@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "292141038283",
+    "project_id": "velora-vlab",
+    "storage_bucket": "velora-vlab.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:292141038283:android:453e44c7477def5430b94e",
+        "android_client_info": {
+          "package_name": "com.example.velora"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKd1qsUAyg5JQuiELWUOlBtjRWJVEcWqc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
