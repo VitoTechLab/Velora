@@ -21,8 +21,16 @@ jobs:
         with: 
           flutter-version: '3.29.3'
 
+      - name: Install dependencies
+        run: flutter pub get
+
       - name: Build Flutter Web
         run: flutter build web
 
-      - name: Deploy to Firebase
-        run: firebase deploy --only hosting --token "${{ secrets.FIREBASE_TOKEN }}"
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccountToken: "${{ secrets.FIREBASE_TOKEN }}"
+          channelId: live
+          projectId: velora-vlab
