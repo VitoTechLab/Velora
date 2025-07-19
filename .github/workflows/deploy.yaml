@@ -27,5 +27,9 @@ jobs:
       - name: Build Flutter Web
         run: flutter build web
 
-      - name: Deploy to Firebase
-        run: firebase deploy --only hosting --token ${{ secrets.FIREBASE_TOKEN }}
+      - name: Setup Firebase CLI
+        uses: w9jds/firebase-action@v13.0.1
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
