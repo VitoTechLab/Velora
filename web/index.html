@@ -33,6 +33,23 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDKfDUdU1PF6mhSmm1ht-NDQgUHCT9hVW8",
+      authDomain: "velora-vlab.firebaseapp.com",
+      projectId: "velora-vlab",
+      storageBucket: "velora-vlab.firebasestorage.app",
+      messagingSenderId: "292141038283",
+      appId: "1:292141038283:web:6768e7008d206e2130b94e",
+      measurementId: "G-05786E0JX9"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
