@@ -24,8 +24,14 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Run Linter (flutter analyze)
+        run: flutter analyze
+
+      - name: Run Tests (flutter test)
+        run: flutter test
+
       - name: Build Flutter Web
-        run: flutter build web
+        run: flutter build web --release
 
       - name: Setup Firebase CLI
         uses: w9jds/firebase-action@v13.0.1
