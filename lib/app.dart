@@ -39,28 +39,19 @@ class _HomePageState extends State<HomePage> {
       FirebaseMessaging.instance
           .getToken(
             vapidKey:
-                "BAbg6V8RmnB77Sz4_VMmzRUrhEyLcnDQ-WI2pXDDOspisMH_3LZ2eEtVLqLEv7_0g1UHQAs_8ydw26_7yFDtmvA", // lihat langkah selanjutnya
+                "BAbg6V8RmnB77Sz4_VMmzRUrhEyLcnDQ-WI2pXDDOspisMH_3LZ2eEtVLqLEv7_0g1UHQAs_8ydw26_7yFDtmvA",
           )
           .then((value) {
-            if (value != null) {
-              print("🕸️ Web Token: $value");
-            } else {
-              print("⚠️ Gagal mendapatkan token (value null)");
-            }
-          })
-          .catchError((e, stack) {
-            print("🔥 Error saat getToken: $e");
+            // Token berhasil diambil, tidak ada log
           });
     } else {
       FirebaseMessaging.instance.getToken().then((value) {
-        print("📱 Mobile Token: $value");
+        // Token berhasil diambil, tidak ada log
       });
     }
 
-    // ✅ Saat aplikasi sedang dibuka (foreground)
+    // Saat aplikasi sedang dibuka (foreground)
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print('🔔 [Foreground] Message received');
-
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
 
@@ -83,9 +74,8 @@ class _HomePageState extends State<HomePage> {
       }
     });
 
-    // ✅ Saat aplikasi dibuka dari background lewat notifikasi
+    // Saat aplikasi dibuka dari background lewat notifikasi
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print('🟢 Notif dibuka dari background: ${message.data}');
       // Arahkan ke halaman tertentu kalau mau
     });
   }

@@ -8,7 +8,7 @@ import 'package:easy_localization/easy_localization.dart';
 
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  print('🔙 Background message: ${message.messageId}');
+  
 }
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
