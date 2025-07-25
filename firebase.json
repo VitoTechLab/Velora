@@ -1,17 +1,42 @@
 {
-  "hosting": {
-    "site": "velora-vlab",
-    "public": "build/web",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "velora-vlab",
+          "appId": "1:292141038283:android:453e44c7477def5430b94e",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "velora-vlab",
+          "configurations": {
+            "android": "1:292141038283:android:453e44c7477def5430b94e",
+            "ios": "1:292141038283:ios:61172020fbb02c1030b94e",
+            "macos": "1:292141038283:ios:61172020fbb02c1030b94e",
+            "web": "1:292141038283:web:6768e7008d206e2130b94e",
+            "windows": "1:292141038283:web:1f8dcf2583535e8830b94e"
+          }
+        }
       }
-    ]
-  }
+    }
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ],
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" run lint",
+        "npm --prefix \"$RESOURCE_DIR\" run build"
+      ]
+    }
+  ]
 }

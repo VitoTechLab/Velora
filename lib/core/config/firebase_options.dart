@@ -64,6 +64,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '292141038283',
     projectId: 'velora-vlab',
     storageBucket: 'velora-vlab.firebasestorage.app',
+    androidClientId: '292141038283-ua7p2rc6cvogimi84q1gd2o1cshu7kam.apps.googleusercontent.com',
+    iosClientId: '292141038283-7joo103emh0d9126upk1rks45m7qk14q.apps.googleusercontent.com',
     iosBundleId: 'com.example.velora',
   );
 
@@ -73,6 +75,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '292141038283',
     projectId: 'velora-vlab',
     storageBucket: 'velora-vlab.firebasestorage.app',
+    androidClientId: '292141038283-ua7p2rc6cvogimi84q1gd2o1cshu7kam.apps.googleusercontent.com',
+    iosClientId: '292141038283-7joo103emh0d9126upk1rks45m7qk14q.apps.googleusercontent.com',
     iosBundleId: 'com.example.velora',
   );
 

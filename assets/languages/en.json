@@ -1,0 +1,20 @@
+{
+  "auth": {
+    "title": "Authentication",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "email": "Email",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "forgot_password": "Forgot Password?",
+    "reset_password": "Reset Password",
+    "login_success": "Login successful!",
+    "login_failed": "Login failed. Please try again.",
+    "register_success": "Registration successful!",
+    "register_failed": "Registration failed. Please try again.",
+    "invalid_email": "Invalid email address.",
+    "empty_fields": "Please fill in all fields.",
+    "passwords_not_match": "Passwords do not match."
+  }
+}

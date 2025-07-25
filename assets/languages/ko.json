@@ -1,0 +1,20 @@
+{
+  "auth": {
+    "title": "인증",
+    "login": "로그인",
+    "register": "회원가입",
+    "logout": "로그아웃",
+    "email": "이메일",
+    "password": "비밀번호",
+    "confirm_password": "비밀번호 확인",
+    "forgot_password": "비밀번호를 잊으셨나요?",
+    "reset_password": "비밀번호 재설정",
+    "login_success": "로그인 성공!",
+    "login_failed": "로그인 실패. 다시 시도하세요.",
+    "register_success": "회원가입 성공!",
+    "register_failed": "회원가입 실패. 다시 시도하세요.",
+    "invalid_email": "유효하지 않은 이메일 주소입니다.",
+    "empty_fields": "모든 필드를 입력하세요.",
+    "passwords_not_match": "비밀번호가 일치하지 않습니다."
+  }
+}
