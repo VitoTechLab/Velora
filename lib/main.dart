@@ -36,7 +36,7 @@ void main() async {
         Locale('id'),
         Locale('ko'),
       ],
-      path: 'languages',
+      path: 'assets/languages',
       fallbackLocale: const Locale('en'),
       startLocale: const Locale('ko'), 
       child: const MyApp(),
