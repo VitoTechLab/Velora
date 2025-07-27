@@ -27,6 +27,9 @@ jobs:
       - name: Run Linter (flutter analyze)
         run: flutter analyze
 
+      - name: Clean build folder
+        run: flutter clean
+
       # - name: Run Tests (flutter test)
       #   run: flutter test
 
