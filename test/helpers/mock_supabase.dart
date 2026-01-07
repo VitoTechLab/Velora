@@ -1,4 +1,3 @@
-
 import 'package:mocktail/mocktail.dart';
 import 'package:postgrest/postgrest.dart';
 import 'package:realtime_client/realtime_client.dart';
