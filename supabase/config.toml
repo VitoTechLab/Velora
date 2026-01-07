@@ -1,0 +1,4 @@
+project_id = "your-project-ref"
+
+[functions]
+# Run `supabase secrets set EDGE_HOOK_SECRET="value"` before deploying.
