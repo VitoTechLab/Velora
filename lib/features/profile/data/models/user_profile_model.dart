@@ -1,0 +1,35 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:velora/core/serialization/json_converters.dart';
+
+part 'user_profile_model.freezed.dart';
+part 'user_profile_model.g.dart';
+
+@freezed
+abstract class UserProfileModel with _$UserProfileModel {
+  const factory UserProfileModel({
+    required String id,
+    required String email,
+    required String username,
+    @JsonKey(name: 'full_name') String? fullName,
+    @JsonKey(name: 'avatar_url') String? avatarUrl,
+    @JsonKey(name: 'is_private') @Default(false) bool isPrivate,
+    @JsonKey(name: 'followers_count') @Default(0) int followersCount,
+    @JsonKey(name: 'following_count') @Default(0) int followingCount,
+    @UtcDateTimeConverter()
+    @JsonKey(name: 'created_at')
+    required DateTime createdAt,
+    @UtcDateTimeConverter()
+    @JsonKey(name: 'updated_at')
+    required DateTime updatedAt,
+    @JsonKey(name: 'is_me') @Default(false) bool isMe,
+    @JsonKey(name: 'is_following') @Default(false) bool isFollowing,
+    @JsonKey(name: 'is_follow_request_pending')
+    @Default(false)
+    bool isFollowRequestPending,
+    @JsonKey(name: 'i_blocked_them') @Default(false) bool iBlockedThem,
+    @JsonKey(name: 'they_blocked_me') @Default(false) bool theyBlockedMe,
+  }) = _UserProfileModel;
+
+  factory UserProfileModel.fromJson(Map<String, dynamic> json) =>
+      _$UserProfileModelFromJson(json);
+}
