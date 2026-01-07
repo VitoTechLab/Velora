@@ -174,9 +174,6 @@ class VerificationEmailScreen extends StatelessWidget {
     String message, {
     required bool isError,
   }) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-
     AppMessenger.showToast(
       message: message,
       icon: isError ? Icons.error_outline : Icons.info_outline,

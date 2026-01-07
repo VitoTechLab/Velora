@@ -90,8 +90,9 @@ class ResetPasswordScreen extends HookWidget {
                               width: 80,
                               height: 80,
                               decoration: BoxDecoration(
-                                color: colorScheme.primaryContainer
-                                    .withValues(alpha: 0.3),
+                                color: colorScheme.primaryContainer.withValues(
+                                  alpha: 0.3,
+                                ),
                                 shape: BoxShape.circle,
                               ),
                               child: Icon(
@@ -270,9 +271,6 @@ class ResetPasswordScreen extends HookWidget {
     String message, {
     required bool isError,
   }) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-
     AppMessenger.showToast(
       message: message,
       icon: isError ? Icons.error_outline : Icons.check_circle_outline,

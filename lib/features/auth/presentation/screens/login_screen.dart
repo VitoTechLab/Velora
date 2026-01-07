@@ -266,9 +266,6 @@ class LoginScreen extends HookWidget {
     String message, {
     required bool isError,
   }) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-
     AppMessenger.showToast(
       message: message,
       icon: isError ? Icons.error_outline : Icons.check_circle_outline,

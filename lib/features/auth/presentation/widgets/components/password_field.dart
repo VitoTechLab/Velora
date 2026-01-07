@@ -103,8 +103,7 @@ class PasswordField extends HookWidget {
               size: 20,
             ),
             onPressed: toggleVisibility,
-            tooltip:
-                isObscured.value ? t.authPasswordShow : t.authPasswordHide,
+            tooltip: isObscured.value ? t.authPasswordShow : t.authPasswordHide,
           ),
         ),
 
@@ -119,8 +118,7 @@ class PasswordField extends HookWidget {
                   child: LinearProgressIndicator(
                     value: strengthValue.value,
                     minHeight: 4,
-                    backgroundColor:
-                        colorScheme.outline.withValues(alpha: 0.2),
+                    backgroundColor: colorScheme.outline.withValues(alpha: 0.2),
                     valueColor: AlwaysStoppedAnimation<Color>(
                       strengthColor.value ?? colorScheme.outline,
                     ),
@@ -208,9 +206,7 @@ class PasswordField extends HookWidget {
           Icon(
             isMet ? Icons.check_circle : Icons.circle_outlined,
             size: 16,
-            color: isMet
-                ? colorScheme.tertiary
-                : colorScheme.onSurfaceVariant,
+            color: isMet ? colorScheme.tertiary : colorScheme.onSurfaceVariant,
           ),
           const SizedBox(width: 8),
           Expanded(

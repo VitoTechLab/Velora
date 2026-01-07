@@ -12,7 +12,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     GoogleSignIn? googleSignIn,
     bool? isWebOverride,
   }) : _client = supabaseClient,
-       _googleSignIn = googleSignIn ??
+       _googleSignIn =
+           googleSignIn ??
            GoogleSignIn(
              scopes: const ['email', 'profile'],
              serverClientId: const String.fromEnvironment(
@@ -45,7 +46,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required String password,
   }) async {
     logi('Supabase signUp email=$email', tag: _logTag);
-    final response = await _client.auth.signUp(email: email, password: password);
+    final response = await _client.auth.signUp(
+      email: email,
+      password: password,
+    );
     return _sessionToModel(response.session ?? _client.auth.currentSession);
   }
 
@@ -101,7 +105,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<void> resetPassword({required String email}) {
     logi('Supabase resetPassword email=$email', tag: _logTag);
-    return _client.auth.resetPasswordForEmail(email);
+    return _client.auth.resetPasswordForEmail(
+      email,
+      redirectTo: 'velora://auth/reset-password',
+    );
   }
 
   @override

@@ -49,11 +49,7 @@ class SignUpScreen extends HookWidget {
     final submitSignUp = useCallback(
       () {
         if (!agreedToTerms.value) {
-          _showInlineMessage(
-            context,
-            t.authAgreeTermsError,
-            isError: true,
-          );
+          _showInlineMessage(context, t.authAgreeTermsError, isError: true);
           return;
         }
 
@@ -73,11 +69,7 @@ class SignUpScreen extends HookWidget {
 
     final signInWithGoogle = useCallback(() {
       AppLogger.i("[RedesignedSignUp] Google sign-in tapped (not implemented)");
-      _showInlineMessage(
-        context,
-        t.authGoogleUnavailable,
-        isError: true,
-      );
+      _showInlineMessage(context, t.authGoogleUnavailable, isError: true);
     }, [context]);
 
     return BlocListener<AuthBloc, AuthState>(
@@ -237,7 +229,9 @@ class SignUpScreen extends HookWidget {
                                               height: 1.5,
                                             ),
                                         children: [
-                                          TextSpan(text: t.authAgreeTermsPrefix),
+                                          TextSpan(
+                                            text: t.authAgreeTermsPrefix,
+                                          ),
                                           TextSpan(
                                             text: t.authTermsOfService,
                                             style: TextStyle(
@@ -334,9 +328,6 @@ class SignUpScreen extends HookWidget {
     String message, {
     required bool isError,
   }) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-
     AppMessenger.showToast(
       message: message,
       icon: isError ? Icons.error_outline : Icons.check_circle_outline,

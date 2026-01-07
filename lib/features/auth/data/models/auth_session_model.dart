@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../domain/entities/auth_session.dart';
+import 'package:velora/features/auth/domain/entities/auth_session.dart';
 
 part 'auth_session_model.freezed.dart';
 part 'auth_session_model.g.dart';

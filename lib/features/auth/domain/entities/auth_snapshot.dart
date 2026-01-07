@@ -5,9 +5,5 @@ class AuthSnapshot {
   final String? userId;
   final bool? emailVerified;
 
-  const AuthSnapshot({
-    required this.status,
-    this.userId,
-    this.emailVerified,
-  });
+  const AuthSnapshot({required this.status, this.userId, this.emailVerified});
 }

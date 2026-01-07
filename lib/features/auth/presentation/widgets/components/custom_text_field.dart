@@ -86,9 +86,7 @@ class CustomTextField extends HookWidget {
       if (suffixIcon != null) {
         return suffixIcon;
       }
-      if (hasInteractedState.value &&
-          isValidState.value &&
-          showSuccessIcon) {
+      if (hasInteractedState.value && isValidState.value && showSuccessIcon) {
         return Icon(
           Icons.check_circle,
           color: Theme.of(context).colorScheme.tertiary,
