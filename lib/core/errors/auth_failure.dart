@@ -13,10 +13,8 @@ enum AuthFailureType {
 }
 
 class AuthFailure extends Failure {
-  const AuthFailure({
-    required String message,
-    required this.type,
-  }): super(message);
+  const AuthFailure({required String message, required this.type})
+    : super(message);
 
   final AuthFailureType type;
 

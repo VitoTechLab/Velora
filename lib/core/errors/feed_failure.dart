@@ -1,19 +1,10 @@
 import 'package:velora/core/errors/exceptions.dart';
 import 'package:velora/core/errors/failure.dart';
 
-enum FeedFailureType {
-  network,
-  notFound,
-  validation,
-  unauthenticated,
-  unknown,
-}
+enum FeedFailureType { network, notFound, validation, unauthenticated, unknown }
 
 class FeedFailure extends Failure {
-  FeedFailure({
-    required String message,
-    required this.type,
-  }) : super(message);
+  FeedFailure({required String message, required this.type}) : super(message);
 
   final FeedFailureType type;
 
@@ -26,9 +17,9 @@ class FeedFailure extends Failure {
   factory FeedFailure.validation([String message = 'Validation error']) =>
       FeedFailure(message: message, type: FeedFailureType.validation);
 
-  factory FeedFailure.unauthenticated(
-    [String message = 'You need to sign in to continue']
-  ) => FeedFailure(message: message, type: FeedFailureType.unauthenticated);
+  factory FeedFailure.unauthenticated([
+    String message = 'You need to sign in to continue',
+  ]) => FeedFailure(message: message, type: FeedFailureType.unauthenticated);
 
   factory FeedFailure.unknown([String message = 'Unexpected feed error']) =>
       FeedFailure(message: message, type: FeedFailureType.unknown);

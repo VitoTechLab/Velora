@@ -10,44 +10,29 @@ enum CampaignFailureType {
 }
 
 class CampaignFailure extends Failure {
-  CampaignFailure({
-    required String message,
-    required this.type,
-  }): super(message);
+  CampaignFailure({required String message, required this.type})
+    : super(message);
 
   final CampaignFailureType type;
 
   factory CampaignFailure.network([String message = 'Network error']) =>
-      CampaignFailure(
-        message: message,
-        type: CampaignFailureType.network,
-      );
+      CampaignFailure(message: message, type: CampaignFailureType.network);
 
   factory CampaignFailure.notFound([String message = 'Data not found']) =>
-      CampaignFailure(
-        message: message,
-        type: CampaignFailureType.notFound,
-      );
+      CampaignFailure(message: message, type: CampaignFailureType.notFound);
 
-  factory CampaignFailure.unauthenticated(
-    [String message = 'Authentication required']
-  ) =>
-      CampaignFailure(
-        message: message,
-        type: CampaignFailureType.unauthenticated,
-      );
+  factory CampaignFailure.unauthenticated([
+    String message = 'Authentication required',
+  ]) => CampaignFailure(
+    message: message,
+    type: CampaignFailureType.unauthenticated,
+  );
 
   factory CampaignFailure.validation([String message = 'Invalid request']) =>
-      CampaignFailure(
-        message: message,
-        type: CampaignFailureType.validation,
-      );
+      CampaignFailure(message: message, type: CampaignFailureType.validation);
 
   factory CampaignFailure.unknown([String message = 'Unknown error']) =>
-      CampaignFailure(
-        message: message,
-        type: CampaignFailureType.unknown,
-      );
+      CampaignFailure(message: message, type: CampaignFailureType.unknown);
 
   factory CampaignFailure.fromException(Object error) {
     if (error is CampaignFailure) return error;
