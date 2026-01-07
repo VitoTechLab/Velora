@@ -1,71 +1,81 @@
 import 'package:flutter/material.dart';
 
 class MaterialColorsCustom {
-  // === Core Brand Colors ===
-  static const Color primaryYellow = Color(0xFFFFC107);
-  static const Color accentYellow = Color(0xFFFFE082);
-  static const Color brandBlue = Color(0xFF4A90E2);
-  static const Color brandBlueSoft = Color(0xFF90CAF9);
-  static const Color brandRed = Color(0xFFEF5350);
-  static const Color brandGreen = Color(0xFF66BB6A);
-  static const Color brandOrange = Color(0xFFFFA726);
-  static const Color black = Colors.black;
+  /// Core brand palette tuned for a clean, modern campaign identity.
+  static const Color brandEmerald = Color(0xFF1F6F5C);
+  static const Color brandSeafoam = Color(0xFF4CC4A7);
+  static const Color brandCoral = Color(0xFFFF8A63);
+  static const Color brandIndigo = Color(0xFF415371);
+  static const Color brandSky = Color(0xFFBBDDF6);
+
+  /// Legacy aliases kept for backward compatibility with older widgets.
+  static const Color primaryYellow = brandEmerald;
+  static const Color accentYellow = brandSeafoam;
+  static const Color brandBlue = Color(0xFF4AA3F2);
+  static const Color brandBlueSoft = brandSky;
+  static const Color brandRed = Color(0xFFEB6A64);
+  static const Color brandGreen = Color(0xFF2BB673);
+  static const Color brandOrange = brandCoral;
+  static const Color black = Color(0xFF0B1A24);
   static const Color white = Colors.white;
 
-  // === Neutral Grayscale ===
-  static const Color darkGrey = Color(0xFF2C2F33);       // Abu gelap klasik Velora
-  static const Color greyLightBorder = Color(0xFFE0E0E0); // Border Light Mode abu soft
-  static const Color greyLightContainer = Color(0xFFF9F9F9); // Container Light Mode (setara grey.shade50)
-  static const Color greyMedium = Color(0xFF9E9E9E);     // Abu medium universal
-  static const Color greyDarkBorder = Color(0xFF4D515A); // Border Dark Mode
+  // Neutral palette
+  static const Color mist = Color(0xFFF5F7FA);
+  static const Color slate = Color(0xFF5A6B7B);
+  static const Color deepNavy = Color(0xFF0C1826);
+  static const Color dusk = Color(0xFF152534);
+  static const Color greyLightBorder = Color(0xFFD7E0E8);
+  static const Color greyLightContainer = mist;
+  static const Color greyMedium = slate;
+  static const Color greyDarkBorder = Color(0xFF253549);
 
-  static const Color arrowIndicatorLight = Color(0xFF757575); // Abu navigasi ">" di Light Mode
-  static const Color arrowIndicatorDark = Color(0xFFB0B0B0);  // Abu navigasi ">" di Dark Mode
+  static const Color arrowIndicatorLight = Color(0xFF6F7D8C);
+  static const Color arrowIndicatorDark = Color(0xFF9EB4C5);
 
-  // === Light Mode ===
-  static const Color lightBackground = white;
-  static const Color lightCard = greyLightContainer;
+  // Light Mode
+  static const Color lightBackground = mist;
+  static const Color lightCard = white;
   static const Color lightAppBarBackground = white;
-  static const Color lightTextPrimary = Color(0xFF212121);
-  static const Color lightTextSecondary = greyMedium;
-  static const Color lightIcon = Color(0xFF212121);
+  static const Color lightTextPrimary = Color(0xFF0F2534);
+  static const Color lightTextSecondary = Color(0xFF5C6C7D);
+  static const Color lightIcon = lightTextPrimary;
   static const Color lightOutline = greyLightBorder;
-  static const Color lightHighlightIcon = primaryYellow;
-  static const Color lightIconBackground = accentYellow;
-  static const Color lightElevatedButtonText = black;
+  static const Color lightHighlightIcon = brandSeafoam;
+  static const Color lightIconBackground = Color(0xFFE4F4F0);
+  static const Color lightElevatedButtonText = white;
   static const Color lightNavigationBarBackground = white;
-  static const Color lightButtonBackground = primaryYellow;
-  static const Color lightButtonText = black;
-  static const Color lightButtonOutline = primaryYellow;
-  static const Color lightContainerDoftBlue = Color(0xFFE3F2FD);
+  static const Color lightButtonBackground = brandEmerald;
+  static const Color lightButtonText = white;
+  static const Color lightButtonOutline = brandSeafoam;
+  static const Color lightContainerDoftBlue = Color(0xFFE2F0FF);
   static const Color lightArrowIndicator = arrowIndicatorLight;
-  static const Color lightContainerBorder = Color(0xFFBDBDBD); // Border container abu lebih gelap
+  static const Color lightContainerBorder = Color(0xFFD2DCE5);
 
-  // === Dark Mode ===
-  static const Color darkBackground = Color(0xFF121212);  
-  static const Color darkCard = Color(0xFF1F1F1F);
-  static const Color darkSurface = darkGrey;
-  static const Color darkTextPrimary = white;
-  static const Color darkTextSecondary = Color(0xFFB0B3BA);
-  static const Color darkIcon = white;
+  // Dark Mode
+  static const Color darkBackground = Color(0xFF050E16);
+  static const Color darkCard = Color(0xFF0F1F2D);
+  static const Color darkSurface = dusk;
+  static const Color darkTextPrimary = Color(0xFFE6EDF3);
+  static const Color darkTextSecondary = Color(0xFFA4B5C4);
+  static const Color darkIcon = darkTextPrimary;
   static const Color darkOutline = greyDarkBorder;
-  static const Color darkHighlightIcon = primaryYellow;
-  static const Color darkIconBackground = accentYellow;
+  static const Color darkHighlightIcon = brandSeafoam;
+  static const Color darkIconBackground = Color(0xFF113B38);
   static const Color darkElevatedButtonText = white;
-  static const Color darkNavigationBarBackground = Color(0xFF1E1E1E);
-  static const Color darkButtonBackground = accentYellow;
-  static const Color darkButtonText = black;
-  static const Color darkButtonOutline = accentYellow;
-  static const Color darkContainerDoftBlue = Color(0xFF1A2A3A);
+  static const Color darkNavigationBarBackground = Color(0xFF081723);
+  static const Color darkButtonBackground = brandSeafoam;
+  static const Color darkButtonText = white;
+  static const Color darkButtonOutline = brandSeafoam;
+  static const Color darkContainerDoftBlue = Color(0xFF10263D);
   static const Color darkArrowIndicator = arrowIndicatorDark;
-  static const Color darkContainerBorder = Color(0xFF2A2A2A); // Border container abu gelap
+  static const Color darkContainerBorder = Color(0xFF223446);
 
-  // === Status Colors ===
+  // Status Colors
   static const Color error = brandRed;
   static const Color success = brandGreen;
-  static const Color warning = brandOrange;
+  static const Color warning = Color(0xFFF6B756);
   static const Color info = brandBlue;
 
-  // === Miscellaneous ===
-  static const Color shadowColor = Color(0x29000000); 
+  // Miscellaneous
+  static const Color shadowColor = Color(0x140C1A2C);
 }

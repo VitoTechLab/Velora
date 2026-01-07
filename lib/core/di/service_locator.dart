@@ -5,11 +5,11 @@ import 'package:velora/core/firebase/firebase_analytics_service.dart';
 import 'package:velora/core/firebase/firebase_messaging_service.dart';
 import 'package:velora/core/network/dio_factory.dart';
 import 'package:velora/core/services/connectivity_service.dart';
-import 'package:velora/core/services/navigation_service.dart';
 import 'package:velora/core/supabase/supabase_initializer.dart';
 import 'package:velora/features/auth/domain/usecases/auth_watch_auth_snapshot.dart';
 import 'package:velora/features/settings/domain/entities/user_preferences.dart';
 import 'package:velora/routes/app_router.dart';
+import 'package:velora/features/navigation/services/navigation_service.dart';
 
 // Auth feature imports
 import 'package:velora/features/auth/data/datasources/auth_remote_datasource.dart';
@@ -69,6 +69,57 @@ import 'package:velora/features/media/domain/usecases/request_media_permission.d
 import 'package:velora/features/media/domain/usecases/load_media_assets.dart';
 import 'package:velora/features/media/domain/usecases/get_file_from_asset.dart';
 import 'package:velora/features/media/presentation/bloc/media_gallery_bloc.dart';
+
+// Chat feature imports
+import 'package:velora/features/chat/data/datasources/chat_remote_datasource.dart';
+import 'package:velora/features/chat/data/datasources/chat_remote_datasource_impl.dart';
+import 'package:velora/features/chat/data/repositories/chat_repository_impl.dart';
+import 'package:velora/features/chat/domain/repositories/chat_repository.dart';
+import 'package:velora/features/chat/domain/usecases/get_messages.dart';
+import 'package:velora/features/chat/domain/usecases/send_text_message.dart';
+import 'package:velora/features/chat/domain/usecases/edit_message.dart';
+import 'package:velora/features/chat/domain/usecases/delete_message.dart';
+import 'package:velora/features/chat/domain/usecases/mark_conversation_read.dart';
+import 'package:velora/features/chat/domain/usecases/watch_new_messages.dart';
+import 'package:velora/features/chat/domain/usecases/stop_watch_messages.dart';
+import 'package:velora/features/chat/domain/usecases/get_conversation_list.dart';
+import 'package:velora/features/chat/domain/usecases/get_message_reads.dart';
+import 'package:velora/features/chat/domain/usecases/mark_message_read.dart';
+import 'package:velora/features/chat/domain/usecases/watch_message_reads.dart';
+import 'package:velora/features/chat/domain/usecases/send_typing_indicator.dart';
+import 'package:velora/features/chat/domain/usecases/watch_typing_indicators.dart';
+import 'package:velora/features/chat/domain/usecases/search_followed_users.dart';
+import 'package:velora/features/chat/presentation/bloc/chat_message_bloc.dart';
+import 'package:velora/features/chat/presentation/bloc/user_presence_bloc.dart';
+import 'package:velora/features/chat/presentation/bloc/search_user_bloc.dart';
+
+// Social Relation feature imports
+import 'package:velora/features/social_relation/data/datasources/social_relation_remote_datasource.dart';
+import 'package:velora/features/social_relation/data/datasources/social_relation_remote_datasource_impl.dart';
+import 'package:velora/features/social_relation/data/repositories/social_relation_repository_impl.dart';
+import 'package:velora/features/social_relation/domain/repositories/social_relation_repository.dart';
+import 'package:velora/features/social_relation/domain/usecases/follow_user.dart';
+import 'package:velora/features/social_relation/domain/usecases/unfollow_user.dart';
+import 'package:velora/features/social_relation/domain/usecases/send_follow_request.dart';
+import 'package:velora/features/social_relation/domain/usecases/accept_follow_request.dart';
+import 'package:velora/features/social_relation/domain/usecases/block_user.dart';
+import 'package:velora/features/social_relation/domain/usecases/unblock_user.dart';
+import 'package:velora/features/social_relation/domain/usecases/get_blocked_users.dart';
+import 'package:velora/features/social_relation/domain/usecases/get_pending_follow_requests.dart';
+import 'package:velora/features/social_relation/domain/usecases/mute_user.dart';
+import 'package:velora/features/social_relation/domain/usecases/restrict_user.dart';
+import 'package:velora/features/social_relation/presentation/bloc/social_relation_bloc.dart';
+
+// Profile feature imports
+import 'package:velora/features/profile/data/datasources/profile_remote_datasource.dart';
+import 'package:velora/features/profile/data/datasources/profile_remote_datasource_impl.dart';
+import 'package:velora/features/profile/domain/repositories/profile_repository.dart';
+import 'package:velora/features/profile/data/repositories/profile_repository_impl.dart';
+import 'package:velora/features/profile/domain/usecases/get_profile_usecase.dart';
+import 'package:velora/features/profile/domain/usecases/toggle_follow_usecase.dart';
+import 'package:velora/features/profile/domain/usecases/block_user_usecase.dart';
+import 'package:velora/features/profile/domain/usecases/unblock_user_usecase.dart';
+import 'package:velora/features/profile/presentation/bloc/profile_bloc.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -155,6 +206,30 @@ Future<void> configureDependencies() async {
     );
   }
 
+  // Chat feature - Data source
+  if (!getIt.isRegistered<ChatRemoteDataSource>()) {
+    getIt.registerLazySingleton<ChatRemoteDataSource>(
+      () => ChatRemoteDataSourceImpl(supabaseClient: getIt<SupabaseClient>()),
+    );
+  }
+
+  // Social Relation feature - Data source
+  if (!getIt.isRegistered<SocialRelationRemoteDataSource>()) {
+    getIt.registerLazySingleton<SocialRelationRemoteDataSource>(
+      () => SocialRelationRemoteDataSourceImpl(
+        supabaseClient: getIt<SupabaseClient>(),
+      ),
+    );
+  }
+
+  // Profile feature - Data source
+  if (!getIt.isRegistered<ProfileRemoteDataSource>()) {
+    getIt.registerLazySingleton<ProfileRemoteDataSource>(
+      () =>
+          ProfileRemoteDataSourceImpl(supabaseClient: getIt<SupabaseClient>()),
+    );
+  }
+
   // Feed feature - Repositories
   getIt.registerLazySingleton<FeedRepository>(
     () => FeedRepositoryImpl(remoteDataSource: getIt<FeedRemoteDataSource>()),
@@ -172,12 +247,33 @@ Future<void> configureDependencies() async {
 
   // Media Gallery (Local) feature - Repositories
   getIt.registerLazySingleton<MediaGalleryRepository>(
-    () => MediaGalleryRepositoryImpl(localDataSource: getIt<MediaLocalDataSource>()),
+    () => MediaGalleryRepositoryImpl(
+      localDataSource: getIt<MediaLocalDataSource>(),
+    ),
+  );
+
+  // Chat feature - Repositories
+  getIt.registerLazySingleton<ChatRepository>(
+    () => ChatRepositoryImpl(remoteDataSource: getIt<ChatRemoteDataSource>()),
   );
 
   // Auth feature - Repositories
   getIt.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(remoteDataSource: getIt<AuthRemoteDataSource>()),
+  );
+
+  // Social Relation feature - Repositories
+  getIt.registerLazySingleton<SocialRelationRepository>(
+    () => SocialRelationRepositoryImpl(
+      remoteDataSource: getIt<SocialRelationRemoteDataSource>(),
+    ),
+  );
+
+  // Profile feature - Repositories
+  getIt.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepositoryImpl(
+      remoteDataSource: getIt<ProfileRemoteDataSource>(),
+    ),
   );
 
   // Feed feature - Use cases
@@ -201,16 +297,77 @@ Future<void> configureDependencies() async {
     // Media feature - Use cases
     ..registerLazySingleton(() => UploadMediaAsset(getIt<MediaRepository>()))
     // Media Gallery (Local) feature - Use cases
-    ..registerLazySingleton(() => RequestMediaPermission(repository: getIt<MediaGalleryRepository>()))
-    ..registerLazySingleton(() => LoadMediaAssets(repository: getIt<MediaGalleryRepository>()))
-    ..registerLazySingleton(() => GetFileFromAsset(repository: getIt<MediaGalleryRepository>()))
+    ..registerLazySingleton(
+      () => RequestMediaPermission(repository: getIt<MediaGalleryRepository>()),
+    )
+    ..registerLazySingleton(
+      () => LoadMediaAssets(repository: getIt<MediaGalleryRepository>()),
+    )
+    ..registerLazySingleton(
+      () => GetFileFromAsset(repository: getIt<MediaGalleryRepository>()),
+    )
     // Auth feature - Use cases
     ..registerLazySingleton(() => AuthSignUp(getIt<AuthRepository>()))
     ..registerLazySingleton(() => AuthSignIn(getIt<AuthRepository>()))
     ..registerLazySingleton(() => AuthResetPassword(getIt<AuthRepository>()))
     ..registerLazySingleton(() => AuthSignOut(getIt<AuthRepository>()))
     ..registerLazySingleton(() => AuthSignInWithGoogle(getIt<AuthRepository>()))
-    ..registerLazySingleton(() => AuthWatchAuthSnapshot(getIt<AuthRepository>()));
+    ..registerLazySingleton(
+      () => AuthWatchAuthSnapshot(getIt<AuthRepository>()),
+    )
+    // Chat feature - Use cases
+    ..registerLazySingleton(() => GetMessages(getIt<ChatRepository>()))
+    ..registerLazySingleton(() => SendTextMessage(getIt<ChatRepository>()))
+    ..registerLazySingleton(() => EditMessage(getIt<ChatRepository>()))
+    ..registerLazySingleton(() => DeleteMessage(getIt<ChatRepository>()))
+    ..registerLazySingleton(() => MarkConversationRead(getIt<ChatRepository>()))
+    ..registerLazySingleton(() => WatchNewMessages(getIt<ChatRepository>()))
+    ..registerLazySingleton(() => StopWatchMessages(getIt<ChatRepository>()))
+    ..registerLazySingleton(() => GetConversationList(getIt<ChatRepository>()))
+    ..registerLazySingleton(() => GetMessageReads(getIt<ChatRepository>()))
+    ..registerLazySingleton(() => MarkMessageRead(getIt<ChatRepository>()))
+    ..registerLazySingleton(() => WatchMessageReads(getIt<ChatRepository>()))
+    ..registerLazySingleton(() => SendTypingIndicator(getIt<ChatRepository>()))
+    ..registerLazySingleton(
+      () => WatchTypingIndicators(getIt<ChatRepository>()),
+    )
+    ..registerLazySingleton(() => SearchFollowedUsers(getIt<ChatRepository>()))
+    // Social Relation feature - Use cases
+    ..registerLazySingleton(() => FollowUser(getIt<SocialRelationRepository>()))
+    ..registerLazySingleton(
+      () => UnfollowUser(getIt<SocialRelationRepository>()),
+    )
+    ..registerLazySingleton(
+      () => SendFollowRequest(getIt<SocialRelationRepository>()),
+    )
+    ..registerLazySingleton(
+      () => AcceptFollowRequest(getIt<SocialRelationRepository>()),
+    )
+    ..registerLazySingleton(() => BlockUser(getIt<SocialRelationRepository>()))
+    ..registerLazySingleton(
+      () => UnblockUser(getIt<SocialRelationRepository>()),
+    )
+    ..registerLazySingleton(
+      () => GetBlockedUsers(getIt<SocialRelationRepository>()),
+    )
+    ..registerLazySingleton(
+      () => GetPendingFollowRequests(getIt<SocialRelationRepository>()),
+    )
+    ..registerLazySingleton(() => MuteUser(getIt<SocialRelationRepository>()))
+    ..registerLazySingleton(
+      () => RestrictUser(getIt<SocialRelationRepository>()),
+    );
+
+  // Profile feature - Use cases
+  getIt
+    ..registerLazySingleton(() => GetProfileUseCase(getIt<ProfileRepository>()))
+    ..registerLazySingleton(
+      () => ToggleFollowUseCase(getIt<ProfileRepository>()),
+    )
+    ..registerLazySingleton(() => BlockUserUseCase(getIt<ProfileRepository>()))
+    ..registerLazySingleton(
+      () => UnblockUserUseCase(getIt<ProfileRepository>()),
+    );
 
   // Feed feature - Bloc
   getIt.registerFactory(
@@ -233,6 +390,66 @@ Future<void> configureDependencies() async {
       toggleLikeCommentUseCase: getIt<ToggleLikeComment>(),
       watchNewCommentsUseCase: getIt<WatchNewComments>(),
       stopWatchCommentsUseCase: getIt<StopWatchComments>(),
+    ),
+  );
+
+  // Chat feature - Bloc
+  getIt.registerFactory(
+    () => ChatMessageBloc(
+      getMessagesUseCase: getIt<GetMessages>(),
+      sendTextMessageUseCase: getIt<SendTextMessage>(),
+      editMessageUseCase: getIt<EditMessage>(),
+      deleteMessageUseCase: getIt<DeleteMessage>(),
+      markConversationReadUseCase: getIt<MarkConversationRead>(),
+      watchNewMessagesUseCase: getIt<WatchNewMessages>(),
+      stopWatchMessagesUseCase: getIt<StopWatchMessages>(),
+      getConversationListUseCase: getIt<GetConversationList>(),
+      getMessageReadsUseCase: getIt<GetMessageReads>(),
+      markMessageReadUseCase: getIt<MarkMessageRead>(),
+      watchMessageReadsUseCase: getIt<WatchMessageReads>(),
+      sendTypingIndicatorUseCase: getIt<SendTypingIndicator>(),
+      watchTypingIndicatorsUseCase: getIt<WatchTypingIndicators>(),
+    ),
+  );
+
+  // User Presence - Bloc (global singleton, auto-started)
+  if (!getIt.isRegistered<UserPresenceBloc>()) {
+    getIt.registerLazySingleton<UserPresenceBloc>(
+      () => UserPresenceBloc(
+        chatRepository: getIt<ChatRepository>(),
+        supabaseClient: getIt<SupabaseClient>(),
+      ),
+    );
+  }
+
+  // Search User - Bloc
+  getIt.registerFactory(
+    () => SearchUserBloc(searchFollowedUsers: getIt<SearchFollowedUsers>()),
+  );
+
+  // Social Relation feature - Bloc
+  getIt.registerFactory(
+    () => SocialRelationBloc(
+      followUserUseCase: getIt<FollowUser>(),
+      unfollowUserUseCase: getIt<UnfollowUser>(),
+      sendFollowRequestUseCase: getIt<SendFollowRequest>(),
+      acceptFollowRequestUseCase: getIt<AcceptFollowRequest>(),
+      blockUserUseCase: getIt<BlockUser>(),
+      unblockUserUseCase: getIt<UnblockUser>(),
+      getBlockedUsersUseCase: getIt<GetBlockedUsers>(),
+      getPendingFollowRequestsUseCase: getIt<GetPendingFollowRequests>(),
+      muteUserUseCase: getIt<MuteUser>(),
+      restrictUserUseCase: getIt<RestrictUser>(),
+    ),
+  );
+
+  // Profile feature - Bloc
+  getIt.registerFactory(
+    () => ProfileBloc(
+      getProfileUseCase: getIt<GetProfileUseCase>(),
+      toggleFollowUseCase: getIt<ToggleFollowUseCase>(),
+      blockUserUseCase: getIt<BlockUserUseCase>(),
+      unblockUserUseCase: getIt<UnblockUserUseCase>(),
     ),
   );
 

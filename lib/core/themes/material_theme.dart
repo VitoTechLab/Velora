@@ -8,37 +8,61 @@ ThemeData buildTheme(Brightness brightness) {
   final ColorScheme colorScheme = ColorScheme(
     brightness: brightness,
     primary: MaterialColorsCustom.primaryYellow,
-    onPrimary: isLight ? MaterialColorsCustom.lightButtonText : MaterialColorsCustom.darkButtonText,
+    onPrimary: isLight
+        ? MaterialColorsCustom.lightButtonText
+        : MaterialColorsCustom.darkButtonText,
     secondary: MaterialColorsCustom.accentYellow,
     onSecondary: MaterialColorsCustom.black,
     error: MaterialColorsCustom.brandRed,
     onError: MaterialColorsCustom.white,
-    surface: isLight ? MaterialColorsCustom.greyLightContainer : MaterialColorsCustom.darkSurface,
-    onSurface: isLight ? MaterialColorsCustom.lightTextPrimary : MaterialColorsCustom.darkTextPrimary,
-    outline: isLight ? MaterialColorsCustom.greyLightBorder : MaterialColorsCustom.darkOutline,
-    inverseSurface:
-        isLight ? MaterialColorsCustom.darkBackground : MaterialColorsCustom.lightBackground,
+    surface: isLight
+        ? MaterialColorsCustom.greyLightContainer
+        : MaterialColorsCustom.darkSurface,
+    onSurface: isLight
+        ? MaterialColorsCustom.lightTextPrimary
+        : MaterialColorsCustom.darkTextPrimary,
+    outline: isLight
+        ? MaterialColorsCustom.greyLightBorder
+        : MaterialColorsCustom.darkOutline,
+    inverseSurface: isLight
+        ? MaterialColorsCustom.darkBackground
+        : MaterialColorsCustom.lightBackground,
     inversePrimary: MaterialColorsCustom.brandBlue,
     tertiary: MaterialColorsCustom.brandBlueSoft,
-    onTertiary: isLight ? MaterialColorsCustom.black : MaterialColorsCustom.white,
+    onTertiary: isLight
+        ? MaterialColorsCustom.black
+        : MaterialColorsCustom.white,
 
     // Tambahan Properti Baru (Gak wajib semua diisi, tergantung kebutuhan)
-    surfaceDim: isLight ? MaterialColorsCustom.greyLightContainer : MaterialColorsCustom.darkCard,
-    surfaceBright: isLight ? MaterialColorsCustom.white : MaterialColorsCustom.darkSurface,
-    surfaceContainerLowest: isLight ? MaterialColorsCustom.white : MaterialColorsCustom.darkCard,
-    surfaceContainerLow:
-        isLight ? MaterialColorsCustom.greyLightContainer : MaterialColorsCustom.darkSurface,
-    surfaceContainer:
-        isLight ? MaterialColorsCustom.greyLightContainer : MaterialColorsCustom.darkSurface,
-    surfaceContainerHigh:
-        isLight ? MaterialColorsCustom.greyLightContainer : MaterialColorsCustom.darkSurface,
-    surfaceContainerHighest:
-        isLight ? MaterialColorsCustom.greyLightContainer : MaterialColorsCustom.darkSurface,
+    surfaceDim: isLight
+        ? MaterialColorsCustom.greyLightContainer
+        : MaterialColorsCustom.darkCard,
+    surfaceBright: isLight
+        ? MaterialColorsCustom.white
+        : MaterialColorsCustom.darkSurface,
+    surfaceContainerLowest: isLight
+        ? MaterialColorsCustom.white
+        : MaterialColorsCustom.darkCard,
+    surfaceContainerLow: isLight
+        ? MaterialColorsCustom.greyLightContainer
+        : MaterialColorsCustom.darkSurface,
+    surfaceContainer: isLight
+        ? MaterialColorsCustom.greyLightContainer
+        : MaterialColorsCustom.darkSurface,
+    surfaceContainerHigh: isLight
+        ? MaterialColorsCustom.greyLightContainer
+        : MaterialColorsCustom.darkSurface,
+    surfaceContainerHighest: isLight
+        ? MaterialColorsCustom.greyLightContainer
+        : MaterialColorsCustom.darkSurface,
 
     // Optional, tapi recommended untuk icon atau outline halus
-    onSurfaceVariant:
-        isLight ? MaterialColorsCustom.greyMedium : MaterialColorsCustom.darkTextSecondary,
-    outlineVariant: isLight ? MaterialColorsCustom.greyLightBorder : MaterialColorsCustom.darkOutline,
+    onSurfaceVariant: isLight
+        ? MaterialColorsCustom.greyMedium
+        : MaterialColorsCustom.darkTextSecondary,
+    outlineVariant: isLight
+        ? MaterialColorsCustom.greyLightBorder
+        : MaterialColorsCustom.darkOutline,
     shadow: MaterialColorsCustom.shadowColor,
   );
 
@@ -181,10 +205,9 @@ ThemeData buildTheme(Brightness brightness) {
       ),
       iconTheme: WidgetStateProperty.resolveWith((states) {
         return IconThemeData(
-          color:
-              states.contains(WidgetState.selected)
-                  ? colorScheme.primary
-                  : colorScheme.onSurfaceVariant,
+          color: states.contains(WidgetState.selected)
+              ? colorScheme.primary
+              : colorScheme.onSurfaceVariant,
         );
       }),
       labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,

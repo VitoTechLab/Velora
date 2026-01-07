@@ -3,19 +3,21 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:velora/core/di/service_locator.dart';
-import 'package:velora/core/services/navigation_service.dart';
 import 'package:velora/core/utils/log_alias.dart';
+import 'package:velora/features/navigation/services/navigation_service.dart';
 
 class FirebaseMessagingService {
   FirebaseMessagingService()
-      : _messaging = FirebaseMessaging.instance,
-        _notifications = FlutterLocalNotificationsPlugin();
+    : _messaging = FirebaseMessaging.instance,
+      _notifications = FlutterLocalNotificationsPlugin();
 
   final FirebaseMessaging _messaging;
   final FlutterLocalNotificationsPlugin _notifications;
 
   Future<void> initialize() async {
-    const androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
+    const androidSettings = AndroidInitializationSettings(
+      '@mipmap/ic_launcher',
+    );
     const initSettings = InitializationSettings(android: androidSettings);
     await _notifications.initialize(initSettings);
 

@@ -22,28 +22,28 @@ class ConnectivitySnackbarListener extends HookWidget {
     useEffect(() {
       final StreamSubscription<bool> sub = connectivityService.connectionChange
           .listen((hasInternet) {
-        // Guard to avoid duplicate snackbars
-        if (last.value == hasInternet) return;
-        last.value = hasInternet;
+            // Guard to avoid duplicate snackbars
+            if (last.value == hasInternet) return;
+            last.value = hasInternet;
 
-        if (!hasInternet) {
-          AppMessenger.showSnackBar(
-            const SnackBar(
-              content: Text('Tidak ada koneksi internet.'),
-              behavior: SnackBarBehavior.floating,
-              duration: Duration(seconds: 3),
-            ),
-          );
-        } else {
-          AppMessenger.showSnackBar(
-            const SnackBar(
-              content: Text('Koneksi internet kembali.'),
-              behavior: SnackBarBehavior.floating,
-              duration: Duration(seconds: 2),
-            ),
-          );
-        }
-      });
+            if (!hasInternet) {
+              AppMessenger.showSnackBar(
+                const SnackBar(
+                  content: Text('Tidak ada koneksi internet.'),
+                  behavior: SnackBarBehavior.floating,
+                  duration: Duration(seconds: 3),
+                ),
+              );
+            } else {
+              AppMessenger.showSnackBar(
+                const SnackBar(
+                  content: Text('Koneksi internet kembali.'),
+                  behavior: SnackBarBehavior.floating,
+                  duration: Duration(seconds: 2),
+                ),
+              );
+            }
+          });
 
       return sub.cancel; // cleanup on unmount
     }, [connectivityService]);

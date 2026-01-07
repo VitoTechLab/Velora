@@ -12,8 +12,6 @@ class FirebaseAnalyticsService {
   Future<void> logScreenView(String screenName) =>
       _analytics.logScreenView(screenName: screenName);
 
-  Future<void> logCustomEvent(
-    String name, {
-    Map<String, Object>? parameters,
-  }) => _analytics.logEvent(name: name, parameters: parameters);
+  Future<void> logCustomEvent(String name, {Map<String, Object>? parameters}) =>
+      _analytics.logEvent(name: name, parameters: parameters);
 }

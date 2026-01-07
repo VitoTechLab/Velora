@@ -18,7 +18,8 @@ class DioFactory {
     );
     const supabaseAnonKey = String.fromEnvironment(
       'SUPABASE_ANON_KEY',
-      defaultValue: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRpamNha3N0d3p1amlsb3lndXRiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUxOTY2NTIsImV4cCI6MjA4MDc3MjY1Mn0.OCUPxofIx3ZY_ore0iK8eZ4_Dk2izBJpU8OEZNeEVJU',
+      defaultValue:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRpamNha3N0d3p1amlsb3lndXRiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUxOTY2NTIsImV4cCI6MjA4MDc3MjY1Mn0.OCUPxofIx3ZY_ore0iK8eZ4_Dk2izBJpU8OEZNeEVJU',
     );
 
     if (supabaseUrl.isEmpty || supabaseAnonKey.isEmpty) {

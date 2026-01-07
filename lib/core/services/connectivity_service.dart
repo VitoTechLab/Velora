@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 
-
 /// Connectivity service (UI-agnostic):
 /// - Detects network interface changes via connectivity_plus.
 /// - Confirms real internet access via internet_connection_checker_plus.
@@ -12,7 +11,7 @@ class ConnectivityService {
   ConnectivityService({
     Connectivity? connectivity,
     InternetConnection? internet,
-  }) : _connectivity =connectivity ?? Connectivity(),
+  }) : _connectivity = connectivity ?? Connectivity(),
        _internet = internet ?? InternetConnection();
 
   final Connectivity _connectivity;
@@ -65,7 +64,8 @@ class ConnectivityService {
     final conn = await _connectivity.checkConnectivity();
 
     // conn can be ConnectivityResult or List<ConnectivityResult> (newer versions)
-    final hasNetwork = conn.isNotEmpty && !conn.contains(ConnectivityResult.none);
+    final hasNetwork =
+        conn.isNotEmpty && !conn.contains(ConnectivityResult.none);
 
     if (!hasNetwork) return false;
 

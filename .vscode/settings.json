@@ -1,3 +1,4 @@
 {
-  "cmake.sourceDirectory": "E:/VitoTechLab/velora/linux"
+  "cmake.sourceDirectory": "E:/VitoTechLab/velora/linux",
+  "deno.enable": true
 }
