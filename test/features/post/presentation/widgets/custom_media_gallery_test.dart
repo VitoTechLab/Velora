@@ -46,15 +46,12 @@ void main() {
     await tester.pump();
   }
 
-  testWidgets('shows placeholder when picker returns empty list',
-      (tester) async {
+  testWidgets('shows placeholder when picker returns empty list', (
+    tester,
+  ) async {
     final picker = FakeImagePicker(onPick: () => []);
 
-    await pumpGallery(
-      tester,
-      imagePicker: picker,
-      onMediaSelected: (_, __) {},
-    );
+    await pumpGallery(tester, imagePicker: picker, onMediaSelected: (_, __) {});
 
     expect(find.text('Select Photos'), findsOneWidget);
     expect(picker.pickCount, 1);
@@ -70,9 +67,7 @@ void main() {
     )..writeAsBytesSync(List<int>.filled(10, 0));
     var selected = false;
 
-    final picker = FakeImagePicker(
-      onPick: () => [XFile(tempFile.path)],
-    );
+    final picker = FakeImagePicker(onPick: () => [XFile(tempFile.path)]);
 
     await pumpGallery(
       tester,

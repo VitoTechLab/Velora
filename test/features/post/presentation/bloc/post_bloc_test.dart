@@ -31,21 +31,22 @@ void main() {
     blocTest<PostBloc, PostState>(
       'emits error when userId is empty',
       build: buildBloc,
-      act: (bloc) => bloc.add(
-        const PostEvent.createPost(userId: '', content: 'hello'),
+      act: (bloc) =>
+          bloc.add(const PostEvent.createPost(userId: '', content: 'hello')),
+      expect: () => const [PostState(errorCreatePost: 'User id is required')],
+      verify: (_) => verifyNever(
+        () => createPost.call(
+          userId: any(named: 'userId'),
+          content: any(named: 'content'),
+        ),
       ),
-      expect: () => const [
-        PostState(errorCreatePost: 'User id is required'),
-      ],
-      verify: (_) => verifyNever(() => createPost.call(userId: any(named: 'userId'), content: any(named: 'content'))),
     );
 
     blocTest<PostBloc, PostState>(
       'emits error when content invalid',
       build: buildBloc,
-      act: (bloc) => bloc.add(
-        const PostEvent.createPost(userId: 'user', content: '   '),
-      ),
+      act: (bloc) =>
+          bloc.add(const PostEvent.createPost(userId: 'user', content: '   ')),
       expect: () => const [
         PostState(errorCreatePost: 'Post content cannot be empty'),
       ],
@@ -88,20 +89,22 @@ void main() {
     blocTest<PostBloc, PostState>(
       'emits failure message when usecase fails',
       build: () {
-        when(() => createPost.call(
-              userId: any(named: 'userId'),
-              content: any(named: 'content'),
-              imageUrls: any(named: 'imageUrls'),
-              videoUrls: any(named: 'videoUrls'),
-              commentsEnabled: any(named: 'commentsEnabled'),
-              hideLikeCount: any(named: 'hideLikeCount'),
-              hideCommentCount: any(named: 'hideCommentCount'),
-              hideShareCount: any(named: 'hideShareCount'),
-              hideLikesList: any(named: 'hideLikesList'),
-              campaignId: any(named: 'campaignId'),
-              campaignTitle: any(named: 'campaignTitle'),
-              metadata: any(named: 'metadata'),
-            )).thenAnswer((_) async => Left(Failure('network')));
+        when(
+          () => createPost.call(
+            userId: any(named: 'userId'),
+            content: any(named: 'content'),
+            imageUrls: any(named: 'imageUrls'),
+            videoUrls: any(named: 'videoUrls'),
+            commentsEnabled: any(named: 'commentsEnabled'),
+            hideLikeCount: any(named: 'hideLikeCount'),
+            hideCommentCount: any(named: 'hideCommentCount'),
+            hideShareCount: any(named: 'hideShareCount'),
+            hideLikesList: any(named: 'hideLikesList'),
+            campaignId: any(named: 'campaignId'),
+            campaignTitle: any(named: 'campaignTitle'),
+            metadata: any(named: 'metadata'),
+          ),
+        ).thenAnswer((_) async => Left(Failure('network')));
         return buildBloc();
       },
       act: (bloc) => bloc.add(

@@ -27,9 +27,7 @@ void main() {
   setUp(() {
     bloc = _MockFeedBloc();
     when(() => bloc.state).thenReturn(const FeedState());
-    when(() => bloc.stream).thenAnswer(
-      (_) => const Stream<FeedState>.empty(),
-    );
+    when(() => bloc.stream).thenAnswer((_) => const Stream<FeedState>.empty());
     when(() => bloc.add(any())).thenReturn(null);
   });
 
@@ -37,9 +35,7 @@ void main() {
     return MaterialApp(
       home: BlocProvider<FeedBloc>.value(
         value: bloc,
-        child: Scaffold(
-          body: FeedCard(post: post),
-        ),
+        child: Scaffold(body: FeedCard(post: post)),
       ),
     );
   }
@@ -52,13 +48,15 @@ void main() {
     verify(() => bloc.add(const FeedEvent.toggleLikePost('post-1'))).called(1);
   });
 
-  testWidgets('tapping bookmark triggers toggle bookmark event',
-      (tester) async {
+  testWidgets('tapping bookmark triggers toggle bookmark event', (
+    tester,
+  ) async {
     await tester.pumpWidget(buildWidget());
 
     await tester.tap(find.byIcon(Icons.bookmark_border));
 
-    verify(() => bloc.add(const FeedEvent.toggleBookmarkPost('post-1')))
-        .called(1);
+    verify(
+      () => bloc.add(const FeedEvent.toggleBookmarkPost('post-1')),
+    ).called(1);
   });
 }

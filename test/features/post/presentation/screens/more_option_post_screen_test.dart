@@ -4,8 +4,9 @@ import 'package:velora/features/post/domain/entities/more_option_data.dart';
 import 'package:velora/features/post/presentation/screens/more_option_post_screen.dart';
 
 void main() {
-  testWidgets('returns updated MoreOptionData when toggles change',
-      (tester) async {
+  testWidgets('returns updated MoreOptionData when toggles change', (
+    tester,
+  ) async {
     MoreOptionData? result;
 
     await tester.pumpWidget(

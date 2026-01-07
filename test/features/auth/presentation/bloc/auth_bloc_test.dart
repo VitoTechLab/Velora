@@ -44,9 +44,9 @@ void main() {
   );
 
   AuthBloc buildBloc() {
-    when(() => watchSnapshot()).thenAnswer(
-      (_) => const Stream<AuthSnapshot>.empty(),
-    );
+    when(
+      () => watchSnapshot(),
+    ).thenAnswer((_) => const Stream<AuthSnapshot>.empty());
     return AuthBloc(
       signUpUseCase: signUp,
       signInUseCase: signIn,
@@ -94,10 +94,7 @@ void main() {
     ],
     verify: (_) {
       verify(
-        () => signIn(
-          email: 'user@velora.app',
-          password: 'Password123!',
-        ),
+        () => signIn(email: 'user@velora.app', password: 'Password123!'),
       ).called(1);
     },
   );
@@ -141,9 +138,8 @@ void main() {
       ).thenAnswer((_) async => const Right(null));
       return buildBloc();
     },
-    act: (bloc) => bloc.add(
-      const AuthResetPasswordRequested(email: 'user@velora.app'),
-    ),
+    act: (bloc) =>
+        bloc.add(const AuthResetPasswordRequested(email: 'user@velora.app')),
     expect: () => const [
       AuthState(isLoading: true),
       AuthState(
@@ -243,7 +239,9 @@ void main() {
   blocTest<AuthBloc, AuthState>(
     'sign in with Google success updates state',
     build: () {
-      when(() => signInWithGoogle()).thenAnswer((_) async => const Right(session));
+      when(
+        () => signInWithGoogle(),
+      ).thenAnswer((_) async => const Right(session));
       return buildBloc();
     },
     act: (bloc) => bloc.add(const AuthSignInWithGoogleRequested()),
@@ -265,7 +263,9 @@ void main() {
         message: 'Google failed',
         type: AuthFailureType.network,
       );
-      when(() => signInWithGoogle()).thenAnswer((_) async => const Left(failure));
+      when(
+        () => signInWithGoogle(),
+      ).thenAnswer((_) async => const Left(failure));
       return buildBloc();
     },
     act: (bloc) => bloc.add(const AuthSignInWithGoogleRequested()),
@@ -285,10 +285,15 @@ void main() {
       when(() => signOut()).thenAnswer((_) async => const Right(null));
       return buildBloc();
     },
-    seed: () => const AuthState(status: AuthStatus.authenticated, userId: 'user-123'),
+    seed: () =>
+        const AuthState(status: AuthStatus.authenticated, userId: 'user-123'),
     act: (bloc) => bloc.add(const AuthSignOutRequested()),
     expect: () => const [
-      AuthState(status: AuthStatus.authenticated, isLoading: true, userId: 'user-123'),
+      AuthState(
+        status: AuthStatus.authenticated,
+        isLoading: true,
+        userId: 'user-123',
+      ),
       AuthState(
         status: AuthStatus.unauthenticated,
         isLoading: false,
@@ -310,23 +315,15 @@ void main() {
     act: (bloc) => bloc.add(const AuthSignOutRequested()),
     expect: () => const [
       AuthState(isLoading: true),
-      AuthState(
-        isLoading: false,
-        errorMessage: 'Could not sign out',
-      ),
+      AuthState(isLoading: false, errorMessage: 'Could not sign out'),
     ],
   );
 
   blocTest<AuthBloc, AuthState>(
     'clear messages resets message and error',
     build: () => buildBloc(),
-    seed: () => const AuthState(
-      message: 'Success',
-      errorMessage: 'Error',
-    ),
+    seed: () => const AuthState(message: 'Success', errorMessage: 'Error'),
     act: (bloc) => bloc.add(const AuthClearMessagesRequested()),
-    expect: () => const [
-      AuthState(message: null, errorMessage: null),
-    ],
+    expect: () => const [AuthState(message: null, errorMessage: null)],
   );
 }

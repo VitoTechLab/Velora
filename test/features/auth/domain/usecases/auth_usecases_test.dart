@@ -47,10 +47,7 @@ void main() {
 
     expect(result, equals(const Right(session)));
     verify(
-      () => repository.signIn(
-        email: 'user@velora.app',
-        password: '123456',
-      ),
+      () => repository.signIn(email: 'user@velora.app', password: '123456'),
     ).called(1);
   });
 
@@ -67,17 +64,15 @@ void main() {
 
     expect(result, equals(const Right(session)));
     verify(
-      () => repository.signUp(
-        email: 'user@velora.app',
-        password: 'Strong!',
-      ),
+      () => repository.signUp(email: 'user@velora.app', password: 'Strong!'),
     ).called(1);
   });
 
   test('AuthSignInWithGoogle delegates to repository', () async {
     final useCase = AuthSignInWithGoogle(repository);
-    when(() => repository.signInWithGoogle())
-        .thenAnswer((_) async => const Right(session));
+    when(
+      () => repository.signInWithGoogle(),
+    ).thenAnswer((_) async => const Right(session));
 
     final result = await useCase();
 
@@ -87,8 +82,9 @@ void main() {
 
   test('AuthResetPassword delegates to repository', () async {
     final useCase = AuthResetPassword(repository);
-    when(() => repository.resetPassword(email: any(named: 'email')))
-        .thenAnswer((_) async => const Right(null));
+    when(
+      () => repository.resetPassword(email: any(named: 'email')),
+    ).thenAnswer((_) async => const Right(null));
 
     final result = await useCase(email: 'user@velora.app');
 
@@ -111,8 +107,9 @@ void main() {
       const AuthSnapshot(status: AuthStatus.unauthenticated),
       const AuthSnapshot(status: AuthStatus.authenticated, userId: 'user-123'),
     ];
-    when(() => repository.watchAuthSnapshot())
-        .thenAnswer((_) => Stream.fromIterable(snapshots));
+    when(
+      () => repository.watchAuthSnapshot(),
+    ).thenAnswer((_) => Stream.fromIterable(snapshots));
 
     final useCase = AuthWatchAuthSnapshot(repository);
 

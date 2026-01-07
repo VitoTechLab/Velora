@@ -3,8 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:velora/features/auth/presentation/widgets/components/custom_text_field.dart';
 
 void main() {
-  testWidgets('CustomTextField shows validation error after blur',
-      (tester) async {
+  testWidgets('CustomTextField shows validation error after blur', (
+    tester,
+  ) async {
     final controller = TextEditingController();
     final focusNode = FocusNode();
 
@@ -20,10 +21,7 @@ void main() {
                 validator: (value) =>
                     value == null || value.isEmpty ? 'Required' : null,
               ),
-              TextButton(
-                onPressed: () {},
-                child: const Text('Next'),
-              ),
+              TextButton(onPressed: () {}, child: const Text('Next')),
             ],
           ),
         ),

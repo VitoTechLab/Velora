@@ -33,10 +33,7 @@ class _MockDeletePost extends Mock implements DeletePost {}
 void main() {
   setUpAll(() {
     registerFallbackValue(
-      const FeedCursorEntity(
-        createdAt: DateTime(2000),
-        id: 'cursor',
-      ),
+      const FeedCursorEntity(createdAt: DateTime(2000), id: 'cursor'),
     );
     registerFallbackValue(
       const FeedEntity(
@@ -90,38 +87,30 @@ void main() {
       'emits posts when successful',
       build: () {
         when(() => loadInitialFeed(limit: any(named: 'limit'))).thenAnswer(
-          (_) async => const Right(
-            FeedPaginationResult(posts: [post], hasMore: true),
-          ),
+          (_) async =>
+              const Right(FeedPaginationResult(posts: [post], hasMore: true)),
         );
         return buildBloc();
       },
       act: (bloc) => bloc.add(const FeedEvent.loadInitialFeed(limit: 10)),
       expect: () => const [
         FeedState(isLoadingInitial: true),
-        FeedState(
-          posts: [post],
-          hasMore: true,
-          isLoadingInitial: false,
-        ),
+        FeedState(posts: [post], hasMore: true, isLoadingInitial: false),
       ],
     );
 
     blocTest<FeedBloc, FeedState>(
       'emits error when failure occurs',
       build: () {
-        when(() => loadInitialFeed(limit: any(named: 'limit'))).thenAnswer(
-          (_) async => Left(Failure('error')),
-        );
+        when(
+          () => loadInitialFeed(limit: any(named: 'limit')),
+        ).thenAnswer((_) async => Left(Failure('error')));
         return buildBloc();
       },
       act: (bloc) => bloc.add(const FeedEvent.loadInitialFeed()),
       expect: () => const [
         FeedState(isLoadingInitial: true),
-        FeedState(
-          isLoadingInitial: false,
-          errorFeed: 'error',
-        ),
+        FeedState(isLoadingInitial: false, errorFeed: 'error'),
       ],
     );
   });
@@ -130,9 +119,7 @@ void main() {
     blocTest<FeedBloc, FeedState>(
       'appends posts on success',
       build: () {
-        when(
-          () => loadInitialFeed(limit: any(named: 'limit')),
-        ).thenAnswer(
+        when(() => loadInitialFeed(limit: any(named: 'limit'))).thenAnswer(
           (_) async => const Right(
             FeedPaginationResult(
               posts: [post],
@@ -204,9 +191,9 @@ void main() {
     blocTest<FeedBloc, FeedState>(
       'optimistically updates liked state on success',
       build: () {
-        when(() => toggleLikePost(any())).thenAnswer(
-          (_) async => const Right(null),
-        );
+        when(
+          () => toggleLikePost(any()),
+        ).thenAnswer((_) async => const Right(null));
         return buildBloc();
       },
       seed: () => const FeedState(posts: [post]),
@@ -240,11 +227,7 @@ void main() {
       seed: () => const FeedState(posts: [post]),
       act: (bloc) => bloc.add(const FeedEvent.updatePostEntity(post: post)),
       expect: () => [
-        const FeedState(
-          posts: [post],
-          isUpdatingPost: true,
-          updatedPost: null,
-        ),
+        const FeedState(posts: [post], isUpdatingPost: true, updatedPost: null),
         FeedState(
           posts: [updated],
           isUpdatingPost: false,
@@ -260,19 +243,15 @@ void main() {
     blocTest<FeedBloc, FeedState>(
       'emits error when update fails',
       build: () {
-        when(() => updatePost(any())).thenAnswer(
-          (_) async => Left(Failure('Update failed')),
-        );
+        when(
+          () => updatePost(any()),
+        ).thenAnswer((_) async => Left(Failure('Update failed')));
         return buildBloc();
       },
       seed: () => const FeedState(posts: [post]),
       act: (bloc) => bloc.add(const FeedEvent.updatePostEntity(post: post)),
       expect: () => const [
-        FeedState(
-          posts: [post],
-          isUpdatingPost: true,
-          updatedPost: null,
-        ),
+        FeedState(posts: [post], isUpdatingPost: true, updatedPost: null),
         FeedState(
           posts: [post],
           isUpdatingPost: false,
@@ -286,39 +265,31 @@ void main() {
     blocTest<FeedBloc, FeedState>(
       'removes post when delete succeeds',
       build: () {
-        when(() => deletePost(any()))
-            .thenAnswer((_) async => const Right(null));
+        when(
+          () => deletePost(any()),
+        ).thenAnswer((_) async => const Right(null));
         return buildBloc();
       },
       seed: () => const FeedState(posts: [post]),
       act: (bloc) => bloc.add(const FeedEvent.deletePost(postId: 'post-1')),
       expect: () => const [
-        FeedState(
-          posts: [post],
-          isDeletingPost: true,
-        ),
-        FeedState(
-          posts: [],
-          isDeletingPost: false,
-          message: 'Post deleted',
-        ),
+        FeedState(posts: [post], isDeletingPost: true),
+        FeedState(posts: [], isDeletingPost: false, message: 'Post deleted'),
       ],
     );
 
     blocTest<FeedBloc, FeedState>(
       'emits error when delete fails',
       build: () {
-        when(() => deletePost(any()))
-            .thenAnswer((_) async => Left(Failure('Delete failed')));
+        when(
+          () => deletePost(any()),
+        ).thenAnswer((_) async => Left(Failure('Delete failed')));
         return buildBloc();
       },
       seed: () => const FeedState(posts: [post]),
       act: (bloc) => bloc.add(const FeedEvent.deletePost(postId: 'post-1')),
       expect: () => const [
-        FeedState(
-          posts: [post],
-          isDeletingPost: true,
-        ),
+        FeedState(posts: [post], isDeletingPost: true),
         FeedState(
           posts: [post],
           isDeletingPost: false,
@@ -335,22 +306,15 @@ void main() {
       'replaces posts when refresh succeeds',
       build: () {
         when(() => loadInitialFeed(limit: any(named: 'limit'))).thenAnswer(
-          (_) async => Right(
-            FeedPaginationResult(
-              posts: [refreshed],
-              hasMore: false,
-            ),
-          ),
+          (_) async =>
+              Right(FeedPaginationResult(posts: [refreshed], hasMore: false)),
         );
         return buildBloc();
       },
       seed: () => const FeedState(posts: [post]),
       act: (bloc) => bloc.add(const FeedEvent.refreshFeed()),
       expect: () => [
-        const FeedState(
-          posts: [post],
-          isRefreshing: true,
-        ),
+        const FeedState(posts: [post], isRefreshing: true),
         FeedState(
           posts: [refreshed],
           hasMore: false,
@@ -365,8 +329,9 @@ void main() {
     blocTest<FeedBloc, FeedState>(
       'flips bookmark flag when use case succeeds',
       build: () {
-        when(() => toggleBookmarkPost(any()))
-            .thenAnswer((_) async => const Right(null));
+        when(
+          () => toggleBookmarkPost(any()),
+        ).thenAnswer((_) async => const Right(null));
         return buildBloc();
       },
       seed: () => const FeedState(posts: [post]),

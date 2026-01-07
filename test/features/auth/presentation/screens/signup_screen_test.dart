@@ -8,14 +8,13 @@ import 'package:velora/features/auth/presentation/bloc/auth_event.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_state.dart';
 import 'package:velora/features/auth/presentation/screens/signup_screen.dart';
 
-class _MockAuthBloc extends MockBloc<AuthEvent, AuthState>
-    implements AuthBloc {
+class _MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {
   @override
   void clearMessages() => super.noSuchMethod(
-        Invocation.method(#clearMessages, const []),
-        returnValue: null,
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#clearMessages, const []),
+    returnValue: null,
+    returnValueForMissingStub: null,
+  );
 }
 
 void main() {
@@ -24,8 +23,7 @@ void main() {
   Finder textFieldByLabel(String label) {
     return find.byWidgetPredicate(
       (widget) =>
-          widget is TextFormField &&
-          widget.decoration?.labelText == label,
+          widget is TextFormField && widget.decoration?.labelText == label,
       description: 'TextFormField with label $label',
     );
   }
@@ -55,47 +53,32 @@ void main() {
       initialState: const AuthState(),
     );
     when(() => mockBloc.state).thenReturn(const AuthState());
-    when(() => mockBloc.stream).thenAnswer(
-      (_) => const Stream<AuthState>.empty(),
-    );
+    when(
+      () => mockBloc.stream,
+    ).thenAnswer((_) => const Stream<AuthState>.empty());
     when(() => mockBloc.add(any())).thenReturn(null);
     when(() => mockBloc.clearMessages()).thenReturn(null);
   });
 
-  testWidgets(
-    'does not submit when terms are not accepted',
-    (tester) async {
-      await pumpSignUpScreen(tester);
+  testWidgets('does not submit when terms are not accepted', (tester) async {
+    await pumpSignUpScreen(tester);
 
-      await tester.enterText(
-        textFieldByLabel('Email'),
-        'user@velora.app',
-      );
-      await tester.enterText(
-        textFieldByLabel('Password'),
-        'Password123!',
-      );
+    await tester.enterText(textFieldByLabel('Email'), 'user@velora.app');
+    await tester.enterText(textFieldByLabel('Password'), 'Password123!');
 
-      await tester.tap(find.text('Create Account'));
-      await tester.pump();
+    await tester.tap(find.text('Create Account'));
+    await tester.pump();
 
-      verifyNever(() => mockBloc.add(any()));
-    },
-  );
+    verifyNever(() => mockBloc.add(any()));
+  });
 
   testWidgets(
     'dispatches AuthSignUpRequested when form valid and terms accepted',
     (tester) async {
       await pumpSignUpScreen(tester);
 
-      await tester.enterText(
-        textFieldByLabel('Email'),
-        'user@velora.app',
-      );
-      await tester.enterText(
-        textFieldByLabel('Password'),
-        'Password123!',
-      );
+      await tester.enterText(textFieldByLabel('Email'), 'user@velora.app');
+      await tester.enterText(textFieldByLabel('Password'), 'Password123!');
 
       await tester.tap(find.byType(Checkbox));
       await tester.pump();
@@ -112,10 +95,12 @@ void main() {
         ),
       ).called(1);
 
-      final emailField =
-          tester.widget<TextFormField>(textFieldByLabel('Email'));
-      final passwordField =
-          tester.widget<TextFormField>(textFieldByLabel('Password'));
+      final emailField = tester.widget<TextFormField>(
+        textFieldByLabel('Email'),
+      );
+      final passwordField = tester.widget<TextFormField>(
+        textFieldByLabel('Password'),
+      );
       expect(emailField.controller?.text, isEmpty);
       expect(passwordField.controller?.text, isEmpty);
     },

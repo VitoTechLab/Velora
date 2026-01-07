@@ -94,10 +94,7 @@ void main() {
 
       expect(result?.userId, equals('user-123'));
       verify(
-        () => goTrue.signUp(
-          email: 'user@velora.app',
-          password: 'Password123!',
-        ),
+        () => goTrue.signUp(email: 'user@velora.app', password: 'Password123!'),
       ).called(1);
     });
   });
@@ -113,7 +110,9 @@ void main() {
       final account = _MockGoogleSignInAccount();
       final authentication = _MockGoogleSignInAuthentication();
       when(() => googleSignIn.signIn()).thenAnswer((_) async => account);
-      when(() => account.authentication).thenAnswer((_) async => authentication);
+      when(
+        () => account.authentication,
+      ).thenAnswer((_) async => authentication);
       when(() => authentication.idToken).thenReturn('id-token');
       when(() => authentication.accessToken).thenReturn('access-token');
       when(
@@ -141,10 +140,7 @@ void main() {
     test('throws when google sign-in aborted', () async {
       when(() => googleSignIn.signIn()).thenAnswer((_) async => null);
 
-      expect(
-        () => dataSource.signInWithGoogle(),
-        throwsA(isA<Exception>()),
-      );
+      expect(() => dataSource.signInWithGoogle(), throwsA(isA<Exception>()));
       verify(() => googleSignIn.signOut()).called(1);
     });
   });
@@ -177,10 +173,9 @@ void main() {
 
   group('resetPassword', () {
     test('delegates to Supabase', () async {
-      when(() => goTrue.resetPasswordForEmail(any()))
-          .thenAnswer((_) async {
-            return null;
-          });
+      when(() => goTrue.resetPasswordForEmail(any())).thenAnswer((_) async {
+        return null;
+      });
 
       await dataSource.resetPassword(email: 'user@velora.app');
 
@@ -216,9 +211,9 @@ void main() {
       when(() => authState1.session).thenReturn(mockSession);
       when(() => authState2.session).thenReturn(secondSession);
 
-      when(() => goTrue.onAuthStateChange).thenAnswer(
-        (_) => Stream.fromIterable([authState1, authState2]),
-      );
+      when(
+        () => goTrue.onAuthStateChange,
+      ).thenAnswer((_) => Stream.fromIterable([authState1, authState2]));
 
       final results = await dataSource.watchAuthSession().toList();
 
@@ -231,9 +226,9 @@ void main() {
   test('watchAuthSession emits null when Supabase session is null', () async {
     final authState = _MockSupabaseAuthState();
     when(() => authState.session).thenReturn(null);
-    when(() => goTrue.onAuthStateChange).thenAnswer(
-      (_) => Stream.fromIterable([authState]),
-    );
+    when(
+      () => goTrue.onAuthStateChange,
+    ).thenAnswer((_) => Stream.fromIterable([authState]));
 
     final results = await dataSource.watchAuthSession().toList();
 

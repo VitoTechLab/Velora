@@ -16,10 +16,7 @@ void main() {
   ];
 
   test('CommentPaginationModel -> entity retains cursor', () {
-    final cursor = CommentCursor(
-      createdAt: now,
-      id: 'cursor',
-    );
+    final cursor = CommentCursor(createdAt: now, id: 'cursor');
     final model = CommentPaginationModel(
       comments: comments,
       hasMore: false,

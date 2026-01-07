@@ -6,12 +6,7 @@ import 'package:velora/features/feed/data/models/feed_pagination_model.dart';
 void main() {
   final now = DateTime.utc(2024, 3, 1);
   final posts = [
-    FeedModel(
-      id: 'p1',
-      userId: 'u1',
-      content: 'Hello',
-      createdAt: now,
-    ),
+    FeedModel(id: 'p1', userId: 'u1', content: 'Hello', createdAt: now),
     FeedModel(
       id: 'p2',
       userId: 'u2',

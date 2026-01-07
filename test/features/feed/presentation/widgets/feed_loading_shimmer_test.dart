@@ -6,9 +6,7 @@ import 'package:velora/shared/widgets/skeleton_loader.dart';
 void main() {
   testWidgets('FeedLoadingShimmer renders skeleton list', (tester) async {
     await tester.pumpWidget(
-      const MaterialApp(
-        home: Scaffold(body: FeedLoadingShimmer()),
-      ),
+      const MaterialApp(home: Scaffold(body: FeedLoadingShimmer())),
     );
 
     expect(find.byType(SkeletonFeedList), findsOneWidget);

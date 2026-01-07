@@ -33,7 +33,10 @@ void main() {
   group('getFeed', () {
     test('returns Right when remote succeeds', () async {
       when(
-        () => remote.getFeed(limit: any(named: 'limit'), cursor: any(named: 'cursor')),
+        () => remote.getFeed(
+          limit: any(named: 'limit'),
+          cursor: any(named: 'cursor'),
+        ),
       ).thenAnswer(
         (_) async => FeedPaginationModel(
           posts: [feedModel],
@@ -49,7 +52,10 @@ void main() {
 
       expect(result.isRight(), isTrue);
       expect(
-        result.getOrElse(() => const FeedPaginationResult(posts: [], hasMore: false))
+        result
+            .getOrElse(
+              () => const FeedPaginationResult(posts: [], hasMore: false),
+            )
             .posts,
         isA<List<FeedEntity>>(),
       );
@@ -57,7 +63,10 @@ void main() {
 
     test('returns failure when remote throws', () async {
       when(
-        () => remote.getFeed(limit: any(named: 'limit'), cursor: any(named: 'cursor')),
+        () => remote.getFeed(
+          limit: any(named: 'limit'),
+          cursor: any(named: 'cursor'),
+        ),
       ).thenThrow(Exception('boom'));
 
       final result = await repository.getFeed(limit: 10, cursor: null);
@@ -124,10 +133,7 @@ void main() {
         ),
       );
 
-      final result = await repository.getComments(
-        postId: 'post-1',
-        limit: 10,
-      );
+      final result = await repository.getComments(postId: 'post-1', limit: 10);
 
       expect(result.isRight(), isTrue);
       expect(

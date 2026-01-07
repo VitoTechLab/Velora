@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:velora/core/services/navigation_service.dart';
 import 'package:velora/features/auth/domain/entities/auth_status.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_event.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_state.dart';
 import 'package:velora/features/settings/domain/entities/user_preferences.dart';
 import 'package:velora/routes/app_router.dart';
+import 'package:velora/features/navigation/services/navigation_service.dart';
 
 class _MockAuthBloc extends MockBloc<AuthEvent, AuthState>
     implements AuthBloc {}
@@ -24,9 +24,9 @@ void main() {
 
   setUp(() {
     authBloc = _MockAuthBloc();
-    when(() => authBloc.stream).thenAnswer(
-      (_) => const Stream<AuthState>.empty(),
-    );
+    when(
+      () => authBloc.stream,
+    ).thenAnswer((_) => const Stream<AuthState>.empty());
   });
 
   Future<AppRouter> pumpRouter(
@@ -34,11 +34,7 @@ void main() {
     required AuthState state,
   }) async {
     when(() => authBloc.state).thenReturn(state);
-    final router = AppRouter(
-      NavigationService(),
-      UserPreferences(),
-      authBloc,
-    );
+    final router = AppRouter(NavigationService(), UserPreferences(), authBloc);
     await tester.pumpWidget(
       BlocProvider<AuthBloc>.value(
         value: authBloc,
@@ -49,7 +45,9 @@ void main() {
     return router;
   }
 
-  testWidgets('unauthenticated users are redirected to sign in', (tester) async {
+  testWidgets('unauthenticated users are redirected to sign in', (
+    tester,
+  ) async {
     final router = await pumpRouter(
       tester,
       state: const AuthState(status: AuthStatus.unauthenticated),
@@ -75,5 +73,4 @@ void main() {
 
     expect(router.router.location, AppRoutePath.createPost);
   });
-
 }

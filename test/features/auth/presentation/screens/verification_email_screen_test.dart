@@ -29,9 +29,9 @@ void main() {
       initialState: const AuthState(),
     );
     when(() => mockBloc.state).thenReturn(const AuthState());
-    when(() => mockBloc.stream).thenAnswer(
-      (_) => const Stream<AuthState>.empty(),
-    );
+    when(
+      () => mockBloc.stream,
+    ).thenAnswer((_) => const Stream<AuthState>.empty());
     when(() => mockBloc.add(any())).thenReturn(null);
   });
 
@@ -53,14 +53,13 @@ void main() {
       ],
     );
 
-    await tester.pumpWidget(
-      MaterialApp.router(routerConfig: router),
-    );
+    await tester.pumpWidget(MaterialApp.router(routerConfig: router));
     await tester.pumpAndSettle();
   }
 
-  testWidgets('sign out button dispatches AuthSignOutRequested and navigates',
-      (tester) async {
+  testWidgets('sign out button dispatches AuthSignOutRequested and navigates', (
+    tester,
+  ) async {
     await pumpVerificationScreen(tester);
 
     await tester.tap(find.text('Wrong email? Sign out'));

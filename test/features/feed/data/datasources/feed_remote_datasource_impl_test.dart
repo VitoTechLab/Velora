@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -9,15 +8,12 @@ import 'package:velora/core/supabase/supabase_constants.dart';
 import 'package:velora/features/feed/data/datasources/feed_remote_datasource_impl.dart';
 import 'package:velora/features/feed/data/models/comment_model.dart';
 import 'package:velora/features/feed/data/models/feed_model.dart';
-import 'package:velora/features/feed/data/models/feed_cursor.dart';
-import 'package:velora/test/helpers/mock_supabase.dart';
+import '../../../../helpers/mock_supabase.dart';
 
 void main() {
   setUpAll(() {
     registerFallbackValue(MockPostgrestQueryBuilder());
-    registerFallbackValue(
-      MockPostgrestFilterBuilder<Map<String, dynamic>>(),
-    );
+    registerFallbackValue(MockPostgrestFilterBuilder<Map<String, dynamic>>());
     registerFallbackValue(MockPostgrestTransformBuilder<dynamic>());
   });
   late MockSupabaseClient supabaseClient;
@@ -25,8 +21,8 @@ void main() {
   late FeedRemoteDataSourceImpl dataSource;
 
   setUp(() {
-    supabaseClient = _MockSupabaseClient();
-    auth = _MockSupabaseAuth();
+    supabaseClient = MockSupabaseClient();
+    auth = MockSupabaseAuth();
     when(() => supabaseClient.auth).thenReturn(auth);
     dataSource = FeedRemoteDataSourceImpl(supabaseClient: supabaseClient);
   });
@@ -45,14 +41,14 @@ void main() {
   group('getFeed', () {
     test('returns mapped posts with pagination metadata', () async {
       final queryBuilder = MockPostgrestQueryBuilder();
-      final filterBuilder =
-          MockPostgrestFilterBuilder<Map<String, dynamic>>();
+      final filterBuilder = MockPostgrestFilterBuilder<Map<String, dynamic>>();
       final firstOrder = MockPostgrestTransformBuilder<PostgrestList>();
       final secondOrder = MockPostgrestTransformBuilder<PostgrestList>();
       final limitBuilder = MockPostgrestTransformBuilder<PostgrestList>();
 
-      when(() => supabaseClient.from(SupabaseTables.feedPostsView))
-          .thenReturn(queryBuilder);
+      when(
+        () => supabaseClient.from(SupabaseTables.feedPostsView),
+      ).thenReturn(queryBuilder);
       when(() => queryBuilder.select()).thenReturn(filterBuilder);
       when(
         () => filterBuilder.order(
@@ -83,18 +79,12 @@ void main() {
         createdAt: DateTime.utc(2024, 1, 1),
       );
       when(
-        () => limitBuilder.then<dynamic>(
-          any(),
-          onError: anyNamed('onError'),
-        ),
+        () => limitBuilder.then<dynamic>(any(), onError: any(named: 'onError')),
       ).thenAnswer((invocation) {
         final onValue =
             invocation.positionalArguments[0] as dynamic Function(dynamic);
         return Future.value(
-          onValue([
-            feed.toJson(),
-            feed.copyWith(id: 'post-2').toJson(),
-          ]),
+          onValue([feed.toJson(), feed.copyWith(id: 'post-2').toJson()]),
         );
       });
 
@@ -102,7 +92,7 @@ void main() {
 
       expect(result.posts.length, 1);
       expect(result.hasMore, isTrue);
-      expect(result.cursor?.id, equals('post-1'));
+      expect(result.nextCursor?.id, equals('post-1'));
     });
   });
 
@@ -113,13 +103,13 @@ void main() {
       when(() => user.id).thenReturn('user-1');
 
       final queryBuilder = MockPostgrestQueryBuilder();
-      final insertBuilder =
-          MockPostgrestFilterBuilder<Map<String, dynamic>>();
+      final insertBuilder = MockPostgrestFilterBuilder<Map<String, dynamic>>();
       final selectBuilder = MockPostgrestTransformBuilder<PostgrestList>();
       final singleBuilder = MockPostgrestTransformBuilder<PostgrestMap>();
 
-      when(() => supabaseClient.from(SupabaseTables.feedComments))
-          .thenReturn(queryBuilder);
+      when(
+        () => supabaseClient.from(SupabaseTables.feedComments),
+      ).thenReturn(queryBuilder);
       when(() => queryBuilder.insert(any())).thenReturn(insertBuilder);
       when(() => insertBuilder.select()).thenReturn(selectBuilder);
       when(() => selectBuilder.single()).thenReturn(singleBuilder);
@@ -133,10 +123,8 @@ void main() {
       );
 
       when(
-        () => singleBuilder.then<dynamic>(
-          any(),
-          onError: anyNamed('onError'),
-        ),
+        () =>
+            singleBuilder.then<dynamic>(any(), onError: any(named: 'onError')),
       ).thenAnswer((invocation) {
         final onValue =
             invocation.positionalArguments[0] as dynamic Function(dynamic);
@@ -163,23 +151,19 @@ void main() {
 
     test('inserts bookmark when none exists', () async {
       final queryBuilder = MockPostgrestQueryBuilder();
-      final selectBuilder =
-          MockPostgrestFilterBuilder<Map<String, dynamic>>();
+      final selectBuilder = MockPostgrestFilterBuilder<Map<String, dynamic>>();
       final maybeBuilder = MockPostgrestTransformBuilder<PostgrestMap?>();
-      final insertBuilder =
-          MockPostgrestFilterBuilder<Map<String, dynamic>>();
+      final insertBuilder = MockPostgrestFilterBuilder<Map<String, dynamic>>();
 
-      when(() => supabaseClient.from(SupabaseTables.feedPostBookmarks))
-          .thenReturn(queryBuilder);
+      when(
+        () => supabaseClient.from(SupabaseTables.feedPostBookmarks),
+      ).thenReturn(queryBuilder);
       when(() => queryBuilder.select()).thenReturn(selectBuilder);
       when(() => selectBuilder.eq(any(), any())).thenReturn(selectBuilder);
       when(() => selectBuilder.maybeSingle()).thenReturn(maybeBuilder);
 
       when(
-        () => maybeBuilder.then<dynamic>(
-          any(),
-          onError: anyNamed('onError'),
-        ),
+        () => maybeBuilder.then<dynamic>(any(), onError: any(named: 'onError')),
       ).thenAnswer((invocation) {
         final onValue =
             invocation.positionalArguments[0] as dynamic Function(dynamic);
@@ -188,10 +172,8 @@ void main() {
 
       when(() => queryBuilder.insert(any())).thenReturn(insertBuilder);
       when(
-        () => insertBuilder.then<dynamic>(
-          any(),
-          onError: anyNamed('onError'),
-        ),
+        () =>
+            insertBuilder.then<dynamic>(any(), onError: any(named: 'onError')),
       ).thenAnswer((invocation) {
         final onValue =
             invocation.positionalArguments[0] as dynamic Function(dynamic);
@@ -209,7 +191,7 @@ void main() {
     late void Function(PostgresChangePayload) capturedCallback;
 
     setUp(() {
-      channel = _MockRealtimeChannel();
+      channel = MockRealtimeChannel();
       when(() => supabaseClient.channel(any())).thenReturn(channel);
       when(
         () => channel.onPostgresChanges(
@@ -221,7 +203,8 @@ void main() {
         ),
       ).thenAnswer((invocation) {
         capturedCallback =
-            invocation.namedArguments[#callback] as void Function(PostgresChangePayload);
+            invocation.namedArguments[#callback]
+                as void Function(PostgresChangePayload);
         return channel;
       });
       when(() => channel.subscribe()).thenReturn(channel);

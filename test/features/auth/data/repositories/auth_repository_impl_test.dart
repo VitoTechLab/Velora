@@ -39,20 +39,16 @@ void main() {
       );
 
       expect(result.isRight(), isTrue);
-      result.fold(
-        (_) => fail('Expected a successful session mapping'),
-        (session) {
-          expect(session, isNotNull);
-          expect(session!.userId, equals(sampleModel.userId));
-          expect(session.email, equals(sampleModel.email));
-          expect(session.emailVerified, isTrue);
-        },
-      );
+      result.fold((_) => fail('Expected a successful session mapping'), (
+        session,
+      ) {
+        expect(session, isNotNull);
+        expect(session!.userId, equals(sampleModel.userId));
+        expect(session.email, equals(sampleModel.email));
+        expect(session.emailVerified, isTrue);
+      });
       verify(
-        () => remote.signIn(
-          email: 'user@velora.app',
-          password: 'Password123!',
-        ),
+        () => remote.signIn(email: 'user@velora.app', password: 'Password123!'),
       ).called(1);
     });
 
@@ -80,12 +76,9 @@ void main() {
   group('watchAuthSnapshot', () {
     test('emits snapshots mapped from remote datasource', () async {
       when(() => remote.currentSession()).thenReturn(null);
-      when(() => remote.watchAuthSession()).thenAnswer(
-        (_) => Stream.fromIterable([
-          sampleModel,
-          null,
-        ]),
-      );
+      when(
+        () => remote.watchAuthSession(),
+      ).thenAnswer((_) => Stream.fromIterable([sampleModel, null]));
 
       final snapshots = repository.watchAuthSnapshot();
 

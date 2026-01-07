@@ -11,14 +11,13 @@ import 'package:velora/features/auth/presentation/bloc/auth_event.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_state.dart';
 import 'package:velora/features/auth/presentation/screens/reset_password_screen.dart';
 
-class _MockAuthBloc extends MockBloc<AuthEvent, AuthState>
-    implements AuthBloc {
+class _MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {
   @override
   void clearMessages() => super.noSuchMethod(
-        Invocation.method(#clearMessages, const []),
-        returnValue: null,
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#clearMessages, const []),
+    returnValue: null,
+    returnValueForMissingStub: null,
+  );
 }
 
 void main() {
@@ -28,8 +27,7 @@ void main() {
   Finder textFieldByLabel(String label) {
     return find.byWidgetPredicate(
       (widget) =>
-          widget is TextFormField &&
-          widget.decoration?.labelText == label,
+          widget is TextFormField && widget.decoration?.labelText == label,
       description: 'TextFormField with label $label',
     );
   }
@@ -73,32 +71,26 @@ void main() {
     controller.close();
   });
 
-  testWidgets(
-    'dispatches reset password event when form is valid',
-    (tester) async {
-      await pumpScreen(tester);
+  testWidgets('dispatches reset password event when form is valid', (
+    tester,
+  ) async {
+    await pumpScreen(tester);
 
-      await tester.enterText(
-        textFieldByLabel('Email'),
-        'user@velora.app',
-      );
-      await tester.tap(find.text('Send reset link'));
-      await tester.pump();
+    await tester.enterText(textFieldByLabel('Email'), 'user@velora.app');
+    await tester.tap(find.text('Send reset link'));
+    await tester.pump();
 
-      verify(
-        () => mockBloc.add(
-          const AuthResetPasswordRequested(email: 'user@velora.app'),
-        ),
-      ).called(1);
-    },
-  );
+    verify(
+      () => mockBloc.add(
+        const AuthResetPasswordRequested(email: 'user@velora.app'),
+      ),
+    ).called(1);
+  });
 
   testWidgets('shows dialog when success message emitted', (tester) async {
     await pumpScreen(tester);
 
-    controller.add(
-      const AuthState(message: 'Check your inbox'),
-    );
+    controller.add(const AuthState(message: 'Check your inbox'));
     await tester.pump();
 
     expect(find.text('Check your email'), findsOneWidget);

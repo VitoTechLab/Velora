@@ -5,9 +5,7 @@ import 'package:velora/features/feed/presentation/widgets/empty_feed_widget.dart
 void main() {
   testWidgets('shows default messages without refresh button', (tester) async {
     await tester.pumpWidget(
-      const MaterialApp(
-        home: Scaffold(body: EmptyFeedWidget()),
-      ),
+      const MaterialApp(home: Scaffold(body: EmptyFeedWidget())),
     );
 
     expect(find.text('No posts yet'), findsOneWidget);
@@ -19,9 +17,7 @@ void main() {
     var tapped = false;
     await tester.pumpWidget(
       MaterialApp(
-        home: Scaffold(
-          body: EmptyFeedWidget(onRefresh: () => tapped = true),
-        ),
+        home: Scaffold(body: EmptyFeedWidget(onRefresh: () => tapped = true)),
       ),
     );
 

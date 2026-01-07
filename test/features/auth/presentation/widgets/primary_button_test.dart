@@ -27,10 +27,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          body: PrimaryButton(
-            text: 'Submit',
-            onPressed: () => tapped = true,
-          ),
+          body: PrimaryButton(text: 'Submit', onPressed: () => tapped = true),
         ),
       ),
     );

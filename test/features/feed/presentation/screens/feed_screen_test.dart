@@ -29,9 +29,7 @@ void main() {
     required FeedState state,
   }) async {
     when(() => bloc.state).thenReturn(state);
-    when(() => bloc.stream).thenAnswer(
-      (_) => const Stream<FeedState>.empty(),
-    );
+    when(() => bloc.stream).thenAnswer((_) => const Stream<FeedState>.empty());
     await tester.pumpWidget(
       MaterialApp(
         home: BlocProvider<FeedBloc>.value(
@@ -44,10 +42,7 @@ void main() {
   }
 
   testWidgets('shows shimmer when loading initial feed', (tester) async {
-    await pumpScreen(
-      tester,
-      state: const FeedState(isLoadingInitial: true),
-    );
+    await pumpScreen(tester, state: const FeedState(isLoadingInitial: true));
 
     expect(find.byType(FeedLoadingShimmer), findsOneWidget);
     verify(() => bloc.add(const FeedEvent.loadInitialFeed())).called(1);
