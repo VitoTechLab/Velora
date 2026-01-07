@@ -24,9 +24,6 @@ class AdMobConfig {
     try {
       AppLogger.i('[AdMob] Initializing Google Mobile Ads SDK...');
 
-      // Initialize the Mobile Ads SDK
-      await MobileAds.instance.initialize();
-
       // Optional: Set request configuration
       await MobileAds.instance.updateRequestConfiguration(
         RequestConfiguration(
