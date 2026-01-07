@@ -1,0 +1,1120 @@
+{
+  "@@locale": "ja",
+  "appTitle": "Velora",
+  "authSignInFormLabel": "ログインフォーム",
+  "authLogoLabel": "Velora ロゴ",
+  "authWelcomeBackTitle": "お帰りなさい",
+  "authSignInSubtitle": "続行するにはログインしてください",
+  "fieldEmailLabel": "メールアドレス",
+  "fieldEmailHint": "email@example.com",
+  "fieldPasswordLabel": "パスワード",
+  "authForgotPassword": "パスワードをお忘れですか？",
+  "authForgotPasswordHint": "パスワードを忘れた場合。パスワード再設定画面へ移動",
+  "authSignInButton": "ログイン",
+  "authDividerText": "または次の方法で続行",
+  "authContinueWith": "{brand} で続行",
+  "@authContinueWith": {
+    "placeholders": {
+      "brand": {
+        "type": "String"
+      }
+    }
+  },
+  "authNoAccount": "アカウントをお持ちではありませんか？",
+  "authSignUpLink": "登録",
+  "authAgreeTermsError": "まず利用規約とプライバシーポリシーに同意してください",
+  "authGoogleUnavailable": "Google ログインはまだ利用できません。",
+  "authSignUpFormLabel": "アカウント作成フォーム",
+  "authCreateAccountTitle": "アカウントを作成",
+  "authJoinCommunitySubtitle": "Velora コミュニティに参加しましょう",
+  "authAgreeTermsLabel": "利用規約とプライバシーポリシーに同意",
+  "authAgreeTermsPrefix": "私は同意します",
+  "authTermsOfService": "利用規約",
+  "authAnd": " と ",
+  "authPrivacyPolicy": "プライバシーポリシー",
+  "authCreateAccountButton": "アカウントを作成",
+  "authAlreadyHaveAccount": "すでにアカウントをお持ちですか？",
+  "authSignInLink": "ログイン",
+  "commonGoBack": "戻る",
+  "commonCancel": "キャンセル",
+  "authResetPasswordFormLabel": "パスワード再設定フォーム",
+  "authEmailIllustrationLabel": "メールのイラスト",
+  "authResetPasswordTitle": "パスワードをリセット",
+  "authResetPasswordSubtitle": "登録済みのメールアドレスを入力すると、パスワード再設定用のリンクを送信します。",
+  "authSendResetLink": "再設定リンクを送信",
+  "authRememberPasswordLabel": "パスワードを思い出しましたか？ログインへ戻る",
+  "authRememberPasswordAction": "パスワードを思い出しましたか？ログイン",
+  "authResetEmailSentLabel": "再設定メールを送信しました",
+  "authCheckEmailTitle": "メールを確認してください",
+  "authBackToSignIn": "ログインへ戻る",
+  "authEmailVerificationLabel": "メール確認の案内",
+  "authAnimatedEmailLabel": "アニメーション付きメールのイラスト",
+  "authVerificationInstructions": "確認リンクを送信しました。受信トレイを確認し、リンクをクリックしてアカウントを確認してください。",
+  "authVerifiedCta": "メールを確認しました",
+  "authResendVerificationLabel": "確認メールを再送",
+  "authVerificationEmailResent": "確認メールを再送信しました",
+  "authWrongEmail": "メールが違いますか？サインアウト",
+  "authSignOutHint": "サインアウトしてログイン画面に戻る",
+  "authPasswordStrengthWeak": "弱い",
+  "authPasswordStrengthStrong": "強い",
+  "authPasswordStrengthMedium": "中程度",
+  "authPasswordStrengthFair": "やや弱い",
+  "authPasswordShow": "パスワードを表示",
+  "authPasswordHide": "パスワードを非表示",
+  "authPasswordRequirementsTitle": "パスワードには次が含まれている必要があります:",
+  "authPasswordRequirementLength": "8 文字以上",
+  "authPasswordRequirementCase": "大文字と小文字",
+  "authPasswordRequirementNumber": "数字を 1 つ以上",
+  "authPasswordRequirementSpecial": "特殊文字 (!@#$%^&*)",
+  "feedTitle": "フィード",
+  "feedCreatePostTooltip": "投稿を作成",
+  "feedNotificationsTooltip": "通知",
+  "feedErrorLoading": "フィードの読み込みに失敗しました",
+  "feedEmptyMessage": "投稿がまだありません",
+  "feedEmptySubtitle": "下に引っ張って更新するか、後でもう一度お試しください",
+  "feedEmptyHint": "{subtitle}。更新ボタンをダブルタップ。",
+  "@feedEmptyHint": {
+    "placeholders": {
+      "subtitle": {
+        "type": "String"
+      }
+    }
+  },
+  "feedRefreshButtonSemantic": "フィードを更新",
+  "feedRefreshButton": "更新",
+  "feedLoadingLabel": "フィードを読み込み中",
+  "feedCommentsTitle": "コメント",
+  "feedReplyingTo": "{name} に返信中",
+  "@feedReplyingTo": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "feedWriteCommentHint": "コメントを書く...",
+  "feedAddCommentHint": "{name} へのコメントを追加",
+  "@feedAddCommentHint": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "feedNoCommentsTitle": "コメントはまだありません",
+  "feedNoCommentsSubtitle": "最初のコメントを残しましょう！",
+  "feedReplyAction": "返信",
+  "feedDeleteAction": "削除",
+  "feedSeeTranslation": "翻訳を表示",
+  "feedViewReplies": "{count, plural, one{{count} 件の返信を表示} other{{count} 件の返信を表示}}",
+  "@feedViewReplies": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "feedUnknownUser": "不明なユーザー",
+  "feedPostSummaryFallback": "投稿",
+  "feedPostSemantics": "{author} が {summary} を {time} に投稿",
+  "@feedPostSemantics": {
+    "placeholders": {
+      "author": {
+        "type": "String"
+      },
+      "summary": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "feedOpenPostHint": "ダブルタップで投稿詳細を開く",
+  "feedPostImageLabel": "投稿画像",
+  "feedPostImagePositionLabel": "投稿画像 {index}/{total}",
+  "@feedPostImagePositionLabel": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "feedCampaignFallback": "キャンペーン",
+  "feedOpenCampaignLabel": "キャンペーン {title} を開く",
+  "@feedOpenCampaignLabel": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "feedLikeLabel": "投稿にいいね",
+  "feedUnlikeLabel": "いいねを取り消す",
+  "feedLikeHint": "ダブルタップでこの投稿にいいね",
+  "feedUnlikeHint": "ダブルタップでいいねを取り消す",
+  "feedViewCommentsLabel": "コメントを見る",
+  "feedViewCommentsHint": "ダブルタップでコメントを開く",
+  "feedShareComingSoon": "シェア機能は近日公開予定",
+  "feedShareLabel": "投稿をシェア",
+  "feedShareHint": "ダブルタップでシェア",
+  "feedRemoveBookmarkLabel": "ブックマークを解除",
+  "feedAddBookmarkLabel": "この投稿をブックマーク",
+  "timeAgoNow": "たった今",
+  "timeAgoMinutes": "{count}分",
+  "@timeAgoMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeAgoHours": "{count}時間",
+  "@timeAgoHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeAgoDays": "{count}日",
+  "@timeAgoDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeAgoMonths": "{count}か月",
+  "@timeAgoMonths": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeAgoYears": "{count}年",
+  "@timeAgoYears": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "countThousands": "{value}K",
+  "@countThousands": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "countMillions": "{value}M",
+  "@countMillions": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAccountsCenterTitle": "アカウントセンター",
+  "settingsAccountsCenterSubtitle": "接続された体験、ID、プライバシーを管理",
+  "settingsSearchTooltip": "設定を検索",
+  "settingsConnectedTitle": "接続された体験",
+  "settingsConnectedSubtitle": "Velora の ID が各プラットフォームでどう動くかを管理します。",
+  "settingsTileProfilesTitle": "プロフィール",
+  "settingsTileProfilesSubtitle": "Vito • Velora、Forum、Community",
+  "settingsTileSharingTitle": "プロフィール間の共有",
+  "settingsTileSharingSubtitle": "自動同期する内容を選択",
+  "settingsTileLoggingTitle": "アカウントでのログイン",
+  "settingsTileLoggingSubtitle": "デバイスとログイン承認を確認",
+  "settingsAccountTitle": "アカウント設定",
+  "settingsTilePasswordSecurityTitle": "パスワードとセキュリティ",
+  "settingsTilePasswordSecuritySubtitle": "2FA、信頼済みデバイス、セキュリティ通知",
+  "settingsTilePersonalDetailsTitle": "個人情報",
+  "settingsTilePersonalDetailsSubtitle": "名前、ユーザー名、プロフィールリンク",
+  "settingsTileInfoPermissionsTitle": "情報と権限",
+  "settingsTileInfoPermissionsSubtitle": "データのダウンロード、権限、公開範囲",
+  "settingsTileAdPreferencesTitle": "広告の表示設定",
+  "settingsTileAdPreferencesSubtitle": "よく表示したいトピック",
+  "settingsTileVeloraPayTitle": "Velora Pay",
+  "settingsTileVeloraPaySubtitle": "支払い方法と保護",
+  "settingsPersonalizationTitle": "パーソナライズ",
+  "settingsTileNotificationsTitle": "通知",
+  "settingsTileNotificationsSubtitle": "プッシュ、メール、SMS の設定",
+  "settingsTileThemeTitle": "テーマ",
+  "settingsTileThemeSubtitle": "アプリの外観、ダークモード、コントラスト",
+  "settingsTileLanguageTitle": "言語",
+  "settingsTileLanguageSubtitle": "Velora が使用する言語を選択",
+  "settingsTileAccessibilityTitle": "アクセシビリティ",
+  "settingsTileAccessibilitySubtitle": "フォント、コントラスト、字幕",
+  "settingsHelpTitle": "ヘルプとリソース",
+  "settingsTileHelpCenterTitle": "ヘルプセンター",
+  "settingsTileHelpCenterSubtitle": "ガイド、チュートリアル、クイック回答",
+  "settingsTileFaqTitle": "FAQ",
+  "settingsTileFaqSubtitle": "よくある質問をまとめて表示",
+  "settingsTileAboutTitle": "Velora について",
+  "settingsTileAboutSubtitle": "バージョン、ライセンス、謝辞",
+  "settingsHeroSemanticsLabel": "Meta ID のプロフィール概要とセキュリティ状況",
+  "settingsHeroMetaId": "Meta ID",
+  "settingsHeroLearnMore": "詳細",
+  "settingsHeroNetworks": "Facebook • Instagram • Velora",
+  "settingsHeroSwitchButton": "切り替え",
+  "settingsHeroPasswordUpdated": "2 日前にパスワードを更新",
+  "settingsHeroPasswordSubtitle": "通知と承認でアカウントを安全に保ちましょう。",
+  "settingsHeroReviewButton": "確認",
+  "settingsSearchProfiles": "プロフィール",
+  "settingsSearchPassword": "パスワード",
+  "settingsSearchSecurity": "セキュリティ",
+  "settingsSearchNotifications": "通知",
+  "settingsSearchPrivacy": "プライバシー",
+  "settingsSearchLanguage": "言語",
+  "settingsSearchTheme": "テーマ",
+  "settingsSearchHelp": "ヘルプ",
+  "settingsSearchPayments": "支払い",
+  "settingsProfileTitle": "Profile",
+  "settingsProfileSubtitle": "Update what people can see on Velora",
+  "settingsProfilePhotoLabelCover": "cover photo",
+  "settingsProfilePhotoLabelProfile": "profile photo",
+  "settingsProfilePhotoActionTake": "Take photo",
+  "settingsProfilePhotoActionGallery": "Choose from gallery",
+  "settingsProfilePhotoActionRemove": "Remove photo",
+  "settingsProfilePhotoActionCancel": "Cancel",
+  "settingsProfilePhotoToastCamera": "Opening camera for {target}...",
+  "@settingsProfilePhotoToastCamera": {
+    "placeholders": {
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsProfilePhotoToastGallery": "Opening gallery for {target}...",
+  "@settingsProfilePhotoToastGallery": {
+    "placeholders": {
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsProfileFieldUpdated": "{field} updated",
+  "@settingsProfileFieldUpdated": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsProfileInfoSectionTitle": "Profile info",
+  "settingsProfileFieldName": "Name",
+  "settingsProfileFieldNameHelper": "You can only change your name twice within 14 days.",
+  "settingsProfileFieldUsername": "Username",
+  "settingsProfileFieldUsernameHelper": "Pick a unique username. People can find you with @username.",
+  "settingsProfileFieldBio": "Bio",
+  "settingsProfileFieldBioHelper": "Share a short description. Keep it under 150 characters.",
+  "settingsProfileFieldWebsite": "Website",
+  "settingsProfileFieldWebsiteHelper": "Enter a valid URL people can tap from your bio.",
+  "settingsProfileInfoSyncTitle": "Profile info syncing is no longer available",
+  "settingsProfileInfoSyncDescription": "Your name and username will no longer sync across apps. Manage synced profile pictures through Connected experiences.",
+  "settingsProfileAccountTypeTitle": "Account type",
+  "settingsProfileAccountTypeSubtitle": "Choose how you use Velora",
+  "settingsProfileAccountTypePersonal": "Personal",
+  "settingsProfileAccountTypeOrganization": "Organization",
+  "settingsProfileAccountTypePersonalDescription": "Personal accounts are for individual supporters.",
+  "settingsProfileAccountTypeOrganizationDescription": "Organization accounts unlock verifications and analytics.",
+  "settingsProfileConnectedTitle": "Connected accounts",
+  "settingsProfileConnectedNotConnected": "Not connected",
+  "settingsProfileConnectedDisconnect": "Disconnect",
+  "settingsProfileConnectedConnect": "Connect",
+  "settingsProfileCrossTitle": "Cross-platform",
+  "settingsProfileCrossSubtitle": "Control how Velora syncs to other networks",
+  "settingsProfileCrossAutoShareTitle": "Auto-share posts",
+  "settingsProfileCrossAutoShareSubtitle": "Share to connected accounts",
+  "settingsProfileCrossSyncNotificationsTitle": "Sync notifications",
+  "settingsProfileCrossSyncNotificationsSubtitle": "Get notified across platforms",
+  "settingsProfileCrossFindFriendsTitle": "Find friends",
+  "settingsProfileCrossFindFriendsSubtitle": "Match people from other networks",
+  "settingsProfileEditTitle": "Edit profile",
+  "settingsProfileEditSubtitle": "Update your personal information",
+  "settingsProfileEditTabName": "Name",
+  "settingsProfileEditTabBio": "Bio & Details",
+  "settingsProfileEditUsedProfiles": "Used for 2 profiles",
+  "settingsProfileEditFirstName": "First name",
+  "settingsProfileEditMiddleName": "Middle name",
+  "settingsProfileEditLastName": "Last name",
+  "settingsProfileEditRequiredField": "Required field",
+  "settingsProfileEditApplyTo": "Apply to",
+  "settingsProfileEditApplyAllProfiles": "All profiles",
+  "settingsProfileEditApplyFacebook": "Facebook only",
+  "settingsProfileEditApplyInstagram": "Instagram only",
+  "settingsProfileEditNameChangeInfo": "If you change your name, you can't change it again for 60 days. Use your authentic name so friends know it's you.",
+  "settingsProfileEditOtherNamesTitle": "Other names",
+  "settingsProfileEditOtherNamesDescription": "Other names are always public and help people find you on Velora.",
+  "settingsProfileEditOtherNamesManage": "Manage other names",
+  "settingsProfileEditReviewSchedule": "Schedule review",
+  "settingsProfileEditReviewScheduled": "Review on {date}",
+  "@settingsProfileEditReviewScheduled": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsProfileEditReviewChange": "Review change",
+  "settingsProfileEditNameSubmitted": "Name information sent for review",
+  "settingsProfileEditIdentitySection": "Identity",
+  "settingsProfileEditContactSection": "Contact preferences",
+  "settingsProfileEditContactEveryone": "Everyone",
+  "settingsProfileEditContactFollowers": "Followers",
+  "settingsProfileEditContactNoOne": "No one",
+  "settingsProfileEditShowProfileInfo": "Show profile info on donations",
+  "settingsProfileEditDisplayFollowerCount": "Display follower count",
+  "settingsProfileEditProfileUpdated": "Profile updated",
+  "settingsProfileEditSaveChanges": "Save changes",
+  "settingsProfileEditPronounsLabel": "Pronouns",
+  "settingsProfileFieldSave": "Save",
+  "settingsProfileFieldEditFallbackTitle": "Edit field",
+  "settingsProfileFieldEditFallbackLabel": "Field",
+  "settingsSecurityPasswordSectionTitle": "Password",
+  "settingsSecurityPasswordChange": "Change password",
+  "settingsSecurityPasswordLastChanged": "Last changed 2 months ago",
+  "settingsSecurityPasswordToast": "Change password feature coming soon",
+  "settingsSecurityTwoFactorSectionTitle": "Two-factor authentication",
+  "settingsSecurityTwoFactorTitle": "Two-factor authentication",
+  "settingsSecurityTwoFactorSubtitle": "Require a security code in addition to your password",
+  "settingsSecurityTwoFactorMethods": "Authenticator app (Google Authenticator, Authy)\nSMS to +62 812-XXXX-5678",
+  "settingsSecurityBiometricSectionTitle": "Biometric security",
+  "settingsSecurityBiometricTitle": "Biometric unlock",
+  "settingsSecurityBiometricSubtitle": "Use fingerprint or face recognition",
+  "settingsSecurityLoginActivityTitle": "Login activity",
+  "settingsSecurityLoginActivityEntry": "Today at {time}",
+  "@settingsSecurityLoginActivityEntry": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsSecurityLoginActivityLocation": "Jakarta, Indonesia • Android",
+  "settingsSecuritySessionsTitle": "Active device sessions",
+  "settingsSecuritySessionsDevice1Title": "Samsung Galaxy S23",
+  "settingsSecuritySessionsDevice1Subtitle": "Jakarta, Indonesia • Active now",
+  "settingsSecuritySessionsBadgeCurrent": "Current",
+  "settingsSecuritySessionsDetails": "Details",
+  "settingsSecuritySessionsDevice2Title": "Chrome on Windows",
+  "settingsSecuritySessionsDevice2Subtitle": "Bandung, Indonesia • 2 days ago",
+  "settingsSecuritySessionsSignOut": "Sign out",
+  "settingsSecurityAlertsTitle": "Security alerts",
+  "settingsSecurityAlertsDeviceTitle": "Device alerts",
+  "settingsSecurityAlertsDeviceSubtitle": "Get notified when your account is accessed from a new device",
+  "settingsSecurityRecoveryTitle": "Account recovery",
+  "settingsSecurityRecoveryTrustedTitle": "Trusted contacts",
+  "settingsSecurityRecoveryTrustedSubtitle": "Add people who can help you recover your account",
+  "settingsSecurityRecoveryCodesTitle": "Download recovery codes",
+  "settingsSecurityRecoveryCodesSubtitle": "Save backup codes in case you lose access",
+  "settingsPrivacyTitle": "Privacy",
+  "settingsPrivacySubtitle": "Control your visibility and data",
+  "settingsPrivacyAudienceTitle": "Audience & visibility",
+  "settingsPrivacyPrivateAccountTitle": "Private account",
+  "settingsPrivacyPrivateAccountSubtitle": "Approve followers before they see your activity",
+  "settingsPrivacySearchTitle": "Appear in search",
+  "settingsPrivacySearchSubtitle": "Allow people to discover you by name or username",
+  "settingsPrivacyDirectMessagesTitle": "Direct messages",
+  "settingsPrivacyDirectMessagesAllowTitle": "Allow messages from everyone",
+  "settingsPrivacyDirectMessagesAllowSubtitle": "Messages from non-followers go to requests",
+  "settingsPrivacyDataPermissionsTitle": "Data & permissions",
+  "settingsPrivacyDownloadInfoTitle": "Download your information",
+  "settingsPrivacyDownloadInfoSubtitle": "Get a copy of your posts, donations, and messages",
+  "settingsPrivacyDeleteAccountTitle": "Delete account",
+  "settingsPrivacyDeleteAccountSubtitle": "Permanently remove your account and data",
+  "settingsPrivacyDataSharingTitle": "Data sharing",
+  "settingsPrivacyDataSharingSubtitle": "Control analytics and personalized experiences",
+  "settingsPrivacyAnalyticsTitle": "Share usage analytics",
+  "settingsPrivacyAnalyticsSubtitle": "Help us improve Velora by sharing anonymized usage",
+  "settingsPrivacyPersonalizedTitle": "Personalized experiences",
+  "settingsPrivacyPersonalizedSubtitle": "Use my activity to tailor content and ads",
+  "postCreateAppBarTitle": "Create Post",
+  "postCreateAppBarNext": "Next",
+  "postCreateTitle": "New Post",
+  "postCreatePublishTooltip": "Publish post",
+  "postCreatePublishHint": "Double tap to publish your post",
+  "postCreatePublishLabel": "Publish",
+  "postCreateMediaLabel": "Selected media preview",
+  "postCreateMediaHint": "Swipe to review your selected media",
+  "postCreateActionAddAudio": "Add audio",
+  "postCreateActionTagPeople": "Tag people",
+  "postCreateActionAddLocation": "Add location",
+  "postCreateActionAudience": "Audience",
+  "postCreateAudienceFollowers": "Followers",
+  "postCreateActionMoreOptions": "More options",
+  "postCreateActionHintAdjust": "Double tap to adjust {action}",
+  "@postCreateActionHintAdjust": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "postCreateActionHintOpen": "Double tap to {action}",
+  "@postCreateActionHintOpen": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "postCreateSelectMediaError": "Please select at least one image",
+  "postCreateUploadFailed": "Upload failed: {error}",
+  "@postCreateUploadFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "postCreateSuccess": "Post created successfully!",
+  "postCreateFailure": "Create post failed: {error}",
+  "@postCreateFailure": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "postCreateDialogTitle": "Publishing Post",
+  "postCreateDialogPreparing": "Preparing to upload...",
+  "postCreateDialogUploading": "Uploading media...",
+  "postCreateDialogCreating": "Creating post...",
+  "postCreateDialogError": "Error: {error}",
+  "@postCreateDialogError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "postCaptionHint": "Write a caption...",
+  "postMediaPreviewLabel": "Media preview carousel",
+  "postMediaPreviewHint": "Swipe left or right to preview selected media",
+  "postMediaRemoveLabel": "Remove current media",
+  "postMediaRemoveHint": "Double tap to remove media {index}",
+  "@postMediaRemoveHint": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
+  "postGalleryLoadError": "Error loading images: {error}",
+  "@postGalleryLoadError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "postGalleryImageLabel": "Gallery image",
+  "postGalleryImageHintSelected": "Selected at position {position}",
+  "@postGalleryImageHintSelected": {
+    "placeholders": {
+      "position": {
+        "type": "int"
+      }
+    }
+  },
+  "postGalleryImageHintSelect": "Double tap to select this image",
+  "postGalleryEmptyTitle": "No photos selected",
+  "postGalleryEmptySubtitle": "Tap the button below to select photos from your gallery",
+  "postGallerySelectButton": "Select photos",
+  "postToolbarLocation": "Location",
+  "postToolbarLink": "Link",
+  "postToolbarCampaign": "Campaign",
+  "postMoreOptionsTitle": "More options",
+  "postMoreOptionsHeader": "How others can interact with your post",
+  "postMoreOptionsTurnOffCommentsTitle": "Turn off commenting",
+  "postMoreOptionsTurnOffCommentsSubtitle": "You can change this later by going to the ⋯ menu at the top of your post.",
+  "postMoreOptionsHideLikeCountTitle": "Hide like count on this post",
+  "postMoreOptionsHideShareCountTitle": "Hide share count on this post",
+  "postMoreOptionsHideShareCountSubtitle": "Only you will see the total number of likes and shares on this post. You can change this later by going to the ⋯ menu at the top of your post. You can hide the number of likes and shares on posts from other accounts by going to Settings. Learn more",
+  "postMoreOptionsHideCommentCountTitle": "Hide comment count on this post",
+  "postMoreOptionsHideLikesListTitle": "Hide list of people who liked this post",
+  "postMoreOptionsHideLikesListSubtitle": "Viewers will see the like count (unless hidden) but not who liked it.",
+  "postToggleHintEnable": "Double tap to allow {action}",
+  "@postToggleHintEnable": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "postToggleHintDisable": "Double tap to disable {action}",
+  "@postToggleHintDisable": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "chatScreenTitle": "チャット",
+  "chatScreenNewChatLabel": "新しいチャットを開始",
+  "chatScreenNewChatTooltip": "新規チャット",
+  "chatScreenListLabel": "チャット一覧",
+  "chatScreenListHint": "上下にスワイプして会話を確認",
+  "chatScreenRetry": "再試行",
+  "chatScreenNoChats": "チャット履歴がありません",
+  "chatScreenNoChatsHint": "新しい会話を開始すると、ここにチャットが表示されます",
+  "chatScreenUnnamed": "名前なし",
+  "chatScreenUnnamedGroup": "名前のないグループ",
+  "chatFilterAll": "すべて",
+  "chatFilterUnread": "未読",
+  "chatFilterFavourites": "お気に入り",
+  "chatFilterGroups": "グループ",
+  "chatFilterSemanticsLabel": "{filter} フィルター",
+  "@chatFilterSemanticsLabel": {
+    "placeholders": {
+      "filter": {
+        "type": "String"
+      }
+    }
+  },
+  "chatFilterSemanticsHint": "{filter}でチャットを絞り込むにはダブルタップ",
+  "@chatFilterSemanticsHint": {
+    "placeholders": {
+      "filter": {
+        "type": "String"
+      }
+    }
+  },
+  "chatSearchBarLabel": "チャットを検索",
+  "chatSearchBarHint": "会話を検索するテキストを入力",
+  "chatSearchBarPlaceholder": "Meta AI に質問するか検索",
+  "chatListItemSemanticsLabel": "{name}とのチャット",
+  "@chatListItemSemanticsLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chatListItemSemanticsHint": "ダブルタップで会話を開く",
+  "chatListItemPhotos": "{count, plural, one{{count} 枚の写真} other{{count} 枚の写真}}",
+  "@chatListItemPhotos": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatListItemPhoto": "写真",
+  "chatListItemMissedCall": "不在着信（音声）",
+  "chatBubbleYourLabel": "あなたのメッセージ",
+  "chatBubbleReceivedLabel": "受信したメッセージ",
+  "chatBubbleHint": "{time}に送信されたメッセージ",
+  "@chatBubbleHint": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "chatMediaYourLabel": "あなたのメディアメッセージ",
+  "chatMediaReceivedLabel": "受信したメディアメッセージ",
+  "chatMediaHint": "{time}に送信されたメディア",
+  "@chatMediaHint": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "chatDateSeparatorLabel": "日付区切り: {date}",
+  "@chatDateSeparatorLabel": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "chatInputEmojiLabel": "絵文字セレクター",
+  "chatInputEmojiHint": "ダブルタップで絵文字セレクターを開く",
+  "chatInputEmojiTooltip": "絵文字",
+  "chatInputFieldLabel": "メッセージ入力欄",
+  "chatInputFieldHint": "ここにメッセージを入力してください",
+  "chatInputFieldPlaceholder": "メッセージ",
+  "chatInputAttachLabel": "ファイルを添付",
+  "chatInputAttachHint": "ダブルタップでファイルを添付",
+  "chatInputAttachTooltip": "ファイルを添付",
+  "chatInputCameraLabel": "カメラ",
+  "chatInputCameraHint": "ダブルタップでカメラを開く",
+  "chatInputCameraTooltip": "カメラ",
+  "chatInputSendLabel": "メッセージを送信",
+  "chatInputSendHint": "ダブルタップでメッセージを送信",
+  "chatInputVoiceLabel": "音声メッセージ",
+  "chatInputVoiceHint": "ダブルタップで音声メッセージを録音",
+  "chatAttachmentGallery": "ギャラリー",
+  "chatAttachmentCamera": "カメラ",
+  "chatAttachmentLocation": "位置情報",
+  "chatAttachmentContact": "連絡先",
+  "chatAttachmentDocument": "ドキュメント",
+  "chatAttachmentAudio": "オーディオ",
+  "chatAttachmentPoll": "投票",
+  "chatAttachmentEvent": "イベント",
+  "chatAttachmentAiImages": "AI 画像",
+  "chatAttachmentSelectHint": "{label}を選択するにはダブルタップ",
+  "@chatAttachmentSelectHint": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "chatDetailBackLabel": "戻る",
+  "chatDetailTitleLabel": "{name}との会話",
+  "@chatDetailTitleLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chatDetailGroupSubtitle": "タップしてグループ情報を表示",
+  "chatDetailSelfSubtitle": "自分宛てにメッセージ",
+  "chatDetailOptionsLabel": "会話のオプション",
+  "chatDetailMenuTooltip": "その他のオプション",
+  "chatDetailHistoryLabel": "会話の履歴",
+  "chatDetailHistoryHint": "上にスワイプして過去のメッセージを表示",
+  "chatDetailNoMessages": "まだメッセージがありません",
+  "chatDetailNoMessagesHint": "メッセージを送信して会話を始めましょう",
+  "chatDetailMessageDeleted": "このメッセージは削除されました",
+  "chatDetailSelectMediaTitle": "メディアの種類を選択",
+  "chatDetailSelectImages": "画像",
+  "chatDetailSelectVideo": "動画",
+  "chatDetailImagesSelected": "{count, plural, one{{count} 件の画像を選択済み} other{{count} 件の画像を選択済み}}",
+  "@chatDetailImagesSelected": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatDetailVideoSelected": "動画を選択しました",
+  "chatDetailPickMediaError": "メディアを選択できませんでした",
+  "chatDetailCameraModeTitle": "撮影モードを選択",
+  "chatDetailCameraTakePhoto": "写真を撮影",
+  "chatDetailCameraRecordVideo": "動画を録画",
+  "chatDetailPhotoCaptured": "写真を撮影しました",
+  "chatDetailVideoRecorded": "動画を録画しました",
+  "chatDetailPollCreated": "投票を作成しました",
+  "chatDetailEventCreated": "イベントを作成しました",
+  "chatDetailDocumentsSelected": "{count, plural, one{{count} 件のドキュメントを選択} other{{count} 件のドキュメントを選択}}",
+  "@chatDetailDocumentsSelected": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatDetailDocumentError": "ドキュメントを選択できませんでした",
+  "chatDetailAudioSelected": "音声ファイルを選択しました",
+  "chatDetailAudioError": "音声を選択できませんでした",
+  "chatDetailLocationSelected": "位置情報を選択しました",
+  "chatDetailContactSelected": "連絡先を選択しました",
+  "chatDetailAiImagesSelected": "AI 画像を選択しました",
+  "chatDetailVoiceMessage": "音声メッセージ",
+  "chatDetailStatusOnline": "オンライン中",
+  "chatSearchScreenTitle": "検索",
+  "chatSearchScreenRecent": "最近の検索",
+  "chatSearchScreenClearAll": "すべてクリア",
+  "chatSearchGlobalLabel": "全体検索",
+  "chatSearchGlobalHint": "キャンペーン・投稿・ユーザー全体を検索",
+  "chatSearchPlaceholder": "検索…",
+  "chatSearchScopeCampaigns": "キャンペーン",
+  "chatSearchScopePosts": "投稿",
+  "chatSearchScopePeople": "人",
+  "chatSearchScopeSemantics": "{scope} の範囲",
+  "@chatSearchScopeSemantics": {
+    "placeholders": {
+      "scope": {
+        "type": "String"
+      }
+    }
+  },
+  "chatSearchRecentItemLabel": "最近の検索: {query}",
+  "@chatSearchRecentItemLabel": {
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
+  },
+  "chatSearchRecentItemHint": "ダブルタップで再検索",
+  "chatSearchRecentDeleteLabel": "最近の検索を削除",
+  "chatSearchRecentDeleteTooltip": "削除",
+  "chatPollLabel": "投票",
+  "chatPollSemanticsYour": "あなたの投票",
+  "chatPollSemanticsReceived": "受信した投票",
+  "chatPollSemanticsHint": "{count} 票の投票",
+  "@chatPollSemanticsHint": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatPollTotalVotes": "{count, plural, one{{count} 票} other{{count} 票}}",
+  "@chatPollTotalVotes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatPollOptionSemantics": "{option}、{votes} 票、{percent}%",
+  "@chatPollOptionSemantics": {
+    "placeholders": {
+      "option": {
+        "type": "String"
+      },
+      "votes": {
+        "type": "int"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "chatPollVoteHint": "ダブルタップでこの選択肢に投票",
+  "chatPollDialogTitle": "投票を作成",
+  "chatPollDialogQuestionLabel": "投票の質問",
+  "chatPollDialogQuestionHint": "質問を入力…",
+  "chatPollDialogOptionsLabel": "選択肢",
+  "chatPollDialogOptionLabel": "選択肢 {index}",
+  "@chatPollDialogOptionLabel": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
+  "chatPollDialogOptionHint": "選択肢を入力…",
+  "chatPollDialogAddOption": "選択肢を追加",
+  "chatPollDialogQuestionError": "質問を入力してください",
+  "chatPollDialogOptionsError": "少なくとも 2 つの選択肢を追加してください",
+  "chatPollDialogSend": "投票を送信",
+  "chatEventLabel": "イベント",
+  "chatEventSemanticsYour": "あなたのイベント",
+  "chatEventSemanticsReceived": "受信したイベント",
+  "chatEventHint": "{date} のイベント",
+  "@chatEventHint": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "chatEventDialogTitle": "イベントを作成",
+  "chatEventDialogTitleLabel": "イベント名",
+  "chatEventDialogTitleHint": "イベント名を入力…",
+  "chatEventDialogDescriptionLabel": "説明",
+  "chatEventDialogDescriptionHint": "イベントの説明を入力…",
+  "chatEventDialogLocationLabel": "場所（任意）",
+  "chatEventDialogLocationHint": "場所を入力…",
+  "chatEventDialogStartLabel": "開始",
+  "chatEventDialogEndLabel": "終了",
+  "chatEventDialogTitleError": "イベント名を入力してください",
+  "chatEventDialogEndTimeError": "終了時間は開始時間より後にしてください",
+  "chatEventDialogSend": "イベントを送信",
+  "chatEventResponseTitle": "あなたの回答",
+  "chatEventResponseGoing": "参加",
+  "chatEventResponseMaybe": "未定",
+  "chatEventResponseNo": "不参加",
+  "chatEventResponseSummary": "{going} 人が参加 • {maybe} 人が未定 • {notGoing} 人が不参加",
+  "@chatEventResponseSummary": {
+    "placeholders": {
+      "going": {
+        "type": "int"
+      },
+      "maybe": {
+        "type": "int"
+      },
+      "notGoing": {
+        "type": "int"
+      }
+    }
+  },
+  "chatEventResponseButtonLabel": "{label} の回答",
+  "@chatEventResponseButtonLabel": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "chatEventResponseButtonHint": "ダブルタップで {label} の回答を送信",
+  "@chatEventResponseButtonHint": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAppearanceLanguageTitle": "言語",
+  "settingsAppearanceLanguagePreviewSemantics": "現在の言語プレビュー",
+  "settingsAppearanceLanguageCurrentLabel": "現在の言語",
+  "settingsAppearanceLanguageSearchHint": "言語を検索…",
+  "settingsAppearanceLanguageEmpty": "該当する言語が見つかりません",
+  "settingsAppearanceLanguageToast": "言語を{language}に変更しました",
+  "@settingsAppearanceLanguageToast": {
+    "placeholders": {
+      "language": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAppearanceLanguageRestartNote": "言語変更を反映するためアプリが再起動します。",
+  "settingsAppearanceThemeTitle": "テーマと外観",
+  "settingsAppearanceThemeModeSection": "テーマモード",
+  "settingsAppearanceThemeModeLight": "ライト",
+  "settingsAppearanceThemeModeDark": "ダーク",
+  "settingsAppearanceThemeModeAuto": "自動",
+  "settingsAppearanceThemeModeDescription": "システムモードは端末設定に合わせて自動で切り替わります。",
+  "settingsAppearanceThemeColorSection": "カラー",
+  "settingsAppearanceThemeColorDynamic": "ダイナミックカラー",
+  "settingsAppearanceThemeShapeSection": "形状",
+  "settingsAppearanceThemeShapeCorner": "角の丸み",
+  "settingsAppearanceThemeShapeCornerValue": "{px} px",
+  "@settingsAppearanceThemeShapeCornerValue": {
+    "placeholders": {
+      "px": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsAppearanceThemeShapeSquare": "スクエア",
+  "settingsAppearanceThemeShapeSmall": "小",
+  "settingsAppearanceThemeShapeMedium": "中",
+  "settingsAppearanceThemeShapeLarge": "大",
+  "settingsAppearanceThemeShapeMax": "最大",
+  "settingsAppearanceThemeAdvancedSection": "詳細設定",
+  "settingsAppearanceThemeAccentTitle": "アクセントカラー",
+  "settingsAppearanceThemeAccentSubtitle": "ハイライトカラーをカスタマイズ",
+  "settingsAppearanceThemeAccentToast": "まもなくカラーピッカーが追加されます",
+  "settingsAppearanceThemeTypographyTitle": "タイポグラフィ",
+  "settingsAppearanceThemeTypographySubtitle": "フォントとサイズ",
+  "settingsAppearanceThemeTypographyToast": "タイポグラフィ設定は近日公開",
+  "settingsAppearanceThemeAnimationsTitle": "アニメーション",
+  "settingsAppearanceThemeAnimationsSubtitle": "トランジションとモーション",
+  "settingsAppearanceThemeAnimationsToast": "アニメーション設定は近日公開",
+  "settingsAppearanceThemePreviewTitle": "ライブプレビュー",
+  "settingsAppearanceThemePreviewSampleCard": "サンプルカード",
+  "settingsAppearanceThemeModeLabel": "{mode}モード",
+  "@settingsAppearanceThemeModeLabel": {
+    "placeholders": {
+      "mode": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAppearanceNotificationsTitle": "通知",
+  "settingsAppearanceNotificationsQuick": "クイックコントロール",
+  "settingsAppearanceNotificationsPauseAllTitle": "通知を一時停止",
+  "settingsAppearanceNotificationsPauseAllSubtitle": "すべての通知を一時的に停止",
+  "settingsAppearanceNotificationsSleepModeTitle": "スリープモード",
+  "settingsAppearanceNotificationsSleepModeSubtitle": "指定時間は通知をミュート",
+  "settingsAppearanceNotificationsPostsSection": "投稿とストーリー",
+  "settingsAppearanceNotificationsPostsPeople": "フォロー中の投稿",
+  "settingsAppearanceNotificationsPostsLive": "ライブ動画",
+  "settingsAppearanceNotificationsPostsLiveSubtitle": "誰かがライブ配信を始めたとき",
+  "settingsAppearanceNotificationsPostsCampaigns": "新しいキャンペーン",
+  "settingsAppearanceNotificationsPostsCampaignsSubtitle": "フォロー中のクリエイターから",
+  "settingsAppearanceNotificationsEngagementSection": "エンゲージメント",
+  "settingsAppearanceNotificationsEngagementLikes": "自分の投稿のいいね",
+  "settingsAppearanceNotificationsEngagementReplies": "コメントへの返信",
+  "settingsAppearanceNotificationsEngagementMentions": "メンション",
+  "settingsAppearanceNotificationsEngagementMentionsSubtitle": "誰かにタグ付けされたとき",
+  "settingsAppearanceNotificationsEngagementFollowers": "新しいフォロワー",
+  "settingsAppearanceNotificationsDonationsSection": "寄付とキャンペーン",
+  "settingsAppearanceNotificationsDonationsReceivedTitle": "寄付を受け取りました",
+  "settingsAppearanceNotificationsDonationsReceivedSubtitle": "誰かがあなたのキャンペーンに寄付したとき",
+  "settingsAppearanceNotificationsDonationsMilestonesTitle": "キャンペーン達成状況",
+  "settingsAppearanceNotificationsDonationsMilestonesSubtitle": "25%、50%、75%、100% 達成",
+  "settingsAppearanceNotificationsDonationsUpdatesTitle": "キャンペーン更新",
+  "settingsAppearanceNotificationsDonationsUpdatesSubtitle": "寄付したキャンペーンから",
+  "settingsAppearanceNotificationsDonationsWithdrawTitle": "出金状況",
+  "settingsAppearanceNotificationsDonationsWithdrawSubtitle": "処理中、完了、失敗",
+  "settingsAppearanceNotificationsMessagesSection": "メッセージ",
+  "settingsAppearanceNotificationsMessagesDirect": "ダイレクトメッセージ",
+  "settingsAppearanceNotificationsMessagesRequests": "メッセージリクエスト",
+  "settingsAppearanceNotificationsMessagesRequestsSubtitle": "フォローしていない相手から",
+  "settingsAppearanceNotificationsMessagesGroups": "グループ招待",
+  "settingsAppearanceNotificationsSummaryTitle": "通知サマリー",
+  "settingsAppearanceNotificationsSummarySubtitle": "リアルタイムの代わりに日次・週次の要約を受け取る",
+  "settingsAppearanceNotificationsSummaryOff": "オフ",
+  "settingsAppearanceNotificationsSummaryDaily": "毎日",
+  "settingsAppearanceNotificationsSummaryWeekly": "毎週",
+  "settingsAppearanceNotificationsOtherSection": "その他のチャネル",
+  "settingsAppearanceNotificationsOtherEmailTitle": "メール通知",
+  "settingsAppearanceNotificationsOtherEmailSubtitle": "週次ダイジェストと重要なお知らせ",
+  "settingsAppearanceNotificationsOtherSmsTitle": "SMS 通知",
+  "settingsAppearanceNotificationsOtherSmsSubtitle": "重要なお知らせのみ",
+  "settingsAppearanceAccessibilityTitle": "アクセシビリティ",
+  "settingsAppearanceAccessibilitySubtitle": "タイポグラフィとレイアウトの調整",
+  "settingsAppearanceAccessibilityTabText": "テキスト",
+  "settingsAppearanceAccessibilityTabAppearance": "外観",
+  "settingsAppearanceAccessibilityTabLayout": "レイアウト",
+  "settingsAppearanceAccessibilityFontSizeTitle": "文字サイズ",
+  "settingsAppearanceAccessibilityFontSizeSubtitle": "Velora 全体でリアルタイムに反映",
+  "settingsAppearanceAccessibilityFontSizeLabel": "{points} pt",
+  "@settingsAppearanceAccessibilityFontSizeLabel": {
+    "placeholders": {
+      "points": {
+        "type": "double"
+      }
+    }
+  },
+  "settingsAppearanceAccessibilityFontSample": "{points} pt のサンプルテキスト",
+  "@settingsAppearanceAccessibilityFontSample": {
+    "placeholders": {
+      "points": {
+        "type": "double"
+      }
+    }
+  },
+  "settingsAppearanceAccessibilityFontFamilyTitle": "フォントファミリー",
+  "settingsAppearanceAccessibilityTextAlignmentTitle": "テキスト整列",
+  "settingsAppearanceAccessibilityPreviewTitle": "プレビュー",
+  "settingsAppearanceAccessibilityPreviewBody": "Velora は、行動する場所を与えることで都市をより人間的にします。",
+  "settingsAppearanceAccessibilityAppearanceHighContrastTitle": "ハイコントラストモード",
+  "settingsAppearanceAccessibilityAppearanceHighContrastSubtitle": "文字とアイコンを見やすく",
+  "settingsAppearanceAccessibilityAppearanceHighContrastToggle": "ハイコントラスト UI を有効にする",
+  "settingsAppearanceAccessibilityAppearanceReduceTitle": "動きを減らす",
+  "settingsAppearanceAccessibilityAppearanceReduceSubtitle": "パララックスや大きなトランジションを抑える",
+  "settingsAppearanceAccessibilityAppearanceReduceToggle": "アニメーションを最小化",
+  "settingsAppearanceAccessibilityLayoutLineSpacing": "行間",
+  "settingsAppearanceAccessibilityLayoutPreviewBody": "Velora は、行動する場所を与えることで都市をより人間的にします。\nストーリー、募金、現地レポートがここに表示されます。",
+  "settingsAccountStatusTitle": "アカウントの状態",
+  "settingsAccountStatusSubtitle": "アカウントの健全性と認証",
+  "settingsAccountStatusInfoTitle": "アカウント情報",
+  "settingsAccountStatusStandingTitle": "健全なアカウント",
+  "settingsAccountStatusStandingSubtitle": "制限はありません",
+  "settingsAccountStatusEmailTitle": "メール認証済み",
+  "settingsAccountStatusPhoneTitle": "電話番号認証済み",
+  "settingsAccountStatusMetricsTitle": "アカウント指標",
+  "settingsAccountStatusMemberSinceTitle": "登録日",
+  "settingsAccountStatusDonationsTitle": "総寄付額",
+  "settingsAccountStatusCampaignsTitle": "作成したキャンペーン",
+  "settingsAccountActivityTitle": "あなたのアクティビティ",
+  "settingsAccountActivitySubtitle": "やり取りと履歴を確認",
+  "settingsAccountActivityTabLikes": "いいね",
+  "settingsAccountActivityTabComments": "コメント",
+  "settingsAccountActivityTabDonations": "寄付",
+  "settingsAccountActivityTabArchive": "アーカイブ",
+  "settingsAccountActivityTabDeleted": "削除済み",
+  "settingsAccountActivityRecentLikes": "最近のいいね",
+  "settingsAccountActivityRecentComments": "最近のコメント",
+  "settingsAccountActivityArchived": "アーカイブ済み",
+  "settingsAccountActivityRestoreButton": "復元",
+  "settingsAccountActivityDeletedEmptyTitle": "削除された項目はありません",
+  "settingsAccountActivityDeletedEmptySubtitle": "削除した項目は、完全に消える前に30日間ここに表示されます。",
+  "settingsAccountDonationsTitle": "私の寄付",
+  "settingsAccountDonationsSubtitle": "寄付の履歴と影響",
+  "settingsAccountDonationsImpactTitle": "影響の概要",
+  "settingsAccountDonationsTotalLabel": "総寄付額",
+  "settingsAccountDonationsCampaignsLabel": "キャンペーン",
+  "settingsAccountDonationsThisMonthLabel": "今月",
+  "settingsAccountDonationsRecurringLabel": "定期",
+  "settingsAccountDonationsRecurringValue": "{count} 件",
+  "@settingsAccountDonationsRecurringValue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsAccountDonationsMatchedLabel": "マッチング",
+  "settingsAccountDonationsFilterAll": "すべて",
+  "settingsAccountDonationsFilterRecurring": "定期",
+  "settingsAccountDonationsFilterMatched": "マッチング",
+  "settingsAccountDonationsExportButton": "すべての領収書をエクスポート",
+  "settingsAccountDonationsExportingToast": "寄付履歴をエクスポートしています…",
+  "settingsAccountDonationsStatusRecurring": "定期",
+  "settingsAccountDonationsStatusMatched": "マッチング",
+  "settingsAccountDonationsEmptyTitle": "まだ寄付がありません",
+  "settingsAccountDonationsEmptySubtitle": "大切なキャンペーンを支援して変化を起こしましょう。",
+  "settingsAccountDonationsEmptyButton": "キャンペーンを探す",
+  "settingsHelpCenterTitle": "ヘルプセンター",
+  "settingsHelpCenterSubtitle": "サポートと安全に関するリソース",
+  "settingsHelpPrioritySemantics": "優先サポートのハイライト",
+  "settingsHelpPriorityTitle": "優先サポート",
+  "settingsHelpPrioritySubtitle": "認証済みキャンペイナーには通常2時間以内に返信します。",
+  "settingsHelpSupportOptionsTitle": "サポートオプション",
+  "settingsHelpFaqTileTitle": "よくある質問",
+  "settingsHelpFaqTileSubtitle": "あなたに合わせた即時回答",
+  "settingsHelpEmailTitle": "メールサポート",
+  "settingsHelpEmailSubtitle": "support@velora.app",
+  "settingsHelpReportTitle": "Report a problem",
+  "settingsHelpReportSubtitle": "バグ、不正利用、ハラスメント",
+  "settingsHelpGuidesTitle": "ガイド",
+  "settingsHelpCommunityGuidelinesTitle": "コミュニティガイドライン",
+  "settingsHelpCommunityGuidelinesSubtitle": "2025年2月更新",
+  "settingsHelpSecurityChecklistTitle": "セキュリティチェックリスト",
+  "settingsHelpSecurityChecklistSubtitle": "アカウントをさらに安全に",
+  "settingsHelpReportSheetTitle": "問題を報告",
+  "settingsHelpReportHint": "何が起きたか説明してください…",
+  "settingsHelpReportThanks": "ご報告ありがとうございます",
+  "settingsHelpReportSendButton": "送信",
+  "settingsHelpFaqTitle": "FAQ",
+  "settingsHelpFaqSubtitle": "人気のサポートトピック",
+  "settingsHelpFaqQuestion1": "Veloraはどのようにキャンペーンを確認しますか?",
+  "settingsHelpFaqAnswer1": "すべてのキャンペーンは、受益者の確認、身分証明書、透明性マイルストーンを含む信頼チェックリストを通過します。",
+  "settingsHelpFaqQuestion2": "寄付金額を非公開にできますか?",
+  "settingsHelpFaqAnswer2": "はい。寄付時に「匿名の金額」オプションを選ぶとアバターだけが表示されます。",
+  "settingsHelpFaqQuestion3": "アカウントへアクセスできなくなったら?",
+  "settingsHelpFaqAnswer3": "パスワードとセキュリティにあるリカバリーキットを使用し、信頼できる連絡先に事前承認を依頼できます。",
+  "settingsHelpFaqQuestion4": "通知の管理方法は?",
+  "settingsHelpFaqAnswer4": "通知設定で、各キャンペーンタイプのプッシュ、メール、SMSを調整してください。",
+  "settingsHelpAboutTitle": "Veloraについて",
+  "settingsHelpAboutSemantics": "Veloraブランドの概要",
+  "settingsHelpAboutBrandName": "Velora",
+  "settingsHelpAboutTagline": "思いやりを力に",
+  "settingsHelpAboutVersion": "バージョン 1.0.0 (ビルド 1)",
+  "settingsHelpAboutWhyTitle": "Veloraを選ぶ理由",
+  "settingsHelpAboutWhyDescription": "Veloraは寛大な人々と意義ある活動を結ぶ社会的インパクトプラットフォームです。共に世界を優しくしましょう。",
+  "settingsHelpAboutStatCampaigns": "100万+ キャンペーン",
+  "settingsHelpAboutStatSupporters": "500万+ サポーター",
+  "settingsHelpAboutStatTrust": "信頼第一",
+  "settingsHelpAboutConnectTitle": "お問い合わせ",
+  "settingsHelpAboutSocialWebsite": "ウェブサイト",
+  "settingsHelpAboutSocialInstagram": "Instagram",
+  "settingsHelpAboutSocialThreads": "Threads",
+  "settingsHelpAboutSocialFacebook": "Facebook",
+  "settingsHelpAboutLegalTitle": "法的情報",
+  "settingsHelpAboutDevTitle": "開発チーム",
+  "settingsHelpAboutDevOrgSubtitle": "プロダクト・デザイン・エンジニアリング",
+  "settingsHelpAboutDevFounderSubtitle": "創業者 & リード開発者",
+  "settingsHelpAboutContactTitle": "サポートへの連絡",
+  "settingsHelpAboutLiveChatTitle": "ライブチャット",
+  "settingsHelpAboutLiveChatSubtitle": "9:00〜18:00 利用可能",
+  "settingsHelpAboutReportBugTitle": "バグを報告",
+  "settingsHelpAboutReportBugSubtitle": "Velora改善にご協力ください",
+  "settingsHelpAboutSuggestFeatureTitle": "機能を提案",
+  "settingsHelpAboutSuggestFeatureSubtitle": "製品アイデアを共有してください",
+  "settingsHelpAboutPrivacy": "プライバシーポリシー",
+  "settingsHelpAboutTerms": "利用規約",
+  "settingsHelpAboutCookie": "クッキーポリシー",
+  "settingsHelpAboutLicenses": "オープンソースライセンス",
+  "settingsHelpAboutEnjoyTitle": "Veloraが気に入りましたか?",
+  "settingsHelpAboutEnjoySubtitle": "評価して、Veloraを広めるお手伝いをしてください。",
+  "settingsHelpAboutRateButton": "Velora を評価",
+  "settingsHelpAboutAcknowledgementsTitle": "謝辞",
+  "settingsHelpAboutAcknowledgementsThanks": "Veloraを支えてくれた貢献者、ベータテスター、Flutterコミュニティに感謝します。",
+  "settingsHelpAboutAcknowledgementFlutter": "Flutter",
+  "settingsHelpAboutAcknowledgementDart": "Dart",
+  "settingsHelpAboutAcknowledgementFirebase": "Firebase",
+  "settingsHelpAboutAcknowledgementSupabase": "Supabase",
+  "settingsHelpAboutAcknowledgementMaterial": "Material Design",
+  "settingsHelpAboutFooterCopyright": "© 2025 VitoTechLab. All rights reserved.",
+  "settingsHelpAboutFooterMadeWith": "より良い世界のために ❤️ を込めて"
+}

@@ -1,0 +1,1120 @@
+{
+  "@@locale": "en",
+  "appTitle": "Velora",
+  "authSignInFormLabel": "Sign in form",
+  "authLogoLabel": "Velora logo",
+  "authWelcomeBackTitle": "Welcome back",
+  "authSignInSubtitle": "Sign in to continue",
+  "fieldEmailLabel": "Email",
+  "fieldEmailHint": "your@email.com",
+  "fieldPasswordLabel": "Password",
+  "authForgotPassword": "Forgot password?",
+  "authForgotPasswordHint": "Forgot password. Navigate to reset password screen",
+  "authSignInButton": "Sign In",
+  "authDividerText": "or continue with",
+  "authContinueWith": "Continue with {brand}",
+  "@authContinueWith": {
+    "placeholders": {
+      "brand": {
+        "type": "String"
+      }
+    }
+  },
+  "authNoAccount": "Don't have an account?",
+  "authSignUpLink": "Sign up",
+  "authAgreeTermsError": "Please agree to Terms & Privacy Policy",
+  "authGoogleUnavailable": "Google sign-in is not available yet.",
+  "authSignUpFormLabel": "Create account form",
+  "authCreateAccountTitle": "Create account",
+  "authJoinCommunitySubtitle": "Join Velora community",
+  "authAgreeTermsLabel": "Agree to Terms of Service and Privacy Policy",
+  "authAgreeTermsPrefix": "I agree to ",
+  "authTermsOfService": "Terms of Service",
+  "authAnd": " and ",
+  "authPrivacyPolicy": "Privacy Policy",
+  "authCreateAccountButton": "Create Account",
+  "authAlreadyHaveAccount": "Already have an account?",
+  "authSignInLink": "Sign in",
+  "commonGoBack": "Go back",
+  "commonCancel": "Cancel",
+  "authResetPasswordFormLabel": "Reset password form",
+  "authEmailIllustrationLabel": "Email illustration",
+  "authResetPasswordTitle": "Reset password",
+  "authResetPasswordSubtitle": "Enter your registered email and we'll send you a link to reset your password.",
+  "authSendResetLink": "Send reset link",
+  "authRememberPasswordLabel": "Remember password? Go back to sign in",
+  "authRememberPasswordAction": "Remember password? Sign in",
+  "authResetEmailSentLabel": "Reset email sent",
+  "authCheckEmailTitle": "Check your email",
+  "authBackToSignIn": "Back to Sign In",
+  "authEmailVerificationLabel": "Email verification instructions",
+  "authAnimatedEmailLabel": "Animated email illustration",
+  "authVerificationInstructions": "We've sent you a verification link. Please check your inbox and click the link to verify your account.",
+  "authVerifiedCta": "I've verified my email",
+  "authResendVerificationLabel": "Resend verification email",
+  "authVerificationEmailResent": "Verification email resent",
+  "authWrongEmail": "Wrong email? Sign out",
+  "authSignOutHint": "Sign out and go back to sign in screen",
+  "authPasswordStrengthWeak": "Weak",
+  "authPasswordStrengthStrong": "Strong",
+  "authPasswordStrengthMedium": "Medium",
+  "authPasswordStrengthFair": "Fair",
+  "authPasswordShow": "Show password",
+  "authPasswordHide": "Hide password",
+  "authPasswordRequirementsTitle": "Password must contain:",
+  "authPasswordRequirementLength": "At least 8 characters",
+  "authPasswordRequirementCase": "Uppercase & lowercase letters",
+  "authPasswordRequirementNumber": "At least one number",
+  "authPasswordRequirementSpecial": "Special character (!@#$%^&*)",
+  "feedTitle": "Feed",
+  "feedCreatePostTooltip": "Create post",
+  "feedNotificationsTooltip": "Notifications",
+  "feedErrorLoading": "Error loading feed",
+  "feedEmptyMessage": "No posts yet",
+  "feedEmptySubtitle": "Pull to refresh or check back later",
+  "feedEmptyHint": "{subtitle}. Double tap refresh button.",
+  "@feedEmptyHint": {
+    "placeholders": {
+      "subtitle": {
+        "type": "String"
+      }
+    }
+  },
+  "feedRefreshButtonSemantic": "Refresh feed",
+  "feedRefreshButton": "Refresh",
+  "feedLoadingLabel": "Loading feed",
+  "feedCommentsTitle": "Comments",
+  "feedReplyingTo": "Replying to {name}",
+  "@feedReplyingTo": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "feedWriteCommentHint": "Write a comment...",
+  "feedAddCommentHint": "Add a comment for {name}",
+  "@feedAddCommentHint": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "feedNoCommentsTitle": "No comments yet",
+  "feedNoCommentsSubtitle": "Be the first to comment!",
+  "feedReplyAction": "Reply",
+  "feedDeleteAction": "Delete",
+  "feedSeeTranslation": "See translation",
+  "feedViewReplies": "View {count, plural, one{{count} reply} other{{count} replies}}",
+  "@feedViewReplies": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "feedUnknownUser": "Unknown user",
+  "feedPostSummaryFallback": "post",
+  "feedPostSemantics": "{author} posted {summary} {time}",
+  "@feedPostSemantics": {
+    "placeholders": {
+      "author": {
+        "type": "String"
+      },
+      "summary": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "feedOpenPostHint": "Double tap to open post details",
+  "feedPostImageLabel": "Post image",
+  "feedPostImagePositionLabel": "Post image {index} of {total}",
+  "@feedPostImagePositionLabel": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "feedCampaignFallback": "Campaign",
+  "feedOpenCampaignLabel": "Open campaign {title}",
+  "@feedOpenCampaignLabel": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "feedLikeLabel": "Like post",
+  "feedUnlikeLabel": "Unlike post",
+  "feedLikeHint": "Double tap to like this post",
+  "feedUnlikeHint": "Double tap to remove your like",
+  "feedViewCommentsLabel": "View comments",
+  "feedViewCommentsHint": "Double tap to open comments",
+  "feedShareComingSoon": "Share feature coming soon",
+  "feedShareLabel": "Share post",
+  "feedShareHint": "Double tap to share",
+  "feedRemoveBookmarkLabel": "Remove bookmark",
+  "feedAddBookmarkLabel": "Bookmark this post",
+  "timeAgoNow": "now",
+  "timeAgoMinutes": "{count}m",
+  "@timeAgoMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeAgoHours": "{count}h",
+  "@timeAgoHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeAgoDays": "{count}d",
+  "@timeAgoDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeAgoMonths": "{count}mo",
+  "@timeAgoMonths": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeAgoYears": "{count}y",
+  "@timeAgoYears": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "countThousands": "{value}K",
+  "@countThousands": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "countMillions": "{value}M",
+  "@countMillions": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAccountsCenterTitle": "Accounts Center",
+  "settingsAccountsCenterSubtitle": "Manage connected experiences, identity, and privacy",
+  "settingsSearchTooltip": "Search settings",
+  "settingsConnectedTitle": "Connected experiences",
+  "settingsConnectedSubtitle": "Control how your Velora identity works across platforms.",
+  "settingsTileProfilesTitle": "Profiles",
+  "settingsTileProfilesSubtitle": "Vito • Velora, Forum, Community",
+  "settingsTileSharingTitle": "Sharing across profiles",
+  "settingsTileSharingSubtitle": "Choose what gets synced automatically",
+  "settingsTileLoggingTitle": "Logging in with accounts",
+  "settingsTileLoggingSubtitle": "Review devices and login approvals",
+  "settingsAccountTitle": "Account settings",
+  "settingsTilePasswordSecurityTitle": "Password and security",
+  "settingsTilePasswordSecuritySubtitle": "2FA, trusted devices, security alerts",
+  "settingsTilePersonalDetailsTitle": "Personal details",
+  "settingsTilePersonalDetailsSubtitle": "Name, username, profile links",
+  "settingsTileInfoPermissionsTitle": "Your information & permissions",
+  "settingsTileInfoPermissionsSubtitle": "Data download, permissions, audience",
+  "settingsTileAdPreferencesTitle": "Ad preferences",
+  "settingsTileAdPreferencesSubtitle": "Topics you see more often",
+  "settingsTileVeloraPayTitle": "Velora Pay",
+  "settingsTileVeloraPaySubtitle": "Payment methods and protections",
+  "settingsPersonalizationTitle": "Personalization",
+  "settingsTileNotificationsTitle": "Notifications",
+  "settingsTileNotificationsSubtitle": "Push, email, and SMS preferences",
+  "settingsTileThemeTitle": "Theme",
+  "settingsTileThemeSubtitle": "App appearance, dark mode, contrast",
+  "settingsTileLanguageTitle": "Language",
+  "settingsTileLanguageSubtitle": "Choose the language Velora uses",
+  "settingsTileAccessibilityTitle": "Accessibility",
+  "settingsTileAccessibilitySubtitle": "Font, contrast, captions",
+  "settingsHelpTitle": "Help & resources",
+  "settingsTileHelpCenterTitle": "Help center",
+  "settingsTileHelpCenterSubtitle": "Guides, tutorials, and quick answers",
+  "settingsTileFaqTitle": "FAQ",
+  "settingsTileFaqSubtitle": "Most asked topics in one place",
+  "settingsTileAboutTitle": "About Velora",
+  "settingsTileAboutSubtitle": "Version, licenses, and acknowledgements",
+  "settingsHeroSemanticsLabel": "Meta ID profile summary and security status",
+  "settingsHeroMetaId": "Meta ID",
+  "settingsHeroLearnMore": "Learn more",
+  "settingsHeroNetworks": "Facebook • Instagram • Velora",
+  "settingsHeroSwitchButton": "Switch",
+  "settingsHeroPasswordUpdated": "Password updated 2 days ago",
+  "settingsHeroPasswordSubtitle": "Keep your account secure with alerts & approvals.",
+  "settingsHeroReviewButton": "Review",
+  "settingsSearchProfiles": "Profiles",
+  "settingsSearchPassword": "Password",
+  "settingsSearchSecurity": "Security",
+  "settingsSearchNotifications": "Notifications",
+  "settingsSearchPrivacy": "Privacy",
+  "settingsSearchLanguage": "Language",
+  "settingsSearchTheme": "Theme",
+  "settingsSearchHelp": "Help",
+  "settingsSearchPayments": "Payments",
+  "settingsProfileTitle": "Profile",
+  "settingsProfileSubtitle": "Update what people can see on Velora",
+  "settingsProfilePhotoLabelCover": "cover photo",
+  "settingsProfilePhotoLabelProfile": "profile photo",
+  "settingsProfilePhotoActionTake": "Take photo",
+  "settingsProfilePhotoActionGallery": "Choose from gallery",
+  "settingsProfilePhotoActionRemove": "Remove photo",
+  "settingsProfilePhotoActionCancel": "Cancel",
+  "settingsProfilePhotoToastCamera": "Opening camera for {target}...",
+  "@settingsProfilePhotoToastCamera": {
+    "placeholders": {
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsProfilePhotoToastGallery": "Opening gallery for {target}...",
+  "@settingsProfilePhotoToastGallery": {
+    "placeholders": {
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsProfileFieldUpdated": "{field} updated",
+  "@settingsProfileFieldUpdated": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsProfileInfoSectionTitle": "Profile info",
+  "settingsProfileFieldName": "Name",
+  "settingsProfileFieldNameHelper": "You can only change your name twice within 14 days.",
+  "settingsProfileFieldUsername": "Username",
+  "settingsProfileFieldUsernameHelper": "Pick a unique username. People can find you with @username.",
+  "settingsProfileFieldBio": "Bio",
+  "settingsProfileFieldBioHelper": "Share a short description. Keep it under 150 characters.",
+  "settingsProfileFieldWebsite": "Website",
+  "settingsProfileFieldWebsiteHelper": "Enter a valid URL people can tap from your bio.",
+  "settingsProfileInfoSyncTitle": "Profile info syncing is no longer available",
+  "settingsProfileInfoSyncDescription": "Your name and username will no longer sync across apps. Manage synced profile pictures through Connected experiences.",
+  "settingsProfileAccountTypeTitle": "Account type",
+  "settingsProfileAccountTypeSubtitle": "Choose how you use Velora",
+  "settingsProfileAccountTypePersonal": "Personal",
+  "settingsProfileAccountTypeOrganization": "Organization",
+  "settingsProfileAccountTypePersonalDescription": "Personal accounts are for individual supporters.",
+  "settingsProfileAccountTypeOrganizationDescription": "Organization accounts unlock verifications and analytics.",
+  "settingsProfileConnectedTitle": "Connected accounts",
+  "settingsProfileConnectedNotConnected": "Not connected",
+  "settingsProfileConnectedDisconnect": "Disconnect",
+  "settingsProfileConnectedConnect": "Connect",
+  "settingsProfileCrossTitle": "Cross-platform",
+  "settingsProfileCrossSubtitle": "Control how Velora syncs to other networks",
+  "settingsProfileCrossAutoShareTitle": "Auto-share posts",
+  "settingsProfileCrossAutoShareSubtitle": "Share to connected accounts",
+  "settingsProfileCrossSyncNotificationsTitle": "Sync notifications",
+  "settingsProfileCrossSyncNotificationsSubtitle": "Get notified across platforms",
+  "settingsProfileCrossFindFriendsTitle": "Find friends",
+  "settingsProfileCrossFindFriendsSubtitle": "Match people from other networks",
+  "settingsProfileEditTitle": "Edit profile",
+  "settingsProfileEditSubtitle": "Update your personal information",
+  "settingsProfileEditTabName": "Name",
+  "settingsProfileEditTabBio": "Bio & Details",
+  "settingsProfileEditUsedProfiles": "Used for 2 profiles",
+  "settingsProfileEditFirstName": "First name",
+  "settingsProfileEditMiddleName": "Middle name",
+  "settingsProfileEditLastName": "Last name",
+  "settingsProfileEditRequiredField": "Required field",
+  "settingsProfileEditApplyTo": "Apply to",
+  "settingsProfileEditApplyAllProfiles": "All profiles",
+  "settingsProfileEditApplyFacebook": "Facebook only",
+  "settingsProfileEditApplyInstagram": "Instagram only",
+  "settingsProfileEditNameChangeInfo": "If you change your name, you can't change it again for 60 days. Use your authentic name so friends know it's you.",
+  "settingsProfileEditOtherNamesTitle": "Other names",
+  "settingsProfileEditOtherNamesDescription": "Other names are always public and help people find you on Velora.",
+  "settingsProfileEditOtherNamesManage": "Manage other names",
+  "settingsProfileEditReviewSchedule": "Schedule review",
+  "settingsProfileEditReviewScheduled": "Review on {date}",
+  "@settingsProfileEditReviewScheduled": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsProfileEditReviewChange": "Review change",
+  "settingsProfileEditNameSubmitted": "Name information sent for review",
+  "settingsProfileEditIdentitySection": "Identity",
+  "settingsProfileEditContactSection": "Contact preferences",
+  "settingsProfileEditContactEveryone": "Everyone",
+  "settingsProfileEditContactFollowers": "Followers",
+  "settingsProfileEditContactNoOne": "No one",
+  "settingsProfileEditShowProfileInfo": "Show profile info on donations",
+  "settingsProfileEditDisplayFollowerCount": "Display follower count",
+  "settingsProfileEditProfileUpdated": "Profile updated",
+  "settingsProfileEditSaveChanges": "Save changes",
+  "settingsProfileEditPronounsLabel": "Pronouns",
+  "settingsProfileFieldSave": "Save",
+  "settingsProfileFieldEditFallbackTitle": "Edit field",
+  "settingsProfileFieldEditFallbackLabel": "Field",
+  "settingsSecurityPasswordSectionTitle": "Password",
+  "settingsSecurityPasswordChange": "Change password",
+  "settingsSecurityPasswordLastChanged": "Last changed 2 months ago",
+  "settingsSecurityPasswordToast": "Change password feature coming soon",
+  "settingsSecurityTwoFactorSectionTitle": "Two-factor authentication",
+  "settingsSecurityTwoFactorTitle": "Two-factor authentication",
+  "settingsSecurityTwoFactorSubtitle": "Require a security code in addition to your password",
+  "settingsSecurityTwoFactorMethods": "Authenticator app (Google Authenticator, Authy)\nSMS to +62 812-XXXX-5678",
+  "settingsSecurityBiometricSectionTitle": "Biometric security",
+  "settingsSecurityBiometricTitle": "Biometric unlock",
+  "settingsSecurityBiometricSubtitle": "Use fingerprint or face recognition",
+  "settingsSecurityLoginActivityTitle": "Login activity",
+  "settingsSecurityLoginActivityEntry": "Today at {time}",
+  "@settingsSecurityLoginActivityEntry": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsSecurityLoginActivityLocation": "Jakarta, Indonesia • Android",
+  "settingsSecuritySessionsTitle": "Active device sessions",
+  "settingsSecuritySessionsDevice1Title": "Samsung Galaxy S23",
+  "settingsSecuritySessionsDevice1Subtitle": "Jakarta, Indonesia • Active now",
+  "settingsSecuritySessionsBadgeCurrent": "Current",
+  "settingsSecuritySessionsDetails": "Details",
+  "settingsSecuritySessionsDevice2Title": "Chrome on Windows",
+  "settingsSecuritySessionsDevice2Subtitle": "Bandung, Indonesia • 2 days ago",
+  "settingsSecuritySessionsSignOut": "Sign out",
+  "settingsSecurityAlertsTitle": "Security alerts",
+  "settingsSecurityAlertsDeviceTitle": "Device alerts",
+  "settingsSecurityAlertsDeviceSubtitle": "Get notified when your account is accessed from a new device",
+  "settingsSecurityRecoveryTitle": "Account recovery",
+  "settingsSecurityRecoveryTrustedTitle": "Trusted contacts",
+  "settingsSecurityRecoveryTrustedSubtitle": "Add people who can help you recover your account",
+  "settingsSecurityRecoveryCodesTitle": "Download recovery codes",
+  "settingsSecurityRecoveryCodesSubtitle": "Save backup codes in case you lose access",
+  "settingsPrivacyTitle": "Privacy",
+  "settingsPrivacySubtitle": "Control your visibility and data",
+  "settingsPrivacyAudienceTitle": "Audience & visibility",
+  "settingsPrivacyPrivateAccountTitle": "Private account",
+  "settingsPrivacyPrivateAccountSubtitle": "Approve followers before they see your activity",
+  "settingsPrivacySearchTitle": "Appear in search",
+  "settingsPrivacySearchSubtitle": "Allow people to discover you by name or username",
+  "settingsPrivacyDirectMessagesTitle": "Direct messages",
+  "settingsPrivacyDirectMessagesAllowTitle": "Allow messages from everyone",
+  "settingsPrivacyDirectMessagesAllowSubtitle": "Messages from non-followers go to requests",
+  "settingsPrivacyDataPermissionsTitle": "Data & permissions",
+  "settingsPrivacyDownloadInfoTitle": "Download your information",
+  "settingsPrivacyDownloadInfoSubtitle": "Get a copy of your posts, donations, and messages",
+  "settingsPrivacyDeleteAccountTitle": "Delete account",
+  "settingsPrivacyDeleteAccountSubtitle": "Permanently remove your account and data",
+  "settingsPrivacyDataSharingTitle": "Data sharing",
+  "settingsPrivacyDataSharingSubtitle": "Control analytics and personalized experiences",
+  "settingsPrivacyAnalyticsTitle": "Share usage analytics",
+  "settingsPrivacyAnalyticsSubtitle": "Help us improve Velora by sharing anonymized usage",
+  "settingsPrivacyPersonalizedTitle": "Personalized experiences",
+  "settingsPrivacyPersonalizedSubtitle": "Use my activity to tailor content and ads",
+  "postCreateAppBarTitle": "Create Post",
+  "postCreateAppBarNext": "Next",
+  "postCreateTitle": "New Post",
+  "postCreatePublishTooltip": "Publish post",
+  "postCreatePublishHint": "Double tap to publish your post",
+  "postCreatePublishLabel": "Publish",
+  "postCreateMediaLabel": "Selected media preview",
+  "postCreateMediaHint": "Swipe to review your selected media",
+  "postCreateActionAddAudio": "Add audio",
+  "postCreateActionTagPeople": "Tag people",
+  "postCreateActionAddLocation": "Add location",
+  "postCreateActionAudience": "Audience",
+  "postCreateAudienceFollowers": "Followers",
+  "postCreateActionMoreOptions": "More options",
+  "postCreateActionHintAdjust": "Double tap to adjust {action}",
+  "@postCreateActionHintAdjust": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "postCreateActionHintOpen": "Double tap to {action}",
+  "@postCreateActionHintOpen": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "postCreateSelectMediaError": "Please select at least one image",
+  "postCreateUploadFailed": "Upload failed: {error}",
+  "@postCreateUploadFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "postCreateSuccess": "Post created successfully!",
+  "postCreateFailure": "Create post failed: {error}",
+  "@postCreateFailure": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "postCreateDialogTitle": "Publishing Post",
+  "postCreateDialogPreparing": "Preparing to upload...",
+  "postCreateDialogUploading": "Uploading media...",
+  "postCreateDialogCreating": "Creating post...",
+  "postCreateDialogError": "Error: {error}",
+  "@postCreateDialogError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "postCaptionHint": "Write a caption...",
+  "postMediaPreviewLabel": "Media preview carousel",
+  "postMediaPreviewHint": "Swipe left or right to preview selected media",
+  "postMediaRemoveLabel": "Remove current media",
+  "postMediaRemoveHint": "Double tap to remove media {index}",
+  "@postMediaRemoveHint": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
+  "postGalleryLoadError": "Error loading images: {error}",
+  "@postGalleryLoadError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "postGalleryImageLabel": "Gallery image",
+  "postGalleryImageHintSelected": "Selected at position {position}",
+  "@postGalleryImageHintSelected": {
+    "placeholders": {
+      "position": {
+        "type": "int"
+      }
+    }
+  },
+  "postGalleryImageHintSelect": "Double tap to select this image",
+  "postGalleryEmptyTitle": "No photos selected",
+  "postGalleryEmptySubtitle": "Tap the button below to select photos from your gallery",
+  "postGallerySelectButton": "Select photos",
+  "postToolbarLocation": "Location",
+  "postToolbarLink": "Link",
+  "postToolbarCampaign": "Campaign",
+  "postMoreOptionsTitle": "More options",
+  "postMoreOptionsHeader": "How others can interact with your post",
+  "postMoreOptionsTurnOffCommentsTitle": "Turn off commenting",
+  "postMoreOptionsTurnOffCommentsSubtitle": "You can change this later by going to the ⋯ menu at the top of your post.",
+  "postMoreOptionsHideLikeCountTitle": "Hide like count on this post",
+  "postMoreOptionsHideShareCountTitle": "Hide share count on this post",
+  "postMoreOptionsHideShareCountSubtitle": "Only you will see the total number of likes and shares on this post. You can change this later by going to the ⋯ menu at the top of your post. You can hide the number of likes and shares on posts from other accounts by going to Settings. Learn more",
+  "postMoreOptionsHideCommentCountTitle": "Hide comment count on this post",
+  "postMoreOptionsHideLikesListTitle": "Hide list of people who liked this post",
+  "postMoreOptionsHideLikesListSubtitle": "Viewers will see the like count (unless hidden) but not who liked it.",
+  "postToggleHintEnable": "Double tap to allow {action}",
+  "@postToggleHintEnable": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "postToggleHintDisable": "Double tap to disable {action}",
+  "@postToggleHintDisable": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "chatScreenTitle": "Chats",
+  "chatScreenNewChatLabel": "Start new chat",
+  "chatScreenNewChatTooltip": "New chat",
+  "chatScreenListLabel": "Chats list",
+  "chatScreenListHint": "Swipe up or down to browse conversations",
+  "chatScreenRetry": "Retry",
+  "chatScreenNoChats": "No Chat History",
+  "chatScreenNoChatsHint": "Start a new conversation to see your chats here",
+  "chatScreenUnnamed": "Unnamed",
+  "chatScreenUnnamedGroup": "Unnamed Group",
+  "chatFilterAll": "All",
+  "chatFilterUnread": "Unread",
+  "chatFilterFavourites": "Favourites",
+  "chatFilterGroups": "Groups",
+  "chatFilterSemanticsLabel": "{filter} filter",
+  "@chatFilterSemanticsLabel": {
+    "placeholders": {
+      "filter": {
+        "type": "String"
+      }
+    }
+  },
+  "chatFilterSemanticsHint": "Double tap to filter chats by {filter}",
+  "@chatFilterSemanticsHint": {
+    "placeholders": {
+      "filter": {
+        "type": "String"
+      }
+    }
+  },
+  "chatSearchBarLabel": "Search chats",
+  "chatSearchBarHint": "Enter text to search conversations",
+  "chatSearchBarPlaceholder": "Ask Meta AI or search",
+  "chatListItemSemanticsLabel": "Chat with {name}",
+  "@chatListItemSemanticsLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chatListItemSemanticsHint": "Double tap to open conversation",
+  "chatListItemPhotos": "{count, plural, one{{count} photo} other{{count} photos}}",
+  "@chatListItemPhotos": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatListItemPhoto": "Photo",
+  "chatListItemMissedCall": "Missed voice call",
+  "chatBubbleYourLabel": "Your message",
+  "chatBubbleReceivedLabel": "Received message",
+  "chatBubbleHint": "Message sent at {time}",
+  "@chatBubbleHint": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "chatMediaYourLabel": "Your media message",
+  "chatMediaReceivedLabel": "Received media message",
+  "chatMediaHint": "Media sent at {time}",
+  "@chatMediaHint": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "chatDateSeparatorLabel": "Date separator: {date}",
+  "@chatDateSeparatorLabel": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "chatInputEmojiLabel": "Emoji picker",
+  "chatInputEmojiHint": "Double tap to open emoji picker",
+  "chatInputEmojiTooltip": "Emoji",
+  "chatInputFieldLabel": "Message input",
+  "chatInputFieldHint": "Type your message here",
+  "chatInputFieldPlaceholder": "Message",
+  "chatInputAttachLabel": "Attach file",
+  "chatInputAttachHint": "Double tap to attach file",
+  "chatInputAttachTooltip": "Attach file",
+  "chatInputCameraLabel": "Camera",
+  "chatInputCameraHint": "Double tap to open camera",
+  "chatInputCameraTooltip": "Camera",
+  "chatInputSendLabel": "Send message",
+  "chatInputSendHint": "Double tap to send message",
+  "chatInputVoiceLabel": "Voice message",
+  "chatInputVoiceHint": "Double tap to record voice message",
+  "chatAttachmentGallery": "Gallery",
+  "chatAttachmentCamera": "Camera",
+  "chatAttachmentLocation": "Location",
+  "chatAttachmentContact": "Contact",
+  "chatAttachmentDocument": "Document",
+  "chatAttachmentAudio": "Audio",
+  "chatAttachmentPoll": "Poll",
+  "chatAttachmentEvent": "Event",
+  "chatAttachmentAiImages": "AI images",
+  "chatAttachmentSelectHint": "Double tap to select {label}",
+  "@chatAttachmentSelectHint": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "chatDetailBackLabel": "Go back",
+  "chatDetailTitleLabel": "Conversation with {name}",
+  "@chatDetailTitleLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chatDetailGroupSubtitle": "Tap here for group info",
+  "chatDetailSelfSubtitle": "Message yourself",
+  "chatDetailOptionsLabel": "Conversation options",
+  "chatDetailMenuTooltip": "More options",
+  "chatDetailHistoryLabel": "Conversation history",
+  "chatDetailHistoryHint": "Swipe up to review older messages",
+  "chatDetailNoMessages": "No messages yet",
+  "chatDetailNoMessagesHint": "Send a message to start the conversation",
+  "chatDetailMessageDeleted": "This message was deleted",
+  "chatDetailSelectMediaTitle": "Select media type",
+  "chatDetailSelectImages": "Images",
+  "chatDetailSelectVideo": "Video",
+  "chatDetailImagesSelected": "{count, plural, one{{count} image selected} other{{count} images selected}}",
+  "@chatDetailImagesSelected": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatDetailVideoSelected": "Video selected",
+  "chatDetailPickMediaError": "Failed to pick media",
+  "chatDetailCameraModeTitle": "Select camera mode",
+  "chatDetailCameraTakePhoto": "Take photo",
+  "chatDetailCameraRecordVideo": "Record video",
+  "chatDetailPhotoCaptured": "Photo captured",
+  "chatDetailVideoRecorded": "Video recorded",
+  "chatDetailPollCreated": "Poll created",
+  "chatDetailEventCreated": "Event created",
+  "chatDetailDocumentsSelected": "{count, plural, one{{count} document selected} other{{count} documents selected}}",
+  "@chatDetailDocumentsSelected": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatDetailDocumentError": "Failed to pick documents",
+  "chatDetailAudioSelected": "Audio file selected",
+  "chatDetailAudioError": "Failed to pick audio",
+  "chatDetailLocationSelected": "Location selected",
+  "chatDetailContactSelected": "Contact selected",
+  "chatDetailAiImagesSelected": "AI images selected",
+  "chatDetailVoiceMessage": "Voice message",
+  "chatDetailStatusOnline": "Online",
+  "chatSearchScreenTitle": "Search",
+  "chatSearchScreenRecent": "Recent searches",
+  "chatSearchScreenClearAll": "Clear all",
+  "chatSearchGlobalLabel": "Global search",
+  "chatSearchGlobalHint": "Search across campaigns, posts, and people",
+  "chatSearchPlaceholder": "Search…",
+  "chatSearchScopeCampaigns": "Campaigns",
+  "chatSearchScopePosts": "Posts",
+  "chatSearchScopePeople": "People",
+  "chatSearchScopeSemantics": "{scope} scope",
+  "@chatSearchScopeSemantics": {
+    "placeholders": {
+      "scope": {
+        "type": "String"
+      }
+    }
+  },
+  "chatSearchRecentItemLabel": "Recent search: {query}",
+  "@chatSearchRecentItemLabel": {
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
+  },
+  "chatSearchRecentItemHint": "Double tap to search again",
+  "chatSearchRecentDeleteLabel": "Delete recent search",
+  "chatSearchRecentDeleteTooltip": "Remove",
+  "chatPollLabel": "POLL",
+  "chatPollSemanticsYour": "Your poll",
+  "chatPollSemanticsReceived": "Received poll",
+  "chatPollSemanticsHint": "Poll with {count} votes",
+  "@chatPollSemanticsHint": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatPollTotalVotes": "{count, plural, one{{count} vote} other{{count} votes}}",
+  "@chatPollTotalVotes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatPollOptionSemantics": "{option}, {votes} votes, {percent} percent",
+  "@chatPollOptionSemantics": {
+    "placeholders": {
+      "option": {
+        "type": "String"
+      },
+      "votes": {
+        "type": "int"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "chatPollVoteHint": "Double tap to vote for this option",
+  "chatPollDialogTitle": "Create poll",
+  "chatPollDialogQuestionLabel": "Poll question",
+  "chatPollDialogQuestionHint": "Ask a question…",
+  "chatPollDialogOptionsLabel": "Options",
+  "chatPollDialogOptionLabel": "Option {index}",
+  "@chatPollDialogOptionLabel": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
+  "chatPollDialogOptionHint": "Enter option…",
+  "chatPollDialogAddOption": "Add option",
+  "chatPollDialogQuestionError": "Please enter a question",
+  "chatPollDialogOptionsError": "Please add at least 2 options",
+  "chatPollDialogSend": "Send poll",
+  "chatEventLabel": "EVENT",
+  "chatEventSemanticsYour": "Your event",
+  "chatEventSemanticsReceived": "Received event",
+  "chatEventHint": "Event on {date}",
+  "@chatEventHint": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "chatEventDialogTitle": "Create event",
+  "chatEventDialogTitleLabel": "Event title",
+  "chatEventDialogTitleHint": "Enter event title…",
+  "chatEventDialogDescriptionLabel": "Description",
+  "chatEventDialogDescriptionHint": "Enter event description…",
+  "chatEventDialogLocationLabel": "Location (optional)",
+  "chatEventDialogLocationHint": "Enter location…",
+  "chatEventDialogStartLabel": "Start",
+  "chatEventDialogEndLabel": "End",
+  "chatEventDialogTitleError": "Please enter an event title",
+  "chatEventDialogEndTimeError": "End time must be after start time",
+  "chatEventDialogSend": "Send event",
+  "chatEventResponseTitle": "Your response",
+  "chatEventResponseGoing": "Going",
+  "chatEventResponseMaybe": "Maybe",
+  "chatEventResponseNo": "No",
+  "chatEventResponseSummary": "{going} going • {maybe} maybe • {notGoing} not going",
+  "@chatEventResponseSummary": {
+    "placeholders": {
+      "going": {
+        "type": "int"
+      },
+      "maybe": {
+        "type": "int"
+      },
+      "notGoing": {
+        "type": "int"
+      }
+    }
+  },
+  "chatEventResponseButtonLabel": "{label} response",
+  "@chatEventResponseButtonLabel": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "chatEventResponseButtonHint": "Double tap to respond {label} to event",
+  "@chatEventResponseButtonHint": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAppearanceLanguageTitle": "Language",
+  "settingsAppearanceLanguagePreviewSemantics": "Current language preview",
+  "settingsAppearanceLanguageCurrentLabel": "Current language",
+  "settingsAppearanceLanguageSearchHint": "Search languages...",
+  "settingsAppearanceLanguageEmpty": "No languages found",
+  "settingsAppearanceLanguageToast": "Language changed to {language}",
+  "@settingsAppearanceLanguageToast": {
+    "placeholders": {
+      "language": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAppearanceLanguageRestartNote": "App will restart to apply language changes.",
+  "settingsAppearanceThemeTitle": "Theme & appearance",
+  "settingsAppearanceThemeModeSection": "Theme mode",
+  "settingsAppearanceThemeModeLight": "Light",
+  "settingsAppearanceThemeModeDark": "Dark",
+  "settingsAppearanceThemeModeAuto": "Auto",
+  "settingsAppearanceThemeModeDescription": "System mode automatically adjusts based on your device settings.",
+  "settingsAppearanceThemeColorSection": "Color",
+  "settingsAppearanceThemeColorDynamic": "Dynamic color",
+  "settingsAppearanceThemeShapeSection": "Shape",
+  "settingsAppearanceThemeShapeCorner": "Corner radius",
+  "settingsAppearanceThemeShapeCornerValue": "{px} px",
+  "@settingsAppearanceThemeShapeCornerValue": {
+    "placeholders": {
+      "px": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsAppearanceThemeShapeSquare": "Square",
+  "settingsAppearanceThemeShapeSmall": "Small",
+  "settingsAppearanceThemeShapeMedium": "Medium",
+  "settingsAppearanceThemeShapeLarge": "Large",
+  "settingsAppearanceThemeShapeMax": "Max",
+  "settingsAppearanceThemeAdvancedSection": "Advanced",
+  "settingsAppearanceThemeAccentTitle": "Accent color",
+  "settingsAppearanceThemeAccentSubtitle": "Customize highlight color",
+  "settingsAppearanceThemeAccentToast": "Color picker coming soon",
+  "settingsAppearanceThemeTypographyTitle": "Typography",
+  "settingsAppearanceThemeTypographySubtitle": "Font family and size",
+  "settingsAppearanceThemeTypographyToast": "Typography settings coming soon",
+  "settingsAppearanceThemeAnimationsTitle": "Animations",
+  "settingsAppearanceThemeAnimationsSubtitle": "Transition effects and motion",
+  "settingsAppearanceThemeAnimationsToast": "Animation settings coming soon",
+  "settingsAppearanceThemePreviewTitle": "Live preview",
+  "settingsAppearanceThemePreviewSampleCard": "Sample card",
+  "settingsAppearanceThemeModeLabel": "{mode} mode",
+  "@settingsAppearanceThemeModeLabel": {
+    "placeholders": {
+      "mode": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAppearanceNotificationsTitle": "Notifications",
+  "settingsAppearanceNotificationsQuick": "Quick controls",
+  "settingsAppearanceNotificationsPauseAllTitle": "Pause all notifications",
+  "settingsAppearanceNotificationsPauseAllSubtitle": "Temporarily stop all alerts",
+  "settingsAppearanceNotificationsSleepModeTitle": "Sleep mode",
+  "settingsAppearanceNotificationsSleepModeSubtitle": "Mute notifications during these hours",
+  "settingsAppearanceNotificationsPostsSection": "Posts & stories",
+  "settingsAppearanceNotificationsPostsPeople": "Posts from people I follow",
+  "settingsAppearanceNotificationsPostsLive": "Live videos",
+  "settingsAppearanceNotificationsPostsLiveSubtitle": "When someone goes live",
+  "settingsAppearanceNotificationsPostsCampaigns": "New campaigns",
+  "settingsAppearanceNotificationsPostsCampaignsSubtitle": "From creators I follow",
+  "settingsAppearanceNotificationsEngagementSection": "Engagement",
+  "settingsAppearanceNotificationsEngagementLikes": "Likes on my posts",
+  "settingsAppearanceNotificationsEngagementReplies": "Comment replies",
+  "settingsAppearanceNotificationsEngagementMentions": "Mentions",
+  "settingsAppearanceNotificationsEngagementMentionsSubtitle": "When someone tags me",
+  "settingsAppearanceNotificationsEngagementFollowers": "New followers",
+  "settingsAppearanceNotificationsDonationsSection": "Donations & campaigns",
+  "settingsAppearanceNotificationsDonationsReceivedTitle": "Donation received",
+  "settingsAppearanceNotificationsDonationsReceivedSubtitle": "When someone donates to my campaign",
+  "settingsAppearanceNotificationsDonationsMilestonesTitle": "Campaign milestones",
+  "settingsAppearanceNotificationsDonationsMilestonesSubtitle": "25%, 50%, 75%, 100% reached",
+  "settingsAppearanceNotificationsDonationsUpdatesTitle": "Campaign updates",
+  "settingsAppearanceNotificationsDonationsUpdatesSubtitle": "From campaigns I donated to",
+  "settingsAppearanceNotificationsDonationsWithdrawTitle": "Withdrawal status",
+  "settingsAppearanceNotificationsDonationsWithdrawSubtitle": "Processing, completed, or failed",
+  "settingsAppearanceNotificationsMessagesSection": "Messages",
+  "settingsAppearanceNotificationsMessagesDirect": "Direct messages",
+  "settingsAppearanceNotificationsMessagesRequests": "Message requests",
+  "settingsAppearanceNotificationsMessagesRequestsSubtitle": "From people I don’t follow",
+  "settingsAppearanceNotificationsMessagesGroups": "Group invites",
+  "settingsAppearanceNotificationsSummaryTitle": "Notification summary",
+  "settingsAppearanceNotificationsSummarySubtitle": "Get a daily or weekly digest instead of real-time notifications",
+  "settingsAppearanceNotificationsSummaryOff": "Off",
+  "settingsAppearanceNotificationsSummaryDaily": "Daily",
+  "settingsAppearanceNotificationsSummaryWeekly": "Weekly",
+  "settingsAppearanceNotificationsOtherSection": "Other channels",
+  "settingsAppearanceNotificationsOtherEmailTitle": "Email notifications",
+  "settingsAppearanceNotificationsOtherEmailSubtitle": "Weekly digest and important updates",
+  "settingsAppearanceNotificationsOtherSmsTitle": "SMS notifications",
+  "settingsAppearanceNotificationsOtherSmsSubtitle": "Critical alerts only",
+  "settingsAppearanceAccessibilityTitle": "Accessibility",
+  "settingsAppearanceAccessibilitySubtitle": "Tune typography and layout",
+  "settingsAppearanceAccessibilityTabText": "Text",
+  "settingsAppearanceAccessibilityTabAppearance": "Appearance",
+  "settingsAppearanceAccessibilityTabLayout": "Layout",
+  "settingsAppearanceAccessibilityFontSizeTitle": "Font size",
+  "settingsAppearanceAccessibilityFontSizeSubtitle": "Preview adjusts live across Velora",
+  "settingsAppearanceAccessibilityFontSizeLabel": "{points} pt",
+  "@settingsAppearanceAccessibilityFontSizeLabel": {
+    "placeholders": {
+      "points": {
+        "type": "double"
+      }
+    }
+  },
+  "settingsAppearanceAccessibilityFontSample": "Sample text at {points} pt",
+  "@settingsAppearanceAccessibilityFontSample": {
+    "placeholders": {
+      "points": {
+        "type": "double"
+      }
+    }
+  },
+  "settingsAppearanceAccessibilityFontFamilyTitle": "Font family",
+  "settingsAppearanceAccessibilityTextAlignmentTitle": "Text alignment",
+  "settingsAppearanceAccessibilityPreviewTitle": "Preview",
+  "settingsAppearanceAccessibilityPreviewBody": "Velora makes cities more human by giving everyone a place to take action.",
+  "settingsAppearanceAccessibilityAppearanceHighContrastTitle": "High contrast mode",
+  "settingsAppearanceAccessibilityAppearanceHighContrastSubtitle": "Improve clarity for text and icons",
+  "settingsAppearanceAccessibilityAppearanceHighContrastToggle": "Enable high contrast UI",
+  "settingsAppearanceAccessibilityAppearanceReduceTitle": "Reduce motion",
+  "settingsAppearanceAccessibilityAppearanceReduceSubtitle": "Limit parallax and large transitions",
+  "settingsAppearanceAccessibilityAppearanceReduceToggle": "Minimize animations",
+  "settingsAppearanceAccessibilityLayoutLineSpacing": "Line spacing",
+  "settingsAppearanceAccessibilityLayoutPreviewBody": "Velora makes cities more human by giving everyone a place to take action.\nStories, fundraisers, and field reports appear here.",
+  "settingsAccountStatusTitle": "Account status",
+  "settingsAccountStatusSubtitle": "Your account health and verification",
+  "settingsAccountStatusInfoTitle": "Account information",
+  "settingsAccountStatusStandingTitle": "Account in good standing",
+  "settingsAccountStatusStandingSubtitle": "No restrictions detected",
+  "settingsAccountStatusEmailTitle": "Email verified",
+  "settingsAccountStatusPhoneTitle": "Phone verified",
+  "settingsAccountStatusMetricsTitle": "Account metrics",
+  "settingsAccountStatusMemberSinceTitle": "Member since",
+  "settingsAccountStatusDonationsTitle": "Total donations",
+  "settingsAccountStatusCampaignsTitle": "Campaigns created",
+  "settingsAccountActivityTitle": "Your activity",
+  "settingsAccountActivitySubtitle": "Review your interactions and history",
+  "settingsAccountActivityTabLikes": "Likes",
+  "settingsAccountActivityTabComments": "Comments",
+  "settingsAccountActivityTabDonations": "Donations",
+  "settingsAccountActivityTabArchive": "Archive",
+  "settingsAccountActivityTabDeleted": "Deleted",
+  "settingsAccountActivityRecentLikes": "Recent likes",
+  "settingsAccountActivityRecentComments": "Recent comments",
+  "settingsAccountActivityArchived": "Archived",
+  "settingsAccountActivityRestoreButton": "Restore",
+  "settingsAccountActivityDeletedEmptyTitle": "No deleted items",
+  "settingsAccountActivityDeletedEmptySubtitle": "Items you delete will appear here for 30 days before being permanently removed.",
+  "settingsAccountDonationsTitle": "My donations",
+  "settingsAccountDonationsSubtitle": "History and impact of your giving",
+  "settingsAccountDonationsImpactTitle": "Impact overview",
+  "settingsAccountDonationsTotalLabel": "Total donated",
+  "settingsAccountDonationsCampaignsLabel": "Campaigns",
+  "settingsAccountDonationsThisMonthLabel": "This month",
+  "settingsAccountDonationsRecurringLabel": "Recurring",
+  "settingsAccountDonationsRecurringValue": "{count} active",
+  "@settingsAccountDonationsRecurringValue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsAccountDonationsMatchedLabel": "Matched",
+  "settingsAccountDonationsFilterAll": "All",
+  "settingsAccountDonationsFilterRecurring": "Recurring",
+  "settingsAccountDonationsFilterMatched": "Matched",
+  "settingsAccountDonationsExportButton": "Export all receipts",
+  "settingsAccountDonationsExportingToast": "Exporting donation history...",
+  "settingsAccountDonationsStatusRecurring": "RECURRING",
+  "settingsAccountDonationsStatusMatched": "MATCHED",
+  "settingsAccountDonationsEmptyTitle": "No donations yet",
+  "settingsAccountDonationsEmptySubtitle": "Start making a difference by supporting campaigns that matter to you.",
+  "settingsAccountDonationsEmptyButton": "Explore campaigns",
+  "settingsHelpCenterTitle": "Help center",
+  "settingsHelpCenterSubtitle": "Support & safety resources",
+  "settingsHelpPrioritySemantics": "Priority support highlight",
+  "settingsHelpPriorityTitle": "Priority support",
+  "settingsHelpPrioritySubtitle": "Our safety team typically replies within 2 hours for verified campaigners.",
+  "settingsHelpSupportOptionsTitle": "Support options",
+  "settingsHelpFaqTileTitle": "Frequently asked questions",
+  "settingsHelpFaqTileSubtitle": "Instant answers curated for you",
+  "settingsHelpEmailTitle": "Email support",
+  "settingsHelpEmailSubtitle": "support@velora.app",
+  "settingsHelpReportTitle": "Report a problem",
+  "settingsHelpReportSubtitle": "Bug, abuse, harassment",
+  "settingsHelpGuidesTitle": "Guides",
+  "settingsHelpCommunityGuidelinesTitle": "Community guidelines",
+  "settingsHelpCommunityGuidelinesSubtitle": "Updated February 2025",
+  "settingsHelpSecurityChecklistTitle": "Security checklist",
+  "settingsHelpSecurityChecklistSubtitle": "Keep your account safer",
+  "settingsHelpReportSheetTitle": "Report a problem",
+  "settingsHelpReportHint": "Describe what happened…",
+  "settingsHelpReportThanks": "Thanks for the report",
+  "settingsHelpReportSendButton": "Send",
+  "settingsHelpFaqTitle": "FAQ",
+  "settingsHelpFaqSubtitle": "Popular help topics",
+  "settingsHelpFaqQuestion1": "How does Velora verify campaigns?",
+  "settingsHelpFaqAnswer1": "Every campaign passes through a trust checklist, including beneficiary validation, identity documents, and transparency milestones.",
+  "settingsHelpFaqQuestion2": "Can I hide my donation amount?",
+  "settingsHelpFaqAnswer2": "Yes. When donating, choose the \"Anonymous amount\" option and only your avatar will be shown.",
+  "settingsHelpFaqQuestion3": "What if I lose access to my account?",
+  "settingsHelpFaqAnswer3": "Use the recovery kit inside Password & security. You can pre-authorize trusted contacts to approve your login.",
+  "settingsHelpFaqQuestion4": "How do I manage notifications?",
+  "settingsHelpFaqAnswer4": "Head to Notifications settings to configure push, email, and SMS alerts for each campaign type.",
+  "settingsHelpAboutTitle": "About Velora",
+  "settingsHelpAboutSemantics": "Velora brand summary",
+  "settingsHelpAboutBrandName": "Velora",
+  "settingsHelpAboutTagline": "Empowering generosity",
+  "settingsHelpAboutVersion": "Version 1.0.0 (Build 1)",
+  "settingsHelpAboutWhyTitle": "Why Velora",
+  "settingsHelpAboutWhyDescription": "Velora is a social impact platform that connects generous people with meaningful causes. Together, we make the world kinder.",
+  "settingsHelpAboutStatCampaigns": "1M+ Campaigns",
+  "settingsHelpAboutStatSupporters": "5M+ Supporters",
+  "settingsHelpAboutStatTrust": "Trust-first",
+  "settingsHelpAboutConnectTitle": "Connect with us",
+  "settingsHelpAboutSocialWebsite": "Website",
+  "settingsHelpAboutSocialInstagram": "Instagram",
+  "settingsHelpAboutSocialThreads": "Threads",
+  "settingsHelpAboutSocialFacebook": "Facebook",
+  "settingsHelpAboutLegalTitle": "Legal",
+  "settingsHelpAboutDevTitle": "Development team",
+  "settingsHelpAboutDevOrgSubtitle": "Product, design, and engineering",
+  "settingsHelpAboutDevFounderSubtitle": "Founder & lead developer",
+  "settingsHelpAboutContactTitle": "Contact & support",
+  "settingsHelpAboutLiveChatTitle": "Live chat",
+  "settingsHelpAboutLiveChatSubtitle": "Available 9 AM – 6 PM",
+  "settingsHelpAboutReportBugTitle": "Report a bug",
+  "settingsHelpAboutReportBugSubtitle": "Help us improve Velora",
+  "settingsHelpAboutSuggestFeatureTitle": "Suggest a feature",
+  "settingsHelpAboutSuggestFeatureSubtitle": "Share product ideas with us",
+  "settingsHelpAboutPrivacy": "Privacy policy",
+  "settingsHelpAboutTerms": "Terms of service",
+  "settingsHelpAboutCookie": "Cookie policy",
+  "settingsHelpAboutLicenses": "Open source licenses",
+  "settingsHelpAboutEnjoyTitle": "Enjoying Velora?",
+  "settingsHelpAboutEnjoySubtitle": "Rate us and help others discover Velora.",
+  "settingsHelpAboutRateButton": "Rate Velora",
+  "settingsHelpAboutAcknowledgementsTitle": "Acknowledgements",
+  "settingsHelpAboutAcknowledgementsThanks": "Thanks to our contributors, beta testers, and the Flutter community for bringing Velora to life.",
+  "settingsHelpAboutAcknowledgementFlutter": "Flutter",
+  "settingsHelpAboutAcknowledgementDart": "Dart",
+  "settingsHelpAboutAcknowledgementFirebase": "Firebase",
+  "settingsHelpAboutAcknowledgementSupabase": "Supabase",
+  "settingsHelpAboutAcknowledgementMaterial": "Material Design",
+  "settingsHelpAboutFooterCopyright": "© 2025 VitoTechLab. All rights reserved.",
+  "settingsHelpAboutFooterMadeWith": "Made with ❤️ for a better world"
+}

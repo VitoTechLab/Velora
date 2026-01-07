@@ -1,0 +1,1120 @@
+{
+  "@@locale": "zh",
+  "appTitle": "Velora",
+  "authSignInFormLabel": "登录表单",
+  "authLogoLabel": "Velora 徽标",
+  "authWelcomeBackTitle": "欢迎回来",
+  "authSignInSubtitle": "登录以继续",
+  "fieldEmailLabel": "电子邮件",
+  "fieldEmailHint": "email@domain.com",
+  "fieldPasswordLabel": "密码",
+  "authForgotPassword": "忘记密码？",
+  "authForgotPasswordHint": "忘记密码。前往重置密码页面",
+  "authSignInButton": "登录",
+  "authDividerText": "或使用以下方式继续",
+  "authContinueWith": "使用 {brand} 继续",
+  "@authContinueWith": {
+    "placeholders": {
+      "brand": {
+        "type": "String"
+      }
+    }
+  },
+  "authNoAccount": "还没有账号？",
+  "authSignUpLink": "注册",
+  "authAgreeTermsError": "请先同意服务条款和隐私政策",
+  "authGoogleUnavailable": "Google 登录尚不可用。",
+  "authSignUpFormLabel": "创建账户表单",
+  "authCreateAccountTitle": "创建账户",
+  "authJoinCommunitySubtitle": "加入 Velora 社区",
+  "authAgreeTermsLabel": "同意服务条款和隐私政策",
+  "authAgreeTermsPrefix": "我同意",
+  "authTermsOfService": "服务条款",
+  "authAnd": " 与 ",
+  "authPrivacyPolicy": "隐私政策",
+  "authCreateAccountButton": "创建账户",
+  "authAlreadyHaveAccount": "已经有账号？",
+  "authSignInLink": "登录",
+  "commonGoBack": "返回",
+  "commonCancel": "取消",
+  "authResetPasswordFormLabel": "重置密码表单",
+  "authEmailIllustrationLabel": "电子邮件插图",
+  "authResetPasswordTitle": "重置密码",
+  "authResetPasswordSubtitle": "输入您注册的邮箱，我们会发送一个链接帮助您重置密码。",
+  "authSendResetLink": "发送重置链接",
+  "authRememberPasswordLabel": "想起密码？返回登录",
+  "authRememberPasswordAction": "想起密码？登录",
+  "authResetEmailSentLabel": "重置邮件已发送",
+  "authCheckEmailTitle": "检查您的邮箱",
+  "authBackToSignIn": "返回登录",
+  "authEmailVerificationLabel": "邮箱验证说明",
+  "authAnimatedEmailLabel": "动画电子邮件插图",
+  "authVerificationInstructions": "我们已发送验证链接，请检查收件箱并点击链接完成验证。",
+  "authVerifiedCta": "我已完成邮箱验证",
+  "authResendVerificationLabel": "重新发送验证邮件",
+  "authVerificationEmailResent": "验证邮件已重新发送",
+  "authWrongEmail": "邮箱不正确？退出",
+  "authSignOutHint": "退出并返回登录页面",
+  "authPasswordStrengthWeak": "弱",
+  "authPasswordStrengthStrong": "强",
+  "authPasswordStrengthMedium": "中等",
+  "authPasswordStrengthFair": "一般",
+  "authPasswordShow": "显示密码",
+  "authPasswordHide": "隐藏密码",
+  "authPasswordRequirementsTitle": "密码必须包含：",
+  "authPasswordRequirementLength": "至少 8 个字符",
+  "authPasswordRequirementCase": "大写和小写字母",
+  "authPasswordRequirementNumber": "至少一个数字",
+  "authPasswordRequirementSpecial": "特殊字符 (!@#$%^&*)",
+  "feedTitle": "动态",
+  "feedCreatePostTooltip": "创建帖子",
+  "feedNotificationsTooltip": "通知",
+  "feedErrorLoading": "动态加载失败",
+  "feedEmptyMessage": "暂无帖子",
+  "feedEmptySubtitle": "下拉刷新或稍后再试",
+  "feedEmptyHint": "{subtitle}，双击刷新按钮。",
+  "@feedEmptyHint": {
+    "placeholders": {
+      "subtitle": {
+        "type": "String"
+      }
+    }
+  },
+  "feedRefreshButtonSemantic": "刷新动态",
+  "feedRefreshButton": "刷新",
+  "feedLoadingLabel": "正在加载动态",
+  "feedCommentsTitle": "评论",
+  "feedReplyingTo": "回复 {name}",
+  "@feedReplyingTo": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "feedWriteCommentHint": "写下评论...",
+  "feedAddCommentHint": "为 {name} 添加评论",
+  "@feedAddCommentHint": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "feedNoCommentsTitle": "暂无评论",
+  "feedNoCommentsSubtitle": "抢先留下你的想法！",
+  "feedReplyAction": "回复",
+  "feedDeleteAction": "删除",
+  "feedSeeTranslation": "查看翻译",
+  "feedViewReplies": "查看{count, plural, one{{count}条回复} other{{count}条回复}}",
+  "@feedViewReplies": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "feedUnknownUser": "未知用户",
+  "feedPostSummaryFallback": "帖子",
+  "feedPostSemantics": "{author} 发布了 {summary} {time}",
+  "@feedPostSemantics": {
+    "placeholders": {
+      "author": {
+        "type": "String"
+      },
+      "summary": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "feedOpenPostHint": "双击打开帖子详情",
+  "feedPostImageLabel": "帖子图片",
+  "feedPostImagePositionLabel": "帖子图片 {index}/{total}",
+  "@feedPostImagePositionLabel": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "feedCampaignFallback": "活动",
+  "feedOpenCampaignLabel": "打开活动 {title}",
+  "@feedOpenCampaignLabel": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "feedLikeLabel": "点赞帖子",
+  "feedUnlikeLabel": "取消点赞",
+  "feedLikeHint": "双击点赞此帖子",
+  "feedUnlikeHint": "双击取消点赞",
+  "feedViewCommentsLabel": "查看评论",
+  "feedViewCommentsHint": "双击打开评论",
+  "feedShareComingSoon": "分享功能即将上线",
+  "feedShareLabel": "分享帖子",
+  "feedShareHint": "双击分享",
+  "feedRemoveBookmarkLabel": "取消收藏",
+  "feedAddBookmarkLabel": "收藏此帖子",
+  "timeAgoNow": "刚刚",
+  "timeAgoMinutes": "{count}分",
+  "@timeAgoMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeAgoHours": "{count}小时",
+  "@timeAgoHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeAgoDays": "{count}天",
+  "@timeAgoDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeAgoMonths": "{count}个月",
+  "@timeAgoMonths": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeAgoYears": "{count}年",
+  "@timeAgoYears": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "countThousands": "{value}K",
+  "@countThousands": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "countMillions": "{value}M",
+  "@countMillions": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAccountsCenterTitle": "账户中心",
+  "settingsAccountsCenterSubtitle": "管理跨平台的连接体验、身份与隐私",
+  "settingsSearchTooltip": "搜索设置",
+  "settingsConnectedTitle": "连接体验",
+  "settingsConnectedSubtitle": "控制 Velora 身份在各个平台上的使用方式。",
+  "settingsTileProfilesTitle": "个人资料",
+  "settingsTileProfilesSubtitle": "Vito • Velora、Forum、Community",
+  "settingsTileSharingTitle": "跨资料共享",
+  "settingsTileSharingSubtitle": "选择自动同步的内容",
+  "settingsTileLoggingTitle": "帐户登录",
+  "settingsTileLoggingSubtitle": "查看设备与登录批准",
+  "settingsAccountTitle": "账户设置",
+  "settingsTilePasswordSecurityTitle": "密码与安全",
+  "settingsTilePasswordSecuritySubtitle": "双重验证、受信设备、安全提醒",
+  "settingsTilePersonalDetailsTitle": "个人信息",
+  "settingsTilePersonalDetailsSubtitle": "姓名、用户名、资料链接",
+  "settingsTileInfoPermissionsTitle": "信息与权限",
+  "settingsTileInfoPermissionsSubtitle": "数据下载、权限、受众",
+  "settingsTileAdPreferencesTitle": "广告偏好",
+  "settingsTileAdPreferencesSubtitle": "更常看到的主题",
+  "settingsTileVeloraPayTitle": "Velora Pay",
+  "settingsTileVeloraPaySubtitle": "付款方式与保障",
+  "settingsPersonalizationTitle": "个性化",
+  "settingsTileNotificationsTitle": "通知",
+  "settingsTileNotificationsSubtitle": "推送、电子邮件、SMS 偏好",
+  "settingsTileThemeTitle": "主题",
+  "settingsTileThemeSubtitle": "应用外观、深色模式、对比度",
+  "settingsTileLanguageTitle": "语言",
+  "settingsTileLanguageSubtitle": "选择 Velora 使用的语言",
+  "settingsTileAccessibilityTitle": "辅助功能",
+  "settingsTileAccessibilitySubtitle": "字体、对比度、字幕",
+  "settingsHelpTitle": "帮助与资源",
+  "settingsTileHelpCenterTitle": "帮助中心",
+  "settingsTileHelpCenterSubtitle": "指南、教程与快速解答",
+  "settingsTileFaqTitle": "常见问题",
+  "settingsTileFaqSubtitle": "热门主题一览",
+  "settingsTileAboutTitle": "关于 Velora",
+  "settingsTileAboutSubtitle": "版本、许可与致谢",
+  "settingsHeroSemanticsLabel": "Meta ID 资料摘要与安全状态",
+  "settingsHeroMetaId": "Meta ID",
+  "settingsHeroLearnMore": "了解更多",
+  "settingsHeroNetworks": "Facebook • Instagram • Velora",
+  "settingsHeroSwitchButton": "切换",
+  "settingsHeroPasswordUpdated": "2 天前已更新密码",
+  "settingsHeroPasswordSubtitle": "通过提醒与审批保持账户安全。",
+  "settingsHeroReviewButton": "查看",
+  "settingsSearchProfiles": "个人资料",
+  "settingsSearchPassword": "密码",
+  "settingsSearchSecurity": "安全",
+  "settingsSearchNotifications": "通知",
+  "settingsSearchPrivacy": "隐私",
+  "settingsSearchLanguage": "语言",
+  "settingsSearchTheme": "主题",
+  "settingsSearchHelp": "帮助",
+  "settingsSearchPayments": "支付",
+  "settingsProfileTitle": "Profile",
+  "settingsProfileSubtitle": "Update what people can see on Velora",
+  "settingsProfilePhotoLabelCover": "cover photo",
+  "settingsProfilePhotoLabelProfile": "profile photo",
+  "settingsProfilePhotoActionTake": "Take photo",
+  "settingsProfilePhotoActionGallery": "Choose from gallery",
+  "settingsProfilePhotoActionRemove": "Remove photo",
+  "settingsProfilePhotoActionCancel": "Cancel",
+  "settingsProfilePhotoToastCamera": "Opening camera for {target}...",
+  "@settingsProfilePhotoToastCamera": {
+    "placeholders": {
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsProfilePhotoToastGallery": "Opening gallery for {target}...",
+  "@settingsProfilePhotoToastGallery": {
+    "placeholders": {
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsProfileFieldUpdated": "{field} updated",
+  "@settingsProfileFieldUpdated": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsProfileInfoSectionTitle": "Profile info",
+  "settingsProfileFieldName": "Name",
+  "settingsProfileFieldNameHelper": "You can only change your name twice within 14 days.",
+  "settingsProfileFieldUsername": "Username",
+  "settingsProfileFieldUsernameHelper": "Pick a unique username. People can find you with @username.",
+  "settingsProfileFieldBio": "Bio",
+  "settingsProfileFieldBioHelper": "Share a short description. Keep it under 150 characters.",
+  "settingsProfileFieldWebsite": "Website",
+  "settingsProfileFieldWebsiteHelper": "Enter a valid URL people can tap from your bio.",
+  "settingsProfileInfoSyncTitle": "Profile info syncing is no longer available",
+  "settingsProfileInfoSyncDescription": "Your name and username will no longer sync across apps. Manage synced profile pictures through Connected experiences.",
+  "settingsProfileAccountTypeTitle": "Account type",
+  "settingsProfileAccountTypeSubtitle": "Choose how you use Velora",
+  "settingsProfileAccountTypePersonal": "Personal",
+  "settingsProfileAccountTypeOrganization": "Organization",
+  "settingsProfileAccountTypePersonalDescription": "Personal accounts are for individual supporters.",
+  "settingsProfileAccountTypeOrganizationDescription": "Organization accounts unlock verifications and analytics.",
+  "settingsProfileConnectedTitle": "Connected accounts",
+  "settingsProfileConnectedNotConnected": "Not connected",
+  "settingsProfileConnectedDisconnect": "Disconnect",
+  "settingsProfileConnectedConnect": "Connect",
+  "settingsProfileCrossTitle": "Cross-platform",
+  "settingsProfileCrossSubtitle": "Control how Velora syncs to other networks",
+  "settingsProfileCrossAutoShareTitle": "Auto-share posts",
+  "settingsProfileCrossAutoShareSubtitle": "Share to connected accounts",
+  "settingsProfileCrossSyncNotificationsTitle": "Sync notifications",
+  "settingsProfileCrossSyncNotificationsSubtitle": "Get notified across platforms",
+  "settingsProfileCrossFindFriendsTitle": "Find friends",
+  "settingsProfileCrossFindFriendsSubtitle": "Match people from other networks",
+  "settingsProfileEditTitle": "Edit profile",
+  "settingsProfileEditSubtitle": "Update your personal information",
+  "settingsProfileEditTabName": "Name",
+  "settingsProfileEditTabBio": "Bio & Details",
+  "settingsProfileEditUsedProfiles": "Used for 2 profiles",
+  "settingsProfileEditFirstName": "First name",
+  "settingsProfileEditMiddleName": "Middle name",
+  "settingsProfileEditLastName": "Last name",
+  "settingsProfileEditRequiredField": "Required field",
+  "settingsProfileEditApplyTo": "Apply to",
+  "settingsProfileEditApplyAllProfiles": "All profiles",
+  "settingsProfileEditApplyFacebook": "Facebook only",
+  "settingsProfileEditApplyInstagram": "Instagram only",
+  "settingsProfileEditNameChangeInfo": "If you change your name, you can't change it again for 60 days. Use your authentic name so friends know it's you.",
+  "settingsProfileEditOtherNamesTitle": "Other names",
+  "settingsProfileEditOtherNamesDescription": "Other names are always public and help people find you on Velora.",
+  "settingsProfileEditOtherNamesManage": "Manage other names",
+  "settingsProfileEditReviewSchedule": "Schedule review",
+  "settingsProfileEditReviewScheduled": "Review on {date}",
+  "@settingsProfileEditReviewScheduled": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsProfileEditReviewChange": "Review change",
+  "settingsProfileEditNameSubmitted": "Name information sent for review",
+  "settingsProfileEditIdentitySection": "Identity",
+  "settingsProfileEditContactSection": "Contact preferences",
+  "settingsProfileEditContactEveryone": "Everyone",
+  "settingsProfileEditContactFollowers": "Followers",
+  "settingsProfileEditContactNoOne": "No one",
+  "settingsProfileEditShowProfileInfo": "Show profile info on donations",
+  "settingsProfileEditDisplayFollowerCount": "Display follower count",
+  "settingsProfileEditProfileUpdated": "Profile updated",
+  "settingsProfileEditSaveChanges": "Save changes",
+  "settingsProfileEditPronounsLabel": "Pronouns",
+  "settingsProfileFieldSave": "Save",
+  "settingsProfileFieldEditFallbackTitle": "Edit field",
+  "settingsProfileFieldEditFallbackLabel": "Field",
+  "settingsSecurityPasswordSectionTitle": "Password",
+  "settingsSecurityPasswordChange": "Change password",
+  "settingsSecurityPasswordLastChanged": "Last changed 2 months ago",
+  "settingsSecurityPasswordToast": "Change password feature coming soon",
+  "settingsSecurityTwoFactorSectionTitle": "Two-factor authentication",
+  "settingsSecurityTwoFactorTitle": "Two-factor authentication",
+  "settingsSecurityTwoFactorSubtitle": "Require a security code in addition to your password",
+  "settingsSecurityTwoFactorMethods": "Authenticator app (Google Authenticator, Authy)\nSMS to +62 812-XXXX-5678",
+  "settingsSecurityBiometricSectionTitle": "Biometric security",
+  "settingsSecurityBiometricTitle": "Biometric unlock",
+  "settingsSecurityBiometricSubtitle": "Use fingerprint or face recognition",
+  "settingsSecurityLoginActivityTitle": "Login activity",
+  "settingsSecurityLoginActivityEntry": "Today at {time}",
+  "@settingsSecurityLoginActivityEntry": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsSecurityLoginActivityLocation": "Jakarta, Indonesia • Android",
+  "settingsSecuritySessionsTitle": "Active device sessions",
+  "settingsSecuritySessionsDevice1Title": "Samsung Galaxy S23",
+  "settingsSecuritySessionsDevice1Subtitle": "Jakarta, Indonesia • Active now",
+  "settingsSecuritySessionsBadgeCurrent": "Current",
+  "settingsSecuritySessionsDetails": "Details",
+  "settingsSecuritySessionsDevice2Title": "Chrome on Windows",
+  "settingsSecuritySessionsDevice2Subtitle": "Bandung, Indonesia • 2 days ago",
+  "settingsSecuritySessionsSignOut": "Sign out",
+  "settingsSecurityAlertsTitle": "Security alerts",
+  "settingsSecurityAlertsDeviceTitle": "Device alerts",
+  "settingsSecurityAlertsDeviceSubtitle": "Get notified when your account is accessed from a new device",
+  "settingsSecurityRecoveryTitle": "Account recovery",
+  "settingsSecurityRecoveryTrustedTitle": "Trusted contacts",
+  "settingsSecurityRecoveryTrustedSubtitle": "Add people who can help you recover your account",
+  "settingsSecurityRecoveryCodesTitle": "Download recovery codes",
+  "settingsSecurityRecoveryCodesSubtitle": "Save backup codes in case you lose access",
+  "settingsPrivacyTitle": "Privacy",
+  "settingsPrivacySubtitle": "Control your visibility and data",
+  "settingsPrivacyAudienceTitle": "Audience & visibility",
+  "settingsPrivacyPrivateAccountTitle": "Private account",
+  "settingsPrivacyPrivateAccountSubtitle": "Approve followers before they see your activity",
+  "settingsPrivacySearchTitle": "Appear in search",
+  "settingsPrivacySearchSubtitle": "Allow people to discover you by name or username",
+  "settingsPrivacyDirectMessagesTitle": "Direct messages",
+  "settingsPrivacyDirectMessagesAllowTitle": "Allow messages from everyone",
+  "settingsPrivacyDirectMessagesAllowSubtitle": "Messages from non-followers go to requests",
+  "settingsPrivacyDataPermissionsTitle": "Data & permissions",
+  "settingsPrivacyDownloadInfoTitle": "Download your information",
+  "settingsPrivacyDownloadInfoSubtitle": "Get a copy of your posts, donations, and messages",
+  "settingsPrivacyDeleteAccountTitle": "Delete account",
+  "settingsPrivacyDeleteAccountSubtitle": "Permanently remove your account and data",
+  "settingsPrivacyDataSharingTitle": "Data sharing",
+  "settingsPrivacyDataSharingSubtitle": "Control analytics and personalized experiences",
+  "settingsPrivacyAnalyticsTitle": "Share usage analytics",
+  "settingsPrivacyAnalyticsSubtitle": "Help us improve Velora by sharing anonymized usage",
+  "settingsPrivacyPersonalizedTitle": "Personalized experiences",
+  "settingsPrivacyPersonalizedSubtitle": "Use my activity to tailor content and ads",
+  "postCreateAppBarTitle": "Create Post",
+  "postCreateAppBarNext": "Next",
+  "postCreateTitle": "New Post",
+  "postCreatePublishTooltip": "Publish post",
+  "postCreatePublishHint": "Double tap to publish your post",
+  "postCreatePublishLabel": "Publish",
+  "postCreateMediaLabel": "Selected media preview",
+  "postCreateMediaHint": "Swipe to review your selected media",
+  "postCreateActionAddAudio": "Add audio",
+  "postCreateActionTagPeople": "Tag people",
+  "postCreateActionAddLocation": "Add location",
+  "postCreateActionAudience": "Audience",
+  "postCreateAudienceFollowers": "Followers",
+  "postCreateActionMoreOptions": "More options",
+  "postCreateActionHintAdjust": "Double tap to adjust {action}",
+  "@postCreateActionHintAdjust": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "postCreateActionHintOpen": "Double tap to {action}",
+  "@postCreateActionHintOpen": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "postCreateSelectMediaError": "Please select at least one image",
+  "postCreateUploadFailed": "Upload failed: {error}",
+  "@postCreateUploadFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "postCreateSuccess": "Post created successfully!",
+  "postCreateFailure": "Create post failed: {error}",
+  "@postCreateFailure": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "postCreateDialogTitle": "Publishing Post",
+  "postCreateDialogPreparing": "Preparing to upload...",
+  "postCreateDialogUploading": "Uploading media...",
+  "postCreateDialogCreating": "Creating post...",
+  "postCreateDialogError": "Error: {error}",
+  "@postCreateDialogError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "postCaptionHint": "Write a caption...",
+  "postMediaPreviewLabel": "Media preview carousel",
+  "postMediaPreviewHint": "Swipe left or right to preview selected media",
+  "postMediaRemoveLabel": "Remove current media",
+  "postMediaRemoveHint": "Double tap to remove media {index}",
+  "@postMediaRemoveHint": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
+  "postGalleryLoadError": "Error loading images: {error}",
+  "@postGalleryLoadError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "postGalleryImageLabel": "Gallery image",
+  "postGalleryImageHintSelected": "Selected at position {position}",
+  "@postGalleryImageHintSelected": {
+    "placeholders": {
+      "position": {
+        "type": "int"
+      }
+    }
+  },
+  "postGalleryImageHintSelect": "Double tap to select this image",
+  "postGalleryEmptyTitle": "No photos selected",
+  "postGalleryEmptySubtitle": "Tap the button below to select photos from your gallery",
+  "postGallerySelectButton": "Select photos",
+  "postToolbarLocation": "Location",
+  "postToolbarLink": "Link",
+  "postToolbarCampaign": "Campaign",
+  "postMoreOptionsTitle": "More options",
+  "postMoreOptionsHeader": "How others can interact with your post",
+  "postMoreOptionsTurnOffCommentsTitle": "Turn off commenting",
+  "postMoreOptionsTurnOffCommentsSubtitle": "You can change this later by going to the ⋯ menu at the top of your post.",
+  "postMoreOptionsHideLikeCountTitle": "Hide like count on this post",
+  "postMoreOptionsHideShareCountTitle": "Hide share count on this post",
+  "postMoreOptionsHideShareCountSubtitle": "Only you will see the total number of likes and shares on this post. You can change this later by going to the ⋯ menu at the top of your post. You can hide the number of likes and shares on posts from other accounts by going to Settings. Learn more",
+  "postMoreOptionsHideCommentCountTitle": "Hide comment count on this post",
+  "postMoreOptionsHideLikesListTitle": "Hide list of people who liked this post",
+  "postMoreOptionsHideLikesListSubtitle": "Viewers will see the like count (unless hidden) but not who liked it.",
+  "postToggleHintEnable": "Double tap to allow {action}",
+  "@postToggleHintEnable": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "postToggleHintDisable": "Double tap to disable {action}",
+  "@postToggleHintDisable": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "chatScreenTitle": "聊天",
+  "chatScreenNewChatLabel": "开始新聊天",
+  "chatScreenNewChatTooltip": "新聊天",
+  "chatScreenListLabel": "聊天列表",
+  "chatScreenListHint": "向上或向下滑动浏览对话",
+  "chatScreenRetry": "重试",
+  "chatScreenNoChats": "没有聊天记录",
+  "chatScreenNoChatsHint": "开始新对话后，您的聊天将显示在这里",
+  "chatScreenUnnamed": "未命名",
+  "chatScreenUnnamedGroup": "未命名群组",
+  "chatFilterAll": "全部",
+  "chatFilterUnread": "未读",
+  "chatFilterFavourites": "收藏",
+  "chatFilterGroups": "群组",
+  "chatFilterSemanticsLabel": "{filter} 筛选器",
+  "@chatFilterSemanticsLabel": {
+    "placeholders": {
+      "filter": {
+        "type": "String"
+      }
+    }
+  },
+  "chatFilterSemanticsHint": "双击以按{filter}筛选聊天",
+  "@chatFilterSemanticsHint": {
+    "placeholders": {
+      "filter": {
+        "type": "String"
+      }
+    }
+  },
+  "chatSearchBarLabel": "搜索聊天",
+  "chatSearchBarHint": "输入文本以搜索对话",
+  "chatSearchBarPlaceholder": "向 Meta AI 提问或搜索",
+  "chatListItemSemanticsLabel": "与 {name} 的聊天",
+  "@chatListItemSemanticsLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chatListItemSemanticsHint": "双击打开对话",
+  "chatListItemPhotos": "{count, plural, one{{count} 张照片} other{{count} 张照片}}",
+  "@chatListItemPhotos": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatListItemPhoto": "照片",
+  "chatListItemMissedCall": "未接语音通话",
+  "chatBubbleYourLabel": "你的消息",
+  "chatBubbleReceivedLabel": "收到的消息",
+  "chatBubbleHint": "消息发送于 {time}",
+  "@chatBubbleHint": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "chatMediaYourLabel": "你发送的媒体消息",
+  "chatMediaReceivedLabel": "收到的媒体消息",
+  "chatMediaHint": "媒体发送于 {time}",
+  "@chatMediaHint": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "chatDateSeparatorLabel": "日期分隔：{date}",
+  "@chatDateSeparatorLabel": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "chatInputEmojiLabel": "表情选择器",
+  "chatInputEmojiHint": "双击打开表情选择器",
+  "chatInputEmojiTooltip": "表情",
+  "chatInputFieldLabel": "消息输入框",
+  "chatInputFieldHint": "在此输入你的消息",
+  "chatInputFieldPlaceholder": "消息",
+  "chatInputAttachLabel": "附加文件",
+  "chatInputAttachHint": "双击附加文件",
+  "chatInputAttachTooltip": "附加文件",
+  "chatInputCameraLabel": "相机",
+  "chatInputCameraHint": "双击打开相机",
+  "chatInputCameraTooltip": "相机",
+  "chatInputSendLabel": "发送消息",
+  "chatInputSendHint": "双击发送消息",
+  "chatInputVoiceLabel": "语音消息",
+  "chatInputVoiceHint": "双击录制语音消息",
+  "chatAttachmentGallery": "图库",
+  "chatAttachmentCamera": "相机",
+  "chatAttachmentLocation": "位置",
+  "chatAttachmentContact": "联系人",
+  "chatAttachmentDocument": "文档",
+  "chatAttachmentAudio": "音频",
+  "chatAttachmentPoll": "投票",
+  "chatAttachmentEvent": "活动",
+  "chatAttachmentAiImages": "AI 图片",
+  "chatAttachmentSelectHint": "双击选择 {label}",
+  "@chatAttachmentSelectHint": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "chatDetailBackLabel": "返回",
+  "chatDetailTitleLabel": "与 {name} 的对话",
+  "@chatDetailTitleLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chatDetailGroupSubtitle": "点击查看群组信息",
+  "chatDetailSelfSubtitle": "给自己发消息",
+  "chatDetailOptionsLabel": "对话选项",
+  "chatDetailMenuTooltip": "更多选项",
+  "chatDetailHistoryLabel": "对话历史",
+  "chatDetailHistoryHint": "向上滑动查看更早的消息",
+  "chatDetailNoMessages": "还没有消息",
+  "chatDetailNoMessagesHint": "发送消息开始对话",
+  "chatDetailMessageDeleted": "此消息已被删除",
+  "chatDetailSelectMediaTitle": "选择媒体类型",
+  "chatDetailSelectImages": "图片",
+  "chatDetailSelectVideo": "视频",
+  "chatDetailImagesSelected": "{count, plural, one{已选择 {count} 张图片} other{已选择 {count} 张图片}}",
+  "@chatDetailImagesSelected": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatDetailVideoSelected": "已选择视频",
+  "chatDetailPickMediaError": "无法选择媒体",
+  "chatDetailCameraModeTitle": "选择拍摄模式",
+  "chatDetailCameraTakePhoto": "拍照",
+  "chatDetailCameraRecordVideo": "录制视频",
+  "chatDetailPhotoCaptured": "照片已拍摄",
+  "chatDetailVideoRecorded": "视频已录制",
+  "chatDetailPollCreated": "投票已创建",
+  "chatDetailEventCreated": "活动已创建",
+  "chatDetailDocumentsSelected": "{count, plural, one{已选择 {count} 个文档} other{已选择 {count} 个文档}}",
+  "@chatDetailDocumentsSelected": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatDetailDocumentError": "无法选择文档",
+  "chatDetailAudioSelected": "已选择音频文件",
+  "chatDetailAudioError": "无法选择音频",
+  "chatDetailLocationSelected": "已选择位置",
+  "chatDetailContactSelected": "已选择联系人",
+  "chatDetailAiImagesSelected": "已选择 AI 图片",
+  "chatDetailVoiceMessage": "语音消息",
+  "chatDetailStatusOnline": "在线",
+  "chatSearchScreenTitle": "搜索",
+  "chatSearchScreenRecent": "最近搜索",
+  "chatSearchScreenClearAll": "全部清除",
+  "chatSearchGlobalLabel": "全局搜索",
+  "chatSearchGlobalHint": "在活动、帖子和用户中搜索",
+  "chatSearchPlaceholder": "搜索…",
+  "chatSearchScopeCampaigns": "活动",
+  "chatSearchScopePosts": "帖子",
+  "chatSearchScopePeople": "用户",
+  "chatSearchScopeSemantics": "{scope} 范围",
+  "@chatSearchScopeSemantics": {
+    "placeholders": {
+      "scope": {
+        "type": "String"
+      }
+    }
+  },
+  "chatSearchRecentItemLabel": "最近搜索：{query}",
+  "@chatSearchRecentItemLabel": {
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
+  },
+  "chatSearchRecentItemHint": "双击再次搜索",
+  "chatSearchRecentDeleteLabel": "删除最近搜索",
+  "chatSearchRecentDeleteTooltip": "移除",
+  "chatPollLabel": "投票",
+  "chatPollSemanticsYour": "你的投票",
+  "chatPollSemanticsReceived": "收到的投票",
+  "chatPollSemanticsHint": "共有 {count} 票的投票",
+  "@chatPollSemanticsHint": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatPollTotalVotes": "{count, plural, one{{count} 票} other{{count} 票}}",
+  "@chatPollTotalVotes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatPollOptionSemantics": "{option}，{votes} 票，占 {percent}%",
+  "@chatPollOptionSemantics": {
+    "placeholders": {
+      "option": {
+        "type": "String"
+      },
+      "votes": {
+        "type": "int"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "chatPollVoteHint": "双击为此选项投票",
+  "chatPollDialogTitle": "创建投票",
+  "chatPollDialogQuestionLabel": "投票问题",
+  "chatPollDialogQuestionHint": "提出一个问题…",
+  "chatPollDialogOptionsLabel": "选项",
+  "chatPollDialogOptionLabel": "选项 {index}",
+  "@chatPollDialogOptionLabel": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
+  "chatPollDialogOptionHint": "输入选项…",
+  "chatPollDialogAddOption": "添加选项",
+  "chatPollDialogQuestionError": "请输入问题",
+  "chatPollDialogOptionsError": "请至少添加 2 个选项",
+  "chatPollDialogSend": "发送投票",
+  "chatEventLabel": "活动",
+  "chatEventSemanticsYour": "你的活动",
+  "chatEventSemanticsReceived": "收到的活动",
+  "chatEventHint": "活动时间：{date}",
+  "@chatEventHint": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "chatEventDialogTitle": "创建活动",
+  "chatEventDialogTitleLabel": "活动标题",
+  "chatEventDialogTitleHint": "输入活动标题…",
+  "chatEventDialogDescriptionLabel": "描述",
+  "chatEventDialogDescriptionHint": "输入活动描述…",
+  "chatEventDialogLocationLabel": "地点（可选）",
+  "chatEventDialogLocationHint": "输入地点…",
+  "chatEventDialogStartLabel": "开始",
+  "chatEventDialogEndLabel": "结束",
+  "chatEventDialogTitleError": "请输入活动标题",
+  "chatEventDialogEndTimeError": "结束时间必须晚于开始时间",
+  "chatEventDialogSend": "发送活动",
+  "chatEventResponseTitle": "你的回复",
+  "chatEventResponseGoing": "参加",
+  "chatEventResponseMaybe": "可能",
+  "chatEventResponseNo": "不参加",
+  "chatEventResponseSummary": "{going} 人参加 • {maybe} 人可能 • {notGoing} 人不参加",
+  "@chatEventResponseSummary": {
+    "placeholders": {
+      "going": {
+        "type": "int"
+      },
+      "maybe": {
+        "type": "int"
+      },
+      "notGoing": {
+        "type": "int"
+      }
+    }
+  },
+  "chatEventResponseButtonLabel": "{label} 回复",
+  "@chatEventResponseButtonLabel": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "chatEventResponseButtonHint": "双击选择 {label} 作为回复",
+  "@chatEventResponseButtonHint": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAppearanceLanguageTitle": "语言",
+  "settingsAppearanceLanguagePreviewSemantics": "当前语言预览",
+  "settingsAppearanceLanguageCurrentLabel": "当前语言",
+  "settingsAppearanceLanguageSearchHint": "搜索语言…",
+  "settingsAppearanceLanguageEmpty": "未找到匹配的语言",
+  "settingsAppearanceLanguageToast": "语言已切换为 {language}",
+  "@settingsAppearanceLanguageToast": {
+    "placeholders": {
+      "language": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAppearanceLanguageRestartNote": "应用将重新启动以应用语言更改。",
+  "settingsAppearanceThemeTitle": "主题与外观",
+  "settingsAppearanceThemeModeSection": "主题模式",
+  "settingsAppearanceThemeModeLight": "浅色",
+  "settingsAppearanceThemeModeDark": "深色",
+  "settingsAppearanceThemeModeAuto": "自动",
+  "settingsAppearanceThemeModeDescription": "系统模式会根据设备设置自动调整。",
+  "settingsAppearanceThemeColorSection": "颜色",
+  "settingsAppearanceThemeColorDynamic": "动态颜色",
+  "settingsAppearanceThemeShapeSection": "形状",
+  "settingsAppearanceThemeShapeCorner": "圆角大小",
+  "settingsAppearanceThemeShapeCornerValue": "{px} px",
+  "@settingsAppearanceThemeShapeCornerValue": {
+    "placeholders": {
+      "px": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsAppearanceThemeShapeSquare": "直角",
+  "settingsAppearanceThemeShapeSmall": "小",
+  "settingsAppearanceThemeShapeMedium": "中",
+  "settingsAppearanceThemeShapeLarge": "大",
+  "settingsAppearanceThemeShapeMax": "最大",
+  "settingsAppearanceThemeAdvancedSection": "高级设置",
+  "settingsAppearanceThemeAccentTitle": "强调色",
+  "settingsAppearanceThemeAccentSubtitle": "自定义高亮颜色",
+  "settingsAppearanceThemeAccentToast": "颜色选择器即将上线",
+  "settingsAppearanceThemeTypographyTitle": "字体",
+  "settingsAppearanceThemeTypographySubtitle": "字体与大小",
+  "settingsAppearanceThemeTypographyToast": "字体设置即将上线",
+  "settingsAppearanceThemeAnimationsTitle": "动画",
+  "settingsAppearanceThemeAnimationsSubtitle": "过渡效果与动效",
+  "settingsAppearanceThemeAnimationsToast": "动画设置即将上线",
+  "settingsAppearanceThemePreviewTitle": "实时预览",
+  "settingsAppearanceThemePreviewSampleCard": "示例卡片",
+  "settingsAppearanceThemeModeLabel": "{mode}模式",
+  "@settingsAppearanceThemeModeLabel": {
+    "placeholders": {
+      "mode": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAppearanceNotificationsTitle": "通知",
+  "settingsAppearanceNotificationsQuick": "快速控制",
+  "settingsAppearanceNotificationsPauseAllTitle": "暂停所有通知",
+  "settingsAppearanceNotificationsPauseAllSubtitle": "暂时停止全部提醒",
+  "settingsAppearanceNotificationsSleepModeTitle": "睡眠模式",
+  "settingsAppearanceNotificationsSleepModeSubtitle": "在这些时间静音通知",
+  "settingsAppearanceNotificationsPostsSection": "帖子与故事",
+  "settingsAppearanceNotificationsPostsPeople": "关注人的帖子",
+  "settingsAppearanceNotificationsPostsLive": "直播视频",
+  "settingsAppearanceNotificationsPostsLiveSubtitle": "有人开始直播时",
+  "settingsAppearanceNotificationsPostsCampaigns": "新活动",
+  "settingsAppearanceNotificationsPostsCampaignsSubtitle": "来自我关注的创作者",
+  "settingsAppearanceNotificationsEngagementSection": "互动",
+  "settingsAppearanceNotificationsEngagementLikes": "我的帖子收到的赞",
+  "settingsAppearanceNotificationsEngagementReplies": "评论回复",
+  "settingsAppearanceNotificationsEngagementMentions": "提及",
+  "settingsAppearanceNotificationsEngagementMentionsSubtitle": "有人@我时",
+  "settingsAppearanceNotificationsEngagementFollowers": "新关注者",
+  "settingsAppearanceNotificationsDonationsSection": "捐赠与活动",
+  "settingsAppearanceNotificationsDonationsReceivedTitle": "收到捐赠",
+  "settingsAppearanceNotificationsDonationsReceivedSubtitle": "有人向我的活动捐款时",
+  "settingsAppearanceNotificationsDonationsMilestonesTitle": "活动里程碑",
+  "settingsAppearanceNotificationsDonationsMilestonesSubtitle": "达成 25%、50%、75%、100%",
+  "settingsAppearanceNotificationsDonationsUpdatesTitle": "活动更新",
+  "settingsAppearanceNotificationsDonationsUpdatesSubtitle": "来自我捐赠过的活动",
+  "settingsAppearanceNotificationsDonationsWithdrawTitle": "提现状态",
+  "settingsAppearanceNotificationsDonationsWithdrawSubtitle": "处理中、已完成或失败",
+  "settingsAppearanceNotificationsMessagesSection": "消息",
+  "settingsAppearanceNotificationsMessagesDirect": "私信",
+  "settingsAppearanceNotificationsMessagesRequests": "消息请求",
+  "settingsAppearanceNotificationsMessagesRequestsSubtitle": "来自未关注的人",
+  "settingsAppearanceNotificationsMessagesGroups": "群组邀请",
+  "settingsAppearanceNotificationsSummaryTitle": "通知摘要",
+  "settingsAppearanceNotificationsSummarySubtitle": "改收每日或每周摘要而非实时通知",
+  "settingsAppearanceNotificationsSummaryOff": "关",
+  "settingsAppearanceNotificationsSummaryDaily": "每日",
+  "settingsAppearanceNotificationsSummaryWeekly": "每周",
+  "settingsAppearanceNotificationsOtherSection": "其他渠道",
+  "settingsAppearanceNotificationsOtherEmailTitle": "邮件通知",
+  "settingsAppearanceNotificationsOtherEmailSubtitle": "每周摘要与重要更新",
+  "settingsAppearanceNotificationsOtherSmsTitle": "短信通知",
+  "settingsAppearanceNotificationsOtherSmsSubtitle": "仅限关键提醒",
+  "settingsAppearanceAccessibilityTitle": "无障碍",
+  "settingsAppearanceAccessibilitySubtitle": "调节字体与布局",
+  "settingsAppearanceAccessibilityTabText": "文字",
+  "settingsAppearanceAccessibilityTabAppearance": "外观",
+  "settingsAppearanceAccessibilityTabLayout": "布局",
+  "settingsAppearanceAccessibilityFontSizeTitle": "字体大小",
+  "settingsAppearanceAccessibilityFontSizeSubtitle": "预览会在 Velora 内实时更新",
+  "settingsAppearanceAccessibilityFontSizeLabel": "{points} pt",
+  "@settingsAppearanceAccessibilityFontSizeLabel": {
+    "placeholders": {
+      "points": {
+        "type": "double"
+      }
+    }
+  },
+  "settingsAppearanceAccessibilityFontSample": "{points} pt 的示例文本",
+  "@settingsAppearanceAccessibilityFontSample": {
+    "placeholders": {
+      "points": {
+        "type": "double"
+      }
+    }
+  },
+  "settingsAppearanceAccessibilityFontFamilyTitle": "字体",
+  "settingsAppearanceAccessibilityTextAlignmentTitle": "文字对齐",
+  "settingsAppearanceAccessibilityPreviewTitle": "预览",
+  "settingsAppearanceAccessibilityPreviewBody": "Velora 让每座城市更有人情味，因为每个人都能在这里采取行动。",
+  "settingsAppearanceAccessibilityAppearanceHighContrastTitle": "高对比度模式",
+  "settingsAppearanceAccessibilityAppearanceHighContrastSubtitle": "提高清晰度，便于阅读",
+  "settingsAppearanceAccessibilityAppearanceHighContrastToggle": "启用高对比度界面",
+  "settingsAppearanceAccessibilityAppearanceReduceTitle": "减少动态",
+  "settingsAppearanceAccessibilityAppearanceReduceSubtitle": "限制视差和大幅过渡",
+  "settingsAppearanceAccessibilityAppearanceReduceToggle": "最小化动画",
+  "settingsAppearanceAccessibilityLayoutLineSpacing": "行距",
+  "settingsAppearanceAccessibilityLayoutPreviewBody": "Velora 让城市更有人情味，因为每个人都能在这里采取行动。\n故事、筹款和现场报告都会显示在这里。",
+  "settingsAccountStatusTitle": "账户状态",
+  "settingsAccountStatusSubtitle": "账户健康与验证",
+  "settingsAccountStatusInfoTitle": "账户信息",
+  "settingsAccountStatusStandingTitle": "良好状态",
+  "settingsAccountStatusStandingSubtitle": "未发现限制",
+  "settingsAccountStatusEmailTitle": "邮箱已验证",
+  "settingsAccountStatusPhoneTitle": "手机号已验证",
+  "settingsAccountStatusMetricsTitle": "账户指标",
+  "settingsAccountStatusMemberSinceTitle": "加入时间",
+  "settingsAccountStatusDonationsTitle": "总捐赠",
+  "settingsAccountStatusCampaignsTitle": "已创建的活动",
+  "settingsAccountActivityTitle": "你的活动",
+  "settingsAccountActivitySubtitle": "查看互动和历史记录",
+  "settingsAccountActivityTabLikes": "赞",
+  "settingsAccountActivityTabComments": "评论",
+  "settingsAccountActivityTabDonations": "捐赠",
+  "settingsAccountActivityTabArchive": "已归档",
+  "settingsAccountActivityTabDeleted": "已删除",
+  "settingsAccountActivityRecentLikes": "最近的赞",
+  "settingsAccountActivityRecentComments": "最近的评论",
+  "settingsAccountActivityArchived": "已归档",
+  "settingsAccountActivityRestoreButton": "恢复",
+  "settingsAccountActivityDeletedEmptyTitle": "暂无删除项",
+  "settingsAccountActivityDeletedEmptySubtitle": "被删除的内容将在永久删除前的 30 天内显示在此处。",
+  "settingsAccountDonationsTitle": "我的捐赠",
+  "settingsAccountDonationsSubtitle": "你的捐赠记录与影响",
+  "settingsAccountDonationsImpactTitle": "影响总览",
+  "settingsAccountDonationsTotalLabel": "总捐赠",
+  "settingsAccountDonationsCampaignsLabel": "活动",
+  "settingsAccountDonationsThisMonthLabel": "本月",
+  "settingsAccountDonationsRecurringLabel": "定期",
+  "settingsAccountDonationsRecurringValue": "{count} 个",
+  "@settingsAccountDonationsRecurringValue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsAccountDonationsMatchedLabel": "匹配",
+  "settingsAccountDonationsFilterAll": "全部",
+  "settingsAccountDonationsFilterRecurring": "定期",
+  "settingsAccountDonationsFilterMatched": "匹配",
+  "settingsAccountDonationsExportButton": "导出全部收据",
+  "settingsAccountDonationsExportingToast": "正在导出捐赠记录…",
+  "settingsAccountDonationsStatusRecurring": "定期",
+  "settingsAccountDonationsStatusMatched": "匹配",
+  "settingsAccountDonationsEmptyTitle": "暂无捐赠",
+  "settingsAccountDonationsEmptySubtitle": "支持与你相关的活动，开始带来改变。",
+  "settingsAccountDonationsEmptyButton": "探索活动",
+  "settingsHelpCenterTitle": "帮助中心",
+  "settingsHelpCenterSubtitle": "支持与安全资源",
+  "settingsHelpPrioritySemantics": "优先支持提示",
+  "settingsHelpPriorityTitle": "优先支持",
+  "settingsHelpPrioritySubtitle": "认证发起人通常能在 2 小时内得到回复。",
+  "settingsHelpSupportOptionsTitle": "支持选项",
+  "settingsHelpFaqTileTitle": "常见问题",
+  "settingsHelpFaqTileSubtitle": "为你准备的即时答案",
+  "settingsHelpEmailTitle": "邮件支持",
+  "settingsHelpEmailSubtitle": "support@velora.app",
+  "settingsHelpReportTitle": "报告问题",
+  "settingsHelpReportSubtitle": "Bug、滥用、骚扰",
+  "settingsHelpGuidesTitle": "指南",
+  "settingsHelpCommunityGuidelinesTitle": "社区准则",
+  "settingsHelpCommunityGuidelinesSubtitle": "2025 年 2 月更新",
+  "settingsHelpSecurityChecklistTitle": "安全检查清单",
+  "settingsHelpSecurityChecklistSubtitle": "让你的账户更安全",
+  "settingsHelpReportSheetTitle": "报告问题",
+  "settingsHelpReportHint": "描述发生了什么…",
+  "settingsHelpReportThanks": "感谢你的反馈",
+  "settingsHelpReportSendButton": "发送",
+  "settingsHelpFaqTitle": "FAQ",
+  "settingsHelpFaqSubtitle": "热门帮助话题",
+  "settingsHelpFaqQuestion1": "Velora 如何验证活动？",
+  "settingsHelpFaqAnswer1": "每个活动都要通过信任检查表，包括受益人验证、身份证件以及透明度里程碑。",
+  "settingsHelpFaqQuestion2": "我可以隐藏捐赠金额吗？",
+  "settingsHelpFaqAnswer2": "可以。捐赠时选择“匿名金额”选项，就只会显示你的头像。",
+  "settingsHelpFaqQuestion3": "如果我失去账号访问权限怎么办？",
+  "settingsHelpFaqAnswer3": "使用“密码和安全”里的恢复工具，并可预先授权可信联系人协助登录。",
+  "settingsHelpFaqQuestion4": "如何管理通知？",
+  "settingsHelpFaqAnswer4": "前往“通知”设置，为每种活动配置推送、邮件和短信提醒。",
+  "settingsHelpAboutTitle": "关于 Velora",
+  "settingsHelpAboutSemantics": "Velora 品牌简介",
+  "settingsHelpAboutBrandName": "Velora",
+  "settingsHelpAboutTagline": "赋能慷慨",
+  "settingsHelpAboutVersion": "版本 1.0.0 (Build 1)",
+  "settingsHelpAboutWhyTitle": "为什么选择 Velora",
+  "settingsHelpAboutWhyDescription": "Velora 是一个公益平台，把热心人士与有意义的项目连接在一起，共同让世界更温暖。",
+  "settingsHelpAboutStatCampaigns": "100 万+ 活动",
+  "settingsHelpAboutStatSupporters": "500 万+ 支持者",
+  "settingsHelpAboutStatTrust": "信任优先",
+  "settingsHelpAboutConnectTitle": "联系我们",
+  "settingsHelpAboutSocialWebsite": "官网",
+  "settingsHelpAboutSocialInstagram": "Instagram",
+  "settingsHelpAboutSocialThreads": "Threads",
+  "settingsHelpAboutSocialFacebook": "Facebook",
+  "settingsHelpAboutLegalTitle": "法律",
+  "settingsHelpAboutDevTitle": "开发团队",
+  "settingsHelpAboutDevOrgSubtitle": "产品、设计与工程",
+  "settingsHelpAboutDevFounderSubtitle": "创始人兼首席开发者",
+  "settingsHelpAboutContactTitle": "联系与支持",
+  "settingsHelpAboutLiveChatTitle": "在线客服",
+  "settingsHelpAboutLiveChatSubtitle": "每日 9:00–18:00",
+  "settingsHelpAboutReportBugTitle": "报告 Bug",
+  "settingsHelpAboutReportBugSubtitle": "帮我们改进 Velora",
+  "settingsHelpAboutSuggestFeatureTitle": "功能建议",
+  "settingsHelpAboutSuggestFeatureSubtitle": "分享你的产品想法",
+  "settingsHelpAboutPrivacy": "隐私政策",
+  "settingsHelpAboutTerms": "服务条款",
+  "settingsHelpAboutCookie": "Cookie 政策",
+  "settingsHelpAboutLicenses": "开源许可",
+  "settingsHelpAboutEnjoyTitle": "喜欢 Velora 吗？",
+  "settingsHelpAboutEnjoySubtitle": "给个评价，帮助更多人发现 Velora。",
+  "settingsHelpAboutRateButton": "为 Velora 评分",
+  "settingsHelpAboutAcknowledgementsTitle": "致谢",
+  "settingsHelpAboutAcknowledgementsThanks": "感谢所有贡献者、测试者以及 Flutter 社区让 Velora 成为现实。",
+  "settingsHelpAboutAcknowledgementFlutter": "Flutter",
+  "settingsHelpAboutAcknowledgementDart": "Dart",
+  "settingsHelpAboutAcknowledgementFirebase": "Firebase",
+  "settingsHelpAboutAcknowledgementSupabase": "Supabase",
+  "settingsHelpAboutAcknowledgementMaterial": "Material Design",
+  "settingsHelpAboutFooterCopyright": "© 2025 VitoTechLab. 版权所有。",
+  "settingsHelpAboutFooterMadeWith": "以 ❤️ 打造，只为更美好的世界"
+}

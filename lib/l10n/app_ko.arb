@@ -1,0 +1,1120 @@
+{
+  "@@locale": "ko",
+  "appTitle": "Velora",
+  "authSignInFormLabel": "로그인 양식",
+  "authLogoLabel": "Velora 로고",
+  "authWelcomeBackTitle": "다시 오신 것을 환영해요",
+  "authSignInSubtitle": "계속하려면 로그인하세요",
+  "fieldEmailLabel": "이메일",
+  "fieldEmailHint": "email@domain.com",
+  "fieldPasswordLabel": "비밀번호",
+  "authForgotPassword": "비밀번호를 잊으셨나요?",
+  "authForgotPasswordHint": "비밀번호를 잊음. 비밀번호 재설정 화면으로 이동",
+  "authSignInButton": "로그인",
+  "authDividerText": "또는 다음으로 계속",
+  "authContinueWith": "{brand}로 계속",
+  "@authContinueWith": {
+    "placeholders": {
+      "brand": {
+        "type": "String"
+      }
+    }
+  },
+  "authNoAccount": "아직 계정이 없나요?",
+  "authSignUpLink": "가입하기",
+  "authAgreeTermsError": "이용약관과 개인정보처리방침에 동의해주세요",
+  "authGoogleUnavailable": "구글 로그인이 아직 지원되지 않습니다.",
+  "authSignUpFormLabel": "계정 생성 양식",
+  "authCreateAccountTitle": "계정 만들기",
+  "authJoinCommunitySubtitle": "Velora 커뮤니티에 가입하세요",
+  "authAgreeTermsLabel": "이용약관 및 개인정보처리방침에 동의",
+  "authAgreeTermsPrefix": "다음에 동의합니다 ",
+  "authTermsOfService": "이용약관",
+  "authAnd": " 및 ",
+  "authPrivacyPolicy": "개인정보처리방침",
+  "authCreateAccountButton": "계정 만들기",
+  "authAlreadyHaveAccount": "이미 계정이 있나요?",
+  "authSignInLink": "로그인",
+  "commonGoBack": "돌아가기",
+  "commonCancel": "취소",
+  "authResetPasswordFormLabel": "비밀번호 재설정 양식",
+  "authEmailIllustrationLabel": "이메일 일러스트",
+  "authResetPasswordTitle": "비밀번호 재설정",
+  "authResetPasswordSubtitle": "등록된 이메일을 입력하면 비밀번호를 재설정할 수 있는 링크를 보내드려요.",
+  "authSendResetLink": "재설정 링크 보내기",
+  "authRememberPasswordLabel": "비밀번호가 기억나나요? 로그인으로 돌아가기",
+  "authRememberPasswordAction": "비밀번호가 기억나나요? 로그인",
+  "authResetEmailSentLabel": "재설정 이메일이 전송되었습니다",
+  "authCheckEmailTitle": "이메일을 확인하세요",
+  "authBackToSignIn": "로그인으로 돌아가기",
+  "authEmailVerificationLabel": "이메일 인증 안내",
+  "authAnimatedEmailLabel": "애니메이션 이메일 일러스트",
+  "authVerificationInstructions": "인증 링크를 보냈습니다. 받은 편지함을 확인하고 링크를 눌러 계정을 인증하세요.",
+  "authVerifiedCta": "이메일을 인증했습니다",
+  "authResendVerificationLabel": "인증 메일 다시 보내기",
+  "authVerificationEmailResent": "인증 메일을 다시 보냈습니다",
+  "authWrongEmail": "이메일이 잘못되었나요? 로그아웃",
+  "authSignOutHint": "로그아웃하고 로그인 화면으로 돌아가기",
+  "authPasswordStrengthWeak": "약함",
+  "authPasswordStrengthStrong": "강함",
+  "authPasswordStrengthMedium": "중간",
+  "authPasswordStrengthFair": "보통",
+  "authPasswordShow": "비밀번호 표시",
+  "authPasswordHide": "비밀번호 숨기기",
+  "authPasswordRequirementsTitle": "비밀번호에는 다음이 포함되어야 합니다:",
+  "authPasswordRequirementLength": "최소 8자",
+  "authPasswordRequirementCase": "대문자와 소문자",
+  "authPasswordRequirementNumber": "숫자 1개 이상",
+  "authPasswordRequirementSpecial": "특수문자 (!@#$%^&*)",
+  "feedTitle": "피드",
+  "feedCreatePostTooltip": "게시물 만들기",
+  "feedNotificationsTooltip": "알림",
+  "feedErrorLoading": "피드를 불러오지 못했습니다",
+  "feedEmptyMessage": "아직 게시물이 없어요",
+  "feedEmptySubtitle": "아래로 당겨 새로고침하거나 나중에 다시 시도하세요",
+  "feedEmptyHint": "{subtitle} 새로고침 버튼을 두 번 탭하세요.",
+  "@feedEmptyHint": {
+    "placeholders": {
+      "subtitle": {
+        "type": "String"
+      }
+    }
+  },
+  "feedRefreshButtonSemantic": "피드 새로고침",
+  "feedRefreshButton": "새로고침",
+  "feedLoadingLabel": "피드를 불러오는 중",
+  "feedCommentsTitle": "댓글",
+  "feedReplyingTo": "{name}에게 답글 남기는 중",
+  "@feedReplyingTo": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "feedWriteCommentHint": "댓글을 작성하세요...",
+  "feedAddCommentHint": "{name}에게 댓글을 남겨보세요",
+  "@feedAddCommentHint": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "feedNoCommentsTitle": "댓글이 아직 없습니다",
+  "feedNoCommentsSubtitle": "가장 먼저 의견을 남겨보세요!",
+  "feedReplyAction": "답글",
+  "feedDeleteAction": "삭제",
+  "feedSeeTranslation": "번역 보기",
+  "feedViewReplies": "{count, plural, one{{count}개의 답글 보기} other{{count}개의 답글 보기}}",
+  "@feedViewReplies": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "feedUnknownUser": "알 수 없는 사용자",
+  "feedPostSummaryFallback": "게시물",
+  "feedPostSemantics": "{author} 님이 {summary}을 {time}에 게시했습니다",
+  "@feedPostSemantics": {
+    "placeholders": {
+      "author": {
+        "type": "String"
+      },
+      "summary": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "feedOpenPostHint": "자세히 보려면 두 번 탭하세요",
+  "feedPostImageLabel": "게시물 이미지",
+  "feedPostImagePositionLabel": "게시물 이미지 {index}/{total}",
+  "@feedPostImagePositionLabel": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "feedCampaignFallback": "캠페인",
+  "feedOpenCampaignLabel": "{title} 캠페인 열기",
+  "@feedOpenCampaignLabel": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "feedLikeLabel": "게시물 좋아요",
+  "feedUnlikeLabel": "좋아요 취소",
+  "feedLikeHint": "이 게시물을 두 번 탭해 좋아요",
+  "feedUnlikeHint": "두 번 탭해 좋아요를 취소",
+  "feedViewCommentsLabel": "댓글 보기",
+  "feedViewCommentsHint": "두 번 탭해 댓글 열기",
+  "feedShareComingSoon": "공유 기능이 곧 제공됩니다",
+  "feedShareLabel": "게시물 공유",
+  "feedShareHint": "두 번 탭해 공유",
+  "feedRemoveBookmarkLabel": "저장 취소",
+  "feedAddBookmarkLabel": "이 게시물을 저장",
+  "timeAgoNow": "방금",
+  "timeAgoMinutes": "{count}분",
+  "@timeAgoMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeAgoHours": "{count}시간",
+  "@timeAgoHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeAgoDays": "{count}일",
+  "@timeAgoDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeAgoMonths": "{count}개월",
+  "@timeAgoMonths": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeAgoYears": "{count}년",
+  "@timeAgoYears": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "countThousands": "{value}K",
+  "@countThousands": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "countMillions": "{value}M",
+  "@countMillions": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAccountsCenterTitle": "계정 센터",
+  "settingsAccountsCenterSubtitle": "연결된 경험, ID, 개인정보를 관리하세요",
+  "settingsSearchTooltip": "설정 검색",
+  "settingsConnectedTitle": "연결된 경험",
+  "settingsConnectedSubtitle": "여러 플랫폼에서 Velora ID가 작동하는 방식을 제어합니다.",
+  "settingsTileProfilesTitle": "프로필",
+  "settingsTileProfilesSubtitle": "Vito • Velora, Forum, Community",
+  "settingsTileSharingTitle": "프로필 간 공유",
+  "settingsTileSharingSubtitle": "자동으로 동기화할 항목 선택",
+  "settingsTileLoggingTitle": "계정 로그인",
+  "settingsTileLoggingSubtitle": "기기 및 로그인 승인 확인",
+  "settingsAccountTitle": "계정 설정",
+  "settingsTilePasswordSecurityTitle": "비밀번호 및 보안",
+  "settingsTilePasswordSecuritySubtitle": "2단계 인증, 신뢰 기기, 보안 알림",
+  "settingsTilePersonalDetailsTitle": "개인 정보",
+  "settingsTilePersonalDetailsSubtitle": "이름, 사용자 이름, 프로필 링크",
+  "settingsTileInfoPermissionsTitle": "정보 및 권한",
+  "settingsTileInfoPermissionsSubtitle": "데이터 다운로드, 권한, 공개 범위",
+  "settingsTileAdPreferencesTitle": "광고 환경설정",
+  "settingsTileAdPreferencesSubtitle": "자주 보고 싶은 주제",
+  "settingsTileVeloraPayTitle": "Velora Pay",
+  "settingsTileVeloraPaySubtitle": "결제 수단 및 보호",
+  "settingsPersonalizationTitle": "개인 맞춤화",
+  "settingsTileNotificationsTitle": "알림",
+  "settingsTileNotificationsSubtitle": "푸시, 이메일, SMS 설정",
+  "settingsTileThemeTitle": "테마",
+  "settingsTileThemeSubtitle": "앱 모양, 다크 모드, 대비",
+  "settingsTileLanguageTitle": "언어",
+  "settingsTileLanguageSubtitle": "Velora에서 사용할 언어 선택",
+  "settingsTileAccessibilityTitle": "접근성",
+  "settingsTileAccessibilitySubtitle": "글꼴, 대비, 자막",
+  "settingsHelpTitle": "도움말 & 리소스",
+  "settingsTileHelpCenterTitle": "고객 센터",
+  "settingsTileHelpCenterSubtitle": "가이드, 튜토리얼, 빠른 답변",
+  "settingsTileFaqTitle": "FAQ",
+  "settingsTileFaqSubtitle": "자주 묻는 질문 모음",
+  "settingsTileAboutTitle": "Velora 정보",
+  "settingsTileAboutSubtitle": "버전, 라이선스, 감사",
+  "settingsHeroSemanticsLabel": "Meta ID 프로필 요약 및 보안 상태",
+  "settingsHeroMetaId": "Meta ID",
+  "settingsHeroLearnMore": "자세히 보기",
+  "settingsHeroNetworks": "Facebook • Instagram • Velora",
+  "settingsHeroSwitchButton": "전환",
+  "settingsHeroPasswordUpdated": "2일 전에 비밀번호가 변경됨",
+  "settingsHeroPasswordSubtitle": "알림과 승인을 통해 계정을 안전하게 지키세요.",
+  "settingsHeroReviewButton": "검토",
+  "settingsSearchProfiles": "프로필",
+  "settingsSearchPassword": "비밀번호",
+  "settingsSearchSecurity": "보안",
+  "settingsSearchNotifications": "알림",
+  "settingsSearchPrivacy": "개인정보",
+  "settingsSearchLanguage": "언어",
+  "settingsSearchTheme": "테마",
+  "settingsSearchHelp": "도움말",
+  "settingsSearchPayments": "결제",
+  "settingsProfileTitle": "Profile",
+  "settingsProfileSubtitle": "Update what people can see on Velora",
+  "settingsProfilePhotoLabelCover": "cover photo",
+  "settingsProfilePhotoLabelProfile": "profile photo",
+  "settingsProfilePhotoActionTake": "Take photo",
+  "settingsProfilePhotoActionGallery": "Choose from gallery",
+  "settingsProfilePhotoActionRemove": "Remove photo",
+  "settingsProfilePhotoActionCancel": "Cancel",
+  "settingsProfilePhotoToastCamera": "Opening camera for {target}...",
+  "@settingsProfilePhotoToastCamera": {
+    "placeholders": {
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsProfilePhotoToastGallery": "Opening gallery for {target}...",
+  "@settingsProfilePhotoToastGallery": {
+    "placeholders": {
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsProfileFieldUpdated": "{field} updated",
+  "@settingsProfileFieldUpdated": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsProfileInfoSectionTitle": "Profile info",
+  "settingsProfileFieldName": "Name",
+  "settingsProfileFieldNameHelper": "You can only change your name twice within 14 days.",
+  "settingsProfileFieldUsername": "Username",
+  "settingsProfileFieldUsernameHelper": "Pick a unique username. People can find you with @username.",
+  "settingsProfileFieldBio": "Bio",
+  "settingsProfileFieldBioHelper": "Share a short description. Keep it under 150 characters.",
+  "settingsProfileFieldWebsite": "Website",
+  "settingsProfileFieldWebsiteHelper": "Enter a valid URL people can tap from your bio.",
+  "settingsProfileInfoSyncTitle": "Profile info syncing is no longer available",
+  "settingsProfileInfoSyncDescription": "Your name and username will no longer sync across apps. Manage synced profile pictures through Connected experiences.",
+  "settingsProfileAccountTypeTitle": "Account type",
+  "settingsProfileAccountTypeSubtitle": "Choose how you use Velora",
+  "settingsProfileAccountTypePersonal": "Personal",
+  "settingsProfileAccountTypeOrganization": "Organization",
+  "settingsProfileAccountTypePersonalDescription": "Personal accounts are for individual supporters.",
+  "settingsProfileAccountTypeOrganizationDescription": "Organization accounts unlock verifications and analytics.",
+  "settingsProfileConnectedTitle": "Connected accounts",
+  "settingsProfileConnectedNotConnected": "Not connected",
+  "settingsProfileConnectedDisconnect": "Disconnect",
+  "settingsProfileConnectedConnect": "Connect",
+  "settingsProfileCrossTitle": "Cross-platform",
+  "settingsProfileCrossSubtitle": "Control how Velora syncs to other networks",
+  "settingsProfileCrossAutoShareTitle": "Auto-share posts",
+  "settingsProfileCrossAutoShareSubtitle": "Share to connected accounts",
+  "settingsProfileCrossSyncNotificationsTitle": "Sync notifications",
+  "settingsProfileCrossSyncNotificationsSubtitle": "Get notified across platforms",
+  "settingsProfileCrossFindFriendsTitle": "Find friends",
+  "settingsProfileCrossFindFriendsSubtitle": "Match people from other networks",
+  "settingsProfileEditTitle": "Edit profile",
+  "settingsProfileEditSubtitle": "Update your personal information",
+  "settingsProfileEditTabName": "Name",
+  "settingsProfileEditTabBio": "Bio & Details",
+  "settingsProfileEditUsedProfiles": "Used for 2 profiles",
+  "settingsProfileEditFirstName": "First name",
+  "settingsProfileEditMiddleName": "Middle name",
+  "settingsProfileEditLastName": "Last name",
+  "settingsProfileEditRequiredField": "Required field",
+  "settingsProfileEditApplyTo": "Apply to",
+  "settingsProfileEditApplyAllProfiles": "All profiles",
+  "settingsProfileEditApplyFacebook": "Facebook only",
+  "settingsProfileEditApplyInstagram": "Instagram only",
+  "settingsProfileEditNameChangeInfo": "If you change your name, you can't change it again for 60 days. Use your authentic name so friends know it's you.",
+  "settingsProfileEditOtherNamesTitle": "Other names",
+  "settingsProfileEditOtherNamesDescription": "Other names are always public and help people find you on Velora.",
+  "settingsProfileEditOtherNamesManage": "Manage other names",
+  "settingsProfileEditReviewSchedule": "Schedule review",
+  "settingsProfileEditReviewScheduled": "Review on {date}",
+  "@settingsProfileEditReviewScheduled": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsProfileEditReviewChange": "Review change",
+  "settingsProfileEditNameSubmitted": "Name information sent for review",
+  "settingsProfileEditIdentitySection": "Identity",
+  "settingsProfileEditContactSection": "Contact preferences",
+  "settingsProfileEditContactEveryone": "Everyone",
+  "settingsProfileEditContactFollowers": "Followers",
+  "settingsProfileEditContactNoOne": "No one",
+  "settingsProfileEditShowProfileInfo": "Show profile info on donations",
+  "settingsProfileEditDisplayFollowerCount": "Display follower count",
+  "settingsProfileEditProfileUpdated": "Profile updated",
+  "settingsProfileEditSaveChanges": "Save changes",
+  "settingsProfileEditPronounsLabel": "Pronouns",
+  "settingsProfileFieldSave": "Save",
+  "settingsProfileFieldEditFallbackTitle": "Edit field",
+  "settingsProfileFieldEditFallbackLabel": "Field",
+  "settingsSecurityPasswordSectionTitle": "Password",
+  "settingsSecurityPasswordChange": "Change password",
+  "settingsSecurityPasswordLastChanged": "Last changed 2 months ago",
+  "settingsSecurityPasswordToast": "Change password feature coming soon",
+  "settingsSecurityTwoFactorSectionTitle": "Two-factor authentication",
+  "settingsSecurityTwoFactorTitle": "Two-factor authentication",
+  "settingsSecurityTwoFactorSubtitle": "Require a security code in addition to your password",
+  "settingsSecurityTwoFactorMethods": "Authenticator app (Google Authenticator, Authy)\nSMS to +62 812-XXXX-5678",
+  "settingsSecurityBiometricSectionTitle": "Biometric security",
+  "settingsSecurityBiometricTitle": "Biometric unlock",
+  "settingsSecurityBiometricSubtitle": "Use fingerprint or face recognition",
+  "settingsSecurityLoginActivityTitle": "Login activity",
+  "settingsSecurityLoginActivityEntry": "Today at {time}",
+  "@settingsSecurityLoginActivityEntry": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsSecurityLoginActivityLocation": "Jakarta, Indonesia • Android",
+  "settingsSecuritySessionsTitle": "Active device sessions",
+  "settingsSecuritySessionsDevice1Title": "Samsung Galaxy S23",
+  "settingsSecuritySessionsDevice1Subtitle": "Jakarta, Indonesia • Active now",
+  "settingsSecuritySessionsBadgeCurrent": "Current",
+  "settingsSecuritySessionsDetails": "Details",
+  "settingsSecuritySessionsDevice2Title": "Chrome on Windows",
+  "settingsSecuritySessionsDevice2Subtitle": "Bandung, Indonesia • 2 days ago",
+  "settingsSecuritySessionsSignOut": "Sign out",
+  "settingsSecurityAlertsTitle": "Security alerts",
+  "settingsSecurityAlertsDeviceTitle": "Device alerts",
+  "settingsSecurityAlertsDeviceSubtitle": "Get notified when your account is accessed from a new device",
+  "settingsSecurityRecoveryTitle": "Account recovery",
+  "settingsSecurityRecoveryTrustedTitle": "Trusted contacts",
+  "settingsSecurityRecoveryTrustedSubtitle": "Add people who can help you recover your account",
+  "settingsSecurityRecoveryCodesTitle": "Download recovery codes",
+  "settingsSecurityRecoveryCodesSubtitle": "Save backup codes in case you lose access",
+  "settingsPrivacyTitle": "Privacy",
+  "settingsPrivacySubtitle": "Control your visibility and data",
+  "settingsPrivacyAudienceTitle": "Audience & visibility",
+  "settingsPrivacyPrivateAccountTitle": "Private account",
+  "settingsPrivacyPrivateAccountSubtitle": "Approve followers before they see your activity",
+  "settingsPrivacySearchTitle": "Appear in search",
+  "settingsPrivacySearchSubtitle": "Allow people to discover you by name or username",
+  "settingsPrivacyDirectMessagesTitle": "Direct messages",
+  "settingsPrivacyDirectMessagesAllowTitle": "Allow messages from everyone",
+  "settingsPrivacyDirectMessagesAllowSubtitle": "Messages from non-followers go to requests",
+  "settingsPrivacyDataPermissionsTitle": "Data & permissions",
+  "settingsPrivacyDownloadInfoTitle": "Download your information",
+  "settingsPrivacyDownloadInfoSubtitle": "Get a copy of your posts, donations, and messages",
+  "settingsPrivacyDeleteAccountTitle": "Delete account",
+  "settingsPrivacyDeleteAccountSubtitle": "Permanently remove your account and data",
+  "settingsPrivacyDataSharingTitle": "Data sharing",
+  "settingsPrivacyDataSharingSubtitle": "Control analytics and personalized experiences",
+  "settingsPrivacyAnalyticsTitle": "Share usage analytics",
+  "settingsPrivacyAnalyticsSubtitle": "Help us improve Velora by sharing anonymized usage",
+  "settingsPrivacyPersonalizedTitle": "Personalized experiences",
+  "settingsPrivacyPersonalizedSubtitle": "Use my activity to tailor content and ads",
+  "postCreateAppBarTitle": "Create Post",
+  "postCreateAppBarNext": "Next",
+  "postCreateTitle": "New Post",
+  "postCreatePublishTooltip": "Publish post",
+  "postCreatePublishHint": "Double tap to publish your post",
+  "postCreatePublishLabel": "Publish",
+  "postCreateMediaLabel": "Selected media preview",
+  "postCreateMediaHint": "Swipe to review your selected media",
+  "postCreateActionAddAudio": "Add audio",
+  "postCreateActionTagPeople": "Tag people",
+  "postCreateActionAddLocation": "Add location",
+  "postCreateActionAudience": "Audience",
+  "postCreateAudienceFollowers": "Followers",
+  "postCreateActionMoreOptions": "More options",
+  "postCreateActionHintAdjust": "Double tap to adjust {action}",
+  "@postCreateActionHintAdjust": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "postCreateActionHintOpen": "Double tap to {action}",
+  "@postCreateActionHintOpen": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "postCreateSelectMediaError": "Please select at least one image",
+  "postCreateUploadFailed": "Upload failed: {error}",
+  "@postCreateUploadFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "postCreateSuccess": "Post created successfully!",
+  "postCreateFailure": "Create post failed: {error}",
+  "@postCreateFailure": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "postCreateDialogTitle": "Publishing Post",
+  "postCreateDialogPreparing": "Preparing to upload...",
+  "postCreateDialogUploading": "Uploading media...",
+  "postCreateDialogCreating": "Creating post...",
+  "postCreateDialogError": "Error: {error}",
+  "@postCreateDialogError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "postCaptionHint": "Write a caption...",
+  "postMediaPreviewLabel": "Media preview carousel",
+  "postMediaPreviewHint": "Swipe left or right to preview selected media",
+  "postMediaRemoveLabel": "Remove current media",
+  "postMediaRemoveHint": "Double tap to remove media {index}",
+  "@postMediaRemoveHint": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
+  "postGalleryLoadError": "Error loading images: {error}",
+  "@postGalleryLoadError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "postGalleryImageLabel": "Gallery image",
+  "postGalleryImageHintSelected": "Selected at position {position}",
+  "@postGalleryImageHintSelected": {
+    "placeholders": {
+      "position": {
+        "type": "int"
+      }
+    }
+  },
+  "postGalleryImageHintSelect": "Double tap to select this image",
+  "postGalleryEmptyTitle": "No photos selected",
+  "postGalleryEmptySubtitle": "Tap the button below to select photos from your gallery",
+  "postGallerySelectButton": "Select photos",
+  "postToolbarLocation": "Location",
+  "postToolbarLink": "Link",
+  "postToolbarCampaign": "Campaign",
+  "postMoreOptionsTitle": "More options",
+  "postMoreOptionsHeader": "How others can interact with your post",
+  "postMoreOptionsTurnOffCommentsTitle": "Turn off commenting",
+  "postMoreOptionsTurnOffCommentsSubtitle": "You can change this later by going to the ⋯ menu at the top of your post.",
+  "postMoreOptionsHideLikeCountTitle": "Hide like count on this post",
+  "postMoreOptionsHideShareCountTitle": "Hide share count on this post",
+  "postMoreOptionsHideShareCountSubtitle": "Only you will see the total number of likes and shares on this post. You can change this later by going to the ⋯ menu at the top of your post. You can hide the number of likes and shares on posts from other accounts by going to Settings. Learn more",
+  "postMoreOptionsHideCommentCountTitle": "Hide comment count on this post",
+  "postMoreOptionsHideLikesListTitle": "Hide list of people who liked this post",
+  "postMoreOptionsHideLikesListSubtitle": "Viewers will see the like count (unless hidden) but not who liked it.",
+  "postToggleHintEnable": "Double tap to allow {action}",
+  "@postToggleHintEnable": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "postToggleHintDisable": "Double tap to disable {action}",
+  "@postToggleHintDisable": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "chatScreenTitle": "채팅",
+  "chatScreenNewChatLabel": "새 채팅 시작",
+  "chatScreenNewChatTooltip": "새 채팅",
+  "chatScreenListLabel": "채팅 목록",
+  "chatScreenListHint": "위아래로 스와이프하여 대화를 둘러보세요",
+  "chatScreenRetry": "다시 시도",
+  "chatScreenNoChats": "채팅 기록 없음",
+  "chatScreenNoChatsHint": "새 대화를 시작하면 여기에 채팅이 표시됩니다",
+  "chatScreenUnnamed": "이름 없음",
+  "chatScreenUnnamedGroup": "이름 없는 그룹",
+  "chatFilterAll": "전체",
+  "chatFilterUnread": "읽지 않음",
+  "chatFilterFavourites": "즐겨찾기",
+  "chatFilterGroups": "그룹",
+  "chatFilterSemanticsLabel": "{filter} 필터",
+  "@chatFilterSemanticsLabel": {
+    "placeholders": {
+      "filter": {
+        "type": "String"
+      }
+    }
+  },
+  "chatFilterSemanticsHint": "{filter} 기준으로 채팅을 필터링하려면 두 번 탭하세요",
+  "@chatFilterSemanticsHint": {
+    "placeholders": {
+      "filter": {
+        "type": "String"
+      }
+    }
+  },
+  "chatSearchBarLabel": "채팅 검색",
+  "chatSearchBarHint": "대화를 검색할 내용을 입력하세요",
+  "chatSearchBarPlaceholder": "Meta AI에 질문하거나 검색",
+  "chatListItemSemanticsLabel": "{name}와(과)의 채팅",
+  "@chatListItemSemanticsLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chatListItemSemanticsHint": "두 번 탭하여 대화를 엽니다",
+  "chatListItemPhotos": "{count, plural, one{{count}장의 사진} other{{count}장의 사진}}",
+  "@chatListItemPhotos": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatListItemPhoto": "사진",
+  "chatListItemMissedCall": "부재중 음성 통화",
+  "chatBubbleYourLabel": "내 메시지",
+  "chatBubbleReceivedLabel": "받은 메시지",
+  "chatBubbleHint": "{time}에 보낸 메시지",
+  "@chatBubbleHint": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "chatMediaYourLabel": "내 미디어 메시지",
+  "chatMediaReceivedLabel": "받은 미디어 메시지",
+  "chatMediaHint": "{time}에 전송된 미디어",
+  "@chatMediaHint": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "chatDateSeparatorLabel": "날짜 구분선: {date}",
+  "@chatDateSeparatorLabel": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "chatInputEmojiLabel": "이모지 선택기",
+  "chatInputEmojiHint": "두 번 탭하여 이모지 선택기 열기",
+  "chatInputEmojiTooltip": "이모지",
+  "chatInputFieldLabel": "메시지 입력란",
+  "chatInputFieldHint": "여기에 메시지를 입력하세요",
+  "chatInputFieldPlaceholder": "메시지",
+  "chatInputAttachLabel": "파일 첨부",
+  "chatInputAttachHint": "두 번 탭하여 파일을 첨부하세요",
+  "chatInputAttachTooltip": "파일 첨부",
+  "chatInputCameraLabel": "카메라",
+  "chatInputCameraHint": "두 번 탭하여 카메라 열기",
+  "chatInputCameraTooltip": "카메라",
+  "chatInputSendLabel": "메시지 보내기",
+  "chatInputSendHint": "두 번 탭하여 메시지를 보냅니다",
+  "chatInputVoiceLabel": "음성 메시지",
+  "chatInputVoiceHint": "두 번 탭하여 음성 메시지를 녹음",
+  "chatAttachmentGallery": "갤러리",
+  "chatAttachmentCamera": "카메라",
+  "chatAttachmentLocation": "위치",
+  "chatAttachmentContact": "연락처",
+  "chatAttachmentDocument": "문서",
+  "chatAttachmentAudio": "오디오",
+  "chatAttachmentPoll": "투표",
+  "chatAttachmentEvent": "이벤트",
+  "chatAttachmentAiImages": "AI 이미지",
+  "chatAttachmentSelectHint": "{label}을(를) 선택하려면 두 번 탭하세요",
+  "@chatAttachmentSelectHint": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "chatDetailBackLabel": "뒤로 가기",
+  "chatDetailTitleLabel": "{name}과의 대화",
+  "@chatDetailTitleLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chatDetailGroupSubtitle": "탭하여 그룹 정보를 확인하세요",
+  "chatDetailSelfSubtitle": "나에게 메시지 보내기",
+  "chatDetailOptionsLabel": "대화 옵션",
+  "chatDetailMenuTooltip": "추가 옵션",
+  "chatDetailHistoryLabel": "대화 기록",
+  "chatDetailHistoryHint": "위로 스와이프하여 이전 메시지를 확인하세요",
+  "chatDetailNoMessages": "아직 메시지가 없습니다",
+  "chatDetailNoMessagesHint": "메시지를 보내 대화를 시작하세요",
+  "chatDetailMessageDeleted": "이 메시지는 삭제되었습니다",
+  "chatDetailSelectMediaTitle": "미디어 유형 선택",
+  "chatDetailSelectImages": "이미지",
+  "chatDetailSelectVideo": "동영상",
+  "chatDetailImagesSelected": "{count, plural, one{{count}개의 이미지 선택됨} other{{count}개의 이미지 선택됨}}",
+  "@chatDetailImagesSelected": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatDetailVideoSelected": "동영상이 선택되었습니다",
+  "chatDetailPickMediaError": "미디어를 선택하지 못했습니다",
+  "chatDetailCameraModeTitle": "카메라 모드 선택",
+  "chatDetailCameraTakePhoto": "사진 촬영",
+  "chatDetailCameraRecordVideo": "동영상 녹화",
+  "chatDetailPhotoCaptured": "사진을 촬영했습니다",
+  "chatDetailVideoRecorded": "동영상을 녹화했습니다",
+  "chatDetailPollCreated": "투표가 생성되었습니다",
+  "chatDetailEventCreated": "이벤트가 생성되었습니다",
+  "chatDetailDocumentsSelected": "{count, plural, one{{count}개의 문서 선택됨} other{{count}개의 문서 선택됨}}",
+  "@chatDetailDocumentsSelected": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatDetailDocumentError": "문서를 선택하지 못했습니다",
+  "chatDetailAudioSelected": "오디오 파일이 선택되었습니다",
+  "chatDetailAudioError": "오디오를 선택하지 못했습니다",
+  "chatDetailLocationSelected": "위치가 선택되었습니다",
+  "chatDetailContactSelected": "연락처가 선택되었습니다",
+  "chatDetailAiImagesSelected": "AI 이미지가 선택되었습니다",
+  "chatDetailVoiceMessage": "음성 메시지",
+  "chatDetailStatusOnline": "온라인 상태",
+  "chatSearchScreenTitle": "검색",
+  "chatSearchScreenRecent": "최근 검색",
+  "chatSearchScreenClearAll": "모두 지우기",
+  "chatSearchGlobalLabel": "전체 검색",
+  "chatSearchGlobalHint": "캠페인, 게시물, 사람 전체를 검색하세요",
+  "chatSearchPlaceholder": "검색…",
+  "chatSearchScopeCampaigns": "캠페인",
+  "chatSearchScopePosts": "게시물",
+  "chatSearchScopePeople": "사람",
+  "chatSearchScopeSemantics": "{scope} 범위",
+  "@chatSearchScopeSemantics": {
+    "placeholders": {
+      "scope": {
+        "type": "String"
+      }
+    }
+  },
+  "chatSearchRecentItemLabel": "최근 검색: {query}",
+  "@chatSearchRecentItemLabel": {
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
+  },
+  "chatSearchRecentItemHint": "두 번 탭하여 다시 검색",
+  "chatSearchRecentDeleteLabel": "최근 검색 삭제",
+  "chatSearchRecentDeleteTooltip": "제거",
+  "chatPollLabel": "투표",
+  "chatPollSemanticsYour": "내 투표",
+  "chatPollSemanticsReceived": "받은 투표",
+  "chatPollSemanticsHint": "{count}표가 있는 투표",
+  "@chatPollSemanticsHint": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatPollTotalVotes": "{count, plural, one{{count}표} other{{count}표}}",
+  "@chatPollTotalVotes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatPollOptionSemantics": "{option}, {votes}표, {percent}%",
+  "@chatPollOptionSemantics": {
+    "placeholders": {
+      "option": {
+        "type": "String"
+      },
+      "votes": {
+        "type": "int"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "chatPollVoteHint": "두 번 탭하여 이 옵션에 투표",
+  "chatPollDialogTitle": "투표 만들기",
+  "chatPollDialogQuestionLabel": "투표 질문",
+  "chatPollDialogQuestionHint": "질문을 입력하세요…",
+  "chatPollDialogOptionsLabel": "옵션",
+  "chatPollDialogOptionLabel": "옵션 {index}",
+  "@chatPollDialogOptionLabel": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
+  "chatPollDialogOptionHint": "옵션을 입력하세요…",
+  "chatPollDialogAddOption": "옵션 추가",
+  "chatPollDialogQuestionError": "질문을 입력해 주세요",
+  "chatPollDialogOptionsError": "최소 2개의 옵션을 추가해 주세요",
+  "chatPollDialogSend": "투표 보내기",
+  "chatEventLabel": "이벤트",
+  "chatEventSemanticsYour": "내 이벤트",
+  "chatEventSemanticsReceived": "받은 이벤트",
+  "chatEventHint": "{date}의 이벤트",
+  "@chatEventHint": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "chatEventDialogTitle": "이벤트 만들기",
+  "chatEventDialogTitleLabel": "이벤트 제목",
+  "chatEventDialogTitleHint": "이벤트 제목을 입력하세요…",
+  "chatEventDialogDescriptionLabel": "설명",
+  "chatEventDialogDescriptionHint": "이벤트 설명을 입력하세요…",
+  "chatEventDialogLocationLabel": "위치(선택 사항)",
+  "chatEventDialogLocationHint": "위치를 입력하세요…",
+  "chatEventDialogStartLabel": "시작",
+  "chatEventDialogEndLabel": "종료",
+  "chatEventDialogTitleError": "이벤트 제목을 입력해 주세요",
+  "chatEventDialogEndTimeError": "종료 시간은 시작 시간 이후여야 합니다",
+  "chatEventDialogSend": "이벤트 보내기",
+  "chatEventResponseTitle": "내 응답",
+  "chatEventResponseGoing": "참석",
+  "chatEventResponseMaybe": "미정",
+  "chatEventResponseNo": "불참",
+  "chatEventResponseSummary": "{going}명 참석 • {maybe}명 미정 • {notGoing}명 불참",
+  "@chatEventResponseSummary": {
+    "placeholders": {
+      "going": {
+        "type": "int"
+      },
+      "maybe": {
+        "type": "int"
+      },
+      "notGoing": {
+        "type": "int"
+      }
+    }
+  },
+  "chatEventResponseButtonLabel": "{label} 응답",
+  "@chatEventResponseButtonLabel": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "chatEventResponseButtonHint": "두 번 탭하여 {label} 응답을 선택",
+  "@chatEventResponseButtonHint": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAppearanceLanguageTitle": "언어",
+  "settingsAppearanceLanguagePreviewSemantics": "현재 언어 미리보기",
+  "settingsAppearanceLanguageCurrentLabel": "현재 언어",
+  "settingsAppearanceLanguageSearchHint": "언어를 검색하세요…",
+  "settingsAppearanceLanguageEmpty": "일치하는 언어가 없습니다",
+  "settingsAppearanceLanguageToast": "언어가 {language}(으)로 변경되었습니다",
+  "@settingsAppearanceLanguageToast": {
+    "placeholders": {
+      "language": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAppearanceLanguageRestartNote": "언어 변경을 적용하려면 앱이 다시 시작됩니다.",
+  "settingsAppearanceThemeTitle": "테마 및 화면",
+  "settingsAppearanceThemeModeSection": "테마 모드",
+  "settingsAppearanceThemeModeLight": "라이트",
+  "settingsAppearanceThemeModeDark": "다크",
+  "settingsAppearanceThemeModeAuto": "자동",
+  "settingsAppearanceThemeModeDescription": "시스템 모드는 기기 설정에 따라 자동으로 전환됩니다.",
+  "settingsAppearanceThemeColorSection": "색상",
+  "settingsAppearanceThemeColorDynamic": "동적 색상",
+  "settingsAppearanceThemeShapeSection": "모양",
+  "settingsAppearanceThemeShapeCorner": "모서리 반경",
+  "settingsAppearanceThemeShapeCornerValue": "{px} px",
+  "@settingsAppearanceThemeShapeCornerValue": {
+    "placeholders": {
+      "px": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsAppearanceThemeShapeSquare": "각진",
+  "settingsAppearanceThemeShapeSmall": "작게",
+  "settingsAppearanceThemeShapeMedium": "중간",
+  "settingsAppearanceThemeShapeLarge": "크게",
+  "settingsAppearanceThemeShapeMax": "최대",
+  "settingsAppearanceThemeAdvancedSection": "고급 설정",
+  "settingsAppearanceThemeAccentTitle": "강조 색상",
+  "settingsAppearanceThemeAccentSubtitle": "하이라이트 색상 사용자 지정",
+  "settingsAppearanceThemeAccentToast": "곧 색상 선택기가 추가됩니다",
+  "settingsAppearanceThemeTypographyTitle": "타이포그래피",
+  "settingsAppearanceThemeTypographySubtitle": "글꼴과 크기",
+  "settingsAppearanceThemeTypographyToast": "타이포그래피 설정이 곧 제공됩니다",
+  "settingsAppearanceThemeAnimationsTitle": "애니메이션",
+  "settingsAppearanceThemeAnimationsSubtitle": "전환 효과와 모션",
+  "settingsAppearanceThemeAnimationsToast": "애니메이션 설정이 곧 제공됩니다",
+  "settingsAppearanceThemePreviewTitle": "실시간 미리보기",
+  "settingsAppearanceThemePreviewSampleCard": "샘플 카드",
+  "settingsAppearanceThemeModeLabel": "{mode} 모드",
+  "@settingsAppearanceThemeModeLabel": {
+    "placeholders": {
+      "mode": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAppearanceNotificationsTitle": "알림",
+  "settingsAppearanceNotificationsQuick": "빠른 제어",
+  "settingsAppearanceNotificationsPauseAllTitle": "모든 알림 일시중단",
+  "settingsAppearanceNotificationsPauseAllSubtitle": "모든 알림을 잠시 중지",
+  "settingsAppearanceNotificationsSleepModeTitle": "수면 모드",
+  "settingsAppearanceNotificationsSleepModeSubtitle": "해당 시간 동안 알림 음소거",
+  "settingsAppearanceNotificationsPostsSection": "게시물 및 스토리",
+  "settingsAppearanceNotificationsPostsPeople": "팔로우 중인 사람의 게시물",
+  "settingsAppearanceNotificationsPostsLive": "라이브 영상",
+  "settingsAppearanceNotificationsPostsLiveSubtitle": "누군가 라이브 방송을 시작하면",
+  "settingsAppearanceNotificationsPostsCampaigns": "새 캠페인",
+  "settingsAppearanceNotificationsPostsCampaignsSubtitle": "팔로우 중인 크리에이터 소식",
+  "settingsAppearanceNotificationsEngagementSection": "참여",
+  "settingsAppearanceNotificationsEngagementLikes": "내 게시물의 좋아요",
+  "settingsAppearanceNotificationsEngagementReplies": "댓글 답글",
+  "settingsAppearanceNotificationsEngagementMentions": "멘션",
+  "settingsAppearanceNotificationsEngagementMentionsSubtitle": "누군가 나를 태그할 때",
+  "settingsAppearanceNotificationsEngagementFollowers": "새 팔로워",
+  "settingsAppearanceNotificationsDonationsSection": "기부 및 캠페인",
+  "settingsAppearanceNotificationsDonationsReceivedTitle": "기부금 수신",
+  "settingsAppearanceNotificationsDonationsReceivedSubtitle": "누군가 내 캠페인에 기부할 때",
+  "settingsAppearanceNotificationsDonationsMilestonesTitle": "캠페인 마일스톤",
+  "settingsAppearanceNotificationsDonationsMilestonesSubtitle": "25%, 50%, 75%, 100% 달성",
+  "settingsAppearanceNotificationsDonationsUpdatesTitle": "캠페인 업데이트",
+  "settingsAppearanceNotificationsDonationsUpdatesSubtitle": "내가 기부한 캠페인 소식",
+  "settingsAppearanceNotificationsDonationsWithdrawTitle": "출금 상태",
+  "settingsAppearanceNotificationsDonationsWithdrawSubtitle": "처리 중, 완료 또는 실패",
+  "settingsAppearanceNotificationsMessagesSection": "메시지",
+  "settingsAppearanceNotificationsMessagesDirect": "다이렉트 메시지",
+  "settingsAppearanceNotificationsMessagesRequests": "메시지 요청",
+  "settingsAppearanceNotificationsMessagesRequestsSubtitle": "팔로우하지 않는 사람으로부터",
+  "settingsAppearanceNotificationsMessagesGroups": "그룹 초대",
+  "settingsAppearanceNotificationsSummaryTitle": "알림 요약",
+  "settingsAppearanceNotificationsSummarySubtitle": "실시간 알림 대신 일·주간 요약 받기",
+  "settingsAppearanceNotificationsSummaryOff": "끔",
+  "settingsAppearanceNotificationsSummaryDaily": "매일",
+  "settingsAppearanceNotificationsSummaryWeekly": "매주",
+  "settingsAppearanceNotificationsOtherSection": "기타 채널",
+  "settingsAppearanceNotificationsOtherEmailTitle": "이메일 알림",
+  "settingsAppearanceNotificationsOtherEmailSubtitle": "주간 요약 및 중요 업데이트",
+  "settingsAppearanceNotificationsOtherSmsTitle": "SMS 알림",
+  "settingsAppearanceNotificationsOtherSmsSubtitle": "중요 경고만",
+  "settingsAppearanceAccessibilityTitle": "접근성",
+  "settingsAppearanceAccessibilitySubtitle": "타이포그래피와 레이아웃 조정",
+  "settingsAppearanceAccessibilityTabText": "텍스트",
+  "settingsAppearanceAccessibilityTabAppearance": "모양",
+  "settingsAppearanceAccessibilityTabLayout": "레이아웃",
+  "settingsAppearanceAccessibilityFontSizeTitle": "글자 크기",
+  "settingsAppearanceAccessibilityFontSizeSubtitle": "미리보기는 Velora 전반에 실시간 적용됩니다",
+  "settingsAppearanceAccessibilityFontSizeLabel": "{points} pt",
+  "@settingsAppearanceAccessibilityFontSizeLabel": {
+    "placeholders": {
+      "points": {
+        "type": "double"
+      }
+    }
+  },
+  "settingsAppearanceAccessibilityFontSample": "{points} pt 예시 텍스트",
+  "@settingsAppearanceAccessibilityFontSample": {
+    "placeholders": {
+      "points": {
+        "type": "double"
+      }
+    }
+  },
+  "settingsAppearanceAccessibilityFontFamilyTitle": "글꼴",
+  "settingsAppearanceAccessibilityTextAlignmentTitle": "텍스트 정렬",
+  "settingsAppearanceAccessibilityPreviewTitle": "미리보기",
+  "settingsAppearanceAccessibilityPreviewBody": "Velora는 모두가 행동할 공간을 제공해 도시를 더 인간답게 만듭니다.",
+  "settingsAppearanceAccessibilityAppearanceHighContrastTitle": "고대비 모드",
+  "settingsAppearanceAccessibilityAppearanceHighContrastSubtitle": "텍스트와 아이콘을 더 선명하게",
+  "settingsAppearanceAccessibilityAppearanceHighContrastToggle": "고대비 UI 사용",
+  "settingsAppearanceAccessibilityAppearanceReduceTitle": "동작 줄이기",
+  "settingsAppearanceAccessibilityAppearanceReduceSubtitle": "패럴랙스와 큰 전환 효과 제한",
+  "settingsAppearanceAccessibilityAppearanceReduceToggle": "애니메이션 최소화",
+  "settingsAppearanceAccessibilityLayoutLineSpacing": "줄 간격",
+  "settingsAppearanceAccessibilityLayoutPreviewBody": "Velora는 모두가 행동할 공간을 제공해 도시를 더 인간답게 만듭니다.\n스토리, 모금, 현장 리포트가 여기에 표시됩니다.",
+  "settingsAccountStatusTitle": "계정 상태",
+  "settingsAccountStatusSubtitle": "계정 건강과 인증",
+  "settingsAccountStatusInfoTitle": "계정 정보",
+  "settingsAccountStatusStandingTitle": "양호한 계정 상태",
+  "settingsAccountStatusStandingSubtitle": "제한 사항이 없습니다",
+  "settingsAccountStatusEmailTitle": "이메일 인증 완료",
+  "settingsAccountStatusPhoneTitle": "전화번호 인증 완료",
+  "settingsAccountStatusMetricsTitle": "계정 지표",
+  "settingsAccountStatusMemberSinceTitle": "가입일",
+  "settingsAccountStatusDonationsTitle": "총 기부금",
+  "settingsAccountStatusCampaignsTitle": "생성한 캠페인",
+  "settingsAccountActivityTitle": "내 활동",
+  "settingsAccountActivitySubtitle": "상호작용과 기록을 살펴보세요",
+  "settingsAccountActivityTabLikes": "좋아요",
+  "settingsAccountActivityTabComments": "댓글",
+  "settingsAccountActivityTabDonations": "기부",
+  "settingsAccountActivityTabArchive": "보관함",
+  "settingsAccountActivityTabDeleted": "삭제됨",
+  "settingsAccountActivityRecentLikes": "최근 좋아요",
+  "settingsAccountActivityRecentComments": "최근 댓글",
+  "settingsAccountActivityArchived": "보관됨",
+  "settingsAccountActivityRestoreButton": "복원",
+  "settingsAccountActivityDeletedEmptyTitle": "삭제된 항목이 없습니다",
+  "settingsAccountActivityDeletedEmptySubtitle": "삭제한 항목은 영구 삭제 전 30일 동안 여기에 표시됩니다.",
+  "settingsAccountDonationsTitle": "나의 기부",
+  "settingsAccountDonationsSubtitle": "기부 내역과 영향",
+  "settingsAccountDonationsImpactTitle": "영향 개요",
+  "settingsAccountDonationsTotalLabel": "총 기부",
+  "settingsAccountDonationsCampaignsLabel": "캠페인",
+  "settingsAccountDonationsThisMonthLabel": "이번 달",
+  "settingsAccountDonationsRecurringLabel": "정기 기부",
+  "settingsAccountDonationsRecurringValue": "{count}건 진행 중",
+  "@settingsAccountDonationsRecurringValue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsAccountDonationsMatchedLabel": "매칭",
+  "settingsAccountDonationsFilterAll": "전체",
+  "settingsAccountDonationsFilterRecurring": "정기",
+  "settingsAccountDonationsFilterMatched": "매칭",
+  "settingsAccountDonationsExportButton": "모든 영수증 내보내기",
+  "settingsAccountDonationsExportingToast": "기부 내역을 내보내는 중입니다…",
+  "settingsAccountDonationsStatusRecurring": "정기",
+  "settingsAccountDonationsStatusMatched": "매칭",
+  "settingsAccountDonationsEmptyTitle": "아직 기부 내역이 없습니다",
+  "settingsAccountDonationsEmptySubtitle": "의미 있는 캠페인을 지원해 변화를 만들어 보세요.",
+  "settingsAccountDonationsEmptyButton": "캠페인 살펴보기",
+  "settingsHelpCenterTitle": "헬프 센터",
+  "settingsHelpCenterSubtitle": "지원 및 안전 리소스",
+  "settingsHelpPrioritySemantics": "우선 지원 강조",
+  "settingsHelpPriorityTitle": "우선 지원",
+  "settingsHelpPrioritySubtitle": "검증된 캠페이너는 보통 2시간 이내에 답변을 받습니다.",
+  "settingsHelpSupportOptionsTitle": "지원 옵션",
+  "settingsHelpFaqTileTitle": "자주 묻는 질문",
+  "settingsHelpFaqTileSubtitle": "맞춤형 즉시 답변",
+  "settingsHelpEmailTitle": "이메일 지원",
+  "settingsHelpEmailSubtitle": "support@velora.app",
+  "settingsHelpReportTitle": "문제 신고",
+  "settingsHelpReportSubtitle": "버그, 악용, 괴롭힘",
+  "settingsHelpGuidesTitle": "가이드",
+  "settingsHelpCommunityGuidelinesTitle": "커뮤니티 가이드라인",
+  "settingsHelpCommunityGuidelinesSubtitle": "2025년 2월 업데이트",
+  "settingsHelpSecurityChecklistTitle": "보안 체크리스트",
+  "settingsHelpSecurityChecklistSubtitle": "계정을 더 안전하게 지키세요",
+  "settingsHelpReportSheetTitle": "문제 신고",
+  "settingsHelpReportHint": "무슨 일이 있었는지 설명하세요…",
+  "settingsHelpReportThanks": "제보해 주셔서 감사합니다",
+  "settingsHelpReportSendButton": "보내기",
+  "settingsHelpFaqTitle": "FAQ",
+  "settingsHelpFaqSubtitle": "인기 도움말 주제",
+  "settingsHelpFaqQuestion1": "Velora는 캠페인을 어떻게 검증하나요?",
+  "settingsHelpFaqAnswer1": "모든 캠페인은 수혜자 확인, 신분증, 투명성 마일스톤을 포함한 신뢰 체크리스트를 통과해야 합니다.",
+  "settingsHelpFaqQuestion2": "기부 금액을 숨길 수 있나요?",
+  "settingsHelpFaqAnswer2": "가능합니다. 기부 시 \"익명 금액\" 옵션을 선택하면 아바타만 표시됩니다.",
+  "settingsHelpFaqQuestion3": "계정 접근을 잃으면 어떻게 하나요?",
+  "settingsHelpFaqAnswer3": "비밀번호 및 보안 메뉴의 복구 키트를 사용하고, 신뢰할 수 있는 연락처에게 미리 승인을 맡길 수 있습니다.",
+  "settingsHelpFaqQuestion4": "알림은 어떻게 관리하나요?",
+  "settingsHelpFaqAnswer4": "알림 설정으로 이동해 캠페인 유형별 푸시, 이메일, SMS를 구성하세요.",
+  "settingsHelpAboutTitle": "Velora 소개",
+  "settingsHelpAboutSemantics": "Velora 브랜드 요약",
+  "settingsHelpAboutBrandName": "Velora",
+  "settingsHelpAboutTagline": "나눔을 실천하게 하다",
+  "settingsHelpAboutVersion": "버전 1.0.0 (빌드 1)",
+  "settingsHelpAboutWhyTitle": "Velora를 선택하는 이유",
+  "settingsHelpAboutWhyDescription": "Velora는 너그러운 사람들과 의미 있는 목적을 연결하는 사회적 임팩트 플랫폼입니다. 함께 세상을 더 따뜻하게 만듭니다.",
+  "settingsHelpAboutStatCampaigns": "100만+ 캠페인",
+  "settingsHelpAboutStatSupporters": "500만+ 후원자",
+  "settingsHelpAboutStatTrust": "신뢰 우선",
+  "settingsHelpAboutConnectTitle": "우리를 만나보세요",
+  "settingsHelpAboutSocialWebsite": "웹사이트",
+  "settingsHelpAboutSocialInstagram": "인스타그램",
+  "settingsHelpAboutSocialThreads": "Threads",
+  "settingsHelpAboutSocialFacebook": "페이스북",
+  "settingsHelpAboutLegalTitle": "법률",
+  "settingsHelpAboutDevTitle": "개발 팀",
+  "settingsHelpAboutDevOrgSubtitle": "프로덕트, 디자인, 엔지니어링",
+  "settingsHelpAboutDevFounderSubtitle": "창립자 & 리드 개발자",
+  "settingsHelpAboutContactTitle": "문의 및 지원",
+  "settingsHelpAboutLiveChatTitle": "라이브 채팅",
+  "settingsHelpAboutLiveChatSubtitle": "오전 9시–오후 6시 운영",
+  "settingsHelpAboutReportBugTitle": "버그 신고",
+  "settingsHelpAboutReportBugSubtitle": "Velora 개선을 도와주세요",
+  "settingsHelpAboutSuggestFeatureTitle": "기능 제안",
+  "settingsHelpAboutSuggestFeatureSubtitle": "제품 아이디어를 공유하세요",
+  "settingsHelpAboutPrivacy": "개인정보 처리방침",
+  "settingsHelpAboutTerms": "서비스 약관",
+  "settingsHelpAboutCookie": "쿠키 정책",
+  "settingsHelpAboutLicenses": "오픈 소스 라이선스",
+  "settingsHelpAboutEnjoyTitle": "Velora가 마음에 드시나요?",
+  "settingsHelpAboutEnjoySubtitle": "평가를 남겨 더 많은 사람이 Velora를 발견하도록 도와주세요.",
+  "settingsHelpAboutRateButton": "Velora 평가하기",
+  "settingsHelpAboutAcknowledgementsTitle": "감사의 말",
+  "settingsHelpAboutAcknowledgementsThanks": "Velora를 완성해 준 기여자, 베타 테스터, Flutter 커뮤니티에 감사드립니다.",
+  "settingsHelpAboutAcknowledgementFlutter": "Flutter",
+  "settingsHelpAboutAcknowledgementDart": "Dart",
+  "settingsHelpAboutAcknowledgementFirebase": "Firebase",
+  "settingsHelpAboutAcknowledgementSupabase": "Supabase",
+  "settingsHelpAboutAcknowledgementMaterial": "Material Design",
+  "settingsHelpAboutFooterCopyright": "© 2025 VitoTechLab. All rights reserved.",
+  "settingsHelpAboutFooterMadeWith": "더 나은 세상을 위해 ❤️와 함께 만들었습니다"
+}

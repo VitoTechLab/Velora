@@ -1,0 +1,1120 @@
+{
+  "@@locale": "id",
+  "appTitle": "Velora",
+  "authSignInFormLabel": "Form masuk",
+  "authLogoLabel": "Logo Velora",
+  "authWelcomeBackTitle": "Selamat datang kembali",
+  "authSignInSubtitle": "Masuk untuk melanjutkan",
+  "fieldEmailLabel": "Email",
+  "fieldEmailHint": "email@anda.com",
+  "fieldPasswordLabel": "Kata sandi",
+  "authForgotPassword": "Lupa kata sandi?",
+  "authForgotPasswordHint": "Lupa kata sandi. Masuk ke layar atur ulang kata sandi",
+  "authSignInButton": "Masuk",
+  "authDividerText": "atau lanjutkan dengan",
+  "authContinueWith": "Lanjutkan dengan {brand}",
+  "@authContinueWith": {
+    "placeholders": {
+      "brand": {
+        "type": "String"
+      }
+    }
+  },
+  "authNoAccount": "Belum punya akun?",
+  "authSignUpLink": "Daftar",
+  "authAgreeTermsError": "Setujui Ketentuan & Kebijakan Privasi terlebih dahulu",
+  "authGoogleUnavailable": "Masuk Google belum tersedia.",
+  "authSignUpFormLabel": "Form buat akun",
+  "authCreateAccountTitle": "Buat akun",
+  "authJoinCommunitySubtitle": "Bergabung dengan komunitas Velora",
+  "authAgreeTermsLabel": "Setuju dengan Ketentuan Layanan dan Kebijakan Privasi",
+  "authAgreeTermsPrefix": "Saya setuju dengan ",
+  "authTermsOfService": "Ketentuan Layanan",
+  "authAnd": " dan ",
+  "authPrivacyPolicy": "Kebijakan Privasi",
+  "authCreateAccountButton": "Buat Akun",
+  "authAlreadyHaveAccount": "Sudah punya akun?",
+  "authSignInLink": "Masuk",
+  "commonGoBack": "Kembali",
+  "commonCancel": "Batal",
+  "authResetPasswordFormLabel": "Form atur ulang kata sandi",
+  "authEmailIllustrationLabel": "Ilustrasi email",
+  "authResetPasswordTitle": "Atur ulang kata sandi",
+  "authResetPasswordSubtitle": "Masukkan email terdaftar dan kami akan mengirim tautan untuk mengatur ulang kata sandi.",
+  "authSendResetLink": "Kirim tautan reset",
+  "authRememberPasswordLabel": "Ingat kata sandi? Kembali ke halaman masuk",
+  "authRememberPasswordAction": "Ingat kata sandi? Masuk",
+  "authResetEmailSentLabel": "Email reset terkirim",
+  "authCheckEmailTitle": "Periksa email Anda",
+  "authBackToSignIn": "Kembali ke Masuk",
+  "authEmailVerificationLabel": "Instruksi verifikasi email",
+  "authAnimatedEmailLabel": "Ilustrasi email animasi",
+  "authVerificationInstructions": "Kami sudah mengirim tautan verifikasi. Periksa kotak masuk dan klik tautannya untuk memverifikasi akun Anda.",
+  "authVerifiedCta": "Saya sudah verifikasi email",
+  "authResendVerificationLabel": "Kirim ulang email verifikasi",
+  "authVerificationEmailResent": "Email verifikasi dikirim ulang",
+  "authWrongEmail": "Email salah? Keluar",
+  "authSignOutHint": "Keluar dan kembali ke halaman masuk",
+  "authPasswordStrengthWeak": "Lemah",
+  "authPasswordStrengthStrong": "Kuat",
+  "authPasswordStrengthMedium": "Sedang",
+  "authPasswordStrengthFair": "Cukup",
+  "authPasswordShow": "Tampilkan kata sandi",
+  "authPasswordHide": "Sembunyikan kata sandi",
+  "authPasswordRequirementsTitle": "Kata sandi harus berisi:",
+  "authPasswordRequirementLength": "Minimal 8 karakter",
+  "authPasswordRequirementCase": "Huruf besar & huruf kecil",
+  "authPasswordRequirementNumber": "Minimal satu angka",
+  "authPasswordRequirementSpecial": "Karakter spesial (!@#$%^&*)",
+  "feedTitle": "Beranda",
+  "feedCreatePostTooltip": "Buat postingan",
+  "feedNotificationsTooltip": "Notifikasi",
+  "feedErrorLoading": "Gagal memuat feed",
+  "feedEmptyMessage": "Belum ada postingan",
+  "feedEmptySubtitle": "Tarik untuk menyegarkan atau coba lagi nanti",
+  "feedEmptyHint": "{subtitle}. Ketuk dua kali tombol segarkan.",
+  "@feedEmptyHint": {
+    "placeholders": {
+      "subtitle": {
+        "type": "String"
+      }
+    }
+  },
+  "feedRefreshButtonSemantic": "Segarkan feed",
+  "feedRefreshButton": "Segarkan",
+  "feedLoadingLabel": "Sedang memuat feed",
+  "feedCommentsTitle": "Komentar",
+  "feedReplyingTo": "Membalas {name}",
+  "@feedReplyingTo": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "feedWriteCommentHint": "Tulis komentar...",
+  "feedAddCommentHint": "Tambahkan komentar untuk {name}",
+  "@feedAddCommentHint": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "feedNoCommentsTitle": "Belum ada komentar",
+  "feedNoCommentsSubtitle": "Jadilah yang pertama berkomentar!",
+  "feedReplyAction": "Balas",
+  "feedDeleteAction": "Hapus",
+  "feedSeeTranslation": "Lihat terjemahan",
+  "feedViewReplies": "Lihat {count, plural, one{{count} balasan} other{{count} balasan}}",
+  "@feedViewReplies": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "feedUnknownUser": "Pengguna tidak dikenal",
+  "feedPostSummaryFallback": "postingan",
+  "feedPostSemantics": "{author} memposting {summary} {time}",
+  "@feedPostSemantics": {
+    "placeholders": {
+      "author": {
+        "type": "String"
+      },
+      "summary": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "feedOpenPostHint": "Ketuk dua kali untuk membuka detail postingan",
+  "feedPostImageLabel": "Gambar postingan",
+  "feedPostImagePositionLabel": "Gambar {index} dari {total}",
+  "@feedPostImagePositionLabel": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "feedCampaignFallback": "Kampanye",
+  "feedOpenCampaignLabel": "Buka kampanye {title}",
+  "@feedOpenCampaignLabel": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "feedLikeLabel": "Sukai postingan",
+  "feedUnlikeLabel": "Batalkan suka postingan",
+  "feedLikeHint": "Ketuk dua kali untuk menyukai postingan ini",
+  "feedUnlikeHint": "Ketuk dua kali untuk menghapus suka Anda",
+  "feedViewCommentsLabel": "Lihat komentar",
+  "feedViewCommentsHint": "Ketuk dua kali untuk membuka komentar",
+  "feedShareComingSoon": "Fitur berbagi segera hadir",
+  "feedShareLabel": "Bagikan postingan",
+  "feedShareHint": "Ketuk dua kali untuk berbagi",
+  "feedRemoveBookmarkLabel": "Hapus penanda",
+  "feedAddBookmarkLabel": "Tandai postingan ini",
+  "timeAgoNow": "baru saja",
+  "timeAgoMinutes": "{count}mnt",
+  "@timeAgoMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeAgoHours": "{count}j",
+  "@timeAgoHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeAgoDays": "{count}hr",
+  "@timeAgoDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeAgoMonths": "{count}bln",
+  "@timeAgoMonths": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeAgoYears": "{count}thn",
+  "@timeAgoYears": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "countThousands": "{value}rb",
+  "@countThousands": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "countMillions": "{value}jt",
+  "@countMillions": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAccountsCenterTitle": "Pusat Akun",
+  "settingsAccountsCenterSubtitle": "Kelola pengalaman terhubung, identitas, dan privasi",
+  "settingsSearchTooltip": "Cari pengaturan",
+  "settingsConnectedTitle": "Pengalaman terhubung",
+  "settingsConnectedSubtitle": "Kendalikan cara identitas Velora Anda bekerja di berbagai platform.",
+  "settingsTileProfilesTitle": "Profil",
+  "settingsTileProfilesSubtitle": "Vito • Velora, Forum, Community",
+  "settingsTileSharingTitle": "Berbagi antar profil",
+  "settingsTileSharingSubtitle": "Pilih apa saja yang tersinkron otomatis",
+  "settingsTileLoggingTitle": "Masuk dengan akun",
+  "settingsTileLoggingSubtitle": "Tinjau perangkat dan persetujuan login",
+  "settingsAccountTitle": "Pengaturan akun",
+  "settingsTilePasswordSecurityTitle": "Kata sandi dan keamanan",
+  "settingsTilePasswordSecuritySubtitle": "2FA, perangkat tepercaya, peringatan keamanan",
+  "settingsTilePersonalDetailsTitle": "Detail pribadi",
+  "settingsTilePersonalDetailsSubtitle": "Nama, nama pengguna, tautan profil",
+  "settingsTileInfoPermissionsTitle": "Info & perizinan Anda",
+  "settingsTileInfoPermissionsSubtitle": "Unduh data, izin, audiens",
+  "settingsTileAdPreferencesTitle": "Preferensi iklan",
+  "settingsTileAdPreferencesSubtitle": "Topik yang lebih sering Anda lihat",
+  "settingsTileVeloraPayTitle": "Velora Pay",
+  "settingsTileVeloraPaySubtitle": "Metode pembayaran dan perlindungan",
+  "settingsPersonalizationTitle": "Personalisasi",
+  "settingsTileNotificationsTitle": "Notifikasi",
+  "settingsTileNotificationsSubtitle": "Preferensi push, email, dan SMS",
+  "settingsTileThemeTitle": "Tema",
+  "settingsTileThemeSubtitle": "Tampilan aplikasi, mode gelap, kontras",
+  "settingsTileLanguageTitle": "Bahasa",
+  "settingsTileLanguageSubtitle": "Pilih bahasa yang digunakan Velora",
+  "settingsTileAccessibilityTitle": "Aksesibilitas",
+  "settingsTileAccessibilitySubtitle": "Huruf, kontras, teks video",
+  "settingsHelpTitle": "Bantuan & sumber daya",
+  "settingsTileHelpCenterTitle": "Pusat bantuan",
+  "settingsTileHelpCenterSubtitle": "Panduan, tutorial, dan jawaban cepat",
+  "settingsTileFaqTitle": "FAQ",
+  "settingsTileFaqSubtitle": "Topik paling sering ditanyakan",
+  "settingsTileAboutTitle": "Tentang Velora",
+  "settingsTileAboutSubtitle": "Versi, lisensi, dan apresiasi",
+  "settingsHeroSemanticsLabel": "Ringkasan profil Meta ID dan status keamanan",
+  "settingsHeroMetaId": "Meta ID",
+  "settingsHeroLearnMore": "Pelajari lebih lanjut",
+  "settingsHeroNetworks": "Facebook • Instagram • Velora",
+  "settingsHeroSwitchButton": "Ganti",
+  "settingsHeroPasswordUpdated": "Kata sandi diperbarui 2 hari lalu",
+  "settingsHeroPasswordSubtitle": "Jaga keamanan akun dengan peringatan & persetujuan.",
+  "settingsHeroReviewButton": "Tinjau",
+  "settingsSearchProfiles": "Profil",
+  "settingsSearchPassword": "Kata sandi",
+  "settingsSearchSecurity": "Keamanan",
+  "settingsSearchNotifications": "Notifikasi",
+  "settingsSearchPrivacy": "Privasi",
+  "settingsSearchLanguage": "Bahasa",
+  "settingsSearchTheme": "Tema",
+  "settingsSearchHelp": "Bantuan",
+  "settingsSearchPayments": "Pembayaran",
+  "settingsProfileTitle": "Profile",
+  "settingsProfileSubtitle": "Update what people can see on Velora",
+  "settingsProfilePhotoLabelCover": "cover photo",
+  "settingsProfilePhotoLabelProfile": "profile photo",
+  "settingsProfilePhotoActionTake": "Take photo",
+  "settingsProfilePhotoActionGallery": "Choose from gallery",
+  "settingsProfilePhotoActionRemove": "Remove photo",
+  "settingsProfilePhotoActionCancel": "Cancel",
+  "settingsProfilePhotoToastCamera": "Opening camera for {target}...",
+  "@settingsProfilePhotoToastCamera": {
+    "placeholders": {
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsProfilePhotoToastGallery": "Opening gallery for {target}...",
+  "@settingsProfilePhotoToastGallery": {
+    "placeholders": {
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsProfileFieldUpdated": "{field} updated",
+  "@settingsProfileFieldUpdated": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsProfileInfoSectionTitle": "Profile info",
+  "settingsProfileFieldName": "Name",
+  "settingsProfileFieldNameHelper": "You can only change your name twice within 14 days.",
+  "settingsProfileFieldUsername": "Username",
+  "settingsProfileFieldUsernameHelper": "Pick a unique username. People can find you with @username.",
+  "settingsProfileFieldBio": "Bio",
+  "settingsProfileFieldBioHelper": "Share a short description. Keep it under 150 characters.",
+  "settingsProfileFieldWebsite": "Website",
+  "settingsProfileFieldWebsiteHelper": "Enter a valid URL people can tap from your bio.",
+  "settingsProfileInfoSyncTitle": "Profile info syncing is no longer available",
+  "settingsProfileInfoSyncDescription": "Your name and username will no longer sync across apps. Manage synced profile pictures through Connected experiences.",
+  "settingsProfileAccountTypeTitle": "Account type",
+  "settingsProfileAccountTypeSubtitle": "Choose how you use Velora",
+  "settingsProfileAccountTypePersonal": "Personal",
+  "settingsProfileAccountTypeOrganization": "Organization",
+  "settingsProfileAccountTypePersonalDescription": "Personal accounts are for individual supporters.",
+  "settingsProfileAccountTypeOrganizationDescription": "Organization accounts unlock verifications and analytics.",
+  "settingsProfileConnectedTitle": "Connected accounts",
+  "settingsProfileConnectedNotConnected": "Not connected",
+  "settingsProfileConnectedDisconnect": "Disconnect",
+  "settingsProfileConnectedConnect": "Connect",
+  "settingsProfileCrossTitle": "Cross-platform",
+  "settingsProfileCrossSubtitle": "Control how Velora syncs to other networks",
+  "settingsProfileCrossAutoShareTitle": "Auto-share posts",
+  "settingsProfileCrossAutoShareSubtitle": "Share to connected accounts",
+  "settingsProfileCrossSyncNotificationsTitle": "Sync notifications",
+  "settingsProfileCrossSyncNotificationsSubtitle": "Get notified across platforms",
+  "settingsProfileCrossFindFriendsTitle": "Find friends",
+  "settingsProfileCrossFindFriendsSubtitle": "Match people from other networks",
+  "settingsProfileEditTitle": "Edit profile",
+  "settingsProfileEditSubtitle": "Update your personal information",
+  "settingsProfileEditTabName": "Name",
+  "settingsProfileEditTabBio": "Bio & Details",
+  "settingsProfileEditUsedProfiles": "Used for 2 profiles",
+  "settingsProfileEditFirstName": "First name",
+  "settingsProfileEditMiddleName": "Middle name",
+  "settingsProfileEditLastName": "Last name",
+  "settingsProfileEditRequiredField": "Required field",
+  "settingsProfileEditApplyTo": "Apply to",
+  "settingsProfileEditApplyAllProfiles": "All profiles",
+  "settingsProfileEditApplyFacebook": "Facebook only",
+  "settingsProfileEditApplyInstagram": "Instagram only",
+  "settingsProfileEditNameChangeInfo": "If you change your name, you can't change it again for 60 days. Use your authentic name so friends know it's you.",
+  "settingsProfileEditOtherNamesTitle": "Other names",
+  "settingsProfileEditOtherNamesDescription": "Other names are always public and help people find you on Velora.",
+  "settingsProfileEditOtherNamesManage": "Manage other names",
+  "settingsProfileEditReviewSchedule": "Schedule review",
+  "settingsProfileEditReviewScheduled": "Review on {date}",
+  "@settingsProfileEditReviewScheduled": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsProfileEditReviewChange": "Review change",
+  "settingsProfileEditNameSubmitted": "Name information sent for review",
+  "settingsProfileEditIdentitySection": "Identity",
+  "settingsProfileEditContactSection": "Contact preferences",
+  "settingsProfileEditContactEveryone": "Everyone",
+  "settingsProfileEditContactFollowers": "Followers",
+  "settingsProfileEditContactNoOne": "No one",
+  "settingsProfileEditShowProfileInfo": "Show profile info on donations",
+  "settingsProfileEditDisplayFollowerCount": "Display follower count",
+  "settingsProfileEditProfileUpdated": "Profile updated",
+  "settingsProfileEditSaveChanges": "Save changes",
+  "settingsProfileEditPronounsLabel": "Pronouns",
+  "settingsProfileFieldSave": "Save",
+  "settingsProfileFieldEditFallbackTitle": "Edit field",
+  "settingsProfileFieldEditFallbackLabel": "Field",
+  "settingsSecurityPasswordSectionTitle": "Password",
+  "settingsSecurityPasswordChange": "Change password",
+  "settingsSecurityPasswordLastChanged": "Last changed 2 months ago",
+  "settingsSecurityPasswordToast": "Change password feature coming soon",
+  "settingsSecurityTwoFactorSectionTitle": "Two-factor authentication",
+  "settingsSecurityTwoFactorTitle": "Two-factor authentication",
+  "settingsSecurityTwoFactorSubtitle": "Require a security code in addition to your password",
+  "settingsSecurityTwoFactorMethods": "Authenticator app (Google Authenticator, Authy)\nSMS to +62 812-XXXX-5678",
+  "settingsSecurityBiometricSectionTitle": "Biometric security",
+  "settingsSecurityBiometricTitle": "Biometric unlock",
+  "settingsSecurityBiometricSubtitle": "Use fingerprint or face recognition",
+  "settingsSecurityLoginActivityTitle": "Login activity",
+  "settingsSecurityLoginActivityEntry": "Today at {time}",
+  "@settingsSecurityLoginActivityEntry": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsSecurityLoginActivityLocation": "Jakarta, Indonesia • Android",
+  "settingsSecuritySessionsTitle": "Active device sessions",
+  "settingsSecuritySessionsDevice1Title": "Samsung Galaxy S23",
+  "settingsSecuritySessionsDevice1Subtitle": "Jakarta, Indonesia • Active now",
+  "settingsSecuritySessionsBadgeCurrent": "Current",
+  "settingsSecuritySessionsDetails": "Details",
+  "settingsSecuritySessionsDevice2Title": "Chrome on Windows",
+  "settingsSecuritySessionsDevice2Subtitle": "Bandung, Indonesia • 2 days ago",
+  "settingsSecuritySessionsSignOut": "Sign out",
+  "settingsSecurityAlertsTitle": "Security alerts",
+  "settingsSecurityAlertsDeviceTitle": "Device alerts",
+  "settingsSecurityAlertsDeviceSubtitle": "Get notified when your account is accessed from a new device",
+  "settingsSecurityRecoveryTitle": "Account recovery",
+  "settingsSecurityRecoveryTrustedTitle": "Trusted contacts",
+  "settingsSecurityRecoveryTrustedSubtitle": "Add people who can help you recover your account",
+  "settingsSecurityRecoveryCodesTitle": "Download recovery codes",
+  "settingsSecurityRecoveryCodesSubtitle": "Save backup codes in case you lose access",
+  "settingsPrivacyTitle": "Privacy",
+  "settingsPrivacySubtitle": "Control your visibility and data",
+  "settingsPrivacyAudienceTitle": "Audience & visibility",
+  "settingsPrivacyPrivateAccountTitle": "Private account",
+  "settingsPrivacyPrivateAccountSubtitle": "Approve followers before they see your activity",
+  "settingsPrivacySearchTitle": "Appear in search",
+  "settingsPrivacySearchSubtitle": "Allow people to discover you by name or username",
+  "settingsPrivacyDirectMessagesTitle": "Direct messages",
+  "settingsPrivacyDirectMessagesAllowTitle": "Allow messages from everyone",
+  "settingsPrivacyDirectMessagesAllowSubtitle": "Messages from non-followers go to requests",
+  "settingsPrivacyDataPermissionsTitle": "Data & permissions",
+  "settingsPrivacyDownloadInfoTitle": "Download your information",
+  "settingsPrivacyDownloadInfoSubtitle": "Get a copy of your posts, donations, and messages",
+  "settingsPrivacyDeleteAccountTitle": "Delete account",
+  "settingsPrivacyDeleteAccountSubtitle": "Permanently remove your account and data",
+  "settingsPrivacyDataSharingTitle": "Data sharing",
+  "settingsPrivacyDataSharingSubtitle": "Control analytics and personalized experiences",
+  "settingsPrivacyAnalyticsTitle": "Share usage analytics",
+  "settingsPrivacyAnalyticsSubtitle": "Help us improve Velora by sharing anonymized usage",
+  "settingsPrivacyPersonalizedTitle": "Personalized experiences",
+  "settingsPrivacyPersonalizedSubtitle": "Use my activity to tailor content and ads",
+  "postCreateAppBarTitle": "Create Post",
+  "postCreateAppBarNext": "Next",
+  "postCreateTitle": "New Post",
+  "postCreatePublishTooltip": "Publish post",
+  "postCreatePublishHint": "Double tap to publish your post",
+  "postCreatePublishLabel": "Publish",
+  "postCreateMediaLabel": "Selected media preview",
+  "postCreateMediaHint": "Swipe to review your selected media",
+  "postCreateActionAddAudio": "Add audio",
+  "postCreateActionTagPeople": "Tag people",
+  "postCreateActionAddLocation": "Add location",
+  "postCreateActionAudience": "Audience",
+  "postCreateAudienceFollowers": "Followers",
+  "postCreateActionMoreOptions": "More options",
+  "postCreateActionHintAdjust": "Double tap to adjust {action}",
+  "@postCreateActionHintAdjust": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "postCreateActionHintOpen": "Double tap to {action}",
+  "@postCreateActionHintOpen": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "postCreateSelectMediaError": "Please select at least one image",
+  "postCreateUploadFailed": "Upload failed: {error}",
+  "@postCreateUploadFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "postCreateSuccess": "Post created successfully!",
+  "postCreateFailure": "Create post failed: {error}",
+  "@postCreateFailure": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "postCreateDialogTitle": "Publishing Post",
+  "postCreateDialogPreparing": "Preparing to upload...",
+  "postCreateDialogUploading": "Uploading media...",
+  "postCreateDialogCreating": "Creating post...",
+  "postCreateDialogError": "Error: {error}",
+  "@postCreateDialogError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "postCaptionHint": "Write a caption...",
+  "postMediaPreviewLabel": "Media preview carousel",
+  "postMediaPreviewHint": "Swipe left or right to preview selected media",
+  "postMediaRemoveLabel": "Remove current media",
+  "postMediaRemoveHint": "Double tap to remove media {index}",
+  "@postMediaRemoveHint": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
+  "postGalleryLoadError": "Error loading images: {error}",
+  "@postGalleryLoadError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "postGalleryImageLabel": "Gallery image",
+  "postGalleryImageHintSelected": "Selected at position {position}",
+  "@postGalleryImageHintSelected": {
+    "placeholders": {
+      "position": {
+        "type": "int"
+      }
+    }
+  },
+  "postGalleryImageHintSelect": "Double tap to select this image",
+  "postGalleryEmptyTitle": "No photos selected",
+  "postGalleryEmptySubtitle": "Tap the button below to select photos from your gallery",
+  "postGallerySelectButton": "Select photos",
+  "postToolbarLocation": "Location",
+  "postToolbarLink": "Link",
+  "postToolbarCampaign": "Campaign",
+  "postMoreOptionsTitle": "More options",
+  "postMoreOptionsHeader": "How others can interact with your post",
+  "postMoreOptionsTurnOffCommentsTitle": "Turn off commenting",
+  "postMoreOptionsTurnOffCommentsSubtitle": "You can change this later by going to the ⋯ menu at the top of your post.",
+  "postMoreOptionsHideLikeCountTitle": "Hide like count on this post",
+  "postMoreOptionsHideShareCountTitle": "Hide share count on this post",
+  "postMoreOptionsHideShareCountSubtitle": "Only you will see the total number of likes and shares on this post. You can change this later by going to the ⋯ menu at the top of your post. You can hide the number of likes and shares on posts from other accounts by going to Settings. Learn more",
+  "postMoreOptionsHideCommentCountTitle": "Hide comment count on this post",
+  "postMoreOptionsHideLikesListTitle": "Hide list of people who liked this post",
+  "postMoreOptionsHideLikesListSubtitle": "Viewers will see the like count (unless hidden) but not who liked it.",
+  "postToggleHintEnable": "Double tap to allow {action}",
+  "@postToggleHintEnable": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "postToggleHintDisable": "Double tap to disable {action}",
+  "@postToggleHintDisable": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "chatScreenTitle": "Obrolan",
+  "chatScreenNewChatLabel": "Mulai obrolan baru",
+  "chatScreenNewChatTooltip": "Obrolan baru",
+  "chatScreenListLabel": "Daftar obrolan",
+  "chatScreenListHint": "Geser ke atas atau ke bawah untuk menelusuri percakapan",
+  "chatScreenRetry": "Coba Lagi",
+  "chatScreenNoChats": "Tidak Ada Riwayat Obrolan",
+  "chatScreenNoChatsHint": "Mulai percakapan baru untuk melihat obrolan Anda di sini",
+  "chatScreenUnnamed": "Tanpa Nama",
+  "chatScreenUnnamedGroup": "Grup Tanpa Nama",
+  "chatFilterAll": "Semua",
+  "chatFilterUnread": "Belum dibaca",
+  "chatFilterFavourites": "Favorit",
+  "chatFilterGroups": "Grup",
+  "chatFilterSemanticsLabel": "Filter {filter}",
+  "@chatFilterSemanticsLabel": {
+    "placeholders": {
+      "filter": {
+        "type": "String"
+      }
+    }
+  },
+  "chatFilterSemanticsHint": "Ketuk dua kali untuk memfilter obrolan berdasarkan {filter}",
+  "@chatFilterSemanticsHint": {
+    "placeholders": {
+      "filter": {
+        "type": "String"
+      }
+    }
+  },
+  "chatSearchBarLabel": "Cari obrolan",
+  "chatSearchBarHint": "Masukkan teks untuk mencari percakapan",
+  "chatSearchBarPlaceholder": "Tanyakan Meta AI atau cari",
+  "chatListItemSemanticsLabel": "Obrolan dengan {name}",
+  "@chatListItemSemanticsLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chatListItemSemanticsHint": "Ketuk dua kali untuk membuka percakapan",
+  "chatListItemPhotos": "{count, plural, one{{count} foto} other{{count} foto}}",
+  "@chatListItemPhotos": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatListItemPhoto": "Foto",
+  "chatListItemMissedCall": "Panggilan suara terlewat",
+  "chatBubbleYourLabel": "Pesan Anda",
+  "chatBubbleReceivedLabel": "Pesan diterima",
+  "chatBubbleHint": "Pesan dikirim pukul {time}",
+  "@chatBubbleHint": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "chatMediaYourLabel": "Media dari Anda",
+  "chatMediaReceivedLabel": "Media yang diterima",
+  "chatMediaHint": "Media dikirim pukul {time}",
+  "@chatMediaHint": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "chatDateSeparatorLabel": "Pemisah tanggal: {date}",
+  "@chatDateSeparatorLabel": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "chatInputEmojiLabel": "Pemilih emoji",
+  "chatInputEmojiHint": "Ketuk dua kali untuk membuka pemilih emoji",
+  "chatInputEmojiTooltip": "Emoji",
+  "chatInputFieldLabel": "Input pesan",
+  "chatInputFieldHint": "Ketik pesan Anda di sini",
+  "chatInputFieldPlaceholder": "Pesan",
+  "chatInputAttachLabel": "Lampirkan file",
+  "chatInputAttachHint": "Ketuk dua kali untuk melampirkan file",
+  "chatInputAttachTooltip": "Lampirkan file",
+  "chatInputCameraLabel": "Kamera",
+  "chatInputCameraHint": "Ketuk dua kali untuk membuka kamera",
+  "chatInputCameraTooltip": "Kamera",
+  "chatInputSendLabel": "Kirim pesan",
+  "chatInputSendHint": "Ketuk dua kali untuk mengirim pesan",
+  "chatInputVoiceLabel": "Pesan suara",
+  "chatInputVoiceHint": "Ketuk dua kali untuk merekam pesan suara",
+  "chatAttachmentGallery": "Galeri",
+  "chatAttachmentCamera": "Kamera",
+  "chatAttachmentLocation": "Lokasi",
+  "chatAttachmentContact": "Kontak",
+  "chatAttachmentDocument": "Dokumen",
+  "chatAttachmentAudio": "Audio",
+  "chatAttachmentPoll": "Jajak pendapat",
+  "chatAttachmentEvent": "Acara",
+  "chatAttachmentAiImages": "Gambar AI",
+  "chatAttachmentSelectHint": "Ketuk dua kali untuk memilih {label}",
+  "@chatAttachmentSelectHint": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "chatDetailBackLabel": "Kembali",
+  "chatDetailTitleLabel": "Percakapan dengan {name}",
+  "@chatDetailTitleLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chatDetailGroupSubtitle": "Ketuk di sini untuk info grup",
+  "chatDetailSelfSubtitle": "Pesan diri sendiri",
+  "chatDetailOptionsLabel": "Opsi percakapan",
+  "chatDetailMenuTooltip": "Opsi lainnya",
+  "chatDetailHistoryLabel": "Riwayat percakapan",
+  "chatDetailHistoryHint": "Geser ke atas untuk meninjau pesan lama",
+  "chatDetailNoMessages": "Belum ada pesan",
+  "chatDetailNoMessagesHint": "Kirim pesan untuk memulai percakapan",
+  "chatDetailMessageDeleted": "Pesan ini telah dihapus",
+  "chatDetailSelectMediaTitle": "Pilih jenis media",
+  "chatDetailSelectImages": "Gambar",
+  "chatDetailSelectVideo": "Video",
+  "chatDetailImagesSelected": "{count, plural, one{{count} gambar dipilih} other{{count} gambar dipilih}}",
+  "@chatDetailImagesSelected": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatDetailVideoSelected": "Video dipilih",
+  "chatDetailPickMediaError": "Gagal memilih media",
+  "chatDetailCameraModeTitle": "Pilih mode kamera",
+  "chatDetailCameraTakePhoto": "Ambil foto",
+  "chatDetailCameraRecordVideo": "Rekam video",
+  "chatDetailPhotoCaptured": "Foto berhasil diambil",
+  "chatDetailVideoRecorded": "Video berhasil direkam",
+  "chatDetailPollCreated": "Jajak pendapat dibuat",
+  "chatDetailEventCreated": "Acara dibuat",
+  "chatDetailDocumentsSelected": "{count, plural, one{{count} dokumen dipilih} other{{count} dokumen dipilih}}",
+  "@chatDetailDocumentsSelected": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatDetailDocumentError": "Gagal memilih dokumen",
+  "chatDetailAudioSelected": "File audio dipilih",
+  "chatDetailAudioError": "Gagal memilih audio",
+  "chatDetailLocationSelected": "Lokasi dipilih",
+  "chatDetailContactSelected": "Kontak dipilih",
+  "chatDetailAiImagesSelected": "Gambar AI dipilih",
+  "chatDetailVoiceMessage": "Pesan suara",
+  "chatDetailStatusOnline": "Sedang online",
+  "chatSearchScreenTitle": "Cari",
+  "chatSearchScreenRecent": "Pencarian terbaru",
+  "chatSearchScreenClearAll": "Hapus semua",
+  "chatSearchGlobalLabel": "Pencarian global",
+  "chatSearchGlobalHint": "Cari di seluruh kampanye, postingan, dan orang",
+  "chatSearchPlaceholder": "Cari…",
+  "chatSearchScopeCampaigns": "Kampanye",
+  "chatSearchScopePosts": "Postingan",
+  "chatSearchScopePeople": "Orang",
+  "chatSearchScopeSemantics": "Ruang lingkup {scope}",
+  "@chatSearchScopeSemantics": {
+    "placeholders": {
+      "scope": {
+        "type": "String"
+      }
+    }
+  },
+  "chatSearchRecentItemLabel": "Pencarian terbaru: {query}",
+  "@chatSearchRecentItemLabel": {
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
+  },
+  "chatSearchRecentItemHint": "Ketuk dua kali untuk mencari lagi",
+  "chatSearchRecentDeleteLabel": "Hapus pencarian terbaru",
+  "chatSearchRecentDeleteTooltip": "Hapus",
+  "chatPollLabel": "Jajak pendapat",
+  "chatPollSemanticsYour": "Jajak pendapat Anda",
+  "chatPollSemanticsReceived": "Jajak pendapat diterima",
+  "chatPollSemanticsHint": "Jajak pendapat dengan {count} suara",
+  "@chatPollSemanticsHint": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatPollTotalVotes": "{count, plural, one{{count} suara} other{{count} suara}}",
+  "@chatPollTotalVotes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatPollOptionSemantics": "{option}, {votes} suara, {percent} persen",
+  "@chatPollOptionSemantics": {
+    "placeholders": {
+      "option": {
+        "type": "String"
+      },
+      "votes": {
+        "type": "int"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "chatPollVoteHint": "Ketuk dua kali untuk memilih opsi ini",
+  "chatPollDialogTitle": "Buat jajak pendapat",
+  "chatPollDialogQuestionLabel": "Pertanyaan jajak pendapat",
+  "chatPollDialogQuestionHint": "Ajukan pertanyaan…",
+  "chatPollDialogOptionsLabel": "Opsi",
+  "chatPollDialogOptionLabel": "Opsi {index}",
+  "@chatPollDialogOptionLabel": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
+  "chatPollDialogOptionHint": "Masukkan opsi…",
+  "chatPollDialogAddOption": "Tambah opsi",
+  "chatPollDialogQuestionError": "Harap isi pertanyaan",
+  "chatPollDialogOptionsError": "Tambahkan minimal 2 opsi",
+  "chatPollDialogSend": "Kirim jajak pendapat",
+  "chatEventLabel": "Acara",
+  "chatEventSemanticsYour": "Acara Anda",
+  "chatEventSemanticsReceived": "Acara diterima",
+  "chatEventHint": "Acara pada {date}",
+  "@chatEventHint": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "chatEventDialogTitle": "Buat acara",
+  "chatEventDialogTitleLabel": "Judul acara",
+  "chatEventDialogTitleHint": "Masukkan judul acara…",
+  "chatEventDialogDescriptionLabel": "Deskripsi",
+  "chatEventDialogDescriptionHint": "Masukkan deskripsi acara…",
+  "chatEventDialogLocationLabel": "Lokasi (opsional)",
+  "chatEventDialogLocationHint": "Masukkan lokasi…",
+  "chatEventDialogStartLabel": "Mulai",
+  "chatEventDialogEndLabel": "Selesai",
+  "chatEventDialogTitleError": "Harap isi judul acara",
+  "chatEventDialogEndTimeError": "Waktu selesai harus setelah waktu mulai",
+  "chatEventDialogSend": "Kirim acara",
+  "chatEventResponseTitle": "Respons Anda",
+  "chatEventResponseGoing": "Hadir",
+  "chatEventResponseMaybe": "Mungkin",
+  "chatEventResponseNo": "Tidak hadir",
+  "chatEventResponseSummary": "{going} hadir • {maybe} mungkin • {notGoing} tidak hadir",
+  "@chatEventResponseSummary": {
+    "placeholders": {
+      "going": {
+        "type": "int"
+      },
+      "maybe": {
+        "type": "int"
+      },
+      "notGoing": {
+        "type": "int"
+      }
+    }
+  },
+  "chatEventResponseButtonLabel": "Respons {label}",
+  "@chatEventResponseButtonLabel": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "chatEventResponseButtonHint": "Ketuk dua kali untuk memberikan respons {label} pada acara",
+  "@chatEventResponseButtonHint": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAppearanceLanguageTitle": "Bahasa",
+  "settingsAppearanceLanguagePreviewSemantics": "Pratinjau bahasa saat ini",
+  "settingsAppearanceLanguageCurrentLabel": "Bahasa saat ini",
+  "settingsAppearanceLanguageSearchHint": "Cari bahasa…",
+  "settingsAppearanceLanguageEmpty": "Tidak ada bahasa yang ditemukan",
+  "settingsAppearanceLanguageToast": "Bahasa diubah menjadi {language}",
+  "@settingsAppearanceLanguageToast": {
+    "placeholders": {
+      "language": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAppearanceLanguageRestartNote": "Aplikasi akan dimulai ulang untuk menerapkan perubahan bahasa.",
+  "settingsAppearanceThemeTitle": "Tema & tampilan",
+  "settingsAppearanceThemeModeSection": "Mode tema",
+  "settingsAppearanceThemeModeLight": "Terang",
+  "settingsAppearanceThemeModeDark": "Gelap",
+  "settingsAppearanceThemeModeAuto": "Otomatis",
+  "settingsAppearanceThemeModeDescription": "Mode sistem otomatis mengikuti pengaturan perangkat Anda.",
+  "settingsAppearanceThemeColorSection": "Warna",
+  "settingsAppearanceThemeColorDynamic": "Warna dinamis",
+  "settingsAppearanceThemeShapeSection": "Bentuk",
+  "settingsAppearanceThemeShapeCorner": "Radius sudut",
+  "settingsAppearanceThemeShapeCornerValue": "{px} px",
+  "@settingsAppearanceThemeShapeCornerValue": {
+    "placeholders": {
+      "px": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsAppearanceThemeShapeSquare": "Persegi",
+  "settingsAppearanceThemeShapeSmall": "Kecil",
+  "settingsAppearanceThemeShapeMedium": "Sedang",
+  "settingsAppearanceThemeShapeLarge": "Besar",
+  "settingsAppearanceThemeShapeMax": "Maksimal",
+  "settingsAppearanceThemeAdvancedSection": "Lanjutan",
+  "settingsAppearanceThemeAccentTitle": "Warna aksen",
+  "settingsAppearanceThemeAccentSubtitle": "Sesuaikan warna sorotan",
+  "settingsAppearanceThemeAccentToast": "Pemilih warna segera hadir",
+  "settingsAppearanceThemeTypographyTitle": "Tipografi",
+  "settingsAppearanceThemeTypographySubtitle": "Jenis huruf dan ukuran",
+  "settingsAppearanceThemeTypographyToast": "Pengaturan tipografi segera hadir",
+  "settingsAppearanceThemeAnimationsTitle": "Animasi",
+  "settingsAppearanceThemeAnimationsSubtitle": "Efek transisi dan gerakan",
+  "settingsAppearanceThemeAnimationsToast": "Pengaturan animasi segera hadir",
+  "settingsAppearanceThemePreviewTitle": "Pratinjau langsung",
+  "settingsAppearanceThemePreviewSampleCard": "Kartu contoh",
+  "settingsAppearanceThemeModeLabel": "Mode {mode}",
+  "@settingsAppearanceThemeModeLabel": {
+    "placeholders": {
+      "mode": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAppearanceNotificationsTitle": "Notifikasi",
+  "settingsAppearanceNotificationsQuick": "Kontrol cepat",
+  "settingsAppearanceNotificationsPauseAllTitle": "Jeda semua notifikasi",
+  "settingsAppearanceNotificationsPauseAllSubtitle": "Hentikan sementara semua peringatan",
+  "settingsAppearanceNotificationsSleepModeTitle": "Mode tidur",
+  "settingsAppearanceNotificationsSleepModeSubtitle": "Senyapkan notifikasi di jam tertentu",
+  "settingsAppearanceNotificationsPostsSection": "Posting & cerita",
+  "settingsAppearanceNotificationsPostsPeople": "Posting dari orang yang saya ikuti",
+  "settingsAppearanceNotificationsPostsLive": "Video langsung",
+  "settingsAppearanceNotificationsPostsLiveSubtitle": "Saat seseorang siaran langsung",
+  "settingsAppearanceNotificationsPostsCampaigns": "Kampanye baru",
+  "settingsAppearanceNotificationsPostsCampaignsSubtitle": "Dari kreator yang saya ikuti",
+  "settingsAppearanceNotificationsEngagementSection": "Interaksi",
+  "settingsAppearanceNotificationsEngagementLikes": "Suka pada posting saya",
+  "settingsAppearanceNotificationsEngagementReplies": "Balasan komentar",
+  "settingsAppearanceNotificationsEngagementMentions": "Mention",
+  "settingsAppearanceNotificationsEngagementMentionsSubtitle": "Saat seseorang menandai saya",
+  "settingsAppearanceNotificationsEngagementFollowers": "Pengikut baru",
+  "settingsAppearanceNotificationsDonationsSection": "Donasi & kampanye",
+  "settingsAppearanceNotificationsDonationsReceivedTitle": "Donasi diterima",
+  "settingsAppearanceNotificationsDonationsReceivedSubtitle": "Saat seseorang berdonasi untuk kampanye saya",
+  "settingsAppearanceNotificationsDonationsMilestonesTitle": "Milestone kampanye",
+  "settingsAppearanceNotificationsDonationsMilestonesSubtitle": "Pencapaian 25%, 50%, 75%, 100%",
+  "settingsAppearanceNotificationsDonationsUpdatesTitle": "Pembaruan kampanye",
+  "settingsAppearanceNotificationsDonationsUpdatesSubtitle": "Dari kampanye yang saya dukung",
+  "settingsAppearanceNotificationsDonationsWithdrawTitle": "Status pencairan",
+  "settingsAppearanceNotificationsDonationsWithdrawSubtitle": "Sedang diproses, selesai, atau gagal",
+  "settingsAppearanceNotificationsMessagesSection": "Pesan",
+  "settingsAppearanceNotificationsMessagesDirect": "Pesan langsung",
+  "settingsAppearanceNotificationsMessagesRequests": "Permintaan pesan",
+  "settingsAppearanceNotificationsMessagesRequestsSubtitle": "Dari orang yang tidak saya ikuti",
+  "settingsAppearanceNotificationsMessagesGroups": "Undangan grup",
+  "settingsAppearanceNotificationsSummaryTitle": "Ringkasan notifikasi",
+  "settingsAppearanceNotificationsSummarySubtitle": "Terima ringkasan harian atau mingguan alih-alih notifikasi real-time",
+  "settingsAppearanceNotificationsSummaryOff": "Nonaktif",
+  "settingsAppearanceNotificationsSummaryDaily": "Harian",
+  "settingsAppearanceNotificationsSummaryWeekly": "Mingguan",
+  "settingsAppearanceNotificationsOtherSection": "Saluran lain",
+  "settingsAppearanceNotificationsOtherEmailTitle": "Notifikasi email",
+  "settingsAppearanceNotificationsOtherEmailSubtitle": "Ringkasan mingguan dan info penting",
+  "settingsAppearanceNotificationsOtherSmsTitle": "Notifikasi SMS",
+  "settingsAppearanceNotificationsOtherSmsSubtitle": "Hanya peringatan penting",
+  "settingsAppearanceAccessibilityTitle": "Aksesibilitas",
+  "settingsAppearanceAccessibilitySubtitle": "Atur tipografi dan tata letak",
+  "settingsAppearanceAccessibilityTabText": "Teks",
+  "settingsAppearanceAccessibilityTabAppearance": "Tampilan",
+  "settingsAppearanceAccessibilityTabLayout": "Tata letak",
+  "settingsAppearanceAccessibilityFontSizeTitle": "Ukuran huruf",
+  "settingsAppearanceAccessibilityFontSizeSubtitle": "Pratinjau menyesuaikan di seluruh Velora",
+  "settingsAppearanceAccessibilityFontSizeLabel": "{points} pt",
+  "@settingsAppearanceAccessibilityFontSizeLabel": {
+    "placeholders": {
+      "points": {
+        "type": "double"
+      }
+    }
+  },
+  "settingsAppearanceAccessibilityFontSample": "Contoh teks pada {points} pt",
+  "@settingsAppearanceAccessibilityFontSample": {
+    "placeholders": {
+      "points": {
+        "type": "double"
+      }
+    }
+  },
+  "settingsAppearanceAccessibilityFontFamilyTitle": "Jenis huruf",
+  "settingsAppearanceAccessibilityTextAlignmentTitle": "Perataan teks",
+  "settingsAppearanceAccessibilityPreviewTitle": "Pratinjau",
+  "settingsAppearanceAccessibilityPreviewBody": "Velora membuat kota lebih manusiawi dengan memberi semua orang ruang untuk bertindak.",
+  "settingsAppearanceAccessibilityAppearanceHighContrastTitle": "Mode kontras tinggi",
+  "settingsAppearanceAccessibilityAppearanceHighContrastSubtitle": "Perjelas teks dan ikon",
+  "settingsAppearanceAccessibilityAppearanceHighContrastToggle": "Aktifkan UI kontras tinggi",
+  "settingsAppearanceAccessibilityAppearanceReduceTitle": "Kurangi gerakan",
+  "settingsAppearanceAccessibilityAppearanceReduceSubtitle": "Batasi efek paralaks dan transisi besar",
+  "settingsAppearanceAccessibilityAppearanceReduceToggle": "Minimalkan animasi",
+  "settingsAppearanceAccessibilityLayoutLineSpacing": "Jarak antarbaris",
+  "settingsAppearanceAccessibilityLayoutPreviewBody": "Velora membuat kota lebih manusiawi dengan memberi semua orang ruang untuk bertindak.\nCerita, penggalangan dana, dan laporan lapangan akan muncul di sini.",
+  "settingsAccountStatusTitle": "Status akun",
+  "settingsAccountStatusSubtitle": "Kesehatan akun dan verifikasi Anda",
+  "settingsAccountStatusInfoTitle": "Informasi akun",
+  "settingsAccountStatusStandingTitle": "Akun dalam kondisi baik",
+  "settingsAccountStatusStandingSubtitle": "Tidak ada pembatasan",
+  "settingsAccountStatusEmailTitle": "Email terverifikasi",
+  "settingsAccountStatusPhoneTitle": "Nomor telepon terverifikasi",
+  "settingsAccountStatusMetricsTitle": "Metrik akun",
+  "settingsAccountStatusMemberSinceTitle": "Anggota sejak",
+  "settingsAccountStatusDonationsTitle": "Total donasi",
+  "settingsAccountStatusCampaignsTitle": "Kampanye yang dibuat",
+  "settingsAccountActivityTitle": "Aktivitas Anda",
+  "settingsAccountActivitySubtitle": "Tinjau interaksi dan riwayat Anda",
+  "settingsAccountActivityTabLikes": "Suka",
+  "settingsAccountActivityTabComments": "Komentar",
+  "settingsAccountActivityTabDonations": "Donasi",
+  "settingsAccountActivityTabArchive": "Arsip",
+  "settingsAccountActivityTabDeleted": "Dihapus",
+  "settingsAccountActivityRecentLikes": "Suka terbaru",
+  "settingsAccountActivityRecentComments": "Komentar terbaru",
+  "settingsAccountActivityArchived": "Diarsipkan",
+  "settingsAccountActivityRestoreButton": "Pulihkan",
+  "settingsAccountActivityDeletedEmptyTitle": "Belum ada item yang dihapus",
+  "settingsAccountActivityDeletedEmptySubtitle": "Item yang Anda hapus muncul di sini selama 30 hari sebelum dihapus permanen.",
+  "settingsAccountDonationsTitle": "Donasi saya",
+  "settingsAccountDonationsSubtitle": "Riwayat dan dampak kontribusi Anda",
+  "settingsAccountDonationsImpactTitle": "Ringkasan dampak",
+  "settingsAccountDonationsTotalLabel": "Total donasi",
+  "settingsAccountDonationsCampaignsLabel": "Kampanye",
+  "settingsAccountDonationsThisMonthLabel": "Bulan ini",
+  "settingsAccountDonationsRecurringLabel": "Berkala",
+  "settingsAccountDonationsRecurringValue": "{count} aktif",
+  "@settingsAccountDonationsRecurringValue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsAccountDonationsMatchedLabel": "Dicocokkan",
+  "settingsAccountDonationsFilterAll": "Semua",
+  "settingsAccountDonationsFilterRecurring": "Berkala",
+  "settingsAccountDonationsFilterMatched": "Dicocokkan",
+  "settingsAccountDonationsExportButton": "Ekspor semua kuitansi",
+  "settingsAccountDonationsExportingToast": "Menyiapkan ekspor riwayat donasi…",
+  "settingsAccountDonationsStatusRecurring": "BERKALA",
+  "settingsAccountDonationsStatusMatched": "DICOCOKKAN",
+  "settingsAccountDonationsEmptyTitle": "Belum ada donasi",
+  "settingsAccountDonationsEmptySubtitle": "Mulailah memberi dampak dengan mendukung kampanye yang berarti bagi Anda.",
+  "settingsAccountDonationsEmptyButton": "Jelajahi kampanye",
+  "settingsHelpCenterTitle": "Pusat bantuan",
+  "settingsHelpCenterSubtitle": "Sumber dukungan & keamanan",
+  "settingsHelpPrioritySemantics": "Sorotan dukungan prioritas",
+  "settingsHelpPriorityTitle": "Dukungan prioritas",
+  "settingsHelpPrioritySubtitle": "Tim keamanan kami biasanya membalas dalam 2 jam untuk kreator terverifikasi.",
+  "settingsHelpSupportOptionsTitle": "Opsi dukungan",
+  "settingsHelpFaqTileTitle": "Pertanyaan yang sering ditanyakan",
+  "settingsHelpFaqTileSubtitle": "Jawaban instan khusus untuk Anda",
+  "settingsHelpEmailTitle": "Dukungan email",
+  "settingsHelpEmailSubtitle": "support@velora.app",
+  "settingsHelpReportTitle": "Laporkan masalah",
+  "settingsHelpReportSubtitle": "Bug, penyalahgunaan, pelecehan",
+  "settingsHelpGuidesTitle": "Panduan",
+  "settingsHelpCommunityGuidelinesTitle": "Pedoman komunitas",
+  "settingsHelpCommunityGuidelinesSubtitle": "Diperbarui Februari 2025",
+  "settingsHelpSecurityChecklistTitle": "Daftar periksa keamanan",
+  "settingsHelpSecurityChecklistSubtitle": "Jaga akun tetap aman",
+  "settingsHelpReportSheetTitle": "Laporkan masalah",
+  "settingsHelpReportHint": "Jelaskan apa yang terjadi…",
+  "settingsHelpReportThanks": "Terima kasih atas laporannya",
+  "settingsHelpReportSendButton": "Kirim",
+  "settingsHelpFaqTitle": "FAQ",
+  "settingsHelpFaqSubtitle": "Topik bantuan populer",
+  "settingsHelpFaqQuestion1": "Bagaimana Velora memverifikasi kampanye?",
+  "settingsHelpFaqAnswer1": "Setiap kampanye melewati daftar pemeriksaan kepercayaan, termasuk validasi penerima, dokumen identitas, dan milestone transparansi.",
+  "settingsHelpFaqQuestion2": "Bisakah saya menyembunyikan nominal donasi?",
+  "settingsHelpFaqAnswer2": "Bisa. Saat berdonasi, pilih opsi \"Nominal anonim\" sehingga hanya avatar Anda yang terlihat.",
+  "settingsHelpFaqQuestion3": "Bagaimana jika saya kehilangan akses ke akun?",
+  "settingsHelpFaqAnswer3": "Gunakan recovery kit di Password & security. Anda dapat memberi wewenang terlebih dulu kepada kontak tepercaya untuk menyetujui login Anda.",
+  "settingsHelpFaqQuestion4": "Bagaimana cara mengatur notifikasi?",
+  "settingsHelpFaqAnswer4": "Buka pengaturan Notifikasi untuk mengatur push, email, dan SMS bagi tiap jenis kampanye.",
+  "settingsHelpAboutTitle": "Tentang Velora",
+  "settingsHelpAboutSemantics": "Ringkasan merek Velora",
+  "settingsHelpAboutBrandName": "Velora",
+  "settingsHelpAboutTagline": "Memberdayakan kemurahan hati",
+  "settingsHelpAboutVersion": "Versi 1.0.0 (Build 1)",
+  "settingsHelpAboutWhyTitle": "Mengapa Velora",
+  "settingsHelpAboutWhyDescription": "Velora adalah platform dampak sosial yang menghubungkan orang dermawan dengan berbagai tujuan bermakna. Bersama, kita membuat dunia lebih baik.",
+  "settingsHelpAboutStatCampaigns": "1 jt+ Kampanye",
+  "settingsHelpAboutStatSupporters": "5 jt+ Pendukung",
+  "settingsHelpAboutStatTrust": "Mengutamakan kepercayaan",
+  "settingsHelpAboutConnectTitle": "Hubungi kami",
+  "settingsHelpAboutSocialWebsite": "Situs web",
+  "settingsHelpAboutSocialInstagram": "Instagram",
+  "settingsHelpAboutSocialThreads": "Threads",
+  "settingsHelpAboutSocialFacebook": "Facebook",
+  "settingsHelpAboutLegalTitle": "Legal",
+  "settingsHelpAboutDevTitle": "Tim pengembang",
+  "settingsHelpAboutDevOrgSubtitle": "Produk, desain, dan engineering",
+  "settingsHelpAboutDevFounderSubtitle": "Pendiri & lead developer",
+  "settingsHelpAboutContactTitle": "Kontak & dukungan",
+  "settingsHelpAboutLiveChatTitle": "Live chat",
+  "settingsHelpAboutLiveChatSubtitle": "Tersedia pukul 09.00 – 18.00",
+  "settingsHelpAboutReportBugTitle": "Laporkan bug",
+  "settingsHelpAboutReportBugSubtitle": "Bantu kami meningkatkan Velora",
+  "settingsHelpAboutSuggestFeatureTitle": "Usulkan fitur",
+  "settingsHelpAboutSuggestFeatureSubtitle": "Bagikan ide produk Anda",
+  "settingsHelpAboutPrivacy": "Kebijakan privasi",
+  "settingsHelpAboutTerms": "Ketentuan layanan",
+  "settingsHelpAboutCookie": "Kebijakan cookie",
+  "settingsHelpAboutLicenses": "Lisensi sumber terbuka",
+  "settingsHelpAboutEnjoyTitle": "Suka dengan Velora?",
+  "settingsHelpAboutEnjoySubtitle": "Beri rating dan bantu orang lain menemukan Velora.",
+  "settingsHelpAboutRateButton": "Beri rating Velora",
+  "settingsHelpAboutAcknowledgementsTitle": "Ucapan terima kasih",
+  "settingsHelpAboutAcknowledgementsThanks": "Terima kasih kepada para kontributor, beta tester, dan komunitas Flutter yang turut menghadirkan Velora.",
+  "settingsHelpAboutAcknowledgementFlutter": "Flutter",
+  "settingsHelpAboutAcknowledgementDart": "Dart",
+  "settingsHelpAboutAcknowledgementFirebase": "Firebase",
+  "settingsHelpAboutAcknowledgementSupabase": "Supabase",
+  "settingsHelpAboutAcknowledgementMaterial": "Material Design",
+  "settingsHelpAboutFooterCopyright": "© 2025 VitoTechLab. Seluruh hak cipta.",
+  "settingsHelpAboutFooterMadeWith": "Dibuat dengan ❤️ untuk dunia yang lebih baik"
+}
