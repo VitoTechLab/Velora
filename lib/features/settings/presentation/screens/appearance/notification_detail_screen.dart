@@ -390,8 +390,6 @@ class _NotificationSection extends StatelessWidget {
   const _NotificationSection({
     required this.title,
     required this.tiles,
-    this.subtitle,
-    this.onTap,
   });
 
   final String title;
