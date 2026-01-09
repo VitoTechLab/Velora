@@ -1,7 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velora/features/navigation/presentation/navigation_tabs.dart';
+import 'package:velora/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:velora/features/profile/presentation/bloc/profile_state.dart';
+import 'package:velora/routes/app_router.dart';
 
 class AdaptiveNavigationScaffold extends StatelessWidget {
   const AdaptiveNavigationScaffold({
@@ -17,8 +22,13 @@ class AdaptiveNavigationScaffold extends StatelessWidget {
   final int currentIndex;
   final ValueChanged<int> onDestinationSelected;
 
-  static const double _mobileIconSize = 22;
-  static const double _railIconSize = 24;
+  // Increased icon sizes for better visibility
+  static const double _mobileIconSize = 30;
+  static const double _railIconSize = 28;
+  // Avatar size for profile tab
+  static const double _avatarSize = 28;
+  // Thicker stroke weight for icons
+  static const double _iconStrokeWeight = 600;
 
   bool get _isIOS => defaultTargetPlatform == TargetPlatform.iOS;
 
@@ -58,11 +68,15 @@ class AdaptiveNavigationScaffold extends StatelessWidget {
       groupAlignment: 0,
       minWidth: 72,
       destinations: tabs
+          .asMap()
+          .entries
           .map(
-            (tab) => NavigationRailDestination(
-              icon: _buildIconForTab(tab, false, size: _railIconSize),
-              selectedIcon: _buildIconForTab(tab, true, size: _railIconSize),
-              label: Text(tab.label),
+            (entry) => NavigationRailDestination(
+              icon: _buildNavIcon(context, entry.value, entry.key, false,
+                  size: _railIconSize),
+              selectedIcon: _buildNavIcon(context, entry.value, entry.key, true,
+                  size: _railIconSize),
+              label: Text(entry.value.label),
             ),
           )
           .toList(),
@@ -73,14 +87,19 @@ class AdaptiveNavigationScaffold extends StatelessWidget {
     return NavigationBar(
       selectedIndex: currentIndex,
       onDestinationSelected: onDestinationSelected,
-      height: 60,
+      height: 65,
       labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+      indicatorColor: Colors.transparent,
       destinations: tabs
+          .asMap()
+          .entries
           .map(
-            (tab) => NavigationDestination(
-              icon: _buildIconForTab(tab, false, size: _mobileIconSize),
-              selectedIcon: _buildIconForTab(tab, true, size: _mobileIconSize),
-              label: tab.label,
+            (entry) => NavigationDestination(
+              icon: _buildNavIcon(context, entry.value, entry.key, false,
+                  size: _mobileIconSize),
+              selectedIcon: _buildNavIcon(context, entry.value, entry.key, true,
+                  size: _mobileIconSize),
+              label: entry.value.label,
             ),
           )
           .toList(),
@@ -93,10 +112,12 @@ class AdaptiveNavigationScaffold extends StatelessWidget {
       onTap: onDestinationSelected,
       iconSize: _mobileIconSize,
       items: tabs
+          .asMap()
+          .entries
           .map(
-            (tab) => BottomNavigationBarItem(
-              icon: _buildCupertinoIcon(tab, false),
-              activeIcon: _buildCupertinoIcon(tab, true),
+            (entry) => BottomNavigationBarItem(
+              icon: _buildNavIcon(context, entry.value, entry.key, false),
+              activeIcon: _buildNavIcon(context, entry.value, entry.key, true),
               label: '',
             ),
           )
@@ -104,18 +125,102 @@ class AdaptiveNavigationScaffold extends StatelessWidget {
     );
   }
 
-  Widget _buildCupertinoIcon(NavigationTab tab, bool selected) {
-    return Icon(
-      selected ? tab.cupertinoActiveIcon : tab.cupertinoIcon,
-      size: _mobileIconSize,
+  /// Build navigation icon - shows avatar for profile tab, regular icon otherwise
+  Widget _buildNavIcon(
+    BuildContext context,
+    NavigationTab tab,
+    int index,
+    bool selected, {
+    double size = _mobileIconSize,
+  }) {
+    // Check if this is the profile tab
+    if (tab.id == AppRouteName.profile) {
+      return _buildProfileAvatar(context, selected, size: size);
+    }
+
+    // Regular icon for other tabs
+    return _buildIconForTab(context, tab, selected, size: size);
+  }
+
+  /// Build profile avatar from ProfileBloc state
+  Widget _buildProfileAvatar(BuildContext context, bool selected,
+      {double size = _mobileIconSize}) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return BlocBuilder<ProfileBloc, ProfileState>(
+      buildWhen: (previous, current) =>
+          previous.profile?.avatarUrl != current.profile?.avatarUrl,
+      builder: (context, state) {
+        final avatarUrl = state.profile?.avatarUrl;
+        final avatarRenderSize = size - 4; // Slightly smaller for border
+
+        return Container(
+          width: size,
+          height: size,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: selected ? colorScheme.onSurface : Colors.transparent,
+              width: selected ? 2 : 0,
+            ),
+          ),
+          child: ClipOval(
+            child: avatarUrl != null && avatarUrl.isNotEmpty
+                ? CachedNetworkImage(
+                    imageUrl: avatarUrl,
+                    width: avatarRenderSize,
+                    height: avatarRenderSize,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => _buildDefaultAvatar(
+                      colorScheme,
+                      avatarRenderSize,
+                    ),
+                    errorWidget: (context, url, error) => _buildDefaultAvatar(
+                      colorScheme,
+                      avatarRenderSize,
+                    ),
+                  )
+                : _buildDefaultAvatar(colorScheme, avatarRenderSize),
+          ),
+        );
+      },
+    );
+  }
+
+  /// Default avatar icon when no image available
+  Widget _buildDefaultAvatar(ColorScheme colorScheme, double size) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        color: colorScheme.surfaceContainerHighest,
+        shape: BoxShape.circle,
+      ),
+      child: Icon(
+        Icons.person_rounded,
+        size: size * 0.6,
+        color: colorScheme.onSurfaceVariant,
+      ),
     );
   }
 
   Widget _buildIconForTab(
+    BuildContext context,
     NavigationTab tab,
     bool selected, {
     double size = _mobileIconSize,
   }) {
-    return Icon(selected ? tab.activeIcon : tab.icon, size: size);
+    final colorScheme = Theme.of(context).colorScheme;
+    final isCupertino = _isIOS;
+
+    return Icon(
+      isCupertino
+          ? (selected ? tab.cupertinoActiveIcon : tab.cupertinoIcon)
+          : (selected ? tab.activeIcon : tab.icon),
+      size: size,
+      color: selected ? colorScheme.onSurface : colorScheme.onSurfaceVariant,
+      weight: _iconStrokeWeight,
+      fill: selected ? 1.0 : 0.0,
+    );
   }
 }

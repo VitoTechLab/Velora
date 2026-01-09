@@ -55,7 +55,7 @@ extension NotificationEventPatterns on NotificationEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LoadInitialNotificationsEvent value)?  loadInitial,TResult Function( LoadMoreNotificationsEvent value)?  loadMore,TResult Function( RefreshNotificationsEvent value)?  refresh,TResult Function( MarkAllNotificationsReadEvent value)?  markAllAsRead,TResult Function( MarkNotificationReadEvent value)?  markAsRead,TResult Function( DeleteNotificationEvent value)?  delete,TResult Function( LoadUnreadCountEvent value)?  loadUnreadCount,TResult Function( StartWatchingNotificationsEvent value)?  startWatching,TResult Function( StopWatchingNotificationsEvent value)?  stopWatching,TResult Function( NewNotificationReceivedEvent value)?  newNotificationReceived,TResult Function( ClearTransientEvent value)?  clearTransient,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LoadInitialNotificationsEvent value)?  loadInitial,TResult Function( LoadMoreNotificationsEvent value)?  loadMore,TResult Function( RefreshNotificationsEvent value)?  refresh,TResult Function( MarkAllNotificationsReadEvent value)?  markAllAsRead,TResult Function( MarkNotificationReadEvent value)?  markAsRead,TResult Function( DeleteNotificationEvent value)?  delete,TResult Function( LoadUnreadCountEvent value)?  loadUnreadCount,TResult Function( StartWatchingNotificationsEvent value)?  startWatching,TResult Function( StopWatchingNotificationsEvent value)?  stopWatching,TResult Function( NewNotificationReceivedEvent value)?  newNotificationReceived,TResult Function( ClearTransientEvent value)?  clearTransient,TResult Function( ToggleFollowActorEvent value)?  toggleFollowActor,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case LoadInitialNotificationsEvent() when loadInitial != null:
@@ -69,7 +69,8 @@ return loadUnreadCount(_that);case StartWatchingNotificationsEvent() when startW
 return startWatching(_that);case StopWatchingNotificationsEvent() when stopWatching != null:
 return stopWatching(_that);case NewNotificationReceivedEvent() when newNotificationReceived != null:
 return newNotificationReceived(_that);case ClearTransientEvent() when clearTransient != null:
-return clearTransient(_that);case _:
+return clearTransient(_that);case ToggleFollowActorEvent() when toggleFollowActor != null:
+return toggleFollowActor(_that);case _:
   return orElse();
 
 }
@@ -87,7 +88,7 @@ return clearTransient(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LoadInitialNotificationsEvent value)  loadInitial,required TResult Function( LoadMoreNotificationsEvent value)  loadMore,required TResult Function( RefreshNotificationsEvent value)  refresh,required TResult Function( MarkAllNotificationsReadEvent value)  markAllAsRead,required TResult Function( MarkNotificationReadEvent value)  markAsRead,required TResult Function( DeleteNotificationEvent value)  delete,required TResult Function( LoadUnreadCountEvent value)  loadUnreadCount,required TResult Function( StartWatchingNotificationsEvent value)  startWatching,required TResult Function( StopWatchingNotificationsEvent value)  stopWatching,required TResult Function( NewNotificationReceivedEvent value)  newNotificationReceived,required TResult Function( ClearTransientEvent value)  clearTransient,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LoadInitialNotificationsEvent value)  loadInitial,required TResult Function( LoadMoreNotificationsEvent value)  loadMore,required TResult Function( RefreshNotificationsEvent value)  refresh,required TResult Function( MarkAllNotificationsReadEvent value)  markAllAsRead,required TResult Function( MarkNotificationReadEvent value)  markAsRead,required TResult Function( DeleteNotificationEvent value)  delete,required TResult Function( LoadUnreadCountEvent value)  loadUnreadCount,required TResult Function( StartWatchingNotificationsEvent value)  startWatching,required TResult Function( StopWatchingNotificationsEvent value)  stopWatching,required TResult Function( NewNotificationReceivedEvent value)  newNotificationReceived,required TResult Function( ClearTransientEvent value)  clearTransient,required TResult Function( ToggleFollowActorEvent value)  toggleFollowActor,}){
 final _that = this;
 switch (_that) {
 case LoadInitialNotificationsEvent():
@@ -101,7 +102,8 @@ return loadUnreadCount(_that);case StartWatchingNotificationsEvent():
 return startWatching(_that);case StopWatchingNotificationsEvent():
 return stopWatching(_that);case NewNotificationReceivedEvent():
 return newNotificationReceived(_that);case ClearTransientEvent():
-return clearTransient(_that);case _:
+return clearTransient(_that);case ToggleFollowActorEvent():
+return toggleFollowActor(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -118,7 +120,7 @@ return clearTransient(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LoadInitialNotificationsEvent value)?  loadInitial,TResult? Function( LoadMoreNotificationsEvent value)?  loadMore,TResult? Function( RefreshNotificationsEvent value)?  refresh,TResult? Function( MarkAllNotificationsReadEvent value)?  markAllAsRead,TResult? Function( MarkNotificationReadEvent value)?  markAsRead,TResult? Function( DeleteNotificationEvent value)?  delete,TResult? Function( LoadUnreadCountEvent value)?  loadUnreadCount,TResult? Function( StartWatchingNotificationsEvent value)?  startWatching,TResult? Function( StopWatchingNotificationsEvent value)?  stopWatching,TResult? Function( NewNotificationReceivedEvent value)?  newNotificationReceived,TResult? Function( ClearTransientEvent value)?  clearTransient,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LoadInitialNotificationsEvent value)?  loadInitial,TResult? Function( LoadMoreNotificationsEvent value)?  loadMore,TResult? Function( RefreshNotificationsEvent value)?  refresh,TResult? Function( MarkAllNotificationsReadEvent value)?  markAllAsRead,TResult? Function( MarkNotificationReadEvent value)?  markAsRead,TResult? Function( DeleteNotificationEvent value)?  delete,TResult? Function( LoadUnreadCountEvent value)?  loadUnreadCount,TResult? Function( StartWatchingNotificationsEvent value)?  startWatching,TResult? Function( StopWatchingNotificationsEvent value)?  stopWatching,TResult? Function( NewNotificationReceivedEvent value)?  newNotificationReceived,TResult? Function( ClearTransientEvent value)?  clearTransient,TResult? Function( ToggleFollowActorEvent value)?  toggleFollowActor,}){
 final _that = this;
 switch (_that) {
 case LoadInitialNotificationsEvent() when loadInitial != null:
@@ -132,7 +134,8 @@ return loadUnreadCount(_that);case StartWatchingNotificationsEvent() when startW
 return startWatching(_that);case StopWatchingNotificationsEvent() when stopWatching != null:
 return stopWatching(_that);case NewNotificationReceivedEvent() when newNotificationReceived != null:
 return newNotificationReceived(_that);case ClearTransientEvent() when clearTransient != null:
-return clearTransient(_that);case _:
+return clearTransient(_that);case ToggleFollowActorEvent() when toggleFollowActor != null:
+return toggleFollowActor(_that);case _:
   return null;
 
 }
@@ -149,7 +152,7 @@ return clearTransient(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int limit)?  loadInitial,TResult Function( int limit)?  loadMore,TResult Function()?  refresh,TResult Function()?  markAllAsRead,TResult Function( String notificationId)?  markAsRead,TResult Function( String notificationId)?  delete,TResult Function()?  loadUnreadCount,TResult Function()?  startWatching,TResult Function()?  stopWatching,TResult Function()?  newNotificationReceived,TResult Function()?  clearTransient,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int limit)?  loadInitial,TResult Function( int limit)?  loadMore,TResult Function()?  refresh,TResult Function()?  markAllAsRead,TResult Function( String notificationId)?  markAsRead,TResult Function( String notificationId)?  delete,TResult Function()?  loadUnreadCount,TResult Function()?  startWatching,TResult Function()?  stopWatching,TResult Function()?  newNotificationReceived,TResult Function()?  clearTransient,TResult Function( String notificationId,  String actorId)?  toggleFollowActor,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case LoadInitialNotificationsEvent() when loadInitial != null:
 return loadInitial(_that.limit);case LoadMoreNotificationsEvent() when loadMore != null:
@@ -162,7 +165,8 @@ return loadUnreadCount();case StartWatchingNotificationsEvent() when startWatchi
 return startWatching();case StopWatchingNotificationsEvent() when stopWatching != null:
 return stopWatching();case NewNotificationReceivedEvent() when newNotificationReceived != null:
 return newNotificationReceived();case ClearTransientEvent() when clearTransient != null:
-return clearTransient();case _:
+return clearTransient();case ToggleFollowActorEvent() when toggleFollowActor != null:
+return toggleFollowActor(_that.notificationId,_that.actorId);case _:
   return orElse();
 
 }
@@ -180,7 +184,7 @@ return clearTransient();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int limit)  loadInitial,required TResult Function( int limit)  loadMore,required TResult Function()  refresh,required TResult Function()  markAllAsRead,required TResult Function( String notificationId)  markAsRead,required TResult Function( String notificationId)  delete,required TResult Function()  loadUnreadCount,required TResult Function()  startWatching,required TResult Function()  stopWatching,required TResult Function()  newNotificationReceived,required TResult Function()  clearTransient,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int limit)  loadInitial,required TResult Function( int limit)  loadMore,required TResult Function()  refresh,required TResult Function()  markAllAsRead,required TResult Function( String notificationId)  markAsRead,required TResult Function( String notificationId)  delete,required TResult Function()  loadUnreadCount,required TResult Function()  startWatching,required TResult Function()  stopWatching,required TResult Function()  newNotificationReceived,required TResult Function()  clearTransient,required TResult Function( String notificationId,  String actorId)  toggleFollowActor,}) {final _that = this;
 switch (_that) {
 case LoadInitialNotificationsEvent():
 return loadInitial(_that.limit);case LoadMoreNotificationsEvent():
@@ -193,7 +197,8 @@ return loadUnreadCount();case StartWatchingNotificationsEvent():
 return startWatching();case StopWatchingNotificationsEvent():
 return stopWatching();case NewNotificationReceivedEvent():
 return newNotificationReceived();case ClearTransientEvent():
-return clearTransient();case _:
+return clearTransient();case ToggleFollowActorEvent():
+return toggleFollowActor(_that.notificationId,_that.actorId);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -210,7 +215,7 @@ return clearTransient();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int limit)?  loadInitial,TResult? Function( int limit)?  loadMore,TResult? Function()?  refresh,TResult? Function()?  markAllAsRead,TResult? Function( String notificationId)?  markAsRead,TResult? Function( String notificationId)?  delete,TResult? Function()?  loadUnreadCount,TResult? Function()?  startWatching,TResult? Function()?  stopWatching,TResult? Function()?  newNotificationReceived,TResult? Function()?  clearTransient,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int limit)?  loadInitial,TResult? Function( int limit)?  loadMore,TResult? Function()?  refresh,TResult? Function()?  markAllAsRead,TResult? Function( String notificationId)?  markAsRead,TResult? Function( String notificationId)?  delete,TResult? Function()?  loadUnreadCount,TResult? Function()?  startWatching,TResult? Function()?  stopWatching,TResult? Function()?  newNotificationReceived,TResult? Function()?  clearTransient,TResult? Function( String notificationId,  String actorId)?  toggleFollowActor,}) {final _that = this;
 switch (_that) {
 case LoadInitialNotificationsEvent() when loadInitial != null:
 return loadInitial(_that.limit);case LoadMoreNotificationsEvent() when loadMore != null:
@@ -223,7 +228,8 @@ return loadUnreadCount();case StartWatchingNotificationsEvent() when startWatchi
 return startWatching();case StopWatchingNotificationsEvent() when stopWatching != null:
 return stopWatching();case NewNotificationReceivedEvent() when newNotificationReceived != null:
 return newNotificationReceived();case ClearTransientEvent() when clearTransient != null:
-return clearTransient();case _:
+return clearTransient();case ToggleFollowActorEvent() when toggleFollowActor != null:
+return toggleFollowActor(_that.notificationId,_that.actorId);case _:
   return null;
 
 }
@@ -718,5 +724,73 @@ String toString() {
 
 
 
+
+/// @nodoc
+
+
+class ToggleFollowActorEvent implements NotificationEvent {
+  const ToggleFollowActorEvent({required this.notificationId, required this.actorId});
+  
+
+ final  String notificationId;
+ final  String actorId;
+
+/// Create a copy of NotificationEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ToggleFollowActorEventCopyWith<ToggleFollowActorEvent> get copyWith => _$ToggleFollowActorEventCopyWithImpl<ToggleFollowActorEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ToggleFollowActorEvent&&(identical(other.notificationId, notificationId) || other.notificationId == notificationId)&&(identical(other.actorId, actorId) || other.actorId == actorId));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,notificationId,actorId);
+
+@override
+String toString() {
+  return 'NotificationEvent.toggleFollowActor(notificationId: $notificationId, actorId: $actorId)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ToggleFollowActorEventCopyWith<$Res> implements $NotificationEventCopyWith<$Res> {
+  factory $ToggleFollowActorEventCopyWith(ToggleFollowActorEvent value, $Res Function(ToggleFollowActorEvent) _then) = _$ToggleFollowActorEventCopyWithImpl;
+@useResult
+$Res call({
+ String notificationId, String actorId
+});
+
+
+
+
+}
+/// @nodoc
+class _$ToggleFollowActorEventCopyWithImpl<$Res>
+    implements $ToggleFollowActorEventCopyWith<$Res> {
+  _$ToggleFollowActorEventCopyWithImpl(this._self, this._then);
+
+  final ToggleFollowActorEvent _self;
+  final $Res Function(ToggleFollowActorEvent) _then;
+
+/// Create a copy of NotificationEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? notificationId = null,Object? actorId = null,}) {
+  return _then(ToggleFollowActorEvent(
+notificationId: null == notificationId ? _self.notificationId : notificationId // ignore: cast_nullable_to_non_nullable
+as String,actorId: null == actorId ? _self.actorId : actorId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
 
 // dart format on

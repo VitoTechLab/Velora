@@ -17,11 +17,29 @@ import 'package:velora/features/profile/presentation/widgets/profile_actions.dar
 import 'package:velora/features/profile/presentation/widgets/profile_tabs.dart';
 import 'package:velora/features/profile/presentation/widgets/profile_grid.dart';
 import 'package:velora/routes/app_router.dart';
+import 'package:velora/core/di/service_locator.dart';
 
-class ProfileScreen extends HookWidget {
+class ProfileScreen extends StatelessWidget {
   final String? userId;
 
   const ProfileScreen({super.key, this.userId});
+
+  @override
+  Widget build(BuildContext context) {
+    // We wrap the content in a BlocProvider to ensure a fresh FeedBloc instance
+    // is used for the profile posts. This prevents state leakage from the main feed.
+    // Note: Ensure FeedBloc is registered as a factory in ServiceLocator!
+    return BlocProvider(
+      create: (_) => getIt<FeedBloc>(),
+      child: _ProfileScreenContent(userId: userId),
+    );
+  }
+}
+
+class _ProfileScreenContent extends HookWidget {
+  final String? userId;
+
+  const _ProfileScreenContent({this.userId});
 
   @override
   Widget build(BuildContext context) {
@@ -30,22 +48,22 @@ class ProfileScreen extends HookWidget {
     final tabController = useTabController(initialLength: 4);
 
     final authState = context.watch<AuthBloc>().state;
-    final effectiveUserId = userId ?? authState.userId;
+    final targetUserId = userId ?? authState.userId;
 
     useEffect(() {
-      if (effectiveUserId != null) {
+      if (targetUserId != null) {
         context.read<ProfileBloc>().add(
-          LoadProfileEvent(userId: effectiveUserId),
+          LoadProfileEvent(userId: targetUserId),
         );
         context.read<FeedBloc>().add(
           feed_event.FeedEvent.loadInitialFeed(
             limit: 20,
-            userId: effectiveUserId,
+            userId: targetUserId,
           ),
         );
       }
       return null;
-    }, [effectiveUserId]);
+    }, [targetUserId]);
 
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, profileState) {
@@ -109,19 +127,20 @@ class ProfileScreen extends HookWidget {
               ? Center(child: Text(profileState.error!))
               : RefreshIndicator(
                   onRefresh: () async {
-                    if (effectiveUserId != null) {
+                    if (targetUserId != null) {
                       context.read<ProfileBloc>().add(
-                        LoadProfileEvent(userId: effectiveUserId),
+                        LoadProfileEvent(userId: targetUserId),
                       );
                       context.read<FeedBloc>().add(
                         feed_event.FeedEvent.loadInitialFeed(
                           limit: 20,
-                          userId: effectiveUserId,
+                          userId: targetUserId,
                         ),
                       );
                     }
                   },
                   child: NestedScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
                     headerSliverBuilder: (context, innerBoxIsScrolled) {
                       return [
                         SliverToBoxAdapter(
@@ -245,6 +264,34 @@ class ProfileScreen extends HookWidget {
                             if (feedState.isLoadingInitial) {
                               return const Center(
                                 child: CircularProgressIndicator(),
+                              );
+                            }
+                            if (feedState.posts.isEmpty) {
+                              return CustomScrollView(
+                                physics: const AlwaysScrollableScrollPhysics(),
+                                slivers: [
+                                  SliverFillRemaining(
+                                    child: Center(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(
+                                            Icons.photo_library_outlined,
+                                            size: 64,
+                                            color: colorScheme.onSurfaceVariant,
+                                          ),
+                                          const SizedBox(height: 16),
+                                          Text(
+                                            'No posts yet',
+                                            style: theme.textTheme.titleMedium?.copyWith(
+                                              color: colorScheme.onSurfaceVariant,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               );
                             }
                             return ProfileGrid(

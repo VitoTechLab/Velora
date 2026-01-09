@@ -1,4 +1,4 @@
-import 'package:velora/features/notification/data/models/notification_cursor.dart';
+import 'package:velora/features/notification/data/models/notification_cursor_model.dart';
 import 'package:velora/features/notification/data/models/notification_model.dart';
 import 'package:velora/features/notification/data/models/notification_pagination_model.dart';
 
@@ -6,7 +6,7 @@ abstract class NotificationRemoteDataSource {
   /// Get notifications with cursor-based pagination
   Future<NotificationPaginationModel> getNotifications({
     int limit = 20,
-    NotificationCursor? cursor,
+    NotificationCursorModel? cursor,
     String? type,
   });
 

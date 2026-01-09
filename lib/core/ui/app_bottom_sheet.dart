@@ -126,17 +126,37 @@ class _SheetFrame extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        // Drag handle
+        Padding(
+          padding: const EdgeInsets.only(top: 12, bottom: 8),
+          child: Center(
+            child: Container(
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: Theme.of(
+                  context,
+                ).colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+          ),
+        ),
         // Header
         Padding(
-          padding: const EdgeInsets.fromLTRB(16, 10, 8, 8),
+          padding: const EdgeInsets.fromLTRB(16, 0, 8, 8),
           child: Row(
             children: [
+              // Left spacer for centering
+              if (showCloseButton) const SizedBox(width: 48),
               Expanded(
                 child: title == null
                     ? const SizedBox.shrink()
                     : Text(
                         title!,
-                        style: Theme.of(context).textTheme.titleMedium,
+                        style: Theme.of(context).textTheme.titleMedium
+                            ?.copyWith(fontWeight: FontWeight.w600),
+                        textAlign: TextAlign.center,
                       ),
               ),
               if (showCloseButton)
@@ -152,7 +172,10 @@ class _SheetFrame extends StatelessWidget {
 
         // Content
         Expanded(
-          child: Padding(padding: contentPadding, child: child),
+          child: SafeArea(
+            top: false,
+            child: Padding(padding: contentPadding, child: child),
+          ),
         ),
       ],
     );

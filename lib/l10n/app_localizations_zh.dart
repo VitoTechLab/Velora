@@ -251,6 +251,17 @@ class AppLocalizationsZh extends AppLocalizations {
   String get feedSeeTranslation => '查看翻译';
 
   @override
+  String get feedSeeOriginal => '查看原文';
+
+  @override
+  String get feedTranslating => '加载中…';
+
+  @override
+  String feedCommentAsUser(String username) {
+    return '以 $username 的身份评论';
+  }
+
+  @override
   String feedViewReplies(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -260,6 +271,9 @@ class AppLocalizationsZh extends AppLocalizations {
     );
     return '查看$_temp0';
   }
+
+  @override
+  String get feedHideReplies => '隐藏回复';
 
   @override
   String get feedUnknownUser => '未知用户';

@@ -55,7 +55,7 @@ extension FeedEventPatterns on FeedEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LoadInitialFeedEvent value)?  loadInitialFeed,TResult Function( LoadMoreFeedEvent value)?  loadMoreFeed,TResult Function( GetPostByIdEvent value)?  getPostById,TResult Function( UpdatePostEvent value)?  updatePostEntity,TResult Function( DeletePostEvent value)?  deletePost,TResult Function( RefreshFeedEvent value)?  refreshFeed,TResult Function( ToggleLikePostEvent value)?  toggleLikePost,TResult Function( ToggleBookmarkPostEvent value)?  toggleBookmarkPost,TResult Function( LoadCommentsEvent value)?  loadComments,TResult Function( AddCommentEvent value)?  addComment,TResult Function( DeleteCommentEvent value)?  deleteComment,TResult Function( ToggleLikeCommentEvent value)?  toggleLikeComment,TResult Function( ClearTransientEvent value)?  clearTransient,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LoadInitialFeedEvent value)?  loadInitialFeed,TResult Function( LoadMoreFeedEvent value)?  loadMoreFeed,TResult Function( GetPostByIdEvent value)?  getPostById,TResult Function( UpdatePostEvent value)?  updatePostEntity,TResult Function( DeletePostEvent value)?  deletePost,TResult Function( RefreshFeedEvent value)?  refreshFeed,TResult Function( ToggleLikePostEvent value)?  toggleLikePost,TResult Function( ToggleBookmarkPostEvent value)?  toggleBookmarkPost,TResult Function( AddNewPostEvent value)?  addNewPost,TResult Function( LoadCommentsEvent value)?  loadComments,TResult Function( AddCommentEvent value)?  addComment,TResult Function( DeleteCommentEvent value)?  deleteComment,TResult Function( ToggleLikeCommentEvent value)?  toggleLikeComment,TResult Function( ClearTransientEvent value)?  clearTransient,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case LoadInitialFeedEvent() when loadInitialFeed != null:
@@ -66,7 +66,8 @@ return updatePostEntity(_that);case DeletePostEvent() when deletePost != null:
 return deletePost(_that);case RefreshFeedEvent() when refreshFeed != null:
 return refreshFeed(_that);case ToggleLikePostEvent() when toggleLikePost != null:
 return toggleLikePost(_that);case ToggleBookmarkPostEvent() when toggleBookmarkPost != null:
-return toggleBookmarkPost(_that);case LoadCommentsEvent() when loadComments != null:
+return toggleBookmarkPost(_that);case AddNewPostEvent() when addNewPost != null:
+return addNewPost(_that);case LoadCommentsEvent() when loadComments != null:
 return loadComments(_that);case AddCommentEvent() when addComment != null:
 return addComment(_that);case DeleteCommentEvent() when deleteComment != null:
 return deleteComment(_that);case ToggleLikeCommentEvent() when toggleLikeComment != null:
@@ -89,7 +90,7 @@ return clearTransient(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LoadInitialFeedEvent value)  loadInitialFeed,required TResult Function( LoadMoreFeedEvent value)  loadMoreFeed,required TResult Function( GetPostByIdEvent value)  getPostById,required TResult Function( UpdatePostEvent value)  updatePostEntity,required TResult Function( DeletePostEvent value)  deletePost,required TResult Function( RefreshFeedEvent value)  refreshFeed,required TResult Function( ToggleLikePostEvent value)  toggleLikePost,required TResult Function( ToggleBookmarkPostEvent value)  toggleBookmarkPost,required TResult Function( LoadCommentsEvent value)  loadComments,required TResult Function( AddCommentEvent value)  addComment,required TResult Function( DeleteCommentEvent value)  deleteComment,required TResult Function( ToggleLikeCommentEvent value)  toggleLikeComment,required TResult Function( ClearTransientEvent value)  clearTransient,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LoadInitialFeedEvent value)  loadInitialFeed,required TResult Function( LoadMoreFeedEvent value)  loadMoreFeed,required TResult Function( GetPostByIdEvent value)  getPostById,required TResult Function( UpdatePostEvent value)  updatePostEntity,required TResult Function( DeletePostEvent value)  deletePost,required TResult Function( RefreshFeedEvent value)  refreshFeed,required TResult Function( ToggleLikePostEvent value)  toggleLikePost,required TResult Function( ToggleBookmarkPostEvent value)  toggleBookmarkPost,required TResult Function( AddNewPostEvent value)  addNewPost,required TResult Function( LoadCommentsEvent value)  loadComments,required TResult Function( AddCommentEvent value)  addComment,required TResult Function( DeleteCommentEvent value)  deleteComment,required TResult Function( ToggleLikeCommentEvent value)  toggleLikeComment,required TResult Function( ClearTransientEvent value)  clearTransient,}){
 final _that = this;
 switch (_that) {
 case LoadInitialFeedEvent():
@@ -100,7 +101,8 @@ return updatePostEntity(_that);case DeletePostEvent():
 return deletePost(_that);case RefreshFeedEvent():
 return refreshFeed(_that);case ToggleLikePostEvent():
 return toggleLikePost(_that);case ToggleBookmarkPostEvent():
-return toggleBookmarkPost(_that);case LoadCommentsEvent():
+return toggleBookmarkPost(_that);case AddNewPostEvent():
+return addNewPost(_that);case LoadCommentsEvent():
 return loadComments(_that);case AddCommentEvent():
 return addComment(_that);case DeleteCommentEvent():
 return deleteComment(_that);case ToggleLikeCommentEvent():
@@ -122,7 +124,7 @@ return clearTransient(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LoadInitialFeedEvent value)?  loadInitialFeed,TResult? Function( LoadMoreFeedEvent value)?  loadMoreFeed,TResult? Function( GetPostByIdEvent value)?  getPostById,TResult? Function( UpdatePostEvent value)?  updatePostEntity,TResult? Function( DeletePostEvent value)?  deletePost,TResult? Function( RefreshFeedEvent value)?  refreshFeed,TResult? Function( ToggleLikePostEvent value)?  toggleLikePost,TResult? Function( ToggleBookmarkPostEvent value)?  toggleBookmarkPost,TResult? Function( LoadCommentsEvent value)?  loadComments,TResult? Function( AddCommentEvent value)?  addComment,TResult? Function( DeleteCommentEvent value)?  deleteComment,TResult? Function( ToggleLikeCommentEvent value)?  toggleLikeComment,TResult? Function( ClearTransientEvent value)?  clearTransient,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LoadInitialFeedEvent value)?  loadInitialFeed,TResult? Function( LoadMoreFeedEvent value)?  loadMoreFeed,TResult? Function( GetPostByIdEvent value)?  getPostById,TResult? Function( UpdatePostEvent value)?  updatePostEntity,TResult? Function( DeletePostEvent value)?  deletePost,TResult? Function( RefreshFeedEvent value)?  refreshFeed,TResult? Function( ToggleLikePostEvent value)?  toggleLikePost,TResult? Function( ToggleBookmarkPostEvent value)?  toggleBookmarkPost,TResult? Function( AddNewPostEvent value)?  addNewPost,TResult? Function( LoadCommentsEvent value)?  loadComments,TResult? Function( AddCommentEvent value)?  addComment,TResult? Function( DeleteCommentEvent value)?  deleteComment,TResult? Function( ToggleLikeCommentEvent value)?  toggleLikeComment,TResult? Function( ClearTransientEvent value)?  clearTransient,}){
 final _that = this;
 switch (_that) {
 case LoadInitialFeedEvent() when loadInitialFeed != null:
@@ -133,7 +135,8 @@ return updatePostEntity(_that);case DeletePostEvent() when deletePost != null:
 return deletePost(_that);case RefreshFeedEvent() when refreshFeed != null:
 return refreshFeed(_that);case ToggleLikePostEvent() when toggleLikePost != null:
 return toggleLikePost(_that);case ToggleBookmarkPostEvent() when toggleBookmarkPost != null:
-return toggleBookmarkPost(_that);case LoadCommentsEvent() when loadComments != null:
+return toggleBookmarkPost(_that);case AddNewPostEvent() when addNewPost != null:
+return addNewPost(_that);case LoadCommentsEvent() when loadComments != null:
 return loadComments(_that);case AddCommentEvent() when addComment != null:
 return addComment(_that);case DeleteCommentEvent() when deleteComment != null:
 return deleteComment(_that);case ToggleLikeCommentEvent() when toggleLikeComment != null:
@@ -155,7 +158,7 @@ return clearTransient(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int limit,  String? userId)?  loadInitialFeed,TResult Function( int limit,  String? userId)?  loadMoreFeed,TResult Function( String postId)?  getPostById,TResult Function( FeedEntity post)?  updatePostEntity,TResult Function( String postId)?  deletePost,TResult Function()?  refreshFeed,TResult Function( String postId)?  toggleLikePost,TResult Function( String postId)?  toggleBookmarkPost,TResult Function( String postId,  int? limit)?  loadComments,TResult Function( String postId,  String content,  String? parentCommentId)?  addComment,TResult Function( String commentId)?  deleteComment,TResult Function( String commentId)?  toggleLikeComment,TResult Function()?  clearTransient,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int limit,  String? userId)?  loadInitialFeed,TResult Function( int limit,  String? userId)?  loadMoreFeed,TResult Function( String postId)?  getPostById,TResult Function( FeedEntity post)?  updatePostEntity,TResult Function( String postId)?  deletePost,TResult Function()?  refreshFeed,TResult Function( String postId)?  toggleLikePost,TResult Function( String postId)?  toggleBookmarkPost,TResult Function( FeedEntity post)?  addNewPost,TResult Function( String postId,  int? limit)?  loadComments,TResult Function( String postId,  String content,  String? parentCommentId)?  addComment,TResult Function( String commentId)?  deleteComment,TResult Function( String commentId)?  toggleLikeComment,TResult Function()?  clearTransient,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case LoadInitialFeedEvent() when loadInitialFeed != null:
 return loadInitialFeed(_that.limit,_that.userId);case LoadMoreFeedEvent() when loadMoreFeed != null:
@@ -165,7 +168,8 @@ return updatePostEntity(_that.post);case DeletePostEvent() when deletePost != nu
 return deletePost(_that.postId);case RefreshFeedEvent() when refreshFeed != null:
 return refreshFeed();case ToggleLikePostEvent() when toggleLikePost != null:
 return toggleLikePost(_that.postId);case ToggleBookmarkPostEvent() when toggleBookmarkPost != null:
-return toggleBookmarkPost(_that.postId);case LoadCommentsEvent() when loadComments != null:
+return toggleBookmarkPost(_that.postId);case AddNewPostEvent() when addNewPost != null:
+return addNewPost(_that.post);case LoadCommentsEvent() when loadComments != null:
 return loadComments(_that.postId,_that.limit);case AddCommentEvent() when addComment != null:
 return addComment(_that.postId,_that.content,_that.parentCommentId);case DeleteCommentEvent() when deleteComment != null:
 return deleteComment(_that.commentId);case ToggleLikeCommentEvent() when toggleLikeComment != null:
@@ -188,7 +192,7 @@ return clearTransient();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int limit,  String? userId)  loadInitialFeed,required TResult Function( int limit,  String? userId)  loadMoreFeed,required TResult Function( String postId)  getPostById,required TResult Function( FeedEntity post)  updatePostEntity,required TResult Function( String postId)  deletePost,required TResult Function()  refreshFeed,required TResult Function( String postId)  toggleLikePost,required TResult Function( String postId)  toggleBookmarkPost,required TResult Function( String postId,  int? limit)  loadComments,required TResult Function( String postId,  String content,  String? parentCommentId)  addComment,required TResult Function( String commentId)  deleteComment,required TResult Function( String commentId)  toggleLikeComment,required TResult Function()  clearTransient,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int limit,  String? userId)  loadInitialFeed,required TResult Function( int limit,  String? userId)  loadMoreFeed,required TResult Function( String postId)  getPostById,required TResult Function( FeedEntity post)  updatePostEntity,required TResult Function( String postId)  deletePost,required TResult Function()  refreshFeed,required TResult Function( String postId)  toggleLikePost,required TResult Function( String postId)  toggleBookmarkPost,required TResult Function( FeedEntity post)  addNewPost,required TResult Function( String postId,  int? limit)  loadComments,required TResult Function( String postId,  String content,  String? parentCommentId)  addComment,required TResult Function( String commentId)  deleteComment,required TResult Function( String commentId)  toggleLikeComment,required TResult Function()  clearTransient,}) {final _that = this;
 switch (_that) {
 case LoadInitialFeedEvent():
 return loadInitialFeed(_that.limit,_that.userId);case LoadMoreFeedEvent():
@@ -198,7 +202,8 @@ return updatePostEntity(_that.post);case DeletePostEvent():
 return deletePost(_that.postId);case RefreshFeedEvent():
 return refreshFeed();case ToggleLikePostEvent():
 return toggleLikePost(_that.postId);case ToggleBookmarkPostEvent():
-return toggleBookmarkPost(_that.postId);case LoadCommentsEvent():
+return toggleBookmarkPost(_that.postId);case AddNewPostEvent():
+return addNewPost(_that.post);case LoadCommentsEvent():
 return loadComments(_that.postId,_that.limit);case AddCommentEvent():
 return addComment(_that.postId,_that.content,_that.parentCommentId);case DeleteCommentEvent():
 return deleteComment(_that.commentId);case ToggleLikeCommentEvent():
@@ -220,7 +225,7 @@ return clearTransient();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int limit,  String? userId)?  loadInitialFeed,TResult? Function( int limit,  String? userId)?  loadMoreFeed,TResult? Function( String postId)?  getPostById,TResult? Function( FeedEntity post)?  updatePostEntity,TResult? Function( String postId)?  deletePost,TResult? Function()?  refreshFeed,TResult? Function( String postId)?  toggleLikePost,TResult? Function( String postId)?  toggleBookmarkPost,TResult? Function( String postId,  int? limit)?  loadComments,TResult? Function( String postId,  String content,  String? parentCommentId)?  addComment,TResult? Function( String commentId)?  deleteComment,TResult? Function( String commentId)?  toggleLikeComment,TResult? Function()?  clearTransient,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int limit,  String? userId)?  loadInitialFeed,TResult? Function( int limit,  String? userId)?  loadMoreFeed,TResult? Function( String postId)?  getPostById,TResult? Function( FeedEntity post)?  updatePostEntity,TResult? Function( String postId)?  deletePost,TResult? Function()?  refreshFeed,TResult? Function( String postId)?  toggleLikePost,TResult? Function( String postId)?  toggleBookmarkPost,TResult? Function( FeedEntity post)?  addNewPost,TResult? Function( String postId,  int? limit)?  loadComments,TResult? Function( String postId,  String content,  String? parentCommentId)?  addComment,TResult? Function( String commentId)?  deleteComment,TResult? Function( String commentId)?  toggleLikeComment,TResult? Function()?  clearTransient,}) {final _that = this;
 switch (_that) {
 case LoadInitialFeedEvent() when loadInitialFeed != null:
 return loadInitialFeed(_that.limit,_that.userId);case LoadMoreFeedEvent() when loadMoreFeed != null:
@@ -230,7 +235,8 @@ return updatePostEntity(_that.post);case DeletePostEvent() when deletePost != nu
 return deletePost(_that.postId);case RefreshFeedEvent() when refreshFeed != null:
 return refreshFeed();case ToggleLikePostEvent() when toggleLikePost != null:
 return toggleLikePost(_that.postId);case ToggleBookmarkPostEvent() when toggleBookmarkPost != null:
-return toggleBookmarkPost(_that.postId);case LoadCommentsEvent() when loadComments != null:
+return toggleBookmarkPost(_that.postId);case AddNewPostEvent() when addNewPost != null:
+return addNewPost(_that.post);case LoadCommentsEvent() when loadComments != null:
 return loadComments(_that.postId,_that.limit);case AddCommentEvent() when addComment != null:
 return addComment(_that.postId,_that.content,_that.parentCommentId);case DeleteCommentEvent() when deleteComment != null:
 return deleteComment(_that.commentId);case ToggleLikeCommentEvent() when toggleLikeComment != null:
@@ -748,6 +754,81 @@ as String,
 }
 
 
+}
+
+/// @nodoc
+
+
+class AddNewPostEvent implements FeedEvent {
+  const AddNewPostEvent(this.post);
+  
+
+ final  FeedEntity post;
+
+/// Create a copy of FeedEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$AddNewPostEventCopyWith<AddNewPostEvent> get copyWith => _$AddNewPostEventCopyWithImpl<AddNewPostEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddNewPostEvent&&(identical(other.post, post) || other.post == post));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,post);
+
+@override
+String toString() {
+  return 'FeedEvent.addNewPost(post: $post)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $AddNewPostEventCopyWith<$Res> implements $FeedEventCopyWith<$Res> {
+  factory $AddNewPostEventCopyWith(AddNewPostEvent value, $Res Function(AddNewPostEvent) _then) = _$AddNewPostEventCopyWithImpl;
+@useResult
+$Res call({
+ FeedEntity post
+});
+
+
+$FeedEntityCopyWith<$Res> get post;
+
+}
+/// @nodoc
+class _$AddNewPostEventCopyWithImpl<$Res>
+    implements $AddNewPostEventCopyWith<$Res> {
+  _$AddNewPostEventCopyWithImpl(this._self, this._then);
+
+  final AddNewPostEvent _self;
+  final $Res Function(AddNewPostEvent) _then;
+
+/// Create a copy of FeedEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? post = null,}) {
+  return _then(AddNewPostEvent(
+null == post ? _self.post : post // ignore: cast_nullable_to_non_nullable
+as FeedEntity,
+  ));
+}
+
+/// Create a copy of FeedEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FeedEntityCopyWith<$Res> get post {
+  
+  return $FeedEntityCopyWith<$Res>(_self.post, (value) {
+    return _then(_self.copyWith(post: value));
+  });
+}
 }
 
 /// @nodoc

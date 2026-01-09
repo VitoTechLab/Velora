@@ -256,6 +256,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get feedSeeTranslation => 'See translation';
 
   @override
+  String get feedSeeOriginal => 'See original';
+
+  @override
+  String get feedTranslating => 'Loading…';
+
+  @override
+  String feedCommentAsUser(String username) {
+    return 'Comment as $username';
+  }
+
+  @override
   String feedViewReplies(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -265,6 +276,9 @@ class AppLocalizationsEn extends AppLocalizations {
     );
     return 'View $_temp0';
   }
+
+  @override
+  String get feedHideReplies => 'Hide replies';
 
   @override
   String get feedUnknownUser => 'Unknown user';

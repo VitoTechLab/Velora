@@ -13,7 +13,7 @@ _CommentPaginationModel _$CommentPaginationModelFromJson(
       .map((e) => CommentModel.fromJson(e as Map<String, dynamic>))
       .toList(),
   hasMore: json['hasMore'] as bool,
-  nextCursor: _cursorFromJson(json['nextCursor']),
+  nextCursor: _commentCursorFromJson(json['nextCursor']),
 );
 
 Map<String, dynamic> _$CommentPaginationModelToJson(
@@ -21,5 +21,5 @@ Map<String, dynamic> _$CommentPaginationModelToJson(
 ) => <String, dynamic>{
   'comments': instance.comments,
   'hasMore': instance.hasMore,
-  'nextCursor': _cursorToJson(instance.nextCursor),
+  'nextCursor': _commentCursorToJson(instance.nextCursor),
 };

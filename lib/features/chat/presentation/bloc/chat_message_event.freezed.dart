@@ -55,7 +55,7 @@ extension ChatMessageEventPatterns on ChatMessageEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LoadChatMessagesEvent value)?  loadMessages,TResult Function( LoadMoreChatMessagesEvent value)?  loadMoreMessages,TResult Function( SendChatMessageEvent value)?  sendMessage,TResult Function( EditChatMessageEvent value)?  editMessage,TResult Function( DeleteChatMessageEvent value)?  deleteMessage,TResult Function( MarkConversationReadEvent value)?  markConversationRead,TResult Function( ClearChatMessagesInfoEvent value)?  clearInfo,TResult Function( StartWatchMessagesEvent value)?  startWatch,TResult Function( StopWatchMessagesEvent value)?  stopWatch,TResult Function( WatchMessageArrivedEvent value)?  watchMessageArrived,TResult Function( WatchMessageUpdatedEvent value)?  watchMessageUpdated,TResult Function( WatchMessageDeletedEvent value)?  watchMessageDeleted,TResult Function( WatchMessageErrorEvent value)?  watchMessageError,TResult Function( LoadConversationListEvent value)?  loadConversationList,TResult Function( LoadMessageReadsEvent value)?  loadMessageReads,TResult Function( MarkMessageReadEvent value)?  markMessageRead,TResult Function( StartWatchReadsEvent value)?  startWatchReads,TResult Function( StopWatchReadsEvent value)?  stopWatchReads,TResult Function( WatchReadArrivedEvent value)?  watchReadArrived,TResult Function( SendTypingEvent value)?  sendTyping,TResult Function( StartWatchTypingEvent value)?  startWatchTyping,TResult Function( StopWatchTypingEvent value)?  stopWatchTyping,TResult Function( WatchTypingArrivedEvent value)?  watchTypingArrived,TResult Function( CleanupTypingEvent value)?  cleanupTyping,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LoadChatMessagesEvent value)?  loadMessages,TResult Function( LoadMoreChatMessagesEvent value)?  loadMoreMessages,TResult Function( SendChatMessageEvent value)?  sendMessage,TResult Function( EditChatMessageEvent value)?  editMessage,TResult Function( DeleteChatMessageEvent value)?  deleteMessage,TResult Function( MarkConversationReadEvent value)?  markConversationRead,TResult Function( ClearChatMessagesInfoEvent value)?  clearInfo,TResult Function( StartWatchMessagesEvent value)?  startWatch,TResult Function( StopWatchMessagesEvent value)?  stopWatch,TResult Function( WatchMessageArrivedEvent value)?  watchMessageArrived,TResult Function( WatchMessageUpdatedEvent value)?  watchMessageUpdated,TResult Function( WatchMessageDeletedEvent value)?  watchMessageDeleted,TResult Function( WatchMessageErrorEvent value)?  watchMessageError,TResult Function( LoadConversationListEvent value)?  loadConversationList,TResult Function( SetChatFilterEvent value)?  setChatFilter,TResult Function( SetSearchQueryEvent value)?  setSearchQuery,TResult Function( LoadMessageReadsEvent value)?  loadMessageReads,TResult Function( MarkMessageReadEvent value)?  markMessageRead,TResult Function( StartWatchReadsEvent value)?  startWatchReads,TResult Function( StopWatchReadsEvent value)?  stopWatchReads,TResult Function( WatchReadArrivedEvent value)?  watchReadArrived,TResult Function( SendTypingEvent value)?  sendTyping,TResult Function( StartWatchTypingEvent value)?  startWatchTyping,TResult Function( StopWatchTypingEvent value)?  stopWatchTyping,TResult Function( WatchTypingArrivedEvent value)?  watchTypingArrived,TResult Function( CleanupTypingEvent value)?  cleanupTyping,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case LoadChatMessagesEvent() when loadMessages != null:
@@ -72,7 +72,9 @@ return watchMessageArrived(_that);case WatchMessageUpdatedEvent() when watchMess
 return watchMessageUpdated(_that);case WatchMessageDeletedEvent() when watchMessageDeleted != null:
 return watchMessageDeleted(_that);case WatchMessageErrorEvent() when watchMessageError != null:
 return watchMessageError(_that);case LoadConversationListEvent() when loadConversationList != null:
-return loadConversationList(_that);case LoadMessageReadsEvent() when loadMessageReads != null:
+return loadConversationList(_that);case SetChatFilterEvent() when setChatFilter != null:
+return setChatFilter(_that);case SetSearchQueryEvent() when setSearchQuery != null:
+return setSearchQuery(_that);case LoadMessageReadsEvent() when loadMessageReads != null:
 return loadMessageReads(_that);case MarkMessageReadEvent() when markMessageRead != null:
 return markMessageRead(_that);case StartWatchReadsEvent() when startWatchReads != null:
 return startWatchReads(_that);case StopWatchReadsEvent() when stopWatchReads != null:
@@ -100,7 +102,7 @@ return cleanupTyping(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LoadChatMessagesEvent value)  loadMessages,required TResult Function( LoadMoreChatMessagesEvent value)  loadMoreMessages,required TResult Function( SendChatMessageEvent value)  sendMessage,required TResult Function( EditChatMessageEvent value)  editMessage,required TResult Function( DeleteChatMessageEvent value)  deleteMessage,required TResult Function( MarkConversationReadEvent value)  markConversationRead,required TResult Function( ClearChatMessagesInfoEvent value)  clearInfo,required TResult Function( StartWatchMessagesEvent value)  startWatch,required TResult Function( StopWatchMessagesEvent value)  stopWatch,required TResult Function( WatchMessageArrivedEvent value)  watchMessageArrived,required TResult Function( WatchMessageUpdatedEvent value)  watchMessageUpdated,required TResult Function( WatchMessageDeletedEvent value)  watchMessageDeleted,required TResult Function( WatchMessageErrorEvent value)  watchMessageError,required TResult Function( LoadConversationListEvent value)  loadConversationList,required TResult Function( LoadMessageReadsEvent value)  loadMessageReads,required TResult Function( MarkMessageReadEvent value)  markMessageRead,required TResult Function( StartWatchReadsEvent value)  startWatchReads,required TResult Function( StopWatchReadsEvent value)  stopWatchReads,required TResult Function( WatchReadArrivedEvent value)  watchReadArrived,required TResult Function( SendTypingEvent value)  sendTyping,required TResult Function( StartWatchTypingEvent value)  startWatchTyping,required TResult Function( StopWatchTypingEvent value)  stopWatchTyping,required TResult Function( WatchTypingArrivedEvent value)  watchTypingArrived,required TResult Function( CleanupTypingEvent value)  cleanupTyping,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LoadChatMessagesEvent value)  loadMessages,required TResult Function( LoadMoreChatMessagesEvent value)  loadMoreMessages,required TResult Function( SendChatMessageEvent value)  sendMessage,required TResult Function( EditChatMessageEvent value)  editMessage,required TResult Function( DeleteChatMessageEvent value)  deleteMessage,required TResult Function( MarkConversationReadEvent value)  markConversationRead,required TResult Function( ClearChatMessagesInfoEvent value)  clearInfo,required TResult Function( StartWatchMessagesEvent value)  startWatch,required TResult Function( StopWatchMessagesEvent value)  stopWatch,required TResult Function( WatchMessageArrivedEvent value)  watchMessageArrived,required TResult Function( WatchMessageUpdatedEvent value)  watchMessageUpdated,required TResult Function( WatchMessageDeletedEvent value)  watchMessageDeleted,required TResult Function( WatchMessageErrorEvent value)  watchMessageError,required TResult Function( LoadConversationListEvent value)  loadConversationList,required TResult Function( SetChatFilterEvent value)  setChatFilter,required TResult Function( SetSearchQueryEvent value)  setSearchQuery,required TResult Function( LoadMessageReadsEvent value)  loadMessageReads,required TResult Function( MarkMessageReadEvent value)  markMessageRead,required TResult Function( StartWatchReadsEvent value)  startWatchReads,required TResult Function( StopWatchReadsEvent value)  stopWatchReads,required TResult Function( WatchReadArrivedEvent value)  watchReadArrived,required TResult Function( SendTypingEvent value)  sendTyping,required TResult Function( StartWatchTypingEvent value)  startWatchTyping,required TResult Function( StopWatchTypingEvent value)  stopWatchTyping,required TResult Function( WatchTypingArrivedEvent value)  watchTypingArrived,required TResult Function( CleanupTypingEvent value)  cleanupTyping,}){
 final _that = this;
 switch (_that) {
 case LoadChatMessagesEvent():
@@ -117,7 +119,9 @@ return watchMessageArrived(_that);case WatchMessageUpdatedEvent():
 return watchMessageUpdated(_that);case WatchMessageDeletedEvent():
 return watchMessageDeleted(_that);case WatchMessageErrorEvent():
 return watchMessageError(_that);case LoadConversationListEvent():
-return loadConversationList(_that);case LoadMessageReadsEvent():
+return loadConversationList(_that);case SetChatFilterEvent():
+return setChatFilter(_that);case SetSearchQueryEvent():
+return setSearchQuery(_that);case LoadMessageReadsEvent():
 return loadMessageReads(_that);case MarkMessageReadEvent():
 return markMessageRead(_that);case StartWatchReadsEvent():
 return startWatchReads(_that);case StopWatchReadsEvent():
@@ -144,7 +148,7 @@ return cleanupTyping(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LoadChatMessagesEvent value)?  loadMessages,TResult? Function( LoadMoreChatMessagesEvent value)?  loadMoreMessages,TResult? Function( SendChatMessageEvent value)?  sendMessage,TResult? Function( EditChatMessageEvent value)?  editMessage,TResult? Function( DeleteChatMessageEvent value)?  deleteMessage,TResult? Function( MarkConversationReadEvent value)?  markConversationRead,TResult? Function( ClearChatMessagesInfoEvent value)?  clearInfo,TResult? Function( StartWatchMessagesEvent value)?  startWatch,TResult? Function( StopWatchMessagesEvent value)?  stopWatch,TResult? Function( WatchMessageArrivedEvent value)?  watchMessageArrived,TResult? Function( WatchMessageUpdatedEvent value)?  watchMessageUpdated,TResult? Function( WatchMessageDeletedEvent value)?  watchMessageDeleted,TResult? Function( WatchMessageErrorEvent value)?  watchMessageError,TResult? Function( LoadConversationListEvent value)?  loadConversationList,TResult? Function( LoadMessageReadsEvent value)?  loadMessageReads,TResult? Function( MarkMessageReadEvent value)?  markMessageRead,TResult? Function( StartWatchReadsEvent value)?  startWatchReads,TResult? Function( StopWatchReadsEvent value)?  stopWatchReads,TResult? Function( WatchReadArrivedEvent value)?  watchReadArrived,TResult? Function( SendTypingEvent value)?  sendTyping,TResult? Function( StartWatchTypingEvent value)?  startWatchTyping,TResult? Function( StopWatchTypingEvent value)?  stopWatchTyping,TResult? Function( WatchTypingArrivedEvent value)?  watchTypingArrived,TResult? Function( CleanupTypingEvent value)?  cleanupTyping,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LoadChatMessagesEvent value)?  loadMessages,TResult? Function( LoadMoreChatMessagesEvent value)?  loadMoreMessages,TResult? Function( SendChatMessageEvent value)?  sendMessage,TResult? Function( EditChatMessageEvent value)?  editMessage,TResult? Function( DeleteChatMessageEvent value)?  deleteMessage,TResult? Function( MarkConversationReadEvent value)?  markConversationRead,TResult? Function( ClearChatMessagesInfoEvent value)?  clearInfo,TResult? Function( StartWatchMessagesEvent value)?  startWatch,TResult? Function( StopWatchMessagesEvent value)?  stopWatch,TResult? Function( WatchMessageArrivedEvent value)?  watchMessageArrived,TResult? Function( WatchMessageUpdatedEvent value)?  watchMessageUpdated,TResult? Function( WatchMessageDeletedEvent value)?  watchMessageDeleted,TResult? Function( WatchMessageErrorEvent value)?  watchMessageError,TResult? Function( LoadConversationListEvent value)?  loadConversationList,TResult? Function( SetChatFilterEvent value)?  setChatFilter,TResult? Function( SetSearchQueryEvent value)?  setSearchQuery,TResult? Function( LoadMessageReadsEvent value)?  loadMessageReads,TResult? Function( MarkMessageReadEvent value)?  markMessageRead,TResult? Function( StartWatchReadsEvent value)?  startWatchReads,TResult? Function( StopWatchReadsEvent value)?  stopWatchReads,TResult? Function( WatchReadArrivedEvent value)?  watchReadArrived,TResult? Function( SendTypingEvent value)?  sendTyping,TResult? Function( StartWatchTypingEvent value)?  startWatchTyping,TResult? Function( StopWatchTypingEvent value)?  stopWatchTyping,TResult? Function( WatchTypingArrivedEvent value)?  watchTypingArrived,TResult? Function( CleanupTypingEvent value)?  cleanupTyping,}){
 final _that = this;
 switch (_that) {
 case LoadChatMessagesEvent() when loadMessages != null:
@@ -161,7 +165,9 @@ return watchMessageArrived(_that);case WatchMessageUpdatedEvent() when watchMess
 return watchMessageUpdated(_that);case WatchMessageDeletedEvent() when watchMessageDeleted != null:
 return watchMessageDeleted(_that);case WatchMessageErrorEvent() when watchMessageError != null:
 return watchMessageError(_that);case LoadConversationListEvent() when loadConversationList != null:
-return loadConversationList(_that);case LoadMessageReadsEvent() when loadMessageReads != null:
+return loadConversationList(_that);case SetChatFilterEvent() when setChatFilter != null:
+return setChatFilter(_that);case SetSearchQueryEvent() when setSearchQuery != null:
+return setSearchQuery(_that);case LoadMessageReadsEvent() when loadMessageReads != null:
 return loadMessageReads(_that);case MarkMessageReadEvent() when markMessageRead != null:
 return markMessageRead(_that);case StartWatchReadsEvent() when startWatchReads != null:
 return startWatchReads(_that);case StopWatchReadsEvent() when stopWatchReads != null:
@@ -188,7 +194,7 @@ return cleanupTyping(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String conversationId,  int? limit)?  loadMessages,TResult Function( String conversationId,  int limit)?  loadMoreMessages,TResult Function( String conversationId,  String content,  String? replyToMessageId)?  sendMessage,TResult Function( String messageId,  String newContent)?  editMessage,TResult Function( String messageId)?  deleteMessage,TResult Function( String conversationId,  String? uptoMessageId)?  markConversationRead,TResult Function()?  clearInfo,TResult Function( String conversationId)?  startWatch,TResult Function()?  stopWatch,TResult Function( ChatMessageEntity message)?  watchMessageArrived,TResult Function( ChatMessageEntity message)?  watchMessageUpdated,TResult Function( ChatMessageEntity message)?  watchMessageDeleted,TResult Function( String message)?  watchMessageError,TResult Function()?  loadConversationList,TResult Function( String messageId)?  loadMessageReads,TResult Function( String messageId)?  markMessageRead,TResult Function( String conversationId)?  startWatchReads,TResult Function()?  stopWatchReads,TResult Function( MessageReadEntity readEntity)?  watchReadArrived,TResult Function( String conversationId,  bool isTyping)?  sendTyping,TResult Function( String conversationId)?  startWatchTyping,TResult Function()?  stopWatchTyping,TResult Function( String userId)?  watchTypingArrived,TResult Function()?  cleanupTyping,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String conversationId,  int? limit)?  loadMessages,TResult Function( String conversationId,  int limit)?  loadMoreMessages,TResult Function( String conversationId,  String content,  String? replyToMessageId)?  sendMessage,TResult Function( String messageId,  String newContent)?  editMessage,TResult Function( String messageId)?  deleteMessage,TResult Function( String conversationId,  String? uptoMessageId)?  markConversationRead,TResult Function()?  clearInfo,TResult Function( String conversationId)?  startWatch,TResult Function()?  stopWatch,TResult Function( ChatMessageEntity message)?  watchMessageArrived,TResult Function( ChatMessageEntity message)?  watchMessageUpdated,TResult Function( ChatMessageEntity message)?  watchMessageDeleted,TResult Function( String message)?  watchMessageError,TResult Function()?  loadConversationList,TResult Function( String filter)?  setChatFilter,TResult Function( String query)?  setSearchQuery,TResult Function( String messageId)?  loadMessageReads,TResult Function( String messageId)?  markMessageRead,TResult Function( String conversationId)?  startWatchReads,TResult Function()?  stopWatchReads,TResult Function( MessageReadEntity readEntity)?  watchReadArrived,TResult Function( String conversationId,  bool isTyping)?  sendTyping,TResult Function( String conversationId)?  startWatchTyping,TResult Function()?  stopWatchTyping,TResult Function( String userId)?  watchTypingArrived,TResult Function()?  cleanupTyping,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case LoadChatMessagesEvent() when loadMessages != null:
 return loadMessages(_that.conversationId,_that.limit);case LoadMoreChatMessagesEvent() when loadMoreMessages != null:
@@ -204,7 +210,9 @@ return watchMessageArrived(_that.message);case WatchMessageUpdatedEvent() when w
 return watchMessageUpdated(_that.message);case WatchMessageDeletedEvent() when watchMessageDeleted != null:
 return watchMessageDeleted(_that.message);case WatchMessageErrorEvent() when watchMessageError != null:
 return watchMessageError(_that.message);case LoadConversationListEvent() when loadConversationList != null:
-return loadConversationList();case LoadMessageReadsEvent() when loadMessageReads != null:
+return loadConversationList();case SetChatFilterEvent() when setChatFilter != null:
+return setChatFilter(_that.filter);case SetSearchQueryEvent() when setSearchQuery != null:
+return setSearchQuery(_that.query);case LoadMessageReadsEvent() when loadMessageReads != null:
 return loadMessageReads(_that.messageId);case MarkMessageReadEvent() when markMessageRead != null:
 return markMessageRead(_that.messageId);case StartWatchReadsEvent() when startWatchReads != null:
 return startWatchReads(_that.conversationId);case StopWatchReadsEvent() when stopWatchReads != null:
@@ -232,7 +240,7 @@ return cleanupTyping();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String conversationId,  int? limit)  loadMessages,required TResult Function( String conversationId,  int limit)  loadMoreMessages,required TResult Function( String conversationId,  String content,  String? replyToMessageId)  sendMessage,required TResult Function( String messageId,  String newContent)  editMessage,required TResult Function( String messageId)  deleteMessage,required TResult Function( String conversationId,  String? uptoMessageId)  markConversationRead,required TResult Function()  clearInfo,required TResult Function( String conversationId)  startWatch,required TResult Function()  stopWatch,required TResult Function( ChatMessageEntity message)  watchMessageArrived,required TResult Function( ChatMessageEntity message)  watchMessageUpdated,required TResult Function( ChatMessageEntity message)  watchMessageDeleted,required TResult Function( String message)  watchMessageError,required TResult Function()  loadConversationList,required TResult Function( String messageId)  loadMessageReads,required TResult Function( String messageId)  markMessageRead,required TResult Function( String conversationId)  startWatchReads,required TResult Function()  stopWatchReads,required TResult Function( MessageReadEntity readEntity)  watchReadArrived,required TResult Function( String conversationId,  bool isTyping)  sendTyping,required TResult Function( String conversationId)  startWatchTyping,required TResult Function()  stopWatchTyping,required TResult Function( String userId)  watchTypingArrived,required TResult Function()  cleanupTyping,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String conversationId,  int? limit)  loadMessages,required TResult Function( String conversationId,  int limit)  loadMoreMessages,required TResult Function( String conversationId,  String content,  String? replyToMessageId)  sendMessage,required TResult Function( String messageId,  String newContent)  editMessage,required TResult Function( String messageId)  deleteMessage,required TResult Function( String conversationId,  String? uptoMessageId)  markConversationRead,required TResult Function()  clearInfo,required TResult Function( String conversationId)  startWatch,required TResult Function()  stopWatch,required TResult Function( ChatMessageEntity message)  watchMessageArrived,required TResult Function( ChatMessageEntity message)  watchMessageUpdated,required TResult Function( ChatMessageEntity message)  watchMessageDeleted,required TResult Function( String message)  watchMessageError,required TResult Function()  loadConversationList,required TResult Function( String filter)  setChatFilter,required TResult Function( String query)  setSearchQuery,required TResult Function( String messageId)  loadMessageReads,required TResult Function( String messageId)  markMessageRead,required TResult Function( String conversationId)  startWatchReads,required TResult Function()  stopWatchReads,required TResult Function( MessageReadEntity readEntity)  watchReadArrived,required TResult Function( String conversationId,  bool isTyping)  sendTyping,required TResult Function( String conversationId)  startWatchTyping,required TResult Function()  stopWatchTyping,required TResult Function( String userId)  watchTypingArrived,required TResult Function()  cleanupTyping,}) {final _that = this;
 switch (_that) {
 case LoadChatMessagesEvent():
 return loadMessages(_that.conversationId,_that.limit);case LoadMoreChatMessagesEvent():
@@ -248,7 +256,9 @@ return watchMessageArrived(_that.message);case WatchMessageUpdatedEvent():
 return watchMessageUpdated(_that.message);case WatchMessageDeletedEvent():
 return watchMessageDeleted(_that.message);case WatchMessageErrorEvent():
 return watchMessageError(_that.message);case LoadConversationListEvent():
-return loadConversationList();case LoadMessageReadsEvent():
+return loadConversationList();case SetChatFilterEvent():
+return setChatFilter(_that.filter);case SetSearchQueryEvent():
+return setSearchQuery(_that.query);case LoadMessageReadsEvent():
 return loadMessageReads(_that.messageId);case MarkMessageReadEvent():
 return markMessageRead(_that.messageId);case StartWatchReadsEvent():
 return startWatchReads(_that.conversationId);case StopWatchReadsEvent():
@@ -275,7 +285,7 @@ return cleanupTyping();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String conversationId,  int? limit)?  loadMessages,TResult? Function( String conversationId,  int limit)?  loadMoreMessages,TResult? Function( String conversationId,  String content,  String? replyToMessageId)?  sendMessage,TResult? Function( String messageId,  String newContent)?  editMessage,TResult? Function( String messageId)?  deleteMessage,TResult? Function( String conversationId,  String? uptoMessageId)?  markConversationRead,TResult? Function()?  clearInfo,TResult? Function( String conversationId)?  startWatch,TResult? Function()?  stopWatch,TResult? Function( ChatMessageEntity message)?  watchMessageArrived,TResult? Function( ChatMessageEntity message)?  watchMessageUpdated,TResult? Function( ChatMessageEntity message)?  watchMessageDeleted,TResult? Function( String message)?  watchMessageError,TResult? Function()?  loadConversationList,TResult? Function( String messageId)?  loadMessageReads,TResult? Function( String messageId)?  markMessageRead,TResult? Function( String conversationId)?  startWatchReads,TResult? Function()?  stopWatchReads,TResult? Function( MessageReadEntity readEntity)?  watchReadArrived,TResult? Function( String conversationId,  bool isTyping)?  sendTyping,TResult? Function( String conversationId)?  startWatchTyping,TResult? Function()?  stopWatchTyping,TResult? Function( String userId)?  watchTypingArrived,TResult? Function()?  cleanupTyping,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String conversationId,  int? limit)?  loadMessages,TResult? Function( String conversationId,  int limit)?  loadMoreMessages,TResult? Function( String conversationId,  String content,  String? replyToMessageId)?  sendMessage,TResult? Function( String messageId,  String newContent)?  editMessage,TResult? Function( String messageId)?  deleteMessage,TResult? Function( String conversationId,  String? uptoMessageId)?  markConversationRead,TResult? Function()?  clearInfo,TResult? Function( String conversationId)?  startWatch,TResult? Function()?  stopWatch,TResult? Function( ChatMessageEntity message)?  watchMessageArrived,TResult? Function( ChatMessageEntity message)?  watchMessageUpdated,TResult? Function( ChatMessageEntity message)?  watchMessageDeleted,TResult? Function( String message)?  watchMessageError,TResult? Function()?  loadConversationList,TResult? Function( String filter)?  setChatFilter,TResult? Function( String query)?  setSearchQuery,TResult? Function( String messageId)?  loadMessageReads,TResult? Function( String messageId)?  markMessageRead,TResult? Function( String conversationId)?  startWatchReads,TResult? Function()?  stopWatchReads,TResult? Function( MessageReadEntity readEntity)?  watchReadArrived,TResult? Function( String conversationId,  bool isTyping)?  sendTyping,TResult? Function( String conversationId)?  startWatchTyping,TResult? Function()?  stopWatchTyping,TResult? Function( String userId)?  watchTypingArrived,TResult? Function()?  cleanupTyping,}) {final _that = this;
 switch (_that) {
 case LoadChatMessagesEvent() when loadMessages != null:
 return loadMessages(_that.conversationId,_that.limit);case LoadMoreChatMessagesEvent() when loadMoreMessages != null:
@@ -291,7 +301,9 @@ return watchMessageArrived(_that.message);case WatchMessageUpdatedEvent() when w
 return watchMessageUpdated(_that.message);case WatchMessageDeletedEvent() when watchMessageDeleted != null:
 return watchMessageDeleted(_that.message);case WatchMessageErrorEvent() when watchMessageError != null:
 return watchMessageError(_that.message);case LoadConversationListEvent() when loadConversationList != null:
-return loadConversationList();case LoadMessageReadsEvent() when loadMessageReads != null:
+return loadConversationList();case SetChatFilterEvent() when setChatFilter != null:
+return setChatFilter(_that.filter);case SetSearchQueryEvent() when setSearchQuery != null:
+return setSearchQuery(_that.query);case LoadMessageReadsEvent() when loadMessageReads != null:
 return loadMessageReads(_that.messageId);case MarkMessageReadEvent() when markMessageRead != null:
 return markMessageRead(_that.messageId);case StartWatchReadsEvent() when startWatchReads != null:
 return startWatchReads(_that.conversationId);case StopWatchReadsEvent() when stopWatchReads != null:
@@ -1169,6 +1181,138 @@ String toString() {
 
 
 
+
+/// @nodoc
+
+
+class SetChatFilterEvent implements ChatMessageEvent {
+  const SetChatFilterEvent(this.filter);
+  
+
+ final  String filter;
+
+/// Create a copy of ChatMessageEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SetChatFilterEventCopyWith<SetChatFilterEvent> get copyWith => _$SetChatFilterEventCopyWithImpl<SetChatFilterEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetChatFilterEvent&&(identical(other.filter, filter) || other.filter == filter));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,filter);
+
+@override
+String toString() {
+  return 'ChatMessageEvent.setChatFilter(filter: $filter)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SetChatFilterEventCopyWith<$Res> implements $ChatMessageEventCopyWith<$Res> {
+  factory $SetChatFilterEventCopyWith(SetChatFilterEvent value, $Res Function(SetChatFilterEvent) _then) = _$SetChatFilterEventCopyWithImpl;
+@useResult
+$Res call({
+ String filter
+});
+
+
+
+
+}
+/// @nodoc
+class _$SetChatFilterEventCopyWithImpl<$Res>
+    implements $SetChatFilterEventCopyWith<$Res> {
+  _$SetChatFilterEventCopyWithImpl(this._self, this._then);
+
+  final SetChatFilterEvent _self;
+  final $Res Function(SetChatFilterEvent) _then;
+
+/// Create a copy of ChatMessageEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? filter = null,}) {
+  return _then(SetChatFilterEvent(
+null == filter ? _self.filter : filter // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class SetSearchQueryEvent implements ChatMessageEvent {
+  const SetSearchQueryEvent(this.query);
+  
+
+ final  String query;
+
+/// Create a copy of ChatMessageEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SetSearchQueryEventCopyWith<SetSearchQueryEvent> get copyWith => _$SetSearchQueryEventCopyWithImpl<SetSearchQueryEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetSearchQueryEvent&&(identical(other.query, query) || other.query == query));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,query);
+
+@override
+String toString() {
+  return 'ChatMessageEvent.setSearchQuery(query: $query)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SetSearchQueryEventCopyWith<$Res> implements $ChatMessageEventCopyWith<$Res> {
+  factory $SetSearchQueryEventCopyWith(SetSearchQueryEvent value, $Res Function(SetSearchQueryEvent) _then) = _$SetSearchQueryEventCopyWithImpl;
+@useResult
+$Res call({
+ String query
+});
+
+
+
+
+}
+/// @nodoc
+class _$SetSearchQueryEventCopyWithImpl<$Res>
+    implements $SetSearchQueryEventCopyWith<$Res> {
+  _$SetSearchQueryEventCopyWithImpl(this._self, this._then);
+
+  final SetSearchQueryEvent _self;
+  final $Res Function(SetSearchQueryEvent) _then;
+
+/// Create a copy of ChatMessageEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? query = null,}) {
+  return _then(SetSearchQueryEvent(
+null == query ? _self.query : query // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
 
 /// @nodoc
 

@@ -9,6 +9,7 @@ import 'package:velora/features/notification/domain/usecases/get_unread_count.da
 import 'package:velora/features/notification/domain/usecases/mark_notifications_read.dart';
 import 'package:velora/features/notification/domain/usecases/delete_notification.dart';
 import 'package:velora/features/notification/domain/usecases/watch_notifications.dart';
+import 'package:velora/features/profile/data/datasources/profile_remote_datasource.dart';
 import 'notification_event.dart';
 import 'notification_state.dart';
 
@@ -22,6 +23,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   final DeleteNotification deleteNotificationUseCase;
   final WatchNewNotifications watchNewNotificationsUseCase;
   final StopWatchNotifications stopWatchNotificationsUseCase;
+  final ProfileRemoteDataSource profileDataSource;
 
   StreamSubscription? _realtimeSubscription;
 
@@ -34,6 +36,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     required this.deleteNotificationUseCase,
     required this.watchNewNotificationsUseCase,
     required this.stopWatchNotificationsUseCase,
+    required this.profileDataSource,
   }) : super(const NotificationState()) {
     on<LoadInitialNotificationsEvent>(_onLoadInitial);
     on<LoadMoreNotificationsEvent>(
@@ -52,6 +55,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     on<StopWatchingNotificationsEvent>(_onStopWatching);
     on<NewNotificationReceivedEvent>(_onNewNotificationReceived);
     on<ClearTransientEvent>((event, emit) => _onClearTransient(emit));
+    on<ToggleFollowActorEvent>(_onToggleFollowActor);
   }
 
   static const int _minPageSize = 1;
@@ -325,6 +329,71 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     // Refresh to get the new notification with proper data
     add(const NotificationEvent.refresh());
     add(const NotificationEvent.loadUnreadCount());
+  }
+
+  Future<void> _onToggleFollowActor(
+    ToggleFollowActorEvent event,
+    Emitter<NotificationState> emit,
+  ) async {
+    final notificationId = event.notificationId;
+    final actorId = event.actorId;
+
+    // Find the notification
+    final notification = state.notifications.firstWhere(
+      (n) => n.id == notificationId,
+      orElse: () => state.notifications.first,
+    );
+
+    if (notification.id != notificationId) {
+      logw('Notification not found: $notificationId', tag: _logTag);
+      return;
+    }
+
+    final currentlyFollowing = notification.isFollowingActor;
+    
+    logi(
+      'Toggle follow actor=$actorId, currentlyFollowing=$currentlyFollowing',
+      tag: _logTag,
+    );
+
+    // Add to loading set
+    final newLoadingIds = {...state.followLoadingIds, notificationId};
+    emit(state.copyWith(followLoadingIds: newLoadingIds));
+
+    try {
+      // Call profile datasource to toggle follow
+      // Since we're following back, the actor is likely public (they followed us)
+      await profileDataSource.toggleFollow(actorId, isPrivate: false);
+
+      // Update the notification with new follow status
+      final updated = state.notifications.map((n) {
+        if (n.id == notificationId) {
+          return n.copyWith(isFollowingActor: !currentlyFollowing);
+        }
+        return n;
+      }).toList();
+
+      // Remove from loading set
+      final updatedLoadingIds = {...state.followLoadingIds}..remove(notificationId);
+
+      emit(state.copyWith(
+        notifications: updated,
+        followLoadingIds: updatedLoadingIds,
+        message: currentlyFollowing ? 'Unfollowed' : 'Following',
+      ));
+
+      logi('Toggle follow success, now following: ${!currentlyFollowing}', tag: _logTag);
+    } catch (e) {
+      loge('Toggle follow failed', error: e, tag: _logTag);
+      
+      // Remove from loading set
+      final updatedLoadingIds = {...state.followLoadingIds}..remove(notificationId);
+      
+      emit(state.copyWith(
+        followLoadingIds: updatedLoadingIds,
+        error: 'Failed to update follow status',
+      ));
+    }
   }
 
   void _onClearTransient(Emitter<NotificationState> emit) {

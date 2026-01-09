@@ -258,6 +258,17 @@ class AppLocalizationsId extends AppLocalizations {
   String get feedSeeTranslation => 'Lihat terjemahan';
 
   @override
+  String get feedSeeOriginal => 'Lihat asli';
+
+  @override
+  String get feedTranslating => 'Memuat…';
+
+  @override
+  String feedCommentAsUser(String username) {
+    return 'Komentar sebagai $username';
+  }
+
+  @override
   String feedViewReplies(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -267,6 +278,9 @@ class AppLocalizationsId extends AppLocalizations {
     );
     return 'Lihat $_temp0';
   }
+
+  @override
+  String get feedHideReplies => 'Sembunyikan balasan';
 
   @override
   String get feedUnknownUser => 'Pengguna tidak dikenal';

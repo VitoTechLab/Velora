@@ -200,10 +200,30 @@ class FeedCommentBloc extends Bloc<FeedCommentEvent, FeedCommentState> {
       ),
     );
 
+    // Resolve the actual Root Parent ID
+    String? effectiveParentId = event.parentCommentId;
+    if (effectiveParentId != null && effectiveParentId.isNotEmpty) {
+      for (final root in state.comments) {
+        // 1. Is the target the root itself?
+        if (root.id == effectiveParentId) {
+          effectiveParentId = root.id;
+          break;
+        }
+        // 2. Is the target one of the replies in this root?
+        final isReplyToNested = root.replies.any(
+          (r) => r.id == effectiveParentId,
+        );
+        if (isReplyToNested) {
+          effectiveParentId = root.id;
+          break;
+        }
+      }
+    }
+
     final result = await addCommentUseCase(
       postId: postId,
       content: trimmed,
-      parentCommentId: event.parentCommentId,
+      parentCommentId: effectiveParentId,
     );
 
     result.fold(
@@ -211,14 +231,41 @@ class FeedCommentBloc extends Bloc<FeedCommentEvent, FeedCommentState> {
         emit(state.copyWith(isAdding: false, addError: failure.message));
       },
       (comment) {
-        emit(
-          state.copyWith(
-            isAdding: false,
-            comments: [comment, ...state.comments],
-            addedComment: comment,
-            message: 'Comment added',
-          ),
-        );
+        // Find the correct root parent to attach this comment to locally
+        final rootId = comment.parentCommentId;
+
+        if (rootId != null && rootId.isNotEmpty) {
+          // It's a reply
+          final updatedComments = state.comments.map((rootComment) {
+            if (rootComment.id == rootId) {
+              // Direct reply to this root
+              return rootComment.copyWith(
+                replies: [...rootComment.replies, comment],
+              );
+            }
+
+            return rootComment;
+          }).toList();
+
+          emit(
+            state.copyWith(
+              isAdding: false,
+              comments: updatedComments,
+              addedComment: comment,
+              message: 'Reply added',
+            ),
+          );
+        } else {
+          // Root comment
+          emit(
+            state.copyWith(
+              isAdding: false,
+              comments: [comment, ...state.comments],
+              addedComment: comment,
+              message: 'Comment added',
+            ),
+          );
+        }
       },
     );
   }
@@ -297,13 +344,13 @@ class FeedCommentBloc extends Bloc<FeedCommentEvent, FeedCommentState> {
     _watchSub = watchNewCommentsUseCase(postId: postId).listen(
       (either) {
         either.fold(
-          (failure) => add(WatchErrorEvent(failure.message)),
-          (comment) => add(WatchCommentArrivedEvent(comment)),
+          (failure) => add(WatchErrorEvent(message: failure.message)),
+          (comment) => add(WatchCommentArrivedEvent(comment: comment)),
         );
       },
       onError: (error, stack) {
         final message = FeedFailure.fromException(error).message;
-        add(WatchErrorEvent(message));
+        add(WatchErrorEvent(message: message));
       },
     );
   }

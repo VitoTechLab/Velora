@@ -30,13 +30,15 @@ class FeedCommentEvent with _$FeedCommentEvent {
   const factory FeedCommentEvent.clearFeedCommentMessages() =
       ClearFeedCommentMessagesEvent;
 
-  const factory FeedCommentEvent.startWatchComments(String postId) =
+  const factory FeedCommentEvent.startWatchComments({required String postId}) =
       StartWatchCommentsEvent;
 
   const factory FeedCommentEvent.stopWatchComments() = StopWatchCommentsEvent;
 
-  const factory FeedCommentEvent.watchCommentArrived(CommentEntity comment) =
-      WatchCommentArrivedEvent;
+  const factory FeedCommentEvent.watchCommentArrived({
+    required CommentEntity comment,
+  }) = WatchCommentArrivedEvent;
 
-  const factory FeedCommentEvent.watchError(String message) = WatchErrorEvent;
+  const factory FeedCommentEvent.watchError({required String message}) =
+      WatchErrorEvent;
 }

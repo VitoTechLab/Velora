@@ -9,7 +9,6 @@ import 'package:velora/features/chat/presentation/bloc/chat_message_state.dart';
 import 'package:velora/features/chat/presentation/screens/chat_detail_screen.dart';
 import 'package:velora/features/chat/presentation/widgets/chat_filter_chips.dart';
 import 'package:velora/features/chat/presentation/widgets/chat_list_item.dart';
-import 'package:velora/features/chat/presentation/widgets/chat_search_bar.dart';
 import 'package:velora/l10n/app_localizations.dart';
 import 'package:velora/routes/app_router.dart';
 
@@ -23,8 +22,6 @@ class ChatScreen extends HookWidget {
     final textTheme = theme.textTheme;
     final t = AppLocalizations.of(context)!;
 
-    final selectedFilter = useState<String>('all');
-    final searchController = useTextEditingController();
     final scrollController = useScrollController();
 
     final animationController = useAnimationController(
@@ -90,17 +87,48 @@ class ChatScreen extends HookWidget {
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
                   child: Column(
                     children: [
-                      ChatSearchBar(
-                        controller: searchController,
-                        onChanged: (value) {
-                          // Implement search functionality
-                        },
+                      GestureDetector(
+                        onTap: () =>
+                            context.pushNamed(AppRouteName.searchFollowUser),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 12,
+                          ),
+                          decoration: BoxDecoration(
+                            color: colorScheme.surfaceContainerHighest,
+                            borderRadius: BorderRadius.circular(24),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.search,
+                                color: colorScheme.onSurfaceVariant,
+                                size: 20,
+                              ),
+                              const SizedBox(width: 12),
+                              Text(
+                                'Search',
+                                style: textTheme.bodyMedium?.copyWith(
+                                  color: colorScheme.onSurfaceVariant
+                                      .withOpacity(0.6),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                       const SizedBox(height: 12),
-                      ChatFilterChips(
-                        selectedFilter: selectedFilter.value,
-                        onFilterSelected: (filter) {
-                          selectedFilter.value = filter;
+                      BlocBuilder<ChatMessageBloc, ChatMessageState>(
+                        builder: (context, state) {
+                          return ChatFilterChips(
+                            selectedFilter: state.selectedFilter,
+                            onFilterSelected: (filter) {
+                              context.read<ChatMessageBloc>().add(
+                                ChatMessageEvent.setChatFilter(filter),
+                              );
+                            },
+                          );
                         },
                       ),
                     ],
@@ -148,26 +176,68 @@ class ChatScreen extends HookWidget {
 
                       final conversations = state.conversations;
 
-                      if (conversations.isEmpty) {
+                      // Apply search filter
+                      var filteredConversations = conversations;
+                      final searchQuery = state.searchQuery
+                          .trim()
+                          .toLowerCase();
+                      if (searchQuery.isNotEmpty) {
+                        filteredConversations = conversations.where((conv) {
+                          final name = conv.title ?? '';
+                          final lastMessage = conv.lastMessagePreview ?? '';
+                          return name.contains(searchQuery) ||
+                              lastMessage.contains(searchQuery);
+                        }).toList();
+                      } else {
+                        // Apply filter only when not searching
+                        filteredConversations = conversations.where((conv) {
+                          switch (state.selectedFilter) {
+                            case 'unread':
+                              return conv.unreadCount > 0;
+                            case 'favourites':
+                              // TODO: Add isFavourite field to ConversationListEntity
+                              return false;
+                            case 'groups':
+                              return conv.type == 'group';
+                            case 'all':
+                            default:
+                              return true;
+                          }
+                        }).toList();
+                      }
+
+                      if (filteredConversations.isEmpty) {
+                        final hasSearch = state.searchQuery.trim().isNotEmpty;
+                        final isFiltered = state.selectedFilter != 'all';
                         return Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
-                                Icons.chat_bubble_outline,
+                                hasSearch
+                                    ? Icons.search_off
+                                    : Icons.chat_bubble_outline,
                                 size: 80,
                                 color: colorScheme.outline,
                               ),
                               const SizedBox(height: 16),
                               Text(
-                                t.chatScreenNoChats,
+                                hasSearch
+                                    ? 'No results for "${state.searchQuery}"'
+                                    : isFiltered
+                                    ? 'No ${state.selectedFilter} chats'
+                                    : t.chatScreenNoChats,
                                 style: textTheme.titleLarge?.copyWith(
                                   color: colorScheme.onSurfaceVariant,
                                 ),
                               ),
                               const SizedBox(height: 8),
                               Text(
-                                t.chatScreenNoChatsHint,
+                                hasSearch
+                                    ? 'Try searching for something else'
+                                    : isFiltered
+                                    ? 'Try selecting a different filter'
+                                    : t.chatScreenNoChatsHint,
                                 style: textTheme.bodyMedium?.copyWith(
                                   color: colorScheme.outline,
                                 ),
@@ -186,9 +256,9 @@ class ChatScreen extends HookWidget {
                           physics: const AlwaysScrollableScrollPhysics(
                             parent: BouncingScrollPhysics(),
                           ),
-                          itemCount: conversations.length,
+                          itemCount: filteredConversations.length,
                           itemBuilder: (context, index) {
-                            final conversation = conversations[index];
+                            final conversation = filteredConversations[index];
                             final isGroup = conversation.type == 'group';
 
                             return ChatListItem(

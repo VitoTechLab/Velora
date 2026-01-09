@@ -139,7 +139,7 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
 
         // Atomic toggle using database function (no race condition)
         await _client.rpc(
-          'toggle_post_like',
+          SupabaseRpc.togglePostLike,
           params: {'p_post_id': postId, 'p_user_id': userId},
         );
       },
@@ -156,7 +156,7 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
 
         // Atomic toggle using database function (no race condition)
         await _client.rpc(
-          'toggle_post_bookmark',
+          SupabaseRpc.togglePostBookmark,
           params: {'p_post_id': postId, 'p_user_id': userId},
         );
       },
@@ -194,8 +194,43 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
             .map((e) => CommentModel.fromJson(e))
             .toList();
 
+        // Separate roots and replies
+        final roots = <CommentModel>[];
+        final repliesByParent = <String, List<CommentModel>>{};
+
+        for (final comment in all) {
+          if (comment.parentCommentId != null) {
+            repliesByParent
+                .putIfAbsent(comment.parentCommentId!, () => [])
+                .add(comment);
+          } else {
+            roots.add(comment);
+          }
+        }
+
+        // Attach replies to roots
+        final nestedComments = roots.map((root) {
+          final replies = repliesByParent[root.id] ?? [];
+          // Sort replies by createdAt ascending (oldest first)
+          replies.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+          return root.copyWith(replies: replies);
+        }).toList();
+
+        // Check for orphans (replies whose parent is not in the current fetched batch)
+        // If we want to display them, we might need to treat them as roots or fetch parents.
+        // For now, based on typical pagination, we only return the structured roots.
+        // To handle pagination correctly ensuring all items are counted:
+        // Ideally, we filter the query to only fetch roots, but we can't easily fetch corresponding replies in one go without joins.
+        // Assuming the current query fetches enough context.
+
+        // If we found orphan replies that should be displayed (e.g. sorted by recent),
+        // hiding them might be confusing.
+        // However, "Nest" logic implies we only show them under parents.
+
         final hasMore = all.length > limit;
-        final comments = hasMore ? all.sublist(0, limit) : all;
+        final comments = hasMore
+            ? nestedComments.take(limit).toList()
+            : nestedComments;
 
         final nextCursor = comments.isEmpty
             ? null
@@ -266,7 +301,7 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
 
         // Atomic toggle using database function (no race condition)
         await _client.rpc(
-          'toggle_comment_like',
+          SupabaseRpc.toggleCommentLike,
           params: {'p_comment_id': commentId, 'p_user_id': userId},
         );
       },

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CommentPaginationModel {
 
- List<CommentModel> get comments; bool get hasMore;@JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) CommentCursor? get nextCursor;
+ List<CommentModel> get comments; bool get hasMore;@JsonKey(fromJson: _commentCursorFromJson, toJson: _commentCursorToJson) CommentCursor? get nextCursor;
 /// Create a copy of CommentPaginationModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $CommentPaginationModelCopyWith<$Res>  {
   factory $CommentPaginationModelCopyWith(CommentPaginationModel value, $Res Function(CommentPaginationModel) _then) = _$CommentPaginationModelCopyWithImpl;
 @useResult
 $Res call({
- List<CommentModel> comments, bool hasMore,@JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) CommentCursor? nextCursor
+ List<CommentModel> comments, bool hasMore,@JsonKey(fromJson: _commentCursorFromJson, toJson: _commentCursorToJson) CommentCursor? nextCursor
 });
 
 
@@ -167,7 +167,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<CommentModel> comments,  bool hasMore, @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson)  CommentCursor? nextCursor)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<CommentModel> comments,  bool hasMore, @JsonKey(fromJson: _commentCursorFromJson, toJson: _commentCursorToJson)  CommentCursor? nextCursor)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CommentPaginationModel() when $default != null:
 return $default(_that.comments,_that.hasMore,_that.nextCursor);case _:
@@ -188,7 +188,7 @@ return $default(_that.comments,_that.hasMore,_that.nextCursor);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<CommentModel> comments,  bool hasMore, @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson)  CommentCursor? nextCursor)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<CommentModel> comments,  bool hasMore, @JsonKey(fromJson: _commentCursorFromJson, toJson: _commentCursorToJson)  CommentCursor? nextCursor)  $default,) {final _that = this;
 switch (_that) {
 case _CommentPaginationModel():
 return $default(_that.comments,_that.hasMore,_that.nextCursor);case _:
@@ -208,7 +208,7 @@ return $default(_that.comments,_that.hasMore,_that.nextCursor);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<CommentModel> comments,  bool hasMore, @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson)  CommentCursor? nextCursor)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<CommentModel> comments,  bool hasMore, @JsonKey(fromJson: _commentCursorFromJson, toJson: _commentCursorToJson)  CommentCursor? nextCursor)?  $default,) {final _that = this;
 switch (_that) {
 case _CommentPaginationModel() when $default != null:
 return $default(_that.comments,_that.hasMore,_that.nextCursor);case _:
@@ -223,7 +223,7 @@ return $default(_that.comments,_that.hasMore,_that.nextCursor);case _:
 @JsonSerializable()
 
 class _CommentPaginationModel extends CommentPaginationModel {
-  const _CommentPaginationModel({required final  List<CommentModel> comments, required this.hasMore, @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) this.nextCursor}): _comments = comments,super._();
+  const _CommentPaginationModel({required final  List<CommentModel> comments, required this.hasMore, @JsonKey(fromJson: _commentCursorFromJson, toJson: _commentCursorToJson) this.nextCursor}): _comments = comments,super._();
   factory _CommentPaginationModel.fromJson(Map<String, dynamic> json) => _$CommentPaginationModelFromJson(json);
 
  final  List<CommentModel> _comments;
@@ -234,7 +234,7 @@ class _CommentPaginationModel extends CommentPaginationModel {
 }
 
 @override final  bool hasMore;
-@override@JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) final  CommentCursor? nextCursor;
+@override@JsonKey(fromJson: _commentCursorFromJson, toJson: _commentCursorToJson) final  CommentCursor? nextCursor;
 
 /// Create a copy of CommentPaginationModel
 /// with the given fields replaced by the non-null parameter values.
@@ -269,7 +269,7 @@ abstract mixin class _$CommentPaginationModelCopyWith<$Res> implements $CommentP
   factory _$CommentPaginationModelCopyWith(_CommentPaginationModel value, $Res Function(_CommentPaginationModel) _then) = __$CommentPaginationModelCopyWithImpl;
 @override @useResult
 $Res call({
- List<CommentModel> comments, bool hasMore,@JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) CommentCursor? nextCursor
+ List<CommentModel> comments, bool hasMore,@JsonKey(fromJson: _commentCursorFromJson, toJson: _commentCursorToJson) CommentCursor? nextCursor
 });
 
 

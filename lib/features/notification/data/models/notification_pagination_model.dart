@@ -1,12 +1,12 @@
 import 'package:velora/features/notification/data/models/notification_model.dart';
-import 'package:velora/features/notification/data/models/notification_cursor.dart';
-import 'package:velora/features/notification/domain/entities/notification_cursor.dart';
+import 'package:velora/features/notification/data/models/notification_cursor_model.dart';
+import 'package:velora/features/notification/domain/entities/notification_cursor_entity.dart';
 import 'package:velora/features/notification/domain/entities/notification_pagination_result.dart';
 
 class NotificationPaginationModel {
   final List<NotificationModel> notifications;
   final bool hasMore;
-  final NotificationCursor? nextCursor;
+  final NotificationCursorModel? nextCursor;
 
   NotificationPaginationModel({
     required this.notifications,

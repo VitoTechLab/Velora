@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$FeedPaginationModel {
 
- List<FeedModel> get posts; bool get hasMore;@JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) FeedCursor? get nextCursor;
+ List<FeedModel> get posts; bool get hasMore;@JsonKey(fromJson: _feedCursorFromJson, toJson: _feedCursorToJson) FeedCursor? get nextCursor;
 /// Create a copy of FeedPaginationModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $FeedPaginationModelCopyWith<$Res>  {
   factory $FeedPaginationModelCopyWith(FeedPaginationModel value, $Res Function(FeedPaginationModel) _then) = _$FeedPaginationModelCopyWithImpl;
 @useResult
 $Res call({
- List<FeedModel> posts, bool hasMore,@JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) FeedCursor? nextCursor
+ List<FeedModel> posts, bool hasMore,@JsonKey(fromJson: _feedCursorFromJson, toJson: _feedCursorToJson) FeedCursor? nextCursor
 });
 
 
@@ -167,7 +167,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<FeedModel> posts,  bool hasMore, @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson)  FeedCursor? nextCursor)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<FeedModel> posts,  bool hasMore, @JsonKey(fromJson: _feedCursorFromJson, toJson: _feedCursorToJson)  FeedCursor? nextCursor)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _FeedPaginationModel() when $default != null:
 return $default(_that.posts,_that.hasMore,_that.nextCursor);case _:
@@ -188,7 +188,7 @@ return $default(_that.posts,_that.hasMore,_that.nextCursor);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<FeedModel> posts,  bool hasMore, @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson)  FeedCursor? nextCursor)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<FeedModel> posts,  bool hasMore, @JsonKey(fromJson: _feedCursorFromJson, toJson: _feedCursorToJson)  FeedCursor? nextCursor)  $default,) {final _that = this;
 switch (_that) {
 case _FeedPaginationModel():
 return $default(_that.posts,_that.hasMore,_that.nextCursor);case _:
@@ -208,7 +208,7 @@ return $default(_that.posts,_that.hasMore,_that.nextCursor);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<FeedModel> posts,  bool hasMore, @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson)  FeedCursor? nextCursor)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<FeedModel> posts,  bool hasMore, @JsonKey(fromJson: _feedCursorFromJson, toJson: _feedCursorToJson)  FeedCursor? nextCursor)?  $default,) {final _that = this;
 switch (_that) {
 case _FeedPaginationModel() when $default != null:
 return $default(_that.posts,_that.hasMore,_that.nextCursor);case _:
@@ -223,7 +223,7 @@ return $default(_that.posts,_that.hasMore,_that.nextCursor);case _:
 @JsonSerializable()
 
 class _FeedPaginationModel extends FeedPaginationModel {
-  const _FeedPaginationModel({required final  List<FeedModel> posts, required this.hasMore, @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) this.nextCursor}): _posts = posts,super._();
+  const _FeedPaginationModel({required final  List<FeedModel> posts, required this.hasMore, @JsonKey(fromJson: _feedCursorFromJson, toJson: _feedCursorToJson) this.nextCursor}): _posts = posts,super._();
   factory _FeedPaginationModel.fromJson(Map<String, dynamic> json) => _$FeedPaginationModelFromJson(json);
 
  final  List<FeedModel> _posts;
@@ -234,7 +234,7 @@ class _FeedPaginationModel extends FeedPaginationModel {
 }
 
 @override final  bool hasMore;
-@override@JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) final  FeedCursor? nextCursor;
+@override@JsonKey(fromJson: _feedCursorFromJson, toJson: _feedCursorToJson) final  FeedCursor? nextCursor;
 
 /// Create a copy of FeedPaginationModel
 /// with the given fields replaced by the non-null parameter values.
@@ -269,7 +269,7 @@ abstract mixin class _$FeedPaginationModelCopyWith<$Res> implements $FeedPaginat
   factory _$FeedPaginationModelCopyWith(_FeedPaginationModel value, $Res Function(_FeedPaginationModel) _then) = __$FeedPaginationModelCopyWithImpl;
 @override @useResult
 $Res call({
- List<FeedModel> posts, bool hasMore,@JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) FeedCursor? nextCursor
+ List<FeedModel> posts, bool hasMore,@JsonKey(fromJson: _feedCursorFromJson, toJson: _feedCursorToJson) FeedCursor? nextCursor
 });
 
 

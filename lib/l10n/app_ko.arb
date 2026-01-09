@@ -106,6 +106,16 @@
   "feedReplyAction": "답글",
   "feedDeleteAction": "삭제",
   "feedSeeTranslation": "번역 보기",
+  "feedSeeOriginal": "원문 보기",
+  "feedTranslating": "로드 중…",
+  "feedCommentAsUser": "{username}(으)로 댓글 달기",
+  "@feedCommentAsUser": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
   "feedViewReplies": "{count, plural, one{{count}개의 답글 보기} other{{count}개의 답글 보기}}",
   "@feedViewReplies": {
     "placeholders": {
@@ -114,6 +124,7 @@
       }
     }
   },
+  "feedHideReplies": "답글 숨기기",
   "feedUnknownUser": "알 수 없는 사용자",
   "feedPostSummaryFallback": "게시물",
   "feedPostSemantics": "{author} 님이 {summary}을 {time}에 게시했습니다",

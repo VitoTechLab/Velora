@@ -65,6 +65,10 @@ class ChatMessageEvent with _$ChatMessageEvent {
   // =========================================================
   const factory ChatMessageEvent.loadConversationList() =
       LoadConversationListEvent;
+  const factory ChatMessageEvent.setChatFilter(String filter) =
+      SetChatFilterEvent;
+  const factory ChatMessageEvent.setSearchQuery(String query) =
+      SetSearchQueryEvent;
 
   // =========================================================
   // MESSAGE READS (Read Receipts)

@@ -2,8 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:velora/core/errors/failure.dart';
 import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/notification/data/datasources/notification_remote_datasource.dart';
-import 'package:velora/features/notification/data/models/notification_cursor.dart';
-import 'package:velora/features/notification/domain/entities/notification_cursor.dart';
+import 'package:velora/features/notification/data/models/notification_cursor_model.dart';
+import 'package:velora/features/notification/domain/entities/notification_cursor_entity.dart';
 import 'package:velora/features/notification/domain/entities/notification_entity.dart';
 import 'package:velora/features/notification/domain/entities/notification_pagination_result.dart';
 import 'package:velora/features/notification/domain/repositories/notification_repository.dart';
@@ -32,6 +32,10 @@ class NotificationRepositoryImpl implements NotificationRepository {
         return 'donation';
       case NotificationType.mention:
         return 'mention';
+      case NotificationType.postShare:
+        return 'post_share';
+      case NotificationType.channelInvite:
+        return 'channel_invite';
     }
   }
 
@@ -49,7 +53,7 @@ class NotificationRepositoryImpl implements NotificationRepository {
       final result = await remoteDataSource.getNotifications(
         limit: limit,
         cursor: cursor != null
-            ? NotificationCursor(createdAt: cursor.createdAt, id: cursor.id)
+            ? NotificationCursorModel(createdAt: cursor.createdAt, id: cursor.id)
             : null,
         type: _notificationTypeToString(type),
       );

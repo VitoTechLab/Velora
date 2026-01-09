@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:velora/features/notification/domain/entities/notification_cursor.dart';
+import 'package:velora/features/notification/domain/entities/notification_cursor_entity.dart';
 import 'package:velora/features/notification/domain/entities/notification_entity.dart';
 
 part 'notification_state.freezed.dart';
@@ -16,5 +16,7 @@ abstract class NotificationState with _$NotificationState {
     @Default(0) int unreadCount,
     String? error,
     String? message,
+    // Track which notification IDs are currently loading follow toggle
+    @Default(<String>{}) Set<String> followLoadingIds,
   }) = _NotificationState;
 }

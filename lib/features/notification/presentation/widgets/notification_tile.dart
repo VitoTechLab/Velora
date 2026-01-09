@@ -9,12 +9,14 @@ class NotificationTile extends StatelessWidget {
     this.onTap,
     this.onLongPress,
     this.onFollowBack,
+    this.isFollowLoading = false,
   });
 
   final NotificationEntity notification;
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
   final VoidCallback? onFollowBack;
+  final bool isFollowLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class NotificationTile extends StatelessWidget {
         decoration: BoxDecoration(
           color: notification.isRead
               ? Colors.transparent
-              : colorScheme.primary.withValues(alpha: 0.05),
+              : colorScheme.primary.withOpacity(0.05),
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,20 +139,9 @@ class NotificationTile extends StatelessWidget {
   }
 
   Widget _buildTrailing(BuildContext context, ColorScheme colorScheme) {
-    // Show follow button for follow-related notifications
+    // Show follow button for follow notifications
     if (_shouldShowFollowButton()) {
-      return FilledButton(
-        onPressed: onFollowBack,
-        style: FilledButton.styleFrom(
-          backgroundColor: colorScheme.primary,
-          foregroundColor: colorScheme.onPrimary,
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          minimumSize: const Size(80, 32),
-        ),
-        child: Text(
-          notification.type == NotificationType.follow ? 'Follow back' : 'Follow',
-        ),
-      );
+      return _buildFollowButton(colorScheme);
     }
 
     // Show thumbnail for post-related notifications
@@ -196,9 +187,55 @@ class NotificationTile extends StatelessWidget {
     return const SizedBox.shrink();
   }
 
+  Widget _buildFollowButton(ColorScheme colorScheme) {
+    // Loading state
+    if (isFollowLoading) {
+      return SizedBox(
+        width: 80,
+        height: 32,
+        child: Center(
+          child: SizedBox(
+            width: 16,
+            height: 16,
+            child: CircularProgressIndicator(
+              strokeWidth: 2,
+              color: colorScheme.primary,
+            ),
+          ),
+        ),
+      );
+    }
+
+    // Already following - show "Following" with gray style
+    if (notification.isFollowingActor) {
+      return OutlinedButton(
+        onPressed: onFollowBack,
+        style: OutlinedButton.styleFrom(
+          foregroundColor: colorScheme.onSurfaceVariant,
+          side: BorderSide(color: colorScheme.outlineVariant),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          minimumSize: const Size(80, 32),
+        ),
+        child: const Text('Following'),
+      );
+    }
+
+    // Not following - show "Follow back" with primary color
+    return FilledButton(
+      onPressed: onFollowBack,
+      style: FilledButton.styleFrom(
+        backgroundColor: colorScheme.primary,
+        foregroundColor: colorScheme.onPrimary,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        minimumSize: const Size(80, 32),
+      ),
+      child: const Text('Follow back'),
+    );
+  }
+
   bool _shouldShowFollowButton() {
-    return notification.type == NotificationType.follow ||
-        notification.type == NotificationType.followRequest;
+    // Only show for follow notifications (not follow request or follow accepted)
+    return notification.type == NotificationType.follow;
   }
 
   IconData _getNotificationIcon() {
@@ -212,7 +249,7 @@ class NotificationTile extends StatelessWidget {
       case NotificationType.follow:
       case NotificationType.followRequest:
         return Icons.person_add;
-      case NotificationType.followRequestAccepted:
+      case NotificationType.followAccepted:
         return Icons.how_to_reg;
       case NotificationType.donation:
         return Icons.volunteer_activism;
@@ -233,7 +270,7 @@ class NotificationTile extends StatelessWidget {
         return Colors.blue;
       case NotificationType.follow:
       case NotificationType.followRequest:
-      case NotificationType.followRequestAccepted:
+      case NotificationType.followAccepted:
         return colorScheme.primary;
       case NotificationType.donation:
         return Colors.green;
@@ -256,7 +293,7 @@ class NotificationTile extends StatelessWidget {
         return 'started following you.';
       case NotificationType.followRequest:
         return 'requested to follow you.';
-      case NotificationType.followRequestAccepted:
+      case NotificationType.followAccepted:
         return 'accepted your follow request.';
       case NotificationType.donation:
         return 'donated to your campaign.';

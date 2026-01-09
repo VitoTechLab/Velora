@@ -599,7 +599,7 @@ String toString() {
 
 
 class StartWatchCommentsEvent implements FeedCommentEvent {
-  const StartWatchCommentsEvent(this.postId);
+  const StartWatchCommentsEvent({required this.postId});
   
 
  final  String postId;
@@ -653,7 +653,7 @@ class _$StartWatchCommentsEventCopyWithImpl<$Res>
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? postId = null,}) {
   return _then(StartWatchCommentsEvent(
-null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
+postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -697,7 +697,7 @@ String toString() {
 
 
 class WatchCommentArrivedEvent implements FeedCommentEvent {
-  const WatchCommentArrivedEvent(this.comment);
+  const WatchCommentArrivedEvent({required this.comment});
   
 
  final  CommentEntity comment;
@@ -751,7 +751,7 @@ class _$WatchCommentArrivedEventCopyWithImpl<$Res>
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? comment = null,}) {
   return _then(WatchCommentArrivedEvent(
-null == comment ? _self.comment : comment // ignore: cast_nullable_to_non_nullable
+comment: null == comment ? _self.comment : comment // ignore: cast_nullable_to_non_nullable
 as CommentEntity,
   ));
 }
@@ -772,7 +772,7 @@ $CommentEntityCopyWith<$Res> get comment {
 
 
 class WatchErrorEvent implements FeedCommentEvent {
-  const WatchErrorEvent(this.message);
+  const WatchErrorEvent({required this.message});
   
 
  final  String message;
@@ -826,7 +826,7 @@ class _$WatchErrorEventCopyWithImpl<$Res>
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
   return _then(WatchErrorEvent(
-null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

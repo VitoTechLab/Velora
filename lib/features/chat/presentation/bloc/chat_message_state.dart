@@ -37,6 +37,8 @@ abstract class ChatMessageState with _$ChatMessageState {
     List<ConversationListEntity> conversations,
     @Default(false) bool isLoadingConversations,
     String? conversationsError,
+    @Default('all') String selectedFilter,
+    @Default('') String searchQuery,
 
     // Message Reads (Read Receipts)
     @Default(<String, List<MessageReadEntity>>{})

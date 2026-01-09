@@ -50,6 +50,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
 
     on<ToggleLikePostEvent>(_onToggleLikePost);
     on<ToggleBookmarkPostEvent>(_onToggleBookmarkPost);
+    on<AddNewPostEvent>(_onAddNewPost);
     on<ClearTransientEvent>((event, emit) => _onClearTransient(emit));
   }
 
@@ -379,6 +380,21 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
         }).toList();
         emit(state.copyWith(posts: updated));
       },
+    );
+  }
+
+  /// Add new post to top of feed (after create post success)
+  Future<void> _onAddNewPost(
+    AddNewPostEvent event,
+    Emitter<FeedState> emit,
+  ) async {
+    logi('Adding new post to top of feed: ${event.post.id}', tag: _logTag);
+
+    // Add to top of feed
+    final updatedPosts = [event.post, ...state.posts];
+
+    emit(
+      state.copyWith(posts: updatedPosts, message: 'Post created successfully'),
     );
   }
 

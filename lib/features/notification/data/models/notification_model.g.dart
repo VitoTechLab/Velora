@@ -22,6 +22,7 @@ _NotificationModel _$NotificationModelFromJson(Map<String, dynamic> json) =>
       actorUsername: json['actor_username'] as String?,
       actorPhotoUrl: json['actor_photo_url'] as String?,
       targetPreviewUrl: json['target_preview_url'] as String?,
+      isFollowingActor: json['is_following_actor'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$NotificationModelToJson(_NotificationModel instance) =>
@@ -43,6 +44,7 @@ Map<String, dynamic> _$NotificationModelToJson(_NotificationModel instance) =>
       'actor_username': instance.actorUsername,
       'actor_photo_url': instance.actorPhotoUrl,
       'target_preview_url': instance.targetPreviewUrl,
+      'is_following_actor': instance.isFollowingActor,
     };
 
 Json? _$JsonConverterToJson<Json, Value>(

@@ -7,7 +7,7 @@ import 'package:velora/features/auth/domain/entities/auth_status.dart';
 import 'package:velora/features/auth/presentation/screens/auth_screens.dart';
 import 'package:velora/features/campaign/presentation/screens/campaign_screen.dart';
 import 'package:velora/features/chat/presentation/screens/chat_screen.dart';
-import 'package:velora/features/chat/presentation/screens/search_screen.dart';
+import 'package:velora/features/chat/presentation/screens/chat_search_screen.dart';
 import 'package:velora/features/chat/presentation/screens/search_follow_user_screen.dart';
 import 'package:velora/features/media/presentation/screens/media_gallery_screen.dart';
 import 'package:velora/features/navigation/models/create_post_media_args.dart';
@@ -40,6 +40,7 @@ import 'package:velora/features/settings/presentation/screens/settings_screen.da
 import 'package:velora/l10n/app_localizations.dart';
 
 import 'package:velora/features/feed/presentation/screens/feed_screen.dart';
+import 'package:velora/features/notification/presentation/screens/notification_screen.dart';
 
 class AppRouter {
   AppRouter(
@@ -135,6 +136,14 @@ class AppRouter {
                     builder: (context, state) => const FeedScreen(),
                     routes: [
                       GoRoute(
+                        path: AppRouteSinglePath.notification,
+                        name: AppRouteName.notification,
+                        parentNavigatorKey:
+                            navigationService.navigatorKey, // root
+                        builder: (context, state) =>
+                            const NotificationScreen(),
+                      ),
+                      GoRoute(
                         path: AppRouteSinglePath.createPost,
                         name: AppRouteName.createPost,
                         parentNavigatorKey:
@@ -170,7 +179,7 @@ class AppRouter {
                   GoRoute(
                     path: AppRoutePath.search,
                     name: AppRouteName.search,
-                    builder: (context, state) => const SearchScreen(),
+                    builder: (context, state) => const ChatSearchScreen(),
                   ),
                 ],
               ),
@@ -357,6 +366,7 @@ class AppRouter {
 class AppRouteName {
   static const home = 'home';
   static const mediaGallery = 'mediaGallery';
+  static const notification = 'notification';
   static const createPost = 'createPost';
   static const moreOptions = 'moreOptions';
   static const search = 'search';
@@ -389,6 +399,7 @@ class AppRouteName {
 class AppRoutePath {
   static const home = '/home';
   static const mediaGallery = '/media-gallery';
+  static const notification = '/home/notification';
   static const createPost = '/home/create-post';
   static const moreOptions = '/home/create-post/more-options';
   static const settings = '/profile/settings';
@@ -420,6 +431,7 @@ class AppRoutePath {
 }
 
 class AppRouteSinglePath {
+  static const notification = 'notification';
   static const createPost = 'create-post';
   static const moreOptions = 'more-options';
   static const settings = 'settings';

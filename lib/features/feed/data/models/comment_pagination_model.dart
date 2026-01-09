@@ -1,19 +1,18 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:velora/features/feed/data/models/comment_cursor.dart';
-import 'package:velora/features/feed/domain/entities/comment_cursor.dart';
+import 'package:velora/features/feed/data/models/comment_model.dart';
 import 'package:velora/features/feed/domain/entities/comment_pagination_result.dart';
-
-import 'comment_model.dart';
+import 'package:velora/features/feed/domain/entities/comment_cursor.dart';
 
 part 'comment_pagination_model.freezed.dart';
 part 'comment_pagination_model.g.dart';
 
-CommentCursor? _cursorFromJson(Object? json) {
+CommentCursor? _commentCursorFromJson(Object? json) {
   if (json == null) return null;
   return CommentCursor.fromJson(json as Map<String, dynamic>);
 }
 
-Object? _cursorToJson(CommentCursor? cursor) => cursor?.toJson();
+Object? _commentCursorToJson(CommentCursor? cursor) => cursor?.toJson();
 
 /// Cursor model for comment pagination (created_at + id)
 @freezed
@@ -23,7 +22,7 @@ abstract class CommentPaginationModel with _$CommentPaginationModel {
   const factory CommentPaginationModel({
     required List<CommentModel> comments,
     required bool hasMore,
-    @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson)
+    @JsonKey(fromJson: _commentCursorFromJson, toJson: _commentCursorToJson)
     CommentCursor? nextCursor,
   }) = _CommentPaginationModel;
 

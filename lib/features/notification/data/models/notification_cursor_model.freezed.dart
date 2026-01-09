@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'notification_cursor.dart';
+part of 'notification_cursor_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,22 +13,22 @@ part of 'notification_cursor.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$NotificationCursor {
+mixin _$NotificationCursorModel {
 
 @UtcDateTimeConverter()@JsonKey(name: 'created_at') DateTime get createdAt;@JsonKey(name: 'id') String get id;
-/// Create a copy of NotificationCursor
+/// Create a copy of NotificationCursorModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$NotificationCursorCopyWith<NotificationCursor> get copyWith => _$NotificationCursorCopyWithImpl<NotificationCursor>(this as NotificationCursor, _$identity);
+$NotificationCursorModelCopyWith<NotificationCursorModel> get copyWith => _$NotificationCursorModelCopyWithImpl<NotificationCursorModel>(this as NotificationCursorModel, _$identity);
 
-  /// Serializes this NotificationCursor to a JSON map.
+  /// Serializes this NotificationCursorModel to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NotificationCursor&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.id, id) || other.id == id));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NotificationCursorModel&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.id, id) || other.id == id));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -37,15 +37,15 @@ int get hashCode => Object.hash(runtimeType,createdAt,id);
 
 @override
 String toString() {
-  return 'NotificationCursor(createdAt: $createdAt, id: $id)';
+  return 'NotificationCursorModel(createdAt: $createdAt, id: $id)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $NotificationCursorCopyWith<$Res>  {
-  factory $NotificationCursorCopyWith(NotificationCursor value, $Res Function(NotificationCursor) _then) = _$NotificationCursorCopyWithImpl;
+abstract mixin class $NotificationCursorModelCopyWith<$Res>  {
+  factory $NotificationCursorModelCopyWith(NotificationCursorModel value, $Res Function(NotificationCursorModel) _then) = _$NotificationCursorModelCopyWithImpl;
 @useResult
 $Res call({
 @UtcDateTimeConverter()@JsonKey(name: 'created_at') DateTime createdAt,@JsonKey(name: 'id') String id
@@ -56,14 +56,14 @@ $Res call({
 
 }
 /// @nodoc
-class _$NotificationCursorCopyWithImpl<$Res>
-    implements $NotificationCursorCopyWith<$Res> {
-  _$NotificationCursorCopyWithImpl(this._self, this._then);
+class _$NotificationCursorModelCopyWithImpl<$Res>
+    implements $NotificationCursorModelCopyWith<$Res> {
+  _$NotificationCursorModelCopyWithImpl(this._self, this._then);
 
-  final NotificationCursor _self;
-  final $Res Function(NotificationCursor) _then;
+  final NotificationCursorModel _self;
+  final $Res Function(NotificationCursorModel) _then;
 
-/// Create a copy of NotificationCursor
+/// Create a copy of NotificationCursorModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? createdAt = null,Object? id = null,}) {
   return _then(_self.copyWith(
@@ -76,8 +76,8 @@ as String,
 }
 
 
-/// Adds pattern-matching-related methods to [NotificationCursor].
-extension NotificationCursorPatterns on NotificationCursor {
+/// Adds pattern-matching-related methods to [NotificationCursorModel].
+extension NotificationCursorModelPatterns on NotificationCursorModel {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -90,10 +90,10 @@ extension NotificationCursorPatterns on NotificationCursor {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _NotificationCursor value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _NotificationCursorModel value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _NotificationCursor() when $default != null:
+case _NotificationCursorModel() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -112,10 +112,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _NotificationCursor value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _NotificationCursorModel value)  $default,){
 final _that = this;
 switch (_that) {
-case _NotificationCursor():
+case _NotificationCursorModel():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -133,10 +133,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _NotificationCursor value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _NotificationCursorModel value)?  $default,){
 final _that = this;
 switch (_that) {
-case _NotificationCursor() when $default != null:
+case _NotificationCursorModel() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -156,7 +156,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@UtcDateTimeConverter()@JsonKey(name: 'created_at')  DateTime createdAt, @JsonKey(name: 'id')  String id)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _NotificationCursor() when $default != null:
+case _NotificationCursorModel() when $default != null:
 return $default(_that.createdAt,_that.id);case _:
   return orElse();
 
@@ -177,7 +177,7 @@ return $default(_that.createdAt,_that.id);case _:
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@UtcDateTimeConverter()@JsonKey(name: 'created_at')  DateTime createdAt, @JsonKey(name: 'id')  String id)  $default,) {final _that = this;
 switch (_that) {
-case _NotificationCursor():
+case _NotificationCursorModel():
 return $default(_that.createdAt,_that.id);case _:
   throw StateError('Unexpected subclass');
 
@@ -197,7 +197,7 @@ return $default(_that.createdAt,_that.id);case _:
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@UtcDateTimeConverter()@JsonKey(name: 'created_at')  DateTime createdAt, @JsonKey(name: 'id')  String id)?  $default,) {final _that = this;
 switch (_that) {
-case _NotificationCursor() when $default != null:
+case _NotificationCursorModel() when $default != null:
 return $default(_that.createdAt,_that.id);case _:
   return null;
 
@@ -209,27 +209,27 @@ return $default(_that.createdAt,_that.id);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _NotificationCursor implements NotificationCursor {
-  const _NotificationCursor({@UtcDateTimeConverter()@JsonKey(name: 'created_at') required this.createdAt, @JsonKey(name: 'id') required this.id});
-  factory _NotificationCursor.fromJson(Map<String, dynamic> json) => _$NotificationCursorFromJson(json);
+class _NotificationCursorModel implements NotificationCursorModel {
+  const _NotificationCursorModel({@UtcDateTimeConverter()@JsonKey(name: 'created_at') required this.createdAt, @JsonKey(name: 'id') required this.id});
+  factory _NotificationCursorModel.fromJson(Map<String, dynamic> json) => _$NotificationCursorModelFromJson(json);
 
 @override@UtcDateTimeConverter()@JsonKey(name: 'created_at') final  DateTime createdAt;
 @override@JsonKey(name: 'id') final  String id;
 
-/// Create a copy of NotificationCursor
+/// Create a copy of NotificationCursorModel
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$NotificationCursorCopyWith<_NotificationCursor> get copyWith => __$NotificationCursorCopyWithImpl<_NotificationCursor>(this, _$identity);
+_$NotificationCursorModelCopyWith<_NotificationCursorModel> get copyWith => __$NotificationCursorModelCopyWithImpl<_NotificationCursorModel>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$NotificationCursorToJson(this, );
+  return _$NotificationCursorModelToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NotificationCursor&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.id, id) || other.id == id));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NotificationCursorModel&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.id, id) || other.id == id));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -238,15 +238,15 @@ int get hashCode => Object.hash(runtimeType,createdAt,id);
 
 @override
 String toString() {
-  return 'NotificationCursor(createdAt: $createdAt, id: $id)';
+  return 'NotificationCursorModel(createdAt: $createdAt, id: $id)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$NotificationCursorCopyWith<$Res> implements $NotificationCursorCopyWith<$Res> {
-  factory _$NotificationCursorCopyWith(_NotificationCursor value, $Res Function(_NotificationCursor) _then) = __$NotificationCursorCopyWithImpl;
+abstract mixin class _$NotificationCursorModelCopyWith<$Res> implements $NotificationCursorModelCopyWith<$Res> {
+  factory _$NotificationCursorModelCopyWith(_NotificationCursorModel value, $Res Function(_NotificationCursorModel) _then) = __$NotificationCursorModelCopyWithImpl;
 @override @useResult
 $Res call({
 @UtcDateTimeConverter()@JsonKey(name: 'created_at') DateTime createdAt,@JsonKey(name: 'id') String id
@@ -257,17 +257,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$NotificationCursorCopyWithImpl<$Res>
-    implements _$NotificationCursorCopyWith<$Res> {
-  __$NotificationCursorCopyWithImpl(this._self, this._then);
+class __$NotificationCursorModelCopyWithImpl<$Res>
+    implements _$NotificationCursorModelCopyWith<$Res> {
+  __$NotificationCursorModelCopyWithImpl(this._self, this._then);
 
-  final _NotificationCursor _self;
-  final $Res Function(_NotificationCursor) _then;
+  final _NotificationCursorModel _self;
+  final $Res Function(_NotificationCursorModel) _then;
 
-/// Create a copy of NotificationCursor
+/// Create a copy of NotificationCursorModel
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? createdAt = null,Object? id = null,}) {
-  return _then(_NotificationCursor(
+  return _then(_NotificationCursorModel(
 createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,

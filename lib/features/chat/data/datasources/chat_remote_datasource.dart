@@ -92,18 +92,18 @@ abstract class ChatRemoteDataSource {
   // USER PRESENCE
   // =========================================================
 
-  /// Fetch last seen status for a list of users from user_presence_view
+  /// Fetch last seen from user_presence_view (batch query)
   Future<List<UserPresenceModel>> fetchLastSeenStatus({
     required List<String> userIds,
   });
 
-  /// Watch realtime user presence (online/offline)
+  /// Watch realtime presence updates via Supabase Realtime
   Stream<List<UserPresenceModel>> watchUserPresence({required String myUserId});
 
-  /// Send heartbeat to indicate online status
+  /// Heartbeat to update online status (calls touch_presence RPC)
   Future<void> touchPresence();
 
-  /// Search users that current user follows by username
+  /// Search users by username (within followed users only)
   Future<List<UserSearchModel>> searchFollowedUsers({
     required String query,
     required int limit,

@@ -7,12 +7,9 @@ import 'package:go_router/go_router.dart';
 import 'package:velora/core/ui/app_messenger.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:velora/features/media/presentation/cubit/media_upload_cubit.dart';
-import 'package:velora/features/media/presentation/cubit/media_upload_state.dart';
 import 'package:velora/features/navigation/models/more_option_post_args.dart';
+import 'package:velora/features/post/services/post_draft_service.dart';
 import 'package:velora/features/post/domain/entities/more_option_data.dart';
-import 'package:velora/features/post/presentation/bloc/post_bloc.dart';
-import 'package:velora/features/post/presentation/bloc/post_event.dart';
-import 'package:velora/features/post/presentation/bloc/post_state.dart';
 import 'package:velora/features/post/presentation/widgets/caption_input_section.dart';
 import 'package:velora/features/post/presentation/widgets/media_preview_carousel.dart';
 import 'package:velora/l10n/app_localizations.dart';
@@ -63,190 +60,6 @@ class CreatePostScreen extends HookWidget {
       moreOptions.value = result;
     }
 
-    void showCreatePostDialog() {
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (dialogContext) =>
-            BlocListener<MediaUploadCubit, MediaUploadState>(
-              listener: (context, uploadState) {
-                uploadState.when(
-                  initial: () {},
-                  uploading: () {},
-                  success: (mediaAssets) {
-                    final imageUrls = mediaAssets
-                        .where((asset) => asset.resourceType == 'image')
-                        .map((asset) => asset.secureUrl)
-                        .toList();
-                    final videoUrls = mediaAssets
-                        .where((asset) => asset.resourceType == 'video')
-                        .map((asset) => asset.secureUrl)
-                        .toList();
-
-                    final userId = context.read<AuthBloc>().state.userId ?? '';
-
-                    final options = moreOptions.value;
-                    context.read<PostBloc>().add(
-                      CreatePostEvent(
-                        userId: userId,
-                        content: captionController.text.trim(),
-                        imageUrls: imageUrls,
-                        videoUrls: videoUrls,
-                        commentsEnabled: options.commentsEnabled,
-                        hideLikeCount: options.hideLikeCount,
-                        hideCommentCount: options.hideCommentCount,
-                        hideShareCount: options.hideShareCount,
-                        hideLikesList: options.hideLikesList,
-                      ),
-                    );
-                  },
-                  failure: (errorMessage) {
-                    Navigator.of(dialogContext).pop();
-                    AppMessenger.showToast(
-                      message: t.postCreateUploadFailed(errorMessage),
-                      icon: Icons.error_outline,
-                      isError: true,
-                      duration: const Duration(seconds: 3),
-                    );
-                  },
-                );
-              },
-              child: BlocListener<PostBloc, PostState>(
-                listener: (context, postState) {
-                  if (postState.createdPost != null) {
-                    Navigator.of(dialogContext).pop();
-                    Navigator.of(context).pop();
-                    Navigator.of(context).pop();
-
-                    context.read<PostBloc>().add(
-                      const PostEvent.clearPostTransient(),
-                    );
-
-                    AppMessenger.showToast(
-                      message: t.postCreateSuccess,
-                      icon: Icons.check_circle_outline,
-                      duration: const Duration(seconds: 3),
-                    );
-                  } else if (postState.errorCreatePost != null) {
-                    Navigator.of(dialogContext).pop();
-                    AppMessenger.showToast(
-                      message: t.postCreateFailure(
-                        postState.errorCreatePost ?? '',
-                      ),
-                      icon: Icons.error_outline,
-                      isError: true,
-                      duration: const Duration(seconds: 3),
-                    );
-                  }
-                },
-                child: AlertDialog(
-                  title: Text(
-                    t.postCreateDialogTitle,
-                    style: textTheme.titleMedium?.copyWith(
-                      color: colorScheme.onSurface,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  content: BlocBuilder<MediaUploadCubit, MediaUploadState>(
-                    builder: (context, uploadState) {
-                      return uploadState.when(
-                        initial: () => Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            CircularProgressIndicator(
-                              color: colorScheme.primary,
-                            ),
-                            const SizedBox(height: 16),
-                            Text(
-                              t.postCreateDialogPreparing,
-                              style: textTheme.bodyMedium,
-                            ),
-                          ],
-                        ),
-                        uploading: () => Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            CircularProgressIndicator(
-                              color: colorScheme.primary,
-                            ),
-                            const SizedBox(height: 16),
-                            Text(
-                              t.postCreateDialogUploading,
-                              style: textTheme.bodyMedium,
-                            ),
-                          ],
-                        ),
-                        success: (_) => BlocBuilder<PostBloc, PostState>(
-                          builder: (context, postState) {
-                            if (postState.isCreatingPost) {
-                              return Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  CircularProgressIndicator(
-                                    color: colorScheme.primary,
-                                  ),
-                                  const SizedBox(height: 16),
-                                  Text(
-                                    t.postCreateDialogCreating,
-                                    style: textTheme.bodyMedium,
-                                  ),
-                                ],
-                              );
-                            }
-                            return Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
-                                  Icons.check_circle,
-                                  color: colorScheme.tertiary,
-                                  size: 48,
-                                ),
-                                const SizedBox(height: 16),
-                                Text(
-                                  t.postCreateSuccess,
-                                  style: textTheme.bodyMedium?.copyWith(
-                                    color: colorScheme.onSurface,
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
-                        ),
-                        failure: (error) => Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.error,
-                              color: colorScheme.error,
-                              size: 48,
-                            ),
-                            const SizedBox(height: 16),
-                            Text(
-                              t.postCreateDialogError(error),
-                              style: textTheme.bodyMedium?.copyWith(
-                                color: colorScheme.onSurface,
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
-            ),
-      );
-
-      final userId = context.read<AuthBloc>().state.userId ?? '';
-      final postId = DateTime.now().millisecondsSinceEpoch.toString();
-
-      context.read<MediaUploadCubit>().uploadForPost(
-        files: selectedMediaState.value,
-        userId: userId,
-        postId: postId,
-      );
-    }
-
     void onPublishPressed() {
       if (selectedMediaState.value.isEmpty) {
         AppMessenger.showToast(
@@ -257,7 +70,23 @@ class CreatePostScreen extends HookWidget {
         return;
       }
 
-      showCreatePostDialog();
+      final userId = context.read<AuthBloc>().state.userId ?? '';
+      final caption = captionController.text.trim();
+
+      // Save draft untuk diambil nanti oleh upload status card
+      PostDraftService.saveDraft(caption: caption, userId: userId);
+
+      // Navigate to feed immediately
+      context.go('/');
+
+      // Start upload process
+      final postId = DateTime.now().millisecondsSinceEpoch.toString();
+
+      context.read<MediaUploadCubit>().uploadForPost(
+        files: selectedMediaState.value,
+        userId: userId,
+        postId: postId,
+      );
     }
 
     final backgroundColor = colorScheme.surfaceContainerLowest;
@@ -289,108 +118,138 @@ class CreatePostScreen extends HookWidget {
               ),
         ),
         centerTitle: false,
-        actions: [
-          Semantics(
-            button: true,
-            label: t.postCreatePublishTooltip,
-            hint: t.postCreatePublishHint,
-            child: TextButton(
-              onPressed: onPublishPressed,
-              child: Text(
-                t.postCreatePublishLabel,
-                style: textTheme.labelLarge?.copyWith(
-                  color: colorScheme.primary,
-                  fontWeight: FontWeight.w600,
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: FadeTransition(
+                opacity: fadeAnimation,
+                child: CustomScrollView(
+                  slivers: [
+                    if (selectedMediaState.value.isNotEmpty)
+                      SliverToBoxAdapter(
+                        child: Semantics(
+                          label: t.postCreateMediaLabel,
+                          hint: t.postCreateMediaHint,
+                          child: MediaPreviewCarousel(
+                            mediaFiles: selectedMediaState.value,
+                          ),
+                        ),
+                      ),
+                    SliverToBoxAdapter(
+                      child: CaptionInputSection(
+                        controller: captionController,
+                        focusNode: captionFocusNode,
+                        maxLength: 2000,
+                      ),
+                    ),
+                    const SliverToBoxAdapter(child: Divider(height: 1)),
+                    SliverToBoxAdapter(
+                      child: _buildActionTile(
+                        icon: Icons.music_note_outlined,
+                        title: t.postCreateActionAddAudio,
+                        onTap: () {},
+                        colorScheme: colorScheme,
+                        textTheme: textTheme,
+                        t: t,
+                      ),
+                    ),
+                    SliverToBoxAdapter(
+                      child: _buildActionTile(
+                        icon: Icons.person_add_outlined,
+                        title: t.postCreateActionTagPeople,
+                        onTap: () {},
+                        colorScheme: colorScheme,
+                        textTheme: textTheme,
+                        t: t,
+                      ),
+                    ),
+                    SliverToBoxAdapter(
+                      child: _buildActionTile(
+                        icon: Icons.location_on_outlined,
+                        title: t.postCreateActionAddLocation,
+                        onTap: () {},
+                        colorScheme: colorScheme,
+                        textTheme: textTheme,
+                        t: t,
+                      ),
+                    ),
+                    const SliverToBoxAdapter(child: Divider(height: 1)),
+                    SliverToBoxAdapter(
+                      child: _buildActionTile(
+                        icon: Icons.people_outline,
+                        title: t.postCreateActionAudience,
+                        trailing: Text(
+                          t.postCreateAudienceFollowers,
+                          style: textTheme.bodyMedium?.copyWith(
+                            color: colorScheme.onSurface.withValues(alpha: 0.6),
+                          ),
+                        ),
+                        onTap: () {},
+                        colorScheme: colorScheme,
+                        textTheme: textTheme,
+                        t: t,
+                      ),
+                    ),
+                    SliverToBoxAdapter(
+                      child: _buildActionTile(
+                        icon: Icons.more_horiz,
+                        title: t.postCreateActionMoreOptions,
+                        onTap: navigateToMoreOptions,
+                        colorScheme: colorScheme,
+                        textTheme: textTheme,
+                        t: t,
+                      ),
+                    ),
+                    const SliverToBoxAdapter(child: SizedBox(height: 16)),
+                  ],
                 ),
               ),
             ),
-          ),
-          const SizedBox(width: 8),
-        ],
-      ),
-      body: SafeArea(
-        child: FadeTransition(
-          opacity: fadeAnimation,
-          child: CustomScrollView(
-            slivers: [
-              if (selectedMediaState.value.isNotEmpty)
-                SliverToBoxAdapter(
-                  child: Semantics(
-                    label: t.postCreateMediaLabel,
-                    hint: t.postCreateMediaHint,
-                    child: MediaPreviewCarousel(
-                      mediaFiles: selectedMediaState.value,
+
+            // Fixed bottom Share button
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: appBarColor,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.1),
+                    blurRadius: 8,
+                    offset: const Offset(0, -2),
+                  ),
+                ],
+              ),
+              child: Semantics(
+                button: true,
+                label: t.postCreatePublishTooltip,
+                hint: t.postCreatePublishHint,
+                child: SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: onPublishPressed,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: colorScheme.primary,
+                      foregroundColor: colorScheme.onPrimary,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      elevation: 0,
+                    ),
+                    child: Text(
+                      t.postCreatePublishLabel,
+                      style: textTheme.labelLarge?.copyWith(
+                        color: colorScheme.onPrimary,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ),
-              SliverToBoxAdapter(
-                child: CaptionInputSection(
-                  controller: captionController,
-                  focusNode: captionFocusNode,
-                  maxLength: 2000,
-                ),
               ),
-              const SliverToBoxAdapter(child: Divider(height: 1)),
-              SliverToBoxAdapter(
-                child: _buildActionTile(
-                  icon: Icons.music_note_outlined,
-                  title: t.postCreateActionAddAudio,
-                  onTap: () {},
-                  colorScheme: colorScheme,
-                  textTheme: textTheme,
-                  t: t,
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: _buildActionTile(
-                  icon: Icons.person_add_outlined,
-                  title: t.postCreateActionTagPeople,
-                  onTap: () {},
-                  colorScheme: colorScheme,
-                  textTheme: textTheme,
-                  t: t,
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: _buildActionTile(
-                  icon: Icons.location_on_outlined,
-                  title: t.postCreateActionAddLocation,
-                  onTap: () {},
-                  colorScheme: colorScheme,
-                  textTheme: textTheme,
-                  t: t,
-                ),
-              ),
-              const SliverToBoxAdapter(child: Divider(height: 1)),
-              SliverToBoxAdapter(
-                child: _buildActionTile(
-                  icon: Icons.people_outline,
-                  title: t.postCreateActionAudience,
-                  trailing: Text(
-                    t.postCreateAudienceFollowers,
-                    style: textTheme.bodyMedium?.copyWith(
-                      color: colorScheme.onSurface.withValues(alpha: 0.6),
-                    ),
-                  ),
-                  onTap: () {},
-                  colorScheme: colorScheme,
-                  textTheme: textTheme,
-                  t: t,
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: _buildActionTile(
-                  icon: Icons.more_horiz,
-                  title: t.postCreateActionMoreOptions,
-                  onTap: navigateToMoreOptions,
-                  colorScheme: colorScheme,
-                  textTheme: textTheme,
-                  t: t,
-                ),
-              ),
-              const SliverToBoxAdapter(child: SizedBox(height: 100)),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

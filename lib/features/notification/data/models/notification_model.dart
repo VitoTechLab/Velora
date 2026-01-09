@@ -30,6 +30,9 @@ abstract class NotificationModel with _$NotificationModel {
 
     // Target preview
     @JsonKey(name: 'target_preview_url') String? targetPreviewUrl,
+
+    // Follow relationship - whether current user follows the actor
+    @JsonKey(name: 'is_following_actor') @Default(false) bool isFollowingActor,
   }) = _NotificationModel;
 
   factory NotificationModel.fromJson(Map<String, dynamic> json) =>
@@ -51,6 +54,7 @@ abstract class NotificationModel with _$NotificationModel {
       actorUsername: actorUsername,
       actorPhotoUrl: actorPhotoUrl,
       targetPreviewUrl: targetPreviewUrl,
+      isFollowingActor: isFollowingActor,
     );
   }
 
@@ -70,6 +74,10 @@ abstract class NotificationModel with _$NotificationModel {
         return NotificationType.donation;
       case 'mention':
         return NotificationType.mention;
+      case 'post_share':
+        return NotificationType.postShare;
+      case 'channel_invite':
+        return NotificationType.channelInvite;
       default:
         return NotificationType.like;
     }

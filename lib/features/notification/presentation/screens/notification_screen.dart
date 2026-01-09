@@ -172,6 +172,38 @@ class NotificationScreen extends HookWidget {
                       ),
                     ),
 
+                  // Today section
+                  if (groupedNotifications.today.isNotEmpty) ...[
+                    const SliverToBoxAdapter(
+                      child: NotificationSectionHeader(title: 'Today'),
+                    ),
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          final notification = groupedNotifications.today[index];
+                          return _buildNotificationTile(context, notification);
+                        },
+                        childCount: groupedNotifications.today.length,
+                      ),
+                    ),
+                  ],
+
+                  // Yesterday section
+                  if (groupedNotifications.yesterday.isNotEmpty) ...[
+                    const SliverToBoxAdapter(
+                      child: NotificationSectionHeader(title: 'Yesterday'),
+                    ),
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          final notification = groupedNotifications.yesterday[index];
+                          return _buildNotificationTile(context, notification);
+                        },
+                        childCount: groupedNotifications.yesterday.length,
+                      ),
+                    ),
+                  ],
+
                   // Last 7 days section
                   if (groupedNotifications.last7Days.isNotEmpty) ...[
                     const SliverToBoxAdapter(
@@ -248,36 +280,53 @@ class NotificationScreen extends HookWidget {
       return const SizedBox.shrink();
     }
 
-    return Dismissible(
-      key: Key('notification_${notification.id}'),
-      direction: DismissDirection.endToStart,
-      background: Container(
-        alignment: Alignment.centerRight,
-        padding: const EdgeInsets.only(right: 20),
-        color: Theme.of(context).colorScheme.error,
-        child: const Icon(Icons.delete, color: Colors.white),
-      ),
-      onDismissed: (_) {
-        context.read<NotificationBloc>().add(
-          NotificationEvent.delete(notification.id),
+    return BlocBuilder<NotificationBloc, NotificationState>(
+      buildWhen: (previous, next) =>
+          previous.followLoadingIds.contains(notification.id) !=
+          next.followLoadingIds.contains(notification.id),
+      builder: (context, state) {
+        final isFollowLoading = state.followLoadingIds.contains(notification.id);
+
+        return Dismissible(
+          key: Key('notification_${notification.id}'),
+          direction: DismissDirection.endToStart,
+          background: Container(
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.only(right: 20),
+            color: Theme.of(context).colorScheme.error,
+            child: const Icon(Icons.delete, color: Colors.white),
+          ),
+          onDismissed: (_) {
+            context.read<NotificationBloc>().add(
+              NotificationEvent.delete(notification.id),
+            );
+          },
+          child: NotificationTile(
+            notification: notification,
+            isFollowLoading: isFollowLoading,
+            onTap: () {
+              // Mark as read
+              if (!notification.isRead) {
+                context.read<NotificationBloc>().add(
+                  NotificationEvent.markAsRead(notification.id),
+                );
+              }
+              // Navigate based on notification type
+              _handleNotificationTap(context, notification);
+            },
+            onFollowBack: notification.actorId != null
+                ? () {
+                    context.read<NotificationBloc>().add(
+                      NotificationEvent.toggleFollowActor(
+                        notificationId: notification.id,
+                        actorId: notification.actorId!,
+                      ),
+                    );
+                  }
+                : null,
+          ),
         );
       },
-      child: NotificationTile(
-        notification: notification,
-        onTap: () {
-          // Mark as read
-          if (!notification.isRead) {
-            context.read<NotificationBloc>().add(
-              NotificationEvent.markAsRead(notification.id),
-            );
-          }
-          // Navigate based on notification type
-          _handleNotificationTap(context, notification);
-        },
-        onFollowBack: () {
-          // Handle follow back action
-        },
-      ),
     );
   }
 
@@ -294,7 +343,7 @@ class NotificationScreen extends HookWidget {
         break;
       case NotificationType.follow:
       case NotificationType.followRequest:
-      case NotificationType.followRequestAccepted:
+      case NotificationType.followAccepted:
         // Navigate to profile
         if (notification.actorId != null) {
           // context.pushNamed(AppRouteName.profile, pathParameters: {'id': notification.actorId!});
@@ -313,12 +362,20 @@ class NotificationScreen extends HookWidget {
   }
 
   _GroupedNotifications _groupNotifications(List<NotificationEntity> notifications) {
+    final today = <NotificationEntity>[];
+    final yesterday = <NotificationEntity>[];
     final last7Days = <NotificationEntity>[];
     final last30Days = <NotificationEntity>[];
     final older = <NotificationEntity>[];
 
     for (final notification in notifications) {
       switch (notification.timeCategory) {
+        case NotificationTimeCategory.today:
+          today.add(notification);
+          break;
+        case NotificationTimeCategory.yesterday:
+          yesterday.add(notification);
+          break;
         case NotificationTimeCategory.last7Days:
           last7Days.add(notification);
           break;
@@ -332,6 +389,8 @@ class NotificationScreen extends HookWidget {
     }
 
     return _GroupedNotifications(
+      today: today,
+      yesterday: yesterday,
       last7Days: last7Days,
       last30Days: last30Days,
       older: older,
@@ -340,11 +399,15 @@ class NotificationScreen extends HookWidget {
 }
 
 class _GroupedNotifications {
+  final List<NotificationEntity> today;
+  final List<NotificationEntity> yesterday;
   final List<NotificationEntity> last7Days;
   final List<NotificationEntity> last30Days;
   final List<NotificationEntity> older;
 
   _GroupedNotifications({
+    required this.today,
+    required this.yesterday,
     required this.last7Days,
     required this.last30Days,
     required this.older,

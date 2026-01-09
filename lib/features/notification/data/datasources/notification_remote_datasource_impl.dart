@@ -5,7 +5,7 @@ import 'package:velora/core/errors/exceptions.dart';
 import 'package:velora/core/supabase/supabase_guard.dart';
 import 'package:velora/core/supabase/supabase_constants.dart';
 import 'package:velora/core/utils/log_alias.dart';
-import 'package:velora/features/notification/data/models/notification_cursor.dart';
+import 'package:velora/features/notification/data/models/notification_cursor_model.dart';
 import 'package:velora/features/notification/data/models/notification_model.dart';
 import 'package:velora/features/notification/data/models/notification_pagination_model.dart';
 import 'notification_remote_datasource.dart';
@@ -31,7 +31,7 @@ class NotificationRemoteDataSourceImpl implements NotificationRemoteDataSource {
   @override
   Future<NotificationPaginationModel> getNotifications({
     int limit = 20,
-    NotificationCursor? cursor,
+    NotificationCursorModel? cursor,
     String? type,
   }) {
     return guardSupabase(
@@ -66,7 +66,7 @@ class NotificationRemoteDataSourceImpl implements NotificationRemoteDataSource {
 
         final nextCursor = notifications.isEmpty
             ? null
-            : NotificationCursor(
+            : NotificationCursorModel(
                 createdAt: notifications.last.createdAt,
                 id: notifications.last.id,
               );

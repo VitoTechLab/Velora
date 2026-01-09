@@ -40,4 +40,10 @@ class NotificationEvent with _$NotificationEvent {
 
   /// Clear transient UI messages/errors
   const factory NotificationEvent.clearTransient() = ClearTransientEvent;
+
+  /// Toggle follow for actor of a notification
+  const factory NotificationEvent.toggleFollowActor({
+    required String notificationId,
+    required String actorId,
+  }) = ToggleFollowActorEvent;
 }

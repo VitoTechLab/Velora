@@ -572,11 +572,35 @@ abstract class AppLocalizations {
   /// **'See translation'**
   String get feedSeeTranslation;
 
+  /// No description provided for @feedSeeOriginal.
+  ///
+  /// In en, this message translates to:
+  /// **'See original'**
+  String get feedSeeOriginal;
+
+  /// No description provided for @feedTranslating.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading…'**
+  String get feedTranslating;
+
+  /// No description provided for @feedCommentAsUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Comment as {username}'**
+  String feedCommentAsUser(String username);
+
   /// No description provided for @feedViewReplies.
   ///
   /// In en, this message translates to:
   /// **'View {count, plural, one{{count} reply} other{{count} replies}}'**
   String feedViewReplies(int count);
+
+  /// No description provided for @feedHideReplies.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide replies'**
+  String get feedHideReplies;
 
   /// No description provided for @feedUnknownUser.
   ///

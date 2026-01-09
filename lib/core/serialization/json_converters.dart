@@ -22,6 +22,26 @@ class UtcDateTimeConverter extends JsonConverter<DateTime, Object?> {
   Object toJson(DateTime object) => object.toUtc().toIso8601String();
 }
 
+/// Nullable version of UtcDateTimeConverter for optional date fields
+class NullableUtcDateTimeConverter extends JsonConverter<DateTime?, Object?> {
+  const NullableUtcDateTimeConverter();
+
+  @override
+  DateTime? fromJson(Object? json) {
+    if (json == null) return null;
+
+    if (json is DateTime) {
+      return json.toUtc();
+    }
+
+    final parsed = DateTime.tryParse(json.toString());
+    return parsed?.toUtc();
+  }
+
+  @override
+  Object? toJson(DateTime? object) => object?.toUtc().toIso8601String();
+}
+
 class StringListConverter extends JsonConverter<List<String>, Object?> {
   const StringListConverter();
 
