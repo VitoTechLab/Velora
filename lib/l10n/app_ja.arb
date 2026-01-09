@@ -229,6 +229,8 @@
   "settingsTileProfilesSubtitle": "Vito • Velora、Forum、Community",
   "settingsTileSharingTitle": "プロフィール間の共有",
   "settingsTileSharingSubtitle": "自動同期する内容を選択",
+  "settingsTileActivityTitle": "アクティビティ履歴",
+  "settingsTileActivitySubtitle": "最近のアクティビティとインタラクションを表示",
   "settingsTileLoggingTitle": "アカウントでのログイン",
   "settingsTileLoggingSubtitle": "デバイスとログイン承認を確認",
   "settingsAccountTitle": "アカウント設定",

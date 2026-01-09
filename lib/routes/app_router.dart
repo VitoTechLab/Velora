@@ -140,9 +140,9 @@ class AppRouter {
                         parentNavigatorKey:
                             navigationService.navigatorKey, // root
                         builder: (context, state) {
-                          final args = state.extra as CreatePostMediaArgs;
+                          final args = state.extra as CreatePostMediaArgs?;
                           return CreatePostScreen(
-                            selectedMedia: args.selectedMedia,
+                            selectedMedia: args?.selectedMedia ?? [],
                           );
                         },
                         routes: [

@@ -401,6 +401,13 @@ class AppLocalizationsId extends AppLocalizations {
       'Pilih apa saja yang tersinkron otomatis';
 
   @override
+  String get settingsTileActivityTitle => 'Riwayat aktivitas';
+
+  @override
+  String get settingsTileActivitySubtitle =>
+      'Lihat aktivitas dan interaksi terbaru Anda';
+
+  @override
   String get settingsTileLoggingTitle => 'Masuk dengan akun';
 
   @override

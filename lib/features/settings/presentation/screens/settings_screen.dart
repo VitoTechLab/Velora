@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_event.dart';
+import 'package:velora/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:velora/features/profile/presentation/bloc/profile_event.dart';
+import 'package:velora/features/profile/presentation/bloc/profile_state.dart';
 import 'package:velora/features/settings/presentation/widgets/settings_section_card.dart';
 import 'package:velora/features/settings/presentation/widgets/settings_tile.dart';
 import 'package:velora/l10n/app_localizations.dart';
@@ -82,9 +85,9 @@ class SettingScreen extends StatelessWidget {
                           ),
                         ),
                         SettingsTileData(
-                          title: t.settingsTileSharingTitle,
-                          subtitle: t.settingsTileSharingSubtitle,
-                          icon: Icons.sync_alt_rounded,
+                          title: t.settingsTileActivityTitle,
+                          subtitle: t.settingsTileActivitySubtitle,
+                          icon: Icons.history,
                           iconColor: const Color(0xFF00BCD4),
                           onTap: () => _openNamed(
                             context,
@@ -287,127 +290,134 @@ class SettingScreen extends StatelessWidget {
   }
 }
 
-class _AccountHeroCard extends StatelessWidget {
+class _AccountHeroCard extends StatefulWidget {
   const _AccountHeroCard();
+
+  @override
+  State<_AccountHeroCard> createState() => _AccountHeroCardState();
+}
+
+class _AccountHeroCardState extends State<_AccountHeroCard> {
+  @override
+  void initState() {
+    super.initState();
+    final authState = context.read<AuthBloc>().state;
+    if (authState.userId != null) {
+      context.read<ProfileBloc>().add(
+        LoadProfileEvent(userId: authState.userId!),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final t = AppLocalizations.of(context)!;
-    return Semantics(
-      container: true,
-      label: t.settingsHeroSemanticsLabel,
-      child: Container(
-        padding: const EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              colorScheme.primary.withValues(alpha: 0.2),
-              colorScheme.secondary.withValues(alpha: 0.08),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          borderRadius: BorderRadius.circular(28),
-          border: Border.all(color: colorScheme.primary.withValues(alpha: 0.2)),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  t.settingsHeroMetaId,
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    color: colorScheme.primary,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(t.settingsHeroLearnMore),
-                ),
-              ],
+    return BlocBuilder<ProfileBloc, ProfileState>(
+      builder: (context, profileState) {
+        final profile = profileState.profile;
+        return Semantics(
+          container: true,
+          label: t.settingsHeroSemanticsLabel,
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  colorScheme.primary.withValues(alpha: 0.2),
+                  colorScheme.secondary.withValues(alpha: 0.08),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(28),
+              border: Border.all(
+                color: colorScheme.primary.withValues(alpha: 0.2),
+              ),
             ),
-            const SizedBox(height: 16),
-            Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CircleAvatar(
-                  radius: 36,
-                  backgroundImage: const NetworkImage(
-                    'https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=200',
-                  ),
-                  backgroundColor: colorScheme.surfaceContainerHighest,
+                Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 36,
+                      backgroundImage: const NetworkImage(
+                        'https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=200',
+                      ),
+                      backgroundColor: colorScheme.surfaceContainerHighest,
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            profile?.username ?? '...',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: theme.textTheme.titleLarge?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            t.settingsHeroNetworks,
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              color: colorScheme.onSurfaceVariant,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    IconButton.filledTonal(
+                      onPressed: () {},
+                      icon: const Icon(Icons.swap_horiz),
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                const SizedBox(height: 20),
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: colorScheme.surface.withValues(alpha: 0.8),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
                     children: [
-                      Text(
-                        'Vito Ananda',
-                        style: theme.textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
+                      Icon(Icons.lock_clock, color: colorScheme.primary),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              t.settingsHeroPasswordUpdated,
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Text(
+                              t.settingsHeroPasswordSubtitle,
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                color: colorScheme.onSurfaceVariant,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      Text(
-                        t.settingsHeroNetworks,
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          color: colorScheme.onSurfaceVariant,
-                        ),
+                      TextButton(
+                        onPressed: () {},
+                        child: Text(t.settingsHeroReviewButton),
                       ),
                     ],
                   ),
                 ),
-                FilledButton.tonalIcon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.swap_horiz),
-                  label: Text(t.settingsHeroSwitchButton),
-                ),
               ],
             ),
-            const SizedBox(height: 20),
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: colorScheme.surface.withValues(alpha: 0.8),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Row(
-                children: [
-                  Icon(Icons.lock_clock, color: colorScheme.primary),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          t.settingsHeroPasswordUpdated,
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Text(
-                          t.settingsHeroPasswordSubtitle,
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            color: colorScheme.onSurfaceVariant,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(t.settingsHeroReviewButton),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

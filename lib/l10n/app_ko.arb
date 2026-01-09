@@ -229,6 +229,8 @@
   "settingsTileProfilesSubtitle": "Vito • Velora, Forum, Community",
   "settingsTileSharingTitle": "프로필 간 공유",
   "settingsTileSharingSubtitle": "자동으로 동기화할 항목 선택",
+  "settingsTileActivityTitle": "활동 기록",
+  "settingsTileActivitySubtitle": "최근 활동 및 상호작용 보기",
   "settingsTileLoggingTitle": "계정 로그인",
   "settingsTileLoggingSubtitle": "기기 및 로그인 승인 확인",
   "settingsAccountTitle": "계정 설정",
