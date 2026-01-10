@@ -5,6 +5,7 @@ import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velora/core/errors/feed_failure.dart';
 import 'package:velora/core/utils/log_alias.dart';
+import 'package:velora/features/feed/domain/entities/comment_entity.dart';
 import 'package:velora/features/feed/domain/usecases/add_comment.dart';
 import 'package:velora/features/feed/domain/usecases/delete_comment.dart';
 import 'package:velora/features/feed/domain/usecases/get_comments.dart';
@@ -315,14 +316,37 @@ class FeedCommentBloc extends Bloc<FeedCommentEvent, FeedCommentState> {
         logw('Toggle comment like failed: ${failure.message}', tag: _logTag);
       },
       (_) {
-        final updated = state.comments.map((comment) {
-          if (comment.id != commentId) return comment;
+        // Helper to toggle like on a comment
+        CommentEntity toggleLike(CommentEntity comment) {
           final willLike = !comment.isLiked;
           final newCount = willLike
               ? comment.likesCount + 1
               : math.max(comment.likesCount - 1, 0);
           return comment.copyWith(isLiked: willLike, likesCount: newCount);
+        }
+
+        // Update comments including nested replies
+        final updated = state.comments.map<CommentEntity>((comment) {
+          // Check if this root comment is the one being liked
+          if (comment.id == commentId) {
+            return toggleLike(comment);
+          }
+
+          // Check if any reply in this comment is being liked
+          final hasReplyToUpdate = comment.replies.any((r) => r.id == commentId);
+          if (hasReplyToUpdate) {
+            final updatedReplies = comment.replies.map<CommentEntity>((reply) {
+              if (reply.id == commentId) {
+                return toggleLike(reply);
+              }
+              return reply;
+            }).toList();
+            return comment.copyWith(replies: updatedReplies);
+          }
+
+          return comment;
         }).toList();
+
         emit(state.copyWith(comments: updated));
       },
     );
