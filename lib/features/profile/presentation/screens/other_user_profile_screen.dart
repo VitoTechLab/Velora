@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
-import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:velora/core/di/service_locator.dart';
 import 'package:velora/features/feed/presentation/bloc/feed_bloc.dart';
 import 'package:velora/features/feed/presentation/bloc/feed_event.dart';
 import 'package:velora/features/feed/presentation/bloc/feed_state.dart';
@@ -14,51 +13,41 @@ import 'package:velora/features/profile/presentation/widgets/profile_stats.dart'
 import 'package:velora/features/profile/presentation/widgets/profile_actions.dart';
 import 'package:velora/features/profile/presentation/widgets/profile_tabs.dart';
 import 'package:velora/features/profile/presentation/widgets/profile_grid.dart';
-import 'package:velora/routes/app_router.dart';
-import 'package:velora/core/di/service_locator.dart';
 
-/// Screen for displaying the current logged-in user's profile (My Profile)
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+/// Screen for displaying other user's profile (not the current logged-in user)
+class OtherUserProfileScreen extends StatelessWidget {
+  final String userId;
+
+  const OtherUserProfileScreen({super.key, required this.userId});
 
   @override
   Widget build(BuildContext context) {
-    // Get current user's ID from AuthBloc
-    final authState = context.watch<AuthBloc>().state;
-    final currentUserId = authState.userId;
-
-    if (currentUserId == null) {
-      return const Scaffold(
-        body: Center(child: Text('Please log in to view your profile')),
-      );
-    }
-
-    // Create isolated FeedBloc instance for current user's posts
-    return BlocProvider(
-      create: (_) =>
-          getIt<FeedBloc>()
-            ..add(FeedEvent.loadInitialFeed(limit: 20, userId: currentUserId)),
-      child: _ProfileScreenContent(userId: currentUserId),
+    // Create isolated FeedBloc instance for this user's posts
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) =>
+              getIt<ProfileBloc>()..add(LoadProfileEvent(userId: userId)),
+        ),
+        BlocProvider(
+          create: (_) =>
+              getIt<FeedBloc>()
+                ..add(FeedEvent.loadInitialFeed(limit: 20, userId: userId)),
+        ),
+      ],
+      child: const _UserProfileContent(),
     );
   }
 }
 
-class _ProfileScreenContent extends HookWidget {
-  final String userId;
-
-  const _ProfileScreenContent({required this.userId});
+class _UserProfileContent extends HookWidget {
+  const _UserProfileContent();
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final tabController = useTabController(initialLength: 4);
-
-    useEffect(() {
-      // Load profile data when screen mounts
-      context.read<ProfileBloc>().add(LoadProfileEvent(userId: userId));
-      return null;
-    }, [userId]);
 
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, profileState) {
@@ -69,12 +58,7 @@ class _ProfileScreenContent extends HookWidget {
           appBar: AppBar(
             backgroundColor: colorScheme.surface,
             elevation: 0,
-            leading: IconButton(
-              icon: const Icon(Icons.add_box_outlined),
-              onPressed: () {
-                context.pushNamed(AppRouteName.mediaGallery);
-              },
-            ),
+            leading: const BackButton(),
             title: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -88,25 +72,13 @@ class _ProfileScreenContent extends HookWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                const SizedBox(width: 4),
-                const Icon(Icons.keyboard_arrow_down, size: 20),
               ],
             ),
             actions: [
               IconButton(
-                icon: Badge(
-                  label: const Text('9+'),
-                  backgroundColor: Colors.red,
-                  child: const Icon(Icons.favorite_border),
-                ),
+                icon: const Icon(Icons.more_vert),
                 onPressed: () {
-                  // TODO: Navigate to notifications
-                },
-              ),
-              IconButton(
-                icon: const Icon(Icons.menu),
-                onPressed: () {
-                  context.pushNamed(AppRouteName.settings);
+                  // TODO: Show user options menu (report, block, etc)
                 },
               ),
             ],
@@ -114,14 +86,33 @@ class _ProfileScreenContent extends HookWidget {
           body: profileState.isLoading
               ? const Center(child: CircularProgressIndicator())
               : profileState.error != null
-              ? Center(child: Text(profileState.error!))
+              ? Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.error_outline,
+                        size: 64,
+                        color: colorScheme.error,
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        profileState.error!,
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          color: colorScheme.error,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                )
               : RefreshIndicator(
                   onRefresh: () async {
                     context.read<ProfileBloc>().add(
-                      LoadProfileEvent(userId: userId),
+                      LoadProfileEvent(userId: profile!.id),
                     );
                     context.read<FeedBloc>().add(
-                      FeedEvent.loadInitialFeed(limit: 20, userId: userId),
+                      FeedEvent.loadInitialFeed(limit: 20, userId: profile.id),
                     );
                   },
                   child: NestedScrollView(
@@ -133,6 +124,7 @@ class _ProfileScreenContent extends HookWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const SizedBox(height: 16),
+                              // Profile Header Section
                               Padding(
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 16,
@@ -141,27 +133,32 @@ class _ProfileScreenContent extends HookWidget {
                                   children: [
                                     ProfileHeader(
                                       imageUrl: profile?.avatarUrl,
-                                      showAddButton: profile?.isMe ?? false,
+                                      showAddButton: false,
                                     ),
                                     const SizedBox(width: 24),
                                     Expanded(
                                       child: ProfileStats(
                                         postsCount:
-                                            profile?.followersCount ??
-                                            0, // Should be posts count, but for now we follow migration tables
+                                            profile?.followersCount ?? 0,
                                         followersCount:
                                             profile?.followersCount ?? 0,
                                         followingCount:
                                             profile?.followingCount ?? 0,
                                         onPostsTap: () {},
-                                        onFollowersTap: () {},
-                                        onFollowingTap: () {},
+                                        onFollowersTap: () {
+                                          // TODO: Navigate to followers list
+                                        },
+                                        onFollowingTap: () {
+                                          // TODO: Navigate to following list
+                                        },
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
                               const SizedBox(height: 12),
+
+                              // Profile Info Section
                               Padding(
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 16,
@@ -169,18 +166,15 @@ class _ProfileScreenContent extends HookWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      profile?.fullName ?? '',
-                                      style: const TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w600,
+                                    if (profile?.fullName != null &&
+                                        profile!.fullName.isNotEmpty)
+                                      Text(
+                                        profile.fullName,
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                       ),
-                                    ),
-                                    const SizedBox(height: 2),
-                                    const Text(
-                                      '💥',
-                                      style: TextStyle(fontSize: 14),
-                                    ),
                                     const SizedBox(height: 4),
                                     Row(
                                       children: [
@@ -202,27 +196,39 @@ class _ProfileScreenContent extends HookWidget {
                                 ),
                               ),
                               const SizedBox(height: 12),
+
+                              // Action Buttons Section (Follow/Message)
                               Padding(
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 16,
                                 ),
                                 child: ProfileActions(
-                                  isMe: true,
-                                  isFollowing: false,
-                                  isFollowRequestPending: false,
-                                  onEditProfile: () {
-                                    context.pushNamed(
-                                      AppRouteName.settingsEditProfile,
-                                    );
+                                  isMe: false,
+                                  isFollowing: profileState.isFollowing,
+                                  isFollowRequestPending:
+                                      profileState.isFollowRequestPending,
+                                  onEditProfile: () {},
+                                  onFollowToggle: () {
+                                    if (profile != null) {
+                                      context.read<ProfileBloc>().add(
+                                        ToggleFollowEvent(
+                                          targetUserId: profile.id,
+                                          isPrivate: profile.isPrivate,
+                                        ),
+                                      );
+                                    }
                                   },
-                                  onFollowToggle: () {},
                                   onShareProfile: () {
                                     // TODO: Share profile
                                   },
-                                  onAddFriend: () {},
+                                  onAddFriend: () {
+                                    // TODO: Add friend
+                                  },
                                 ),
                               ),
                               const SizedBox(height: 16),
+
+                              // Tabs Section
                               ProfileTabs(controller: tabController),
                             ],
                           ),
@@ -232,6 +238,7 @@ class _ProfileScreenContent extends HookWidget {
                     body: TabBarView(
                       controller: tabController,
                       children: [
+                        // Posts Grid Tab
                         BlocBuilder<FeedBloc, FeedState>(
                           builder: (context, feedState) {
                             if (feedState.isLoadingInitial) {
@@ -279,17 +286,23 @@ class _ProfileScreenContent extends HookWidget {
                             );
                           },
                         ),
+
+                        // Reels Tab (placeholder)
                         const Center(
                           child: Icon(
                             Icons.video_collection_outlined,
                             size: 64,
                           ),
                         ),
-                        const Center(
-                          child: Icon(Icons.sync_outlined, size: 64),
-                        ),
+
+                        // Tagged Tab (placeholder)
                         const Center(
                           child: Icon(Icons.person_pin_outlined, size: 64),
+                        ),
+
+                        // Saved Tab (placeholder)
+                        const Center(
+                          child: Icon(Icons.bookmark_outline, size: 64),
                         ),
                       ],
                     ),
