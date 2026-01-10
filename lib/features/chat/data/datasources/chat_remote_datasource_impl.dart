@@ -63,7 +63,10 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
           params['p_cursor_id'] = cursor.id;
         }
 
-        final response = await _client.rpc('get_messages_page', params: params);
+        final response = await _client.rpc(
+          SupabaseRpc.getMessagesPage,
+          params: params,
+        );
 
         final all = (response as List)
             .map(
@@ -175,7 +178,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
     return guardSupabase(
       () async {
         final response = await _client.rpc(
-          'create_direct_conversation',
+          SupabaseRpc.createDirectConversation,
           params: {'other_user_id': otherUserId},
         );
 
@@ -198,7 +201,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
           params['p_upto_message_id'] = uptoMessageId;
         }
 
-        await _client.rpc('mark_conversation_read', params: params);
+        await _client.rpc(SupabaseRpc.markConversationRead, params: params);
       },
       op: 'markConversationRead',
       tag: _logTag,
@@ -308,62 +311,44 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
     required String myUserId,
   }) {
     final controller = StreamController<List<UserPresenceModel>>.broadcast();
-    final presenceMap = <String, UserPresenceModel>{};
 
-    final channel = _client.channel('presence:global');
+    // Subscribe to user_presence table changes (respects RLS)
+    final channel = _client
+        .channel('user_presence:realtime')
+        .onPostgresChanges(
+          event: PostgresChangeEvent.all,
+          schema: 'public',
+          table: SupabaseTables.userPresence,
+          callback: (payload) async {
+            try {
+              // Fetch updated presence list (RLS filters automatically)
+              final rows = await _client
+                  .from(SupabaseTables.userPresenceView)
+                  .select('user_id, last_seen_at, is_online');
 
-    channel
-        .onPresenceSync((_) {
-          final state = channel.presenceState() as Map<String, dynamic>;
-          final updates = <UserPresenceModel>[];
+              final presenceList = (rows as List).map((row) {
+                final map = Map<String, dynamic>.from(row as Map);
+                return UserPresenceModel(
+                  userId: map['user_id'] as String,
+                  lastSeenAt: DateTime.parse(
+                    map['last_seen_at'] as String,
+                  ).toLocal(),
+                  isOnline: map['is_online'] as bool,
+                );
+              }).toList();
 
-          for (final entry in state.entries) {
-            final userId = entry.key;
-            final presences = entry.value as List;
-
-            if (presences.isNotEmpty) {
-              final latestPresence = presences.last as Map<String, dynamic>;
-              final onlineAt = latestPresence['online_at'] as String?;
-
-              final model = UserPresenceModel(
-                userId: userId,
-                lastSeenAt: onlineAt != null
-                    ? DateTime.parse(onlineAt)
-                    : DateTime.now(),
-                isOnline: true,
+              controller.add(presenceList);
+            } catch (e, s) {
+              loge(
+                'Error processing presence update',
+                tag: _logTag,
+                error: e,
+                stackTrace: s,
               );
-
-              presenceMap[userId] = model;
-              updates.add(model);
             }
-          }
-
-          if (updates.isNotEmpty) {
-            controller.add(presenceMap.values.toList());
-          }
-        })
-        .onPresenceLeave((payload) {
-          final leftUserId = payload.key;
-          final model = presenceMap[leftUserId];
-
-          if (model != null) {
-            presenceMap[leftUserId] = UserPresenceModel(
-              userId: leftUserId,
-              lastSeenAt: DateTime.now(),
-              isOnline: false,
-            );
-            controller.add(presenceMap.values.toList());
-          }
-        });
-
-    channel.subscribe((status, error) async {
-      if (status == RealtimeSubscribeStatus.subscribed) {
-        await channel.track({
-          'user_id': myUserId,
-          'online_at': DateTime.now().toIso8601String(),
-        });
-      }
-    });
+          },
+        )
+        .subscribe();
 
     controller.onCancel = () {
       channel.unsubscribe();
@@ -403,7 +388,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
   Future<void> touchPresence() {
     return guardSupabase(
       () async {
-        await _client.rpc('touch_presence');
+        await _client.rpc(SupabaseRpc.touchPresence);
       },
       op: 'touchPresence',
       tag: _logTag,
@@ -421,7 +406,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
         logi('Fetching conversation list', tag: _logTag);
 
         final rows = await _client
-            .from('v_conversation_list')
+            .from(SupabaseTables.conversationListView)
             .select()
             .order('last_message_at', ascending: false);
 
@@ -626,7 +611,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
 
         // Get list of users that current user follows
         final followingIds = await _client
-            .from('user_follows')
+            .from(SupabaseTables.userFollows)
             .select('following_id')
             .eq('follower_id', myUserId)
             .then(
@@ -639,7 +624,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
 
         // Search only among followed users by username
         final response = await _client
-            .from('user_profiles')
+            .from(SupabaseTables.userProfiles)
             .select('id, username, avatar_url, bio')
             .inFilter('id', followingIds)
             .ilike('username', '%$query%')

@@ -106,6 +106,16 @@
   "feedReplyAction": "返信",
   "feedDeleteAction": "削除",
   "feedSeeTranslation": "翻訳を表示",
+  "feedSeeOriginal": "原文を表示",
+  "feedTranslating": "読み込み中…",
+  "feedCommentAsUser": "{username}としてコメント",
+  "@feedCommentAsUser": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
   "feedViewReplies": "{count, plural, one{{count} 件の返信を表示} other{{count} 件の返信を表示}}",
   "@feedViewReplies": {
     "placeholders": {
@@ -114,6 +124,7 @@
       }
     }
   },
+  "feedHideReplies": "返信を非表示",
   "feedUnknownUser": "不明なユーザー",
   "feedPostSummaryFallback": "投稿",
   "feedPostSemantics": "{author} が {summary} を {time} に投稿",

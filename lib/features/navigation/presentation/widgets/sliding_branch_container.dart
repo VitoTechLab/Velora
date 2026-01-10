@@ -2,13 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 
-/// Custom container for [StatefulShellRoute] that animates transitions between
-/// tab navigators using a [PageView]. Each branch keeps its own navigation
-/// stack alive, mimicking Instagram-style horizontal sliding.
-///
-/// Supports configurable animation duration for accessibility and performance:
-/// - Set [enableAnimations] to false for instant switching
-/// - Respects system "Reduce Motion" settings when applicable
+/// Custom container for StatefulShellRoute with animated PageView transitions between branches.
 class SlidingBranchContainer extends HookWidget {
   const SlidingBranchContainer({
     super.key,
@@ -22,15 +16,9 @@ class SlidingBranchContainer extends HookWidget {
   final List<Widget> children;
 
   /// Whether to enable smooth slide animations between tabs.
-  ///
-  /// When false, tabs switch instantly (duration becomes 0ms).
-  /// When true, uses [animationDuration] for smooth transitions.
   final bool enableAnimations;
 
   /// Duration of the slide animation when switching tabs.
-  ///
-  /// Default: 280ms (Instagram-style)
-  /// Ignored if [enableAnimations] is false.
   final Duration animationDuration;
 
   @override

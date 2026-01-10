@@ -4,14 +4,16 @@ import 'package:velora/core/errors/failure.dart';
 import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/feed/data/datasources/feed_remote_datasource.dart';
 import 'package:velora/features/feed/data/mapper/feed_payload_mapper.dart';
-import 'package:velora/features/feed/data/models/comment_cursor.dart';
 import 'package:velora/features/feed/data/models/feed_cursor.dart';
-import 'package:velora/features/feed/domain/entities/comment_cursor.dart';
-import 'package:velora/features/feed/domain/entities/comment_entity.dart';
-import 'package:velora/features/feed/domain/entities/feed_cursor.dart';
+import 'package:velora/features/feed/data/models/comment_cursor.dart';
 import 'package:velora/features/feed/domain/entities/feed_entity.dart';
+import 'package:velora/features/feed/domain/entities/comment_entity.dart';
 import 'package:velora/features/feed/domain/entities/feed_pagination_result.dart';
 import 'package:velora/features/feed/domain/entities/comment_pagination_result.dart';
+import 'package:velora/features/feed/domain/entities/feed_cursor.dart'
+    as feed_cursor_entity;
+import 'package:velora/features/feed/domain/entities/comment_cursor.dart'
+    as comment_cursor_entity;
 import 'package:velora/features/feed/domain/repositories/feed_repository.dart';
 
 class FeedRepositoryImpl implements FeedRepository {
@@ -61,7 +63,7 @@ class FeedRepositoryImpl implements FeedRepository {
   @override
   Future<Either<Failure, FeedPaginationResult>> getFeed({
     required int limit,
-    FeedCursorEntity? cursor,
+    feed_cursor_entity.FeedCursorEntity? cursor,
     String? userId,
   }) async {
     try {
@@ -108,7 +110,7 @@ class FeedRepositoryImpl implements FeedRepository {
   Future<Either<Failure, CommentPaginationResult>> getComments({
     required String postId,
     required int limit,
-    CommentCursorEntity? cursor,
+    comment_cursor_entity.CommentCursorEntity? cursor,
   }) async {
     try {
       logi('[FEED REPOSITORY] getComments - Post: $postId');
@@ -133,7 +135,15 @@ class FeedRepositoryImpl implements FeedRepository {
     String? parentCommentId,
   }) async {
     try {
-      logi('[FEED REPOSITORY] addComment - Post: $postId');
+      logi(
+        '[FEED REPOSITORY] addComment - Post: $postId Parent: $parentCommentId',
+      );
+
+      // Note: Logic for ensuring parentCommentId is the Root ID is handled
+      // by the UI/Bloc passing the correct ID, or the Backend triggers.
+      // However, if we need to resolve it here, we would need access to the data.
+      // Current implementation assumes parentCommentId passed is correct (Root ID).
+
       final result = await remoteDataSource.addComment(
         postId: postId,
         content: content,

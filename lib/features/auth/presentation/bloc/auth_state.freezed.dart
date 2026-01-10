@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AuthState {
 
- AuthStatus get status; bool get isLoading; String? get message; String? get errorMessage; String? get userId;
+ AuthStatus get status; AuthLoadingType get loadingType; String? get message; String? get errorMessage; String? get userId;
 /// Create a copy of AuthState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $AuthStateCopyWith<AuthState> get copyWith => _$AuthStateCopyWithImpl<AuthState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthState&&(identical(other.status, status) || other.status == status)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.message, message) || other.message == message)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.userId, userId) || other.userId == userId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthState&&(identical(other.status, status) || other.status == status)&&(identical(other.loadingType, loadingType) || other.loadingType == loadingType)&&(identical(other.message, message) || other.message == message)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.userId, userId) || other.userId == userId));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,isLoading,message,errorMessage,userId);
+int get hashCode => Object.hash(runtimeType,status,loadingType,message,errorMessage,userId);
 
 @override
 String toString() {
-  return 'AuthState(status: $status, isLoading: $isLoading, message: $message, errorMessage: $errorMessage, userId: $userId)';
+  return 'AuthState(status: $status, loadingType: $loadingType, message: $message, errorMessage: $errorMessage, userId: $userId)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $AuthStateCopyWith<$Res>  {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) _then) = _$AuthStateCopyWithImpl;
 @useResult
 $Res call({
- AuthStatus status, bool isLoading, String? message, String? errorMessage, String? userId
+ AuthStatus status, AuthLoadingType loadingType, String? message, String? errorMessage, String? userId
 });
 
 
@@ -62,11 +62,11 @@ class _$AuthStateCopyWithImpl<$Res>
 
 /// Create a copy of AuthState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? isLoading = null,Object? message = freezed,Object? errorMessage = freezed,Object? userId = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? loadingType = null,Object? message = freezed,Object? errorMessage = freezed,Object? userId = freezed,}) {
   return _then(_self.copyWith(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as AuthStatus,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
-as bool,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as AuthStatus,loadingType: null == loadingType ? _self.loadingType : loadingType // ignore: cast_nullable_to_non_nullable
+as AuthLoadingType,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,userId: freezed == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String?,
@@ -154,10 +154,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( AuthStatus status,  bool isLoading,  String? message,  String? errorMessage,  String? userId)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( AuthStatus status,  AuthLoadingType loadingType,  String? message,  String? errorMessage,  String? userId)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AuthState() when $default != null:
-return $default(_that.status,_that.isLoading,_that.message,_that.errorMessage,_that.userId);case _:
+return $default(_that.status,_that.loadingType,_that.message,_that.errorMessage,_that.userId);case _:
   return orElse();
 
 }
@@ -175,10 +175,10 @@ return $default(_that.status,_that.isLoading,_that.message,_that.errorMessage,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( AuthStatus status,  bool isLoading,  String? message,  String? errorMessage,  String? userId)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( AuthStatus status,  AuthLoadingType loadingType,  String? message,  String? errorMessage,  String? userId)  $default,) {final _that = this;
 switch (_that) {
 case _AuthState():
-return $default(_that.status,_that.isLoading,_that.message,_that.errorMessage,_that.userId);case _:
+return $default(_that.status,_that.loadingType,_that.message,_that.errorMessage,_that.userId);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -195,10 +195,10 @@ return $default(_that.status,_that.isLoading,_that.message,_that.errorMessage,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( AuthStatus status,  bool isLoading,  String? message,  String? errorMessage,  String? userId)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( AuthStatus status,  AuthLoadingType loadingType,  String? message,  String? errorMessage,  String? userId)?  $default,) {final _that = this;
 switch (_that) {
 case _AuthState() when $default != null:
-return $default(_that.status,_that.isLoading,_that.message,_that.errorMessage,_that.userId);case _:
+return $default(_that.status,_that.loadingType,_that.message,_that.errorMessage,_that.userId);case _:
   return null;
 
 }
@@ -209,12 +209,12 @@ return $default(_that.status,_that.isLoading,_that.message,_that.errorMessage,_t
 /// @nodoc
 
 
-class _AuthState implements AuthState {
-  const _AuthState({this.status = AuthStatus.unknown, this.isLoading = false, this.message, this.errorMessage, this.userId});
+class _AuthState extends AuthState {
+  const _AuthState({this.status = AuthStatus.unknown, this.loadingType = AuthLoadingType.none, this.message, this.errorMessage, this.userId}): super._();
   
 
 @override@JsonKey() final  AuthStatus status;
-@override@JsonKey() final  bool isLoading;
+@override@JsonKey() final  AuthLoadingType loadingType;
 @override final  String? message;
 @override final  String? errorMessage;
 @override final  String? userId;
@@ -229,16 +229,16 @@ _$AuthStateCopyWith<_AuthState> get copyWith => __$AuthStateCopyWithImpl<_AuthSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthState&&(identical(other.status, status) || other.status == status)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.message, message) || other.message == message)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.userId, userId) || other.userId == userId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthState&&(identical(other.status, status) || other.status == status)&&(identical(other.loadingType, loadingType) || other.loadingType == loadingType)&&(identical(other.message, message) || other.message == message)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.userId, userId) || other.userId == userId));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,isLoading,message,errorMessage,userId);
+int get hashCode => Object.hash(runtimeType,status,loadingType,message,errorMessage,userId);
 
 @override
 String toString() {
-  return 'AuthState(status: $status, isLoading: $isLoading, message: $message, errorMessage: $errorMessage, userId: $userId)';
+  return 'AuthState(status: $status, loadingType: $loadingType, message: $message, errorMessage: $errorMessage, userId: $userId)';
 }
 
 
@@ -249,7 +249,7 @@ abstract mixin class _$AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Re
   factory _$AuthStateCopyWith(_AuthState value, $Res Function(_AuthState) _then) = __$AuthStateCopyWithImpl;
 @override @useResult
 $Res call({
- AuthStatus status, bool isLoading, String? message, String? errorMessage, String? userId
+ AuthStatus status, AuthLoadingType loadingType, String? message, String? errorMessage, String? userId
 });
 
 
@@ -266,11 +266,11 @@ class __$AuthStateCopyWithImpl<$Res>
 
 /// Create a copy of AuthState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? isLoading = null,Object? message = freezed,Object? errorMessage = freezed,Object? userId = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? loadingType = null,Object? message = freezed,Object? errorMessage = freezed,Object? userId = freezed,}) {
   return _then(_AuthState(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as AuthStatus,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
-as bool,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as AuthStatus,loadingType: null == loadingType ? _self.loadingType : loadingType // ignore: cast_nullable_to_non_nullable
+as AuthLoadingType,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,userId: freezed == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String?,

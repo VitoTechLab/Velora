@@ -390,21 +390,16 @@ class _NotificationSection extends StatelessWidget {
   const _NotificationSection({
     required this.title,
     required this.tiles,
-    this.subtitle,
-    this.onTap,
   });
 
   final String title;
-  final String? subtitle;
   final List<SettingsTileData> tiles;
-  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    Widget child = SettingsSection(
+    return SettingsSection(
       title: title,
-      subtitle: subtitle,
       child: Column(
         children: [
           for (int i = 0; i < tiles.length; i++) ...[
@@ -414,21 +409,11 @@ class _NotificationSection extends StatelessWidget {
                 height: 0,
                 indent: tiles[i].icon != null ? 72 : 16,
                 endIndent: 16,
-                color: colorScheme.outlineVariant.withValues(alpha: 0.4),
+                color: colorScheme.outlineVariant.withOpacity(0.4),
               ),
           ],
         ],
       ),
     );
-
-    if (onTap != null) {
-      return InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(16),
-        child: child,
-      );
-    }
-
-    return child;
   }
 }

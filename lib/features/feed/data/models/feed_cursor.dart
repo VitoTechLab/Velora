@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:velora/features/feed/domain/entities/feed_cursor.dart'
-    as domain;
+import 'package:velora/features/feed/domain/entities/feed_cursor.dart';
 
 part 'feed_cursor.freezed.dart';
 part 'feed_cursor.g.dart';
@@ -26,6 +25,8 @@ abstract class FeedCursor with _$FeedCursor {
   factory FeedCursor.fromMap(Map<String, dynamic> map) =>
       FeedCursor.fromJson(map);
 
+  FeedCursorEntity toEntity() => FeedCursorEntity(createdAt: createdAt, id: id);
+
   static FeedCursor? fromDynamic(Object? value) {
     if (value == null) return null;
     if (value is FeedCursor) return value;
@@ -37,7 +38,4 @@ abstract class FeedCursor with _$FeedCursor {
     }
     return null;
   }
-
-  domain.FeedCursorEntity toEntity() =>
-      domain.FeedCursorEntity(createdAt: createdAt, id: id);
 }

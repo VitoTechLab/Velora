@@ -253,6 +253,17 @@ class AppLocalizationsJa extends AppLocalizations {
   String get feedSeeTranslation => '翻訳を表示';
 
   @override
+  String get feedSeeOriginal => '原文を表示';
+
+  @override
+  String get feedTranslating => '読み込み中…';
+
+  @override
+  String feedCommentAsUser(String username) {
+    return '$usernameとしてコメント';
+  }
+
+  @override
   String feedViewReplies(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -262,6 +273,9 @@ class AppLocalizationsJa extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get feedHideReplies => '返信を非表示';
 
   @override
   String get feedUnknownUser => '不明なユーザー';

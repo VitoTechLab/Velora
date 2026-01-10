@@ -151,38 +151,43 @@ class FeedCard extends HookWidget {
         label: t.feedPostSemantics(author, summary, timeAgo),
         hint: onTap != null ? t.feedOpenPostHint : null,
         child: ExcludeSemantics(
-          child: Container(
-            color: colorScheme.surface,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildHeader(
-                  context,
-                  textTheme,
-                  colorScheme,
-                  t,
-                  isFollowing.value,
-                  hasFollowRequest.value,
-                  handleFollowToggle,
-                ),
-                if (post.imageUrls.isNotEmpty)
-                  _buildImageStrip(context, colorScheme, t),
-                _buildActionBar(
-                  context,
-                  colorScheme,
-                  textTheme,
-                  isLiked.value,
-                  likesCount.value,
-                  isBookmarked.value,
-                  handleLikeToggle,
-                  handleBookmarkToggle,
-                  onCommentTap ?? onTap,
-                  t,
-                ),
-                _buildContent(context, textTheme, t),
-                if (post.campaignId != null)
-                  _buildCampaignCard(context, colorScheme, textTheme, t),
-              ],
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Container(
+              padding: const EdgeInsets.only(bottom: 6),
+              color: colorScheme.surface,
+
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildHeader(
+                    context,
+                    textTheme,
+                    colorScheme,
+                    t,
+                    isFollowing.value,
+                    hasFollowRequest.value,
+                    handleFollowToggle,
+                  ),
+                  if (post.imageUrls.isNotEmpty)
+                    _buildImageStrip(context, colorScheme, t),
+                  _buildActionBar(
+                    context,
+                    colorScheme,
+                    textTheme,
+                    isLiked.value,
+                    likesCount.value,
+                    isBookmarked.value,
+                    handleLikeToggle,
+                    handleBookmarkToggle,
+                    onCommentTap ?? onTap,
+                    t,
+                  ),
+                  _buildContent(context, textTheme, t),
+                  if (post.campaignId != null)
+                    _buildCampaignCard(context, colorScheme, textTheme, t),
+                ],
+              ),
             ),
           ),
         ),
@@ -202,25 +207,6 @@ class FeedCard extends HookWidget {
     // Subtitle untuk sound/music (bisa dari campaign atau music attribute)
     final subtitle = post.campaignTitle;
     final hasSubtitle = subtitle != null && subtitle.isNotEmpty;
-
-    // Tentukan text dan style button berdasarkan status
-    String buttonText;
-    Color buttonBgColor;
-    Color buttonTextColor;
-
-    if (isFollowing) {
-      buttonText = 'Following';
-      buttonBgColor = colorScheme.surfaceContainerHighest;
-      buttonTextColor = colorScheme.onSurface;
-    } else if (hasFollowRequest) {
-      buttonText = 'Requested';
-      buttonBgColor = colorScheme.surfaceContainerHighest;
-      buttonTextColor = colorScheme.onSurface;
-    } else {
-      buttonText = 'Follow';
-      buttonBgColor = colorScheme.primary;
-      buttonTextColor = colorScheme.onPrimary;
-    }
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -291,14 +277,13 @@ class FeedCard extends HookWidget {
               ],
             ),
           ),
-          // Follow button - show if not own post
-          // State: Follow (not following) / Following / Requested (private account)
-          if (!post.isMe) ...[
+          // Follow button - only show when not own post, not following, and no pending request
+          if (!post.isMe && !isFollowing && !hasFollowRequest) ...[
             TextButton(
               onPressed: onFollowToggle,
               style: TextButton.styleFrom(
-                backgroundColor: buttonBgColor,
-                foregroundColor: buttonTextColor,
+                backgroundColor: colorScheme.primary,
+                foregroundColor: colorScheme.onPrimary,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16,
                   vertical: 6,
@@ -310,11 +295,11 @@ class FeedCard extends HookWidget {
                 ),
               ),
               child: Text(
-                buttonText,
+                'Follow',
                 style: textTheme.labelMedium?.copyWith(
                   fontWeight: FontWeight.w600,
                   fontSize: 13,
-                  color: buttonTextColor,
+                  color: colorScheme.onPrimary,
                 ),
               ),
             ),
@@ -341,7 +326,7 @@ class FeedCard extends HookWidget {
     if (post.content.isEmpty) return const SizedBox.shrink();
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      padding: const EdgeInsets.fromLTRB(12, 6, 12, 4),
       child: RichText(
         text: TextSpan(
           style: textTheme.bodyMedium?.copyWith(fontSize: 14),

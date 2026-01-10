@@ -106,6 +106,16 @@
   "feedReplyAction": "Reply",
   "feedDeleteAction": "Delete",
   "feedSeeTranslation": "See translation",
+  "feedSeeOriginal": "See original",
+  "feedTranslating": "Loading…",
+  "feedCommentAsUser": "Comment as {username}",
+  "@feedCommentAsUser": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
   "feedViewReplies": "View {count, plural, one{{count} reply} other{{count} replies}}",
   "@feedViewReplies": {
     "placeholders": {
@@ -114,6 +124,7 @@
       }
     }
   },
+  "feedHideReplies": "Hide replies",
   "feedUnknownUser": "Unknown user",
   "feedPostSummaryFallback": "post",
   "feedPostSemantics": "{author} posted {summary} {time}",

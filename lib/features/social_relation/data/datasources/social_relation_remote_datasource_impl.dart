@@ -1,5 +1,6 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:velora/core/errors/exceptions.dart';
+import 'package:velora/core/supabase/supabase_constants.dart';
 import 'package:velora/core/supabase/supabase_guard.dart';
 import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/social_relation/data/models/blocked_user_model.dart';
@@ -34,7 +35,7 @@ class SocialRelationRemoteDataSourceImpl
         final currentUserId = _requireUserId();
         logi('Following user: $targetUserId', tag: _logTag);
 
-        await _client.from('user_follows').insert({
+        await _client.from(SupabaseTables.userFollows).insert({
           'follower_id': currentUserId,
           'following_id': targetUserId,
         });
@@ -52,7 +53,7 @@ class SocialRelationRemoteDataSourceImpl
         logi('Unfollowing user: $targetUserId', tag: _logTag);
 
         await _client
-            .from('user_follows')
+            .from(SupabaseTables.userFollows)
             .delete()
             .filter('follower_id', 'eq', currentUserId)
             .filter('following_id', 'eq', targetUserId);
@@ -70,7 +71,7 @@ class SocialRelationRemoteDataSourceImpl
         logi('Checking if following: $targetUserId', tag: _logTag);
 
         final response = await _client
-            .from('user_follows')
+            .from(SupabaseTables.userFollows)
             .select('follower_id')
             .filter('follower_id', 'eq', currentUserId)
             .filter('following_id', 'eq', targetUserId)
@@ -91,7 +92,7 @@ class SocialRelationRemoteDataSourceImpl
         logi('Fetching following user IDs', tag: _logTag);
 
         final response = await _client
-            .from('user_follows')
+            .from(SupabaseTables.userFollows)
             .select('following_id')
             .filter('follower_id', 'eq', currentUserId);
 
@@ -113,7 +114,7 @@ class SocialRelationRemoteDataSourceImpl
         final currentUserId = _requireUserId();
         logi('Sending follow request to: $targetUserId', tag: _logTag);
 
-        await _client.from('user_follow_requests').insert({
+        await _client.from(SupabaseTables.userFollowRequests).insert({
           'requester_id': currentUserId,
           'target_id': targetUserId,
           'status': 'pending',
@@ -132,7 +133,7 @@ class SocialRelationRemoteDataSourceImpl
         logi('Canceling follow request to: $targetUserId', tag: _logTag);
 
         await _client
-            .from('user_follow_requests')
+            .from(SupabaseTables.userFollowRequests)
             .delete()
             .filter('requester_id', 'eq', currentUserId)
             .filter('target_id', 'eq', targetUserId);
@@ -157,7 +158,7 @@ class SocialRelationRemoteDataSourceImpl
             .filter('target_id', 'eq', currentUserId);
 
         // Create follow relationship
-        await _client.from('user_follows').insert({
+        await _client.from(SupabaseTables.userFollows).insert({
           'follower_id': requesterId,
           'following_id': currentUserId,
         });
@@ -182,7 +183,7 @@ class SocialRelationRemoteDataSourceImpl
         logi('Rejecting follow request from: $requesterId', tag: _logTag);
 
         await _client
-            .from('user_follow_requests')
+            .from(SupabaseTables.userFollowRequests)
             .delete()
             .filter('requester_id', 'eq', requesterId)
             .filter('target_id', 'eq', currentUserId);
@@ -279,7 +280,7 @@ class SocialRelationRemoteDataSourceImpl
         logi('Checking follow request status for: $targetUserId', tag: _logTag);
 
         final response = await _client
-            .from('user_follow_requests')
+            .from(SupabaseTables.userFollowRequests)
             .select('requester_id')
             .filter('requester_id', 'eq', currentUserId)
             .filter('target_id', 'eq', targetUserId)
@@ -302,7 +303,7 @@ class SocialRelationRemoteDataSourceImpl
         final currentUserId = _requireUserId();
         logi('Blocking user: $targetUserId', tag: _logTag);
 
-        await _client.from('user_blocks').insert({
+        await _client.from(SupabaseTables.userBlocks).insert({
           'blocker_id': currentUserId,
           'blocked_id': targetUserId,
         });
@@ -320,7 +321,7 @@ class SocialRelationRemoteDataSourceImpl
         logi('Unblocking user: $targetUserId', tag: _logTag);
 
         await _client
-            .from('user_blocks')
+            .from(SupabaseTables.userBlocks)
             .delete()
             .filter('blocker_id', 'eq', currentUserId)
             .filter('blocked_id', 'eq', targetUserId);
@@ -338,7 +339,7 @@ class SocialRelationRemoteDataSourceImpl
         logi('Checking if blocked: $targetUserId', tag: _logTag);
 
         final response = await _client
-            .from('user_blocks')
+            .from(SupabaseTables.userBlocks)
             .select('blocker_id')
             .filter('blocker_id', 'eq', currentUserId)
             .filter('blocked_id', 'eq', targetUserId)
@@ -397,7 +398,7 @@ class SocialRelationRemoteDataSourceImpl
         final currentUserId = _requireUserId();
         logi('Muting user: $targetUserId', tag: _logTag);
 
-        await _client.from('user_mutes').insert({
+        await _client.from(SupabaseTables.userMutes).insert({
           'muter_id': currentUserId,
           'muted_id': targetUserId,
         });
@@ -415,7 +416,7 @@ class SocialRelationRemoteDataSourceImpl
         logi('Unmuting user: $targetUserId', tag: _logTag);
 
         await _client
-            .from('user_mutes')
+            .from(SupabaseTables.userMutes)
             .delete()
             .filter('muter_id', 'eq', currentUserId)
             .filter('muted_id', 'eq', targetUserId);
@@ -433,7 +434,7 @@ class SocialRelationRemoteDataSourceImpl
         logi('Checking if muted: $targetUserId', tag: _logTag);
 
         final response = await _client
-            .from('user_mutes')
+            .from(SupabaseTables.userMutes)
             .select('muter_id')
             .filter('muter_id', 'eq', currentUserId)
             .filter('muted_id', 'eq', targetUserId)
@@ -454,7 +455,7 @@ class SocialRelationRemoteDataSourceImpl
         logi('Fetching muted users', tag: _logTag);
 
         final response = await _client
-            .from('user_mutes')
+            .from(SupabaseTables.userMutes)
             .select('''
               muter_id,
               muted_id,
@@ -492,7 +493,7 @@ class SocialRelationRemoteDataSourceImpl
         final currentUserId = _requireUserId();
         logi('Restricting user: $targetUserId', tag: _logTag);
 
-        await _client.from('user_restricts').insert({
+        await _client.from(SupabaseTables.userRestricts).insert({
           'restrictor_id': currentUserId,
           'restricted_id': targetUserId,
         });
@@ -510,7 +511,7 @@ class SocialRelationRemoteDataSourceImpl
         logi('Unrestricting user: $targetUserId', tag: _logTag);
 
         await _client
-            .from('user_restricts')
+            .from(SupabaseTables.userRestricts)
             .delete()
             .filter('restrictor_id', 'eq', currentUserId)
             .filter('restricted_id', 'eq', targetUserId);
@@ -528,7 +529,7 @@ class SocialRelationRemoteDataSourceImpl
         logi('Checking if restricted: $targetUserId', tag: _logTag);
 
         final response = await _client
-            .from('user_restricts')
+            .from(SupabaseTables.userRestricts)
             .select('restrictor_id')
             .filter('restrictor_id', 'eq', currentUserId)
             .filter('restricted_id', 'eq', targetUserId)
@@ -549,7 +550,7 @@ class SocialRelationRemoteDataSourceImpl
         logi('Fetching restricted users', tag: _logTag);
 
         final response = await _client
-            .from('user_restricts')
+            .from(SupabaseTables.userRestricts)
             .select('''
               restrictor_id,
               restricted_id,

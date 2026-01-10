@@ -5,26 +5,7 @@ import 'package:velora/features/settings/domain/entities/user_preferences.dart';
 import 'package:velora/features/navigation/presentation/widgets/sliding_branch_container.dart';
 import 'package:velora/features/navigation/presentation/widgets/static_branch_container.dart';
 
-/// Adaptive navigation container that intelligently chooses between
-/// animated ([SlidingBranchContainer]) or instant ([StaticBranchContainer])
-/// tab switching based on:
-///
-/// - User preferences (manual animation toggle)
-/// - System accessibility settings (Reduce Motion)
-/// - Device capabilities (low-end device detection)
-///
-/// This provides the best experience for all users:
-/// - Smooth animations for modern devices and users who want them
-/// - Instant switching for accessibility, battery saving, or low-end devices
-///
-/// Usage in AppRouter:
-/// ```dart
-/// navigatorContainerBuilder: (context, navigationShell, children) =>
-///   AdaptiveBranchContainer(
-///     navigationShell: navigationShell,
-///     children: children,
-///   ),
-/// ```
+/// Adaptive navigation that chooses between animated or instant tab switching based on device capabilities and user preferences.
 class AdaptiveBranchContainer extends StatelessWidget {
   const AdaptiveBranchContainer({
     super.key,
@@ -36,9 +17,7 @@ class AdaptiveBranchContainer extends StatelessWidget {
   final StatefulNavigationShell navigationShell;
   final List<Widget> children;
 
-  /// Optional user preferences. If not provided, defaults to animations enabled.
-  ///
-  /// In production, you should inject this via dependency injection or Provider.
+  /// Optional user preferences for animation control.
   final UserPreferences? userPreferences;
 
   @override
@@ -72,7 +51,6 @@ class AdaptiveBranchContainer extends StatelessWidget {
     }
   }
 
-  /// Determines if animations should be enabled based on all factors.
   bool _shouldEnableAnimations({
     required bool systemReduceMotion,
     required bool isLowEndDevice,
@@ -92,11 +70,7 @@ class AdaptiveBranchContainer extends StatelessWidget {
   }
 }
 
-/// Alternative implementation that uses SlidingBranchContainer with
-/// dynamic duration instead of switching containers entirely.
-///
-/// This variant always uses PageView but adjusts animation duration to 0
-/// when animations should be disabled, providing a middle ground approach.
+/// Alternative implementation using SlidingBranchContainer with dynamic duration.
 class AdaptiveBranchContainerV2 extends StatelessWidget {
   const AdaptiveBranchContainerV2({
     super.key,

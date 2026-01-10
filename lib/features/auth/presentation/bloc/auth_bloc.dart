@@ -72,7 +72,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(
       state.copyWith(
         status: event.snapshot.status,
-        isLoading: false,
+        loadingType: AuthLoadingType.none,
         message: null,
         errorMessage: null,
         userId: currentUserId,
@@ -84,7 +84,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthSignUpRequested event,
     Emitter<AuthState> emit,
   ) async {
-    emit(state.copyWith(isLoading: true, message: null, errorMessage: null));
+    emit(state.copyWith(
+      loadingType: AuthLoadingType.emailPassword,
+      message: null,
+      errorMessage: null,
+    ));
 
     try {
       final result = await signUpUseCase(
@@ -98,7 +102,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           emit(
             state.copyWith(
               status: status,
-              isLoading: false,
+              loadingType: AuthLoadingType.none,
               errorMessage: failure.message,
               message: null,
               userId: null,
@@ -112,7 +116,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
               status: isEmailVerified
                   ? AuthStatus.authenticated
                   : AuthStatus.emailUnverified,
-              isLoading: false,
+              loadingType: AuthLoadingType.none,
               message:
                   'We\'ve sent a verification link to your email. Please verify '
                   'before signing in.',
@@ -132,7 +136,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(
         state.copyWith(
           status: AuthStatus.unauthenticated,
-          isLoading: false,
+          loadingType: AuthLoadingType.none,
           errorMessage: failure.message,
           message: null,
         ),
@@ -144,7 +148,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthSignInRequested event,
     Emitter<AuthState> emit,
   ) async {
-    emit(state.copyWith(isLoading: true, message: null, errorMessage: null));
+    emit(state.copyWith(
+      loadingType: AuthLoadingType.emailPassword,
+      message: null,
+      errorMessage: null,
+    ));
 
     try {
       final result = await signInUseCase(
@@ -158,7 +166,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           emit(
             state.copyWith(
               status: status,
-              isLoading: false,
+              loadingType: AuthLoadingType.none,
               errorMessage: failure.message,
               message: null,
               userId: null,
@@ -169,7 +177,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           emit(
             state.copyWith(
               status: AuthStatus.authenticated,
-              isLoading: false,
+              loadingType: AuthLoadingType.none,
               message: 'Welcome back!',
               errorMessage: null,
               userId: session?.userId,
@@ -187,7 +195,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(
         state.copyWith(
           status: AuthStatus.unauthenticated,
-          isLoading: false,
+          loadingType: AuthLoadingType.none,
           errorMessage: failure.message,
           message: null,
         ),
@@ -199,7 +207,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthResetPasswordRequested event,
     Emitter<AuthState> emit,
   ) async {
-    emit(state.copyWith(isLoading: true, message: null, errorMessage: null));
+    emit(state.copyWith(
+      loadingType: AuthLoadingType.emailPassword,
+      message: null,
+      errorMessage: null,
+    ));
 
     try {
       final result = await resetPasswordUseCase(email: event.email);
@@ -208,7 +220,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         (failure) {
           emit(
             state.copyWith(
-              isLoading: false,
+              loadingType: AuthLoadingType.none,
               errorMessage: failure.message,
               message: null,
             ),
@@ -218,7 +230,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           AppLogger.i('[AuthBloc] Password reset email sent to ${event.email}');
           emit(
             state.copyWith(
-              isLoading: false,
+              loadingType: AuthLoadingType.none,
               message: 'Password reset link sent to your email.',
               errorMessage: null,
             ),
@@ -234,7 +246,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final failure = Failure.fromException(error);
       emit(
         state.copyWith(
-          isLoading: false,
+          loadingType: AuthLoadingType.none,
           errorMessage: failure.message,
           message: null,
         ),
@@ -246,7 +258,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthSignOutRequested event,
     Emitter<AuthState> emit,
   ) async {
-    emit(state.copyWith(isLoading: true, message: null, errorMessage: null));
+    emit(state.copyWith(
+      loadingType: AuthLoadingType.emailPassword,
+      message: null,
+      errorMessage: null,
+    ));
 
     try {
       final result = await signOutUseCase();
@@ -255,7 +271,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         (failure) {
           emit(
             state.copyWith(
-              isLoading: false,
+              loadingType: AuthLoadingType.none,
               errorMessage: failure.message,
               message: null,
             ),
@@ -266,10 +282,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           emit(
             state.copyWith(
               status: AuthStatus.unauthenticated,
-              isLoading: false,
+              loadingType: AuthLoadingType.none,
               message: null,
               errorMessage: null,
-              userId: null, // Clear userId on logout
+              userId: null,
             ),
           );
         },
@@ -283,7 +299,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final failure = Failure.fromException(error);
       emit(
         state.copyWith(
-          isLoading: false,
+          loadingType: AuthLoadingType.none,
           errorMessage: failure.message,
           message: null,
         ),
@@ -295,7 +311,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthSignInWithGoogleRequested event,
     Emitter<AuthState> emit,
   ) async {
-    emit(state.copyWith(isLoading: true, message: null, errorMessage: null));
+    emit(state.copyWith(
+      loadingType: AuthLoadingType.google,
+      message: null,
+      errorMessage: null,
+    ));
 
     try {
       final result = await signInWithGoogleUseCase();
@@ -306,7 +326,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           emit(
             state.copyWith(
               status: status,
-              isLoading: false,
+              loadingType: AuthLoadingType.none,
               errorMessage: failure.message,
               message: null,
               userId: null,
@@ -319,7 +339,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
               status: session?.emailVerified == false
                   ? AuthStatus.emailUnverified
                   : AuthStatus.authenticated,
-              isLoading: false,
+              loadingType: AuthLoadingType.none,
               message: 'Signed in with Google',
               errorMessage: null,
               userId: session?.userId,
@@ -337,7 +357,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(
         state.copyWith(
           status: AuthStatus.unauthenticated,
-          isLoading: false,
+          loadingType: AuthLoadingType.none,
           errorMessage: failure.message,
           message: null,
         ),

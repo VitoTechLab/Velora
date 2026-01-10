@@ -253,6 +253,17 @@ class AppLocalizationsKo extends AppLocalizations {
   String get feedSeeTranslation => '번역 보기';
 
   @override
+  String get feedSeeOriginal => '원문 보기';
+
+  @override
+  String get feedTranslating => '로드 중…';
+
+  @override
+  String feedCommentAsUser(String username) {
+    return '$username(으)로 댓글 달기';
+  }
+
+  @override
   String feedViewReplies(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -262,6 +273,9 @@ class AppLocalizationsKo extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get feedHideReplies => '답글 숨기기';
 
   @override
   String get feedUnknownUser => '알 수 없는 사용자';

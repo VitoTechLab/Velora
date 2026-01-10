@@ -12,7 +12,7 @@ _FeedPaginationModel _$FeedPaginationModelFromJson(Map<String, dynamic> json) =>
           .map((e) => FeedModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       hasMore: json['hasMore'] as bool,
-      nextCursor: _cursorFromJson(json['nextCursor']),
+      nextCursor: _feedCursorFromJson(json['nextCursor']),
     );
 
 Map<String, dynamic> _$FeedPaginationModelToJson(
@@ -20,5 +20,5 @@ Map<String, dynamic> _$FeedPaginationModelToJson(
 ) => <String, dynamic>{
   'posts': instance.posts,
   'hasMore': instance.hasMore,
-  'nextCursor': _cursorToJson(instance.nextCursor),
+  'nextCursor': _feedCursorToJson(instance.nextCursor),
 };

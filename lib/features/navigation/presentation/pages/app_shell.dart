@@ -7,8 +7,7 @@ import 'package:velora/core/ui/connectivity_snackbar_listener.dart';
 import 'package:velora/features/navigation/presentation/navigation_tabs.dart';
 import 'package:velora/features/navigation/presentation/widgets/adaptive_navigation_scaffold.dart';
 
-/// Shell widget that wraps the [StatefulNavigationShell] from GoRouter with
-/// adaptive navigation controls that work across mobile, web, and desktop.
+/// Shell widget that wraps StatefulNavigationShell with adaptive navigation controls.
 class AppShell extends HookWidget {
   const AppShell({super.key, required this.navigationShell});
 
@@ -20,7 +19,6 @@ class AppShell extends HookWidget {
 
     final connectivity = getIt<ConnectivityService>();
 
-    // Sync with navigationShell changes (handles back button, deep links, etc)
     useEffect(() {
       currentIndex.value = navigationShell.currentIndex;
       return null;

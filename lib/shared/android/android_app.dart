@@ -11,6 +11,7 @@ import 'package:velora/features/media/presentation/bloc/media_gallery_bloc.dart'
 import 'package:velora/features/media/presentation/cubit/media_upload_cubit.dart';
 import 'package:velora/features/post/presentation/bloc/post_bloc.dart';
 import 'package:velora/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:velora/features/notification/presentation/bloc/notification_bloc.dart';
 import 'package:velora/features/social_relation/presentation/bloc/social_relation_bloc.dart';
 import 'package:velora/l10n/app_localizations.dart';
 import 'package:velora/routes/app_router.dart';
@@ -49,6 +50,10 @@ class AndroidApp extends StatelessWidget {
         ),
         // ProfileBloc - factory instance
         BlocProvider<ProfileBloc>(create: (_) => getIt<ProfileBloc>()),
+        // NotificationBloc - factory instance
+        BlocProvider<NotificationBloc>(
+          create: (_) => getIt<NotificationBloc>(),
+        ),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

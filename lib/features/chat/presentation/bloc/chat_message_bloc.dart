@@ -73,6 +73,8 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
 
     // Conversation List
     on<LoadConversationListEvent>(_onLoadConversationList);
+    on<SetChatFilterEvent>(_onSetChatFilter);
+    on<SetSearchQueryEvent>(_onSetSearchQuery);
 
     // Message Reads
     on<LoadMessageReadsEvent>(_onLoadMessageReads);
@@ -526,6 +528,20 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
   // =========================================================
   // CONVERSATION LIST HANDLE
   // =========================================================
+
+  Future<void> _onSetChatFilter(
+    SetChatFilterEvent event,
+    Emitter<ChatMessageState> emit,
+  ) async {
+    emit(state.copyWith(selectedFilter: event.filter));
+  }
+
+  Future<void> _onSetSearchQuery(
+    SetSearchQueryEvent event,
+    Emitter<ChatMessageState> emit,
+  ) async {
+    emit(state.copyWith(searchQuery: event.query));
+  }
 
   Future<void> _onLoadConversationList(
     LoadConversationListEvent event,

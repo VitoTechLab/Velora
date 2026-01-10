@@ -106,6 +106,16 @@
   "feedReplyAction": "回复",
   "feedDeleteAction": "删除",
   "feedSeeTranslation": "查看翻译",
+  "feedSeeOriginal": "查看原文",
+  "feedTranslating": "加载中…",
+  "feedCommentAsUser": "以 {username} 的身份评论",
+  "@feedCommentAsUser": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
   "feedViewReplies": "查看{count, plural, one{{count}条回复} other{{count}条回复}}",
   "@feedViewReplies": {
     "placeholders": {
@@ -114,6 +124,7 @@
       }
     }
   },
+  "feedHideReplies": "隐藏回复",
   "feedUnknownUser": "未知用户",
   "feedPostSummaryFallback": "帖子",
   "feedPostSemantics": "{author} 发布了 {summary} {time}",

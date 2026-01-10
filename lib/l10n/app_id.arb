@@ -106,6 +106,16 @@
   "feedReplyAction": "Balas",
   "feedDeleteAction": "Hapus",
   "feedSeeTranslation": "Lihat terjemahan",
+  "feedSeeOriginal": "Lihat asli",
+  "feedTranslating": "Memuat…",
+  "feedCommentAsUser": "Komentar sebagai {username}",
+  "@feedCommentAsUser": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
   "feedViewReplies": "Lihat {count, plural, one{{count} balasan} other{{count} balasan}}",
   "@feedViewReplies": {
     "placeholders": {
@@ -114,6 +124,7 @@
       }
     }
   },
+  "feedHideReplies": "Sembunyikan balasan",
   "feedUnknownUser": "Pengguna tidak dikenal",
   "feedPostSummaryFallback": "postingan",
   "feedPostSemantics": "{author} memposting {summary} {time}",

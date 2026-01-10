@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:velora/core/di/service_locator.dart';
+import 'package:velora/core/services/translation_service.dart';
 import 'package:velora/core/ui/app_bottom_sheet.dart';
 import 'package:velora/core/ui/app_messenger.dart';
 import 'package:velora/core/utils/format_utils.dart';
-import 'package:velora/features/feed/domain/entities/comment_entity.dart';
 import 'package:velora/features/feed/domain/entities/feed_entity.dart';
+import 'package:velora/features/feed/domain/entities/comment_entity.dart';
 import 'package:velora/features/feed/presentation/bloc/feed_comment_bloc.dart';
 import 'package:velora/features/feed/presentation/bloc/feed_comment_event.dart';
 import 'package:velora/features/feed/presentation/bloc/feed_comment_state.dart';
@@ -28,9 +29,9 @@ class CommentScreen {
       contentPadding: EdgeInsets.zero,
       builder: (scrollController) {
         return BlocProvider(
-          create: (_) =>
-              getIt<FeedCommentBloc>()
-                ..add(LoadFeedCommentsEvent(postId: post.id, limit: 20)),
+          create: (_) => getIt<FeedCommentBloc>()
+            ..add(LoadFeedCommentsEvent(postId: post.id, limit: 20))
+            ..add(StartWatchCommentsEvent(postId: post.id)),
           child: _CommentBottomSheetContent(
             post: post,
             scrollController: scrollController,
@@ -72,18 +73,31 @@ class _CommentBottomSheetContent extends HookWidget {
       }
 
       scrollController.addListener(onScroll);
-      return () => scrollController.removeListener(onScroll);
+      return () {
+        scrollController.removeListener(onScroll);
+        // Stop watching when screen closes
+        context.read<FeedCommentBloc>().add(const StopWatchCommentsEvent());
+      };
     }, [scrollController]);
 
     void onSendComment() {
       final content = commentController.text.trim();
       if (content.isEmpty) return;
 
+      // Determine the correct parent ID (Root ID)
+      // If we reply to a reply, use its parent ID.
+      // If we reply to a root, use its ID.
+      String? targetParentId = replyingTo.value?.id;
+      if (replyingTo.value != null &&
+          replyingTo.value!.parentCommentId != null) {
+        targetParentId = replyingTo.value!.parentCommentId;
+      }
+
       context.read<FeedCommentBloc>().add(
         AddFeedCommentEvent(
           postId: post.id,
           content: content,
-          parentCommentId: replyingTo.value?.id,
+          parentCommentId: targetParentId,
         ),
       );
       commentController.clear();
@@ -155,9 +169,8 @@ class _CommentBottomSheetContent extends HookWidget {
             onSend: onSendComment,
             replyingTo: replyingTo.value,
             onCancelReply: onCancelReply,
-            commentHint: t.feedAddCommentHint(
-              post.username ?? t.feedUnknownUser,
-            ),
+            isPostOwner: post.isMe,
+            postUsername: post.username ?? t.feedUnknownUser,
           ),
         ],
       ),
@@ -171,14 +184,16 @@ class _CommentInputArea extends StatelessWidget {
     required this.onSend,
     required this.replyingTo,
     required this.onCancelReply,
-    required this.commentHint,
+    required this.isPostOwner,
+    required this.postUsername,
   });
 
   final TextEditingController controller;
   final VoidCallback onSend;
   final CommentEntity? replyingTo;
   final VoidCallback onCancelReply;
-  final String commentHint;
+  final bool isPostOwner;
+  final String postUsername;
 
   @override
   Widget build(BuildContext context) {
@@ -271,7 +286,9 @@ class _CommentInputArea extends StatelessWidget {
                           controller: controller,
                           enabled: !state.isAdding,
                           decoration: InputDecoration(
-                            hintText: commentHint,
+                            hintText: isPostOwner
+                                ? t.feedCommentAsUser(postUsername)
+                                : t.feedAddCommentHint(postUsername),
                             hintStyle: textTheme.bodyMedium?.copyWith(
                               color: colorScheme.onSurfaceVariant,
                               fontSize: 14,
@@ -392,7 +409,7 @@ class _CommentsList extends StatelessWidget {
         final comment = comments[index];
         return _CommentItem(
           comment: comment,
-          onLike: () => onLike(comment),
+          onLike: onLike,
           onReply: () => onReply(comment),
         );
       },
@@ -400,8 +417,8 @@ class _CommentsList extends StatelessWidget {
   }
 }
 
-// FIXED: Removed 'void' from extends
-class _CommentItem extends StatelessWidget {
+// Converted to HookWidget for cleaner lifecycle management
+class _CommentItem extends HookWidget {
   const _CommentItem({
     required this.comment,
     required this.onLike,
@@ -409,27 +426,84 @@ class _CommentItem extends StatelessWidget {
   });
 
   final CommentEntity comment;
-  final VoidCallback onLike;
+  final Function(CommentEntity) onLike;
   final VoidCallback onReply;
 
   @override
   Widget build(BuildContext context) {
+    // Using useState instead of StatefulWidget's setState
+    // This only rebuilds when showReplies changes
+    final showReplies = useState(false);
+
+    // Translation state
+    final translationState = useState<_TranslationState>(
+      _TranslationState.original,
+    );
+    final translatedText = useState<String?>(null);
+
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final t = AppLocalizations.of(context)!;
+
+    Future<void> handleTranslation() async {
+      if (translationState.value == _TranslationState.loading) return;
+
+      if (translationState.value == _TranslationState.translated) {
+        translationState.value = _TranslationState.original;
+        return;
+      }
+
+      translationState.value = _TranslationState.loading;
+
+      try {
+        final translationService = getIt<TranslationService>();
+        final locale = Localizations.localeOf(context);
+        final targetLang = locale.languageCode;
+
+        final result = await translationService.translate(
+          text: comment.content,
+          targetLanguageCode: targetLang,
+        );
+
+        if (result != null) {
+          translatedText.value = result.translatedText;
+          translationState.value = _TranslationState.translated;
+        } else {
+          // Same language or not supported
+          translationState.value = _TranslationState.original;
+        }
+      } catch (e) {
+        translationState.value = _TranslationState.original;
+      }
+    }
+
+    String getTranslationButtonText() {
+      switch (translationState.value) {
+        case _TranslationState.original:
+          return t.feedSeeTranslation;
+        case _TranslationState.loading:
+          return t.feedTranslating;
+        case _TranslationState.translated:
+          return t.feedSeeOriginal;
+      }
+    }
+
+    final displayText = translationState.value == _TranslationState.translated
+        ? translatedText.value ?? comment.content
+        : comment.content;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Avatar
+          // Avatar - Larger for root comment
           CircleAvatar(
-            radius: 18,
+            radius: 20,
             backgroundColor: colorScheme.surfaceContainerHighest,
             child: Icon(
               Icons.person,
-              size: 18,
+              size: 20,
               color: colorScheme.onSurfaceVariant,
             ),
           ),
@@ -464,10 +538,26 @@ class _CommentItem extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
 
-                // Comment text
-                Text(
-                  comment.content,
-                  style: textTheme.bodyMedium?.copyWith(fontSize: 14),
+                // Comment text with animation
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  switchInCurve: Curves.easeInOut,
+                  switchOutCurve: Curves.easeInOut,
+                  transitionBuilder: (child, animation) {
+                    return FadeTransition(
+                      opacity: animation,
+                      child: SizeTransition(
+                        sizeFactor: animation,
+                        axisAlignment: -1,
+                        child: child,
+                      ),
+                    );
+                  },
+                  child: Text(
+                    displayText,
+                    key: ValueKey(displayText),
+                    style: textTheme.bodyMedium?.copyWith(fontSize: 14),
+                  ),
                 ),
                 const SizedBox(height: 8),
 
@@ -487,47 +577,62 @@ class _CommentItem extends StatelessWidget {
                     ),
                     const SizedBox(width: 16),
                     InkWell(
-                      onTap: () {
-                        // TODO: Implement translation
-                      },
-                      child: Text(
-                        t.feedSeeTranslation,
-                        style: textTheme.bodySmall?.copyWith(
-                          color: colorScheme.onSurfaceVariant,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 13,
+                      onTap: handleTranslation,
+                      child: AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 200),
+                        child: Text(
+                          getTranslationButtonText(),
+                          key: ValueKey(translationState.value),
+                          style: textTheme.bodySmall?.copyWith(
+                            color:
+                                translationState.value ==
+                                    _TranslationState.loading
+                                ? colorScheme.primary
+                                : colorScheme.onSurfaceVariant,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 13,
+                          ),
                         ),
                       ),
                     ),
                   ],
                 ),
 
-                // View replies (if has replies)
+                // View replies (if has replies) - Instagram style
                 if (comment.replies.isNotEmpty)
                   Padding(
-                    padding: const EdgeInsets.only(top: 8),
+                    padding: const EdgeInsets.only(top: 12),
                     child: InkWell(
                       onTap: () {
-                        // Show replies
+                        showReplies.value = !showReplies.value;
                       },
                       child: Row(
                         children: [
                           Container(
-                            width: 24,
+                            width: 32,
                             height: 1,
                             color: colorScheme.outlineVariant,
                           ),
-                          const SizedBox(width: 8),
+                          const SizedBox(width: 12),
                           Text(
-                            t.feedViewReplies(comment.replies.length),
+                            showReplies.value
+                                ? t.feedHideReplies
+                                : t.feedViewReplies(comment.replies.length),
                             style: textTheme.bodySmall?.copyWith(
                               color: colorScheme.onSurfaceVariant,
                               fontWeight: FontWeight.w600,
+                              fontSize: 13,
                             ),
                           ),
                         ],
                       ),
                     ),
+                  ),
+
+                // Replies list
+                if (showReplies.value && comment.replies.isNotEmpty)
+                  ...comment.replies.map(
+                    (reply) => _ReplyItem(reply: reply, onLike: onLike),
                   ),
               ],
             ),
@@ -537,10 +642,10 @@ class _CommentItem extends StatelessWidget {
           Column(
             children: [
               InkWell(
-                onTap: onLike,
+                onTap: () => onLike(comment),
                 child: Icon(
                   comment.isLiked ? Icons.favorite : Icons.favorite_border,
-                  size: 14,
+                  size: 20,
                   color: comment.isLiked
                       ? colorScheme.error
                       : colorScheme.onSurfaceVariant,
@@ -564,3 +669,194 @@ class _CommentItem extends StatelessWidget {
     );
   }
 }
+
+// Reply item with smaller avatar - now with HookWidget for translation
+class _ReplyItem extends HookWidget {
+  const _ReplyItem({required this.reply, required this.onLike});
+
+  final CommentEntity reply;
+  final Function(CommentEntity) onLike;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+    final t = AppLocalizations.of(context)!;
+
+    // Translation state
+    final translationState = useState<_TranslationState>(
+      _TranslationState.original,
+    );
+    final translatedText = useState<String?>(null);
+
+    Future<void> handleTranslation() async {
+      if (translationState.value == _TranslationState.loading) return;
+
+      if (translationState.value == _TranslationState.translated) {
+        translationState.value = _TranslationState.original;
+        return;
+      }
+
+      translationState.value = _TranslationState.loading;
+
+      try {
+        final translationService = getIt<TranslationService>();
+        final locale = Localizations.localeOf(context);
+        final targetLang = locale.languageCode;
+
+        final result = await translationService.translate(
+          text: reply.content,
+          targetLanguageCode: targetLang,
+        );
+
+        if (result != null) {
+          translatedText.value = result.translatedText;
+          translationState.value = _TranslationState.translated;
+        } else {
+          translationState.value = _TranslationState.original;
+        }
+      } catch (e) {
+        translationState.value = _TranslationState.original;
+      }
+    }
+
+    String getTranslationButtonText() {
+      switch (translationState.value) {
+        case _TranslationState.original:
+          return t.feedSeeTranslation;
+        case _TranslationState.loading:
+          return t.feedTranslating;
+        case _TranslationState.translated:
+          return t.feedSeeOriginal;
+      }
+    }
+
+    final displayText = translationState.value == _TranslationState.translated
+        ? translatedText.value ?? reply.content
+        : reply.content;
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 12, left: 32),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Avatar - Smaller for replies
+          CircleAvatar(
+            radius: 14,
+            backgroundColor: colorScheme.surfaceContainerHighest,
+            child: Icon(
+              Icons.person,
+              size: 14,
+              color: colorScheme.onSurfaceVariant,
+            ),
+          ),
+          const SizedBox(width: 12),
+
+          // Content
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Username + time
+                Row(
+                  children: [
+                    Text(
+                      reply.userFullName ?? t.feedUnknownUser,
+                      style: textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      FormatUtils.formatTimeAgo(
+                        reply.createdAt,
+                        context: context,
+                      ),
+                      style: textTheme.bodySmall?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
+
+                // Comment text with animation
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  switchInCurve: Curves.easeInOut,
+                  switchOutCurve: Curves.easeInOut,
+                  transitionBuilder: (child, animation) {
+                    return FadeTransition(
+                      opacity: animation,
+                      child: SizeTransition(
+                        sizeFactor: animation,
+                        axisAlignment: -1,
+                        child: child,
+                      ),
+                    );
+                  },
+                  child: Text(
+                    displayText,
+                    key: ValueKey(displayText),
+                    style: textTheme.bodyMedium?.copyWith(fontSize: 14),
+                  ),
+                ),
+                const SizedBox(height: 4),
+
+                // Translation button
+                InkWell(
+                  onTap: handleTranslation,
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 200),
+                    child: Text(
+                      getTranslationButtonText(),
+                      key: ValueKey(translationState.value),
+                      style: textTheme.bodySmall?.copyWith(
+                        color:
+                            translationState.value == _TranslationState.loading
+                            ? colorScheme.primary
+                            : colorScheme.onSurfaceVariant,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // Like button + count
+          Column(
+            children: [
+              InkWell(
+                onTap: () => onLike(reply),
+                child: Icon(
+                  reply.isLiked ? Icons.favorite : Icons.favorite_border,
+                  size: 18,
+                  color: reply.isLiked
+                      ? colorScheme.error
+                      : colorScheme.onSurfaceVariant,
+                ),
+              ),
+              if (reply.likesCount > 0)
+                Padding(
+                  padding: const EdgeInsets.only(top: 2),
+                  child: Text(
+                    reply.likesCount.toString(),
+                    style: textTheme.bodySmall?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                      fontSize: 11,
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Translation state for comment items
+enum _TranslationState { original, loading, translated }

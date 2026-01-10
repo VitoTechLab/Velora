@@ -4,10 +4,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:velora/features/feed/presentation/bloc/feed_bloc.dart';
-import 'package:velora/features/feed/presentation/bloc/feed_event.dart'
-    as feed_event;
-import 'package:velora/features/feed/presentation/bloc/feed_state.dart'
-    as feed_state;
+import 'package:velora/features/feed/presentation/bloc/feed_event.dart';
+import 'package:velora/features/feed/presentation/bloc/feed_state.dart';
 import 'package:velora/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:velora/features/profile/presentation/bloc/profile_event.dart';
 import 'package:velora/features/profile/presentation/bloc/profile_state.dart';
@@ -17,11 +15,38 @@ import 'package:velora/features/profile/presentation/widgets/profile_actions.dar
 import 'package:velora/features/profile/presentation/widgets/profile_tabs.dart';
 import 'package:velora/features/profile/presentation/widgets/profile_grid.dart';
 import 'package:velora/routes/app_router.dart';
+import 'package:velora/core/di/service_locator.dart';
 
-class ProfileScreen extends HookWidget {
-  final String? userId;
+/// Screen for displaying the current logged-in user's profile (My Profile)
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
 
-  const ProfileScreen({super.key, this.userId});
+  @override
+  Widget build(BuildContext context) {
+    // Get current user's ID from AuthBloc
+    final authState = context.watch<AuthBloc>().state;
+    final currentUserId = authState.userId;
+
+    if (currentUserId == null) {
+      return const Scaffold(
+        body: Center(child: Text('Please log in to view your profile')),
+      );
+    }
+
+    // Create isolated FeedBloc instance for current user's posts
+    return BlocProvider(
+      create: (_) =>
+          getIt<FeedBloc>()
+            ..add(FeedEvent.loadInitialFeed(limit: 20, userId: currentUserId)),
+      child: _ProfileScreenContent(userId: currentUserId),
+    );
+  }
+}
+
+class _ProfileScreenContent extends HookWidget {
+  final String userId;
+
+  const _ProfileScreenContent({required this.userId});
 
   @override
   Widget build(BuildContext context) {
@@ -29,23 +54,11 @@ class ProfileScreen extends HookWidget {
     final colorScheme = theme.colorScheme;
     final tabController = useTabController(initialLength: 4);
 
-    final authState = context.watch<AuthBloc>().state;
-    final effectiveUserId = userId ?? authState.userId;
-
     useEffect(() {
-      if (effectiveUserId != null) {
-        context.read<ProfileBloc>().add(
-          LoadProfileEvent(userId: effectiveUserId),
-        );
-        context.read<FeedBloc>().add(
-          feed_event.FeedEvent.loadInitialFeed(
-            limit: 20,
-            userId: effectiveUserId,
-          ),
-        );
-      }
+      // Load profile data when screen mounts
+      context.read<ProfileBloc>().add(LoadProfileEvent(userId: userId));
       return null;
-    }, [effectiveUserId]);
+    }, [userId]);
 
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, profileState) {
@@ -56,14 +69,12 @@ class ProfileScreen extends HookWidget {
           appBar: AppBar(
             backgroundColor: colorScheme.surface,
             elevation: 0,
-            leading: profileState.profile?.isMe == true
-                ? IconButton(
-                    icon: const Icon(Icons.add_box_outlined),
-                    onPressed: () {
-                      context.pushNamed(AppRouteName.mediaGallery);
-                    },
-                  )
-                : const BackButton(),
+            leading: IconButton(
+              icon: const Icon(Icons.add_box_outlined),
+              onPressed: () {
+                context.pushNamed(AppRouteName.mediaGallery);
+              },
+            ),
             title: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -77,24 +88,21 @@ class ProfileScreen extends HookWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                if (profileState.profile?.isMe == true) ...[
-                  const SizedBox(width: 4),
-                  const Icon(Icons.keyboard_arrow_down, size: 20),
-                ],
+                const SizedBox(width: 4),
+                const Icon(Icons.keyboard_arrow_down, size: 20),
               ],
             ),
             actions: [
-              if (profileState.profile?.isMe == true)
-                IconButton(
-                  icon: Badge(
-                    label: const Text('9+'),
-                    backgroundColor: Colors.red,
-                    child: const Icon(Icons.favorite_border),
-                  ),
-                  onPressed: () {
-                    // TODO: Navigate to notifications
-                  },
+              IconButton(
+                icon: Badge(
+                  label: const Text('9+'),
+                  backgroundColor: Colors.red,
+                  child: const Icon(Icons.favorite_border),
                 ),
+                onPressed: () {
+                  // TODO: Navigate to notifications
+                },
+              ),
               IconButton(
                 icon: const Icon(Icons.menu),
                 onPressed: () {
@@ -109,19 +117,15 @@ class ProfileScreen extends HookWidget {
               ? Center(child: Text(profileState.error!))
               : RefreshIndicator(
                   onRefresh: () async {
-                    if (effectiveUserId != null) {
-                      context.read<ProfileBloc>().add(
-                        LoadProfileEvent(userId: effectiveUserId),
-                      );
-                      context.read<FeedBloc>().add(
-                        feed_event.FeedEvent.loadInitialFeed(
-                          limit: 20,
-                          userId: effectiveUserId,
-                        ),
-                      );
-                    }
+                    context.read<ProfileBloc>().add(
+                      LoadProfileEvent(userId: userId),
+                    );
+                    context.read<FeedBloc>().add(
+                      FeedEvent.loadInitialFeed(limit: 20, userId: userId),
+                    );
                   },
                   child: NestedScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
                     headerSliverBuilder: (context, innerBoxIsScrolled) {
                       return [
                         SliverToBoxAdapter(
@@ -203,31 +207,19 @@ class ProfileScreen extends HookWidget {
                                   horizontal: 16,
                                 ),
                                 child: ProfileActions(
-                                  isMe: profile?.isMe ?? false,
-                                  isFollowing: profileState.isFollowing,
-                                  isFollowRequestPending:
-                                      profileState.isFollowRequestPending,
+                                  isMe: true,
+                                  isFollowing: false,
+                                  isFollowRequestPending: false,
                                   onEditProfile: () {
                                     context.pushNamed(
                                       AppRouteName.settingsEditProfile,
                                     );
                                   },
-                                  onFollowToggle: () {
-                                    if (profile != null) {
-                                      context.read<ProfileBloc>().add(
-                                        ToggleFollowEvent(
-                                          targetUserId: profile.id,
-                                          isPrivate: profile.isPrivate,
-                                        ),
-                                      );
-                                    }
-                                  },
+                                  onFollowToggle: () {},
                                   onShareProfile: () {
                                     // TODO: Share profile
                                   },
-                                  onAddFriend: () {
-                                    // TODO: Add friend action
-                                  },
+                                  onAddFriend: () {},
                                 ),
                               ),
                               const SizedBox(height: 16),
@@ -240,11 +232,41 @@ class ProfileScreen extends HookWidget {
                     body: TabBarView(
                       controller: tabController,
                       children: [
-                        BlocBuilder<FeedBloc, feed_state.FeedState>(
+                        BlocBuilder<FeedBloc, FeedState>(
                           builder: (context, feedState) {
                             if (feedState.isLoadingInitial) {
                               return const Center(
                                 child: CircularProgressIndicator(),
+                              );
+                            }
+                            if (feedState.posts.isEmpty) {
+                              return CustomScrollView(
+                                physics: const AlwaysScrollableScrollPhysics(),
+                                slivers: [
+                                  SliverFillRemaining(
+                                    child: Center(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(
+                                            Icons.photo_library_outlined,
+                                            size: 64,
+                                            color: colorScheme.onSurfaceVariant,
+                                          ),
+                                          const SizedBox(height: 16),
+                                          Text(
+                                            'No posts yet',
+                                            style: theme.textTheme.titleMedium
+                                                ?.copyWith(
+                                                  color: colorScheme
+                                                      .onSurfaceVariant,
+                                                ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               );
                             }
                             return ProfileGrid(
