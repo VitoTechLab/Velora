@@ -166,10 +166,9 @@ class _UserProfileContent extends HookWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    if (profile?.fullName != null &&
-                                        profile!.fullName.isNotEmpty)
+                                    if (profile?.fullName?.isNotEmpty == true)
                                       Text(
-                                        profile.fullName,
+                                        profile!.fullName!,
                                         style: const TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600,
