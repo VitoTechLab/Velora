@@ -240,6 +240,8 @@
   "settingsTileProfilesSubtitle": "Vito • Velora, Forum, Community",
   "settingsTileSharingTitle": "Sharing across profiles",
   "settingsTileSharingSubtitle": "Choose what gets synced automatically",
+  "settingsTileActivityTitle": "Activity history",
+  "settingsTileActivitySubtitle": "View your recent activities and interactions",
   "settingsTileLoggingTitle": "Logging in with accounts",
   "settingsTileLoggingSubtitle": "Review devices and login approvals",
   "settingsAccountTitle": "Account settings",

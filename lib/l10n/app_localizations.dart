@@ -818,6 +818,18 @@ abstract class AppLocalizations {
   /// **'Choose what gets synced automatically'**
   String get settingsTileSharingSubtitle;
 
+  /// No description provided for @settingsTileActivityTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity history'**
+  String get settingsTileActivityTitle;
+
+  /// No description provided for @settingsTileActivitySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'View your recent activities and interactions'**
+  String get settingsTileActivitySubtitle;
+
   /// No description provided for @settingsTileLoggingTitle.
   ///
   /// In en, this message translates to:

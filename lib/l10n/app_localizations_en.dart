@@ -412,6 +412,13 @@ class AppLocalizationsEn extends AppLocalizations {
       'Choose what gets synced automatically';
 
   @override
+  String get settingsTileActivityTitle => 'Activity history';
+
+  @override
+  String get settingsTileActivitySubtitle =>
+      'View your recent activities and interactions';
+
+  @override
   String get settingsTileLoggingTitle => 'Logging in with accounts';
 
   @override

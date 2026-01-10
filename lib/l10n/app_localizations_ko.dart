@@ -406,6 +406,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get settingsTileSharingSubtitle => '자동으로 동기화할 항목 선택';
 
   @override
+  String get settingsTileActivityTitle => '활동 기록';
+
+  @override
+  String get settingsTileActivitySubtitle => '최근 활동 및 상호작용 보기';
+
+  @override
   String get settingsTileLoggingTitle => '계정 로그인';
 
   @override

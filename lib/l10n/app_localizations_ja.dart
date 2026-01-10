@@ -406,6 +406,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get settingsTileSharingSubtitle => '自動同期する内容を選択';
 
   @override
+  String get settingsTileActivityTitle => 'アクティビティ履歴';
+
+  @override
+  String get settingsTileActivitySubtitle => '最近のアクティビティとインタラクションを表示';
+
+  @override
   String get settingsTileLoggingTitle => 'アカウントでのログイン';
 
   @override

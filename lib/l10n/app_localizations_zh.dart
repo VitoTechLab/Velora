@@ -404,6 +404,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsTileSharingSubtitle => '选择自动同步的内容';
 
   @override
+  String get settingsTileActivityTitle => '活动历史';
+
+  @override
+  String get settingsTileActivitySubtitle => '查看您最近的活动和互动';
+
+  @override
   String get settingsTileLoggingTitle => '帐户登录';
 
   @override
