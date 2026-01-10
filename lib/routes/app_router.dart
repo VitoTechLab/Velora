@@ -22,6 +22,7 @@ import 'package:velora/features/post/presentation/screens/more_option_post_scree
 import 'package:velora/features/profile/presentation/screens/profile_screen.dart';
 import 'package:velora/features/settings/domain/entities/user_preferences.dart';
 import 'package:velora/features/settings/presentation/screens/account/account_status_screen.dart';
+import 'package:velora/features/settings/presentation/screens/account/account_type_screen.dart';
 import 'package:velora/features/settings/presentation/screens/account/activity_screen.dart';
 import 'package:velora/features/settings/presentation/screens/account/my_donation_screen.dart';
 import 'package:velora/features/settings/presentation/screens/appearance/accessibility_screen.dart';
@@ -37,6 +38,7 @@ import 'package:velora/features/settings/presentation/screens/profile/profile_fi
 import 'package:velora/features/settings/presentation/screens/security/password_security_screen.dart';
 import 'package:velora/features/settings/presentation/screens/security/privacy_screen.dart';
 import 'package:velora/features/settings/presentation/screens/settings_screen.dart';
+import 'package:velora/features/wallet/presentation/screens/wallet_dashboard_screen.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
 import 'package:velora/features/feed/presentation/screens/feed_screen.dart';
@@ -239,6 +241,13 @@ class AppRouter {
                                 const AccountStatusScreen(),
                           ),
                           GoRoute(
+                            path: AppRouteSinglePath.settingsAccountType,
+                            name: AppRouteName.settingsAccountType,
+                            parentNavigatorKey: navigationService.navigatorKey,
+                            builder: (context, state) =>
+                                const AccountTypeScreen(),
+                          ),
+                          GoRoute(
                             path: AppRouteSinglePath.settingsPasswordSecurity,
                             name: AppRouteName.settingsPasswordSecurity,
                             parentNavigatorKey: navigationService.navigatorKey,
@@ -264,6 +273,13 @@ class AppRouter {
                             parentNavigatorKey: navigationService.navigatorKey,
                             builder: (context, state) =>
                                 const MyDonationScreen(),
+                          ),
+                          GoRoute(
+                            path: AppRouteSinglePath.settingsWalletDashboard,
+                            name: AppRouteName.settingsWalletDashboard,
+                            parentNavigatorKey: navigationService.navigatorKey,
+                            builder: (context, state) =>
+                                const WalletDashboardScreen(),
                           ),
                           GoRoute(
                             path: AppRouteSinglePath.settingsNotificationDetail,
@@ -368,10 +384,12 @@ class AppRouteName {
   static const settingsProfiles = 'settingsProfiles';
   static const settingsActivity = 'settingsActivity';
   static const settingsAccountStatus = 'settingsAccountStatus';
+  static const settingsAccountType = 'settingsAccountType';
   static const settingsPasswordSecurity = 'settingsPasswordSecurity';
   static const settingsEditProfile = 'settingsEditProfile';
   static const settingsPrivacy = 'settingsPrivacy';
   static const settingsMyDonation = 'settingsMyDonation';
+  static const settingsWalletDashboard = 'settingsWalletDashboard';
   static const settingsNotificationDetail = 'settingsNotificationDetail';
   static const settingsTheme = 'settingsTheme';
   static const settingsLanguage = 'settingsLanguage';
@@ -395,10 +413,12 @@ class AppRoutePath {
   static const settingsProfiles = '/profile/settings/profiles';
   static const settingsActivity = '/profile/settings/activity';
   static const settingsAccountStatus = '/profile/settings/account-status';
+  static const settingsAccountType = '/profile/settings/account-type';
   static const settingsPasswordSecurity = '/profile/settings/password-security';
   static const settingsEditProfile = '/profile/settings/edit-profile';
   static const settingsPrivacy = '/profile/settings/privacy';
   static const settingsMyDonation = '/profile/settings/my-donation';
+  static const settingsWalletDashboard = '/profile/settings/wallet';
   static const settingsNotificationDetail =
       '/profile/settings/notification-detail';
   static const settingsTheme = '/profile/settings/theme';
@@ -426,11 +446,13 @@ class AppRouteSinglePath {
   static const settingsProfiles = 'profiles';
   static const settingsActivity = 'activity';
   static const settingsAccountStatus = 'account-status';
+  static const settingsAccountType = 'account-type';
   static const settingsPasswordSecurity = 'password-security';
   static const settingsLanguage = 'language';
   static const settingsEditProfile = 'edit-profile';
   static const settingsPrivacy = 'privacy';
   static const settingsMyDonation = 'my-donation';
+  static const settingsWalletDashboard = 'wallet';
   static const settingsNotificationDetail = 'notification-detail';
   static const settingsTheme = 'theme';
   static const settingsAccessibility = 'accessibility';
