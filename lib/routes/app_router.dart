@@ -61,7 +61,8 @@ class AppRouter {
               state.matchedLocation == AppRoutePath.verificationEmail;
 
           if (status == AuthStatus.unknown) {
-            return AppRoutePath.createPost;
+            // Still checking auth, stay on current route or go to home
+            return null;
           }
 
           if (status == AuthStatus.unauthenticated) {
@@ -149,7 +150,16 @@ class AppRouter {
                         parentNavigatorKey:
                             navigationService.navigatorKey, // root
                         builder: (context, state) {
-                          final args = state.extra as CreatePostMediaArgs;
+                          final args = state.extra as CreatePostMediaArgs?;
+                          if (args == null) {
+                            // No media provided, redirect to gallery
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              if (context.mounted) {
+                                context.goNamed(AppRouteName.mediaGallery);
+                              }
+                            });
+                            return const SizedBox.shrink();
+                          }
                           return CreatePostScreen(
                             selectedMedia: args.selectedMedia,
                           );
