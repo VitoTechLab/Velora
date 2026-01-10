@@ -20,6 +20,7 @@ import 'package:velora/features/navigation/services/navigation_service.dart';
 import 'package:velora/features/post/presentation/screens/create_post_screen.dart';
 import 'package:velora/features/post/presentation/screens/more_option_post_screen.dart';
 import 'package:velora/features/profile/presentation/screens/profile_screen.dart';
+import 'package:velora/features/profile/presentation/screens/other_user_profile_screen.dart';
 import 'package:velora/features/settings/domain/entities/user_preferences.dart';
 import 'package:velora/features/settings/presentation/screens/account/account_status_screen.dart';
 import 'package:velora/features/settings/presentation/screens/account/activity_screen.dart';
@@ -59,9 +60,13 @@ class AppRouter {
           final resetting = state.matchedLocation == AppRoutePath.resetPassword;
           final verifying =
               state.matchedLocation == AppRoutePath.verificationEmail;
+          final onSplash = state.matchedLocation == AppRoutePath.splash;
 
           if (status == AuthStatus.unknown) {
-            // Still checking auth, stay on current route or go to home
+            // Show splash screen while checking auth
+            if (!onSplash) {
+              return AppRoutePath.splash;
+            }
             return null;
           }
 
@@ -92,6 +97,11 @@ class AppRouter {
           return null;
         },
         routes: [
+          GoRoute(
+            path: AppRoutePath.splash,
+            name: AppRouteName.splash,
+            builder: (context, state) => const SplashScreen(),
+          ),
           GoRoute(
             path: AppRoutePath.signIn,
             name: AppRouteName.signIn,
@@ -141,8 +151,22 @@ class AppRouter {
                         name: AppRouteName.notification,
                         parentNavigatorKey:
                             navigationService.navigatorKey, // root
-                        builder: (context, state) =>
-                            const NotificationScreen(),
+                        builder: (context, state) => const NotificationScreen(),
+                      ),
+                      GoRoute(
+                        path: AppRouteSinglePath.userProfile,
+                        name: AppRouteName.userProfile,
+                        parentNavigatorKey:
+                            navigationService.navigatorKey, // root
+                        builder: (context, state) {
+                          final userId = state.pathParameters['userId'];
+                          if (userId == null || userId.isEmpty) {
+                            return const Scaffold(
+                              body: Center(child: Text('User not found')),
+                            );
+                          }
+                          return OtherUserProfileScreen(userId: userId);
+                        },
                       ),
                       GoRoute(
                         path: AppRouteSinglePath.createPost,
@@ -161,7 +185,7 @@ class AppRouter {
                             return const SizedBox.shrink();
                           }
                           return CreatePostScreen(
-                            selectedMedia: args?.selectedMedia ?? [],
+                            selectedMedia: args.selectedMedia ?? [],
                           );
                         },
                         routes: [
@@ -246,8 +270,7 @@ class AppRouter {
                           GoRoute(
                             path: AppRouteSinglePath.settingsActivity,
                             name: AppRouteName.settingsActivity,
-                            parentNavigatorKey:
-                                navigationService.navigatorKey,
+                            parentNavigatorKey: navigationService.navigatorKey,
                             builder: (context, state) => const ActivityScreen(),
                           ),
                           GoRoute(
@@ -374,9 +397,11 @@ class AppRouter {
 }
 
 class AppRouteName {
+  static const splash = 'splash';
   static const home = 'home';
   static const mediaGallery = 'mediaGallery';
   static const notification = 'notification';
+  static const userProfile = 'userProfile';
   static const createPost = 'createPost';
   static const moreOptions = 'moreOptions';
   static const search = 'search';
@@ -407,9 +432,11 @@ class AppRouteName {
 }
 
 class AppRoutePath {
+  static const splash = '/splash';
   static const home = '/home';
   static const mediaGallery = '/media-gallery';
   static const notification = '/home/notification';
+  static const userProfile = '/home/user/:userId';
   static const createPost = '/home/create-post';
   static const moreOptions = '/home/create-post/more-options';
   static const settings = '/profile/settings';
@@ -442,6 +469,7 @@ class AppRoutePath {
 
 class AppRouteSinglePath {
   static const notification = 'notification';
+  static const userProfile = 'user/:userId';
   static const createPost = 'create-post';
   static const moreOptions = 'more-options';
   static const settings = 'settings';
