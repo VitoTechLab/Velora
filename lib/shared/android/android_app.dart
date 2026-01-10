@@ -58,12 +58,12 @@ class AndroidApp extends StatelessWidget {
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         title: 'Velora',
-        // localizationsDelegates: const [
-        //   AppLocalizations.delegate,
-        //   GlobalMaterialLocalizations.delegate,
-        //   GlobalWidgetsLocalizations.delegate,
-        //   GlobalCupertinoLocalizations.delegate,
-        // ],
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
         supportedLocales: AppLocalizations.supportedLocales,
         theme: buildTheme(Brightness.light),
         darkTheme: buildTheme(Brightness.dark),
