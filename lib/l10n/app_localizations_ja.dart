@@ -2077,6 +2077,41 @@ class AppLocalizationsJa extends AppLocalizations {
   String get settingsAccountDonationsRecurringLabel => '定期';
 
   @override
+  String get campaignSeeMore => 'もっと見る';
+
+  @override
+  String get campaignFeaturedTitle => '注目のキャンペーン';
+
+  @override
+  String get campaignEmergencyTitle => '緊急募金活動';
+
+  @override
+  String get campaignSocialImpactTitle => '社会的影響';
+
+  @override
+  String get campaignTechnologyTitle => 'テクノロジー';
+
+  @override
+  String get campaignFashionTitle => 'ファッション';
+
+  @override
+  String get campaignFoodBeverageTitle => '飲食';
+
+  @override
+  String get campaignFinanceTitle => 'ファイナンス';
+
+  @override
+  String get campaignMemorialTitle => '追悼募金活動';
+
+  @override
+  String campaignRaisedOf(String target) {
+    return '$targetのうち達成';
+  }
+
+  @override
+  String get campaignEndOfList => 'キャンペーンはこれ以上ありません';
+
+  @override
   String settingsAccountDonationsRecurringValue(int count) {
     return '$count 件';
   }

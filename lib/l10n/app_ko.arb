@@ -1038,6 +1038,24 @@
   "settingsAccountDonationsCampaignsLabel": "캠페인",
   "settingsAccountDonationsThisMonthLabel": "이번 달",
   "settingsAccountDonationsRecurringLabel": "정기 기부",
+  "campaignSeeMore": "더 보기",
+  "campaignFeaturedTitle": "주요 캠페인",
+  "campaignEmergencyTitle": "긴급 모금",
+  "campaignSocialImpactTitle": "사회적 영향",
+  "campaignTechnologyTitle": "기술",
+  "campaignFashionTitle": "패션",
+  "campaignFoodBeverageTitle": "음식 및 음료",
+  "campaignFinanceTitle": "금융",
+  "campaignMemorialTitle": "추모 모금",
+  "campaignRaisedOf": "{target} 중 모금됨",
+  "@campaignRaisedOf": {
+    "placeholders": {
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "campaignEndOfList": "더 이상 캠페인이 없습니다",
   "settingsAccountDonationsRecurringValue": "{count}건 진행 중",
   "@settingsAccountDonationsRecurringValue": {
     "placeholders": {

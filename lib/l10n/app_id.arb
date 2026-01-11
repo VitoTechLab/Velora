@@ -1038,6 +1038,24 @@
   "settingsAccountDonationsCampaignsLabel": "Kampanye",
   "settingsAccountDonationsThisMonthLabel": "Bulan ini",
   "settingsAccountDonationsRecurringLabel": "Berkala",
+  "campaignSeeMore": "Lihat Semua",
+  "campaignFeaturedTitle": "Kampanye Unggulan",
+  "campaignEmergencyTitle": "Penggalangan Dana Darurat",
+  "campaignSocialImpactTitle": "Dampak Sosial",
+  "campaignTechnologyTitle": "Teknologi",
+  "campaignFashionTitle": "Fashion",
+  "campaignFoodBeverageTitle": "Makanan & Minuman",
+  "campaignFinanceTitle": "Keuangan",
+  "campaignMemorialTitle": "Penggalangan Dana Memorial",
+  "campaignRaisedOf": "terkumpul dari {target}",
+  "@campaignRaisedOf": {
+    "placeholders": {
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "campaignEndOfList": "Tidak ada kampanye lagi",
   "settingsAccountDonationsRecurringValue": "{count} aktif",
   "@settingsAccountDonationsRecurringValue": {
     "placeholders": {

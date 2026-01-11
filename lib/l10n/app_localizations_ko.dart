@@ -2078,6 +2078,41 @@ class AppLocalizationsKo extends AppLocalizations {
   String get settingsAccountDonationsRecurringLabel => '정기 기부';
 
   @override
+  String get campaignSeeMore => '더 보기';
+
+  @override
+  String get campaignFeaturedTitle => '주요 캠페인';
+
+  @override
+  String get campaignEmergencyTitle => '긴급 모금';
+
+  @override
+  String get campaignSocialImpactTitle => '사회적 영향';
+
+  @override
+  String get campaignTechnologyTitle => '기술';
+
+  @override
+  String get campaignFashionTitle => '패션';
+
+  @override
+  String get campaignFoodBeverageTitle => '음식 및 음료';
+
+  @override
+  String get campaignFinanceTitle => '금융';
+
+  @override
+  String get campaignMemorialTitle => '추모 모금';
+
+  @override
+  String campaignRaisedOf(String target) {
+    return '$target 중 모금됨';
+  }
+
+  @override
+  String get campaignEndOfList => '더 이상 캠페인이 없습니다';
+
+  @override
   String settingsAccountDonationsRecurringValue(int count) {
     return '$count건 진행 중';
   }

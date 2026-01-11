@@ -2126,6 +2126,41 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsAccountDonationsRecurringLabel => 'Recurring';
 
   @override
+  String get campaignSeeMore => 'See More';
+
+  @override
+  String get campaignFeaturedTitle => 'Featured Campaigns';
+
+  @override
+  String get campaignEmergencyTitle => 'Emergency Fundraisers';
+
+  @override
+  String get campaignSocialImpactTitle => 'Social Impact';
+
+  @override
+  String get campaignTechnologyTitle => 'Technology';
+
+  @override
+  String get campaignFashionTitle => 'Fashion';
+
+  @override
+  String get campaignFoodBeverageTitle => 'Food & Beverage';
+
+  @override
+  String get campaignFinanceTitle => 'Finance';
+
+  @override
+  String get campaignMemorialTitle => 'Memorial Fundraisers';
+
+  @override
+  String campaignRaisedOf(String target) {
+    return 'raised of $target';
+  }
+
+  @override
+  String get campaignEndOfList => 'No more campaigns';
+
+  @override
   String settingsAccountDonationsRecurringValue(int count) {
     return '$count active';
   }

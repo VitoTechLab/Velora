@@ -2069,6 +2069,41 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsAccountDonationsRecurringLabel => '定期';
 
   @override
+  String get campaignSeeMore => '查看更多';
+
+  @override
+  String get campaignFeaturedTitle => '精选活动';
+
+  @override
+  String get campaignEmergencyTitle => '紧急募捐';
+
+  @override
+  String get campaignSocialImpactTitle => '社会影响';
+
+  @override
+  String get campaignTechnologyTitle => '科技';
+
+  @override
+  String get campaignFashionTitle => '时尚';
+
+  @override
+  String get campaignFoodBeverageTitle => '餐饮';
+
+  @override
+  String get campaignFinanceTitle => '金融';
+
+  @override
+  String get campaignMemorialTitle => '追悼募捐';
+
+  @override
+  String campaignRaisedOf(String target) {
+    return '已筹集 $target';
+  }
+
+  @override
+  String get campaignEndOfList => '没有更多活动';
+
+  @override
   String settingsAccountDonationsRecurringValue(int count) {
     return '$count 个';
   }

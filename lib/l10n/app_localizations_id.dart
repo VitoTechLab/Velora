@@ -2132,6 +2132,41 @@ class AppLocalizationsId extends AppLocalizations {
   String get settingsAccountDonationsRecurringLabel => 'Berkala';
 
   @override
+  String get campaignSeeMore => 'Lihat Semua';
+
+  @override
+  String get campaignFeaturedTitle => 'Kampanye Unggulan';
+
+  @override
+  String get campaignEmergencyTitle => 'Penggalangan Dana Darurat';
+
+  @override
+  String get campaignSocialImpactTitle => 'Dampak Sosial';
+
+  @override
+  String get campaignTechnologyTitle => 'Teknologi';
+
+  @override
+  String get campaignFashionTitle => 'Fashion';
+
+  @override
+  String get campaignFoodBeverageTitle => 'Makanan & Minuman';
+
+  @override
+  String get campaignFinanceTitle => 'Keuangan';
+
+  @override
+  String get campaignMemorialTitle => 'Penggalangan Dana Memorial';
+
+  @override
+  String campaignRaisedOf(String target) {
+    return 'terkumpul dari $target';
+  }
+
+  @override
+  String get campaignEndOfList => 'Tidak ada kampanye lagi';
+
+  @override
   String settingsAccountDonationsRecurringValue(int count) {
     return '$count aktif';
   }

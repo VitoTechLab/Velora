@@ -3812,6 +3812,72 @@ abstract class AppLocalizations {
   /// **'Recurring'**
   String get settingsAccountDonationsRecurringLabel;
 
+  /// No description provided for @campaignSeeMore.
+  ///
+  /// In en, this message translates to:
+  /// **'See More'**
+  String get campaignSeeMore;
+
+  /// No description provided for @campaignFeaturedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Featured Campaigns'**
+  String get campaignFeaturedTitle;
+
+  /// No description provided for @campaignEmergencyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency Fundraisers'**
+  String get campaignEmergencyTitle;
+
+  /// No description provided for @campaignSocialImpactTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Social Impact'**
+  String get campaignSocialImpactTitle;
+
+  /// No description provided for @campaignTechnologyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Technology'**
+  String get campaignTechnologyTitle;
+
+  /// No description provided for @campaignFashionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Fashion'**
+  String get campaignFashionTitle;
+
+  /// No description provided for @campaignFoodBeverageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Food & Beverage'**
+  String get campaignFoodBeverageTitle;
+
+  /// No description provided for @campaignFinanceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Finance'**
+  String get campaignFinanceTitle;
+
+  /// No description provided for @campaignMemorialTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Memorial Fundraisers'**
+  String get campaignMemorialTitle;
+
+  /// No description provided for @campaignRaisedOf.
+  ///
+  /// In en, this message translates to:
+  /// **'raised of {target}'**
+  String campaignRaisedOf(String target);
+
+  /// No description provided for @campaignEndOfList.
+  ///
+  /// In en, this message translates to:
+  /// **'No more campaigns'**
+  String get campaignEndOfList;
+
   /// No description provided for @settingsAccountDonationsRecurringValue.
   ///
   /// In en, this message translates to:

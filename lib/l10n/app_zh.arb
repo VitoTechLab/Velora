@@ -1038,6 +1038,24 @@
   "settingsAccountDonationsCampaignsLabel": "活动",
   "settingsAccountDonationsThisMonthLabel": "本月",
   "settingsAccountDonationsRecurringLabel": "定期",
+  "campaignSeeMore": "查看更多",
+  "campaignFeaturedTitle": "精选活动",
+  "campaignEmergencyTitle": "紧急募捐",
+  "campaignSocialImpactTitle": "社会影响",
+  "campaignTechnologyTitle": "科技",
+  "campaignFashionTitle": "时尚",
+  "campaignFoodBeverageTitle": "餐饮",
+  "campaignFinanceTitle": "金融",
+  "campaignMemorialTitle": "追悼募捐",
+  "campaignRaisedOf": "已筹集 {target}",
+  "@campaignRaisedOf": {
+    "placeholders": {
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "campaignEndOfList": "没有更多活动",
   "settingsAccountDonationsRecurringValue": "{count} 个",
   "@settingsAccountDonationsRecurringValue": {
     "placeholders": {

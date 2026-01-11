@@ -1038,6 +1038,24 @@
   "settingsAccountDonationsCampaignsLabel": "Campaigns",
   "settingsAccountDonationsThisMonthLabel": "This month",
   "settingsAccountDonationsRecurringLabel": "Recurring",
+  "campaignSeeMore": "See More",
+  "campaignFeaturedTitle": "Featured Campaigns",
+  "campaignEmergencyTitle": "Emergency Fundraisers",
+  "campaignSocialImpactTitle": "Social Impact",
+  "campaignTechnologyTitle": "Technology",
+  "campaignFashionTitle": "Fashion",
+  "campaignFoodBeverageTitle": "Food & Beverage",
+  "campaignFinanceTitle": "Finance",
+  "campaignMemorialTitle": "Memorial Fundraisers",
+  "campaignRaisedOf": "raised of {target}",
+  "@campaignRaisedOf": {
+    "placeholders": {
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "campaignEndOfList": "No more campaigns",
   "settingsAccountDonationsRecurringValue": "{count} active",
   "@settingsAccountDonationsRecurringValue": {
     "placeholders": {

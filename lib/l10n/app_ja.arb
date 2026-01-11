@@ -1038,6 +1038,24 @@
   "settingsAccountDonationsCampaignsLabel": "キャンペーン",
   "settingsAccountDonationsThisMonthLabel": "今月",
   "settingsAccountDonationsRecurringLabel": "定期",
+  "campaignSeeMore": "もっと見る",
+  "campaignFeaturedTitle": "注目のキャンペーン",
+  "campaignEmergencyTitle": "緊急募金活動",
+  "campaignSocialImpactTitle": "社会的影響",
+  "campaignTechnologyTitle": "テクノロジー",
+  "campaignFashionTitle": "ファッション",
+  "campaignFoodBeverageTitle": "飲食",
+  "campaignFinanceTitle": "ファイナンス",
+  "campaignMemorialTitle": "追悼募金活動",
+  "campaignRaisedOf": "{target}のうち達成",
+  "@campaignRaisedOf": {
+    "placeholders": {
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "campaignEndOfList": "キャンペーンはこれ以上ありません",
   "settingsAccountDonationsRecurringValue": "{count} 件",
   "@settingsAccountDonationsRecurringValue": {
     "placeholders": {
