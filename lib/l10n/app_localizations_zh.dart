@@ -416,6 +416,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsTileLoggingSubtitle => '查看设备与登录批准';
 
   @override
+  String get settingsTileAccountStatusTitle => '账户状态';
+
+  @override
+  String get settingsTileAccountStatusSubtitle => '查看验证状态和账户活动';
+
+  @override
   String get settingsAccountTitle => '账户设置';
 
   @override
@@ -447,6 +453,63 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get settingsTileVeloraPaySubtitle => '付款方式与保障';
+
+  @override
+  String get settingsWalletTitle => '钱包';
+
+  @override
+  String get walletDashboardTitle => '钱包仪表板';
+
+  @override
+  String get walletDashboardWalletId => '钱包ID: #VLR2024001';
+
+  @override
+  String get walletDashboardTotalBalance => '总余额';
+
+  @override
+  String get walletDashboardQuickActions => '快速操作';
+
+  @override
+  String get walletDashboardDonationHistory => '捐款历史';
+
+  @override
+  String get walletDashboardDonationHistorySubtitle => '查看您所有的捐款交易';
+
+  @override
+  String get walletDashboardMyCampaigns => '我的活动';
+
+  @override
+  String get walletDashboardMyCampaignsSubtitle => '管理您的筹款活动';
+
+  @override
+  String get walletDashboardMyDonations => '我的捐款';
+
+  @override
+  String get walletDashboardMyDonationsSubtitle => '跟踪您的贡献';
+
+  @override
+  String get walletDashboardAnalytics => '分析';
+
+  @override
+  String get walletDashboardAnalyticsSubtitle => '查看洞察和统计';
+
+  @override
+  String get walletDashboardRecentActivity => '最近活动';
+
+  @override
+  String get walletDashboardNoActivity => '还没有活动';
+
+  @override
+  String get walletDashboardNoActivitySubtitle => '您的钱包交易将显示在这里';
+
+  @override
+  String get walletDashboardUnderDevelopmentTitle => '开发中';
+
+  @override
+  String get walletDashboardUnderDevelopmentMessage => '此功能目前正在开发中，将很快提供。';
+
+  @override
+  String get walletDashboardUnderDevelopmentButton => '确定';
 
   @override
   String get settingsPersonalizationTitle => '个性化';
@@ -519,6 +582,96 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get settingsHeroReviewButton => '查看';
+
+  @override
+  String get settingsHeroAccountType => '个人账户';
+
+  @override
+  String get settingsHeroAccountTypeSubtitle => '点击查看账户类型详情';
+
+  @override
+  String get accountTypeScreenTitle => '账户类型';
+
+  @override
+  String get accountTypeScreenCurrentType => '当前账户类型';
+
+  @override
+  String get accountTypeScreenPersonal => '个人账户';
+
+  @override
+  String get accountTypeScreenPersonalDescription => '适合想要与朋友和家人联系的个人用户。';
+
+  @override
+  String get accountTypeScreenPersonalBenefitsTitle => '个人账户优势';
+
+  @override
+  String get accountTypeScreenBenefit1Title => '个人资料';
+
+  @override
+  String get accountTypeScreenBenefit1Subtitle => '维护个人身份和隐私';
+
+  @override
+  String get accountTypeScreenBenefit2Title => '隐私控制';
+
+  @override
+  String get accountTypeScreenBenefit2Subtitle => '完全控制您的个人数据';
+
+  @override
+  String get accountTypeScreenBenefit3Title => '社交连接';
+
+  @override
+  String get accountTypeScreenBenefit3Subtitle => '轻松联系朋友和家人';
+
+  @override
+  String get accountTypeScreenOrganization => '组织账户';
+
+  @override
+  String get accountTypeScreenOrganizationDescription => '升级到组织账户以获取高级商务功能和验证。';
+
+  @override
+  String get accountTypeScreenOrganizationBenefitsTitle => '组织优势：';
+
+  @override
+  String get accountTypeScreenOrgBenefit1 => '验证徽章以证明真实性';
+
+  @override
+  String get accountTypeScreenOrgBenefit2 => '高级分析和洞察';
+
+  @override
+  String get accountTypeScreenOrgBenefit3 => '促销工具和活动';
+
+  @override
+  String get accountTypeScreenOrgBenefit4 => '团队协作功能';
+
+  @override
+  String get accountTypeScreenUpgradeButton => '升级到组织';
+
+  @override
+  String get accountTypeScreenVerificationTitle => '账户验证';
+
+  @override
+  String get accountTypeScreenVerificationSubtitle => '要升级到组织账户，请完成验证过程。';
+
+  @override
+  String get accountTypeScreenVerificationStep1 => '身份证照片';
+
+  @override
+  String get accountTypeScreenVerificationStep1Subtitle => '拍摄清晰的身份证照片';
+
+  @override
+  String get accountTypeScreenVerificationStep2 => '自拍照片';
+
+  @override
+  String get accountTypeScreenVerificationStep2Subtitle => '手持身份证自拍';
+
+  @override
+  String get accountTypeScreenVerificationSubmit => '提交验证';
+
+  @override
+  String get accountTypeScreenVerificationCancel => '取消';
+
+  @override
+  String get accountTypeScreenVerificationSuccess => '验证提交成功！1-3个工作日内审核您的请求。';
 
   @override
   String get settingsSearchProfiles => '个人资料';
@@ -624,6 +777,9 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String get settingsProfileInfoSyncDescription =>
       'Your name and username will no longer sync across apps. Manage synced profile pictures through Connected experiences.';
+
+  @override
+  String get settingsProfileAccountSectionTitle => '账户';
 
   @override
   String get settingsProfileAccountTypeTitle => 'Account type';

@@ -390,7 +390,8 @@ class _SocialButton extends StatelessWidget {
   const _SocialButton({
     required this.icon,
     required this.label,
-    required this.color
+    required this.color,
+    this.onTap,
   });
 
   final IconData icon;
