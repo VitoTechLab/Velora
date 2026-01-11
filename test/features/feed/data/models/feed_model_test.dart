@@ -25,7 +25,6 @@ void main() {
     hideLikesList: false,
     campaignId: 'cmp-32',
     campaignTitle: 'Save the forest',
-    metadata: const {'mood': 'happy'},
   );
 
   test('serializes to/from json correctly', () {

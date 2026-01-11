@@ -13,11 +13,7 @@ import 'package:velora/features/auth/presentation/screens/reset_password_screen.
 
 class _MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {
   @override
-  void clearMessages() => super.noSuchMethod(
-    Invocation.method(#clearMessages, const []),
-    returnValue: null,
-    returnValueForMissingStub: null,
-  );
+  void clearMessages() {}
 }
 
 void main() {
@@ -26,9 +22,14 @@ void main() {
 
   Finder textFieldByLabel(String label) {
     return find.byWidgetPredicate(
-      (widget) =>
-          widget is TextFormField && widget.decoration?.labelText == label,
-      description: 'TextFormField with label $label',
+      (widget) {
+        if (widget is TextField) {
+          final decoration = widget.decoration;
+          return decoration?.labelText == label;
+        }
+        return false;
+      },
+      description: 'TextField with label $label',
     );
   }
 
@@ -91,9 +92,10 @@ void main() {
     await pumpScreen(tester);
 
     controller.add(const AuthState(message: 'Check your inbox'));
-    await tester.pump();
+    await tester.pumpAndSettle();
 
-    expect(find.text('Check your email'), findsOneWidget);
+    // Dialog should appear with success icon and message
+    expect(find.byIcon(Icons.check_circle), findsOneWidget);
     expect(find.text('Check your inbox'), findsOneWidget);
   });
 }

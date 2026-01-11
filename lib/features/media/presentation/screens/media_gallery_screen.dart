@@ -445,6 +445,6 @@ class MediaGalleryScreen extends HookWidget {
     padding: const EdgeInsets.all(4),
     physics: const NeverScrollableScrollPhysics(),
     itemCount: 21,
-    itemBuilder: (_, _) => const MediaSkeletonTile(),
+    itemBuilder: (_, __) => const MediaSkeletonTile(),
   );
 }

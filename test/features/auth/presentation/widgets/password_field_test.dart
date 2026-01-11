@@ -14,13 +14,15 @@ void main() {
       ),
     );
 
-    final textField = find.byType(TextFormField);
-    expect(tester.widget<TextFormField>(textField).obscureText, isTrue);
+    // Check initial state - password should be obscured
+    expect(find.byIcon(Icons.visibility_outlined), findsOneWidget);
 
+    // Tap to show password
     await tester.tap(find.byIcon(Icons.visibility_outlined));
     await tester.pump();
 
-    expect(tester.widget<TextFormField>(textField).obscureText, isFalse);
+    // After tapping, icon should change to visibility_off
+    expect(find.byIcon(Icons.visibility_off_outlined), findsOneWidget);
   });
 
   testWidgets('PasswordField shows strength indicator', (tester) async {

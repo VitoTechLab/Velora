@@ -6,8 +6,9 @@ part of 'follow_request_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_FollowRequestModel _$FollowRequestModelFromJson(Map<String, dynamic> json) =>
-    _FollowRequestModel(
+_$FollowRequestModelImpl _$$FollowRequestModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$FollowRequestModelImpl(
       requesterId: json['requester_id'] as String,
       targetId: json['target_id'] as String,
       createdAt: const UtcDateTimeConverter().fromJson(json['created_at']),
@@ -20,7 +21,8 @@ _FollowRequestModel _$FollowRequestModelFromJson(Map<String, dynamic> json) =>
       targetFullName: json['target_full_name'] as String?,
     );
 
-Map<String, dynamic> _$FollowRequestModelToJson(_FollowRequestModel instance) =>
+Map<String, dynamic> _$$FollowRequestModelImplToJson(
+        _$FollowRequestModelImpl instance) =>
     <String, dynamic>{
       'requester_id': instance.requesterId,
       'target_id': instance.targetId,

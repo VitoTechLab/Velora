@@ -6,8 +6,9 @@ part of 'chat_message_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_ChatMessageModel _$ChatMessageModelFromJson(Map<String, dynamic> json) =>
-    _ChatMessageModel(
+_$ChatMessageModelImpl _$$ChatMessageModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ChatMessageModelImpl(
       id: json['id'] as String,
       conversationId: json['conversation_id'] as String,
       senderId: json['sender_id'] as String?,
@@ -21,7 +22,8 @@ _ChatMessageModel _$ChatMessageModelFromJson(Map<String, dynamic> json) =>
       updatedAt: const UtcDateTimeConverter().fromJson(json['updated_at']),
     );
 
-Map<String, dynamic> _$ChatMessageModelToJson(_ChatMessageModel instance) =>
+Map<String, dynamic> _$$ChatMessageModelImplToJson(
+        _$ChatMessageModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'conversation_id': instance.conversationId,
@@ -30,13 +32,9 @@ Map<String, dynamic> _$ChatMessageModelToJson(_ChatMessageModel instance) =>
       'body': instance.body,
       'reply_to_message_id': instance.replyToMessageId,
       'edited_at': _$JsonConverterToJson<Object?, DateTime>(
-        instance.editedAt,
-        const UtcDateTimeConverter().toJson,
-      ),
+          instance.editedAt, const UtcDateTimeConverter().toJson),
       'deleted_at': _$JsonConverterToJson<Object?, DateTime>(
-        instance.deletedAt,
-        const UtcDateTimeConverter().toJson,
-      ),
+          instance.deletedAt, const UtcDateTimeConverter().toJson),
       'deleted_by': instance.deletedBy,
       'created_at': const UtcDateTimeConverter().toJson(instance.createdAt),
       'updated_at': const UtcDateTimeConverter().toJson(instance.updatedAt),
@@ -45,4 +43,5 @@ Map<String, dynamic> _$ChatMessageModelToJson(_ChatMessageModel instance) =>
 Json? _$JsonConverterToJson<Json, Value>(
   Value? value,
   Json? Function(Value value) toJson,
-) => value == null ? null : toJson(value);
+) =>
+    value == null ? null : toJson(value);

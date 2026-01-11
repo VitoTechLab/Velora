@@ -6,8 +6,9 @@ part of 'blocked_user_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_BlockedUserModel _$BlockedUserModelFromJson(Map<String, dynamic> json) =>
-    _BlockedUserModel(
+_$BlockedUserModelImpl _$$BlockedUserModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$BlockedUserModelImpl(
       blockerId: json['blocker_id'] as String,
       blockedId: json['blocked_id'] as String,
       createdAt: const UtcDateTimeConverter().fromJson(json['created_at']),
@@ -16,7 +17,8 @@ _BlockedUserModel _$BlockedUserModelFromJson(Map<String, dynamic> json) =>
       blockedFullName: json['blocked_full_name'] as String?,
     );
 
-Map<String, dynamic> _$BlockedUserModelToJson(_BlockedUserModel instance) =>
+Map<String, dynamic> _$$BlockedUserModelImplToJson(
+        _$BlockedUserModelImpl instance) =>
     <String, dynamic>{
       'blocker_id': instance.blockerId,
       'blocked_id': instance.blockedId,

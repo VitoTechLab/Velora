@@ -6,8 +6,9 @@ part of 'user_profile_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_UserProfileModel _$UserProfileModelFromJson(Map<String, dynamic> json) =>
-    _UserProfileModel(
+_$UserProfileModelImpl _$$UserProfileModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$UserProfileModelImpl(
       id: json['id'] as String,
       email: json['email'] as String,
       username: json['username'] as String,
@@ -26,7 +27,8 @@ _UserProfileModel _$UserProfileModelFromJson(Map<String, dynamic> json) =>
       theyBlockedMe: json['they_blocked_me'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$UserProfileModelToJson(_UserProfileModel instance) =>
+Map<String, dynamic> _$$UserProfileModelImplToJson(
+        _$UserProfileModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'email': instance.email,

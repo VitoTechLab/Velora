@@ -1,5 +1,5 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,299 +9,215 @@ part of 'chat_message_pagination_result.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+
 /// @nodoc
 mixin _$ChatMessagePaginationResult {
+  List<ChatMessageEntity> get messages => throw _privateConstructorUsedError;
+  bool get hasMore => throw _privateConstructorUsedError;
+  MessageCursorEntity? get cursor => throw _privateConstructorUsedError;
 
- List<ChatMessageEntity> get messages; bool get hasMore; MessageCursorEntity? get cursor;
-/// Create a copy of ChatMessagePaginationResult
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$ChatMessagePaginationResultCopyWith<ChatMessagePaginationResult> get copyWith => _$ChatMessagePaginationResultCopyWithImpl<ChatMessagePaginationResult>(this as ChatMessagePaginationResult, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatMessagePaginationResult&&const DeepCollectionEquality().equals(other.messages, messages)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.cursor, cursor) || other.cursor == cursor));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(messages),hasMore,cursor);
-
-@override
-String toString() {
-  return 'ChatMessagePaginationResult(messages: $messages, hasMore: $hasMore, cursor: $cursor)';
-}
-
-
+  /// Create a copy of ChatMessagePaginationResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $ChatMessagePaginationResultCopyWith<ChatMessagePaginationResult>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract mixin class $ChatMessagePaginationResultCopyWith<$Res>  {
-  factory $ChatMessagePaginationResultCopyWith(ChatMessagePaginationResult value, $Res Function(ChatMessagePaginationResult) _then) = _$ChatMessagePaginationResultCopyWithImpl;
-@useResult
-$Res call({
- List<ChatMessageEntity> messages, bool hasMore, MessageCursorEntity? cursor
-});
+abstract class $ChatMessagePaginationResultCopyWith<$Res> {
+  factory $ChatMessagePaginationResultCopyWith(
+          ChatMessagePaginationResult value,
+          $Res Function(ChatMessagePaginationResult) then) =
+      _$ChatMessagePaginationResultCopyWithImpl<$Res,
+          ChatMessagePaginationResult>;
+  @useResult
+  $Res call(
+      {List<ChatMessageEntity> messages,
+      bool hasMore,
+      MessageCursorEntity? cursor});
 
-
-$MessageCursorEntityCopyWith<$Res>? get cursor;
-
+  $MessageCursorEntityCopyWith<$Res>? get cursor;
 }
+
 /// @nodoc
-class _$ChatMessagePaginationResultCopyWithImpl<$Res>
+class _$ChatMessagePaginationResultCopyWithImpl<$Res,
+        $Val extends ChatMessagePaginationResult>
     implements $ChatMessagePaginationResultCopyWith<$Res> {
-  _$ChatMessagePaginationResultCopyWithImpl(this._self, this._then);
+  _$ChatMessagePaginationResultCopyWithImpl(this._value, this._then);
 
-  final ChatMessagePaginationResult _self;
-  final $Res Function(ChatMessagePaginationResult) _then;
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
-/// Create a copy of ChatMessagePaginationResult
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? messages = null,Object? hasMore = null,Object? cursor = freezed,}) {
-  return _then(_self.copyWith(
-messages: null == messages ? _self.messages : messages // ignore: cast_nullable_to_non_nullable
-as List<ChatMessageEntity>,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
-as bool,cursor: freezed == cursor ? _self.cursor : cursor // ignore: cast_nullable_to_non_nullable
-as MessageCursorEntity?,
-  ));
-}
-/// Create a copy of ChatMessagePaginationResult
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$MessageCursorEntityCopyWith<$Res>? get cursor {
-    if (_self.cursor == null) {
-    return null;
+  /// Create a copy of ChatMessagePaginationResult
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? messages = null,
+    Object? hasMore = null,
+    Object? cursor = freezed,
+  }) {
+    return _then(_value.copyWith(
+      messages: null == messages
+          ? _value.messages
+          : messages // ignore: cast_nullable_to_non_nullable
+              as List<ChatMessageEntity>,
+      hasMore: null == hasMore
+          ? _value.hasMore
+          : hasMore // ignore: cast_nullable_to_non_nullable
+              as bool,
+      cursor: freezed == cursor
+          ? _value.cursor
+          : cursor // ignore: cast_nullable_to_non_nullable
+              as MessageCursorEntity?,
+    ) as $Val);
   }
 
-  return $MessageCursorEntityCopyWith<$Res>(_self.cursor!, (value) {
-    return _then(_self.copyWith(cursor: value));
-  });
-}
-}
+  /// Create a copy of ChatMessagePaginationResult
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $MessageCursorEntityCopyWith<$Res>? get cursor {
+    if (_value.cursor == null) {
+      return null;
+    }
 
-
-/// Adds pattern-matching-related methods to [ChatMessagePaginationResult].
-extension ChatMessagePaginationResultPatterns on ChatMessagePaginationResult {
-/// A variant of `map` that fallback to returning `orElse`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ChatMessagePaginationResult value)?  $default,{required TResult orElse(),}){
-final _that = this;
-switch (_that) {
-case _ChatMessagePaginationResult() when $default != null:
-return $default(_that);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// Callbacks receives the raw object, upcasted.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case final Subclass2 value:
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ChatMessagePaginationResult value)  $default,){
-final _that = this;
-switch (_that) {
-case _ChatMessagePaginationResult():
-return $default(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `map` that fallback to returning `null`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ChatMessagePaginationResult value)?  $default,){
-final _that = this;
-switch (_that) {
-case _ChatMessagePaginationResult() when $default != null:
-return $default(_that);case _:
-  return null;
-
-}
-}
-/// A variant of `when` that fallback to an `orElse` callback.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<ChatMessageEntity> messages,  bool hasMore,  MessageCursorEntity? cursor)?  $default,{required TResult orElse(),}) {final _that = this;
-switch (_that) {
-case _ChatMessagePaginationResult() when $default != null:
-return $default(_that.messages,_that.hasMore,_that.cursor);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// As opposed to `map`, this offers destructuring.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case Subclass2(:final field2):
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<ChatMessageEntity> messages,  bool hasMore,  MessageCursorEntity? cursor)  $default,) {final _that = this;
-switch (_that) {
-case _ChatMessagePaginationResult():
-return $default(_that.messages,_that.hasMore,_that.cursor);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `when` that fallback to returning `null`
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<ChatMessageEntity> messages,  bool hasMore,  MessageCursorEntity? cursor)?  $default,) {final _that = this;
-switch (_that) {
-case _ChatMessagePaginationResult() when $default != null:
-return $default(_that.messages,_that.hasMore,_that.cursor);case _:
-  return null;
-
-}
+    return $MessageCursorEntityCopyWith<$Res>(_value.cursor!, (value) {
+      return _then(_value.copyWith(cursor: value) as $Val);
+    });
+  }
 }
 
+/// @nodoc
+abstract class _$$ChatMessagePaginationResultImplCopyWith<$Res>
+    implements $ChatMessagePaginationResultCopyWith<$Res> {
+  factory _$$ChatMessagePaginationResultImplCopyWith(
+          _$ChatMessagePaginationResultImpl value,
+          $Res Function(_$ChatMessagePaginationResultImpl) then) =
+      __$$ChatMessagePaginationResultImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {List<ChatMessageEntity> messages,
+      bool hasMore,
+      MessageCursorEntity? cursor});
+
+  @override
+  $MessageCursorEntityCopyWith<$Res>? get cursor;
+}
+
+/// @nodoc
+class __$$ChatMessagePaginationResultImplCopyWithImpl<$Res>
+    extends _$ChatMessagePaginationResultCopyWithImpl<$Res,
+        _$ChatMessagePaginationResultImpl>
+    implements _$$ChatMessagePaginationResultImplCopyWith<$Res> {
+  __$$ChatMessagePaginationResultImplCopyWithImpl(
+      _$ChatMessagePaginationResultImpl _value,
+      $Res Function(_$ChatMessagePaginationResultImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatMessagePaginationResult
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? messages = null,
+    Object? hasMore = null,
+    Object? cursor = freezed,
+  }) {
+    return _then(_$ChatMessagePaginationResultImpl(
+      messages: null == messages
+          ? _value._messages
+          : messages // ignore: cast_nullable_to_non_nullable
+              as List<ChatMessageEntity>,
+      hasMore: null == hasMore
+          ? _value.hasMore
+          : hasMore // ignore: cast_nullable_to_non_nullable
+              as bool,
+      cursor: freezed == cursor
+          ? _value.cursor
+          : cursor // ignore: cast_nullable_to_non_nullable
+              as MessageCursorEntity?,
+    ));
+  }
 }
 
 /// @nodoc
 
+class _$ChatMessagePaginationResultImpl
+    implements _ChatMessagePaginationResult {
+  const _$ChatMessagePaginationResultImpl(
+      {required final List<ChatMessageEntity> messages,
+      required this.hasMore,
+      this.cursor})
+      : _messages = messages;
 
-class _ChatMessagePaginationResult implements ChatMessagePaginationResult {
-  const _ChatMessagePaginationResult({required final  List<ChatMessageEntity> messages, required this.hasMore, this.cursor}): _messages = messages;
-  
-
- final  List<ChatMessageEntity> _messages;
-@override List<ChatMessageEntity> get messages {
-  if (_messages is EqualUnmodifiableListView) return _messages;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_messages);
-}
-
-@override final  bool hasMore;
-@override final  MessageCursorEntity? cursor;
-
-/// Create a copy of ChatMessagePaginationResult
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$ChatMessagePaginationResultCopyWith<_ChatMessagePaginationResult> get copyWith => __$ChatMessagePaginationResultCopyWithImpl<_ChatMessagePaginationResult>(this, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatMessagePaginationResult&&const DeepCollectionEquality().equals(other._messages, _messages)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.cursor, cursor) || other.cursor == cursor));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_messages),hasMore,cursor);
-
-@override
-String toString() {
-  return 'ChatMessagePaginationResult(messages: $messages, hasMore: $hasMore, cursor: $cursor)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class _$ChatMessagePaginationResultCopyWith<$Res> implements $ChatMessagePaginationResultCopyWith<$Res> {
-  factory _$ChatMessagePaginationResultCopyWith(_ChatMessagePaginationResult value, $Res Function(_ChatMessagePaginationResult) _then) = __$ChatMessagePaginationResultCopyWithImpl;
-@override @useResult
-$Res call({
- List<ChatMessageEntity> messages, bool hasMore, MessageCursorEntity? cursor
-});
-
-
-@override $MessageCursorEntityCopyWith<$Res>? get cursor;
-
-}
-/// @nodoc
-class __$ChatMessagePaginationResultCopyWithImpl<$Res>
-    implements _$ChatMessagePaginationResultCopyWith<$Res> {
-  __$ChatMessagePaginationResultCopyWithImpl(this._self, this._then);
-
-  final _ChatMessagePaginationResult _self;
-  final $Res Function(_ChatMessagePaginationResult) _then;
-
-/// Create a copy of ChatMessagePaginationResult
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? messages = null,Object? hasMore = null,Object? cursor = freezed,}) {
-  return _then(_ChatMessagePaginationResult(
-messages: null == messages ? _self._messages : messages // ignore: cast_nullable_to_non_nullable
-as List<ChatMessageEntity>,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
-as bool,cursor: freezed == cursor ? _self.cursor : cursor // ignore: cast_nullable_to_non_nullable
-as MessageCursorEntity?,
-  ));
-}
-
-/// Create a copy of ChatMessagePaginationResult
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$MessageCursorEntityCopyWith<$Res>? get cursor {
-    if (_self.cursor == null) {
-    return null;
+  final List<ChatMessageEntity> _messages;
+  @override
+  List<ChatMessageEntity> get messages {
+    if (_messages is EqualUnmodifiableListView) return _messages;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_messages);
   }
 
-  return $MessageCursorEntityCopyWith<$Res>(_self.cursor!, (value) {
-    return _then(_self.copyWith(cursor: value));
-  });
-}
+  @override
+  final bool hasMore;
+  @override
+  final MessageCursorEntity? cursor;
+
+  @override
+  String toString() {
+    return 'ChatMessagePaginationResult(messages: $messages, hasMore: $hasMore, cursor: $cursor)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ChatMessagePaginationResultImpl &&
+            const DeepCollectionEquality().equals(other._messages, _messages) &&
+            (identical(other.hasMore, hasMore) || other.hasMore == hasMore) &&
+            (identical(other.cursor, cursor) || other.cursor == cursor));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_messages), hasMore, cursor);
+
+  /// Create a copy of ChatMessagePaginationResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ChatMessagePaginationResultImplCopyWith<_$ChatMessagePaginationResultImpl>
+      get copyWith => __$$ChatMessagePaginationResultImplCopyWithImpl<
+          _$ChatMessagePaginationResultImpl>(this, _$identity);
 }
 
-// dart format on
+abstract class _ChatMessagePaginationResult
+    implements ChatMessagePaginationResult {
+  const factory _ChatMessagePaginationResult(
+      {required final List<ChatMessageEntity> messages,
+      required final bool hasMore,
+      final MessageCursorEntity? cursor}) = _$ChatMessagePaginationResultImpl;
+
+  @override
+  List<ChatMessageEntity> get messages;
+  @override
+  bool get hasMore;
+  @override
+  MessageCursorEntity? get cursor;
+
+  /// Create a copy of ChatMessagePaginationResult
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ChatMessagePaginationResultImplCopyWith<_$ChatMessagePaginationResultImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}

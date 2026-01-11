@@ -6,14 +6,16 @@ part of 'auth_session_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_AuthSessionModel _$AuthSessionModelFromJson(Map<String, dynamic> json) =>
-    _AuthSessionModel(
+_$AuthSessionModelImpl _$$AuthSessionModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$AuthSessionModelImpl(
       userId: json['userId'] as String,
       email: json['email'] as String?,
       emailVerified: json['emailVerified'] as bool,
     );
 
-Map<String, dynamic> _$AuthSessionModelToJson(_AuthSessionModel instance) =>
+Map<String, dynamic> _$$AuthSessionModelImplToJson(
+        _$AuthSessionModelImpl instance) =>
     <String, dynamic>{
       'userId': instance.userId,
       'email': instance.email,

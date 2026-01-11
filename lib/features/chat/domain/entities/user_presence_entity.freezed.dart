@@ -1,5 +1,5 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,269 +9,174 @@ part of 'user_presence_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+
 /// @nodoc
 mixin _$UserPresenceEntity {
+  String get userId => throw _privateConstructorUsedError;
+  bool get isOnline => throw _privateConstructorUsedError;
+  DateTime? get lastSeenAt => throw _privateConstructorUsedError;
 
- String get userId; bool get isOnline; DateTime? get lastSeenAt;
-/// Create a copy of UserPresenceEntity
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$UserPresenceEntityCopyWith<UserPresenceEntity> get copyWith => _$UserPresenceEntityCopyWithImpl<UserPresenceEntity>(this as UserPresenceEntity, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserPresenceEntity&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.isOnline, isOnline) || other.isOnline == isOnline)&&(identical(other.lastSeenAt, lastSeenAt) || other.lastSeenAt == lastSeenAt));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,userId,isOnline,lastSeenAt);
-
-@override
-String toString() {
-  return 'UserPresenceEntity(userId: $userId, isOnline: $isOnline, lastSeenAt: $lastSeenAt)';
-}
-
-
+  /// Create a copy of UserPresenceEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $UserPresenceEntityCopyWith<UserPresenceEntity> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract mixin class $UserPresenceEntityCopyWith<$Res>  {
-  factory $UserPresenceEntityCopyWith(UserPresenceEntity value, $Res Function(UserPresenceEntity) _then) = _$UserPresenceEntityCopyWithImpl;
-@useResult
-$Res call({
- String userId, bool isOnline, DateTime? lastSeenAt
-});
-
-
-
-
+abstract class $UserPresenceEntityCopyWith<$Res> {
+  factory $UserPresenceEntityCopyWith(
+          UserPresenceEntity value, $Res Function(UserPresenceEntity) then) =
+      _$UserPresenceEntityCopyWithImpl<$Res, UserPresenceEntity>;
+  @useResult
+  $Res call({String userId, bool isOnline, DateTime? lastSeenAt});
 }
+
 /// @nodoc
-class _$UserPresenceEntityCopyWithImpl<$Res>
+class _$UserPresenceEntityCopyWithImpl<$Res, $Val extends UserPresenceEntity>
     implements $UserPresenceEntityCopyWith<$Res> {
-  _$UserPresenceEntityCopyWithImpl(this._self, this._then);
+  _$UserPresenceEntityCopyWithImpl(this._value, this._then);
 
-  final UserPresenceEntity _self;
-  final $Res Function(UserPresenceEntity) _then;
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
-/// Create a copy of UserPresenceEntity
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? userId = null,Object? isOnline = null,Object? lastSeenAt = freezed,}) {
-  return _then(_self.copyWith(
-userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
-as String,isOnline: null == isOnline ? _self.isOnline : isOnline // ignore: cast_nullable_to_non_nullable
-as bool,lastSeenAt: freezed == lastSeenAt ? _self.lastSeenAt : lastSeenAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,
-  ));
+  /// Create a copy of UserPresenceEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = null,
+    Object? isOnline = null,
+    Object? lastSeenAt = freezed,
+  }) {
+    return _then(_value.copyWith(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      isOnline: null == isOnline
+          ? _value.isOnline
+          : isOnline // ignore: cast_nullable_to_non_nullable
+              as bool,
+      lastSeenAt: freezed == lastSeenAt
+          ? _value.lastSeenAt
+          : lastSeenAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
+  }
 }
 
+/// @nodoc
+abstract class _$$UserPresenceEntityImplCopyWith<$Res>
+    implements $UserPresenceEntityCopyWith<$Res> {
+  factory _$$UserPresenceEntityImplCopyWith(_$UserPresenceEntityImpl value,
+          $Res Function(_$UserPresenceEntityImpl) then) =
+      __$$UserPresenceEntityImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String userId, bool isOnline, DateTime? lastSeenAt});
 }
 
+/// @nodoc
+class __$$UserPresenceEntityImplCopyWithImpl<$Res>
+    extends _$UserPresenceEntityCopyWithImpl<$Res, _$UserPresenceEntityImpl>
+    implements _$$UserPresenceEntityImplCopyWith<$Res> {
+  __$$UserPresenceEntityImplCopyWithImpl(_$UserPresenceEntityImpl _value,
+      $Res Function(_$UserPresenceEntityImpl) _then)
+      : super(_value, _then);
 
-/// Adds pattern-matching-related methods to [UserPresenceEntity].
-extension UserPresenceEntityPatterns on UserPresenceEntity {
-/// A variant of `map` that fallback to returning `orElse`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _UserPresenceEntity value)?  $default,{required TResult orElse(),}){
-final _that = this;
-switch (_that) {
-case _UserPresenceEntity() when $default != null:
-return $default(_that);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// Callbacks receives the raw object, upcasted.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case final Subclass2 value:
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _UserPresenceEntity value)  $default,){
-final _that = this;
-switch (_that) {
-case _UserPresenceEntity():
-return $default(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `map` that fallback to returning `null`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _UserPresenceEntity value)?  $default,){
-final _that = this;
-switch (_that) {
-case _UserPresenceEntity() when $default != null:
-return $default(_that);case _:
-  return null;
-
-}
-}
-/// A variant of `when` that fallback to an `orElse` callback.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String userId,  bool isOnline,  DateTime? lastSeenAt)?  $default,{required TResult orElse(),}) {final _that = this;
-switch (_that) {
-case _UserPresenceEntity() when $default != null:
-return $default(_that.userId,_that.isOnline,_that.lastSeenAt);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// As opposed to `map`, this offers destructuring.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case Subclass2(:final field2):
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String userId,  bool isOnline,  DateTime? lastSeenAt)  $default,) {final _that = this;
-switch (_that) {
-case _UserPresenceEntity():
-return $default(_that.userId,_that.isOnline,_that.lastSeenAt);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `when` that fallback to returning `null`
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String userId,  bool isOnline,  DateTime? lastSeenAt)?  $default,) {final _that = this;
-switch (_that) {
-case _UserPresenceEntity() when $default != null:
-return $default(_that.userId,_that.isOnline,_that.lastSeenAt);case _:
-  return null;
-
-}
-}
-
+  /// Create a copy of UserPresenceEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = null,
+    Object? isOnline = null,
+    Object? lastSeenAt = freezed,
+  }) {
+    return _then(_$UserPresenceEntityImpl(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      isOnline: null == isOnline
+          ? _value.isOnline
+          : isOnline // ignore: cast_nullable_to_non_nullable
+              as bool,
+      lastSeenAt: freezed == lastSeenAt
+          ? _value.lastSeenAt
+          : lastSeenAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
+  }
 }
 
 /// @nodoc
 
+class _$UserPresenceEntityImpl implements _UserPresenceEntity {
+  const _$UserPresenceEntityImpl(
+      {required this.userId, required this.isOnline, this.lastSeenAt});
 
-class _UserPresenceEntity implements UserPresenceEntity {
-  const _UserPresenceEntity({required this.userId, required this.isOnline, this.lastSeenAt});
-  
+  @override
+  final String userId;
+  @override
+  final bool isOnline;
+  @override
+  final DateTime? lastSeenAt;
 
-@override final  String userId;
-@override final  bool isOnline;
-@override final  DateTime? lastSeenAt;
+  @override
+  String toString() {
+    return 'UserPresenceEntity(userId: $userId, isOnline: $isOnline, lastSeenAt: $lastSeenAt)';
+  }
 
-/// Create a copy of UserPresenceEntity
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$UserPresenceEntityCopyWith<_UserPresenceEntity> get copyWith => __$UserPresenceEntityCopyWithImpl<_UserPresenceEntity>(this, _$identity);
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UserPresenceEntityImpl &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.isOnline, isOnline) ||
+                other.isOnline == isOnline) &&
+            (identical(other.lastSeenAt, lastSeenAt) ||
+                other.lastSeenAt == lastSeenAt));
+  }
 
+  @override
+  int get hashCode => Object.hash(runtimeType, userId, isOnline, lastSeenAt);
 
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserPresenceEntity&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.isOnline, isOnline) || other.isOnline == isOnline)&&(identical(other.lastSeenAt, lastSeenAt) || other.lastSeenAt == lastSeenAt));
+  /// Create a copy of UserPresenceEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UserPresenceEntityImplCopyWith<_$UserPresenceEntityImpl> get copyWith =>
+      __$$UserPresenceEntityImplCopyWithImpl<_$UserPresenceEntityImpl>(
+          this, _$identity);
 }
 
+abstract class _UserPresenceEntity implements UserPresenceEntity {
+  const factory _UserPresenceEntity(
+      {required final String userId,
+      required final bool isOnline,
+      final DateTime? lastSeenAt}) = _$UserPresenceEntityImpl;
 
-@override
-int get hashCode => Object.hash(runtimeType,userId,isOnline,lastSeenAt);
+  @override
+  String get userId;
+  @override
+  bool get isOnline;
+  @override
+  DateTime? get lastSeenAt;
 
-@override
-String toString() {
-  return 'UserPresenceEntity(userId: $userId, isOnline: $isOnline, lastSeenAt: $lastSeenAt)';
+  /// Create a copy of UserPresenceEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UserPresenceEntityImplCopyWith<_$UserPresenceEntityImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
-
-
-}
-
-/// @nodoc
-abstract mixin class _$UserPresenceEntityCopyWith<$Res> implements $UserPresenceEntityCopyWith<$Res> {
-  factory _$UserPresenceEntityCopyWith(_UserPresenceEntity value, $Res Function(_UserPresenceEntity) _then) = __$UserPresenceEntityCopyWithImpl;
-@override @useResult
-$Res call({
- String userId, bool isOnline, DateTime? lastSeenAt
-});
-
-
-
-
-}
-/// @nodoc
-class __$UserPresenceEntityCopyWithImpl<$Res>
-    implements _$UserPresenceEntityCopyWith<$Res> {
-  __$UserPresenceEntityCopyWithImpl(this._self, this._then);
-
-  final _UserPresenceEntity _self;
-  final $Res Function(_UserPresenceEntity) _then;
-
-/// Create a copy of UserPresenceEntity
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? userId = null,Object? isOnline = null,Object? lastSeenAt = freezed,}) {
-  return _then(_UserPresenceEntity(
-userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
-as String,isOnline: null == isOnline ? _self.isOnline : isOnline // ignore: cast_nullable_to_non_nullable
-as bool,lastSeenAt: freezed == lastSeenAt ? _self.lastSeenAt : lastSeenAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,
-  ));
-}
-
-
-}
-
-// dart format on

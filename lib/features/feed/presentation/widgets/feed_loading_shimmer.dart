@@ -9,7 +9,7 @@ class FeedLoadingShimmer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Semantics(
       label: AppLocalizations.of(context)!.feedLoadingLabel,
-      child: ExcludeSemantics(child: SkeletonFeedList(itemCount: 3)),
+      child: const ExcludeSemantics(child: SkeletonFeedList(itemCount: 3)),
     );
   }
 }
