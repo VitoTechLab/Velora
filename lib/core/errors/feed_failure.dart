@@ -1,10 +1,12 @@
 import 'package:velora/core/errors/exceptions.dart';
 import 'package:velora/core/errors/failure.dart';
 
+/// Feed failure types for categorizing errors
 enum FeedFailureType { network, notFound, validation, unauthenticated, unknown }
 
+/// Feed-specific failure with categorized error types
 class FeedFailure extends Failure {
-  FeedFailure({required String message, required this.type}) : super(message);
+  const FeedFailure({required String message, required this.type}) : super(message);
 
   final FeedFailureType type;
 
@@ -24,6 +26,7 @@ class FeedFailure extends Failure {
   factory FeedFailure.unknown([String message = 'Unexpected feed error']) =>
       FeedFailure(message: message, type: FeedFailureType.unknown);
 
+  /// Convert exception to categorized FeedFailure
   factory FeedFailure.fromException(Object error) {
     if (error is FeedFailure) return error;
     if (error is Failure) {

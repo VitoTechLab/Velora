@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velora/core/ui/app_messenger.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:velora/features/media/presentation/cubit/media_upload_cubit.dart';
-import 'package:velora/features/media/presentation/cubit/media_upload_state.dart';
+import 'package:velora/features/media/presentation/bloc/media_upload_bloc.dart';
+import 'package:velora/features/media/presentation/bloc/media_upload_state.dart';
 import 'package:velora/features/post/presentation/bloc/post_bloc.dart';
 import 'package:velora/features/post/presentation/bloc/post_event.dart';
 import 'package:velora/features/post/presentation/bloc/post_state.dart';
@@ -12,11 +12,11 @@ import 'package:velora/features/feed/presentation/bloc/feed_bloc.dart';
 import 'package:velora/features/feed/presentation/bloc/feed_event.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
-/// Card yang muncul di atas feed saat sedang upload post
+/// Status card displayed during post upload process
 class UploadStatusCard extends StatelessWidget {
-  final VoidCallback onComplete;
-
   const UploadStatusCard({super.key, required this.onComplete});
+
+  final VoidCallback onComplete;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class UploadStatusCard extends StatelessWidget {
     final textTheme = theme.textTheme;
     final t = AppLocalizations.of(context)!;
 
-    return BlocListener<MediaUploadCubit, MediaUploadState>(
+    return BlocListener<MediaUploadBloc, MediaUploadState>(
       listener: (context, uploadState) {
         uploadState.when(
           initial: () {},
@@ -108,7 +108,7 @@ class UploadStatusCard extends StatelessWidget {
           ),
           child: Padding(
             padding: const EdgeInsets.all(16),
-            child: BlocBuilder<MediaUploadCubit, MediaUploadState>(
+            child: BlocBuilder<MediaUploadBloc, MediaUploadState>(
               builder: (context, uploadState) {
                 return uploadState.when(
                   initial: () => _buildUploadingRow(

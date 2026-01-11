@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:velora/features/chat/domain/entities/chat_message_entity.dart';
 import 'package:velora/features/chat/domain/entities/conversation_list_entity.dart';
-import 'package:velora/features/chat/domain/entities/message_cursor.dart';
+import 'package:velora/features/chat/domain/entities/message_cursor_entity.dart';
 import 'package:velora/features/chat/domain/entities/message_read_entity.dart';
 
 part 'chat_message_state.freezed.dart';

@@ -5,16 +5,24 @@ import 'package:velora/features/notification/data/datasources/notification_remot
 import 'package:velora/features/notification/data/models/notification_cursor_model.dart';
 import 'package:velora/features/notification/domain/entities/notification_cursor_entity.dart';
 import 'package:velora/features/notification/domain/entities/notification_entity.dart';
-import 'package:velora/features/notification/domain/entities/notification_pagination_result.dart';
+import 'package:velora/features/notification/domain/entities/notification_pagination_result_entity.dart';
 import 'package:velora/features/notification/domain/repositories/notification_repository.dart';
 
+/// Repository implementation for notification operations
+/// 
+/// Features:
+/// - Cursor-based pagination for efficient loading
+/// - Type filtering (like, comment, follow, etc.)
+/// - Realtime notification subscriptions
+/// - Time-based categorization support
 class NotificationRepositoryImpl implements NotificationRepository {
-  final NotificationRemoteDataSource remoteDataSource;
+  const NotificationRepositoryImpl({required this.remoteDataSource});
 
-  NotificationRepositoryImpl({required this.remoteDataSource});
+  final NotificationRemoteDataSource remoteDataSource;
 
   static const _logTag = 'NotificationRepository';
 
+  /// Convert NotificationType enum to database string
   String? _notificationTypeToString(NotificationType? type) {
     if (type == null) return null;
     switch (type) {
@@ -39,6 +47,7 @@ class NotificationRepositoryImpl implements NotificationRepository {
     }
   }
 
+  /// Get notifications with cursor-based pagination
   @override
   Future<Either<Failure, NotificationPaginationResult>> getNotifications({
     required int limit,
@@ -68,6 +77,7 @@ class NotificationRepositoryImpl implements NotificationRepository {
     }
   }
 
+  /// Get count of unread notifications
   @override
   Future<Either<Failure, int>> getUnreadCount() async {
     try {
@@ -84,6 +94,7 @@ class NotificationRepositoryImpl implements NotificationRepository {
     }
   }
 
+  /// Mark all notifications as read
   @override
   Future<Either<Failure, void>> markAllAsRead() async {
     try {
@@ -100,6 +111,7 @@ class NotificationRepositoryImpl implements NotificationRepository {
     }
   }
 
+  /// Mark specific notifications as read by IDs
   @override
   Future<Either<Failure, void>> markAsRead(List<String> notificationIds) async {
     try {
@@ -119,6 +131,7 @@ class NotificationRepositoryImpl implements NotificationRepository {
     }
   }
 
+  /// Delete a notification by ID
   @override
   Future<Either<Failure, void>> deleteNotification(
     String notificationId,
@@ -140,6 +153,7 @@ class NotificationRepositoryImpl implements NotificationRepository {
     }
   }
 
+  /// Watch for new notifications in realtime via Supabase subscriptions
   @override
   Stream<Either<Failure, NotificationEntity>> watchNewNotifications() async* {
     try {
@@ -151,6 +165,7 @@ class NotificationRepositoryImpl implements NotificationRepository {
     }
   }
 
+  /// Stop watching for new notifications
   @override
   Future<void> stopWatchNotifications() => remoteDataSource.stopWatch();
 }

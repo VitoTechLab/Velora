@@ -5,18 +5,20 @@ import 'package:velora/core/supabase/supabase_guard.dart';
 import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/feed/data/models/feed_model.dart';
 import 'package:velora/features/post/data/datasources/post_remote_datasource.dart';
-import 'package:velora/features/post/data/models/create_post_model.dart';
+import 'package:velora/features/post/data/models/post_feed_model.dart';
 
+/// Implementation of post remote datasource using Supabase
 class PostRemoteDataSourceImpl implements PostRemoteDataSource {
-  PostRemoteDataSourceImpl({required SupabaseClient supabaseClient})
+  const PostRemoteDataSourceImpl({required SupabaseClient supabaseClient})
     : _client = supabaseClient;
 
   final SupabaseClient _client;
 
   static const _logTag = 'PostRemoteDataSource';
 
+  /// Create new feed post and return created post data
   @override
-  Future<FeedModel> createPost(CreatePostModel payload) {
+  Future<FeedModel> createFeedPost(PostFeedModel payload) {
     return guardSupabase(
       () async {
         // Get current authenticated user
@@ -34,7 +36,7 @@ class PostRemoteDataSourceImpl implements PostRemoteDataSource {
 
         final inserted = await _client
             .from(SupabaseTables.feedPosts)
-            .insert(payload.toJson())
+            .insert(payload.toSupabaseJson())
             .select('id')
             .single();
 
@@ -52,7 +54,7 @@ class PostRemoteDataSourceImpl implements PostRemoteDataSource {
 
         return FeedModel.fromJson(response);
       },
-      op: 'createPost',
+      op: 'createFeedPost',
       tag: _logTag,
     );
   }

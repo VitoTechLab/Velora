@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$FeedPaginationModel {
 
- List<FeedModel> get posts; bool get hasMore;@JsonKey(fromJson: _feedCursorFromJson, toJson: _feedCursorToJson) FeedCursor? get nextCursor;
+ List<FeedModel> get posts; bool get hasMore;@JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) FeedCursorModel? get nextCursor;
 /// Create a copy of FeedPaginationModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,11 +48,11 @@ abstract mixin class $FeedPaginationModelCopyWith<$Res>  {
   factory $FeedPaginationModelCopyWith(FeedPaginationModel value, $Res Function(FeedPaginationModel) _then) = _$FeedPaginationModelCopyWithImpl;
 @useResult
 $Res call({
- List<FeedModel> posts, bool hasMore,@JsonKey(fromJson: _feedCursorFromJson, toJson: _feedCursorToJson) FeedCursor? nextCursor
+ List<FeedModel> posts, bool hasMore,@JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) FeedCursorModel? nextCursor
 });
 
 
-$FeedCursorCopyWith<$Res>? get nextCursor;
+$FeedCursorModelCopyWith<$Res>? get nextCursor;
 
 }
 /// @nodoc
@@ -70,19 +70,19 @@ class _$FeedPaginationModelCopyWithImpl<$Res>
 posts: null == posts ? _self.posts : posts // ignore: cast_nullable_to_non_nullable
 as List<FeedModel>,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
 as bool,nextCursor: freezed == nextCursor ? _self.nextCursor : nextCursor // ignore: cast_nullable_to_non_nullable
-as FeedCursor?,
+as FeedCursorModel?,
   ));
 }
 /// Create a copy of FeedPaginationModel
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$FeedCursorCopyWith<$Res>? get nextCursor {
+$FeedCursorModelCopyWith<$Res>? get nextCursor {
     if (_self.nextCursor == null) {
     return null;
   }
 
-  return $FeedCursorCopyWith<$Res>(_self.nextCursor!, (value) {
+  return $FeedCursorModelCopyWith<$Res>(_self.nextCursor!, (value) {
     return _then(_self.copyWith(nextCursor: value));
   });
 }
@@ -167,7 +167,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<FeedModel> posts,  bool hasMore, @JsonKey(fromJson: _feedCursorFromJson, toJson: _feedCursorToJson)  FeedCursor? nextCursor)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<FeedModel> posts,  bool hasMore, @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson)  FeedCursorModel? nextCursor)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _FeedPaginationModel() when $default != null:
 return $default(_that.posts,_that.hasMore,_that.nextCursor);case _:
@@ -188,7 +188,7 @@ return $default(_that.posts,_that.hasMore,_that.nextCursor);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<FeedModel> posts,  bool hasMore, @JsonKey(fromJson: _feedCursorFromJson, toJson: _feedCursorToJson)  FeedCursor? nextCursor)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<FeedModel> posts,  bool hasMore, @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson)  FeedCursorModel? nextCursor)  $default,) {final _that = this;
 switch (_that) {
 case _FeedPaginationModel():
 return $default(_that.posts,_that.hasMore,_that.nextCursor);case _:
@@ -208,7 +208,7 @@ return $default(_that.posts,_that.hasMore,_that.nextCursor);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<FeedModel> posts,  bool hasMore, @JsonKey(fromJson: _feedCursorFromJson, toJson: _feedCursorToJson)  FeedCursor? nextCursor)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<FeedModel> posts,  bool hasMore, @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson)  FeedCursorModel? nextCursor)?  $default,) {final _that = this;
 switch (_that) {
 case _FeedPaginationModel() when $default != null:
 return $default(_that.posts,_that.hasMore,_that.nextCursor);case _:
@@ -223,7 +223,7 @@ return $default(_that.posts,_that.hasMore,_that.nextCursor);case _:
 @JsonSerializable()
 
 class _FeedPaginationModel extends FeedPaginationModel {
-  const _FeedPaginationModel({required final  List<FeedModel> posts, required this.hasMore, @JsonKey(fromJson: _feedCursorFromJson, toJson: _feedCursorToJson) this.nextCursor}): _posts = posts,super._();
+  const _FeedPaginationModel({required final  List<FeedModel> posts, required this.hasMore, @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) this.nextCursor}): _posts = posts,super._();
   factory _FeedPaginationModel.fromJson(Map<String, dynamic> json) => _$FeedPaginationModelFromJson(json);
 
  final  List<FeedModel> _posts;
@@ -234,7 +234,7 @@ class _FeedPaginationModel extends FeedPaginationModel {
 }
 
 @override final  bool hasMore;
-@override@JsonKey(fromJson: _feedCursorFromJson, toJson: _feedCursorToJson) final  FeedCursor? nextCursor;
+@override@JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) final  FeedCursorModel? nextCursor;
 
 /// Create a copy of FeedPaginationModel
 /// with the given fields replaced by the non-null parameter values.
@@ -269,11 +269,11 @@ abstract mixin class _$FeedPaginationModelCopyWith<$Res> implements $FeedPaginat
   factory _$FeedPaginationModelCopyWith(_FeedPaginationModel value, $Res Function(_FeedPaginationModel) _then) = __$FeedPaginationModelCopyWithImpl;
 @override @useResult
 $Res call({
- List<FeedModel> posts, bool hasMore,@JsonKey(fromJson: _feedCursorFromJson, toJson: _feedCursorToJson) FeedCursor? nextCursor
+ List<FeedModel> posts, bool hasMore,@JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) FeedCursorModel? nextCursor
 });
 
 
-@override $FeedCursorCopyWith<$Res>? get nextCursor;
+@override $FeedCursorModelCopyWith<$Res>? get nextCursor;
 
 }
 /// @nodoc
@@ -291,7 +291,7 @@ class __$FeedPaginationModelCopyWithImpl<$Res>
 posts: null == posts ? _self._posts : posts // ignore: cast_nullable_to_non_nullable
 as List<FeedModel>,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
 as bool,nextCursor: freezed == nextCursor ? _self.nextCursor : nextCursor // ignore: cast_nullable_to_non_nullable
-as FeedCursor?,
+as FeedCursorModel?,
   ));
 }
 
@@ -299,12 +299,12 @@ as FeedCursor?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$FeedCursorCopyWith<$Res>? get nextCursor {
+$FeedCursorModelCopyWith<$Res>? get nextCursor {
     if (_self.nextCursor == null) {
     return null;
   }
 
-  return $FeedCursorCopyWith<$Res>(_self.nextCursor!, (value) {
+  return $FeedCursorModelCopyWith<$Res>(_self.nextCursor!, (value) {
     return _then(_self.copyWith(nextCursor: value));
   });
 }

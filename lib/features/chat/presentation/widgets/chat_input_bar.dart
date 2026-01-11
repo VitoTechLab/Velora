@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:velora/features/chat/presentation/widgets/attachment_menu_bottom_sheet.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
-class ChatInputBar extends StatefulWidget {
+/// Optimized ChatInputBar widget
+/// Uses ValueListenableBuilder to prevent unnecessary rebuilds
+/// Only rebuilds send button when text state changes
+class ChatInputBar extends StatelessWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
   final ValueChanged<String> onSendMessage;
@@ -33,31 +36,6 @@ class ChatInputBar extends StatefulWidget {
     required this.onAiImagesPressed,
     required this.onVoicePressed,
   });
-
-  @override
-  State<ChatInputBar> createState() => _ChatInputBarState();
-}
-
-class _ChatInputBarState extends State<ChatInputBar> {
-  bool _hasText = false;
-
-  @override
-  void initState() {
-    super.initState();
-    widget.controller.addListener(_onTextChanged);
-  }
-
-  @override
-  void dispose() {
-    widget.controller.removeListener(_onTextChanged);
-    super.dispose();
-  }
-
-  void _onTextChanged() {
-    setState(() {
-      _hasText = widget.controller.text.trim().isNotEmpty;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,8 +92,8 @@ class _ChatInputBarState extends State<ChatInputBar> {
                         label: t.chatInputFieldLabel,
                         hint: t.chatInputFieldHint,
                         child: TextField(
-                          controller: widget.controller,
-                          focusNode: widget.focusNode,
+                          controller: controller,
+                          focusNode: focusNode,
                           maxLines: null,
                           textInputAction: TextInputAction.newline,
                           style: textTheme.bodyMedium?.copyWith(
@@ -135,80 +113,102 @@ class _ChatInputBarState extends State<ChatInputBar> {
                         ),
                       ),
                     ),
-                    if (!_hasText) ...[
-                      Semantics(
-                        button: true,
-                        label: t.chatInputAttachLabel,
-                        hint: t.chatInputAttachHint,
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.attach_file,
-                            color: colorScheme.onSurfaceVariant,
-                          ),
-                          onPressed: () {
-                            AttachmentMenuBottomSheet.show(
-                              context,
-                              onGalleryTap: widget.onGalleryPressed,
-                              onCameraTap: widget.onCameraPressed,
-                              onLocationTap: widget.onLocationPressed,
-                              onContactTap: widget.onContactPressed,
-                              onDocumentTap: widget.onDocumentPressed,
-                              onAudioTap: widget.onAudioPressed,
-                              onPollTap: widget.onPollPressed,
-                              onEventTap: widget.onEventPressed,
-                              onAiImagesTap: widget.onAiImagesPressed,
-                            );
-                          },
-                          tooltip: t.chatInputAttachTooltip,
-                        ),
-                      ),
-                      Semantics(
-                        button: true,
-                        label: t.chatInputCameraLabel,
-                        hint: t.chatInputCameraHint,
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.camera_alt_outlined,
-                            color: colorScheme.onSurfaceVariant,
-                          ),
-                          onPressed: widget.onCameraPressed,
-                          tooltip: t.chatInputCameraTooltip,
-                          padding: const EdgeInsets.only(right: 8),
-                        ),
-                      ),
-                    ],
+                    // Use ValueListenableBuilder to only rebuild this part
+                    ValueListenableBuilder<TextEditingValue>(
+                      valueListenable: controller,
+                      builder: (context, value, child) {
+                        final hasText = value.text.trim().isNotEmpty;
+                        if (hasText) {
+                          // Show nothing when typing
+                          return const SizedBox.shrink();
+                        }
+                        // Show attach and camera buttons when empty
+                        return Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Semantics(
+                              button: true,
+                              label: t.chatInputAttachLabel,
+                              hint: t.chatInputAttachHint,
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.attach_file,
+                                  color: colorScheme.onSurfaceVariant,
+                                ),
+                                onPressed: () {
+                                  AttachmentMenuBottomSheet.show(
+                                    context,
+                                    onGalleryTap: onGalleryPressed,
+                                    onCameraTap: onCameraPressed,
+                                    onLocationTap: onLocationPressed,
+                                    onContactTap: onContactPressed,
+                                    onDocumentTap: onDocumentPressed,
+                                    onAudioTap: onAudioPressed,
+                                    onPollTap: onPollPressed,
+                                    onEventTap: onEventPressed,
+                                    onAiImagesTap: onAiImagesPressed,
+                                  );
+                                },
+                                tooltip: t.chatInputAttachTooltip,
+                              ),
+                            ),
+                            Semantics(
+                              button: true,
+                              label: t.chatInputCameraLabel,
+                              hint: t.chatInputCameraHint,
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.camera_alt_outlined,
+                                  color: colorScheme.onSurfaceVariant,
+                                ),
+                                onPressed: onCameraPressed,
+                                tooltip: t.chatInputCameraTooltip,
+                                padding: const EdgeInsets.only(right: 8),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),
             ),
             const SizedBox(width: 8),
-            Semantics(
-              button: true,
-              label: _hasText ? t.chatInputSendLabel : t.chatInputVoiceLabel,
-              hint: _hasText ? t.chatInputSendHint : t.chatInputVoiceHint,
-              child: GestureDetector(
-                onTap: _hasText
-                    ? () {
-                        final message = widget.controller.text.trim();
-                        if (message.isNotEmpty) {
-                          widget.onSendMessage(message);
-                        }
-                      }
-                    : widget.onVoicePressed,
-                child: Container(
-                  width: 48,
-                  height: 48,
-                  decoration: BoxDecoration(
-                    color: colorScheme.primary,
-                    shape: BoxShape.circle,
+            // Use ValueListenableBuilder for send/voice button
+            ValueListenableBuilder<TextEditingValue>(
+              valueListenable: controller,
+              builder: (context, value, child) {
+                final hasText = value.text.trim().isNotEmpty;
+                return Semantics(
+                  button: true,
+                  label: hasText ? t.chatInputSendLabel : t.chatInputVoiceLabel,
+                  hint: hasText ? t.chatInputSendHint : t.chatInputVoiceHint,
+                  child: GestureDetector(
+                    onTap: hasText
+                        ? () {
+                            final message = controller.text.trim();
+                            if (message.isNotEmpty) {
+                              onSendMessage(message);
+                            }
+                          }
+                        : onVoicePressed,
+                    child: Container(
+                      width: 48,
+                      height: 48,
+                      decoration: BoxDecoration(
+                        color: colorScheme.primary,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        hasText ? Icons.send : Icons.mic,
+                        color: colorScheme.onPrimary,
+                        size: 24,
+                      ),
+                    ),
                   ),
-                  child: Icon(
-                    _hasText ? Icons.send : Icons.mic,
-                    color: colorScheme.onPrimary,
-                    size: 24,
-                  ),
-                ),
-              ),
+                );
+              },
             ),
           ],
         ),

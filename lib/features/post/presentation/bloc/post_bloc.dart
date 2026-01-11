@@ -1,22 +1,24 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velora/core/utils/log_alias.dart';
-import 'package:velora/features/post/domain/usecases/create_post.dart';
+import 'package:velora/features/post/domain/usecases/create_post_feed_usecase.dart';
 import 'post_event.dart';
 import 'post_state.dart';
 
+/// BLoC for post creation operations
 class PostBloc extends Bloc<PostEvent, PostState> {
-  final CreatePost createPostUseCase;
-
-  PostBloc({required this.createPostUseCase}) : super(const PostState()) {
+  PostBloc({required this.createPostFeedUseCase}) : super(const PostState()) {
     on<CreatePostEvent>(_onCreatePost);
     on<ClearPostTransientEvent>((event, emit) {
       emit(state.copyWith(errorCreatePost: null, message: null));
     });
   }
 
+  final CreatePostFeedUseCase createPostFeedUseCase;
+
   static const _logTag = 'PostBloc';
   static const int _maxPostContentLength = 2000;
 
+  /// Validate post content length and emptiness
   String? _validatePostContent(String content) {
     final trimmed = content.trim();
     if (trimmed.isEmpty) return 'Post content cannot be empty';
@@ -26,6 +28,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     return null;
   }
 
+  /// Create new feed post with validation and error handling
   Future<void> _onCreatePost(
     CreatePostEvent event,
     Emitter<PostState> emit,
@@ -51,7 +54,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       ),
     );
 
-    final result = await createPostUseCase(
+    final result = await createPostFeedUseCase(
       userId: userId,
       content: event.content.trim(),
       imageUrls: event.imageUrls,

@@ -12,6 +12,7 @@ import 'package:velora/features/chat/presentation/bloc/chat_message_event.dart';
 import 'package:velora/features/chat/presentation/bloc/chat_message_state.dart';
 import 'package:velora/features/chat/presentation/bloc/user_presence_bloc.dart';
 import 'package:velora/features/chat/presentation/bloc/user_presence_event.dart';
+import 'package:velora/features/chat/presentation/bloc/user_presence_state.dart';
 import 'package:velora/features/chat/presentation/dialogs/create_event_dialog.dart';
 import 'package:velora/features/chat/presentation/dialogs/create_poll_dialog.dart';
 import 'package:velora/features/chat/presentation/widgets/chat_bubble_widget.dart';
@@ -285,23 +286,6 @@ class ChatDetailScreen extends HookWidget {
       theme.brightness == Brightness.dark ? 0.08 : 0.15,
     );
 
-    String presenceText = '';
-
-    if (!isGroup && peerUserId != null) {
-      final presenceState = context.watch<UserPresenceBloc>().state;
-      final isOnline = presenceState.onlineUsers[peerUserId] ?? false;
-
-      if (isOnline) {
-        presenceText = t.chatDetailStatusOnline;
-      } else {
-        // Untuk sekarang fallback ke subtitle default jika tidak ada info last seen.
-        // Nanti bisa di-wire ke PresenceRealtimeStore.lastSeenFor(peerUserId!).
-        presenceText = chatSubtitle;
-      }
-    } else {
-      presenceText = chatSubtitle;
-    }
-
     return BlocProvider(
       create: (context) => getIt<ChatMessageBloc>()
         ..add(LoadChatMessagesEvent(conversationId: conversationId))
@@ -369,14 +353,33 @@ class ChatDetailScreen extends HookWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          Text(
-                            presenceText,
-                            style: textTheme.bodySmall?.copyWith(
-                              color: colorScheme.onSurfaceVariant,
+                          // Only rebuild presence text when presence state changes
+                          if (!isGroup && peerUserId != null)
+                            BlocSelector<UserPresenceBloc, UserPresenceState, bool>(
+                              selector: (state) => state.onlineUsers[peerUserId] ?? false,
+                              builder: (context, isOnline) {
+                                final presenceText = isOnline
+                                    ? t.chatDetailStatusOnline
+                                    : chatSubtitle;
+                                return Text(
+                                  presenceText,
+                                  style: textTheme.bodySmall?.copyWith(
+                                    color: colorScheme.onSurfaceVariant,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                );
+                              },
+                            )
+                          else
+                            Text(
+                              chatSubtitle,
+                              style: textTheme.bodySmall?.copyWith(
+                                color: colorScheme.onSurfaceVariant,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
                         ],
                       ),
                     ),

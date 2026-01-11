@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:velora/core/errors/failure.dart';
 import 'package:velora/features/chat/domain/entities/chat_message_entity.dart';
-import 'package:velora/features/chat/domain/entities/chat_message_pagination_result.dart';
+import 'package:velora/features/chat/domain/entities/chat_message_pagination_result_entity.dart';
 import 'package:velora/features/chat/domain/entities/conversation_list_entity.dart';
-import 'package:velora/features/chat/domain/entities/message_cursor.dart';
+import 'package:velora/features/chat/domain/entities/message_cursor_entity.dart';
 import 'package:velora/features/chat/domain/entities/message_read_entity.dart';
 import 'package:velora/features/chat/domain/entities/user_presence_entity.dart';
 import 'package:velora/features/chat/domain/entities/user_search_entity.dart';
@@ -15,7 +15,7 @@ abstract class ChatRepository {
   // =========================================================
 
   /// Get messages in a conversation using cursor-based pagination
-  Future<Either<Failure, ChatMessagePaginationResult>> getMessages({
+  Future<Either<Failure, ChatMessagePaginationResultEntity>> getMessages({
     required String conversationId,
     required int limit,
     MessageCursorEntity? cursor,

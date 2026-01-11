@@ -35,7 +35,7 @@ class ResetPasswordScreen extends HookWidget {
     final submitResetPassword = useCallback(() {
       if (formKey.currentState?.validate() ?? false) {
         context.read<AuthBloc>().add(
-          AuthResetPasswordRequested(email: emailController.text.trim()),
+          AuthEvent.resetPassword(email: emailController.text.trim()),
         );
       }
     }, [emailController, formKey]);

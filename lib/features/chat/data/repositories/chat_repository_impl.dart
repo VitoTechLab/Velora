@@ -3,11 +3,11 @@ import 'package:velora/core/errors/chat_failure.dart';
 import 'package:velora/core/errors/failure.dart';
 import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/chat/data/datasources/chat_remote_datasource.dart';
-import 'package:velora/features/chat/data/models/message_cursor.dart';
+import 'package:velora/features/chat/data/models/message_cursor_model.dart';
 import 'package:velora/features/chat/domain/entities/chat_message_entity.dart';
-import 'package:velora/features/chat/domain/entities/chat_message_pagination_result.dart';
+import 'package:velora/features/chat/domain/entities/chat_message_pagination_result_entity.dart';
 import 'package:velora/features/chat/domain/entities/conversation_list_entity.dart';
-import 'package:velora/features/chat/domain/entities/message_cursor.dart';
+import 'package:velora/features/chat/domain/entities/message_cursor_entity.dart';
 import 'package:velora/features/chat/domain/entities/message_read_entity.dart';
 import 'package:velora/features/chat/domain/entities/user_presence_entity.dart';
 import 'package:velora/features/chat/domain/entities/user_search_entity.dart';
@@ -19,7 +19,7 @@ class ChatRepositoryImpl implements ChatRepository {
   final ChatRemoteDataSource remoteDataSource;
 
   @override
-  Future<Either<Failure, ChatMessagePaginationResult>> getMessages({
+  Future<Either<Failure, ChatMessagePaginationResultEntity>> getMessages({
     required String conversationId,
     required int limit,
     MessageCursorEntity? cursor,
@@ -31,7 +31,7 @@ class ChatRepositoryImpl implements ChatRepository {
         limit: limit,
         cursor: cursor == null
             ? null
-            : MessageCursor(createdAt: cursor.createdAt, id: cursor.id),
+            : MessageCursorModel(createdAt: cursor.createdAt, id: cursor.id),
       );
       return Right(result.toEntity());
     } catch (e) {

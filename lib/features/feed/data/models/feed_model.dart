@@ -5,6 +5,7 @@ import 'package:velora/features/feed/domain/entities/feed_entity.dart';
 part 'feed_model.freezed.dart';
 part 'feed_model.g.dart';
 
+/// Feed post data model for API responses.
 @freezed
 abstract class FeedModel with _$FeedModel {
   const FeedModel._();
@@ -13,12 +14,11 @@ abstract class FeedModel with _$FeedModel {
     @JsonKey(name: 'id') required String id,
     @JsonKey(name: 'user_id') required String userId,
     @JsonKey(name: 'content') required String content,
-
     @UtcDateTimeConverter()
     @JsonKey(name: 'created_at')
     required DateTime createdAt,
 
-    // joined from profiles (read-only)
+    // Joined from profiles (read-only)
     @JsonKey(name: 'username') String? username,
     @JsonKey(name: 'photo_url') String? photoUrl,
 
@@ -32,12 +32,12 @@ abstract class FeedModel with _$FeedModel {
     @Default([])
     List<String> videoUrls,
 
-    // counts can be masked => nullable
+    // Counts can be masked (nullable)
     @JsonKey(name: 'likes_count') int? likesCount,
     @JsonKey(name: 'comments_count') int? commentsCount,
     @JsonKey(name: 'shares_count') int? sharesCount,
 
-    // computed per viewer (read-only)
+    // Computed per viewer (read-only)
     @JsonKey(name: 'is_liked') @Default(false) bool isLiked,
     @JsonKey(name: 'is_bookmarked') @Default(false) bool isBookmarked,
     @JsonKey(name: 'is_following') @Default(false) bool isFollowing,
@@ -46,13 +46,14 @@ abstract class FeedModel with _$FeedModel {
     bool isFollowRequestPending,
     @JsonKey(name: 'is_me') @Default(false) bool isMe,
 
-    // per-post settings
+    // Post privacy settings
     @JsonKey(name: 'comments_enabled') @Default(true) bool commentsEnabled,
     @JsonKey(name: 'hide_like_count') @Default(false) bool hideLikeCount,
     @JsonKey(name: 'hide_comment_count') @Default(false) bool hideCommentCount,
     @JsonKey(name: 'hide_share_count') @Default(false) bool hideShareCount,
     @JsonKey(name: 'hide_likes_list') @Default(false) bool hideLikesList,
 
+    // Campaign association
     @JsonKey(name: 'campaign_id') String? campaignId,
     @JsonKey(name: 'campaign_title') String? campaignTitle,
   }) = _FeedModel;
@@ -60,6 +61,7 @@ abstract class FeedModel with _$FeedModel {
   factory FeedModel.fromJson(Map<String, dynamic> json) =>
       _$FeedModelFromJson(json);
 
+  /// Converts to domain entity.
   FeedEntity toEntity() {
     return FeedEntity(
       id: id,
@@ -88,6 +90,7 @@ abstract class FeedModel with _$FeedModel {
     );
   }
 
+  /// Creates from domain entity.
   factory FeedModel.fromEntity(FeedEntity entity) {
     return FeedModel(
       id: entity.id,

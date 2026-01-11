@@ -5,19 +5,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velora/core/errors/chat_failure.dart';
 import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/chat/domain/entities/message_read_entity.dart';
-import 'package:velora/features/chat/domain/usecases/delete_message.dart';
-import 'package:velora/features/chat/domain/usecases/edit_message.dart';
-import 'package:velora/features/chat/domain/usecases/get_conversation_list.dart';
-import 'package:velora/features/chat/domain/usecases/get_message_reads.dart';
-import 'package:velora/features/chat/domain/usecases/get_messages.dart';
-import 'package:velora/features/chat/domain/usecases/mark_conversation_read.dart';
-import 'package:velora/features/chat/domain/usecases/mark_message_read.dart';
-import 'package:velora/features/chat/domain/usecases/send_text_message.dart';
-import 'package:velora/features/chat/domain/usecases/send_typing_indicator.dart';
-import 'package:velora/features/chat/domain/usecases/stop_watch_messages.dart';
-import 'package:velora/features/chat/domain/usecases/watch_message_reads.dart';
-import 'package:velora/features/chat/domain/usecases/watch_new_messages.dart';
-import 'package:velora/features/chat/domain/usecases/watch_typing_indicators.dart';
+import 'package:velora/features/chat/domain/usecases/delete_message_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/edit_message_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/get_conversation_list_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/get_message_reads_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/get_messages_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/mark_conversation_read_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/mark_message_read_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/send_text_message_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/send_typing_indicator_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/stop_watch_messages_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/watch_message_reads_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/watch_new_messages_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/watch_typing_indicators_usecase.dart';
 
 import 'chat_message_event.dart';
 import 'chat_message_state.dart';
@@ -91,25 +91,25 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     on<CleanupTypingEvent>(_onCleanupTyping);
   }
 
-  final GetMessages getMessagesUseCase;
-  final SendTextMessage sendTextMessageUseCase;
-  final EditMessage editMessageUseCase;
-  final DeleteMessage deleteMessageUseCase;
-  final MarkConversationRead markConversationReadUseCase;
-  final WatchNewMessages watchNewMessagesUseCase;
-  final StopWatchMessages stopWatchMessagesUseCase;
+  final GetMessagesUseCase getMessagesUseCase;
+  final SendTextMessageUseCase sendTextMessageUseCase;
+  final EditMessageUseCase editMessageUseCase;
+  final DeleteMessageUseCase deleteMessageUseCase;
+  final MarkConversationReadUseCase markConversationReadUseCase;
+  final WatchNewMessagesUseCase watchNewMessagesUseCase;
+  final StopWatchMessagesUseCase stopWatchMessagesUseCase;
 
   // Conversation List
-  final GetConversationList getConversationListUseCase;
+  final GetConversationListUseCase getConversationListUseCase;
 
   // Message Reads
-  final GetMessageReads getMessageReadsUseCase;
-  final MarkMessageRead markMessageReadUseCase;
-  final WatchMessageReads watchMessageReadsUseCase;
+  final GetMessageReadsUseCase getMessageReadsUseCase;
+  final MarkMessageReadUseCase markMessageReadUseCase;
+  final WatchMessageReadsUseCase watchMessageReadsUseCase;
 
   // Typing Indicator
-  final SendTypingIndicator sendTypingIndicatorUseCase;
-  final WatchTypingIndicators watchTypingIndicatorsUseCase;
+  final SendTypingIndicatorUseCase sendTypingIndicatorUseCase;
+  final WatchTypingIndicatorsUseCase watchTypingIndicatorsUseCase;
 
   StreamSubscription? _watchSub;
   StreamSubscription? _readWatchSub;

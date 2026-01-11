@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AuthState {
 
- AuthStatus get status; AuthLoadingType get loadingType; String? get message; String? get errorMessage; String? get userId;
+ AuthStatusEntity get status; AuthLoadingType get loadingType; String? get message; String? get errorMessage; String? get userId;
 /// Create a copy of AuthState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -45,7 +45,7 @@ abstract mixin class $AuthStateCopyWith<$Res>  {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) _then) = _$AuthStateCopyWithImpl;
 @useResult
 $Res call({
- AuthStatus status, AuthLoadingType loadingType, String? message, String? errorMessage, String? userId
+ AuthStatusEntity status, AuthLoadingType loadingType, String? message, String? errorMessage, String? userId
 });
 
 
@@ -65,7 +65,7 @@ class _$AuthStateCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? loadingType = null,Object? message = freezed,Object? errorMessage = freezed,Object? userId = freezed,}) {
   return _then(_self.copyWith(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as AuthStatus,loadingType: null == loadingType ? _self.loadingType : loadingType // ignore: cast_nullable_to_non_nullable
+as AuthStatusEntity,loadingType: null == loadingType ? _self.loadingType : loadingType // ignore: cast_nullable_to_non_nullable
 as AuthLoadingType,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,userId: freezed == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
@@ -154,7 +154,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( AuthStatus status,  AuthLoadingType loadingType,  String? message,  String? errorMessage,  String? userId)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( AuthStatusEntity status,  AuthLoadingType loadingType,  String? message,  String? errorMessage,  String? userId)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AuthState() when $default != null:
 return $default(_that.status,_that.loadingType,_that.message,_that.errorMessage,_that.userId);case _:
@@ -175,7 +175,7 @@ return $default(_that.status,_that.loadingType,_that.message,_that.errorMessage,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( AuthStatus status,  AuthLoadingType loadingType,  String? message,  String? errorMessage,  String? userId)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( AuthStatusEntity status,  AuthLoadingType loadingType,  String? message,  String? errorMessage,  String? userId)  $default,) {final _that = this;
 switch (_that) {
 case _AuthState():
 return $default(_that.status,_that.loadingType,_that.message,_that.errorMessage,_that.userId);case _:
@@ -195,7 +195,7 @@ return $default(_that.status,_that.loadingType,_that.message,_that.errorMessage,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( AuthStatus status,  AuthLoadingType loadingType,  String? message,  String? errorMessage,  String? userId)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( AuthStatusEntity status,  AuthLoadingType loadingType,  String? message,  String? errorMessage,  String? userId)?  $default,) {final _that = this;
 switch (_that) {
 case _AuthState() when $default != null:
 return $default(_that.status,_that.loadingType,_that.message,_that.errorMessage,_that.userId);case _:
@@ -210,10 +210,10 @@ return $default(_that.status,_that.loadingType,_that.message,_that.errorMessage,
 
 
 class _AuthState extends AuthState {
-  const _AuthState({this.status = AuthStatus.unknown, this.loadingType = AuthLoadingType.none, this.message, this.errorMessage, this.userId}): super._();
+  const _AuthState({this.status = AuthStatusEntity.unknown, this.loadingType = AuthLoadingType.none, this.message, this.errorMessage, this.userId}): super._();
   
 
-@override@JsonKey() final  AuthStatus status;
+@override@JsonKey() final  AuthStatusEntity status;
 @override@JsonKey() final  AuthLoadingType loadingType;
 @override final  String? message;
 @override final  String? errorMessage;
@@ -249,7 +249,7 @@ abstract mixin class _$AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Re
   factory _$AuthStateCopyWith(_AuthState value, $Res Function(_AuthState) _then) = __$AuthStateCopyWithImpl;
 @override @useResult
 $Res call({
- AuthStatus status, AuthLoadingType loadingType, String? message, String? errorMessage, String? userId
+ AuthStatusEntity status, AuthLoadingType loadingType, String? message, String? errorMessage, String? userId
 });
 
 
@@ -269,7 +269,7 @@ class __$AuthStateCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? loadingType = null,Object? message = freezed,Object? errorMessage = freezed,Object? userId = freezed,}) {
   return _then(_AuthState(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as AuthStatus,loadingType: null == loadingType ? _self.loadingType : loadingType // ignore: cast_nullable_to_non_nullable
+as AuthStatusEntity,loadingType: null == loadingType ? _self.loadingType : loadingType // ignore: cast_nullable_to_non_nullable
 as AuthLoadingType,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,userId: freezed == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable

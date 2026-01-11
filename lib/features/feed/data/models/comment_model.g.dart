@@ -18,6 +18,7 @@ _CommentModel _$CommentModelFromJson(Map<String, dynamic> json) =>
       parentCommentId: json['parent_comment_id'] as String?,
       likesCount: (json['likes_count'] as num?)?.toInt() ?? 0,
       isLiked: json['isLiked'] as bool? ?? false,
+      replyCount: (json['reply_count'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$CommentModelToJson(_CommentModel instance) =>
@@ -31,4 +32,5 @@ Map<String, dynamic> _$CommentModelToJson(_CommentModel instance) =>
       'user_photo_url': instance.userPhotoUrl,
       'parent_comment_id': instance.parentCommentId,
       'likes_count': instance.likesCount,
+      'reply_count': instance.replyCount,
     };

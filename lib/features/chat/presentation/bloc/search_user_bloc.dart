@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velora/core/utils/log_alias.dart';
-import 'package:velora/features/chat/domain/usecases/search_followed_users.dart';
+import 'package:velora/features/chat/domain/usecases/search_followed_users_usecase.dart';
 import 'package:velora/features/chat/presentation/bloc/search_user_event.dart';
 import 'package:velora/features/chat/presentation/bloc/search_user_state.dart';
 
@@ -12,7 +12,7 @@ class SearchUserBloc extends Bloc<SearchUserEvent, SearchUserState> {
     on<LoadFollowedUsers>(_onLoadFollowedUsers);
   }
 
-  final SearchFollowedUsers searchFollowedUsers;
+  final SearchFollowedUsersUseCase searchFollowedUsers;
 
   static const _logTag = 'SearchUserBloc';
 

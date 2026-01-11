@@ -3,41 +3,41 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:velora/core/errors/auth_failure.dart';
-import 'package:velora/features/auth/domain/entities/auth_session.dart';
-import 'package:velora/features/auth/domain/entities/auth_snapshot.dart';
-import 'package:velora/features/auth/domain/entities/auth_status.dart';
-import 'package:velora/features/auth/domain/usecases/auth_reset_password.dart';
-import 'package:velora/features/auth/domain/usecases/auth_sign_in.dart';
-import 'package:velora/features/auth/domain/usecases/auth_sign_in_with_google.dart';
-import 'package:velora/features/auth/domain/usecases/auth_sign_out.dart';
-import 'package:velora/features/auth/domain/usecases/auth_sign_up.dart';
-import 'package:velora/features/auth/domain/usecases/auth_watch_auth_snapshot.dart';
+import 'package:velora/features/auth/domain/entities/auth_session_entity.dart';
+import 'package:velora/features/auth/domain/entities/auth_snapshot_entity.dart';
+import 'package:velora/features/auth/domain/entities/auth_status_entity.dart';
+import 'package:velora/features/auth/domain/usecases/reset_password_usecase.dart';
+import 'package:velora/features/auth/domain/usecases/sign_in_usecase.dart';
+import 'package:velora/features/auth/domain/usecases/sign_in_with_google_usecase.dart';
+import 'package:velora/features/auth/domain/usecases/sign_out_usecase.dart';
+import 'package:velora/features/auth/domain/usecases/sign_up_usecase.dart';
+import 'package:velora/features/auth/domain/usecases/watch_auth_snapshot_usecase.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_event.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_state.dart';
 
-class _MockAuthSignUp extends Mock implements AuthSignUp {}
+class _MockSignUpUseCase extends Mock implements SignUpUseCase {}
 
-class _MockAuthSignIn extends Mock implements AuthSignIn {}
+class _MockSignInUseCase extends Mock implements SignInUseCase {}
 
-class _MockAuthSignInWithGoogle extends Mock implements AuthSignInWithGoogle {}
+class _MockSignInWithGoogleUseCase extends Mock implements SignInWithGoogleUseCase {}
 
-class _MockAuthResetPassword extends Mock implements AuthResetPassword {}
+class _MockResetPasswordUseCase extends Mock implements ResetPasswordUseCase {}
 
-class _MockAuthSignOut extends Mock implements AuthSignOut {}
+class _MockSignOutUseCase extends Mock implements SignOutUseCase {}
 
-class _MockAuthWatchAuthSnapshot extends Mock
-    implements AuthWatchAuthSnapshot {}
+class _MockWatchAuthSnapshotUseCase extends Mock
+    implements WatchAuthSnapshotUseCase {}
 
 void main() {
-  late _MockAuthSignUp signUp;
-  late _MockAuthSignIn signIn;
-  late _MockAuthSignInWithGoogle signInWithGoogle;
-  late _MockAuthResetPassword resetPassword;
-  late _MockAuthSignOut signOut;
-  late _MockAuthWatchAuthSnapshot watchSnapshot;
+  late _MockSignUpUseCase signUp;
+  late _MockSignInUseCase signIn;
+  late _MockSignInWithGoogleUseCase signInWithGoogle;
+  late _MockResetPasswordUseCase resetPassword;
+  late _MockSignOutUseCase signOut;
+  late _MockWatchAuthSnapshotUseCase watchSnapshot;
 
-  const session = AuthSession(
+  const session = AuthSessionEntity(
     userId: 'user-123',
     email: 'user@velora.app',
     emailVerified: true,
@@ -46,7 +46,7 @@ void main() {
   AuthBloc buildBloc() {
     when(
       () => watchSnapshot(),
-    ).thenAnswer((_) => const Stream<AuthSnapshot>.empty());
+    ).thenAnswer((_) => const Stream<AuthSnapshotEntity>.empty());
     return AuthBloc(
       signUpUseCase: signUp,
       signInUseCase: signIn,
@@ -58,12 +58,12 @@ void main() {
   }
 
   setUp(() {
-    signUp = _MockAuthSignUp();
-    signIn = _MockAuthSignIn();
-    signInWithGoogle = _MockAuthSignInWithGoogle();
-    resetPassword = _MockAuthResetPassword();
-    signOut = _MockAuthSignOut();
-    watchSnapshot = _MockAuthWatchAuthSnapshot();
+    signUp = _MockSignUpUseCase();
+    signIn = _MockSignInUseCase();
+    signInWithGoogle = _MockSignInWithGoogleUseCase();
+    resetPassword = _MockResetPasswordUseCase();
+    signOut = _MockSignOutUseCase();
+    watchSnapshot = _MockWatchAuthSnapshotUseCase();
   });
 
   blocTest<AuthBloc, AuthState>(
@@ -78,16 +78,16 @@ void main() {
       return buildBloc();
     },
     act: (bloc) => bloc.add(
-      const AuthSignInRequested(
+      const AuthEvent.signIn(
         email: 'user@velora.app',
         password: 'Password123!',
       ),
     ),
     expect: () => const [
-      AuthState(isLoading: true),
+      AuthState(loadingType: AuthLoadingType.emailPassword),
       AuthState(
-        status: AuthStatus.authenticated,
-        isLoading: false,
+        status: AuthStatusEntity.authenticated,
+        loadingType: AuthLoadingType.none,
         message: 'Welcome back!',
         userId: 'user-123',
       ),
@@ -115,16 +115,16 @@ void main() {
       return buildBloc();
     },
     act: (bloc) => bloc.add(
-      const AuthSignInRequested(
+      const AuthEvent.signIn(
         email: 'user@velora.app',
         password: 'bad-password',
       ),
     ),
     expect: () => const [
-      AuthState(isLoading: true),
+      AuthState(loadingType: AuthLoadingType.emailPassword),
       AuthState(
-        status: AuthStatus.unauthenticated,
-        isLoading: false,
+        status: AuthStatusEntity.unauthenticated,
+        loadingType: AuthLoadingType.none,
         errorMessage: 'Invalid credentials',
       ),
     ],
@@ -139,11 +139,11 @@ void main() {
       return buildBloc();
     },
     act: (bloc) =>
-        bloc.add(const AuthResetPasswordRequested(email: 'user@velora.app')),
+        bloc.add(const AuthEvent.resetPassword(email: 'user@velora.app')),
     expect: () => const [
-      AuthState(isLoading: true),
+      AuthState(loadingType: AuthLoadingType.emailPassword),
       AuthState(
-        isLoading: false,
+        loadingType: AuthLoadingType.none,
         message: 'Password reset link sent to your email.',
       ),
     ],
@@ -153,18 +153,17 @@ void main() {
     'updates state when Supabase snapshot changes',
     build: () => buildBloc(),
     act: (bloc) => bloc.add(
-      const AuthSupabaseSnapshotChanged(
-        snapshot: AuthSnapshot(
-          status: AuthStatus.authenticated,
+      const AuthEvent.authSnapshotChanged(
+        snapshot: AuthSnapshotEntity(
+          status: AuthStatusEntity.authenticated,
           userId: 'user-123',
-          emailVerified: true,
         ),
       ),
     ),
     expect: () => const [
       AuthState(
-        status: AuthStatus.authenticated,
-        isLoading: false,
+        status: AuthStatusEntity.authenticated,
+        loadingType: AuthLoadingType.none,
         userId: 'user-123',
       ),
     ],
@@ -173,7 +172,7 @@ void main() {
   blocTest<AuthBloc, AuthState>(
     'emits email unverified message when sign up succeeds without verification',
     build: () {
-      const unverifiedSession = AuthSession(
+      const unverifiedSession = AuthSessionEntity(
         userId: 'user-123',
         email: 'user@velora.app',
         emailVerified: false,
@@ -187,16 +186,16 @@ void main() {
       return buildBloc();
     },
     act: (bloc) => bloc.add(
-      const AuthSignUpRequested(
+      const AuthEvent.signUp(
         email: 'user@velora.app',
         password: 'Password123!',
       ),
     ),
     expect: () => const [
-      AuthState(isLoading: true),
+      AuthState(loadingType: AuthLoadingType.emailPassword),
       AuthState(
-        status: AuthStatus.emailUnverified,
-        isLoading: false,
+        status: AuthStatusEntity.emailUnverified,
+        loadingType: AuthLoadingType.none,
         message:
             "We've sent a verification link to your email. Please verify "
             'before signing in.',
@@ -221,16 +220,16 @@ void main() {
       return buildBloc();
     },
     act: (bloc) => bloc.add(
-      const AuthSignUpRequested(
+      const AuthEvent.signUp(
         email: 'user@velora.app',
         password: 'Password123!',
       ),
     ),
     expect: () => const [
-      AuthState(isLoading: true),
+      AuthState(loadingType: AuthLoadingType.emailPassword),
       AuthState(
-        status: AuthStatus.unauthenticated,
-        isLoading: false,
+        status: AuthStatusEntity.unauthenticated,
+        loadingType: AuthLoadingType.none,
         errorMessage: 'Email exists',
       ),
     ],
@@ -244,12 +243,12 @@ void main() {
       ).thenAnswer((_) async => const Right(session));
       return buildBloc();
     },
-    act: (bloc) => bloc.add(const AuthSignInWithGoogleRequested()),
+    act: (bloc) => bloc.add(const AuthEvent.signInWithGoogle()),
     expect: () => const [
-      AuthState(isLoading: true),
+      AuthState(loadingType: AuthLoadingType.google),
       AuthState(
-        status: AuthStatus.authenticated,
-        isLoading: false,
+        status: AuthStatusEntity.authenticated,
+        loadingType: AuthLoadingType.none,
         message: 'Signed in with Google',
         userId: 'user-123',
       ),
@@ -268,12 +267,12 @@ void main() {
       ).thenAnswer((_) async => const Left(failure));
       return buildBloc();
     },
-    act: (bloc) => bloc.add(const AuthSignInWithGoogleRequested()),
+    act: (bloc) => bloc.add(const AuthEvent.signInWithGoogle()),
     expect: () => const [
-      AuthState(isLoading: true),
+      AuthState(loadingType: AuthLoadingType.google),
       AuthState(
-        status: AuthStatus.unauthenticated,
-        isLoading: false,
+        status: AuthStatusEntity.unauthenticated,
+        loadingType: AuthLoadingType.none,
         errorMessage: 'Google failed',
       ),
     ],
@@ -286,17 +285,17 @@ void main() {
       return buildBloc();
     },
     seed: () =>
-        const AuthState(status: AuthStatus.authenticated, userId: 'user-123'),
-    act: (bloc) => bloc.add(const AuthSignOutRequested()),
+        const AuthState(status: AuthStatusEntity.authenticated, userId: 'user-123'),
+    act: (bloc) => bloc.add(const AuthEvent.signOut()),
     expect: () => const [
       AuthState(
-        status: AuthStatus.authenticated,
-        isLoading: true,
+        status: AuthStatusEntity.authenticated,
+        loadingType: AuthLoadingType.emailPassword,
         userId: 'user-123',
       ),
       AuthState(
-        status: AuthStatus.unauthenticated,
-        isLoading: false,
+        status: AuthStatusEntity.unauthenticated,
+        loadingType: AuthLoadingType.none,
         userId: null,
       ),
     ],
@@ -312,10 +311,10 @@ void main() {
       when(() => signOut()).thenAnswer((_) async => const Left(failure));
       return buildBloc();
     },
-    act: (bloc) => bloc.add(const AuthSignOutRequested()),
+    act: (bloc) => bloc.add(const AuthEvent.signOut()),
     expect: () => const [
-      AuthState(isLoading: true),
-      AuthState(isLoading: false, errorMessage: 'Could not sign out'),
+      AuthState(loadingType: AuthLoadingType.emailPassword),
+      AuthState(loadingType: AuthLoadingType.none, errorMessage: 'Could not sign out'),
     ],
   );
 
@@ -323,7 +322,7 @@ void main() {
     'clear messages resets message and error',
     build: () => buildBloc(),
     seed: () => const AuthState(message: 'Success', errorMessage: 'Error'),
-    act: (bloc) => bloc.add(const AuthClearMessagesRequested()),
+    act: (bloc) => bloc.add(const AuthEvent.clearMessages()),
     expect: () => const [AuthState(message: null, errorMessage: null)],
   );
 }

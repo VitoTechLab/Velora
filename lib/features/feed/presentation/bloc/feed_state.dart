@@ -1,9 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:velora/features/feed/domain/entities/feed_cursor.dart';
+import 'package:velora/features/feed/domain/entities/feed_cursor_entity.dart';
 import 'package:velora/features/feed/domain/entities/feed_entity.dart';
 
 part 'feed_state.freezed.dart';
 
+/// State for feed BLoC.
 @freezed
 abstract class FeedState with _$FeedState {
   const factory FeedState({

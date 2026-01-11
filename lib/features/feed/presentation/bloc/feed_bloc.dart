@@ -2,25 +2,17 @@ import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/feed/domain/entities/feed_entity.dart';
-import 'package:velora/features/feed/domain/usecases/get_smart_feed.dart';
-import 'package:velora/features/feed/domain/usecases/toggle_like_post.dart';
-import 'package:velora/features/feed/domain/usecases/toggle_bookmark_post.dart';
-import 'package:velora/features/feed/domain/usecases/get_post_by_id.dart';
-import 'package:velora/features/feed/domain/usecases/update_post.dart';
-import 'package:velora/features/feed/domain/usecases/delete_post.dart';
+import 'package:velora/features/feed/domain/usecases/delete_post_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/get_feed_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/get_post_by_id_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/toggle_bookmark_post_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/toggle_like_post_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/update_post_usecase.dart';
 import 'feed_event.dart';
 import 'feed_state.dart';
 
-/// BLoC untuk semua interaksi Feed (list, detail, komentar).
+/// BLoC for feed operations.
 class FeedBloc extends Bloc<FeedEvent, FeedState> {
-  final LoadInitialFeed loadInitialFeedUseCase;
-  final LoadMoreFeed loadMoreFeedUseCase;
-  final ToggleLikePost toggleLikePostUseCase;
-  final ToggleBookmarkPost toggleBookmarkPostUseCase;
-  final GetPostById getPostByIdUseCase;
-  final UpdatePost updatePostUseCase;
-  final DeletePost deletePostUseCase;
-
   FeedBloc({
     required this.loadInitialFeedUseCase,
     required this.loadMoreFeedUseCase,
@@ -31,40 +23,38 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
     required this.deletePostUseCase,
   }) : super(const FeedState()) {
     on<LoadInitialFeedEvent>(_onLoadInitialFeed);
-
-    // Drop new loadMore events while a previous one is still running.
     on<LoadMoreFeedEvent>(
       _onLoadMoreFeed,
       transformer: bloc_concurrency.droppable(),
     );
-
     on<GetPostByIdEvent>(_onGetPostById);
-    on<UpdatePostEvent>(_onUpdatePostEntity);
+    on<UpdatePostEvent>(_onUpdatePost);
     on<DeletePostEvent>(_onDeletePost);
-
-    // Drop extra refresh events while a refresh is already in progress.
     on<RefreshFeedEvent>(
       _onRefreshFeed,
       transformer: bloc_concurrency.droppable(),
     );
-
     on<ToggleLikePostEvent>(_onToggleLikePost);
     on<ToggleBookmarkPostEvent>(_onToggleBookmarkPost);
     on<AddNewPostEvent>(_onAddNewPost);
     on<ClearTransientEvent>((event, emit) => _onClearTransient(emit));
   }
 
-  // Batas aman untuk page size (walau kita pakai cursor, tetap perlu limit).
+  final LoadInitialFeedUseCase loadInitialFeedUseCase;
+  final LoadMoreFeedUseCase loadMoreFeedUseCase;
+  final ToggleLikePostUseCase toggleLikePostUseCase;
+  final ToggleBookmarkPostUseCase toggleBookmarkPostUseCase;
+  final GetPostByIdUseCase getPostByIdUseCase;
+  final UpdatePostUseCase updatePostUseCase;
+  final DeletePostUseCase deletePostUseCase;
+
   static const int _minPageSize = 1;
   static const int _maxPageSize = 50;
   static const int _maxPostContentLength = 2000;
-
   static const _logTag = 'FeedBloc';
 
-  /// Validasi agar limit tetap dalam rentang aman.
   int _validatedLimit(int limit) => limit.clamp(_minPageSize, _maxPageSize);
 
-  /// Validasi konten post (kosong / terlalu panjang).
   String? _validatePostContent(String content) {
     final trimmed = content.trim();
     if (trimmed.isEmpty) return 'Post content cannot be empty';
@@ -74,7 +64,6 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
     return null;
   }
 
-  /// Loads the initial feed page using cursor-based pagination.
   Future<void> _onLoadInitialFeed(
     LoadInitialFeedEvent event,
     Emitter<FeedState> emit,
@@ -243,7 +232,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
     );
   }
 
-  Future<void> _onUpdatePostEntity(
+  Future<void> _onUpdatePost(
     UpdatePostEvent event,
     Emitter<FeedState> emit,
   ) async {

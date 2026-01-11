@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$MessagePaginationModel {
 
- List<ChatMessageModel> get messages; bool get hasMore;@JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) MessageCursor? get nextCursor;
+ List<ChatMessageModel> get messages; bool get hasMore;@JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) MessageCursorModel? get nextCursor;
 /// Create a copy of MessagePaginationModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,11 +48,11 @@ abstract mixin class $MessagePaginationModelCopyWith<$Res>  {
   factory $MessagePaginationModelCopyWith(MessagePaginationModel value, $Res Function(MessagePaginationModel) _then) = _$MessagePaginationModelCopyWithImpl;
 @useResult
 $Res call({
- List<ChatMessageModel> messages, bool hasMore,@JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) MessageCursor? nextCursor
+ List<ChatMessageModel> messages, bool hasMore,@JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) MessageCursorModel? nextCursor
 });
 
 
-$MessageCursorCopyWith<$Res>? get nextCursor;
+$MessageCursorModelCopyWith<$Res>? get nextCursor;
 
 }
 /// @nodoc
@@ -70,19 +70,19 @@ class _$MessagePaginationModelCopyWithImpl<$Res>
 messages: null == messages ? _self.messages : messages // ignore: cast_nullable_to_non_nullable
 as List<ChatMessageModel>,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
 as bool,nextCursor: freezed == nextCursor ? _self.nextCursor : nextCursor // ignore: cast_nullable_to_non_nullable
-as MessageCursor?,
+as MessageCursorModel?,
   ));
 }
 /// Create a copy of MessagePaginationModel
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$MessageCursorCopyWith<$Res>? get nextCursor {
+$MessageCursorModelCopyWith<$Res>? get nextCursor {
     if (_self.nextCursor == null) {
     return null;
   }
 
-  return $MessageCursorCopyWith<$Res>(_self.nextCursor!, (value) {
+  return $MessageCursorModelCopyWith<$Res>(_self.nextCursor!, (value) {
     return _then(_self.copyWith(nextCursor: value));
   });
 }
@@ -167,7 +167,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<ChatMessageModel> messages,  bool hasMore, @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson)  MessageCursor? nextCursor)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<ChatMessageModel> messages,  bool hasMore, @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson)  MessageCursorModel? nextCursor)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MessagePaginationModel() when $default != null:
 return $default(_that.messages,_that.hasMore,_that.nextCursor);case _:
@@ -188,7 +188,7 @@ return $default(_that.messages,_that.hasMore,_that.nextCursor);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<ChatMessageModel> messages,  bool hasMore, @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson)  MessageCursor? nextCursor)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<ChatMessageModel> messages,  bool hasMore, @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson)  MessageCursorModel? nextCursor)  $default,) {final _that = this;
 switch (_that) {
 case _MessagePaginationModel():
 return $default(_that.messages,_that.hasMore,_that.nextCursor);case _:
@@ -208,7 +208,7 @@ return $default(_that.messages,_that.hasMore,_that.nextCursor);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<ChatMessageModel> messages,  bool hasMore, @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson)  MessageCursor? nextCursor)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<ChatMessageModel> messages,  bool hasMore, @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson)  MessageCursorModel? nextCursor)?  $default,) {final _that = this;
 switch (_that) {
 case _MessagePaginationModel() when $default != null:
 return $default(_that.messages,_that.hasMore,_that.nextCursor);case _:
@@ -234,7 +234,7 @@ class _MessagePaginationModel extends MessagePaginationModel {
 }
 
 @override final  bool hasMore;
-@override@JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) final  MessageCursor? nextCursor;
+@override@JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) final  MessageCursorModel? nextCursor;
 
 /// Create a copy of MessagePaginationModel
 /// with the given fields replaced by the non-null parameter values.
@@ -269,11 +269,11 @@ abstract mixin class _$MessagePaginationModelCopyWith<$Res> implements $MessageP
   factory _$MessagePaginationModelCopyWith(_MessagePaginationModel value, $Res Function(_MessagePaginationModel) _then) = __$MessagePaginationModelCopyWithImpl;
 @override @useResult
 $Res call({
- List<ChatMessageModel> messages, bool hasMore,@JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) MessageCursor? nextCursor
+ List<ChatMessageModel> messages, bool hasMore,@JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) MessageCursorModel? nextCursor
 });
 
 
-@override $MessageCursorCopyWith<$Res>? get nextCursor;
+@override $MessageCursorModelCopyWith<$Res>? get nextCursor;
 
 }
 /// @nodoc
@@ -291,7 +291,7 @@ class __$MessagePaginationModelCopyWithImpl<$Res>
 messages: null == messages ? _self._messages : messages // ignore: cast_nullable_to_non_nullable
 as List<ChatMessageModel>,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
 as bool,nextCursor: freezed == nextCursor ? _self.nextCursor : nextCursor // ignore: cast_nullable_to_non_nullable
-as MessageCursor?,
+as MessageCursorModel?,
   ));
 }
 
@@ -299,12 +299,12 @@ as MessageCursor?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$MessageCursorCopyWith<$Res>? get nextCursor {
+$MessageCursorModelCopyWith<$Res>? get nextCursor {
     if (_self.nextCursor == null) {
     return null;
   }
 
-  return $MessageCursorCopyWith<$Res>(_self.nextCursor!, (value) {
+  return $MessageCursorModelCopyWith<$Res>(_self.nextCursor!, (value) {
     return _then(_self.copyWith(nextCursor: value));
   });
 }

@@ -37,14 +37,19 @@ class PasswordField extends HookWidget {
     final strengthColor = useState<Color?>(null);
     final strengthText = useState('');
 
+    final regexPatterns = useMemoized(() => (
+      upperCase: RegExp(r'[A-Z]'),
+      lowerCase: RegExp(r'[a-z]'),
+      number: RegExp(r"\d"),
+      symbol: RegExp(r'[!@#\$%^&*()_+{}\[\]:;<>,.?/~\\-]'),
+    ), []);
+
     void updatePasswordStrength() {
       final password = controller.text;
-      final hasUpperCase = RegExp(r'[A-Z]').hasMatch(password);
-      final hasLowerCase = RegExp(r'[a-z]').hasMatch(password);
-      final hasNumber = RegExp(r"\d").hasMatch(password);
-      final hasSymbol = RegExp(
-        r'[!@#\$%^&*()_+{}\[\]:;<>,.?/~\\-]',
-      ).hasMatch(password);
+      final hasUpperCase = regexPatterns.upperCase.hasMatch(password);
+      final hasLowerCase = regexPatterns.lowerCase.hasMatch(password);
+      final hasNumber = regexPatterns.number.hasMatch(password);
+      final hasSymbol = regexPatterns.symbol.hasMatch(password);
 
       if (password.isEmpty) {
         strengthValue.value = 0.0;
@@ -90,7 +95,7 @@ class PasswordField extends HookWidget {
           focusNode: focusNode,
           label: effectiveLabel,
           validator: validator,
-          prefixIcon: prefixIcon ?? const Icon(Icons.lock_outline),
+          prefixIcon: prefixIcon ?? const Icon(Icons.lock_outline, size: 20),
           obscureText: isObscured.value,
           textInputAction: TextInputAction.done,
           onEditingComplete: onEditingComplete,
@@ -168,20 +173,18 @@ class PasswordField extends HookWidget {
                 _buildPasswordRequirement(
                   context,
                   t.authPasswordRequirementCase,
-                  RegExp(r'[A-Z]').hasMatch(controller.text) &&
-                      RegExp(r'[a-z]').hasMatch(controller.text),
+                  regexPatterns.upperCase.hasMatch(controller.text) &&
+                      regexPatterns.lowerCase.hasMatch(controller.text),
                 ),
                 _buildPasswordRequirement(
                   context,
                   t.authPasswordRequirementNumber,
-                  RegExp(r"\d").hasMatch(controller.text),
+                  regexPatterns.number.hasMatch(controller.text),
                 ),
                 _buildPasswordRequirement(
                   context,
                   t.authPasswordRequirementSpecial,
-                  RegExp(
-                    r'[!@#\$%^&*()_+{}\[\]:;<>,.?/~\\-]',
-                  ).hasMatch(controller.text),
+                  regexPatterns.symbol.hasMatch(controller.text),
                 ),
               ],
             ),

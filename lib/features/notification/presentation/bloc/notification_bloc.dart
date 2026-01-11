@@ -4,25 +4,31 @@ import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/notification/domain/entities/notification_entity.dart';
-import 'package:velora/features/notification/domain/usecases/get_notifications.dart';
-import 'package:velora/features/notification/domain/usecases/get_unread_count.dart';
-import 'package:velora/features/notification/domain/usecases/mark_notifications_read.dart';
-import 'package:velora/features/notification/domain/usecases/delete_notification.dart';
-import 'package:velora/features/notification/domain/usecases/watch_notifications.dart';
+import 'package:velora/features/notification/domain/usecases/get_notifications_usecase.dart';
+import 'package:velora/features/notification/domain/usecases/get_unread_count_usecase.dart';
+import 'package:velora/features/notification/domain/usecases/mark_notifications_read_usecase.dart';
+import 'package:velora/features/notification/domain/usecases/delete_notification_usecase.dart';
+import 'package:velora/features/notification/domain/usecases/watch_notifications_usecase.dart';
 import 'package:velora/features/profile/data/datasources/profile_remote_datasource.dart';
 import 'notification_event.dart';
 import 'notification_state.dart';
 
-/// BLoC for notification interactions
+/// BLoC for notification interactions with time-based grouping
+/// 
+/// Features:
+/// - Time categorization: Today, Yesterday, Last 7 Days, Last 30 Days, Older
+/// - User action handling: Follow Back, Like accessibility, Comment visibility
+/// - Realtime updates via Supabase subscriptions
+/// - Optimistic UI updates for better UX
 class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
-  final LoadInitialNotifications loadInitialNotificationsUseCase;
-  final LoadMoreNotifications loadMoreNotificationsUseCase;
-  final GetUnreadNotificationCount getUnreadCountUseCase;
-  final MarkAllNotificationsRead markAllAsReadUseCase;
-  final MarkNotificationsRead markAsReadUseCase;
-  final DeleteNotification deleteNotificationUseCase;
-  final WatchNewNotifications watchNewNotificationsUseCase;
-  final StopWatchNotifications stopWatchNotificationsUseCase;
+  final LoadInitialNotificationsUseCase loadInitialNotificationsUseCase;
+  final LoadMoreNotificationsUseCase loadMoreNotificationsUseCase;
+  final GetUnreadNotificationCountUseCase getUnreadCountUseCase;
+  final MarkAllNotificationsReadUseCase markAllAsReadUseCase;
+  final MarkNotificationsReadUseCase markAsReadUseCase;
+  final DeleteNotificationUseCase deleteNotificationUseCase;
+  final WatchNewNotificationsUseCase watchNewNotificationsUseCase;
+  final StopWatchNotificationsUseCase stopWatchNotificationsUseCase;
   final ProfileRemoteDataSource profileDataSource;
 
   StreamSubscription? _realtimeSubscription;
@@ -62,8 +68,10 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   static const int _maxPageSize = 50;
   static const _logTag = 'NotificationBloc';
 
+  /// Validate page limit to prevent excessive loads
   int _validatedLimit(int limit) => limit.clamp(_minPageSize, _maxPageSize);
 
+  /// Load initial notifications with time-based grouping
   Future<void> _onLoadInitial(
     LoadInitialNotificationsEvent event,
     Emitter<NotificationState> emit,
@@ -106,6 +114,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     );
   }
 
+  /// Load more notifications with cursor-based pagination
   Future<void> _onLoadMore(
     LoadMoreNotificationsEvent event,
     Emitter<NotificationState> emit,
@@ -155,6 +164,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     );
   }
 
+  /// Refresh notifications (pull-to-refresh)
   Future<void> _onRefresh(
     RefreshNotificationsEvent event,
     Emitter<NotificationState> emit,
@@ -186,6 +196,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     );
   }
 
+  /// Mark all notifications as read
   Future<void> _onMarkAllAsRead(
     MarkAllNotificationsReadEvent event,
     Emitter<NotificationState> emit,
@@ -207,6 +218,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     );
   }
 
+  /// Mark single notification as read
   Future<void> _onMarkAsRead(
     MarkNotificationReadEvent event,
     Emitter<NotificationState> emit,
@@ -233,6 +245,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     );
   }
 
+  /// Delete notification with unread count adjustment
   Future<void> _onDelete(
     DeleteNotificationEvent event,
     Emitter<NotificationState> emit,
@@ -268,6 +281,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     );
   }
 
+  /// Load unread notification count
   Future<void> _onLoadUnreadCount(
     LoadUnreadCountEvent event,
     Emitter<NotificationState> emit,
@@ -286,6 +300,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     );
   }
 
+  /// Start watching for realtime notifications
   Future<void> _onStartWatching(
     StartWatchingNotificationsEvent event,
     Emitter<NotificationState> emit,
@@ -311,6 +326,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     );
   }
 
+  /// Stop watching for realtime notifications
   Future<void> _onStopWatching(
     StopWatchingNotificationsEvent event,
     Emitter<NotificationState> emit,
@@ -321,6 +337,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     await stopWatchNotificationsUseCase();
   }
 
+  /// Handle new notification received from realtime subscription
   Future<void> _onNewNotificationReceived(
     NewNotificationReceivedEvent event,
     Emitter<NotificationState> emit,
@@ -331,6 +348,12 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     add(const NotificationEvent.loadUnreadCount());
   }
 
+  /// Toggle follow status for notification actor
+  /// 
+  /// Handles:
+  /// - Follow back for public accounts
+  /// - Send follow request for private accounts
+  /// - Unfollow if already following
   Future<void> _onToggleFollowActor(
     ToggleFollowActorEvent event,
     Emitter<NotificationState> emit,
@@ -396,6 +419,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     }
   }
 
+  /// Clear transient state (error/success messages)
   void _onClearTransient(Emitter<NotificationState> emit) {
     emit(state.copyWith(message: null, error: null));
   }

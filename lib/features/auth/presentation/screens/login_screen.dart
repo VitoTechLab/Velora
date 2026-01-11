@@ -39,21 +39,15 @@ class LoginScreen extends HookWidget {
     final passwordFocusNode = useFocusNode();
     final formKey = useMemoized(() => GlobalKey<FormState>());
 
-    final clearForm = useCallback(() {
-      FocusScope.of(context).unfocus();
-      emailController.clear();
-      passwordController.clear();
-    }, [emailController, passwordController]);
-
     final submitLogin = useCallback(() {
-      // Unfocus to trigger validation on all fields
+      final bloc = context.read<AuthBloc>();
       FocusScope.of(context).unfocus();
       
       // Small delay to allow focus change to complete validation
       Future.microtask(() {
         if (formKey.currentState?.validate() ?? false) {
-          context.read<AuthBloc>().add(
-            AuthSignInRequested(
+          bloc.add(
+            AuthEvent.signIn(
               email: emailController.text.trim(),
               password: passwordController.text,
             ),
@@ -65,7 +59,7 @@ class LoginScreen extends HookWidget {
 
     final signInWithGoogle = useCallback(() {
       AppLogger.i("[RedesignedLogin] Google sign-in tapped");
-      context.read<AuthBloc>().add(const AuthSignInWithGoogleRequested());
+      context.read<AuthBloc>().add(const AuthEvent.signInWithGoogle());
     }, [context]);
 
     return BlocListener<AuthBloc, AuthState>(

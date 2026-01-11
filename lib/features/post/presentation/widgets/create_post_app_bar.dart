@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:velora/core/themes/color_material.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
-/// Minimal, modern app bar for create post screen
+/// Minimal app bar for post creation with close and next actions
 class CreatePostAppBar extends StatelessWidget {
-  final VoidCallback onClosePressed;
-  final VoidCallback onNextPressed;
-  final bool isNextEnabled;
-
   const CreatePostAppBar({
     super.key,
     required this.onClosePressed,
     required this.onNextPressed,
     this.isNextEnabled = false,
   });
+
+  final VoidCallback onClosePressed;
+  final VoidCallback onNextPressed;
+  final bool isNextEnabled;
 
   @override
   Widget build(BuildContext context) {

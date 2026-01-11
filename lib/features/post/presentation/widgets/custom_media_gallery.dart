@@ -7,13 +7,8 @@ import 'package:velora/core/themes/color_material.dart';
 import 'package:velora/core/ui/app_messenger.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
-/// Custom media gallery with masonry/staggered grid layout
+/// Custom media gallery with grid layout for media selection
 class CustomMediaGallery extends HookWidget {
-  final List<File> selectedMedia;
-  final Set<int> selectionOrder;
-  final Function(File media, int index) onMediaSelected;
-  final ImagePicker? imagePicker;
-
   const CustomMediaGallery({
     super.key,
     required this.selectedMedia,
@@ -21,6 +16,11 @@ class CustomMediaGallery extends HookWidget {
     required this.onMediaSelected,
     this.imagePicker,
   });
+
+  final List<File> selectedMedia;
+  final Set<int> selectionOrder;
+  final Function(File media, int index) onMediaSelected;
+  final ImagePicker? imagePicker;
 
   @override
   Widget build(BuildContext context) {

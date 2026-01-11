@@ -270,7 +270,7 @@ class SettingScreen extends StatelessWidget {
                         ),
                         onTap: () {
                           context.read<AuthBloc>().add(
-                            const AuthSignOutRequested(),
+                            const AuthEvent.signOut(),
                           );
                         },
                       ),

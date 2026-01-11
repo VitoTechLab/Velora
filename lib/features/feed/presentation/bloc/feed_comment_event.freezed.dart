@@ -55,12 +55,13 @@ extension FeedCommentEventPatterns on FeedCommentEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LoadFeedCommentsEvent value)?  loadFeedComments,TResult Function( LoadMoreFeedCommentsEvent value)?  loadMoreFeedComments,TResult Function( AddFeedCommentEvent value)?  addFeedComment,TResult Function( DeleteFeedCommentEvent value)?  deleteFeedComment,TResult Function( ToggleFeedCommentLikeEvent value)?  toggleFeedCommentLike,TResult Function( ClearFeedCommentMessagesEvent value)?  clearFeedCommentMessages,TResult Function( StartWatchCommentsEvent value)?  startWatchComments,TResult Function( StopWatchCommentsEvent value)?  stopWatchComments,TResult Function( WatchCommentArrivedEvent value)?  watchCommentArrived,TResult Function( WatchErrorEvent value)?  watchError,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LoadFeedCommentsEvent value)?  loadFeedComments,TResult Function( LoadMoreFeedCommentsEvent value)?  loadMoreFeedComments,TResult Function( LoadRepliesEvent value)?  loadReplies,TResult Function( AddFeedCommentEvent value)?  addFeedComment,TResult Function( DeleteFeedCommentEvent value)?  deleteFeedComment,TResult Function( ToggleFeedCommentLikeEvent value)?  toggleFeedCommentLike,TResult Function( ClearFeedCommentMessagesEvent value)?  clearFeedCommentMessages,TResult Function( StartWatchCommentsEvent value)?  startWatchComments,TResult Function( StopWatchCommentsEvent value)?  stopWatchComments,TResult Function( WatchCommentArrivedEvent value)?  watchCommentArrived,TResult Function( WatchErrorEvent value)?  watchError,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case LoadFeedCommentsEvent() when loadFeedComments != null:
 return loadFeedComments(_that);case LoadMoreFeedCommentsEvent() when loadMoreFeedComments != null:
-return loadMoreFeedComments(_that);case AddFeedCommentEvent() when addFeedComment != null:
+return loadMoreFeedComments(_that);case LoadRepliesEvent() when loadReplies != null:
+return loadReplies(_that);case AddFeedCommentEvent() when addFeedComment != null:
 return addFeedComment(_that);case DeleteFeedCommentEvent() when deleteFeedComment != null:
 return deleteFeedComment(_that);case ToggleFeedCommentLikeEvent() when toggleFeedCommentLike != null:
 return toggleFeedCommentLike(_that);case ClearFeedCommentMessagesEvent() when clearFeedCommentMessages != null:
@@ -86,12 +87,13 @@ return watchError(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LoadFeedCommentsEvent value)  loadFeedComments,required TResult Function( LoadMoreFeedCommentsEvent value)  loadMoreFeedComments,required TResult Function( AddFeedCommentEvent value)  addFeedComment,required TResult Function( DeleteFeedCommentEvent value)  deleteFeedComment,required TResult Function( ToggleFeedCommentLikeEvent value)  toggleFeedCommentLike,required TResult Function( ClearFeedCommentMessagesEvent value)  clearFeedCommentMessages,required TResult Function( StartWatchCommentsEvent value)  startWatchComments,required TResult Function( StopWatchCommentsEvent value)  stopWatchComments,required TResult Function( WatchCommentArrivedEvent value)  watchCommentArrived,required TResult Function( WatchErrorEvent value)  watchError,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LoadFeedCommentsEvent value)  loadFeedComments,required TResult Function( LoadMoreFeedCommentsEvent value)  loadMoreFeedComments,required TResult Function( LoadRepliesEvent value)  loadReplies,required TResult Function( AddFeedCommentEvent value)  addFeedComment,required TResult Function( DeleteFeedCommentEvent value)  deleteFeedComment,required TResult Function( ToggleFeedCommentLikeEvent value)  toggleFeedCommentLike,required TResult Function( ClearFeedCommentMessagesEvent value)  clearFeedCommentMessages,required TResult Function( StartWatchCommentsEvent value)  startWatchComments,required TResult Function( StopWatchCommentsEvent value)  stopWatchComments,required TResult Function( WatchCommentArrivedEvent value)  watchCommentArrived,required TResult Function( WatchErrorEvent value)  watchError,}){
 final _that = this;
 switch (_that) {
 case LoadFeedCommentsEvent():
 return loadFeedComments(_that);case LoadMoreFeedCommentsEvent():
-return loadMoreFeedComments(_that);case AddFeedCommentEvent():
+return loadMoreFeedComments(_that);case LoadRepliesEvent():
+return loadReplies(_that);case AddFeedCommentEvent():
 return addFeedComment(_that);case DeleteFeedCommentEvent():
 return deleteFeedComment(_that);case ToggleFeedCommentLikeEvent():
 return toggleFeedCommentLike(_that);case ClearFeedCommentMessagesEvent():
@@ -116,12 +118,13 @@ return watchError(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LoadFeedCommentsEvent value)?  loadFeedComments,TResult? Function( LoadMoreFeedCommentsEvent value)?  loadMoreFeedComments,TResult? Function( AddFeedCommentEvent value)?  addFeedComment,TResult? Function( DeleteFeedCommentEvent value)?  deleteFeedComment,TResult? Function( ToggleFeedCommentLikeEvent value)?  toggleFeedCommentLike,TResult? Function( ClearFeedCommentMessagesEvent value)?  clearFeedCommentMessages,TResult? Function( StartWatchCommentsEvent value)?  startWatchComments,TResult? Function( StopWatchCommentsEvent value)?  stopWatchComments,TResult? Function( WatchCommentArrivedEvent value)?  watchCommentArrived,TResult? Function( WatchErrorEvent value)?  watchError,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LoadFeedCommentsEvent value)?  loadFeedComments,TResult? Function( LoadMoreFeedCommentsEvent value)?  loadMoreFeedComments,TResult? Function( LoadRepliesEvent value)?  loadReplies,TResult? Function( AddFeedCommentEvent value)?  addFeedComment,TResult? Function( DeleteFeedCommentEvent value)?  deleteFeedComment,TResult? Function( ToggleFeedCommentLikeEvent value)?  toggleFeedCommentLike,TResult? Function( ClearFeedCommentMessagesEvent value)?  clearFeedCommentMessages,TResult? Function( StartWatchCommentsEvent value)?  startWatchComments,TResult? Function( StopWatchCommentsEvent value)?  stopWatchComments,TResult? Function( WatchCommentArrivedEvent value)?  watchCommentArrived,TResult? Function( WatchErrorEvent value)?  watchError,}){
 final _that = this;
 switch (_that) {
 case LoadFeedCommentsEvent() when loadFeedComments != null:
 return loadFeedComments(_that);case LoadMoreFeedCommentsEvent() when loadMoreFeedComments != null:
-return loadMoreFeedComments(_that);case AddFeedCommentEvent() when addFeedComment != null:
+return loadMoreFeedComments(_that);case LoadRepliesEvent() when loadReplies != null:
+return loadReplies(_that);case AddFeedCommentEvent() when addFeedComment != null:
 return addFeedComment(_that);case DeleteFeedCommentEvent() when deleteFeedComment != null:
 return deleteFeedComment(_that);case ToggleFeedCommentLikeEvent() when toggleFeedCommentLike != null:
 return toggleFeedCommentLike(_that);case ClearFeedCommentMessagesEvent() when clearFeedCommentMessages != null:
@@ -146,11 +149,12 @@ return watchError(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String postId,  int? limit)?  loadFeedComments,TResult Function( String postId,  int limit)?  loadMoreFeedComments,TResult Function( String postId,  String content,  String? parentCommentId)?  addFeedComment,TResult Function( String commentId)?  deleteFeedComment,TResult Function( String commentId)?  toggleFeedCommentLike,TResult Function()?  clearFeedCommentMessages,TResult Function( String postId)?  startWatchComments,TResult Function()?  stopWatchComments,TResult Function( CommentEntity comment)?  watchCommentArrived,TResult Function( String message)?  watchError,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String postId,  int? limit)?  loadFeedComments,TResult Function( String postId,  int limit)?  loadMoreFeedComments,TResult Function( String parentCommentId)?  loadReplies,TResult Function( String postId,  String content,  String? parentCommentId)?  addFeedComment,TResult Function( String commentId)?  deleteFeedComment,TResult Function( String commentId)?  toggleFeedCommentLike,TResult Function()?  clearFeedCommentMessages,TResult Function( String postId)?  startWatchComments,TResult Function()?  stopWatchComments,TResult Function( CommentEntity comment)?  watchCommentArrived,TResult Function( String message)?  watchError,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case LoadFeedCommentsEvent() when loadFeedComments != null:
 return loadFeedComments(_that.postId,_that.limit);case LoadMoreFeedCommentsEvent() when loadMoreFeedComments != null:
-return loadMoreFeedComments(_that.postId,_that.limit);case AddFeedCommentEvent() when addFeedComment != null:
+return loadMoreFeedComments(_that.postId,_that.limit);case LoadRepliesEvent() when loadReplies != null:
+return loadReplies(_that.parentCommentId);case AddFeedCommentEvent() when addFeedComment != null:
 return addFeedComment(_that.postId,_that.content,_that.parentCommentId);case DeleteFeedCommentEvent() when deleteFeedComment != null:
 return deleteFeedComment(_that.commentId);case ToggleFeedCommentLikeEvent() when toggleFeedCommentLike != null:
 return toggleFeedCommentLike(_that.commentId);case ClearFeedCommentMessagesEvent() when clearFeedCommentMessages != null:
@@ -176,11 +180,12 @@ return watchError(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String postId,  int? limit)  loadFeedComments,required TResult Function( String postId,  int limit)  loadMoreFeedComments,required TResult Function( String postId,  String content,  String? parentCommentId)  addFeedComment,required TResult Function( String commentId)  deleteFeedComment,required TResult Function( String commentId)  toggleFeedCommentLike,required TResult Function()  clearFeedCommentMessages,required TResult Function( String postId)  startWatchComments,required TResult Function()  stopWatchComments,required TResult Function( CommentEntity comment)  watchCommentArrived,required TResult Function( String message)  watchError,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String postId,  int? limit)  loadFeedComments,required TResult Function( String postId,  int limit)  loadMoreFeedComments,required TResult Function( String parentCommentId)  loadReplies,required TResult Function( String postId,  String content,  String? parentCommentId)  addFeedComment,required TResult Function( String commentId)  deleteFeedComment,required TResult Function( String commentId)  toggleFeedCommentLike,required TResult Function()  clearFeedCommentMessages,required TResult Function( String postId)  startWatchComments,required TResult Function()  stopWatchComments,required TResult Function( CommentEntity comment)  watchCommentArrived,required TResult Function( String message)  watchError,}) {final _that = this;
 switch (_that) {
 case LoadFeedCommentsEvent():
 return loadFeedComments(_that.postId,_that.limit);case LoadMoreFeedCommentsEvent():
-return loadMoreFeedComments(_that.postId,_that.limit);case AddFeedCommentEvent():
+return loadMoreFeedComments(_that.postId,_that.limit);case LoadRepliesEvent():
+return loadReplies(_that.parentCommentId);case AddFeedCommentEvent():
 return addFeedComment(_that.postId,_that.content,_that.parentCommentId);case DeleteFeedCommentEvent():
 return deleteFeedComment(_that.commentId);case ToggleFeedCommentLikeEvent():
 return toggleFeedCommentLike(_that.commentId);case ClearFeedCommentMessagesEvent():
@@ -205,11 +210,12 @@ return watchError(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String postId,  int? limit)?  loadFeedComments,TResult? Function( String postId,  int limit)?  loadMoreFeedComments,TResult? Function( String postId,  String content,  String? parentCommentId)?  addFeedComment,TResult? Function( String commentId)?  deleteFeedComment,TResult? Function( String commentId)?  toggleFeedCommentLike,TResult? Function()?  clearFeedCommentMessages,TResult? Function( String postId)?  startWatchComments,TResult? Function()?  stopWatchComments,TResult? Function( CommentEntity comment)?  watchCommentArrived,TResult? Function( String message)?  watchError,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String postId,  int? limit)?  loadFeedComments,TResult? Function( String postId,  int limit)?  loadMoreFeedComments,TResult? Function( String parentCommentId)?  loadReplies,TResult? Function( String postId,  String content,  String? parentCommentId)?  addFeedComment,TResult? Function( String commentId)?  deleteFeedComment,TResult? Function( String commentId)?  toggleFeedCommentLike,TResult? Function()?  clearFeedCommentMessages,TResult? Function( String postId)?  startWatchComments,TResult? Function()?  stopWatchComments,TResult? Function( CommentEntity comment)?  watchCommentArrived,TResult? Function( String message)?  watchError,}) {final _that = this;
 switch (_that) {
 case LoadFeedCommentsEvent() when loadFeedComments != null:
 return loadFeedComments(_that.postId,_that.limit);case LoadMoreFeedCommentsEvent() when loadMoreFeedComments != null:
-return loadMoreFeedComments(_that.postId,_that.limit);case AddFeedCommentEvent() when addFeedComment != null:
+return loadMoreFeedComments(_that.postId,_that.limit);case LoadRepliesEvent() when loadReplies != null:
+return loadReplies(_that.parentCommentId);case AddFeedCommentEvent() when addFeedComment != null:
 return addFeedComment(_that.postId,_that.content,_that.parentCommentId);case DeleteFeedCommentEvent() when deleteFeedComment != null:
 return deleteFeedComment(_that.commentId);case ToggleFeedCommentLikeEvent() when toggleFeedCommentLike != null:
 return toggleFeedCommentLike(_that.commentId);case ClearFeedCommentMessagesEvent() when clearFeedCommentMessages != null:
@@ -355,6 +361,72 @@ class _$LoadMoreFeedCommentsEventCopyWithImpl<$Res>
 postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
 as String,limit: null == limit ? _self.limit : limit // ignore: cast_nullable_to_non_nullable
 as int,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class LoadRepliesEvent implements FeedCommentEvent {
+  const LoadRepliesEvent({required this.parentCommentId});
+  
+
+ final  String parentCommentId;
+
+/// Create a copy of FeedCommentEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LoadRepliesEventCopyWith<LoadRepliesEvent> get copyWith => _$LoadRepliesEventCopyWithImpl<LoadRepliesEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadRepliesEvent&&(identical(other.parentCommentId, parentCommentId) || other.parentCommentId == parentCommentId));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,parentCommentId);
+
+@override
+String toString() {
+  return 'FeedCommentEvent.loadReplies(parentCommentId: $parentCommentId)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $LoadRepliesEventCopyWith<$Res> implements $FeedCommentEventCopyWith<$Res> {
+  factory $LoadRepliesEventCopyWith(LoadRepliesEvent value, $Res Function(LoadRepliesEvent) _then) = _$LoadRepliesEventCopyWithImpl;
+@useResult
+$Res call({
+ String parentCommentId
+});
+
+
+
+
+}
+/// @nodoc
+class _$LoadRepliesEventCopyWithImpl<$Res>
+    implements $LoadRepliesEventCopyWith<$Res> {
+  _$LoadRepliesEventCopyWithImpl(this._self, this._then);
+
+  final LoadRepliesEvent _self;
+  final $Res Function(LoadRepliesEvent) _then;
+
+/// Create a copy of FeedCommentEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? parentCommentId = null,}) {
+  return _then(LoadRepliesEvent(
+parentCommentId: null == parentCommentId ? _self.parentCommentId : parentCommentId // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 

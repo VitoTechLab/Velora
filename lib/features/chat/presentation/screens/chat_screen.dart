@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -6,12 +6,13 @@ import 'package:velora/core/di/service_locator.dart';
 import 'package:velora/features/chat/presentation/bloc/chat_message_bloc.dart';
 import 'package:velora/features/chat/presentation/bloc/chat_message_event.dart';
 import 'package:velora/features/chat/presentation/bloc/chat_message_state.dart';
-import 'package:velora/features/chat/presentation/screens/chat_detail_screen.dart';
 import 'package:velora/features/chat/presentation/widgets/chat_filter_chips.dart';
-import 'package:velora/features/chat/presentation/widgets/chat_list_item.dart';
+import 'package:velora/features/chat/presentation/widgets/conversation_list_widget.dart';
 import 'package:velora/l10n/app_localizations.dart';
 import 'package:velora/routes/app_router.dart';
 
+/// Optimized chat screen with modular conversation list
+/// Uses BlocSelector to prevent unnecessary rebuilds
 class ChatScreen extends HookWidget {
   const ChatScreen({super.key});
 
@@ -119,10 +120,11 @@ class ChatScreen extends HookWidget {
                         ),
                       ),
                       const SizedBox(height: 12),
-                      BlocBuilder<ChatMessageBloc, ChatMessageState>(
-                        builder: (context, state) {
+                      BlocSelector<ChatMessageBloc, ChatMessageState, String>(
+                        selector: (state) => state.selectedFilter,
+                        builder: (context, selectedFilter) {
                           return ChatFilterChips(
-                            selectedFilter: state.selectedFilter,
+                            selectedFilter: selectedFilter,
                             onFilterSelected: (filter) {
                               context.read<ChatMessageBloc>().add(
                                 ChatMessageEvent.setChatFilter(filter),
@@ -135,187 +137,8 @@ class ChatScreen extends HookWidget {
                   ),
                 ),
                 Expanded(
-                  child: BlocBuilder<ChatMessageBloc, ChatMessageState>(
-                    builder: (context, state) {
-                      if (state.isLoadingConversations) {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-
-                      if (state.conversationsError != null) {
-                        return Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.error_outline,
-                                size: 64,
-                                color: colorScheme.error,
-                              ),
-                              const SizedBox(height: 16),
-                              Text(
-                                state.conversationsError!,
-                                style: textTheme.bodyLarge?.copyWith(
-                                  color: colorScheme.error,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                              const SizedBox(height: 16),
-                              FilledButton.icon(
-                                onPressed: () {
-                                  context.read<ChatMessageBloc>().add(
-                                    const LoadConversationListEvent(),
-                                  );
-                                },
-                                icon: const Icon(Icons.refresh),
-                                label: Text(t.chatScreenRetry),
-                              ),
-                            ],
-                          ),
-                        );
-                      }
-
-                      final conversations = state.conversations;
-
-                      // Apply search filter
-                      var filteredConversations = conversations;
-                      final searchQuery = state.searchQuery
-                          .trim()
-                          .toLowerCase();
-                      if (searchQuery.isNotEmpty) {
-                        filteredConversations = conversations.where((conv) {
-                          final name = conv.title ?? '';
-                          final lastMessage = conv.lastMessagePreview ?? '';
-                          return name.contains(searchQuery) ||
-                              lastMessage.contains(searchQuery);
-                        }).toList();
-                      } else {
-                        // Apply filter only when not searching
-                        filteredConversations = conversations.where((conv) {
-                          switch (state.selectedFilter) {
-                            case 'unread':
-                              return conv.unreadCount > 0;
-                            case 'favourites':
-                              // TODO: Add isFavourite field to ConversationListEntity
-                              return false;
-                            case 'groups':
-                              return conv.type == 'group';
-                            case 'all':
-                            default:
-                              return true;
-                          }
-                        }).toList();
-                      }
-
-                      if (filteredConversations.isEmpty) {
-                        final hasSearch = state.searchQuery.trim().isNotEmpty;
-                        final isFiltered = state.selectedFilter != 'all';
-                        return Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                hasSearch
-                                    ? Icons.search_off
-                                    : Icons.chat_bubble_outline,
-                                size: 80,
-                                color: colorScheme.outline,
-                              ),
-                              const SizedBox(height: 16),
-                              Text(
-                                hasSearch
-                                    ? 'No results for "${state.searchQuery}"'
-                                    : isFiltered
-                                    ? 'No ${state.selectedFilter} chats'
-                                    : t.chatScreenNoChats,
-                                style: textTheme.titleLarge?.copyWith(
-                                  color: colorScheme.onSurfaceVariant,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                hasSearch
-                                    ? 'Try searching for something else'
-                                    : isFiltered
-                                    ? 'Try selecting a different filter'
-                                    : t.chatScreenNoChatsHint,
-                                style: textTheme.bodyMedium?.copyWith(
-                                  color: colorScheme.outline,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                        );
-                      }
-
-                      return Semantics(
-                        label: t.chatScreenListLabel,
-                        hint: t.chatScreenListHint,
-                        child: ListView.builder(
-                          controller: scrollController,
-                          physics: const AlwaysScrollableScrollPhysics(
-                            parent: BouncingScrollPhysics(),
-                          ),
-                          itemCount: filteredConversations.length,
-                          itemBuilder: (context, index) {
-                            final conversation = filteredConversations[index];
-                            final isGroup = conversation.type == 'group';
-
-                            return ChatListItem(
-                              key: ValueKey(
-                                'chat_${conversation.conversationId}',
-                              ),
-                              profileImageUrl:
-                                  conversation.photoUrl ??
-                                  'https://i.pravatar.cc/150?img=12',
-                              name:
-                                  conversation.title ??
-                                  (isGroup
-                                      ? t.chatScreenUnnamedGroup
-                                      : t.chatScreenUnnamed),
-                              message: conversation.lastMessagePreview ?? '',
-                              time: conversation.lastMessageAt != null
-                                  ? _formatTime(conversation.lastMessageAt!)
-                                  : '',
-                              isRead: conversation.unreadCount == 0,
-                              messageType: _getMessageType(
-                                conversation.lastMessageKind,
-                              ),
-                              unreadCount: conversation.unreadCount > 0
-                                  ? conversation.unreadCount
-                                  : null,
-                              isGroup: isGroup,
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ChatDetailScreen(
-                                      conversationId:
-                                          conversation.conversationId,
-                                      chatName:
-                                          conversation.title ??
-                                          (isGroup
-                                              ? t.chatScreenUnnamedGroup
-                                              : t.chatScreenUnnamed),
-                                      chatSubtitle: isGroup
-                                          ? t.chatDetailGroupSubtitle
-                                          : t.chatDetailSelfSubtitle,
-                                      profileImageUrl:
-                                          conversation.photoUrl ??
-                                          'https://i.pravatar.cc/150?img=12',
-                                      isGroup: isGroup,
-                                      peerUserId: isGroup
-                                          ? null
-                                          : conversation.userId,
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                        ),
-                      );
-                    },
+                  child: ConversationListWidget(
+                    scrollController: scrollController,
                   ),
                 ),
               ],
@@ -324,26 +147,5 @@ class ChatScreen extends HookWidget {
         ),
       ),
     );
-  }
-
-  String _formatTime(DateTime dateTime) {
-    final now = DateTime.now();
-    final difference = now.difference(dateTime);
-
-    if (difference.inDays == 0) {
-      return '${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}';
-    } else if (difference.inDays == 1) {
-      return 'Yesterday';
-    } else if (difference.inDays < 7) {
-      final weekday = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-      return weekday[dateTime.weekday - 1];
-    } else {
-      return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
-    }
-  }
-
-  String? _getMessageType(String? kind) {
-    if (kind == null) return null;
-    return kind; // 'text', 'media', 'call', etc.
   }
 }

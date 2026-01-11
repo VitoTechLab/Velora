@@ -4,16 +4,16 @@ import 'package:velora/l10n/app_localizations.dart';
 
 /// Contextual toolbar with location, link, and campaign actions
 class ContextualToolbar extends StatelessWidget {
-  final VoidCallback onAddLocation;
-  final VoidCallback onAddLink;
-  final VoidCallback onAddCampaign;
-
   const ContextualToolbar({
     super.key,
     required this.onAddLocation,
     required this.onAddLink,
     required this.onAddCampaign,
   });
+
+  final VoidCallback onAddLocation;
+  final VoidCallback onAddLink;
+  final VoidCallback onAddCampaign;
 
   @override
   Widget build(BuildContext context) {

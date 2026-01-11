@@ -7,7 +7,7 @@ import 'package:photo_manager/photo_manager.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 import 'package:velora/core/themes/color_material.dart';
 import 'package:velora/core/ui/app_messenger.dart';
-import 'package:velora/features/media/domain/entities/gallery_media_asset.dart';
+import 'package:velora/features/media/domain/entities/gallery_media_asset_entity.dart';
 import 'package:velora/features/media/presentation/bloc/media_gallery_bloc.dart';
 import 'package:velora/features/media/presentation/widgets/media_skeleton_tile.dart';
 import 'package:velora/features/navigation/models/create_post_media_args.dart';
@@ -80,7 +80,7 @@ class MediaGalleryScreen extends HookWidget {
       }
 
       context.pushNamed(
-        AppRouteName.createPost,
+        AppRouteName.postFeed,
         extra: CreatePostMediaArgs(selectedMedia: files),
       );
     }

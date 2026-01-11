@@ -21,6 +21,7 @@ class AuthDivider extends StatelessWidget {
             child: Divider(
               color: colorScheme.outline.withValues(alpha: 0.5),
               thickness: 1,
+              height: 1,
             ),
           ),
           Padding(
@@ -37,6 +38,7 @@ class AuthDivider extends StatelessWidget {
             child: Divider(
               color: colorScheme.outline.withValues(alpha: 0.5),
               thickness: 1,
+              height: 1,
             ),
           ),
         ],

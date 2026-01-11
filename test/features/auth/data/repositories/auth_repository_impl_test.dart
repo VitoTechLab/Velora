@@ -4,8 +4,8 @@ import 'package:velora/core/errors/auth_failure.dart';
 import 'package:velora/features/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:velora/features/auth/data/models/auth_session_model.dart';
 import 'package:velora/features/auth/data/repositories/auth_repository_impl.dart';
-import 'package:velora/features/auth/domain/entities/auth_snapshot.dart';
-import 'package:velora/features/auth/domain/entities/auth_status.dart';
+import 'package:velora/features/auth/domain/entities/auth_snapshot_entity.dart';
+import 'package:velora/features/auth/domain/entities/auth_status_entity.dart';
 
 class _MockAuthRemoteDataSource extends Mock implements AuthRemoteDataSource {}
 
@@ -85,18 +85,18 @@ void main() {
       await expectLater(
         snapshots,
         emitsInOrder([
-          predicate<AuthSnapshot>(
+          predicate<AuthSnapshotEntity>(
             (value) =>
-                value.status == AuthStatus.unauthenticated &&
+                value.status == AuthStatusEntity.unauthenticated &&
                 value.userId == null,
           ),
-          predicate<AuthSnapshot>(
+          predicate<AuthSnapshotEntity>(
             (value) =>
-                value.status == AuthStatus.authenticated &&
+                value.status == AuthStatusEntity.authenticated &&
                 value.userId == sampleModel.userId,
           ),
-          predicate<AuthSnapshot>(
-            (value) => value.status == AuthStatus.unauthenticated,
+          predicate<AuthSnapshotEntity>(
+            (value) => value.status == AuthStatusEntity.unauthenticated,
           ),
         ]),
       );

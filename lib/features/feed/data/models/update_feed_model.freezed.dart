@@ -15,8 +15,9 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UpdateFeedModel {
 
-@JsonKey(name: 'content') String? get content;@StringListConverter()@JsonKey(name: 'image_urls') List<String>? get imageUrls;@StringListConverter()@JsonKey(name: 'video_urls') List<String>? get videoUrls;// per-post settings
-@JsonKey(name: 'comments_enabled') bool? get commentsEnabled;@JsonKey(name: 'hide_like_count') bool? get hideLikeCount;@JsonKey(name: 'hide_comment_count') bool? get hideCommentCount;@JsonKey(name: 'hide_share_count') bool? get hideShareCount;@JsonKey(name: 'hide_likes_list') bool? get hideLikesList;@JsonKey(name: 'campaign_id') String? get campaignId;@JsonKey(name: 'campaign_title') String? get campaignTitle;
+@JsonKey(name: 'content') String? get content;@StringListConverter()@JsonKey(name: 'image_urls') List<String>? get imageUrls;@StringListConverter()@JsonKey(name: 'video_urls') List<String>? get videoUrls;// Post privacy settings
+@JsonKey(name: 'comments_enabled') bool? get commentsEnabled;@JsonKey(name: 'hide_like_count') bool? get hideLikeCount;@JsonKey(name: 'hide_comment_count') bool? get hideCommentCount;@JsonKey(name: 'hide_share_count') bool? get hideShareCount;@JsonKey(name: 'hide_likes_list') bool? get hideLikesList;// Campaign association
+@JsonKey(name: 'campaign_id') String? get campaignId;@JsonKey(name: 'campaign_title') String? get campaignTitle;
 /// Create a copy of UpdateFeedModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -241,12 +242,13 @@ class _UpdateFeedModel implements UpdateFeedModel {
   return EqualUnmodifiableListView(value);
 }
 
-// per-post settings
+// Post privacy settings
 @override@JsonKey(name: 'comments_enabled') final  bool? commentsEnabled;
 @override@JsonKey(name: 'hide_like_count') final  bool? hideLikeCount;
 @override@JsonKey(name: 'hide_comment_count') final  bool? hideCommentCount;
 @override@JsonKey(name: 'hide_share_count') final  bool? hideShareCount;
 @override@JsonKey(name: 'hide_likes_list') final  bool? hideLikesList;
+// Campaign association
 @override@JsonKey(name: 'campaign_id') final  String? campaignId;
 @override@JsonKey(name: 'campaign_title') final  String? campaignTitle;
 

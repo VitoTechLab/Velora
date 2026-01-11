@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:velora/core/errors/failure.dart';
 import 'package:velora/features/notification/domain/entities/notification_entity.dart';
 import 'package:velora/features/notification/domain/entities/notification_cursor_entity.dart';
-import 'package:velora/features/notification/domain/entities/notification_pagination_result.dart';
+import 'package:velora/features/notification/domain/entities/notification_pagination_result_entity.dart';
 
 /// Notification repository contract
 abstract class NotificationRepository {

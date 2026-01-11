@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
-/// Clean caption input - no border, no counter, just simple text field
+/// Caption input field with no borders or visual effects
 class CaptionInputSection extends StatelessWidget {
-  final TextEditingController controller;
-  final FocusNode focusNode;
-  final int maxLength;
-
   const CaptionInputSection({
     super.key,
     required this.controller,
     required this.focusNode,
     this.maxLength = 2000,
   });
+
+  final TextEditingController controller;
+  final FocusNode focusNode;
+  final int maxLength;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +35,11 @@ class CaptionInputSection extends StatelessWidget {
         ),
         decoration: InputDecoration(
           border: InputBorder.none,
+          enabledBorder: InputBorder.none,
+          focusedBorder: InputBorder.none,
+          errorBorder: InputBorder.none,
+          focusedErrorBorder: InputBorder.none,
+          disabledBorder: InputBorder.none,
           hintText: t.postCaptionHint,
           hintStyle: theme.textTheme.bodyLarge?.copyWith(
             color: colorScheme.onSurface.withValues(alpha: 0.4),

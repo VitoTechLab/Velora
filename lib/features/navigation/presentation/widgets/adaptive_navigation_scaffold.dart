@@ -25,8 +25,6 @@ class AdaptiveNavigationScaffold extends StatelessWidget {
   // Increased icon sizes for better visibility
   static const double _mobileIconSize = 30;
   static const double _railIconSize = 28;
-  // Avatar size for profile tab
-  static const double _avatarSize = 28;
   // Thicker stroke weight for icons
   static const double _iconStrokeWeight = 600;
 

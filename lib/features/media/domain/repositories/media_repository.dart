@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:velora/core/errors/failure.dart';
-import 'package:velora/features/media/domain/entities/media_asset.dart';
+import 'package:velora/features/media/domain/entities/media_asset_entity.dart';
 
 abstract class MediaRepository {
   Future<Either<Failure, List<MediaAsset>>> uploadImagesForPost({

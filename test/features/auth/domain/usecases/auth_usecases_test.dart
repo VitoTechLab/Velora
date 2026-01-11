@@ -2,16 +2,16 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:velora/core/errors/failure.dart';
-import 'package:velora/features/auth/domain/entities/auth_session.dart';
-import 'package:velora/features/auth/domain/entities/auth_snapshot.dart';
-import 'package:velora/features/auth/domain/entities/auth_status.dart';
+import 'package:velora/features/auth/domain/entities/auth_session_entity.dart';
+import 'package:velora/features/auth/domain/entities/auth_snapshot_entity.dart';
+import 'package:velora/features/auth/domain/entities/auth_status_entity.dart';
 import 'package:velora/features/auth/domain/repositories/auth_repository.dart';
-import 'package:velora/features/auth/domain/usecases/auth_reset_password.dart';
-import 'package:velora/features/auth/domain/usecases/auth_sign_in.dart';
-import 'package:velora/features/auth/domain/usecases/auth_sign_in_with_google.dart';
-import 'package:velora/features/auth/domain/usecases/auth_sign_out.dart';
-import 'package:velora/features/auth/domain/usecases/auth_sign_up.dart';
-import 'package:velora/features/auth/domain/usecases/auth_watch_auth_snapshot.dart';
+import 'package:velora/features/auth/domain/usecases/reset_password_usecase.dart';
+import 'package:velora/features/auth/domain/usecases/sign_in_usecase.dart';
+import 'package:velora/features/auth/domain/usecases/sign_in_with_google_usecase.dart';
+import 'package:velora/features/auth/domain/usecases/sign_out_usecase.dart';
+import 'package:velora/features/auth/domain/usecases/sign_up_usecase.dart';
+import 'package:velora/features/auth/domain/usecases/watch_auth_snapshot_usecase.dart';
 
 class _MockAuthRepository extends Mock implements AuthRepository {}
 
@@ -20,7 +20,7 @@ class _FakeFailure extends Fake implements Failure {}
 void main() {
   late _MockAuthRepository repository;
 
-  const session = AuthSession(
+  const session = AuthSessionEntity(
     userId: 'user-123',
     email: 'user@velora.app',
     emailVerified: true,
@@ -34,8 +34,8 @@ void main() {
     repository = _MockAuthRepository();
   });
 
-  test('AuthSignIn delegates to repository', () async {
-    final useCase = AuthSignIn(repository);
+  test('SignInUseCase delegates to repository', () async {
+    final useCase = SignInUseCase(repository: repository);
     when(
       () => repository.signIn(
         email: any(named: 'email'),
@@ -51,8 +51,8 @@ void main() {
     ).called(1);
   });
 
-  test('AuthSignUp delegates to repository', () async {
-    final useCase = AuthSignUp(repository);
+  test('SignUpUseCase delegates to repository', () async {
+    final useCase = SignUpUseCase(repository: repository);
     when(
       () => repository.signUp(
         email: any(named: 'email'),
@@ -68,8 +68,8 @@ void main() {
     ).called(1);
   });
 
-  test('AuthSignInWithGoogle delegates to repository', () async {
-    final useCase = AuthSignInWithGoogle(repository);
+  test('SignInWithGoogleUseCase delegates to repository', () async {
+    final useCase = SignInWithGoogleUseCase(repository: repository);
     when(
       () => repository.signInWithGoogle(),
     ).thenAnswer((_) async => const Right(session));
@@ -80,8 +80,8 @@ void main() {
     verify(() => repository.signInWithGoogle()).called(1);
   });
 
-  test('AuthResetPassword delegates to repository', () async {
-    final useCase = AuthResetPassword(repository);
+  test('ResetPasswordUseCase delegates to repository', () async {
+    final useCase = ResetPasswordUseCase(repository: repository);
     when(
       () => repository.resetPassword(email: any(named: 'email')),
     ).thenAnswer((_) async => const Right(null));
@@ -92,8 +92,8 @@ void main() {
     verify(() => repository.resetPassword(email: 'user@velora.app')).called(1);
   });
 
-  test('AuthSignOut delegates to repository', () async {
-    final useCase = AuthSignOut(repository);
+  test('SignOutUseCase delegates to repository', () async {
+    final useCase = SignOutUseCase(repository: repository);
     when(() => repository.signOut()).thenAnswer((_) async => const Right(null));
 
     final result = await useCase();
@@ -102,16 +102,16 @@ void main() {
     verify(() => repository.signOut()).called(1);
   });
 
-  test('AuthWatchAuthSnapshot delegates to repository', () async {
+  test('WatchAuthSnapshotUseCase delegates to repository', () async {
     final snapshots = [
-      const AuthSnapshot(status: AuthStatus.unauthenticated),
-      const AuthSnapshot(status: AuthStatus.authenticated, userId: 'user-123'),
+      const AuthSnapshotEntity(status: AuthStatusEntity.unauthenticated),
+      const AuthSnapshotEntity(status: AuthStatusEntity.authenticated, userId: 'user-123'),
     ];
     when(
       () => repository.watchAuthSnapshot(),
     ).thenAnswer((_) => Stream.fromIterable(snapshots));
 
-    final useCase = AuthWatchAuthSnapshot(repository);
+    final useCase = WatchAuthSnapshotUseCase(repository: repository);
 
     expect(await useCase().toList(), equals(snapshots));
     verify(() => repository.watchAuthSnapshot()).called(1);

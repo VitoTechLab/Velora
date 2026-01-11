@@ -3,22 +3,26 @@ import 'package:velora/core/errors/failure.dart';
 import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/feed/domain/entities/feed_entity.dart';
 import 'package:velora/features/post/data/datasources/post_remote_datasource.dart';
-import 'package:velora/features/post/data/models/create_post_model.dart';
-import 'package:velora/features/post/domain/entities/create_post_entity.dart';
+import 'package:velora/features/post/data/models/post_feed_model.dart';
+import 'package:velora/features/post/domain/entities/post_feed_entity.dart';
 import 'package:velora/features/post/domain/repositories/post_repository.dart';
 
+/// Implementation of post repository using remote datasource
 class PostRepositoryImpl implements PostRepository {
+  const PostRepositoryImpl({required this.remoteDataSource});
+
   final PostRemoteDataSource remoteDataSource;
 
-  PostRepositoryImpl({required this.remoteDataSource});
+  static const _logTag = 'PostRepository';
 
+  /// Create new feed post with media and visibility settings
   @override
-  Future<Either<Failure, FeedEntity>> createPost({
-    required CreatePostEntity post,
+  Future<Either<Failure, FeedEntity>> createFeedPost({
+    required PostFeedEntity post,
   }) async {
     try {
-      logi('[POST REPOSITORY] createPost - User: ${post.userId}');
-      final payload = CreatePostModel(
+      logi('createFeedPost - User: ${post.userId}', tag: _logTag);
+      final payload = PostFeedModel(
         userId: post.userId,
         content: post.content,
         imageUrls: post.imageUrls,
@@ -31,10 +35,10 @@ class PostRepositoryImpl implements PostRepository {
         campaignId: post.campaignId,
         campaignTitle: post.campaignTitle,
       );
-      final result = await remoteDataSource.createPost(payload);
+      final result = await remoteDataSource.createFeedPost(payload);
       return Right(result.toEntity());
     } catch (e) {
-      loge('[POST REPOSITORY ERROR] createPost', error: e);
+      loge('createFeedPost failed', error: e, tag: _logTag);
       return Left(Failure.fromException(e));
     }
   }

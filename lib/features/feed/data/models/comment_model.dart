@@ -5,6 +5,7 @@ import 'package:velora/features/feed/domain/entities/comment_entity.dart';
 part 'comment_model.freezed.dart';
 part 'comment_model.g.dart';
 
+/// Comment data model for API responses.
 @freezed
 abstract class CommentModel with _$CommentModel {
   const CommentModel._();
@@ -25,11 +26,13 @@ abstract class CommentModel with _$CommentModel {
     List<CommentModel> replies,
     @JsonKey(name: 'likes_count') @Default(0) int likesCount,
     @JsonKey(includeToJson: false) @Default(false) bool isLiked,
+    @JsonKey(name: 'reply_count') @Default(0) int replyCount,
   }) = _CommentModel;
 
   factory CommentModel.fromJson(Map<String, dynamic> json) =>
       _$CommentModelFromJson(json);
 
+  /// Converts to domain entity.
   CommentEntity toEntity() {
     return CommentEntity(
       id: id,
@@ -43,9 +46,12 @@ abstract class CommentModel with _$CommentModel {
       replies: replies.map((r) => r.toEntity()).toList(),
       likesCount: likesCount,
       isLiked: isLiked,
+      replyCount: replyCount,
+      repliesLoaded: replies.isNotEmpty,
     );
   }
 
+  /// Converts to insert payload.
   Map<String, dynamic> toInsertJson() {
     final payload = <String, dynamic>{
       'post_id': postId,
@@ -59,6 +65,7 @@ abstract class CommentModel with _$CommentModel {
     return payload;
   }
 
+  /// Creates from domain entity.
   factory CommentModel.fromEntity(CommentEntity entity) {
     return CommentModel(
       id: entity.id,
@@ -72,6 +79,7 @@ abstract class CommentModel with _$CommentModel {
       replies: entity.replies.map((r) => CommentModel.fromEntity(r)).toList(),
       likesCount: entity.likesCount,
       isLiked: entity.isLiked,
+      replyCount: entity.replyCount,
     );
   }
 }

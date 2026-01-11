@@ -147,7 +147,7 @@ class VerificationEmailScreen extends StatelessWidget {
                   child: ExcludeSemantics(
                     child: TextButton(
                       onPressed: () {
-                        context.read<AuthBloc>().add(AuthSignOutRequested());
+                        context.read<AuthBloc>().add(const AuthEvent.signOut());
                         context.go('/auth/signin');
                       },
                       child: Text(

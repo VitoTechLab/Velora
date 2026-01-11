@@ -1,57 +1,63 @@
-import 'package:velora/features/feed/data/models/comment_cursor.dart';
-import 'package:velora/features/feed/data/models/update_feed_model.dart';
-import 'package:velora/features/feed/data/models/feed_model.dart';
+import 'package:velora/features/feed/data/models/comment_cursor_model.dart';
 import 'package:velora/features/feed/data/models/comment_model.dart';
 import 'package:velora/features/feed/data/models/comment_pagination_model.dart';
+import 'package:velora/features/feed/data/models/feed_cursor_model.dart';
+import 'package:velora/features/feed/data/models/feed_model.dart';
 import 'package:velora/features/feed/data/models/feed_pagination_model.dart';
-import 'package:velora/features/feed/data/models/feed_cursor.dart';
+import 'package:velora/features/feed/data/models/update_feed_model.dart';
 
+/// Remote data source contract for feed operations.
 abstract class FeedRemoteDataSource {
-  /// Get a single post by id
+  /// Fetches a single post by id.
   Future<FeedModel> getPostById(String postId);
 
-  /// Update an existing post
-  Future<FeedModel> updatePost(String postId, UpdateFeedModel post);
+  /// Updates an existing post.
+  Future<FeedModel> updatePost(String postId, UpdateFeedModel payload);
 
-  /// Delete a post permanently
+  /// Deletes a post permanently.
   Future<void> deletePost(String postId);
 
-  /// Get feed with cursor-based pagination, optionally filtered by userId
+  /// Fetches feed with cursor-based pagination.
   Future<FeedPaginationModel> getFeed({
     int limit = 20,
-    FeedCursor? cursor,
+    FeedCursorModel? cursor,
     String? userId,
   });
 
-  /// Toggle like on a post
+  /// Toggles like on a post.
   Future<void> toggleLikePost(String postId);
 
-  /// Toggle bookmark on a post
+  /// Toggles bookmark on a post.
   Future<void> toggleBookmarkPost(String postId);
 
-  /// Get comments for a post with cursor-based pagination
+  /// Fetches root comments for a post with pagination (no replies).
   Future<CommentPaginationModel> getComments({
     required String postId,
     int limit = 20,
-    CommentCursor? cursor,
+    CommentCursorModel? cursor,
   });
 
-  /// Add a comment to a post
+  /// Fetches replies for a specific root comment.
+  Future<List<CommentModel>> getReplies({
+    required String parentCommentId,
+  });
+
+  /// Adds a comment to a post.
   Future<CommentModel> addComment({
     required String postId,
     required String content,
     String? parentCommentId,
   });
 
-  /// Delete a comment
+  /// Deletes a comment.
   Future<void> deleteComment(String commentId);
 
-  /// Toggle like on a comment
+  /// Toggles like on a comment.
   Future<void> toggleLikeComment(String commentId);
 
-  /// Watch realtime comment inserts for a post
+  /// Watches realtime comment inserts for a post.
   Stream<CommentModel> watchNewComments({required String postId});
 
-  /// Stop any active comment watch channel
+  /// Stops any active comment watch channel.
   Future<void> stopWatch();
 }

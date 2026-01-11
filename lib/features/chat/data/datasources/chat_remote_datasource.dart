@@ -1,6 +1,6 @@
 import 'package:velora/features/chat/data/models/chat_message_model.dart';
 import 'package:velora/features/chat/data/models/conversation_list_model.dart';
-import 'package:velora/features/chat/data/models/message_cursor.dart';
+import 'package:velora/features/chat/data/models/message_cursor_model.dart';
 import 'package:velora/features/chat/data/models/message_pagination_model.dart';
 import 'package:velora/features/chat/data/models/message_read_model.dart';
 import 'package:velora/features/chat/data/models/typing_indicator_model.dart';
@@ -16,7 +16,7 @@ abstract class ChatRemoteDataSource {
   Future<MessagePaginationModel> getMessages({
     required String conversationId,
     int limit = 50,
-    MessageCursor? cursor,
+    MessageCursorModel? cursor,
   });
 
   /// Send a plain-text message

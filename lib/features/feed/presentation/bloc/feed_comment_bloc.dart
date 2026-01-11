@@ -6,64 +6,80 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velora/core/errors/feed_failure.dart';
 import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/feed/domain/entities/comment_entity.dart';
-import 'package:velora/features/feed/domain/usecases/add_comment.dart';
-import 'package:velora/features/feed/domain/usecases/delete_comment.dart';
-import 'package:velora/features/feed/domain/usecases/get_comments.dart';
-import 'package:velora/features/feed/domain/usecases/stop_watch_comments.dart';
-import 'package:velora/features/feed/domain/usecases/toggle_like_comment.dart';
-import 'package:velora/features/feed/domain/usecases/watch_new_comments.dart';
-
+import 'package:velora/features/feed/domain/usecases/add_comment_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/delete_comment_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/get_comments_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/get_replies_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/stop_watch_comments_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/toggle_like_comment_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/watch_new_comments_usecase.dart';
 import 'feed_comment_event.dart';
 import 'feed_comment_state.dart';
 
+/// BLoC for comment operations.
 class FeedCommentBloc extends Bloc<FeedCommentEvent, FeedCommentState> {
   FeedCommentBloc({
     required this.getCommentsUseCase,
+    required this.getRepliesUseCase,
     required this.addCommentUseCase,
     required this.deleteCommentUseCase,
     required this.toggleLikeCommentUseCase,
     required this.watchNewCommentsUseCase,
     required this.stopWatchCommentsUseCase,
+    this.currentUserId,
   }) : super(const FeedCommentState()) {
-    on<LoadFeedCommentsEvent>(_onLoadInitialCommentsFeed);
+    on<LoadFeedCommentsEvent>(_onLoadComments);
     on<LoadMoreFeedCommentsEvent>(
-      _onLoadMoreCommentsFeed,
+      _onLoadMoreComments,
       transformer: bloc_concurrency.droppable(),
     );
+    on<LoadRepliesEvent>(_onLoadReplies);
     on<AddFeedCommentEvent>(_onAddComment);
     on<DeleteFeedCommentEvent>(_onDeleteComment);
     on<ToggleFeedCommentLikeEvent>(_onToggleLikeComment);
-    on<ClearFeedCommentMessagesEvent>(
-      (event, emit) => emit(
-        state.copyWith(
-          message: null,
-          errorMessage: null,
-          addError: null,
-          deleteError: null,
-          watchError: null,
-        ),
-      ),
-    );
+    on<ClearFeedCommentMessagesEvent>(_onClearMessages);
     on<StartWatchCommentsEvent>(_onStartWatch);
     on<StopWatchCommentsEvent>(_onStopWatch);
     on<WatchCommentArrivedEvent>(_onWatchCommentArrived);
-    on<WatchErrorEvent>(
-      (event, emit) => emit(state.copyWith(watchError: event.message)),
-    );
+    on<WatchErrorEvent>(_onWatchError);
   }
 
-  final GetComments getCommentsUseCase;
-  final AddComment addCommentUseCase;
-  final DeleteComment deleteCommentUseCase;
-  final ToggleLikeComment toggleLikeCommentUseCase;
-  final WatchNewComments watchNewCommentsUseCase;
-  final StopWatchComments stopWatchCommentsUseCase;
-  StreamSubscription? _watchSub;
+  final GetCommentsUseCase getCommentsUseCase;
+  final GetRepliesUseCase getRepliesUseCase;
+  final AddCommentUseCase addCommentUseCase;
+  final DeleteCommentUseCase deleteCommentUseCase;
+  final ToggleLikeCommentUseCase toggleLikeCommentUseCase;
+  final WatchNewCommentsUseCase watchNewCommentsUseCase;
+  final StopWatchCommentsUseCase stopWatchCommentsUseCase;
+
+  /// Current user ID for skipping own realtime comments.
+  final String? currentUserId;
+
+  StreamSubscription<dynamic>? _commentWatchSubscription;
 
   static const _logTag = 'FeedCommentBloc';
   static const int _maxCommentLength = 1000;
 
-  Future<void> _onLoadInitialCommentsFeed(
+  void _onClearMessages(
+    ClearFeedCommentMessagesEvent event,
+    Emitter<FeedCommentState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        message: null,
+        errorMessage: null,
+        addError: null,
+        deleteError: null,
+        watchError: null,
+      ),
+    );
+  }
+
+  void _onWatchError(WatchErrorEvent event, Emitter<FeedCommentState> emit) {
+    emit(state.copyWith(watchError: event.message));
+  }
+
+  Future<void> _onLoadComments(
     LoadFeedCommentsEvent event,
     Emitter<FeedCommentState> emit,
   ) async {
@@ -109,23 +125,15 @@ class FeedCommentBloc extends Bloc<FeedCommentEvent, FeedCommentState> {
     );
   }
 
-  Future<void> _onLoadMoreCommentsFeed(
+  Future<void> _onLoadMoreComments(
     LoadMoreFeedCommentsEvent event,
     Emitter<FeedCommentState> emit,
   ) async {
-    if (state.isLoadingMore || state.isLoading) {
-      return;
-    }
-    if (!state.hasMore || state.cursor == null || state.postId == null) {
-      return;
-    }
+    if (state.isLoadingMore || state.isLoading) return;
+    if (!state.hasMore || state.cursor == null || state.postId == null) return;
 
     final limit = event.limit;
-
-    logi(
-      'Loading more comments limit=$limit cursor=${state.cursor}',
-      tag: _logTag,
-    );
+    logi('Loading more comments limit=$limit', tag: _logTag);
 
     emit(
       state.copyWith(isLoadingMore: true, errorMessage: null, message: null),
@@ -133,7 +141,6 @@ class FeedCommentBloc extends Bloc<FeedCommentEvent, FeedCommentState> {
 
     final cursor = state.cursor;
     final postId = state.postId;
-
     if (cursor == null || postId == null) return;
 
     final result = await getCommentsUseCase(
@@ -150,10 +157,9 @@ class FeedCommentBloc extends Bloc<FeedCommentEvent, FeedCommentState> {
       },
       (pagination) {
         final seen = state.comments.map((c) => c.id).toSet();
-        final newOnes = pagination.comments
-            .where((c) => seen.add(c.id))
-            .toList();
-        final merged = [...state.comments, ...newOnes];
+        final newComments =
+            pagination.comments.where((c) => seen.add(c.id)).toList();
+        final merged = [...state.comments, ...newComments];
 
         emit(
           state.copyWith(
@@ -164,6 +170,53 @@ class FeedCommentBloc extends Bloc<FeedCommentEvent, FeedCommentState> {
             errorMessage: null,
           ),
         );
+      },
+    );
+  }
+
+  /// Load replies for a specific root comment on demand.
+  Future<void> _onLoadReplies(
+    LoadRepliesEvent event,
+    Emitter<FeedCommentState> emit,
+  ) async {
+    final parentId = event.parentCommentId.trim();
+    if (parentId.isEmpty) return;
+
+    // Find the root comment index
+    final rootIndex = state.comments.indexWhere((c) => c.id == parentId);
+    if (rootIndex == -1) return;
+
+    final root = state.comments[rootIndex];
+
+    // Skip if already loading or already loaded
+    if (root.isLoadingReplies || root.repliesLoaded) return;
+
+    // Set loading state for this comment
+    final loadingComments = List<CommentEntity>.from(state.comments);
+    loadingComments[rootIndex] = root.copyWith(isLoadingReplies: true);
+    emit(state.copyWith(comments: loadingComments));
+
+    final result = await getRepliesUseCase(parentCommentId: parentId);
+
+    result.fold(
+      (failure) {
+        logw('Load replies failed: ${failure.message}', tag: _logTag);
+        // Reset loading state on error
+        final resetComments = List<CommentEntity>.from(state.comments);
+        final currentRoot = resetComments[rootIndex];
+        resetComments[rootIndex] = currentRoot.copyWith(isLoadingReplies: false);
+        emit(state.copyWith(comments: resetComments));
+      },
+      (replies) {
+        final finalComments = List<CommentEntity>.from(state.comments);
+        final currentRoot = finalComments[rootIndex];
+        finalComments[rootIndex] = currentRoot.copyWith(
+          replies: replies,
+          repliesLoaded: true,
+          isLoadingReplies: false,
+          replyCount: replies.length,
+        );
+        emit(state.copyWith(comments: finalComments));
       },
     );
   }
@@ -205,15 +258,12 @@ class FeedCommentBloc extends Bloc<FeedCommentEvent, FeedCommentState> {
     String? effectiveParentId = event.parentCommentId;
     if (effectiveParentId != null && effectiveParentId.isNotEmpty) {
       for (final root in state.comments) {
-        // 1. Is the target the root itself?
         if (root.id == effectiveParentId) {
           effectiveParentId = root.id;
           break;
         }
-        // 2. Is the target one of the replies in this root?
-        final isReplyToNested = root.replies.any(
-          (r) => r.id == effectiveParentId,
-        );
+        final isReplyToNested =
+            root.replies.any((r) => r.id == effectiveParentId);
         if (isReplyToNested) {
           effectiveParentId = root.id;
           break;
@@ -232,19 +282,18 @@ class FeedCommentBloc extends Bloc<FeedCommentEvent, FeedCommentState> {
         emit(state.copyWith(isAdding: false, addError: failure.message));
       },
       (comment) {
-        // Find the correct root parent to attach this comment to locally
         final rootId = comment.parentCommentId;
 
         if (rootId != null && rootId.isNotEmpty) {
-          // It's a reply
+          // It's a reply - add to the root's replies
           final updatedComments = state.comments.map((rootComment) {
             if (rootComment.id == rootId) {
-              // Direct reply to this root
               return rootComment.copyWith(
                 replies: [...rootComment.replies, comment],
+                replyCount: rootComment.replyCount + 1,
+                repliesLoaded: true,
               );
             }
-
             return rootComment;
           }).toList();
 
@@ -257,7 +306,7 @@ class FeedCommentBloc extends Bloc<FeedCommentEvent, FeedCommentState> {
             ),
           );
         } else {
-          // Root comment
+          // Root comment - add to top
           emit(
             state.copyWith(
               isAdding: false,
@@ -276,9 +325,7 @@ class FeedCommentBloc extends Bloc<FeedCommentEvent, FeedCommentState> {
     Emitter<FeedCommentState> emit,
   ) async {
     final commentId = event.commentId.trim();
-    if (commentId.isEmpty) {
-      return;
-    }
+    if (commentId.isEmpty) return;
 
     emit(state.copyWith(isDeleting: true, deleteError: null, message: null));
 
@@ -289,12 +336,32 @@ class FeedCommentBloc extends Bloc<FeedCommentEvent, FeedCommentState> {
         emit(state.copyWith(isDeleting: false, deleteError: failure.message));
       },
       (_) {
+        final updatedComments = <CommentEntity>[];
+
+        for (final root in state.comments) {
+          // Skip if this root is being deleted
+          if (root.id == commentId) continue;
+
+          // Filter out the reply if it matches
+          final filteredReplies =
+              root.replies.where((reply) => reply.id != commentId).toList();
+
+          final replyWasDeleted = filteredReplies.length != root.replies.length;
+
+          updatedComments.add(
+            root.copyWith(
+              replies: filteredReplies,
+              replyCount: replyWasDeleted
+                  ? math.max(root.replyCount - 1, 0)
+                  : root.replyCount,
+            ),
+          );
+        }
+
         emit(
           state.copyWith(
             isDeleting: false,
-            comments: state.comments
-                .where((comment) => comment.id != commentId)
-                .toList(),
+            comments: updatedComments,
             message: 'Comment deleted',
           ),
         );
@@ -316,7 +383,6 @@ class FeedCommentBloc extends Bloc<FeedCommentEvent, FeedCommentState> {
         logw('Toggle comment like failed: ${failure.message}', tag: _logTag);
       },
       (_) {
-        // Helper to toggle like on a comment
         CommentEntity toggleLike(CommentEntity comment) {
           final willLike = !comment.isLiked;
           final newCount = willLike
@@ -325,15 +391,13 @@ class FeedCommentBloc extends Bloc<FeedCommentEvent, FeedCommentState> {
           return comment.copyWith(isLiked: willLike, likesCount: newCount);
         }
 
-        // Update comments including nested replies
         final updated = state.comments.map<CommentEntity>((comment) {
-          // Check if this root comment is the one being liked
           if (comment.id == commentId) {
             return toggleLike(comment);
           }
 
-          // Check if any reply in this comment is being liked
-          final hasReplyToUpdate = comment.replies.any((r) => r.id == commentId);
+          final hasReplyToUpdate =
+              comment.replies.any((r) => r.id == commentId);
           if (hasReplyToUpdate) {
             final updatedReplies = comment.replies.map<CommentEntity>((reply) {
               if (reply.id == commentId) {
@@ -359,13 +423,13 @@ class FeedCommentBloc extends Bloc<FeedCommentEvent, FeedCommentState> {
     final postId = event.postId.trim();
     if (postId.isEmpty) return;
 
-    await _watchSub?.cancel();
-    _watchSub = null;
+    await _commentWatchSubscription?.cancel();
+    _commentWatchSubscription = null;
     await stopWatchCommentsUseCase();
 
     emit(state.copyWith(isWatching: true, watchError: null, postId: postId));
 
-    _watchSub = watchNewCommentsUseCase(postId: postId).listen(
+    _commentWatchSubscription = watchNewCommentsUseCase(postId: postId).listen(
       (either) {
         either.fold(
           (failure) => add(WatchErrorEvent(message: failure.message)),
@@ -383,27 +447,66 @@ class FeedCommentBloc extends Bloc<FeedCommentEvent, FeedCommentState> {
     StopWatchCommentsEvent event,
     Emitter<FeedCommentState> emit,
   ) async {
-    await _watchSub?.cancel();
-    _watchSub = null;
+    await _commentWatchSubscription?.cancel();
+    _commentWatchSubscription = null;
     await stopWatchCommentsUseCase();
     emit(state.copyWith(isWatching: false, watchError: null));
   }
 
+  /// Handle realtime comment arrival with optimizations.
   Future<void> _onWatchCommentArrived(
     WatchCommentArrivedEvent event,
     Emitter<FeedCommentState> emit,
   ) async {
     final incoming = event.comment;
-    final exists = state.comments.any((comment) => comment.id == incoming.id);
-    if (exists) return;
 
-    emit(state.copyWith(comments: [incoming, ...state.comments]));
+    // Optimization 1: Skip if from current user (already added optimistically)
+    if (currentUserId != null && incoming.userId == currentUserId) {
+      logi('Skipping own comment from realtime', tag: _logTag);
+      return;
+    }
+
+    // Optimization 2: Check if already exists (dedup)
+    for (final root in state.comments) {
+      if (root.id == incoming.id) return;
+      if (root.replies.any((r) => r.id == incoming.id)) return;
+    }
+
+    // Handle reply vs root
+    if (incoming.parentCommentId != null) {
+      final parentId = incoming.parentCommentId!;
+      final parentIndex = state.comments.indexWhere((c) => c.id == parentId);
+
+      if (parentIndex != -1) {
+        final parent = state.comments[parentIndex];
+        final updatedComments = List<CommentEntity>.from(state.comments);
+
+        if (parent.repliesLoaded) {
+          // Replies already loaded - add to list
+          updatedComments[parentIndex] = parent.copyWith(
+            replies: [...parent.replies, incoming],
+            replyCount: parent.replyCount + 1,
+          );
+        } else {
+          // Replies not loaded - just increment count (user sees badge)
+          updatedComments[parentIndex] = parent.copyWith(
+            replyCount: parent.replyCount + 1,
+          );
+        }
+
+        emit(state.copyWith(comments: updatedComments));
+      }
+      // If parent not found, might be paginated out - ignore
+    } else {
+      // Root comment - add to top
+      emit(state.copyWith(comments: [incoming, ...state.comments]));
+    }
   }
 
   @override
   Future<void> close() async {
-    await _watchSub?.cancel();
-    _watchSub = null;
+    await _commentWatchSubscription?.cancel();
+    _commentWatchSubscription = null;
     await stopWatchCommentsUseCase();
     await super.close();
   }

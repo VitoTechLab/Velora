@@ -7,7 +7,7 @@ import 'package:velora/core/supabase/supabase_guard.dart';
 import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/chat/data/models/chat_message_model.dart';
 import 'package:velora/features/chat/data/models/conversation_list_model.dart';
-import 'package:velora/features/chat/data/models/message_cursor.dart';
+import 'package:velora/features/chat/data/models/message_cursor_model.dart';
 import 'package:velora/features/chat/data/models/message_pagination_model.dart';
 import 'package:velora/features/chat/data/models/message_read_model.dart';
 import 'package:velora/features/chat/data/models/typing_indicator_model.dart';
@@ -42,18 +42,18 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
   Future<MessagePaginationModel> getMessages({
     required String conversationId,
     int limit = 50,
-    MessageCursor? cursor,
+    MessageCursorModel? cursor,
   }) {
     return guardSupabase(
       () async {
         logi(
-          'Fetching messages for conversation=$conversationId',
+          'Fetching messages for conversation=$conversationId (limit=$limit)',
           tag: _logTag,
         );
 
         final params = <String, dynamic>{
           'p_conversation_id': conversationId,
-          'p_limit': limit + 1,
+          'p_limit': limit,
         };
 
         if (cursor != null) {
@@ -63,25 +63,50 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
           params['p_cursor_id'] = cursor.id;
         }
 
+        // New optimized RPC returns {messages: [], has_more: bool, count: int}
         final response = await _client.rpc(
           SupabaseRpc.getMessagesPage,
           params: params,
         );
 
-        final all = (response as List)
-            .map(
-              (e) => ChatMessageModel.fromJson(
-                Map<String, dynamic>.from(e as Map),
-              ),
-            )
-            .toList();
+        // Handle response based on format (backward compatible)
+        late List<ChatMessageModel> messages;
+        late bool hasMore;
 
-        final hasMore = all.length > limit;
-        final messages = hasMore ? all.sublist(0, limit) : all;
+        if (response is Map<String, dynamic>) {
+          // New format: {messages: [], has_more: bool}
+          final messagesData = response['messages'] as List? ?? [];
+          hasMore = response['has_more'] as bool? ?? false;
+
+          messages = messagesData
+              .map(
+                (e) => ChatMessageModel.fromJson(
+                  Map<String, dynamic>.from(e as Map),
+                ),
+              )
+              .toList();
+
+          logi(
+            'Loaded ${messages.length} messages, hasMore=$hasMore',
+            tag: _logTag,
+          );
+        } else {
+          // Old format: List (backward compatibility)
+          final all = (response as List)
+              .map(
+                (e) => ChatMessageModel.fromJson(
+                  Map<String, dynamic>.from(e as Map),
+                ),
+              )
+              .toList();
+
+          hasMore = all.length > limit;
+          messages = hasMore ? all.sublist(0, limit) : all;
+        }
 
         final nextCursor = messages.isEmpty
             ? null
-            : MessageCursor(
+            : MessageCursorModel(
                 createdAt: messages.last.createdAt,
                 id: messages.last.id,
               );
@@ -114,10 +139,11 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
           'reply_to_message_id': replyToMessageId,
         };
 
+        // Select only needed fields to reduce bandwidth
         final response = await _client
             .from(SupabaseTables.messages)
             .insert(payload)
-            .select()
+            .select('id, conversation_id, sender_id, kind, body, reply_to_message_id, created_at, edited_at, deleted_at, deleted_by')
             .single();
 
         return ChatMessageModel.fromJson(response);
@@ -405,10 +431,16 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
       () async {
         logi('Fetching conversation list', tag: _logTag);
 
+        // Select only essential fields to minimize bandwidth
         final rows = await _client
             .from(SupabaseTables.conversationListView)
-            .select()
-            .order('last_message_at', ascending: false);
+            .select(
+              'conversation_id, other_user_id, other_user_username, '
+              'other_user_full_name, other_user_avatar_url, '
+              'last_message_body, last_message_at, unread_count'
+            )
+            .order('last_message_at', ascending: false)
+            .limit(100); // Reasonable limit for conversation list
 
         return (rows as List)
             .map((row) => ConversationListModel.fromJson(row))

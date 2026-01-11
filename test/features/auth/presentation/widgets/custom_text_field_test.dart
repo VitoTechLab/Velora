@@ -3,27 +3,41 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:velora/features/auth/presentation/widgets/components/custom_text_field.dart';
 
 void main() {
-  testWidgets('CustomTextField shows validation error after blur', (
-    tester,
-  ) async {
-    final controller = TextEditingController();
-    final focusNode = FocusNode();
+  late TextEditingController controller;
+  late FocusNode focusNode;
 
+  setUp(() {
+    controller = TextEditingController();
+    focusNode = FocusNode();
+  });
+
+  tearDown(() {
+    controller.dispose();
+    focusNode.dispose();
+  });
+
+  Widget buildTestWidget(Widget child) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Column(
+          children: [
+            child,
+            TextButton(onPressed: () {}, child: const Text('Next')),
+          ],
+        ),
+      ),
+    );
+  }
+
+  testWidgets('shows validation error after blur', (tester) async {
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: Column(
-            children: [
-              CustomTextField(
-                controller: controller,
-                focusNode: focusNode,
-                label: 'Email',
-                validator: (value) =>
-                    value == null || value.isEmpty ? 'Required' : null,
-              ),
-              TextButton(onPressed: () {}, child: const Text('Next')),
-            ],
-          ),
+      buildTestWidget(
+        CustomTextField(
+          controller: controller,
+          focusNode: focusNode,
+          label: 'Email',
+          validator: (value) =>
+              value == null || value.isEmpty ? 'Required' : null,
         ),
       ),
     );
@@ -34,5 +48,41 @@ void main() {
     await tester.pump();
 
     expect(find.text('Required'), findsOneWidget);
+  });
+
+  testWidgets('accepts valid input without error', (tester) async {
+    await tester.pumpWidget(
+      buildTestWidget(
+        CustomTextField(
+          controller: controller,
+          focusNode: focusNode,
+          label: 'Email',
+          validator: (value) =>
+              value == null || value.isEmpty ? 'Required' : null,
+        ),
+      ),
+    );
+
+    await tester.enterText(find.byType(TextFormField), 'test@example.com');
+    await tester.tap(find.text('Next'));
+    await tester.pump();
+
+    expect(find.text('Required'), findsNothing);
+  });
+
+  testWidgets('disabled when enabled is false', (tester) async {
+    await tester.pumpWidget(
+      buildTestWidget(
+        CustomTextField(
+          controller: controller,
+          focusNode: focusNode,
+          label: 'Email',
+          enabled: false,
+        ),
+      ),
+    );
+
+    final textField = tester.widget<TextFormField>(find.byType(TextFormField));
+    expect(textField.enabled, isFalse);
   });
 }

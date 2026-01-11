@@ -14,10 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$FeedEntity {
 
- String get id; String get userId; String get content; DateTime get createdAt;// User info (from profiles join)
- String? get username; String? get photoUrl; List<String> get imageUrls; List<String> get videoUrls;// Counts (nullable as they might be hidden)
- int? get likesCount; int? get commentsCount; int? get sharesCount;// Interaction Status (computed by View)
- bool get isLiked; bool get isBookmarked; bool get isFollowing; bool get isFollowRequestPending; bool get isMe; bool get commentsEnabled; bool get hideLikeCount; bool get hideCommentCount; bool get hideShareCount; bool get hideLikesList; String? get campaignId; String? get campaignTitle;
+ String get id; String get userId; String get content; DateTime get createdAt; String? get username; String? get photoUrl; List<String> get imageUrls; List<String> get videoUrls; int? get likesCount; int? get commentsCount; int? get sharesCount; bool get isLiked; bool get isBookmarked; bool get isFollowing; bool get isFollowRequestPending; bool get isMe; bool get commentsEnabled; bool get hideLikeCount; bool get hideCommentCount; bool get hideShareCount; bool get hideLikesList; String? get campaignId; String? get campaignTitle;
 /// Create a copy of FeedEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -238,7 +235,6 @@ class _FeedEntity extends FeedEntity {
 @override final  String userId;
 @override final  String content;
 @override final  DateTime createdAt;
-// User info (from profiles join)
 @override final  String? username;
 @override final  String? photoUrl;
  final  List<String> _imageUrls;
@@ -255,11 +251,9 @@ class _FeedEntity extends FeedEntity {
   return EqualUnmodifiableListView(_videoUrls);
 }
 
-// Counts (nullable as they might be hidden)
 @override final  int? likesCount;
 @override final  int? commentsCount;
 @override final  int? sharesCount;
-// Interaction Status (computed by View)
 @override@JsonKey() final  bool isLiked;
 @override@JsonKey() final  bool isBookmarked;
 @override@JsonKey() final  bool isFollowing;

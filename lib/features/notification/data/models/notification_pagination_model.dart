@@ -1,7 +1,7 @@
 import 'package:velora/features/notification/data/models/notification_model.dart';
 import 'package:velora/features/notification/data/models/notification_cursor_model.dart';
 import 'package:velora/features/notification/domain/entities/notification_cursor_entity.dart';
-import 'package:velora/features/notification/domain/entities/notification_pagination_result.dart';
+import 'package:velora/features/notification/domain/entities/notification_pagination_result_entity.dart';
 
 class NotificationPaginationModel {
   final List<NotificationModel> notifications;

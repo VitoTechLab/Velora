@@ -5,22 +5,23 @@ import 'package:velora/core/errors/exceptions.dart';
 import 'package:velora/core/supabase/supabase_guard.dart';
 import 'package:velora/core/supabase/supabase_constants.dart';
 import 'package:velora/core/utils/log_alias.dart';
-import 'package:velora/features/feed/data/models/comment_cursor.dart';
-import 'package:velora/features/feed/data/models/update_feed_model.dart';
+import 'package:velora/features/feed/data/models/comment_cursor_model.dart';
 import 'package:velora/features/feed/data/models/comment_model.dart';
 import 'package:velora/features/feed/data/models/comment_pagination_model.dart';
+import 'package:velora/features/feed/data/models/feed_cursor_model.dart';
 import 'package:velora/features/feed/data/models/feed_model.dart';
 import 'package:velora/features/feed/data/models/feed_pagination_model.dart';
-import 'package:velora/features/feed/data/models/feed_cursor.dart';
+import 'package:velora/features/feed/data/models/update_feed_model.dart';
 import 'feed_remote_datasource.dart';
 
+/// Implementation of [FeedRemoteDataSource] using Supabase.
 class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
   FeedRemoteDataSourceImpl({required SupabaseClient supabaseClient})
     : _client = supabaseClient;
 
   final SupabaseClient _client;
   RealtimeChannel? _channel;
-  StreamController<CommentModel>? _watchController;
+  StreamController<CommentModel>? _commentStreamController;
 
   static const _logTag = 'FeedRemoteDataSource';
 
@@ -88,7 +89,7 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
   @override
   Future<FeedPaginationModel> getFeed({
     int limit = 20,
-    FeedCursor? cursor,
+    FeedCursorModel? cursor,
     String? userId,
   }) {
     return guardSupabase(
@@ -118,7 +119,7 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
 
         final nextCursor = posts.isEmpty
             ? null
-            : FeedCursor(createdAt: posts.last.createdAt, id: posts.last.id);
+            : FeedCursorModel(createdAt: posts.last.createdAt, id: posts.last.id);
 
         return FeedPaginationModel(
           posts: posts,
@@ -169,14 +170,17 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
   Future<CommentPaginationModel> getComments({
     required String postId,
     int limit = 20,
-    CommentCursor? cursor,
+    CommentCursorModel? cursor,
   }) {
     return guardSupabase(
       () async {
+        // Fetch only ROOT comments (parent_comment_id is null)
+        // Replies are loaded on-demand via getReplies()
         var query = _client
             .from(SupabaseTables.feedComments)
             .select()
-            .filter('post_id', 'eq', postId);
+            .filter('post_id', 'eq', postId)
+            .isFilter('parent_comment_id', null);
 
         if (cursor != null) {
           final iso = cursor.createdAt.toUtc().toIso8601String();
@@ -190,62 +194,50 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
             .order('id', ascending: false)
             .limit(limit + 1);
 
-        final all = (response as List)
+        final allRoots = (response as List)
             .map((e) => CommentModel.fromJson(e))
             .toList();
 
-        // Separate roots and replies
-        final roots = <CommentModel>[];
-        final repliesByParent = <String, List<CommentModel>>{};
+        final hasMore = allRoots.length > limit;
+        final roots = hasMore ? allRoots.sublist(0, limit) : allRoots;
 
-        for (final comment in all) {
-          if (comment.parentCommentId != null) {
-            repliesByParent
-                .putIfAbsent(comment.parentCommentId!, () => [])
-                .add(comment);
-          } else {
-            roots.add(comment);
-          }
-        }
-
-        // Attach replies to roots
-        final nestedComments = roots.map((root) {
-          final replies = repliesByParent[root.id] ?? [];
-          // Sort replies by createdAt ascending (oldest first)
-          replies.sort((a, b) => a.createdAt.compareTo(b.createdAt));
-          return root.copyWith(replies: replies);
-        }).toList();
-
-        // Check for orphans (replies whose parent is not in the current fetched batch)
-        // If we want to display them, we might need to treat them as roots or fetch parents.
-        // For now, based on typical pagination, we only return the structured roots.
-        // To handle pagination correctly ensuring all items are counted:
-        // Ideally, we filter the query to only fetch roots, but we can't easily fetch corresponding replies in one go without joins.
-        // Assuming the current query fetches enough context.
-
-        // If we found orphan replies that should be displayed (e.g. sorted by recent),
-        // hiding them might be confusing.
-        // However, "Nest" logic implies we only show them under parents.
-
-        final hasMore = all.length > limit;
-        final comments = hasMore
-            ? nestedComments.take(limit).toList()
-            : nestedComments;
-
-        final nextCursor = comments.isEmpty
+        final nextCursor = roots.isEmpty
             ? null
-            : CommentCursor(
-                createdAt: comments.last.createdAt,
-                id: comments.last.id,
+            : CommentCursorModel(
+                createdAt: roots.last.createdAt,
+                id: roots.last.id,
               );
 
         return CommentPaginationModel(
-          comments: comments,
+          comments: roots,
           hasMore: hasMore,
           nextCursor: nextCursor,
         );
       },
       op: 'getComments',
+      tag: _logTag,
+    );
+  }
+
+  @override
+  Future<List<CommentModel>> getReplies({
+    required String parentCommentId,
+  }) {
+    return guardSupabase(
+      () async {
+        logi('Fetching replies for comment=$parentCommentId', tag: _logTag);
+
+        final response = await _client
+            .from(SupabaseTables.feedComments)
+            .select()
+            .filter('parent_comment_id', 'eq', parentCommentId)
+            .order('created_at', ascending: true);
+
+        return (response as List)
+            .map((e) => CommentModel.fromJson(e))
+            .toList();
+      },
+      op: 'getReplies',
       tag: _logTag,
     );
   }
@@ -312,14 +304,14 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
 
   @override
   Stream<CommentModel> watchNewComments({required String postId}) {
-    final previousController = _watchController;
+    final previousController = _commentStreamController;
     if (previousController != null && !previousController.isClosed) {
       unawaited(previousController.close());
     }
-    _watchController = null;
+    _commentStreamController = null;
 
     final controller = StreamController<CommentModel>.broadcast();
-    _watchController = controller;
+    _commentStreamController = controller;
 
     unawaited(_channel?.unsubscribe());
 
@@ -348,7 +340,7 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
     controller.onCancel = () async {
       await _channel?.unsubscribe();
       _channel = null;
-      _watchController = null;
+      _commentStreamController = null;
     };
 
     return controller.stream;
@@ -358,10 +350,10 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
   Future<void> stopWatch() async {
     await _channel?.unsubscribe();
     _channel = null;
-    final controller = _watchController;
+    final controller = _commentStreamController;
     if (controller != null && !controller.isClosed) {
       await controller.close();
     }
-    _watchController = null;
+    _commentStreamController = null;
   }
 }

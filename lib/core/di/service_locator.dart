@@ -6,7 +6,7 @@ import 'package:velora/core/firebase/firebase_messaging_service.dart';
 import 'package:velora/core/network/dio_factory.dart';
 import 'package:velora/core/services/connectivity_service.dart';
 import 'package:velora/core/supabase/supabase_initializer.dart';
-import 'package:velora/features/auth/domain/usecases/auth_watch_auth_snapshot.dart';
+import 'package:velora/features/auth/domain/usecases/watch_auth_snapshot_usecase.dart';
 import 'package:velora/features/settings/domain/entities/user_preferences.dart';
 import 'package:velora/routes/app_router.dart';
 import 'package:velora/features/navigation/services/navigation_service.dart';
@@ -16,11 +16,11 @@ import 'package:velora/features/auth/data/datasources/auth_remote_datasource.dar
 import 'package:velora/features/auth/data/datasources/auth_remote_datasource_impl.dart';
 import 'package:velora/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:velora/features/auth/domain/repositories/auth_repository.dart';
-import 'package:velora/features/auth/domain/usecases/auth_sign_in_with_google.dart';
-import 'package:velora/features/auth/domain/usecases/auth_sign_in.dart';
-import 'package:velora/features/auth/domain/usecases/auth_sign_out.dart';
-import 'package:velora/features/auth/domain/usecases/auth_sign_up.dart';
-import 'package:velora/features/auth/domain/usecases/auth_reset_password.dart';
+import 'package:velora/features/auth/domain/usecases/sign_in_with_google_usecase.dart';
+import 'package:velora/features/auth/domain/usecases/sign_in_usecase.dart';
+import 'package:velora/features/auth/domain/usecases/sign_out_usecase.dart';
+import 'package:velora/features/auth/domain/usecases/sign_up_usecase.dart';
+import 'package:velora/features/auth/domain/usecases/reset_password_usecase.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 
 // Feed feature imports
@@ -28,19 +28,20 @@ import 'package:velora/features/feed/data/datasources/feed_remote_datasource.dar
 import 'package:velora/features/feed/data/datasources/feed_remote_datasource_impl.dart';
 import 'package:velora/features/feed/data/repositories/feed_repository_impl.dart';
 import 'package:velora/features/feed/domain/repositories/feed_repository.dart';
-import 'package:velora/features/feed/domain/usecases/get_smart_feed.dart';
-import 'package:velora/features/feed/domain/usecases/refresh_feed.dart';
-import 'package:velora/features/feed/domain/usecases/toggle_like_post.dart';
-import 'package:velora/features/feed/domain/usecases/toggle_bookmark_post.dart';
-import 'package:velora/features/feed/domain/usecases/get_comments.dart';
-import 'package:velora/features/feed/domain/usecases/add_comment.dart';
-import 'package:velora/features/feed/domain/usecases/delete_comment.dart';
-import 'package:velora/features/feed/domain/usecases/toggle_like_comment.dart';
-import 'package:velora/features/feed/domain/usecases/get_post_by_id.dart';
-import 'package:velora/features/feed/domain/usecases/update_post.dart';
-import 'package:velora/features/feed/domain/usecases/delete_post.dart';
-import 'package:velora/features/feed/domain/usecases/watch_new_comments.dart';
-import 'package:velora/features/feed/domain/usecases/stop_watch_comments.dart';
+import 'package:velora/features/feed/domain/usecases/get_feed_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/refresh_feed_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/toggle_like_post_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/toggle_bookmark_post_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/get_comments_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/get_replies_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/add_comment_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/delete_comment_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/toggle_like_comment_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/get_post_by_id_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/update_post_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/delete_post_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/watch_new_comments_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/stop_watch_comments_usecase.dart';
 import 'package:velora/features/feed/presentation/bloc/feed_bloc.dart';
 import 'package:velora/features/feed/presentation/bloc/feed_comment_bloc.dart';
 
@@ -49,7 +50,7 @@ import 'package:velora/features/post/data/datasources/post_remote_datasource.dar
 import 'package:velora/features/post/data/datasources/post_remote_datasource_impl.dart';
 import 'package:velora/features/post/data/repositories/post_repository_impl.dart';
 import 'package:velora/features/post/domain/repositories/post_repository.dart';
-import 'package:velora/features/post/domain/usecases/create_post.dart';
+import 'package:velora/features/post/domain/usecases/create_post_feed_usecase.dart';
 import 'package:velora/features/post/presentation/bloc/post_bloc.dart';
 
 // Media feature imports
@@ -57,17 +58,17 @@ import 'package:velora/features/media/data/datasources/remote/media_remote_datas
 import 'package:velora/features/media/data/datasources/remote/media_remote_datasource_impl.dart';
 import 'package:velora/features/media/data/repositories/media_repository_impl.dart';
 import 'package:velora/features/media/domain/repositories/media_repository.dart';
-import 'package:velora/features/media/domain/usecases/upload_media_asset.dart';
-import 'package:velora/features/media/presentation/cubit/media_upload_cubit.dart';
+import 'package:velora/features/media/domain/usecases/upload_media_asset_usecase.dart';
+import 'package:velora/features/media/presentation/bloc/media_upload_bloc.dart';
 
 // Media Gallery (Local) feature imports
 import 'package:velora/features/media/data/datasources/local/media_local_datasource.dart';
 import 'package:velora/features/media/data/datasources/local/media_local_datasource_impl.dart';
 import 'package:velora/features/media/data/repositories/media_gallery_repository_impl.dart';
 import 'package:velora/features/media/domain/repositories/media_gallery_repository.dart';
-import 'package:velora/features/media/domain/usecases/request_media_permission.dart';
-import 'package:velora/features/media/domain/usecases/load_media_assets.dart';
-import 'package:velora/features/media/domain/usecases/get_file_from_asset.dart';
+import 'package:velora/features/media/domain/usecases/request_media_permission_usecase.dart';
+import 'package:velora/features/media/domain/usecases/load_media_assets_usecase.dart';
+import 'package:velora/features/media/domain/usecases/get_file_from_asset_usecase.dart';
 import 'package:velora/features/media/presentation/bloc/media_gallery_bloc.dart';
 
 // Chat feature imports
@@ -75,20 +76,20 @@ import 'package:velora/features/chat/data/datasources/chat_remote_datasource.dar
 import 'package:velora/features/chat/data/datasources/chat_remote_datasource_impl.dart';
 import 'package:velora/features/chat/data/repositories/chat_repository_impl.dart';
 import 'package:velora/features/chat/domain/repositories/chat_repository.dart';
-import 'package:velora/features/chat/domain/usecases/get_messages.dart';
-import 'package:velora/features/chat/domain/usecases/send_text_message.dart';
-import 'package:velora/features/chat/domain/usecases/edit_message.dart';
-import 'package:velora/features/chat/domain/usecases/delete_message.dart';
-import 'package:velora/features/chat/domain/usecases/mark_conversation_read.dart';
-import 'package:velora/features/chat/domain/usecases/watch_new_messages.dart';
-import 'package:velora/features/chat/domain/usecases/stop_watch_messages.dart';
-import 'package:velora/features/chat/domain/usecases/get_conversation_list.dart';
-import 'package:velora/features/chat/domain/usecases/get_message_reads.dart';
-import 'package:velora/features/chat/domain/usecases/mark_message_read.dart';
-import 'package:velora/features/chat/domain/usecases/watch_message_reads.dart';
-import 'package:velora/features/chat/domain/usecases/send_typing_indicator.dart';
-import 'package:velora/features/chat/domain/usecases/watch_typing_indicators.dart';
-import 'package:velora/features/chat/domain/usecases/search_followed_users.dart';
+import 'package:velora/features/chat/domain/usecases/get_messages_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/send_text_message_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/edit_message_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/delete_message_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/mark_conversation_read_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/watch_new_messages_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/stop_watch_messages_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/get_conversation_list_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/get_message_reads_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/mark_message_read_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/watch_message_reads_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/send_typing_indicator_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/watch_typing_indicators_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/search_followed_users_usecase.dart';
 import 'package:velora/features/chat/presentation/bloc/chat_message_bloc.dart';
 import 'package:velora/features/chat/presentation/bloc/user_presence_bloc.dart';
 import 'package:velora/features/chat/presentation/bloc/search_user_bloc.dart';
@@ -126,15 +127,15 @@ import 'package:velora/features/notification/data/datasources/notification_remot
 import 'package:velora/features/notification/data/datasources/notification_remote_datasource_impl.dart';
 import 'package:velora/features/notification/data/repositories/notification_repository_impl.dart';
 import 'package:velora/features/notification/domain/repositories/notification_repository.dart';
-import 'package:velora/features/notification/domain/usecases/get_notifications.dart';
-import 'package:velora/features/notification/domain/usecases/get_unread_count.dart';
-import 'package:velora/features/notification/domain/usecases/mark_notifications_read.dart';
-import 'package:velora/features/notification/domain/usecases/delete_notification.dart';
-import 'package:velora/features/notification/domain/usecases/watch_notifications.dart';
+import 'package:velora/features/notification/domain/usecases/get_notifications_usecase.dart';
+import 'package:velora/features/notification/domain/usecases/get_unread_count_usecase.dart';
+import 'package:velora/features/notification/domain/usecases/mark_notifications_read_usecase.dart';
+import 'package:velora/features/notification/domain/usecases/delete_notification_usecase.dart';
+import 'package:velora/features/notification/domain/usecases/watch_notifications_usecase.dart';
 import 'package:velora/features/notification/presentation/bloc/notification_bloc.dart';
 
-// Translation service import
-import 'package:velora/core/services/translation_service.dart';
+// Translation services imports
+import 'package:velora/core/translation/translation.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -154,7 +155,13 @@ Future<void> configureDependencies() async {
       () => FirebaseMessagingService(),
     )
     ..registerLazySingleton<UserPreferences>(() => UserPreferences())
-    ..registerLazySingleton<TranslationService>(() => TranslationService());
+    ..registerLazySingleton<TranslationService>(() => TranslationService())
+    ..registerLazySingleton<TranslationPreloader>(
+      () => TranslationPreloader(getIt<TranslationService>()),
+    )
+    ..registerLazySingleton<TranslationQueue>(
+      () => TranslationQueue(getIt<TranslationService>()),
+    );
 
   // Supabase client - initialize and register
   if (!getIt.isRegistered<SupabaseClient>()) {
@@ -310,60 +317,63 @@ Future<void> configureDependencies() async {
 
   // Feed feature - Use cases
   getIt
-    ..registerLazySingleton(() => LoadInitialFeed(getIt<FeedRepository>()))
-    ..registerLazySingleton(() => LoadMoreFeed(getIt<FeedRepository>()))
-    ..registerLazySingleton(() => RefreshFeed(getIt<FeedRepository>()))
-    ..registerLazySingleton(() => ToggleLikePost(getIt<FeedRepository>()))
-    ..registerLazySingleton(() => ToggleBookmarkPost(getIt<FeedRepository>()))
-    ..registerLazySingleton(() => GetComments(getIt<FeedRepository>()))
-    ..registerLazySingleton(() => AddComment(getIt<FeedRepository>()))
-    ..registerLazySingleton(() => DeleteComment(getIt<FeedRepository>()))
-    ..registerLazySingleton(() => ToggleLikeComment(getIt<FeedRepository>()))
-    ..registerLazySingleton(() => WatchNewComments(getIt<FeedRepository>()))
-    ..registerLazySingleton(() => StopWatchComments(getIt<FeedRepository>()))
-    ..registerLazySingleton(() => GetPostById(getIt<FeedRepository>()))
-    ..registerLazySingleton(() => UpdatePost(getIt<FeedRepository>()))
-    ..registerLazySingleton(() => DeletePost(getIt<FeedRepository>()))
+    ..registerLazySingleton(() => LoadInitialFeedUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(() => LoadMoreFeedUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(() => RefreshFeedUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(() => ToggleLikePostUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(() => ToggleBookmarkPostUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(() => GetCommentsUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(() => GetRepliesUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(() => AddCommentUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(() => DeleteCommentUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(() => ToggleLikeCommentUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(() => WatchNewCommentsUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(() => StopWatchCommentsUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(() => GetPostByIdUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(() => UpdatePostUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(() => DeletePostUseCase(repository: getIt<FeedRepository>()))
     // Post feature - Use cases
-    ..registerLazySingleton(() => CreatePost(getIt<PostRepository>()))
+    ..registerLazySingleton(
+      () => CreatePostFeedUseCase(repository: getIt<PostRepository>()),
+    )
     // Media feature - Use cases
-    ..registerLazySingleton(() => UploadMediaAsset(getIt<MediaRepository>()))
+    ..registerLazySingleton(() => UploadMediaAssetUseCase(repository: getIt<MediaRepository>()))
     // Media Gallery (Local) feature - Use cases
     ..registerLazySingleton(
-      () => RequestMediaPermission(repository: getIt<MediaGalleryRepository>()),
+      () => RequestMediaPermissionUseCase(repository: getIt<MediaGalleryRepository>()),
     )
     ..registerLazySingleton(
-      () => LoadMediaAssets(repository: getIt<MediaGalleryRepository>()),
+      () => LoadMediaAssetsUseCase(repository: getIt<MediaGalleryRepository>()),
     )
     ..registerLazySingleton(
-      () => GetFileFromAsset(repository: getIt<MediaGalleryRepository>()),
+      () => GetFileFromAssetUseCase(repository: getIt<MediaGalleryRepository>()),
     )
     // Auth feature - Use cases
-    ..registerLazySingleton(() => AuthSignUp(getIt<AuthRepository>()))
-    ..registerLazySingleton(() => AuthSignIn(getIt<AuthRepository>()))
-    ..registerLazySingleton(() => AuthResetPassword(getIt<AuthRepository>()))
-    ..registerLazySingleton(() => AuthSignOut(getIt<AuthRepository>()))
-    ..registerLazySingleton(() => AuthSignInWithGoogle(getIt<AuthRepository>()))
+    ..registerLazySingleton(() => SignUpUseCase(repository: getIt<AuthRepository>()))
+    ..registerLazySingleton(() => SignInUseCase(repository: getIt<AuthRepository>()))
+    ..registerLazySingleton(() => ResetPasswordUseCase(repository: getIt<AuthRepository>()))
+    ..registerLazySingleton(() => SignOutUseCase(repository: getIt<AuthRepository>()))
+    ..registerLazySingleton(() => SignInWithGoogleUseCase(repository: getIt<AuthRepository>()))
     ..registerLazySingleton(
-      () => AuthWatchAuthSnapshot(getIt<AuthRepository>()),
+      () => WatchAuthSnapshotUseCase(repository: getIt<AuthRepository>()),
     )
     // Chat feature - Use cases
-    ..registerLazySingleton(() => GetMessages(getIt<ChatRepository>()))
-    ..registerLazySingleton(() => SendTextMessage(getIt<ChatRepository>()))
-    ..registerLazySingleton(() => EditMessage(getIt<ChatRepository>()))
-    ..registerLazySingleton(() => DeleteMessage(getIt<ChatRepository>()))
-    ..registerLazySingleton(() => MarkConversationRead(getIt<ChatRepository>()))
-    ..registerLazySingleton(() => WatchNewMessages(getIt<ChatRepository>()))
-    ..registerLazySingleton(() => StopWatchMessages(getIt<ChatRepository>()))
-    ..registerLazySingleton(() => GetConversationList(getIt<ChatRepository>()))
-    ..registerLazySingleton(() => GetMessageReads(getIt<ChatRepository>()))
-    ..registerLazySingleton(() => MarkMessageRead(getIt<ChatRepository>()))
-    ..registerLazySingleton(() => WatchMessageReads(getIt<ChatRepository>()))
-    ..registerLazySingleton(() => SendTypingIndicator(getIt<ChatRepository>()))
+    ..registerLazySingleton(() => GetMessagesUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(() => SendTextMessageUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(() => EditMessageUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(() => DeleteMessageUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(() => MarkConversationReadUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(() => WatchNewMessagesUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(() => StopWatchMessagesUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(() => GetConversationListUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(() => GetMessageReadsUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(() => MarkMessageReadUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(() => WatchMessageReadsUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(() => SendTypingIndicatorUseCase(repository: getIt<ChatRepository>()))
     ..registerLazySingleton(
-      () => WatchTypingIndicators(getIt<ChatRepository>()),
+      () => WatchTypingIndicatorsUseCase(repository: getIt<ChatRepository>()),
     )
-    ..registerLazySingleton(() => SearchFollowedUsers(getIt<ChatRepository>()))
+    ..registerLazySingleton(() => SearchFollowedUsersUseCase(repository: getIt<ChatRepository>()))
     // Social Relation feature - Use cases
     ..registerLazySingleton(() => FollowUser(getIt<SocialRelationRepository>()))
     ..registerLazySingleton(
@@ -404,70 +414,87 @@ Future<void> configureDependencies() async {
   // Notification feature - Use cases
   getIt
     ..registerLazySingleton(
-      () => LoadInitialNotifications(getIt<NotificationRepository>()),
+      () => LoadInitialNotificationsUseCase(
+        repository: getIt<NotificationRepository>(),
+      ),
     )
     ..registerLazySingleton(
-      () => LoadMoreNotifications(getIt<NotificationRepository>()),
+      () => LoadMoreNotificationsUseCase(
+        repository: getIt<NotificationRepository>(),
+      ),
     )
     ..registerLazySingleton(
-      () => GetUnreadNotificationCount(getIt<NotificationRepository>()),
+      () => GetUnreadNotificationCountUseCase(
+        repository: getIt<NotificationRepository>(),
+      ),
     )
     ..registerLazySingleton(
-      () => MarkAllNotificationsRead(getIt<NotificationRepository>()),
+      () => MarkAllNotificationsReadUseCase(
+        repository: getIt<NotificationRepository>(),
+      ),
     )
     ..registerLazySingleton(
-      () => MarkNotificationsRead(getIt<NotificationRepository>()),
+      () => MarkNotificationsReadUseCase(
+        repository: getIt<NotificationRepository>(),
+      ),
     )
     ..registerLazySingleton(
-      () => DeleteNotification(getIt<NotificationRepository>()),
+      () => DeleteNotificationUseCase(
+        repository: getIt<NotificationRepository>(),
+      ),
     )
     ..registerLazySingleton(
-      () => WatchNewNotifications(getIt<NotificationRepository>()),
+      () => WatchNewNotificationsUseCase(
+        repository: getIt<NotificationRepository>(),
+      ),
     )
     ..registerLazySingleton(
-      () => StopWatchNotifications(getIt<NotificationRepository>()),
+      () => StopWatchNotificationsUseCase(
+        repository: getIt<NotificationRepository>(),
+      ),
     );
 
   // Feed feature - Bloc
   getIt.registerFactory(
     () => FeedBloc(
-      loadInitialFeedUseCase: getIt<LoadInitialFeed>(),
-      loadMoreFeedUseCase: getIt<LoadMoreFeed>(),
-      toggleLikePostUseCase: getIt<ToggleLikePost>(),
-      toggleBookmarkPostUseCase: getIt<ToggleBookmarkPost>(),
-      getPostByIdUseCase: getIt<GetPostById>(),
-      updatePostUseCase: getIt<UpdatePost>(),
-      deletePostUseCase: getIt<DeletePost>(),
+      loadInitialFeedUseCase: getIt<LoadInitialFeedUseCase>(),
+      loadMoreFeedUseCase: getIt<LoadMoreFeedUseCase>(),
+      toggleLikePostUseCase: getIt<ToggleLikePostUseCase>(),
+      toggleBookmarkPostUseCase: getIt<ToggleBookmarkPostUseCase>(),
+      getPostByIdUseCase: getIt<GetPostByIdUseCase>(),
+      updatePostUseCase: getIt<UpdatePostUseCase>(),
+      deletePostUseCase: getIt<DeletePostUseCase>(),
     ),
   );
 
   getIt.registerFactory(
     () => FeedCommentBloc(
-      getCommentsUseCase: getIt<GetComments>(),
-      addCommentUseCase: getIt<AddComment>(),
-      deleteCommentUseCase: getIt<DeleteComment>(),
-      toggleLikeCommentUseCase: getIt<ToggleLikeComment>(),
-      watchNewCommentsUseCase: getIt<WatchNewComments>(),
-      stopWatchCommentsUseCase: getIt<StopWatchComments>(),
+      getCommentsUseCase: getIt<GetCommentsUseCase>(),
+      getRepliesUseCase: getIt<GetRepliesUseCase>(),
+      addCommentUseCase: getIt<AddCommentUseCase>(),
+      deleteCommentUseCase: getIt<DeleteCommentUseCase>(),
+      toggleLikeCommentUseCase: getIt<ToggleLikeCommentUseCase>(),
+      watchNewCommentsUseCase: getIt<WatchNewCommentsUseCase>(),
+      stopWatchCommentsUseCase: getIt<StopWatchCommentsUseCase>(),
     ),
   );
 
   // Chat feature - Bloc
   getIt.registerFactory(
     () => ChatMessageBloc(
-      getMessagesUseCase: getIt<GetMessages>(),
-      sendTextMessageUseCase: getIt<SendTextMessage>(),
-      editMessageUseCase: getIt<EditMessage>(),
-      deleteMessageUseCase: getIt<DeleteMessage>(),
-      markConversationReadUseCase: getIt<MarkConversationRead>(),
-      watchNewMessagesUseCase: getIt<WatchNewMessages>(),
-      stopWatchMessagesUseCase: getIt<StopWatchMessages>(),
-      getConversationListUseCase: getIt<GetConversationList>(),
-      getMessageReadsUseCase: getIt<GetMessageReads>(),
-      markMessageReadUseCase: getIt<MarkMessageRead>(),
-      watchMessageReadsUseCase: getIt<WatchMessageReads>(),
-      sendTypingIndicatorUseCase: getIt<SendTypingIndicator>(),
-      watchTypingIndicatorsUseCase: getIt<WatchTypingIndicators>(),
+      getMessagesUseCase: getIt<GetMessagesUseCase>(),
+      sendTextMessageUseCase: getIt<SendTextMessageUseCase>(),
+      editMessageUseCase: getIt<EditMessageUseCase>(),
+      deleteMessageUseCase: getIt<DeleteMessageUseCase>(),
+      markConversationReadUseCase: getIt<MarkConversationReadUseCase>(),
+      watchNewMessagesUseCase: getIt<WatchNewMessagesUseCase>(),
+      stopWatchMessagesUseCase: getIt<StopWatchMessagesUseCase>(),
+      getConversationListUseCase: getIt<GetConversationListUseCase>(),
+      getMessageReadsUseCase: getIt<GetMessageReadsUseCase>(),
+      markMessageReadUseCase: getIt<MarkMessageReadUseCase>(),
+      watchMessageReadsUseCase: getIt<WatchMessageReadsUseCase>(),
+      sendTypingIndicatorUseCase: getIt<SendTypingIndicatorUseCase>(),
+      watchTypingIndicatorsUseCase: getIt<WatchTypingIndicatorsUseCase>(),
     ),
   );
 
@@ -483,7 +510,7 @@ Future<void> configureDependencies() async {
 
   // Search User - Bloc
   getIt.registerFactory(
-    () => SearchUserBloc(searchFollowedUsers: getIt<SearchFollowedUsers>()),
+    () => SearchUserBloc(searchFollowedUsers: getIt<SearchFollowedUsersUseCase>()),
   );
 
   // Social Relation feature - Bloc
@@ -515,30 +542,34 @@ Future<void> configureDependencies() async {
   // Notification feature - Bloc
   getIt.registerFactory(
     () => NotificationBloc(
-      loadInitialNotificationsUseCase: getIt<LoadInitialNotifications>(),
-      loadMoreNotificationsUseCase: getIt<LoadMoreNotifications>(),
-      getUnreadCountUseCase: getIt<GetUnreadNotificationCount>(),
-      markAllAsReadUseCase: getIt<MarkAllNotificationsRead>(),
-      markAsReadUseCase: getIt<MarkNotificationsRead>(),
-      deleteNotificationUseCase: getIt<DeleteNotification>(),
-      watchNewNotificationsUseCase: getIt<WatchNewNotifications>(),
-      stopWatchNotificationsUseCase: getIt<StopWatchNotifications>(),
+      loadInitialNotificationsUseCase: getIt<LoadInitialNotificationsUseCase>(),
+      loadMoreNotificationsUseCase: getIt<LoadMoreNotificationsUseCase>(),
+      getUnreadCountUseCase: getIt<GetUnreadNotificationCountUseCase>(),
+      markAllAsReadUseCase: getIt<MarkAllNotificationsReadUseCase>(),
+      markAsReadUseCase: getIt<MarkNotificationsReadUseCase>(),
+      deleteNotificationUseCase: getIt<DeleteNotificationUseCase>(),
+      watchNewNotificationsUseCase: getIt<WatchNewNotificationsUseCase>(),
+      stopWatchNotificationsUseCase: getIt<StopWatchNotificationsUseCase>(),
       profileDataSource: getIt<ProfileRemoteDataSource>(),
     ),
   );
 
   // Post feature - Bloc
-  getIt.registerFactory(() => PostBloc(createPostUseCase: getIt<CreatePost>()));
+  getIt.registerFactory(
+    () => PostBloc(createPostFeedUseCase: getIt<CreatePostFeedUseCase>()),
+  );
 
-  // Media feature - Cubit
-  getIt.registerFactory(() => MediaUploadCubit(getIt<UploadMediaAsset>()));
+  // Media feature - Bloc
+  getIt.registerFactory(
+    () => MediaUploadBloc(uploadMediaAsset: getIt<UploadMediaAssetUseCase>()),
+  );
 
   // Media Gallery (Local) feature - Bloc
   getIt.registerFactory(
     () => MediaGalleryBloc(
-      requestMediaPermission: getIt<RequestMediaPermission>(),
-      loadMediaAssets: getIt<LoadMediaAssets>(),
-      getFileFromAsset: getIt<GetFileFromAsset>(),
+      requestMediaPermission: getIt<RequestMediaPermissionUseCase>(),
+      loadMediaAssets: getIt<LoadMediaAssetsUseCase>(),
+      getFileFromAsset: getIt<GetFileFromAssetUseCase>(),
     ),
   );
 
@@ -546,12 +577,12 @@ Future<void> configureDependencies() async {
   if (!getIt.isRegistered<AuthBloc>()) {
     getIt.registerLazySingleton<AuthBloc>(
       () => AuthBloc(
-        signUpUseCase: getIt<AuthSignUp>(),
-        signInUseCase: getIt<AuthSignIn>(),
-        signInWithGoogleUseCase: getIt<AuthSignInWithGoogle>(),
-        resetPasswordUseCase: getIt<AuthResetPassword>(),
-        signOutUseCase: getIt<AuthSignOut>(),
-        watchAuthSnapshotUseCase: getIt<AuthWatchAuthSnapshot>(),
+        signUpUseCase: getIt<SignUpUseCase>(),
+        signInUseCase: getIt<SignInUseCase>(),
+        signInWithGoogleUseCase: getIt<SignInWithGoogleUseCase>(),
+        resetPasswordUseCase: getIt<ResetPasswordUseCase>(),
+        signOutUseCase: getIt<SignOutUseCase>(),
+        watchAuthSnapshotUseCase: getIt<WatchAuthSnapshotUseCase>(),
       ),
     );
   }

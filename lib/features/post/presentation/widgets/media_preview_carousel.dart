@@ -5,16 +5,16 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:velora/core/themes/color_material.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
-/// Hero preview card with carousel for multiple images
+/// Media preview carousel with page indicators
 class MediaPreviewCarousel extends HookWidget {
-  final List<File> mediaFiles;
-  final Function(int index)? onRemove;
-
   const MediaPreviewCarousel({
     super.key,
     required this.mediaFiles,
     this.onRemove,
   });
+
+  final List<File> mediaFiles;
+  final Function(int index)? onRemove;
 
   @override
   Widget build(BuildContext context) {

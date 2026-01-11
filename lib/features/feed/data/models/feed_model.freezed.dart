@@ -15,11 +15,12 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$FeedModel {
 
-@JsonKey(name: 'id') String get id;@JsonKey(name: 'user_id') String get userId;@JsonKey(name: 'content') String get content;@UtcDateTimeConverter()@JsonKey(name: 'created_at') DateTime get createdAt;// joined from profiles (read-only)
-@JsonKey(name: 'username') String? get username;@JsonKey(name: 'photo_url') String? get photoUrl;@StringListConverter()@JsonKey(name: 'image_urls') List<String> get imageUrls;@StringListConverter()@JsonKey(name: 'video_urls') List<String> get videoUrls;// counts can be masked => nullable
-@JsonKey(name: 'likes_count') int? get likesCount;@JsonKey(name: 'comments_count') int? get commentsCount;@JsonKey(name: 'shares_count') int? get sharesCount;// computed per viewer (read-only)
-@JsonKey(name: 'is_liked') bool get isLiked;@JsonKey(name: 'is_bookmarked') bool get isBookmarked;@JsonKey(name: 'is_following') bool get isFollowing;@JsonKey(name: 'is_follow_request_pending') bool get isFollowRequestPending;@JsonKey(name: 'is_me') bool get isMe;// per-post settings
-@JsonKey(name: 'comments_enabled') bool get commentsEnabled;@JsonKey(name: 'hide_like_count') bool get hideLikeCount;@JsonKey(name: 'hide_comment_count') bool get hideCommentCount;@JsonKey(name: 'hide_share_count') bool get hideShareCount;@JsonKey(name: 'hide_likes_list') bool get hideLikesList;@JsonKey(name: 'campaign_id') String? get campaignId;@JsonKey(name: 'campaign_title') String? get campaignTitle;
+@JsonKey(name: 'id') String get id;@JsonKey(name: 'user_id') String get userId;@JsonKey(name: 'content') String get content;@UtcDateTimeConverter()@JsonKey(name: 'created_at') DateTime get createdAt;// Joined from profiles (read-only)
+@JsonKey(name: 'username') String? get username;@JsonKey(name: 'photo_url') String? get photoUrl;@StringListConverter()@JsonKey(name: 'image_urls') List<String> get imageUrls;@StringListConverter()@JsonKey(name: 'video_urls') List<String> get videoUrls;// Counts can be masked (nullable)
+@JsonKey(name: 'likes_count') int? get likesCount;@JsonKey(name: 'comments_count') int? get commentsCount;@JsonKey(name: 'shares_count') int? get sharesCount;// Computed per viewer (read-only)
+@JsonKey(name: 'is_liked') bool get isLiked;@JsonKey(name: 'is_bookmarked') bool get isBookmarked;@JsonKey(name: 'is_following') bool get isFollowing;@JsonKey(name: 'is_follow_request_pending') bool get isFollowRequestPending;@JsonKey(name: 'is_me') bool get isMe;// Post privacy settings
+@JsonKey(name: 'comments_enabled') bool get commentsEnabled;@JsonKey(name: 'hide_like_count') bool get hideLikeCount;@JsonKey(name: 'hide_comment_count') bool get hideCommentCount;@JsonKey(name: 'hide_share_count') bool get hideShareCount;@JsonKey(name: 'hide_likes_list') bool get hideLikesList;// Campaign association
+@JsonKey(name: 'campaign_id') String? get campaignId;@JsonKey(name: 'campaign_title') String? get campaignTitle;
 /// Create a copy of FeedModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -242,7 +243,7 @@ class _FeedModel extends FeedModel {
 @override@JsonKey(name: 'user_id') final  String userId;
 @override@JsonKey(name: 'content') final  String content;
 @override@UtcDateTimeConverter()@JsonKey(name: 'created_at') final  DateTime createdAt;
-// joined from profiles (read-only)
+// Joined from profiles (read-only)
 @override@JsonKey(name: 'username') final  String? username;
 @override@JsonKey(name: 'photo_url') final  String? photoUrl;
  final  List<String> _imageUrls;
@@ -259,22 +260,23 @@ class _FeedModel extends FeedModel {
   return EqualUnmodifiableListView(_videoUrls);
 }
 
-// counts can be masked => nullable
+// Counts can be masked (nullable)
 @override@JsonKey(name: 'likes_count') final  int? likesCount;
 @override@JsonKey(name: 'comments_count') final  int? commentsCount;
 @override@JsonKey(name: 'shares_count') final  int? sharesCount;
-// computed per viewer (read-only)
+// Computed per viewer (read-only)
 @override@JsonKey(name: 'is_liked') final  bool isLiked;
 @override@JsonKey(name: 'is_bookmarked') final  bool isBookmarked;
 @override@JsonKey(name: 'is_following') final  bool isFollowing;
 @override@JsonKey(name: 'is_follow_request_pending') final  bool isFollowRequestPending;
 @override@JsonKey(name: 'is_me') final  bool isMe;
-// per-post settings
+// Post privacy settings
 @override@JsonKey(name: 'comments_enabled') final  bool commentsEnabled;
 @override@JsonKey(name: 'hide_like_count') final  bool hideLikeCount;
 @override@JsonKey(name: 'hide_comment_count') final  bool hideCommentCount;
 @override@JsonKey(name: 'hide_share_count') final  bool hideShareCount;
 @override@JsonKey(name: 'hide_likes_list') final  bool hideLikesList;
+// Campaign association
 @override@JsonKey(name: 'campaign_id') final  String? campaignId;
 @override@JsonKey(name: 'campaign_title') final  String? campaignTitle;
 

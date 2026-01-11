@@ -43,8 +43,12 @@ class CustomTextField extends HookWidget {
     this.showSuccessIcon = true,
     this.validateOnChange = true,
   });
+  
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    
     final errorTextState = useState<String?>(null);
     final isValidState = useState(false);
     final hasInteractedState = useState(false);
@@ -82,22 +86,17 @@ class CustomTextField extends HookWidget {
       };
     }, [controller, focusNode, validateOnChange, validator]);
 
-    Widget? buildSuffixIcon() {
-      if (suffixIcon != null) {
-        return suffixIcon;
-      }
+    final suffixIconWidget = useMemoized(() {
+      if (suffixIcon != null) return suffixIcon;
       if (hasInteractedState.value && isValidState.value && showSuccessIcon) {
         return Icon(
           Icons.check_circle,
-          color: Theme.of(context).colorScheme.tertiary,
+          color: colorScheme.tertiary,
           size: 20,
         );
       }
       return null;
-    }
-
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
+    }, [suffixIcon, hasInteractedState.value, isValidState.value, showSuccessIcon, colorScheme]);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,7 +123,7 @@ class CustomTextField extends HookWidget {
             hintText: hint,
             floatingLabelBehavior: FloatingLabelBehavior.auto,
             prefixIcon: prefixIcon,
-            suffixIcon: buildSuffixIcon(),
+            suffixIcon: suffixIconWidget,
             errorText: hasInteractedState.value ? errorTextState.value : null,
             errorMaxLines: 2,
             filled: true,

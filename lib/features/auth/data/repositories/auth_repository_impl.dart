@@ -3,13 +3,14 @@ import 'package:velora/core/errors/auth_failure.dart';
 import 'package:velora/core/errors/failure.dart';
 import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/auth/data/models/auth_session_model.dart';
-import 'package:velora/features/auth/domain/entities/auth_session.dart';
-import 'package:velora/features/auth/domain/entities/auth_snapshot.dart';
-import 'package:velora/features/auth/domain/entities/auth_status.dart';
+import 'package:velora/features/auth/domain/entities/auth_session_entity.dart';
+import 'package:velora/features/auth/domain/entities/auth_snapshot_entity.dart';
+import 'package:velora/features/auth/domain/entities/auth_status_entity.dart';
 
 import '../../domain/repositories/auth_repository.dart';
 import '../datasources/auth_remote_datasource.dart';
 
+/// Implementation of auth repository using Supabase remote datasource
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource remoteDataSource;
 
@@ -17,8 +18,9 @@ class AuthRepositoryImpl implements AuthRepository {
 
   static const _logTag = 'AuthRepository';
 
+  /// Register new user with email and password
   @override
-  Future<Either<Failure, AuthSession?>> signUp({
+  Future<Either<Failure, AuthSessionEntity?>> signUp({
     required String email,
     required String password,
   }) async {
@@ -35,8 +37,9 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
+  /// Authenticate user with email and password
   @override
-  Future<Either<Failure, AuthSession?>> signIn({
+  Future<Either<Failure, AuthSessionEntity?>> signIn({
     required String email,
     required String password,
   }) async {
@@ -53,8 +56,9 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
+  /// Authenticate user with Google OAuth
   @override
-  Future<Either<Failure, AuthSession?>> signInWithGoogle() async {
+  Future<Either<Failure, AuthSessionEntity?>> signInWithGoogle() async {
     try {
       logi('[$_logTag] signInWithGoogle');
       final session = await remoteDataSource.signInWithGoogle();
@@ -65,6 +69,7 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
+  /// Send password reset email to user
   @override
   Future<Either<Failure, void>> resetPassword({required String email}) async {
     try {
@@ -77,6 +82,7 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
+  /// Sign out current user from session
   @override
   Future<Either<Failure, void>> signOut() async {
     try {
@@ -89,12 +95,14 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
-  AuthSession? _mapAuthSession(AuthSessionModel? model) {
+  /// Convert session model to entity
+  AuthSessionEntity? _mapAuthSession(AuthSessionModel? model) {
     return model?.toEntity();
   }
 
+  /// Stream auth state changes from Supabase
   @override
-  Stream<AuthSnapshot> watchAuthSnapshot() async* {
+  Stream<AuthSnapshotEntity> watchAuthSnapshot() async* {
     yield _mapModelToSnapshot(remoteDataSource.currentSession());
     yield* remoteDataSource
         .watchAuthSession()
@@ -102,28 +110,26 @@ class AuthRepositoryImpl implements AuthRepository {
         .distinct(
           (a, b) =>
               a.status == b.status &&
-              a.userId == b.userId &&
-              a.emailVerified == b.emailVerified,
+              a.userId == b.userId,
         );
   }
 
-  AuthSnapshot _mapModelToSnapshot(AuthSessionModel? session) {
+  /// Convert session model to snapshot entity
+  AuthSnapshotEntity _mapModelToSnapshot(AuthSessionModel? session) {
     if (session == null) {
-      return const AuthSnapshot(
-        status: AuthStatus.unauthenticated,
+      return const AuthSnapshotEntity(
+        status: AuthStatusEntity.unauthenticated,
         userId: null,
-        emailVerified: null,
       );
     }
 
     final status = session.emailVerified
-        ? AuthStatus.authenticated
-        : AuthStatus.emailUnverified;
+        ? AuthStatusEntity.authenticated
+        : AuthStatusEntity.emailUnverified;
 
-    return AuthSnapshot(
+    return AuthSnapshotEntity(
       status: status,
       userId: session.userId,
-      emailVerified: session.emailVerified,
     );
   }
 }

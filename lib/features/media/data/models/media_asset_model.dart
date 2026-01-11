@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:velora/features/media/domain/entities/media_asset.dart';
+import 'package:velora/features/media/domain/entities/media_asset_entity.dart';
 
 part 'media_asset_model.freezed.dart';
 part 'media_asset_model.g.dart';

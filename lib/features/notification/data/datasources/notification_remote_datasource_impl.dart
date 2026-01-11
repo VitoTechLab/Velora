@@ -10,6 +10,13 @@ import 'package:velora/features/notification/data/models/notification_model.dart
 import 'package:velora/features/notification/data/models/notification_pagination_model.dart';
 import 'notification_remote_datasource.dart';
 
+/// Remote datasource implementation for notification operations
+/// 
+/// Features:
+/// - Cursor-based pagination with RPC optimization
+/// - Realtime Supabase subscriptions for new notifications
+/// - Type filtering for notification categories
+/// - Time-based grouping support (Today, Yesterday, Last 7/30 Days, Older)
 class NotificationRemoteDataSourceImpl implements NotificationRemoteDataSource {
   NotificationRemoteDataSourceImpl({required SupabaseClient supabaseClient})
     : _client = supabaseClient;
@@ -20,6 +27,7 @@ class NotificationRemoteDataSourceImpl implements NotificationRemoteDataSource {
 
   static const _logTag = 'NotificationRemoteDataSource';
 
+  /// Get current authenticated user ID or throw exception
   String _requireUserId() {
     final userId = _client.auth.currentUser?.id;
     if (userId == null) {
@@ -28,6 +36,9 @@ class NotificationRemoteDataSourceImpl implements NotificationRemoteDataSource {
     return userId;
   }
 
+  /// Get notifications with cursor-based pagination
+  /// 
+  /// Uses optimized RPC function with time_category for efficient grouping
   @override
   Future<NotificationPaginationModel> getNotifications({
     int limit = 20,
@@ -36,8 +47,6 @@ class NotificationRemoteDataSourceImpl implements NotificationRemoteDataSource {
   }) {
     return guardSupabase(
       () async {
-        final userId = _requireUserId();
-
         // Use the RPC function for optimized querying with time_category
         final params = <String, dynamic>{'p_limit': limit + 1};
 
@@ -82,6 +91,7 @@ class NotificationRemoteDataSourceImpl implements NotificationRemoteDataSource {
     );
   }
 
+  /// Get count of unread notifications
   @override
   Future<int> getUnreadCount() {
     return guardSupabase(
@@ -98,6 +108,7 @@ class NotificationRemoteDataSourceImpl implements NotificationRemoteDataSource {
     );
   }
 
+  /// Mark all notifications as read for current user
   @override
   Future<void> markAllAsRead() {
     return guardSupabase(
@@ -110,6 +121,7 @@ class NotificationRemoteDataSourceImpl implements NotificationRemoteDataSource {
     );
   }
 
+  /// Mark specific notifications as read by IDs
   @override
   Future<void> markAsRead(List<String> notificationIds) {
     return guardSupabase(
@@ -125,6 +137,7 @@ class NotificationRemoteDataSourceImpl implements NotificationRemoteDataSource {
     );
   }
 
+  /// Delete a notification by ID
   @override
   Future<void> deleteNotification(String notificationId) {
     return guardSupabase(
@@ -140,6 +153,10 @@ class NotificationRemoteDataSourceImpl implements NotificationRemoteDataSource {
     );
   }
 
+  /// Watch for new notifications via Supabase realtime subscriptions
+  /// 
+  /// Subscribes to INSERT events on notifications table
+  /// Automatically cleans up previous subscriptions
   @override
   Stream<NotificationModel> watchNewNotifications() {
     final userId = _requireUserId();
@@ -194,6 +211,7 @@ class NotificationRemoteDataSourceImpl implements NotificationRemoteDataSource {
     return controller.stream;
   }
 
+  /// Stop watching for new notifications and cleanup subscriptions
   @override
   Future<void> stopWatch() async {
     await _channel?.unsubscribe();

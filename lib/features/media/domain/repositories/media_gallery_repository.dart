@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:velora/core/errors/media_gallery_failure.dart';
-import 'package:velora/features/media/domain/entities/gallery_media_asset.dart';
+import 'package:velora/features/media/domain/entities/gallery_media_asset_entity.dart';
 
 abstract class MediaGalleryRepository {
   /// Request permission to access media gallery

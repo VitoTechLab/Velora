@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:velora/features/auth/domain/entities/auth_status.dart';
+import 'package:velora/features/auth/domain/entities/auth_status_entity.dart';
 import 'package:velora/features/auth/presentation/screens/auth_screens.dart';
 import 'package:velora/features/campaign/presentation/screens/campaign_screen.dart';
 import 'package:velora/features/chat/presentation/screens/chat_screen.dart';
 import 'package:velora/features/chat/presentation/screens/chat_search_screen.dart';
-import 'package:velora/features/chat/presentation/screens/search_follow_user_screen.dart';
+import 'package:velora/features/chat/presentation/screens/user_search_screen.dart';
 import 'package:velora/features/media/presentation/screens/media_gallery_screen.dart';
 import 'package:velora/features/navigation/models/create_post_media_args.dart';
 import 'package:velora/features/navigation/models/more_option_post_args.dart';
@@ -17,7 +17,7 @@ import 'package:velora/features/navigation/navigation_keys.dart';
 import 'package:velora/features/navigation/presentation/pages/app_shell.dart';
 import 'package:velora/features/navigation/presentation/widgets/adaptive_branch_container.dart';
 import 'package:velora/features/navigation/services/navigation_service.dart';
-import 'package:velora/features/post/presentation/screens/create_post_screen.dart';
+import 'package:velora/features/post/presentation/screens/post_feed_screen.dart';
 import 'package:velora/features/post/presentation/screens/more_option_post_screen.dart';
 import 'package:velora/features/profile/presentation/screens/profile_screen.dart';
 import 'package:velora/features/profile/presentation/screens/other_user_profile_screen.dart';
@@ -62,7 +62,7 @@ class AppRouter {
               state.matchedLocation == AppRoutePath.verificationEmail;
           final onSplash = state.matchedLocation == AppRoutePath.splash;
 
-          if (status == AuthStatus.unknown) {
+          if (status == AuthStatusEntity.unknown) {
             // Show splash screen while checking auth
             if (!onSplash) {
               return AppRoutePath.splash;
@@ -70,19 +70,19 @@ class AppRouter {
             return null;
           }
 
-          if (status == AuthStatus.unauthenticated) {
+          if (status == AuthStatusEntity.unauthenticated) {
             if (loggingIn || signingUp || resetting) return null;
             return AppRoutePath.signIn;
           }
 
-          if (status == AuthStatus.emailUnverified) {
+          if (status == AuthStatusEntity.emailUnverified) {
             if (!verifying) {
               return AppRoutePath.verificationEmail;
             }
             return null;
           }
 
-          if (status == AuthStatus.authenticated) {
+          if (status == AuthStatusEntity.authenticated) {
             final isAuthRoute =
                 loggingIn || signingUp || resetting || verifying;
             if (isAuthRoute) {
@@ -169,8 +169,8 @@ class AppRouter {
                         },
                       ),
                       GoRoute(
-                        path: AppRouteSinglePath.createPost,
-                        name: AppRouteName.createPost,
+                        path: AppRouteSinglePath.postFeed,
+                        name: AppRouteName.postFeed,
                         parentNavigatorKey:
                             navigationService.navigatorKey, // root
                         builder: (context, state) {
@@ -184,8 +184,8 @@ class AppRouter {
                             });
                             return const SizedBox.shrink();
                           }
-                          return CreatePostScreen(
-                            selectedMedia: args.selectedMedia ?? [],
+                          return PostFeedScreen(
+                            selectedMedia: args.selectedMedia,
                           );
                         },
                         routes: [
@@ -229,7 +229,7 @@ class AppRouter {
                         path: AppRouteSinglePath.searchFollowUser,
                         name: AppRouteName.searchFollowUser,
                         builder: (context, state) =>
-                            const SearchFollowUserScreen(),
+                            const UserSearchScreen(),
                       ),
                     ],
                   ),
@@ -402,7 +402,7 @@ class AppRouteName {
   static const mediaGallery = 'mediaGallery';
   static const notification = 'notification';
   static const userProfile = 'userProfile';
-  static const createPost = 'createPost';
+  static const postFeed = 'postFeed';
   static const moreOptions = 'moreOptions';
   static const search = 'search';
   static const chat = 'chat';
@@ -437,8 +437,8 @@ class AppRoutePath {
   static const mediaGallery = '/media-gallery';
   static const notification = '/home/notification';
   static const userProfile = '/home/user/:userId';
-  static const createPost = '/home/create-post';
-  static const moreOptions = '/home/create-post/more-options';
+  static const postFeed = '/home/post-feed';
+  static const moreOptions = '/home/post-feed/more-options';
   static const settings = '/profile/settings';
   static const settingsProfiles = '/profile/settings/profiles';
   static const settingsActivity = '/profile/settings/activity';
@@ -470,7 +470,7 @@ class AppRoutePath {
 class AppRouteSinglePath {
   static const notification = 'notification';
   static const userProfile = 'user/:userId';
-  static const createPost = 'create-post';
+  static const postFeed = 'post-feed';
   static const moreOptions = 'more-options';
   static const settings = 'settings';
   static const settingsProfiles = 'profiles';

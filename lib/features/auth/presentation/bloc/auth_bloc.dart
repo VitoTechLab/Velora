@@ -4,28 +4,26 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velora/core/errors/auth_failure.dart';
 import 'package:velora/core/errors/failure.dart';
 import 'package:velora/core/utils/app_logger.dart';
-import 'package:velora/features/auth/domain/entities/auth_snapshot.dart';
-import 'package:velora/features/auth/domain/entities/auth_status.dart';
-import 'package:velora/features/auth/domain/usecases/auth_reset_password.dart';
-import 'package:velora/features/auth/domain/usecases/auth_sign_in.dart';
-import 'package:velora/features/auth/domain/usecases/auth_sign_in_with_google.dart';
-import 'package:velora/features/auth/domain/usecases/auth_sign_out.dart';
-import 'package:velora/features/auth/domain/usecases/auth_sign_up.dart';
-import 'package:velora/features/auth/domain/usecases/auth_watch_auth_snapshot.dart';
+import 'package:velora/features/auth/domain/entities/auth_snapshot_entity.dart';
+import 'package:velora/features/auth/domain/entities/auth_status_entity.dart';
+import 'package:velora/features/auth/domain/usecases/reset_password_usecase.dart';
+import 'package:velora/features/auth/domain/usecases/sign_in_usecase.dart';
+import 'package:velora/features/auth/domain/usecases/sign_in_with_google_usecase.dart';
+import 'package:velora/features/auth/domain/usecases/sign_out_usecase.dart';
+import 'package:velora/features/auth/domain/usecases/sign_up_usecase.dart';
+import 'package:velora/features/auth/domain/usecases/watch_auth_snapshot_usecase.dart';
 
 import 'package:velora/features/auth/presentation/bloc/auth_state.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_event.dart';
 
-/// AuthBloc handles user-facing auth flows (sign in, sign up, reset password,
-/// sign out) and keeps a global [AuthStatus] for routing.
+/// Manages authentication flows and maintains global auth status for routing.
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  /// Domain use cases for auth operations.
-  final AuthSignUp signUpUseCase;
-  final AuthSignIn signInUseCase;
-  final AuthSignInWithGoogle signInWithGoogleUseCase;
-  final AuthResetPassword resetPasswordUseCase;
-  final AuthSignOut signOutUseCase;
-  final AuthWatchAuthSnapshot watchAuthSnapshotUseCase;
+  final SignUpUseCase signUpUseCase;
+  final SignInUseCase signInUseCase;
+  final SignInWithGoogleUseCase signInWithGoogleUseCase;
+  final ResetPasswordUseCase resetPasswordUseCase;
+  final SignOutUseCase signOutUseCase;
+  final WatchAuthSnapshotUseCase watchAuthSnapshotUseCase;
 
   AuthBloc({
     required this.signUpUseCase,
@@ -35,35 +33,37 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required this.signOutUseCase,
     required this.watchAuthSnapshotUseCase,
   }) : super(const AuthState()) {
-    on<AuthSignUpRequested>(_onSignUpRequested);
-    on<AuthSignInRequested>(_onSignInRequested);
-    on<AuthResetPasswordRequested>(_onResetPasswordRequested);
-    on<AuthSignOutRequested>(_onSignOutRequested);
-    on<AuthSignInWithGoogleRequested>(_onSignInWithGoogleRequested);
-    on<AuthClearMessagesRequested>(_onClearMessagesRequested);
-    on<AuthSupabaseSnapshotChanged>(_onSupabaseSnapshotChanged);
+    on<SignUpEvent>(_onSignUp);
+    on<SignInEvent>(_onSignIn);
+    on<ResetPasswordEvent>(_onResetPassword);
+    on<SignOutEvent>(_onSignOut);
+    on<SignInWithGoogleEvent>(_onSignInWithGoogle);
+    on<ClearMessagesEvent>(_onClearMessages);
+    on<AuthSnapshotChangedEvent>(_onAuthSnapshotChanged);
 
     _listenToAuthStatus();
   }
 
-  StreamSubscription<AuthSnapshot>? _authSubscription;
+  StreamSubscription<AuthSnapshotEntity>? _authSubscription;
 
+  /// Subscribe to Supabase auth state changes
   void _listenToAuthStatus() {
     _authSubscription?.cancel();
     _authSubscription = watchAuthSnapshotUseCase().listen(
-      (snap) => add(AuthSupabaseSnapshotChanged(snapshot: snap)),
+      (snap) => add(AuthEvent.authSnapshotChanged(snapshot: snap)),
       onError: (e, st) =>
           AppLogger.e('[AuthBloc] stream error', error: e, stackTrace: st),
     );
   }
 
-  void _onSupabaseSnapshotChanged(
-    AuthSupabaseSnapshotChanged event,
+  /// Handle internal auth state updates from Supabase
+  void _onAuthSnapshotChanged(
+    AuthSnapshotChangedEvent event,
     Emitter<AuthState> emit,
   ) {
     // Get current user ID from the auth status stream if available
     String? currentUserId;
-    if (event.snapshot.status == AuthStatus.authenticated) {
+    if (event.snapshot.status == AuthStatusEntity.authenticated) {
       // Try to get userId from current session
       // This will be set by sign in/sign up flows
       currentUserId = event.snapshot.userId;
@@ -80,8 +80,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
   }
 
-  Future<void> _onSignUpRequested(
-    AuthSignUpRequested event,
+  /// Register new user with email and password
+  Future<void> _onSignUp(
+    SignUpEvent event,
     Emitter<AuthState> emit,
   ) async {
     emit(state.copyWith(
@@ -98,7 +99,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       result.fold(
         (failure) {
-          final status = _statusForFailure(failure, AuthStatus.unauthenticated);
+          final status = _statusForFailure(failure, AuthStatusEntity.unauthenticated);
           emit(
             state.copyWith(
               status: status,
@@ -114,8 +115,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           emit(
             state.copyWith(
               status: isEmailVerified
-                  ? AuthStatus.authenticated
-                  : AuthStatus.emailUnverified,
+                  ? AuthStatusEntity.authenticated
+                  : AuthStatusEntity.emailUnverified,
               loadingType: AuthLoadingType.none,
               message:
                   'We\'ve sent a verification link to your email. Please verify '
@@ -127,25 +128,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         },
       );
     } catch (error, stackTrace) {
-      AppLogger.e(
-        '[AuthBloc] Unknown error during sign-up',
-        error: error,
-        stackTrace: stackTrace,
-      );
-      final failure = Failure.fromException(error);
-      emit(
-        state.copyWith(
-          status: AuthStatus.unauthenticated,
-          loadingType: AuthLoadingType.none,
-          errorMessage: failure.message,
-          message: null,
-        ),
+      _handleError(
+        error,
+        stackTrace,
+        emit,
+        'sign-up',
+        statusOnError: AuthStatusEntity.unauthenticated,
       );
     }
   }
 
-  Future<void> _onSignInRequested(
-    AuthSignInRequested event,
+  /// Authenticate user with email and password
+  Future<void> _onSignIn(
+    SignInEvent event,
     Emitter<AuthState> emit,
   ) async {
     emit(state.copyWith(
@@ -162,7 +157,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       result.fold(
         (failure) {
-          final status = _statusForFailure(failure, AuthStatus.unauthenticated);
+          final status = _statusForFailure(failure, AuthStatusEntity.unauthenticated);
           emit(
             state.copyWith(
               status: status,
@@ -176,7 +171,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         (session) {
           emit(
             state.copyWith(
-              status: AuthStatus.authenticated,
+              status: AuthStatusEntity.authenticated,
               loadingType: AuthLoadingType.none,
               message: 'Welcome back!',
               errorMessage: null,
@@ -186,25 +181,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         },
       );
     } catch (error, stackTrace) {
-      AppLogger.e(
-        '[AuthBloc] Unknown error during sign-in',
-        error: error,
-        stackTrace: stackTrace,
-      );
-      final failure = Failure.fromException(error);
-      emit(
-        state.copyWith(
-          status: AuthStatus.unauthenticated,
-          loadingType: AuthLoadingType.none,
-          errorMessage: failure.message,
-          message: null,
-        ),
+      _handleError(
+        error,
+        stackTrace,
+        emit,
+        'sign-in',
+        statusOnError: AuthStatusEntity.unauthenticated,
       );
     }
   }
 
-  Future<void> _onResetPasswordRequested(
-    AuthResetPasswordRequested event,
+  /// Send password reset email to user
+  Future<void> _onResetPassword(
+    ResetPasswordEvent event,
     Emitter<AuthState> emit,
   ) async {
     emit(state.copyWith(
@@ -238,24 +227,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         },
       );
     } catch (error, stackTrace) {
-      AppLogger.e(
-        '[AuthBloc] Unknown error during password reset',
-        error: error,
-        stackTrace: stackTrace,
-      );
-      final failure = Failure.fromException(error);
-      emit(
-        state.copyWith(
-          loadingType: AuthLoadingType.none,
-          errorMessage: failure.message,
-          message: null,
-        ),
+      _handleError(
+        error,
+        stackTrace,
+        emit,
+        'password reset',
+        statusOnError: state.status,
       );
     }
   }
 
-  Future<void> _onSignOutRequested(
-    AuthSignOutRequested event,
+  /// Sign out current user from session
+  Future<void> _onSignOut(
+    SignOutEvent event,
     Emitter<AuthState> emit,
   ) async {
     emit(state.copyWith(
@@ -281,7 +265,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           AppLogger.i('[AuthBloc] User signed out');
           emit(
             state.copyWith(
-              status: AuthStatus.unauthenticated,
+              status: AuthStatusEntity.unauthenticated,
               loadingType: AuthLoadingType.none,
               message: null,
               errorMessage: null,
@@ -291,24 +275,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         },
       );
     } catch (error, stackTrace) {
-      AppLogger.e(
-        '[AuthBloc] Unknown error during sign-out',
-        error: error,
-        stackTrace: stackTrace,
-      );
-      final failure = Failure.fromException(error);
-      emit(
-        state.copyWith(
-          loadingType: AuthLoadingType.none,
-          errorMessage: failure.message,
-          message: null,
-        ),
+      _handleError(
+        error,
+        stackTrace,
+        emit,
+        'sign-out',
+        statusOnError: state.status,
       );
     }
   }
 
-  Future<void> _onSignInWithGoogleRequested(
-    AuthSignInWithGoogleRequested event,
+  /// Authenticate user with Google OAuth
+  Future<void> _onSignInWithGoogle(
+    SignInWithGoogleEvent event,
     Emitter<AuthState> emit,
   ) async {
     emit(state.copyWith(
@@ -322,7 +301,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       result.fold(
         (failure) {
-          final status = _statusForFailure(failure, AuthStatus.unauthenticated);
+          final status = _statusForFailure(failure, AuthStatusEntity.unauthenticated);
           emit(
             state.copyWith(
               status: status,
@@ -337,8 +316,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           emit(
             state.copyWith(
               status: session?.emailVerified == false
-                  ? AuthStatus.emailUnverified
-                  : AuthStatus.authenticated,
+                  ? AuthStatusEntity.emailUnverified
+                  : AuthStatusEntity.authenticated,
               loadingType: AuthLoadingType.none,
               message: 'Signed in with Google',
               errorMessage: null,
@@ -348,35 +327,54 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         },
       );
     } catch (error, stackTrace) {
-      AppLogger.e(
-        '[AuthBloc] Unknown error during Google sign-in',
-        error: error,
-        stackTrace: stackTrace,
-      );
-      final failure = Failure.fromException(error);
-      emit(
-        state.copyWith(
-          status: AuthStatus.unauthenticated,
-          loadingType: AuthLoadingType.none,
-          errorMessage: failure.message,
-          message: null,
-        ),
+      _handleError(
+        error,
+        stackTrace,
+        emit,
+        'Google sign-in',
+        statusOnError: AuthStatusEntity.unauthenticated,
       );
     }
   }
 
-  /// Clear transient messages after UI has displayed them.
-  Future<void> _onClearMessagesRequested(
-    AuthClearMessagesRequested event,
+  /// Clear transient messages after UI has displayed them
+  Future<void> _onClearMessages(
+    ClearMessagesEvent event,
     Emitter<AuthState> emit,
   ) async {
     if (state.message == null && state.errorMessage == null) return;
     emit(state.copyWith(message: null, errorMessage: null));
   }
 
-  /// Public helper so UI can still call bloc.clearMessages().
+  /// Public helper to clear success and error messages
   void clearMessages() {
-    add(const AuthClearMessagesRequested());
+    add(const AuthEvent.clearMessages());
+  }
+
+  /// Handle error and emit error state
+  void _handleError(
+    Object error,
+    StackTrace stackTrace,
+    Emitter<AuthState> emit,
+    String operation, {
+    required AuthStatusEntity statusOnError,
+  }) {
+    AppLogger.e(
+      '[AuthBloc] Error during $operation',
+      error: error,
+      stackTrace: stackTrace,
+    );
+    final failure = Failure.fromException(error);
+    final shouldResetUserId = statusOnError == AuthStatusEntity.unauthenticated;
+    emit(
+      state.copyWith(
+        status: statusOnError,
+        loadingType: AuthLoadingType.none,
+        errorMessage: failure.message,
+        message: null,
+        userId: shouldResetUserId ? null : state.userId,
+      ),
+    );
   }
 
   @override
@@ -385,11 +383,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     return super.close();
   }
 
-  AuthStatus _statusForFailure(Failure failure, AuthStatus fallback) {
+  /// Map authentication failure types to corresponding status values
+  AuthStatusEntity _statusForFailure(Failure failure, AuthStatusEntity fallback) {
     if (failure is AuthFailure) {
       switch (failure.type) {
         case AuthFailureType.emailNotVerified:
-          return AuthStatus.emailUnverified;
+          return AuthStatusEntity.emailUnverified;
         default:
           return fallback;
       }

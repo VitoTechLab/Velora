@@ -53,8 +53,6 @@ class ChatSearchScreen extends HookWidget {
       return null;
     }, [animationController, focusNode]);
 
-    final isDark = theme.brightness == Brightness.dark;
-
     return Scaffold(
       backgroundColor: colorScheme.surface,
       appBar: AppBar(

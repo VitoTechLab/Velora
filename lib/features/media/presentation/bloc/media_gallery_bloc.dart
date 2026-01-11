@@ -2,19 +2,20 @@ import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:photo_manager/photo_manager.dart';
-import 'package:velora/features/media/domain/entities/gallery_media_asset.dart';
-import 'package:velora/features/media/domain/usecases/get_file_from_asset.dart';
-import 'package:velora/features/media/domain/usecases/load_media_assets.dart';
-import 'package:velora/features/media/domain/usecases/request_media_permission.dart';
+import 'package:velora/features/media/domain/entities/gallery_media_asset_entity.dart';
+import 'package:velora/features/media/domain/usecases/get_file_from_asset_usecase.dart';
+import 'package:velora/features/media/domain/usecases/load_media_assets_usecase.dart';
+import 'package:velora/features/media/domain/usecases/request_media_permission_usecase.dart';
 
 part 'media_gallery_event.dart';
 part 'media_gallery_state.dart';
 part 'media_gallery_bloc.freezed.dart';
 
+/// BLoC for managing media gallery operations
 class MediaGalleryBloc extends Bloc<MediaGalleryEvent, MediaGalleryState> {
-  final RequestMediaPermission requestMediaPermission;
-  final LoadMediaAssets loadMediaAssets;
-  final GetFileFromAsset getFileFromAsset;
+  final RequestMediaPermissionUseCase requestMediaPermission;
+  final LoadMediaAssetsUseCase loadMediaAssets;
+  final GetFileFromAssetUseCase getFileFromAsset;
 
   static const int _pageSize = 40;
 

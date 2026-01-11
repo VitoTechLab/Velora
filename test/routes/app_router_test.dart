@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:velora/features/auth/domain/entities/auth_status.dart';
+import 'package:velora/features/auth/domain/entities/auth_status_entity.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_event.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_state.dart';
@@ -18,7 +18,7 @@ void main() {
   late _MockAuthBloc authBloc;
 
   setUpAll(() {
-    registerFallbackValue(const AuthSignOutRequested());
+    registerFallbackValue(const AuthEvent.signOut());
     registerFallbackValue(const AuthState());
   });
 
@@ -50,7 +50,7 @@ void main() {
   ) async {
     final router = await pumpRouter(
       tester,
-      state: const AuthState(status: AuthStatus.unauthenticated),
+      state: const AuthState(status: AuthStatusEntity.unauthenticated),
     );
 
     expect(router.router.location, AppRoutePath.signIn);
@@ -59,7 +59,7 @@ void main() {
   testWidgets('email unverified users see verification screen', (tester) async {
     final router = await pumpRouter(
       tester,
-      state: const AuthState(status: AuthStatus.emailUnverified),
+      state: const AuthState(status: AuthStatusEntity.emailUnverified),
     );
 
     expect(router.router.location, AppRoutePath.verificationEmail);
@@ -68,7 +68,7 @@ void main() {
   testWidgets('unknown status redirects to create post', (tester) async {
     final router = await pumpRouter(
       tester,
-      state: const AuthState(status: AuthStatus.unknown),
+      state: const AuthState(status: AuthStatusEntity.unknown),
     );
 
     expect(router.router.location, AppRoutePath.createPost);

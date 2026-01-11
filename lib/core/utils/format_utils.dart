@@ -158,6 +158,77 @@ class FormatUtils {
     }
   }
 
+  // ==========================================================================
+  // CHAT TIME FORMATTING
+  // ==========================================================================
+
+  /// Format time for chat list (Today, Yesterday, or date)
+  static String formatChatListTime(DateTime dateTime) {
+    final now = DateTime.now();
+    final difference = now.difference(dateTime);
+
+    if (difference.inDays == 0) {
+      // Today - show time
+      return '${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}';
+    } else if (difference.inDays == 1) {
+      // Yesterday
+      return 'Yesterday';
+    } else if (difference.inDays < 7) {
+      // This week - show weekday
+      final weekday = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      return weekday[dateTime.weekday - 1];
+    } else {
+      // Older - show date
+      return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+    }
+  }
+
+  /// Format time for message timestamp (HH:mm)
+  static String formatMessageTime(DateTime time) {
+    return '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
+  }
+
+  /// Format date for message date separator
+  static String formatDateSeparator(DateTime date) {
+    final now = DateTime.now();
+    final difference = now.difference(date);
+
+    if (_isSameDay(date, now)) {
+      return 'Today';
+    } else if (difference.inDays == 1) {
+      return 'Yesterday';
+    } else {
+      final months = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ];
+      return '${months[date.month - 1]} ${date.day}, ${date.year}';
+    }
+  }
+
+  /// Check if message date separator should be shown
+  static bool shouldShowDateSeparator(DateTime? previous, DateTime current) {
+    if (previous == null) return true;
+    return !_isSameDay(previous, current);
+  }
+
+  /// Check if two dates are on the same day
+  static bool _isSameDay(DateTime date1, DateTime date2) {
+    return date1.year == date2.year &&
+        date1.month == date2.month &&
+        date1.day == date2.day;
+  }
+
   static bool _isIndonesianLocale(BuildContext? context) {
     if (context == null) return false;
     try {

@@ -1,39 +1,38 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:velora/features/auth/domain/entities/auth_snapshot.dart';
+import 'package:velora/features/auth/domain/entities/auth_snapshot_entity.dart';
 
 part 'auth_event.freezed.dart';
 
-/// Auth events for Supabase-based authentication.
+/// Events for authentication operations.
 @freezed
 class AuthEvent with _$AuthEvent {
-  /// Email/password sign-up
-  const factory AuthEvent.signUpRequested({
+  /// User registration with email and password
+  const factory AuthEvent.signUp({
     required String email,
     required String password,
-  }) = AuthSignUpRequested;
+  }) = SignUpEvent;
 
-  /// Email/password sign-in
-  const factory AuthEvent.signInRequested({
+  /// User login with email and password
+  const factory AuthEvent.signIn({
     required String email,
     required String password,
-  }) = AuthSignInRequested;
+  }) = SignInEvent;
 
-  /// Request password reset email
-  const factory AuthEvent.resetPasswordRequested({required String email}) =
-      AuthResetPasswordRequested;
+  /// Send password reset email
+  const factory AuthEvent.resetPassword({required String email}) =
+      ResetPasswordEvent;
 
-  /// Sign out current user
-  const factory AuthEvent.signOutRequested() = AuthSignOutRequested;
+  /// Log out current user
+  const factory AuthEvent.signOut() = SignOutEvent;
 
-  /// Optional: hook for future Google / OAuth sign-in.
-  const factory AuthEvent.signInWithGoogleRequested() =
-      AuthSignInWithGoogleRequested;
+  /// Google OAuth authentication
+  const factory AuthEvent.signInWithGoogle() = SignInWithGoogleEvent;
 
-  /// Clear transient success/error messages
-  const factory AuthEvent.clearMessagesRequested() = AuthClearMessagesRequested;
+  /// Clear transient messages from state
+  const factory AuthEvent.clearMessages() = ClearMessagesEvent;
 
-  /// Internal event used when Supabase session changes outside Bloc handlers.
-  const factory AuthEvent.authSupabaseSnapshotChanged({
-    required AuthSnapshot snapshot,
-  }) = AuthSupabaseSnapshotChanged;
+  /// Internal event for Supabase session changes
+  const factory AuthEvent.authSnapshotChanged({
+    required AuthSnapshotEntity snapshot,
+  }) = AuthSnapshotChangedEvent;
 }

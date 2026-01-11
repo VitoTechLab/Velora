@@ -3,6 +3,10 @@ import 'package:velora/core/errors/exceptions.dart';
 import 'package:velora/core/supabase/postgrest_error_mapper.dart';
 import 'package:velora/core/utils/log_alias.dart';
 
+/// Wraps Supabase operations with error handling and logging
+/// 
+/// Catches PostgrestException and maps to app-specific exceptions.
+/// Logs errors with context (operation name and tag) for debugging.
 Future<T> guardSupabase<T>(
   Future<T> Function() action, {
   required String op,

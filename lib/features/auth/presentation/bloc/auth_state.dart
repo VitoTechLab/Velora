@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:velora/features/auth/domain/entities/auth_status.dart';
+import 'package:velora/features/auth/domain/entities/auth_status_entity.dart';
 
 part 'auth_state.freezed.dart';
 
@@ -11,10 +11,11 @@ enum AuthLoadingType {
   apple,
 }
 
+/// Represents current authentication state.
 @freezed
 abstract class AuthState with _$AuthState {
   const factory AuthState({
-    @Default(AuthStatus.unknown) AuthStatus status,
+    @Default(AuthStatusEntity.unknown) AuthStatusEntity status,
     @Default(AuthLoadingType.none) AuthLoadingType loadingType,
     String? message,
     String? errorMessage,
@@ -23,13 +24,12 @@ abstract class AuthState with _$AuthState {
 
   const AuthState._();
 
-  /// Whether any auth action is in progress
-  @override
+  /// Check if any auth action is in progress
   bool get isLoading => loadingType != AuthLoadingType.none;
 
-  /// Whether email/password auth is loading
+  /// Check if email/password auth is loading
   bool get isEmailLoading => loadingType == AuthLoadingType.emailPassword;
 
-  /// Whether Google auth is loading
+  /// Check if Google auth is loading
   bool get isGoogleLoading => loadingType == AuthLoadingType.google;
 }

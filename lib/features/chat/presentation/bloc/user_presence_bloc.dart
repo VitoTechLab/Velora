@@ -16,9 +16,9 @@ class UserPresenceBloc extends Bloc<UserPresenceEvent, UserPresenceState>
     required this.chatRepository,
     required this.supabaseClient,
     Connectivity? connectivity,
-    this.baseInterval = const Duration(seconds: 60),
-    this.maxBackoff = const Duration(minutes: 2),
-    this.jitterSeconds = 8,
+    this.baseInterval = const Duration(minutes: 2), // Increased from 60s to 2 minutes
+    this.maxBackoff = const Duration(minutes: 5), // Increased max backoff
+    this.jitterSeconds = 15, // Increased jitter
   }) : _connectivity = connectivity ?? Connectivity(),
        super(const UserPresenceState()) {
     on<UserPresenceEvent>((event, emit) async {

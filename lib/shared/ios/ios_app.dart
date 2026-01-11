@@ -6,7 +6,7 @@ import 'package:velora/routes/app_router.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:velora/features/feed/presentation/bloc/feed_bloc.dart';
 import 'package:velora/features/post/presentation/bloc/post_bloc.dart';
-import 'package:velora/features/media/presentation/cubit/media_upload_cubit.dart';
+import 'package:velora/features/media/presentation/bloc/media_upload_bloc.dart';
 import 'package:velora/features/media/presentation/bloc/media_gallery_bloc.dart';
 
 class IOSApp extends StatelessWidget {
@@ -24,9 +24,9 @@ class IOSApp extends StatelessWidget {
         BlocProvider<FeedBloc>(create: (_) => getIt<FeedBloc>()),
         // PostBloc - factory instance
         BlocProvider<PostBloc>(create: (_) => getIt<PostBloc>()),
-        // MediaUploadCubit - factory instance
-        BlocProvider<MediaUploadCubit>(
-          create: (_) => getIt<MediaUploadCubit>(),
+        // MediaUploadBloc - factory instance
+        BlocProvider<MediaUploadBloc>(
+          create: (_) => getIt<MediaUploadBloc>(),
         ),
         // MediaGalleryBloc - factory instance
         BlocProvider<MediaGalleryBloc>(

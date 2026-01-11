@@ -55,17 +55,17 @@ extension AuthEventPatterns on AuthEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( AuthSignUpRequested value)?  signUpRequested,TResult Function( AuthSignInRequested value)?  signInRequested,TResult Function( AuthResetPasswordRequested value)?  resetPasswordRequested,TResult Function( AuthSignOutRequested value)?  signOutRequested,TResult Function( AuthSignInWithGoogleRequested value)?  signInWithGoogleRequested,TResult Function( AuthClearMessagesRequested value)?  clearMessagesRequested,TResult Function( AuthSupabaseSnapshotChanged value)?  authSupabaseSnapshotChanged,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( SignUpEvent value)?  signUp,TResult Function( SignInEvent value)?  signIn,TResult Function( ResetPasswordEvent value)?  resetPassword,TResult Function( SignOutEvent value)?  signOut,TResult Function( SignInWithGoogleEvent value)?  signInWithGoogle,TResult Function( ClearMessagesEvent value)?  clearMessages,TResult Function( AuthSnapshotChangedEvent value)?  authSnapshotChanged,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case AuthSignUpRequested() when signUpRequested != null:
-return signUpRequested(_that);case AuthSignInRequested() when signInRequested != null:
-return signInRequested(_that);case AuthResetPasswordRequested() when resetPasswordRequested != null:
-return resetPasswordRequested(_that);case AuthSignOutRequested() when signOutRequested != null:
-return signOutRequested(_that);case AuthSignInWithGoogleRequested() when signInWithGoogleRequested != null:
-return signInWithGoogleRequested(_that);case AuthClearMessagesRequested() when clearMessagesRequested != null:
-return clearMessagesRequested(_that);case AuthSupabaseSnapshotChanged() when authSupabaseSnapshotChanged != null:
-return authSupabaseSnapshotChanged(_that);case _:
+case SignUpEvent() when signUp != null:
+return signUp(_that);case SignInEvent() when signIn != null:
+return signIn(_that);case ResetPasswordEvent() when resetPassword != null:
+return resetPassword(_that);case SignOutEvent() when signOut != null:
+return signOut(_that);case SignInWithGoogleEvent() when signInWithGoogle != null:
+return signInWithGoogle(_that);case ClearMessagesEvent() when clearMessages != null:
+return clearMessages(_that);case AuthSnapshotChangedEvent() when authSnapshotChanged != null:
+return authSnapshotChanged(_that);case _:
   return orElse();
 
 }
@@ -83,17 +83,17 @@ return authSupabaseSnapshotChanged(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( AuthSignUpRequested value)  signUpRequested,required TResult Function( AuthSignInRequested value)  signInRequested,required TResult Function( AuthResetPasswordRequested value)  resetPasswordRequested,required TResult Function( AuthSignOutRequested value)  signOutRequested,required TResult Function( AuthSignInWithGoogleRequested value)  signInWithGoogleRequested,required TResult Function( AuthClearMessagesRequested value)  clearMessagesRequested,required TResult Function( AuthSupabaseSnapshotChanged value)  authSupabaseSnapshotChanged,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( SignUpEvent value)  signUp,required TResult Function( SignInEvent value)  signIn,required TResult Function( ResetPasswordEvent value)  resetPassword,required TResult Function( SignOutEvent value)  signOut,required TResult Function( SignInWithGoogleEvent value)  signInWithGoogle,required TResult Function( ClearMessagesEvent value)  clearMessages,required TResult Function( AuthSnapshotChangedEvent value)  authSnapshotChanged,}){
 final _that = this;
 switch (_that) {
-case AuthSignUpRequested():
-return signUpRequested(_that);case AuthSignInRequested():
-return signInRequested(_that);case AuthResetPasswordRequested():
-return resetPasswordRequested(_that);case AuthSignOutRequested():
-return signOutRequested(_that);case AuthSignInWithGoogleRequested():
-return signInWithGoogleRequested(_that);case AuthClearMessagesRequested():
-return clearMessagesRequested(_that);case AuthSupabaseSnapshotChanged():
-return authSupabaseSnapshotChanged(_that);case _:
+case SignUpEvent():
+return signUp(_that);case SignInEvent():
+return signIn(_that);case ResetPasswordEvent():
+return resetPassword(_that);case SignOutEvent():
+return signOut(_that);case SignInWithGoogleEvent():
+return signInWithGoogle(_that);case ClearMessagesEvent():
+return clearMessages(_that);case AuthSnapshotChangedEvent():
+return authSnapshotChanged(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -110,17 +110,17 @@ return authSupabaseSnapshotChanged(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( AuthSignUpRequested value)?  signUpRequested,TResult? Function( AuthSignInRequested value)?  signInRequested,TResult? Function( AuthResetPasswordRequested value)?  resetPasswordRequested,TResult? Function( AuthSignOutRequested value)?  signOutRequested,TResult? Function( AuthSignInWithGoogleRequested value)?  signInWithGoogleRequested,TResult? Function( AuthClearMessagesRequested value)?  clearMessagesRequested,TResult? Function( AuthSupabaseSnapshotChanged value)?  authSupabaseSnapshotChanged,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( SignUpEvent value)?  signUp,TResult? Function( SignInEvent value)?  signIn,TResult? Function( ResetPasswordEvent value)?  resetPassword,TResult? Function( SignOutEvent value)?  signOut,TResult? Function( SignInWithGoogleEvent value)?  signInWithGoogle,TResult? Function( ClearMessagesEvent value)?  clearMessages,TResult? Function( AuthSnapshotChangedEvent value)?  authSnapshotChanged,}){
 final _that = this;
 switch (_that) {
-case AuthSignUpRequested() when signUpRequested != null:
-return signUpRequested(_that);case AuthSignInRequested() when signInRequested != null:
-return signInRequested(_that);case AuthResetPasswordRequested() when resetPasswordRequested != null:
-return resetPasswordRequested(_that);case AuthSignOutRequested() when signOutRequested != null:
-return signOutRequested(_that);case AuthSignInWithGoogleRequested() when signInWithGoogleRequested != null:
-return signInWithGoogleRequested(_that);case AuthClearMessagesRequested() when clearMessagesRequested != null:
-return clearMessagesRequested(_that);case AuthSupabaseSnapshotChanged() when authSupabaseSnapshotChanged != null:
-return authSupabaseSnapshotChanged(_that);case _:
+case SignUpEvent() when signUp != null:
+return signUp(_that);case SignInEvent() when signIn != null:
+return signIn(_that);case ResetPasswordEvent() when resetPassword != null:
+return resetPassword(_that);case SignOutEvent() when signOut != null:
+return signOut(_that);case SignInWithGoogleEvent() when signInWithGoogle != null:
+return signInWithGoogle(_that);case ClearMessagesEvent() when clearMessages != null:
+return clearMessages(_that);case AuthSnapshotChangedEvent() when authSnapshotChanged != null:
+return authSnapshotChanged(_that);case _:
   return null;
 
 }
@@ -137,16 +137,16 @@ return authSupabaseSnapshotChanged(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String email,  String password)?  signUpRequested,TResult Function( String email,  String password)?  signInRequested,TResult Function( String email)?  resetPasswordRequested,TResult Function()?  signOutRequested,TResult Function()?  signInWithGoogleRequested,TResult Function()?  clearMessagesRequested,TResult Function( AuthSnapshot snapshot)?  authSupabaseSnapshotChanged,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String email,  String password)?  signUp,TResult Function( String email,  String password)?  signIn,TResult Function( String email)?  resetPassword,TResult Function()?  signOut,TResult Function()?  signInWithGoogle,TResult Function()?  clearMessages,TResult Function( AuthSnapshotEntity snapshot)?  authSnapshotChanged,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case AuthSignUpRequested() when signUpRequested != null:
-return signUpRequested(_that.email,_that.password);case AuthSignInRequested() when signInRequested != null:
-return signInRequested(_that.email,_that.password);case AuthResetPasswordRequested() when resetPasswordRequested != null:
-return resetPasswordRequested(_that.email);case AuthSignOutRequested() when signOutRequested != null:
-return signOutRequested();case AuthSignInWithGoogleRequested() when signInWithGoogleRequested != null:
-return signInWithGoogleRequested();case AuthClearMessagesRequested() when clearMessagesRequested != null:
-return clearMessagesRequested();case AuthSupabaseSnapshotChanged() when authSupabaseSnapshotChanged != null:
-return authSupabaseSnapshotChanged(_that.snapshot);case _:
+case SignUpEvent() when signUp != null:
+return signUp(_that.email,_that.password);case SignInEvent() when signIn != null:
+return signIn(_that.email,_that.password);case ResetPasswordEvent() when resetPassword != null:
+return resetPassword(_that.email);case SignOutEvent() when signOut != null:
+return signOut();case SignInWithGoogleEvent() when signInWithGoogle != null:
+return signInWithGoogle();case ClearMessagesEvent() when clearMessages != null:
+return clearMessages();case AuthSnapshotChangedEvent() when authSnapshotChanged != null:
+return authSnapshotChanged(_that.snapshot);case _:
   return orElse();
 
 }
@@ -164,16 +164,16 @@ return authSupabaseSnapshotChanged(_that.snapshot);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String email,  String password)  signUpRequested,required TResult Function( String email,  String password)  signInRequested,required TResult Function( String email)  resetPasswordRequested,required TResult Function()  signOutRequested,required TResult Function()  signInWithGoogleRequested,required TResult Function()  clearMessagesRequested,required TResult Function( AuthSnapshot snapshot)  authSupabaseSnapshotChanged,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String email,  String password)  signUp,required TResult Function( String email,  String password)  signIn,required TResult Function( String email)  resetPassword,required TResult Function()  signOut,required TResult Function()  signInWithGoogle,required TResult Function()  clearMessages,required TResult Function( AuthSnapshotEntity snapshot)  authSnapshotChanged,}) {final _that = this;
 switch (_that) {
-case AuthSignUpRequested():
-return signUpRequested(_that.email,_that.password);case AuthSignInRequested():
-return signInRequested(_that.email,_that.password);case AuthResetPasswordRequested():
-return resetPasswordRequested(_that.email);case AuthSignOutRequested():
-return signOutRequested();case AuthSignInWithGoogleRequested():
-return signInWithGoogleRequested();case AuthClearMessagesRequested():
-return clearMessagesRequested();case AuthSupabaseSnapshotChanged():
-return authSupabaseSnapshotChanged(_that.snapshot);case _:
+case SignUpEvent():
+return signUp(_that.email,_that.password);case SignInEvent():
+return signIn(_that.email,_that.password);case ResetPasswordEvent():
+return resetPassword(_that.email);case SignOutEvent():
+return signOut();case SignInWithGoogleEvent():
+return signInWithGoogle();case ClearMessagesEvent():
+return clearMessages();case AuthSnapshotChangedEvent():
+return authSnapshotChanged(_that.snapshot);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -190,16 +190,16 @@ return authSupabaseSnapshotChanged(_that.snapshot);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String email,  String password)?  signUpRequested,TResult? Function( String email,  String password)?  signInRequested,TResult? Function( String email)?  resetPasswordRequested,TResult? Function()?  signOutRequested,TResult? Function()?  signInWithGoogleRequested,TResult? Function()?  clearMessagesRequested,TResult? Function( AuthSnapshot snapshot)?  authSupabaseSnapshotChanged,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String email,  String password)?  signUp,TResult? Function( String email,  String password)?  signIn,TResult? Function( String email)?  resetPassword,TResult? Function()?  signOut,TResult? Function()?  signInWithGoogle,TResult? Function()?  clearMessages,TResult? Function( AuthSnapshotEntity snapshot)?  authSnapshotChanged,}) {final _that = this;
 switch (_that) {
-case AuthSignUpRequested() when signUpRequested != null:
-return signUpRequested(_that.email,_that.password);case AuthSignInRequested() when signInRequested != null:
-return signInRequested(_that.email,_that.password);case AuthResetPasswordRequested() when resetPasswordRequested != null:
-return resetPasswordRequested(_that.email);case AuthSignOutRequested() when signOutRequested != null:
-return signOutRequested();case AuthSignInWithGoogleRequested() when signInWithGoogleRequested != null:
-return signInWithGoogleRequested();case AuthClearMessagesRequested() when clearMessagesRequested != null:
-return clearMessagesRequested();case AuthSupabaseSnapshotChanged() when authSupabaseSnapshotChanged != null:
-return authSupabaseSnapshotChanged(_that.snapshot);case _:
+case SignUpEvent() when signUp != null:
+return signUp(_that.email,_that.password);case SignInEvent() when signIn != null:
+return signIn(_that.email,_that.password);case ResetPasswordEvent() when resetPassword != null:
+return resetPassword(_that.email);case SignOutEvent() when signOut != null:
+return signOut();case SignInWithGoogleEvent() when signInWithGoogle != null:
+return signInWithGoogle();case ClearMessagesEvent() when clearMessages != null:
+return clearMessages();case AuthSnapshotChangedEvent() when authSnapshotChanged != null:
+return authSnapshotChanged(_that.snapshot);case _:
   return null;
 
 }
@@ -210,8 +210,8 @@ return authSupabaseSnapshotChanged(_that.snapshot);case _:
 /// @nodoc
 
 
-class AuthSignUpRequested implements AuthEvent {
-  const AuthSignUpRequested({required this.email, required this.password});
+class SignUpEvent implements AuthEvent {
+  const SignUpEvent({required this.email, required this.password});
   
 
  final  String email;
@@ -221,13 +221,13 @@ class AuthSignUpRequested implements AuthEvent {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$AuthSignUpRequestedCopyWith<AuthSignUpRequested> get copyWith => _$AuthSignUpRequestedCopyWithImpl<AuthSignUpRequested>(this, _$identity);
+$SignUpEventCopyWith<SignUpEvent> get copyWith => _$SignUpEventCopyWithImpl<SignUpEvent>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthSignUpRequested&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignUpEvent&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password));
 }
 
 
@@ -236,15 +236,15 @@ int get hashCode => Object.hash(runtimeType,email,password);
 
 @override
 String toString() {
-  return 'AuthEvent.signUpRequested(email: $email, password: $password)';
+  return 'AuthEvent.signUp(email: $email, password: $password)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $AuthSignUpRequestedCopyWith<$Res> implements $AuthEventCopyWith<$Res> {
-  factory $AuthSignUpRequestedCopyWith(AuthSignUpRequested value, $Res Function(AuthSignUpRequested) _then) = _$AuthSignUpRequestedCopyWithImpl;
+abstract mixin class $SignUpEventCopyWith<$Res> implements $AuthEventCopyWith<$Res> {
+  factory $SignUpEventCopyWith(SignUpEvent value, $Res Function(SignUpEvent) _then) = _$SignUpEventCopyWithImpl;
 @useResult
 $Res call({
  String email, String password
@@ -255,17 +255,17 @@ $Res call({
 
 }
 /// @nodoc
-class _$AuthSignUpRequestedCopyWithImpl<$Res>
-    implements $AuthSignUpRequestedCopyWith<$Res> {
-  _$AuthSignUpRequestedCopyWithImpl(this._self, this._then);
+class _$SignUpEventCopyWithImpl<$Res>
+    implements $SignUpEventCopyWith<$Res> {
+  _$SignUpEventCopyWithImpl(this._self, this._then);
 
-  final AuthSignUpRequested _self;
-  final $Res Function(AuthSignUpRequested) _then;
+  final SignUpEvent _self;
+  final $Res Function(SignUpEvent) _then;
 
 /// Create a copy of AuthEvent
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? password = null,}) {
-  return _then(AuthSignUpRequested(
+  return _then(SignUpEvent(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String,
@@ -278,8 +278,8 @@ as String,
 /// @nodoc
 
 
-class AuthSignInRequested implements AuthEvent {
-  const AuthSignInRequested({required this.email, required this.password});
+class SignInEvent implements AuthEvent {
+  const SignInEvent({required this.email, required this.password});
   
 
  final  String email;
@@ -289,13 +289,13 @@ class AuthSignInRequested implements AuthEvent {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$AuthSignInRequestedCopyWith<AuthSignInRequested> get copyWith => _$AuthSignInRequestedCopyWithImpl<AuthSignInRequested>(this, _$identity);
+$SignInEventCopyWith<SignInEvent> get copyWith => _$SignInEventCopyWithImpl<SignInEvent>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthSignInRequested&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignInEvent&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password));
 }
 
 
@@ -304,15 +304,15 @@ int get hashCode => Object.hash(runtimeType,email,password);
 
 @override
 String toString() {
-  return 'AuthEvent.signInRequested(email: $email, password: $password)';
+  return 'AuthEvent.signIn(email: $email, password: $password)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $AuthSignInRequestedCopyWith<$Res> implements $AuthEventCopyWith<$Res> {
-  factory $AuthSignInRequestedCopyWith(AuthSignInRequested value, $Res Function(AuthSignInRequested) _then) = _$AuthSignInRequestedCopyWithImpl;
+abstract mixin class $SignInEventCopyWith<$Res> implements $AuthEventCopyWith<$Res> {
+  factory $SignInEventCopyWith(SignInEvent value, $Res Function(SignInEvent) _then) = _$SignInEventCopyWithImpl;
 @useResult
 $Res call({
  String email, String password
@@ -323,17 +323,17 @@ $Res call({
 
 }
 /// @nodoc
-class _$AuthSignInRequestedCopyWithImpl<$Res>
-    implements $AuthSignInRequestedCopyWith<$Res> {
-  _$AuthSignInRequestedCopyWithImpl(this._self, this._then);
+class _$SignInEventCopyWithImpl<$Res>
+    implements $SignInEventCopyWith<$Res> {
+  _$SignInEventCopyWithImpl(this._self, this._then);
 
-  final AuthSignInRequested _self;
-  final $Res Function(AuthSignInRequested) _then;
+  final SignInEvent _self;
+  final $Res Function(SignInEvent) _then;
 
 /// Create a copy of AuthEvent
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? password = null,}) {
-  return _then(AuthSignInRequested(
+  return _then(SignInEvent(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String,
@@ -346,8 +346,8 @@ as String,
 /// @nodoc
 
 
-class AuthResetPasswordRequested implements AuthEvent {
-  const AuthResetPasswordRequested({required this.email});
+class ResetPasswordEvent implements AuthEvent {
+  const ResetPasswordEvent({required this.email});
   
 
  final  String email;
@@ -356,13 +356,13 @@ class AuthResetPasswordRequested implements AuthEvent {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$AuthResetPasswordRequestedCopyWith<AuthResetPasswordRequested> get copyWith => _$AuthResetPasswordRequestedCopyWithImpl<AuthResetPasswordRequested>(this, _$identity);
+$ResetPasswordEventCopyWith<ResetPasswordEvent> get copyWith => _$ResetPasswordEventCopyWithImpl<ResetPasswordEvent>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthResetPasswordRequested&&(identical(other.email, email) || other.email == email));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ResetPasswordEvent&&(identical(other.email, email) || other.email == email));
 }
 
 
@@ -371,15 +371,15 @@ int get hashCode => Object.hash(runtimeType,email);
 
 @override
 String toString() {
-  return 'AuthEvent.resetPasswordRequested(email: $email)';
+  return 'AuthEvent.resetPassword(email: $email)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $AuthResetPasswordRequestedCopyWith<$Res> implements $AuthEventCopyWith<$Res> {
-  factory $AuthResetPasswordRequestedCopyWith(AuthResetPasswordRequested value, $Res Function(AuthResetPasswordRequested) _then) = _$AuthResetPasswordRequestedCopyWithImpl;
+abstract mixin class $ResetPasswordEventCopyWith<$Res> implements $AuthEventCopyWith<$Res> {
+  factory $ResetPasswordEventCopyWith(ResetPasswordEvent value, $Res Function(ResetPasswordEvent) _then) = _$ResetPasswordEventCopyWithImpl;
 @useResult
 $Res call({
  String email
@@ -390,17 +390,17 @@ $Res call({
 
 }
 /// @nodoc
-class _$AuthResetPasswordRequestedCopyWithImpl<$Res>
-    implements $AuthResetPasswordRequestedCopyWith<$Res> {
-  _$AuthResetPasswordRequestedCopyWithImpl(this._self, this._then);
+class _$ResetPasswordEventCopyWithImpl<$Res>
+    implements $ResetPasswordEventCopyWith<$Res> {
+  _$ResetPasswordEventCopyWithImpl(this._self, this._then);
 
-  final AuthResetPasswordRequested _self;
-  final $Res Function(AuthResetPasswordRequested) _then;
+  final ResetPasswordEvent _self;
+  final $Res Function(ResetPasswordEvent) _then;
 
 /// Create a copy of AuthEvent
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? email = null,}) {
-  return _then(AuthResetPasswordRequested(
+  return _then(ResetPasswordEvent(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,
   ));
@@ -412,8 +412,8 @@ as String,
 /// @nodoc
 
 
-class AuthSignOutRequested implements AuthEvent {
-  const AuthSignOutRequested();
+class SignOutEvent implements AuthEvent {
+  const SignOutEvent();
   
 
 
@@ -423,7 +423,7 @@ class AuthSignOutRequested implements AuthEvent {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthSignOutRequested);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignOutEvent);
 }
 
 
@@ -432,7 +432,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'AuthEvent.signOutRequested()';
+  return 'AuthEvent.signOut()';
 }
 
 
@@ -444,8 +444,8 @@ String toString() {
 /// @nodoc
 
 
-class AuthSignInWithGoogleRequested implements AuthEvent {
-  const AuthSignInWithGoogleRequested();
+class SignInWithGoogleEvent implements AuthEvent {
+  const SignInWithGoogleEvent();
   
 
 
@@ -455,7 +455,7 @@ class AuthSignInWithGoogleRequested implements AuthEvent {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthSignInWithGoogleRequested);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignInWithGoogleEvent);
 }
 
 
@@ -464,7 +464,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'AuthEvent.signInWithGoogleRequested()';
+  return 'AuthEvent.signInWithGoogle()';
 }
 
 
@@ -476,8 +476,8 @@ String toString() {
 /// @nodoc
 
 
-class AuthClearMessagesRequested implements AuthEvent {
-  const AuthClearMessagesRequested();
+class ClearMessagesEvent implements AuthEvent {
+  const ClearMessagesEvent();
   
 
 
@@ -487,7 +487,7 @@ class AuthClearMessagesRequested implements AuthEvent {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthClearMessagesRequested);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ClearMessagesEvent);
 }
 
 
@@ -496,7 +496,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'AuthEvent.clearMessagesRequested()';
+  return 'AuthEvent.clearMessages()';
 }
 
 
@@ -508,23 +508,23 @@ String toString() {
 /// @nodoc
 
 
-class AuthSupabaseSnapshotChanged implements AuthEvent {
-  const AuthSupabaseSnapshotChanged({required this.snapshot});
+class AuthSnapshotChangedEvent implements AuthEvent {
+  const AuthSnapshotChangedEvent({required this.snapshot});
   
 
- final  AuthSnapshot snapshot;
+ final  AuthSnapshotEntity snapshot;
 
 /// Create a copy of AuthEvent
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$AuthSupabaseSnapshotChangedCopyWith<AuthSupabaseSnapshotChanged> get copyWith => _$AuthSupabaseSnapshotChangedCopyWithImpl<AuthSupabaseSnapshotChanged>(this, _$identity);
+$AuthSnapshotChangedEventCopyWith<AuthSnapshotChangedEvent> get copyWith => _$AuthSnapshotChangedEventCopyWithImpl<AuthSnapshotChangedEvent>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthSupabaseSnapshotChanged&&(identical(other.snapshot, snapshot) || other.snapshot == snapshot));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthSnapshotChangedEvent&&(identical(other.snapshot, snapshot) || other.snapshot == snapshot));
 }
 
 
@@ -533,18 +533,18 @@ int get hashCode => Object.hash(runtimeType,snapshot);
 
 @override
 String toString() {
-  return 'AuthEvent.authSupabaseSnapshotChanged(snapshot: $snapshot)';
+  return 'AuthEvent.authSnapshotChanged(snapshot: $snapshot)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $AuthSupabaseSnapshotChangedCopyWith<$Res> implements $AuthEventCopyWith<$Res> {
-  factory $AuthSupabaseSnapshotChangedCopyWith(AuthSupabaseSnapshotChanged value, $Res Function(AuthSupabaseSnapshotChanged) _then) = _$AuthSupabaseSnapshotChangedCopyWithImpl;
+abstract mixin class $AuthSnapshotChangedEventCopyWith<$Res> implements $AuthEventCopyWith<$Res> {
+  factory $AuthSnapshotChangedEventCopyWith(AuthSnapshotChangedEvent value, $Res Function(AuthSnapshotChangedEvent) _then) = _$AuthSnapshotChangedEventCopyWithImpl;
 @useResult
 $Res call({
- AuthSnapshot snapshot
+ AuthSnapshotEntity snapshot
 });
 
 
@@ -552,19 +552,19 @@ $Res call({
 
 }
 /// @nodoc
-class _$AuthSupabaseSnapshotChangedCopyWithImpl<$Res>
-    implements $AuthSupabaseSnapshotChangedCopyWith<$Res> {
-  _$AuthSupabaseSnapshotChangedCopyWithImpl(this._self, this._then);
+class _$AuthSnapshotChangedEventCopyWithImpl<$Res>
+    implements $AuthSnapshotChangedEventCopyWith<$Res> {
+  _$AuthSnapshotChangedEventCopyWithImpl(this._self, this._then);
 
-  final AuthSupabaseSnapshotChanged _self;
-  final $Res Function(AuthSupabaseSnapshotChanged) _then;
+  final AuthSnapshotChangedEvent _self;
+  final $Res Function(AuthSnapshotChangedEvent) _then;
 
 /// Create a copy of AuthEvent
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? snapshot = null,}) {
-  return _then(AuthSupabaseSnapshotChanged(
+  return _then(AuthSnapshotChangedEvent(
 snapshot: null == snapshot ? _self.snapshot : snapshot // ignore: cast_nullable_to_non_nullable
-as AuthSnapshot,
+as AuthSnapshotEntity,
   ));
 }
 

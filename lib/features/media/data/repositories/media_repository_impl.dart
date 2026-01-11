@@ -8,12 +8,19 @@ import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/media/data/datasources/remote/media_remote_datasource.dart';
 import 'package:velora/features/media/data/models/media_asset_model.dart';
 import 'package:velora/features/media/data/services/media_compressor.dart';
-import 'package:velora/features/media/domain/entities/media_asset.dart';
+import 'package:velora/features/media/domain/entities/media_asset_entity.dart';
 import 'package:velora/features/media/domain/repositories/media_repository.dart';
 
+/// Repository implementation for media upload operations
+/// 
+/// Features:
+/// - Parallel upload with adaptive concurrency
+/// - Automatic compression before upload
+/// - Fail-fast error handling
+/// - Progress tracking support
 class MediaRepositoryImpl implements MediaRepository {
   MediaRepositoryImpl({required MediaRemoteDataSource remoteDataSource})
-    : _remoteDataSource = remoteDataSource;
+      : _remoteDataSource = remoteDataSource;
 
   final MediaRemoteDataSource _remoteDataSource;
 
@@ -48,12 +55,17 @@ class MediaRepositoryImpl implements MediaRepository {
     );
   }
 
+  /// Upload multiple files with adaptive concurrency
+  /// 
+  /// Concurrency strategy:
+  /// - 1 file: Sequential (no parallelism needed)
+  /// - 2-4 files: 2 concurrent uploads
+  /// - 5+ files: 3 concurrent uploads
   Future<Either<Failure, List<MediaAsset>>> _uploadScopedBatch({
     required List<File> files,
     required String userId,
     required String scope,
     required String scopeId,
-    int concurrency = 3,
   }) async {
     try {
       if (userId.trim().isEmpty) {
@@ -66,12 +78,25 @@ class MediaRepositoryImpl implements MediaRepository {
         return const Right(<MediaAsset>[]);
       }
 
-      final tasks = files.map((file) {
-        return () => _uploadScoped(
+      // Adaptive concurrency based on file count
+      final concurrency = _calculateConcurrency(files.length);
+
+      logi(
+        'Uploading ${files.length} files with concurrency=$concurrency',
+        tag: _logTag,
+      );
+
+      final tasks = files.asMap().entries.map((entry) {
+        final index = entry.key;
+        final file = entry.value;
+        
+        return () => _uploadWithProgress(
           file: file,
           userId: userId,
           scope: scope,
           scopeId: scopeId,
+          index: index,
+          total: files.length,
         );
       }).toList();
 
@@ -85,16 +110,18 @@ class MediaRepositoryImpl implements MediaRepository {
       for (final result in results) {
         final failureOrNull = result.fold((l) => l, (_) => null);
         if (failureOrNull != null) {
-          // fail-fast: ketemu 1 gagal -> langsung return failure
+          // Fail-fast: return immediately on first error
+          loge('Upload failed, aborting batch', tag: _logTag);
           return Left(failureOrNull);
         }
         result.fold((_) {}, (asset) => assets.add(asset));
       }
 
+      logi('Batch upload completed: ${assets.length} assets', tag: _logTag);
       return Right(assets);
     } catch (e, st) {
       loge(
-        'Batch media upload failed (unknown)',
+        'Batch upload failed',
         tag: _logTag,
         error: e,
         stackTrace: st,
@@ -103,6 +130,45 @@ class MediaRepositoryImpl implements MediaRepository {
     }
   }
 
+  /// Calculate optimal concurrency based on file count
+  int _calculateConcurrency(int fileCount) {
+    if (fileCount == 1) return 1;
+    if (fileCount <= 4) return 2;
+    return 3; // Max 3 concurrent uploads for 5+ files
+  }
+
+  /// Upload single file with progress tracking
+  Future<Either<Failure, MediaAsset>> _uploadWithProgress({
+    required File file,
+    required String userId,
+    required String scope,
+    required String scopeId,
+    required int index,
+    required int total,
+  }) async {
+    try {
+      logi('Upload [${ index + 1}/$total] starting...', tag: _logTag);
+
+      final result = await _uploadScoped(
+        file: file,
+        userId: userId,
+        scope: scope,
+        scopeId: scopeId,
+      );
+
+      result.fold(
+        (failure) => loge('Upload [${index + 1}/$total] failed', tag: _logTag),
+        (_) => logi('Upload [${index + 1}/$total] completed', tag: _logTag),
+      );
+
+      return result;
+    } catch (e) {
+      loge('Upload [${index + 1}/$total] exception: $e', tag: _logTag);
+      return Left(Failure(e.toString()));
+    }
+  }
+
+  /// Upload single file with compression
   Future<Either<Failure, MediaAsset>> _uploadScoped({
     required File file,
     required String userId,
@@ -117,18 +183,12 @@ class MediaRepositoryImpl implements MediaRepository {
         return const Left(Failure('Scope id is required'));
       }
 
-      // 1) Compress if needed
+      // 1) Compress if needed (never fails - returns original on error)
       final compressedFile = await MediaCompressor.compressImageIfNeeded(file);
 
-      // 2) Build Cloudinary path (folder + public_id)
+      // 2) Build Cloudinary path
       final folder = _buildFolder(userId, scope, scopeId);
       final publicId = _buildPublicId(userId, scope, scopeId);
-
-      logi(
-        'Uploading media: user=$userId scope=$scope scopeId=$scopeId '
-        'folder=$folder publicId=$publicId',
-        tag: _logTag,
-      );
 
       // 3) Request signature from Supabase Edge Function
       final signature = await _remoteDataSource.getUploadSignature(
@@ -142,11 +202,11 @@ class MediaRepositoryImpl implements MediaRepository {
 
       return Right(model.toEntity());
     } on AppException catch (error) {
-      loge('Media upload failed (AppException)', tag: _logTag, error: error);
+      loge('Upload failed (AppException)', tag: _logTag, error: error);
       return Left(Failure(error.message));
     } catch (error, stackTrace) {
       loge(
-        'Media upload failed (unknown)',
+        'Upload failed (unknown)',
         tag: _logTag,
         error: error,
         stackTrace: stackTrace,
@@ -155,9 +215,10 @@ class MediaRepositoryImpl implements MediaRepository {
     }
   }
 
+  /// Run tasks with controlled concurrency
   Future<List<T>> _runWithConcurrency<T>({
     required List<Future<T> Function()> tasks,
-    int concurrency = 3,
+    required int concurrency,
   }) async {
     if (concurrency <= 0) concurrency = 1;
 
@@ -171,7 +232,7 @@ class MediaRepositoryImpl implements MediaRepository {
 
       final chunk = tasks.sublist(index, end);
 
-      // Jalankan chunk ini barengan
+      // Run chunk concurrently
       final chunkResults = await Future.wait(chunk.map((fn) => fn()));
       results.addAll(chunkResults);
 
@@ -181,10 +242,12 @@ class MediaRepositoryImpl implements MediaRepository {
     return results;
   }
 
+  /// Build Cloudinary folder path
   String _buildFolder(String userId, String scope, String scopeId) {
     return 'velora/users/$userId/$scope/$scopeId';
   }
 
+  /// Build unique public ID for Cloudinary
   String _buildPublicId(String userId, String scope, String scopeId) {
     final uuid = _uuid.v4();
     return 'velora/users/$userId/$scope/$scopeId/$uuid';

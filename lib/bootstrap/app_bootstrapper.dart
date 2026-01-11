@@ -12,6 +12,8 @@ import 'package:velora/core/ui/app_bottom_sheet.dart';
 import 'package:velora/core/utils/bloc_observer.dart';
 import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/navigation/services/navigation_service.dart';
+import 'dart:async' show unawaited;
+import 'package:velora/core/translation/translation.dart';
 
 class AppBootstrapper {
   const AppBootstrapper._();
@@ -43,6 +45,11 @@ class AppBootstrapper {
 
     final connectivity = getIt<ConnectivityService>();
     await connectivity.initialize();
+
+    // Preload translation models in background (non-blocking)
+    // This downloads models for specified languages to avoid delays during runtime
+    final preloader = getIt<TranslationPreloader>();
+    unawaited(preloader.preload(languages: ['en', 'id', 'ja', 'ko', 'zh']));
   }
 
   static void configureSystemUI() {

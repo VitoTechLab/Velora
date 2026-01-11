@@ -1,5 +1,6 @@
+/// Constants for Supabase table names
 class SupabaseTables {
-  SupabaseTables._();
+  const SupabaseTables._();
 
   // Feed Tables
   static const feedPosts = 'feed_posts';
@@ -52,8 +53,9 @@ class SupabaseTables {
   static const notifications = 'notifications';
 }
 
+/// Constants for Supabase RPC (Remote Procedure Call) function names
 class SupabaseRpc {
-  SupabaseRpc._();
+  const SupabaseRpc._();
 
   // Chat RPCs
   static const getMessagesPage = 'get_messages_page';
