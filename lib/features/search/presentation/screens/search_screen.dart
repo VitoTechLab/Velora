@@ -43,7 +43,7 @@ class SearchScreen extends HookWidget {
     void onSearchSubmit(String query) {
       if (query.trim().isEmpty) return;
 
-      // TODO: Navigate to search results
+      // Note: Navigation to search results will be implemented
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Search: $query'),
@@ -63,11 +63,20 @@ class SearchScreen extends HookWidget {
 
     // Handle discover card tap
     void onDiscoverTap(String campaignId) {
-      // TODO: Navigate to campaign detail
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Open campaign: $campaignId'),
-          duration: const Duration(seconds: 1),
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Scaffold(
+            appBar: AppBar(
+              title: const Text('Campaign Detail'),
+            ),
+            body: Center(
+              child: Text(
+                'Campaign ID: $campaignId',
+                style: theme.textTheme.bodyLarge,
+              ),
+            ),
+          ),
         ),
       );
     }
@@ -203,7 +212,7 @@ class SearchScreen extends HookWidget {
                   color: colorScheme.surface,
                   boxShadow: [
                     BoxShadow(
-                      color: colorScheme.shadow.withOpacity(0.1),
+                      color: colorScheme.shadow.withValues(alpha: 0.1),
                       blurRadius: 8,
                       offset: const Offset(0, 2),
                     ),

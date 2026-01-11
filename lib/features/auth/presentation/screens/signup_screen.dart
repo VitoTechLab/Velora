@@ -40,13 +40,6 @@ class SignUpScreen extends HookWidget {
     final formKey = useMemoized(() => GlobalKey<FormState>());
     final agreedToTerms = useState(false);
 
-    final clearForm = useCallback(() {
-      FocusScope.of(context).unfocus();
-      emailController.clear();
-      passwordController.clear();
-      agreedToTerms.value = false;
-    }, [emailController, passwordController, agreedToTerms]);
-
     final submitSignUp = useCallback(
       () {
         if (!agreedToTerms.value) {
@@ -61,11 +54,14 @@ class SignUpScreen extends HookWidget {
         // Unfocus to trigger validation on all fields
         FocusScope.of(context).unfocus();
         
+        // Get bloc reference before async gap
+        final bloc = context.read<AuthBloc>();
+        
         // Small delay to allow focus change to complete validation
         Future.microtask(() {
           if (formKey.currentState?.validate() ?? false) {
             AppLogger.i("[RedesignedSignUp] Sign up initiated");
-            context.read<AuthBloc>().add(
+            bloc.add(
               AuthSignUpRequested(
                 email: emailController.text.trim(),
                 password: passwordController.text,

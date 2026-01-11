@@ -1,8 +1,7 @@
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:realtime_client/realtime_client.dart';
-import 'package:postgrest/postgrest.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:velora/core/errors/exceptions.dart';
 import 'package:velora/core/supabase/supabase_constants.dart';
 import 'package:velora/features/feed/data/datasources/feed_remote_datasource_impl.dart';

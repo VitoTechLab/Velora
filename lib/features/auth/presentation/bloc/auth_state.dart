@@ -24,7 +24,6 @@ abstract class AuthState with _$AuthState {
   const AuthState._();
 
   /// Whether any auth action is in progress
-  @override
   bool get isLoading => loadingType != AuthLoadingType.none;
 
   /// Whether email/password auth is loading

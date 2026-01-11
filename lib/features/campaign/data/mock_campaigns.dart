@@ -157,3 +157,4 @@ final List<CampaignModel> mockCampaigns = [
     timeLeftLabel: 'D-60',
     isFeatured: true,
   ),
+];

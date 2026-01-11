@@ -36,7 +36,7 @@ class NotificationRemoteDataSourceImpl implements NotificationRemoteDataSource {
   }) {
     return guardSupabase(
       () async {
-        final userId = _requireUserId();
+        _requireUserId();
 
         // Use the RPC function for optimized querying with time_category
         final params = <String, dynamic>{'p_limit': limit + 1};

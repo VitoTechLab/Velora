@@ -44,7 +44,7 @@ class AboutScreen extends StatelessWidget {
                       width: 96,
                       height: 96,
                       decoration: BoxDecoration(
-                        color: colorScheme.onPrimary.withOpacity(0.1),
+                        color: colorScheme.onPrimary.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(24),
                       ),
                       child: Icon(
@@ -65,7 +65,7 @@ class AboutScreen extends StatelessWidget {
                     Text(
                       t.settingsHelpAboutTagline,
                       style: textTheme.bodyMedium?.copyWith(
-                        color: colorScheme.onPrimary.withOpacity(0.8),
+                        color: colorScheme.onPrimary.withValues(alpha: 0.8),
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -75,7 +75,7 @@ class AboutScreen extends StatelessWidget {
                         vertical: 8,
                       ),
                       decoration: BoxDecoration(
-                        color: colorScheme.onPrimary.withOpacity(0.2),
+                        color: colorScheme.onPrimary.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
@@ -354,7 +354,7 @@ class _TileGroup extends StatelessWidget {
                 height: 0,
                 indent: tiles[i].icon != null ? 72 : 16,
                 endIndent: 16,
-                color: colorScheme.outlineVariant.withOpacity(0.4),
+                color: colorScheme.outlineVariant.withValues(alpha: 0.4),
               ),
           ],
         ],
@@ -380,8 +380,8 @@ class _StatChip extends StatelessWidget {
     return Chip(
       avatar: Icon(icon, size: 16, color: color),
       label: Text(label, style: theme.textTheme.labelMedium),
-      backgroundColor: color.withOpacity(0.08),
-      side: BorderSide(color: color.withOpacity(0.2)),
+      backgroundColor: color.withValues(alpha: 0.08),
+      side: BorderSide(color: color.withValues(alpha: 0.2)),
     );
   }
 }
@@ -391,28 +391,26 @@ class _SocialButton extends StatelessWidget {
     required this.icon,
     required this.label,
     required this.color,
-    this.onTap,
   });
 
   final IconData icon;
   final String label;
   final Color color;
-  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return Semantics(
-      button: onTap != null,
+      button: true,
       label: label,
       child: InkWell(
         borderRadius: BorderRadius.circular(24),
-        onTap: onTap,
+        onTap: () {},
         child: Column(
           children: [
             CircleAvatar(
               radius: 24,
-              backgroundColor: color.withOpacity(0.12),
+              backgroundColor: color.withValues(alpha: 0.12),
               child: Icon(icon, color: color),
             ),
             const SizedBox(height: 6),

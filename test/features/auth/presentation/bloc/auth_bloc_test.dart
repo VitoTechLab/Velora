@@ -84,10 +84,10 @@ void main() {
       ),
     ),
     expect: () => const [
-      AuthState(isLoading: true),
+      AuthState(loadingType: AuthLoadingType.emailPassword),
       AuthState(
         status: AuthStatus.authenticated,
-        isLoading: false,
+        loadingType: AuthLoadingType.none,
         message: 'Welcome back!',
         userId: 'user-123',
       ),
@@ -121,10 +121,10 @@ void main() {
       ),
     ),
     expect: () => const [
-      AuthState(isLoading: true),
+      AuthState(loadingType: AuthLoadingType.emailPassword),
       AuthState(
         status: AuthStatus.unauthenticated,
-        isLoading: false,
+        loadingType: AuthLoadingType.none,
         errorMessage: 'Invalid credentials',
       ),
     ],
@@ -141,9 +141,9 @@ void main() {
     act: (bloc) =>
         bloc.add(const AuthResetPasswordRequested(email: 'user@velora.app')),
     expect: () => const [
-      AuthState(isLoading: true),
+      AuthState(loadingType: AuthLoadingType.emailPassword),
       AuthState(
-        isLoading: false,
+        loadingType: AuthLoadingType.none,
         message: 'Password reset link sent to your email.',
       ),
     ],
@@ -164,7 +164,7 @@ void main() {
     expect: () => const [
       AuthState(
         status: AuthStatus.authenticated,
-        isLoading: false,
+        loadingType: AuthLoadingType.none,
         userId: 'user-123',
       ),
     ],
@@ -193,10 +193,10 @@ void main() {
       ),
     ),
     expect: () => const [
-      AuthState(isLoading: true),
+      AuthState(loadingType: AuthLoadingType.emailPassword),
       AuthState(
         status: AuthStatus.emailUnverified,
-        isLoading: false,
+        loadingType: AuthLoadingType.none,
         message:
             "We've sent a verification link to your email. Please verify "
             'before signing in.',
@@ -227,10 +227,10 @@ void main() {
       ),
     ),
     expect: () => const [
-      AuthState(isLoading: true),
+      AuthState(loadingType: AuthLoadingType.emailPassword),
       AuthState(
         status: AuthStatus.unauthenticated,
-        isLoading: false,
+        loadingType: AuthLoadingType.none,
         errorMessage: 'Email exists',
       ),
     ],
@@ -246,10 +246,10 @@ void main() {
     },
     act: (bloc) => bloc.add(const AuthSignInWithGoogleRequested()),
     expect: () => const [
-      AuthState(isLoading: true),
+      AuthState(loadingType: AuthLoadingType.google),
       AuthState(
         status: AuthStatus.authenticated,
-        isLoading: false,
+        loadingType: AuthLoadingType.none,
         message: 'Signed in with Google',
         userId: 'user-123',
       ),
@@ -270,10 +270,10 @@ void main() {
     },
     act: (bloc) => bloc.add(const AuthSignInWithGoogleRequested()),
     expect: () => const [
-      AuthState(isLoading: true),
+      AuthState(loadingType: AuthLoadingType.google),
       AuthState(
         status: AuthStatus.unauthenticated,
-        isLoading: false,
+        loadingType: AuthLoadingType.none,
         errorMessage: 'Google failed',
       ),
     ],
@@ -291,12 +291,12 @@ void main() {
     expect: () => const [
       AuthState(
         status: AuthStatus.authenticated,
-        isLoading: true,
+        loadingType: AuthLoadingType.emailPassword,
         userId: 'user-123',
       ),
       AuthState(
         status: AuthStatus.unauthenticated,
-        isLoading: false,
+        loadingType: AuthLoadingType.none,
         userId: null,
       ),
     ],
@@ -314,8 +314,8 @@ void main() {
     },
     act: (bloc) => bloc.add(const AuthSignOutRequested()),
     expect: () => const [
-      AuthState(isLoading: true),
-      AuthState(isLoading: false, errorMessage: 'Could not sign out'),
+      AuthState(loadingType: AuthLoadingType.emailPassword),
+      AuthState(loadingType: AuthLoadingType.none, errorMessage: 'Could not sign out'),
     ],
   );
 

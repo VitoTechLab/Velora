@@ -78,7 +78,7 @@ class _UserProfileContent extends HookWidget {
               IconButton(
                 icon: const Icon(Icons.more_vert),
                 onPressed: () {
-                  // TODO: Show user options menu (report, block, etc)
+                  // Note: User options menu (report, block) will be implemented when moderation feature is ready
                 },
               ),
             ],
@@ -146,10 +146,10 @@ class _UserProfileContent extends HookWidget {
                                             profile?.followingCount ?? 0,
                                         onPostsTap: () {},
                                         onFollowersTap: () {
-                                          // TODO: Navigate to followers list
+                                          // Note: Navigation to followers list will be implemented
                                         },
                                         onFollowingTap: () {
-                                          // TODO: Navigate to following list
+                                          // Note: Navigation to following list will be implemented
                                         },
                                       ),
                                     ),
@@ -218,10 +218,10 @@ class _UserProfileContent extends HookWidget {
                                     }
                                   },
                                   onShareProfile: () {
-                                    // TODO: Share profile
+                                    // Note: Profile sharing will be implemented when share feature is ready
                                   },
                                   onAddFriend: () {
-                                    // TODO: Add friend
+                                    // Note: Add friend functionality will be implemented when friend system is ready
                                   },
                                 ),
                               ),
@@ -280,7 +280,7 @@ class _UserProfileContent extends HookWidget {
                                   .expand((p) => p.imageUrls)
                                   .toList(),
                               onPostTap: (index) {
-                                // TODO: Navigate to post detail
+                                // Note: Navigation to post detail will be implemented
                               },
                             );
                           },

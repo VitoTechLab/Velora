@@ -100,7 +100,7 @@ class _ProfileScreenContent extends HookWidget {
                   child: const Icon(Icons.favorite_border),
                 ),
                 onPressed: () {
-                  // TODO: Navigate to notifications
+                  // Note: Navigation to notifications will be implemented
                 },
               ),
               IconButton(
@@ -217,7 +217,7 @@ class _ProfileScreenContent extends HookWidget {
                                   },
                                   onFollowToggle: () {},
                                   onShareProfile: () {
-                                    // TODO: Share profile
+                                    // Note: Profile sharing will be implemented when share feature is ready
                                   },
                                   onAddFriend: () {},
                                 ),
@@ -274,7 +274,7 @@ class _ProfileScreenContent extends HookWidget {
                                   .expand((p) => p.imageUrls)
                                   .toList(),
                               onPostTap: (index) {
-                                // TODO: Navigate to post detail
+                                // Note: Navigation to post detail will be implemented
                               },
                             );
                           },

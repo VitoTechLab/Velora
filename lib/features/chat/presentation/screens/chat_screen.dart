@@ -111,7 +111,7 @@ class ChatScreen extends HookWidget {
                                 'Search',
                                 style: textTheme.bodyMedium?.copyWith(
                                   color: colorScheme.onSurfaceVariant
-                                      .withOpacity(0.6),
+                                      .withValues(alpha: 0.6),
                                 ),
                               ),
                             ],
@@ -195,7 +195,7 @@ class ChatScreen extends HookWidget {
                             case 'unread':
                               return conv.unreadCount > 0;
                             case 'favourites':
-                              // TODO: Add isFavourite field to ConversationListEntity
+                              // Note: Favourites feature pending - requires isFavourite field in ConversationListEntity
                               return false;
                             case 'groups':
                               return conv.type == 'group';

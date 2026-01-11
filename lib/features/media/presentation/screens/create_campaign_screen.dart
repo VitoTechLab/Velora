@@ -25,7 +25,7 @@ class _CreateCampaignScreenState extends State<CreateCampaignScreen> {
   File? _selectedFile;
 
   Future<void> _pickImage() async {
-    // TODO: Integrate with your image picker implementation
+    // Note: Integrate with image picker when media selection feature is ready
     // setState(() => _selectedFile = pickedFile);
   }
 

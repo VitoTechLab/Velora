@@ -15,9 +15,8 @@ _$UserProfileModelImpl _$$UserProfileModelImplFromJson(
       fullName: json['full_name'] as String?,
       avatarUrl: json['avatar_url'] as String?,
       bio: json['bio'] as String?,
-      dateOfBirth: const NullableUtcDateTimeConverter().fromJson(
-        json['date_of_birth'],
-      ),
+      dateOfBirth:
+          const NullableUtcDateTimeConverter().fromJson(json['date_of_birth']),
       gender: $enumDecodeNullable(_$UserGenderEnumMap, json['gender']),
       isOrganization: json['is_organization'] as bool? ?? false,
       organizationName: json['organization_name'] as String?,
@@ -47,9 +46,8 @@ Map<String, dynamic> _$$UserProfileModelImplToJson(
       'full_name': instance.fullName,
       'avatar_url': instance.avatarUrl,
       'bio': instance.bio,
-      'date_of_birth': const NullableUtcDateTimeConverter().toJson(
-        instance.dateOfBirth,
-      ),
+      'date_of_birth':
+          const NullableUtcDateTimeConverter().toJson(instance.dateOfBirth),
       'gender': _$UserGenderEnumMap[instance.gender],
       'is_organization': instance.isOrganization,
       'organization_name': instance.organizationName,

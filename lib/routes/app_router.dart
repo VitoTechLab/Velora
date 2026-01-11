@@ -187,7 +187,7 @@ class AppRouter {
                             return const SizedBox.shrink();
                           }
                           return CreatePostScreen(
-                            selectedMedia: args.selectedMedia ?? [],
+                            selectedMedia: args.selectedMedia,
                           );
                         },
                         routes: [

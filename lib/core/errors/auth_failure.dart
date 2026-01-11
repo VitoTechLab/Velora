@@ -1,5 +1,4 @@
-import 'package:gotrue/src/types/auth_exception.dart';
-import 'package:gotrue/src/types/error_code.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'failure.dart';
 
@@ -41,17 +40,16 @@ class AuthFailure extends Failure {
 
     if (error is AuthException) {
       final code = error.code;
-      if (code == ErrorCode.emailNotConfirmed.code) {
+      if (code == 'email_not_confirmed') {
         return AuthFailure.emailNotVerified(error.message);
       }
-      if (code == ErrorCode.emailExists.code ||
-          code == ErrorCode.userAlreadyExists.code) {
+      if (code == 'email_exists' || code == 'user_already_exists') {
         return AuthFailure.emailAlreadyInUse(error.message);
       }
-      if (code == ErrorCode.userNotFound.code) {
+      if (code == 'user_not_found') {
         return AuthFailure.userNotFound(error.message);
       }
-      if (code == ErrorCode.overRequestRateLimit.code) {
+      if (code == 'over_request_rate_limit') {
         return AuthFailure.network(error.message);
       }
 

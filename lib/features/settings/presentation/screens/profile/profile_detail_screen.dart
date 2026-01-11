@@ -283,11 +283,9 @@ class _ProfileTileGroup extends StatelessWidget {
   const _ProfileTileGroup({
     required this.title,
     required this.tiles,
-    this.subtitle,
   });
 
   final String title;
-  final String? subtitle;
   final List<SettingsTileData> tiles;
 
   @override
@@ -295,7 +293,6 @@ class _ProfileTileGroup extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     return EdgeToEdgeSection(
       title: title,
-      subtitle: subtitle,
       child: Column(
         children: [
           for (int i = 0; i < tiles.length; i++) ...[

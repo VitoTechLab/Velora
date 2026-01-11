@@ -69,7 +69,7 @@ class _ElegantFeaturedCarouselState extends State<ElegantFeaturedCarousel> {
               expansionFactor: 3,
               spacing: 6,
               activeDotColor: colorScheme.primary,
-              dotColor: colorScheme.outline.withOpacity(0.3),
+              dotColor: colorScheme.outline.withValues(alpha: 0.3),
             ),
             onDotClicked: (index) {
               _carouselController.animateToPage(index);
@@ -89,7 +89,7 @@ class _ElegantFeaturedCarouselState extends State<ElegantFeaturedCarousel> {
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.shadow.withOpacity(0.12),
+            color: colorScheme.shadow.withValues(alpha: 0.12),
             blurRadius: 24,
             offset: const Offset(0, 8),
           ),
@@ -112,8 +112,8 @@ class _ElegantFeaturedCarouselState extends State<ElegantFeaturedCarousel> {
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: [
-                        colorScheme.primaryContainer.withOpacity(0.1),
-                        colorScheme.tertiaryContainer.withOpacity(0.1),
+                        colorScheme.primaryContainer.withValues(alpha: 0.1),
+                        colorScheme.tertiaryContainer.withValues(alpha: 0.1),
                       ],
                     ),
                   ),
@@ -153,7 +153,7 @@ class _ElegantFeaturedCarouselState extends State<ElegantFeaturedCarousel> {
                                 vertical: 6,
                               ),
                               decoration: BoxDecoration(
-                                color: colorScheme.primary.withOpacity(0.15),
+                                color: colorScheme.primary.withValues(alpha: 0.15),
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Row(

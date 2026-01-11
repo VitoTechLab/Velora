@@ -21,7 +21,6 @@ class FollowRequestsCard extends StatelessWidget {
 
     // Get first 3 avatars for stacked display
     final displayAvatars = requests.take(3).toList();
-    final totalCount = requests.length;
     final hasUnread = requests.any((r) => !r.isRead);
 
     return InkWell(

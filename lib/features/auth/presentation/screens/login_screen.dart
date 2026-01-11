@@ -39,20 +39,17 @@ class LoginScreen extends HookWidget {
     final passwordFocusNode = useFocusNode();
     final formKey = useMemoized(() => GlobalKey<FormState>());
 
-    final clearForm = useCallback(() {
-      FocusScope.of(context).unfocus();
-      emailController.clear();
-      passwordController.clear();
-    }, [emailController, passwordController]);
-
     final submitLogin = useCallback(() {
       // Unfocus to trigger validation on all fields
       FocusScope.of(context).unfocus();
       
+      // Get bloc reference before async gap
+      final bloc = context.read<AuthBloc>();
+      
       // Small delay to allow focus change to complete validation
       Future.microtask(() {
         if (formKey.currentState?.validate() ?? false) {
-          context.read<AuthBloc>().add(
+          bloc.add(
             AuthSignInRequested(
               email: emailController.text.trim(),
               password: passwordController.text,

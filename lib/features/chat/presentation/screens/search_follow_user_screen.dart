@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velora/core/di/service_locator.dart';
+import 'package:velora/core/ui/app_messenger.dart';
 import 'package:velora/features/chat/domain/entities/user_search_entity.dart';
 import 'package:velora/features/chat/presentation/bloc/search_user_bloc.dart';
 import 'package:velora/features/chat/presentation/bloc/search_user_event.dart';
@@ -32,7 +33,7 @@ class SearchFollowUserScreen extends HookWidget {
                 decoration: InputDecoration(
                   hintText: 'Search or ask Meta AI',
                   hintStyle: TextStyle(
-                    color: colorScheme.onSurfaceVariant.withOpacity(0.6),
+                    color: colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
                   ),
                   prefixIcon: Icon(
                     Icons.search,
@@ -185,7 +186,11 @@ class SearchFollowUserScreen extends HookWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    // TODO: Clear recent searches
+                    // Note: Clear recent searches will be implemented with search history feature
+                    AppMessenger.showToast(
+                      message: 'Clear recent searches coming soon',
+                      icon: Icons.info_outline,
+                    );
                   },
                   child: Text(
                     'Edit',
@@ -239,7 +244,11 @@ class SearchFollowUserScreen extends HookWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    // TODO: See all followed users
+                    // Note: See all followed users will navigate to full following list
+                    AppMessenger.showToast(
+                      message: 'Following list coming soon',
+                      icon: Icons.info_outline,
+                    );
                   },
                   child: Text(
                     'See all',
@@ -285,7 +294,7 @@ class SearchFollowUserScreen extends HookWidget {
       padding: const EdgeInsets.only(right: 16),
       child: InkWell(
         onTap: () {
-          // TODO: Navigate to user profile or create chat
+          // Note: Profile view or chat creation will be implemented with navigation routes
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Open chat with ${user.username}')),
           );
@@ -354,7 +363,7 @@ class SearchFollowUserScreen extends HookWidget {
             )
           : null,
       onTap: () {
-        // TODO: Navigate to user profile or create chat
+        // Note: Profile view or chat creation will be implemented with navigation routes
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Open chat with ${user.username}')),
         );

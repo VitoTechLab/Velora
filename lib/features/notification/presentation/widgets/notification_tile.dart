@@ -31,7 +31,7 @@ class NotificationTile extends StatelessWidget {
         decoration: BoxDecoration(
           color: notification.isRead
               ? Colors.transparent
-              : colorScheme.primary.withOpacity(0.05),
+              : colorScheme.primary.withValues(alpha: 0.05),
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,

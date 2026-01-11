@@ -131,11 +131,31 @@ class CampaignListScreen extends HookWidget {
 
     // Campaign tap handler
     void onCampaignTap(CampaignModel campaign) {
-      // TODO: Navigate to campaign detail
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Open campaign: ${campaign.title}'),
-          duration: const Duration(seconds: 1),
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Scaffold(
+            appBar: AppBar(
+              title: Text('Campaign Detail'),
+            ),
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    campaign.title,
+                    style: theme.textTheme.headlineSmall,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    'ID: ${campaign.id}',
+                    style: theme.textTheme.bodyMedium,
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       );
     }

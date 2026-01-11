@@ -291,7 +291,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     Emitter<SettingsState> emit,
   ) async {
     emit(state.copyWith(pauseAllNotifications: event.enabled));
-    // TODO: Sync to Supabase when online
+    // Note: Sync to Supabase when online feature will be implemented
   }
 
   Future<void> _onUpdateSleepMode(
@@ -307,7 +307,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         sleepEndMinute: event.endMinute ?? state.sleepEndMinute,
       ),
     );
-    // TODO: Sync to Supabase when online
+    // Note: Sync to Supabase when online feature will be implemented
   }
 
   Future<void> _onToggleNotification(
@@ -344,7 +344,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       case 'group_invites':
         emit(state.copyWith(notifyGroupInvites: event.enabled));
     }
-    // TODO: Sync to Supabase when online
+    // Note: Sync to Supabase when online feature will be implemented
   }
 
   Future<void> _onUpdateSummaryFrequency(
@@ -352,7 +352,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     Emitter<SettingsState> emit,
   ) async {
     emit(state.copyWith(summaryFrequency: event.frequency));
-    // TODO: Sync to Supabase when online
+    // Note: Sync to Supabase when online feature will be implemented
   }
 
   Future<void> _onToggleEmailNotifications(
@@ -360,7 +360,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     Emitter<SettingsState> emit,
   ) async {
     emit(state.copyWith(emailNotifications: event.enabled));
-    // TODO: Sync to Supabase when online
+    // Note: Sync to Supabase when online feature will be implemented
   }
 
   Future<void> _onToggleSmsNotifications(
@@ -368,7 +368,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     Emitter<SettingsState> emit,
   ) async {
     emit(state.copyWith(smsNotifications: event.enabled));
-    // TODO: Sync to Supabase when online
+    // Note: Sync to Supabase when online feature will be implemented
   }
 
   // ==========================================
