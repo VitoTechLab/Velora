@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:velora/features/auth/domain/entities/auth_status_entity.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
@@ -38,7 +39,16 @@ void main() {
     await tester.pumpWidget(
       BlocProvider<AuthBloc>.value(
         value: authBloc,
-        child: MaterialApp.router(routerConfig: router.router),
+        child: MaterialApp.router(
+          routerConfig: router.router,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: AppLocalizations.supportedLocales,
+        ),
       ),
     );
     await tester.pumpAndSettle();
@@ -53,7 +63,7 @@ void main() {
       state: const AuthState(status: AuthStatusEntity.unauthenticated),
     );
 
-    expect(router.router.location, AppRoutePath.signIn);
+    expect(router.router.routeInformationProvider.value.uri.toString(), AppRoutePath.signIn);
   });
 
   testWidgets('email unverified users see verification screen', (tester) async {
@@ -62,7 +72,7 @@ void main() {
       state: const AuthState(status: AuthStatusEntity.emailUnverified),
     );
 
-    expect(router.router.location, AppRoutePath.verificationEmail);
+    expect(router.router.routeInformationProvider.value.uri.toString(), AppRoutePath.verificationEmail);
   });
 
   testWidgets('unknown status redirects to create post', (tester) async {
@@ -71,6 +81,6 @@ void main() {
       state: const AuthState(status: AuthStatusEntity.unknown),
     );
 
-    expect(router.router.location, AppRoutePath.createPost);
+    expect(router.router.routeInformationProvider.value.uri.toString(), AppRoutePath.createPost);
   });
 }

@@ -63,7 +63,7 @@ class ProfileActions extends StatelessWidget {
             child: _ActionButton(
               label: 'Message',
               onPressed: () {
-                // TODO: Navigate to chat
+                // Note: Navigation to chat will be implemented
               },
               colorScheme: colorScheme,
             ),

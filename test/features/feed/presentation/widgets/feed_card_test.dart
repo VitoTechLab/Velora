@@ -17,7 +17,7 @@ void main() {
     registerFallbackValue(const FeedEvent.clearTransient());
   });
   late _MockFeedBloc bloc;
-  const post = FeedEntity(
+  final post = FeedEntity(
     id: 'post-1',
     userId: 'user-1',
     content: 'Feed content',

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
+import '../../../../l10n/app_localizations.dart';
 import '../../domain/entities/campaign_type.dart';
 import '../../domain/entities/sort_option.dart';
 import '../../data/mock_campaigns.dart';
 import '../widgets/campaign_search_field.dart';
 import '../widgets/campaign_chips.dart';
-import '../widgets/featured_campaign_carousel.dart';
-import '../widgets/campaign_card.dart';
+import '../widgets/elegant_featured_carousel.dart';
+import '../widgets/campaign_category_section.dart';
 import '../widgets/campaign_empty_state.dart';
+import 'campaign_list_screen.dart';
 
 // ============================================================================
 // MAIN SCREEN
@@ -21,6 +23,7 @@ class CampaignScreen extends HookWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final l10n = AppLocalizations.of(context);
 
     final selectedType = useState(CampaignType.all);
     final selectedSort = useState(SortOption.trending);
@@ -78,8 +81,16 @@ class CampaignScreen extends HookWidget {
     final featuredCampaigns = campaigns.value
         .where((c) => c.isFeatured)
         .toList();
-    final regularCampaigns = campaigns.value
-        .where((c) => !c.isFeatured)
+
+    // Group campaigns by category
+    final emergencyCampaigns = campaigns.value
+        .where((c) => c.category == 'Emergency')
+        .toList();
+    final socialImpactCampaigns = campaigns.value
+        .where((c) => c.category == 'Social Impact')
+        .toList();
+    final technologyCampaigns = campaigns.value
+        .where((c) => c.category == 'Technology')
         .toList();
 
     Future<void> onRefresh() async {
@@ -98,7 +109,7 @@ class CampaignScreen extends HookWidget {
               backgroundColor: colorScheme.surface,
               elevation: 0,
               title: Text(
-                'Campaigns',
+                l10n?.chatSearchScopeCampaigns ?? 'Campaigns',
                 style: theme.textTheme.headlineMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: colorScheme.onSurface,
@@ -132,41 +143,85 @@ class CampaignScreen extends HookWidget {
                       selectedSort.value = sort;
                     },
                   ),
-                  if (featuredCampaigns.isNotEmpty)
-                    FeaturedCampaignCarousel(campaigns: featuredCampaigns),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 24, 20, 12),
-                    child: Text(
-                      'All Campaigns',
-                      style: theme.textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: colorScheme.onSurface,
+                  const SizedBox(height: 16),
+
+                  // Featured Carousel
+                  if (featuredCampaigns.isNotEmpty) ...[
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20, bottom: 8),
+                      child: Text(
+                        l10n?.campaignFeaturedTitle ?? 'Featured Campaigns',
+                        style: theme.textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: colorScheme.onSurface,
+                        ),
                       ),
                     ),
-                  ),
+                    ElegantFeaturedCarousel(campaigns: featuredCampaigns),
+                  ],
+
+                  // Emergency Campaigns
+                  if (emergencyCampaigns.isNotEmpty)
+                    CampaignCategorySection(
+                      categoryName:
+                          l10n?.campaignEmergencyTitle ??
+                          'Emergency Fundraisers',
+                      campaigns: emergencyCampaigns,
+                      onSeeMore: () {
+                        CampaignListScreen.show(
+                          context,
+                          categoryName:
+                              l10n?.campaignEmergencyTitle ??
+                              'Emergency Fundraisers',
+                          categoryFilter: 'Emergency',
+                        );
+                      },
+                    ),
+
+                  // Social Impact Campaigns
+                  if (socialImpactCampaigns.isNotEmpty)
+                    CampaignCategorySection(
+                      categoryName:
+                          l10n?.campaignSocialImpactTitle ?? 'Social Impact',
+                      campaigns: socialImpactCampaigns,
+                      onSeeMore: () {
+                        CampaignListScreen.show(
+                          context,
+                          categoryName:
+                              l10n?.campaignSocialImpactTitle ??
+                              'Social Impact',
+                          categoryFilter: 'Social Impact',
+                        );
+                      },
+                    ),
+
+                  // Technology Campaigns
+                  if (technologyCampaigns.isNotEmpty)
+                    CampaignCategorySection(
+                      categoryName:
+                          l10n?.campaignTechnologyTitle ?? 'Technology',
+                      campaigns: technologyCampaigns,
+                      onSeeMore: () {
+                        CampaignListScreen.show(
+                          context,
+                          categoryName:
+                              l10n?.campaignTechnologyTitle ?? 'Technology',
+                          categoryFilter: 'Technology',
+                        );
+                      },
+                    ),
+
+                  const SizedBox(height: 24),
                 ],
               ),
             ),
-            if (regularCampaigns.isEmpty)
+            if (campaigns.value.isEmpty)
               SliverFillRemaining(
                 child: CampaignEmptyState(
                   onRetry: () {
                     selectedType.value = CampaignType.all;
                     selectedSort.value = SortOption.trending;
                   },
-                ),
-              )
-            else
-              SliverPadding(
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
-                sliver: SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) => Padding(
-                      padding: const EdgeInsets.only(bottom: 16),
-                      child: CampaignCard(campaign: regularCampaigns[index]),
-                    ),
-                    childCount: regularCampaigns.length,
-                  ),
                 ),
               ),
           ],

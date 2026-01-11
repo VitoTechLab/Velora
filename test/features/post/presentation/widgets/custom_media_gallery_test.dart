@@ -16,6 +16,8 @@ class FakeImagePicker extends ImagePicker {
     double? maxWidth,
     double? maxHeight,
     int? imageQuality,
+    int? limit,
+    bool requestFullMetadata = true,
     CameraDevice preferredCameraDevice = CameraDevice.rear,
   }) async {
     pickCount++;

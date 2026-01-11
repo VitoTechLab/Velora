@@ -429,6 +429,13 @@ class AppLocalizationsId extends AppLocalizations {
       'Tinjau perangkat dan persetujuan login';
 
   @override
+  String get settingsTileAccountStatusTitle => 'Status Akun';
+
+  @override
+  String get settingsTileAccountStatusSubtitle =>
+      'Lihat status verifikasi dan aktivitas akun';
+
+  @override
   String get settingsAccountTitle => 'Pengaturan akun';
 
   @override
@@ -464,6 +471,67 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get settingsTileVeloraPaySubtitle =>
       'Metode pembayaran dan perlindungan';
+
+  @override
+  String get settingsWalletTitle => 'Dompet';
+
+  @override
+  String get walletDashboardTitle => 'Dashboard Dompet';
+
+  @override
+  String get walletDashboardWalletId => 'ID Dompet: #VLR2024001';
+
+  @override
+  String get walletDashboardTotalBalance => 'Saldo Total';
+
+  @override
+  String get walletDashboardQuickActions => 'Aksi Cepat';
+
+  @override
+  String get walletDashboardDonationHistory => 'Riwayat Donasi';
+
+  @override
+  String get walletDashboardDonationHistorySubtitle =>
+      'Lihat semua transaksi donasi Anda';
+
+  @override
+  String get walletDashboardMyCampaigns => 'Kampanye Saya';
+
+  @override
+  String get walletDashboardMyCampaignsSubtitle =>
+      'Kelola kampanye penggalangan dana Anda';
+
+  @override
+  String get walletDashboardMyDonations => 'Donasi Saya';
+
+  @override
+  String get walletDashboardMyDonationsSubtitle => 'Lacak kontribusi Anda';
+
+  @override
+  String get walletDashboardAnalytics => 'Analitik';
+
+  @override
+  String get walletDashboardAnalyticsSubtitle => 'Lihat wawasan dan statistik';
+
+  @override
+  String get walletDashboardRecentActivity => 'Aktivitas Terbaru';
+
+  @override
+  String get walletDashboardNoActivity => 'Belum ada aktivitas';
+
+  @override
+  String get walletDashboardNoActivitySubtitle =>
+      'Transaksi dompet Anda akan muncul di sini';
+
+  @override
+  String get walletDashboardUnderDevelopmentTitle => 'Dalam Pengembangan';
+
+  @override
+  String get walletDashboardUnderDevelopmentMessage =>
+      'Fitur ini sedang dalam pengembangan dan akan segera tersedia.';
+
+  @override
+  String get walletDashboardUnderDevelopmentButton => 'OK';
 
   @override
   String get settingsPersonalizationTitle => 'Personalisasi';
@@ -542,6 +610,108 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get settingsHeroReviewButton => 'Tinjau';
+
+  @override
+  String get settingsHeroAccountType => 'Akun Personal';
+
+  @override
+  String get settingsHeroAccountTypeSubtitle =>
+      'Ketuk untuk melihat detail tipe akun';
+
+  @override
+  String get accountTypeScreenTitle => 'Tipe Akun';
+
+  @override
+  String get accountTypeScreenCurrentType => 'Tipe Akun Saat Ini';
+
+  @override
+  String get accountTypeScreenPersonal => 'Akun Personal';
+
+  @override
+  String get accountTypeScreenPersonalDescription =>
+      'Sempurna untuk pengguna individu yang ingin terhubung dengan teman dan keluarga.';
+
+  @override
+  String get accountTypeScreenPersonalBenefitsTitle => 'Manfaat Akun Personal';
+
+  @override
+  String get accountTypeScreenBenefit1Title => 'Profil Pribadi';
+
+  @override
+  String get accountTypeScreenBenefit1Subtitle =>
+      'Jaga identitas dan privasi pribadi Anda';
+
+  @override
+  String get accountTypeScreenBenefit2Title => 'Kontrol Privasi';
+
+  @override
+  String get accountTypeScreenBenefit2Subtitle =>
+      'Kontrol penuh atas data pribadi Anda';
+
+  @override
+  String get accountTypeScreenBenefit3Title => 'Koneksi Sosial';
+
+  @override
+  String get accountTypeScreenBenefit3Subtitle =>
+      'Terhubung dengan teman dan keluarga dengan mudah';
+
+  @override
+  String get accountTypeScreenOrganization => 'Akun Organisasi';
+
+  @override
+  String get accountTypeScreenOrganizationDescription =>
+      'Tingkatkan ke akun organisasi untuk mengakses fitur bisnis lanjutan dan verifikasi.';
+
+  @override
+  String get accountTypeScreenOrganizationBenefitsTitle =>
+      'Manfaat Organisasi:';
+
+  @override
+  String get accountTypeScreenOrgBenefit1 =>
+      'Lencana terverifikasi untuk keaslian';
+
+  @override
+  String get accountTypeScreenOrgBenefit2 => 'Analitik dan wawasan lanjutan';
+
+  @override
+  String get accountTypeScreenOrgBenefit3 => 'Alat promosi dan kampanye';
+
+  @override
+  String get accountTypeScreenOrgBenefit4 => 'Fitur kolaborasi tim';
+
+  @override
+  String get accountTypeScreenUpgradeButton => 'Tingkatkan ke Organisasi';
+
+  @override
+  String get accountTypeScreenVerificationTitle => 'Verifikasi Akun';
+
+  @override
+  String get accountTypeScreenVerificationSubtitle =>
+      'Untuk meningkatkan ke akun organisasi, silakan selesaikan proses verifikasi.';
+
+  @override
+  String get accountTypeScreenVerificationStep1 => 'Foto KTP';
+
+  @override
+  String get accountTypeScreenVerificationStep1Subtitle =>
+      'Ambil foto KTP Anda yang jelas';
+
+  @override
+  String get accountTypeScreenVerificationStep2 => 'Foto Selfie';
+
+  @override
+  String get accountTypeScreenVerificationStep2Subtitle =>
+      'Ambil foto selfie sambil memegang KTP Anda';
+
+  @override
+  String get accountTypeScreenVerificationSubmit => 'Kirim Verifikasi';
+
+  @override
+  String get accountTypeScreenVerificationCancel => 'Batal';
+
+  @override
+  String get accountTypeScreenVerificationSuccess =>
+      'Verifikasi berhasil dikirim! Kami akan meninjau permintaan Anda dalam 1-3 hari kerja.';
 
   @override
   String get settingsSearchProfiles => 'Profil';
@@ -647,6 +817,9 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get settingsProfileInfoSyncDescription =>
       'Your name and username will no longer sync across apps. Manage synced profile pictures through Connected experiences.';
+
+  @override
+  String get settingsProfileAccountSectionTitle => 'Akun';
 
   @override
   String get settingsProfileAccountTypeTitle => 'Account type';
@@ -2130,6 +2303,53 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get settingsAccountDonationsRecurringLabel => 'Berkala';
+
+  @override
+  String get campaignSeeMore => 'Lihat Semua';
+
+  @override
+  String get campaignFeaturedTitle => 'Kampanye Unggulan';
+
+  @override
+  String get campaignEmergencyTitle => 'Penggalangan Dana Darurat';
+
+  @override
+  String get campaignSocialImpactTitle => 'Dampak Sosial';
+
+  @override
+  String get campaignTechnologyTitle => 'Teknologi';
+
+  @override
+  String get campaignFashionTitle => 'Fashion';
+
+  @override
+  String get campaignFoodBeverageTitle => 'Makanan & Minuman';
+
+  @override
+  String get campaignFinanceTitle => 'Keuangan';
+
+  @override
+  String get campaignMemorialTitle => 'Penggalangan Dana Memorial';
+
+  @override
+  String campaignRaisedOf(String target) {
+    return 'terkumpul dari $target';
+  }
+
+  @override
+  String get campaignEndOfList => 'Tidak ada kampanye lagi';
+
+  @override
+  String get searchTitle => 'Cari';
+
+  @override
+  String get searchHint => 'Apa yang ingin Anda temukan?';
+
+  @override
+  String get searchDiscoverTitle => 'Temukan sesuatu yang baru';
+
+  @override
+  String get searchBrowseAllTitle => 'Jelajahi semua';
 
   @override
   String settingsAccountDonationsRecurringValue(int count) {

@@ -1,8 +1,7 @@
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:realtime_client/realtime_client.dart';
-import 'package:postgrest/postgrest.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:velora/core/errors/exceptions.dart';
 import 'package:velora/core/supabase/supabase_constants.dart';
 import 'package:velora/features/feed/data/datasources/feed_remote_datasource_impl.dart';
@@ -11,18 +10,18 @@ import 'package:velora/features/feed/data/models/feed_model.dart';
 import '../../../../helpers/mock_supabase.dart';
 
 void main() {
-  setUpAll(() {
-    registerFallbackValue(MockPostgrestQueryBuilder());
-    registerFallbackValue(MockPostgrestFilterBuilder<Map<String, dynamic>>());
-    registerFallbackValue(MockPostgrestTransformBuilder<dynamic>());
-  });
+  // setUpAll(() {
+  //   registerFallbackValue(MockPostgrestQueryBuilder());
+  //   registerFallbackValue(MockPostgrestFilterBuilder<Map<String, dynamic>>());
+  //   registerFallbackValue(MockPostgrestTransformBuilder<dynamic>());
+  // });
   late MockSupabaseClient supabaseClient;
-  late MockSupabaseAuth auth;
+  late MockGoTrueClient auth;
   late FeedRemoteDataSourceImpl dataSource;
 
   setUp(() {
     supabaseClient = MockSupabaseClient();
-    auth = MockSupabaseAuth();
+    auth = MockGoTrueClient();
     when(() => supabaseClient.auth).thenReturn(auth);
     dataSource = FeedRemoteDataSourceImpl(supabaseClient: supabaseClient);
   });
@@ -40,8 +39,8 @@ void main() {
 
   group('getFeed', () {
     test('returns mapped posts with pagination metadata', () async {
-      final queryBuilder = MockPostgrestQueryBuilder();
-      final filterBuilder = MockPostgrestFilterBuilder<Map<String, dynamic>>();
+      final queryBuilder = MockSupabaseQueryBuilder();
+      final filterBuilder = MockPostgrestFilterBuilder<PostgrestList>();
       final firstOrder = MockPostgrestTransformBuilder<PostgrestList>();
       final secondOrder = MockPostgrestTransformBuilder<PostgrestList>();
       final limitBuilder = MockPostgrestTransformBuilder<PostgrestList>();
@@ -102,8 +101,8 @@ void main() {
       when(() => auth.currentUser).thenReturn(user);
       when(() => user.id).thenReturn('user-1');
 
-      final queryBuilder = MockPostgrestQueryBuilder();
-      final insertBuilder = MockPostgrestFilterBuilder<Map<String, dynamic>>();
+      final queryBuilder = MockSupabaseQueryBuilder();
+      final insertBuilder = MockPostgrestFilterBuilder<PostgrestList>();
       final selectBuilder = MockPostgrestTransformBuilder<PostgrestList>();
       final singleBuilder = MockPostgrestTransformBuilder<PostgrestMap>();
 
@@ -150,10 +149,10 @@ void main() {
     });
 
     test('inserts bookmark when none exists', () async {
-      final queryBuilder = MockPostgrestQueryBuilder();
-      final selectBuilder = MockPostgrestFilterBuilder<Map<String, dynamic>>();
+      final queryBuilder = MockSupabaseQueryBuilder();
+      final selectBuilder = MockPostgrestFilterBuilder<PostgrestList>();
       final maybeBuilder = MockPostgrestTransformBuilder<PostgrestMap?>();
-      final insertBuilder = MockPostgrestFilterBuilder<Map<String, dynamic>>();
+      final insertBuilder = MockPostgrestFilterBuilder<PostgrestList>();
 
       when(
         () => supabaseClient.from(SupabaseTables.feedPostBookmarks),
@@ -208,7 +207,7 @@ void main() {
         return channel;
       });
       when(() => channel.subscribe()).thenReturn(channel);
-      when(() => channel.unsubscribe()).thenAnswer((_) async => channel);
+      when(() => channel.unsubscribe()).thenAnswer((_) async => 'ok');
     });
 
     test('emits comment when Supabase payload received', () async {

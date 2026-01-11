@@ -426,6 +426,13 @@ class AppLocalizationsEn extends AppLocalizations {
       'Review devices and login approvals';
 
   @override
+  String get settingsTileAccountStatusTitle => 'Account Status';
+
+  @override
+  String get settingsTileAccountStatusSubtitle =>
+      'View verification status and account activity';
+
+  @override
   String get settingsAccountTitle => 'Account settings';
 
   @override
@@ -461,6 +468,67 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsTileVeloraPaySubtitle => 'Payment methods and protections';
+
+  @override
+  String get settingsWalletTitle => 'Wallet';
+
+  @override
+  String get walletDashboardTitle => 'Wallet Dashboard';
+
+  @override
+  String get walletDashboardWalletId => 'Wallet ID: #VLR2024001';
+
+  @override
+  String get walletDashboardTotalBalance => 'Total Balance';
+
+  @override
+  String get walletDashboardQuickActions => 'Quick Actions';
+
+  @override
+  String get walletDashboardDonationHistory => 'Donation History';
+
+  @override
+  String get walletDashboardDonationHistorySubtitle =>
+      'View all your donation transactions';
+
+  @override
+  String get walletDashboardMyCampaigns => 'My Campaigns';
+
+  @override
+  String get walletDashboardMyCampaignsSubtitle =>
+      'Manage your fundraising campaigns';
+
+  @override
+  String get walletDashboardMyDonations => 'My Donations';
+
+  @override
+  String get walletDashboardMyDonationsSubtitle => 'Track your contributions';
+
+  @override
+  String get walletDashboardAnalytics => 'Analytics';
+
+  @override
+  String get walletDashboardAnalyticsSubtitle => 'View insights and statistics';
+
+  @override
+  String get walletDashboardRecentActivity => 'Recent Activity';
+
+  @override
+  String get walletDashboardNoActivity => 'No activity yet';
+
+  @override
+  String get walletDashboardNoActivitySubtitle =>
+      'Your wallet transactions will appear here';
+
+  @override
+  String get walletDashboardUnderDevelopmentTitle => 'Under Development';
+
+  @override
+  String get walletDashboardUnderDevelopmentMessage =>
+      'This feature is currently under development and will be available soon.';
+
+  @override
+  String get walletDashboardUnderDevelopmentButton => 'OK';
 
   @override
   String get settingsPersonalizationTitle => 'Personalization';
@@ -538,6 +606,108 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsHeroReviewButton => 'Review';
+
+  @override
+  String get settingsHeroAccountType => 'Personal Account';
+
+  @override
+  String get settingsHeroAccountTypeSubtitle =>
+      'Tap to view account type details';
+
+  @override
+  String get accountTypeScreenTitle => 'Account Type';
+
+  @override
+  String get accountTypeScreenCurrentType => 'Current Account Type';
+
+  @override
+  String get accountTypeScreenPersonal => 'Personal Account';
+
+  @override
+  String get accountTypeScreenPersonalDescription =>
+      'Perfect for individual users who want to connect with friends and family.';
+
+  @override
+  String get accountTypeScreenPersonalBenefitsTitle =>
+      'Personal Account Benefits';
+
+  @override
+  String get accountTypeScreenBenefit1Title => 'Personal Profile';
+
+  @override
+  String get accountTypeScreenBenefit1Subtitle =>
+      'Maintain your personal identity and privacy';
+
+  @override
+  String get accountTypeScreenBenefit2Title => 'Privacy Controls';
+
+  @override
+  String get accountTypeScreenBenefit2Subtitle =>
+      'Full control over your personal data';
+
+  @override
+  String get accountTypeScreenBenefit3Title => 'Social Connection';
+
+  @override
+  String get accountTypeScreenBenefit3Subtitle =>
+      'Connect with friends and family easily';
+
+  @override
+  String get accountTypeScreenOrganization => 'Organization Account';
+
+  @override
+  String get accountTypeScreenOrganizationDescription =>
+      'Upgrade to organization account to access advanced business features and verification.';
+
+  @override
+  String get accountTypeScreenOrganizationBenefitsTitle =>
+      'Organization Benefits:';
+
+  @override
+  String get accountTypeScreenOrgBenefit1 => 'Verified badge for authenticity';
+
+  @override
+  String get accountTypeScreenOrgBenefit2 => 'Advanced analytics and insights';
+
+  @override
+  String get accountTypeScreenOrgBenefit3 => 'Promotional tools and campaigns';
+
+  @override
+  String get accountTypeScreenOrgBenefit4 => 'Team collaboration features';
+
+  @override
+  String get accountTypeScreenUpgradeButton => 'Upgrade to Organization';
+
+  @override
+  String get accountTypeScreenVerificationTitle => 'Account Verification';
+
+  @override
+  String get accountTypeScreenVerificationSubtitle =>
+      'To upgrade to organization account, please complete the verification process.';
+
+  @override
+  String get accountTypeScreenVerificationStep1 => 'ID Card Photo';
+
+  @override
+  String get accountTypeScreenVerificationStep1Subtitle =>
+      'Take a clear photo of your ID card (KTP)';
+
+  @override
+  String get accountTypeScreenVerificationStep2 => 'Selfie Photo';
+
+  @override
+  String get accountTypeScreenVerificationStep2Subtitle =>
+      'Take a selfie holding your ID card';
+
+  @override
+  String get accountTypeScreenVerificationSubmit => 'Submit Verification';
+
+  @override
+  String get accountTypeScreenVerificationCancel => 'Cancel';
+
+  @override
+  String get accountTypeScreenVerificationSuccess =>
+      'Verification submitted successfully! We\'ll review your request within 1-3 business days.';
 
   @override
   String get settingsSearchProfiles => 'Profiles';
@@ -643,6 +813,9 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get settingsProfileInfoSyncDescription =>
       'Your name and username will no longer sync across apps. Manage synced profile pictures through Connected experiences.';
+
+  @override
+  String get settingsProfileAccountSectionTitle => 'Account';
 
   @override
   String get settingsProfileAccountTypeTitle => 'Account type';
@@ -2124,6 +2297,53 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsAccountDonationsRecurringLabel => 'Recurring';
+
+  @override
+  String get campaignSeeMore => 'See More';
+
+  @override
+  String get campaignFeaturedTitle => 'Featured Campaigns';
+
+  @override
+  String get campaignEmergencyTitle => 'Emergency Fundraisers';
+
+  @override
+  String get campaignSocialImpactTitle => 'Social Impact';
+
+  @override
+  String get campaignTechnologyTitle => 'Technology';
+
+  @override
+  String get campaignFashionTitle => 'Fashion';
+
+  @override
+  String get campaignFoodBeverageTitle => 'Food & Beverage';
+
+  @override
+  String get campaignFinanceTitle => 'Finance';
+
+  @override
+  String get campaignMemorialTitle => 'Memorial Fundraisers';
+
+  @override
+  String campaignRaisedOf(String target) {
+    return 'raised of $target';
+  }
+
+  @override
+  String get campaignEndOfList => 'No more campaigns';
+
+  @override
+  String get searchTitle => 'Search';
+
+  @override
+  String get searchHint => 'What do you want to find?';
+
+  @override
+  String get searchDiscoverTitle => 'Discover something new';
+
+  @override
+  String get searchBrowseAllTitle => 'Browse all';
 
   @override
   String settingsAccountDonationsRecurringValue(int count) {

@@ -1,5 +1,5 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,11 +9,19 @@ part of 'comment_pagination_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+
+CommentPaginationModel _$CommentPaginationModelFromJson(
+    Map<String, dynamic> json) {
+  return _CommentPaginationModel.fromJson(json);
+}
 
 /// @nodoc
 mixin _$CommentPaginationModel {
+<<<<<<< HEAD
 
  List<CommentModel> get comments; bool get hasMore;@JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) CommentCursorModel? get nextCursor;
 /// Create a copy of CommentPaginationModel
@@ -21,29 +29,25 @@ mixin _$CommentPaginationModel {
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $CommentPaginationModelCopyWith<CommentPaginationModel> get copyWith => _$CommentPaginationModelCopyWithImpl<CommentPaginationModel>(this as CommentPaginationModel, _$identity);
+=======
+  List<CommentModel> get comments => throw _privateConstructorUsedError;
+  bool get hasMore => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _commentCursorFromJson, toJson: _commentCursorToJson)
+  CommentCursor? get nextCursor => throw _privateConstructorUsedError;
+>>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
 
   /// Serializes this CommentPaginationModel to a JSON map.
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CommentPaginationModel&&const DeepCollectionEquality().equals(other.comments, comments)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.nextCursor, nextCursor) || other.nextCursor == nextCursor));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(comments),hasMore,nextCursor);
-
-@override
-String toString() {
-  return 'CommentPaginationModel(comments: $comments, hasMore: $hasMore, nextCursor: $nextCursor)';
-}
-
-
+  /// Create a copy of CommentPaginationModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $CommentPaginationModelCopyWith<CommentPaginationModel> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
+<<<<<<< HEAD
 abstract mixin class $CommentPaginationModelCopyWith<$Res>  {
   factory $CommentPaginationModelCopyWith(CommentPaginationModel value, $Res Function(CommentPaginationModel) _then) = _$CommentPaginationModelCopyWithImpl;
 @useResult
@@ -53,16 +57,34 @@ $Res call({
 
 
 $CommentCursorModelCopyWith<$Res>? get nextCursor;
+=======
+abstract class $CommentPaginationModelCopyWith<$Res> {
+  factory $CommentPaginationModelCopyWith(CommentPaginationModel value,
+          $Res Function(CommentPaginationModel) then) =
+      _$CommentPaginationModelCopyWithImpl<$Res, CommentPaginationModel>;
+  @useResult
+  $Res call(
+      {List<CommentModel> comments,
+      bool hasMore,
+      @JsonKey(fromJson: _commentCursorFromJson, toJson: _commentCursorToJson)
+      CommentCursor? nextCursor});
+>>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
 
+  $CommentCursorCopyWith<$Res>? get nextCursor;
 }
+
 /// @nodoc
-class _$CommentPaginationModelCopyWithImpl<$Res>
+class _$CommentPaginationModelCopyWithImpl<$Res,
+        $Val extends CommentPaginationModel>
     implements $CommentPaginationModelCopyWith<$Res> {
-  _$CommentPaginationModelCopyWithImpl(this._self, this._then);
+  _$CommentPaginationModelCopyWithImpl(this._value, this._then);
 
-  final CommentPaginationModel _self;
-  final $Res Function(CommentPaginationModel) _then;
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+<<<<<<< HEAD
 /// Create a copy of CommentPaginationModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? comments = null,Object? hasMore = null,Object? nextCursor = freezed,}) {
@@ -86,9 +108,64 @@ $CommentCursorModelCopyWith<$Res>? get nextCursor {
     return _then(_self.copyWith(nextCursor: value));
   });
 }
+=======
+  /// Create a copy of CommentPaginationModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? comments = null,
+    Object? hasMore = null,
+    Object? nextCursor = freezed,
+  }) {
+    return _then(_value.copyWith(
+      comments: null == comments
+          ? _value.comments
+          : comments // ignore: cast_nullable_to_non_nullable
+              as List<CommentModel>,
+      hasMore: null == hasMore
+          ? _value.hasMore
+          : hasMore // ignore: cast_nullable_to_non_nullable
+              as bool,
+      nextCursor: freezed == nextCursor
+          ? _value.nextCursor
+          : nextCursor // ignore: cast_nullable_to_non_nullable
+              as CommentCursor?,
+    ) as $Val);
+  }
+
+  /// Create a copy of CommentPaginationModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CommentCursorCopyWith<$Res>? get nextCursor {
+    if (_value.nextCursor == null) {
+      return null;
+    }
+
+    return $CommentCursorCopyWith<$Res>(_value.nextCursor!, (value) {
+      return _then(_value.copyWith(nextCursor: value) as $Val);
+    });
+  }
+>>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
 }
 
+/// @nodoc
+abstract class _$$CommentPaginationModelImplCopyWith<$Res>
+    implements $CommentPaginationModelCopyWith<$Res> {
+  factory _$$CommentPaginationModelImplCopyWith(
+          _$CommentPaginationModelImpl value,
+          $Res Function(_$CommentPaginationModelImpl) then) =
+      __$$CommentPaginationModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {List<CommentModel> comments,
+      bool hasMore,
+      @JsonKey(fromJson: _commentCursorFromJson, toJson: _commentCursorToJson)
+      CommentCursor? nextCursor});
 
+<<<<<<< HEAD
 /// Adds pattern-matching-related methods to [CommentPaginationModel].
 extension CommentPaginationModelPatterns on CommentPaginationModel {
 /// A variant of `map` that fallback to returning `orElse`.
@@ -215,13 +292,60 @@ return $default(_that.comments,_that.hasMore,_that.nextCursor);case _:
   return null;
 
 }
+=======
+  @override
+  $CommentCursorCopyWith<$Res>? get nextCursor;
+>>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
 }
 
+/// @nodoc
+class __$$CommentPaginationModelImplCopyWithImpl<$Res>
+    extends _$CommentPaginationModelCopyWithImpl<$Res,
+        _$CommentPaginationModelImpl>
+    implements _$$CommentPaginationModelImplCopyWith<$Res> {
+  __$$CommentPaginationModelImplCopyWithImpl(
+      _$CommentPaginationModelImpl _value,
+      $Res Function(_$CommentPaginationModelImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CommentPaginationModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? comments = null,
+    Object? hasMore = null,
+    Object? nextCursor = freezed,
+  }) {
+    return _then(_$CommentPaginationModelImpl(
+      comments: null == comments
+          ? _value._comments
+          : comments // ignore: cast_nullable_to_non_nullable
+              as List<CommentModel>,
+      hasMore: null == hasMore
+          ? _value.hasMore
+          : hasMore // ignore: cast_nullable_to_non_nullable
+              as bool,
+      nextCursor: freezed == nextCursor
+          ? _value.nextCursor
+          : nextCursor // ignore: cast_nullable_to_non_nullable
+              as CommentCursor?,
+    ));
+  }
 }
 
 /// @nodoc
 @JsonSerializable()
+class _$CommentPaginationModelImpl extends _CommentPaginationModel {
+  const _$CommentPaginationModelImpl(
+      {required final List<CommentModel> comments,
+      required this.hasMore,
+      @JsonKey(fromJson: _commentCursorFromJson, toJson: _commentCursorToJson)
+      this.nextCursor})
+      : _comments = comments,
+        super._();
 
+<<<<<<< HEAD
 class _CommentPaginationModel extends CommentPaginationModel {
   const _CommentPaginationModel({required final  List<CommentModel> comments, required this.hasMore, @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) this.nextCursor}): _comments = comments,super._();
   factory _CommentPaginationModel.fromJson(Map<String, dynamic> json) => _$CommentPaginationModelFromJson(json);
@@ -308,6 +432,86 @@ $CommentCursorModelCopyWith<$Res>? get nextCursor {
     return _then(_self.copyWith(nextCursor: value));
   });
 }
+=======
+  factory _$CommentPaginationModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CommentPaginationModelImplFromJson(json);
+
+  final List<CommentModel> _comments;
+  @override
+  List<CommentModel> get comments {
+    if (_comments is EqualUnmodifiableListView) return _comments;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_comments);
+  }
+
+  @override
+  final bool hasMore;
+  @override
+  @JsonKey(fromJson: _commentCursorFromJson, toJson: _commentCursorToJson)
+  final CommentCursor? nextCursor;
+
+  @override
+  String toString() {
+    return 'CommentPaginationModel(comments: $comments, hasMore: $hasMore, nextCursor: $nextCursor)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CommentPaginationModelImpl &&
+            const DeepCollectionEquality().equals(other._comments, _comments) &&
+            (identical(other.hasMore, hasMore) || other.hasMore == hasMore) &&
+            (identical(other.nextCursor, nextCursor) ||
+                other.nextCursor == nextCursor));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_comments), hasMore, nextCursor);
+
+  /// Create a copy of CommentPaginationModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CommentPaginationModelImplCopyWith<_$CommentPaginationModelImpl>
+      get copyWith => __$$CommentPaginationModelImplCopyWithImpl<
+          _$CommentPaginationModelImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$CommentPaginationModelImplToJson(
+      this,
+    );
+  }
+>>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
 }
 
-// dart format on
+abstract class _CommentPaginationModel extends CommentPaginationModel {
+  const factory _CommentPaginationModel(
+      {required final List<CommentModel> comments,
+      required final bool hasMore,
+      @JsonKey(fromJson: _commentCursorFromJson, toJson: _commentCursorToJson)
+      final CommentCursor? nextCursor}) = _$CommentPaginationModelImpl;
+  const _CommentPaginationModel._() : super._();
+
+  factory _CommentPaginationModel.fromJson(Map<String, dynamic> json) =
+      _$CommentPaginationModelImpl.fromJson;
+
+  @override
+  List<CommentModel> get comments;
+  @override
+  bool get hasMore;
+  @override
+  @JsonKey(fromJson: _commentCursorFromJson, toJson: _commentCursorToJson)
+  CommentCursor? get nextCursor;
+
+  /// Create a copy of CommentPaginationModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CommentPaginationModelImplCopyWith<_$CommentPaginationModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}

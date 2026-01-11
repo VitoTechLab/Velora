@@ -409,7 +409,7 @@ class _NotificationSection extends StatelessWidget {
                 height: 0,
                 indent: tiles[i].icon != null ? 72 : 16,
                 endIndent: 16,
-                color: colorScheme.outlineVariant.withOpacity(0.4),
+                color: colorScheme.outlineVariant.withValues(alpha: 0.4),
               ),
           ],
         ],

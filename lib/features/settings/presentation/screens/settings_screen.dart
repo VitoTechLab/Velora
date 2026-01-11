@@ -94,16 +94,6 @@ class SettingScreen extends StatelessWidget {
                             AppRouteName.settingsActivity,
                           ),
                         ),
-                        SettingsTileData(
-                          title: t.settingsTileLoggingTitle,
-                          subtitle: t.settingsTileLoggingSubtitle,
-                          icon: Icons.phonelink_lock_rounded,
-                          iconColor: const Color(0xFF3B82F6),
-                          onTap: () => _openNamed(
-                            context,
-                            AppRouteName.settingsAccountStatus,
-                          ),
-                        ),
                       ],
                     ),
                     SettingsSectionCard(
@@ -147,6 +137,11 @@ class SettingScreen extends StatelessWidget {
                             AppRouteName.settingsActivity,
                           ),
                         ),
+                      ],
+                    ),
+                    SettingsSectionCard(
+                      title: t.settingsWalletTitle,
+                      tiles: [
                         SettingsTileData(
                           title: t.settingsTileVeloraPayTitle,
                           subtitle: t.settingsTileVeloraPaySubtitle,
@@ -154,7 +149,7 @@ class SettingScreen extends StatelessWidget {
                           iconColor: const Color(0xFF00BCD4),
                           onTap: () => _openNamed(
                             context,
-                            AppRouteName.settingsMyDonation,
+                            AppRouteName.settingsWalletDashboard,
                           ),
                         ),
                       ],
@@ -377,40 +372,49 @@ class _AccountHeroCardState extends State<_AccountHeroCard> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: colorScheme.surface.withValues(alpha: 0.8),
-                    borderRadius: BorderRadius.circular(20),
+                InkWell(
+                  onTap: () => context.pushNamed(
+                    AppRouteName.settingsAccountType,
                   ),
-                  child: Row(
-                    children: [
-                      Icon(Icons.lock_clock, color: colorScheme.primary),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              t.settingsHeroPasswordUpdated,
-                              style: theme.textTheme.bodyMedium?.copyWith(
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            Text(
-                              t.settingsHeroPasswordSubtitle,
-                              style: theme.textTheme.bodySmall?.copyWith(
-                                color: colorScheme.onSurfaceVariant,
-                              ),
-                            ),
-                          ],
+                  borderRadius: BorderRadius.circular(20),
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: colorScheme.surface.withValues(alpha: 0.8),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.account_circle_outlined,
+                          color: colorScheme.primary,
                         ),
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(t.settingsHeroReviewButton),
-                      ),
-                    ],
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                t.settingsHeroAccountType,
+                                style: theme.textTheme.bodyMedium?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Text(
+                                t.settingsHeroAccountTypeSubtitle,
+                                style: theme.textTheme.bodySmall?.copyWith(
+                                  color: colorScheme.onSurfaceVariant,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Icon(
+                          Icons.chevron_right,
+                          color: colorScheme.onSurfaceVariant,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

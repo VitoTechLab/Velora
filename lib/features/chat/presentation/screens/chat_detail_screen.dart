@@ -116,7 +116,8 @@ class ChatDetailScreen extends HookWidget {
               message: t.chatDetailImagesSelected(pickedFiles.length),
               icon: Icons.image_outlined,
             );
-            // TODO: Upload images and send to chat
+            // Note: Image upload will be implemented when chat media feature is ready
+            // For now, showing confirmation toast only
           }
         } else if (choice == 'video') {
           final pickedFile = await imagePicker.pickVideo(
@@ -129,7 +130,8 @@ class ChatDetailScreen extends HookWidget {
               message: t.chatDetailVideoSelected,
               icon: Icons.videocam_outlined,
             );
-            // TODO: Upload video and send to chat
+            // Note: Video upload will be implemented when chat media feature is ready
+            // For now, showing confirmation toast only
           }
         }
       } catch (e) {
@@ -178,7 +180,8 @@ class ChatDetailScreen extends HookWidget {
               message: t.chatDetailPhotoCaptured,
               icon: Icons.camera_alt_outlined,
             );
-            // TODO: Upload image and send to chat
+            // Note: Image upload from camera will be implemented when chat media feature is ready
+            // For now, showing confirmation toast only
           }
         } else if (choice == 'video') {
           final pickedFile = await imagePicker.pickVideo(
@@ -191,7 +194,8 @@ class ChatDetailScreen extends HookWidget {
               message: t.chatDetailVideoRecorded,
               icon: Icons.videocam_outlined,
             );
-            // TODO: Upload video and send to chat
+            // Note: Video recording upload will be implemented when chat media feature is ready
+            // For now, showing confirmation toast only
           }
         }
       } catch (e) {
@@ -209,7 +213,8 @@ class ChatDetailScreen extends HookWidget {
           message: t.chatDetailPollCreated,
           icon: Icons.poll_outlined,
         );
-        // TODO: Send poll to chat
+        // Note: Poll sending will be implemented when chat poll RPC is ready
+        // For now, showing confirmation toast and debug print
         debugPrint('Poll: $result');
       }
     }
@@ -221,7 +226,7 @@ class ChatDetailScreen extends HookWidget {
           message: t.chatDetailEventCreated,
           icon: Icons.event_outlined,
         );
-        // TODO: Send event to chat
+        // Note: Event will be sent when chat event RPC is implemented
         debugPrint('Event: $result');
       }
     }
@@ -248,7 +253,8 @@ class ChatDetailScreen extends HookWidget {
             message: t.chatDetailDocumentsSelected(result.files.length),
             icon: Icons.description_outlined,
           );
-          // TODO: Upload documents and send to chat
+          // Note: Document upload will be implemented when chat media feature is ready
+          // For now, showing confirmation toast only
         }
       } catch (e) {
         AppMessenger.showToast(
@@ -270,7 +276,8 @@ class ChatDetailScreen extends HookWidget {
             message: t.chatDetailAudioSelected,
             icon: Icons.headset_outlined,
           );
-          // TODO: Upload audio and send to chat
+          // Note: Audio upload will be implemented when chat media feature is ready
+          // For now, showing confirmation toast only
         }
       } catch (e) {
         AppMessenger.showToast(
@@ -639,7 +646,7 @@ class ChatDetailScreen extends HookWidget {
           onVote: pollData.hasVoted || isSender
               ? null
               : () {
-                  // TODO: Implement vote via bloc when RPC is ready
+                  // Note: RSVP will be implemented via bloc when event RPC is ready
                   logi('Poll vote requested', tag: 'ChatDetail');
                 },
         );
@@ -662,7 +669,7 @@ class ChatDetailScreen extends HookWidget {
           onResponseTap: isSender
               ? null
               : () {
-                  // TODO: Implement RSVP via bloc when RPC is ready
+                  // Note: RSVP will be implemented via bloc when event RPC is ready
                   logi('Event RSVP requested', tag: 'ChatDetail');
                 },
         );

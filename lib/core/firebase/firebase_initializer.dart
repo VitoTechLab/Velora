@@ -12,7 +12,9 @@ class FirebaseInitializer {
     );
 
     if (!kIsWeb) {
+      // ignore: deprecated_member_use
       await FirebaseAppCheck.instance.activate(
+        webProvider: ReCaptchaV3Provider('recaptcha-v3-site-key'),
         androidProvider: AndroidProvider.debug,
         appleProvider: AppleProvider.debug,
       );

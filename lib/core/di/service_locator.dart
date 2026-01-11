@@ -573,6 +573,11 @@ Future<void> configureDependencies() async {
     ),
   );
 
+  // Settings feature - Bloc (global singleton)
+  if (!getIt.isRegistered<SettingsBloc>()) {
+    getIt.registerLazySingleton<SettingsBloc>(() => SettingsBloc());
+  }
+
   // Auth feature - Bloc (global)
   if (!getIt.isRegistered<AuthBloc>()) {
     getIt.registerLazySingleton<AuthBloc>(

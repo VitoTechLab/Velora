@@ -10,11 +10,7 @@ import 'package:velora/features/auth/presentation/screens/signup_screen.dart';
 
 class _MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {
   @override
-  void clearMessages() => super.noSuchMethod(
-    Invocation.method(#clearMessages, const []),
-    returnValue: null,
-    returnValueForMissingStub: null,
-  );
+  void clearMessages() {}
 }
 
 void main() {
@@ -22,9 +18,14 @@ void main() {
 
   Finder textFieldByLabel(String label) {
     return find.byWidgetPredicate(
-      (widget) =>
-          widget is TextFormField && widget.decoration?.labelText == label,
-      description: 'TextFormField with label $label',
+      (widget) {
+        if (widget is TextField) {
+          final decoration = widget.decoration;
+          return decoration?.labelText == label;
+        }
+        return false;
+      },
+      description: 'TextField with label $label',
     );
   }
 

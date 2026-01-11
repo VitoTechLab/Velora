@@ -1,5 +1,4 @@
-import 'package:gotrue/src/types/auth_exception.dart';
-import 'package:gotrue/src/types/error_code.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'failure.dart';
 

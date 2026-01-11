@@ -14,11 +14,11 @@ class _MockCreatePost extends Mock implements CreatePost {}
 void main() {
   late _MockCreatePost createPost;
 
-  const createdPost = FeedEntity(
+  final createdPost = FeedEntity(
     id: 'post-1',
     userId: 'user-1',
     content: 'Hello world',
-    createdAt: DateTime(2024, 1, 1),
+    createdAt: DateTime.utc(2024, 1, 1),
   );
 
   setUp(() {
@@ -68,16 +68,15 @@ void main() {
             hideLikesList: any(named: 'hideLikesList'),
             campaignId: any(named: 'campaignId'),
             campaignTitle: any(named: 'campaignTitle'),
-            metadata: any(named: 'metadata'),
           ),
-        ).thenAnswer((_) async => const Right(createdPost));
+        ).thenAnswer((_) async => Right(createdPost));
         return buildBloc();
       },
       act: (bloc) => bloc.add(
         const PostEvent.createPost(userId: 'user-1', content: 'Hello world'),
       ),
-      expect: () => const [
-        PostState(isCreatingPost: true),
+      expect: () => [
+        const PostState(isCreatingPost: true),
         PostState(
           isCreatingPost: false,
           createdPost: createdPost,
@@ -102,7 +101,6 @@ void main() {
             hideLikesList: any(named: 'hideLikesList'),
             campaignId: any(named: 'campaignId'),
             campaignTitle: any(named: 'campaignTitle'),
-            metadata: any(named: 'metadata'),
           ),
         ).thenAnswer((_) async => Left(Failure('network')));
         return buildBloc();

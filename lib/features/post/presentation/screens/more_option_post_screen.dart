@@ -231,7 +231,7 @@ class MoreOptionPostScreen extends HookWidget {
             Switch(
               value: value,
               onChanged: onChanged,
-              activeThumbColor: colorScheme.primary,
+              activeColor: colorScheme.primary,
             ),
           ],
         ),

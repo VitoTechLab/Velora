@@ -33,10 +33,10 @@ class _MockDeletePost extends Mock implements DeletePost {}
 void main() {
   setUpAll(() {
     registerFallbackValue(
-      const FeedCursorEntity(createdAt: DateTime(2000), id: 'cursor'),
+      FeedCursorEntity(createdAt: DateTime(2000), id: 'cursor'),
     );
     registerFallbackValue(
-      const FeedEntity(
+      FeedEntity(
         id: 'fallback',
         userId: 'user',
         content: '',
@@ -52,7 +52,7 @@ void main() {
   late _MockUpdatePost updatePost;
   late _MockDeletePost deletePost;
 
-  const post = FeedEntity(
+  final post = FeedEntity(
     id: 'post-1',
     userId: 'user-1',
     content: 'Hello feed',
@@ -88,13 +88,13 @@ void main() {
       build: () {
         when(() => loadInitialFeed(limit: any(named: 'limit'))).thenAnswer(
           (_) async =>
-              const Right(FeedPaginationResult(posts: [post], hasMore: true)),
+              Right(FeedPaginationResult(posts: [post], hasMore: true)),
         );
         return buildBloc();
       },
       act: (bloc) => bloc.add(const FeedEvent.loadInitialFeed(limit: 10)),
-      expect: () => const [
-        FeedState(isLoadingInitial: true),
+      expect: () => [
+        const FeedState(isLoadingInitial: true),
         FeedState(posts: [post], hasMore: true, isLoadingInitial: false),
       ],
     );
@@ -120,7 +120,7 @@ void main() {
       'appends posts on success',
       build: () {
         when(() => loadInitialFeed(limit: any(named: 'limit'))).thenAnswer(
-          (_) async => const Right(
+          (_) async => Right(
             FeedPaginationResult(
               posts: [post],
               hasMore: true,
@@ -137,7 +137,7 @@ void main() {
             limit: any(named: 'limit'),
           ),
         ).thenAnswer(
-          (_) async => const Right(
+          (_) async => Right(
             FeedPaginationResult(
               posts: [
                 FeedEntity(
@@ -160,7 +160,7 @@ void main() {
       },
       skip: 2,
       expect: () => [
-        const FeedState(
+        FeedState(
           posts: [post],
           hasMore: true,
           cursor: FeedCursorEntity(
@@ -169,7 +169,7 @@ void main() {
           ),
           isLoadingInitial: false,
         ),
-        const FeedState(
+        FeedState(
           posts: [
             post,
             FeedEntity(
@@ -196,10 +196,10 @@ void main() {
         ).thenAnswer((_) async => const Right(null));
         return buildBloc();
       },
-      seed: () => const FeedState(posts: [post]),
+      seed: () => FeedState(posts: [post]),
       act: (bloc) => bloc.add(const FeedEvent.toggleLikePost('post-1')),
       expect: () => [
-        const FeedState(
+        FeedState(
           posts: [
             FeedEntity(
               id: 'post-1',
@@ -224,10 +224,10 @@ void main() {
         when(() => updatePost(any())).thenAnswer((_) async => Right(updated));
         return buildBloc();
       },
-      seed: () => const FeedState(posts: [post]),
-      act: (bloc) => bloc.add(const FeedEvent.updatePostEntity(post: post)),
+      seed: () => FeedState(posts: [post]),
+      act: (bloc) => bloc.add(FeedEvent.updatePostEntity(post: post)),
       expect: () => [
-        const FeedState(posts: [post], isUpdatingPost: true, updatedPost: null),
+        FeedState(posts: [post], isUpdatingPost: true, updatedPost: null),
         FeedState(
           posts: [updated],
           isUpdatingPost: false,
@@ -248,9 +248,9 @@ void main() {
         ).thenAnswer((_) async => Left(Failure('Update failed')));
         return buildBloc();
       },
-      seed: () => const FeedState(posts: [post]),
-      act: (bloc) => bloc.add(const FeedEvent.updatePostEntity(post: post)),
-      expect: () => const [
+      seed: () => FeedState(posts: [post]),
+      act: (bloc) => bloc.add(FeedEvent.updatePostEntity(post: post)),
+      expect: () => [
         FeedState(posts: [post], isUpdatingPost: true, updatedPost: null),
         FeedState(
           posts: [post],
@@ -270,11 +270,11 @@ void main() {
         ).thenAnswer((_) async => const Right(null));
         return buildBloc();
       },
-      seed: () => const FeedState(posts: [post]),
+      seed: () => FeedState(posts: [post]),
       act: (bloc) => bloc.add(const FeedEvent.deletePost(postId: 'post-1')),
-      expect: () => const [
+      expect: () => [
         FeedState(posts: [post], isDeletingPost: true),
-        FeedState(posts: [], isDeletingPost: false, message: 'Post deleted'),
+        const FeedState(posts: [], isDeletingPost: false, message: 'Post deleted'),
       ],
     );
 
@@ -286,9 +286,9 @@ void main() {
         ).thenAnswer((_) async => Left(Failure('Delete failed')));
         return buildBloc();
       },
-      seed: () => const FeedState(posts: [post]),
+      seed: () => FeedState(posts: [post]),
       act: (bloc) => bloc.add(const FeedEvent.deletePost(postId: 'post-1')),
-      expect: () => const [
+      expect: () => [
         FeedState(posts: [post], isDeletingPost: true),
         FeedState(
           posts: [post],
@@ -311,10 +311,10 @@ void main() {
         );
         return buildBloc();
       },
-      seed: () => const FeedState(posts: [post]),
+      seed: () => FeedState(posts: [post]),
       act: (bloc) => bloc.add(const FeedEvent.refreshFeed()),
       expect: () => [
-        const FeedState(posts: [post], isRefreshing: true),
+        FeedState(posts: [post], isRefreshing: true),
         FeedState(
           posts: [refreshed],
           hasMore: false,
@@ -334,9 +334,9 @@ void main() {
         ).thenAnswer((_) async => const Right(null));
         return buildBloc();
       },
-      seed: () => const FeedState(posts: [post]),
+      seed: () => FeedState(posts: [post]),
       act: (bloc) => bloc.add(const FeedEvent.toggleBookmarkPost('post-1')),
-      expect: () => const [
+      expect: () => [
         FeedState(
           posts: [
             FeedEntity(

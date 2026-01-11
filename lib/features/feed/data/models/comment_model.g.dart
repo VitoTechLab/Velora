@@ -6,8 +6,8 @@ part of 'comment_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_CommentModel _$CommentModelFromJson(Map<String, dynamic> json) =>
-    _CommentModel(
+_$CommentModelImpl _$$CommentModelImplFromJson(Map<String, dynamic> json) =>
+    _$CommentModelImpl(
       id: json['id'] as String,
       postId: json['post_id'] as String,
       userId: json['user_id'] as String,
@@ -21,7 +21,7 @@ _CommentModel _$CommentModelFromJson(Map<String, dynamic> json) =>
       replyCount: (json['reply_count'] as num?)?.toInt() ?? 0,
     );
 
-Map<String, dynamic> _$CommentModelToJson(_CommentModel instance) =>
+Map<String, dynamic> _$$CommentModelImplToJson(_$CommentModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'post_id': instance.postId,

@@ -446,7 +446,33 @@ class FeedCard extends HookWidget {
         child: InkWell(
           onTap: () {
             if (post.campaignId != null) {
-              // TODO: Navigate to campaign detail screen
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Scaffold(
+                    appBar: AppBar(
+                      title: const Text('Campaign Detail'),
+                    ),
+                    body: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            campaignTitle,
+                            style: textTheme.headlineSmall,
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 16),
+                          Text(
+                            'Campaign ID: ${post.campaignId}',
+                            style: textTheme.bodyMedium,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              );
             }
           },
           child: Container(

@@ -9,16 +9,22 @@ import 'package:velora/features/post/domain/usecases/create_post.dart';
 
 class _MockPostRepository extends Mock implements PostRepository {}
 
+class _FakeCreatePostEntity extends Fake implements CreatePostEntity {}
+
 void main() {
   late _MockPostRepository repository;
   late CreatePost usecase;
 
-  const feed = FeedEntity(
+  final feed = FeedEntity(
     id: 'post-1',
     userId: 'user-1',
     content: 'Caption',
-    createdAt: DateTime(2024, 1, 1),
+    createdAt: DateTime.utc(2024, 1, 1),
   );
+
+  setUpAll(() {
+    registerFallbackValue(_FakeCreatePostEntity());
+  });
 
   setUp(() {
     repository = _MockPostRepository();
@@ -28,21 +34,19 @@ void main() {
   test('delegates to repository with built entity', () async {
     when(
       () => repository.createPost(post: any(named: 'post')),
-    ).thenAnswer((_) async => const Right(feed));
+    ).thenAnswer((_) async => Right(feed));
 
     final result = await usecase(
       userId: 'user-1',
       content: 'Caption',
-      metadata: {'mood': 'upbeat'},
     );
 
-    expect(result, equals(const Right(feed)));
+    expect(result, equals(Right(feed)));
     verify(
       () => repository.createPost(
-        post: CreatePostEntity(
+        post: const CreatePostEntity(
           userId: 'user-1',
           content: 'Caption',
-          metadata: {'mood': 'upbeat'},
         ),
       ),
     ).called(1);

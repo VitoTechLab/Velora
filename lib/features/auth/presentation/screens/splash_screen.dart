@@ -91,9 +91,9 @@ class _SplashScreenState extends State<SplashScreen>
                     const Color(0xFF0F3460),
                   ]
                 : [
-                    colorScheme.primary.withOpacity(0.1),
-                    colorScheme.secondary.withOpacity(0.1),
-                    colorScheme.tertiary.withOpacity(0.1),
+                    colorScheme.primary.withValues(alpha: 0.1),
+                    colorScheme.secondary.withValues(alpha: 0.1),
+                    colorScheme.tertiary.withValues(alpha: 0.1),
                   ],
           ),
         ),
@@ -114,7 +114,7 @@ class _SplashScreenState extends State<SplashScreen>
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: colorScheme.primary.withOpacity(0.1),
+                          color: colorScheme.primary.withValues(alpha: 0.1),
                           width: 2,
                         ),
                       ),
@@ -137,7 +137,7 @@ class _SplashScreenState extends State<SplashScreen>
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: colorScheme.secondary.withOpacity(0.1),
+                          color: colorScheme.secondary.withValues(alpha: 0.1),
                           width: 2,
                         ),
                       ),
@@ -170,7 +170,7 @@ class _SplashScreenState extends State<SplashScreen>
                         borderRadius: BorderRadius.circular(30),
                         boxShadow: [
                           BoxShadow(
-                            color: colorScheme.primary.withOpacity(0.3),
+                            color: colorScheme.primary.withValues(alpha: 0.3),
                             blurRadius: 30,
                             spreadRadius: 5,
                           ),
@@ -185,7 +185,7 @@ class _SplashScreenState extends State<SplashScreen>
                             color: Colors.white,
                             shadows: [
                               Shadow(
-                                color: Colors.black.withOpacity(0.3),
+                                color: Colors.black.withValues(alpha: 0.3),
                                 offset: const Offset(0, 2),
                                 blurRadius: 4,
                               ),
@@ -214,7 +214,7 @@ class _SplashScreenState extends State<SplashScreen>
                         Text(
                           'Share Your Moments',
                           style: theme.textTheme.bodyMedium?.copyWith(
-                            color: colorScheme.onSurface.withOpacity(0.6),
+                            color: colorScheme.onSurface.withValues(alpha: 0.6),
                             letterSpacing: 2,
                           ),
                         ),
@@ -252,7 +252,7 @@ class _SplashScreenState extends State<SplashScreen>
                   child: Text(
                     'VitoTechLab © 2026',
                     style: theme.textTheme.bodySmall?.copyWith(
-                      color: colorScheme.onSurface.withOpacity(0.4),
+                      color: colorScheme.onSurface.withValues(alpha: 0.4),
                       letterSpacing: 1.5,
                     ),
                   ),

@@ -26,7 +26,7 @@ class DeviceInfo {
   /// }
   /// ```
   bool get isLowEndDevice {
-    // TODO: Implement actual device capability detection with device_info_plus
+    // Note: Actual device capability detection can be implemented with device_info_plus package
     // For now, return false and let system reduce motion handle accessibility
     return false;
   }

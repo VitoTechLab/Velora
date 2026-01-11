@@ -6,8 +6,9 @@ part of 'update_feed_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_UpdateFeedModel _$UpdateFeedModelFromJson(Map<String, dynamic> json) =>
-    _UpdateFeedModel(
+_$UpdateFeedModelImpl _$$UpdateFeedModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$UpdateFeedModelImpl(
       content: json['content'] as String?,
       imageUrls: const StringListConverter().fromJson(json['image_urls']),
       videoUrls: const StringListConverter().fromJson(json['video_urls']),
@@ -20,27 +21,30 @@ _UpdateFeedModel _$UpdateFeedModelFromJson(Map<String, dynamic> json) =>
       campaignTitle: json['campaign_title'] as String?,
     );
 
-Map<String, dynamic> _$UpdateFeedModelToJson(_UpdateFeedModel instance) =>
+Map<String, dynamic> _$$UpdateFeedModelImplToJson(
+        _$UpdateFeedModelImpl instance) =>
     <String, dynamic>{
-      'content': ?instance.content,
-      'image_urls': ?_$JsonConverterToJson<Object?, List<String>>(
-        instance.imageUrls,
-        const StringListConverter().toJson,
-      ),
-      'video_urls': ?_$JsonConverterToJson<Object?, List<String>>(
-        instance.videoUrls,
-        const StringListConverter().toJson,
-      ),
-      'comments_enabled': ?instance.commentsEnabled,
-      'hide_like_count': ?instance.hideLikeCount,
-      'hide_comment_count': ?instance.hideCommentCount,
-      'hide_share_count': ?instance.hideShareCount,
-      'hide_likes_list': ?instance.hideLikesList,
-      'campaign_id': ?instance.campaignId,
-      'campaign_title': ?instance.campaignTitle,
+      if (instance.content case final value?) 'content': value,
+      if (_$JsonConverterToJson<Object?, List<String>>(
+              instance.imageUrls, const StringListConverter().toJson)
+          case final value?)
+        'image_urls': value,
+      if (_$JsonConverterToJson<Object?, List<String>>(
+              instance.videoUrls, const StringListConverter().toJson)
+          case final value?)
+        'video_urls': value,
+      if (instance.commentsEnabled case final value?) 'comments_enabled': value,
+      if (instance.hideLikeCount case final value?) 'hide_like_count': value,
+      if (instance.hideCommentCount case final value?)
+        'hide_comment_count': value,
+      if (instance.hideShareCount case final value?) 'hide_share_count': value,
+      if (instance.hideLikesList case final value?) 'hide_likes_list': value,
+      if (instance.campaignId case final value?) 'campaign_id': value,
+      if (instance.campaignTitle case final value?) 'campaign_title': value,
     };
 
 Json? _$JsonConverterToJson<Json, Value>(
   Value? value,
   Json? Function(Value value) toJson,
-) => value == null ? null : toJson(value);
+) =>
+    value == null ? null : toJson(value);

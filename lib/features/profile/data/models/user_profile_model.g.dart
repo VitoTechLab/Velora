@@ -6,17 +6,17 @@ part of 'user_profile_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_UserProfileModel _$UserProfileModelFromJson(Map<String, dynamic> json) =>
-    _UserProfileModel(
+_$UserProfileModelImpl _$$UserProfileModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$UserProfileModelImpl(
       id: json['id'] as String,
       email: json['email'] as String,
       username: json['username'] as String,
       fullName: json['full_name'] as String?,
       avatarUrl: json['avatar_url'] as String?,
       bio: json['bio'] as String?,
-      dateOfBirth: const NullableUtcDateTimeConverter().fromJson(
-        json['date_of_birth'],
-      ),
+      dateOfBirth:
+          const NullableUtcDateTimeConverter().fromJson(json['date_of_birth']),
       gender: $enumDecodeNullable(_$UserGenderEnumMap, json['gender']),
       isOrganization: json['is_organization'] as bool? ?? false,
       organizationName: json['organization_name'] as String?,
@@ -37,7 +37,8 @@ _UserProfileModel _$UserProfileModelFromJson(Map<String, dynamic> json) =>
       theyBlockedMe: json['they_blocked_me'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$UserProfileModelToJson(_UserProfileModel instance) =>
+Map<String, dynamic> _$$UserProfileModelImplToJson(
+        _$UserProfileModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'email': instance.email,
@@ -45,9 +46,8 @@ Map<String, dynamic> _$UserProfileModelToJson(_UserProfileModel instance) =>
       'full_name': instance.fullName,
       'avatar_url': instance.avatarUrl,
       'bio': instance.bio,
-      'date_of_birth': const NullableUtcDateTimeConverter().toJson(
-        instance.dateOfBirth,
-      ),
+      'date_of_birth':
+          const NullableUtcDateTimeConverter().toJson(instance.dateOfBirth),
       'gender': _$UserGenderEnumMap[instance.gender],
       'is_organization': instance.isOrganization,
       'organization_name': instance.organizationName,

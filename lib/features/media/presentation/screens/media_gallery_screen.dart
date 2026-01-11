@@ -184,7 +184,7 @@ class MediaGalleryScreen extends HookWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.3),
+            color: Colors.black.withValues(alpha: 0.3),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
@@ -227,7 +227,7 @@ class MediaGalleryScreen extends HookWidget {
                         begin: Alignment.bottomCenter,
                         end: Alignment.topCenter,
                         colors: [
-                          Colors.black.withOpacity(0.7),
+                          Colors.black.withValues(alpha: 0.7),
                           Colors.transparent,
                         ],
                       ),
@@ -249,7 +249,7 @@ class MediaGalleryScreen extends HookWidget {
                       width: 36,
                       height: 36,
                       decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.6),
+                        color: Colors.black.withValues(alpha: 0.6),
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(
@@ -280,8 +280,8 @@ class MediaGalleryScreen extends HookWidget {
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
-                          color: MaterialColorsCustom.brandSeafoam.withOpacity(
-                            0.4,
+                          color: MaterialColorsCustom.brandSeafoam.withValues(
+                            alpha: 0.4,
                           ),
                           blurRadius: 8,
                           offset: const Offset(0, 2),
@@ -396,7 +396,7 @@ class MediaGalleryScreen extends HookWidget {
                 if (isSelected)
                   Positioned.fill(
                     child: Container(
-                      color: MaterialColorsCustom.brandSeafoam.withOpacity(0.2),
+                      color: MaterialColorsCustom.brandSeafoam.withValues(alpha: 0.2),
                     ),
                   ),
 
@@ -445,6 +445,6 @@ class MediaGalleryScreen extends HookWidget {
     padding: const EdgeInsets.all(4),
     physics: const NeverScrollableScrollPhysics(),
     itemCount: 21,
-    itemBuilder: (_, _) => const MediaSkeletonTile(),
+    itemBuilder: (_, __) => const MediaSkeletonTile(),
   );
 }

@@ -112,7 +112,7 @@ class ChatScreen extends HookWidget {
                                 'Search',
                                 style: textTheme.bodyMedium?.copyWith(
                                   color: colorScheme.onSurfaceVariant
-                                      .withOpacity(0.6),
+                                      .withValues(alpha: 0.6),
                                 ),
                               ),
                             ],

@@ -6,8 +6,9 @@ part of 'media_asset_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_MediaAssetModel _$MediaAssetModelFromJson(Map<String, dynamic> json) =>
-    _MediaAssetModel(
+_$MediaAssetModelImpl _$$MediaAssetModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$MediaAssetModelImpl(
       publicId: json['public_id'] as String,
       secureUrl: json['secure_url'] as String,
       resourceType: json['resource_type'] as String,
@@ -17,7 +18,8 @@ _MediaAssetModel _$MediaAssetModelFromJson(Map<String, dynamic> json) =>
       height: (json['height'] as num).toInt(),
     );
 
-Map<String, dynamic> _$MediaAssetModelToJson(_MediaAssetModel instance) =>
+Map<String, dynamic> _$$MediaAssetModelImplToJson(
+        _$MediaAssetModelImpl instance) =>
     <String, dynamic>{
       'public_id': instance.publicId,
       'secure_url': instance.secureUrl,

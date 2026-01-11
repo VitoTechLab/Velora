@@ -842,6 +842,18 @@ abstract class AppLocalizations {
   /// **'Review devices and login approvals'**
   String get settingsTileLoggingSubtitle;
 
+  /// No description provided for @settingsTileAccountStatusTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Account Status'**
+  String get settingsTileAccountStatusTitle;
+
+  /// No description provided for @settingsTileAccountStatusSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'View verification status and account activity'**
+  String get settingsTileAccountStatusSubtitle;
+
   /// No description provided for @settingsAccountTitle.
   ///
   /// In en, this message translates to:
@@ -907,6 +919,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Payment methods and protections'**
   String get settingsTileVeloraPaySubtitle;
+
+  /// No description provided for @settingsWalletTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet'**
+  String get settingsWalletTitle;
+
+  /// No description provided for @walletDashboardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet Dashboard'**
+  String get walletDashboardTitle;
+
+  /// No description provided for @walletDashboardWalletId.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet ID: #VLR2024001'**
+  String get walletDashboardWalletId;
+
+  /// No description provided for @walletDashboardTotalBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Balance'**
+  String get walletDashboardTotalBalance;
+
+  /// No description provided for @walletDashboardQuickActions.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Actions'**
+  String get walletDashboardQuickActions;
+
+  /// No description provided for @walletDashboardDonationHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Donation History'**
+  String get walletDashboardDonationHistory;
+
+  /// No description provided for @walletDashboardDonationHistorySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'View all your donation transactions'**
+  String get walletDashboardDonationHistorySubtitle;
+
+  /// No description provided for @walletDashboardMyCampaigns.
+  ///
+  /// In en, this message translates to:
+  /// **'My Campaigns'**
+  String get walletDashboardMyCampaigns;
+
+  /// No description provided for @walletDashboardMyCampaignsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage your fundraising campaigns'**
+  String get walletDashboardMyCampaignsSubtitle;
+
+  /// No description provided for @walletDashboardMyDonations.
+  ///
+  /// In en, this message translates to:
+  /// **'My Donations'**
+  String get walletDashboardMyDonations;
+
+  /// No description provided for @walletDashboardMyDonationsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Track your contributions'**
+  String get walletDashboardMyDonationsSubtitle;
+
+  /// No description provided for @walletDashboardAnalytics.
+  ///
+  /// In en, this message translates to:
+  /// **'Analytics'**
+  String get walletDashboardAnalytics;
+
+  /// No description provided for @walletDashboardAnalyticsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'View insights and statistics'**
+  String get walletDashboardAnalyticsSubtitle;
+
+  /// No description provided for @walletDashboardRecentActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Activity'**
+  String get walletDashboardRecentActivity;
+
+  /// No description provided for @walletDashboardNoActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'No activity yet'**
+  String get walletDashboardNoActivity;
+
+  /// No description provided for @walletDashboardNoActivitySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your wallet transactions will appear here'**
+  String get walletDashboardNoActivitySubtitle;
+
+  /// No description provided for @walletDashboardUnderDevelopmentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Under Development'**
+  String get walletDashboardUnderDevelopmentTitle;
+
+  /// No description provided for @walletDashboardUnderDevelopmentMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This feature is currently under development and will be available soon.'**
+  String get walletDashboardUnderDevelopmentMessage;
+
+  /// No description provided for @walletDashboardUnderDevelopmentButton.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get walletDashboardUnderDevelopmentButton;
 
   /// No description provided for @settingsPersonalizationTitle.
   ///
@@ -1051,6 +1177,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Review'**
   String get settingsHeroReviewButton;
+
+  /// No description provided for @settingsHeroAccountType.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Account'**
+  String get settingsHeroAccountType;
+
+  /// No description provided for @settingsHeroAccountTypeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to view account type details'**
+  String get settingsHeroAccountTypeSubtitle;
+
+  /// No description provided for @accountTypeScreenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Account Type'**
+  String get accountTypeScreenTitle;
+
+  /// No description provided for @accountTypeScreenCurrentType.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Account Type'**
+  String get accountTypeScreenCurrentType;
+
+  /// No description provided for @accountTypeScreenPersonal.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Account'**
+  String get accountTypeScreenPersonal;
+
+  /// No description provided for @accountTypeScreenPersonalDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Perfect for individual users who want to connect with friends and family.'**
+  String get accountTypeScreenPersonalDescription;
+
+  /// No description provided for @accountTypeScreenPersonalBenefitsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Account Benefits'**
+  String get accountTypeScreenPersonalBenefitsTitle;
+
+  /// No description provided for @accountTypeScreenBenefit1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Profile'**
+  String get accountTypeScreenBenefit1Title;
+
+  /// No description provided for @accountTypeScreenBenefit1Subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Maintain your personal identity and privacy'**
+  String get accountTypeScreenBenefit1Subtitle;
+
+  /// No description provided for @accountTypeScreenBenefit2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Controls'**
+  String get accountTypeScreenBenefit2Title;
+
+  /// No description provided for @accountTypeScreenBenefit2Subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Full control over your personal data'**
+  String get accountTypeScreenBenefit2Subtitle;
+
+  /// No description provided for @accountTypeScreenBenefit3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Social Connection'**
+  String get accountTypeScreenBenefit3Title;
+
+  /// No description provided for @accountTypeScreenBenefit3Subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect with friends and family easily'**
+  String get accountTypeScreenBenefit3Subtitle;
+
+  /// No description provided for @accountTypeScreenOrganization.
+  ///
+  /// In en, this message translates to:
+  /// **'Organization Account'**
+  String get accountTypeScreenOrganization;
+
+  /// No description provided for @accountTypeScreenOrganizationDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Upgrade to organization account to access advanced business features and verification.'**
+  String get accountTypeScreenOrganizationDescription;
+
+  /// No description provided for @accountTypeScreenOrganizationBenefitsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Organization Benefits:'**
+  String get accountTypeScreenOrganizationBenefitsTitle;
+
+  /// No description provided for @accountTypeScreenOrgBenefit1.
+  ///
+  /// In en, this message translates to:
+  /// **'Verified badge for authenticity'**
+  String get accountTypeScreenOrgBenefit1;
+
+  /// No description provided for @accountTypeScreenOrgBenefit2.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced analytics and insights'**
+  String get accountTypeScreenOrgBenefit2;
+
+  /// No description provided for @accountTypeScreenOrgBenefit3.
+  ///
+  /// In en, this message translates to:
+  /// **'Promotional tools and campaigns'**
+  String get accountTypeScreenOrgBenefit3;
+
+  /// No description provided for @accountTypeScreenOrgBenefit4.
+  ///
+  /// In en, this message translates to:
+  /// **'Team collaboration features'**
+  String get accountTypeScreenOrgBenefit4;
+
+  /// No description provided for @accountTypeScreenUpgradeButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Upgrade to Organization'**
+  String get accountTypeScreenUpgradeButton;
+
+  /// No description provided for @accountTypeScreenVerificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Account Verification'**
+  String get accountTypeScreenVerificationTitle;
+
+  /// No description provided for @accountTypeScreenVerificationSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'To upgrade to organization account, please complete the verification process.'**
+  String get accountTypeScreenVerificationSubtitle;
+
+  /// No description provided for @accountTypeScreenVerificationStep1.
+  ///
+  /// In en, this message translates to:
+  /// **'ID Card Photo'**
+  String get accountTypeScreenVerificationStep1;
+
+  /// No description provided for @accountTypeScreenVerificationStep1Subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Take a clear photo of your ID card (KTP)'**
+  String get accountTypeScreenVerificationStep1Subtitle;
+
+  /// No description provided for @accountTypeScreenVerificationStep2.
+  ///
+  /// In en, this message translates to:
+  /// **'Selfie Photo'**
+  String get accountTypeScreenVerificationStep2;
+
+  /// No description provided for @accountTypeScreenVerificationStep2Subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Take a selfie holding your ID card'**
+  String get accountTypeScreenVerificationStep2Subtitle;
+
+  /// No description provided for @accountTypeScreenVerificationSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit Verification'**
+  String get accountTypeScreenVerificationSubmit;
+
+  /// No description provided for @accountTypeScreenVerificationCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get accountTypeScreenVerificationCancel;
+
+  /// No description provided for @accountTypeScreenVerificationSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification submitted successfully! We\'ll review your request within 1-3 business days.'**
+  String get accountTypeScreenVerificationSuccess;
 
   /// No description provided for @settingsSearchProfiles.
   ///
@@ -1237,6 +1543,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your name and username will no longer sync across apps. Manage synced profile pictures through Connected experiences.'**
   String get settingsProfileInfoSyncDescription;
+
+  /// No description provided for @settingsProfileAccountSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get settingsProfileAccountSectionTitle;
 
   /// No description provided for @settingsProfileAccountTypeTitle.
   ///
@@ -3811,6 +4123,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Recurring'**
   String get settingsAccountDonationsRecurringLabel;
+
+  /// No description provided for @campaignSeeMore.
+  ///
+  /// In en, this message translates to:
+  /// **'See More'**
+  String get campaignSeeMore;
+
+  /// No description provided for @campaignFeaturedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Featured Campaigns'**
+  String get campaignFeaturedTitle;
+
+  /// No description provided for @campaignEmergencyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency Fundraisers'**
+  String get campaignEmergencyTitle;
+
+  /// No description provided for @campaignSocialImpactTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Social Impact'**
+  String get campaignSocialImpactTitle;
+
+  /// No description provided for @campaignTechnologyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Technology'**
+  String get campaignTechnologyTitle;
+
+  /// No description provided for @campaignFashionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Fashion'**
+  String get campaignFashionTitle;
+
+  /// No description provided for @campaignFoodBeverageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Food & Beverage'**
+  String get campaignFoodBeverageTitle;
+
+  /// No description provided for @campaignFinanceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Finance'**
+  String get campaignFinanceTitle;
+
+  /// No description provided for @campaignMemorialTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Memorial Fundraisers'**
+  String get campaignMemorialTitle;
+
+  /// No description provided for @campaignRaisedOf.
+  ///
+  /// In en, this message translates to:
+  /// **'raised of {target}'**
+  String campaignRaisedOf(String target);
+
+  /// No description provided for @campaignEndOfList.
+  ///
+  /// In en, this message translates to:
+  /// **'No more campaigns'**
+  String get campaignEndOfList;
+
+  /// No description provided for @searchTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get searchTitle;
+
+  /// No description provided for @searchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'What do you want to find?'**
+  String get searchHint;
+
+  /// No description provided for @searchDiscoverTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover something new'**
+  String get searchDiscoverTitle;
+
+  /// No description provided for @searchBrowseAllTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Browse all'**
+  String get searchBrowseAllTitle;
 
   /// No description provided for @settingsAccountDonationsRecurringValue.
   ///
