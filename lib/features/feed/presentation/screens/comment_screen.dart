@@ -30,7 +30,7 @@ class CommentScreen {
       showCloseButton: false,
       initialChildSize: 0.7,
       minChildSize: 0.5,
-      maxChildSize: 0.95,
+      maxChildSize: 0.98,
       isDismissible: true,
       enableDrag: true,
       contentPadding: EdgeInsets.zero,

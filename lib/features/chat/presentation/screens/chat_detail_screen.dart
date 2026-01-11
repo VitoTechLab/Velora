@@ -19,6 +19,7 @@ import 'package:velora/features/chat/presentation/widgets/chat_bubble_widget.dar
 import 'package:velora/features/chat/presentation/widgets/chat_event_widget.dart';
 import 'package:velora/features/chat/presentation/widgets/chat_input_bar.dart';
 import 'package:velora/features/chat/presentation/widgets/chat_media_widget.dart';
+import 'package:velora/features/chat/presentation/widgets/chat_message_item.dart';
 import 'package:velora/features/chat/presentation/widgets/chat_poll_widget.dart';
 import 'package:velora/features/chat/presentation/widgets/date_separator_widget.dart';
 import 'package:velora/l10n/app_localizations.dart';
@@ -610,21 +611,32 @@ class ChatDetailScreen extends HookWidget {
     required AppLocalizations t,
   }) {
     final time = _formatTime(message.createdAt);
+    
+    // Get sender info for receiver messages
+    final senderName = !isSender ? (message.senderName ?? 'User') : null;
+    final senderAvatar = !isSender ? message.senderAvatarUrl : null;
+    
+    // Check online status for peer user (only in 1-on-1 chats)
+    final isOnline = !isGroup && !isSender && peerUserId != null
+        ? context.read<UserPresenceBloc>().state.onlineUsers[peerUserId] ?? false
+        : false;
 
+    Widget messageWidget;
     switch (message.kind) {
       case 'text':
-        return ChatBubbleWidget(
+        messageWidget = ChatBubbleWidget(
           message: message.body ?? '',
           time: time,
           isSender: isSender,
           isRead: true,
         );
+        break;
 
       case 'media':
       case 'image':
       case 'video':
         final mediaUrl = message.mediaUrl ?? '';
-        return ChatMediaWidget(
+        messageWidget = ChatMediaWidget(
           mediaUrls: mediaUrl.isNotEmpty ? [mediaUrl] : [],
           caption: message.body,
           time: time,
@@ -632,11 +644,12 @@ class ChatDetailScreen extends HookWidget {
           isRead: true,
           isVideo: message.kind == 'video',
         );
+        break;
 
       case 'poll':
         final currentUserId = Supabase.instance.client.auth.currentUser?.id;
         final pollData = _parsePollData(message.metadata, currentUserId);
-        return ChatPollWidget(
+        messageWidget = ChatPollWidget(
           question: pollData.question,
           options: pollData.options,
           time: time,
@@ -650,11 +663,12 @@ class ChatDetailScreen extends HookWidget {
                   logi('Poll vote requested', tag: 'ChatDetail');
                 },
         );
+        break;
 
       case 'event':
         final currentUserId = Supabase.instance.client.auth.currentUser?.id;
         final eventData = _parseEventData(message.metadata, currentUserId);
-        return ChatEventWidget(
+        messageWidget = ChatEventWidget(
           title: eventData.title,
           description: eventData.description,
           location: eventData.location,
@@ -673,15 +687,26 @@ class ChatDetailScreen extends HookWidget {
                   logi('Event RSVP requested', tag: 'ChatDetail');
                 },
         );
+        break;
 
       default:
-        return ChatBubbleWidget(
+        messageWidget = ChatBubbleWidget(
           message: message.body ?? t.chatDetailMessageDeleted,
           time: time,
           isSender: isSender,
           isRead: true,
         );
+        break;
     }
+
+    // Wrap with ChatMessageItem to show avatar + username
+    return ChatMessageItem(
+      isSender: isSender,
+      avatarUrl: senderAvatar,
+      username: senderName,
+      isOnline: isOnline,
+      child: messageWidget,
+    );
   }
 
   // ==========================================================================

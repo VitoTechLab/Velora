@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:velora/core/config/admob_config.dart';
 import 'package:velora/core/constants/short_en_message.dart';
@@ -20,6 +21,14 @@ class AppBootstrapper {
 
   static Future<void> initializeCore() async {
     WidgetsFlutterBinding.ensureInitialized();
+
+    // Load environment variables from .env file
+    try {
+      await dotenv.load(fileName: '.env.local');
+      logi('Environment variables loaded from .env.local');
+    } catch (e) {
+      logw('Failed to load .env.local, using fallback values: $e');
+    }
 
     FlutterError.onError = (details) {
       loge(

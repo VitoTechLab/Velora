@@ -1,3 +1,4 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:velora/core/utils/log_alias.dart';
 
@@ -11,13 +12,13 @@ class SupabaseInitializer {
       return Supabase.instance.client;
     }
 
-    const supabaseUrl = String.fromEnvironment(
+    final supabaseUrl = dotenv.get(
       'SUPABASE_URL',
-      defaultValue: 'https://tijcakstwzujiloygutb.supabase.co',
+      fallback: 'https://tijcakstwzujiloygutb.supabase.co',
     );
-    const supabaseAnonKey = String.fromEnvironment(
+    final supabaseAnonKey = dotenv.get(
       'SUPABASE_ANON_KEY',
-      defaultValue:
+      fallback:
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRpamNha3N0d3p1amlsb3lndXRiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUxOTY2NTIsImV4cCI6MjA4MDc3MjY1Mn0.OCUPxofIx3ZY_ore0iK8eZ4_Dk2izBJpU8OEZNeEVJU',
     );
 

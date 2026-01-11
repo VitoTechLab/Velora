@@ -43,7 +43,7 @@ class CommentContentTile extends HookWidget {
 
   /// Whether this is a reply (smaller avatar, indented)
   final bool isReply;
-
+ 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -60,12 +60,14 @@ class CommentContentTile extends HookWidget {
 
     return Padding(
       padding: EdgeInsets.only(
-        left: isReply ? 32.0 : 0.0,
         top: isReply ? 12.0 : 0.0,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Indent spacer for replies (only indent content, not like button)
+          if (isReply) const SizedBox(width: 32),
+          
           // Avatar
           CircleAvatar(
             radius: avatarRadius,

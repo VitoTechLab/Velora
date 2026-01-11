@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:velora/core/utils/log_alias.dart';
@@ -16,9 +17,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         _googleSignIn = googleSignIn ??
             GoogleSignIn(
               scopes: const ['email', 'profile'],
-              serverClientId: const String.fromEnvironment(
+              serverClientId: dotenv.get(
                 'GOOGLE_OAUTH_CLIENT_ID',
-                defaultValue: '',
+                fallback: '',
               ),
             ),
         _isWeb = isWebOverride ?? kIsWeb;

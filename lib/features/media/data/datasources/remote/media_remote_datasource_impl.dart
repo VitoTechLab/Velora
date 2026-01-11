@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:velora/core/errors/exceptions.dart';
 import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/media/data/datasources/remote/media_remote_datasource.dart';
@@ -115,9 +116,9 @@ class MediaRemoteDataSourceImpl implements MediaRemoteDataSource {
         throw ServerException('File does not exist: ${file.path}');
       }
 
-      const cloudName = String.fromEnvironment(
+      final cloudName = dotenv.get(
         'CLOUDINARY_CLOUD_NAME',
-        defaultValue: 'dcaskzvqd',
+        fallback: 'dcaskzvqd',
       );
 
       if (cloudName.isEmpty) {
