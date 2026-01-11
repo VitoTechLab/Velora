@@ -15,7 +15,8 @@ enum AuthFailureType {
 
 /// Authentication-specific failure with categorized error types
 class AuthFailure extends Failure {
-  const AuthFailure({required String message, required this.type}) : super(message);
+  const AuthFailure({required String message, required this.type})
+      : super(message);
 
   final AuthFailureType type;
 
@@ -50,23 +51,22 @@ class AuthFailure extends Failure {
       final lowerMessage = message.toLowerCase();
 
       // Email verification errors
-      if (code == ErrorCode.emailNotConfirmed.code) {
+      if (code == 'email_not_confirmed') {
         return AuthFailure.emailNotVerified(message);
       }
 
       // Email already in use errors
-      if (code == ErrorCode.emailExists.code ||
-          code == ErrorCode.userAlreadyExists.code) {
+      if (code == 'email_exists' || code == 'user_already_exists') {
         return AuthFailure.emailAlreadyInUse(message);
       }
 
       // User not found errors
-      if (code == ErrorCode.userNotFound.code) {
+      if (code == 'user_not_found') {
         return AuthFailure.userNotFound(message);
       }
 
       // Network/rate limit errors
-      if (code == ErrorCode.overRequestRateLimit.code) {
+      if (code == 'over_request_rate_limit') {
         return AuthFailure.network(message);
       }
 

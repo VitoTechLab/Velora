@@ -125,7 +125,7 @@ class _NameTab extends HookWidget {
                 labelText: t.settingsProfileEditApplyTo,
                 border: const OutlineInputBorder(),
               ),
-              value: selectedProfile.value,
+              initialValue: selectedProfile.value,
               items: [
                 DropdownMenuItem(
                   value: 'All profiles',
