@@ -220,13 +220,6 @@ class MediaCompressor {
       final ext = format == CompressFormat.webp ? 'webp' : 'jpg';
       final targetPath = p.join(dir, '${base}_$suffix.$ext');
 
-      final Map<String, dynamic> params = {
-        'quality': quality,
-        'keepExif': false,
-        if (minWidth != null) 'minWidth': minWidth,
-        if (minHeight != null) 'minHeight': minHeight,
-      };
-
       final result = await FlutterImageCompress.compressAndGetFile(
         file.absolute.path,
         targetPath,

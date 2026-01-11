@@ -43,9 +43,6 @@ class LoginScreen extends HookWidget {
       final bloc = context.read<AuthBloc>();
       FocusScope.of(context).unfocus();
       
-      // Get bloc reference before async gap
-      final bloc = context.read<AuthBloc>();
-      
       // Small delay to allow focus change to complete validation
       Future.microtask(() {
         if (formKey.currentState?.validate() ?? false) {

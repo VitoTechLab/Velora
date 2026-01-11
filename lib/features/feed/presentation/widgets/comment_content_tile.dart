@@ -47,7 +47,6 @@ class CommentContentTile extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
     final t = AppLocalizations.of(context)!;
 
     // Use the translation hook for clean state management

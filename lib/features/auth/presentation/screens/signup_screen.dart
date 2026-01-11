@@ -51,7 +51,6 @@ class SignUpScreen extends HookWidget {
           return;
         }
 
-        final bloc = context.read<AuthBloc>();
         FocusScope.of(context).unfocus();
         
         // Get bloc reference before async gap
