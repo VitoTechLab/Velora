@@ -2274,6 +2274,18 @@ class AppLocalizationsKo extends AppLocalizations {
   String get campaignEndOfList => '더 이상 캠페인이 없습니다';
 
   @override
+  String get searchTitle => '검색';
+
+  @override
+  String get searchHint => '무엇을 찾고 싶으세요?';
+
+  @override
+  String get searchDiscoverTitle => '새로운 발견';
+
+  @override
+  String get searchBrowseAllTitle => '모두 탐색';
+
+  @override
   String settingsAccountDonationsRecurringValue(int count) {
     return '$count건 진행 중';
   }

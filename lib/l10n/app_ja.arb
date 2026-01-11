@@ -1110,6 +1110,10 @@
     }
   },
   "campaignEndOfList": "キャンペーンはこれ以上ありません",
+  "searchTitle": "検索",
+  "searchHint": "何をお探しですか？",
+  "searchDiscoverTitle": "新しい発見",
+  "searchBrowseAllTitle": "すべて見る",
   "settingsAccountDonationsRecurringValue": "{count} 件",
   "@settingsAccountDonationsRecurringValue": {
     "placeholders": {

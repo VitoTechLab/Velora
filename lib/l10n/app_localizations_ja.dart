@@ -2272,6 +2272,18 @@ class AppLocalizationsJa extends AppLocalizations {
   String get campaignEndOfList => 'キャンペーンはこれ以上ありません';
 
   @override
+  String get searchTitle => '検索';
+
+  @override
+  String get searchHint => '何をお探しですか？';
+
+  @override
+  String get searchDiscoverTitle => '新しい発見';
+
+  @override
+  String get searchBrowseAllTitle => 'すべて見る';
+
+  @override
   String settingsAccountDonationsRecurringValue(int count) {
     return '$count 件';
   }

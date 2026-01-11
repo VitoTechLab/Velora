@@ -2334,6 +2334,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get campaignEndOfList => 'No more campaigns';
 
   @override
+  String get searchTitle => 'Search';
+
+  @override
+  String get searchHint => 'What do you want to find?';
+
+  @override
+  String get searchDiscoverTitle => 'Discover something new';
+
+  @override
+  String get searchBrowseAllTitle => 'Browse all';
+
+  @override
   String settingsAccountDonationsRecurringValue(int count) {
     return '$count active';
   }

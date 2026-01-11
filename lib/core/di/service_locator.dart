@@ -133,6 +133,9 @@ import 'package:velora/features/notification/domain/usecases/delete_notification
 import 'package:velora/features/notification/domain/usecases/watch_notifications.dart';
 import 'package:velora/features/notification/presentation/bloc/notification_bloc.dart';
 
+// Settings feature imports
+import 'package:velora/features/settings/presentation/bloc/settings_bloc.dart';
+
 // Translation service import
 import 'package:velora/core/services/translation_service.dart';
 
@@ -541,6 +544,11 @@ Future<void> configureDependencies() async {
       getFileFromAsset: getIt<GetFileFromAsset>(),
     ),
   );
+
+  // Settings feature - Bloc (global singleton)
+  if (!getIt.isRegistered<SettingsBloc>()) {
+    getIt.registerLazySingleton<SettingsBloc>(() => SettingsBloc());
+  }
 
   // Auth feature - Bloc (global)
   if (!getIt.isRegistered<AuthBloc>()) {

@@ -1110,6 +1110,10 @@
     }
   },
   "campaignEndOfList": "No more campaigns",
+  "searchTitle": "Search",
+  "searchHint": "What do you want to find?",
+  "searchDiscoverTitle": "Discover something new",
+  "searchBrowseAllTitle": "Browse all",
   "settingsAccountDonationsRecurringValue": "{count} active",
   "@settingsAccountDonationsRecurringValue": {
     "placeholders": {

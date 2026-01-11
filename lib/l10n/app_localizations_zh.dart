@@ -2260,6 +2260,18 @@ class AppLocalizationsZh extends AppLocalizations {
   String get campaignEndOfList => '没有更多活动';
 
   @override
+  String get searchTitle => '搜索';
+
+  @override
+  String get searchHint => '你想找什么？';
+
+  @override
+  String get searchDiscoverTitle => '发现新内容';
+
+  @override
+  String get searchBrowseAllTitle => '浏览全部';
+
+  @override
   String settingsAccountDonationsRecurringValue(int count) {
     return '$count 个';
   }

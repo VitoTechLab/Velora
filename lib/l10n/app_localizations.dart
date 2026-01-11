@@ -4190,6 +4190,30 @@ abstract class AppLocalizations {
   /// **'No more campaigns'**
   String get campaignEndOfList;
 
+  /// No description provided for @searchTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get searchTitle;
+
+  /// No description provided for @searchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'What do you want to find?'**
+  String get searchHint;
+
+  /// No description provided for @searchDiscoverTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover something new'**
+  String get searchDiscoverTitle;
+
+  /// No description provided for @searchBrowseAllTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Browse all'**
+  String get searchBrowseAllTitle;
+
   /// No description provided for @settingsAccountDonationsRecurringValue.
   ///
   /// In en, this message translates to:

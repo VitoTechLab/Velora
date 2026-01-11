@@ -1110,6 +1110,10 @@
     }
   },
   "campaignEndOfList": "没有更多活动",
+  "searchTitle": "搜索",
+  "searchHint": "你想找什么？",
+  "searchDiscoverTitle": "发现新内容",
+  "searchBrowseAllTitle": "浏览全部",
   "settingsAccountDonationsRecurringValue": "{count} 个",
   "@settingsAccountDonationsRecurringValue": {
     "placeholders": {

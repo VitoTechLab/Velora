@@ -1110,6 +1110,10 @@
     }
   },
   "campaignEndOfList": "Tidak ada kampanye lagi",
+  "searchTitle": "Cari",
+  "searchHint": "Apa yang ingin Anda temukan?",
+  "searchDiscoverTitle": "Temukan sesuatu yang baru",
+  "searchBrowseAllTitle": "Jelajahi semua",
   "settingsAccountDonationsRecurringValue": "{count} aktif",
   "@settingsAccountDonationsRecurringValue": {
     "placeholders": {

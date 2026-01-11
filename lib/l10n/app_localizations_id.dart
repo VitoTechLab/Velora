@@ -2340,6 +2340,18 @@ class AppLocalizationsId extends AppLocalizations {
   String get campaignEndOfList => 'Tidak ada kampanye lagi';
 
   @override
+  String get searchTitle => 'Cari';
+
+  @override
+  String get searchHint => 'Apa yang ingin Anda temukan?';
+
+  @override
+  String get searchDiscoverTitle => 'Temukan sesuatu yang baru';
+
+  @override
+  String get searchBrowseAllTitle => 'Jelajahi semua';
+
+  @override
   String settingsAccountDonationsRecurringValue(int count) {
     return '$count aktif';
   }

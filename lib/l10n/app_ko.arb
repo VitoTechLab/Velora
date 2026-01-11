@@ -1110,6 +1110,10 @@
     }
   },
   "campaignEndOfList": "더 이상 캠페인이 없습니다",
+  "searchTitle": "검색",
+  "searchHint": "무엇을 찾고 싶으세요?",
+  "searchDiscoverTitle": "새로운 발견",
+  "searchBrowseAllTitle": "모두 탐색",
   "settingsAccountDonationsRecurringValue": "{count}건 진행 중",
   "@settingsAccountDonationsRecurringValue": {
     "placeholders": {
