@@ -55,6 +55,100 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   }
 
   @override
+  Future<UserProfileModel> getMyProfile() {
+    return guardSupabase(
+      () async {
+        final userId = _requireUserId();
+        logi('Fetching my profile userId=$userId', tag: _logTag);
+        return getProfile(userId);
+      },
+      op: 'getMyProfile',
+      tag: _logTag,
+    );
+  }
+
+  @override
+  Future<UserProfileModel> updateProfile(UpdateProfileModel params) {
+    return guardSupabase(
+      () async {
+        final userId = _requireUserId();
+
+        if (params.isEmpty) {
+          logi('updateProfile: No fields to update', tag: _logTag);
+          return getProfile(userId);
+        }
+
+        logi(
+          'Updating profile userId=$userId, fields=${params.toJson().keys.toList()}',
+          tag: _logTag,
+        );
+
+        // Check username availability if updating username
+        if (params.username != null) {
+          final isAvailable = await isUsernameAvailable(params.username!);
+          if (!isAvailable) {
+            throw ValidationException('Username is already taken');
+          }
+        }
+
+        await _client
+            .from(SupabaseTables.userProfiles)
+            .update(params.toJson())
+            .eq('id', userId);
+
+        logi('updateProfile success for userId=$userId', tag: _logTag);
+
+        // Fetch and return updated profile
+        return getProfile(userId);
+      },
+      op: 'updateProfile',
+      tag: _logTag,
+    );
+  }
+
+  @override
+  Future<bool> isUsernameAvailable(String username) {
+    return guardSupabase(
+      () async {
+        final userId = _requireUserId();
+        final lowercaseUsername = username.toLowerCase().trim();
+
+        if (lowercaseUsername.isEmpty) {
+          return false;
+        }
+
+        // Username validation: 3-30 chars, alphanumeric and underscore only
+        final usernameRegex = RegExp(r'^[a-z0-9_]{3,30}$');
+        if (!usernameRegex.hasMatch(lowercaseUsername)) {
+          return false;
+        }
+
+        logi(
+          'Checking username availability: $lowercaseUsername',
+          tag: _logTag,
+        );
+
+        final response = await _client
+            .from(SupabaseTables.userProfiles)
+            .select('id')
+            .ilike('username', lowercaseUsername)
+            .neq('id', userId) // Exclude own profile
+            .maybeSingle();
+
+        final isAvailable = response == null;
+        logi(
+          'Username "$lowercaseUsername" available: $isAvailable',
+          tag: _logTag,
+        );
+
+        return isAvailable;
+      },
+      op: 'isUsernameAvailable',
+      tag: _logTag,
+    );
+  }
+
+  @override
   Future<void> toggleFollow(String targetUserId, {required bool isPrivate}) {
     return guardSupabase(
       () async {

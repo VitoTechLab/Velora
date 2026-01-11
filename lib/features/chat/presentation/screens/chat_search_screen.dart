@@ -7,21 +7,20 @@ enum SearchScope { campaigns, posts, people }
 extension _SearchScopeLocalization on SearchScope {
   String label(AppLocalizations t) {
     switch (this) {
+      case SearchScope.campaigns:
+        return t.chatSearchScopeCampaigns;
       case SearchScope.posts:
         return t.chatSearchScopePosts;
       case SearchScope.people:
         return t.chatSearchScopePeople;
-      case SearchScope.campaigns:
-      default:
-        return t.chatSearchScopeCampaigns;
     }
   }
 }
 
-class SearchScreen extends HookWidget {
+class ChatSearchScreen extends HookWidget {
   final SearchScope? initialScope;
 
-  const SearchScreen({super.key, this.initialScope});
+  const ChatSearchScreen({super.key, this.initialScope});
 
   @override
   Widget build(BuildContext context) {

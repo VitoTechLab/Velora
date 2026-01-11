@@ -37,6 +37,9 @@ class FeedEvent with _$FeedEvent {
   const factory FeedEvent.toggleBookmarkPost(String postId) =
       ToggleBookmarkPostEvent;
 
+  /// Add new post to top of feed (for auto-add after create)
+  const factory FeedEvent.addNewPost(FeedEntity post) = AddNewPostEvent;
+
   /// Load comments for a post
   const factory FeedEvent.loadComments({required String postId, int? limit}) =
       LoadCommentsEvent;

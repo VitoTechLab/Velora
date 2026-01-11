@@ -113,9 +113,8 @@ class CustomTextField extends HookWidget {
           maxLength: maxLength,
           inputFormatters: inputFormatters,
           onChanged: (value) {
-            if (!hasInteractedState.value) {
-              hasInteractedState.value = true;
-            }
+            // Don't set hasInteractedState here - wait for focus lost
+            // This prevents red error while user is still typing
             onChanged?.call(value);
           },
           onEditingComplete: onEditingComplete,

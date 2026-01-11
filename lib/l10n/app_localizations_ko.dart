@@ -253,6 +253,17 @@ class AppLocalizationsKo extends AppLocalizations {
   String get feedSeeTranslation => '번역 보기';
 
   @override
+  String get feedSeeOriginal => '원문 보기';
+
+  @override
+  String get feedTranslating => '로드 중…';
+
+  @override
+  String feedCommentAsUser(String username) {
+    return '$username(으)로 댓글 달기';
+  }
+
+  @override
   String feedViewReplies(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -262,6 +273,9 @@ class AppLocalizationsKo extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get feedHideReplies => '답글 숨기기';
 
   @override
   String get feedUnknownUser => '알 수 없는 사용자';
@@ -392,10 +406,22 @@ class AppLocalizationsKo extends AppLocalizations {
   String get settingsTileSharingSubtitle => '자동으로 동기화할 항목 선택';
 
   @override
+  String get settingsTileActivityTitle => '활동 기록';
+
+  @override
+  String get settingsTileActivitySubtitle => '최근 활동 및 상호작용 보기';
+
+  @override
   String get settingsTileLoggingTitle => '계정 로그인';
 
   @override
   String get settingsTileLoggingSubtitle => '기기 및 로그인 승인 확인';
+
+  @override
+  String get settingsTileAccountStatusTitle => '계정 상태';
+
+  @override
+  String get settingsTileAccountStatusSubtitle => '인증 상태 및 계정 활동 보기';
 
   @override
   String get settingsAccountTitle => '계정 설정';
@@ -429,6 +455,64 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get settingsTileVeloraPaySubtitle => '결제 수단 및 보호';
+
+  @override
+  String get settingsWalletTitle => '지갑';
+
+  @override
+  String get walletDashboardTitle => '지갑 대시보드';
+
+  @override
+  String get walletDashboardWalletId => '지갑 ID: #VLR2024001';
+
+  @override
+  String get walletDashboardTotalBalance => '총 잔액';
+
+  @override
+  String get walletDashboardQuickActions => '빠른 작업';
+
+  @override
+  String get walletDashboardDonationHistory => '기부 내역';
+
+  @override
+  String get walletDashboardDonationHistorySubtitle => '모든 기부 거래 보기';
+
+  @override
+  String get walletDashboardMyCampaigns => '내 캠페인';
+
+  @override
+  String get walletDashboardMyCampaignsSubtitle => '모금 캠페인 관리';
+
+  @override
+  String get walletDashboardMyDonations => '내 기부';
+
+  @override
+  String get walletDashboardMyDonationsSubtitle => '기여 추적';
+
+  @override
+  String get walletDashboardAnalytics => '분석';
+
+  @override
+  String get walletDashboardAnalyticsSubtitle => '통찰력 및 통계 보기';
+
+  @override
+  String get walletDashboardRecentActivity => '최근 활동';
+
+  @override
+  String get walletDashboardNoActivity => '아직 활동이 없습니다';
+
+  @override
+  String get walletDashboardNoActivitySubtitle => '지갑 거래가 여기에 표시됩니다';
+
+  @override
+  String get walletDashboardUnderDevelopmentTitle => '개발 중';
+
+  @override
+  String get walletDashboardUnderDevelopmentMessage =>
+      '이 기능은 현재 개발 중이며 곳 사용할 수 있습니다.';
+
+  @override
+  String get walletDashboardUnderDevelopmentButton => '확인';
 
   @override
   String get settingsPersonalizationTitle => '개인 맞춤화';
@@ -501,6 +585,100 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get settingsHeroReviewButton => '검토';
+
+  @override
+  String get settingsHeroAccountType => '개인 계정';
+
+  @override
+  String get settingsHeroAccountTypeSubtitle => '탭하여 계정 유형 세부정보 보기';
+
+  @override
+  String get accountTypeScreenTitle => '계정 유형';
+
+  @override
+  String get accountTypeScreenCurrentType => '현재 계정 유형';
+
+  @override
+  String get accountTypeScreenPersonal => '개인 계정';
+
+  @override
+  String get accountTypeScreenPersonalDescription =>
+      '친구 및 가족과 연결하고 싶은 개인 사용자에게 적합합니다.';
+
+  @override
+  String get accountTypeScreenPersonalBenefitsTitle => '개인 계정 혜택';
+
+  @override
+  String get accountTypeScreenBenefit1Title => '개인 프로필';
+
+  @override
+  String get accountTypeScreenBenefit1Subtitle => '개인 신원과 개인정보 보호';
+
+  @override
+  String get accountTypeScreenBenefit2Title => '개인정보 보호 제어';
+
+  @override
+  String get accountTypeScreenBenefit2Subtitle => '개인 데이터에 대한 완벽한 제어';
+
+  @override
+  String get accountTypeScreenBenefit3Title => '소셜 연결';
+
+  @override
+  String get accountTypeScreenBenefit3Subtitle => '친구 및 가족과 쉽게 연결';
+
+  @override
+  String get accountTypeScreenOrganization => '조직 계정';
+
+  @override
+  String get accountTypeScreenOrganizationDescription =>
+      '조직 계정으로 업그레이드하여 고급 비즈니스 기능과 인증을 이용하세요.';
+
+  @override
+  String get accountTypeScreenOrganizationBenefitsTitle => '조직 혜택:';
+
+  @override
+  String get accountTypeScreenOrgBenefit1 => '진위성을 위한 인증 배지';
+
+  @override
+  String get accountTypeScreenOrgBenefit2 => '고급 분석 및 인사이트';
+
+  @override
+  String get accountTypeScreenOrgBenefit3 => '프로모션 도구 및 캠페인';
+
+  @override
+  String get accountTypeScreenOrgBenefit4 => '팀 협업 기능';
+
+  @override
+  String get accountTypeScreenUpgradeButton => '조직으로 업그레이드';
+
+  @override
+  String get accountTypeScreenVerificationTitle => '계정 인증';
+
+  @override
+  String get accountTypeScreenVerificationSubtitle =>
+      '조직 계정으로 업그레이드하려면 인증 프로세스를 완료하세요.';
+
+  @override
+  String get accountTypeScreenVerificationStep1 => '신분증 사진';
+
+  @override
+  String get accountTypeScreenVerificationStep1Subtitle => '신분증의 명확한 사진을 촬영하세요';
+
+  @override
+  String get accountTypeScreenVerificationStep2 => '셀카 사진';
+
+  @override
+  String get accountTypeScreenVerificationStep2Subtitle => '신분증을 들고 셀카를 찍으세요';
+
+  @override
+  String get accountTypeScreenVerificationSubmit => '인증 제출';
+
+  @override
+  String get accountTypeScreenVerificationCancel => '취소';
+
+  @override
+  String get accountTypeScreenVerificationSuccess =>
+      '인증이 성공적으로 제출되었습니다! 1-3 영업일 내에 요청을 검토하겠습니다.';
 
   @override
   String get settingsSearchProfiles => '프로필';
@@ -606,6 +784,9 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get settingsProfileInfoSyncDescription =>
       'Your name and username will no longer sync across apps. Manage synced profile pictures through Connected experiences.';
+
+  @override
+  String get settingsProfileAccountSectionTitle => '계정';
 
   @override
   String get settingsProfileAccountTypeTitle => 'Account type';
@@ -2056,6 +2237,53 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get settingsAccountDonationsRecurringLabel => '정기 기부';
+
+  @override
+  String get campaignSeeMore => '더 보기';
+
+  @override
+  String get campaignFeaturedTitle => '주요 캠페인';
+
+  @override
+  String get campaignEmergencyTitle => '긴급 모금';
+
+  @override
+  String get campaignSocialImpactTitle => '사회적 영향';
+
+  @override
+  String get campaignTechnologyTitle => '기술';
+
+  @override
+  String get campaignFashionTitle => '패션';
+
+  @override
+  String get campaignFoodBeverageTitle => '음식 및 음료';
+
+  @override
+  String get campaignFinanceTitle => '금융';
+
+  @override
+  String get campaignMemorialTitle => '추모 모금';
+
+  @override
+  String campaignRaisedOf(String target) {
+    return '$target 중 모금됨';
+  }
+
+  @override
+  String get campaignEndOfList => '더 이상 캠페인이 없습니다';
+
+  @override
+  String get searchTitle => '검색';
+
+  @override
+  String get searchHint => '무엇을 찾고 싶으세요?';
+
+  @override
+  String get searchDiscoverTitle => '새로운 발견';
+
+  @override
+  String get searchBrowseAllTitle => '모두 탐색';
 
   @override
   String settingsAccountDonationsRecurringValue(int count) {

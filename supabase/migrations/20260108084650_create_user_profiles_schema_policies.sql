@@ -252,13 +252,4 @@ GRANT SELECT, INSERT, UPDATE ON public.user_profiles TO authenticated;
 -- Prevent users from updating sensitive columns
 REVOKE UPDATE (role, is_verified) ON public.user_profiles FROM authenticated;
 
--- User Blocks (from social_relation schema)
-GRANT SELECT, INSERT, DELETE ON public.user_blocks TO authenticated;
-
--- User Follows (from social_relation schema)
-GRANT SELECT, INSERT, DELETE ON public.user_follows TO authenticated;
-
--- User Follow Requests (from social_relation schema)
-GRANT SELECT, INSERT, UPDATE, DELETE ON public.user_follow_requests TO authenticated;
-
 COMMIT;

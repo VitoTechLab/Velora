@@ -15,6 +15,7 @@ import 'package:velora/features/auth/presentation/widgets/components/primary_but
 import 'package:velora/features/auth/presentation/widgets/components/social_button.dart';
 import 'package:velora/features/auth/presentation/widgets/components/custom_text_field.dart';
 import 'package:velora/l10n/app_localizations.dart';
+import 'package:velora/routes/app_router.dart';
 
 /// Login Screen
 ///
@@ -45,16 +46,22 @@ class LoginScreen extends HookWidget {
     }, [emailController, passwordController]);
 
     final submitLogin = useCallback(() {
-      if (formKey.currentState?.validate() ?? false) {
-        context.read<AuthBloc>().add(
-          AuthSignInRequested(
-            email: emailController.text.trim(),
-            password: passwordController.text,
-          ),
-        );
-        clearForm();
-      }
-    }, [emailController, passwordController, formKey, clearForm]);
+      // Unfocus to trigger validation on all fields
+      FocusScope.of(context).unfocus();
+      
+      // Small delay to allow focus change to complete validation
+      Future.microtask(() {
+        if (formKey.currentState?.validate() ?? false) {
+          context.read<AuthBloc>().add(
+            AuthSignInRequested(
+              email: emailController.text.trim(),
+              password: passwordController.text,
+            ),
+          );
+          // Don't clear form here - wait for success response
+        }
+      });
+    }, [emailController, passwordController, formKey]);
 
     final signInWithGoogle = useCallback(() {
       AppLogger.i("[RedesignedLogin] Google sign-in tapped");
@@ -68,10 +75,18 @@ class LoginScreen extends HookWidget {
       listener: (context, state) {
         if (state.errorMessage != null && state.errorMessage!.isNotEmpty) {
           AppLogger.e("[RedesignedLogin] Error: ${state.errorMessage}");
-          _showInlineMessage(context, state.errorMessage!, isError: true);
+          AppMessenger.showToast(
+            message: state.errorMessage!,
+            icon: Icons.error_outline,
+            isError: true,
+          );
         } else if (state.message != null && state.message!.isNotEmpty) {
           AppLogger.i("[RedesignedLogin] Info: ${state.message}");
-          _showInlineMessage(context, state.message!, isError: false);
+          AppMessenger.showToast(
+            message: state.message!,
+            icon: Icons.check_circle_outline,
+            isError: false,
+          );
         }
 
         context.read<AuthBloc>().clearMessages();
@@ -82,6 +97,8 @@ class LoginScreen extends HookWidget {
           child: BlocBuilder<AuthBloc, AuthState>(
             builder: (context, state) {
               final isLoading = state.isLoading;
+              final isEmailLoading = state.isEmailLoading;
+              final isGoogleLoading = state.isGoogleLoading;
 
               return SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -183,8 +200,9 @@ class LoginScreen extends HookWidget {
                               child: TextButton(
                                 onPressed: isLoading
                                     ? null
-                                    : () =>
-                                          context.push('/auth/reset-password'),
+                                    : () => context.pushNamed(
+                                          AppRouteName.resetPassword,
+                                        ),
                                 child: Text(
                                   t.authForgotPassword,
                                   style: theme.textTheme.bodySmall?.copyWith(
@@ -202,8 +220,8 @@ class LoginScreen extends HookWidget {
                         // Primary CTA
                         PrimaryButton(
                           text: t.authSignInButton,
-                          onPressed: submitLogin,
-                          isLoading: isLoading,
+                          onPressed: isLoading ? null : submitLogin,
+                          isLoading: isEmailLoading,
                         ),
 
                         // Divider
@@ -213,8 +231,8 @@ class LoginScreen extends HookWidget {
                         SocialButton(
                           brand: 'Google',
                           iconAsset: 'assets/images/google.png',
-                          onPressed: signInWithGoogle,
-                          isLoading: isLoading,
+                          onPressed: isLoading ? null : signInWithGoogle,
+                          isLoading: isGoogleLoading,
                         ),
 
                         const SizedBox(height: 32),
@@ -235,7 +253,7 @@ class LoginScreen extends HookWidget {
                               TextButton(
                                 onPressed: isLoading
                                     ? null
-                                    : () => context.go('/auth/signup'),
+                                    : () => context.goNamed(AppRouteName.signUp),
                                 child: Text(
                                   t.authSignUpLink,
                                   style: theme.textTheme.bodyMedium?.copyWith(
@@ -258,19 +276,6 @@ class LoginScreen extends HookWidget {
           ),
         ),
       ),
-    );
-  }
-
-  void _showInlineMessage(
-    BuildContext context,
-    String message, {
-    required bool isError,
-  }) {
-    AppMessenger.showToast(
-      message: message,
-      icon: isError ? Icons.error_outline : Icons.check_circle_outline,
-      isError: isError,
-      duration: const Duration(seconds: 3),
     );
   }
 }

@@ -15,6 +15,7 @@ import 'package:velora/features/auth/presentation/widgets/components/primary_but
 import 'package:velora/features/auth/presentation/widgets/components/social_button.dart';
 import 'package:velora/features/auth/presentation/widgets/components/custom_text_field.dart';
 import 'package:velora/l10n/app_localizations.dart';
+import 'package:velora/routes/app_router.dart';
 
 /// Sign Up Screen
 ///
@@ -49,27 +50,41 @@ class SignUpScreen extends HookWidget {
     final submitSignUp = useCallback(
       () {
         if (!agreedToTerms.value) {
-          _showInlineMessage(context, t.authAgreeTermsError, isError: true);
+          AppMessenger.showToast(
+            message: t.authAgreeTermsError,
+            icon: Icons.error_outline,
+            isError: true,
+          );
           return;
         }
 
-        if (formKey.currentState?.validate() ?? false) {
-          AppLogger.i("[RedesignedSignUp] Sign up initiated");
-          context.read<AuthBloc>().add(
-            AuthSignUpRequested(
-              email: emailController.text.trim(),
-              password: passwordController.text,
-            ),
-          );
-          clearForm();
-        }
+        // Unfocus to trigger validation on all fields
+        FocusScope.of(context).unfocus();
+        
+        // Small delay to allow focus change to complete validation
+        Future.microtask(() {
+          if (formKey.currentState?.validate() ?? false) {
+            AppLogger.i("[RedesignedSignUp] Sign up initiated");
+            context.read<AuthBloc>().add(
+              AuthSignUpRequested(
+                email: emailController.text.trim(),
+                password: passwordController.text,
+              ),
+            );
+            // Don't clear form here - wait for success response
+          }
+        });
       },
-      [emailController, passwordController, formKey, clearForm, agreedToTerms],
+      [emailController, passwordController, formKey, agreedToTerms],
     );
 
     final signInWithGoogle = useCallback(() {
       AppLogger.i("[RedesignedSignUp] Google sign-in tapped (not implemented)");
-      _showInlineMessage(context, t.authGoogleUnavailable, isError: true);
+      AppMessenger.showToast(
+        message: t.authGoogleUnavailable,
+        icon: Icons.error_outline,
+        isError: true,
+      );
     }, [context]);
 
     return BlocListener<AuthBloc, AuthState>(
@@ -79,10 +94,18 @@ class SignUpScreen extends HookWidget {
       listener: (context, state) {
         if (state.errorMessage != null && state.errorMessage!.isNotEmpty) {
           AppLogger.e("[RedesignedSignUp] Error: ${state.errorMessage}");
-          _showInlineMessage(context, state.errorMessage!, isError: true);
+          AppMessenger.showToast(
+            message: state.errorMessage!,
+            icon: Icons.error_outline,
+            isError: true,
+          );
         } else if (state.message != null && state.message!.isNotEmpty) {
           AppLogger.i("[RedesignedSignUp] Info: ${state.message}");
-          _showInlineMessage(context, state.message!, isError: false);
+          AppMessenger.showToast(
+            message: state.message!,
+            icon: Icons.check_circle_outline,
+            isError: false,
+          );
         }
 
         context.read<AuthBloc>().clearMessages();
@@ -93,6 +116,8 @@ class SignUpScreen extends HookWidget {
           child: BlocBuilder<AuthBloc, AuthState>(
             builder: (context, state) {
               final isLoading = state.isLoading;
+              final isEmailLoading = state.isEmailLoading;
+              final isGoogleLoading = state.isGoogleLoading;
 
               return SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -266,8 +291,8 @@ class SignUpScreen extends HookWidget {
                         // Primary CTA
                         PrimaryButton(
                           text: t.authCreateAccountButton,
-                          onPressed: submitSignUp,
-                          isLoading: isLoading,
+                          onPressed: isLoading ? null : submitSignUp,
+                          isLoading: isEmailLoading,
                         ),
 
                         // Divider
@@ -277,8 +302,8 @@ class SignUpScreen extends HookWidget {
                         SocialButton(
                           brand: 'Google',
                           iconAsset: 'assets/images/google.png',
-                          onPressed: signInWithGoogle,
-                          isLoading: isLoading,
+                          onPressed: isLoading ? null : signInWithGoogle,
+                          isLoading: isGoogleLoading,
                         ),
 
                         const SizedBox(height: 32),
@@ -297,7 +322,7 @@ class SignUpScreen extends HookWidget {
                               TextButton(
                                 onPressed: isLoading
                                     ? null
-                                    : () => context.go('/auth/signin'),
+                                    : () => context.goNamed(AppRouteName.signIn),
                                 child: Text(
                                   t.authSignInLink,
                                   style: theme.textTheme.bodyMedium?.copyWith(
@@ -320,19 +345,6 @@ class SignUpScreen extends HookWidget {
           ),
         ),
       ),
-    );
-  }
-
-  void _showInlineMessage(
-    BuildContext context,
-    String message, {
-    required bool isError,
-  }) {
-    AppMessenger.showToast(
-      message: message,
-      icon: isError ? Icons.error_outline : Icons.check_circle_outline,
-      isError: isError,
-      duration: const Duration(seconds: 3),
     );
   }
 }

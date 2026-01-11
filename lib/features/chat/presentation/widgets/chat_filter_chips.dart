@@ -48,7 +48,7 @@ class ChatFilterChips extends StatelessWidget {
                 },
                 backgroundColor: colorScheme.surface,
                 selectedColor: colorScheme.primaryContainer,
-                checkmarkColor: colorScheme.primary,
+                checkmarkColor: colorScheme.onPrimaryContainer,
                 labelStyle: textTheme.bodyMedium?.copyWith(
                   color: isSelected
                       ? colorScheme.onPrimaryContainer

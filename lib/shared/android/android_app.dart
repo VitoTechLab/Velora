@@ -11,6 +11,9 @@ import 'package:velora/features/media/presentation/bloc/media_gallery_bloc.dart'
 import 'package:velora/features/media/presentation/cubit/media_upload_cubit.dart';
 import 'package:velora/features/post/presentation/bloc/post_bloc.dart';
 import 'package:velora/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:velora/features/notification/presentation/bloc/notification_bloc.dart';
+import 'package:velora/features/settings/presentation/bloc/settings_bloc.dart';
+import 'package:velora/features/settings/presentation/bloc/settings_state.dart';
 import 'package:velora/features/social_relation/presentation/bloc/social_relation_bloc.dart';
 import 'package:velora/l10n/app_localizations.dart';
 import 'package:velora/routes/app_router.dart';
@@ -31,6 +34,11 @@ class AndroidApp extends StatelessWidget {
           create: (_) => getIt<UserPresenceBloc>(),
           lazy: false,
         ),
+        // SettingsBloc - singleton, manages user preferences including language
+        BlocProvider<SettingsBloc>(
+          create: (_) => getIt<SettingsBloc>(),
+          lazy: false,
+        ),
         // FeedBloc - factory instance, new instance per provider
         BlocProvider<FeedBloc>(create: (_) => getIt<FeedBloc>()),
         // PostBloc - factory instance
@@ -49,22 +57,57 @@ class AndroidApp extends StatelessWidget {
         ),
         // ProfileBloc - factory instance
         BlocProvider<ProfileBloc>(create: (_) => getIt<ProfileBloc>()),
+        // NotificationBloc - factory instance
+        BlocProvider<NotificationBloc>(
+          create: (_) => getIt<NotificationBloc>(),
+        ),
       ],
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        title: 'Velora',
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: AppLocalizations.supportedLocales,
-        theme: buildTheme(Brightness.light),
-        darkTheme: buildTheme(Brightness.dark),
-        scaffoldMessengerKey: AppMessenger.messengerKey,
-        routerConfig: router,
+      child: BlocBuilder<SettingsBloc, SettingsState>(
+        buildWhen: (prev, curr) => prev.languageCode != curr.languageCode,
+        builder: (context, settingsState) {
+          // Convert language code string to Locale
+          final locale = _parseLocale(settingsState.languageCode);
+
+          return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            title: 'Velora',
+            // Dynamic locale based on user settings
+            locale: locale,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: AppLocalizations.supportedLocales,
+            theme: buildTheme(Brightness.light),
+            darkTheme: buildTheme(Brightness.dark),
+            scaffoldMessengerKey: AppMessenger.messengerKey,
+            routerConfig: router,
+          );
+        },
       ),
     );
+  }
+
+  /// Parse language code string to Locale
+  /// Supports: en, id, ko, ja, zh
+  Locale? _parseLocale(String? code) {
+    if (code == null || code.isEmpty) return null;
+
+    switch (code.toLowerCase()) {
+      case 'en':
+        return const Locale('en', 'US');
+      case 'id':
+        return const Locale('id', 'ID');
+      case 'ko':
+        return const Locale('ko', 'KR');
+      case 'ja':
+        return const Locale('ja', 'JP');
+      case 'zh':
+        return const Locale('zh', 'CN');
+      default:
+        return null; // Use system default
+    }
   }
 }

@@ -2,20 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 
-/// Container for [StatefulShellRoute] that provides instant tab switching
-/// using [IndexedStack]. All branches are built immediately and kept alive.
-///
-/// This is the performance-optimized alternative to [SlidingBranchContainer]:
-/// - No animations (instant switching)
-/// - Lower CPU usage (no animation calculations)
-/// - Better for accessibility (respects Reduce Motion)
-/// - Ideal for low-end devices
-///
-/// Use cases:
-/// - System "Reduce Motion" is enabled
-/// - User manually disabled animations
-/// - Low-end device detected
-/// - Battery saving mode
+/// Container for StatefulShellRoute with instant tab switching using IndexedStack.
 class StaticBranchContainer extends HookWidget {
   const StaticBranchContainer({
     super.key,

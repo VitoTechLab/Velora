@@ -121,6 +121,24 @@ import 'package:velora/features/profile/domain/usecases/block_user_usecase.dart'
 import 'package:velora/features/profile/domain/usecases/unblock_user_usecase.dart';
 import 'package:velora/features/profile/presentation/bloc/profile_bloc.dart';
 
+// Notification feature imports
+import 'package:velora/features/notification/data/datasources/notification_remote_datasource.dart';
+import 'package:velora/features/notification/data/datasources/notification_remote_datasource_impl.dart';
+import 'package:velora/features/notification/data/repositories/notification_repository_impl.dart';
+import 'package:velora/features/notification/domain/repositories/notification_repository.dart';
+import 'package:velora/features/notification/domain/usecases/get_notifications.dart';
+import 'package:velora/features/notification/domain/usecases/get_unread_count.dart';
+import 'package:velora/features/notification/domain/usecases/mark_notifications_read.dart';
+import 'package:velora/features/notification/domain/usecases/delete_notification.dart';
+import 'package:velora/features/notification/domain/usecases/watch_notifications.dart';
+import 'package:velora/features/notification/presentation/bloc/notification_bloc.dart';
+
+// Settings feature imports
+import 'package:velora/features/settings/presentation/bloc/settings_bloc.dart';
+
+// Translation service import
+import 'package:velora/core/services/translation_service.dart';
+
 final GetIt getIt = GetIt.instance;
 
 Future<void> configureDependencies() async {
@@ -138,7 +156,8 @@ Future<void> configureDependencies() async {
     ..registerLazySingleton<FirebaseMessagingService>(
       () => FirebaseMessagingService(),
     )
-    ..registerLazySingleton<UserPreferences>(() => UserPreferences());
+    ..registerLazySingleton<UserPreferences>(() => UserPreferences())
+    ..registerLazySingleton<TranslationService>(() => TranslationService());
 
   // Supabase client - initialize and register
   if (!getIt.isRegistered<SupabaseClient>()) {
@@ -276,6 +295,22 @@ Future<void> configureDependencies() async {
     ),
   );
 
+  // Notification feature - Data source
+  if (!getIt.isRegistered<NotificationRemoteDataSource>()) {
+    getIt.registerLazySingleton<NotificationRemoteDataSource>(
+      () => NotificationRemoteDataSourceImpl(
+        supabaseClient: getIt<SupabaseClient>(),
+      ),
+    );
+  }
+
+  // Notification feature - Repositories
+  getIt.registerLazySingleton<NotificationRepository>(
+    () => NotificationRepositoryImpl(
+      remoteDataSource: getIt<NotificationRemoteDataSource>(),
+    ),
+  );
+
   // Feed feature - Use cases
   getIt
     ..registerLazySingleton(() => LoadInitialFeed(getIt<FeedRepository>()))
@@ -369,6 +404,33 @@ Future<void> configureDependencies() async {
       () => UnblockUserUseCase(getIt<ProfileRepository>()),
     );
 
+  // Notification feature - Use cases
+  getIt
+    ..registerLazySingleton(
+      () => LoadInitialNotifications(getIt<NotificationRepository>()),
+    )
+    ..registerLazySingleton(
+      () => LoadMoreNotifications(getIt<NotificationRepository>()),
+    )
+    ..registerLazySingleton(
+      () => GetUnreadNotificationCount(getIt<NotificationRepository>()),
+    )
+    ..registerLazySingleton(
+      () => MarkAllNotificationsRead(getIt<NotificationRepository>()),
+    )
+    ..registerLazySingleton(
+      () => MarkNotificationsRead(getIt<NotificationRepository>()),
+    )
+    ..registerLazySingleton(
+      () => DeleteNotification(getIt<NotificationRepository>()),
+    )
+    ..registerLazySingleton(
+      () => WatchNewNotifications(getIt<NotificationRepository>()),
+    )
+    ..registerLazySingleton(
+      () => StopWatchNotifications(getIt<NotificationRepository>()),
+    );
+
   // Feed feature - Bloc
   getIt.registerFactory(
     () => FeedBloc(
@@ -453,6 +515,21 @@ Future<void> configureDependencies() async {
     ),
   );
 
+  // Notification feature - Bloc
+  getIt.registerFactory(
+    () => NotificationBloc(
+      loadInitialNotificationsUseCase: getIt<LoadInitialNotifications>(),
+      loadMoreNotificationsUseCase: getIt<LoadMoreNotifications>(),
+      getUnreadCountUseCase: getIt<GetUnreadNotificationCount>(),
+      markAllAsReadUseCase: getIt<MarkAllNotificationsRead>(),
+      markAsReadUseCase: getIt<MarkNotificationsRead>(),
+      deleteNotificationUseCase: getIt<DeleteNotification>(),
+      watchNewNotificationsUseCase: getIt<WatchNewNotifications>(),
+      stopWatchNotificationsUseCase: getIt<StopWatchNotifications>(),
+      profileDataSource: getIt<ProfileRemoteDataSource>(),
+    ),
+  );
+
   // Post feature - Bloc
   getIt.registerFactory(() => PostBloc(createPostUseCase: getIt<CreatePost>()));
 
@@ -467,6 +544,11 @@ Future<void> configureDependencies() async {
       getFileFromAsset: getIt<GetFileFromAsset>(),
     ),
   );
+
+  // Settings feature - Bloc (global singleton)
+  if (!getIt.isRegistered<SettingsBloc>()) {
+    getIt.registerLazySingleton<SettingsBloc>(() => SettingsBloc());
+  }
 
   // Auth feature - Bloc (global)
   if (!getIt.isRegistered<AuthBloc>()) {

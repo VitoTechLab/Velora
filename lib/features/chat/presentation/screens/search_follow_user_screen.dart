@@ -28,6 +28,7 @@ class SearchFollowUserScreen extends HookWidget {
               backgroundColor: colorScheme.surface,
               title: TextField(
                 controller: searchController,
+                autofocus: true,
                 decoration: InputDecoration(
                   hintText: 'Search or ask Meta AI',
                   hintStyle: TextStyle(

@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_event.dart';
+import 'package:velora/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:velora/features/profile/presentation/bloc/profile_event.dart';
+import 'package:velora/features/profile/presentation/bloc/profile_state.dart';
 import 'package:velora/features/settings/presentation/widgets/settings_section_card.dart';
 import 'package:velora/features/settings/presentation/widgets/settings_tile.dart';
 import 'package:velora/l10n/app_localizations.dart';
@@ -82,23 +85,13 @@ class SettingScreen extends StatelessWidget {
                           ),
                         ),
                         SettingsTileData(
-                          title: t.settingsTileSharingTitle,
-                          subtitle: t.settingsTileSharingSubtitle,
-                          icon: Icons.sync_alt_rounded,
+                          title: t.settingsTileActivityTitle,
+                          subtitle: t.settingsTileActivitySubtitle,
+                          icon: Icons.history,
                           iconColor: const Color(0xFF00BCD4),
                           onTap: () => _openNamed(
                             context,
                             AppRouteName.settingsActivity,
-                          ),
-                        ),
-                        SettingsTileData(
-                          title: t.settingsTileLoggingTitle,
-                          subtitle: t.settingsTileLoggingSubtitle,
-                          icon: Icons.phonelink_lock_rounded,
-                          iconColor: const Color(0xFF3B82F6),
-                          onTap: () => _openNamed(
-                            context,
-                            AppRouteName.settingsAccountStatus,
                           ),
                         ),
                       ],
@@ -144,6 +137,11 @@ class SettingScreen extends StatelessWidget {
                             AppRouteName.settingsActivity,
                           ),
                         ),
+                      ],
+                    ),
+                    SettingsSectionCard(
+                      title: t.settingsWalletTitle,
+                      tiles: [
                         SettingsTileData(
                           title: t.settingsTileVeloraPayTitle,
                           subtitle: t.settingsTileVeloraPaySubtitle,
@@ -151,7 +149,7 @@ class SettingScreen extends StatelessWidget {
                           iconColor: const Color(0xFF00BCD4),
                           onTap: () => _openNamed(
                             context,
-                            AppRouteName.settingsMyDonation,
+                            AppRouteName.settingsWalletDashboard,
                           ),
                         ),
                       ],
@@ -287,127 +285,143 @@ class SettingScreen extends StatelessWidget {
   }
 }
 
-class _AccountHeroCard extends StatelessWidget {
+class _AccountHeroCard extends StatefulWidget {
   const _AccountHeroCard();
+
+  @override
+  State<_AccountHeroCard> createState() => _AccountHeroCardState();
+}
+
+class _AccountHeroCardState extends State<_AccountHeroCard> {
+  @override
+  void initState() {
+    super.initState();
+    final authState = context.read<AuthBloc>().state;
+    if (authState.userId != null) {
+      context.read<ProfileBloc>().add(
+        LoadProfileEvent(userId: authState.userId!),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final t = AppLocalizations.of(context)!;
-    return Semantics(
-      container: true,
-      label: t.settingsHeroSemanticsLabel,
-      child: Container(
-        padding: const EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              colorScheme.primary.withValues(alpha: 0.2),
-              colorScheme.secondary.withValues(alpha: 0.08),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          borderRadius: BorderRadius.circular(28),
-          border: Border.all(color: colorScheme.primary.withValues(alpha: 0.2)),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  t.settingsHeroMetaId,
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    color: colorScheme.primary,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(t.settingsHeroLearnMore),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                CircleAvatar(
-                  radius: 36,
-                  backgroundImage: const NetworkImage(
-                    'https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=200',
-                  ),
-                  backgroundColor: colorScheme.surfaceContainerHighest,
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Vito Ananda',
-                        style: theme.textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        t.settingsHeroNetworks,
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          color: colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                FilledButton.tonalIcon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.swap_horiz),
-                  label: Text(t.settingsHeroSwitchButton),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: colorScheme.surface.withValues(alpha: 0.8),
-                borderRadius: BorderRadius.circular(20),
+    return BlocBuilder<ProfileBloc, ProfileState>(
+      builder: (context, profileState) {
+        final profile = profileState.profile;
+        return Semantics(
+          container: true,
+          label: t.settingsHeroSemanticsLabel,
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  colorScheme.primary.withValues(alpha: 0.2),
+                  colorScheme.secondary.withValues(alpha: 0.08),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               ),
-              child: Row(
-                children: [
-                  Icon(Icons.lock_clock, color: colorScheme.primary),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+              borderRadius: BorderRadius.circular(28),
+              border: Border.all(
+                color: colorScheme.primary.withValues(alpha: 0.2),
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 36,
+                      backgroundImage: const NetworkImage(
+                        'https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=200',
+                      ),
+                      backgroundColor: colorScheme.surfaceContainerHighest,
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            profile?.username ?? '...',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: theme.textTheme.titleLarge?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            t.settingsHeroNetworks,
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              color: colorScheme.onSurfaceVariant,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    IconButton.filledTonal(
+                      onPressed: () {},
+                      icon: const Icon(Icons.swap_horiz),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                InkWell(
+                  onTap: () => context.pushNamed(
+                    AppRouteName.settingsAccountType,
+                  ),
+                  borderRadius: BorderRadius.circular(20),
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: colorScheme.surface.withValues(alpha: 0.8),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
                       children: [
-                        Text(
-                          t.settingsHeroPasswordUpdated,
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.w600,
+                        Icon(
+                          Icons.account_circle_outlined,
+                          color: colorScheme.primary,
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                t.settingsHeroAccountType,
+                                style: theme.textTheme.bodyMedium?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Text(
+                                t.settingsHeroAccountTypeSubtitle,
+                                style: theme.textTheme.bodySmall?.copyWith(
+                                  color: colorScheme.onSurfaceVariant,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        Text(
-                          t.settingsHeroPasswordSubtitle,
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            color: colorScheme.onSurfaceVariant,
-                          ),
+                        Icon(
+                          Icons.chevron_right,
+                          color: colorScheme.onSurfaceVariant,
                         ),
                       ],
                     ),
                   ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(t.settingsHeroReviewButton),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

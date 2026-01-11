@@ -76,6 +76,11 @@ ThemeData buildTheme(Brightness brightness) {
         height: 1.2,
         color: baseColor,
       ),
+      displayMedium: GoogleFonts.pacifico(
+        fontSize: 28,
+        fontWeight: FontWeight.w400,
+        color: baseColor,
+      ),
       headlineLarge: GoogleFonts.montserrat(
         fontSize: 28,
         fontWeight: FontWeight.w700,
@@ -196,10 +201,7 @@ ThemeData buildTheme(Brightness brightness) {
     ),
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: colorScheme.surfaceContainerLow,
-      indicatorColor: Color.alphaBlend(
-        colorScheme.primary.withAlpha(38),
-        colorScheme.surfaceContainerLow,
-      ),
+      indicatorColor: Colors.transparent,
       labelTextStyle: WidgetStateProperty.all(
         const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
       ),

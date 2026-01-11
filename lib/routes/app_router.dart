@@ -7,7 +7,7 @@ import 'package:velora/features/auth/domain/entities/auth_status.dart';
 import 'package:velora/features/auth/presentation/screens/auth_screens.dart';
 import 'package:velora/features/campaign/presentation/screens/campaign_screen.dart';
 import 'package:velora/features/chat/presentation/screens/chat_screen.dart';
-import 'package:velora/features/chat/presentation/screens/search_screen.dart';
+import 'package:velora/features/chat/presentation/screens/chat_search_screen.dart';
 import 'package:velora/features/chat/presentation/screens/search_follow_user_screen.dart';
 import 'package:velora/features/media/presentation/screens/media_gallery_screen.dart';
 import 'package:velora/features/navigation/models/create_post_media_args.dart';
@@ -20,8 +20,10 @@ import 'package:velora/features/navigation/services/navigation_service.dart';
 import 'package:velora/features/post/presentation/screens/create_post_screen.dart';
 import 'package:velora/features/post/presentation/screens/more_option_post_screen.dart';
 import 'package:velora/features/profile/presentation/screens/profile_screen.dart';
+import 'package:velora/features/profile/presentation/screens/other_user_profile_screen.dart';
 import 'package:velora/features/settings/domain/entities/user_preferences.dart';
 import 'package:velora/features/settings/presentation/screens/account/account_status_screen.dart';
+import 'package:velora/features/settings/presentation/screens/account/account_type_screen.dart';
 import 'package:velora/features/settings/presentation/screens/account/activity_screen.dart';
 import 'package:velora/features/settings/presentation/screens/account/my_donation_screen.dart';
 import 'package:velora/features/settings/presentation/screens/appearance/accessibility_screen.dart';
@@ -37,9 +39,11 @@ import 'package:velora/features/settings/presentation/screens/profile/profile_fi
 import 'package:velora/features/settings/presentation/screens/security/password_security_screen.dart';
 import 'package:velora/features/settings/presentation/screens/security/privacy_screen.dart';
 import 'package:velora/features/settings/presentation/screens/settings_screen.dart';
+import 'package:velora/features/wallet/presentation/screens/wallet_dashboard_screen.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
 import 'package:velora/features/feed/presentation/screens/feed_screen.dart';
+import 'package:velora/features/notification/presentation/screens/notification_screen.dart';
 
 class AppRouter {
   AppRouter(
@@ -58,9 +62,14 @@ class AppRouter {
           final resetting = state.matchedLocation == AppRoutePath.resetPassword;
           final verifying =
               state.matchedLocation == AppRoutePath.verificationEmail;
+          final onSplash = state.matchedLocation == AppRoutePath.splash;
 
           if (status == AuthStatus.unknown) {
-            return AppRoutePath.createPost;
+            // Show splash screen while checking auth
+            if (!onSplash) {
+              return AppRoutePath.splash;
+            }
+            return null;
           }
 
           if (status == AuthStatus.unauthenticated) {
@@ -90,6 +99,11 @@ class AppRouter {
           return null;
         },
         routes: [
+          GoRoute(
+            path: AppRoutePath.splash,
+            name: AppRouteName.splash,
+            builder: (context, state) => const SplashScreen(),
+          ),
           GoRoute(
             path: AppRoutePath.signIn,
             name: AppRouteName.signIn,
@@ -135,14 +149,45 @@ class AppRouter {
                     builder: (context, state) => const FeedScreen(),
                     routes: [
                       GoRoute(
+                        path: AppRouteSinglePath.notification,
+                        name: AppRouteName.notification,
+                        parentNavigatorKey:
+                            navigationService.navigatorKey, // root
+                        builder: (context, state) => const NotificationScreen(),
+                      ),
+                      GoRoute(
+                        path: AppRouteSinglePath.userProfile,
+                        name: AppRouteName.userProfile,
+                        parentNavigatorKey:
+                            navigationService.navigatorKey, // root
+                        builder: (context, state) {
+                          final userId = state.pathParameters['userId'];
+                          if (userId == null || userId.isEmpty) {
+                            return const Scaffold(
+                              body: Center(child: Text('User not found')),
+                            );
+                          }
+                          return OtherUserProfileScreen(userId: userId);
+                        },
+                      ),
+                      GoRoute(
                         path: AppRouteSinglePath.createPost,
                         name: AppRouteName.createPost,
                         parentNavigatorKey:
                             navigationService.navigatorKey, // root
                         builder: (context, state) {
-                          final args = state.extra as CreatePostMediaArgs;
+                          final args = state.extra as CreatePostMediaArgs?;
+                          if (args == null) {
+                            // No media provided, redirect to gallery
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              if (context.mounted) {
+                                context.goNamed(AppRouteName.mediaGallery);
+                              }
+                            });
+                            return const SizedBox.shrink();
+                          }
                           return CreatePostScreen(
-                            selectedMedia: args.selectedMedia,
+                            selectedMedia: args.selectedMedia ?? [],
                           );
                         },
                         routes: [
@@ -170,7 +215,7 @@ class AppRouter {
                   GoRoute(
                     path: AppRoutePath.search,
                     name: AppRouteName.search,
-                    builder: (context, state) => const SearchScreen(),
+                    builder: (context, state) => const ChatSearchScreen(),
                   ),
                 ],
               ),
@@ -227,8 +272,7 @@ class AppRouter {
                           GoRoute(
                             path: AppRouteSinglePath.settingsActivity,
                             name: AppRouteName.settingsActivity,
-                            parentNavigatorKey:
-                                navigationService.navigatorKey,
+                            parentNavigatorKey: navigationService.navigatorKey,
                             builder: (context, state) => const ActivityScreen(),
                           ),
                           GoRoute(
@@ -237,6 +281,13 @@ class AppRouter {
                             parentNavigatorKey: navigationService.navigatorKey,
                             builder: (context, state) =>
                                 const AccountStatusScreen(),
+                          ),
+                          GoRoute(
+                            path: AppRouteSinglePath.settingsAccountType,
+                            name: AppRouteName.settingsAccountType,
+                            parentNavigatorKey: navigationService.navigatorKey,
+                            builder: (context, state) =>
+                                const AccountTypeScreen(),
                           ),
                           GoRoute(
                             path: AppRouteSinglePath.settingsPasswordSecurity,
@@ -264,6 +315,13 @@ class AppRouter {
                             parentNavigatorKey: navigationService.navigatorKey,
                             builder: (context, state) =>
                                 const MyDonationScreen(),
+                          ),
+                          GoRoute(
+                            path: AppRouteSinglePath.settingsWalletDashboard,
+                            name: AppRouteName.settingsWalletDashboard,
+                            parentNavigatorKey: navigationService.navigatorKey,
+                            builder: (context, state) =>
+                                const WalletDashboardScreen(),
                           ),
                           GoRoute(
                             path: AppRouteSinglePath.settingsNotificationDetail,
@@ -355,8 +413,11 @@ class AppRouter {
 }
 
 class AppRouteName {
+  static const splash = 'splash';
   static const home = 'home';
   static const mediaGallery = 'mediaGallery';
+  static const notification = 'notification';
+  static const userProfile = 'userProfile';
   static const createPost = 'createPost';
   static const moreOptions = 'moreOptions';
   static const search = 'search';
@@ -368,10 +429,12 @@ class AppRouteName {
   static const settingsProfiles = 'settingsProfiles';
   static const settingsActivity = 'settingsActivity';
   static const settingsAccountStatus = 'settingsAccountStatus';
+  static const settingsAccountType = 'settingsAccountType';
   static const settingsPasswordSecurity = 'settingsPasswordSecurity';
   static const settingsEditProfile = 'settingsEditProfile';
   static const settingsPrivacy = 'settingsPrivacy';
   static const settingsMyDonation = 'settingsMyDonation';
+  static const settingsWalletDashboard = 'settingsWalletDashboard';
   static const settingsNotificationDetail = 'settingsNotificationDetail';
   static const settingsTheme = 'settingsTheme';
   static const settingsLanguage = 'settingsLanguage';
@@ -387,18 +450,23 @@ class AppRouteName {
 }
 
 class AppRoutePath {
+  static const splash = '/splash';
   static const home = '/home';
   static const mediaGallery = '/media-gallery';
+  static const notification = '/home/notification';
+  static const userProfile = '/home/user/:userId';
   static const createPost = '/home/create-post';
   static const moreOptions = '/home/create-post/more-options';
   static const settings = '/profile/settings';
   static const settingsProfiles = '/profile/settings/profiles';
   static const settingsActivity = '/profile/settings/activity';
   static const settingsAccountStatus = '/profile/settings/account-status';
+  static const settingsAccountType = '/profile/settings/account-type';
   static const settingsPasswordSecurity = '/profile/settings/password-security';
   static const settingsEditProfile = '/profile/settings/edit-profile';
   static const settingsPrivacy = '/profile/settings/privacy';
   static const settingsMyDonation = '/profile/settings/my-donation';
+  static const settingsWalletDashboard = '/profile/settings/wallet';
   static const settingsNotificationDetail =
       '/profile/settings/notification-detail';
   static const settingsTheme = '/profile/settings/theme';
@@ -420,17 +488,21 @@ class AppRoutePath {
 }
 
 class AppRouteSinglePath {
+  static const notification = 'notification';
+  static const userProfile = 'user/:userId';
   static const createPost = 'create-post';
   static const moreOptions = 'more-options';
   static const settings = 'settings';
   static const settingsProfiles = 'profiles';
   static const settingsActivity = 'activity';
   static const settingsAccountStatus = 'account-status';
+  static const settingsAccountType = 'account-type';
   static const settingsPasswordSecurity = 'password-security';
   static const settingsLanguage = 'language';
   static const settingsEditProfile = 'edit-profile';
   static const settingsPrivacy = 'privacy';
   static const settingsMyDonation = 'my-donation';
+  static const settingsWalletDashboard = 'wallet';
   static const settingsNotificationDetail = 'notification-detail';
   static const settingsTheme = 'theme';
   static const settingsAccessibility = 'accessibility';

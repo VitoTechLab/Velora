@@ -253,6 +253,17 @@ class AppLocalizationsJa extends AppLocalizations {
   String get feedSeeTranslation => '翻訳を表示';
 
   @override
+  String get feedSeeOriginal => '原文を表示';
+
+  @override
+  String get feedTranslating => '読み込み中…';
+
+  @override
+  String feedCommentAsUser(String username) {
+    return '$usernameとしてコメント';
+  }
+
+  @override
   String feedViewReplies(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -262,6 +273,9 @@ class AppLocalizationsJa extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get feedHideReplies => '返信を非表示';
 
   @override
   String get feedUnknownUser => '不明なユーザー';
@@ -392,10 +406,22 @@ class AppLocalizationsJa extends AppLocalizations {
   String get settingsTileSharingSubtitle => '自動同期する内容を選択';
 
   @override
+  String get settingsTileActivityTitle => 'アクティビティ履歴';
+
+  @override
+  String get settingsTileActivitySubtitle => '最近のアクティビティとインタラクションを表示';
+
+  @override
   String get settingsTileLoggingTitle => 'アカウントでのログイン';
 
   @override
   String get settingsTileLoggingSubtitle => 'デバイスとログイン承認を確認';
+
+  @override
+  String get settingsTileAccountStatusTitle => 'アカウントステータス';
+
+  @override
+  String get settingsTileAccountStatusSubtitle => '認証状況とアカウントアクティビティを表示';
 
   @override
   String get settingsAccountTitle => 'アカウント設定';
@@ -429,6 +455,64 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get settingsTileVeloraPaySubtitle => '支払い方法と保護';
+
+  @override
+  String get settingsWalletTitle => 'ウォレット';
+
+  @override
+  String get walletDashboardTitle => 'ウォレットダッシュボード';
+
+  @override
+  String get walletDashboardWalletId => 'ウォレットID: #VLR2024001';
+
+  @override
+  String get walletDashboardTotalBalance => '総残高';
+
+  @override
+  String get walletDashboardQuickActions => 'クイックアクション';
+
+  @override
+  String get walletDashboardDonationHistory => '寄付履歴';
+
+  @override
+  String get walletDashboardDonationHistorySubtitle => 'すべての寄付取引を表示';
+
+  @override
+  String get walletDashboardMyCampaigns => 'マイキャンペーン';
+
+  @override
+  String get walletDashboardMyCampaignsSubtitle => '募金キャンペーンを管理';
+
+  @override
+  String get walletDashboardMyDonations => '私の寄付';
+
+  @override
+  String get walletDashboardMyDonationsSubtitle => '貢献を追跡';
+
+  @override
+  String get walletDashboardAnalytics => '分析';
+
+  @override
+  String get walletDashboardAnalyticsSubtitle => '洞察と統計を表示';
+
+  @override
+  String get walletDashboardRecentActivity => '最近のアクティビティ';
+
+  @override
+  String get walletDashboardNoActivity => 'まだアクティビティはありません';
+
+  @override
+  String get walletDashboardNoActivitySubtitle => 'ウォレットの取引がここに表示されます';
+
+  @override
+  String get walletDashboardUnderDevelopmentTitle => '開発中';
+
+  @override
+  String get walletDashboardUnderDevelopmentMessage =>
+      'この機能は現在開発中で、まもなく利用できるようになります。';
+
+  @override
+  String get walletDashboardUnderDevelopmentButton => 'OK';
 
   @override
   String get settingsPersonalizationTitle => 'パーソナライズ';
@@ -501,6 +585,99 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get settingsHeroReviewButton => '確認';
+
+  @override
+  String get settingsHeroAccountType => '個人アカウント';
+
+  @override
+  String get settingsHeroAccountTypeSubtitle => 'タップしてアカウントタイプの詳細を表示';
+
+  @override
+  String get accountTypeScreenTitle => 'アカウントタイプ';
+
+  @override
+  String get accountTypeScreenCurrentType => '現在のアカウントタイプ';
+
+  @override
+  String get accountTypeScreenPersonal => '個人アカウント';
+
+  @override
+  String get accountTypeScreenPersonalDescription => '友人や家族とつながりたい個人ユーザーに最適です。';
+
+  @override
+  String get accountTypeScreenPersonalBenefitsTitle => '個人アカウントのメリット';
+
+  @override
+  String get accountTypeScreenBenefit1Title => '個人プロフィール';
+
+  @override
+  String get accountTypeScreenBenefit1Subtitle => '個人のアイデンティティとプライバシーを保護';
+
+  @override
+  String get accountTypeScreenBenefit2Title => 'プライバシーコントロール';
+
+  @override
+  String get accountTypeScreenBenefit2Subtitle => '個人データを完全にコントロール';
+
+  @override
+  String get accountTypeScreenBenefit3Title => 'ソーシャル接続';
+
+  @override
+  String get accountTypeScreenBenefit3Subtitle => '友人や家族と簡単につながる';
+
+  @override
+  String get accountTypeScreenOrganization => '組織アカウント';
+
+  @override
+  String get accountTypeScreenOrganizationDescription =>
+      '組織アカウントにアップグレードして、高度なビジネス機能と認証を利用できます。';
+
+  @override
+  String get accountTypeScreenOrganizationBenefitsTitle => '組織のメリット：';
+
+  @override
+  String get accountTypeScreenOrgBenefit1 => '本物認証バッジ';
+
+  @override
+  String get accountTypeScreenOrgBenefit2 => '高度な分析と洞察';
+
+  @override
+  String get accountTypeScreenOrgBenefit3 => 'プロモーションツールとキャンペーン';
+
+  @override
+  String get accountTypeScreenOrgBenefit4 => 'チームコラボレーション機能';
+
+  @override
+  String get accountTypeScreenUpgradeButton => '組織にアップグレード';
+
+  @override
+  String get accountTypeScreenVerificationTitle => 'アカウント認証';
+
+  @override
+  String get accountTypeScreenVerificationSubtitle =>
+      '組織アカウントにアップグレードするには、認証プロセスを完了してください。';
+
+  @override
+  String get accountTypeScreenVerificationStep1 => 'IDカード写真';
+
+  @override
+  String get accountTypeScreenVerificationStep1Subtitle => 'IDカードの鮮明な写真を撮影';
+
+  @override
+  String get accountTypeScreenVerificationStep2 => 'セルフィー写真';
+
+  @override
+  String get accountTypeScreenVerificationStep2Subtitle => 'IDカードを持ったセルフィーを撮影';
+
+  @override
+  String get accountTypeScreenVerificationSubmit => '認証を送信';
+
+  @override
+  String get accountTypeScreenVerificationCancel => 'キャンセル';
+
+  @override
+  String get accountTypeScreenVerificationSuccess =>
+      '認証が正常に送信されました！1～3営業日以内にリクエストを確認いたします。';
 
   @override
   String get settingsSearchProfiles => 'プロフィール';
@@ -606,6 +783,9 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get settingsProfileInfoSyncDescription =>
       'Your name and username will no longer sync across apps. Manage synced profile pictures through Connected experiences.';
+
+  @override
+  String get settingsProfileAccountSectionTitle => 'アカウント';
 
   @override
   String get settingsProfileAccountTypeTitle => 'Account type';
@@ -2055,6 +2235,53 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get settingsAccountDonationsRecurringLabel => '定期';
+
+  @override
+  String get campaignSeeMore => 'もっと見る';
+
+  @override
+  String get campaignFeaturedTitle => '注目のキャンペーン';
+
+  @override
+  String get campaignEmergencyTitle => '緊急募金活動';
+
+  @override
+  String get campaignSocialImpactTitle => '社会的影響';
+
+  @override
+  String get campaignTechnologyTitle => 'テクノロジー';
+
+  @override
+  String get campaignFashionTitle => 'ファッション';
+
+  @override
+  String get campaignFoodBeverageTitle => '飲食';
+
+  @override
+  String get campaignFinanceTitle => 'ファイナンス';
+
+  @override
+  String get campaignMemorialTitle => '追悼募金活動';
+
+  @override
+  String campaignRaisedOf(String target) {
+    return '$targetのうち達成';
+  }
+
+  @override
+  String get campaignEndOfList => 'キャンペーンはこれ以上ありません';
+
+  @override
+  String get searchTitle => '検索';
+
+  @override
+  String get searchHint => '何をお探しですか？';
+
+  @override
+  String get searchDiscoverTitle => '新しい発見';
+
+  @override
+  String get searchBrowseAllTitle => 'すべて見る';
 
   @override
   String settingsAccountDonationsRecurringValue(int count) {

@@ -54,12 +54,6 @@ class AccountStatusScreen extends StatelessWidget {
                 iconColor: colorScheme.tertiary,
               ),
               SettingsTileData(
-                title: t.settingsAccountStatusDonationsTitle,
-                subtitle: 'Rp 2,450,000 • 12 campaigns',
-                icon: Icons.volunteer_activism_outlined,
-                iconColor: colorScheme.primary,
-              ),
-              SettingsTileData(
                 title: t.settingsAccountStatusCampaignsTitle,
                 subtitle: '3 active campaigns',
                 icon: Icons.campaign_outlined,
