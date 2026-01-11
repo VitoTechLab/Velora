@@ -1,5 +1,5 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,269 +9,174 @@ part of 'translation_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+
 /// @nodoc
 mixin _$TranslationState {
+  bool get isLoading => throw _privateConstructorUsedError;
+  String? get result => throw _privateConstructorUsedError;
+  String? get error => throw _privateConstructorUsedError;
 
- bool get isLoading; String? get result; String? get error;
-/// Create a copy of TranslationState
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$TranslationStateCopyWith<TranslationState> get copyWith => _$TranslationStateCopyWithImpl<TranslationState>(this as TranslationState, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TranslationState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.result, result) || other.result == result)&&(identical(other.error, error) || other.error == error));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,isLoading,result,error);
-
-@override
-String toString() {
-  return 'TranslationState(isLoading: $isLoading, result: $result, error: $error)';
-}
-
-
+  /// Create a copy of TranslationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $TranslationStateCopyWith<TranslationState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract mixin class $TranslationStateCopyWith<$Res>  {
-  factory $TranslationStateCopyWith(TranslationState value, $Res Function(TranslationState) _then) = _$TranslationStateCopyWithImpl;
-@useResult
-$Res call({
- bool isLoading, String? result, String? error
-});
-
-
-
-
+abstract class $TranslationStateCopyWith<$Res> {
+  factory $TranslationStateCopyWith(
+          TranslationState value, $Res Function(TranslationState) then) =
+      _$TranslationStateCopyWithImpl<$Res, TranslationState>;
+  @useResult
+  $Res call({bool isLoading, String? result, String? error});
 }
+
 /// @nodoc
-class _$TranslationStateCopyWithImpl<$Res>
+class _$TranslationStateCopyWithImpl<$Res, $Val extends TranslationState>
     implements $TranslationStateCopyWith<$Res> {
-  _$TranslationStateCopyWithImpl(this._self, this._then);
+  _$TranslationStateCopyWithImpl(this._value, this._then);
 
-  final TranslationState _self;
-  final $Res Function(TranslationState) _then;
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
-/// Create a copy of TranslationState
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? result = freezed,Object? error = freezed,}) {
-  return _then(_self.copyWith(
-isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
-as bool,result: freezed == result ? _self.result : result // ignore: cast_nullable_to_non_nullable
-as String?,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
-as String?,
-  ));
+  /// Create a copy of TranslationState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isLoading = null,
+    Object? result = freezed,
+    Object? error = freezed,
+  }) {
+    return _then(_value.copyWith(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      result: freezed == result
+          ? _value.result
+          : result // ignore: cast_nullable_to_non_nullable
+              as String?,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
 }
 
+/// @nodoc
+abstract class _$$TranslationStateImplCopyWith<$Res>
+    implements $TranslationStateCopyWith<$Res> {
+  factory _$$TranslationStateImplCopyWith(_$TranslationStateImpl value,
+          $Res Function(_$TranslationStateImpl) then) =
+      __$$TranslationStateImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({bool isLoading, String? result, String? error});
 }
 
+/// @nodoc
+class __$$TranslationStateImplCopyWithImpl<$Res>
+    extends _$TranslationStateCopyWithImpl<$Res, _$TranslationStateImpl>
+    implements _$$TranslationStateImplCopyWith<$Res> {
+  __$$TranslationStateImplCopyWithImpl(_$TranslationStateImpl _value,
+      $Res Function(_$TranslationStateImpl) _then)
+      : super(_value, _then);
 
-/// Adds pattern-matching-related methods to [TranslationState].
-extension TranslationStatePatterns on TranslationState {
-/// A variant of `map` that fallback to returning `orElse`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _TranslationState value)?  $default,{required TResult orElse(),}){
-final _that = this;
-switch (_that) {
-case _TranslationState() when $default != null:
-return $default(_that);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// Callbacks receives the raw object, upcasted.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case final Subclass2 value:
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _TranslationState value)  $default,){
-final _that = this;
-switch (_that) {
-case _TranslationState():
-return $default(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `map` that fallback to returning `null`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _TranslationState value)?  $default,){
-final _that = this;
-switch (_that) {
-case _TranslationState() when $default != null:
-return $default(_that);case _:
-  return null;
-
-}
-}
-/// A variant of `when` that fallback to an `orElse` callback.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoading,  String? result,  String? error)?  $default,{required TResult orElse(),}) {final _that = this;
-switch (_that) {
-case _TranslationState() when $default != null:
-return $default(_that.isLoading,_that.result,_that.error);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// As opposed to `map`, this offers destructuring.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case Subclass2(:final field2):
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoading,  String? result,  String? error)  $default,) {final _that = this;
-switch (_that) {
-case _TranslationState():
-return $default(_that.isLoading,_that.result,_that.error);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `when` that fallback to returning `null`
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoading,  String? result,  String? error)?  $default,) {final _that = this;
-switch (_that) {
-case _TranslationState() when $default != null:
-return $default(_that.isLoading,_that.result,_that.error);case _:
-  return null;
-
-}
-}
-
+  /// Create a copy of TranslationState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isLoading = null,
+    Object? result = freezed,
+    Object? error = freezed,
+  }) {
+    return _then(_$TranslationStateImpl(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      result: freezed == result
+          ? _value.result
+          : result // ignore: cast_nullable_to_non_nullable
+              as String?,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
 /// @nodoc
 
+class _$TranslationStateImpl implements _TranslationState {
+  const _$TranslationStateImpl(
+      {this.isLoading = false, this.result, this.error});
 
-class _TranslationState implements TranslationState {
-  const _TranslationState({this.isLoading = false, this.result, this.error});
-  
+  @override
+  @JsonKey()
+  final bool isLoading;
+  @override
+  final String? result;
+  @override
+  final String? error;
 
-@override@JsonKey() final  bool isLoading;
-@override final  String? result;
-@override final  String? error;
+  @override
+  String toString() {
+    return 'TranslationState(isLoading: $isLoading, result: $result, error: $error)';
+  }
 
-/// Create a copy of TranslationState
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$TranslationStateCopyWith<_TranslationState> get copyWith => __$TranslationStateCopyWithImpl<_TranslationState>(this, _$identity);
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TranslationStateImpl &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.result, result) || other.result == result) &&
+            (identical(other.error, error) || other.error == error));
+  }
 
+  @override
+  int get hashCode => Object.hash(runtimeType, isLoading, result, error);
 
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TranslationState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.result, result) || other.result == result)&&(identical(other.error, error) || other.error == error));
+  /// Create a copy of TranslationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TranslationStateImplCopyWith<_$TranslationStateImpl> get copyWith =>
+      __$$TranslationStateImplCopyWithImpl<_$TranslationStateImpl>(
+          this, _$identity);
 }
 
+abstract class _TranslationState implements TranslationState {
+  const factory _TranslationState(
+      {final bool isLoading,
+      final String? result,
+      final String? error}) = _$TranslationStateImpl;
 
-@override
-int get hashCode => Object.hash(runtimeType,isLoading,result,error);
+  @override
+  bool get isLoading;
+  @override
+  String? get result;
+  @override
+  String? get error;
 
-@override
-String toString() {
-  return 'TranslationState(isLoading: $isLoading, result: $result, error: $error)';
+  /// Create a copy of TranslationState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TranslationStateImplCopyWith<_$TranslationStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
-
-
-}
-
-/// @nodoc
-abstract mixin class _$TranslationStateCopyWith<$Res> implements $TranslationStateCopyWith<$Res> {
-  factory _$TranslationStateCopyWith(_TranslationState value, $Res Function(_TranslationState) _then) = __$TranslationStateCopyWithImpl;
-@override @useResult
-$Res call({
- bool isLoading, String? result, String? error
-});
-
-
-
-
-}
-/// @nodoc
-class __$TranslationStateCopyWithImpl<$Res>
-    implements _$TranslationStateCopyWith<$Res> {
-  __$TranslationStateCopyWithImpl(this._self, this._then);
-
-  final _TranslationState _self;
-  final $Res Function(_TranslationState) _then;
-
-/// Create a copy of TranslationState
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? result = freezed,Object? error = freezed,}) {
-  return _then(_TranslationState(
-isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
-as bool,result: freezed == result ? _self.result : result // ignore: cast_nullable_to_non_nullable
-as String?,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
-as String?,
-  ));
-}
-
-
-}
-
-// dart format on

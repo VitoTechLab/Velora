@@ -19,17 +19,14 @@ mixin _$FeedEntity {
   String get id => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
-  DateTime get createdAt =>
-      throw _privateConstructorUsedError; // User info (from profiles join)
+  DateTime get createdAt => throw _privateConstructorUsedError;
   String? get username => throw _privateConstructorUsedError;
   String? get photoUrl => throw _privateConstructorUsedError;
   List<String> get imageUrls => throw _privateConstructorUsedError;
-  List<String> get videoUrls =>
-      throw _privateConstructorUsedError; // Counts (nullable as they might be hidden)
+  List<String> get videoUrls => throw _privateConstructorUsedError;
   int? get likesCount => throw _privateConstructorUsedError;
   int? get commentsCount => throw _privateConstructorUsedError;
-  int? get sharesCount =>
-      throw _privateConstructorUsedError; // Interaction Status (computed by View)
+  int? get sharesCount => throw _privateConstructorUsedError;
   bool get isLiked => throw _privateConstructorUsedError;
   bool get isBookmarked => throw _privateConstructorUsedError;
   bool get isFollowing => throw _privateConstructorUsedError;
@@ -43,38 +40,11 @@ mixin _$FeedEntity {
   String? get campaignId => throw _privateConstructorUsedError;
   String? get campaignTitle => throw _privateConstructorUsedError;
 
-<<<<<<< HEAD
- String get id; String get userId; String get content; DateTime get createdAt; String? get username; String? get photoUrl; List<String> get imageUrls; List<String> get videoUrls; int? get likesCount; int? get commentsCount; int? get sharesCount; bool get isLiked; bool get isBookmarked; bool get isFollowing; bool get isFollowRequestPending; bool get isMe; bool get commentsEnabled; bool get hideLikeCount; bool get hideCommentCount; bool get hideShareCount; bool get hideLikesList; String? get campaignId; String? get campaignTitle;
-/// Create a copy of FeedEntity
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$FeedEntityCopyWith<FeedEntity> get copyWith => _$FeedEntityCopyWithImpl<FeedEntity>(this as FeedEntity, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FeedEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.content, content) || other.content == content)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.username, username) || other.username == username)&&(identical(other.photoUrl, photoUrl) || other.photoUrl == photoUrl)&&const DeepCollectionEquality().equals(other.imageUrls, imageUrls)&&const DeepCollectionEquality().equals(other.videoUrls, videoUrls)&&(identical(other.likesCount, likesCount) || other.likesCount == likesCount)&&(identical(other.commentsCount, commentsCount) || other.commentsCount == commentsCount)&&(identical(other.sharesCount, sharesCount) || other.sharesCount == sharesCount)&&(identical(other.isLiked, isLiked) || other.isLiked == isLiked)&&(identical(other.isBookmarked, isBookmarked) || other.isBookmarked == isBookmarked)&&(identical(other.isFollowing, isFollowing) || other.isFollowing == isFollowing)&&(identical(other.isFollowRequestPending, isFollowRequestPending) || other.isFollowRequestPending == isFollowRequestPending)&&(identical(other.isMe, isMe) || other.isMe == isMe)&&(identical(other.commentsEnabled, commentsEnabled) || other.commentsEnabled == commentsEnabled)&&(identical(other.hideLikeCount, hideLikeCount) || other.hideLikeCount == hideLikeCount)&&(identical(other.hideCommentCount, hideCommentCount) || other.hideCommentCount == hideCommentCount)&&(identical(other.hideShareCount, hideShareCount) || other.hideShareCount == hideShareCount)&&(identical(other.hideLikesList, hideLikesList) || other.hideLikesList == hideLikesList)&&(identical(other.campaignId, campaignId) || other.campaignId == campaignId)&&(identical(other.campaignTitle, campaignTitle) || other.campaignTitle == campaignTitle));
-}
-
-
-@override
-int get hashCode => Object.hashAll([runtimeType,id,userId,content,createdAt,username,photoUrl,const DeepCollectionEquality().hash(imageUrls),const DeepCollectionEquality().hash(videoUrls),likesCount,commentsCount,sharesCount,isLiked,isBookmarked,isFollowing,isFollowRequestPending,isMe,commentsEnabled,hideLikeCount,hideCommentCount,hideShareCount,hideLikesList,campaignId,campaignTitle]);
-
-@override
-String toString() {
-  return 'FeedEntity(id: $id, userId: $userId, content: $content, createdAt: $createdAt, username: $username, photoUrl: $photoUrl, imageUrls: $imageUrls, videoUrls: $videoUrls, likesCount: $likesCount, commentsCount: $commentsCount, sharesCount: $sharesCount, isLiked: $isLiked, isBookmarked: $isBookmarked, isFollowing: $isFollowing, isFollowRequestPending: $isFollowRequestPending, isMe: $isMe, commentsEnabled: $commentsEnabled, hideLikeCount: $hideLikeCount, hideCommentCount: $hideCommentCount, hideShareCount: $hideShareCount, hideLikesList: $hideLikesList, campaignId: $campaignId, campaignTitle: $campaignTitle)';
-}
-
-
-=======
   /// Create a copy of FeedEntity
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   $FeedEntityCopyWith<FeedEntity> get copyWith =>
       throw _privateConstructorUsedError;
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
 }
 
 /// @nodoc
@@ -444,24 +414,6 @@ class _$FeedEntityImpl extends _FeedEntity {
         _videoUrls = videoUrls,
         super._();
 
-<<<<<<< HEAD
-class _FeedEntity extends FeedEntity {
-  const _FeedEntity({required this.id, required this.userId, required this.content, required this.createdAt, this.username, this.photoUrl, final  List<String> imageUrls = const <String>[], final  List<String> videoUrls = const <String>[], this.likesCount, this.commentsCount, this.sharesCount, this.isLiked = false, this.isBookmarked = false, this.isFollowing = false, this.isFollowRequestPending = false, this.isMe = false, this.commentsEnabled = true, this.hideLikeCount = false, this.hideCommentCount = false, this.hideShareCount = false, this.hideLikesList = false, this.campaignId, this.campaignTitle}): _imageUrls = imageUrls,_videoUrls = videoUrls,super._();
-  
-
-@override final  String id;
-@override final  String userId;
-@override final  String content;
-@override final  DateTime createdAt;
-@override final  String? username;
-@override final  String? photoUrl;
- final  List<String> _imageUrls;
-@override@JsonKey() List<String> get imageUrls {
-  if (_imageUrls is EqualUnmodifiableListView) return _imageUrls;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_imageUrls);
-}
-=======
   @override
   final String id;
   @override
@@ -470,7 +422,6 @@ class _FeedEntity extends FeedEntity {
   final String content;
   @override
   final DateTime createdAt;
-// User info (from profiles join)
   @override
   final String? username;
   @override
@@ -483,7 +434,6 @@ class _FeedEntity extends FeedEntity {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_imageUrls);
   }
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
 
   final List<String> _videoUrls;
   @override
@@ -494,31 +444,12 @@ class _FeedEntity extends FeedEntity {
     return EqualUnmodifiableListView(_videoUrls);
   }
 
-<<<<<<< HEAD
-@override final  int? likesCount;
-@override final  int? commentsCount;
-@override final  int? sharesCount;
-@override@JsonKey() final  bool isLiked;
-@override@JsonKey() final  bool isBookmarked;
-@override@JsonKey() final  bool isFollowing;
-@override@JsonKey() final  bool isFollowRequestPending;
-@override@JsonKey() final  bool isMe;
-@override@JsonKey() final  bool commentsEnabled;
-@override@JsonKey() final  bool hideLikeCount;
-@override@JsonKey() final  bool hideCommentCount;
-@override@JsonKey() final  bool hideShareCount;
-@override@JsonKey() final  bool hideLikesList;
-@override final  String? campaignId;
-@override final  String? campaignTitle;
-=======
-// Counts (nullable as they might be hidden)
   @override
   final int? likesCount;
   @override
   final int? commentsCount;
   @override
   final int? sharesCount;
-// Interaction Status (computed by View)
   @override
   @JsonKey()
   final bool isLiked;
@@ -553,7 +484,6 @@ class _FeedEntity extends FeedEntity {
   final String? campaignId;
   @override
   final String? campaignTitle;
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
 
   @override
   String toString() {
@@ -679,7 +609,7 @@ abstract class _FeedEntity extends FeedEntity {
   @override
   String get content;
   @override
-  DateTime get createdAt; // User info (from profiles join)
+  DateTime get createdAt;
   @override
   String? get username;
   @override
@@ -687,13 +617,13 @@ abstract class _FeedEntity extends FeedEntity {
   @override
   List<String> get imageUrls;
   @override
-  List<String> get videoUrls; // Counts (nullable as they might be hidden)
+  List<String> get videoUrls;
   @override
   int? get likesCount;
   @override
   int? get commentsCount;
   @override
-  int? get sharesCount; // Interaction Status (computed by View)
+  int? get sharesCount;
   @override
   bool get isLiked;
   @override

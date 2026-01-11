@@ -21,20 +21,10 @@ MessagePaginationModel _$MessagePaginationModelFromJson(
 
 /// @nodoc
 mixin _$MessagePaginationModel {
-<<<<<<< HEAD
-
- List<ChatMessageModel> get messages; bool get hasMore;@JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) MessageCursorModel? get nextCursor;
-/// Create a copy of MessagePaginationModel
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$MessagePaginationModelCopyWith<MessagePaginationModel> get copyWith => _$MessagePaginationModelCopyWithImpl<MessagePaginationModel>(this as MessagePaginationModel, _$identity);
-=======
   List<ChatMessageModel> get messages => throw _privateConstructorUsedError;
   bool get hasMore => throw _privateConstructorUsedError;
   @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson)
-  MessageCursor? get nextCursor => throw _privateConstructorUsedError;
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
+  MessageCursorModel? get nextCursor => throw _privateConstructorUsedError;
 
   /// Serializes this MessagePaginationModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,17 +37,6 @@ $MessagePaginationModelCopyWith<MessagePaginationModel> get copyWith => _$Messag
 }
 
 /// @nodoc
-<<<<<<< HEAD
-abstract mixin class $MessagePaginationModelCopyWith<$Res>  {
-  factory $MessagePaginationModelCopyWith(MessagePaginationModel value, $Res Function(MessagePaginationModel) _then) = _$MessagePaginationModelCopyWithImpl;
-@useResult
-$Res call({
- List<ChatMessageModel> messages, bool hasMore,@JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) MessageCursorModel? nextCursor
-});
-
-
-$MessageCursorModelCopyWith<$Res>? get nextCursor;
-=======
 abstract class $MessagePaginationModelCopyWith<$Res> {
   factory $MessagePaginationModelCopyWith(MessagePaginationModel value,
           $Res Function(MessagePaginationModel) then) =
@@ -67,10 +46,9 @@ abstract class $MessagePaginationModelCopyWith<$Res> {
       {List<ChatMessageModel> messages,
       bool hasMore,
       @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson)
-      MessageCursor? nextCursor});
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
+      MessageCursorModel? nextCursor});
 
-  $MessageCursorCopyWith<$Res>? get nextCursor;
+  $MessageCursorModelCopyWith<$Res>? get nextCursor;
 }
 
 /// @nodoc
@@ -84,31 +62,6 @@ class _$MessagePaginationModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-<<<<<<< HEAD
-/// Create a copy of MessagePaginationModel
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? messages = null,Object? hasMore = null,Object? nextCursor = freezed,}) {
-  return _then(_self.copyWith(
-messages: null == messages ? _self.messages : messages // ignore: cast_nullable_to_non_nullable
-as List<ChatMessageModel>,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
-as bool,nextCursor: freezed == nextCursor ? _self.nextCursor : nextCursor // ignore: cast_nullable_to_non_nullable
-as MessageCursorModel?,
-  ));
-}
-/// Create a copy of MessagePaginationModel
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$MessageCursorModelCopyWith<$Res>? get nextCursor {
-    if (_self.nextCursor == null) {
-    return null;
-  }
-
-  return $MessageCursorModelCopyWith<$Res>(_self.nextCursor!, (value) {
-    return _then(_self.copyWith(nextCursor: value));
-  });
-}
-=======
   /// Create a copy of MessagePaginationModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
@@ -130,7 +83,7 @@ $MessageCursorModelCopyWith<$Res>? get nextCursor {
       nextCursor: freezed == nextCursor
           ? _value.nextCursor
           : nextCursor // ignore: cast_nullable_to_non_nullable
-              as MessageCursor?,
+              as MessageCursorModel?,
     ) as $Val);
   }
 
@@ -138,16 +91,15 @@ $MessageCursorModelCopyWith<$Res>? get nextCursor {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $MessageCursorCopyWith<$Res>? get nextCursor {
+  $MessageCursorModelCopyWith<$Res>? get nextCursor {
     if (_value.nextCursor == null) {
       return null;
     }
 
-    return $MessageCursorCopyWith<$Res>(_value.nextCursor!, (value) {
+    return $MessageCursorModelCopyWith<$Res>(_value.nextCursor!, (value) {
       return _then(_value.copyWith(nextCursor: value) as $Val);
     });
   }
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
 }
 
 /// @nodoc
@@ -163,139 +115,10 @@ abstract class _$$MessagePaginationModelImplCopyWith<$Res>
       {List<ChatMessageModel> messages,
       bool hasMore,
       @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson)
-      MessageCursor? nextCursor});
+      MessageCursorModel? nextCursor});
 
-<<<<<<< HEAD
-/// Adds pattern-matching-related methods to [MessagePaginationModel].
-extension MessagePaginationModelPatterns on MessagePaginationModel {
-/// A variant of `map` that fallback to returning `orElse`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _MessagePaginationModel value)?  $default,{required TResult orElse(),}){
-final _that = this;
-switch (_that) {
-case _MessagePaginationModel() when $default != null:
-return $default(_that);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// Callbacks receives the raw object, upcasted.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case final Subclass2 value:
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _MessagePaginationModel value)  $default,){
-final _that = this;
-switch (_that) {
-case _MessagePaginationModel():
-return $default(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `map` that fallback to returning `null`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _MessagePaginationModel value)?  $default,){
-final _that = this;
-switch (_that) {
-case _MessagePaginationModel() when $default != null:
-return $default(_that);case _:
-  return null;
-
-}
-}
-/// A variant of `when` that fallback to an `orElse` callback.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<ChatMessageModel> messages,  bool hasMore, @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson)  MessageCursorModel? nextCursor)?  $default,{required TResult orElse(),}) {final _that = this;
-switch (_that) {
-case _MessagePaginationModel() when $default != null:
-return $default(_that.messages,_that.hasMore,_that.nextCursor);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// As opposed to `map`, this offers destructuring.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case Subclass2(:final field2):
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<ChatMessageModel> messages,  bool hasMore, @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson)  MessageCursorModel? nextCursor)  $default,) {final _that = this;
-switch (_that) {
-case _MessagePaginationModel():
-return $default(_that.messages,_that.hasMore,_that.nextCursor);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `when` that fallback to returning `null`
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<ChatMessageModel> messages,  bool hasMore, @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson)  MessageCursorModel? nextCursor)?  $default,) {final _that = this;
-switch (_that) {
-case _MessagePaginationModel() when $default != null:
-return $default(_that.messages,_that.hasMore,_that.nextCursor);case _:
-  return null;
-
-}
-=======
   @override
-  $MessageCursorCopyWith<$Res>? get nextCursor;
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
+  $MessageCursorModelCopyWith<$Res>? get nextCursor;
 }
 
 /// @nodoc
@@ -329,7 +152,7 @@ class __$$MessagePaginationModelImplCopyWithImpl<$Res>
       nextCursor: freezed == nextCursor
           ? _value.nextCursor
           : nextCursor // ignore: cast_nullable_to_non_nullable
-              as MessageCursor?,
+              as MessageCursorModel?,
     ));
   }
 }
@@ -348,90 +171,6 @@ class _$MessagePaginationModelImpl extends _MessagePaginationModel {
   factory _$MessagePaginationModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$MessagePaginationModelImplFromJson(json);
 
-<<<<<<< HEAD
- final  List<ChatMessageModel> _messages;
-@override List<ChatMessageModel> get messages {
-  if (_messages is EqualUnmodifiableListView) return _messages;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_messages);
-}
-
-@override final  bool hasMore;
-@override@JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) final  MessageCursorModel? nextCursor;
-
-/// Create a copy of MessagePaginationModel
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$MessagePaginationModelCopyWith<_MessagePaginationModel> get copyWith => __$MessagePaginationModelCopyWithImpl<_MessagePaginationModel>(this, _$identity);
-
-@override
-Map<String, dynamic> toJson() {
-  return _$MessagePaginationModelToJson(this, );
-}
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MessagePaginationModel&&const DeepCollectionEquality().equals(other._messages, _messages)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.nextCursor, nextCursor) || other.nextCursor == nextCursor));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_messages),hasMore,nextCursor);
-
-@override
-String toString() {
-  return 'MessagePaginationModel(messages: $messages, hasMore: $hasMore, nextCursor: $nextCursor)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class _$MessagePaginationModelCopyWith<$Res> implements $MessagePaginationModelCopyWith<$Res> {
-  factory _$MessagePaginationModelCopyWith(_MessagePaginationModel value, $Res Function(_MessagePaginationModel) _then) = __$MessagePaginationModelCopyWithImpl;
-@override @useResult
-$Res call({
- List<ChatMessageModel> messages, bool hasMore,@JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson) MessageCursorModel? nextCursor
-});
-
-
-@override $MessageCursorModelCopyWith<$Res>? get nextCursor;
-
-}
-/// @nodoc
-class __$MessagePaginationModelCopyWithImpl<$Res>
-    implements _$MessagePaginationModelCopyWith<$Res> {
-  __$MessagePaginationModelCopyWithImpl(this._self, this._then);
-
-  final _MessagePaginationModel _self;
-  final $Res Function(_MessagePaginationModel) _then;
-
-/// Create a copy of MessagePaginationModel
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? messages = null,Object? hasMore = null,Object? nextCursor = freezed,}) {
-  return _then(_MessagePaginationModel(
-messages: null == messages ? _self._messages : messages // ignore: cast_nullable_to_non_nullable
-as List<ChatMessageModel>,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
-as bool,nextCursor: freezed == nextCursor ? _self.nextCursor : nextCursor // ignore: cast_nullable_to_non_nullable
-as MessageCursorModel?,
-  ));
-}
-
-/// Create a copy of MessagePaginationModel
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$MessageCursorModelCopyWith<$Res>? get nextCursor {
-    if (_self.nextCursor == null) {
-    return null;
-  }
-
-  return $MessageCursorModelCopyWith<$Res>(_self.nextCursor!, (value) {
-    return _then(_self.copyWith(nextCursor: value));
-  });
-}
-=======
   final List<ChatMessageModel> _messages;
   @override
   List<ChatMessageModel> get messages {
@@ -444,7 +183,7 @@ $MessageCursorModelCopyWith<$Res>? get nextCursor {
   final bool hasMore;
   @override
   @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson)
-  final MessageCursor? nextCursor;
+  final MessageCursorModel? nextCursor;
 
   @override
   String toString() {
@@ -482,7 +221,6 @@ $MessageCursorModelCopyWith<$Res>? get nextCursor {
       this,
     );
   }
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
 }
 
 abstract class _MessagePaginationModel extends MessagePaginationModel {
@@ -490,7 +228,7 @@ abstract class _MessagePaginationModel extends MessagePaginationModel {
       {required final List<ChatMessageModel> messages,
       required final bool hasMore,
       @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson)
-      final MessageCursor? nextCursor}) = _$MessagePaginationModelImpl;
+      final MessageCursorModel? nextCursor}) = _$MessagePaginationModelImpl;
   const _MessagePaginationModel._() : super._();
 
   factory _MessagePaginationModel.fromJson(Map<String, dynamic> json) =
@@ -502,7 +240,7 @@ abstract class _MessagePaginationModel extends MessagePaginationModel {
   bool get hasMore;
   @override
   @JsonKey(fromJson: _cursorFromJson, toJson: _cursorToJson)
-  MessageCursor? get nextCursor;
+  MessageCursorModel? get nextCursor;
 
   /// Create a copy of MessagePaginationModel
   /// with the given fields replaced by the non-null parameter values.

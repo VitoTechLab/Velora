@@ -354,15 +354,14 @@ class UserSearchScreen extends HookWidget with ChatNavigationMixin {
             )
           : null,
       onTap: () {
-<<<<<<< HEAD:lib/features/chat/presentation/screens/user_search_screen.dart
         navigateToChatWithUser(
           context,
           userId: user.userId,
           username: user.username,
           avatarUrl: user.avatarUrl,
-=======
-        // Note: Profile view or chat creation will be implemented with navigation routes
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Open chat with ${user.username}')),
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d:lib/features/chat/presentation/screens/search_follow_user_screen.dart
+          bio: user.bio,
         );
+      },
+    );
+  }
+}

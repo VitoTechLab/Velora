@@ -25,52 +25,18 @@ mixin _$CommentEntity {
   String? get userPhotoUrl => throw _privateConstructorUsedError;
   int get likesCount => throw _privateConstructorUsedError;
   bool get isLiked => throw _privateConstructorUsedError;
-  String? get parentCommentId =>
-      throw _privateConstructorUsedError; // For nested replies
+  String? get parentCommentId => throw _privateConstructorUsedError;
   List<CommentEntity> get replies => throw _privateConstructorUsedError;
 
-<<<<<<< HEAD
- String get id; String get postId; String get userId; String get content; DateTime get createdAt; String? get userFullName; String? get userPhotoUrl; int get likesCount; bool get isLiked; String? get parentCommentId; List<CommentEntity> get replies;/// Total reply count from server.
- int get replyCount;/// Whether replies have been loaded for this comment.
- bool get repliesLoaded;/// Whether replies are currently being fetched.
- bool get isLoadingReplies;
-/// Create a copy of CommentEntity
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$CommentEntityCopyWith<CommentEntity> get copyWith => _$CommentEntityCopyWithImpl<CommentEntity>(this as CommentEntity, _$identity);
+  /// Total reply count from server.
+  int get replyCount => throw _privateConstructorUsedError;
 
+  /// Whether replies have been loaded for this comment.
+  bool get repliesLoaded => throw _privateConstructorUsedError;
 
+  /// Whether replies are currently being fetched.
+  bool get isLoadingReplies => throw _privateConstructorUsedError;
 
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CommentEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.content, content) || other.content == content)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.userFullName, userFullName) || other.userFullName == userFullName)&&(identical(other.userPhotoUrl, userPhotoUrl) || other.userPhotoUrl == userPhotoUrl)&&(identical(other.likesCount, likesCount) || other.likesCount == likesCount)&&(identical(other.isLiked, isLiked) || other.isLiked == isLiked)&&(identical(other.parentCommentId, parentCommentId) || other.parentCommentId == parentCommentId)&&const DeepCollectionEquality().equals(other.replies, replies)&&(identical(other.replyCount, replyCount) || other.replyCount == replyCount)&&(identical(other.repliesLoaded, repliesLoaded) || other.repliesLoaded == repliesLoaded)&&(identical(other.isLoadingReplies, isLoadingReplies) || other.isLoadingReplies == isLoadingReplies));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,id,postId,userId,content,createdAt,userFullName,userPhotoUrl,likesCount,isLiked,parentCommentId,const DeepCollectionEquality().hash(replies),replyCount,repliesLoaded,isLoadingReplies);
-
-@override
-String toString() {
-  return 'CommentEntity(id: $id, postId: $postId, userId: $userId, content: $content, createdAt: $createdAt, userFullName: $userFullName, userPhotoUrl: $userPhotoUrl, likesCount: $likesCount, isLiked: $isLiked, parentCommentId: $parentCommentId, replies: $replies, replyCount: $replyCount, repliesLoaded: $repliesLoaded, isLoadingReplies: $isLoadingReplies)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $CommentEntityCopyWith<$Res>  {
-  factory $CommentEntityCopyWith(CommentEntity value, $Res Function(CommentEntity) _then) = _$CommentEntityCopyWithImpl;
-@useResult
-$Res call({
- String id, String postId, String userId, String content, DateTime createdAt, String? userFullName, String? userPhotoUrl, int likesCount, bool isLiked, String? parentCommentId, List<CommentEntity> replies, int replyCount, bool repliesLoaded, bool isLoadingReplies
-});
-
-
-
-
-=======
   /// Create a copy of CommentEntity
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -95,8 +61,10 @@ abstract class $CommentEntityCopyWith<$Res> {
       int likesCount,
       bool isLiked,
       String? parentCommentId,
-      List<CommentEntity> replies});
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
+      List<CommentEntity> replies,
+      int replyCount,
+      bool repliesLoaded,
+      bool isLoadingReplies});
 }
 
 /// @nodoc
@@ -109,28 +77,6 @@ class _$CommentEntityCopyWithImpl<$Res, $Val extends CommentEntity>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-<<<<<<< HEAD
-/// Create a copy of CommentEntity
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? postId = null,Object? userId = null,Object? content = null,Object? createdAt = null,Object? userFullName = freezed,Object? userPhotoUrl = freezed,Object? likesCount = null,Object? isLiked = null,Object? parentCommentId = freezed,Object? replies = null,Object? replyCount = null,Object? repliesLoaded = null,Object? isLoadingReplies = null,}) {
-  return _then(_self.copyWith(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
-as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
-as String,content: null == content ? _self.content : content // ignore: cast_nullable_to_non_nullable
-as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as DateTime,userFullName: freezed == userFullName ? _self.userFullName : userFullName // ignore: cast_nullable_to_non_nullable
-as String?,userPhotoUrl: freezed == userPhotoUrl ? _self.userPhotoUrl : userPhotoUrl // ignore: cast_nullable_to_non_nullable
-as String?,likesCount: null == likesCount ? _self.likesCount : likesCount // ignore: cast_nullable_to_non_nullable
-as int,isLiked: null == isLiked ? _self.isLiked : isLiked // ignore: cast_nullable_to_non_nullable
-as bool,parentCommentId: freezed == parentCommentId ? _self.parentCommentId : parentCommentId // ignore: cast_nullable_to_non_nullable
-as String?,replies: null == replies ? _self.replies : replies // ignore: cast_nullable_to_non_nullable
-as List<CommentEntity>,replyCount: null == replyCount ? _self.replyCount : replyCount // ignore: cast_nullable_to_non_nullable
-as int,repliesLoaded: null == repliesLoaded ? _self.repliesLoaded : repliesLoaded // ignore: cast_nullable_to_non_nullable
-as bool,isLoadingReplies: null == isLoadingReplies ? _self.isLoadingReplies : isLoadingReplies // ignore: cast_nullable_to_non_nullable
-as bool,
-  ));
-=======
   /// Create a copy of CommentEntity
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
@@ -147,6 +93,9 @@ as bool,
     Object? isLiked = null,
     Object? parentCommentId = freezed,
     Object? replies = null,
+    Object? replyCount = null,
+    Object? repliesLoaded = null,
+    Object? isLoadingReplies = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -193,9 +142,20 @@ as bool,
           ? _value.replies
           : replies // ignore: cast_nullable_to_non_nullable
               as List<CommentEntity>,
+      replyCount: null == replyCount
+          ? _value.replyCount
+          : replyCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      repliesLoaded: null == repliesLoaded
+          ? _value.repliesLoaded
+          : repliesLoaded // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingReplies: null == isLoadingReplies
+          ? _value.isLoadingReplies
+          : isLoadingReplies // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
 }
 
 /// @nodoc
@@ -217,7 +177,10 @@ abstract class _$$CommentEntityImplCopyWith<$Res>
       int likesCount,
       bool isLiked,
       String? parentCommentId,
-      List<CommentEntity> replies});
+      List<CommentEntity> replies,
+      int replyCount,
+      bool repliesLoaded,
+      bool isLoadingReplies});
 }
 
 /// @nodoc
@@ -228,136 +191,6 @@ class __$$CommentEntityImplCopyWithImpl<$Res>
       _$CommentEntityImpl _value, $Res Function(_$CommentEntityImpl) _then)
       : super(_value, _then);
 
-<<<<<<< HEAD
-/// Adds pattern-matching-related methods to [CommentEntity].
-extension CommentEntityPatterns on CommentEntity {
-/// A variant of `map` that fallback to returning `orElse`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _CommentEntity value)?  $default,{required TResult orElse(),}){
-final _that = this;
-switch (_that) {
-case _CommentEntity() when $default != null:
-return $default(_that);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// Callbacks receives the raw object, upcasted.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case final Subclass2 value:
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _CommentEntity value)  $default,){
-final _that = this;
-switch (_that) {
-case _CommentEntity():
-return $default(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `map` that fallback to returning `null`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _CommentEntity value)?  $default,){
-final _that = this;
-switch (_that) {
-case _CommentEntity() when $default != null:
-return $default(_that);case _:
-  return null;
-
-}
-}
-/// A variant of `when` that fallback to an `orElse` callback.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String postId,  String userId,  String content,  DateTime createdAt,  String? userFullName,  String? userPhotoUrl,  int likesCount,  bool isLiked,  String? parentCommentId,  List<CommentEntity> replies,  int replyCount,  bool repliesLoaded,  bool isLoadingReplies)?  $default,{required TResult orElse(),}) {final _that = this;
-switch (_that) {
-case _CommentEntity() when $default != null:
-return $default(_that.id,_that.postId,_that.userId,_that.content,_that.createdAt,_that.userFullName,_that.userPhotoUrl,_that.likesCount,_that.isLiked,_that.parentCommentId,_that.replies,_that.replyCount,_that.repliesLoaded,_that.isLoadingReplies);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// As opposed to `map`, this offers destructuring.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case Subclass2(:final field2):
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String postId,  String userId,  String content,  DateTime createdAt,  String? userFullName,  String? userPhotoUrl,  int likesCount,  bool isLiked,  String? parentCommentId,  List<CommentEntity> replies,  int replyCount,  bool repliesLoaded,  bool isLoadingReplies)  $default,) {final _that = this;
-switch (_that) {
-case _CommentEntity():
-return $default(_that.id,_that.postId,_that.userId,_that.content,_that.createdAt,_that.userFullName,_that.userPhotoUrl,_that.likesCount,_that.isLiked,_that.parentCommentId,_that.replies,_that.replyCount,_that.repliesLoaded,_that.isLoadingReplies);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `when` that fallback to returning `null`
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String postId,  String userId,  String content,  DateTime createdAt,  String? userFullName,  String? userPhotoUrl,  int likesCount,  bool isLiked,  String? parentCommentId,  List<CommentEntity> replies,  int replyCount,  bool repliesLoaded,  bool isLoadingReplies)?  $default,) {final _that = this;
-switch (_that) {
-case _CommentEntity() when $default != null:
-return $default(_that.id,_that.postId,_that.userId,_that.content,_that.createdAt,_that.userFullName,_that.userPhotoUrl,_that.likesCount,_that.isLiked,_that.parentCommentId,_that.replies,_that.replyCount,_that.repliesLoaded,_that.isLoadingReplies);case _:
-  return null;
-
-}
-}
-
-=======
   /// Create a copy of CommentEntity
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
@@ -374,6 +207,9 @@ return $default(_that.id,_that.postId,_that.userId,_that.content,_that.createdAt
     Object? isLiked = null,
     Object? parentCommentId = freezed,
     Object? replies = null,
+    Object? replyCount = null,
+    Object? repliesLoaded = null,
+    Object? isLoadingReplies = null,
   }) {
     return _then(_$CommentEntityImpl(
       id: null == id
@@ -420,9 +256,20 @@ return $default(_that.id,_that.postId,_that.userId,_that.content,_that.createdAt
           ? _value._replies
           : replies // ignore: cast_nullable_to_non_nullable
               as List<CommentEntity>,
+      replyCount: null == replyCount
+          ? _value.replyCount
+          : replyCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      repliesLoaded: null == repliesLoaded
+          ? _value.repliesLoaded
+          : repliesLoaded // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingReplies: null == isLoadingReplies
+          ? _value.isLoadingReplies
+          : isLoadingReplies // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
 }
 
 /// @nodoc
@@ -439,38 +286,12 @@ class _$CommentEntityImpl implements _CommentEntity {
       this.likesCount = 0,
       this.isLiked = false,
       this.parentCommentId,
-      final List<CommentEntity> replies = const []})
+      final List<CommentEntity> replies = const [],
+      this.replyCount = 0,
+      this.repliesLoaded = false,
+      this.isLoadingReplies = false})
       : _replies = replies;
 
-<<<<<<< HEAD
-class _CommentEntity implements CommentEntity {
-  const _CommentEntity({required this.id, required this.postId, required this.userId, required this.content, required this.createdAt, this.userFullName, this.userPhotoUrl, this.likesCount = 0, this.isLiked = false, this.parentCommentId, final  List<CommentEntity> replies = const [], this.replyCount = 0, this.repliesLoaded = false, this.isLoadingReplies = false}): _replies = replies;
-  
-
-@override final  String id;
-@override final  String postId;
-@override final  String userId;
-@override final  String content;
-@override final  DateTime createdAt;
-@override final  String? userFullName;
-@override final  String? userPhotoUrl;
-@override@JsonKey() final  int likesCount;
-@override@JsonKey() final  bool isLiked;
-@override final  String? parentCommentId;
- final  List<CommentEntity> _replies;
-@override@JsonKey() List<CommentEntity> get replies {
-  if (_replies is EqualUnmodifiableListView) return _replies;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_replies);
-}
-
-/// Total reply count from server.
-@override@JsonKey() final  int replyCount;
-/// Whether replies have been loaded for this comment.
-@override@JsonKey() final  bool repliesLoaded;
-/// Whether replies are currently being fetched.
-@override@JsonKey() final  bool isLoadingReplies;
-=======
   @override
   final String id;
   @override
@@ -493,9 +314,7 @@ class _CommentEntity implements CommentEntity {
   final bool isLiked;
   @override
   final String? parentCommentId;
-// For nested replies
   final List<CommentEntity> _replies;
-// For nested replies
   @override
   @JsonKey()
   List<CommentEntity> get replies {
@@ -504,9 +323,24 @@ class _CommentEntity implements CommentEntity {
     return EqualUnmodifiableListView(_replies);
   }
 
+  /// Total reply count from server.
+  @override
+  @JsonKey()
+  final int replyCount;
+
+  /// Whether replies have been loaded for this comment.
+  @override
+  @JsonKey()
+  final bool repliesLoaded;
+
+  /// Whether replies are currently being fetched.
+  @override
+  @JsonKey()
+  final bool isLoadingReplies;
+
   @override
   String toString() {
-    return 'CommentEntity(id: $id, postId: $postId, userId: $userId, content: $content, createdAt: $createdAt, userFullName: $userFullName, userPhotoUrl: $userPhotoUrl, likesCount: $likesCount, isLiked: $isLiked, parentCommentId: $parentCommentId, replies: $replies)';
+    return 'CommentEntity(id: $id, postId: $postId, userId: $userId, content: $content, createdAt: $createdAt, userFullName: $userFullName, userPhotoUrl: $userPhotoUrl, likesCount: $likesCount, isLiked: $isLiked, parentCommentId: $parentCommentId, replies: $replies, replyCount: $replyCount, repliesLoaded: $repliesLoaded, isLoadingReplies: $isLoadingReplies)';
   }
 
   @override
@@ -529,7 +363,13 @@ class _CommentEntity implements CommentEntity {
             (identical(other.isLiked, isLiked) || other.isLiked == isLiked) &&
             (identical(other.parentCommentId, parentCommentId) ||
                 other.parentCommentId == parentCommentId) &&
-            const DeepCollectionEquality().equals(other._replies, _replies));
+            const DeepCollectionEquality().equals(other._replies, _replies) &&
+            (identical(other.replyCount, replyCount) ||
+                other.replyCount == replyCount) &&
+            (identical(other.repliesLoaded, repliesLoaded) ||
+                other.repliesLoaded == repliesLoaded) &&
+            (identical(other.isLoadingReplies, isLoadingReplies) ||
+                other.isLoadingReplies == isLoadingReplies));
   }
 
   @override
@@ -545,7 +385,10 @@ class _CommentEntity implements CommentEntity {
       likesCount,
       isLiked,
       parentCommentId,
-      const DeepCollectionEquality().hash(_replies));
+      const DeepCollectionEquality().hash(_replies),
+      replyCount,
+      repliesLoaded,
+      isLoadingReplies);
 
   /// Create a copy of CommentEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -568,8 +411,10 @@ abstract class _CommentEntity implements CommentEntity {
       final int likesCount,
       final bool isLiked,
       final String? parentCommentId,
-      final List<CommentEntity> replies}) = _$CommentEntityImpl;
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
+      final List<CommentEntity> replies,
+      final int replyCount,
+      final bool repliesLoaded,
+      final bool isLoadingReplies}) = _$CommentEntityImpl;
 
   @override
   String get id;
@@ -590,77 +435,22 @@ abstract class _CommentEntity implements CommentEntity {
   @override
   bool get isLiked;
   @override
-  String? get parentCommentId; // For nested replies
+  String? get parentCommentId;
   @override
   List<CommentEntity> get replies;
 
-<<<<<<< HEAD
+  /// Total reply count from server.
+  @override
+  int get replyCount;
 
+  /// Whether replies have been loaded for this comment.
+  @override
+  bool get repliesLoaded;
 
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CommentEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.content, content) || other.content == content)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.userFullName, userFullName) || other.userFullName == userFullName)&&(identical(other.userPhotoUrl, userPhotoUrl) || other.userPhotoUrl == userPhotoUrl)&&(identical(other.likesCount, likesCount) || other.likesCount == likesCount)&&(identical(other.isLiked, isLiked) || other.isLiked == isLiked)&&(identical(other.parentCommentId, parentCommentId) || other.parentCommentId == parentCommentId)&&const DeepCollectionEquality().equals(other._replies, _replies)&&(identical(other.replyCount, replyCount) || other.replyCount == replyCount)&&(identical(other.repliesLoaded, repliesLoaded) || other.repliesLoaded == repliesLoaded)&&(identical(other.isLoadingReplies, isLoadingReplies) || other.isLoadingReplies == isLoadingReplies));
-}
+  /// Whether replies are currently being fetched.
+  @override
+  bool get isLoadingReplies;
 
-
-@override
-int get hashCode => Object.hash(runtimeType,id,postId,userId,content,createdAt,userFullName,userPhotoUrl,likesCount,isLiked,parentCommentId,const DeepCollectionEquality().hash(_replies),replyCount,repliesLoaded,isLoadingReplies);
-
-@override
-String toString() {
-  return 'CommentEntity(id: $id, postId: $postId, userId: $userId, content: $content, createdAt: $createdAt, userFullName: $userFullName, userPhotoUrl: $userPhotoUrl, likesCount: $likesCount, isLiked: $isLiked, parentCommentId: $parentCommentId, replies: $replies, replyCount: $replyCount, repliesLoaded: $repliesLoaded, isLoadingReplies: $isLoadingReplies)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class _$CommentEntityCopyWith<$Res> implements $CommentEntityCopyWith<$Res> {
-  factory _$CommentEntityCopyWith(_CommentEntity value, $Res Function(_CommentEntity) _then) = __$CommentEntityCopyWithImpl;
-@override @useResult
-$Res call({
- String id, String postId, String userId, String content, DateTime createdAt, String? userFullName, String? userPhotoUrl, int likesCount, bool isLiked, String? parentCommentId, List<CommentEntity> replies, int replyCount, bool repliesLoaded, bool isLoadingReplies
-});
-
-
-
-
-}
-/// @nodoc
-class __$CommentEntityCopyWithImpl<$Res>
-    implements _$CommentEntityCopyWith<$Res> {
-  __$CommentEntityCopyWithImpl(this._self, this._then);
-
-  final _CommentEntity _self;
-  final $Res Function(_CommentEntity) _then;
-
-/// Create a copy of CommentEntity
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? postId = null,Object? userId = null,Object? content = null,Object? createdAt = null,Object? userFullName = freezed,Object? userPhotoUrl = freezed,Object? likesCount = null,Object? isLiked = null,Object? parentCommentId = freezed,Object? replies = null,Object? replyCount = null,Object? repliesLoaded = null,Object? isLoadingReplies = null,}) {
-  return _then(_CommentEntity(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
-as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
-as String,content: null == content ? _self.content : content // ignore: cast_nullable_to_non_nullable
-as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as DateTime,userFullName: freezed == userFullName ? _self.userFullName : userFullName // ignore: cast_nullable_to_non_nullable
-as String?,userPhotoUrl: freezed == userPhotoUrl ? _self.userPhotoUrl : userPhotoUrl // ignore: cast_nullable_to_non_nullable
-as String?,likesCount: null == likesCount ? _self.likesCount : likesCount // ignore: cast_nullable_to_non_nullable
-as int,isLiked: null == isLiked ? _self.isLiked : isLiked // ignore: cast_nullable_to_non_nullable
-as bool,parentCommentId: freezed == parentCommentId ? _self.parentCommentId : parentCommentId // ignore: cast_nullable_to_non_nullable
-as String?,replies: null == replies ? _self._replies : replies // ignore: cast_nullable_to_non_nullable
-as List<CommentEntity>,replyCount: null == replyCount ? _self.replyCount : replyCount // ignore: cast_nullable_to_non_nullable
-as int,repliesLoaded: null == repliesLoaded ? _self.repliesLoaded : repliesLoaded // ignore: cast_nullable_to_non_nullable
-as bool,isLoadingReplies: null == isLoadingReplies ? _self.isLoadingReplies : isLoadingReplies // ignore: cast_nullable_to_non_nullable
-as bool,
-  ));
-}
-
-
-}
-
-// dart format on
-=======
   /// Create a copy of CommentEntity
   /// with the given fields replaced by the non-null parameter values.
   @override
@@ -668,4 +458,3 @@ as bool,
   _$$CommentEntityImplCopyWith<_$CommentEntityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d

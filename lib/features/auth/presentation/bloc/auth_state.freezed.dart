@@ -16,51 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AuthState {
-  AuthStatus get status => throw _privateConstructorUsedError;
+  AuthStatusEntity get status => throw _privateConstructorUsedError;
   AuthLoadingType get loadingType => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
   String? get userId => throw _privateConstructorUsedError;
 
-<<<<<<< HEAD
- AuthStatusEntity get status; AuthLoadingType get loadingType; String? get message; String? get errorMessage; String? get userId;
-/// Create a copy of AuthState
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$AuthStateCopyWith<AuthState> get copyWith => _$AuthStateCopyWithImpl<AuthState>(this as AuthState, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthState&&(identical(other.status, status) || other.status == status)&&(identical(other.loadingType, loadingType) || other.loadingType == loadingType)&&(identical(other.message, message) || other.message == message)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.userId, userId) || other.userId == userId));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,status,loadingType,message,errorMessage,userId);
-
-@override
-String toString() {
-  return 'AuthState(status: $status, loadingType: $loadingType, message: $message, errorMessage: $errorMessage, userId: $userId)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $AuthStateCopyWith<$Res>  {
-  factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) _then) = _$AuthStateCopyWithImpl;
-@useResult
-$Res call({
- AuthStatusEntity status, AuthLoadingType loadingType, String? message, String? errorMessage, String? userId
-});
-
-
-
-
-=======
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -74,12 +35,11 @@ abstract class $AuthStateCopyWith<$Res> {
       _$AuthStateCopyWithImpl<$Res, AuthState>;
   @useResult
   $Res call(
-      {AuthStatus status,
+      {AuthStatusEntity status,
       AuthLoadingType loadingType,
       String? message,
       String? errorMessage,
       String? userId});
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
 }
 
 /// @nodoc
@@ -92,19 +52,6 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-<<<<<<< HEAD
-/// Create a copy of AuthState
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? loadingType = null,Object? message = freezed,Object? errorMessage = freezed,Object? userId = freezed,}) {
-  return _then(_self.copyWith(
-status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as AuthStatusEntity,loadingType: null == loadingType ? _self.loadingType : loadingType // ignore: cast_nullable_to_non_nullable
-as AuthLoadingType,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
-as String?,userId: freezed == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
-as String?,
-  ));
-=======
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
@@ -120,7 +67,7 @@ as String?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as AuthStatus,
+              as AuthStatusEntity,
       loadingType: null == loadingType
           ? _value.loadingType
           : loadingType // ignore: cast_nullable_to_non_nullable
@@ -139,7 +86,6 @@ as String?,
               as String?,
     ) as $Val);
   }
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
 }
 
 /// @nodoc
@@ -151,7 +97,7 @@ abstract class _$$AuthStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {AuthStatus status,
+      {AuthStatusEntity status,
       AuthLoadingType loadingType,
       String? message,
       String? errorMessage,
@@ -166,136 +112,6 @@ class __$$AuthStateImplCopyWithImpl<$Res>
       _$AuthStateImpl _value, $Res Function(_$AuthStateImpl) _then)
       : super(_value, _then);
 
-<<<<<<< HEAD
-/// Adds pattern-matching-related methods to [AuthState].
-extension AuthStatePatterns on AuthState {
-/// A variant of `map` that fallback to returning `orElse`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _AuthState value)?  $default,{required TResult orElse(),}){
-final _that = this;
-switch (_that) {
-case _AuthState() when $default != null:
-return $default(_that);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// Callbacks receives the raw object, upcasted.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case final Subclass2 value:
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _AuthState value)  $default,){
-final _that = this;
-switch (_that) {
-case _AuthState():
-return $default(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `map` that fallback to returning `null`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _AuthState value)?  $default,){
-final _that = this;
-switch (_that) {
-case _AuthState() when $default != null:
-return $default(_that);case _:
-  return null;
-
-}
-}
-/// A variant of `when` that fallback to an `orElse` callback.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( AuthStatusEntity status,  AuthLoadingType loadingType,  String? message,  String? errorMessage,  String? userId)?  $default,{required TResult orElse(),}) {final _that = this;
-switch (_that) {
-case _AuthState() when $default != null:
-return $default(_that.status,_that.loadingType,_that.message,_that.errorMessage,_that.userId);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// As opposed to `map`, this offers destructuring.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case Subclass2(:final field2):
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( AuthStatusEntity status,  AuthLoadingType loadingType,  String? message,  String? errorMessage,  String? userId)  $default,) {final _that = this;
-switch (_that) {
-case _AuthState():
-return $default(_that.status,_that.loadingType,_that.message,_that.errorMessage,_that.userId);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `when` that fallback to returning `null`
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( AuthStatusEntity status,  AuthLoadingType loadingType,  String? message,  String? errorMessage,  String? userId)?  $default,) {final _that = this;
-switch (_that) {
-case _AuthState() when $default != null:
-return $default(_that.status,_that.loadingType,_that.message,_that.errorMessage,_that.userId);case _:
-  return null;
-
-}
-}
-
-=======
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
@@ -311,7 +127,7 @@ return $default(_that.status,_that.loadingType,_that.message,_that.errorMessage,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as AuthStatus,
+              as AuthStatusEntity,
       loadingType: null == loadingType
           ? _value.loadingType
           : loadingType // ignore: cast_nullable_to_non_nullable
@@ -330,34 +146,22 @@ return $default(_that.status,_that.loadingType,_that.message,_that.errorMessage,
               as String?,
     ));
   }
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
 }
 
 /// @nodoc
 
 class _$AuthStateImpl extends _AuthState {
   const _$AuthStateImpl(
-      {this.status = AuthStatus.unknown,
+      {this.status = AuthStatusEntity.unknown,
       this.loadingType = AuthLoadingType.none,
       this.message,
       this.errorMessage,
       this.userId})
       : super._();
 
-<<<<<<< HEAD
-class _AuthState extends AuthState {
-  const _AuthState({this.status = AuthStatusEntity.unknown, this.loadingType = AuthLoadingType.none, this.message, this.errorMessage, this.userId}): super._();
-  
-
-@override@JsonKey() final  AuthStatusEntity status;
-@override@JsonKey() final  AuthLoadingType loadingType;
-@override final  String? message;
-@override final  String? errorMessage;
-@override final  String? userId;
-=======
   @override
   @JsonKey()
-  final AuthStatus status;
+  final AuthStatusEntity status;
   @override
   @JsonKey()
   final AuthLoadingType loadingType;
@@ -372,7 +176,6 @@ class _AuthState extends AuthState {
   String toString() {
     return 'AuthState(status: $status, loadingType: $loadingType, message: $message, errorMessage: $errorMessage, userId: $userId)';
   }
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
 
   @override
   bool operator ==(Object other) {
@@ -403,7 +206,7 @@ class _AuthState extends AuthState {
 
 abstract class _AuthState extends AuthState {
   const factory _AuthState(
-      {final AuthStatus status,
+      {final AuthStatusEntity status,
       final AuthLoadingType loadingType,
       final String? message,
       final String? errorMessage,
@@ -411,7 +214,7 @@ abstract class _AuthState extends AuthState {
   const _AuthState._() : super._();
 
   @override
-  AuthStatus get status;
+  AuthStatusEntity get status;
   @override
   AuthLoadingType get loadingType;
   @override
@@ -428,47 +231,3 @@ abstract class _AuthState extends AuthState {
   _$$AuthStateImplCopyWith<_$AuthStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
-<<<<<<< HEAD
-
-
-}
-
-/// @nodoc
-abstract mixin class _$AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
-  factory _$AuthStateCopyWith(_AuthState value, $Res Function(_AuthState) _then) = __$AuthStateCopyWithImpl;
-@override @useResult
-$Res call({
- AuthStatusEntity status, AuthLoadingType loadingType, String? message, String? errorMessage, String? userId
-});
-
-
-
-
-}
-/// @nodoc
-class __$AuthStateCopyWithImpl<$Res>
-    implements _$AuthStateCopyWith<$Res> {
-  __$AuthStateCopyWithImpl(this._self, this._then);
-
-  final _AuthState _self;
-  final $Res Function(_AuthState) _then;
-
-/// Create a copy of AuthState
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? loadingType = null,Object? message = freezed,Object? errorMessage = freezed,Object? userId = freezed,}) {
-  return _then(_AuthState(
-status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as AuthStatusEntity,loadingType: null == loadingType ? _self.loadingType : loadingType // ignore: cast_nullable_to_non_nullable
-as AuthLoadingType,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
-as String?,userId: freezed == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
-as String?,
-  ));
-}
-
-
-}
-
-// dart format on
-=======
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d

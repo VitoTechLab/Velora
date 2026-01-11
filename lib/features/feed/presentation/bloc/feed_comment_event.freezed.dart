@@ -20,6 +20,7 @@ mixin _$FeedCommentEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String postId, int? limit) loadFeedComments,
     required TResult Function(String postId, int limit) loadMoreFeedComments,
+    required TResult Function(String parentCommentId) loadReplies,
     required TResult Function(
             String postId, String content, String? parentCommentId)
         addFeedComment,
@@ -36,6 +37,7 @@ mixin _$FeedCommentEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String postId, int? limit)? loadFeedComments,
     TResult? Function(String postId, int limit)? loadMoreFeedComments,
+    TResult? Function(String parentCommentId)? loadReplies,
     TResult? Function(String postId, String content, String? parentCommentId)?
         addFeedComment,
     TResult? Function(String commentId)? deleteFeedComment,
@@ -51,6 +53,7 @@ mixin _$FeedCommentEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String postId, int? limit)? loadFeedComments,
     TResult Function(String postId, int limit)? loadMoreFeedComments,
+    TResult Function(String parentCommentId)? loadReplies,
     TResult Function(String postId, String content, String? parentCommentId)?
         addFeedComment,
     TResult Function(String commentId)? deleteFeedComment,
@@ -68,6 +71,7 @@ mixin _$FeedCommentEvent {
     required TResult Function(LoadFeedCommentsEvent value) loadFeedComments,
     required TResult Function(LoadMoreFeedCommentsEvent value)
         loadMoreFeedComments,
+    required TResult Function(LoadRepliesEvent value) loadReplies,
     required TResult Function(AddFeedCommentEvent value) addFeedComment,
     required TResult Function(DeleteFeedCommentEvent value) deleteFeedComment,
     required TResult Function(ToggleFeedCommentLikeEvent value)
@@ -85,6 +89,7 @@ mixin _$FeedCommentEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadFeedCommentsEvent value)? loadFeedComments,
     TResult? Function(LoadMoreFeedCommentsEvent value)? loadMoreFeedComments,
+    TResult? Function(LoadRepliesEvent value)? loadReplies,
     TResult? Function(AddFeedCommentEvent value)? addFeedComment,
     TResult? Function(DeleteFeedCommentEvent value)? deleteFeedComment,
     TResult? Function(ToggleFeedCommentLikeEvent value)? toggleFeedCommentLike,
@@ -100,6 +105,7 @@ mixin _$FeedCommentEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadFeedCommentsEvent value)? loadFeedComments,
     TResult Function(LoadMoreFeedCommentsEvent value)? loadMoreFeedComments,
+    TResult Function(LoadRepliesEvent value)? loadReplies,
     TResult Function(AddFeedCommentEvent value)? addFeedComment,
     TResult Function(DeleteFeedCommentEvent value)? deleteFeedComment,
     TResult Function(ToggleFeedCommentLikeEvent value)? toggleFeedCommentLike,
@@ -131,183 +137,8 @@ class _$FeedCommentEventCopyWithImpl<$Res, $Val extends FeedCommentEvent>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-<<<<<<< HEAD
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LoadFeedCommentsEvent value)?  loadFeedComments,TResult Function( LoadMoreFeedCommentsEvent value)?  loadMoreFeedComments,TResult Function( LoadRepliesEvent value)?  loadReplies,TResult Function( AddFeedCommentEvent value)?  addFeedComment,TResult Function( DeleteFeedCommentEvent value)?  deleteFeedComment,TResult Function( ToggleFeedCommentLikeEvent value)?  toggleFeedCommentLike,TResult Function( ClearFeedCommentMessagesEvent value)?  clearFeedCommentMessages,TResult Function( StartWatchCommentsEvent value)?  startWatchComments,TResult Function( StopWatchCommentsEvent value)?  stopWatchComments,TResult Function( WatchCommentArrivedEvent value)?  watchCommentArrived,TResult Function( WatchErrorEvent value)?  watchError,required TResult orElse(),}){
-final _that = this;
-switch (_that) {
-case LoadFeedCommentsEvent() when loadFeedComments != null:
-return loadFeedComments(_that);case LoadMoreFeedCommentsEvent() when loadMoreFeedComments != null:
-return loadMoreFeedComments(_that);case LoadRepliesEvent() when loadReplies != null:
-return loadReplies(_that);case AddFeedCommentEvent() when addFeedComment != null:
-return addFeedComment(_that);case DeleteFeedCommentEvent() when deleteFeedComment != null:
-return deleteFeedComment(_that);case ToggleFeedCommentLikeEvent() when toggleFeedCommentLike != null:
-return toggleFeedCommentLike(_that);case ClearFeedCommentMessagesEvent() when clearFeedCommentMessages != null:
-return clearFeedCommentMessages(_that);case StartWatchCommentsEvent() when startWatchComments != null:
-return startWatchComments(_that);case StopWatchCommentsEvent() when stopWatchComments != null:
-return stopWatchComments(_that);case WatchCommentArrivedEvent() when watchCommentArrived != null:
-return watchCommentArrived(_that);case WatchErrorEvent() when watchError != null:
-return watchError(_that);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// Callbacks receives the raw object, upcasted.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case final Subclass2 value:
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LoadFeedCommentsEvent value)  loadFeedComments,required TResult Function( LoadMoreFeedCommentsEvent value)  loadMoreFeedComments,required TResult Function( LoadRepliesEvent value)  loadReplies,required TResult Function( AddFeedCommentEvent value)  addFeedComment,required TResult Function( DeleteFeedCommentEvent value)  deleteFeedComment,required TResult Function( ToggleFeedCommentLikeEvent value)  toggleFeedCommentLike,required TResult Function( ClearFeedCommentMessagesEvent value)  clearFeedCommentMessages,required TResult Function( StartWatchCommentsEvent value)  startWatchComments,required TResult Function( StopWatchCommentsEvent value)  stopWatchComments,required TResult Function( WatchCommentArrivedEvent value)  watchCommentArrived,required TResult Function( WatchErrorEvent value)  watchError,}){
-final _that = this;
-switch (_that) {
-case LoadFeedCommentsEvent():
-return loadFeedComments(_that);case LoadMoreFeedCommentsEvent():
-return loadMoreFeedComments(_that);case LoadRepliesEvent():
-return loadReplies(_that);case AddFeedCommentEvent():
-return addFeedComment(_that);case DeleteFeedCommentEvent():
-return deleteFeedComment(_that);case ToggleFeedCommentLikeEvent():
-return toggleFeedCommentLike(_that);case ClearFeedCommentMessagesEvent():
-return clearFeedCommentMessages(_that);case StartWatchCommentsEvent():
-return startWatchComments(_that);case StopWatchCommentsEvent():
-return stopWatchComments(_that);case WatchCommentArrivedEvent():
-return watchCommentArrived(_that);case WatchErrorEvent():
-return watchError(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `map` that fallback to returning `null`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LoadFeedCommentsEvent value)?  loadFeedComments,TResult? Function( LoadMoreFeedCommentsEvent value)?  loadMoreFeedComments,TResult? Function( LoadRepliesEvent value)?  loadReplies,TResult? Function( AddFeedCommentEvent value)?  addFeedComment,TResult? Function( DeleteFeedCommentEvent value)?  deleteFeedComment,TResult? Function( ToggleFeedCommentLikeEvent value)?  toggleFeedCommentLike,TResult? Function( ClearFeedCommentMessagesEvent value)?  clearFeedCommentMessages,TResult? Function( StartWatchCommentsEvent value)?  startWatchComments,TResult? Function( StopWatchCommentsEvent value)?  stopWatchComments,TResult? Function( WatchCommentArrivedEvent value)?  watchCommentArrived,TResult? Function( WatchErrorEvent value)?  watchError,}){
-final _that = this;
-switch (_that) {
-case LoadFeedCommentsEvent() when loadFeedComments != null:
-return loadFeedComments(_that);case LoadMoreFeedCommentsEvent() when loadMoreFeedComments != null:
-return loadMoreFeedComments(_that);case LoadRepliesEvent() when loadReplies != null:
-return loadReplies(_that);case AddFeedCommentEvent() when addFeedComment != null:
-return addFeedComment(_that);case DeleteFeedCommentEvent() when deleteFeedComment != null:
-return deleteFeedComment(_that);case ToggleFeedCommentLikeEvent() when toggleFeedCommentLike != null:
-return toggleFeedCommentLike(_that);case ClearFeedCommentMessagesEvent() when clearFeedCommentMessages != null:
-return clearFeedCommentMessages(_that);case StartWatchCommentsEvent() when startWatchComments != null:
-return startWatchComments(_that);case StopWatchCommentsEvent() when stopWatchComments != null:
-return stopWatchComments(_that);case WatchCommentArrivedEvent() when watchCommentArrived != null:
-return watchCommentArrived(_that);case WatchErrorEvent() when watchError != null:
-return watchError(_that);case _:
-  return null;
-
-}
-}
-/// A variant of `when` that fallback to an `orElse` callback.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String postId,  int? limit)?  loadFeedComments,TResult Function( String postId,  int limit)?  loadMoreFeedComments,TResult Function( String parentCommentId)?  loadReplies,TResult Function( String postId,  String content,  String? parentCommentId)?  addFeedComment,TResult Function( String commentId)?  deleteFeedComment,TResult Function( String commentId)?  toggleFeedCommentLike,TResult Function()?  clearFeedCommentMessages,TResult Function( String postId)?  startWatchComments,TResult Function()?  stopWatchComments,TResult Function( CommentEntity comment)?  watchCommentArrived,TResult Function( String message)?  watchError,required TResult orElse(),}) {final _that = this;
-switch (_that) {
-case LoadFeedCommentsEvent() when loadFeedComments != null:
-return loadFeedComments(_that.postId,_that.limit);case LoadMoreFeedCommentsEvent() when loadMoreFeedComments != null:
-return loadMoreFeedComments(_that.postId,_that.limit);case LoadRepliesEvent() when loadReplies != null:
-return loadReplies(_that.parentCommentId);case AddFeedCommentEvent() when addFeedComment != null:
-return addFeedComment(_that.postId,_that.content,_that.parentCommentId);case DeleteFeedCommentEvent() when deleteFeedComment != null:
-return deleteFeedComment(_that.commentId);case ToggleFeedCommentLikeEvent() when toggleFeedCommentLike != null:
-return toggleFeedCommentLike(_that.commentId);case ClearFeedCommentMessagesEvent() when clearFeedCommentMessages != null:
-return clearFeedCommentMessages();case StartWatchCommentsEvent() when startWatchComments != null:
-return startWatchComments(_that.postId);case StopWatchCommentsEvent() when stopWatchComments != null:
-return stopWatchComments();case WatchCommentArrivedEvent() when watchCommentArrived != null:
-return watchCommentArrived(_that.comment);case WatchErrorEvent() when watchError != null:
-return watchError(_that.message);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// As opposed to `map`, this offers destructuring.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case Subclass2(:final field2):
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String postId,  int? limit)  loadFeedComments,required TResult Function( String postId,  int limit)  loadMoreFeedComments,required TResult Function( String parentCommentId)  loadReplies,required TResult Function( String postId,  String content,  String? parentCommentId)  addFeedComment,required TResult Function( String commentId)  deleteFeedComment,required TResult Function( String commentId)  toggleFeedCommentLike,required TResult Function()  clearFeedCommentMessages,required TResult Function( String postId)  startWatchComments,required TResult Function()  stopWatchComments,required TResult Function( CommentEntity comment)  watchCommentArrived,required TResult Function( String message)  watchError,}) {final _that = this;
-switch (_that) {
-case LoadFeedCommentsEvent():
-return loadFeedComments(_that.postId,_that.limit);case LoadMoreFeedCommentsEvent():
-return loadMoreFeedComments(_that.postId,_that.limit);case LoadRepliesEvent():
-return loadReplies(_that.parentCommentId);case AddFeedCommentEvent():
-return addFeedComment(_that.postId,_that.content,_that.parentCommentId);case DeleteFeedCommentEvent():
-return deleteFeedComment(_that.commentId);case ToggleFeedCommentLikeEvent():
-return toggleFeedCommentLike(_that.commentId);case ClearFeedCommentMessagesEvent():
-return clearFeedCommentMessages();case StartWatchCommentsEvent():
-return startWatchComments(_that.postId);case StopWatchCommentsEvent():
-return stopWatchComments();case WatchCommentArrivedEvent():
-return watchCommentArrived(_that.comment);case WatchErrorEvent():
-return watchError(_that.message);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `when` that fallback to returning `null`
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String postId,  int? limit)?  loadFeedComments,TResult? Function( String postId,  int limit)?  loadMoreFeedComments,TResult? Function( String parentCommentId)?  loadReplies,TResult? Function( String postId,  String content,  String? parentCommentId)?  addFeedComment,TResult? Function( String commentId)?  deleteFeedComment,TResult? Function( String commentId)?  toggleFeedCommentLike,TResult? Function()?  clearFeedCommentMessages,TResult? Function( String postId)?  startWatchComments,TResult? Function()?  stopWatchComments,TResult? Function( CommentEntity comment)?  watchCommentArrived,TResult? Function( String message)?  watchError,}) {final _that = this;
-switch (_that) {
-case LoadFeedCommentsEvent() when loadFeedComments != null:
-return loadFeedComments(_that.postId,_that.limit);case LoadMoreFeedCommentsEvent() when loadMoreFeedComments != null:
-return loadMoreFeedComments(_that.postId,_that.limit);case LoadRepliesEvent() when loadReplies != null:
-return loadReplies(_that.parentCommentId);case AddFeedCommentEvent() when addFeedComment != null:
-return addFeedComment(_that.postId,_that.content,_that.parentCommentId);case DeleteFeedCommentEvent() when deleteFeedComment != null:
-return deleteFeedComment(_that.commentId);case ToggleFeedCommentLikeEvent() when toggleFeedCommentLike != null:
-return toggleFeedCommentLike(_that.commentId);case ClearFeedCommentMessagesEvent() when clearFeedCommentMessages != null:
-return clearFeedCommentMessages();case StartWatchCommentsEvent() when startWatchComments != null:
-return startWatchComments(_that.postId);case StopWatchCommentsEvent() when stopWatchComments != null:
-return stopWatchComments();case WatchCommentArrivedEvent() when watchCommentArrived != null:
-return watchCommentArrived(_that.comment);case WatchErrorEvent() when watchError != null:
-return watchError(_that.message);case _:
-  return null;
-
-}
-=======
   /// Create a copy of FeedCommentEvent
   /// with the given fields replaced by the non-null parameter values.
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
 }
 
 /// @nodoc
@@ -390,6 +221,7 @@ class _$LoadFeedCommentsEventImpl implements LoadFeedCommentsEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String postId, int? limit) loadFeedComments,
     required TResult Function(String postId, int limit) loadMoreFeedComments,
+    required TResult Function(String parentCommentId) loadReplies,
     required TResult Function(
             String postId, String content, String? parentCommentId)
         addFeedComment,
@@ -409,6 +241,7 @@ class _$LoadFeedCommentsEventImpl implements LoadFeedCommentsEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String postId, int? limit)? loadFeedComments,
     TResult? Function(String postId, int limit)? loadMoreFeedComments,
+    TResult? Function(String parentCommentId)? loadReplies,
     TResult? Function(String postId, String content, String? parentCommentId)?
         addFeedComment,
     TResult? Function(String commentId)? deleteFeedComment,
@@ -427,6 +260,7 @@ class _$LoadFeedCommentsEventImpl implements LoadFeedCommentsEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String postId, int? limit)? loadFeedComments,
     TResult Function(String postId, int limit)? loadMoreFeedComments,
+    TResult Function(String parentCommentId)? loadReplies,
     TResult Function(String postId, String content, String? parentCommentId)?
         addFeedComment,
     TResult Function(String commentId)? deleteFeedComment,
@@ -450,6 +284,7 @@ class _$LoadFeedCommentsEventImpl implements LoadFeedCommentsEvent {
     required TResult Function(LoadFeedCommentsEvent value) loadFeedComments,
     required TResult Function(LoadMoreFeedCommentsEvent value)
         loadMoreFeedComments,
+    required TResult Function(LoadRepliesEvent value) loadReplies,
     required TResult Function(AddFeedCommentEvent value) addFeedComment,
     required TResult Function(DeleteFeedCommentEvent value) deleteFeedComment,
     required TResult Function(ToggleFeedCommentLikeEvent value)
@@ -470,6 +305,7 @@ class _$LoadFeedCommentsEventImpl implements LoadFeedCommentsEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadFeedCommentsEvent value)? loadFeedComments,
     TResult? Function(LoadMoreFeedCommentsEvent value)? loadMoreFeedComments,
+    TResult? Function(LoadRepliesEvent value)? loadReplies,
     TResult? Function(AddFeedCommentEvent value)? addFeedComment,
     TResult? Function(DeleteFeedCommentEvent value)? deleteFeedComment,
     TResult? Function(ToggleFeedCommentLikeEvent value)? toggleFeedCommentLike,
@@ -488,6 +324,7 @@ class _$LoadFeedCommentsEventImpl implements LoadFeedCommentsEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadFeedCommentsEvent value)? loadFeedComments,
     TResult Function(LoadMoreFeedCommentsEvent value)? loadMoreFeedComments,
+    TResult Function(LoadRepliesEvent value)? loadReplies,
     TResult Function(AddFeedCommentEvent value)? addFeedComment,
     TResult Function(DeleteFeedCommentEvent value)? deleteFeedComment,
     TResult Function(ToggleFeedCommentLikeEvent value)? toggleFeedCommentLike,
@@ -604,6 +441,7 @@ class _$LoadMoreFeedCommentsEventImpl implements LoadMoreFeedCommentsEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String postId, int? limit) loadFeedComments,
     required TResult Function(String postId, int limit) loadMoreFeedComments,
+    required TResult Function(String parentCommentId) loadReplies,
     required TResult Function(
             String postId, String content, String? parentCommentId)
         addFeedComment,
@@ -623,6 +461,7 @@ class _$LoadMoreFeedCommentsEventImpl implements LoadMoreFeedCommentsEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String postId, int? limit)? loadFeedComments,
     TResult? Function(String postId, int limit)? loadMoreFeedComments,
+    TResult? Function(String parentCommentId)? loadReplies,
     TResult? Function(String postId, String content, String? parentCommentId)?
         addFeedComment,
     TResult? Function(String commentId)? deleteFeedComment,
@@ -641,6 +480,7 @@ class _$LoadMoreFeedCommentsEventImpl implements LoadMoreFeedCommentsEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String postId, int? limit)? loadFeedComments,
     TResult Function(String postId, int limit)? loadMoreFeedComments,
+    TResult Function(String parentCommentId)? loadReplies,
     TResult Function(String postId, String content, String? parentCommentId)?
         addFeedComment,
     TResult Function(String commentId)? deleteFeedComment,
@@ -664,6 +504,7 @@ class _$LoadMoreFeedCommentsEventImpl implements LoadMoreFeedCommentsEvent {
     required TResult Function(LoadFeedCommentsEvent value) loadFeedComments,
     required TResult Function(LoadMoreFeedCommentsEvent value)
         loadMoreFeedComments,
+    required TResult Function(LoadRepliesEvent value) loadReplies,
     required TResult Function(AddFeedCommentEvent value) addFeedComment,
     required TResult Function(DeleteFeedCommentEvent value) deleteFeedComment,
     required TResult Function(ToggleFeedCommentLikeEvent value)
@@ -684,6 +525,7 @@ class _$LoadMoreFeedCommentsEventImpl implements LoadMoreFeedCommentsEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadFeedCommentsEvent value)? loadFeedComments,
     TResult? Function(LoadMoreFeedCommentsEvent value)? loadMoreFeedComments,
+    TResult? Function(LoadRepliesEvent value)? loadReplies,
     TResult? Function(AddFeedCommentEvent value)? addFeedComment,
     TResult? Function(DeleteFeedCommentEvent value)? deleteFeedComment,
     TResult? Function(ToggleFeedCommentLikeEvent value)? toggleFeedCommentLike,
@@ -702,6 +544,7 @@ class _$LoadMoreFeedCommentsEventImpl implements LoadMoreFeedCommentsEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadFeedCommentsEvent value)? loadFeedComments,
     TResult Function(LoadMoreFeedCommentsEvent value)? loadMoreFeedComments,
+    TResult Function(LoadRepliesEvent value)? loadReplies,
     TResult Function(AddFeedCommentEvent value)? addFeedComment,
     TResult Function(DeleteFeedCommentEvent value)? deleteFeedComment,
     TResult Function(ToggleFeedCommentLikeEvent value)? toggleFeedCommentLike,
@@ -733,6 +576,213 @@ abstract class LoadMoreFeedCommentsEvent implements FeedCommentEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadMoreFeedCommentsEventImplCopyWith<_$LoadMoreFeedCommentsEventImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoadRepliesEventImplCopyWith<$Res> {
+  factory _$$LoadRepliesEventImplCopyWith(_$LoadRepliesEventImpl value,
+          $Res Function(_$LoadRepliesEventImpl) then) =
+      __$$LoadRepliesEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String parentCommentId});
+}
+
+/// @nodoc
+class __$$LoadRepliesEventImplCopyWithImpl<$Res>
+    extends _$FeedCommentEventCopyWithImpl<$Res, _$LoadRepliesEventImpl>
+    implements _$$LoadRepliesEventImplCopyWith<$Res> {
+  __$$LoadRepliesEventImplCopyWithImpl(_$LoadRepliesEventImpl _value,
+      $Res Function(_$LoadRepliesEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of FeedCommentEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? parentCommentId = null,
+  }) {
+    return _then(_$LoadRepliesEventImpl(
+      parentCommentId: null == parentCommentId
+          ? _value.parentCommentId
+          : parentCommentId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$LoadRepliesEventImpl implements LoadRepliesEvent {
+  const _$LoadRepliesEventImpl({required this.parentCommentId});
+
+  @override
+  final String parentCommentId;
+
+  @override
+  String toString() {
+    return 'FeedCommentEvent.loadReplies(parentCommentId: $parentCommentId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoadRepliesEventImpl &&
+            (identical(other.parentCommentId, parentCommentId) ||
+                other.parentCommentId == parentCommentId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, parentCommentId);
+
+  /// Create a copy of FeedCommentEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadRepliesEventImplCopyWith<_$LoadRepliesEventImpl> get copyWith =>
+      __$$LoadRepliesEventImplCopyWithImpl<_$LoadRepliesEventImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String postId, int? limit) loadFeedComments,
+    required TResult Function(String postId, int limit) loadMoreFeedComments,
+    required TResult Function(String parentCommentId) loadReplies,
+    required TResult Function(
+            String postId, String content, String? parentCommentId)
+        addFeedComment,
+    required TResult Function(String commentId) deleteFeedComment,
+    required TResult Function(String commentId) toggleFeedCommentLike,
+    required TResult Function() clearFeedCommentMessages,
+    required TResult Function(String postId) startWatchComments,
+    required TResult Function() stopWatchComments,
+    required TResult Function(CommentEntity comment) watchCommentArrived,
+    required TResult Function(String message) watchError,
+  }) {
+    return loadReplies(parentCommentId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String postId, int? limit)? loadFeedComments,
+    TResult? Function(String postId, int limit)? loadMoreFeedComments,
+    TResult? Function(String parentCommentId)? loadReplies,
+    TResult? Function(String postId, String content, String? parentCommentId)?
+        addFeedComment,
+    TResult? Function(String commentId)? deleteFeedComment,
+    TResult? Function(String commentId)? toggleFeedCommentLike,
+    TResult? Function()? clearFeedCommentMessages,
+    TResult? Function(String postId)? startWatchComments,
+    TResult? Function()? stopWatchComments,
+    TResult? Function(CommentEntity comment)? watchCommentArrived,
+    TResult? Function(String message)? watchError,
+  }) {
+    return loadReplies?.call(parentCommentId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String postId, int? limit)? loadFeedComments,
+    TResult Function(String postId, int limit)? loadMoreFeedComments,
+    TResult Function(String parentCommentId)? loadReplies,
+    TResult Function(String postId, String content, String? parentCommentId)?
+        addFeedComment,
+    TResult Function(String commentId)? deleteFeedComment,
+    TResult Function(String commentId)? toggleFeedCommentLike,
+    TResult Function()? clearFeedCommentMessages,
+    TResult Function(String postId)? startWatchComments,
+    TResult Function()? stopWatchComments,
+    TResult Function(CommentEntity comment)? watchCommentArrived,
+    TResult Function(String message)? watchError,
+    required TResult orElse(),
+  }) {
+    if (loadReplies != null) {
+      return loadReplies(parentCommentId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadFeedCommentsEvent value) loadFeedComments,
+    required TResult Function(LoadMoreFeedCommentsEvent value)
+        loadMoreFeedComments,
+    required TResult Function(LoadRepliesEvent value) loadReplies,
+    required TResult Function(AddFeedCommentEvent value) addFeedComment,
+    required TResult Function(DeleteFeedCommentEvent value) deleteFeedComment,
+    required TResult Function(ToggleFeedCommentLikeEvent value)
+        toggleFeedCommentLike,
+    required TResult Function(ClearFeedCommentMessagesEvent value)
+        clearFeedCommentMessages,
+    required TResult Function(StartWatchCommentsEvent value) startWatchComments,
+    required TResult Function(StopWatchCommentsEvent value) stopWatchComments,
+    required TResult Function(WatchCommentArrivedEvent value)
+        watchCommentArrived,
+    required TResult Function(WatchErrorEvent value) watchError,
+  }) {
+    return loadReplies(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadFeedCommentsEvent value)? loadFeedComments,
+    TResult? Function(LoadMoreFeedCommentsEvent value)? loadMoreFeedComments,
+    TResult? Function(LoadRepliesEvent value)? loadReplies,
+    TResult? Function(AddFeedCommentEvent value)? addFeedComment,
+    TResult? Function(DeleteFeedCommentEvent value)? deleteFeedComment,
+    TResult? Function(ToggleFeedCommentLikeEvent value)? toggleFeedCommentLike,
+    TResult? Function(ClearFeedCommentMessagesEvent value)?
+        clearFeedCommentMessages,
+    TResult? Function(StartWatchCommentsEvent value)? startWatchComments,
+    TResult? Function(StopWatchCommentsEvent value)? stopWatchComments,
+    TResult? Function(WatchCommentArrivedEvent value)? watchCommentArrived,
+    TResult? Function(WatchErrorEvent value)? watchError,
+  }) {
+    return loadReplies?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadFeedCommentsEvent value)? loadFeedComments,
+    TResult Function(LoadMoreFeedCommentsEvent value)? loadMoreFeedComments,
+    TResult Function(LoadRepliesEvent value)? loadReplies,
+    TResult Function(AddFeedCommentEvent value)? addFeedComment,
+    TResult Function(DeleteFeedCommentEvent value)? deleteFeedComment,
+    TResult Function(ToggleFeedCommentLikeEvent value)? toggleFeedCommentLike,
+    TResult Function(ClearFeedCommentMessagesEvent value)?
+        clearFeedCommentMessages,
+    TResult Function(StartWatchCommentsEvent value)? startWatchComments,
+    TResult Function(StopWatchCommentsEvent value)? stopWatchComments,
+    TResult Function(WatchCommentArrivedEvent value)? watchCommentArrived,
+    TResult Function(WatchErrorEvent value)? watchError,
+    required TResult orElse(),
+  }) {
+    if (loadReplies != null) {
+      return loadReplies(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LoadRepliesEvent implements FeedCommentEvent {
+  const factory LoadRepliesEvent({required final String parentCommentId}) =
+      _$LoadRepliesEventImpl;
+
+  String get parentCommentId;
+
+  /// Create a copy of FeedCommentEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LoadRepliesEventImplCopyWith<_$LoadRepliesEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -784,84 +834,12 @@ class _$AddFeedCommentEventImpl implements AddFeedCommentEvent {
   const _$AddFeedCommentEventImpl(
       {required this.postId, required this.content, this.parentCommentId});
 
-<<<<<<< HEAD
-class LoadRepliesEvent implements FeedCommentEvent {
-  const LoadRepliesEvent({required this.parentCommentId});
-  
-
- final  String parentCommentId;
-
-/// Create a copy of FeedCommentEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$LoadRepliesEventCopyWith<LoadRepliesEvent> get copyWith => _$LoadRepliesEventCopyWithImpl<LoadRepliesEvent>(this, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadRepliesEvent&&(identical(other.parentCommentId, parentCommentId) || other.parentCommentId == parentCommentId));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,parentCommentId);
-
-@override
-String toString() {
-  return 'FeedCommentEvent.loadReplies(parentCommentId: $parentCommentId)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $LoadRepliesEventCopyWith<$Res> implements $FeedCommentEventCopyWith<$Res> {
-  factory $LoadRepliesEventCopyWith(LoadRepliesEvent value, $Res Function(LoadRepliesEvent) _then) = _$LoadRepliesEventCopyWithImpl;
-@useResult
-$Res call({
- String parentCommentId
-});
-
-
-
-
-}
-/// @nodoc
-class _$LoadRepliesEventCopyWithImpl<$Res>
-    implements $LoadRepliesEventCopyWith<$Res> {
-  _$LoadRepliesEventCopyWithImpl(this._self, this._then);
-
-  final LoadRepliesEvent _self;
-  final $Res Function(LoadRepliesEvent) _then;
-
-/// Create a copy of FeedCommentEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? parentCommentId = null,}) {
-  return _then(LoadRepliesEvent(
-parentCommentId: null == parentCommentId ? _self.parentCommentId : parentCommentId // ignore: cast_nullable_to_non_nullable
-as String,
-  ));
-}
-
-
-}
-
-/// @nodoc
-
-
-class AddFeedCommentEvent implements FeedCommentEvent {
-  const AddFeedCommentEvent({required this.postId, required this.content, this.parentCommentId});
-  
-=======
   @override
   final String postId;
   @override
   final String content;
   @override
   final String? parentCommentId;
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
 
   @override
   String toString() {
@@ -897,6 +875,7 @@ class AddFeedCommentEvent implements FeedCommentEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String postId, int? limit) loadFeedComments,
     required TResult Function(String postId, int limit) loadMoreFeedComments,
+    required TResult Function(String parentCommentId) loadReplies,
     required TResult Function(
             String postId, String content, String? parentCommentId)
         addFeedComment,
@@ -916,6 +895,7 @@ class AddFeedCommentEvent implements FeedCommentEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String postId, int? limit)? loadFeedComments,
     TResult? Function(String postId, int limit)? loadMoreFeedComments,
+    TResult? Function(String parentCommentId)? loadReplies,
     TResult? Function(String postId, String content, String? parentCommentId)?
         addFeedComment,
     TResult? Function(String commentId)? deleteFeedComment,
@@ -934,6 +914,7 @@ class AddFeedCommentEvent implements FeedCommentEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String postId, int? limit)? loadFeedComments,
     TResult Function(String postId, int limit)? loadMoreFeedComments,
+    TResult Function(String parentCommentId)? loadReplies,
     TResult Function(String postId, String content, String? parentCommentId)?
         addFeedComment,
     TResult Function(String commentId)? deleteFeedComment,
@@ -957,6 +938,7 @@ class AddFeedCommentEvent implements FeedCommentEvent {
     required TResult Function(LoadFeedCommentsEvent value) loadFeedComments,
     required TResult Function(LoadMoreFeedCommentsEvent value)
         loadMoreFeedComments,
+    required TResult Function(LoadRepliesEvent value) loadReplies,
     required TResult Function(AddFeedCommentEvent value) addFeedComment,
     required TResult Function(DeleteFeedCommentEvent value) deleteFeedComment,
     required TResult Function(ToggleFeedCommentLikeEvent value)
@@ -977,6 +959,7 @@ class AddFeedCommentEvent implements FeedCommentEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadFeedCommentsEvent value)? loadFeedComments,
     TResult? Function(LoadMoreFeedCommentsEvent value)? loadMoreFeedComments,
+    TResult? Function(LoadRepliesEvent value)? loadReplies,
     TResult? Function(AddFeedCommentEvent value)? addFeedComment,
     TResult? Function(DeleteFeedCommentEvent value)? deleteFeedComment,
     TResult? Function(ToggleFeedCommentLikeEvent value)? toggleFeedCommentLike,
@@ -995,6 +978,7 @@ class AddFeedCommentEvent implements FeedCommentEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadFeedCommentsEvent value)? loadFeedComments,
     TResult Function(LoadMoreFeedCommentsEvent value)? loadMoreFeedComments,
+    TResult Function(LoadRepliesEvent value)? loadReplies,
     TResult Function(AddFeedCommentEvent value)? addFeedComment,
     TResult Function(DeleteFeedCommentEvent value)? deleteFeedComment,
     TResult Function(ToggleFeedCommentLikeEvent value)? toggleFeedCommentLike,
@@ -1104,6 +1088,7 @@ class _$DeleteFeedCommentEventImpl implements DeleteFeedCommentEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String postId, int? limit) loadFeedComments,
     required TResult Function(String postId, int limit) loadMoreFeedComments,
+    required TResult Function(String parentCommentId) loadReplies,
     required TResult Function(
             String postId, String content, String? parentCommentId)
         addFeedComment,
@@ -1123,6 +1108,7 @@ class _$DeleteFeedCommentEventImpl implements DeleteFeedCommentEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String postId, int? limit)? loadFeedComments,
     TResult? Function(String postId, int limit)? loadMoreFeedComments,
+    TResult? Function(String parentCommentId)? loadReplies,
     TResult? Function(String postId, String content, String? parentCommentId)?
         addFeedComment,
     TResult? Function(String commentId)? deleteFeedComment,
@@ -1141,6 +1127,7 @@ class _$DeleteFeedCommentEventImpl implements DeleteFeedCommentEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String postId, int? limit)? loadFeedComments,
     TResult Function(String postId, int limit)? loadMoreFeedComments,
+    TResult Function(String parentCommentId)? loadReplies,
     TResult Function(String postId, String content, String? parentCommentId)?
         addFeedComment,
     TResult Function(String commentId)? deleteFeedComment,
@@ -1164,6 +1151,7 @@ class _$DeleteFeedCommentEventImpl implements DeleteFeedCommentEvent {
     required TResult Function(LoadFeedCommentsEvent value) loadFeedComments,
     required TResult Function(LoadMoreFeedCommentsEvent value)
         loadMoreFeedComments,
+    required TResult Function(LoadRepliesEvent value) loadReplies,
     required TResult Function(AddFeedCommentEvent value) addFeedComment,
     required TResult Function(DeleteFeedCommentEvent value) deleteFeedComment,
     required TResult Function(ToggleFeedCommentLikeEvent value)
@@ -1184,6 +1172,7 @@ class _$DeleteFeedCommentEventImpl implements DeleteFeedCommentEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadFeedCommentsEvent value)? loadFeedComments,
     TResult? Function(LoadMoreFeedCommentsEvent value)? loadMoreFeedComments,
+    TResult? Function(LoadRepliesEvent value)? loadReplies,
     TResult? Function(AddFeedCommentEvent value)? addFeedComment,
     TResult? Function(DeleteFeedCommentEvent value)? deleteFeedComment,
     TResult? Function(ToggleFeedCommentLikeEvent value)? toggleFeedCommentLike,
@@ -1202,6 +1191,7 @@ class _$DeleteFeedCommentEventImpl implements DeleteFeedCommentEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadFeedCommentsEvent value)? loadFeedComments,
     TResult Function(LoadMoreFeedCommentsEvent value)? loadMoreFeedComments,
+    TResult Function(LoadRepliesEvent value)? loadReplies,
     TResult Function(AddFeedCommentEvent value)? addFeedComment,
     TResult Function(DeleteFeedCommentEvent value)? deleteFeedComment,
     TResult Function(ToggleFeedCommentLikeEvent value)? toggleFeedCommentLike,
@@ -1308,6 +1298,7 @@ class _$ToggleFeedCommentLikeEventImpl implements ToggleFeedCommentLikeEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String postId, int? limit) loadFeedComments,
     required TResult Function(String postId, int limit) loadMoreFeedComments,
+    required TResult Function(String parentCommentId) loadReplies,
     required TResult Function(
             String postId, String content, String? parentCommentId)
         addFeedComment,
@@ -1327,6 +1318,7 @@ class _$ToggleFeedCommentLikeEventImpl implements ToggleFeedCommentLikeEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String postId, int? limit)? loadFeedComments,
     TResult? Function(String postId, int limit)? loadMoreFeedComments,
+    TResult? Function(String parentCommentId)? loadReplies,
     TResult? Function(String postId, String content, String? parentCommentId)?
         addFeedComment,
     TResult? Function(String commentId)? deleteFeedComment,
@@ -1345,6 +1337,7 @@ class _$ToggleFeedCommentLikeEventImpl implements ToggleFeedCommentLikeEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String postId, int? limit)? loadFeedComments,
     TResult Function(String postId, int limit)? loadMoreFeedComments,
+    TResult Function(String parentCommentId)? loadReplies,
     TResult Function(String postId, String content, String? parentCommentId)?
         addFeedComment,
     TResult Function(String commentId)? deleteFeedComment,
@@ -1368,6 +1361,7 @@ class _$ToggleFeedCommentLikeEventImpl implements ToggleFeedCommentLikeEvent {
     required TResult Function(LoadFeedCommentsEvent value) loadFeedComments,
     required TResult Function(LoadMoreFeedCommentsEvent value)
         loadMoreFeedComments,
+    required TResult Function(LoadRepliesEvent value) loadReplies,
     required TResult Function(AddFeedCommentEvent value) addFeedComment,
     required TResult Function(DeleteFeedCommentEvent value) deleteFeedComment,
     required TResult Function(ToggleFeedCommentLikeEvent value)
@@ -1388,6 +1382,7 @@ class _$ToggleFeedCommentLikeEventImpl implements ToggleFeedCommentLikeEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadFeedCommentsEvent value)? loadFeedComments,
     TResult? Function(LoadMoreFeedCommentsEvent value)? loadMoreFeedComments,
+    TResult? Function(LoadRepliesEvent value)? loadReplies,
     TResult? Function(AddFeedCommentEvent value)? addFeedComment,
     TResult? Function(DeleteFeedCommentEvent value)? deleteFeedComment,
     TResult? Function(ToggleFeedCommentLikeEvent value)? toggleFeedCommentLike,
@@ -1406,6 +1401,7 @@ class _$ToggleFeedCommentLikeEventImpl implements ToggleFeedCommentLikeEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadFeedCommentsEvent value)? loadFeedComments,
     TResult Function(LoadMoreFeedCommentsEvent value)? loadMoreFeedComments,
+    TResult Function(LoadRepliesEvent value)? loadReplies,
     TResult Function(AddFeedCommentEvent value)? addFeedComment,
     TResult Function(DeleteFeedCommentEvent value)? deleteFeedComment,
     TResult Function(ToggleFeedCommentLikeEvent value)? toggleFeedCommentLike,
@@ -1485,6 +1481,7 @@ class _$ClearFeedCommentMessagesEventImpl
   TResult when<TResult extends Object?>({
     required TResult Function(String postId, int? limit) loadFeedComments,
     required TResult Function(String postId, int limit) loadMoreFeedComments,
+    required TResult Function(String parentCommentId) loadReplies,
     required TResult Function(
             String postId, String content, String? parentCommentId)
         addFeedComment,
@@ -1504,6 +1501,7 @@ class _$ClearFeedCommentMessagesEventImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String postId, int? limit)? loadFeedComments,
     TResult? Function(String postId, int limit)? loadMoreFeedComments,
+    TResult? Function(String parentCommentId)? loadReplies,
     TResult? Function(String postId, String content, String? parentCommentId)?
         addFeedComment,
     TResult? Function(String commentId)? deleteFeedComment,
@@ -1522,6 +1520,7 @@ class _$ClearFeedCommentMessagesEventImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String postId, int? limit)? loadFeedComments,
     TResult Function(String postId, int limit)? loadMoreFeedComments,
+    TResult Function(String parentCommentId)? loadReplies,
     TResult Function(String postId, String content, String? parentCommentId)?
         addFeedComment,
     TResult Function(String commentId)? deleteFeedComment,
@@ -1545,6 +1544,7 @@ class _$ClearFeedCommentMessagesEventImpl
     required TResult Function(LoadFeedCommentsEvent value) loadFeedComments,
     required TResult Function(LoadMoreFeedCommentsEvent value)
         loadMoreFeedComments,
+    required TResult Function(LoadRepliesEvent value) loadReplies,
     required TResult Function(AddFeedCommentEvent value) addFeedComment,
     required TResult Function(DeleteFeedCommentEvent value) deleteFeedComment,
     required TResult Function(ToggleFeedCommentLikeEvent value)
@@ -1565,6 +1565,7 @@ class _$ClearFeedCommentMessagesEventImpl
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadFeedCommentsEvent value)? loadFeedComments,
     TResult? Function(LoadMoreFeedCommentsEvent value)? loadMoreFeedComments,
+    TResult? Function(LoadRepliesEvent value)? loadReplies,
     TResult? Function(AddFeedCommentEvent value)? addFeedComment,
     TResult? Function(DeleteFeedCommentEvent value)? deleteFeedComment,
     TResult? Function(ToggleFeedCommentLikeEvent value)? toggleFeedCommentLike,
@@ -1583,6 +1584,7 @@ class _$ClearFeedCommentMessagesEventImpl
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadFeedCommentsEvent value)? loadFeedComments,
     TResult Function(LoadMoreFeedCommentsEvent value)? loadMoreFeedComments,
+    TResult Function(LoadRepliesEvent value)? loadReplies,
     TResult Function(AddFeedCommentEvent value)? addFeedComment,
     TResult Function(DeleteFeedCommentEvent value)? deleteFeedComment,
     TResult Function(ToggleFeedCommentLikeEvent value)? toggleFeedCommentLike,
@@ -1679,6 +1681,7 @@ class _$StartWatchCommentsEventImpl implements StartWatchCommentsEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String postId, int? limit) loadFeedComments,
     required TResult Function(String postId, int limit) loadMoreFeedComments,
+    required TResult Function(String parentCommentId) loadReplies,
     required TResult Function(
             String postId, String content, String? parentCommentId)
         addFeedComment,
@@ -1698,6 +1701,7 @@ class _$StartWatchCommentsEventImpl implements StartWatchCommentsEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String postId, int? limit)? loadFeedComments,
     TResult? Function(String postId, int limit)? loadMoreFeedComments,
+    TResult? Function(String parentCommentId)? loadReplies,
     TResult? Function(String postId, String content, String? parentCommentId)?
         addFeedComment,
     TResult? Function(String commentId)? deleteFeedComment,
@@ -1716,6 +1720,7 @@ class _$StartWatchCommentsEventImpl implements StartWatchCommentsEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String postId, int? limit)? loadFeedComments,
     TResult Function(String postId, int limit)? loadMoreFeedComments,
+    TResult Function(String parentCommentId)? loadReplies,
     TResult Function(String postId, String content, String? parentCommentId)?
         addFeedComment,
     TResult Function(String commentId)? deleteFeedComment,
@@ -1739,6 +1744,7 @@ class _$StartWatchCommentsEventImpl implements StartWatchCommentsEvent {
     required TResult Function(LoadFeedCommentsEvent value) loadFeedComments,
     required TResult Function(LoadMoreFeedCommentsEvent value)
         loadMoreFeedComments,
+    required TResult Function(LoadRepliesEvent value) loadReplies,
     required TResult Function(AddFeedCommentEvent value) addFeedComment,
     required TResult Function(DeleteFeedCommentEvent value) deleteFeedComment,
     required TResult Function(ToggleFeedCommentLikeEvent value)
@@ -1759,6 +1765,7 @@ class _$StartWatchCommentsEventImpl implements StartWatchCommentsEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadFeedCommentsEvent value)? loadFeedComments,
     TResult? Function(LoadMoreFeedCommentsEvent value)? loadMoreFeedComments,
+    TResult? Function(LoadRepliesEvent value)? loadReplies,
     TResult? Function(AddFeedCommentEvent value)? addFeedComment,
     TResult? Function(DeleteFeedCommentEvent value)? deleteFeedComment,
     TResult? Function(ToggleFeedCommentLikeEvent value)? toggleFeedCommentLike,
@@ -1777,6 +1784,7 @@ class _$StartWatchCommentsEventImpl implements StartWatchCommentsEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadFeedCommentsEvent value)? loadFeedComments,
     TResult Function(LoadMoreFeedCommentsEvent value)? loadMoreFeedComments,
+    TResult Function(LoadRepliesEvent value)? loadReplies,
     TResult Function(AddFeedCommentEvent value)? addFeedComment,
     TResult Function(DeleteFeedCommentEvent value)? deleteFeedComment,
     TResult Function(ToggleFeedCommentLikeEvent value)? toggleFeedCommentLike,
@@ -1854,6 +1862,7 @@ class _$StopWatchCommentsEventImpl implements StopWatchCommentsEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String postId, int? limit) loadFeedComments,
     required TResult Function(String postId, int limit) loadMoreFeedComments,
+    required TResult Function(String parentCommentId) loadReplies,
     required TResult Function(
             String postId, String content, String? parentCommentId)
         addFeedComment,
@@ -1873,6 +1882,7 @@ class _$StopWatchCommentsEventImpl implements StopWatchCommentsEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String postId, int? limit)? loadFeedComments,
     TResult? Function(String postId, int limit)? loadMoreFeedComments,
+    TResult? Function(String parentCommentId)? loadReplies,
     TResult? Function(String postId, String content, String? parentCommentId)?
         addFeedComment,
     TResult? Function(String commentId)? deleteFeedComment,
@@ -1891,6 +1901,7 @@ class _$StopWatchCommentsEventImpl implements StopWatchCommentsEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String postId, int? limit)? loadFeedComments,
     TResult Function(String postId, int limit)? loadMoreFeedComments,
+    TResult Function(String parentCommentId)? loadReplies,
     TResult Function(String postId, String content, String? parentCommentId)?
         addFeedComment,
     TResult Function(String commentId)? deleteFeedComment,
@@ -1914,6 +1925,7 @@ class _$StopWatchCommentsEventImpl implements StopWatchCommentsEvent {
     required TResult Function(LoadFeedCommentsEvent value) loadFeedComments,
     required TResult Function(LoadMoreFeedCommentsEvent value)
         loadMoreFeedComments,
+    required TResult Function(LoadRepliesEvent value) loadReplies,
     required TResult Function(AddFeedCommentEvent value) addFeedComment,
     required TResult Function(DeleteFeedCommentEvent value) deleteFeedComment,
     required TResult Function(ToggleFeedCommentLikeEvent value)
@@ -1934,6 +1946,7 @@ class _$StopWatchCommentsEventImpl implements StopWatchCommentsEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadFeedCommentsEvent value)? loadFeedComments,
     TResult? Function(LoadMoreFeedCommentsEvent value)? loadMoreFeedComments,
+    TResult? Function(LoadRepliesEvent value)? loadReplies,
     TResult? Function(AddFeedCommentEvent value)? addFeedComment,
     TResult? Function(DeleteFeedCommentEvent value)? deleteFeedComment,
     TResult? Function(ToggleFeedCommentLikeEvent value)? toggleFeedCommentLike,
@@ -1952,6 +1965,7 @@ class _$StopWatchCommentsEventImpl implements StopWatchCommentsEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadFeedCommentsEvent value)? loadFeedComments,
     TResult Function(LoadMoreFeedCommentsEvent value)? loadMoreFeedComments,
+    TResult Function(LoadRepliesEvent value)? loadReplies,
     TResult Function(AddFeedCommentEvent value)? addFeedComment,
     TResult Function(DeleteFeedCommentEvent value)? deleteFeedComment,
     TResult Function(ToggleFeedCommentLikeEvent value)? toggleFeedCommentLike,
@@ -2059,6 +2073,7 @@ class _$WatchCommentArrivedEventImpl implements WatchCommentArrivedEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String postId, int? limit) loadFeedComments,
     required TResult Function(String postId, int limit) loadMoreFeedComments,
+    required TResult Function(String parentCommentId) loadReplies,
     required TResult Function(
             String postId, String content, String? parentCommentId)
         addFeedComment,
@@ -2078,6 +2093,7 @@ class _$WatchCommentArrivedEventImpl implements WatchCommentArrivedEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String postId, int? limit)? loadFeedComments,
     TResult? Function(String postId, int limit)? loadMoreFeedComments,
+    TResult? Function(String parentCommentId)? loadReplies,
     TResult? Function(String postId, String content, String? parentCommentId)?
         addFeedComment,
     TResult? Function(String commentId)? deleteFeedComment,
@@ -2096,6 +2112,7 @@ class _$WatchCommentArrivedEventImpl implements WatchCommentArrivedEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String postId, int? limit)? loadFeedComments,
     TResult Function(String postId, int limit)? loadMoreFeedComments,
+    TResult Function(String parentCommentId)? loadReplies,
     TResult Function(String postId, String content, String? parentCommentId)?
         addFeedComment,
     TResult Function(String commentId)? deleteFeedComment,
@@ -2119,6 +2136,7 @@ class _$WatchCommentArrivedEventImpl implements WatchCommentArrivedEvent {
     required TResult Function(LoadFeedCommentsEvent value) loadFeedComments,
     required TResult Function(LoadMoreFeedCommentsEvent value)
         loadMoreFeedComments,
+    required TResult Function(LoadRepliesEvent value) loadReplies,
     required TResult Function(AddFeedCommentEvent value) addFeedComment,
     required TResult Function(DeleteFeedCommentEvent value) deleteFeedComment,
     required TResult Function(ToggleFeedCommentLikeEvent value)
@@ -2139,6 +2157,7 @@ class _$WatchCommentArrivedEventImpl implements WatchCommentArrivedEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadFeedCommentsEvent value)? loadFeedComments,
     TResult? Function(LoadMoreFeedCommentsEvent value)? loadMoreFeedComments,
+    TResult? Function(LoadRepliesEvent value)? loadReplies,
     TResult? Function(AddFeedCommentEvent value)? addFeedComment,
     TResult? Function(DeleteFeedCommentEvent value)? deleteFeedComment,
     TResult? Function(ToggleFeedCommentLikeEvent value)? toggleFeedCommentLike,
@@ -2157,6 +2176,7 @@ class _$WatchCommentArrivedEventImpl implements WatchCommentArrivedEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadFeedCommentsEvent value)? loadFeedComments,
     TResult Function(LoadMoreFeedCommentsEvent value)? loadMoreFeedComments,
+    TResult Function(LoadRepliesEvent value)? loadReplies,
     TResult Function(AddFeedCommentEvent value)? addFeedComment,
     TResult Function(DeleteFeedCommentEvent value)? deleteFeedComment,
     TResult Function(ToggleFeedCommentLikeEvent value)? toggleFeedCommentLike,
@@ -2259,6 +2279,7 @@ class _$WatchErrorEventImpl implements WatchErrorEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String postId, int? limit) loadFeedComments,
     required TResult Function(String postId, int limit) loadMoreFeedComments,
+    required TResult Function(String parentCommentId) loadReplies,
     required TResult Function(
             String postId, String content, String? parentCommentId)
         addFeedComment,
@@ -2278,6 +2299,7 @@ class _$WatchErrorEventImpl implements WatchErrorEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String postId, int? limit)? loadFeedComments,
     TResult? Function(String postId, int limit)? loadMoreFeedComments,
+    TResult? Function(String parentCommentId)? loadReplies,
     TResult? Function(String postId, String content, String? parentCommentId)?
         addFeedComment,
     TResult? Function(String commentId)? deleteFeedComment,
@@ -2296,6 +2318,7 @@ class _$WatchErrorEventImpl implements WatchErrorEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String postId, int? limit)? loadFeedComments,
     TResult Function(String postId, int limit)? loadMoreFeedComments,
+    TResult Function(String parentCommentId)? loadReplies,
     TResult Function(String postId, String content, String? parentCommentId)?
         addFeedComment,
     TResult Function(String commentId)? deleteFeedComment,
@@ -2319,6 +2342,7 @@ class _$WatchErrorEventImpl implements WatchErrorEvent {
     required TResult Function(LoadFeedCommentsEvent value) loadFeedComments,
     required TResult Function(LoadMoreFeedCommentsEvent value)
         loadMoreFeedComments,
+    required TResult Function(LoadRepliesEvent value) loadReplies,
     required TResult Function(AddFeedCommentEvent value) addFeedComment,
     required TResult Function(DeleteFeedCommentEvent value) deleteFeedComment,
     required TResult Function(ToggleFeedCommentLikeEvent value)
@@ -2339,6 +2363,7 @@ class _$WatchErrorEventImpl implements WatchErrorEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadFeedCommentsEvent value)? loadFeedComments,
     TResult? Function(LoadMoreFeedCommentsEvent value)? loadMoreFeedComments,
+    TResult? Function(LoadRepliesEvent value)? loadReplies,
     TResult? Function(AddFeedCommentEvent value)? addFeedComment,
     TResult? Function(DeleteFeedCommentEvent value)? deleteFeedComment,
     TResult? Function(ToggleFeedCommentLikeEvent value)? toggleFeedCommentLike,
@@ -2357,6 +2382,7 @@ class _$WatchErrorEventImpl implements WatchErrorEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadFeedCommentsEvent value)? loadFeedComments,
     TResult Function(LoadMoreFeedCommentsEvent value)? loadMoreFeedComments,
+    TResult Function(LoadRepliesEvent value)? loadReplies,
     TResult Function(AddFeedCommentEvent value)? addFeedComment,
     TResult Function(DeleteFeedCommentEvent value)? deleteFeedComment,
     TResult Function(ToggleFeedCommentLikeEvent value)? toggleFeedCommentLike,

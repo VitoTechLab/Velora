@@ -20,17 +20,6 @@ UpdateFeedModel _$UpdateFeedModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UpdateFeedModel {
-<<<<<<< HEAD
-
-@JsonKey(name: 'content') String? get content;@StringListConverter()@JsonKey(name: 'image_urls') List<String>? get imageUrls;@StringListConverter()@JsonKey(name: 'video_urls') List<String>? get videoUrls;// Post privacy settings
-@JsonKey(name: 'comments_enabled') bool? get commentsEnabled;@JsonKey(name: 'hide_like_count') bool? get hideLikeCount;@JsonKey(name: 'hide_comment_count') bool? get hideCommentCount;@JsonKey(name: 'hide_share_count') bool? get hideShareCount;@JsonKey(name: 'hide_likes_list') bool? get hideLikesList;// Campaign association
-@JsonKey(name: 'campaign_id') String? get campaignId;@JsonKey(name: 'campaign_title') String? get campaignTitle;
-/// Create a copy of UpdateFeedModel
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$UpdateFeedModelCopyWith<UpdateFeedModel> get copyWith => _$UpdateFeedModelCopyWithImpl<UpdateFeedModel>(this as UpdateFeedModel, _$identity);
-=======
   @JsonKey(name: 'content')
   String? get content => throw _privateConstructorUsedError;
   @StringListConverter()
@@ -39,7 +28,7 @@ $UpdateFeedModelCopyWith<UpdateFeedModel> get copyWith => _$UpdateFeedModelCopyW
   @StringListConverter()
   @JsonKey(name: 'video_urls')
   List<String>? get videoUrls =>
-      throw _privateConstructorUsedError; // per-post settings
+      throw _privateConstructorUsedError; // Post privacy settings
   @JsonKey(name: 'comments_enabled')
   bool? get commentsEnabled => throw _privateConstructorUsedError;
   @JsonKey(name: 'hide_like_count')
@@ -49,12 +38,12 @@ $UpdateFeedModelCopyWith<UpdateFeedModel> get copyWith => _$UpdateFeedModelCopyW
   @JsonKey(name: 'hide_share_count')
   bool? get hideShareCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'hide_likes_list')
-  bool? get hideLikesList => throw _privateConstructorUsedError;
+  bool? get hideLikesList =>
+      throw _privateConstructorUsedError; // Campaign association
   @JsonKey(name: 'campaign_id')
   String? get campaignId => throw _privateConstructorUsedError;
   @JsonKey(name: 'campaign_title')
   String? get campaignTitle => throw _privateConstructorUsedError;
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
 
   /// Serializes this UpdateFeedModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -306,18 +295,7 @@ class _$UpdateFeedModelImpl implements _UpdateFeedModel {
     return EqualUnmodifiableListView(value);
   }
 
-<<<<<<< HEAD
 // Post privacy settings
-@override@JsonKey(name: 'comments_enabled') final  bool? commentsEnabled;
-@override@JsonKey(name: 'hide_like_count') final  bool? hideLikeCount;
-@override@JsonKey(name: 'hide_comment_count') final  bool? hideCommentCount;
-@override@JsonKey(name: 'hide_share_count') final  bool? hideShareCount;
-@override@JsonKey(name: 'hide_likes_list') final  bool? hideLikesList;
-// Campaign association
-@override@JsonKey(name: 'campaign_id') final  String? campaignId;
-@override@JsonKey(name: 'campaign_title') final  String? campaignTitle;
-=======
-// per-post settings
   @override
   @JsonKey(name: 'comments_enabled')
   final bool? commentsEnabled;
@@ -333,13 +311,13 @@ class _$UpdateFeedModelImpl implements _UpdateFeedModel {
   @override
   @JsonKey(name: 'hide_likes_list')
   final bool? hideLikesList;
+// Campaign association
   @override
   @JsonKey(name: 'campaign_id')
   final String? campaignId;
   @override
   @JsonKey(name: 'campaign_title')
   final String? campaignTitle;
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
 
   @override
   String toString() {
@@ -435,7 +413,7 @@ abstract class _UpdateFeedModel implements UpdateFeedModel {
   @override
   @StringListConverter()
   @JsonKey(name: 'video_urls')
-  List<String>? get videoUrls; // per-post settings
+  List<String>? get videoUrls; // Post privacy settings
   @override
   @JsonKey(name: 'comments_enabled')
   bool? get commentsEnabled;
@@ -450,7 +428,7 @@ abstract class _UpdateFeedModel implements UpdateFeedModel {
   bool? get hideShareCount;
   @override
   @JsonKey(name: 'hide_likes_list')
-  bool? get hideLikesList;
+  bool? get hideLikesList; // Campaign association
   @override
   @JsonKey(name: 'campaign_id')
   String? get campaignId;

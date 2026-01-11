@@ -18,78 +18,70 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AuthEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) signUpRequested,
-    required TResult Function(String email, String password) signInRequested,
-    required TResult Function(String email) resetPasswordRequested,
-    required TResult Function() signOutRequested,
-    required TResult Function() signInWithGoogleRequested,
-    required TResult Function() clearMessagesRequested,
-    required TResult Function(AuthSnapshot snapshot)
-        authSupabaseSnapshotChanged,
+    required TResult Function(String email, String password) signUp,
+    required TResult Function(String email, String password) signIn,
+    required TResult Function(String email) resetPassword,
+    required TResult Function() signOut,
+    required TResult Function() signInWithGoogle,
+    required TResult Function() clearMessages,
+    required TResult Function(AuthSnapshotEntity snapshot) authSnapshotChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? signUpRequested,
-    TResult? Function(String email, String password)? signInRequested,
-    TResult? Function(String email)? resetPasswordRequested,
-    TResult? Function()? signOutRequested,
-    TResult? Function()? signInWithGoogleRequested,
-    TResult? Function()? clearMessagesRequested,
-    TResult? Function(AuthSnapshot snapshot)? authSupabaseSnapshotChanged,
+    TResult? Function(String email, String password)? signUp,
+    TResult? Function(String email, String password)? signIn,
+    TResult? Function(String email)? resetPassword,
+    TResult? Function()? signOut,
+    TResult? Function()? signInWithGoogle,
+    TResult? Function()? clearMessages,
+    TResult? Function(AuthSnapshotEntity snapshot)? authSnapshotChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? signUpRequested,
-    TResult Function(String email, String password)? signInRequested,
-    TResult Function(String email)? resetPasswordRequested,
-    TResult Function()? signOutRequested,
-    TResult Function()? signInWithGoogleRequested,
-    TResult Function()? clearMessagesRequested,
-    TResult Function(AuthSnapshot snapshot)? authSupabaseSnapshotChanged,
+    TResult Function(String email, String password)? signUp,
+    TResult Function(String email, String password)? signIn,
+    TResult Function(String email)? resetPassword,
+    TResult Function()? signOut,
+    TResult Function()? signInWithGoogle,
+    TResult Function()? clearMessages,
+    TResult Function(AuthSnapshotEntity snapshot)? authSnapshotChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(AuthSignUpRequested value) signUpRequested,
-    required TResult Function(AuthSignInRequested value) signInRequested,
-    required TResult Function(AuthResetPasswordRequested value)
-        resetPasswordRequested,
-    required TResult Function(AuthSignOutRequested value) signOutRequested,
-    required TResult Function(AuthSignInWithGoogleRequested value)
-        signInWithGoogleRequested,
-    required TResult Function(AuthClearMessagesRequested value)
-        clearMessagesRequested,
-    required TResult Function(AuthSupabaseSnapshotChanged value)
-        authSupabaseSnapshotChanged,
+    required TResult Function(SignUpEvent value) signUp,
+    required TResult Function(SignInEvent value) signIn,
+    required TResult Function(ResetPasswordEvent value) resetPassword,
+    required TResult Function(SignOutEvent value) signOut,
+    required TResult Function(SignInWithGoogleEvent value) signInWithGoogle,
+    required TResult Function(ClearMessagesEvent value) clearMessages,
+    required TResult Function(AuthSnapshotChangedEvent value)
+        authSnapshotChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(AuthSignUpRequested value)? signUpRequested,
-    TResult? Function(AuthSignInRequested value)? signInRequested,
-    TResult? Function(AuthResetPasswordRequested value)? resetPasswordRequested,
-    TResult? Function(AuthSignOutRequested value)? signOutRequested,
-    TResult? Function(AuthSignInWithGoogleRequested value)?
-        signInWithGoogleRequested,
-    TResult? Function(AuthClearMessagesRequested value)? clearMessagesRequested,
-    TResult? Function(AuthSupabaseSnapshotChanged value)?
-        authSupabaseSnapshotChanged,
+    TResult? Function(SignUpEvent value)? signUp,
+    TResult? Function(SignInEvent value)? signIn,
+    TResult? Function(ResetPasswordEvent value)? resetPassword,
+    TResult? Function(SignOutEvent value)? signOut,
+    TResult? Function(SignInWithGoogleEvent value)? signInWithGoogle,
+    TResult? Function(ClearMessagesEvent value)? clearMessages,
+    TResult? Function(AuthSnapshotChangedEvent value)? authSnapshotChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(AuthSignUpRequested value)? signUpRequested,
-    TResult Function(AuthSignInRequested value)? signInRequested,
-    TResult Function(AuthResetPasswordRequested value)? resetPasswordRequested,
-    TResult Function(AuthSignOutRequested value)? signOutRequested,
-    TResult Function(AuthSignInWithGoogleRequested value)?
-        signInWithGoogleRequested,
-    TResult Function(AuthClearMessagesRequested value)? clearMessagesRequested,
-    TResult Function(AuthSupabaseSnapshotChanged value)?
-        authSupabaseSnapshotChanged,
+    TResult Function(SignUpEvent value)? signUp,
+    TResult Function(SignInEvent value)? signIn,
+    TResult Function(ResetPasswordEvent value)? resetPassword,
+    TResult Function(SignOutEvent value)? signOut,
+    TResult Function(SignInWithGoogleEvent value)? signInWithGoogle,
+    TResult Function(ClearMessagesEvent value)? clearMessages,
+    TResult Function(AuthSnapshotChangedEvent value)? authSnapshotChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -111,171 +103,25 @@ class _$AuthEventCopyWithImpl<$Res, $Val extends AuthEvent>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( SignUpEvent value)?  signUp,TResult Function( SignInEvent value)?  signIn,TResult Function( ResetPasswordEvent value)?  resetPassword,TResult Function( SignOutEvent value)?  signOut,TResult Function( SignInWithGoogleEvent value)?  signInWithGoogle,TResult Function( ClearMessagesEvent value)?  clearMessages,TResult Function( AuthSnapshotChangedEvent value)?  authSnapshotChanged,required TResult orElse(),}){
-final _that = this;
-switch (_that) {
-case SignUpEvent() when signUp != null:
-return signUp(_that);case SignInEvent() when signIn != null:
-return signIn(_that);case ResetPasswordEvent() when resetPassword != null:
-return resetPassword(_that);case SignOutEvent() when signOut != null:
-return signOut(_that);case SignInWithGoogleEvent() when signInWithGoogle != null:
-return signInWithGoogle(_that);case ClearMessagesEvent() when clearMessages != null:
-return clearMessages(_that);case AuthSnapshotChangedEvent() when authSnapshotChanged != null:
-return authSnapshotChanged(_that);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// Callbacks receives the raw object, upcasted.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case final Subclass2 value:
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( SignUpEvent value)  signUp,required TResult Function( SignInEvent value)  signIn,required TResult Function( ResetPasswordEvent value)  resetPassword,required TResult Function( SignOutEvent value)  signOut,required TResult Function( SignInWithGoogleEvent value)  signInWithGoogle,required TResult Function( ClearMessagesEvent value)  clearMessages,required TResult Function( AuthSnapshotChangedEvent value)  authSnapshotChanged,}){
-final _that = this;
-switch (_that) {
-case SignUpEvent():
-return signUp(_that);case SignInEvent():
-return signIn(_that);case ResetPasswordEvent():
-return resetPassword(_that);case SignOutEvent():
-return signOut(_that);case SignInWithGoogleEvent():
-return signInWithGoogle(_that);case ClearMessagesEvent():
-return clearMessages(_that);case AuthSnapshotChangedEvent():
-return authSnapshotChanged(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `map` that fallback to returning `null`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( SignUpEvent value)?  signUp,TResult? Function( SignInEvent value)?  signIn,TResult? Function( ResetPasswordEvent value)?  resetPassword,TResult? Function( SignOutEvent value)?  signOut,TResult? Function( SignInWithGoogleEvent value)?  signInWithGoogle,TResult? Function( ClearMessagesEvent value)?  clearMessages,TResult? Function( AuthSnapshotChangedEvent value)?  authSnapshotChanged,}){
-final _that = this;
-switch (_that) {
-case SignUpEvent() when signUp != null:
-return signUp(_that);case SignInEvent() when signIn != null:
-return signIn(_that);case ResetPasswordEvent() when resetPassword != null:
-return resetPassword(_that);case SignOutEvent() when signOut != null:
-return signOut(_that);case SignInWithGoogleEvent() when signInWithGoogle != null:
-return signInWithGoogle(_that);case ClearMessagesEvent() when clearMessages != null:
-return clearMessages(_that);case AuthSnapshotChangedEvent() when authSnapshotChanged != null:
-return authSnapshotChanged(_that);case _:
-  return null;
-
-}
-}
-/// A variant of `when` that fallback to an `orElse` callback.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String email,  String password)?  signUp,TResult Function( String email,  String password)?  signIn,TResult Function( String email)?  resetPassword,TResult Function()?  signOut,TResult Function()?  signInWithGoogle,TResult Function()?  clearMessages,TResult Function( AuthSnapshotEntity snapshot)?  authSnapshotChanged,required TResult orElse(),}) {final _that = this;
-switch (_that) {
-case SignUpEvent() when signUp != null:
-return signUp(_that.email,_that.password);case SignInEvent() when signIn != null:
-return signIn(_that.email,_that.password);case ResetPasswordEvent() when resetPassword != null:
-return resetPassword(_that.email);case SignOutEvent() when signOut != null:
-return signOut();case SignInWithGoogleEvent() when signInWithGoogle != null:
-return signInWithGoogle();case ClearMessagesEvent() when clearMessages != null:
-return clearMessages();case AuthSnapshotChangedEvent() when authSnapshotChanged != null:
-return authSnapshotChanged(_that.snapshot);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// As opposed to `map`, this offers destructuring.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case Subclass2(:final field2):
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String email,  String password)  signUp,required TResult Function( String email,  String password)  signIn,required TResult Function( String email)  resetPassword,required TResult Function()  signOut,required TResult Function()  signInWithGoogle,required TResult Function()  clearMessages,required TResult Function( AuthSnapshotEntity snapshot)  authSnapshotChanged,}) {final _that = this;
-switch (_that) {
-case SignUpEvent():
-return signUp(_that.email,_that.password);case SignInEvent():
-return signIn(_that.email,_that.password);case ResetPasswordEvent():
-return resetPassword(_that.email);case SignOutEvent():
-return signOut();case SignInWithGoogleEvent():
-return signInWithGoogle();case ClearMessagesEvent():
-return clearMessages();case AuthSnapshotChangedEvent():
-return authSnapshotChanged(_that.snapshot);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `when` that fallback to returning `null`
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String email,  String password)?  signUp,TResult? Function( String email,  String password)?  signIn,TResult? Function( String email)?  resetPassword,TResult? Function()?  signOut,TResult? Function()?  signInWithGoogle,TResult? Function()?  clearMessages,TResult? Function( AuthSnapshotEntity snapshot)?  authSnapshotChanged,}) {final _that = this;
-switch (_that) {
-case SignUpEvent() when signUp != null:
-return signUp(_that.email,_that.password);case SignInEvent() when signIn != null:
-return signIn(_that.email,_that.password);case ResetPasswordEvent() when resetPassword != null:
-return resetPassword(_that.email);case SignOutEvent() when signOut != null:
-return signOut();case SignInWithGoogleEvent() when signInWithGoogle != null:
-return signInWithGoogle();case ClearMessagesEvent() when clearMessages != null:
-return clearMessages();case AuthSnapshotChangedEvent() when authSnapshotChanged != null:
-return authSnapshotChanged(_that.snapshot);case _:
-  return null;
-
-}
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$AuthSignUpRequestedImplCopyWith<$Res> {
-  factory _$$AuthSignUpRequestedImplCopyWith(_$AuthSignUpRequestedImpl value,
-          $Res Function(_$AuthSignUpRequestedImpl) then) =
-      __$$AuthSignUpRequestedImplCopyWithImpl<$Res>;
+abstract class _$$SignUpEventImplCopyWith<$Res> {
+  factory _$$SignUpEventImplCopyWith(
+          _$SignUpEventImpl value, $Res Function(_$SignUpEventImpl) then) =
+      __$$SignUpEventImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String email, String password});
 }
 
 /// @nodoc
-class __$$AuthSignUpRequestedImplCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$AuthSignUpRequestedImpl>
-    implements _$$AuthSignUpRequestedImplCopyWith<$Res> {
-  __$$AuthSignUpRequestedImplCopyWithImpl(_$AuthSignUpRequestedImpl _value,
-      $Res Function(_$AuthSignUpRequestedImpl) _then)
+class __$$SignUpEventImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$SignUpEventImpl>
+    implements _$$SignUpEventImplCopyWith<$Res> {
+  __$$SignUpEventImplCopyWithImpl(
+      _$SignUpEventImpl _value, $Res Function(_$SignUpEventImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of AuthEvent
@@ -286,7 +132,7 @@ class __$$AuthSignUpRequestedImplCopyWithImpl<$Res>
     Object? email = null,
     Object? password = null,
   }) {
-    return _then(_$AuthSignUpRequestedImpl(
+    return _then(_$SignUpEventImpl(
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -301,303 +147,82 @@ class __$$AuthSignUpRequestedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AuthSignUpRequestedImpl implements AuthSignUpRequested {
-  const _$AuthSignUpRequestedImpl(
-      {required this.email, required this.password});
+class _$SignUpEventImpl implements SignUpEvent {
+  const _$SignUpEventImpl({required this.email, required this.password});
 
-class SignUpEvent implements AuthEvent {
-  const SignUpEvent({required this.email, required this.password});
-  
+  @override
+  final String email;
+  @override
+  final String password;
 
   @override
   String toString() {
-    return 'AuthEvent.signUpRequested(email: $email, password: $password)';
+    return 'AuthEvent.signUp(email: $email, password: $password)';
   }
 
-/// Create a copy of AuthEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$SignUpEventCopyWith<SignUpEvent> get copyWith => _$SignUpEventCopyWithImpl<SignUpEvent>(this, _$identity);
-
-  @override
-  int get hashCode => Object.hash(runtimeType, email, password);
-
-  /// Create a copy of AuthEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AuthSignUpRequestedImplCopyWith<_$AuthSignUpRequestedImpl> get copyWith =>
-      __$$AuthSignUpRequestedImplCopyWithImpl<_$AuthSignUpRequestedImpl>(
-          this, _$identity);
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignUpEvent&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password));
-}
-
-abstract class AuthSignUpRequested implements AuthEvent {
-  const factory AuthSignUpRequested(
-      {required final String email,
-      required final String password}) = _$AuthSignUpRequestedImpl;
-
-@override
-int get hashCode => Object.hash(runtimeType,email,password);
-
-@override
-String toString() {
-  return 'AuthEvent.signUp(email: $email, password: $password)';
-}
-
-
-  /// Create a copy of AuthEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AuthSignUpRequestedImplCopyWith<_$AuthSignUpRequestedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract mixin class $SignUpEventCopyWith<$Res> implements $AuthEventCopyWith<$Res> {
-  factory $SignUpEventCopyWith(SignUpEvent value, $Res Function(SignUpEvent) _then) = _$SignUpEventCopyWithImpl;
-@useResult
-$Res call({
- String email, String password
-});
-
-
-
-
-}
-
-/// @nodoc
-class _$SignUpEventCopyWithImpl<$Res>
-    implements $SignUpEventCopyWith<$Res> {
-  _$SignUpEventCopyWithImpl(this._self, this._then);
-
-  final SignUpEvent _self;
-  final $Res Function(SignUpEvent) _then;
-
-/// Create a copy of AuthEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? email = null,Object? password = null,}) {
-  return _then(SignUpEvent(
-email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
-as String,
-  ));
-}
-
-
-  /// Create a copy of AuthEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? email = null,
-    Object? password = null,
-  }) {
-    return _then(_$AuthSignInRequestedImpl(
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$AuthSignInRequestedImpl implements AuthSignInRequested {
-  const _$AuthSignInRequestedImpl(
-      {required this.email, required this.password});
-
-class SignInEvent implements AuthEvent {
-  const SignInEvent({required this.email, required this.password});
-  
-
-  @override
-  String toString() {
-    return 'AuthEvent.signInRequested(email: $email, password: $password)';
-  }
-
-/// Create a copy of AuthEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$SignInEventCopyWith<SignInEvent> get copyWith => _$SignInEventCopyWithImpl<SignInEvent>(this, _$identity);
-
-  @override
-  int get hashCode => Object.hash(runtimeType, email, password);
-
-  /// Create a copy of AuthEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AuthSignInRequestedImplCopyWith<_$AuthSignInRequestedImpl> get copyWith =>
-      __$$AuthSignInRequestedImplCopyWithImpl<_$AuthSignInRequestedImpl>(
-          this, _$identity);
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignInEvent&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password));
-}
-
-abstract class AuthSignInRequested implements AuthEvent {
-  const factory AuthSignInRequested(
-      {required final String email,
-      required final String password}) = _$AuthSignInRequestedImpl;
-
-@override
-int get hashCode => Object.hash(runtimeType,email,password);
-
-@override
-String toString() {
-  return 'AuthEvent.signIn(email: $email, password: $password)';
-}
-
-
-  /// Create a copy of AuthEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AuthSignInRequestedImplCopyWith<_$AuthSignInRequestedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract mixin class $SignInEventCopyWith<$Res> implements $AuthEventCopyWith<$Res> {
-  factory $SignInEventCopyWith(SignInEvent value, $Res Function(SignInEvent) _then) = _$SignInEventCopyWithImpl;
-@useResult
-$Res call({
- String email, String password
-});
-
-
-
-
-}
-
-/// @nodoc
-class _$SignInEventCopyWithImpl<$Res>
-    implements $SignInEventCopyWith<$Res> {
-  _$SignInEventCopyWithImpl(this._self, this._then);
-
-  final SignInEvent _self;
-  final $Res Function(SignInEvent) _then;
-
-/// Create a copy of AuthEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? email = null,Object? password = null,}) {
-  return _then(SignInEvent(
-email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
-as String,
-  ));
-}
-
-
-  /// Create a copy of AuthEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? email = null,
-  }) {
-    return _then(_$AuthResetPasswordRequestedImpl(
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$AuthResetPasswordRequestedImpl implements AuthResetPasswordRequested {
-  const _$AuthResetPasswordRequestedImpl({required this.email});
-
-class ResetPasswordEvent implements AuthEvent {
-  const ResetPasswordEvent({required this.email});
-  
-
-  @override
-  String toString() {
-    return 'AuthEvent.resetPasswordRequested(email: $email)';
-  }
-
-<<<<<<< HEAD
-/// Create a copy of AuthEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-=======
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
+            other is _$SignUpEventImpl &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.password, password) ||
+                other.password == password));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, email, password);
+
+  /// Create a copy of AuthEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$AuthResetPasswordRequestedImplCopyWith<_$AuthResetPasswordRequestedImpl>
-      get copyWith => __$$AuthResetPasswordRequestedImplCopyWithImpl<
-          _$AuthResetPasswordRequestedImpl>(this, _$identity);
+  _$$SignUpEventImplCopyWith<_$SignUpEventImpl> get copyWith =>
+      __$$SignUpEventImplCopyWithImpl<_$SignUpEventImpl>(this, _$identity);
 
-<<<<<<< HEAD
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ResetPasswordEvent&&(identical(other.email, email) || other.email == email));
-=======
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) signUpRequested,
-    required TResult Function(String email, String password) signInRequested,
-    required TResult Function(String email) resetPasswordRequested,
-    required TResult Function() signOutRequested,
-    required TResult Function() signInWithGoogleRequested,
-    required TResult Function() clearMessagesRequested,
-    required TResult Function(AuthSnapshot snapshot)
-        authSupabaseSnapshotChanged,
+    required TResult Function(String email, String password) signUp,
+    required TResult Function(String email, String password) signIn,
+    required TResult Function(String email) resetPassword,
+    required TResult Function() signOut,
+    required TResult Function() signInWithGoogle,
+    required TResult Function() clearMessages,
+    required TResult Function(AuthSnapshotEntity snapshot) authSnapshotChanged,
   }) {
-    return resetPasswordRequested(email);
+    return signUp(email, password);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? signUpRequested,
-    TResult? Function(String email, String password)? signInRequested,
-    TResult? Function(String email)? resetPasswordRequested,
-    TResult? Function()? signOutRequested,
-    TResult? Function()? signInWithGoogleRequested,
-    TResult? Function()? clearMessagesRequested,
-    TResult? Function(AuthSnapshot snapshot)? authSupabaseSnapshotChanged,
+    TResult? Function(String email, String password)? signUp,
+    TResult? Function(String email, String password)? signIn,
+    TResult? Function(String email)? resetPassword,
+    TResult? Function()? signOut,
+    TResult? Function()? signInWithGoogle,
+    TResult? Function()? clearMessages,
+    TResult? Function(AuthSnapshotEntity snapshot)? authSnapshotChanged,
   }) {
-    return resetPasswordRequested?.call(email);
+    return signUp?.call(email, password);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? signUpRequested,
-    TResult Function(String email, String password)? signInRequested,
-    TResult Function(String email)? resetPasswordRequested,
-    TResult Function()? signOutRequested,
-    TResult Function()? signInWithGoogleRequested,
-    TResult Function()? clearMessagesRequested,
-    TResult Function(AuthSnapshot snapshot)? authSupabaseSnapshotChanged,
+    TResult Function(String email, String password)? signUp,
+    TResult Function(String email, String password)? signIn,
+    TResult Function(String email)? resetPassword,
+    TResult Function()? signOut,
+    TResult Function()? signInWithGoogle,
+    TResult Function()? clearMessages,
+    TResult Function(AuthSnapshotEntity snapshot)? authSnapshotChanged,
     required TResult orElse(),
   }) {
-    if (resetPasswordRequested != null) {
-      return resetPasswordRequested(email);
+    if (signUp != null) {
+      return signUp(email, password);
     }
     return orElse();
   }
@@ -605,728 +230,849 @@ bool operator ==(Object other) {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(AuthSignUpRequested value) signUpRequested,
-    required TResult Function(AuthSignInRequested value) signInRequested,
-    required TResult Function(AuthResetPasswordRequested value)
-        resetPasswordRequested,
-    required TResult Function(AuthSignOutRequested value) signOutRequested,
-    required TResult Function(AuthSignInWithGoogleRequested value)
-        signInWithGoogleRequested,
-    required TResult Function(AuthClearMessagesRequested value)
-        clearMessagesRequested,
-    required TResult Function(AuthSupabaseSnapshotChanged value)
-        authSupabaseSnapshotChanged,
+    required TResult Function(SignUpEvent value) signUp,
+    required TResult Function(SignInEvent value) signIn,
+    required TResult Function(ResetPasswordEvent value) resetPassword,
+    required TResult Function(SignOutEvent value) signOut,
+    required TResult Function(SignInWithGoogleEvent value) signInWithGoogle,
+    required TResult Function(ClearMessagesEvent value) clearMessages,
+    required TResult Function(AuthSnapshotChangedEvent value)
+        authSnapshotChanged,
   }) {
-    return resetPasswordRequested(this);
+    return signUp(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(AuthSignUpRequested value)? signUpRequested,
-    TResult? Function(AuthSignInRequested value)? signInRequested,
-    TResult? Function(AuthResetPasswordRequested value)? resetPasswordRequested,
-    TResult? Function(AuthSignOutRequested value)? signOutRequested,
-    TResult? Function(AuthSignInWithGoogleRequested value)?
-        signInWithGoogleRequested,
-    TResult? Function(AuthClearMessagesRequested value)? clearMessagesRequested,
-    TResult? Function(AuthSupabaseSnapshotChanged value)?
-        authSupabaseSnapshotChanged,
+    TResult? Function(SignUpEvent value)? signUp,
+    TResult? Function(SignInEvent value)? signIn,
+    TResult? Function(ResetPasswordEvent value)? resetPassword,
+    TResult? Function(SignOutEvent value)? signOut,
+    TResult? Function(SignInWithGoogleEvent value)? signInWithGoogle,
+    TResult? Function(ClearMessagesEvent value)? clearMessages,
+    TResult? Function(AuthSnapshotChangedEvent value)? authSnapshotChanged,
   }) {
-    return resetPasswordRequested?.call(this);
+    return signUp?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(AuthSignUpRequested value)? signUpRequested,
-    TResult Function(AuthSignInRequested value)? signInRequested,
-    TResult Function(AuthResetPasswordRequested value)? resetPasswordRequested,
-    TResult Function(AuthSignOutRequested value)? signOutRequested,
-    TResult Function(AuthSignInWithGoogleRequested value)?
-        signInWithGoogleRequested,
-    TResult Function(AuthClearMessagesRequested value)? clearMessagesRequested,
-    TResult Function(AuthSupabaseSnapshotChanged value)?
-        authSupabaseSnapshotChanged,
+    TResult Function(SignUpEvent value)? signUp,
+    TResult Function(SignInEvent value)? signIn,
+    TResult Function(ResetPasswordEvent value)? resetPassword,
+    TResult Function(SignOutEvent value)? signOut,
+    TResult Function(SignInWithGoogleEvent value)? signInWithGoogle,
+    TResult Function(ClearMessagesEvent value)? clearMessages,
+    TResult Function(AuthSnapshotChangedEvent value)? authSnapshotChanged,
     required TResult orElse(),
   }) {
-    if (resetPasswordRequested != null) {
-      return resetPasswordRequested(this);
+    if (signUp != null) {
+      return signUp(this);
     }
     return orElse();
   }
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
 }
 
-abstract class AuthResetPasswordRequested implements AuthEvent {
-  const factory AuthResetPasswordRequested({required final String email}) =
-      _$AuthResetPasswordRequestedImpl;
+abstract class SignUpEvent implements AuthEvent {
+  const factory SignUpEvent(
+      {required final String email,
+      required final String password}) = _$SignUpEventImpl;
 
-<<<<<<< HEAD
-@override
-int get hashCode => Object.hash(runtimeType,email);
-
-@override
-String toString() {
-  return 'AuthEvent.resetPassword(email: $email)';
-}
-
-=======
   String get email;
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
+  String get password;
 
   /// Create a copy of AuthEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AuthResetPasswordRequestedImplCopyWith<_$AuthResetPasswordRequestedImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$SignUpEventImplCopyWith<_$SignUpEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-<<<<<<< HEAD
-abstract mixin class $ResetPasswordEventCopyWith<$Res> implements $AuthEventCopyWith<$Res> {
-  factory $ResetPasswordEventCopyWith(ResetPasswordEvent value, $Res Function(ResetPasswordEvent) _then) = _$ResetPasswordEventCopyWithImpl;
-@useResult
-$Res call({
- String email
-});
-
-
-
-
-=======
-abstract class _$$AuthSignOutRequestedImplCopyWith<$Res> {
-  factory _$$AuthSignOutRequestedImplCopyWith(_$AuthSignOutRequestedImpl value,
-          $Res Function(_$AuthSignOutRequestedImpl) then) =
-      __$$AuthSignOutRequestedImplCopyWithImpl<$Res>;
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
-}
-
-/// @nodoc
-<<<<<<< HEAD
-class _$ResetPasswordEventCopyWithImpl<$Res>
-    implements $ResetPasswordEventCopyWith<$Res> {
-  _$ResetPasswordEventCopyWithImpl(this._self, this._then);
-
-  final ResetPasswordEvent _self;
-  final $Res Function(ResetPasswordEvent) _then;
-
-/// Create a copy of AuthEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? email = null,}) {
-  return _then(ResetPasswordEvent(
-email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,
-  ));
-}
-
-=======
-class __$$AuthSignOutRequestedImplCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$AuthSignOutRequestedImpl>
-    implements _$$AuthSignOutRequestedImplCopyWith<$Res> {
-  __$$AuthSignOutRequestedImplCopyWithImpl(_$AuthSignOutRequestedImpl _value,
-      $Res Function(_$AuthSignOutRequestedImpl) _then)
-      : super(_value, _then);
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
-
-  /// Create a copy of AuthEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$AuthSignOutRequestedImpl implements AuthSignOutRequested {
-  const _$AuthSignOutRequestedImpl();
-
-<<<<<<< HEAD
-class SignOutEvent implements AuthEvent {
-  const SignOutEvent();
-  
-=======
-  @override
-  String toString() {
-    return 'AuthEvent.signOutRequested()';
-  }
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AuthSignOutRequestedImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) signUpRequested,
-    required TResult Function(String email, String password) signInRequested,
-    required TResult Function(String email) resetPasswordRequested,
-    required TResult Function() signOutRequested,
-    required TResult Function() signInWithGoogleRequested,
-    required TResult Function() clearMessagesRequested,
-    required TResult Function(AuthSnapshot snapshot)
-        authSupabaseSnapshotChanged,
-  }) {
-    return signOutRequested();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? signUpRequested,
-    TResult? Function(String email, String password)? signInRequested,
-    TResult? Function(String email)? resetPasswordRequested,
-    TResult? Function()? signOutRequested,
-    TResult? Function()? signInWithGoogleRequested,
-    TResult? Function()? clearMessagesRequested,
-    TResult? Function(AuthSnapshot snapshot)? authSupabaseSnapshotChanged,
-  }) {
-    return signOutRequested?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? signUpRequested,
-    TResult Function(String email, String password)? signInRequested,
-    TResult Function(String email)? resetPasswordRequested,
-    TResult Function()? signOutRequested,
-    TResult Function()? signInWithGoogleRequested,
-    TResult Function()? clearMessagesRequested,
-    TResult Function(AuthSnapshot snapshot)? authSupabaseSnapshotChanged,
-    required TResult orElse(),
-  }) {
-    if (signOutRequested != null) {
-      return signOutRequested();
-    }
-    return orElse();
-  }
-
-<<<<<<< HEAD
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignOutEvent);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'AuthEvent.signOut()';
-}
-
-
-}
-
-
-
-
-/// @nodoc
-
-
-class SignInWithGoogleEvent implements AuthEvent {
-  const SignInWithGoogleEvent();
-  
-
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignInWithGoogleEvent);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'AuthEvent.signInWithGoogle()';
-}
-
-
-}
-
-
-
-
-/// @nodoc
-
-
-class ClearMessagesEvent implements AuthEvent {
-  const ClearMessagesEvent();
-  
-
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ClearMessagesEvent);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'AuthEvent.clearMessages()';
-}
-
-
-}
-
-
-
-
-/// @nodoc
-
-
-class AuthSnapshotChangedEvent implements AuthEvent {
-  const AuthSnapshotChangedEvent({required this.snapshot});
-  
-
- final  AuthSnapshotEntity snapshot;
-
-/// Create a copy of AuthEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$AuthSnapshotChangedEventCopyWith<AuthSnapshotChangedEvent> get copyWith => _$AuthSnapshotChangedEventCopyWithImpl<AuthSnapshotChangedEvent>(this, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthSnapshotChangedEvent&&(identical(other.snapshot, snapshot) || other.snapshot == snapshot));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,snapshot);
-
-@override
-String toString() {
-  return 'AuthEvent.authSnapshotChanged(snapshot: $snapshot)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $AuthSnapshotChangedEventCopyWith<$Res> implements $AuthEventCopyWith<$Res> {
-  factory $AuthSnapshotChangedEventCopyWith(AuthSnapshotChangedEvent value, $Res Function(AuthSnapshotChangedEvent) _then) = _$AuthSnapshotChangedEventCopyWithImpl;
-@useResult
-$Res call({
- AuthSnapshotEntity snapshot
-});
-
-
-
-
-=======
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(AuthSignUpRequested value) signUpRequested,
-    required TResult Function(AuthSignInRequested value) signInRequested,
-    required TResult Function(AuthResetPasswordRequested value)
-        resetPasswordRequested,
-    required TResult Function(AuthSignOutRequested value) signOutRequested,
-    required TResult Function(AuthSignInWithGoogleRequested value)
-        signInWithGoogleRequested,
-    required TResult Function(AuthClearMessagesRequested value)
-        clearMessagesRequested,
-    required TResult Function(AuthSupabaseSnapshotChanged value)
-        authSupabaseSnapshotChanged,
-  }) {
-    return signOutRequested(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(AuthSignUpRequested value)? signUpRequested,
-    TResult? Function(AuthSignInRequested value)? signInRequested,
-    TResult? Function(AuthResetPasswordRequested value)? resetPasswordRequested,
-    TResult? Function(AuthSignOutRequested value)? signOutRequested,
-    TResult? Function(AuthSignInWithGoogleRequested value)?
-        signInWithGoogleRequested,
-    TResult? Function(AuthClearMessagesRequested value)? clearMessagesRequested,
-    TResult? Function(AuthSupabaseSnapshotChanged value)?
-        authSupabaseSnapshotChanged,
-  }) {
-    return signOutRequested?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(AuthSignUpRequested value)? signUpRequested,
-    TResult Function(AuthSignInRequested value)? signInRequested,
-    TResult Function(AuthResetPasswordRequested value)? resetPasswordRequested,
-    TResult Function(AuthSignOutRequested value)? signOutRequested,
-    TResult Function(AuthSignInWithGoogleRequested value)?
-        signInWithGoogleRequested,
-    TResult Function(AuthClearMessagesRequested value)? clearMessagesRequested,
-    TResult Function(AuthSupabaseSnapshotChanged value)?
-        authSupabaseSnapshotChanged,
-    required TResult orElse(),
-  }) {
-    if (signOutRequested != null) {
-      return signOutRequested(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class AuthSignOutRequested implements AuthEvent {
-  const factory AuthSignOutRequested() = _$AuthSignOutRequestedImpl;
-}
-
-/// @nodoc
-abstract class _$$AuthSignInWithGoogleRequestedImplCopyWith<$Res> {
-  factory _$$AuthSignInWithGoogleRequestedImplCopyWith(
-          _$AuthSignInWithGoogleRequestedImpl value,
-          $Res Function(_$AuthSignInWithGoogleRequestedImpl) then) =
-      __$$AuthSignInWithGoogleRequestedImplCopyWithImpl<$Res>;
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
-}
-
-/// @nodoc
-<<<<<<< HEAD
-class _$AuthSnapshotChangedEventCopyWithImpl<$Res>
-    implements $AuthSnapshotChangedEventCopyWith<$Res> {
-  _$AuthSnapshotChangedEventCopyWithImpl(this._self, this._then);
-
-  final AuthSnapshotChangedEvent _self;
-  final $Res Function(AuthSnapshotChangedEvent) _then;
-
-/// Create a copy of AuthEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? snapshot = null,}) {
-  return _then(AuthSnapshotChangedEvent(
-snapshot: null == snapshot ? _self.snapshot : snapshot // ignore: cast_nullable_to_non_nullable
-as AuthSnapshotEntity,
-  ));
-=======
-class __$$AuthSignInWithGoogleRequestedImplCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$AuthSignInWithGoogleRequestedImpl>
-    implements _$$AuthSignInWithGoogleRequestedImplCopyWith<$Res> {
-  __$$AuthSignInWithGoogleRequestedImplCopyWithImpl(
-      _$AuthSignInWithGoogleRequestedImpl _value,
-      $Res Function(_$AuthSignInWithGoogleRequestedImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of AuthEvent
-  /// with the given fields replaced by the non-null parameter values.
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
-}
-
-/// @nodoc
-
-class _$AuthSignInWithGoogleRequestedImpl
-    implements AuthSignInWithGoogleRequested {
-  const _$AuthSignInWithGoogleRequestedImpl();
-
-  @override
-  String toString() {
-    return 'AuthEvent.signInWithGoogleRequested()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AuthSignInWithGoogleRequestedImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) signUpRequested,
-    required TResult Function(String email, String password) signInRequested,
-    required TResult Function(String email) resetPasswordRequested,
-    required TResult Function() signOutRequested,
-    required TResult Function() signInWithGoogleRequested,
-    required TResult Function() clearMessagesRequested,
-    required TResult Function(AuthSnapshot snapshot)
-        authSupabaseSnapshotChanged,
-  }) {
-    return signInWithGoogleRequested();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? signUpRequested,
-    TResult? Function(String email, String password)? signInRequested,
-    TResult? Function(String email)? resetPasswordRequested,
-    TResult? Function()? signOutRequested,
-    TResult? Function()? signInWithGoogleRequested,
-    TResult? Function()? clearMessagesRequested,
-    TResult? Function(AuthSnapshot snapshot)? authSupabaseSnapshotChanged,
-  }) {
-    return signInWithGoogleRequested?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? signUpRequested,
-    TResult Function(String email, String password)? signInRequested,
-    TResult Function(String email)? resetPasswordRequested,
-    TResult Function()? signOutRequested,
-    TResult Function()? signInWithGoogleRequested,
-    TResult Function()? clearMessagesRequested,
-    TResult Function(AuthSnapshot snapshot)? authSupabaseSnapshotChanged,
-    required TResult orElse(),
-  }) {
-    if (signInWithGoogleRequested != null) {
-      return signInWithGoogleRequested();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(AuthSignUpRequested value) signUpRequested,
-    required TResult Function(AuthSignInRequested value) signInRequested,
-    required TResult Function(AuthResetPasswordRequested value)
-        resetPasswordRequested,
-    required TResult Function(AuthSignOutRequested value) signOutRequested,
-    required TResult Function(AuthSignInWithGoogleRequested value)
-        signInWithGoogleRequested,
-    required TResult Function(AuthClearMessagesRequested value)
-        clearMessagesRequested,
-    required TResult Function(AuthSupabaseSnapshotChanged value)
-        authSupabaseSnapshotChanged,
-  }) {
-    return signInWithGoogleRequested(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(AuthSignUpRequested value)? signUpRequested,
-    TResult? Function(AuthSignInRequested value)? signInRequested,
-    TResult? Function(AuthResetPasswordRequested value)? resetPasswordRequested,
-    TResult? Function(AuthSignOutRequested value)? signOutRequested,
-    TResult? Function(AuthSignInWithGoogleRequested value)?
-        signInWithGoogleRequested,
-    TResult? Function(AuthClearMessagesRequested value)? clearMessagesRequested,
-    TResult? Function(AuthSupabaseSnapshotChanged value)?
-        authSupabaseSnapshotChanged,
-  }) {
-    return signInWithGoogleRequested?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(AuthSignUpRequested value)? signUpRequested,
-    TResult Function(AuthSignInRequested value)? signInRequested,
-    TResult Function(AuthResetPasswordRequested value)? resetPasswordRequested,
-    TResult Function(AuthSignOutRequested value)? signOutRequested,
-    TResult Function(AuthSignInWithGoogleRequested value)?
-        signInWithGoogleRequested,
-    TResult Function(AuthClearMessagesRequested value)? clearMessagesRequested,
-    TResult Function(AuthSupabaseSnapshotChanged value)?
-        authSupabaseSnapshotChanged,
-    required TResult orElse(),
-  }) {
-    if (signInWithGoogleRequested != null) {
-      return signInWithGoogleRequested(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class AuthSignInWithGoogleRequested implements AuthEvent {
-  const factory AuthSignInWithGoogleRequested() =
-      _$AuthSignInWithGoogleRequestedImpl;
-}
-
-/// @nodoc
-abstract class _$$AuthClearMessagesRequestedImplCopyWith<$Res> {
-  factory _$$AuthClearMessagesRequestedImplCopyWith(
-          _$AuthClearMessagesRequestedImpl value,
-          $Res Function(_$AuthClearMessagesRequestedImpl) then) =
-      __$$AuthClearMessagesRequestedImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$AuthClearMessagesRequestedImplCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$AuthClearMessagesRequestedImpl>
-    implements _$$AuthClearMessagesRequestedImplCopyWith<$Res> {
-  __$$AuthClearMessagesRequestedImplCopyWithImpl(
-      _$AuthClearMessagesRequestedImpl _value,
-      $Res Function(_$AuthClearMessagesRequestedImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of AuthEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$AuthClearMessagesRequestedImpl implements AuthClearMessagesRequested {
-  const _$AuthClearMessagesRequestedImpl();
-
-  @override
-  String toString() {
-    return 'AuthEvent.clearMessagesRequested()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AuthClearMessagesRequestedImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) signUpRequested,
-    required TResult Function(String email, String password) signInRequested,
-    required TResult Function(String email) resetPasswordRequested,
-    required TResult Function() signOutRequested,
-    required TResult Function() signInWithGoogleRequested,
-    required TResult Function() clearMessagesRequested,
-    required TResult Function(AuthSnapshot snapshot)
-        authSupabaseSnapshotChanged,
-  }) {
-    return clearMessagesRequested();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? signUpRequested,
-    TResult? Function(String email, String password)? signInRequested,
-    TResult? Function(String email)? resetPasswordRequested,
-    TResult? Function()? signOutRequested,
-    TResult? Function()? signInWithGoogleRequested,
-    TResult? Function()? clearMessagesRequested,
-    TResult? Function(AuthSnapshot snapshot)? authSupabaseSnapshotChanged,
-  }) {
-    return clearMessagesRequested?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? signUpRequested,
-    TResult Function(String email, String password)? signInRequested,
-    TResult Function(String email)? resetPasswordRequested,
-    TResult Function()? signOutRequested,
-    TResult Function()? signInWithGoogleRequested,
-    TResult Function()? clearMessagesRequested,
-    TResult Function(AuthSnapshot snapshot)? authSupabaseSnapshotChanged,
-    required TResult orElse(),
-  }) {
-    if (clearMessagesRequested != null) {
-      return clearMessagesRequested();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(AuthSignUpRequested value) signUpRequested,
-    required TResult Function(AuthSignInRequested value) signInRequested,
-    required TResult Function(AuthResetPasswordRequested value)
-        resetPasswordRequested,
-    required TResult Function(AuthSignOutRequested value) signOutRequested,
-    required TResult Function(AuthSignInWithGoogleRequested value)
-        signInWithGoogleRequested,
-    required TResult Function(AuthClearMessagesRequested value)
-        clearMessagesRequested,
-    required TResult Function(AuthSupabaseSnapshotChanged value)
-        authSupabaseSnapshotChanged,
-  }) {
-    return clearMessagesRequested(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(AuthSignUpRequested value)? signUpRequested,
-    TResult? Function(AuthSignInRequested value)? signInRequested,
-    TResult? Function(AuthResetPasswordRequested value)? resetPasswordRequested,
-    TResult? Function(AuthSignOutRequested value)? signOutRequested,
-    TResult? Function(AuthSignInWithGoogleRequested value)?
-        signInWithGoogleRequested,
-    TResult? Function(AuthClearMessagesRequested value)? clearMessagesRequested,
-    TResult? Function(AuthSupabaseSnapshotChanged value)?
-        authSupabaseSnapshotChanged,
-  }) {
-    return clearMessagesRequested?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(AuthSignUpRequested value)? signUpRequested,
-    TResult Function(AuthSignInRequested value)? signInRequested,
-    TResult Function(AuthResetPasswordRequested value)? resetPasswordRequested,
-    TResult Function(AuthSignOutRequested value)? signOutRequested,
-    TResult Function(AuthSignInWithGoogleRequested value)?
-        signInWithGoogleRequested,
-    TResult Function(AuthClearMessagesRequested value)? clearMessagesRequested,
-    TResult Function(AuthSupabaseSnapshotChanged value)?
-        authSupabaseSnapshotChanged,
-    required TResult orElse(),
-  }) {
-    if (clearMessagesRequested != null) {
-      return clearMessagesRequested(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class AuthClearMessagesRequested implements AuthEvent {
-  const factory AuthClearMessagesRequested() = _$AuthClearMessagesRequestedImpl;
-}
-
-/// @nodoc
-abstract class _$$AuthSupabaseSnapshotChangedImplCopyWith<$Res> {
-  factory _$$AuthSupabaseSnapshotChangedImplCopyWith(
-          _$AuthSupabaseSnapshotChangedImpl value,
-          $Res Function(_$AuthSupabaseSnapshotChangedImpl) then) =
-      __$$AuthSupabaseSnapshotChangedImplCopyWithImpl<$Res>;
+abstract class _$$SignInEventImplCopyWith<$Res> {
+  factory _$$SignInEventImplCopyWith(
+          _$SignInEventImpl value, $Res Function(_$SignInEventImpl) then) =
+      __$$SignInEventImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({AuthSnapshot snapshot});
+  $Res call({String email, String password});
 }
 
 /// @nodoc
-class __$$AuthSupabaseSnapshotChangedImplCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$AuthSupabaseSnapshotChangedImpl>
-    implements _$$AuthSupabaseSnapshotChangedImplCopyWith<$Res> {
-  __$$AuthSupabaseSnapshotChangedImplCopyWithImpl(
-      _$AuthSupabaseSnapshotChangedImpl _value,
-      $Res Function(_$AuthSupabaseSnapshotChangedImpl) _then)
+class __$$SignInEventImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$SignInEventImpl>
+    implements _$$SignInEventImplCopyWith<$Res> {
+  __$$SignInEventImplCopyWithImpl(
+      _$SignInEventImpl _value, $Res Function(_$SignInEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? email = null,
+    Object? password = null,
+  }) {
+    return _then(_$SignInEventImpl(
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SignInEventImpl implements SignInEvent {
+  const _$SignInEventImpl({required this.email, required this.password});
+
+  @override
+  final String email;
+  @override
+  final String password;
+
+  @override
+  String toString() {
+    return 'AuthEvent.signIn(email: $email, password: $password)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SignInEventImpl &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.password, password) ||
+                other.password == password));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, email, password);
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SignInEventImplCopyWith<_$SignInEventImpl> get copyWith =>
+      __$$SignInEventImplCopyWithImpl<_$SignInEventImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String email, String password) signUp,
+    required TResult Function(String email, String password) signIn,
+    required TResult Function(String email) resetPassword,
+    required TResult Function() signOut,
+    required TResult Function() signInWithGoogle,
+    required TResult Function() clearMessages,
+    required TResult Function(AuthSnapshotEntity snapshot) authSnapshotChanged,
+  }) {
+    return signIn(email, password);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String email, String password)? signUp,
+    TResult? Function(String email, String password)? signIn,
+    TResult? Function(String email)? resetPassword,
+    TResult? Function()? signOut,
+    TResult? Function()? signInWithGoogle,
+    TResult? Function()? clearMessages,
+    TResult? Function(AuthSnapshotEntity snapshot)? authSnapshotChanged,
+  }) {
+    return signIn?.call(email, password);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String email, String password)? signUp,
+    TResult Function(String email, String password)? signIn,
+    TResult Function(String email)? resetPassword,
+    TResult Function()? signOut,
+    TResult Function()? signInWithGoogle,
+    TResult Function()? clearMessages,
+    TResult Function(AuthSnapshotEntity snapshot)? authSnapshotChanged,
+    required TResult orElse(),
+  }) {
+    if (signIn != null) {
+      return signIn(email, password);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SignUpEvent value) signUp,
+    required TResult Function(SignInEvent value) signIn,
+    required TResult Function(ResetPasswordEvent value) resetPassword,
+    required TResult Function(SignOutEvent value) signOut,
+    required TResult Function(SignInWithGoogleEvent value) signInWithGoogle,
+    required TResult Function(ClearMessagesEvent value) clearMessages,
+    required TResult Function(AuthSnapshotChangedEvent value)
+        authSnapshotChanged,
+  }) {
+    return signIn(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SignUpEvent value)? signUp,
+    TResult? Function(SignInEvent value)? signIn,
+    TResult? Function(ResetPasswordEvent value)? resetPassword,
+    TResult? Function(SignOutEvent value)? signOut,
+    TResult? Function(SignInWithGoogleEvent value)? signInWithGoogle,
+    TResult? Function(ClearMessagesEvent value)? clearMessages,
+    TResult? Function(AuthSnapshotChangedEvent value)? authSnapshotChanged,
+  }) {
+    return signIn?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SignUpEvent value)? signUp,
+    TResult Function(SignInEvent value)? signIn,
+    TResult Function(ResetPasswordEvent value)? resetPassword,
+    TResult Function(SignOutEvent value)? signOut,
+    TResult Function(SignInWithGoogleEvent value)? signInWithGoogle,
+    TResult Function(ClearMessagesEvent value)? clearMessages,
+    TResult Function(AuthSnapshotChangedEvent value)? authSnapshotChanged,
+    required TResult orElse(),
+  }) {
+    if (signIn != null) {
+      return signIn(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SignInEvent implements AuthEvent {
+  const factory SignInEvent(
+      {required final String email,
+      required final String password}) = _$SignInEventImpl;
+
+  String get email;
+  String get password;
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SignInEventImplCopyWith<_$SignInEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ResetPasswordEventImplCopyWith<$Res> {
+  factory _$$ResetPasswordEventImplCopyWith(_$ResetPasswordEventImpl value,
+          $Res Function(_$ResetPasswordEventImpl) then) =
+      __$$ResetPasswordEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String email});
+}
+
+/// @nodoc
+class __$$ResetPasswordEventImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$ResetPasswordEventImpl>
+    implements _$$ResetPasswordEventImplCopyWith<$Res> {
+  __$$ResetPasswordEventImplCopyWithImpl(_$ResetPasswordEventImpl _value,
+      $Res Function(_$ResetPasswordEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? email = null,
+  }) {
+    return _then(_$ResetPasswordEventImpl(
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ResetPasswordEventImpl implements ResetPasswordEvent {
+  const _$ResetPasswordEventImpl({required this.email});
+
+  @override
+  final String email;
+
+  @override
+  String toString() {
+    return 'AuthEvent.resetPassword(email: $email)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ResetPasswordEventImpl &&
+            (identical(other.email, email) || other.email == email));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, email);
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ResetPasswordEventImplCopyWith<_$ResetPasswordEventImpl> get copyWith =>
+      __$$ResetPasswordEventImplCopyWithImpl<_$ResetPasswordEventImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String email, String password) signUp,
+    required TResult Function(String email, String password) signIn,
+    required TResult Function(String email) resetPassword,
+    required TResult Function() signOut,
+    required TResult Function() signInWithGoogle,
+    required TResult Function() clearMessages,
+    required TResult Function(AuthSnapshotEntity snapshot) authSnapshotChanged,
+  }) {
+    return resetPassword(email);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String email, String password)? signUp,
+    TResult? Function(String email, String password)? signIn,
+    TResult? Function(String email)? resetPassword,
+    TResult? Function()? signOut,
+    TResult? Function()? signInWithGoogle,
+    TResult? Function()? clearMessages,
+    TResult? Function(AuthSnapshotEntity snapshot)? authSnapshotChanged,
+  }) {
+    return resetPassword?.call(email);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String email, String password)? signUp,
+    TResult Function(String email, String password)? signIn,
+    TResult Function(String email)? resetPassword,
+    TResult Function()? signOut,
+    TResult Function()? signInWithGoogle,
+    TResult Function()? clearMessages,
+    TResult Function(AuthSnapshotEntity snapshot)? authSnapshotChanged,
+    required TResult orElse(),
+  }) {
+    if (resetPassword != null) {
+      return resetPassword(email);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SignUpEvent value) signUp,
+    required TResult Function(SignInEvent value) signIn,
+    required TResult Function(ResetPasswordEvent value) resetPassword,
+    required TResult Function(SignOutEvent value) signOut,
+    required TResult Function(SignInWithGoogleEvent value) signInWithGoogle,
+    required TResult Function(ClearMessagesEvent value) clearMessages,
+    required TResult Function(AuthSnapshotChangedEvent value)
+        authSnapshotChanged,
+  }) {
+    return resetPassword(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SignUpEvent value)? signUp,
+    TResult? Function(SignInEvent value)? signIn,
+    TResult? Function(ResetPasswordEvent value)? resetPassword,
+    TResult? Function(SignOutEvent value)? signOut,
+    TResult? Function(SignInWithGoogleEvent value)? signInWithGoogle,
+    TResult? Function(ClearMessagesEvent value)? clearMessages,
+    TResult? Function(AuthSnapshotChangedEvent value)? authSnapshotChanged,
+  }) {
+    return resetPassword?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SignUpEvent value)? signUp,
+    TResult Function(SignInEvent value)? signIn,
+    TResult Function(ResetPasswordEvent value)? resetPassword,
+    TResult Function(SignOutEvent value)? signOut,
+    TResult Function(SignInWithGoogleEvent value)? signInWithGoogle,
+    TResult Function(ClearMessagesEvent value)? clearMessages,
+    TResult Function(AuthSnapshotChangedEvent value)? authSnapshotChanged,
+    required TResult orElse(),
+  }) {
+    if (resetPassword != null) {
+      return resetPassword(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ResetPasswordEvent implements AuthEvent {
+  const factory ResetPasswordEvent({required final String email}) =
+      _$ResetPasswordEventImpl;
+
+  String get email;
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ResetPasswordEventImplCopyWith<_$ResetPasswordEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SignOutEventImplCopyWith<$Res> {
+  factory _$$SignOutEventImplCopyWith(
+          _$SignOutEventImpl value, $Res Function(_$SignOutEventImpl) then) =
+      __$$SignOutEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SignOutEventImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$SignOutEventImpl>
+    implements _$$SignOutEventImplCopyWith<$Res> {
+  __$$SignOutEventImplCopyWithImpl(
+      _$SignOutEventImpl _value, $Res Function(_$SignOutEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$SignOutEventImpl implements SignOutEvent {
+  const _$SignOutEventImpl();
+
+  @override
+  String toString() {
+    return 'AuthEvent.signOut()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$SignOutEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String email, String password) signUp,
+    required TResult Function(String email, String password) signIn,
+    required TResult Function(String email) resetPassword,
+    required TResult Function() signOut,
+    required TResult Function() signInWithGoogle,
+    required TResult Function() clearMessages,
+    required TResult Function(AuthSnapshotEntity snapshot) authSnapshotChanged,
+  }) {
+    return signOut();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String email, String password)? signUp,
+    TResult? Function(String email, String password)? signIn,
+    TResult? Function(String email)? resetPassword,
+    TResult? Function()? signOut,
+    TResult? Function()? signInWithGoogle,
+    TResult? Function()? clearMessages,
+    TResult? Function(AuthSnapshotEntity snapshot)? authSnapshotChanged,
+  }) {
+    return signOut?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String email, String password)? signUp,
+    TResult Function(String email, String password)? signIn,
+    TResult Function(String email)? resetPassword,
+    TResult Function()? signOut,
+    TResult Function()? signInWithGoogle,
+    TResult Function()? clearMessages,
+    TResult Function(AuthSnapshotEntity snapshot)? authSnapshotChanged,
+    required TResult orElse(),
+  }) {
+    if (signOut != null) {
+      return signOut();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SignUpEvent value) signUp,
+    required TResult Function(SignInEvent value) signIn,
+    required TResult Function(ResetPasswordEvent value) resetPassword,
+    required TResult Function(SignOutEvent value) signOut,
+    required TResult Function(SignInWithGoogleEvent value) signInWithGoogle,
+    required TResult Function(ClearMessagesEvent value) clearMessages,
+    required TResult Function(AuthSnapshotChangedEvent value)
+        authSnapshotChanged,
+  }) {
+    return signOut(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SignUpEvent value)? signUp,
+    TResult? Function(SignInEvent value)? signIn,
+    TResult? Function(ResetPasswordEvent value)? resetPassword,
+    TResult? Function(SignOutEvent value)? signOut,
+    TResult? Function(SignInWithGoogleEvent value)? signInWithGoogle,
+    TResult? Function(ClearMessagesEvent value)? clearMessages,
+    TResult? Function(AuthSnapshotChangedEvent value)? authSnapshotChanged,
+  }) {
+    return signOut?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SignUpEvent value)? signUp,
+    TResult Function(SignInEvent value)? signIn,
+    TResult Function(ResetPasswordEvent value)? resetPassword,
+    TResult Function(SignOutEvent value)? signOut,
+    TResult Function(SignInWithGoogleEvent value)? signInWithGoogle,
+    TResult Function(ClearMessagesEvent value)? clearMessages,
+    TResult Function(AuthSnapshotChangedEvent value)? authSnapshotChanged,
+    required TResult orElse(),
+  }) {
+    if (signOut != null) {
+      return signOut(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SignOutEvent implements AuthEvent {
+  const factory SignOutEvent() = _$SignOutEventImpl;
+}
+
+/// @nodoc
+abstract class _$$SignInWithGoogleEventImplCopyWith<$Res> {
+  factory _$$SignInWithGoogleEventImplCopyWith(
+          _$SignInWithGoogleEventImpl value,
+          $Res Function(_$SignInWithGoogleEventImpl) then) =
+      __$$SignInWithGoogleEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SignInWithGoogleEventImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$SignInWithGoogleEventImpl>
+    implements _$$SignInWithGoogleEventImplCopyWith<$Res> {
+  __$$SignInWithGoogleEventImplCopyWithImpl(_$SignInWithGoogleEventImpl _value,
+      $Res Function(_$SignInWithGoogleEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$SignInWithGoogleEventImpl implements SignInWithGoogleEvent {
+  const _$SignInWithGoogleEventImpl();
+
+  @override
+  String toString() {
+    return 'AuthEvent.signInWithGoogle()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SignInWithGoogleEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String email, String password) signUp,
+    required TResult Function(String email, String password) signIn,
+    required TResult Function(String email) resetPassword,
+    required TResult Function() signOut,
+    required TResult Function() signInWithGoogle,
+    required TResult Function() clearMessages,
+    required TResult Function(AuthSnapshotEntity snapshot) authSnapshotChanged,
+  }) {
+    return signInWithGoogle();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String email, String password)? signUp,
+    TResult? Function(String email, String password)? signIn,
+    TResult? Function(String email)? resetPassword,
+    TResult? Function()? signOut,
+    TResult? Function()? signInWithGoogle,
+    TResult? Function()? clearMessages,
+    TResult? Function(AuthSnapshotEntity snapshot)? authSnapshotChanged,
+  }) {
+    return signInWithGoogle?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String email, String password)? signUp,
+    TResult Function(String email, String password)? signIn,
+    TResult Function(String email)? resetPassword,
+    TResult Function()? signOut,
+    TResult Function()? signInWithGoogle,
+    TResult Function()? clearMessages,
+    TResult Function(AuthSnapshotEntity snapshot)? authSnapshotChanged,
+    required TResult orElse(),
+  }) {
+    if (signInWithGoogle != null) {
+      return signInWithGoogle();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SignUpEvent value) signUp,
+    required TResult Function(SignInEvent value) signIn,
+    required TResult Function(ResetPasswordEvent value) resetPassword,
+    required TResult Function(SignOutEvent value) signOut,
+    required TResult Function(SignInWithGoogleEvent value) signInWithGoogle,
+    required TResult Function(ClearMessagesEvent value) clearMessages,
+    required TResult Function(AuthSnapshotChangedEvent value)
+        authSnapshotChanged,
+  }) {
+    return signInWithGoogle(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SignUpEvent value)? signUp,
+    TResult? Function(SignInEvent value)? signIn,
+    TResult? Function(ResetPasswordEvent value)? resetPassword,
+    TResult? Function(SignOutEvent value)? signOut,
+    TResult? Function(SignInWithGoogleEvent value)? signInWithGoogle,
+    TResult? Function(ClearMessagesEvent value)? clearMessages,
+    TResult? Function(AuthSnapshotChangedEvent value)? authSnapshotChanged,
+  }) {
+    return signInWithGoogle?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SignUpEvent value)? signUp,
+    TResult Function(SignInEvent value)? signIn,
+    TResult Function(ResetPasswordEvent value)? resetPassword,
+    TResult Function(SignOutEvent value)? signOut,
+    TResult Function(SignInWithGoogleEvent value)? signInWithGoogle,
+    TResult Function(ClearMessagesEvent value)? clearMessages,
+    TResult Function(AuthSnapshotChangedEvent value)? authSnapshotChanged,
+    required TResult orElse(),
+  }) {
+    if (signInWithGoogle != null) {
+      return signInWithGoogle(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SignInWithGoogleEvent implements AuthEvent {
+  const factory SignInWithGoogleEvent() = _$SignInWithGoogleEventImpl;
+}
+
+/// @nodoc
+abstract class _$$ClearMessagesEventImplCopyWith<$Res> {
+  factory _$$ClearMessagesEventImplCopyWith(_$ClearMessagesEventImpl value,
+          $Res Function(_$ClearMessagesEventImpl) then) =
+      __$$ClearMessagesEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ClearMessagesEventImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$ClearMessagesEventImpl>
+    implements _$$ClearMessagesEventImplCopyWith<$Res> {
+  __$$ClearMessagesEventImplCopyWithImpl(_$ClearMessagesEventImpl _value,
+      $Res Function(_$ClearMessagesEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ClearMessagesEventImpl implements ClearMessagesEvent {
+  const _$ClearMessagesEventImpl();
+
+  @override
+  String toString() {
+    return 'AuthEvent.clearMessages()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ClearMessagesEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String email, String password) signUp,
+    required TResult Function(String email, String password) signIn,
+    required TResult Function(String email) resetPassword,
+    required TResult Function() signOut,
+    required TResult Function() signInWithGoogle,
+    required TResult Function() clearMessages,
+    required TResult Function(AuthSnapshotEntity snapshot) authSnapshotChanged,
+  }) {
+    return clearMessages();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String email, String password)? signUp,
+    TResult? Function(String email, String password)? signIn,
+    TResult? Function(String email)? resetPassword,
+    TResult? Function()? signOut,
+    TResult? Function()? signInWithGoogle,
+    TResult? Function()? clearMessages,
+    TResult? Function(AuthSnapshotEntity snapshot)? authSnapshotChanged,
+  }) {
+    return clearMessages?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String email, String password)? signUp,
+    TResult Function(String email, String password)? signIn,
+    TResult Function(String email)? resetPassword,
+    TResult Function()? signOut,
+    TResult Function()? signInWithGoogle,
+    TResult Function()? clearMessages,
+    TResult Function(AuthSnapshotEntity snapshot)? authSnapshotChanged,
+    required TResult orElse(),
+  }) {
+    if (clearMessages != null) {
+      return clearMessages();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SignUpEvent value) signUp,
+    required TResult Function(SignInEvent value) signIn,
+    required TResult Function(ResetPasswordEvent value) resetPassword,
+    required TResult Function(SignOutEvent value) signOut,
+    required TResult Function(SignInWithGoogleEvent value) signInWithGoogle,
+    required TResult Function(ClearMessagesEvent value) clearMessages,
+    required TResult Function(AuthSnapshotChangedEvent value)
+        authSnapshotChanged,
+  }) {
+    return clearMessages(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SignUpEvent value)? signUp,
+    TResult? Function(SignInEvent value)? signIn,
+    TResult? Function(ResetPasswordEvent value)? resetPassword,
+    TResult? Function(SignOutEvent value)? signOut,
+    TResult? Function(SignInWithGoogleEvent value)? signInWithGoogle,
+    TResult? Function(ClearMessagesEvent value)? clearMessages,
+    TResult? Function(AuthSnapshotChangedEvent value)? authSnapshotChanged,
+  }) {
+    return clearMessages?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SignUpEvent value)? signUp,
+    TResult Function(SignInEvent value)? signIn,
+    TResult Function(ResetPasswordEvent value)? resetPassword,
+    TResult Function(SignOutEvent value)? signOut,
+    TResult Function(SignInWithGoogleEvent value)? signInWithGoogle,
+    TResult Function(ClearMessagesEvent value)? clearMessages,
+    TResult Function(AuthSnapshotChangedEvent value)? authSnapshotChanged,
+    required TResult orElse(),
+  }) {
+    if (clearMessages != null) {
+      return clearMessages(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ClearMessagesEvent implements AuthEvent {
+  const factory ClearMessagesEvent() = _$ClearMessagesEventImpl;
+}
+
+/// @nodoc
+abstract class _$$AuthSnapshotChangedEventImplCopyWith<$Res> {
+  factory _$$AuthSnapshotChangedEventImplCopyWith(
+          _$AuthSnapshotChangedEventImpl value,
+          $Res Function(_$AuthSnapshotChangedEventImpl) then) =
+      __$$AuthSnapshotChangedEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({AuthSnapshotEntity snapshot});
+}
+
+/// @nodoc
+class __$$AuthSnapshotChangedEventImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$AuthSnapshotChangedEventImpl>
+    implements _$$AuthSnapshotChangedEventImplCopyWith<$Res> {
+  __$$AuthSnapshotChangedEventImplCopyWithImpl(
+      _$AuthSnapshotChangedEventImpl _value,
+      $Res Function(_$AuthSnapshotChangedEventImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of AuthEvent
@@ -1336,33 +1082,33 @@ class __$$AuthSupabaseSnapshotChangedImplCopyWithImpl<$Res>
   $Res call({
     Object? snapshot = null,
   }) {
-    return _then(_$AuthSupabaseSnapshotChangedImpl(
+    return _then(_$AuthSnapshotChangedEventImpl(
       snapshot: null == snapshot
           ? _value.snapshot
           : snapshot // ignore: cast_nullable_to_non_nullable
-              as AuthSnapshot,
+              as AuthSnapshotEntity,
     ));
   }
 }
 
 /// @nodoc
 
-class _$AuthSupabaseSnapshotChangedImpl implements AuthSupabaseSnapshotChanged {
-  const _$AuthSupabaseSnapshotChangedImpl({required this.snapshot});
+class _$AuthSnapshotChangedEventImpl implements AuthSnapshotChangedEvent {
+  const _$AuthSnapshotChangedEventImpl({required this.snapshot});
 
   @override
-  final AuthSnapshot snapshot;
+  final AuthSnapshotEntity snapshot;
 
   @override
   String toString() {
-    return 'AuthEvent.authSupabaseSnapshotChanged(snapshot: $snapshot)';
+    return 'AuthEvent.authSnapshotChanged(snapshot: $snapshot)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AuthSupabaseSnapshotChangedImpl &&
+            other is _$AuthSnapshotChangedEventImpl &&
             (identical(other.snapshot, snapshot) ||
                 other.snapshot == snapshot));
   }
@@ -1375,53 +1121,52 @@ class _$AuthSupabaseSnapshotChangedImpl implements AuthSupabaseSnapshotChanged {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$AuthSupabaseSnapshotChangedImplCopyWith<_$AuthSupabaseSnapshotChangedImpl>
-      get copyWith => __$$AuthSupabaseSnapshotChangedImplCopyWithImpl<
-          _$AuthSupabaseSnapshotChangedImpl>(this, _$identity);
+  _$$AuthSnapshotChangedEventImplCopyWith<_$AuthSnapshotChangedEventImpl>
+      get copyWith => __$$AuthSnapshotChangedEventImplCopyWithImpl<
+          _$AuthSnapshotChangedEventImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) signUpRequested,
-    required TResult Function(String email, String password) signInRequested,
-    required TResult Function(String email) resetPasswordRequested,
-    required TResult Function() signOutRequested,
-    required TResult Function() signInWithGoogleRequested,
-    required TResult Function() clearMessagesRequested,
-    required TResult Function(AuthSnapshot snapshot)
-        authSupabaseSnapshotChanged,
+    required TResult Function(String email, String password) signUp,
+    required TResult Function(String email, String password) signIn,
+    required TResult Function(String email) resetPassword,
+    required TResult Function() signOut,
+    required TResult Function() signInWithGoogle,
+    required TResult Function() clearMessages,
+    required TResult Function(AuthSnapshotEntity snapshot) authSnapshotChanged,
   }) {
-    return authSupabaseSnapshotChanged(snapshot);
+    return authSnapshotChanged(snapshot);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? signUpRequested,
-    TResult? Function(String email, String password)? signInRequested,
-    TResult? Function(String email)? resetPasswordRequested,
-    TResult? Function()? signOutRequested,
-    TResult? Function()? signInWithGoogleRequested,
-    TResult? Function()? clearMessagesRequested,
-    TResult? Function(AuthSnapshot snapshot)? authSupabaseSnapshotChanged,
+    TResult? Function(String email, String password)? signUp,
+    TResult? Function(String email, String password)? signIn,
+    TResult? Function(String email)? resetPassword,
+    TResult? Function()? signOut,
+    TResult? Function()? signInWithGoogle,
+    TResult? Function()? clearMessages,
+    TResult? Function(AuthSnapshotEntity snapshot)? authSnapshotChanged,
   }) {
-    return authSupabaseSnapshotChanged?.call(snapshot);
+    return authSnapshotChanged?.call(snapshot);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? signUpRequested,
-    TResult Function(String email, String password)? signInRequested,
-    TResult Function(String email)? resetPasswordRequested,
-    TResult Function()? signOutRequested,
-    TResult Function()? signInWithGoogleRequested,
-    TResult Function()? clearMessagesRequested,
-    TResult Function(AuthSnapshot snapshot)? authSupabaseSnapshotChanged,
+    TResult Function(String email, String password)? signUp,
+    TResult Function(String email, String password)? signIn,
+    TResult Function(String email)? resetPassword,
+    TResult Function()? signOut,
+    TResult Function()? signInWithGoogle,
+    TResult Function()? clearMessages,
+    TResult Function(AuthSnapshotEntity snapshot)? authSnapshotChanged,
     required TResult orElse(),
   }) {
-    if (authSupabaseSnapshotChanged != null) {
-      return authSupabaseSnapshotChanged(snapshot);
+    if (authSnapshotChanged != null) {
+      return authSnapshotChanged(snapshot);
     }
     return orElse();
   }
@@ -1429,68 +1174,61 @@ class _$AuthSupabaseSnapshotChangedImpl implements AuthSupabaseSnapshotChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(AuthSignUpRequested value) signUpRequested,
-    required TResult Function(AuthSignInRequested value) signInRequested,
-    required TResult Function(AuthResetPasswordRequested value)
-        resetPasswordRequested,
-    required TResult Function(AuthSignOutRequested value) signOutRequested,
-    required TResult Function(AuthSignInWithGoogleRequested value)
-        signInWithGoogleRequested,
-    required TResult Function(AuthClearMessagesRequested value)
-        clearMessagesRequested,
-    required TResult Function(AuthSupabaseSnapshotChanged value)
-        authSupabaseSnapshotChanged,
+    required TResult Function(SignUpEvent value) signUp,
+    required TResult Function(SignInEvent value) signIn,
+    required TResult Function(ResetPasswordEvent value) resetPassword,
+    required TResult Function(SignOutEvent value) signOut,
+    required TResult Function(SignInWithGoogleEvent value) signInWithGoogle,
+    required TResult Function(ClearMessagesEvent value) clearMessages,
+    required TResult Function(AuthSnapshotChangedEvent value)
+        authSnapshotChanged,
   }) {
-    return authSupabaseSnapshotChanged(this);
+    return authSnapshotChanged(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(AuthSignUpRequested value)? signUpRequested,
-    TResult? Function(AuthSignInRequested value)? signInRequested,
-    TResult? Function(AuthResetPasswordRequested value)? resetPasswordRequested,
-    TResult? Function(AuthSignOutRequested value)? signOutRequested,
-    TResult? Function(AuthSignInWithGoogleRequested value)?
-        signInWithGoogleRequested,
-    TResult? Function(AuthClearMessagesRequested value)? clearMessagesRequested,
-    TResult? Function(AuthSupabaseSnapshotChanged value)?
-        authSupabaseSnapshotChanged,
+    TResult? Function(SignUpEvent value)? signUp,
+    TResult? Function(SignInEvent value)? signIn,
+    TResult? Function(ResetPasswordEvent value)? resetPassword,
+    TResult? Function(SignOutEvent value)? signOut,
+    TResult? Function(SignInWithGoogleEvent value)? signInWithGoogle,
+    TResult? Function(ClearMessagesEvent value)? clearMessages,
+    TResult? Function(AuthSnapshotChangedEvent value)? authSnapshotChanged,
   }) {
-    return authSupabaseSnapshotChanged?.call(this);
+    return authSnapshotChanged?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(AuthSignUpRequested value)? signUpRequested,
-    TResult Function(AuthSignInRequested value)? signInRequested,
-    TResult Function(AuthResetPasswordRequested value)? resetPasswordRequested,
-    TResult Function(AuthSignOutRequested value)? signOutRequested,
-    TResult Function(AuthSignInWithGoogleRequested value)?
-        signInWithGoogleRequested,
-    TResult Function(AuthClearMessagesRequested value)? clearMessagesRequested,
-    TResult Function(AuthSupabaseSnapshotChanged value)?
-        authSupabaseSnapshotChanged,
+    TResult Function(SignUpEvent value)? signUp,
+    TResult Function(SignInEvent value)? signIn,
+    TResult Function(ResetPasswordEvent value)? resetPassword,
+    TResult Function(SignOutEvent value)? signOut,
+    TResult Function(SignInWithGoogleEvent value)? signInWithGoogle,
+    TResult Function(ClearMessagesEvent value)? clearMessages,
+    TResult Function(AuthSnapshotChangedEvent value)? authSnapshotChanged,
     required TResult orElse(),
   }) {
-    if (authSupabaseSnapshotChanged != null) {
-      return authSupabaseSnapshotChanged(this);
+    if (authSnapshotChanged != null) {
+      return authSnapshotChanged(this);
     }
     return orElse();
   }
 }
 
-abstract class AuthSupabaseSnapshotChanged implements AuthEvent {
-  const factory AuthSupabaseSnapshotChanged(
-          {required final AuthSnapshot snapshot}) =
-      _$AuthSupabaseSnapshotChangedImpl;
+abstract class AuthSnapshotChangedEvent implements AuthEvent {
+  const factory AuthSnapshotChangedEvent(
+          {required final AuthSnapshotEntity snapshot}) =
+      _$AuthSnapshotChangedEventImpl;
 
-  AuthSnapshot get snapshot;
+  AuthSnapshotEntity get snapshot;
 
   /// Create a copy of AuthEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AuthSupabaseSnapshotChangedImplCopyWith<_$AuthSupabaseSnapshotChangedImpl>
+  _$$AuthSnapshotChangedEventImplCopyWith<_$AuthSnapshotChangedEventImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

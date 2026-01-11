@@ -20,20 +20,6 @@ FeedModel _$FeedModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$FeedModel {
-<<<<<<< HEAD
-
-@JsonKey(name: 'id') String get id;@JsonKey(name: 'user_id') String get userId;@JsonKey(name: 'content') String get content;@UtcDateTimeConverter()@JsonKey(name: 'created_at') DateTime get createdAt;// Joined from profiles (read-only)
-@JsonKey(name: 'username') String? get username;@JsonKey(name: 'photo_url') String? get photoUrl;@StringListConverter()@JsonKey(name: 'image_urls') List<String> get imageUrls;@StringListConverter()@JsonKey(name: 'video_urls') List<String> get videoUrls;// Counts can be masked (nullable)
-@JsonKey(name: 'likes_count') int? get likesCount;@JsonKey(name: 'comments_count') int? get commentsCount;@JsonKey(name: 'shares_count') int? get sharesCount;// Computed per viewer (read-only)
-@JsonKey(name: 'is_liked') bool get isLiked;@JsonKey(name: 'is_bookmarked') bool get isBookmarked;@JsonKey(name: 'is_following') bool get isFollowing;@JsonKey(name: 'is_follow_request_pending') bool get isFollowRequestPending;@JsonKey(name: 'is_me') bool get isMe;// Post privacy settings
-@JsonKey(name: 'comments_enabled') bool get commentsEnabled;@JsonKey(name: 'hide_like_count') bool get hideLikeCount;@JsonKey(name: 'hide_comment_count') bool get hideCommentCount;@JsonKey(name: 'hide_share_count') bool get hideShareCount;@JsonKey(name: 'hide_likes_list') bool get hideLikesList;// Campaign association
-@JsonKey(name: 'campaign_id') String? get campaignId;@JsonKey(name: 'campaign_title') String? get campaignTitle;
-/// Create a copy of FeedModel
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$FeedModelCopyWith<FeedModel> get copyWith => _$FeedModelCopyWithImpl<FeedModel>(this as FeedModel, _$identity);
-=======
   @JsonKey(name: 'id')
   String get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_id')
@@ -43,7 +29,7 @@ $FeedModelCopyWith<FeedModel> get copyWith => _$FeedModelCopyWithImpl<FeedModel>
   @UtcDateTimeConverter()
   @JsonKey(name: 'created_at')
   DateTime get createdAt =>
-      throw _privateConstructorUsedError; // joined from profiles (read-only)
+      throw _privateConstructorUsedError; // Joined from profiles (read-only)
   @JsonKey(name: 'username')
   String? get username => throw _privateConstructorUsedError;
   @JsonKey(name: 'photo_url')
@@ -54,14 +40,14 @@ $FeedModelCopyWith<FeedModel> get copyWith => _$FeedModelCopyWithImpl<FeedModel>
   @StringListConverter()
   @JsonKey(name: 'video_urls')
   List<String> get videoUrls =>
-      throw _privateConstructorUsedError; // counts can be masked => nullable
+      throw _privateConstructorUsedError; // Counts can be masked (nullable)
   @JsonKey(name: 'likes_count')
   int? get likesCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'comments_count')
   int? get commentsCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'shares_count')
   int? get sharesCount =>
-      throw _privateConstructorUsedError; // computed per viewer (read-only)
+      throw _privateConstructorUsedError; // Computed per viewer (read-only)
   @JsonKey(name: 'is_liked')
   bool get isLiked => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_bookmarked')
@@ -71,7 +57,7 @@ $FeedModelCopyWith<FeedModel> get copyWith => _$FeedModelCopyWithImpl<FeedModel>
   @JsonKey(name: 'is_follow_request_pending')
   bool get isFollowRequestPending => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_me')
-  bool get isMe => throw _privateConstructorUsedError; // per-post settings
+  bool get isMe => throw _privateConstructorUsedError; // Post privacy settings
   @JsonKey(name: 'comments_enabled')
   bool get commentsEnabled => throw _privateConstructorUsedError;
   @JsonKey(name: 'hide_like_count')
@@ -81,12 +67,12 @@ $FeedModelCopyWith<FeedModel> get copyWith => _$FeedModelCopyWithImpl<FeedModel>
   @JsonKey(name: 'hide_share_count')
   bool get hideShareCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'hide_likes_list')
-  bool get hideLikesList => throw _privateConstructorUsedError;
+  bool get hideLikesList =>
+      throw _privateConstructorUsedError; // Campaign association
   @JsonKey(name: 'campaign_id')
   String? get campaignId => throw _privateConstructorUsedError;
   @JsonKey(name: 'campaign_title')
   String? get campaignTitle => throw _privateConstructorUsedError;
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
 
   /// Serializes this FeedModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -482,21 +468,6 @@ class _$FeedModelImpl extends _FeedModel {
   factory _$FeedModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$FeedModelImplFromJson(json);
 
-<<<<<<< HEAD
-@override@JsonKey(name: 'id') final  String id;
-@override@JsonKey(name: 'user_id') final  String userId;
-@override@JsonKey(name: 'content') final  String content;
-@override@UtcDateTimeConverter()@JsonKey(name: 'created_at') final  DateTime createdAt;
-// Joined from profiles (read-only)
-@override@JsonKey(name: 'username') final  String? username;
-@override@JsonKey(name: 'photo_url') final  String? photoUrl;
- final  List<String> _imageUrls;
-@override@StringListConverter()@JsonKey(name: 'image_urls') List<String> get imageUrls {
-  if (_imageUrls is EqualUnmodifiableListView) return _imageUrls;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_imageUrls);
-}
-=======
   @override
   @JsonKey(name: 'id')
   final String id;
@@ -510,7 +481,7 @@ class _$FeedModelImpl extends _FeedModel {
   @UtcDateTimeConverter()
   @JsonKey(name: 'created_at')
   final DateTime createdAt;
-// joined from profiles (read-only)
+// Joined from profiles (read-only)
   @override
   @JsonKey(name: 'username')
   final String? username;
@@ -526,7 +497,6 @@ class _$FeedModelImpl extends _FeedModel {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_imageUrls);
   }
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
 
   final List<String> _videoUrls;
   @override
@@ -538,28 +508,7 @@ class _$FeedModelImpl extends _FeedModel {
     return EqualUnmodifiableListView(_videoUrls);
   }
 
-<<<<<<< HEAD
 // Counts can be masked (nullable)
-@override@JsonKey(name: 'likes_count') final  int? likesCount;
-@override@JsonKey(name: 'comments_count') final  int? commentsCount;
-@override@JsonKey(name: 'shares_count') final  int? sharesCount;
-// Computed per viewer (read-only)
-@override@JsonKey(name: 'is_liked') final  bool isLiked;
-@override@JsonKey(name: 'is_bookmarked') final  bool isBookmarked;
-@override@JsonKey(name: 'is_following') final  bool isFollowing;
-@override@JsonKey(name: 'is_follow_request_pending') final  bool isFollowRequestPending;
-@override@JsonKey(name: 'is_me') final  bool isMe;
-// Post privacy settings
-@override@JsonKey(name: 'comments_enabled') final  bool commentsEnabled;
-@override@JsonKey(name: 'hide_like_count') final  bool hideLikeCount;
-@override@JsonKey(name: 'hide_comment_count') final  bool hideCommentCount;
-@override@JsonKey(name: 'hide_share_count') final  bool hideShareCount;
-@override@JsonKey(name: 'hide_likes_list') final  bool hideLikesList;
-// Campaign association
-@override@JsonKey(name: 'campaign_id') final  String? campaignId;
-@override@JsonKey(name: 'campaign_title') final  String? campaignTitle;
-=======
-// counts can be masked => nullable
   @override
   @JsonKey(name: 'likes_count')
   final int? likesCount;
@@ -569,7 +518,7 @@ class _$FeedModelImpl extends _FeedModel {
   @override
   @JsonKey(name: 'shares_count')
   final int? sharesCount;
-// computed per viewer (read-only)
+// Computed per viewer (read-only)
   @override
   @JsonKey(name: 'is_liked')
   final bool isLiked;
@@ -585,7 +534,7 @@ class _$FeedModelImpl extends _FeedModel {
   @override
   @JsonKey(name: 'is_me')
   final bool isMe;
-// per-post settings
+// Post privacy settings
   @override
   @JsonKey(name: 'comments_enabled')
   final bool commentsEnabled;
@@ -601,13 +550,13 @@ class _$FeedModelImpl extends _FeedModel {
   @override
   @JsonKey(name: 'hide_likes_list')
   final bool hideLikesList;
+// Campaign association
   @override
   @JsonKey(name: 'campaign_id')
   final String? campaignId;
   @override
   @JsonKey(name: 'campaign_title')
   final String? campaignTitle;
->>>>>>> fd2118c7948154593cd39da330b75baffc54f46d
 
   @override
   String toString() {
@@ -757,7 +706,7 @@ abstract class _FeedModel extends FeedModel {
   @override
   @UtcDateTimeConverter()
   @JsonKey(name: 'created_at')
-  DateTime get createdAt; // joined from profiles (read-only)
+  DateTime get createdAt; // Joined from profiles (read-only)
   @override
   @JsonKey(name: 'username')
   String? get username;
@@ -771,7 +720,7 @@ abstract class _FeedModel extends FeedModel {
   @override
   @StringListConverter()
   @JsonKey(name: 'video_urls')
-  List<String> get videoUrls; // counts can be masked => nullable
+  List<String> get videoUrls; // Counts can be masked (nullable)
   @override
   @JsonKey(name: 'likes_count')
   int? get likesCount;
@@ -780,7 +729,7 @@ abstract class _FeedModel extends FeedModel {
   int? get commentsCount;
   @override
   @JsonKey(name: 'shares_count')
-  int? get sharesCount; // computed per viewer (read-only)
+  int? get sharesCount; // Computed per viewer (read-only)
   @override
   @JsonKey(name: 'is_liked')
   bool get isLiked;
@@ -795,7 +744,7 @@ abstract class _FeedModel extends FeedModel {
   bool get isFollowRequestPending;
   @override
   @JsonKey(name: 'is_me')
-  bool get isMe; // per-post settings
+  bool get isMe; // Post privacy settings
   @override
   @JsonKey(name: 'comments_enabled')
   bool get commentsEnabled;
@@ -810,7 +759,7 @@ abstract class _FeedModel extends FeedModel {
   bool get hideShareCount;
   @override
   @JsonKey(name: 'hide_likes_list')
-  bool get hideLikesList;
+  bool get hideLikesList; // Campaign association
   @override
   @JsonKey(name: 'campaign_id')
   String? get campaignId;
