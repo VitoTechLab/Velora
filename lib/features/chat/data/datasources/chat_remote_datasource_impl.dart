@@ -431,16 +431,10 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
       () async {
         logi('Fetching conversation list', tag: _logTag);
 
-        // Select only essential fields to minimize bandwidth
-        final rows = await _client
-            .from(SupabaseTables.conversationListView)
-            .select(
-              'conversation_id, other_user_id, other_user_username, '
-              'other_user_full_name, other_user_avatar_url, '
-              'last_message_body, last_message_at, unread_count'
-            )
-            .order('last_message_at', ascending: false)
-            .limit(100); // Reasonable limit for conversation list
+        // Use optimized RPC function
+        final rows = await _client.rpc(
+          SupabaseRpc.getConversationListOptimized,
+        );
 
         return (rows as List)
             .map((row) => ConversationListModel.fromJson(row))

@@ -19,7 +19,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
               scopes: const ['email', 'profile'],
               serverClientId: dotenv.get(
                 'GOOGLE_OAUTH_CLIENT_ID',
-                fallback: '',
+                fallback: '292141038283-ua7p2rc6cvogimi84q1gd2o1cshu7kam.apps.googleusercontent.com',
               ),
             ),
         _isWeb = isWebOverride ?? kIsWeb;

@@ -61,6 +61,7 @@ class SupabaseRpc {
   static const getMessagesPage = 'get_messages_page';
   static const createDirectConversation = 'create_direct_conversation';
   static const markConversationRead = 'mark_conversation_read';
+  static const getConversationListOptimized = 'get_conversation_list_optimized';
 
   // Presence RPCs
   static const touchPresence = 'touch_presence';
