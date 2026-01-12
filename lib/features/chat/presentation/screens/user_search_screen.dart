@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velora/core/di/service_locator.dart';
 import 'package:velora/core/ui/app_messenger.dart';
@@ -12,12 +11,30 @@ import 'package:velora/features/chat/presentation/widgets/user_avatar_widget.dar
 import 'package:velora/features/navigation/models/chat_detail_args.dart';
 import 'package:velora/routes/app_router.dart';
 
-class UserSearchScreen extends HookWidget {
+class UserSearchScreen extends StatefulWidget {
   const UserSearchScreen({super.key});
 
   @override
+  State<UserSearchScreen> createState() => _UserSearchScreenState();
+}
+
+class _UserSearchScreenState extends State<UserSearchScreen> {
+  late final TextEditingController _searchController;
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final searchController = useTextEditingController();
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
@@ -32,7 +49,7 @@ class UserSearchScreen extends HookWidget {
             appBar: AppBar(
               backgroundColor: colorScheme.surface,
               title: TextField(
-                controller: searchController,
+                controller: _searchController,
                 autofocus: true,
                 decoration: InputDecoration(
                   hintText: 'Search or ask Meta AI',
@@ -73,10 +90,10 @@ class UserSearchScreen extends HookWidget {
                 IconButton(
                   icon: const Icon(Icons.send),
                   onPressed: () {
-                    if (searchController.text.isNotEmpty) {
+                    if (_searchController.text.isNotEmpty) {
                       context.read<SearchUserBloc>().add(
                         SearchUserEvent.searchQueryChanged(
-                          searchController.text,
+                          _searchController.text,
                         ),
                       );
                     }
