@@ -4,13 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velora/core/di/service_locator.dart';
 import 'package:velora/core/ui/app_messenger.dart';
 import 'package:velora/features/chat/domain/entities/user_search_entity.dart';
+import 'package:go_router/go_router.dart';
 import 'package:velora/features/chat/presentation/bloc/search_user_bloc.dart';
 import 'package:velora/features/chat/presentation/bloc/search_user_event.dart';
 import 'package:velora/features/chat/presentation/bloc/search_user_state.dart';
-import 'package:velora/features/chat/presentation/mixins/chat_navigation_mixin.dart';
 import 'package:velora/features/chat/presentation/widgets/user_avatar_widget.dart';
+import 'package:velora/features/navigation/models/chat_detail_args.dart';
+import 'package:velora/routes/app_router.dart';
 
-class UserSearchScreen extends HookWidget with ChatNavigationMixin {
+class UserSearchScreen extends HookWidget {
   const UserSearchScreen({super.key});
 
   @override
@@ -296,12 +298,16 @@ class UserSearchScreen extends HookWidget with ChatNavigationMixin {
       padding: const EdgeInsets.only(right: 16),
       child: InkWell(
         onTap: () {
-          navigateToChatWithUser(
-            context,
-            userId: user.userId,
-            username: user.username,
-            avatarUrl: user.avatarUrl,
-            bio: user.bio,
+          context.pushNamed(
+            AppRouteName.chatDetail,
+            extra: ChatDetailArgs(
+              conversationId: '',
+              chatName: user.username,
+              chatSubtitle: user.bio ?? '',
+              profileImageUrl: user.avatarUrl ?? 'https://i.pravatar.cc/150?u=${user.userId}',
+              isGroup: false,
+              peerUserId: user.userId,
+            ),
           );
         },
         borderRadius: BorderRadius.circular(32),
@@ -354,12 +360,16 @@ class UserSearchScreen extends HookWidget with ChatNavigationMixin {
             )
           : null,
       onTap: () {
-        navigateToChatWithUser(
-          context,
-          userId: user.userId,
-          username: user.username,
-          avatarUrl: user.avatarUrl,
-          bio: user.bio,
+        context.pushNamed(
+          AppRouteName.chatDetail,
+          extra: ChatDetailArgs(
+            conversationId: '',
+            chatName: user.username,
+            chatSubtitle: user.bio ?? '',
+            profileImageUrl: user.avatarUrl ?? 'https://i.pravatar.cc/150?u=${user.userId}',
+            isGroup: false,
+            peerUserId: user.userId,
+          ),
         );
       },
     );
