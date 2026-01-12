@@ -134,6 +134,9 @@ import 'package:velora/features/notification/domain/usecases/delete_notification
 import 'package:velora/features/notification/domain/usecases/watch_notifications_usecase.dart';
 import 'package:velora/features/notification/presentation/bloc/notification_bloc.dart';
 
+// Settings feature imports
+import 'package:velora/features/settings/presentation/bloc/settings_bloc.dart';
+
 // Translation services imports
 import 'package:velora/core/translation/translation.dart';
 

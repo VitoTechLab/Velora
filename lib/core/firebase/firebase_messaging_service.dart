@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,11 @@ class FirebaseMessagingService {
   }
 
   Future<bool> requestPermission() async {
-    final settings = await _messaging.requestPermission();
+    final settings = await _messaging.requestPermission(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
     final granted =
         settings.authorizationStatus == AuthorizationStatus.authorized;
     logi('FCM permission granted: $granted');
@@ -82,6 +87,8 @@ class FirebaseMessagingService {
   }
 }
 
+@pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  logi('Handling background message ${message.messageId}');
+  await Firebase.initializeApp();
+  print("BG message: ${message.messageId}");
 }
