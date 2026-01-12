@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:velora/core/utils/format_utils.dart';
 import 'package:velora/features/chat/domain/entities/conversation_list_entity.dart';
 import 'package:velora/features/chat/presentation/bloc/chat_message_bloc.dart';
 import 'package:velora/features/chat/presentation/bloc/chat_message_event.dart';
 import 'package:velora/features/chat/presentation/bloc/chat_message_state.dart';
-import 'package:velora/features/chat/presentation/screens/chat_detail_screen.dart';
 import 'package:velora/features/chat/presentation/widgets/chat_list_item.dart';
+import 'package:velora/features/navigation/models/chat_detail_args.dart';
 import 'package:velora/l10n/app_localizations.dart';
+import 'package:velora/routes/app_router.dart';
 
 /// Modular conversation list widget
 /// Handles filtering, search, and navigation
@@ -229,21 +231,19 @@ class _ConversationListItemWidget extends StatelessWidget {
       unreadCount: conversation.unreadCount > 0 ? conversation.unreadCount : null,
       isGroup: isGroup,
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ChatDetailScreen(
-              conversationId: conversation.conversationId,
-              chatName: conversation.title ??
-                  (isGroup ? t.chatScreenUnnamedGroup : t.chatScreenUnnamed),
-              chatSubtitle: isGroup
-                  ? t.chatDetailGroupSubtitle
-                  : t.chatDetailSelfSubtitle,
-              profileImageUrl:
-                  conversation.photoUrl ?? 'https://i.pravatar.cc/150?img=12',
-              isGroup: isGroup,
-              peerUserId: isGroup ? null : conversation.userId,
-            ),
+        context.pushNamed(
+          AppRouteName.chatDetail,
+          extra: ChatDetailArgs(
+            conversationId: conversation.conversationId,
+            chatName: conversation.title ??
+                (isGroup ? t.chatScreenUnnamedGroup : t.chatScreenUnnamed),
+            chatSubtitle: isGroup
+                ? t.chatDetailGroupSubtitle
+                : t.chatDetailSelfSubtitle,
+            profileImageUrl:
+                conversation.photoUrl ?? 'https://i.pravatar.cc/150?img=12',
+            isGroup: isGroup,
+            peerUserId: isGroup ? null : conversation.userId,
           ),
         );
       },
