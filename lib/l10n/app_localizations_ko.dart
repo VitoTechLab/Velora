@@ -1628,6 +1628,35 @@ class AppLocalizationsKo extends AppLocalizations {
   String get chatDetailStatusOnline => '온라인 상태';
 
   @override
+  String get chatDetailTyping => 'typing';
+
+  @override
+  String get chatDetailLastSeenJustNow => 'last seen just now';
+
+  @override
+  String chatDetailLastSeenMinutes(int minutes) {
+    return 'last seen $minutes min ago';
+  }
+
+  @override
+  String chatDetailLastSeenHours(int hours) {
+    return 'last seen ${hours}h ago';
+  }
+
+  @override
+  String chatDetailLastSeenDays(int days) {
+    return 'last seen ${days}d ago';
+  }
+
+  @override
+  String chatDetailLastSeenDate(String date) {
+    return 'last seen $date';
+  }
+
+  @override
+  String get chatScreenTyping => 'typing...';
+
+  @override
   String get chatSearchScreenTitle => '검색';
 
   @override

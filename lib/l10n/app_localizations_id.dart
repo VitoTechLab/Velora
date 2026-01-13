@@ -1664,6 +1664,35 @@ class AppLocalizationsId extends AppLocalizations {
   String get chatDetailStatusOnline => 'Sedang online';
 
   @override
+  String get chatDetailTyping => 'mengetik';
+
+  @override
+  String get chatDetailLastSeenJustNow => 'terakhir dilihat baru saja';
+
+  @override
+  String chatDetailLastSeenMinutes(int minutes) {
+    return 'terakhir dilihat $minutes menit lalu';
+  }
+
+  @override
+  String chatDetailLastSeenHours(int hours) {
+    return 'terakhir dilihat $hours jam lalu';
+  }
+
+  @override
+  String chatDetailLastSeenDays(int days) {
+    return 'terakhir dilihat $days hari lalu';
+  }
+
+  @override
+  String chatDetailLastSeenDate(String date) {
+    return 'terakhir dilihat $date';
+  }
+
+  @override
+  String get chatScreenTyping => 'mengetik...';
+
+  @override
   String get chatSearchScreenTitle => 'Cari';
 
   @override

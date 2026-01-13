@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:velora/features/chat/presentation/screens/chat_detail_screen.dart';
+import 'package:go_router/go_router.dart';
+import 'package:velora/features/navigation/models/chat_detail_args.dart';
+import 'package:velora/routes/app_router.dart';
 
 /// Mixin for handling chat navigation consistently across screens
 /// Provides unified navigation to chat screens
@@ -16,20 +18,17 @@ mixin ChatNavigationMixin {
     bool isGroup = false,
     String chatSubtitle = '',
   }) {
-    // Navigate directly - conversation will be created in ChatDetailScreen if needed
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ChatDetailScreen(
-          conversationId: conversationId ?? '',
-          chatName: chatName,
-          chatSubtitle: chatSubtitle.isEmpty
-              ? (isGroup ? 'Group' : 'Chat')
-              : chatSubtitle,
-          profileImageUrl: profileImageUrl,
-          isGroup: isGroup,
-          peerUserId: isGroup ? null : peerUserId,
-        ),
+    // Navigate using GoRouter with ChatDetailArgs
+    context.pushNamed(
+      AppRouteName.chatDetail,
+      extra: ChatDetailArgs(
+        conversationId: conversationId ?? '',
+        chatName: chatName,
+        chatSubtitle:
+            chatSubtitle.isEmpty ? (isGroup ? 'Group' : 'Chat') : chatSubtitle,
+        profileImageUrl: profileImageUrl,
+        isGroup: isGroup,
+        peerUserId: isGroup ? null : peerUserId,
       ),
     );
   }

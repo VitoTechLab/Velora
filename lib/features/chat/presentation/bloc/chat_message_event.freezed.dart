@@ -18,6 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ChatMessageEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -52,6 +55,8 @@ mixin _$ChatMessageEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -85,6 +90,8 @@ mixin _$ChatMessageEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -119,6 +126,7 @@ mixin _$ChatMessageEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -154,6 +162,7 @@ mixin _$ChatMessageEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -184,6 +193,7 @@ mixin _$ChatMessageEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
@@ -234,6 +244,341 @@ class _$ChatMessageEventCopyWithImpl<$Res, $Val extends ChatMessageEvent>
 
   /// Create a copy of ChatMessageEvent
   /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$InitializeChatEventImplCopyWith<$Res> {
+  factory _$$InitializeChatEventImplCopyWith(_$InitializeChatEventImpl value,
+          $Res Function(_$InitializeChatEventImpl) then) =
+      __$$InitializeChatEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String conversationId, String? peerUserId, int? limit});
+}
+
+/// @nodoc
+class __$$InitializeChatEventImplCopyWithImpl<$Res>
+    extends _$ChatMessageEventCopyWithImpl<$Res, _$InitializeChatEventImpl>
+    implements _$$InitializeChatEventImplCopyWith<$Res> {
+  __$$InitializeChatEventImplCopyWithImpl(_$InitializeChatEventImpl _value,
+      $Res Function(_$InitializeChatEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? conversationId = null,
+    Object? peerUserId = freezed,
+    Object? limit = freezed,
+  }) {
+    return _then(_$InitializeChatEventImpl(
+      conversationId: null == conversationId
+          ? _value.conversationId
+          : conversationId // ignore: cast_nullable_to_non_nullable
+              as String,
+      peerUserId: freezed == peerUserId
+          ? _value.peerUserId
+          : peerUserId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      limit: freezed == limit
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$InitializeChatEventImpl implements InitializeChatEvent {
+  const _$InitializeChatEventImpl(
+      {required this.conversationId, this.peerUserId, this.limit});
+
+  @override
+  final String conversationId;
+  @override
+  final String? peerUserId;
+  @override
+  final int? limit;
+
+  @override
+  String toString() {
+    return 'ChatMessageEvent.initializeChat(conversationId: $conversationId, peerUserId: $peerUserId, limit: $limit)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$InitializeChatEventImpl &&
+            (identical(other.conversationId, conversationId) ||
+                other.conversationId == conversationId) &&
+            (identical(other.peerUserId, peerUserId) ||
+                other.peerUserId == peerUserId) &&
+            (identical(other.limit, limit) || other.limit == limit));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, conversationId, peerUserId, limit);
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$InitializeChatEventImplCopyWith<_$InitializeChatEventImpl> get copyWith =>
+      __$$InitializeChatEventImplCopyWithImpl<_$InitializeChatEventImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
+    required TResult Function(String conversationId, int? limit) loadMessages,
+    required TResult Function(String conversationId, int limit)
+        loadMoreMessages,
+    required TResult Function(
+            String conversationId, String content, String? replyToMessageId)
+        sendMessage,
+    required TResult Function(String messageId, String newContent) editMessage,
+    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(String conversationId, String? uptoMessageId)
+        markConversationRead,
+    required TResult Function() clearInfo,
+    required TResult Function(String conversationId) startWatch,
+    required TResult Function() stopWatch,
+    required TResult Function(ChatMessageEntity message) watchMessageArrived,
+    required TResult Function(ChatMessageEntity message) watchMessageUpdated,
+    required TResult Function(ChatMessageEntity message) watchMessageDeleted,
+    required TResult Function(String message) watchMessageError,
+    required TResult Function() loadConversationList,
+    required TResult Function(String filter) setChatFilter,
+    required TResult Function(String query) setSearchQuery,
+    required TResult Function(String messageId) loadMessageReads,
+    required TResult Function(String messageId) markMessageRead,
+    required TResult Function(String conversationId) startWatchReads,
+    required TResult Function() stopWatchReads,
+    required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String conversationId, bool isTyping) sendTyping,
+    required TResult Function(String conversationId) startWatchTyping,
+    required TResult Function() stopWatchTyping,
+    required TResult Function(String userId) watchTypingArrived,
+    required TResult Function() cleanupTyping,
+  }) {
+    return initializeChat(conversationId, peerUserId, limit);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
+    TResult? Function(String conversationId, int? limit)? loadMessages,
+    TResult? Function(String conversationId, int limit)? loadMoreMessages,
+    TResult? Function(
+            String conversationId, String content, String? replyToMessageId)?
+        sendMessage,
+    TResult? Function(String messageId, String newContent)? editMessage,
+    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(String conversationId, String? uptoMessageId)?
+        markConversationRead,
+    TResult? Function()? clearInfo,
+    TResult? Function(String conversationId)? startWatch,
+    TResult? Function()? stopWatch,
+    TResult? Function(ChatMessageEntity message)? watchMessageArrived,
+    TResult? Function(ChatMessageEntity message)? watchMessageUpdated,
+    TResult? Function(ChatMessageEntity message)? watchMessageDeleted,
+    TResult? Function(String message)? watchMessageError,
+    TResult? Function()? loadConversationList,
+    TResult? Function(String filter)? setChatFilter,
+    TResult? Function(String query)? setSearchQuery,
+    TResult? Function(String messageId)? loadMessageReads,
+    TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(String conversationId)? startWatchReads,
+    TResult? Function()? stopWatchReads,
+    TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String conversationId, bool isTyping)? sendTyping,
+    TResult? Function(String conversationId)? startWatchTyping,
+    TResult? Function()? stopWatchTyping,
+    TResult? Function(String userId)? watchTypingArrived,
+    TResult? Function()? cleanupTyping,
+  }) {
+    return initializeChat?.call(conversationId, peerUserId, limit);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
+    TResult Function(String conversationId, int? limit)? loadMessages,
+    TResult Function(String conversationId, int limit)? loadMoreMessages,
+    TResult Function(
+            String conversationId, String content, String? replyToMessageId)?
+        sendMessage,
+    TResult Function(String messageId, String newContent)? editMessage,
+    TResult Function(String messageId)? deleteMessage,
+    TResult Function(String conversationId, String? uptoMessageId)?
+        markConversationRead,
+    TResult Function()? clearInfo,
+    TResult Function(String conversationId)? startWatch,
+    TResult Function()? stopWatch,
+    TResult Function(ChatMessageEntity message)? watchMessageArrived,
+    TResult Function(ChatMessageEntity message)? watchMessageUpdated,
+    TResult Function(ChatMessageEntity message)? watchMessageDeleted,
+    TResult Function(String message)? watchMessageError,
+    TResult Function()? loadConversationList,
+    TResult Function(String filter)? setChatFilter,
+    TResult Function(String query)? setSearchQuery,
+    TResult Function(String messageId)? loadMessageReads,
+    TResult Function(String messageId)? markMessageRead,
+    TResult Function(String conversationId)? startWatchReads,
+    TResult Function()? stopWatchReads,
+    TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String conversationId, bool isTyping)? sendTyping,
+    TResult Function(String conversationId)? startWatchTyping,
+    TResult Function()? stopWatchTyping,
+    TResult Function(String userId)? watchTypingArrived,
+    TResult Function()? cleanupTyping,
+    required TResult orElse(),
+  }) {
+    if (initializeChat != null) {
+      return initializeChat(conversationId, peerUserId, limit);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
+    required TResult Function(LoadChatMessagesEvent value) loadMessages,
+    required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
+    required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(EditChatMessageEvent value) editMessage,
+    required TResult Function(DeleteChatMessageEvent value) deleteMessage,
+    required TResult Function(MarkConversationReadEvent value)
+        markConversationRead,
+    required TResult Function(ClearChatMessagesInfoEvent value) clearInfo,
+    required TResult Function(StartWatchMessagesEvent value) startWatch,
+    required TResult Function(StopWatchMessagesEvent value) stopWatch,
+    required TResult Function(WatchMessageArrivedEvent value)
+        watchMessageArrived,
+    required TResult Function(WatchMessageUpdatedEvent value)
+        watchMessageUpdated,
+    required TResult Function(WatchMessageDeletedEvent value)
+        watchMessageDeleted,
+    required TResult Function(WatchMessageErrorEvent value) watchMessageError,
+    required TResult Function(LoadConversationListEvent value)
+        loadConversationList,
+    required TResult Function(SetChatFilterEvent value) setChatFilter,
+    required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
+    required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(StartWatchReadsEvent value) startWatchReads,
+    required TResult Function(StopWatchReadsEvent value) stopWatchReads,
+    required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(SendTypingEvent value) sendTyping,
+    required TResult Function(StartWatchTypingEvent value) startWatchTyping,
+    required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
+    required TResult Function(WatchTypingArrivedEvent value) watchTypingArrived,
+    required TResult Function(CleanupTypingEvent value) cleanupTyping,
+  }) {
+    return initializeChat(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
+    TResult? Function(LoadChatMessagesEvent value)? loadMessages,
+    TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
+    TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(EditChatMessageEvent value)? editMessage,
+    TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
+    TResult? Function(MarkConversationReadEvent value)? markConversationRead,
+    TResult? Function(ClearChatMessagesInfoEvent value)? clearInfo,
+    TResult? Function(StartWatchMessagesEvent value)? startWatch,
+    TResult? Function(StopWatchMessagesEvent value)? stopWatch,
+    TResult? Function(WatchMessageArrivedEvent value)? watchMessageArrived,
+    TResult? Function(WatchMessageUpdatedEvent value)? watchMessageUpdated,
+    TResult? Function(WatchMessageDeletedEvent value)? watchMessageDeleted,
+    TResult? Function(WatchMessageErrorEvent value)? watchMessageError,
+    TResult? Function(LoadConversationListEvent value)? loadConversationList,
+    TResult? Function(SetChatFilterEvent value)? setChatFilter,
+    TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
+    TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(StartWatchReadsEvent value)? startWatchReads,
+    TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
+    TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(SendTypingEvent value)? sendTyping,
+    TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
+    TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
+    TResult? Function(WatchTypingArrivedEvent value)? watchTypingArrived,
+    TResult? Function(CleanupTypingEvent value)? cleanupTyping,
+  }) {
+    return initializeChat?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
+    TResult Function(LoadChatMessagesEvent value)? loadMessages,
+    TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
+    TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(EditChatMessageEvent value)? editMessage,
+    TResult Function(DeleteChatMessageEvent value)? deleteMessage,
+    TResult Function(MarkConversationReadEvent value)? markConversationRead,
+    TResult Function(ClearChatMessagesInfoEvent value)? clearInfo,
+    TResult Function(StartWatchMessagesEvent value)? startWatch,
+    TResult Function(StopWatchMessagesEvent value)? stopWatch,
+    TResult Function(WatchMessageArrivedEvent value)? watchMessageArrived,
+    TResult Function(WatchMessageUpdatedEvent value)? watchMessageUpdated,
+    TResult Function(WatchMessageDeletedEvent value)? watchMessageDeleted,
+    TResult Function(WatchMessageErrorEvent value)? watchMessageError,
+    TResult Function(LoadConversationListEvent value)? loadConversationList,
+    TResult Function(SetChatFilterEvent value)? setChatFilter,
+    TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
+    TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(StartWatchReadsEvent value)? startWatchReads,
+    TResult Function(StopWatchReadsEvent value)? stopWatchReads,
+    TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(SendTypingEvent value)? sendTyping,
+    TResult Function(StartWatchTypingEvent value)? startWatchTyping,
+    TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
+    TResult Function(WatchTypingArrivedEvent value)? watchTypingArrived,
+    TResult Function(CleanupTypingEvent value)? cleanupTyping,
+    required TResult orElse(),
+  }) {
+    if (initializeChat != null) {
+      return initializeChat(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class InitializeChatEvent implements ChatMessageEvent {
+  const factory InitializeChatEvent(
+      {required final String conversationId,
+      final String? peerUserId,
+      final int? limit}) = _$InitializeChatEventImpl;
+
+  String get conversationId;
+  String? get peerUserId;
+  int? get limit;
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$InitializeChatEventImplCopyWith<_$InitializeChatEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -315,6 +660,9 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -352,6 +700,8 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -388,6 +738,8 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -428,6 +780,7 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -466,6 +819,7 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -499,6 +853,7 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
@@ -631,6 +986,9 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -668,6 +1026,8 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -704,6 +1064,8 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -744,6 +1106,7 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -782,6 +1145,7 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -815,6 +1179,7 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
@@ -957,6 +1322,9 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -994,6 +1362,8 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -1030,6 +1400,8 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -1070,6 +1442,7 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -1108,6 +1481,7 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -1141,6 +1515,7 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
@@ -1274,6 +1649,9 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -1311,6 +1689,8 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -1347,6 +1727,8 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -1387,6 +1769,7 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -1425,6 +1808,7 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -1458,6 +1842,7 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
@@ -1580,6 +1965,9 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -1617,6 +2005,8 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -1653,6 +2043,8 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -1693,6 +2085,7 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -1731,6 +2124,7 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -1764,6 +2158,7 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
@@ -1895,6 +2290,9 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -1932,6 +2330,8 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -1968,6 +2368,8 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -2008,6 +2410,7 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -2046,6 +2449,7 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -2079,6 +2483,7 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
@@ -2174,6 +2579,9 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -2211,6 +2619,8 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -2247,6 +2657,8 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -2287,6 +2699,7 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -2325,6 +2738,7 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -2358,6 +2772,7 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
@@ -2469,6 +2884,9 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -2506,6 +2924,8 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -2542,6 +2962,8 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -2582,6 +3004,7 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -2620,6 +3043,7 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -2653,6 +3077,7 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
@@ -2745,6 +3170,9 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -2782,6 +3210,8 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -2818,6 +3248,8 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -2858,6 +3290,7 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -2896,6 +3329,7 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -2929,6 +3363,7 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
@@ -3051,6 +3486,9 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -3088,6 +3526,8 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -3124,6 +3564,8 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -3164,6 +3606,7 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -3202,6 +3645,7 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -3235,6 +3679,7 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
@@ -3366,6 +3811,9 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -3403,6 +3851,8 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -3439,6 +3889,8 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -3479,6 +3931,7 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -3517,6 +3970,7 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -3550,6 +4004,7 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
@@ -3681,6 +4136,9 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -3718,6 +4176,8 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -3754,6 +4214,8 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -3794,6 +4256,7 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -3832,6 +4295,7 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -3865,6 +4329,7 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
@@ -3984,6 +4449,9 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -4021,6 +4489,8 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -4057,6 +4527,8 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -4097,6 +4569,7 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -4135,6 +4608,7 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -4168,6 +4642,7 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
@@ -4261,6 +4736,9 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -4298,6 +4776,8 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -4334,6 +4814,8 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -4374,6 +4856,7 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -4412,6 +4895,7 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -4445,6 +4929,7 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
@@ -4553,6 +5038,9 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -4590,6 +5078,8 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -4626,6 +5116,8 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -4666,6 +5158,7 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -4704,6 +5197,7 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -4737,6 +5231,7 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
@@ -4854,6 +5349,9 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -4891,6 +5389,8 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -4927,6 +5427,8 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -4967,6 +5469,7 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -5005,6 +5508,7 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -5038,6 +5542,7 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
@@ -5157,6 +5662,9 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -5194,6 +5702,8 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -5230,6 +5740,8 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -5270,6 +5782,7 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -5308,6 +5821,7 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -5341,6 +5855,7 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
@@ -5460,6 +5975,9 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -5497,6 +6015,8 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -5533,6 +6053,8 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -5573,6 +6095,7 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -5611,6 +6134,7 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -5644,6 +6168,7 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
@@ -5763,6 +6288,9 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -5800,6 +6328,8 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -5836,6 +6366,8 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -5876,6 +6408,7 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -5914,6 +6447,7 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -5947,6 +6481,7 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
@@ -6037,6 +6572,9 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -6074,6 +6612,8 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -6110,6 +6650,8 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -6150,6 +6692,7 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -6188,6 +6731,7 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -6221,6 +6765,7 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
@@ -6343,6 +6888,9 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -6380,6 +6928,8 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -6416,6 +6966,8 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -6456,6 +7008,7 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -6494,6 +7047,7 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -6527,6 +7081,7 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
@@ -6655,6 +7210,9 @@ class _$SendTypingEventImpl implements SendTypingEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -6692,6 +7250,8 @@ class _$SendTypingEventImpl implements SendTypingEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -6728,6 +7288,8 @@ class _$SendTypingEventImpl implements SendTypingEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -6768,6 +7330,7 @@ class _$SendTypingEventImpl implements SendTypingEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -6806,6 +7369,7 @@ class _$SendTypingEventImpl implements SendTypingEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -6839,6 +7403,7 @@ class _$SendTypingEventImpl implements SendTypingEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
@@ -6960,6 +7525,9 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -6997,6 +7565,8 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -7033,6 +7603,8 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -7073,6 +7645,7 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -7111,6 +7684,7 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -7144,6 +7718,7 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
@@ -7234,6 +7809,9 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -7271,6 +7849,8 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -7307,6 +7887,8 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -7347,6 +7929,7 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -7385,6 +7968,7 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -7418,6 +8002,7 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
@@ -7528,6 +8113,9 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -7565,6 +8153,8 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -7601,6 +8191,8 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -7641,6 +8233,7 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -7679,6 +8272,7 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -7712,6 +8306,7 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
@@ -7801,6 +8396,9 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
     required TResult Function(String conversationId, int? limit) loadMessages,
     required TResult Function(String conversationId, int limit)
         loadMoreMessages,
@@ -7838,6 +8436,8 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult? Function(String conversationId, int? limit)? loadMessages,
     TResult? Function(String conversationId, int limit)? loadMoreMessages,
     TResult? Function(
@@ -7874,6 +8474,8 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
     TResult Function(String conversationId, int? limit)? loadMessages,
     TResult Function(String conversationId, int limit)? loadMoreMessages,
     TResult Function(
@@ -7914,6 +8516,7 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
@@ -7952,6 +8555,7 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
@@ -7985,6 +8589,7 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,

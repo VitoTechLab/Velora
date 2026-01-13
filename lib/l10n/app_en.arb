@@ -791,6 +791,41 @@
   "chatDetailAiImagesSelected": "AI images selected",
   "chatDetailVoiceMessage": "Voice message",
   "chatDetailStatusOnline": "Online",
+  "chatDetailTyping": "typing",
+  "chatDetailLastSeenJustNow": "last seen just now",
+  "chatDetailLastSeenMinutes": "last seen {minutes} min ago",
+  "@chatDetailLastSeenMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "chatDetailLastSeenHours": "last seen {hours}h ago",
+  "@chatDetailLastSeenHours": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "chatDetailLastSeenDays": "last seen {days}d ago",
+  "@chatDetailLastSeenDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "chatDetailLastSeenDate": "last seen {date}",
+  "@chatDetailLastSeenDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "chatScreenTyping": "typing...",
   "chatSearchScreenTitle": "Search",
   "chatSearchScreenRecent": "Recent searches",
   "chatSearchScreenClearAll": "Clear all",

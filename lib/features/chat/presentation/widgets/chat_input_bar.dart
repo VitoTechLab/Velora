@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:velora/features/chat/presentation/widgets/attachment_menu_bottom_sheet.dart';
 import 'package:velora/l10n/app_localizations.dart';
@@ -5,7 +7,7 @@ import 'package:velora/l10n/app_localizations.dart';
 /// Optimized ChatInputBar widget
 /// Uses ValueListenableBuilder to prevent unnecessary rebuilds
 /// Only rebuilds send button when text state changes
-class ChatInputBar extends StatelessWidget {
+class ChatInputBar extends StatefulWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
   final ValueChanged<String> onSendMessage;
@@ -19,6 +21,7 @@ class ChatInputBar extends StatelessWidget {
   final VoidCallback onEventPressed;
   final VoidCallback onAiImagesPressed;
   final VoidCallback onVoicePressed;
+  final ValueChanged<bool>? onTyping;
 
   const ChatInputBar({
     super.key,
@@ -35,7 +38,59 @@ class ChatInputBar extends StatelessWidget {
     required this.onEventPressed,
     required this.onAiImagesPressed,
     required this.onVoicePressed,
+    this.onTyping,
   });
+
+  @override
+  State<ChatInputBar> createState() => _ChatInputBarState();
+}
+
+class _ChatInputBarState extends State<ChatInputBar> {
+  Timer? _typingDebounceTimer;
+  bool _isTyping = false;
+  static const _typingDebounceDuration = Duration(milliseconds: 1500);
+
+  @override
+  void dispose() {
+    _typingDebounceTimer?.cancel();
+    // Send stop typing when leaving
+    if (_isTyping) {
+      widget.onTyping?.call(false);
+    }
+    super.dispose();
+  }
+
+  void _handleTextChanged(String text) {
+    final hasText = text.trim().isNotEmpty;
+
+    if (hasText && !_isTyping) {
+      // Start typing
+      _isTyping = true;
+      widget.onTyping?.call(true);
+    }
+
+    // Reset debounce timer
+    _typingDebounceTimer?.cancel();
+    _typingDebounceTimer = Timer(_typingDebounceDuration, () {
+      if (_isTyping) {
+        _isTyping = false;
+        widget.onTyping?.call(false);
+      }
+    });
+  }
+
+  void _handleSend() {
+    final message = widget.controller.text.trim();
+    if (message.isNotEmpty) {
+      // Stop typing indicator before sending
+      _typingDebounceTimer?.cancel();
+      if (_isTyping) {
+        _isTyping = false;
+        widget.onTyping?.call(false);
+      }
+      widget.onSendMessage(message);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,10 +147,11 @@ class ChatInputBar extends StatelessWidget {
                         label: t.chatInputFieldLabel,
                         hint: t.chatInputFieldHint,
                         child: TextField(
-                          controller: controller,
-                          focusNode: focusNode,
+                          controller: widget.controller,
+                          focusNode: widget.focusNode,
                           maxLines: null,
                           textInputAction: TextInputAction.newline,
+                          onChanged: _handleTextChanged,
                           style: textTheme.bodyMedium?.copyWith(
                             color: colorScheme.onSurface,
                           ),
@@ -115,7 +171,7 @@ class ChatInputBar extends StatelessWidget {
                     ),
                     // Use ValueListenableBuilder to only rebuild this part
                     ValueListenableBuilder<TextEditingValue>(
-                      valueListenable: controller,
+                      valueListenable: widget.controller,
                       builder: (context, value, child) {
                         final hasText = value.text.trim().isNotEmpty;
                         if (hasText) {
@@ -138,15 +194,15 @@ class ChatInputBar extends StatelessWidget {
                                 onPressed: () {
                                   AttachmentMenuBottomSheet.show(
                                     context,
-                                    onGalleryTap: onGalleryPressed,
-                                    onCameraTap: onCameraPressed,
-                                    onLocationTap: onLocationPressed,
-                                    onContactTap: onContactPressed,
-                                    onDocumentTap: onDocumentPressed,
-                                    onAudioTap: onAudioPressed,
-                                    onPollTap: onPollPressed,
-                                    onEventTap: onEventPressed,
-                                    onAiImagesTap: onAiImagesPressed,
+                                    onGalleryTap: widget.onGalleryPressed,
+                                    onCameraTap: widget.onCameraPressed,
+                                    onLocationTap: widget.onLocationPressed,
+                                    onContactTap: widget.onContactPressed,
+                                    onDocumentTap: widget.onDocumentPressed,
+                                    onAudioTap: widget.onAudioPressed,
+                                    onPollTap: widget.onPollPressed,
+                                    onEventTap: widget.onEventPressed,
+                                    onAiImagesTap: widget.onAiImagesPressed,
                                   );
                                 },
                                 tooltip: t.chatInputAttachTooltip,
@@ -161,7 +217,7 @@ class ChatInputBar extends StatelessWidget {
                                   Icons.camera_alt_outlined,
                                   color: colorScheme.onSurfaceVariant,
                                 ),
-                                onPressed: onCameraPressed,
+                                onPressed: widget.onCameraPressed,
                                 tooltip: t.chatInputCameraTooltip,
                                 padding: const EdgeInsets.only(right: 8),
                               ),
@@ -177,7 +233,7 @@ class ChatInputBar extends StatelessWidget {
             const SizedBox(width: 8),
             // Use ValueListenableBuilder for send/voice button
             ValueListenableBuilder<TextEditingValue>(
-              valueListenable: controller,
+              valueListenable: widget.controller,
               builder: (context, value, child) {
                 final hasText = value.text.trim().isNotEmpty;
                 return Semantics(
@@ -185,14 +241,7 @@ class ChatInputBar extends StatelessWidget {
                   label: hasText ? t.chatInputSendLabel : t.chatInputVoiceLabel,
                   hint: hasText ? t.chatInputSendHint : t.chatInputVoiceHint,
                   child: GestureDetector(
-                    onTap: hasText
-                        ? () {
-                            final message = controller.text.trim();
-                            if (message.isNotEmpty) {
-                              onSendMessage(message);
-                            }
-                          }
-                        : onVoicePressed,
+                    onTap: hasText ? _handleSend : widget.onVoicePressed,
                     child: Container(
                       width: 48,
                       height: 48,
