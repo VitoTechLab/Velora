@@ -7,6 +7,16 @@ part 'chat_message_event.freezed.dart';
 @freezed
 class ChatMessageEvent with _$ChatMessageEvent {
   // =========================================================
+  // CHAT INITIALIZATION
+  // =========================================================
+  /// Initialize chat - creates conversation if peerUserId is provided and conversationId is empty
+  const factory ChatMessageEvent.initializeChat({
+    required String conversationId,
+    String? peerUserId,
+    int? limit,
+  }) = InitializeChatEvent;
+
+  // =========================================================
   // MESSAGES
   // =========================================================
   const factory ChatMessageEvent.loadMessages({

@@ -115,8 +115,8 @@ class ConversationListWidget extends StatelessWidget {
           FilledButton.icon(
             onPressed: () {
               context.read<ChatMessageBloc>().add(
-                const ChatMessageEvent.loadConversationList(),
-              );
+                    const ChatMessageEvent.loadConversationList(),
+                  );
             },
             icon: const Icon(Icons.refresh),
             label: Text(t.chatScreenRetry),
@@ -217,34 +217,50 @@ class _ConversationListItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final isGroup = conversation.type == 'group';
 
-    return ChatListItem(
-      profileImageUrl:
-          conversation.photoUrl ?? 'https://i.pravatar.cc/150?img=12',
-      name: conversation.title ??
-          (isGroup ? t.chatScreenUnnamedGroup : t.chatScreenUnnamed),
-      message: conversation.lastMessagePreview ?? '',
-      time: conversation.lastMessageAt != null
-          ? FormatUtils.formatChatListTime(conversation.lastMessageAt!)
-          : '',
-      isRead: conversation.unreadCount == 0,
-      messageType: conversation.lastMessageKind,
-      unreadCount: conversation.unreadCount > 0 ? conversation.unreadCount : null,
-      isGroup: isGroup,
-      onTap: () {
-        context.pushNamed(
-          AppRouteName.chatDetail,
-          extra: ChatDetailArgs(
-            conversationId: conversation.conversationId,
-            chatName: conversation.title ??
-                (isGroup ? t.chatScreenUnnamedGroup : t.chatScreenUnnamed),
-            chatSubtitle: isGroup
-                ? t.chatDetailGroupSubtitle
-                : t.chatDetailSelfSubtitle,
-            profileImageUrl:
-                conversation.photoUrl ?? 'https://i.pravatar.cc/150?img=12',
-            isGroup: isGroup,
-            peerUserId: isGroup ? null : conversation.userId,
-          ),
+    // Check if peer user is typing (for 1-on-1 chats only)
+    return BlocSelector<ChatMessageBloc, ChatMessageState, bool>(
+      selector: (state) {
+        if (isGroup || conversation.userId == null) return false;
+        return state.typingUsers.containsKey(conversation.userId);
+      },
+      builder: (context, isTyping) {
+        // Determine message preview - show typing if peer is typing
+        final messagePreview = isTyping
+            ? t.chatScreenTyping
+            : (conversation.lastMessagePreview ?? '');
+
+        return ChatListItem(
+          profileImageUrl:
+              conversation.photoUrl ?? 'https://i.pravatar.cc/150?img=12',
+          name: conversation.title ??
+              (isGroup ? t.chatScreenUnnamedGroup : t.chatScreenUnnamed),
+          message: messagePreview,
+          time: conversation.lastMessageAt != null
+              ? FormatUtils.formatChatListTime(conversation.lastMessageAt!)
+              : '',
+          isRead: conversation.unreadCount == 0,
+          messageType: isTyping ? null : conversation.lastMessageKind,
+          unreadCount:
+              conversation.unreadCount > 0 ? conversation.unreadCount : null,
+          isGroup: isGroup,
+          isTyping: isTyping,
+          onTap: () {
+            context.pushNamed(
+              AppRouteName.chatDetail,
+              extra: ChatDetailArgs(
+                conversationId: conversation.conversationId,
+                chatName: conversation.title ??
+                    (isGroup ? t.chatScreenUnnamedGroup : t.chatScreenUnnamed),
+                chatSubtitle: isGroup
+                    ? t.chatDetailGroupSubtitle
+                    : t.chatDetailSelfSubtitle,
+                profileImageUrl:
+                    conversation.photoUrl ?? 'https://i.pravatar.cc/150?img=12',
+                isGroup: isGroup,
+                peerUserId: isGroup ? null : conversation.userId,
+              ),
+            );
+          },
         );
       },
     );

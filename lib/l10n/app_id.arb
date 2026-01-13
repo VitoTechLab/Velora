@@ -791,6 +791,41 @@
   "chatDetailAiImagesSelected": "Gambar AI dipilih",
   "chatDetailVoiceMessage": "Pesan suara",
   "chatDetailStatusOnline": "Sedang online",
+  "chatDetailTyping": "mengetik",
+  "chatDetailLastSeenJustNow": "terakhir dilihat baru saja",
+  "chatDetailLastSeenMinutes": "terakhir dilihat {minutes} menit lalu",
+  "@chatDetailLastSeenMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "chatDetailLastSeenHours": "terakhir dilihat {hours} jam lalu",
+  "@chatDetailLastSeenHours": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "chatDetailLastSeenDays": "terakhir dilihat {days} hari lalu",
+  "@chatDetailLastSeenDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "chatDetailLastSeenDate": "terakhir dilihat {date}",
+  "@chatDetailLastSeenDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "chatScreenTyping": "mengetik...",
   "chatSearchScreenTitle": "Cari",
   "chatSearchScreenRecent": "Pencarian terbaru",
   "chatSearchScreenClearAll": "Hapus semua",

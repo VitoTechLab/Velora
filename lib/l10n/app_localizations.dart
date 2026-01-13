@@ -3020,6 +3020,48 @@ abstract class AppLocalizations {
   /// **'Online'**
   String get chatDetailStatusOnline;
 
+  /// No description provided for @chatDetailTyping.
+  ///
+  /// In en, this message translates to:
+  /// **'typing'**
+  String get chatDetailTyping;
+
+  /// No description provided for @chatDetailLastSeenJustNow.
+  ///
+  /// In en, this message translates to:
+  /// **'last seen just now'**
+  String get chatDetailLastSeenJustNow;
+
+  /// No description provided for @chatDetailLastSeenMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'last seen {minutes} min ago'**
+  String chatDetailLastSeenMinutes(int minutes);
+
+  /// No description provided for @chatDetailLastSeenHours.
+  ///
+  /// In en, this message translates to:
+  /// **'last seen {hours}h ago'**
+  String chatDetailLastSeenHours(int hours);
+
+  /// No description provided for @chatDetailLastSeenDays.
+  ///
+  /// In en, this message translates to:
+  /// **'last seen {days}d ago'**
+  String chatDetailLastSeenDays(int days);
+
+  /// No description provided for @chatDetailLastSeenDate.
+  ///
+  /// In en, this message translates to:
+  /// **'last seen {date}'**
+  String chatDetailLastSeenDate(String date);
+
+  /// No description provided for @chatScreenTyping.
+  ///
+  /// In en, this message translates to:
+  /// **'typing...'**
+  String get chatScreenTyping;
+
   /// No description provided for @chatSearchScreenTitle.
   ///
   /// In en, this message translates to:

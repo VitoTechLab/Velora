@@ -91,6 +91,7 @@ import 'package:velora/features/chat/domain/usecases/watch_message_reads_usecase
 import 'package:velora/features/chat/domain/usecases/send_typing_indicator_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/watch_typing_indicators_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/search_followed_users_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/create_direct_conversation_usecase.dart';
 import 'package:velora/features/chat/presentation/bloc/chat_message_bloc.dart';
 import 'package:velora/features/chat/presentation/bloc/user_presence_bloc.dart';
 import 'package:velora/features/chat/presentation/bloc/search_user_bloc.dart';
@@ -388,6 +389,7 @@ Future<void> configureDependencies() async {
       () => WatchTypingIndicatorsUseCase(repository: getIt<ChatRepository>()),
     )
     ..registerLazySingleton(() => SearchFollowedUsersUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(() => CreateDirectConversationUseCase(repository: getIt<ChatRepository>()))
     // Social Relation feature - Use cases
     ..registerLazySingleton(() => FollowUser(getIt<SocialRelationRepository>()))
     ..registerLazySingleton(
@@ -509,6 +511,7 @@ Future<void> configureDependencies() async {
       watchMessageReadsUseCase: getIt<WatchMessageReadsUseCase>(),
       sendTypingIndicatorUseCase: getIt<SendTypingIndicatorUseCase>(),
       watchTypingIndicatorsUseCase: getIt<WatchTypingIndicatorsUseCase>(),
+      createDirectConversationUseCase: getIt<CreateDirectConversationUseCase>(),
     ),
   );
 

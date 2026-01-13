@@ -12,6 +12,7 @@ class ChatListItem extends StatelessWidget {
   final bool isMissedCall;
   final int? unreadCount;
   final bool isGroup;
+  final bool isTyping;
   final VoidCallback onTap;
 
   const ChatListItem({
@@ -26,6 +27,7 @@ class ChatListItem extends StatelessWidget {
     this.isMissedCall = false,
     this.unreadCount,
     this.isGroup = false,
+    this.isTyping = false,
     required this.onTap,
   });
 
@@ -149,12 +151,15 @@ class ChatListItem extends StatelessWidget {
           child: Text(
             _getMessageText(t),
             style: textTheme.bodyMedium?.copyWith(
-              color: isMissedCall
-                  ? colorScheme.error
-                  : isRead
-                  ? colorScheme.onSurfaceVariant
-                  : colorScheme.onSurface,
+              color: isTyping
+                  ? colorScheme.primary
+                  : isMissedCall
+                      ? colorScheme.error
+                      : isRead
+                          ? colorScheme.onSurfaceVariant
+                          : colorScheme.onSurface,
               fontWeight: isRead ? FontWeight.normal : FontWeight.w500,
+              fontStyle: isTyping ? FontStyle.italic : FontStyle.normal,
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

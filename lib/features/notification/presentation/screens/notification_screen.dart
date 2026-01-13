@@ -21,7 +21,9 @@ class NotificationScreen extends HookWidget {
     final theme = Theme.of(context);
 
     void loadNotifications() {
-      context.read<NotificationBloc>().add(const NotificationEvent.loadInitial());
+      context
+          .read<NotificationBloc>()
+          .add(const NotificationEvent.loadInitial());
     }
 
     void onScroll() {
@@ -51,11 +53,14 @@ class NotificationScreen extends HookWidget {
 
     useEffect(() {
       loadNotifications();
-      context.read<NotificationBloc>().add(const NotificationEvent.startWatching());
+      final bloc = context.read<NotificationBloc>();
+      bloc.add(const NotificationEvent.startWatching());
       scrollController.addListener(onScroll);
       return () {
         scrollController.removeListener(onScroll);
-        context.read<NotificationBloc>().add(const NotificationEvent.stopWatching());
+        if (context.mounted) {
+          bloc.add(const NotificationEvent.stopWatching());
+        }
       };
     }, [scrollController]);
 
@@ -73,8 +78,8 @@ class NotificationScreen extends HookWidget {
             onSelected: (value) {
               if (value == 'mark_all_read') {
                 context.read<NotificationBloc>().add(
-                  const NotificationEvent.markAllAsRead(),
-                );
+                      const NotificationEvent.markAllAsRead(),
+                    );
               }
             },
             itemBuilder: (context) => [
@@ -180,7 +185,8 @@ class NotificationScreen extends HookWidget {
                     SliverList(
                       delegate: SliverChildBuilderDelegate(
                         (context, index) {
-                          final notification = groupedNotifications.today[index];
+                          final notification =
+                              groupedNotifications.today[index];
                           return _buildNotificationTile(context, notification);
                         },
                         childCount: groupedNotifications.today.length,
@@ -196,7 +202,8 @@ class NotificationScreen extends HookWidget {
                     SliverList(
                       delegate: SliverChildBuilderDelegate(
                         (context, index) {
-                          final notification = groupedNotifications.yesterday[index];
+                          final notification =
+                              groupedNotifications.yesterday[index];
                           return _buildNotificationTile(context, notification);
                         },
                         childCount: groupedNotifications.yesterday.length,
@@ -212,7 +219,8 @@ class NotificationScreen extends HookWidget {
                     SliverList(
                       delegate: SliverChildBuilderDelegate(
                         (context, index) {
-                          final notification = groupedNotifications.last7Days[index];
+                          final notification =
+                              groupedNotifications.last7Days[index];
                           return _buildNotificationTile(context, notification);
                         },
                         childCount: groupedNotifications.last7Days.length,
@@ -228,7 +236,8 @@ class NotificationScreen extends HookWidget {
                     SliverList(
                       delegate: SliverChildBuilderDelegate(
                         (context, index) {
-                          final notification = groupedNotifications.last30Days[index];
+                          final notification =
+                              groupedNotifications.last30Days[index];
                           return _buildNotificationTile(context, notification);
                         },
                         childCount: groupedNotifications.last30Days.length,
@@ -244,7 +253,8 @@ class NotificationScreen extends HookWidget {
                     SliverList(
                       delegate: SliverChildBuilderDelegate(
                         (context, index) {
-                          final notification = groupedNotifications.older[index];
+                          final notification =
+                              groupedNotifications.older[index];
                           return _buildNotificationTile(context, notification);
                         },
                         childCount: groupedNotifications.older.length,
@@ -274,7 +284,8 @@ class NotificationScreen extends HookWidget {
     );
   }
 
-  Widget _buildNotificationTile(BuildContext context, NotificationEntity notification) {
+  Widget _buildNotificationTile(
+      BuildContext context, NotificationEntity notification) {
     // Skip follow requests since they're shown in the card
     if (notification.type == NotificationType.followRequest) {
       return const SizedBox.shrink();
@@ -285,7 +296,8 @@ class NotificationScreen extends HookWidget {
           previous.followLoadingIds.contains(notification.id) !=
           next.followLoadingIds.contains(notification.id),
       builder: (context, state) {
-        final isFollowLoading = state.followLoadingIds.contains(notification.id);
+        final isFollowLoading =
+            state.followLoadingIds.contains(notification.id);
 
         return Dismissible(
           key: Key('notification_${notification.id}'),
@@ -297,31 +309,35 @@ class NotificationScreen extends HookWidget {
             child: const Icon(Icons.delete, color: Colors.white),
           ),
           onDismissed: (_) {
-            context.read<NotificationBloc>().add(
-              NotificationEvent.delete(notification.id),
-            );
+            if (context.mounted) {
+              context.read<NotificationBloc>().add(
+                    NotificationEvent.delete(notification.id),
+                  );
+            }
           },
           child: NotificationTile(
             notification: notification,
             isFollowLoading: isFollowLoading,
             onTap: () {
+              if (!context.mounted) return;
               // Mark as read
               if (!notification.isRead) {
                 context.read<NotificationBloc>().add(
-                  NotificationEvent.markAsRead(notification.id),
-                );
+                      NotificationEvent.markAsRead(notification.id),
+                    );
               }
               // Navigate based on notification type
               _handleNotificationTap(context, notification);
             },
             onFollowBack: notification.actorId != null
                 ? () {
+                    if (!context.mounted) return;
                     context.read<NotificationBloc>().add(
-                      NotificationEvent.toggleFollowActor(
-                        notificationId: notification.id,
-                        actorId: notification.actorId!,
-                      ),
-                    );
+                          NotificationEvent.toggleFollowActor(
+                            notificationId: notification.id,
+                            actorId: notification.actorId!,
+                          ),
+                        );
                   }
                 : null,
           ),
@@ -330,7 +346,8 @@ class NotificationScreen extends HookWidget {
     );
   }
 
-  void _handleNotificationTap(BuildContext context, NotificationEntity notification) {
+  void _handleNotificationTap(
+      BuildContext context, NotificationEntity notification) {
     switch (notification.type) {
       case NotificationType.like:
       case NotificationType.comment:
@@ -361,7 +378,8 @@ class NotificationScreen extends HookWidget {
     }
   }
 
-  _GroupedNotifications _groupNotifications(List<NotificationEntity> notifications) {
+  _GroupedNotifications _groupNotifications(
+      List<NotificationEntity> notifications) {
     final today = <NotificationEntity>[];
     final yesterday = <NotificationEntity>[];
     final last7Days = <NotificationEntity>[];

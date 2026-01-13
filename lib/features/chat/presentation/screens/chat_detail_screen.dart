@@ -46,7 +46,6 @@ class ChatDetailScreen extends HookWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final textTheme = theme.textTheme;
     final t = AppLocalizations.of(context)!;
 
     final messageController = useTextEditingController();
@@ -70,8 +69,8 @@ class ChatDetailScreen extends HookWidget {
     useEffect(() {
       if (!isGroup && peerUserId != null) {
         context.read<UserPresenceBloc>().add(
-          UserPresenceEvent.fetchLastSeen([peerUserId!]),
-        );
+              UserPresenceEvent.fetchLastSeen([peerUserId!]),
+            );
       }
       return null;
     }, [peerUserId]);
@@ -296,310 +295,468 @@ class ChatDetailScreen extends HookWidget {
 
     return BlocProvider(
       create: (context) => getIt<ChatMessageBloc>()
-        ..add(LoadChatMessagesEvent(conversationId: conversationId))
-        ..add(StartWatchMessagesEvent(conversationId: conversationId))
-        ..add(StartWatchReadsEvent(conversationId: conversationId))
-        ..add(StartWatchTypingEvent(conversationId: conversationId)),
-      child: Builder(
-        builder: (context) {
-          // Setup scroll listener for load more
-          useEffect(() {
-            void onScroll() {
-              if (scrollController.position.pixels >=
-                  scrollController.position.maxScrollExtent - 200) {
-                final bloc = context.read<ChatMessageBloc>();
-                if (bloc.state.hasMore && !bloc.state.isLoadingMore) {
-                  bloc.add(
-                    LoadMoreChatMessagesEvent(
-                      conversationId: conversationId,
-                      limit: 50,
-                    ),
-                  );
-                }
-              }
-            }
+        ..add(InitializeChatEvent(
+          conversationId: conversationId,
+          peerUserId: peerUserId,
+          limit: 50,
+        )),
+      child: _ChatDetailContent(
+        conversationId: conversationId,
+        chatName: chatName,
+        chatSubtitle: chatSubtitle,
+        profileImageUrl: profileImageUrl,
+        isGroup: isGroup,
+        peerUserId: peerUserId,
+        scrollController: scrollController,
+        messageController: messageController,
+        focusNode: focusNode,
+        fadeAnimation: fadeAnimation,
+        backgroundColor: backgroundColor,
+        handleGalleryPressed: handleGalleryPressed,
+        handleCameraPressed: handleCameraPressed,
+        handlePollPressed: handlePollPressed,
+        handleEventPressed: handleEventPressed,
+        handleDocumentPressed: handleDocumentPressed,
+        handleAudioPressed: handleAudioPressed,
+      ),
+    );
+  }
+}
 
-            scrollController.addListener(onScroll);
-            return () => scrollController.removeListener(onScroll);
-          }, [scrollController]);
+class _ChatDetailContent extends StatefulWidget {
+  final String conversationId;
+  final String chatName;
+  final String chatSubtitle;
+  final String profileImageUrl;
+  final bool isGroup;
+  final String? peerUserId;
+  final ScrollController scrollController;
+  final TextEditingController messageController;
+  final FocusNode focusNode;
+  final Animation<double> fadeAnimation;
+  final Color? backgroundColor;
+  final Future<void> Function() handleGalleryPressed;
+  final Future<void> Function() handleCameraPressed;
+  final Future<void> Function() handlePollPressed;
+  final Future<void> Function() handleEventPressed;
+  final Future<void> Function() handleDocumentPressed;
+  final Future<void> Function() handleAudioPressed;
 
-          return Scaffold(
-            backgroundColor: backgroundColor,
-            appBar: AppBar(
-              backgroundColor: colorScheme.surfaceContainerHighest,
-              elevation: 0,
-              leading: Semantics(
-                button: true,
-                label: t.chatDetailBackLabel,
-                child: IconButton(
-                  icon: Icon(Icons.arrow_back, color: colorScheme.onSurface),
-                  onPressed: () => Navigator.pop(context),
-                  tooltip: t.commonGoBack,
+  const _ChatDetailContent({
+    required this.conversationId,
+    required this.chatName,
+    required this.chatSubtitle,
+    required this.profileImageUrl,
+    required this.isGroup,
+    this.peerUserId,
+    required this.scrollController,
+    required this.messageController,
+    required this.focusNode,
+    required this.fadeAnimation,
+    this.backgroundColor,
+    required this.handleGalleryPressed,
+    required this.handleCameraPressed,
+    required this.handlePollPressed,
+    required this.handleEventPressed,
+    required this.handleDocumentPressed,
+    required this.handleAudioPressed,
+  });
+
+  @override
+  State<_ChatDetailContent> createState() => _ChatDetailContentState();
+}
+
+class _ChatDetailContentState extends State<_ChatDetailContent> {
+  @override
+  void initState() {
+    super.initState();
+    widget.scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    widget.scrollController.removeListener(_onScroll);
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (widget.scrollController.position.pixels >=
+        widget.scrollController.position.maxScrollExtent - 200) {
+      final bloc = context.read<ChatMessageBloc>();
+      if (bloc.state.hasMore && !bloc.state.isLoadingMore) {
+        bloc.add(
+          LoadMoreChatMessagesEvent(
+            conversationId: widget.conversationId,
+            limit: 50,
+          ),
+        );
+      }
+    }
+  }
+
+  /// Build subtitle widget showing typing indicator, online status, or lastSeen
+  Widget _buildSubtitleWidget(
+    BuildContext context,
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+    AppLocalizations t,
+  ) {
+    // First check if peer is typing (priority)
+    return BlocSelector<ChatMessageBloc, ChatMessageState, bool>(
+      selector: (state) {
+        // Check if peerUserId is in typingUsers
+        if (widget.peerUserId == null) return false;
+        return state.typingUsers.containsKey(widget.peerUserId);
+      },
+      builder: (context, isTyping) {
+        if (isTyping) {
+          // Show "typing..." with animation
+          return Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                t.chatDetailTyping,
+                style: textTheme.bodySmall?.copyWith(
+                  color: colorScheme.primary,
+                  fontStyle: FontStyle.italic,
                 ),
               ),
-              title: Semantics(
-                header: true,
-                label: t.chatDetailTitleLabel(chatName),
-                child: Row(
+              const SizedBox(width: 4),
+              _TypingDotsAnimation(color: colorScheme.primary),
+            ],
+          );
+        }
+
+        // Not typing - show online status or last seen
+        return BlocSelector<UserPresenceBloc, UserPresenceState,
+            ({bool isOnline, DateTime? lastSeen})>(
+          selector: (state) => (
+            isOnline: state.onlineUsers[widget.peerUserId] ?? false,
+            lastSeen: state.lastSeen[widget.peerUserId],
+          ),
+          builder: (context, presence) {
+            if (presence.isOnline) {
+              return Text(
+                t.chatDetailStatusOnline,
+                style: textTheme.bodySmall?.copyWith(
+                  color: Colors.green,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              );
+            }
+
+            // Show last seen or default subtitle
+            final lastSeenText = presence.lastSeen != null
+                ? _formatLastSeen(presence.lastSeen!, t)
+                : widget.chatSubtitle;
+
+            return Text(
+              lastSeenText,
+              style: textTheme.bodySmall?.copyWith(
+                color: colorScheme.onSurfaceVariant,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            );
+          },
+        );
+      },
+    );
+  }
+
+  /// Format lastSeen time
+  String _formatLastSeen(DateTime lastSeen, AppLocalizations t) {
+    final now = DateTime.now();
+    final diff = now.difference(lastSeen);
+
+    if (diff.inMinutes < 1) {
+      return t.chatDetailLastSeenJustNow;
+    } else if (diff.inMinutes < 60) {
+      return t.chatDetailLastSeenMinutes(diff.inMinutes);
+    } else if (diff.inHours < 24) {
+      return t.chatDetailLastSeenHours(diff.inHours);
+    } else if (diff.inDays < 7) {
+      return t.chatDetailLastSeenDays(diff.inDays);
+    } else {
+      return t.chatDetailLastSeenDate(_formatDate(lastSeen));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+    final t = AppLocalizations.of(context)!;
+
+    return Scaffold(
+      backgroundColor: widget.backgroundColor,
+      appBar: AppBar(
+        backgroundColor: colorScheme.surfaceContainerHighest,
+        elevation: 0,
+        leading: Semantics(
+          button: true,
+          label: t.chatDetailBackLabel,
+          child: IconButton(
+            icon: Icon(Icons.arrow_back, color: colorScheme.onSurface),
+            onPressed: () => Navigator.pop(context),
+            tooltip: t.commonGoBack,
+          ),
+        ),
+        title: Semantics(
+          header: true,
+          label: t.chatDetailTitleLabel(widget.chatName),
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 20,
+                backgroundImage: NetworkImage(widget.profileImageUrl),
+                backgroundColor: colorScheme.surfaceContainerHighest,
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CircleAvatar(
-                      radius: 20,
-                      backgroundImage: NetworkImage(profileImageUrl),
-                      backgroundColor: colorScheme.surfaceContainerHighest,
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            chatName,
-                            style: textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              color: colorScheme.onSurface,
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          // Only rebuild presence text when presence state changes
-                          if (!isGroup && peerUserId != null)
-                            BlocSelector<UserPresenceBloc, UserPresenceState, bool>(
-                              selector: (state) => state.onlineUsers[peerUserId] ?? false,
-                              builder: (context, isOnline) {
-                                final presenceText = isOnline
-                                    ? t.chatDetailStatusOnline
-                                    : chatSubtitle;
-                                return Text(
-                                  presenceText,
-                                  style: textTheme.bodySmall?.copyWith(
-                                    color: colorScheme.onSurfaceVariant,
-                                  ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                );
-                              },
-                            )
-                          else
-                            Text(
-                              chatSubtitle,
-                              style: textTheme.bodySmall?.copyWith(
-                                color: colorScheme.onSurfaceVariant,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                        ],
+                    Text(
+                      widget.chatName,
+                      style: textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: colorScheme.onSurface,
                       ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
+                    // Only rebuild presence text when presence state changes
+                    if (!widget.isGroup && widget.peerUserId != null)
+                      _buildSubtitleWidget(context, colorScheme, textTheme, t)
+                    else
+                      Text(
+                        widget.chatSubtitle,
+                        style: textTheme.bodySmall?.copyWith(
+                          color: colorScheme.onSurfaceVariant,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                   ],
                 ),
               ),
-              actions: [
-                Semantics(
-                  button: true,
-                  label: t.chatDetailOptionsLabel,
-                  child: IconButton(
-                    icon: Icon(Icons.more_vert, color: colorScheme.onSurface),
-                    onPressed: () {},
-                    tooltip: t.chatDetailMenuTooltip,
-                  ),
-                ),
-              ],
+            ],
+          ),
+        ),
+        actions: [
+          Semantics(
+            button: true,
+            label: t.chatDetailOptionsLabel,
+            child: IconButton(
+              icon: Icon(Icons.more_vert, color: colorScheme.onSurface),
+              onPressed: () {},
+              tooltip: t.chatDetailMenuTooltip,
             ),
-            body: SafeArea(
-              child: Column(
-                children: [
-                  Expanded(
-                    child: BlocBuilder<ChatMessageBloc, ChatMessageState>(
-                      builder: (context, state) {
-                        if (state.isLoading && state.messages.isEmpty) {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
+          ),
+        ],
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: BlocBuilder<ChatMessageBloc, ChatMessageState>(
+                builder: (context, state) {
+                  if (state.isLoading && state.messages.isEmpty) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
 
-                        if (state.errorMessage != null &&
-                            state.messages.isEmpty) {
-                          return Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.error_outline,
-                                  size: 64,
-                                  color: colorScheme.error,
-                                ),
-                                const SizedBox(height: 16),
-                                Text(
-                                  state.errorMessage!,
-                                  style: textTheme.bodyLarge?.copyWith(
-                                    color: colorScheme.error,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ],
+                  if (state.errorMessage != null && state.messages.isEmpty) {
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.error_outline,
+                            size: 64,
+                            color: colorScheme.error,
+                          ),
+                          const SizedBox(height: 16),
+                          Text(
+                            state.errorMessage!,
+                            style: textTheme.bodyLarge?.copyWith(
+                              color: colorScheme.error,
                             ),
-                          );
-                        }
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    );
+                  }
 
-                        if (state.messages.isEmpty) {
-                          return Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.chat_bubble_outline,
-                                  size: 80,
-                                  color: colorScheme.outline,
-                                ),
-                                const SizedBox(height: 16),
-                                Text(
-                                  t.chatDetailNoMessages,
-                                  style: textTheme.titleLarge?.copyWith(
-                                    color: colorScheme.onSurfaceVariant,
-                                  ),
-                                ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  t.chatDetailNoMessagesHint,
-                                  style: textTheme.bodyMedium?.copyWith(
-                                    color: colorScheme.outline,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ],
-                            ),
-                          );
-                        }
-
-                        final myUserId =
-                            Supabase.instance.client.auth.currentUser?.id;
-                        final messages = state.messages;
-
-                        return FadeTransition(
-                          opacity: fadeAnimation,
-                          child: Semantics(
-                            label: t.chatDetailHistoryLabel,
-                            hint: t.chatDetailHistoryHint,
-                            child: ListView.builder(
-                              controller: scrollController,
-                              reverse: true,
-                              physics: const AlwaysScrollableScrollPhysics(
-                                parent: BouncingScrollPhysics(),
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8,
-                                vertical: 8,
-                              ),
-                              itemCount:
-                                  messages.length +
-                                  (state.isLoadingMore ? 1 : 0),
-                              itemBuilder: (context, index) {
-                                if (index == messages.length) {
-                                  return const Center(
-                                    child: Padding(
-                                      padding: EdgeInsets.all(16.0),
-                                      child: CircularProgressIndicator(),
-                                    ),
-                                  );
-                                }
-
-                                final reversedIndex =
-                                    messages.length - 1 - index;
-                                final message = messages[reversedIndex];
-                                final isSender = message.senderId == myUserId;
-                                final isDeleted = message.deletedAt != null;
-
-                                final showDateSeparator =
-                                    reversedIndex == 0 ||
-                                    !_isSameDay(
-                                      messages[reversedIndex].createdAt,
-                                      messages[reversedIndex - 1].createdAt,
-                                    );
-
-                                return Column(
-                                  children: [
-                                    if (showDateSeparator)
-                                      DateSeparatorWidget(
-                                        date: _formatDate(message.createdAt),
-                                      ),
-                                    if (isDeleted)
-                                      ChatBubbleWidget(
-                                        message: t.chatDetailMessageDeleted,
-                                        time: _formatTime(message.createdAt),
-                                        isSender: isSender,
-                                        isRead: true,
-                                      )
-                                    else
-                                      _buildMessageWidget(
-                                        context: context,
-                                        message: message,
-                                        isSender: isSender,
-                                        t: t,
-                                      ),
-                                  ],
-                                );
-                              },
+                  if (state.messages.isEmpty) {
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.chat_bubble_outline,
+                            size: 80,
+                            color: colorScheme.outline,
+                          ),
+                          const SizedBox(height: 16),
+                          Text(
+                            t.chatDetailNoMessages,
+                            style: textTheme.titleLarge?.copyWith(
+                              color: colorScheme.onSurfaceVariant,
                             ),
                           ),
-                        );
-                      },
-                    ),
-                  ),
-                  BlocBuilder<ChatMessageBloc, ChatMessageState>(
-                    builder: (context, state) {
-                      return ChatInputBar(
-                        controller: messageController,
-                        focusNode: focusNode,
-                        onSendMessage: (message) {
-                          if (message.trim().isNotEmpty) {
-                            context.read<ChatMessageBloc>().add(
-                              SendChatMessageEvent(
-                                conversationId: conversationId,
-                                content: message,
+                          const SizedBox(height: 8),
+                          Text(
+                            t.chatDetailNoMessagesHint,
+                            style: textTheme.bodyMedium?.copyWith(
+                              color: colorScheme.outline,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+
+                  final myUserId =
+                      Supabase.instance.client.auth.currentUser?.id;
+                  final messages = state.messages;
+
+                  return FadeTransition(
+                    opacity: widget.fadeAnimation,
+                    child: Semantics(
+                      label: t.chatDetailHistoryLabel,
+                      hint: t.chatDetailHistoryHint,
+                      child: ListView.builder(
+                        controller: widget.scrollController,
+                        reverse: true,
+                        physics: const AlwaysScrollableScrollPhysics(
+                          parent: BouncingScrollPhysics(),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 8,
+                        ),
+                        itemCount:
+                            messages.length + (state.isLoadingMore ? 1 : 0),
+                        itemBuilder: (context, index) {
+                          if (index == messages.length) {
+                            return const Center(
+                              child: Padding(
+                                padding: EdgeInsets.all(16.0),
+                                child: CircularProgressIndicator(),
                               ),
                             );
-                            messageController.clear();
                           }
-                        },
-                        onGalleryPressed: handleGalleryPressed,
-                        onCameraPressed: handleCameraPressed,
-                        onLocationPressed: () {
-                          AppMessenger.showToast(
-                            message: t.chatDetailLocationSelected,
-                            icon: Icons.location_on_outlined,
+
+                          final reversedIndex = messages.length - 1 - index;
+                          final message = messages[reversedIndex];
+                          final isSender = message.senderId == myUserId;
+                          final isDeleted = message.deletedAt != null;
+
+                          final showDateSeparator = reversedIndex == 0 ||
+                              !_isSameDay(
+                                messages[reversedIndex].createdAt,
+                                messages[reversedIndex - 1].createdAt,
+                              );
+
+                          return Column(
+                            children: [
+                              if (showDateSeparator)
+                                DateSeparatorWidget(
+                                  date: _formatDate(message.createdAt),
+                                ),
+                              if (isDeleted)
+                                ChatBubbleWidget(
+                                  message: t.chatDetailMessageDeleted,
+                                  time: _formatTime(message.createdAt),
+                                  isSender: isSender,
+                                  isRead: true,
+                                )
+                              else
+                                _buildMessageWidget(
+                                  context: context,
+                                  message: message,
+                                  isSender: isSender,
+                                  t: t,
+                                ),
+                            ],
                           );
                         },
-                        onContactPressed: () {
-                          AppMessenger.showToast(
-                            message: t.chatDetailContactSelected,
-                            icon: Icons.person_outline,
-                          );
-                        },
-                        onDocumentPressed: handleDocumentPressed,
-                        onAudioPressed: handleAudioPressed,
-                        onPollPressed: handlePollPressed,
-                        onEventPressed: handleEventPressed,
-                        onAiImagesPressed: () {
-                          AppMessenger.showToast(
-                            message: t.chatDetailAiImagesSelected,
-                            icon: Icons.auto_awesome_outlined,
-                          );
-                        },
-                        onVoicePressed: () {
-                          AppMessenger.showToast(
-                            message: t.chatDetailVoiceMessage,
-                            icon: Icons.mic,
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ],
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
-          );
-        },
+            BlocBuilder<ChatMessageBloc, ChatMessageState>(
+              builder: (context, state) {
+                final conversationId =
+                    state.conversationId ?? widget.conversationId;
+                return ChatInputBar(
+                  controller: widget.messageController,
+                  focusNode: widget.focusNode,
+                  onSendMessage: (message) {
+                    if (message.trim().isNotEmpty) {
+                      context.read<ChatMessageBloc>().add(
+                            SendChatMessageEvent(
+                              conversationId: conversationId,
+                              content: message,
+                            ),
+                          );
+                      widget.messageController.clear();
+                    }
+                  },
+                  onTyping: (isTyping) {
+                    if (conversationId.isNotEmpty) {
+                      context.read<ChatMessageBloc>().add(
+                            SendTypingEvent(
+                              conversationId: conversationId,
+                              isTyping: isTyping,
+                            ),
+                          );
+                    }
+                  },
+                  onGalleryPressed: widget.handleGalleryPressed,
+                  onCameraPressed: widget.handleCameraPressed,
+                  onLocationPressed: () {
+                    AppMessenger.showToast(
+                      message: t.chatDetailLocationSelected,
+                      icon: Icons.location_on_outlined,
+                    );
+                  },
+                  onContactPressed: () {
+                    AppMessenger.showToast(
+                      message: t.chatDetailContactSelected,
+                      icon: Icons.person_outline,
+                    );
+                  },
+                  onDocumentPressed: widget.handleDocumentPressed,
+                  onAudioPressed: widget.handleAudioPressed,
+                  onPollPressed: widget.handlePollPressed,
+                  onEventPressed: widget.handleEventPressed,
+                  onAiImagesPressed: () {
+                    AppMessenger.showToast(
+                      message: t.chatDetailAiImagesSelected,
+                      icon: Icons.auto_awesome_outlined,
+                    );
+                  },
+                  onVoicePressed: () {
+                    AppMessenger.showToast(
+                      message: t.chatDetailVoiceMessage,
+                      icon: Icons.mic,
+                    );
+                  },
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -611,14 +768,18 @@ class ChatDetailScreen extends HookWidget {
     required AppLocalizations t,
   }) {
     final time = _formatTime(message.createdAt);
-    
+
     // Get sender info for receiver messages
     final senderName = !isSender ? (message.senderName ?? 'User') : null;
     final senderAvatar = !isSender ? message.senderAvatarUrl : null;
-    
+
     // Check online status for peer user (only in 1-on-1 chats)
-    final isOnline = !isGroup && !isSender && peerUserId != null
-        ? context.read<UserPresenceBloc>().state.onlineUsers[peerUserId] ?? false
+    final isOnline = !widget.isGroup && !isSender && widget.peerUserId != null
+        ? context
+                .read<UserPresenceBloc>()
+                .state
+                .onlineUsers[widget.peerUserId] ??
+            false
         : false;
 
     Widget messageWidget;
@@ -751,9 +912,8 @@ class ChatDetailScreen extends HookWidget {
       final index = entry.key;
       final option = entry.value;
       final optionId = option is Map ? option['id'] as String? : '$index';
-      final optionText = option is Map
-          ? option['text'] as String? ?? ''
-          : option.toString();
+      final optionText =
+          option is Map ? option['text'] as String? ?? '' : option.toString();
       final voteCount = votesMap[optionId] as int? ?? 0;
       final isSelected = optionId == votedOptionId;
 
@@ -802,8 +962,7 @@ class ChatDetailScreen extends HookWidget {
     }
 
     final title = metadata['title'] as String? ?? '';
-    final description =
-        metadata['description'] as String? ??
+    final description = metadata['description'] as String? ??
         metadata['notes'] as String? ??
         '';
     final location = metadata['location'] as String?;
@@ -819,7 +978,7 @@ class ChatDetailScreen extends HookWidget {
         : DateTime.now();
     final endDate = endTimeStr != null
         ? DateTime.tryParse(endTimeStr) ??
-              startDate.add(const Duration(hours: 1))
+            startDate.add(const Duration(hours: 1))
         : startDate.add(const Duration(hours: 1));
 
     // Parse RSVP counts
@@ -832,8 +991,7 @@ class ChatDetailScreen extends HookWidget {
     // Check current user's response
     EventResponse? userResponse;
     if (currentUserId != null) {
-      final userRsvpStatus =
-          metadata['user_rsvp'] as String? ??
+      final userRsvpStatus = metadata['user_rsvp'] as String? ??
           _getUserRsvpFromList(metadata['rsvp_list'], currentUserId);
       if (userRsvpStatus != null) {
         switch (userRsvpStatus) {
@@ -958,4 +1116,66 @@ class _EventData {
     required this.maybeCount,
     required this.notGoingCount,
   });
+}
+
+/// Animated typing dots widget
+class _TypingDotsAnimation extends StatefulWidget {
+  final Color color;
+
+  const _TypingDotsAnimation({required this.color});
+
+  @override
+  State<_TypingDotsAnimation> createState() => _TypingDotsAnimationState();
+}
+
+class _TypingDotsAnimationState extends State<_TypingDotsAnimation>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1200),
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        return Row(
+          mainAxisSize: MainAxisSize.min,
+          children: List.generate(3, (index) {
+            final delay = index * 0.2;
+            final value = (_controller.value - delay).clamp(0.0, 1.0);
+            final opacity =
+                (value < 0.5 ? value * 2 : (1 - value) * 2).clamp(0.3, 1.0);
+            return Padding(
+              padding: const EdgeInsets.only(right: 2),
+              child: Opacity(
+                opacity: opacity,
+                child: Container(
+                  width: 4,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: widget.color,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              ),
+            );
+          }),
+        );
+      },
+    );
+  }
 }

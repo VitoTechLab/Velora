@@ -7,6 +7,7 @@ import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/chat/domain/entities/message_read_entity.dart';
 import 'package:velora/features/chat/domain/usecases/delete_message_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/edit_message_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/create_direct_conversation_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/get_conversation_list_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/get_message_reads_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/get_messages_usecase.dart';
@@ -37,7 +38,9 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     required this.watchMessageReadsUseCase,
     required this.sendTypingIndicatorUseCase,
     required this.watchTypingIndicatorsUseCase,
+    required this.createDirectConversationUseCase,
   }) : super(const ChatMessageState()) {
+    on<InitializeChatEvent>(_onInitializeChat);
     on<LoadChatMessagesEvent>(_onLoadInitialMessages);
     on<LoadMoreChatMessagesEvent>(
       _onLoadMoreMessages,
@@ -111,6 +114,9 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
   final SendTypingIndicatorUseCase sendTypingIndicatorUseCase;
   final WatchTypingIndicatorsUseCase watchTypingIndicatorsUseCase;
 
+  // Direct Conversation
+  final CreateDirectConversationUseCase createDirectConversationUseCase;
+
   StreamSubscription? _watchSub;
   StreamSubscription? _readWatchSub;
   StreamSubscription? _typingWatchSub;
@@ -119,6 +125,92 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
   static const _logTag = 'ChatMessageBloc';
   static const int _maxMessageLength = 1000;
   static const Duration _typingTimeout = Duration(seconds: 5);
+
+  /// Initialize chat - creates conversation if needed, then loads messages
+  Future<void> _onInitializeChat(
+    InitializeChatEvent event,
+    Emitter<ChatMessageState> emit,
+  ) async {
+    var conversationId = event.conversationId.trim();
+    final peerUserId = event.peerUserId?.trim();
+
+    emit(
+      state.copyWith(
+        isLoading: true,
+        isLoadingMore: false,
+        messages: const [],
+        hasMore: false,
+        cursor: null,
+        errorMessage: null,
+        message: null,
+      ),
+    );
+
+    // If no conversationId but has peerUserId, create/get direct conversation
+    if (conversationId.isEmpty && peerUserId != null && peerUserId.isNotEmpty) {
+      logi('Creating/getting direct conversation with: $peerUserId',
+          tag: _logTag);
+
+      final createResult = await createDirectConversationUseCase(
+        otherUserId: peerUserId,
+      );
+
+      final newConvId = createResult.fold(
+        (failure) {
+          emit(state.copyWith(
+            isLoading: false,
+            errorMessage: failure.message,
+          ));
+          return null;
+        },
+        (id) => id,
+      );
+
+      if (newConvId == null) return;
+      conversationId = newConvId;
+      logi('Conversation ID resolved: $conversationId', tag: _logTag);
+    }
+
+    if (conversationId.isEmpty) {
+      emit(state.copyWith(
+        isLoading: false,
+        errorMessage: 'Conversation id is required',
+      ));
+      return;
+    }
+
+    // Update state with resolved conversationId
+    emit(state.copyWith(conversationId: conversationId));
+
+    // Load messages
+    final limit = event.limit ?? 50;
+    final result = await getMessagesUseCase(
+      conversationId: conversationId,
+      limit: limit,
+    );
+
+    result.fold(
+      (failure) {
+        emit(state.copyWith(isLoading: false, errorMessage: failure.message));
+      },
+      (pagination) {
+        emit(
+          state.copyWith(
+            isLoading: false,
+            messages: pagination.messages,
+            hasMore: pagination.hasMore,
+            cursor: pagination.cursor,
+            errorMessage: null,
+          ),
+        );
+
+        // Start watching after messages loaded
+        add(StartWatchMessagesEvent(conversationId: conversationId));
+        add(StartWatchReadsEvent(conversationId: conversationId));
+        add(StartWatchTypingEvent(conversationId: conversationId));
+      },
+    );
+  }
 
   Future<void> _onLoadInitialMessages(
     LoadChatMessagesEvent event,
@@ -212,9 +304,8 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
       },
       (pagination) {
         final seen = state.messages.map((m) => m.id).toSet();
-        final newOnes = pagination.messages
-            .where((m) => seen.add(m.id))
-            .toList();
+        final newOnes =
+            pagination.messages.where((m) => seen.add(m.id)).toList();
         final merged = [...state.messages, ...newOnes];
 
         emit(
@@ -625,20 +716,20 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
 
     _readWatchSub =
         watchMessageReadsUseCase(conversationId: event.conversationId).listen(
-          (either) {
-            either.fold(
-              (failure) {
-                loge('$_logTag: watchReads error', error: failure);
-              },
-              (readEntity) {
-                add(WatchReadArrivedEvent(readEntity));
-              },
-            );
+      (either) {
+        either.fold(
+          (failure) {
+            loge('$_logTag: watchReads error', error: failure);
           },
-          onError: (e) {
-            loge('$_logTag: watchReads stream error', error: e);
+          (readEntity) {
+            add(WatchReadArrivedEvent(readEntity));
           },
         );
+      },
+      onError: (e) {
+        loge('$_logTag: watchReads stream error', error: e);
+      },
+    );
   }
 
   Future<void> _onStopWatchReads(
@@ -712,17 +803,16 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
       _cleanupStaleTypingIndicators();
     });
 
-    _typingWatchSub =
-        watchTypingIndicatorsUseCase(
-          conversationId: event.conversationId,
-        ).listen(
-          (userId) {
-            add(WatchTypingArrivedEvent(userId));
-          },
-          onError: (e) {
-            loge('$_logTag: watchTyping stream error', error: e);
-          },
-        );
+    _typingWatchSub = watchTypingIndicatorsUseCase(
+      conversationId: event.conversationId,
+    ).listen(
+      (userId) {
+        add(WatchTypingArrivedEvent(userId));
+      },
+      onError: (e) {
+        loge('$_logTag: watchTyping stream error', error: e);
+      },
+    );
   }
 
   Future<void> _onStopWatchTyping(
