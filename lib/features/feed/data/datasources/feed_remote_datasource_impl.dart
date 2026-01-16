@@ -12,14 +12,19 @@ import 'package:velora/features/feed/data/models/feed_cursor_model.dart';
 import 'package:velora/features/feed/data/models/feed_model.dart';
 import 'package:velora/features/feed/data/models/feed_pagination_model.dart';
 import 'package:velora/features/feed/data/models/update_feed_model.dart';
+import 'package:velora/features/feed/data/services/feed_notification_service.dart';
 import 'feed_remote_datasource.dart';
 
 /// Implementation of [FeedRemoteDataSource] using Supabase.
 class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
-  FeedRemoteDataSourceImpl({required SupabaseClient supabaseClient})
-    : _client = supabaseClient;
+  FeedRemoteDataSourceImpl({
+    required SupabaseClient supabaseClient,
+    required FeedNotificationService notificationService,
+  })  : _client = supabaseClient,
+        _notificationService = notificationService;
 
   final SupabaseClient _client;
+  final FeedNotificationService _notificationService;
   RealtimeChannel? _channel;
   StreamController<CommentModel>? _commentStreamController;
 
@@ -138,11 +143,51 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
       () async {
         final userId = _requireUserId();
 
+        // Fetch post details first to check current like status and get author info
+        final postData = await _client
+            .from(SupabaseTables.feedPostsView)
+            .select('user_id, username, is_liked, image_urls')
+            .eq('id', postId)
+            .maybeSingle();
+
+        if (postData == null) {
+          throw NotFoundException('Post not found');
+        }
+
+        final postAuthorId = postData['user_id'] as String;
+        final postAuthorUsername = postData['username'] as String?;
+        final wasLiked = postData['is_liked'] as bool? ?? false;
+        final imageUrls = postData['image_urls'] as List<dynamic>?;
+        final firstImageUrl = imageUrls?.isNotEmpty == true 
+            ? imageUrls!.first as String? 
+            : null;
+
         // Atomic toggle using database function (no race condition)
         await _client.rpc(
           SupabaseRpc.togglePostLike,
           params: {'p_post_id': postId, 'p_user_id': userId},
         );
+
+        // Send notification only if this is a NEW like (not unlike)
+        if (!wasLiked && postAuthorId != userId) {
+          // Fetch current user's username for notification
+          final currentUserData = await _client
+              .from(SupabaseTables.userProfiles)
+              .select('username')
+              .eq('id', userId)
+              .maybeSingle();
+
+          final currentUsername = currentUserData?['username'] as String? ?? 'Someone';
+
+          // Send notification asynchronously (fire and forget)
+          _notificationService.sendPostLikeNotification(
+            postAuthorId: postAuthorId,
+            likerUserId: userId,
+            likerUsername: currentUsername,
+            postId: postId,
+            postImageUrl: firstImageUrl,
+          );
+        }
       },
       op: 'toggleLikePost',
       tag: _logTag,
@@ -264,11 +309,132 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
             .select()
             .single();
 
-        return CommentModel.fromJson(response);
+        final comment = CommentModel.fromJson(response);
+
+        // Send notification after successfully adding comment
+        // Fire and forget - don't wait for notification to complete
+        if (parentCommentId == null) {
+          // This is a root comment on a post
+          _sendPostCommentNotification(
+            postId: postId,
+            commentId: comment.id,
+            commentText: content,
+            commenterId: userId,
+          );
+        } else {
+          // This is a reply to another comment
+          _sendCommentReplyNotification(
+            postId: postId,
+            parentCommentId: parentCommentId,
+            replyId: comment.id,
+            replyText: content,
+            replierId: userId,
+          );
+        }
+
+        return comment;
       },
       op: 'addComment',
       tag: _logTag,
     );
+  }
+
+  /// Send notification for post comment (internal helper)
+  Future<void> _sendPostCommentNotification({
+    required String postId,
+    required String commentId,
+    required String commentText,
+    required String commenterId,
+  }) async {
+    try {
+      // Fetch post author and commenter info
+      final postData = await _client
+          .from(SupabaseTables.feedPostsView)
+          .select('user_id, image_urls')
+          .eq('id', postId)
+          .maybeSingle();
+
+      if (postData == null) return;
+
+      final postAuthorId = postData['user_id'] as String;
+      
+      // Don't notify if commenting on own post
+      if (postAuthorId == commenterId) return;
+
+      final imageUrls = postData['image_urls'] as List<dynamic>?;
+      final firstImageUrl = imageUrls?.isNotEmpty == true 
+          ? imageUrls!.first as String? 
+          : null;
+
+      // Fetch commenter username
+      final commenterData = await _client
+          .from(SupabaseTables.userProfiles)
+          .select('username')
+          .eq('id', commenterId)
+          .maybeSingle();
+
+      final commenterUsername = commenterData?['username'] as String? ?? 'Someone';
+
+      await _notificationService.sendPostCommentNotification(
+        postAuthorId: postAuthorId,
+        commenterId: commenterId,
+        commenterUsername: commenterUsername,
+        postId: postId,
+        commentId: commentId,
+        commentText: commentText,
+        postImageUrl: firstImageUrl,
+      );
+    } catch (e) {
+      loge('Failed to send post comment notification', error: e, tag: _logTag);
+      // Don't throw - notification failure shouldn't break the comment
+    }
+  }
+
+  /// Send notification for comment reply (internal helper)
+  Future<void> _sendCommentReplyNotification({
+    required String postId,
+    required String parentCommentId,
+    required String replyId,
+    required String replyText,
+    required String replierId,
+  }) async {
+    try {
+      // Fetch original comment author info
+      final commentData = await _client
+          .from(SupabaseTables.feedComments)
+          .select('user_id')
+          .eq('id', parentCommentId)
+          .maybeSingle();
+
+      if (commentData == null) return;
+
+      final originalCommenterId = commentData['user_id'] as String;
+      
+      // Don't notify if replying to own comment
+      if (originalCommenterId == replierId) return;
+
+      // Fetch replier username
+      final replierData = await _client
+          .from(SupabaseTables.userProfiles)
+          .select('username')
+          .eq('id', replierId)
+          .maybeSingle();
+
+      final replierUsername = replierData?['username'] as String? ?? 'Someone';
+
+      await _notificationService.sendCommentReplyNotification(
+        originalCommenterId: originalCommenterId,
+        replierId: replierId,
+        replierUsername: replierUsername,
+        postId: postId,
+        commentId: parentCommentId,
+        replyId: replyId,
+        replyText: replyText,
+      );
+    } catch (e) {
+      loge('Failed to send comment reply notification', error: e, tag: _logTag);
+      // Don't throw - notification failure shouldn't break the reply
+    }
   }
 
   @override

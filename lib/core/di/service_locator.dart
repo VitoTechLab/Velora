@@ -27,6 +27,7 @@ import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:velora/features/feed/data/datasources/feed_remote_datasource.dart';
 import 'package:velora/features/feed/data/datasources/feed_remote_datasource_impl.dart';
 import 'package:velora/features/feed/data/repositories/feed_repository_impl.dart';
+import 'package:velora/features/feed/data/services/feed_notification_service.dart';
 import 'package:velora/features/feed/domain/repositories/feed_repository.dart';
 import 'package:velora/features/feed/domain/usecases/get_feed_usecase.dart';
 import 'package:velora/features/feed/domain/usecases/refresh_feed_usecase.dart';
@@ -203,6 +204,13 @@ Future<void> configureDependencies() async {
     );
   }
 
+  // Feed Notification Service
+  if (!getIt.isRegistered<FeedNotificationService>()) {
+    getIt.registerLazySingleton<FeedNotificationService>(
+      () => FeedNotificationService(supabaseClient: getIt<SupabaseClient>()),
+    );
+  }
+
   // Auth feature - Data source
   if (!getIt.isRegistered<AuthRemoteDataSource>()) {
     getIt.registerLazySingleton<AuthRemoteDataSource>(
@@ -212,7 +220,10 @@ Future<void> configureDependencies() async {
 
   if (!getIt.isRegistered<FeedRemoteDataSource>()) {
     getIt.registerLazySingleton<FeedRemoteDataSource>(
-      () => FeedRemoteDataSourceImpl(supabaseClient: getIt<SupabaseClient>()),
+      () => FeedRemoteDataSourceImpl(
+        supabaseClient: getIt<SupabaseClient>(),
+        notificationService: getIt<FeedNotificationService>(),
+      ),
     );
   }
 
