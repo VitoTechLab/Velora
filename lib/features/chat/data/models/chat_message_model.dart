@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:velora/core/serialization/json_converters.dart';
+import 'package:velora/features/chat/data/models/event_content_model.dart';
+import 'package:velora/features/chat/data/models/poll_content_model.dart';
 import 'package:velora/features/chat/domain/entities/chat_message_entity.dart';
 
 part 'chat_message_model.freezed.dart';
@@ -25,6 +27,8 @@ abstract class ChatMessageModel with _$ChatMessageModel {
     @UtcDateTimeConverter()
     @JsonKey(name: 'updated_at')
     required DateTime updatedAt,
+    @JsonKey(name: 'message_poll_payload') PollPayloadModel? pollPayload,
+    @JsonKey(name: 'message_event_payload') EventPayloadModel? eventPayload,
   }) = _ChatMessageModel;
 
   factory ChatMessageModel.fromJson(Map<String, dynamic> json) =>
@@ -42,6 +46,8 @@ abstract class ChatMessageModel with _$ChatMessageModel {
     deletedBy: deletedBy,
     createdAt: createdAt,
     updatedAt: updatedAt,
+    poll: pollPayload?.toEntity(),
+    event: eventPayload?.toEntity(),
   );
 
   factory ChatMessageModel.fromEntity(ChatMessageEntity entity) =>
@@ -57,6 +63,8 @@ abstract class ChatMessageModel with _$ChatMessageModel {
         deletedBy: entity.deletedBy,
         createdAt: entity.createdAt,
         updatedAt: entity.updatedAt,
+        pollPayload: null, // Optimization: avoided mapping back for now
+        eventPayload: null,
       );
 
   Map<String, dynamic> toInsertJson() {

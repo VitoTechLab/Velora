@@ -46,6 +46,10 @@ mixin _$ChatMessageModel {
   @UtcDateTimeConverter()
   @JsonKey(name: 'updated_at')
   DateTime get updatedAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'message_poll_payload')
+  PollPayloadModel? get pollPayload => throw _privateConstructorUsedError;
+  @JsonKey(name: 'message_event_payload')
+  EventPayloadModel? get eventPayload => throw _privateConstructorUsedError;
 
   /// Serializes this ChatMessageModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -74,7 +78,12 @@ abstract class $ChatMessageModelCopyWith<$Res> {
       @UtcDateTimeConverter() @JsonKey(name: 'deleted_at') DateTime? deletedAt,
       @JsonKey(name: 'deleted_by') String? deletedBy,
       @UtcDateTimeConverter() @JsonKey(name: 'created_at') DateTime createdAt,
-      @UtcDateTimeConverter() @JsonKey(name: 'updated_at') DateTime updatedAt});
+      @UtcDateTimeConverter() @JsonKey(name: 'updated_at') DateTime updatedAt,
+      @JsonKey(name: 'message_poll_payload') PollPayloadModel? pollPayload,
+      @JsonKey(name: 'message_event_payload') EventPayloadModel? eventPayload});
+
+  $PollPayloadModelCopyWith<$Res>? get pollPayload;
+  $EventPayloadModelCopyWith<$Res>? get eventPayload;
 }
 
 /// @nodoc
@@ -103,6 +112,8 @@ class _$ChatMessageModelCopyWithImpl<$Res, $Val extends ChatMessageModel>
     Object? deletedBy = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? pollPayload = freezed,
+    Object? eventPayload = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -149,7 +160,43 @@ class _$ChatMessageModelCopyWithImpl<$Res, $Val extends ChatMessageModel>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      pollPayload: freezed == pollPayload
+          ? _value.pollPayload
+          : pollPayload // ignore: cast_nullable_to_non_nullable
+              as PollPayloadModel?,
+      eventPayload: freezed == eventPayload
+          ? _value.eventPayload
+          : eventPayload // ignore: cast_nullable_to_non_nullable
+              as EventPayloadModel?,
     ) as $Val);
+  }
+
+  /// Create a copy of ChatMessageModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PollPayloadModelCopyWith<$Res>? get pollPayload {
+    if (_value.pollPayload == null) {
+      return null;
+    }
+
+    return $PollPayloadModelCopyWith<$Res>(_value.pollPayload!, (value) {
+      return _then(_value.copyWith(pollPayload: value) as $Val);
+    });
+  }
+
+  /// Create a copy of ChatMessageModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $EventPayloadModelCopyWith<$Res>? get eventPayload {
+    if (_value.eventPayload == null) {
+      return null;
+    }
+
+    return $EventPayloadModelCopyWith<$Res>(_value.eventPayload!, (value) {
+      return _then(_value.copyWith(eventPayload: value) as $Val);
+    });
   }
 }
 
@@ -172,7 +219,14 @@ abstract class _$$ChatMessageModelImplCopyWith<$Res>
       @UtcDateTimeConverter() @JsonKey(name: 'deleted_at') DateTime? deletedAt,
       @JsonKey(name: 'deleted_by') String? deletedBy,
       @UtcDateTimeConverter() @JsonKey(name: 'created_at') DateTime createdAt,
-      @UtcDateTimeConverter() @JsonKey(name: 'updated_at') DateTime updatedAt});
+      @UtcDateTimeConverter() @JsonKey(name: 'updated_at') DateTime updatedAt,
+      @JsonKey(name: 'message_poll_payload') PollPayloadModel? pollPayload,
+      @JsonKey(name: 'message_event_payload') EventPayloadModel? eventPayload});
+
+  @override
+  $PollPayloadModelCopyWith<$Res>? get pollPayload;
+  @override
+  $EventPayloadModelCopyWith<$Res>? get eventPayload;
 }
 
 /// @nodoc
@@ -199,6 +253,8 @@ class __$$ChatMessageModelImplCopyWithImpl<$Res>
     Object? deletedBy = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? pollPayload = freezed,
+    Object? eventPayload = freezed,
   }) {
     return _then(_$ChatMessageModelImpl(
       id: null == id
@@ -245,6 +301,14 @@ class __$$ChatMessageModelImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      pollPayload: freezed == pollPayload
+          ? _value.pollPayload
+          : pollPayload // ignore: cast_nullable_to_non_nullable
+              as PollPayloadModel?,
+      eventPayload: freezed == eventPayload
+          ? _value.eventPayload
+          : eventPayload // ignore: cast_nullable_to_non_nullable
+              as EventPayloadModel?,
     ));
   }
 }
@@ -267,7 +331,9 @@ class _$ChatMessageModelImpl extends _ChatMessageModel {
       required this.createdAt,
       @UtcDateTimeConverter()
       @JsonKey(name: 'updated_at')
-      required this.updatedAt})
+      required this.updatedAt,
+      @JsonKey(name: 'message_poll_payload') this.pollPayload,
+      @JsonKey(name: 'message_event_payload') this.eventPayload})
       : super._();
 
   factory _$ChatMessageModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -310,10 +376,16 @@ class _$ChatMessageModelImpl extends _ChatMessageModel {
   @UtcDateTimeConverter()
   @JsonKey(name: 'updated_at')
   final DateTime updatedAt;
+  @override
+  @JsonKey(name: 'message_poll_payload')
+  final PollPayloadModel? pollPayload;
+  @override
+  @JsonKey(name: 'message_event_payload')
+  final EventPayloadModel? eventPayload;
 
   @override
   String toString() {
-    return 'ChatMessageModel(id: $id, conversationId: $conversationId, senderId: $senderId, kind: $kind, body: $body, replyToMessageId: $replyToMessageId, editedAt: $editedAt, deletedAt: $deletedAt, deletedBy: $deletedBy, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'ChatMessageModel(id: $id, conversationId: $conversationId, senderId: $senderId, kind: $kind, body: $body, replyToMessageId: $replyToMessageId, editedAt: $editedAt, deletedAt: $deletedAt, deletedBy: $deletedBy, createdAt: $createdAt, updatedAt: $updatedAt, pollPayload: $pollPayload, eventPayload: $eventPayload)';
   }
 
   @override
@@ -339,7 +411,11 @@ class _$ChatMessageModelImpl extends _ChatMessageModel {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.updatedAt == updatedAt) &&
+            (identical(other.pollPayload, pollPayload) ||
+                other.pollPayload == pollPayload) &&
+            (identical(other.eventPayload, eventPayload) ||
+                other.eventPayload == eventPayload));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -356,7 +432,9 @@ class _$ChatMessageModelImpl extends _ChatMessageModel {
       deletedAt,
       deletedBy,
       createdAt,
-      updatedAt);
+      updatedAt,
+      pollPayload,
+      eventPayload);
 
   /// Create a copy of ChatMessageModel
   /// with the given fields replaced by the non-null parameter values.
@@ -395,7 +473,11 @@ abstract class _ChatMessageModel extends ChatMessageModel {
       required final DateTime createdAt,
       @UtcDateTimeConverter()
       @JsonKey(name: 'updated_at')
-      required final DateTime updatedAt}) = _$ChatMessageModelImpl;
+      required final DateTime updatedAt,
+      @JsonKey(name: 'message_poll_payload')
+      final PollPayloadModel? pollPayload,
+      @JsonKey(name: 'message_event_payload')
+      final EventPayloadModel? eventPayload}) = _$ChatMessageModelImpl;
   const _ChatMessageModel._() : super._();
 
   factory _ChatMessageModel.fromJson(Map<String, dynamic> json) =
@@ -438,6 +520,12 @@ abstract class _ChatMessageModel extends ChatMessageModel {
   @UtcDateTimeConverter()
   @JsonKey(name: 'updated_at')
   DateTime get updatedAt;
+  @override
+  @JsonKey(name: 'message_poll_payload')
+  PollPayloadModel? get pollPayload;
+  @override
+  @JsonKey(name: 'message_event_payload')
+  EventPayloadModel? get eventPayload;
 
   /// Create a copy of ChatMessageModel
   /// with the given fields replaced by the non-null parameter values.

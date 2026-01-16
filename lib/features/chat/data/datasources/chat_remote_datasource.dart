@@ -26,6 +26,24 @@ abstract class ChatRemoteDataSource {
     String? replyToMessageId,
   });
 
+  /// Send a poll message
+  Future<ChatMessageModel> sendPollMessage({
+    required String conversationId,
+    required String question,
+    required List<String> options,
+    required bool multipleChoice,
+  });
+
+  /// Send an event message
+  Future<ChatMessageModel> sendEventMessage({
+    required String conversationId,
+    required String title,
+    String? description,
+    String? location,
+    required DateTime startDate,
+    required DateTime endDate,
+  });
+
   /// Edit existing message (update body, set edited_at)
   Future<ChatMessageModel> editMessage({
     required String messageId,
@@ -87,6 +105,36 @@ abstract class ChatRemoteDataSource {
 
   /// Stop typing indicator channel
   Future<void> stopTypingWatch();
+
+  // =========================================================
+  // POLL VOTING
+  // =========================================================
+
+  /// Vote on a poll option (single choice polls will auto-remove previous vote)
+  Future<void> votePollOption({
+    required String pollMessageId,
+    required String optionId,
+  });
+
+  /// Remove vote from a poll option (for multiple choice toggle off)
+  Future<void> unvotePollOption({
+    required String optionId,
+  });
+
+  // =========================================================
+  // EVENT RSVP
+  // =========================================================
+
+  /// Respond to an event with RSVP status
+  Future<void> respondToEvent({
+    required String eventMessageId,
+    required String status, // 'going', 'interested', 'not_going'
+  });
+
+  /// Cancel RSVP response to an event
+  Future<void> cancelEventRsvp({
+    required String eventMessageId,
+  });
 
   // =========================================================
   // USER PRESENCE

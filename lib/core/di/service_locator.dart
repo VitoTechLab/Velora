@@ -92,6 +92,12 @@ import 'package:velora/features/chat/domain/usecases/send_typing_indicator_useca
 import 'package:velora/features/chat/domain/usecases/watch_typing_indicators_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/search_followed_users_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/create_direct_conversation_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/send_event_message_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/send_poll_message_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/vote_poll_option_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/unvote_poll_option_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/respond_to_event_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/cancel_event_rsvp_usecase.dart';
 import 'package:velora/features/chat/presentation/bloc/chat_message_bloc.dart';
 import 'package:velora/features/chat/presentation/bloc/user_presence_bloc.dart';
 import 'package:velora/features/chat/presentation/bloc/search_user_bloc.dart';
@@ -332,64 +338,113 @@ Future<void> configureDependencies() async {
 
   // Feed feature - Use cases
   getIt
-    ..registerLazySingleton(() => LoadInitialFeedUseCase(repository: getIt<FeedRepository>()))
-    ..registerLazySingleton(() => LoadMoreFeedUseCase(repository: getIt<FeedRepository>()))
-    ..registerLazySingleton(() => RefreshFeedUseCase(repository: getIt<FeedRepository>()))
-    ..registerLazySingleton(() => ToggleLikePostUseCase(repository: getIt<FeedRepository>()))
-    ..registerLazySingleton(() => ToggleBookmarkPostUseCase(repository: getIt<FeedRepository>()))
-    ..registerLazySingleton(() => GetCommentsUseCase(repository: getIt<FeedRepository>()))
-    ..registerLazySingleton(() => GetRepliesUseCase(repository: getIt<FeedRepository>()))
-    ..registerLazySingleton(() => AddCommentUseCase(repository: getIt<FeedRepository>()))
-    ..registerLazySingleton(() => DeleteCommentUseCase(repository: getIt<FeedRepository>()))
-    ..registerLazySingleton(() => ToggleLikeCommentUseCase(repository: getIt<FeedRepository>()))
-    ..registerLazySingleton(() => WatchNewCommentsUseCase(repository: getIt<FeedRepository>()))
-    ..registerLazySingleton(() => StopWatchCommentsUseCase(repository: getIt<FeedRepository>()))
-    ..registerLazySingleton(() => GetPostByIdUseCase(repository: getIt<FeedRepository>()))
-    ..registerLazySingleton(() => UpdatePostUseCase(repository: getIt<FeedRepository>()))
-    ..registerLazySingleton(() => DeletePostUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(
+        () => LoadInitialFeedUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(
+        () => LoadMoreFeedUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(
+        () => RefreshFeedUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(
+        () => ToggleLikePostUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(
+        () => ToggleBookmarkPostUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(
+        () => GetCommentsUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(
+        () => GetRepliesUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(
+        () => AddCommentUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(
+        () => DeleteCommentUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(
+        () => ToggleLikeCommentUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(
+        () => WatchNewCommentsUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(
+        () => StopWatchCommentsUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(
+        () => GetPostByIdUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(
+        () => UpdatePostUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(
+        () => DeletePostUseCase(repository: getIt<FeedRepository>()))
     // Post feature - Use cases
     ..registerLazySingleton(
       () => CreatePostFeedUseCase(repository: getIt<PostRepository>()),
     )
     // Media feature - Use cases
-    ..registerLazySingleton(() => UploadMediaAssetUseCase(repository: getIt<MediaRepository>()))
+    ..registerLazySingleton(
+        () => UploadMediaAssetUseCase(repository: getIt<MediaRepository>()))
     // Media Gallery (Local) feature - Use cases
     ..registerLazySingleton(
-      () => RequestMediaPermissionUseCase(repository: getIt<MediaGalleryRepository>()),
+      () => RequestMediaPermissionUseCase(
+          repository: getIt<MediaGalleryRepository>()),
     )
     ..registerLazySingleton(
       () => LoadMediaAssetsUseCase(repository: getIt<MediaGalleryRepository>()),
     )
     ..registerLazySingleton(
-      () => GetFileFromAssetUseCase(repository: getIt<MediaGalleryRepository>()),
+      () =>
+          GetFileFromAssetUseCase(repository: getIt<MediaGalleryRepository>()),
     )
     // Auth feature - Use cases
-    ..registerLazySingleton(() => SignUpUseCase(repository: getIt<AuthRepository>()))
-    ..registerLazySingleton(() => SignInUseCase(repository: getIt<AuthRepository>()))
-    ..registerLazySingleton(() => ResetPasswordUseCase(repository: getIt<AuthRepository>()))
-    ..registerLazySingleton(() => SignOutUseCase(repository: getIt<AuthRepository>()))
-    ..registerLazySingleton(() => SignInWithGoogleUseCase(repository: getIt<AuthRepository>()))
+    ..registerLazySingleton(
+        () => SignUpUseCase(repository: getIt<AuthRepository>()))
+    ..registerLazySingleton(
+        () => SignInUseCase(repository: getIt<AuthRepository>()))
+    ..registerLazySingleton(
+        () => ResetPasswordUseCase(repository: getIt<AuthRepository>()))
+    ..registerLazySingleton(
+        () => SignOutUseCase(repository: getIt<AuthRepository>()))
+    ..registerLazySingleton(
+        () => SignInWithGoogleUseCase(repository: getIt<AuthRepository>()))
     ..registerLazySingleton(
       () => WatchAuthSnapshotUseCase(repository: getIt<AuthRepository>()),
     )
     // Chat feature - Use cases
-    ..registerLazySingleton(() => GetMessagesUseCase(repository: getIt<ChatRepository>()))
-    ..registerLazySingleton(() => SendTextMessageUseCase(repository: getIt<ChatRepository>()))
-    ..registerLazySingleton(() => EditMessageUseCase(repository: getIt<ChatRepository>()))
-    ..registerLazySingleton(() => DeleteMessageUseCase(repository: getIt<ChatRepository>()))
-    ..registerLazySingleton(() => MarkConversationReadUseCase(repository: getIt<ChatRepository>()))
-    ..registerLazySingleton(() => WatchNewMessagesUseCase(repository: getIt<ChatRepository>()))
-    ..registerLazySingleton(() => StopWatchMessagesUseCase(repository: getIt<ChatRepository>()))
-    ..registerLazySingleton(() => GetConversationListUseCase(repository: getIt<ChatRepository>()))
-    ..registerLazySingleton(() => GetMessageReadsUseCase(repository: getIt<ChatRepository>()))
-    ..registerLazySingleton(() => MarkMessageReadUseCase(repository: getIt<ChatRepository>()))
-    ..registerLazySingleton(() => WatchMessageReadsUseCase(repository: getIt<ChatRepository>()))
-    ..registerLazySingleton(() => SendTypingIndicatorUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(
+        () => GetMessagesUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(
+        () => SendTextMessageUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(
+        () => EditMessageUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(
+        () => DeleteMessageUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(
+        () => MarkConversationReadUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(
+        () => WatchNewMessagesUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(
+        () => StopWatchMessagesUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(
+        () => GetConversationListUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(
+        () => GetMessageReadsUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(
+        () => MarkMessageReadUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(
+        () => WatchMessageReadsUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(
+        () => SendTypingIndicatorUseCase(repository: getIt<ChatRepository>()))
     ..registerLazySingleton(
       () => WatchTypingIndicatorsUseCase(repository: getIt<ChatRepository>()),
     )
-    ..registerLazySingleton(() => SearchFollowedUsersUseCase(repository: getIt<ChatRepository>()))
-    ..registerLazySingleton(() => CreateDirectConversationUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(
+        () => SearchFollowedUsersUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(() =>
+        CreateDirectConversationUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(
+        () => SendPollMessageUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(
+        () => SendEventMessageUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(
+        () => VotePollOptionUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(
+        () => UnvotePollOptionUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(
+        () => RespondToEventUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(
+        () => CancelEventRsvpUseCase(repository: getIt<ChatRepository>()))
     // Social Relation feature - Use cases
     ..registerLazySingleton(() => FollowUser(getIt<SocialRelationRepository>()))
     ..registerLazySingleton(
@@ -512,6 +567,12 @@ Future<void> configureDependencies() async {
       sendTypingIndicatorUseCase: getIt<SendTypingIndicatorUseCase>(),
       watchTypingIndicatorsUseCase: getIt<WatchTypingIndicatorsUseCase>(),
       createDirectConversationUseCase: getIt<CreateDirectConversationUseCase>(),
+      sendPollMessageUseCase: getIt<SendPollMessageUseCase>(),
+      sendEventMessageUseCase: getIt<SendEventMessageUseCase>(),
+      votePollOptionUseCase: getIt<VotePollOptionUseCase>(),
+      unvotePollOptionUseCase: getIt<UnvotePollOptionUseCase>(),
+      respondToEventUseCase: getIt<RespondToEventUseCase>(),
+      cancelEventRsvpUseCase: getIt<CancelEventRsvpUseCase>(),
     ),
   );
 
@@ -527,7 +588,8 @@ Future<void> configureDependencies() async {
 
   // Search User - Bloc
   getIt.registerFactory(
-    () => SearchUserBloc(searchFollowedUsers: getIt<SearchFollowedUsersUseCase>()),
+    () => SearchUserBloc(
+        searchFollowedUsers: getIt<SearchFollowedUsersUseCase>()),
   );
 
   // Social Relation feature - Bloc

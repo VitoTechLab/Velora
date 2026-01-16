@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_event.dart';
 import 'package:velora/features/profile/presentation/bloc/profile_bloc.dart';
-import 'package:velora/features/profile/presentation/bloc/profile_event.dart';
 import 'package:velora/features/profile/presentation/bloc/profile_state.dart';
 import 'package:velora/features/settings/presentation/widgets/settings_section_card.dart';
 import 'package:velora/features/settings/presentation/widgets/settings_tile.dart';

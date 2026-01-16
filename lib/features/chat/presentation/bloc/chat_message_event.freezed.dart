@@ -27,6 +27,17 @@ mixin _$ChatMessageEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -46,6 +57,11 @@ mixin _$ChatMessageEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -62,6 +78,12 @@ mixin _$ChatMessageEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -81,6 +103,10 @@ mixin _$ChatMessageEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -97,6 +123,12 @@ mixin _$ChatMessageEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -116,6 +148,10 @@ mixin _$ChatMessageEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -130,6 +166,8 @@ mixin _$ChatMessageEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -153,6 +191,10 @@ mixin _$ChatMessageEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -166,6 +208,8 @@ mixin _$ChatMessageEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -184,6 +228,10 @@ mixin _$ChatMessageEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -197,6 +245,8 @@ mixin _$ChatMessageEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -215,6 +265,10 @@ mixin _$ChatMessageEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -344,6 +398,17 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -363,6 +428,11 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -382,6 +452,12 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -401,6 +477,10 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -420,6 +500,12 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -439,6 +525,10 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -459,6 +549,8 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -482,6 +574,10 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -498,6 +594,8 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -516,6 +614,10 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -532,6 +634,8 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -550,6 +654,10 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -669,6 +777,17 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -688,6 +807,11 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -707,6 +831,12 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -726,6 +856,10 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -745,6 +879,12 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -764,6 +904,10 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -784,6 +928,8 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -807,6 +953,10 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -823,6 +973,8 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -841,6 +993,10 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -857,6 +1013,8 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -875,6 +1033,10 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -995,6 +1157,17 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -1014,6 +1187,11 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -1033,6 +1211,12 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -1052,6 +1236,10 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -1071,6 +1259,12 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -1090,6 +1284,10 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -1110,6 +1308,8 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -1133,6 +1333,10 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -1149,6 +1353,8 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -1167,6 +1373,10 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -1183,6 +1393,8 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -1201,6 +1413,10 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -1331,6 +1547,17 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -1350,6 +1577,11 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -1369,6 +1601,12 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -1388,6 +1626,10 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -1407,6 +1649,12 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -1426,6 +1674,10 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -1446,6 +1698,8 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -1469,6 +1723,10 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -1485,6 +1743,8 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -1503,6 +1763,10 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -1519,6 +1783,8 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -1537,6 +1803,10 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -1565,6 +1835,859 @@ abstract class SendChatMessageEvent implements ChatMessageEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SendChatMessageEventImplCopyWith<_$SendChatMessageEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SendPollMessageEventImplCopyWith<$Res> {
+  factory _$$SendPollMessageEventImplCopyWith(_$SendPollMessageEventImpl value,
+          $Res Function(_$SendPollMessageEventImpl) then) =
+      __$$SendPollMessageEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {String conversationId,
+      String question,
+      List<String> options,
+      bool multipleChoice});
+}
+
+/// @nodoc
+class __$$SendPollMessageEventImplCopyWithImpl<$Res>
+    extends _$ChatMessageEventCopyWithImpl<$Res, _$SendPollMessageEventImpl>
+    implements _$$SendPollMessageEventImplCopyWith<$Res> {
+  __$$SendPollMessageEventImplCopyWithImpl(_$SendPollMessageEventImpl _value,
+      $Res Function(_$SendPollMessageEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? conversationId = null,
+    Object? question = null,
+    Object? options = null,
+    Object? multipleChoice = null,
+  }) {
+    return _then(_$SendPollMessageEventImpl(
+      conversationId: null == conversationId
+          ? _value.conversationId
+          : conversationId // ignore: cast_nullable_to_non_nullable
+              as String,
+      question: null == question
+          ? _value.question
+          : question // ignore: cast_nullable_to_non_nullable
+              as String,
+      options: null == options
+          ? _value._options
+          : options // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      multipleChoice: null == multipleChoice
+          ? _value.multipleChoice
+          : multipleChoice // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SendPollMessageEventImpl implements SendPollMessageEvent {
+  const _$SendPollMessageEventImpl(
+      {required this.conversationId,
+      required this.question,
+      required final List<String> options,
+      this.multipleChoice = false})
+      : _options = options;
+
+  @override
+  final String conversationId;
+  @override
+  final String question;
+  final List<String> _options;
+  @override
+  List<String> get options {
+    if (_options is EqualUnmodifiableListView) return _options;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_options);
+  }
+
+  @override
+  @JsonKey()
+  final bool multipleChoice;
+
+  @override
+  String toString() {
+    return 'ChatMessageEvent.sendPollMessage(conversationId: $conversationId, question: $question, options: $options, multipleChoice: $multipleChoice)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SendPollMessageEventImpl &&
+            (identical(other.conversationId, conversationId) ||
+                other.conversationId == conversationId) &&
+            (identical(other.question, question) ||
+                other.question == question) &&
+            const DeepCollectionEquality().equals(other._options, _options) &&
+            (identical(other.multipleChoice, multipleChoice) ||
+                other.multipleChoice == multipleChoice));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, conversationId, question,
+      const DeepCollectionEquality().hash(_options), multipleChoice);
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SendPollMessageEventImplCopyWith<_$SendPollMessageEventImpl>
+      get copyWith =>
+          __$$SendPollMessageEventImplCopyWithImpl<_$SendPollMessageEventImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
+    required TResult Function(String conversationId, int? limit) loadMessages,
+    required TResult Function(String conversationId, int limit)
+        loadMoreMessages,
+    required TResult Function(
+            String conversationId, String content, String? replyToMessageId)
+        sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
+    required TResult Function(String messageId, String newContent) editMessage,
+    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(String conversationId, String? uptoMessageId)
+        markConversationRead,
+    required TResult Function() clearInfo,
+    required TResult Function(String conversationId) startWatch,
+    required TResult Function() stopWatch,
+    required TResult Function(ChatMessageEntity message) watchMessageArrived,
+    required TResult Function(ChatMessageEntity message) watchMessageUpdated,
+    required TResult Function(ChatMessageEntity message) watchMessageDeleted,
+    required TResult Function(String message) watchMessageError,
+    required TResult Function() loadConversationList,
+    required TResult Function(String filter) setChatFilter,
+    required TResult Function(String query) setSearchQuery,
+    required TResult Function(String messageId) loadMessageReads,
+    required TResult Function(String messageId) markMessageRead,
+    required TResult Function(String conversationId) startWatchReads,
+    required TResult Function() stopWatchReads,
+    required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
+    required TResult Function(String conversationId, bool isTyping) sendTyping,
+    required TResult Function(String conversationId) startWatchTyping,
+    required TResult Function() stopWatchTyping,
+    required TResult Function(String userId) watchTypingArrived,
+    required TResult Function() cleanupTyping,
+  }) {
+    return sendPollMessage(conversationId, question, options, multipleChoice);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
+    TResult? Function(String conversationId, int? limit)? loadMessages,
+    TResult? Function(String conversationId, int limit)? loadMoreMessages,
+    TResult? Function(
+            String conversationId, String content, String? replyToMessageId)?
+        sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
+    TResult? Function(String messageId, String newContent)? editMessage,
+    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(String conversationId, String? uptoMessageId)?
+        markConversationRead,
+    TResult? Function()? clearInfo,
+    TResult? Function(String conversationId)? startWatch,
+    TResult? Function()? stopWatch,
+    TResult? Function(ChatMessageEntity message)? watchMessageArrived,
+    TResult? Function(ChatMessageEntity message)? watchMessageUpdated,
+    TResult? Function(ChatMessageEntity message)? watchMessageDeleted,
+    TResult? Function(String message)? watchMessageError,
+    TResult? Function()? loadConversationList,
+    TResult? Function(String filter)? setChatFilter,
+    TResult? Function(String query)? setSearchQuery,
+    TResult? Function(String messageId)? loadMessageReads,
+    TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(String conversationId)? startWatchReads,
+    TResult? Function()? stopWatchReads,
+    TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
+    TResult? Function(String conversationId, bool isTyping)? sendTyping,
+    TResult? Function(String conversationId)? startWatchTyping,
+    TResult? Function()? stopWatchTyping,
+    TResult? Function(String userId)? watchTypingArrived,
+    TResult? Function()? cleanupTyping,
+  }) {
+    return sendPollMessage?.call(
+        conversationId, question, options, multipleChoice);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
+    TResult Function(String conversationId, int? limit)? loadMessages,
+    TResult Function(String conversationId, int limit)? loadMoreMessages,
+    TResult Function(
+            String conversationId, String content, String? replyToMessageId)?
+        sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
+    TResult Function(String messageId, String newContent)? editMessage,
+    TResult Function(String messageId)? deleteMessage,
+    TResult Function(String conversationId, String? uptoMessageId)?
+        markConversationRead,
+    TResult Function()? clearInfo,
+    TResult Function(String conversationId)? startWatch,
+    TResult Function()? stopWatch,
+    TResult Function(ChatMessageEntity message)? watchMessageArrived,
+    TResult Function(ChatMessageEntity message)? watchMessageUpdated,
+    TResult Function(ChatMessageEntity message)? watchMessageDeleted,
+    TResult Function(String message)? watchMessageError,
+    TResult Function()? loadConversationList,
+    TResult Function(String filter)? setChatFilter,
+    TResult Function(String query)? setSearchQuery,
+    TResult Function(String messageId)? loadMessageReads,
+    TResult Function(String messageId)? markMessageRead,
+    TResult Function(String conversationId)? startWatchReads,
+    TResult Function()? stopWatchReads,
+    TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
+    TResult Function(String conversationId, bool isTyping)? sendTyping,
+    TResult Function(String conversationId)? startWatchTyping,
+    TResult Function()? stopWatchTyping,
+    TResult Function(String userId)? watchTypingArrived,
+    TResult Function()? cleanupTyping,
+    required TResult orElse(),
+  }) {
+    if (sendPollMessage != null) {
+      return sendPollMessage(conversationId, question, options, multipleChoice);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
+    required TResult Function(LoadChatMessagesEvent value) loadMessages,
+    required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
+    required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
+    required TResult Function(EditChatMessageEvent value) editMessage,
+    required TResult Function(DeleteChatMessageEvent value) deleteMessage,
+    required TResult Function(MarkConversationReadEvent value)
+        markConversationRead,
+    required TResult Function(ClearChatMessagesInfoEvent value) clearInfo,
+    required TResult Function(StartWatchMessagesEvent value) startWatch,
+    required TResult Function(StopWatchMessagesEvent value) stopWatch,
+    required TResult Function(WatchMessageArrivedEvent value)
+        watchMessageArrived,
+    required TResult Function(WatchMessageUpdatedEvent value)
+        watchMessageUpdated,
+    required TResult Function(WatchMessageDeletedEvent value)
+        watchMessageDeleted,
+    required TResult Function(WatchMessageErrorEvent value) watchMessageError,
+    required TResult Function(LoadConversationListEvent value)
+        loadConversationList,
+    required TResult Function(SetChatFilterEvent value) setChatFilter,
+    required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
+    required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(StartWatchReadsEvent value) startWatchReads,
+    required TResult Function(StopWatchReadsEvent value) stopWatchReads,
+    required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
+    required TResult Function(SendTypingEvent value) sendTyping,
+    required TResult Function(StartWatchTypingEvent value) startWatchTyping,
+    required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
+    required TResult Function(WatchTypingArrivedEvent value) watchTypingArrived,
+    required TResult Function(CleanupTypingEvent value) cleanupTyping,
+  }) {
+    return sendPollMessage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
+    TResult? Function(LoadChatMessagesEvent value)? loadMessages,
+    TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
+    TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
+    TResult? Function(EditChatMessageEvent value)? editMessage,
+    TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
+    TResult? Function(MarkConversationReadEvent value)? markConversationRead,
+    TResult? Function(ClearChatMessagesInfoEvent value)? clearInfo,
+    TResult? Function(StartWatchMessagesEvent value)? startWatch,
+    TResult? Function(StopWatchMessagesEvent value)? stopWatch,
+    TResult? Function(WatchMessageArrivedEvent value)? watchMessageArrived,
+    TResult? Function(WatchMessageUpdatedEvent value)? watchMessageUpdated,
+    TResult? Function(WatchMessageDeletedEvent value)? watchMessageDeleted,
+    TResult? Function(WatchMessageErrorEvent value)? watchMessageError,
+    TResult? Function(LoadConversationListEvent value)? loadConversationList,
+    TResult? Function(SetChatFilterEvent value)? setChatFilter,
+    TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
+    TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(StartWatchReadsEvent value)? startWatchReads,
+    TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
+    TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
+    TResult? Function(SendTypingEvent value)? sendTyping,
+    TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
+    TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
+    TResult? Function(WatchTypingArrivedEvent value)? watchTypingArrived,
+    TResult? Function(CleanupTypingEvent value)? cleanupTyping,
+  }) {
+    return sendPollMessage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
+    TResult Function(LoadChatMessagesEvent value)? loadMessages,
+    TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
+    TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
+    TResult Function(EditChatMessageEvent value)? editMessage,
+    TResult Function(DeleteChatMessageEvent value)? deleteMessage,
+    TResult Function(MarkConversationReadEvent value)? markConversationRead,
+    TResult Function(ClearChatMessagesInfoEvent value)? clearInfo,
+    TResult Function(StartWatchMessagesEvent value)? startWatch,
+    TResult Function(StopWatchMessagesEvent value)? stopWatch,
+    TResult Function(WatchMessageArrivedEvent value)? watchMessageArrived,
+    TResult Function(WatchMessageUpdatedEvent value)? watchMessageUpdated,
+    TResult Function(WatchMessageDeletedEvent value)? watchMessageDeleted,
+    TResult Function(WatchMessageErrorEvent value)? watchMessageError,
+    TResult Function(LoadConversationListEvent value)? loadConversationList,
+    TResult Function(SetChatFilterEvent value)? setChatFilter,
+    TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
+    TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(StartWatchReadsEvent value)? startWatchReads,
+    TResult Function(StopWatchReadsEvent value)? stopWatchReads,
+    TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
+    TResult Function(SendTypingEvent value)? sendTyping,
+    TResult Function(StartWatchTypingEvent value)? startWatchTyping,
+    TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
+    TResult Function(WatchTypingArrivedEvent value)? watchTypingArrived,
+    TResult Function(CleanupTypingEvent value)? cleanupTyping,
+    required TResult orElse(),
+  }) {
+    if (sendPollMessage != null) {
+      return sendPollMessage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SendPollMessageEvent implements ChatMessageEvent {
+  const factory SendPollMessageEvent(
+      {required final String conversationId,
+      required final String question,
+      required final List<String> options,
+      final bool multipleChoice}) = _$SendPollMessageEventImpl;
+
+  String get conversationId;
+  String get question;
+  List<String> get options;
+  bool get multipleChoice;
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SendPollMessageEventImplCopyWith<_$SendPollMessageEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SendEventMessageEventImplCopyWith<$Res> {
+  factory _$$SendEventMessageEventImplCopyWith(
+          _$SendEventMessageEventImpl value,
+          $Res Function(_$SendEventMessageEventImpl) then) =
+      __$$SendEventMessageEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {String conversationId,
+      String title,
+      String? description,
+      String? location,
+      DateTime startDate,
+      DateTime endDate});
+}
+
+/// @nodoc
+class __$$SendEventMessageEventImplCopyWithImpl<$Res>
+    extends _$ChatMessageEventCopyWithImpl<$Res, _$SendEventMessageEventImpl>
+    implements _$$SendEventMessageEventImplCopyWith<$Res> {
+  __$$SendEventMessageEventImplCopyWithImpl(_$SendEventMessageEventImpl _value,
+      $Res Function(_$SendEventMessageEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? conversationId = null,
+    Object? title = null,
+    Object? description = freezed,
+    Object? location = freezed,
+    Object? startDate = null,
+    Object? endDate = null,
+  }) {
+    return _then(_$SendEventMessageEventImpl(
+      conversationId: null == conversationId
+          ? _value.conversationId
+          : conversationId // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+      startDate: null == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      endDate: null == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SendEventMessageEventImpl implements SendEventMessageEvent {
+  const _$SendEventMessageEventImpl(
+      {required this.conversationId,
+      required this.title,
+      this.description,
+      this.location,
+      required this.startDate,
+      required this.endDate});
+
+  @override
+  final String conversationId;
+  @override
+  final String title;
+  @override
+  final String? description;
+  @override
+  final String? location;
+  @override
+  final DateTime startDate;
+  @override
+  final DateTime endDate;
+
+  @override
+  String toString() {
+    return 'ChatMessageEvent.sendEventMessage(conversationId: $conversationId, title: $title, description: $description, location: $location, startDate: $startDate, endDate: $endDate)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SendEventMessageEventImpl &&
+            (identical(other.conversationId, conversationId) ||
+                other.conversationId == conversationId) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.location, location) ||
+                other.location == location) &&
+            (identical(other.startDate, startDate) ||
+                other.startDate == startDate) &&
+            (identical(other.endDate, endDate) || other.endDate == endDate));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, conversationId, title,
+      description, location, startDate, endDate);
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SendEventMessageEventImplCopyWith<_$SendEventMessageEventImpl>
+      get copyWith => __$$SendEventMessageEventImplCopyWithImpl<
+          _$SendEventMessageEventImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
+    required TResult Function(String conversationId, int? limit) loadMessages,
+    required TResult Function(String conversationId, int limit)
+        loadMoreMessages,
+    required TResult Function(
+            String conversationId, String content, String? replyToMessageId)
+        sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
+    required TResult Function(String messageId, String newContent) editMessage,
+    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(String conversationId, String? uptoMessageId)
+        markConversationRead,
+    required TResult Function() clearInfo,
+    required TResult Function(String conversationId) startWatch,
+    required TResult Function() stopWatch,
+    required TResult Function(ChatMessageEntity message) watchMessageArrived,
+    required TResult Function(ChatMessageEntity message) watchMessageUpdated,
+    required TResult Function(ChatMessageEntity message) watchMessageDeleted,
+    required TResult Function(String message) watchMessageError,
+    required TResult Function() loadConversationList,
+    required TResult Function(String filter) setChatFilter,
+    required TResult Function(String query) setSearchQuery,
+    required TResult Function(String messageId) loadMessageReads,
+    required TResult Function(String messageId) markMessageRead,
+    required TResult Function(String conversationId) startWatchReads,
+    required TResult Function() stopWatchReads,
+    required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
+    required TResult Function(String conversationId, bool isTyping) sendTyping,
+    required TResult Function(String conversationId) startWatchTyping,
+    required TResult Function() stopWatchTyping,
+    required TResult Function(String userId) watchTypingArrived,
+    required TResult Function() cleanupTyping,
+  }) {
+    return sendEventMessage(
+        conversationId, title, description, location, startDate, endDate);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
+    TResult? Function(String conversationId, int? limit)? loadMessages,
+    TResult? Function(String conversationId, int limit)? loadMoreMessages,
+    TResult? Function(
+            String conversationId, String content, String? replyToMessageId)?
+        sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
+    TResult? Function(String messageId, String newContent)? editMessage,
+    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(String conversationId, String? uptoMessageId)?
+        markConversationRead,
+    TResult? Function()? clearInfo,
+    TResult? Function(String conversationId)? startWatch,
+    TResult? Function()? stopWatch,
+    TResult? Function(ChatMessageEntity message)? watchMessageArrived,
+    TResult? Function(ChatMessageEntity message)? watchMessageUpdated,
+    TResult? Function(ChatMessageEntity message)? watchMessageDeleted,
+    TResult? Function(String message)? watchMessageError,
+    TResult? Function()? loadConversationList,
+    TResult? Function(String filter)? setChatFilter,
+    TResult? Function(String query)? setSearchQuery,
+    TResult? Function(String messageId)? loadMessageReads,
+    TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(String conversationId)? startWatchReads,
+    TResult? Function()? stopWatchReads,
+    TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
+    TResult? Function(String conversationId, bool isTyping)? sendTyping,
+    TResult? Function(String conversationId)? startWatchTyping,
+    TResult? Function()? stopWatchTyping,
+    TResult? Function(String userId)? watchTypingArrived,
+    TResult? Function()? cleanupTyping,
+  }) {
+    return sendEventMessage?.call(
+        conversationId, title, description, location, startDate, endDate);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
+    TResult Function(String conversationId, int? limit)? loadMessages,
+    TResult Function(String conversationId, int limit)? loadMoreMessages,
+    TResult Function(
+            String conversationId, String content, String? replyToMessageId)?
+        sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
+    TResult Function(String messageId, String newContent)? editMessage,
+    TResult Function(String messageId)? deleteMessage,
+    TResult Function(String conversationId, String? uptoMessageId)?
+        markConversationRead,
+    TResult Function()? clearInfo,
+    TResult Function(String conversationId)? startWatch,
+    TResult Function()? stopWatch,
+    TResult Function(ChatMessageEntity message)? watchMessageArrived,
+    TResult Function(ChatMessageEntity message)? watchMessageUpdated,
+    TResult Function(ChatMessageEntity message)? watchMessageDeleted,
+    TResult Function(String message)? watchMessageError,
+    TResult Function()? loadConversationList,
+    TResult Function(String filter)? setChatFilter,
+    TResult Function(String query)? setSearchQuery,
+    TResult Function(String messageId)? loadMessageReads,
+    TResult Function(String messageId)? markMessageRead,
+    TResult Function(String conversationId)? startWatchReads,
+    TResult Function()? stopWatchReads,
+    TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
+    TResult Function(String conversationId, bool isTyping)? sendTyping,
+    TResult Function(String conversationId)? startWatchTyping,
+    TResult Function()? stopWatchTyping,
+    TResult Function(String userId)? watchTypingArrived,
+    TResult Function()? cleanupTyping,
+    required TResult orElse(),
+  }) {
+    if (sendEventMessage != null) {
+      return sendEventMessage(
+          conversationId, title, description, location, startDate, endDate);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
+    required TResult Function(LoadChatMessagesEvent value) loadMessages,
+    required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
+    required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
+    required TResult Function(EditChatMessageEvent value) editMessage,
+    required TResult Function(DeleteChatMessageEvent value) deleteMessage,
+    required TResult Function(MarkConversationReadEvent value)
+        markConversationRead,
+    required TResult Function(ClearChatMessagesInfoEvent value) clearInfo,
+    required TResult Function(StartWatchMessagesEvent value) startWatch,
+    required TResult Function(StopWatchMessagesEvent value) stopWatch,
+    required TResult Function(WatchMessageArrivedEvent value)
+        watchMessageArrived,
+    required TResult Function(WatchMessageUpdatedEvent value)
+        watchMessageUpdated,
+    required TResult Function(WatchMessageDeletedEvent value)
+        watchMessageDeleted,
+    required TResult Function(WatchMessageErrorEvent value) watchMessageError,
+    required TResult Function(LoadConversationListEvent value)
+        loadConversationList,
+    required TResult Function(SetChatFilterEvent value) setChatFilter,
+    required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
+    required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(StartWatchReadsEvent value) startWatchReads,
+    required TResult Function(StopWatchReadsEvent value) stopWatchReads,
+    required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
+    required TResult Function(SendTypingEvent value) sendTyping,
+    required TResult Function(StartWatchTypingEvent value) startWatchTyping,
+    required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
+    required TResult Function(WatchTypingArrivedEvent value) watchTypingArrived,
+    required TResult Function(CleanupTypingEvent value) cleanupTyping,
+  }) {
+    return sendEventMessage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
+    TResult? Function(LoadChatMessagesEvent value)? loadMessages,
+    TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
+    TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
+    TResult? Function(EditChatMessageEvent value)? editMessage,
+    TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
+    TResult? Function(MarkConversationReadEvent value)? markConversationRead,
+    TResult? Function(ClearChatMessagesInfoEvent value)? clearInfo,
+    TResult? Function(StartWatchMessagesEvent value)? startWatch,
+    TResult? Function(StopWatchMessagesEvent value)? stopWatch,
+    TResult? Function(WatchMessageArrivedEvent value)? watchMessageArrived,
+    TResult? Function(WatchMessageUpdatedEvent value)? watchMessageUpdated,
+    TResult? Function(WatchMessageDeletedEvent value)? watchMessageDeleted,
+    TResult? Function(WatchMessageErrorEvent value)? watchMessageError,
+    TResult? Function(LoadConversationListEvent value)? loadConversationList,
+    TResult? Function(SetChatFilterEvent value)? setChatFilter,
+    TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
+    TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(StartWatchReadsEvent value)? startWatchReads,
+    TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
+    TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
+    TResult? Function(SendTypingEvent value)? sendTyping,
+    TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
+    TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
+    TResult? Function(WatchTypingArrivedEvent value)? watchTypingArrived,
+    TResult? Function(CleanupTypingEvent value)? cleanupTyping,
+  }) {
+    return sendEventMessage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
+    TResult Function(LoadChatMessagesEvent value)? loadMessages,
+    TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
+    TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
+    TResult Function(EditChatMessageEvent value)? editMessage,
+    TResult Function(DeleteChatMessageEvent value)? deleteMessage,
+    TResult Function(MarkConversationReadEvent value)? markConversationRead,
+    TResult Function(ClearChatMessagesInfoEvent value)? clearInfo,
+    TResult Function(StartWatchMessagesEvent value)? startWatch,
+    TResult Function(StopWatchMessagesEvent value)? stopWatch,
+    TResult Function(WatchMessageArrivedEvent value)? watchMessageArrived,
+    TResult Function(WatchMessageUpdatedEvent value)? watchMessageUpdated,
+    TResult Function(WatchMessageDeletedEvent value)? watchMessageDeleted,
+    TResult Function(WatchMessageErrorEvent value)? watchMessageError,
+    TResult Function(LoadConversationListEvent value)? loadConversationList,
+    TResult Function(SetChatFilterEvent value)? setChatFilter,
+    TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
+    TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(StartWatchReadsEvent value)? startWatchReads,
+    TResult Function(StopWatchReadsEvent value)? stopWatchReads,
+    TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
+    TResult Function(SendTypingEvent value)? sendTyping,
+    TResult Function(StartWatchTypingEvent value)? startWatchTyping,
+    TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
+    TResult Function(WatchTypingArrivedEvent value)? watchTypingArrived,
+    TResult Function(CleanupTypingEvent value)? cleanupTyping,
+    required TResult orElse(),
+  }) {
+    if (sendEventMessage != null) {
+      return sendEventMessage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SendEventMessageEvent implements ChatMessageEvent {
+  const factory SendEventMessageEvent(
+      {required final String conversationId,
+      required final String title,
+      final String? description,
+      final String? location,
+      required final DateTime startDate,
+      required final DateTime endDate}) = _$SendEventMessageEventImpl;
+
+  String get conversationId;
+  String get title;
+  String? get description;
+  String? get location;
+  DateTime get startDate;
+  DateTime get endDate;
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SendEventMessageEventImplCopyWith<_$SendEventMessageEventImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1658,6 +2781,17 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -1677,6 +2811,11 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -1696,6 +2835,12 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -1715,6 +2860,10 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -1734,6 +2883,12 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -1753,6 +2908,10 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -1773,6 +2932,8 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -1796,6 +2957,10 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -1812,6 +2977,8 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -1830,6 +2997,10 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -1846,6 +3017,8 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -1864,6 +3037,10 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -1974,6 +3151,17 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -1993,6 +3181,11 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -2012,6 +3205,12 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -2031,6 +3230,10 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -2050,6 +3253,12 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -2069,6 +3278,10 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -2089,6 +3302,8 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -2112,6 +3327,10 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -2128,6 +3347,8 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -2146,6 +3367,10 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -2162,6 +3387,8 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -2180,6 +3407,10 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -2299,6 +3530,17 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -2318,6 +3560,11 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -2337,6 +3584,12 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -2356,6 +3609,10 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -2375,6 +3632,12 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -2394,6 +3657,10 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -2414,6 +3681,8 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -2437,6 +3706,10 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -2453,6 +3726,8 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -2471,6 +3746,10 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -2487,6 +3766,8 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -2505,6 +3786,10 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -2588,6 +3873,17 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -2607,6 +3903,11 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -2626,6 +3927,12 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -2645,6 +3952,10 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -2664,6 +3975,12 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -2683,6 +4000,10 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -2703,6 +4024,8 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -2726,6 +4049,10 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -2742,6 +4069,8 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -2760,6 +4089,10 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -2776,6 +4109,8 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -2794,6 +4129,10 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -2893,6 +4232,17 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -2912,6 +4262,11 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -2931,6 +4286,12 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -2950,6 +4311,10 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -2969,6 +4334,12 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -2988,6 +4359,10 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -3008,6 +4383,8 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -3031,6 +4408,10 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -3047,6 +4428,8 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -3065,6 +4448,10 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -3081,6 +4468,8 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -3099,6 +4488,10 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -3179,6 +4572,17 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -3198,6 +4602,11 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -3217,6 +4626,12 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -3236,6 +4651,10 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -3255,6 +4674,12 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -3274,6 +4699,10 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -3294,6 +4723,8 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -3317,6 +4748,10 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -3333,6 +4768,8 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -3351,6 +4788,10 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -3367,6 +4808,8 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -3385,6 +4828,10 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -3495,6 +4942,17 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -3514,6 +4972,11 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -3533,6 +4996,12 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -3552,6 +5021,10 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -3571,6 +5044,12 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -3590,6 +5069,10 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -3610,6 +5093,8 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -3633,6 +5118,10 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -3649,6 +5138,8 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -3667,6 +5158,10 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -3683,6 +5178,8 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -3701,6 +5198,10 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -3820,6 +5321,17 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -3839,6 +5351,11 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -3858,6 +5375,12 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -3877,6 +5400,10 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -3896,6 +5423,12 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -3915,6 +5448,10 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -3935,6 +5472,8 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -3958,6 +5497,10 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -3974,6 +5517,8 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -3992,6 +5537,10 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -4008,6 +5557,8 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -4026,6 +5577,10 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -4145,6 +5700,17 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -4164,6 +5730,11 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -4183,6 +5754,12 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -4202,6 +5779,10 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -4221,6 +5802,12 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -4240,6 +5827,10 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -4260,6 +5851,8 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -4283,6 +5876,10 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -4299,6 +5896,8 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -4317,6 +5916,10 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -4333,6 +5936,8 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -4351,6 +5956,10 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -4458,6 +6067,17 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -4477,6 +6097,11 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -4496,6 +6121,12 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -4515,6 +6146,10 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -4534,6 +6169,12 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -4553,6 +6194,10 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -4573,6 +6218,8 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -4596,6 +6243,10 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -4612,6 +6263,8 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -4630,6 +6283,10 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -4646,6 +6303,8 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -4664,6 +6323,10 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -4745,6 +6408,17 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -4764,6 +6438,11 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -4783,6 +6462,12 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -4802,6 +6487,10 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -4821,6 +6510,12 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -4840,6 +6535,10 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -4860,6 +6559,8 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -4883,6 +6584,10 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -4899,6 +6604,8 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -4917,6 +6624,10 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -4933,6 +6644,8 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -4951,6 +6664,10 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -5047,6 +6764,17 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -5066,6 +6794,11 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -5085,6 +6818,12 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -5104,6 +6843,10 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -5123,6 +6866,12 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -5142,6 +6891,10 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -5162,6 +6915,8 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -5185,6 +6940,10 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -5201,6 +6960,8 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -5219,6 +6980,10 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -5235,6 +7000,8 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -5253,6 +7020,10 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -5358,6 +7129,17 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -5377,6 +7159,11 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -5396,6 +7183,12 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -5415,6 +7208,10 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -5434,6 +7231,12 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -5453,6 +7256,10 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -5473,6 +7280,8 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -5496,6 +7305,10 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -5512,6 +7325,8 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -5530,6 +7345,10 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -5546,6 +7365,8 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -5564,6 +7385,10 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -5671,6 +7496,17 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -5690,6 +7526,11 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -5709,6 +7550,12 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -5728,6 +7575,10 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -5747,6 +7598,12 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -5766,6 +7623,10 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -5786,6 +7647,8 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -5809,6 +7672,10 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -5825,6 +7692,8 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -5843,6 +7712,10 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -5859,6 +7732,8 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -5877,6 +7752,10 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -5984,6 +7863,17 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -6003,6 +7893,11 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -6022,6 +7917,12 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -6041,6 +7942,10 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -6060,6 +7965,12 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -6079,6 +7990,10 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -6099,6 +8014,8 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -6122,6 +8039,10 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -6138,6 +8059,8 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -6156,6 +8079,10 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -6172,6 +8099,8 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -6190,6 +8119,10 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -6297,6 +8230,17 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -6316,6 +8260,11 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -6335,6 +8284,12 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -6354,6 +8309,10 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -6373,6 +8332,12 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -6392,6 +8357,10 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -6412,6 +8381,8 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -6435,6 +8406,10 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -6451,6 +8426,8 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -6469,6 +8446,10 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -6485,6 +8466,8 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -6503,6 +8486,10 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -6581,6 +8568,17 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -6600,6 +8598,11 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -6619,6 +8622,12 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -6638,6 +8647,10 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -6657,6 +8670,12 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -6676,6 +8695,10 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -6696,6 +8719,8 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -6719,6 +8744,10 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -6735,6 +8764,8 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -6753,6 +8784,10 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -6769,6 +8804,8 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -6787,6 +8824,10 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -6897,6 +8938,17 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -6916,6 +8968,11 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -6935,6 +8992,12 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -6954,6 +9017,10 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -6973,6 +9040,12 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -6992,6 +9065,10 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -7012,6 +9089,8 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -7035,6 +9114,10 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -7051,6 +9134,8 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -7069,6 +9154,10 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -7085,6 +9174,8 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -7103,6 +9194,10 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -7127,6 +9222,1493 @@ abstract class WatchReadArrivedEvent implements ChatMessageEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WatchReadArrivedEventImplCopyWith<_$WatchReadArrivedEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$VotePollEventImplCopyWith<$Res> {
+  factory _$$VotePollEventImplCopyWith(
+          _$VotePollEventImpl value, $Res Function(_$VotePollEventImpl) then) =
+      __$$VotePollEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String pollMessageId, String optionId});
+}
+
+/// @nodoc
+class __$$VotePollEventImplCopyWithImpl<$Res>
+    extends _$ChatMessageEventCopyWithImpl<$Res, _$VotePollEventImpl>
+    implements _$$VotePollEventImplCopyWith<$Res> {
+  __$$VotePollEventImplCopyWithImpl(
+      _$VotePollEventImpl _value, $Res Function(_$VotePollEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? pollMessageId = null,
+    Object? optionId = null,
+  }) {
+    return _then(_$VotePollEventImpl(
+      pollMessageId: null == pollMessageId
+          ? _value.pollMessageId
+          : pollMessageId // ignore: cast_nullable_to_non_nullable
+              as String,
+      optionId: null == optionId
+          ? _value.optionId
+          : optionId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$VotePollEventImpl implements VotePollEvent {
+  const _$VotePollEventImpl(
+      {required this.pollMessageId, required this.optionId});
+
+  @override
+  final String pollMessageId;
+  @override
+  final String optionId;
+
+  @override
+  String toString() {
+    return 'ChatMessageEvent.votePoll(pollMessageId: $pollMessageId, optionId: $optionId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$VotePollEventImpl &&
+            (identical(other.pollMessageId, pollMessageId) ||
+                other.pollMessageId == pollMessageId) &&
+            (identical(other.optionId, optionId) ||
+                other.optionId == optionId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, pollMessageId, optionId);
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$VotePollEventImplCopyWith<_$VotePollEventImpl> get copyWith =>
+      __$$VotePollEventImplCopyWithImpl<_$VotePollEventImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
+    required TResult Function(String conversationId, int? limit) loadMessages,
+    required TResult Function(String conversationId, int limit)
+        loadMoreMessages,
+    required TResult Function(
+            String conversationId, String content, String? replyToMessageId)
+        sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
+    required TResult Function(String messageId, String newContent) editMessage,
+    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(String conversationId, String? uptoMessageId)
+        markConversationRead,
+    required TResult Function() clearInfo,
+    required TResult Function(String conversationId) startWatch,
+    required TResult Function() stopWatch,
+    required TResult Function(ChatMessageEntity message) watchMessageArrived,
+    required TResult Function(ChatMessageEntity message) watchMessageUpdated,
+    required TResult Function(ChatMessageEntity message) watchMessageDeleted,
+    required TResult Function(String message) watchMessageError,
+    required TResult Function() loadConversationList,
+    required TResult Function(String filter) setChatFilter,
+    required TResult Function(String query) setSearchQuery,
+    required TResult Function(String messageId) loadMessageReads,
+    required TResult Function(String messageId) markMessageRead,
+    required TResult Function(String conversationId) startWatchReads,
+    required TResult Function() stopWatchReads,
+    required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
+    required TResult Function(String conversationId, bool isTyping) sendTyping,
+    required TResult Function(String conversationId) startWatchTyping,
+    required TResult Function() stopWatchTyping,
+    required TResult Function(String userId) watchTypingArrived,
+    required TResult Function() cleanupTyping,
+  }) {
+    return votePoll(pollMessageId, optionId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
+    TResult? Function(String conversationId, int? limit)? loadMessages,
+    TResult? Function(String conversationId, int limit)? loadMoreMessages,
+    TResult? Function(
+            String conversationId, String content, String? replyToMessageId)?
+        sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
+    TResult? Function(String messageId, String newContent)? editMessage,
+    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(String conversationId, String? uptoMessageId)?
+        markConversationRead,
+    TResult? Function()? clearInfo,
+    TResult? Function(String conversationId)? startWatch,
+    TResult? Function()? stopWatch,
+    TResult? Function(ChatMessageEntity message)? watchMessageArrived,
+    TResult? Function(ChatMessageEntity message)? watchMessageUpdated,
+    TResult? Function(ChatMessageEntity message)? watchMessageDeleted,
+    TResult? Function(String message)? watchMessageError,
+    TResult? Function()? loadConversationList,
+    TResult? Function(String filter)? setChatFilter,
+    TResult? Function(String query)? setSearchQuery,
+    TResult? Function(String messageId)? loadMessageReads,
+    TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(String conversationId)? startWatchReads,
+    TResult? Function()? stopWatchReads,
+    TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
+    TResult? Function(String conversationId, bool isTyping)? sendTyping,
+    TResult? Function(String conversationId)? startWatchTyping,
+    TResult? Function()? stopWatchTyping,
+    TResult? Function(String userId)? watchTypingArrived,
+    TResult? Function()? cleanupTyping,
+  }) {
+    return votePoll?.call(pollMessageId, optionId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
+    TResult Function(String conversationId, int? limit)? loadMessages,
+    TResult Function(String conversationId, int limit)? loadMoreMessages,
+    TResult Function(
+            String conversationId, String content, String? replyToMessageId)?
+        sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
+    TResult Function(String messageId, String newContent)? editMessage,
+    TResult Function(String messageId)? deleteMessage,
+    TResult Function(String conversationId, String? uptoMessageId)?
+        markConversationRead,
+    TResult Function()? clearInfo,
+    TResult Function(String conversationId)? startWatch,
+    TResult Function()? stopWatch,
+    TResult Function(ChatMessageEntity message)? watchMessageArrived,
+    TResult Function(ChatMessageEntity message)? watchMessageUpdated,
+    TResult Function(ChatMessageEntity message)? watchMessageDeleted,
+    TResult Function(String message)? watchMessageError,
+    TResult Function()? loadConversationList,
+    TResult Function(String filter)? setChatFilter,
+    TResult Function(String query)? setSearchQuery,
+    TResult Function(String messageId)? loadMessageReads,
+    TResult Function(String messageId)? markMessageRead,
+    TResult Function(String conversationId)? startWatchReads,
+    TResult Function()? stopWatchReads,
+    TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
+    TResult Function(String conversationId, bool isTyping)? sendTyping,
+    TResult Function(String conversationId)? startWatchTyping,
+    TResult Function()? stopWatchTyping,
+    TResult Function(String userId)? watchTypingArrived,
+    TResult Function()? cleanupTyping,
+    required TResult orElse(),
+  }) {
+    if (votePoll != null) {
+      return votePoll(pollMessageId, optionId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
+    required TResult Function(LoadChatMessagesEvent value) loadMessages,
+    required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
+    required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
+    required TResult Function(EditChatMessageEvent value) editMessage,
+    required TResult Function(DeleteChatMessageEvent value) deleteMessage,
+    required TResult Function(MarkConversationReadEvent value)
+        markConversationRead,
+    required TResult Function(ClearChatMessagesInfoEvent value) clearInfo,
+    required TResult Function(StartWatchMessagesEvent value) startWatch,
+    required TResult Function(StopWatchMessagesEvent value) stopWatch,
+    required TResult Function(WatchMessageArrivedEvent value)
+        watchMessageArrived,
+    required TResult Function(WatchMessageUpdatedEvent value)
+        watchMessageUpdated,
+    required TResult Function(WatchMessageDeletedEvent value)
+        watchMessageDeleted,
+    required TResult Function(WatchMessageErrorEvent value) watchMessageError,
+    required TResult Function(LoadConversationListEvent value)
+        loadConversationList,
+    required TResult Function(SetChatFilterEvent value) setChatFilter,
+    required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
+    required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(StartWatchReadsEvent value) startWatchReads,
+    required TResult Function(StopWatchReadsEvent value) stopWatchReads,
+    required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
+    required TResult Function(SendTypingEvent value) sendTyping,
+    required TResult Function(StartWatchTypingEvent value) startWatchTyping,
+    required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
+    required TResult Function(WatchTypingArrivedEvent value) watchTypingArrived,
+    required TResult Function(CleanupTypingEvent value) cleanupTyping,
+  }) {
+    return votePoll(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
+    TResult? Function(LoadChatMessagesEvent value)? loadMessages,
+    TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
+    TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
+    TResult? Function(EditChatMessageEvent value)? editMessage,
+    TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
+    TResult? Function(MarkConversationReadEvent value)? markConversationRead,
+    TResult? Function(ClearChatMessagesInfoEvent value)? clearInfo,
+    TResult? Function(StartWatchMessagesEvent value)? startWatch,
+    TResult? Function(StopWatchMessagesEvent value)? stopWatch,
+    TResult? Function(WatchMessageArrivedEvent value)? watchMessageArrived,
+    TResult? Function(WatchMessageUpdatedEvent value)? watchMessageUpdated,
+    TResult? Function(WatchMessageDeletedEvent value)? watchMessageDeleted,
+    TResult? Function(WatchMessageErrorEvent value)? watchMessageError,
+    TResult? Function(LoadConversationListEvent value)? loadConversationList,
+    TResult? Function(SetChatFilterEvent value)? setChatFilter,
+    TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
+    TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(StartWatchReadsEvent value)? startWatchReads,
+    TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
+    TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
+    TResult? Function(SendTypingEvent value)? sendTyping,
+    TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
+    TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
+    TResult? Function(WatchTypingArrivedEvent value)? watchTypingArrived,
+    TResult? Function(CleanupTypingEvent value)? cleanupTyping,
+  }) {
+    return votePoll?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
+    TResult Function(LoadChatMessagesEvent value)? loadMessages,
+    TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
+    TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
+    TResult Function(EditChatMessageEvent value)? editMessage,
+    TResult Function(DeleteChatMessageEvent value)? deleteMessage,
+    TResult Function(MarkConversationReadEvent value)? markConversationRead,
+    TResult Function(ClearChatMessagesInfoEvent value)? clearInfo,
+    TResult Function(StartWatchMessagesEvent value)? startWatch,
+    TResult Function(StopWatchMessagesEvent value)? stopWatch,
+    TResult Function(WatchMessageArrivedEvent value)? watchMessageArrived,
+    TResult Function(WatchMessageUpdatedEvent value)? watchMessageUpdated,
+    TResult Function(WatchMessageDeletedEvent value)? watchMessageDeleted,
+    TResult Function(WatchMessageErrorEvent value)? watchMessageError,
+    TResult Function(LoadConversationListEvent value)? loadConversationList,
+    TResult Function(SetChatFilterEvent value)? setChatFilter,
+    TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
+    TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(StartWatchReadsEvent value)? startWatchReads,
+    TResult Function(StopWatchReadsEvent value)? stopWatchReads,
+    TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
+    TResult Function(SendTypingEvent value)? sendTyping,
+    TResult Function(StartWatchTypingEvent value)? startWatchTyping,
+    TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
+    TResult Function(WatchTypingArrivedEvent value)? watchTypingArrived,
+    TResult Function(CleanupTypingEvent value)? cleanupTyping,
+    required TResult orElse(),
+  }) {
+    if (votePoll != null) {
+      return votePoll(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class VotePollEvent implements ChatMessageEvent {
+  const factory VotePollEvent(
+      {required final String pollMessageId,
+      required final String optionId}) = _$VotePollEventImpl;
+
+  String get pollMessageId;
+  String get optionId;
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$VotePollEventImplCopyWith<_$VotePollEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UnvotePollEventImplCopyWith<$Res> {
+  factory _$$UnvotePollEventImplCopyWith(_$UnvotePollEventImpl value,
+          $Res Function(_$UnvotePollEventImpl) then) =
+      __$$UnvotePollEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String optionId});
+}
+
+/// @nodoc
+class __$$UnvotePollEventImplCopyWithImpl<$Res>
+    extends _$ChatMessageEventCopyWithImpl<$Res, _$UnvotePollEventImpl>
+    implements _$$UnvotePollEventImplCopyWith<$Res> {
+  __$$UnvotePollEventImplCopyWithImpl(
+      _$UnvotePollEventImpl _value, $Res Function(_$UnvotePollEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? optionId = null,
+  }) {
+    return _then(_$UnvotePollEventImpl(
+      optionId: null == optionId
+          ? _value.optionId
+          : optionId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UnvotePollEventImpl implements UnvotePollEvent {
+  const _$UnvotePollEventImpl({required this.optionId});
+
+  @override
+  final String optionId;
+
+  @override
+  String toString() {
+    return 'ChatMessageEvent.unvotePoll(optionId: $optionId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UnvotePollEventImpl &&
+            (identical(other.optionId, optionId) ||
+                other.optionId == optionId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, optionId);
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UnvotePollEventImplCopyWith<_$UnvotePollEventImpl> get copyWith =>
+      __$$UnvotePollEventImplCopyWithImpl<_$UnvotePollEventImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
+    required TResult Function(String conversationId, int? limit) loadMessages,
+    required TResult Function(String conversationId, int limit)
+        loadMoreMessages,
+    required TResult Function(
+            String conversationId, String content, String? replyToMessageId)
+        sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
+    required TResult Function(String messageId, String newContent) editMessage,
+    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(String conversationId, String? uptoMessageId)
+        markConversationRead,
+    required TResult Function() clearInfo,
+    required TResult Function(String conversationId) startWatch,
+    required TResult Function() stopWatch,
+    required TResult Function(ChatMessageEntity message) watchMessageArrived,
+    required TResult Function(ChatMessageEntity message) watchMessageUpdated,
+    required TResult Function(ChatMessageEntity message) watchMessageDeleted,
+    required TResult Function(String message) watchMessageError,
+    required TResult Function() loadConversationList,
+    required TResult Function(String filter) setChatFilter,
+    required TResult Function(String query) setSearchQuery,
+    required TResult Function(String messageId) loadMessageReads,
+    required TResult Function(String messageId) markMessageRead,
+    required TResult Function(String conversationId) startWatchReads,
+    required TResult Function() stopWatchReads,
+    required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
+    required TResult Function(String conversationId, bool isTyping) sendTyping,
+    required TResult Function(String conversationId) startWatchTyping,
+    required TResult Function() stopWatchTyping,
+    required TResult Function(String userId) watchTypingArrived,
+    required TResult Function() cleanupTyping,
+  }) {
+    return unvotePoll(optionId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
+    TResult? Function(String conversationId, int? limit)? loadMessages,
+    TResult? Function(String conversationId, int limit)? loadMoreMessages,
+    TResult? Function(
+            String conversationId, String content, String? replyToMessageId)?
+        sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
+    TResult? Function(String messageId, String newContent)? editMessage,
+    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(String conversationId, String? uptoMessageId)?
+        markConversationRead,
+    TResult? Function()? clearInfo,
+    TResult? Function(String conversationId)? startWatch,
+    TResult? Function()? stopWatch,
+    TResult? Function(ChatMessageEntity message)? watchMessageArrived,
+    TResult? Function(ChatMessageEntity message)? watchMessageUpdated,
+    TResult? Function(ChatMessageEntity message)? watchMessageDeleted,
+    TResult? Function(String message)? watchMessageError,
+    TResult? Function()? loadConversationList,
+    TResult? Function(String filter)? setChatFilter,
+    TResult? Function(String query)? setSearchQuery,
+    TResult? Function(String messageId)? loadMessageReads,
+    TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(String conversationId)? startWatchReads,
+    TResult? Function()? stopWatchReads,
+    TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
+    TResult? Function(String conversationId, bool isTyping)? sendTyping,
+    TResult? Function(String conversationId)? startWatchTyping,
+    TResult? Function()? stopWatchTyping,
+    TResult? Function(String userId)? watchTypingArrived,
+    TResult? Function()? cleanupTyping,
+  }) {
+    return unvotePoll?.call(optionId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
+    TResult Function(String conversationId, int? limit)? loadMessages,
+    TResult Function(String conversationId, int limit)? loadMoreMessages,
+    TResult Function(
+            String conversationId, String content, String? replyToMessageId)?
+        sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
+    TResult Function(String messageId, String newContent)? editMessage,
+    TResult Function(String messageId)? deleteMessage,
+    TResult Function(String conversationId, String? uptoMessageId)?
+        markConversationRead,
+    TResult Function()? clearInfo,
+    TResult Function(String conversationId)? startWatch,
+    TResult Function()? stopWatch,
+    TResult Function(ChatMessageEntity message)? watchMessageArrived,
+    TResult Function(ChatMessageEntity message)? watchMessageUpdated,
+    TResult Function(ChatMessageEntity message)? watchMessageDeleted,
+    TResult Function(String message)? watchMessageError,
+    TResult Function()? loadConversationList,
+    TResult Function(String filter)? setChatFilter,
+    TResult Function(String query)? setSearchQuery,
+    TResult Function(String messageId)? loadMessageReads,
+    TResult Function(String messageId)? markMessageRead,
+    TResult Function(String conversationId)? startWatchReads,
+    TResult Function()? stopWatchReads,
+    TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
+    TResult Function(String conversationId, bool isTyping)? sendTyping,
+    TResult Function(String conversationId)? startWatchTyping,
+    TResult Function()? stopWatchTyping,
+    TResult Function(String userId)? watchTypingArrived,
+    TResult Function()? cleanupTyping,
+    required TResult orElse(),
+  }) {
+    if (unvotePoll != null) {
+      return unvotePoll(optionId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
+    required TResult Function(LoadChatMessagesEvent value) loadMessages,
+    required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
+    required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
+    required TResult Function(EditChatMessageEvent value) editMessage,
+    required TResult Function(DeleteChatMessageEvent value) deleteMessage,
+    required TResult Function(MarkConversationReadEvent value)
+        markConversationRead,
+    required TResult Function(ClearChatMessagesInfoEvent value) clearInfo,
+    required TResult Function(StartWatchMessagesEvent value) startWatch,
+    required TResult Function(StopWatchMessagesEvent value) stopWatch,
+    required TResult Function(WatchMessageArrivedEvent value)
+        watchMessageArrived,
+    required TResult Function(WatchMessageUpdatedEvent value)
+        watchMessageUpdated,
+    required TResult Function(WatchMessageDeletedEvent value)
+        watchMessageDeleted,
+    required TResult Function(WatchMessageErrorEvent value) watchMessageError,
+    required TResult Function(LoadConversationListEvent value)
+        loadConversationList,
+    required TResult Function(SetChatFilterEvent value) setChatFilter,
+    required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
+    required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(StartWatchReadsEvent value) startWatchReads,
+    required TResult Function(StopWatchReadsEvent value) stopWatchReads,
+    required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
+    required TResult Function(SendTypingEvent value) sendTyping,
+    required TResult Function(StartWatchTypingEvent value) startWatchTyping,
+    required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
+    required TResult Function(WatchTypingArrivedEvent value) watchTypingArrived,
+    required TResult Function(CleanupTypingEvent value) cleanupTyping,
+  }) {
+    return unvotePoll(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
+    TResult? Function(LoadChatMessagesEvent value)? loadMessages,
+    TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
+    TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
+    TResult? Function(EditChatMessageEvent value)? editMessage,
+    TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
+    TResult? Function(MarkConversationReadEvent value)? markConversationRead,
+    TResult? Function(ClearChatMessagesInfoEvent value)? clearInfo,
+    TResult? Function(StartWatchMessagesEvent value)? startWatch,
+    TResult? Function(StopWatchMessagesEvent value)? stopWatch,
+    TResult? Function(WatchMessageArrivedEvent value)? watchMessageArrived,
+    TResult? Function(WatchMessageUpdatedEvent value)? watchMessageUpdated,
+    TResult? Function(WatchMessageDeletedEvent value)? watchMessageDeleted,
+    TResult? Function(WatchMessageErrorEvent value)? watchMessageError,
+    TResult? Function(LoadConversationListEvent value)? loadConversationList,
+    TResult? Function(SetChatFilterEvent value)? setChatFilter,
+    TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
+    TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(StartWatchReadsEvent value)? startWatchReads,
+    TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
+    TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
+    TResult? Function(SendTypingEvent value)? sendTyping,
+    TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
+    TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
+    TResult? Function(WatchTypingArrivedEvent value)? watchTypingArrived,
+    TResult? Function(CleanupTypingEvent value)? cleanupTyping,
+  }) {
+    return unvotePoll?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
+    TResult Function(LoadChatMessagesEvent value)? loadMessages,
+    TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
+    TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
+    TResult Function(EditChatMessageEvent value)? editMessage,
+    TResult Function(DeleteChatMessageEvent value)? deleteMessage,
+    TResult Function(MarkConversationReadEvent value)? markConversationRead,
+    TResult Function(ClearChatMessagesInfoEvent value)? clearInfo,
+    TResult Function(StartWatchMessagesEvent value)? startWatch,
+    TResult Function(StopWatchMessagesEvent value)? stopWatch,
+    TResult Function(WatchMessageArrivedEvent value)? watchMessageArrived,
+    TResult Function(WatchMessageUpdatedEvent value)? watchMessageUpdated,
+    TResult Function(WatchMessageDeletedEvent value)? watchMessageDeleted,
+    TResult Function(WatchMessageErrorEvent value)? watchMessageError,
+    TResult Function(LoadConversationListEvent value)? loadConversationList,
+    TResult Function(SetChatFilterEvent value)? setChatFilter,
+    TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
+    TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(StartWatchReadsEvent value)? startWatchReads,
+    TResult Function(StopWatchReadsEvent value)? stopWatchReads,
+    TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
+    TResult Function(SendTypingEvent value)? sendTyping,
+    TResult Function(StartWatchTypingEvent value)? startWatchTyping,
+    TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
+    TResult Function(WatchTypingArrivedEvent value)? watchTypingArrived,
+    TResult Function(CleanupTypingEvent value)? cleanupTyping,
+    required TResult orElse(),
+  }) {
+    if (unvotePoll != null) {
+      return unvotePoll(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UnvotePollEvent implements ChatMessageEvent {
+  const factory UnvotePollEvent({required final String optionId}) =
+      _$UnvotePollEventImpl;
+
+  String get optionId;
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UnvotePollEventImplCopyWith<_$UnvotePollEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$RespondToEventEventImplCopyWith<$Res> {
+  factory _$$RespondToEventEventImplCopyWith(_$RespondToEventEventImpl value,
+          $Res Function(_$RespondToEventEventImpl) then) =
+      __$$RespondToEventEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String eventMessageId, String status});
+}
+
+/// @nodoc
+class __$$RespondToEventEventImplCopyWithImpl<$Res>
+    extends _$ChatMessageEventCopyWithImpl<$Res, _$RespondToEventEventImpl>
+    implements _$$RespondToEventEventImplCopyWith<$Res> {
+  __$$RespondToEventEventImplCopyWithImpl(_$RespondToEventEventImpl _value,
+      $Res Function(_$RespondToEventEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventMessageId = null,
+    Object? status = null,
+  }) {
+    return _then(_$RespondToEventEventImpl(
+      eventMessageId: null == eventMessageId
+          ? _value.eventMessageId
+          : eventMessageId // ignore: cast_nullable_to_non_nullable
+              as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$RespondToEventEventImpl implements RespondToEventEvent {
+  const _$RespondToEventEventImpl(
+      {required this.eventMessageId, required this.status});
+
+  @override
+  final String eventMessageId;
+  @override
+  final String status;
+
+  @override
+  String toString() {
+    return 'ChatMessageEvent.respondToEvent(eventMessageId: $eventMessageId, status: $status)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RespondToEventEventImpl &&
+            (identical(other.eventMessageId, eventMessageId) ||
+                other.eventMessageId == eventMessageId) &&
+            (identical(other.status, status) || other.status == status));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, eventMessageId, status);
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$RespondToEventEventImplCopyWith<_$RespondToEventEventImpl> get copyWith =>
+      __$$RespondToEventEventImplCopyWithImpl<_$RespondToEventEventImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
+    required TResult Function(String conversationId, int? limit) loadMessages,
+    required TResult Function(String conversationId, int limit)
+        loadMoreMessages,
+    required TResult Function(
+            String conversationId, String content, String? replyToMessageId)
+        sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
+    required TResult Function(String messageId, String newContent) editMessage,
+    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(String conversationId, String? uptoMessageId)
+        markConversationRead,
+    required TResult Function() clearInfo,
+    required TResult Function(String conversationId) startWatch,
+    required TResult Function() stopWatch,
+    required TResult Function(ChatMessageEntity message) watchMessageArrived,
+    required TResult Function(ChatMessageEntity message) watchMessageUpdated,
+    required TResult Function(ChatMessageEntity message) watchMessageDeleted,
+    required TResult Function(String message) watchMessageError,
+    required TResult Function() loadConversationList,
+    required TResult Function(String filter) setChatFilter,
+    required TResult Function(String query) setSearchQuery,
+    required TResult Function(String messageId) loadMessageReads,
+    required TResult Function(String messageId) markMessageRead,
+    required TResult Function(String conversationId) startWatchReads,
+    required TResult Function() stopWatchReads,
+    required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
+    required TResult Function(String conversationId, bool isTyping) sendTyping,
+    required TResult Function(String conversationId) startWatchTyping,
+    required TResult Function() stopWatchTyping,
+    required TResult Function(String userId) watchTypingArrived,
+    required TResult Function() cleanupTyping,
+  }) {
+    return respondToEvent(eventMessageId, status);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
+    TResult? Function(String conversationId, int? limit)? loadMessages,
+    TResult? Function(String conversationId, int limit)? loadMoreMessages,
+    TResult? Function(
+            String conversationId, String content, String? replyToMessageId)?
+        sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
+    TResult? Function(String messageId, String newContent)? editMessage,
+    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(String conversationId, String? uptoMessageId)?
+        markConversationRead,
+    TResult? Function()? clearInfo,
+    TResult? Function(String conversationId)? startWatch,
+    TResult? Function()? stopWatch,
+    TResult? Function(ChatMessageEntity message)? watchMessageArrived,
+    TResult? Function(ChatMessageEntity message)? watchMessageUpdated,
+    TResult? Function(ChatMessageEntity message)? watchMessageDeleted,
+    TResult? Function(String message)? watchMessageError,
+    TResult? Function()? loadConversationList,
+    TResult? Function(String filter)? setChatFilter,
+    TResult? Function(String query)? setSearchQuery,
+    TResult? Function(String messageId)? loadMessageReads,
+    TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(String conversationId)? startWatchReads,
+    TResult? Function()? stopWatchReads,
+    TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
+    TResult? Function(String conversationId, bool isTyping)? sendTyping,
+    TResult? Function(String conversationId)? startWatchTyping,
+    TResult? Function()? stopWatchTyping,
+    TResult? Function(String userId)? watchTypingArrived,
+    TResult? Function()? cleanupTyping,
+  }) {
+    return respondToEvent?.call(eventMessageId, status);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
+    TResult Function(String conversationId, int? limit)? loadMessages,
+    TResult Function(String conversationId, int limit)? loadMoreMessages,
+    TResult Function(
+            String conversationId, String content, String? replyToMessageId)?
+        sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
+    TResult Function(String messageId, String newContent)? editMessage,
+    TResult Function(String messageId)? deleteMessage,
+    TResult Function(String conversationId, String? uptoMessageId)?
+        markConversationRead,
+    TResult Function()? clearInfo,
+    TResult Function(String conversationId)? startWatch,
+    TResult Function()? stopWatch,
+    TResult Function(ChatMessageEntity message)? watchMessageArrived,
+    TResult Function(ChatMessageEntity message)? watchMessageUpdated,
+    TResult Function(ChatMessageEntity message)? watchMessageDeleted,
+    TResult Function(String message)? watchMessageError,
+    TResult Function()? loadConversationList,
+    TResult Function(String filter)? setChatFilter,
+    TResult Function(String query)? setSearchQuery,
+    TResult Function(String messageId)? loadMessageReads,
+    TResult Function(String messageId)? markMessageRead,
+    TResult Function(String conversationId)? startWatchReads,
+    TResult Function()? stopWatchReads,
+    TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
+    TResult Function(String conversationId, bool isTyping)? sendTyping,
+    TResult Function(String conversationId)? startWatchTyping,
+    TResult Function()? stopWatchTyping,
+    TResult Function(String userId)? watchTypingArrived,
+    TResult Function()? cleanupTyping,
+    required TResult orElse(),
+  }) {
+    if (respondToEvent != null) {
+      return respondToEvent(eventMessageId, status);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
+    required TResult Function(LoadChatMessagesEvent value) loadMessages,
+    required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
+    required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
+    required TResult Function(EditChatMessageEvent value) editMessage,
+    required TResult Function(DeleteChatMessageEvent value) deleteMessage,
+    required TResult Function(MarkConversationReadEvent value)
+        markConversationRead,
+    required TResult Function(ClearChatMessagesInfoEvent value) clearInfo,
+    required TResult Function(StartWatchMessagesEvent value) startWatch,
+    required TResult Function(StopWatchMessagesEvent value) stopWatch,
+    required TResult Function(WatchMessageArrivedEvent value)
+        watchMessageArrived,
+    required TResult Function(WatchMessageUpdatedEvent value)
+        watchMessageUpdated,
+    required TResult Function(WatchMessageDeletedEvent value)
+        watchMessageDeleted,
+    required TResult Function(WatchMessageErrorEvent value) watchMessageError,
+    required TResult Function(LoadConversationListEvent value)
+        loadConversationList,
+    required TResult Function(SetChatFilterEvent value) setChatFilter,
+    required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
+    required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(StartWatchReadsEvent value) startWatchReads,
+    required TResult Function(StopWatchReadsEvent value) stopWatchReads,
+    required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
+    required TResult Function(SendTypingEvent value) sendTyping,
+    required TResult Function(StartWatchTypingEvent value) startWatchTyping,
+    required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
+    required TResult Function(WatchTypingArrivedEvent value) watchTypingArrived,
+    required TResult Function(CleanupTypingEvent value) cleanupTyping,
+  }) {
+    return respondToEvent(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
+    TResult? Function(LoadChatMessagesEvent value)? loadMessages,
+    TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
+    TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
+    TResult? Function(EditChatMessageEvent value)? editMessage,
+    TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
+    TResult? Function(MarkConversationReadEvent value)? markConversationRead,
+    TResult? Function(ClearChatMessagesInfoEvent value)? clearInfo,
+    TResult? Function(StartWatchMessagesEvent value)? startWatch,
+    TResult? Function(StopWatchMessagesEvent value)? stopWatch,
+    TResult? Function(WatchMessageArrivedEvent value)? watchMessageArrived,
+    TResult? Function(WatchMessageUpdatedEvent value)? watchMessageUpdated,
+    TResult? Function(WatchMessageDeletedEvent value)? watchMessageDeleted,
+    TResult? Function(WatchMessageErrorEvent value)? watchMessageError,
+    TResult? Function(LoadConversationListEvent value)? loadConversationList,
+    TResult? Function(SetChatFilterEvent value)? setChatFilter,
+    TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
+    TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(StartWatchReadsEvent value)? startWatchReads,
+    TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
+    TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
+    TResult? Function(SendTypingEvent value)? sendTyping,
+    TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
+    TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
+    TResult? Function(WatchTypingArrivedEvent value)? watchTypingArrived,
+    TResult? Function(CleanupTypingEvent value)? cleanupTyping,
+  }) {
+    return respondToEvent?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
+    TResult Function(LoadChatMessagesEvent value)? loadMessages,
+    TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
+    TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
+    TResult Function(EditChatMessageEvent value)? editMessage,
+    TResult Function(DeleteChatMessageEvent value)? deleteMessage,
+    TResult Function(MarkConversationReadEvent value)? markConversationRead,
+    TResult Function(ClearChatMessagesInfoEvent value)? clearInfo,
+    TResult Function(StartWatchMessagesEvent value)? startWatch,
+    TResult Function(StopWatchMessagesEvent value)? stopWatch,
+    TResult Function(WatchMessageArrivedEvent value)? watchMessageArrived,
+    TResult Function(WatchMessageUpdatedEvent value)? watchMessageUpdated,
+    TResult Function(WatchMessageDeletedEvent value)? watchMessageDeleted,
+    TResult Function(WatchMessageErrorEvent value)? watchMessageError,
+    TResult Function(LoadConversationListEvent value)? loadConversationList,
+    TResult Function(SetChatFilterEvent value)? setChatFilter,
+    TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
+    TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(StartWatchReadsEvent value)? startWatchReads,
+    TResult Function(StopWatchReadsEvent value)? stopWatchReads,
+    TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
+    TResult Function(SendTypingEvent value)? sendTyping,
+    TResult Function(StartWatchTypingEvent value)? startWatchTyping,
+    TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
+    TResult Function(WatchTypingArrivedEvent value)? watchTypingArrived,
+    TResult Function(CleanupTypingEvent value)? cleanupTyping,
+    required TResult orElse(),
+  }) {
+    if (respondToEvent != null) {
+      return respondToEvent(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class RespondToEventEvent implements ChatMessageEvent {
+  const factory RespondToEventEvent(
+      {required final String eventMessageId,
+      required final String status}) = _$RespondToEventEventImpl;
+
+  String get eventMessageId;
+  String get status;
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$RespondToEventEventImplCopyWith<_$RespondToEventEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CancelEventRsvpEventImplCopyWith<$Res> {
+  factory _$$CancelEventRsvpEventImplCopyWith(_$CancelEventRsvpEventImpl value,
+          $Res Function(_$CancelEventRsvpEventImpl) then) =
+      __$$CancelEventRsvpEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String eventMessageId});
+}
+
+/// @nodoc
+class __$$CancelEventRsvpEventImplCopyWithImpl<$Res>
+    extends _$ChatMessageEventCopyWithImpl<$Res, _$CancelEventRsvpEventImpl>
+    implements _$$CancelEventRsvpEventImplCopyWith<$Res> {
+  __$$CancelEventRsvpEventImplCopyWithImpl(_$CancelEventRsvpEventImpl _value,
+      $Res Function(_$CancelEventRsvpEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventMessageId = null,
+  }) {
+    return _then(_$CancelEventRsvpEventImpl(
+      eventMessageId: null == eventMessageId
+          ? _value.eventMessageId
+          : eventMessageId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CancelEventRsvpEventImpl implements CancelEventRsvpEvent {
+  const _$CancelEventRsvpEventImpl({required this.eventMessageId});
+
+  @override
+  final String eventMessageId;
+
+  @override
+  String toString() {
+    return 'ChatMessageEvent.cancelEventRsvp(eventMessageId: $eventMessageId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CancelEventRsvpEventImpl &&
+            (identical(other.eventMessageId, eventMessageId) ||
+                other.eventMessageId == eventMessageId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, eventMessageId);
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CancelEventRsvpEventImplCopyWith<_$CancelEventRsvpEventImpl>
+      get copyWith =>
+          __$$CancelEventRsvpEventImplCopyWithImpl<_$CancelEventRsvpEventImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
+    required TResult Function(String conversationId, int? limit) loadMessages,
+    required TResult Function(String conversationId, int limit)
+        loadMoreMessages,
+    required TResult Function(
+            String conversationId, String content, String? replyToMessageId)
+        sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
+    required TResult Function(String messageId, String newContent) editMessage,
+    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(String conversationId, String? uptoMessageId)
+        markConversationRead,
+    required TResult Function() clearInfo,
+    required TResult Function(String conversationId) startWatch,
+    required TResult Function() stopWatch,
+    required TResult Function(ChatMessageEntity message) watchMessageArrived,
+    required TResult Function(ChatMessageEntity message) watchMessageUpdated,
+    required TResult Function(ChatMessageEntity message) watchMessageDeleted,
+    required TResult Function(String message) watchMessageError,
+    required TResult Function() loadConversationList,
+    required TResult Function(String filter) setChatFilter,
+    required TResult Function(String query) setSearchQuery,
+    required TResult Function(String messageId) loadMessageReads,
+    required TResult Function(String messageId) markMessageRead,
+    required TResult Function(String conversationId) startWatchReads,
+    required TResult Function() stopWatchReads,
+    required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
+    required TResult Function(String conversationId, bool isTyping) sendTyping,
+    required TResult Function(String conversationId) startWatchTyping,
+    required TResult Function() stopWatchTyping,
+    required TResult Function(String userId) watchTypingArrived,
+    required TResult Function() cleanupTyping,
+  }) {
+    return cancelEventRsvp(eventMessageId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
+    TResult? Function(String conversationId, int? limit)? loadMessages,
+    TResult? Function(String conversationId, int limit)? loadMoreMessages,
+    TResult? Function(
+            String conversationId, String content, String? replyToMessageId)?
+        sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
+    TResult? Function(String messageId, String newContent)? editMessage,
+    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(String conversationId, String? uptoMessageId)?
+        markConversationRead,
+    TResult? Function()? clearInfo,
+    TResult? Function(String conversationId)? startWatch,
+    TResult? Function()? stopWatch,
+    TResult? Function(ChatMessageEntity message)? watchMessageArrived,
+    TResult? Function(ChatMessageEntity message)? watchMessageUpdated,
+    TResult? Function(ChatMessageEntity message)? watchMessageDeleted,
+    TResult? Function(String message)? watchMessageError,
+    TResult? Function()? loadConversationList,
+    TResult? Function(String filter)? setChatFilter,
+    TResult? Function(String query)? setSearchQuery,
+    TResult? Function(String messageId)? loadMessageReads,
+    TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(String conversationId)? startWatchReads,
+    TResult? Function()? stopWatchReads,
+    TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
+    TResult? Function(String conversationId, bool isTyping)? sendTyping,
+    TResult? Function(String conversationId)? startWatchTyping,
+    TResult? Function()? stopWatchTyping,
+    TResult? Function(String userId)? watchTypingArrived,
+    TResult? Function()? cleanupTyping,
+  }) {
+    return cancelEventRsvp?.call(eventMessageId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
+    TResult Function(String conversationId, int? limit)? loadMessages,
+    TResult Function(String conversationId, int limit)? loadMoreMessages,
+    TResult Function(
+            String conversationId, String content, String? replyToMessageId)?
+        sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
+    TResult Function(String messageId, String newContent)? editMessage,
+    TResult Function(String messageId)? deleteMessage,
+    TResult Function(String conversationId, String? uptoMessageId)?
+        markConversationRead,
+    TResult Function()? clearInfo,
+    TResult Function(String conversationId)? startWatch,
+    TResult Function()? stopWatch,
+    TResult Function(ChatMessageEntity message)? watchMessageArrived,
+    TResult Function(ChatMessageEntity message)? watchMessageUpdated,
+    TResult Function(ChatMessageEntity message)? watchMessageDeleted,
+    TResult Function(String message)? watchMessageError,
+    TResult Function()? loadConversationList,
+    TResult Function(String filter)? setChatFilter,
+    TResult Function(String query)? setSearchQuery,
+    TResult Function(String messageId)? loadMessageReads,
+    TResult Function(String messageId)? markMessageRead,
+    TResult Function(String conversationId)? startWatchReads,
+    TResult Function()? stopWatchReads,
+    TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
+    TResult Function(String conversationId, bool isTyping)? sendTyping,
+    TResult Function(String conversationId)? startWatchTyping,
+    TResult Function()? stopWatchTyping,
+    TResult Function(String userId)? watchTypingArrived,
+    TResult Function()? cleanupTyping,
+    required TResult orElse(),
+  }) {
+    if (cancelEventRsvp != null) {
+      return cancelEventRsvp(eventMessageId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
+    required TResult Function(LoadChatMessagesEvent value) loadMessages,
+    required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
+    required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
+    required TResult Function(EditChatMessageEvent value) editMessage,
+    required TResult Function(DeleteChatMessageEvent value) deleteMessage,
+    required TResult Function(MarkConversationReadEvent value)
+        markConversationRead,
+    required TResult Function(ClearChatMessagesInfoEvent value) clearInfo,
+    required TResult Function(StartWatchMessagesEvent value) startWatch,
+    required TResult Function(StopWatchMessagesEvent value) stopWatch,
+    required TResult Function(WatchMessageArrivedEvent value)
+        watchMessageArrived,
+    required TResult Function(WatchMessageUpdatedEvent value)
+        watchMessageUpdated,
+    required TResult Function(WatchMessageDeletedEvent value)
+        watchMessageDeleted,
+    required TResult Function(WatchMessageErrorEvent value) watchMessageError,
+    required TResult Function(LoadConversationListEvent value)
+        loadConversationList,
+    required TResult Function(SetChatFilterEvent value) setChatFilter,
+    required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
+    required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(StartWatchReadsEvent value) startWatchReads,
+    required TResult Function(StopWatchReadsEvent value) stopWatchReads,
+    required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
+    required TResult Function(SendTypingEvent value) sendTyping,
+    required TResult Function(StartWatchTypingEvent value) startWatchTyping,
+    required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
+    required TResult Function(WatchTypingArrivedEvent value) watchTypingArrived,
+    required TResult Function(CleanupTypingEvent value) cleanupTyping,
+  }) {
+    return cancelEventRsvp(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
+    TResult? Function(LoadChatMessagesEvent value)? loadMessages,
+    TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
+    TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
+    TResult? Function(EditChatMessageEvent value)? editMessage,
+    TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
+    TResult? Function(MarkConversationReadEvent value)? markConversationRead,
+    TResult? Function(ClearChatMessagesInfoEvent value)? clearInfo,
+    TResult? Function(StartWatchMessagesEvent value)? startWatch,
+    TResult? Function(StopWatchMessagesEvent value)? stopWatch,
+    TResult? Function(WatchMessageArrivedEvent value)? watchMessageArrived,
+    TResult? Function(WatchMessageUpdatedEvent value)? watchMessageUpdated,
+    TResult? Function(WatchMessageDeletedEvent value)? watchMessageDeleted,
+    TResult? Function(WatchMessageErrorEvent value)? watchMessageError,
+    TResult? Function(LoadConversationListEvent value)? loadConversationList,
+    TResult? Function(SetChatFilterEvent value)? setChatFilter,
+    TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
+    TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(StartWatchReadsEvent value)? startWatchReads,
+    TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
+    TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
+    TResult? Function(SendTypingEvent value)? sendTyping,
+    TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
+    TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
+    TResult? Function(WatchTypingArrivedEvent value)? watchTypingArrived,
+    TResult? Function(CleanupTypingEvent value)? cleanupTyping,
+  }) {
+    return cancelEventRsvp?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
+    TResult Function(LoadChatMessagesEvent value)? loadMessages,
+    TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
+    TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
+    TResult Function(EditChatMessageEvent value)? editMessage,
+    TResult Function(DeleteChatMessageEvent value)? deleteMessage,
+    TResult Function(MarkConversationReadEvent value)? markConversationRead,
+    TResult Function(ClearChatMessagesInfoEvent value)? clearInfo,
+    TResult Function(StartWatchMessagesEvent value)? startWatch,
+    TResult Function(StopWatchMessagesEvent value)? stopWatch,
+    TResult Function(WatchMessageArrivedEvent value)? watchMessageArrived,
+    TResult Function(WatchMessageUpdatedEvent value)? watchMessageUpdated,
+    TResult Function(WatchMessageDeletedEvent value)? watchMessageDeleted,
+    TResult Function(WatchMessageErrorEvent value)? watchMessageError,
+    TResult Function(LoadConversationListEvent value)? loadConversationList,
+    TResult Function(SetChatFilterEvent value)? setChatFilter,
+    TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
+    TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(StartWatchReadsEvent value)? startWatchReads,
+    TResult Function(StopWatchReadsEvent value)? stopWatchReads,
+    TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
+    TResult Function(SendTypingEvent value)? sendTyping,
+    TResult Function(StartWatchTypingEvent value)? startWatchTyping,
+    TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
+    TResult Function(WatchTypingArrivedEvent value)? watchTypingArrived,
+    TResult Function(CleanupTypingEvent value)? cleanupTyping,
+    required TResult orElse(),
+  }) {
+    if (cancelEventRsvp != null) {
+      return cancelEventRsvp(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CancelEventRsvpEvent implements ChatMessageEvent {
+  const factory CancelEventRsvpEvent({required final String eventMessageId}) =
+      _$CancelEventRsvpEventImpl;
+
+  String get eventMessageId;
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CancelEventRsvpEventImplCopyWith<_$CancelEventRsvpEventImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -7219,6 +10801,17 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -7238,6 +10831,11 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -7257,6 +10855,12 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -7276,6 +10880,10 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -7295,6 +10903,12 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -7314,6 +10928,10 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -7334,6 +10952,8 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -7357,6 +10977,10 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -7373,6 +10997,8 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -7391,6 +11017,10 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -7407,6 +11037,8 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -7425,6 +11057,10 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -7534,6 +11170,17 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -7553,6 +11200,11 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -7572,6 +11224,12 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -7591,6 +11249,10 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -7610,6 +11272,12 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -7629,6 +11297,10 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -7649,6 +11321,8 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -7672,6 +11346,10 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -7688,6 +11366,8 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -7706,6 +11386,10 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -7722,6 +11406,8 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -7740,6 +11426,10 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -7818,6 +11508,17 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -7837,6 +11538,11 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -7856,6 +11562,12 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -7875,6 +11587,10 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -7894,6 +11610,12 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -7913,6 +11635,10 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -7933,6 +11659,8 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -7956,6 +11684,10 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -7972,6 +11704,8 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -7990,6 +11724,10 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -8006,6 +11744,8 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -8024,6 +11764,10 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -8122,6 +11866,17 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -8141,6 +11896,11 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -8160,6 +11920,12 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -8179,6 +11945,10 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -8198,6 +11968,12 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -8217,6 +11993,10 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -8237,6 +12017,8 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -8260,6 +12042,10 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -8276,6 +12062,8 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -8294,6 +12082,10 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -8310,6 +12102,8 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -8328,6 +12122,10 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -8405,6 +12203,17 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? location,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
     required TResult Function(String messageId, String newContent) editMessage,
     required TResult Function(String messageId) deleteMessage,
     required TResult Function(String conversationId, String? uptoMessageId)
@@ -8424,6 +12233,11 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
     required TResult Function(String conversationId, bool isTyping) sendTyping,
     required TResult Function(String conversationId) startWatchTyping,
     required TResult Function() stopWatchTyping,
@@ -8443,6 +12257,12 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult? Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
     TResult? Function(String conversationId, String? uptoMessageId)?
@@ -8462,6 +12282,10 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
     TResult? Function(String conversationId, bool isTyping)? sendTyping,
     TResult? Function(String conversationId)? startWatchTyping,
     TResult? Function()? stopWatchTyping,
@@ -8481,6 +12305,12 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice)?
+        sendPollMessage,
+    TResult Function(String conversationId, String title, String? description,
+            String? location, DateTime startDate, DateTime endDate)?
+        sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
     TResult Function(String conversationId, String? uptoMessageId)?
@@ -8500,6 +12330,10 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
     TResult Function(String conversationId, bool isTyping)? sendTyping,
     TResult Function(String conversationId)? startWatchTyping,
     TResult Function()? stopWatchTyping,
@@ -8520,6 +12354,8 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
     required TResult Function(DeleteChatMessageEvent value) deleteMessage,
     required TResult Function(MarkConversationReadEvent value)
@@ -8543,6 +12379,10 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
     required TResult Function(SendTypingEvent value) sendTyping,
     required TResult Function(StartWatchTypingEvent value) startWatchTyping,
     required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
@@ -8559,6 +12399,8 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
     TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult? Function(MarkConversationReadEvent value)? markConversationRead,
@@ -8577,6 +12419,10 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult? Function(SendTypingEvent value)? sendTyping,
     TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
@@ -8593,6 +12439,8 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
     TResult Function(DeleteChatMessageEvent value)? deleteMessage,
     TResult Function(MarkConversationReadEvent value)? markConversationRead,
@@ -8611,6 +12459,10 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
     TResult Function(SendTypingEvent value)? sendTyping,
     TResult Function(StartWatchTypingEvent value)? startWatchTyping,
     TResult Function(StopWatchTypingEvent value)? stopWatchTyping,

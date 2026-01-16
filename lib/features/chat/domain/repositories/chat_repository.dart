@@ -28,6 +28,24 @@ abstract class ChatRepository {
     String? replyToMessageId,
   });
 
+  /// Send a poll message
+  Future<Either<Failure, ChatMessageEntity>> sendPollMessage({
+    required String conversationId,
+    required String question,
+    required List<String> options,
+    required bool multipleChoice,
+  });
+
+  /// Send an event message
+  Future<Either<Failure, ChatMessageEntity>> sendEventMessage({
+    required String conversationId,
+    required String title,
+    String? description,
+    String? location,
+    required DateTime startDate,
+    required DateTime endDate,
+  });
+
   /// Edit an existing message
   Future<Either<Failure, ChatMessageEntity>> editMessage({
     required String messageId,
@@ -79,6 +97,33 @@ abstract class ChatRepository {
   Stream<Either<Failure, MessageReadEntity>> watchMessageReads({
     required String conversationId,
   });
+
+  // =========================================================
+  // POLL VOTING
+  // =========================================================
+
+  /// Vote on a poll option (single choice polls auto-remove previous vote)
+  Future<Either<Failure, void>> votePollOption({
+    required String pollMessageId,
+    required String optionId,
+  });
+
+  /// Remove vote from a poll option (for multiple choice toggle)
+  Future<Either<Failure, void>> unvotePollOption({required String optionId});
+
+  // =========================================================
+  // EVENT RSVP
+  // =========================================================
+
+  /// Respond to an event with RSVP status
+  Future<Either<Failure, void>> respondToEvent({
+    required String eventMessageId,
+    required String status, // 'going', 'interested', 'not_going'
+  });
+
+  /// Cancel RSVP response to an event
+  Future<Either<Failure, void>> cancelEventRsvp(
+      {required String eventMessageId});
 
   // =========================================================
   // TYPING INDICATOR

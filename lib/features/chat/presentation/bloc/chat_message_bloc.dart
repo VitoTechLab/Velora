@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velora/core/errors/chat_failure.dart';
 import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/chat/domain/entities/message_read_entity.dart';
+import 'package:velora/features/chat/domain/usecases/cancel_event_rsvp_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/delete_message_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/edit_message_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/create_direct_conversation_usecase.dart';
@@ -13,9 +14,14 @@ import 'package:velora/features/chat/domain/usecases/get_message_reads_usecase.d
 import 'package:velora/features/chat/domain/usecases/get_messages_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/mark_conversation_read_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/mark_message_read_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/respond_to_event_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/send_event_message_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/send_poll_message_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/send_text_message_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/send_typing_indicator_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/stop_watch_messages_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/unvote_poll_option_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/vote_poll_option_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/watch_message_reads_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/watch_new_messages_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/watch_typing_indicators_usecase.dart';
@@ -39,6 +45,12 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     required this.sendTypingIndicatorUseCase,
     required this.watchTypingIndicatorsUseCase,
     required this.createDirectConversationUseCase,
+    required this.sendPollMessageUseCase,
+    required this.sendEventMessageUseCase,
+    required this.votePollOptionUseCase,
+    required this.unvotePollOptionUseCase,
+    required this.respondToEventUseCase,
+    required this.cancelEventRsvpUseCase,
   }) : super(const ChatMessageState()) {
     on<InitializeChatEvent>(_onInitializeChat);
     on<LoadChatMessagesEvent>(_onLoadInitialMessages);
@@ -47,6 +59,8 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
       transformer: bloc_concurrency.droppable(),
     );
     on<SendChatMessageEvent>(_onSendMessage);
+    on<SendPollMessageEvent>(_onSendPollMessage);
+    on<SendEventMessageEvent>(_onSendEventMessage);
     on<EditChatMessageEvent>(_onEditMessage);
     on<DeleteChatMessageEvent>(_onDeleteMessage);
     on<MarkConversationReadEvent>(_onMarkConversationRead);
@@ -86,6 +100,14 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     on<StopWatchReadsEvent>(_onStopWatchReads);
     on<WatchReadArrivedEvent>(_onWatchReadArrived);
 
+    // Poll Voting
+    on<VotePollEvent>(_onVotePoll);
+    on<UnvotePollEvent>(_onUnvotePoll);
+
+    // Event RSVP
+    on<RespondToEventEvent>(_onRespondToEvent);
+    on<CancelEventRsvpEvent>(_onCancelEventRsvp);
+
     // Typing Indicator
     on<SendTypingEvent>(_onSendTyping);
     on<StartWatchTypingEvent>(_onStartWatchTyping);
@@ -116,6 +138,14 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
 
   // Direct Conversation
   final CreateDirectConversationUseCase createDirectConversationUseCase;
+
+  // Poll & Event
+  final SendPollMessageUseCase sendPollMessageUseCase;
+  final SendEventMessageUseCase sendEventMessageUseCase;
+  final VotePollOptionUseCase votePollOptionUseCase;
+  final UnvotePollOptionUseCase unvotePollOptionUseCase;
+  final RespondToEventUseCase respondToEventUseCase;
+  final CancelEventRsvpUseCase cancelEventRsvpUseCase;
 
   StreamSubscription? _watchSub;
   StreamSubscription? _readWatchSub;
@@ -371,6 +401,68 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
             messages: [chatMessage, ...state.messages],
             sentMessage: chatMessage,
             message: 'Message sent',
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _onSendPollMessage(
+    SendPollMessageEvent event,
+    Emitter<ChatMessageState> emit,
+  ) async {
+    emit(state.copyWith(isSending: true, sendError: null));
+
+    final result = await sendPollMessageUseCase(
+      conversationId: event.conversationId,
+      question: event.question,
+      options: event.options,
+      multipleChoice: event.multipleChoice,
+    );
+
+    result.fold(
+      (failure) {
+        emit(state.copyWith(isSending: false, sendError: failure.message));
+      },
+      (chatMessage) {
+        emit(
+          state.copyWith(
+            isSending: false,
+            messages: [chatMessage, ...state.messages],
+            sentMessage: chatMessage,
+            message: 'Poll sent',
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _onSendEventMessage(
+    SendEventMessageEvent event,
+    Emitter<ChatMessageState> emit,
+  ) async {
+    emit(state.copyWith(isSending: true, sendError: null));
+
+    final result = await sendEventMessageUseCase(
+      conversationId: event.conversationId,
+      title: event.title,
+      description: event.description,
+      location: event.location,
+      startDate: event.startDate,
+      endDate: event.endDate,
+    );
+
+    result.fold(
+      (failure) {
+        emit(state.copyWith(isSending: false, sendError: failure.message));
+      },
+      (chatMessage) {
+        emit(
+          state.copyWith(
+            isSending: false,
+            messages: [chatMessage, ...state.messages],
+            sentMessage: chatMessage,
+            message: 'Event sent',
           ),
         );
       },
@@ -854,6 +946,102 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     if (updatedTyping.length != state.typingUsers.length) {
       emit(state.copyWith(typingUsers: updatedTyping));
     }
+  }
+
+  // =========================================================
+  // POLL VOTING HANDLERS
+  // =========================================================
+
+  Future<void> _onVotePoll(
+    VotePollEvent event,
+    Emitter<ChatMessageState> emit,
+  ) async {
+    logi(
+        '$_logTag: voting on poll ${event.pollMessageId}, option ${event.optionId}');
+
+    final result = await votePollOptionUseCase(
+      pollMessageId: event.pollMessageId,
+      optionId: event.optionId,
+    );
+
+    result.fold(
+      (failure) {
+        loge('$_logTag: votePoll error', error: failure);
+        emit(state.copyWith(errorMessage: failure.message));
+      },
+      (_) {
+        logi('$_logTag: vote successful, refreshing messages');
+        // Note: In a full implementation, you might want to emit an optimistic
+        // update or trigger a message refresh to get updated vote counts
+      },
+    );
+  }
+
+  Future<void> _onUnvotePoll(
+    UnvotePollEvent event,
+    Emitter<ChatMessageState> emit,
+  ) async {
+    logi('$_logTag: removing vote from option ${event.optionId}');
+
+    final result = await unvotePollOptionUseCase(optionId: event.optionId);
+
+    result.fold(
+      (failure) {
+        loge('$_logTag: unvotePoll error', error: failure);
+        emit(state.copyWith(errorMessage: failure.message));
+      },
+      (_) {
+        logi('$_logTag: vote removed successfully');
+      },
+    );
+  }
+
+  // =========================================================
+  // EVENT RSVP HANDLERS
+  // =========================================================
+
+  Future<void> _onRespondToEvent(
+    RespondToEventEvent event,
+    Emitter<ChatMessageState> emit,
+  ) async {
+    logi(
+        '$_logTag: responding to event ${event.eventMessageId} with ${event.status}');
+
+    final result = await respondToEventUseCase(
+      eventMessageId: event.eventMessageId,
+      status: event.status,
+    );
+
+    result.fold(
+      (failure) {
+        loge('$_logTag: respondToEvent error', error: failure);
+        emit(state.copyWith(errorMessage: failure.message));
+      },
+      (_) {
+        logi('$_logTag: RSVP response successful');
+      },
+    );
+  }
+
+  Future<void> _onCancelEventRsvp(
+    CancelEventRsvpEvent event,
+    Emitter<ChatMessageState> emit,
+  ) async {
+    logi('$_logTag: cancelling RSVP for event ${event.eventMessageId}');
+
+    final result = await cancelEventRsvpUseCase(
+      eventMessageId: event.eventMessageId,
+    );
+
+    result.fold(
+      (failure) {
+        loge('$_logTag: cancelEventRsvp error', error: failure);
+        emit(state.copyWith(errorMessage: failure.message));
+      },
+      (_) {
+        logi('$_logTag: RSVP cancelled successfully');
+      },
+    );
   }
 
   @override

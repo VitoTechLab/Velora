@@ -35,6 +35,22 @@ class ChatMessageEvent with _$ChatMessageEvent {
     String? replyToMessageId,
   }) = SendChatMessageEvent;
 
+  const factory ChatMessageEvent.sendPollMessage({
+    required String conversationId,
+    required String question,
+    required List<String> options,
+    @Default(false) bool multipleChoice,
+  }) = SendPollMessageEvent;
+
+  const factory ChatMessageEvent.sendEventMessage({
+    required String conversationId,
+    required String title,
+    String? description,
+    String? location,
+    required DateTime startDate,
+    required DateTime endDate,
+  }) = SendEventMessageEvent;
+
   const factory ChatMessageEvent.editMessage({
     required String messageId,
     required String newContent,
@@ -98,6 +114,30 @@ class ChatMessageEvent with _$ChatMessageEvent {
   const factory ChatMessageEvent.watchReadArrived(
     MessageReadEntity readEntity,
   ) = WatchReadArrivedEvent;
+
+  // =========================================================
+  // POLL VOTING
+  // =========================================================
+  const factory ChatMessageEvent.votePoll({
+    required String pollMessageId,
+    required String optionId,
+  }) = VotePollEvent;
+
+  const factory ChatMessageEvent.unvotePoll({
+    required String optionId,
+  }) = UnvotePollEvent;
+
+  // =========================================================
+  // EVENT RSVP
+  // =========================================================
+  const factory ChatMessageEvent.respondToEvent({
+    required String eventMessageId,
+    required String status, // 'going', 'interested', 'not_going'
+  }) = RespondToEventEvent;
+
+  const factory ChatMessageEvent.cancelEventRsvp({
+    required String eventMessageId,
+  }) = CancelEventRsvpEvent;
 
   // =========================================================
   // TYPING INDICATOR

@@ -21,6 +21,7 @@ class _CreatePollDialogState extends State<CreatePollDialog> {
     TextEditingController(),
     TextEditingController(),
   ];
+  bool _isMultipleChoice = false;
 
   @override
   void dispose() {
@@ -70,7 +71,11 @@ class _CreatePollDialogState extends State<CreatePollDialog> {
       return;
     }
 
-    Navigator.pop(context, {'question': question, 'options': options});
+    Navigator.pop(context, {
+      'question': question,
+      'options': options,
+      'multiple_choice': _isMultipleChoice,
+    });
   }
 
   @override
@@ -197,10 +202,21 @@ class _CreatePollDialogState extends State<CreatePollDialog> {
                         onPressed: _addOption,
                         icon: const Icon(Icons.add),
                         label: Text(t.chatPollDialogAddOption),
-                        style: OutlinedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                        ),
                       ),
+                    const SizedBox(height: 20),
+                    // Multiple choice toggle
+                    SwitchListTile(
+                      value: _isMultipleChoice,
+                      onChanged: (value) {
+                        setState(() {
+                          _isMultipleChoice = value;
+                        });
+                      },
+                      title: Text(t.chatPollDialogMultipleChoiceLabel),
+                      subtitle: Text(t.chatPollDialogMultipleChoiceHint),
+                      secondary: const Icon(Icons.checklist_rtl),
+                      contentPadding: EdgeInsets.zero,
+                    ),
                   ],
                 ),
               ),

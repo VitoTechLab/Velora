@@ -61,6 +61,56 @@ class ChatRepositoryImpl implements ChatRepository {
   }
 
   @override
+  Future<Either<Failure, ChatMessageEntity>> sendPollMessage({
+    required String conversationId,
+    required String question,
+    required List<String> options,
+    required bool multipleChoice,
+  }) async {
+    try {
+      logi('[CHAT REPOSITORY] sendPollMessage - conversation: $conversationId');
+      final result = await remoteDataSource.sendPollMessage(
+        conversationId: conversationId,
+        question: question,
+        options: options,
+        multipleChoice: multipleChoice,
+      );
+      return Right(result.toEntity());
+    } catch (e) {
+      loge('[CHAT REPOSITORY ERROR] sendPollMessage', error: e);
+      return Left(ChatFailure.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ChatMessageEntity>> sendEventMessage({
+    required String conversationId,
+    required String title,
+    String? description,
+    String? location,
+    required DateTime startDate,
+    required DateTime endDate,
+  }) async {
+    try {
+      logi(
+        '[CHAT REPOSITORY] sendEventMessage - conversation: $conversationId',
+      );
+      final result = await remoteDataSource.sendEventMessage(
+        conversationId: conversationId,
+        title: title,
+        description: description,
+        location: location,
+        startDate: startDate,
+        endDate: endDate,
+      );
+      return Right(result.toEntity());
+    } catch (e) {
+      loge('[CHAT REPOSITORY ERROR] sendEventMessage', error: e);
+      return Left(ChatFailure.fromException(e));
+    }
+  }
+
+  @override
   Future<Either<Failure, ChatMessageEntity>> editMessage({
     required String messageId,
     required String newBody,
@@ -211,7 +261,7 @@ class ChatRepositoryImpl implements ChatRepository {
 
   @override
   Future<Either<Failure, List<ConversationListEntity>>>
-  getConversationList() async {
+      getConversationList() async {
     try {
       logi('[CHAT REPOSITORY] getConversationList');
       final result = await remoteDataSource.getConversationList();
@@ -268,6 +318,80 @@ class ChatRepositoryImpl implements ChatRepository {
       }
     } catch (e) {
       yield Left(ChatFailure.fromException(e));
+    }
+  }
+
+  // =========================================================
+  // POLL VOTING
+  // =========================================================
+
+  @override
+  Future<Either<Failure, void>> votePollOption({
+    required String pollMessageId,
+    required String optionId,
+  }) async {
+    try {
+      logi(
+          '[CHAT REPOSITORY] votePollOption - poll: $pollMessageId, option: $optionId');
+      await remoteDataSource.votePollOption(
+        pollMessageId: pollMessageId,
+        optionId: optionId,
+      );
+      return const Right(null);
+    } catch (e) {
+      loge('[CHAT REPOSITORY ERROR] votePollOption', error: e);
+      return Left(ChatFailure.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> unvotePollOption({
+    required String optionId,
+  }) async {
+    try {
+      logi('[CHAT REPOSITORY] unvotePollOption - option: $optionId');
+      await remoteDataSource.unvotePollOption(optionId: optionId);
+      return const Right(null);
+    } catch (e) {
+      loge('[CHAT REPOSITORY ERROR] unvotePollOption', error: e);
+      return Left(ChatFailure.fromException(e));
+    }
+  }
+
+  // =========================================================
+  // EVENT RSVP
+  // =========================================================
+
+  @override
+  Future<Either<Failure, void>> respondToEvent({
+    required String eventMessageId,
+    required String status,
+  }) async {
+    try {
+      logi(
+          '[CHAT REPOSITORY] respondToEvent - event: $eventMessageId, status: $status');
+      await remoteDataSource.respondToEvent(
+        eventMessageId: eventMessageId,
+        status: status,
+      );
+      return const Right(null);
+    } catch (e) {
+      loge('[CHAT REPOSITORY ERROR] respondToEvent', error: e);
+      return Left(ChatFailure.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> cancelEventRsvp({
+    required String eventMessageId,
+  }) async {
+    try {
+      logi('[CHAT REPOSITORY] cancelEventRsvp - event: $eventMessageId');
+      await remoteDataSource.cancelEventRsvp(eventMessageId: eventMessageId);
+      return const Right(null);
+    } catch (e) {
+      loge('[CHAT REPOSITORY ERROR] cancelEventRsvp', error: e);
+      return Left(ChatFailure.fromException(e));
     }
   }
 

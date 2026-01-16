@@ -27,6 +27,8 @@ mixin _$ChatMessageEntity {
   String? get deletedBy => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
+  PollPayloadEntity? get poll => throw _privateConstructorUsedError;
+  EventPayloadEntity? get event => throw _privateConstructorUsedError;
 
   /// Create a copy of ChatMessageEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -52,7 +54,12 @@ abstract class $ChatMessageEntityCopyWith<$Res> {
       DateTime? deletedAt,
       String? deletedBy,
       DateTime createdAt,
-      DateTime updatedAt});
+      DateTime updatedAt,
+      PollPayloadEntity? poll,
+      EventPayloadEntity? event});
+
+  $PollPayloadEntityCopyWith<$Res>? get poll;
+  $EventPayloadEntityCopyWith<$Res>? get event;
 }
 
 /// @nodoc
@@ -81,6 +88,8 @@ class _$ChatMessageEntityCopyWithImpl<$Res, $Val extends ChatMessageEntity>
     Object? deletedBy = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? poll = freezed,
+    Object? event = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -127,7 +136,43 @@ class _$ChatMessageEntityCopyWithImpl<$Res, $Val extends ChatMessageEntity>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      poll: freezed == poll
+          ? _value.poll
+          : poll // ignore: cast_nullable_to_non_nullable
+              as PollPayloadEntity?,
+      event: freezed == event
+          ? _value.event
+          : event // ignore: cast_nullable_to_non_nullable
+              as EventPayloadEntity?,
     ) as $Val);
+  }
+
+  /// Create a copy of ChatMessageEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PollPayloadEntityCopyWith<$Res>? get poll {
+    if (_value.poll == null) {
+      return null;
+    }
+
+    return $PollPayloadEntityCopyWith<$Res>(_value.poll!, (value) {
+      return _then(_value.copyWith(poll: value) as $Val);
+    });
+  }
+
+  /// Create a copy of ChatMessageEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $EventPayloadEntityCopyWith<$Res>? get event {
+    if (_value.event == null) {
+      return null;
+    }
+
+    return $EventPayloadEntityCopyWith<$Res>(_value.event!, (value) {
+      return _then(_value.copyWith(event: value) as $Val);
+    });
   }
 }
 
@@ -150,7 +195,14 @@ abstract class _$$ChatMessageEntityImplCopyWith<$Res>
       DateTime? deletedAt,
       String? deletedBy,
       DateTime createdAt,
-      DateTime updatedAt});
+      DateTime updatedAt,
+      PollPayloadEntity? poll,
+      EventPayloadEntity? event});
+
+  @override
+  $PollPayloadEntityCopyWith<$Res>? get poll;
+  @override
+  $EventPayloadEntityCopyWith<$Res>? get event;
 }
 
 /// @nodoc
@@ -177,6 +229,8 @@ class __$$ChatMessageEntityImplCopyWithImpl<$Res>
     Object? deletedBy = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? poll = freezed,
+    Object? event = freezed,
   }) {
     return _then(_$ChatMessageEntityImpl(
       id: null == id
@@ -223,6 +277,14 @@ class __$$ChatMessageEntityImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      poll: freezed == poll
+          ? _value.poll
+          : poll // ignore: cast_nullable_to_non_nullable
+              as PollPayloadEntity?,
+      event: freezed == event
+          ? _value.event
+          : event // ignore: cast_nullable_to_non_nullable
+              as EventPayloadEntity?,
     ));
   }
 }
@@ -241,7 +303,9 @@ class _$ChatMessageEntityImpl implements _ChatMessageEntity {
       this.deletedAt,
       this.deletedBy,
       required this.createdAt,
-      required this.updatedAt});
+      required this.updatedAt,
+      this.poll,
+      this.event});
 
   @override
   final String id;
@@ -265,10 +329,14 @@ class _$ChatMessageEntityImpl implements _ChatMessageEntity {
   final DateTime createdAt;
   @override
   final DateTime updatedAt;
+  @override
+  final PollPayloadEntity? poll;
+  @override
+  final EventPayloadEntity? event;
 
   @override
   String toString() {
-    return 'ChatMessageEntity(id: $id, conversationId: $conversationId, senderId: $senderId, kind: $kind, body: $body, replyToMessageId: $replyToMessageId, editedAt: $editedAt, deletedAt: $deletedAt, deletedBy: $deletedBy, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'ChatMessageEntity(id: $id, conversationId: $conversationId, senderId: $senderId, kind: $kind, body: $body, replyToMessageId: $replyToMessageId, editedAt: $editedAt, deletedAt: $deletedAt, deletedBy: $deletedBy, createdAt: $createdAt, updatedAt: $updatedAt, poll: $poll, event: $event)';
   }
 
   @override
@@ -294,7 +362,9 @@ class _$ChatMessageEntityImpl implements _ChatMessageEntity {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.updatedAt == updatedAt) &&
+            (identical(other.poll, poll) || other.poll == poll) &&
+            (identical(other.event, event) || other.event == event));
   }
 
   @override
@@ -310,7 +380,9 @@ class _$ChatMessageEntityImpl implements _ChatMessageEntity {
       deletedAt,
       deletedBy,
       createdAt,
-      updatedAt);
+      updatedAt,
+      poll,
+      event);
 
   /// Create a copy of ChatMessageEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -334,7 +406,9 @@ abstract class _ChatMessageEntity implements ChatMessageEntity {
       final DateTime? deletedAt,
       final String? deletedBy,
       required final DateTime createdAt,
-      required final DateTime updatedAt}) = _$ChatMessageEntityImpl;
+      required final DateTime updatedAt,
+      final PollPayloadEntity? poll,
+      final EventPayloadEntity? event}) = _$ChatMessageEntityImpl;
 
   @override
   String get id;
@@ -358,6 +432,10 @@ abstract class _ChatMessageEntity implements ChatMessageEntity {
   DateTime get createdAt;
   @override
   DateTime get updatedAt;
+  @override
+  PollPayloadEntity? get poll;
+  @override
+  EventPayloadEntity? get event;
 
   /// Create a copy of ChatMessageEntity
   /// with the given fields replaced by the non-null parameter values.
