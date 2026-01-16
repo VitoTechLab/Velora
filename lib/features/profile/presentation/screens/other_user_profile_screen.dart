@@ -6,7 +6,6 @@ import 'package:velora/features/feed/presentation/bloc/feed_bloc.dart';
 import 'package:velora/features/feed/presentation/bloc/feed_event.dart';
 import 'package:velora/features/feed/presentation/bloc/feed_state.dart';
 import 'package:velora/features/profile/presentation/bloc/profile_bloc.dart';
-import 'package:velora/features/profile/presentation/bloc/profile_event.dart';
 import 'package:velora/features/profile/presentation/bloc/profile_state.dart';
 import 'package:velora/features/profile/presentation/widgets/profile_header.dart';
 import 'package:velora/features/profile/presentation/widgets/profile_stats.dart';

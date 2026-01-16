@@ -19,7 +19,9 @@ class ChatPollWidget extends StatelessWidget {
   final bool isRead;
   final bool hasVoted;
   final int totalVotes;
-  final VoidCallback? onVote;
+
+  /// Callback when voting - passes the option id
+  final void Function(String optionId)? onVote;
 
   const ChatPollWidget({
     super.key,
@@ -44,9 +46,8 @@ class ChatPollWidget extends StatelessWidget {
         ? colorScheme.primaryContainer
         : colorScheme.surfaceContainerHigh;
 
-    final textColor = isSender
-        ? colorScheme.onPrimaryContainer
-        : colorScheme.onSurface;
+    final textColor =
+        isSender ? colorScheme.onPrimaryContainer : colorScheme.onSurface;
 
     return Semantics(
       label: isSender ? t.chatPollSemanticsYour : t.chatPollSemanticsReceived,
@@ -137,8 +138,8 @@ class ChatPollWidget extends StatelessWidget {
                         onTap: hasVoted || isSender
                             ? null
                             : () {
-                                // Handle vote
-                                onVote?.call();
+                                // Handle vote with option id
+                                onVote?.call(option.id);
                               },
                         t: t,
                       ),
@@ -172,7 +173,9 @@ class ChatPollWidget extends StatelessWidget {
                             AnimatedSwitcher(
                               duration: const Duration(milliseconds: 200),
                               child: Icon(
-                                isRead ? Icons.done_all_rounded : Icons.check_rounded,
+                                isRead
+                                    ? Icons.done_all_rounded
+                                    : Icons.check_rounded,
                                 key: ValueKey(isRead),
                                 size: 16,
                                 color: isRead
@@ -258,7 +261,8 @@ class _PollOptionItem extends StatelessWidget {
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.easeOutCubic,
                       alignment: Alignment.centerLeft,
-                      widthFactor: totalVotes > 0 ? option.votes / totalVotes : 0,
+                      widthFactor:
+                          totalVotes > 0 ? option.votes / totalVotes : 0,
                       child: Container(
                         decoration: BoxDecoration(
                           color: progressColor,
@@ -270,7 +274,8 @@ class _PollOptionItem extends StatelessWidget {
 
                 // Content
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                   child: Row(
                     children: [
                       // Selected indicator
@@ -333,11 +338,13 @@ class _PollOptionItem extends StatelessWidget {
 }
 
 class PollOption {
+  final String id;
   final String text;
   final int votes;
   final bool isSelected;
 
   const PollOption({
+    required this.id,
     required this.text,
     required this.votes,
     this.isSelected = false,

@@ -18,7 +18,7 @@ import 'chat_remote_datasource.dart';
 
 class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
   ChatRemoteDataSourceImpl({required SupabaseClient supabaseClient})
-    : _client = supabaseClient;
+      : _client = supabaseClient;
 
   final SupabaseClient _client;
   RealtimeChannel? _messageChannel;
@@ -51,58 +51,41 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
           tag: _logTag,
         );
 
-        final params = <String, dynamic>{
-          'p_conversation_id': conversationId,
-          'p_limit': limit,
-        };
+        // Use direct query with views for vote counts and RSVP info
+        // v_poll_options_with_votes provides vote_count and is_selected
+        // v_event_with_rsvp provides going_count, interested_count, not_going_count, user_response
+        final effectiveLimit = limit + 1;
+
+        var query = _client
+            .from(SupabaseTables.messages)
+            .select('''
+              *,
+              message_poll_payload(
+                *,
+                poll_options:v_poll_options_with_votes(*)
+              ),
+              message_event_payload:v_event_with_rsvp(*)
+            ''')
+            .eq('conversation_id', conversationId)
+            .order('created_at', ascending: false)
+            .limit(effectiveLimit);
 
         if (cursor != null) {
-          params['p_cursor_created_at'] = cursor.createdAt
-              .toUtc()
-              .toIso8601String();
-          params['p_cursor_id'] = cursor.id;
-        }
-
-        // New optimized RPC returns {messages: [], has_more: bool, count: int}
-        final response = await _client.rpc(
-          SupabaseRpc.getMessagesPage,
-          params: params,
-        );
-
-        // Handle response based on format (backward compatible)
-        late List<ChatMessageModel> messages;
-        late bool hasMore;
-
-        if (response is Map<String, dynamic>) {
-          // New format: {messages: [], has_more: bool}
-          final messagesData = response['messages'] as List? ?? [];
-          hasMore = response['has_more'] as bool? ?? false;
-
-          messages = messagesData
-              .map(
-                (e) => ChatMessageModel.fromJson(
-                  Map<String, dynamic>.from(e as Map),
-                ),
-              )
-              .toList();
-
-          logi(
-            'Loaded ${messages.length} messages, hasMore=$hasMore',
-            tag: _logTag,
+          query = query.lt(
+            'created_at',
+            cursor.createdAt.toUtc().toIso8601String(),
           );
-        } else {
-          // Old format: List (backward compatibility)
-          final all = (response as List)
-              .map(
-                (e) => ChatMessageModel.fromJson(
-                  Map<String, dynamic>.from(e as Map),
-                ),
-              )
-              .toList();
-
-          hasMore = all.length > limit;
-          messages = hasMore ? all.sublist(0, limit) : all;
         }
+
+        final List<dynamic> response = await query;
+        final hasMore = response.length > limit;
+        final results = hasMore ? response.sublist(0, limit) : response;
+
+        final messages = results
+            .map(
+              (e) => ChatMessageModel.fromJson(Map<String, dynamic>.from(e)),
+            )
+            .toList();
 
         final nextCursor = messages.isEmpty
             ? null
@@ -139,16 +122,136 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
           'reply_to_message_id': replyToMessageId,
         };
 
-        // Select only needed fields to reduce bandwidth
+        // Select with poll/event joins (though null for text) to maintain consistency if needed
+        // But for text, standard return is fine.
         final response = await _client
             .from(SupabaseTables.messages)
             .insert(payload)
-            .select('id, conversation_id, sender_id, kind, body, reply_to_message_id, created_at, edited_at, deleted_at, deleted_by')
+            .select(
+                '*, message_poll_payload(*, poll_options(*)), message_event_payload(*)')
             .single();
 
         return ChatMessageModel.fromJson(response);
       },
       op: 'sendTextMessage',
+      tag: _logTag,
+    );
+  }
+
+  @override
+  Future<ChatMessageModel> sendPollMessage({
+    required String conversationId,
+    required String question,
+    required List<String> options,
+    required bool multipleChoice,
+  }) {
+    return guardSupabase(
+      () async {
+        final userId = _requireUserId();
+
+        // 1. Insert message
+        final msgRes = await _client
+            .from(SupabaseTables.messages)
+            .insert({
+              'conversation_id': conversationId,
+              'sender_id': userId,
+              'kind': 'poll',
+              'body': question,
+            })
+            .select()
+            .single();
+
+        final messageId = msgRes['id'] as String;
+
+        // 2. Insert payload
+        await _client.from('message_poll_payload').insert({
+          'message_id': messageId,
+          'question': question,
+          'multiple_choice': multipleChoice,
+        });
+
+        // 3. Insert options
+        final optionsPayload = options
+            .asMap()
+            .entries
+            .map(
+              (e) => {
+                'poll_message_id': messageId,
+                'text': e.value,
+                'position': e.key,
+              },
+            )
+            .toList();
+
+        await _client.from('poll_options').insert(optionsPayload);
+
+        // 4. Return full object with views for vote counts
+        final fullMsg = await _client.from(SupabaseTables.messages).select('''
+              *,
+              message_poll_payload(
+                *,
+                poll_options:v_poll_options_with_votes(*)
+              ),
+              message_event_payload:v_event_with_rsvp(*)
+            ''').eq('id', messageId).single();
+
+        return ChatMessageModel.fromJson(fullMsg);
+      },
+      op: 'sendPollMessage',
+      tag: _logTag,
+    );
+  }
+
+  @override
+  Future<ChatMessageModel> sendEventMessage({
+    required String conversationId,
+    required String title,
+    String? description,
+    String? location,
+    required DateTime startDate,
+    required DateTime endDate,
+  }) {
+    return guardSupabase(
+      () async {
+        final userId = _requireUserId();
+
+        // 1. Insert message
+        final msgRes = await _client
+            .from(SupabaseTables.messages)
+            .insert({
+              'conversation_id': conversationId,
+              'sender_id': userId,
+              'kind': 'event',
+              'body': title,
+            })
+            .select()
+            .single();
+
+        final messageId = msgRes['id'] as String;
+
+        // 2. Insert payload
+        await _client.from('message_event_payload').insert({
+          'message_id': messageId,
+          'title': title,
+          'notes': description,
+          'location': location,
+          'starts_at': startDate.toUtc().toIso8601String(),
+          'ends_at': endDate.toUtc().toIso8601String(),
+        });
+
+        // 3. Return full object with RSVP counts view
+        final fullMsg = await _client.from(SupabaseTables.messages).select('''
+              *,
+              message_poll_payload(
+                *,
+                poll_options:v_poll_options_with_votes(*)
+              ),
+              message_event_payload:v_event_with_rsvp(*)
+            ''').eq('id', messageId).single();
+
+        return ChatMessageModel.fromJson(fullMsg);
+      },
+      op: 'sendEventMessage',
       tag: _logTag,
     );
   }
@@ -620,6 +723,74 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
       await controller.close();
     }
     _typingController = null;
+  }
+
+  // =========================================================
+  // POLL VOTING
+  // =========================================================
+
+  @override
+  Future<void> votePollOption({
+    required String pollMessageId,
+    required String optionId,
+  }) {
+    return guardSupabase(
+      () async {
+        await _client.rpc('vote_poll_option', params: {
+          'p_poll_message_id': pollMessageId,
+          'p_option_id': optionId,
+        });
+      },
+      op: 'votePollOption',
+      tag: _logTag,
+    );
+  }
+
+  @override
+  Future<void> unvotePollOption({required String optionId}) {
+    return guardSupabase(
+      () async {
+        await _client.rpc('unvote_poll_option', params: {
+          'p_option_id': optionId,
+        });
+      },
+      op: 'unvotePollOption',
+      tag: _logTag,
+    );
+  }
+
+  // =========================================================
+  // EVENT RSVP
+  // =========================================================
+
+  @override
+  Future<void> respondToEvent({
+    required String eventMessageId,
+    required String status,
+  }) {
+    return guardSupabase(
+      () async {
+        await _client.rpc('respond_to_event', params: {
+          'p_event_message_id': eventMessageId,
+          'p_status': status,
+        });
+      },
+      op: 'respondToEvent',
+      tag: _logTag,
+    );
+  }
+
+  @override
+  Future<void> cancelEventRsvp({required String eventMessageId}) {
+    return guardSupabase(
+      () async {
+        await _client.rpc('cancel_event_rsvp', params: {
+          'p_event_message_id': eventMessageId,
+        });
+      },
+      op: 'cancelEventRsvp',
+      tag: _logTag,
+    );
   }
 
   // =========================================================

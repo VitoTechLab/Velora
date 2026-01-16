@@ -220,7 +220,7 @@ class _ConversationListItemWidget extends StatelessWidget {
     // Check if peer user is typing (for 1-on-1 chats only)
     return BlocSelector<ChatMessageBloc, ChatMessageState, bool>(
       selector: (state) {
-        if (isGroup || conversation.userId == null) return false;
+        if (isGroup) return false;
         return state.typingUsers.containsKey(conversation.userId);
       },
       builder: (context, isTyping) {

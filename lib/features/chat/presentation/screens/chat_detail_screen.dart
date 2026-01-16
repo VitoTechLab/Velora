@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:velora/core/di/service_locator.dart';
 import 'package:velora/core/ui/app_messenger.dart';
-import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/chat/presentation/bloc/chat_message_bloc.dart';
 import 'package:velora/features/chat/presentation/bloc/chat_message_event.dart';
 import 'package:velora/features/chat/presentation/bloc/chat_message_state.dart';
@@ -209,25 +208,40 @@ class ChatDetailScreen extends HookWidget {
     Future<void> handlePollPressed() async {
       final result = await CreatePollDialog.show(context);
       if (result != null) {
-        AppMessenger.showToast(
-          message: t.chatDetailPollCreated,
-          icon: Icons.poll_outlined,
-        );
-        // Note: Poll sending will be implemented when chat poll RPC is ready
-        // For now, showing confirmation toast and debug print
-        debugPrint('Poll: $result');
+        final question = result['question'] as String;
+        final options = (result['options'] as List).cast<String>();
+        final multipleChoice = result['multiple_choice'] as bool? ?? false;
+
+        context.read<ChatMessageBloc>().add(
+              SendPollMessageEvent(
+                conversationId: conversationId,
+                question: question,
+                options: options,
+                multipleChoice: multipleChoice,
+              ),
+            );
       }
     }
 
     Future<void> handleEventPressed() async {
       final result = await CreateEventDialog.show(context);
       if (result != null) {
-        AppMessenger.showToast(
-          message: t.chatDetailEventCreated,
-          icon: Icons.event_outlined,
-        );
-        // Note: Event will be sent when chat event RPC is implemented
-        debugPrint('Event: $result');
+        final title = result['title'] as String;
+        final description = result['description'] as String?;
+        final location = result['location'] as String?;
+        final startDate = DateTime.parse(result['startDate']);
+        final endDate = DateTime.parse(result['endDate']);
+
+        context.read<ChatMessageBloc>().add(
+              SendEventMessageEvent(
+                conversationId: conversationId,
+                title: title,
+                description: description,
+                location: location,
+                startDate: startDate,
+                endDate: endDate,
+              ),
+            );
       }
     }
 
@@ -808,46 +822,81 @@ class _ChatDetailContentState extends State<_ChatDetailContent> {
         break;
 
       case 'poll':
-        final currentUserId = Supabase.instance.client.auth.currentUser?.id;
-        final pollData = _parsePollData(message.metadata, currentUserId);
+        final poll = message.poll;
+        if (poll == null) {
+          messageWidget = ChatBubbleWidget(
+            message: 'Poll data unavailable',
+            time: time,
+            isSender: isSender,
+          );
+          break;
+        }
+
+        final options = poll.options
+            .map(
+              (o) => PollOption(
+                id: o.id,
+                text: o.text,
+                votes: o.voteCount,
+                isSelected: o.isSelected,
+              ),
+            )
+            .toList();
+
+        final totalVotes = options.fold<int>(0, (p, c) => p + c.votes);
+        final hasVoted = options.any((o) => o.isSelected);
+
         messageWidget = ChatPollWidget(
-          question: pollData.question,
-          options: pollData.options,
+          question: poll.question,
+          options: options,
           time: time,
           isSender: isSender,
-          totalVotes: pollData.totalVotes,
-          hasVoted: pollData.hasVoted,
-          onVote: pollData.hasVoted || isSender
+          totalVotes: totalVotes,
+          hasVoted: hasVoted,
+          onVote: hasVoted || isSender
               ? null
-              : () {
-                  // Note: RSVP will be implemented via bloc when event RPC is ready
-                  logi('Poll vote requested', tag: 'ChatDetail');
+              : (optionId) {
+                  context.read<ChatMessageBloc>().add(
+                        ChatMessageEvent.votePoll(
+                          pollMessageId: poll.messageId,
+                          optionId: optionId,
+                        ),
+                      );
                 },
         );
         break;
 
       case 'event':
-        final currentUserId = Supabase.instance.client.auth.currentUser?.id;
-        final eventData = _parseEventData(message.metadata, currentUserId);
+        final event = message.event;
+        if (event == null) {
+          messageWidget = ChatBubbleWidget(
+            message: 'Event data unavailable',
+            time: time,
+            isSender: isSender,
+          );
+          break;
+        }
+
         messageWidget = ChatEventWidget(
-          title: eventData.title,
-          description: eventData.description,
-          location: eventData.location,
-          startDate: eventData.startDate,
-          endDate: eventData.endDate,
+          title: event.title,
+          description: event.description ?? '',
+          location: event.location,
+          startDate: event.startDate,
+          endDate: event.endDate,
           time: time,
           isSender: isSender,
-          userResponse: eventData.userResponse,
-          goingCount: eventData.goingCount,
-          maybeCount: eventData.maybeCount,
-          notGoingCount: eventData.notGoingCount,
+          userResponse: _mapEventResponse(event.userResponse),
+          goingCount: event.goingCount,
+          maybeCount: event.maybeCount,
+          notGoingCount: event.notGoingCount,
           onResponseTap: isSender
               ? null
               : () {
-                  // Note: RSVP will be implemented via bloc when event RPC is ready
-                  logi('Event RSVP requested', tag: 'ChatDetail');
+                  _showEventRsvpDialog(
+                      context, event.messageId, event.userResponse);
                 },
         );
+        break;
         break;
 
       default:
@@ -870,166 +919,107 @@ class _ChatDetailContentState extends State<_ChatDetailContent> {
     );
   }
 
-  // ==========================================================================
-  // POLL HELPERS
-  // ==========================================================================
-
-  /// Parses poll metadata and returns structured poll data
-  _PollData _parsePollData(
-    Map<String, dynamic>? metadata,
-    String? currentUserId,
-  ) {
-    if (metadata == null) {
-      return _PollData(
-        question: '',
-        options: [],
-        totalVotes: 0,
-        hasVoted: false,
-      );
+  EventResponse? _mapEventResponse(String? status) {
+    if (status == null) return null;
+    switch (status) {
+      case 'going':
+        return EventResponse.going;
+      case 'maybe':
+      case 'interested':
+        return EventResponse.maybe;
+      case 'not_going':
+        return EventResponse.notGoing;
+      default:
+        return null;
     }
-
-    final question = metadata['question'] as String? ?? '';
-    final optionsRaw = metadata['options'] as List<dynamic>? ?? [];
-    final votesMap = metadata['votes'] as Map<String, dynamic>? ?? {};
-    final votersMap = metadata['voters'] as Map<String, dynamic>? ?? {};
-
-    // Check if current user has voted
-    bool hasVoted = false;
-    String? votedOptionId;
-    if (currentUserId != null) {
-      for (final entry in votersMap.entries) {
-        final voters = entry.value as List<dynamic>? ?? [];
-        if (voters.contains(currentUserId)) {
-          hasVoted = true;
-          votedOptionId = entry.key;
-          break;
-        }
-      }
-    }
-
-    // Parse options with vote counts
-    final options = optionsRaw.asMap().entries.map((entry) {
-      final index = entry.key;
-      final option = entry.value;
-      final optionId = option is Map ? option['id'] as String? : '$index';
-      final optionText =
-          option is Map ? option['text'] as String? ?? '' : option.toString();
-      final voteCount = votesMap[optionId] as int? ?? 0;
-      final isSelected = optionId == votedOptionId;
-
-      return PollOption(
-        text: optionText,
-        votes: voteCount,
-        isSelected: isSelected,
-      );
-    }).toList();
-
-    // Calculate total votes
-    final totalVotes = votesMap.values.fold<int>(
-      0,
-      (sum, count) => sum + (count as int? ?? 0),
-    );
-
-    return _PollData(
-      question: question,
-      options: options,
-      totalVotes: totalVotes,
-      hasVoted: hasVoted,
-    );
   }
 
-  // ==========================================================================
-  // EVENT HELPERS
-  // ==========================================================================
+  void _showEventRsvpDialog(
+      BuildContext context, String eventMessageId, String? currentResponse) {
+    final t = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
 
-  /// Parses event metadata and returns structured event data
-  _EventData _parseEventData(
-    Map<String, dynamic>? metadata,
-    String? currentUserId,
-  ) {
-    if (metadata == null) {
-      return _EventData(
-        title: '',
-        description: '',
-        location: null,
-        startDate: DateTime.now(),
-        endDate: DateTime.now().add(const Duration(hours: 1)),
-        userResponse: null,
-        goingCount: 0,
-        maybeCount: 0,
-        notGoingCount: 0,
-      );
-    }
-
-    final title = metadata['title'] as String? ?? '';
-    final description = metadata['description'] as String? ??
-        metadata['notes'] as String? ??
-        '';
-    final location = metadata['location'] as String?;
-
-    // Parse dates (handle both 'starts_at/ends_at' and 'start_time/end_time')
-    final startTimeStr =
-        metadata['starts_at'] as String? ?? metadata['start_time'] as String?;
-    final endTimeStr =
-        metadata['ends_at'] as String? ?? metadata['end_time'] as String?;
-
-    final startDate = startTimeStr != null
-        ? DateTime.tryParse(startTimeStr) ?? DateTime.now()
-        : DateTime.now();
-    final endDate = endTimeStr != null
-        ? DateTime.tryParse(endTimeStr) ??
-            startDate.add(const Duration(hours: 1))
-        : startDate.add(const Duration(hours: 1));
-
-    // Parse RSVP counts
-    final rsvps = metadata['rsvps'] as Map<String, dynamic>? ?? {};
-    final goingCount = rsvps['going'] as int? ?? 0;
-    final maybeCount =
-        rsvps['interested'] as int? ?? rsvps['maybe'] as int? ?? 0;
-    final notGoingCount = rsvps['not_going'] as int? ?? 0;
-
-    // Check current user's response
-    EventResponse? userResponse;
-    if (currentUserId != null) {
-      final userRsvpStatus = metadata['user_rsvp'] as String? ??
-          _getUserRsvpFromList(metadata['rsvp_list'], currentUserId);
-      if (userRsvpStatus != null) {
-        switch (userRsvpStatus) {
-          case 'going':
-            userResponse = EventResponse.going;
-            break;
-          case 'interested':
-          case 'maybe':
-            userResponse = EventResponse.maybe;
-            break;
-          case 'not_going':
-            userResponse = EventResponse.notGoing;
-            break;
-        }
-      }
-    }
-
-    return _EventData(
-      title: title,
-      description: description,
-      location: location,
-      startDate: startDate,
-      endDate: endDate,
-      userResponse: userResponse,
-      goingCount: goingCount,
-      maybeCount: maybeCount,
-      notGoingCount: notGoingCount,
+    showModalBottomSheet(
+      context: context,
+      builder: (bottomSheetContext) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: Icon(
+                Icons.check_circle,
+                color: currentResponse == 'going'
+                    ? theme.colorScheme.primary
+                    : null,
+              ),
+              title: Text(t.chatEventResponseGoing),
+              selected: currentResponse == 'going',
+              onTap: () {
+                Navigator.pop(bottomSheetContext);
+                context.read<ChatMessageBloc>().add(
+                      ChatMessageEvent.respondToEvent(
+                        eventMessageId: eventMessageId,
+                        status: 'going',
+                      ),
+                    );
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.help_outline,
+                color: currentResponse == 'interested'
+                    ? theme.colorScheme.primary
+                    : null,
+              ),
+              title: Text(t.chatEventResponseMaybe),
+              selected: currentResponse == 'interested',
+              onTap: () {
+                Navigator.pop(bottomSheetContext);
+                context.read<ChatMessageBloc>().add(
+                      ChatMessageEvent.respondToEvent(
+                        eventMessageId: eventMessageId,
+                        status: 'interested',
+                      ),
+                    );
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.cancel_outlined,
+                color: currentResponse == 'not_going'
+                    ? theme.colorScheme.primary
+                    : null,
+              ),
+              title: Text(t.chatEventResponseNo),
+              selected: currentResponse == 'not_going',
+              onTap: () {
+                Navigator.pop(bottomSheetContext);
+                context.read<ChatMessageBloc>().add(
+                      ChatMessageEvent.respondToEvent(
+                        eventMessageId: eventMessageId,
+                        status: 'not_going',
+                      ),
+                    );
+              },
+            ),
+            if (currentResponse != null)
+              ListTile(
+                leading: const Icon(Icons.remove_circle_outline),
+                title: Text(t.commonCancel),
+                onTap: () {
+                  Navigator.pop(bottomSheetContext);
+                  context.read<ChatMessageBloc>().add(
+                        ChatMessageEvent.cancelEventRsvp(
+                          eventMessageId: eventMessageId,
+                        ),
+                      );
+                },
+              ),
+            const SizedBox(height: 8),
+          ],
+        ),
+      ),
     );
-  }
-
-  String? _getUserRsvpFromList(dynamic rsvpList, String userId) {
-    if (rsvpList is! List) return null;
-    for (final rsvp in rsvpList) {
-      if (rsvp is Map && rsvp['user_id'] == userId) {
-        return rsvp['status'] as String?;
-      }
-    }
-    return null;
   }
 
   // ==========================================================================
@@ -1077,46 +1067,6 @@ class _ChatDetailContentState extends State<_ChatDetailContent> {
 // =============================================================================
 // HELPER DATA CLASSES
 // =============================================================================
-
-/// Data class for parsed poll information
-class _PollData {
-  final String question;
-  final List<PollOption> options;
-  final int totalVotes;
-  final bool hasVoted;
-
-  const _PollData({
-    required this.question,
-    required this.options,
-    required this.totalVotes,
-    required this.hasVoted,
-  });
-}
-
-/// Data class for parsed event information
-class _EventData {
-  final String title;
-  final String description;
-  final String? location;
-  final DateTime startDate;
-  final DateTime endDate;
-  final EventResponse? userResponse;
-  final int goingCount;
-  final int maybeCount;
-  final int notGoingCount;
-
-  const _EventData({
-    required this.title,
-    required this.description,
-    this.location,
-    required this.startDate,
-    required this.endDate,
-    this.userResponse,
-    required this.goingCount,
-    required this.maybeCount,
-    required this.notGoingCount,
-  });
-}
 
 /// Animated typing dots widget
 class _TypingDotsAnimation extends StatefulWidget {

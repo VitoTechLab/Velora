@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:velora/core/ui/app_messenger.dart';
 import 'package:velora/features/settings/presentation/bloc/settings_bloc.dart';
-import 'package:velora/features/settings/presentation/bloc/settings_event.dart';
 import 'package:velora/features/settings/presentation/bloc/settings_state.dart';
 import 'package:velora/features/settings/presentation/widgets/settings_section.dart';
 import 'package:velora/features/settings/presentation/widgets/settings_page_scaffold.dart';

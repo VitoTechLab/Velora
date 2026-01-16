@@ -1,4 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:velora/features/chat/domain/entities/event_content_entity.dart';
+import 'package:velora/features/chat/domain/entities/poll_content_entity.dart';
 
 part 'chat_message_entity.freezed.dart';
 
@@ -17,5 +19,7 @@ abstract class ChatMessageEntity with _$ChatMessageEntity {
     String? deletedBy,
     required DateTime createdAt,
     required DateTime updatedAt,
+    PollPayloadEntity? poll,
+    EventPayloadEntity? event,
   }) = _ChatMessageEntity;
 }
