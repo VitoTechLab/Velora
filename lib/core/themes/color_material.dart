@@ -8,6 +8,25 @@ class MaterialColorsCustom {
   static const Color brandIndigo = Color(0xFF415371);
   static const Color brandSky = Color(0xFFBBDDF6);
 
+  /// Neon/Vibrant palette for dark theme auth screens
+  static const Color neonViolet = Color(0xFF6366F1);
+  static const Color neonPurple = Color(0xFF8B5CF6);
+  static const Color neonMagenta = Color(0xFFA855F7);
+  static const Color neonIndigo = Color(0xFF818CF8);
+  static const Color neonLavender = Color(0xFFC084FC);
+  static const Color neonCyan = Color(0xFF06B6D4);
+  static const Color neonTeal = Color(0xFF22D3EE);
+  static const Color neonRose = Color(0xFFEC4899);
+  static const Color neonPink = Color(0xFFF472B6);
+  static const Color neonLightPurple = Color(0xFFA78BFA);
+  static const Color neonLilac = Color(0xFFC4B5FD);
+
+  /// Dark gradient backgrounds for auth
+  static const Color darkNavy1 = Color(0xFF1a1a2e);
+  static const Color darkNavy2 = Color(0xFF16213e);
+  static const Color darkNavy3 = Color(0xFF0f3460);
+  static const Color darkNavy4 = Color(0xFF533483);
+
   /// Legacy aliases kept for backward compatibility with older widgets.
   static const Color primaryYellow = brandEmerald;
   static const Color accentYellow = brandSeafoam;
@@ -51,21 +70,21 @@ class MaterialColorsCustom {
   static const Color lightArrowIndicator = arrowIndicatorLight;
   static const Color lightContainerBorder = Color(0xFFD2DCE5);
 
-  // Dark Mode
-  static const Color darkBackground = Color(0xFF050E16);
+  // Dark Mode - Enhanced with neon colors
+  static const Color darkBackground = darkNavy1;
   static const Color darkCard = Color(0xFF0F1F2D);
   static const Color darkSurface = dusk;
   static const Color darkTextPrimary = Color(0xFFE6EDF3);
   static const Color darkTextSecondary = Color(0xFFA4B5C4);
   static const Color darkIcon = darkTextPrimary;
   static const Color darkOutline = greyDarkBorder;
-  static const Color darkHighlightIcon = brandSeafoam;
+  static const Color darkHighlightIcon = neonIndigo;
   static const Color darkIconBackground = Color(0xFF113B38);
   static const Color darkElevatedButtonText = white;
   static const Color darkNavigationBarBackground = Color(0xFF081723);
-  static const Color darkButtonBackground = brandSeafoam;
+  static const Color darkButtonBackground = neonViolet;
   static const Color darkButtonText = white;
-  static const Color darkButtonOutline = brandSeafoam;
+  static const Color darkButtonOutline = neonIndigo;
   static const Color darkContainerDoftBlue = Color(0xFF10263D);
   static const Color darkArrowIndicator = arrowIndicatorDark;
   static const Color darkContainerBorder = Color(0xFF223446);

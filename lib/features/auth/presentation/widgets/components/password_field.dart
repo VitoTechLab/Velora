@@ -12,7 +12,6 @@ class PasswordField extends HookWidget {
   final bool showStrengthIndicator;
   final bool showPasswordHints;
   final VoidCallback? onEditingComplete;
-  final bool isDarkTheme;
 
   const PasswordField({
     super.key,
@@ -24,7 +23,6 @@ class PasswordField extends HookWidget {
     this.showStrengthIndicator = false,
     this.showPasswordHints = false,
     this.onEditingComplete,
-    this.isDarkTheme = false,
   });
 
   @override
@@ -104,14 +102,15 @@ class PasswordField extends HookWidget {
           textInputAction: TextInputAction.done,
           onEditingComplete: onEditingComplete,
           showSuccessIcon: false,
-          isDarkTheme: isDarkTheme,
           suffixIcon: IconButton(
             icon: Icon(
               isObscured.value
                   ? Icons.visibility_outlined
                   : Icons.visibility_off_outlined,
               size: 20,
-              color: isDarkTheme ? Colors.white.withOpacity(0.7) : null,
+              color: colorScheme.brightness == Brightness.dark
+                  ? colorScheme.onSurface.withValues(alpha: 0.7)
+                  : null,
             ),
             onPressed: toggleVisibility,
             tooltip: isObscured.value ? t.authPasswordShow : t.authPasswordHide,

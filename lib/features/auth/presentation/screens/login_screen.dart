@@ -6,6 +6,7 @@ import 'dart:math' as math;
 import 'dart:ui';
 
 import 'package:velora/core/ui/app_messenger.dart';
+import 'package:velora/core/themes/color_material.dart';
 import 'package:velora/core/utils/app_logger.dart';
 import 'package:velora/core/utils/validator_field.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
@@ -104,7 +105,7 @@ class LoginScreen extends HookWidget {
                   center: Alignment.topRight,
                   radius: 1.2,
                   colors: [
-                    const Color(0xFF6366F1).withOpacity(0.15),
+                    MaterialColorsCustom.neonIndigo.withValues(alpha: 0.15),
                     Colors.transparent,
                   ],
                 ),
@@ -116,7 +117,7 @@ class LoginScreen extends HookWidget {
                   center: Alignment.bottomLeft,
                   radius: 1.0,
                   colors: [
-                    const Color(0xFFA855F7).withOpacity(0.12),
+                    MaterialColorsCustom.neonMagenta.withValues(alpha: 0.12),
                     Colors.transparent,
                   ],
                 ),
@@ -181,7 +182,7 @@ class LoginScreen extends HookWidget {
                                 Text(
                                   t.authSignInSubtitle,
                                   style: theme.textTheme.bodyMedium?.copyWith(
-                                    color: Colors.white.withOpacity(0.7),
+                                    color: Colors.white.withValues(alpha: 0.7),
                                   ),
                                 ),
 
@@ -196,13 +197,12 @@ class LoginScreen extends HookWidget {
                                   keyboardType: TextInputType.emailAddress,
                                   textInputAction: TextInputAction.next,
                                   validator: FieldValidator.email,
-                                  prefixIcon: const Icon(
+                                  prefixIcon: Icon(
                                     Icons.email_outlined,
                                     size: 20,
-                                    color: Color(0xFF818CF8),
+                                    color: MaterialColorsCustom.neonIndigo,
                                   ),
                                   enabled: !isLoading,
-                                  isDarkTheme: true,
                                 ),
 
                                 const SizedBox(height: 16),
@@ -213,13 +213,12 @@ class LoginScreen extends HookWidget {
                                   focusNode: passwordFocusNode,
                                   label: t.fieldPasswordLabel,
                                   validator: FieldValidator.password,
-                                  prefixIcon: const Icon(
+                                  prefixIcon: Icon(
                                     Icons.lock_outline,
                                     size: 20,
-                                    color: Color(0xFF818CF8),
+                                    color: MaterialColorsCustom.neonIndigo,
                                   ),
                                   onEditingComplete: submitLogin,
-                                  isDarkTheme: true,
                                 ),
 
                                 // Forgot Password
@@ -233,10 +232,10 @@ class LoginScreen extends HookWidget {
                                             ),
                                     child: ShaderMask(
                                       shaderCallback: (bounds) =>
-                                          const LinearGradient(
+                                          LinearGradient(
                                         colors: [
-                                          Color(0xFF818CF8),
-                                          Color(0xFFC084FC),
+                                          MaterialColorsCustom.neonIndigo,
+                                          MaterialColorsCustom.neonLavender,
                                         ],
                                       ).createShader(bounds),
                                       child: Text(
@@ -258,13 +257,11 @@ class LoginScreen extends HookWidget {
                                   text: t.authSignInButton,
                                   onPressed: isLoading ? null : submitLogin,
                                   isLoading: isEmailLoading,
-                                  isDarkTheme: true,
                                 ),
 
                                 // Divider with normalized component
                                 AuthDivider(
                                   text: t.authDividerText,
-                                  isDarkTheme: true,
                                 ),
 
                                 // Google Sign In with normalized component
@@ -274,7 +271,6 @@ class LoginScreen extends HookWidget {
                                   onPressed:
                                       isLoading ? null : signInWithGoogle,
                                   isLoading: isGoogleLoading,
-                                  isDarkTheme: true,
                                 ),
                               ],
                             ),
@@ -289,7 +285,7 @@ class LoginScreen extends HookWidget {
                               Text(
                                 t.authNoAccount,
                                 style: theme.textTheme.bodyMedium?.copyWith(
-                                  color: Colors.white.withOpacity(0.7),
+                                  color: Colors.white.withValues(alpha: 0.7),
                                 ),
                               ),
                               TextButton(
@@ -298,11 +294,10 @@ class LoginScreen extends HookWidget {
                                     : () =>
                                         context.goNamed(AppRouteName.signUp),
                                 child: ShaderMask(
-                                  shaderCallback: (bounds) =>
-                                      const LinearGradient(
+                                  shaderCallback: (bounds) => LinearGradient(
                                     colors: [
-                                      Color(0xFF818CF8),
-                                      Color(0xFFC084FC),
+                                      MaterialColorsCustom.neonIndigo,
+                                      MaterialColorsCustom.neonLavender,
                                     ],
                                   ).createShader(bounds),
                                   child: Text(
@@ -349,12 +344,12 @@ class LoginScreen extends HookWidget {
         boxShadow: [
           // Neon glow effect
           BoxShadow(
-            color: const Color(0xFF6366F1).withOpacity(0.5),
+            color: MaterialColorsCustom.neonIndigo.withValues(alpha: 0.5),
             blurRadius: 30,
             spreadRadius: 2,
           ),
           BoxShadow(
-            color: const Color(0xFF8B5CF6).withOpacity(0.3),
+            color: MaterialColorsCustom.neonPurple.withValues(alpha: 0.3),
             blurRadius: 50,
             spreadRadius: 5,
           ),
@@ -440,7 +435,7 @@ class LoginScreen extends HookWidget {
         right: size.width * 0.15,
         child: const _NeonFloatingOrb(
           size: 50,
-          primaryColor: Color(0xFF818CF8),
+          primaryColor: MaterialColorsCustom.neonIndigo,
           secondaryColor: Color(0xFFC4B5FD),
           duration: Duration(seconds: 3),
           floatDistance: 12,
@@ -466,21 +461,21 @@ class _GlassCard extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(32),
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.08),
+            color: Colors.white.withValues(alpha: 0.08),
             borderRadius: BorderRadius.circular(32),
             border: Border.all(
-              color: Colors.white.withOpacity(0.15),
+              color: Colors.white.withValues(alpha: 0.15),
               width: 1.5,
             ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.1),
+                color: Colors.black.withValues(alpha: 0.1),
                 blurRadius: 40,
                 offset: const Offset(0, 20),
               ),
               // Subtle inner glow
               BoxShadow(
-                color: const Color(0xFF818CF8).withOpacity(0.05),
+                color: MaterialColorsCustom.neonIndigo.withValues(alpha: 0.05),
                 blurRadius: 20,
                 offset: const Offset(0, 10),
                 spreadRadius: -5,
@@ -575,9 +570,9 @@ class _NeonFloatingOrbState extends State<_NeonFloatingOrb>
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
                   colors: [
-                    widget.primaryColor.withOpacity(0.4),
-                    widget.secondaryColor.withOpacity(0.2),
-                    widget.primaryColor.withOpacity(0.08),
+                    widget.primaryColor.withValues(alpha: 0.4),
+                    widget.secondaryColor.withValues(alpha: 0.2),
+                    widget.primaryColor.withValues(alpha: 0.08),
                     Colors.transparent,
                   ],
                   stops: const [0.0, 0.3, 0.6, 1.0],
@@ -585,13 +580,13 @@ class _NeonFloatingOrbState extends State<_NeonFloatingOrb>
                 boxShadow: [
                   // Inner glow
                   BoxShadow(
-                    color: widget.primaryColor.withOpacity(0.4),
+                    color: widget.primaryColor.withValues(alpha: 0.4),
                     blurRadius: widget.size * 0.3,
                     spreadRadius: 0,
                   ),
                   // Outer glow
                   BoxShadow(
-                    color: widget.secondaryColor.withOpacity(0.2),
+                    color: widget.secondaryColor.withValues(alpha: 0.2),
                     blurRadius: widget.size * 0.6,
                     spreadRadius: 0,
                   ),
@@ -643,11 +638,11 @@ class _FloatingParticlesState extends State<_FloatingParticles>
 
   Color _getParticleColor(int index) {
     final colors = [
-      const Color(0xFF818CF8), // Indigo
-      const Color(0xFFC084FC), // Purple
-      const Color(0xFFF472B6), // Pink
-      const Color(0xFF22D3EE), // Cyan
-      const Color(0xFFA78BFA), // Light Purple
+      MaterialColorsCustom.neonIndigo,
+      MaterialColorsCustom.neonLavender,
+      MaterialColorsCustom.neonPink,
+      MaterialColorsCustom.neonTeal,
+      MaterialColorsCustom.neonLilac,
     ];
     return colors[index % colors.length];
   }
@@ -721,7 +716,7 @@ class _ParticlePainter extends CustomPainter {
 
       // Paint particle with glow effect
       final paint = Paint()
-        ..color = particle.color.withOpacity(particle.opacity)
+        ..color = particle.color.withValues(alpha: particle.opacity)
         ..maskFilter = MaskFilter.blur(BlurStyle.normal, particle.size * 0.8);
 
       canvas.drawCircle(
@@ -732,7 +727,7 @@ class _ParticlePainter extends CustomPainter {
 
       // Add core glow
       final corePaint = Paint()
-        ..color = particle.color.withOpacity(particle.opacity * 0.6)
+        ..color = particle.color.withValues(alpha: particle.opacity * 0.6)
         ..maskFilter = MaskFilter.blur(BlurStyle.normal, particle.size * 1.5);
 
       canvas.drawCircle(

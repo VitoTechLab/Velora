@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:velora/core/themes/color_material.dart';
 
 /// Primary CTA button following Velora design system.
 ///
@@ -16,7 +17,6 @@ class PrimaryButton extends StatelessWidget {
   final bool isFullWidth;
   final IconData? icon;
   final double? height;
-  final bool isDarkTheme;
 
   const PrimaryButton({
     super.key,
@@ -26,7 +26,6 @@ class PrimaryButton extends StatelessWidget {
     this.isFullWidth = true,
     this.icon,
     this.height = 56,
-    this.isDarkTheme = false,
   });
 
   @override
@@ -35,11 +34,9 @@ class PrimaryButton extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
-    // Determine if we should use dark theme styling
-    final brightness = Theme.of(context).brightness;
-    final useDarkStyle = isDarkTheme || brightness == Brightness.dark;
+    final isDark = colorScheme.brightness == Brightness.dark;
 
-    if (useDarkStyle) {
+    if (isDark) {
       // Dark theme with gradient and neon glow
       return SizedBox(
         width: isFullWidth ? double.infinity : null,
@@ -60,29 +57,31 @@ class PrimaryButton extends StatelessWidget {
               gradient: onPressed == null
                   ? LinearGradient(
                       colors: [
-                        Colors.grey[600]!.withOpacity(0.3),
-                        Colors.grey[600]!.withOpacity(0.3),
+                        colorScheme.onSurface.withValues(alpha: 0.3),
+                        colorScheme.onSurface.withValues(alpha: 0.3),
                       ],
                     )
-                  : const LinearGradient(
+                  : LinearGradient(
                       begin: Alignment.centerLeft,
                       end: Alignment.centerRight,
                       colors: [
-                        Color(0xFF6366F1),
-                        Color(0xFF8B5CF6),
-                        Color(0xFFA855F7),
+                        MaterialColorsCustom.neonIndigo,
+                        MaterialColorsCustom.neonPurple,
+                        MaterialColorsCustom.neonMagenta,
                       ],
                     ),
               borderRadius: BorderRadius.circular(16),
               boxShadow: onPressed != null && !isLoading
                   ? [
                       BoxShadow(
-                        color: const Color(0xFF6366F1).withOpacity(0.5),
+                        color: MaterialColorsCustom.neonIndigo
+                            .withValues(alpha: 0.5),
                         blurRadius: 25,
                         offset: const Offset(0, 8),
                       ),
                       BoxShadow(
-                        color: const Color(0xFF8B5CF6).withOpacity(0.3),
+                        color: MaterialColorsCustom.neonPurple
+                            .withValues(alpha: 0.3),
                         blurRadius: 40,
                         offset: const Offset(0, 12),
                       ),

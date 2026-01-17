@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:velora/core/themes/color_material.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
 /// Secondary button for social auth (Google, Apple, etc.)
@@ -15,7 +16,6 @@ class SocialButton extends StatelessWidget {
   final String iconAsset;
   final VoidCallback? onPressed;
   final bool isLoading;
-  final bool isDarkTheme;
 
   const SocialButton({
     super.key,
@@ -23,7 +23,6 @@ class SocialButton extends StatelessWidget {
     required this.iconAsset,
     this.onPressed,
     this.isLoading = false,
-    this.isDarkTheme = false,
   });
 
   @override
@@ -33,30 +32,29 @@ class SocialButton extends StatelessWidget {
     final textTheme = theme.textTheme;
     final t = AppLocalizations.of(context)!;
 
-    // Determine if we should use dark theme styling
-    final brightness = Theme.of(context).brightness;
-    final useDarkStyle = isDarkTheme || brightness == Brightness.dark;
+    final isDark = colorScheme.brightness == Brightness.dark;
 
     return SizedBox(
       width: double.infinity,
-      height: useDarkStyle ? 56 : 48,
+      height: isDark ? 56 : 48,
       child: OutlinedButton(
         onPressed: isLoading ? null : onPressed,
         style: OutlinedButton.styleFrom(
-          foregroundColor: useDarkStyle ? Colors.white : colorScheme.onSurface,
+          foregroundColor:
+              isDark ? colorScheme.onSurface : colorScheme.onSurface,
           side: BorderSide(
-            color: useDarkStyle
-                ? Colors.white.withOpacity(0.15)
+            color: isDark
+                ? colorScheme.onSurface.withValues(alpha: 0.15)
                 : (isLoading
                     ? colorScheme.outline.withValues(alpha: 0.5)
                     : colorScheme.outline),
-            width: useDarkStyle ? 1 : 1.5,
+            width: isDark ? 1 : 1.5,
           ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(useDarkStyle ? 16 : 12),
+            borderRadius: BorderRadius.circular(isDark ? 16 : 12),
           ),
-          backgroundColor: useDarkStyle
-              ? Colors.white.withOpacity(0.08)
+          backgroundColor: isDark
+              ? colorScheme.onSurface.withValues(alpha: 0.08)
               : colorScheme.surface,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         ),
@@ -72,18 +70,18 @@ class SocialButton extends StatelessWidget {
                 children: [
                   Image.asset(
                     iconAsset,
-                    width: useDarkStyle ? 24 : 20,
-                    height: useDarkStyle ? 24 : 20,
+                    width: isDark ? 24 : 20,
+                    height: isDark ? 24 : 20,
                     fit: BoxFit.contain,
                   ),
                   const SizedBox(width: 12),
                   Text(
                     t.authContinueWith(brand),
-                    style: useDarkStyle
-                        ? const TextStyle(
+                    style: isDark
+                        ? TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
-                            color: Colors.white,
+                            color: colorScheme.onSurface,
                           )
                         : textTheme.labelLarge?.copyWith(
                             fontWeight: FontWeight.w500,
@@ -95,13 +93,13 @@ class SocialButton extends StatelessWidget {
             ),
             if (isLoading)
               SizedBox(
-                width: useDarkStyle ? 24 : 18,
-                height: useDarkStyle ? 24 : 18,
+                width: isDark ? 24 : 18,
+                height: isDark ? 24 : 18,
                 child: CircularProgressIndicator(
                   strokeWidth: 2.5,
                   valueColor: AlwaysStoppedAnimation<Color>(
-                    useDarkStyle
-                        ? const Color(0xFF818CF8)
+                    isDark
+                        ? MaterialColorsCustom.neonIndigo
                         : colorScheme.primary,
                   ),
                 ),

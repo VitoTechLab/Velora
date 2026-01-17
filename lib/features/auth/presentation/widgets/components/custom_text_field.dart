@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:velora/core/themes/color_material.dart';
 
 class CustomTextField extends HookWidget {
   final TextEditingController controller;
@@ -21,7 +22,6 @@ class CustomTextField extends HookWidget {
   final VoidCallback? onEditingComplete;
   final bool showSuccessIcon;
   final bool validateOnChange;
-  final bool isDarkTheme;
 
   const CustomTextField({
     super.key,
@@ -43,7 +43,6 @@ class CustomTextField extends HookWidget {
     this.onEditingComplete,
     this.showSuccessIcon = true,
     this.validateOnChange = true,
-    this.isDarkTheme = false,
   });
 
   @override
@@ -93,7 +92,9 @@ class CustomTextField extends HookWidget {
       if (hasInteractedState.value && isValidState.value && showSuccessIcon) {
         return Icon(
           Icons.check_circle,
-          color: isDarkTheme ? const Color(0xFF22D3EE) : colorScheme.tertiary,
+          color: colorScheme.brightness == Brightness.dark
+              ? MaterialColorsCustom.neonTeal
+              : colorScheme.tertiary,
           size: 20,
         );
       }
@@ -104,42 +105,42 @@ class CustomTextField extends HookWidget {
       isValidState.value,
       showSuccessIcon,
       colorScheme,
-      isDarkTheme
     ]);
 
-    // Determine if we should use dark theme styling
-    final brightness = Theme.of(context).brightness;
-    final useDarkStyle = isDarkTheme || brightness == Brightness.dark;
+    final isDark = colorScheme.brightness == Brightness.dark;
     final isFocused = focusNode?.hasFocus ?? false;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (useDarkStyle)
+        if (isDark)
           Text(
             label,
             style: theme.textTheme.bodySmall?.copyWith(
               fontWeight: FontWeight.w600,
-              color: Colors.white.withOpacity(0.8),
+              color: colorScheme.onSurface.withValues(alpha: 0.8),
             ),
           ),
-        if (useDarkStyle) const SizedBox(height: 8),
+        if (isDark) const SizedBox(height: 8),
         AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          decoration: useDarkStyle
+          decoration: isDark
               ? BoxDecoration(
-                  color: Colors.white.withOpacity(isFocused ? 0.12 : 0.08),
+                  color: colorScheme.onSurface.withValues(
+                    alpha: isFocused ? 0.12 : 0.08,
+                  ),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
                     color: isFocused
-                        ? const Color(0xFF818CF8).withOpacity(0.4)
-                        : Colors.white.withOpacity(0.12),
+                        ? MaterialColorsCustom.neonIndigo.withValues(alpha: 0.4)
+                        : colorScheme.onSurface.withValues(alpha: 0.12),
                     width: 1.5,
                   ),
                   boxShadow: isFocused
                       ? [
                           BoxShadow(
-                            color: const Color(0xFF818CF8).withOpacity(0.2),
+                            color: MaterialColorsCustom.neonIndigo
+                                .withValues(alpha: 0.2),
                             blurRadius: 12,
                             offset: const Offset(0, 4),
                           ),
@@ -161,19 +162,19 @@ class CustomTextField extends HookWidget {
               onChanged?.call(value);
             },
             onEditingComplete: onEditingComplete,
-            style: useDarkStyle
-                ? const TextStyle(
+            style: isDark
+                ? TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
-                    color: Colors.white,
+                    color: colorScheme.onSurface,
                   )
                 : theme.textTheme.bodyLarge,
             decoration: InputDecoration(
-              labelText: useDarkStyle ? null : label,
+              labelText: isDark ? null : label,
               hintText: hint,
-              hintStyle: useDarkStyle
+              hintStyle: isDark
                   ? TextStyle(
-                      color: Colors.white.withOpacity(0.4),
+                      color: colorScheme.onSurface.withValues(alpha: 0.4),
                       fontSize: 15,
                     )
                   : null,
@@ -182,54 +183,53 @@ class CustomTextField extends HookWidget {
               suffixIcon: suffixIconWidget,
               errorText: hasInteractedState.value ? errorTextState.value : null,
               errorMaxLines: 2,
-              errorStyle: useDarkStyle
-                  ? const TextStyle(
-                      color: Color(0xFFF472B6),
+              errorStyle: isDark
+                  ? TextStyle(
+                      color: MaterialColorsCustom.neonPink,
                       fontSize: 12,
                     )
                   : null,
-              filled: !useDarkStyle,
-              fillColor:
-                  useDarkStyle ? Colors.transparent : colorScheme.surface,
+              filled: !isDark,
+              fillColor: isDark ? Colors.transparent : colorScheme.surface,
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 20,
                 vertical: 16,
               ),
-              border: useDarkStyle
+              border: isDark
                   ? InputBorder.none
                   : OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(color: colorScheme.outline),
                     ),
-              enabledBorder: useDarkStyle
+              enabledBorder: isDark
                   ? InputBorder.none
                   : OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide:
                           BorderSide(color: colorScheme.outline, width: 1),
                     ),
-              focusedBorder: useDarkStyle
+              focusedBorder: isDark
                   ? InputBorder.none
                   : OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide:
                           BorderSide(color: colorScheme.primary, width: 2),
                     ),
-              errorBorder: useDarkStyle
+              errorBorder: isDark
                   ? InputBorder.none
                   : OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide:
                           BorderSide(color: colorScheme.error, width: 1),
                     ),
-              focusedErrorBorder: useDarkStyle
+              focusedErrorBorder: isDark
                   ? InputBorder.none
                   : OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide:
                           BorderSide(color: colorScheme.error, width: 2),
                     ),
-              disabledBorder: useDarkStyle
+              disabledBorder: isDark
                   ? InputBorder.none
                   : OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
