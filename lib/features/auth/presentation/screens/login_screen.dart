@@ -13,9 +13,9 @@ import 'package:velora/features/auth/presentation/bloc/auth_state.dart';
 import 'package:velora/l10n/app_localizations.dart';
 import 'package:velora/routes/app_router.dart';
 
-/// Modern Login Screen with Glassmorphism & Floating Effects
-class ModernLoginScreen extends HookWidget {
-  const ModernLoginScreen({super.key});
+/// Login Screen with Modern Design
+class LoginScreen extends HookWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

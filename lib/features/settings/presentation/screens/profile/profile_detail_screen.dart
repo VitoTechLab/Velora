@@ -6,6 +6,7 @@ import 'package:velora/core/ui/app_messenger.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:velora/features/navigation/models/profile_field_edit_args.dart';
 import 'package:velora/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:velora/features/profile/presentation/bloc/profile_event.dart';
 import 'package:velora/features/profile/presentation/bloc/profile_state.dart';
 import 'package:velora/features/settings/presentation/widgets/edge_to_edge_section.dart';
 import 'package:velora/features/settings/presentation/widgets/settings_page_scaffold.dart';

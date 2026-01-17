@@ -423,9 +423,6 @@ STABLE
 SECURITY DEFINER
 SET search_path = public
 AS $$
-    -- Cari irisan (intersection) antara following saya dan following target
-    -- Note: Mutual friends usually means "Friends of mine who also follow Target" OR "Friends of mine whom Target also follows"?
-    -- Common social definition: "People I follow who also follow Target" (Teman barengan)
     SELECT 
         up.id, up.username, up.full_name, up.avatar_url
     FROM public.user_profiles up

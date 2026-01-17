@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'post_feed_model.freezed.dart';
+part 'post_feed_model.g.dart';
 
 @freezed
 abstract class PostFeedModel with _$PostFeedModel {
@@ -18,7 +19,8 @@ abstract class PostFeedModel with _$PostFeedModel {
 
   const PostFeedModel._();
 
-  factory PostFeedModel.fromJson(Map<String, dynamic> json) => _$PostFeedModelFromJson(json);
+  factory PostFeedModel.fromJson(Map<String, dynamic> json) =>
+      _$PostFeedModelFromJson(json);
 
   Map<String, dynamic> toSupabaseJson() {
     final data = <String, dynamic>{
