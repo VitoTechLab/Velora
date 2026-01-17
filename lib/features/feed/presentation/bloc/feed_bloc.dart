@@ -337,7 +337,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
         final updated = state.posts.map((post) {
           if (post.id != postId) return post;
           final willLike = !post.isLiked;
-          final currentLikes = post.likesCount ?? 0;
+          final currentLikes = post.likesCount;
           final newLikes = willLike
               ? currentLikes + 1
               : (currentLikes > 0 ? currentLikes - 1 : 0);

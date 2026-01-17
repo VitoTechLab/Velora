@@ -16,18 +16,21 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$EventPayloadEntity {
-  String get id => throw _privateConstructorUsedError;
   String get messageId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  String? get description =>
-      throw _privateConstructorUsedError; // Note: ChatDTO said 'notes'? Using description/notes based on widget
-  String? get location => throw _privateConstructorUsedError;
-  DateTime get startDate => throw _privateConstructorUsedError;
-  DateTime get endDate => throw _privateConstructorUsedError; // RSVP counts
+  String? get description => throw _privateConstructorUsedError;
+  String? get locationName => throw _privateConstructorUsedError;
+  String? get address => throw _privateConstructorUsedError;
+  bool get isOnline => throw _privateConstructorUsedError;
+  String? get meetingUrl => throw _privateConstructorUsedError;
+  String? get coverUrl => throw _privateConstructorUsedError;
+  DateTime get startsAt => throw _privateConstructorUsedError;
+  DateTime? get endsAt =>
+      throw _privateConstructorUsedError; // RSVP counts from v_event_with_rsvp
   int get goingCount => throw _privateConstructorUsedError;
-  int get maybeCount => throw _privateConstructorUsedError;
+  int get interestedCount => throw _privateConstructorUsedError;
   int get notGoingCount =>
-      throw _privateConstructorUsedError; // Current user response
+      throw _privateConstructorUsedError; // Current user RSVP response: 'going', 'interested', 'not_going'
   String? get userResponse => throw _privateConstructorUsedError;
 
   /// Create a copy of EventPayloadEntity
@@ -44,15 +47,18 @@ abstract class $EventPayloadEntityCopyWith<$Res> {
       _$EventPayloadEntityCopyWithImpl<$Res, EventPayloadEntity>;
   @useResult
   $Res call(
-      {String id,
-      String messageId,
+      {String messageId,
       String title,
       String? description,
-      String? location,
-      DateTime startDate,
-      DateTime endDate,
+      String? locationName,
+      String? address,
+      bool isOnline,
+      String? meetingUrl,
+      String? coverUrl,
+      DateTime startsAt,
+      DateTime? endsAt,
       int goingCount,
-      int maybeCount,
+      int interestedCount,
       int notGoingCount,
       String? userResponse});
 }
@@ -72,23 +78,22 @@ class _$EventPayloadEntityCopyWithImpl<$Res, $Val extends EventPayloadEntity>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? messageId = null,
     Object? title = null,
     Object? description = freezed,
-    Object? location = freezed,
-    Object? startDate = null,
-    Object? endDate = null,
+    Object? locationName = freezed,
+    Object? address = freezed,
+    Object? isOnline = null,
+    Object? meetingUrl = freezed,
+    Object? coverUrl = freezed,
+    Object? startsAt = null,
+    Object? endsAt = freezed,
     Object? goingCount = null,
-    Object? maybeCount = null,
+    Object? interestedCount = null,
     Object? notGoingCount = null,
     Object? userResponse = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       messageId: null == messageId
           ? _value.messageId
           : messageId // ignore: cast_nullable_to_non_nullable
@@ -101,25 +106,41 @@ class _$EventPayloadEntityCopyWithImpl<$Res, $Val extends EventPayloadEntity>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      location: freezed == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
+      locationName: freezed == locationName
+          ? _value.locationName
+          : locationName // ignore: cast_nullable_to_non_nullable
               as String?,
-      startDate: null == startDate
-          ? _value.startDate
-          : startDate // ignore: cast_nullable_to_non_nullable
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isOnline: null == isOnline
+          ? _value.isOnline
+          : isOnline // ignore: cast_nullable_to_non_nullable
+              as bool,
+      meetingUrl: freezed == meetingUrl
+          ? _value.meetingUrl
+          : meetingUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      coverUrl: freezed == coverUrl
+          ? _value.coverUrl
+          : coverUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      startsAt: null == startsAt
+          ? _value.startsAt
+          : startsAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      endDate: null == endDate
-          ? _value.endDate
-          : endDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+      endsAt: freezed == endsAt
+          ? _value.endsAt
+          : endsAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       goingCount: null == goingCount
           ? _value.goingCount
           : goingCount // ignore: cast_nullable_to_non_nullable
               as int,
-      maybeCount: null == maybeCount
-          ? _value.maybeCount
-          : maybeCount // ignore: cast_nullable_to_non_nullable
+      interestedCount: null == interestedCount
+          ? _value.interestedCount
+          : interestedCount // ignore: cast_nullable_to_non_nullable
               as int,
       notGoingCount: null == notGoingCount
           ? _value.notGoingCount
@@ -142,15 +163,18 @@ abstract class _$$EventPayloadEntityImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id,
-      String messageId,
+      {String messageId,
       String title,
       String? description,
-      String? location,
-      DateTime startDate,
-      DateTime endDate,
+      String? locationName,
+      String? address,
+      bool isOnline,
+      String? meetingUrl,
+      String? coverUrl,
+      DateTime startsAt,
+      DateTime? endsAt,
       int goingCount,
-      int maybeCount,
+      int interestedCount,
       int notGoingCount,
       String? userResponse});
 }
@@ -168,23 +192,22 @@ class __$$EventPayloadEntityImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? messageId = null,
     Object? title = null,
     Object? description = freezed,
-    Object? location = freezed,
-    Object? startDate = null,
-    Object? endDate = null,
+    Object? locationName = freezed,
+    Object? address = freezed,
+    Object? isOnline = null,
+    Object? meetingUrl = freezed,
+    Object? coverUrl = freezed,
+    Object? startsAt = null,
+    Object? endsAt = freezed,
     Object? goingCount = null,
-    Object? maybeCount = null,
+    Object? interestedCount = null,
     Object? notGoingCount = null,
     Object? userResponse = freezed,
   }) {
     return _then(_$EventPayloadEntityImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       messageId: null == messageId
           ? _value.messageId
           : messageId // ignore: cast_nullable_to_non_nullable
@@ -197,25 +220,41 @@ class __$$EventPayloadEntityImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      location: freezed == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
+      locationName: freezed == locationName
+          ? _value.locationName
+          : locationName // ignore: cast_nullable_to_non_nullable
               as String?,
-      startDate: null == startDate
-          ? _value.startDate
-          : startDate // ignore: cast_nullable_to_non_nullable
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isOnline: null == isOnline
+          ? _value.isOnline
+          : isOnline // ignore: cast_nullable_to_non_nullable
+              as bool,
+      meetingUrl: freezed == meetingUrl
+          ? _value.meetingUrl
+          : meetingUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      coverUrl: freezed == coverUrl
+          ? _value.coverUrl
+          : coverUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      startsAt: null == startsAt
+          ? _value.startsAt
+          : startsAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      endDate: null == endDate
-          ? _value.endDate
-          : endDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+      endsAt: freezed == endsAt
+          ? _value.endsAt
+          : endsAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       goingCount: null == goingCount
           ? _value.goingCount
           : goingCount // ignore: cast_nullable_to_non_nullable
               as int,
-      maybeCount: null == maybeCount
-          ? _value.maybeCount
-          : maybeCount // ignore: cast_nullable_to_non_nullable
+      interestedCount: null == interestedCount
+          ? _value.interestedCount
+          : interestedCount // ignore: cast_nullable_to_non_nullable
               as int,
       notGoingCount: null == notGoingCount
           ? _value.notGoingCount
@@ -233,47 +272,59 @@ class __$$EventPayloadEntityImplCopyWithImpl<$Res>
 
 class _$EventPayloadEntityImpl implements _EventPayloadEntity {
   const _$EventPayloadEntityImpl(
-      {required this.id,
-      required this.messageId,
+      {required this.messageId,
       required this.title,
       this.description,
-      this.location,
-      required this.startDate,
-      required this.endDate,
-      required this.goingCount,
-      required this.maybeCount,
-      required this.notGoingCount,
+      this.locationName,
+      this.address,
+      this.isOnline = false,
+      this.meetingUrl,
+      this.coverUrl,
+      required this.startsAt,
+      this.endsAt,
+      this.goingCount = 0,
+      this.interestedCount = 0,
+      this.notGoingCount = 0,
       this.userResponse});
 
-  @override
-  final String id;
   @override
   final String messageId;
   @override
   final String title;
   @override
   final String? description;
-// Note: ChatDTO said 'notes'? Using description/notes based on widget
   @override
-  final String? location;
+  final String? locationName;
   @override
-  final DateTime startDate;
+  final String? address;
   @override
-  final DateTime endDate;
-// RSVP counts
+  @JsonKey()
+  final bool isOnline;
   @override
+  final String? meetingUrl;
+  @override
+  final String? coverUrl;
+  @override
+  final DateTime startsAt;
+  @override
+  final DateTime? endsAt;
+// RSVP counts from v_event_with_rsvp
+  @override
+  @JsonKey()
   final int goingCount;
   @override
-  final int maybeCount;
+  @JsonKey()
+  final int interestedCount;
   @override
+  @JsonKey()
   final int notGoingCount;
-// Current user response
+// Current user RSVP response: 'going', 'interested', 'not_going'
   @override
   final String? userResponse;
 
   @override
   String toString() {
-    return 'EventPayloadEntity(id: $id, messageId: $messageId, title: $title, description: $description, location: $location, startDate: $startDate, endDate: $endDate, goingCount: $goingCount, maybeCount: $maybeCount, notGoingCount: $notGoingCount, userResponse: $userResponse)';
+    return 'EventPayloadEntity(messageId: $messageId, title: $title, description: $description, locationName: $locationName, address: $address, isOnline: $isOnline, meetingUrl: $meetingUrl, coverUrl: $coverUrl, startsAt: $startsAt, endsAt: $endsAt, goingCount: $goingCount, interestedCount: $interestedCount, notGoingCount: $notGoingCount, userResponse: $userResponse)';
   }
 
   @override
@@ -281,21 +332,27 @@ class _$EventPayloadEntityImpl implements _EventPayloadEntity {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$EventPayloadEntityImpl &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.messageId, messageId) ||
                 other.messageId == messageId) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            (identical(other.location, location) ||
-                other.location == location) &&
-            (identical(other.startDate, startDate) ||
-                other.startDate == startDate) &&
-            (identical(other.endDate, endDate) || other.endDate == endDate) &&
+            (identical(other.locationName, locationName) ||
+                other.locationName == locationName) &&
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.isOnline, isOnline) ||
+                other.isOnline == isOnline) &&
+            (identical(other.meetingUrl, meetingUrl) ||
+                other.meetingUrl == meetingUrl) &&
+            (identical(other.coverUrl, coverUrl) ||
+                other.coverUrl == coverUrl) &&
+            (identical(other.startsAt, startsAt) ||
+                other.startsAt == startsAt) &&
+            (identical(other.endsAt, endsAt) || other.endsAt == endsAt) &&
             (identical(other.goingCount, goingCount) ||
                 other.goingCount == goingCount) &&
-            (identical(other.maybeCount, maybeCount) ||
-                other.maybeCount == maybeCount) &&
+            (identical(other.interestedCount, interestedCount) ||
+                other.interestedCount == interestedCount) &&
             (identical(other.notGoingCount, notGoingCount) ||
                 other.notGoingCount == notGoingCount) &&
             (identical(other.userResponse, userResponse) ||
@@ -305,15 +362,18 @@ class _$EventPayloadEntityImpl implements _EventPayloadEntity {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      id,
       messageId,
       title,
       description,
-      location,
-      startDate,
-      endDate,
+      locationName,
+      address,
+      isOnline,
+      meetingUrl,
+      coverUrl,
+      startsAt,
+      endsAt,
       goingCount,
-      maybeCount,
+      interestedCount,
       notGoingCount,
       userResponse);
 
@@ -329,39 +389,47 @@ class _$EventPayloadEntityImpl implements _EventPayloadEntity {
 
 abstract class _EventPayloadEntity implements EventPayloadEntity {
   const factory _EventPayloadEntity(
-      {required final String id,
-      required final String messageId,
+      {required final String messageId,
       required final String title,
       final String? description,
-      final String? location,
-      required final DateTime startDate,
-      required final DateTime endDate,
-      required final int goingCount,
-      required final int maybeCount,
-      required final int notGoingCount,
+      final String? locationName,
+      final String? address,
+      final bool isOnline,
+      final String? meetingUrl,
+      final String? coverUrl,
+      required final DateTime startsAt,
+      final DateTime? endsAt,
+      final int goingCount,
+      final int interestedCount,
+      final int notGoingCount,
       final String? userResponse}) = _$EventPayloadEntityImpl;
 
-  @override
-  String get id;
   @override
   String get messageId;
   @override
   String get title;
   @override
-  String?
-      get description; // Note: ChatDTO said 'notes'? Using description/notes based on widget
+  String? get description;
   @override
-  String? get location;
+  String? get locationName;
   @override
-  DateTime get startDate;
+  String? get address;
   @override
-  DateTime get endDate; // RSVP counts
+  bool get isOnline;
+  @override
+  String? get meetingUrl;
+  @override
+  String? get coverUrl;
+  @override
+  DateTime get startsAt;
+  @override
+  DateTime? get endsAt; // RSVP counts from v_event_with_rsvp
   @override
   int get goingCount;
   @override
-  int get maybeCount;
+  int get interestedCount;
   @override
-  int get notGoingCount; // Current user response
+  int get notGoingCount; // Current user RSVP response: 'going', 'interested', 'not_going'
   @override
   String? get userResponse;
 

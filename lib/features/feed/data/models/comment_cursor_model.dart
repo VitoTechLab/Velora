@@ -4,7 +4,6 @@ import 'package:velora/features/feed/domain/entities/comment_cursor_entity.dart'
 part 'comment_cursor_model.freezed.dart';
 part 'comment_cursor_model.g.dart';
 
-/// Cursor model for comment pagination.
 @freezed
 abstract class CommentCursorModel with _$CommentCursorModel {
   const CommentCursorModel._();

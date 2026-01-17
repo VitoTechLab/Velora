@@ -13,7 +13,6 @@ FeedCursorModel? _cursorFromJson(Object? json) {
 
 Object? _cursorToJson(FeedCursorModel? cursor) => cursor?.toJson();
 
-/// Pagination model for feed posts.
 @freezed
 abstract class FeedPaginationModel with _$FeedPaginationModel {
   const FeedPaginationModel._();

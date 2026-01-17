@@ -4,7 +4,6 @@ import 'package:velora/features/post/domain/usecases/create_post_feed_usecase.da
 import 'post_event.dart';
 import 'post_state.dart';
 
-/// BLoC for post creation operations
 class PostBloc extends Bloc<PostEvent, PostState> {
   PostBloc({required this.createPostFeedUseCase}) : super(const PostState()) {
     on<CreatePostEvent>(_onCreatePost);
@@ -18,7 +17,6 @@ class PostBloc extends Bloc<PostEvent, PostState> {
   static const _logTag = 'PostBloc';
   static const int _maxPostContentLength = 2000;
 
-  /// Validate post content length and emptiness
   String? _validatePostContent(String content) {
     final trimmed = content.trim();
     if (trimmed.isEmpty) return 'Post content cannot be empty';
@@ -28,7 +26,6 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     return null;
   }
 
-  /// Create new feed post with validation and error handling
   Future<void> _onCreatePost(
     CreatePostEvent event,
     Emitter<PostState> emit,
@@ -57,14 +54,12 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     final result = await createPostFeedUseCase(
       userId: userId,
       content: event.content.trim(),
-      imageUrls: event.imageUrls,
-      videoUrls: event.videoUrls,
-      commentsEnabled: event.commentsEnabled,
-      hideLikeCount: event.hideLikeCount,
-      hideCommentCount: event.hideCommentCount,
-      hideShareCount: event.hideShareCount,
-      hideLikesList: event.hideLikesList,
-      campaignId: event.campaignId,
+      mediaUrls: event.mediaUrls,
+      tags: event.tags,
+      mentionIds: event.mentionIds,
+      location: event.location,
+      allowComments: event.allowComments,
+      allowShare: event.allowShare,
       campaignTitle: event.campaignTitle,
     );
 

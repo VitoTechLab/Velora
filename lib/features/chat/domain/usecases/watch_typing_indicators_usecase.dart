@@ -1,7 +1,7 @@
 import 'package:velora/features/chat/domain/repositories/chat_repository.dart';
 
 /// Watch typing indicators in realtime using Supabase Realtime Broadcast
-/// Returns Stream<String> containing userId who is typing
+/// Returns Stream\<String\> containing userId who is typing
 class WatchTypingIndicatorsUseCase {
   const WatchTypingIndicatorsUseCase({required this.repository});
 

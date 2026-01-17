@@ -7,14 +7,12 @@ class PostEvent with _$PostEvent {
   const factory PostEvent.createPost({
     required String userId,
     required String content,
-    @Default([]) List<String> imageUrls,
-    @Default([]) List<String> videoUrls,
-    @Default(true) bool commentsEnabled,
-    @Default(false) bool hideLikeCount,
-    @Default(false) bool hideCommentCount,
-    @Default(false) bool hideShareCount,
-    @Default(false) bool hideLikesList,
-    String? campaignId,
+    @Default([]) List<String> mediaUrls,
+    @Default([]) List<String> tags,
+    @Default([]) List<String> mentionIds,
+    Map<String, dynamic>? location,
+    @Default(true) bool allowComments,
+    @Default(true) bool allowShare,
     String? campaignTitle,
   }) = CreatePostEvent;
 

@@ -92,7 +92,6 @@
       }
     }
   },
-  "feedWriteCommentHint": "Write a comment...",
   "feedAddCommentHint": "Add a comment for {name}",
   "@feedAddCommentHint": {
     "placeholders": {
@@ -790,6 +789,21 @@
   "chatDetailContactSelected": "Contact selected",
   "chatDetailAiImagesSelected": "AI images selected",
   "chatDetailVoiceMessage": "Voice message",
+  "chatDetailVoiceError": "Failed to record voice message",
+  "chatDetailVoiceRecorded": "Uploading voice message...",
+  "voiceRecorderTitle": "Voice Message",
+  "voiceRecorderCheckingPermission": "Checking microphone permission...",
+  "voiceRecorderNoPermission": "Microphone permission is required to record voice messages",
+  "voiceRecorderRetryPermission": "Grant Permission",
+  "voiceRecorderTapToStart": "Tap to start recording",
+  "voiceRecorderRecording": "Recording...",
+  "voiceRecorderPaused": "Paused",
+  "voiceRecorderCancel": "Cancel",
+  "voiceRecorderPause": "Pause",
+  "voiceRecorderResume": "Resume",
+  "voiceRecorderSend": "Send",
+  "chatDetailAudioUnavailable": "Audio unavailable",
+  "chatDetailFileDownloading": "Downloading file...",
   "chatDetailStatusOnline": "Online",
   "chatDetailTyping": "typing",
   "chatDetailLastSeenJustNow": "last seen just now",
@@ -904,6 +918,17 @@
   "chatPollDialogAddOption": "Add option",
   "chatPollDialogQuestionError": "Please enter a question",
   "chatPollDialogOptionsError": "Please add at least 2 options",
+  "chatPollDialogMultipleChoiceLabel": "Multiple choice",
+  "chatPollDialogMultipleChoiceHint": "Allow users to select multiple options",
+  "chatPollDialogMaxVotesLabel": "Maximum votes",
+  "chatPollDialogMaxVotesHint": "Users can vote for up to {count} options",
+  "@chatPollDialogMaxVotesHint": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "chatPollDialogSend": "Send poll",
   "chatEventLabel": "EVENT",
   "chatEventSemanticsYour": "Your event",
@@ -923,6 +948,13 @@
   "chatEventDialogDescriptionHint": "Enter event description…",
   "chatEventDialogLocationLabel": "Location (optional)",
   "chatEventDialogLocationHint": "Enter location…",
+  "chatEventDialogAddressLabel": "Address",
+  "chatEventDialogAddressHint": "Enter full address…",
+  "chatEventDialogOnlineLabel": "Online event",
+  "chatEventDialogOnlineHint": "This event will be held virtually",
+  "chatEventDialogMeetingUrlLabel": "Meeting URL",
+  "chatEventDialogMeetingUrlHint": "Enter meeting link (Zoom, Google Meet, etc.)",
+  "chatEventDialogMeetingUrlError": "Please enter a meeting URL for online events",
   "chatEventDialogStartLabel": "Start",
   "chatEventDialogEndLabel": "End",
   "chatEventDialogTitleError": "Please enter an event title",
@@ -1240,5 +1272,76 @@
   "settingsHelpAboutAcknowledgementSupabase": "Supabase",
   "settingsHelpAboutAcknowledgementMaterial": "Material Design",
   "settingsHelpAboutFooterCopyright": "© 2025 VitoTechLab. All rights reserved.",
-  "settingsHelpAboutFooterMadeWith": "Made with ❤️ for a better world"
+  "settingsHelpAboutFooterMadeWith": "Made with ❤️ for a better world",
+  
+  "chatGallerySelectPhotos": "Select Photos",
+  "chatGallerySelectAtLeastOne": "Please select at least one image",
+  "chatGalleryUnableToLoad": "Unable to load the selected images",
+  "chatGallerySomeImagesNotAccessed": "Some images could not be accessed",
+  "chatGallerySend": "Send",
+  "chatGallerySendCount": "Send ({count})",
+  "@chatGallerySendCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatGallerySelectedCount": "{selected} of {max} selected",
+  "@chatGallerySelectedCount": {
+    "placeholders": {
+      "selected": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "chatGalleryClearAll": "Clear all",
+  
+  "chatDocumentTitle": "Select Documents",
+  "chatDocumentSend": "Send",
+  "chatDocumentSendCount": "Send ({count})",
+  "@chatDocumentSendCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatDocumentSelectedCount": "{selected} of {max} selected",
+  "@chatDocumentSelectedCount": {
+    "placeholders": {
+      "selected": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "chatDocumentClearAll": "Clear all",
+  "chatDocumentMaxReached": "Maximum {max} documents allowed",
+  "@chatDocumentMaxReached": {
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "chatDocumentSomeLimited": "Some files were skipped (max {max})",
+  "@chatDocumentSomeLimited": {
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "chatDocumentPickError": "Failed to pick documents",
+  "chatDocumentSelectAtLeastOne": "Please select at least one document",
+  "chatDocumentEmptyTitle": "No documents selected",
+  "chatDocumentEmptySubtitle": "Tap the button below to browse and select files",
+  "chatDocumentBrowseFiles": "Browse Files",
+  "chatDocumentAddMore": "Add more documents"
 }

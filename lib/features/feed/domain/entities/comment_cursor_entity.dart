@@ -1,4 +1,3 @@
-/// Cursor entity for comment pagination.
 class CommentCursorEntity {
   const CommentCursorEntity({required this.createdAt, required this.id});
 

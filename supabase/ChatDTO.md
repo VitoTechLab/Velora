@@ -1,56 +1,438 @@
-# AI INTEGRATION SPECIFICATION: Flutter Chat & Supabase Backend
+# Chat Schema V2 — DTO & Architecture Guide
 
-## 🎯 OBJECTIVE
-Refactor the following Flutter files to fully integrate with the Supabase PostgreSQL schema. The implementation must handle different message kinds (Text, Poll, Event) and fix existing UI logic errors.
-
-## 🗄️ DATABASE SCHEMA REFERENCE
-Based on the provided SQL, use these table relationships:
-- **Table `messages`**: The core table. 
-  - `id` (UUID), `kind` (ENUM: 'text', 'poll', 'event', etc.), `body` (TEXT), `deleted_at` (TIMESTAMPTZ).
-- **Table `message_poll_payload`**: Linked by `message_id`.
-- **Table `poll_options`**: Linked by `poll_message_id`.
-- **Table `message_event_payload`**: Linked by `message_id`.
+Dokumen ini menjelaskan **fungsi setiap tabel**, **tujuan desain**, dan **DTO apa saja yang perlu dibuat** dari schema Chat V2.  
+Fokus utama: performa, skalabilitas, dan kemudahan integrasi API.
 
 ---
 
-## 🛠️ TASKS & LOGIC REQUIREMENTS
+## 1. Gambaran Besar Arsitektur
 
-### 1. Fix `chat_bubble_widget.dart` Logic
-- **Issue**: Currently displays "Message was deleted" for active messages.
-- **Fix**: 
-  - IF `deleted_at == null` -> Render the actual content (body/poll/event).
-  - IF `deleted_at != null` -> Render "Message was deleted" UI.
-- **Positioning**: 
-  - Align **Right** if `sender_id == auth.uid()`.
-  - Align **Left** if `sender_id != auth.uid()`.
+Schema ini membangun sistem chat modern dengan fitur:
 
-### 2. Poll Submission Integration (`create_poll_dialog.dart`)
-Implement a sequential insert (Transaction-like) in Supabase:
-1. Insert record into `messages` table (`kind: 'poll'`, `body: [Question]`).
-2. Capture the returned `id` as `message_id`.
-3. Insert into `message_poll_payload` (`message_id`, `question`, `multiple_choice`).
-4. Loop and insert into `poll_options` (`poll_message_id` from Step 2, `text`, `position`).
-- **UX**: Show `CircularProgressIndicator` during submission and `Navigator.pop()` on success.
-
-### 3. Event Submission Integration (`create_event_dialog.dart`)
-1. Insert record into `messages` table (`kind: 'event'`, `body: [Title]`).
-2. Insert into `message_event_payload` using the `message_id`.
-   - Fields: `title`, `location`, `starts_at` (ISO8601), `ends_at`, `notes`.
-
-### 4. Dynamic Rendering in `chat_detail_screen.dart`
-Refactor the `ListView.builder` to handle polymorphic UI based on `message.kind`:
-- **CASE 'text'**: Use updated `ChatBubbleWidget`.
-- **CASE 'poll'**: Render a **PollViewWidget** that displays options. Implement voting logic by inserting into `poll_votes`.
-- **CASE 'event'**: Render an **EventCardWidget** with RSVP functionality (inserting into `event_rsvps`).
-- **Data Fetching**: Use `.select('*, message_poll_payload(*, poll_options(*)), message_event_payload(*)')` to fetch all necessary data in one go.
+- Direct chat & group chat  
+- Message dengan banyak tipe (text, image, poll, event, call)  
+- Read receipt (blue ticks)  
+- Unread counter per user  
+- Batch read untuk efisiensi  
+- Polling system  
+- Event system + RSVP  
+- Realtime update via Supabase Realtime  
 
 ---
 
-## ⚠️ TECHNICAL CONSTRAINTS
-- Language: Dart (Flutter).
-- Backend: `supabase_flutter`.
-- State Management: Ensure reactivity (Realtime is enabled on the `messages` table).
-- Error Handling: Wrap all Supabase calls in `try-catch` blocks and show `SnackBar` on failure.
+## 2. Konsep DTO
+
+DTO dibagi menjadi 4 layer utama:
+
+1. **Request DTO** → data dari client ke server  
+2. **Response DTO** → data dari server ke client  
+3. **Domain DTO** → representasi bisnis  
+4. **View DTO** → hasil dari VIEW / RPC
 
 ---
-**INSTRUCTION**: Use the provided `.dart` files as the base and apply these changes strictly following the SQL schema provided.
+
+## 3. CORE TABLES
+
+---
+
+### 3.1 `conversations`
+
+**Fungsi**  
+Menyimpan metadata percakapan.
+
+**Kenapa penting**
+- Menjadi root entity dari seluruh sistem chat.
+- Digunakan untuk:
+  - List chat
+  - Sorting berdasarkan aktivitas terakhir
+  - Realtime update
+
+**DTO**
+- `ConversationDTO`
+- `CreateConversationRequest`
+- `ConversationListItemDTO`
+
+---
+
+### 3.2 `conversation_members`
+
+**Fungsi**  
+Relasi user dengan conversation.
+
+**Tujuan desain**
+- Mengatur:
+  - Role user (member/admin/owner)
+  - Status mute
+  - Join/leave
+  - Unread count
+
+**Kenapa ada `unread_count` di sini?**
+Supaya:
+- Tidak perlu hitung ulang dari `messages`
+- List chat jadi super cepat
+
+**DTO**
+- `ConversationMemberDTO`
+- `UpdateMemberSettingsDTO`
+- `UnreadSummaryDTO`
+
+---
+
+### 3.3 `conversation_direct_pairs`
+
+**Fungsi**  
+Optimasi lookup direct chat.
+
+**Masalah yang diselesaikan**
+Tanpa tabel ini:
+- Setiap buka chat harus scan seluruh conversations
+
+Dengan tabel ini:
+- Langsung ketemu conversation antara 2 user
+- O(1) lookup
+
+**DTO**
+- Tidak perlu DTO publik  
+- Digunakan internal oleh RPC `create_direct_conversation`
+
+---
+
+## 4. MESSAGE SYSTEM
+
+---
+
+### 4.1 `messages`
+
+**Fungsi**
+Menyimpan semua pesan.
+
+**Desain penting**
+- `kind` → polymorphic message
+- `reply_to_message_id` → threading
+- `deleted_at` → soft delete
+
+**DTO**
+- `MessageDTO`
+- `SendMessageRequest`
+- `EditMessageRequest`
+- `DeleteMessageRequest`
+
+---
+
+### 4.2 `message_attachments`
+
+**Fungsi**
+Menyimpan metadata file.
+
+**Kenapa dipisah?**
+- Message tetap ringan
+- Attachment bisa banyak per message
+
+**DTO**
+- `AttachmentDTO`
+- `UploadAttachmentRequest`
+
+---
+
+## 5. READ RECEIPT SYSTEM
+
+---
+
+### 5.1 `message_reads`
+
+**Fungsi**
+Menyimpan siapa membaca pesan apa.
+
+**Tujuan**
+- Blue ticks
+- Read by X users
+
+---
+
+### 5.2 Batch Read (RPC)
+
+#### `mark_messages_read_batch(message_ids[])`
+
+**Masalah yang diselesaikan**
+Kalau update satu-satu:
+- Banyak query
+- Boros bandwidth
+- Lambat di mobile
+
+**Dengan batch**
+- Sekali kirim array
+- Sekali eksekusi
+- Lebih hemat baterai & data
+
+**DTO**
+- `BatchReadRequest`
+- `BatchReadResultDTO`
+
+---
+
+## 6. PAYLOAD SYSTEM (POLYMORPHIC MESSAGE)
+
+---
+
+### 6.1 Call Payload
+
+`message_call_payload`
+
+**Tujuan**
+- Simpan metadata call
+- Tracking:
+  - started
+  - ended
+  - missed
+
+**DTO**
+- `CallPayloadDTO`
+
+---
+
+### 6.2 Poll System
+
+#### `message_poll_payload`
+#### `poll_options`
+#### `poll_votes`
+
+**Tujuan desain**
+- Poll adalah message khusus
+- Logic vote di DB supaya:
+  - Aman dari race condition
+  - Tidak bisa double vote
+
+**Kenapa ada RPC vote?**
+Supaya:
+- Validasi max vote
+- Validasi multiple choice
+- Semua konsisten
+
+**DTO**
+- `PollDTO`
+- `PollOptionDTO`
+- `VotePollRequest`
+- `PollResultDTO`
+
+---
+
+### 6.3 Event System
+
+#### `message_event_payload`
+#### `event_rsvps`
+
+**Tujuan**
+Membuat event langsung dari chat.
+
+**Use case**
+- Meeting
+- Gathering
+- Webinar
+
+**Kenapa RSVP di table terpisah?**
+Supaya:
+- Bisa agregasi cepat
+- Bisa hitung going/interested/not_going
+
+**DTO**
+- `EventDTO`
+- `EventRSVPDTO`
+- `RespondEventRequest`
+
+---
+
+## 7. VIEW LAYER (OPTIMIZED QUERY)
+
+---
+
+### 7.1 `v_conversation_list_optimized`
+
+**Tujuan**
+Menyediakan:
+- List chat siap pakai UI
+- Tanpa join berat di backend
+
+**Sudah include**
+- Other user info
+- Last message preview
+- Unread count
+
+**DTO**
+- `ConversationListItemDTO`
+
+---
+
+### 7.2 `v_poll_options_with_votes`
+
+**Tujuan**
+- Ambil hasil poll + status user
+
+**DTO**
+- `PollOptionResultDTO`
+
+---
+
+### 7.3 `v_event_with_rsvp`
+
+**Tujuan**
+- Ringkasan RSVP event
+
+**DTO**
+- `EventSummaryDTO`
+
+---
+
+## 8. RPC FUNCTIONS & DTO
+
+---
+
+### `create_direct_conversation`
+**DTO**
+- `CreateDirectConversationRequest`
+- `CreateConversationResponse`
+
+---
+
+### `mark_conversation_read`
+**DTO**
+- `MarkConversationReadRequest`
+
+---
+
+### `mark_messages_read_batch`
+**DTO**
+- `BatchReadRequest`
+- `BatchReadResponse`
+
+---
+
+### `get_conversation_list_optimized`
+**DTO**
+- `ConversationListItemDTO`
+
+---
+
+### `vote_poll_option`
+**DTO**
+- `VotePollRequest`
+
+---
+
+### `respond_to_event`
+**DTO**
+- `RespondEventRequest`
+
+---
+
+## 9. DTO MAPPING SUMMARY
+
+| Table / View | DTO |
+|-------------|-----|
+conversations | ConversationDTO  
+conversation_members | ConversationMemberDTO  
+messages | MessageDTO  
+message_attachments | AttachmentDTO  
+message_reads | MessageReadDTO  
+message_call_payload | CallPayloadDTO  
+message_poll_payload | PollDTO  
+poll_options | PollOptionDTO  
+poll_votes | PollVoteDTO  
+message_event_payload | EventDTO  
+event_rsvps | EventRSVPDTO  
+v_conversation_list_optimized | ConversationListItemDTO  
+v_poll_options_with_votes | PollOptionResultDTO  
+v_event_with_rsvp | EventSummaryDTO  
+
+---
+
+## 10. Alur Data Penting
+
+---
+
+### A. Kirim Pesan
+
+1. Client → `SendMessageRequest`
+2. Insert ke `messages`
+3. Trigger:
+   - Update `conversations.last_message`
+   - Increment `conversation_members.unread_count`
+4. Realtime push ke client lain
+
+---
+
+### B. User Buka Chat
+
+1. Client call `mark_conversation_read`
+2. Server:
+   - Reset unread_count
+   - Update last_read_message_id
+
+---
+
+### C. Scroll Message (Batch Read)
+
+1. Client kumpulkan message IDs
+2. Call `mark_messages_read_batch`
+3. Server insert ke `message_reads`
+4. Blue ticks update realtime
+
+---
+
+### D. Vote Poll
+
+1. Client kirim `VotePollRequest`
+2. RPC validasi:
+   - Max vote
+   - Multiple choice
+3. Insert ke `poll_votes`
+4. View `v_poll_options_with_votes` auto update
+
+---
+
+### E. RSVP Event
+
+1. Client kirim `RespondEventRequest`
+2. Upsert ke `event_rsvps`
+3. View `v_event_with_rsvp` update
+
+---
+
+## 11. Kenapa Schema Ini Kuat
+
+- **Scalable**
+  - Batch read
+  - Optimized views
+- **Consistent**
+  - Logic di RPC, bukan di client
+- **Realtime-ready**
+  - Supabase Realtime integration
+- **Future proof**
+  - Payload system → mudah tambah jenis message baru
+
+---
+
+
+---
+
+## 12. Kesimpulan
+
+Schema ini bukan sekadar chat schema biasa.  
+Ini adalah **event-driven communication platform** dengan:
+
+- Chat
+- Polling
+- Event management
+- Read tracking
+- Realtime system
+
+DTO harus mencerminkan:
+- **Tujuan bisnis**
+- **Efisiensi data**
+- **Keamanan (RLS + RPC)**
+
+Kalau kamu konsisten ikuti mapping DTO ini, backend & frontend akan:
+- Lebih rapi
+- Lebih scalable
+- Lebih gampang dikembangkan ke fitur lanjutan.
+
+

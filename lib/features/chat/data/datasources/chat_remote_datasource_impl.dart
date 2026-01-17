@@ -13,6 +13,7 @@ import 'package:velora/features/chat/data/models/message_read_model.dart';
 import 'package:velora/features/chat/data/models/typing_indicator_model.dart';
 import 'package:velora/features/chat/data/models/user_presence_model.dart';
 import 'package:velora/features/chat/data/models/user_search_model.dart';
+import 'package:velora/features/chat/data/models/message_attachment_model.dart';
 
 import 'chat_remote_datasource.dart';
 
@@ -56,28 +57,31 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
         // v_event_with_rsvp provides going_count, interested_count, not_going_count, user_response
         final effectiveLimit = limit + 1;
 
-        var query = _client
-            .from(SupabaseTables.messages)
-            .select('''
+        PostgrestFilterBuilder query =
+            _client.from(SupabaseTables.messages).select('''
               *,
               message_poll_payload(
                 *,
                 poll_options:v_poll_options_with_votes(*)
               ),
-              message_event_payload:v_event_with_rsvp(*)
-            ''')
-            .eq('conversation_id', conversationId)
-            .order('created_at', ascending: false)
-            .limit(effectiveLimit);
+              message_event_payload:v_event_with_rsvp(*),
+              message_attachments(*)
+            ''').eq('conversation_id', conversationId);
 
+        // Composite cursor for consistent pagination (created_at, id)
         if (cursor != null) {
-          query = query.lt(
-            'created_at',
-            cursor.createdAt.toUtc().toIso8601String(),
+          final iso = cursor.createdAt.toUtc().toIso8601String();
+          // Handle same-timestamp records by also comparing id
+          query = query.or(
+            'created_at.lt.$iso,and(created_at.eq.$iso,id.lt.${cursor.id})',
           );
         }
 
-        final List<dynamic> response = await query;
+        final List<dynamic> response = await query
+            .order('created_at', ascending: false)
+            .order('id', ascending: false)
+            .limit(effectiveLimit);
+
         final hasMore = response.length > limit;
         final results = hasMore ? response.sublist(0, limit) : response;
 
@@ -139,11 +143,96 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
   }
 
   @override
+  Future<ChatMessageModel> sendMediaMessage({
+    required String conversationId,
+    required String mediaUrl,
+    required String mediaType,
+    String? mimeType,
+    String? fileName,
+    int? fileSize,
+    String? caption,
+  }) {
+    return guardSupabase(
+      () async {
+        final userId = _requireUserId();
+
+        // Determine kind from mediaType
+        String attachmentKind;
+        String messageKind;
+        switch (mediaType.toLowerCase()) {
+          case 'image':
+            attachmentKind = 'image';
+            messageKind = 'image';
+            break;
+          case 'video':
+            attachmentKind = 'video';
+            messageKind = 'video';
+            break;
+          case 'document':
+            attachmentKind = 'file';
+            messageKind = 'file';
+            break;
+          case 'audio':
+            attachmentKind = 'audio';
+            messageKind = 'audio';
+            break;
+          default:
+            attachmentKind = 'file';
+            messageKind = 'file';
+        }
+
+        // 1. Insert message
+        final messagePayload = <String, dynamic>{
+          'conversation_id': conversationId,
+          'sender_id': userId,
+          'kind': messageKind,
+          'body': caption ?? '',
+        };
+
+        final messageResponse = await _client
+            .from(SupabaseTables.messages)
+            .insert(messagePayload)
+            .select()
+            .single();
+
+        final messageId = messageResponse['id'] as String;
+
+        // 2. Insert attachment
+        final attachmentPayload = MessageAttachmentModel.toInsertJson(
+          messageId: messageId,
+          kind: attachmentKind,
+          url: mediaUrl,
+          filename: fileName,
+          mimeType: mimeType,
+          sizeBytes: fileSize,
+        );
+
+        await _client
+            .from(SupabaseTables.messageAttachments)
+            .insert(attachmentPayload);
+
+        // 3. Fetch complete message with attachments
+        final response = await _client
+            .from(SupabaseTables.messages)
+            .select(
+                '*, message_poll_payload(*, poll_options(*)), message_event_payload(*), message_attachments(*)')
+            .eq('id', messageId)
+            .single();
+
+        return ChatMessageModel.fromJson(response);
+      },
+      op: 'sendMediaMessage',
+      tag: _logTag,
+    );
+  }
+
+  @override
   Future<ChatMessageModel> sendPollMessage({
     required String conversationId,
     required String question,
     required List<String> options,
     required bool multipleChoice,
+    int maxUserVotes = 1,
   }) {
     return guardSupabase(
       () async {
@@ -163,11 +252,12 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
 
         final messageId = msgRes['id'] as String;
 
-        // 2. Insert payload
+        // 2. Insert payload with SQL v2 fields
         await _client.from('message_poll_payload').insert({
           'message_id': messageId,
           'question': question,
           'multiple_choice': multipleChoice,
+          'max_user_votes': maxUserVotes,
         });
 
         // 3. Insert options
@@ -207,7 +297,11 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
     required String conversationId,
     required String title,
     String? description,
-    String? location,
+    String? locationName,
+    String? address,
+    bool isOnline = false,
+    String? meetingUrl,
+    String? coverUrl,
     required DateTime startDate,
     required DateTime endDate,
   }) {
@@ -229,12 +323,16 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
 
         final messageId = msgRes['id'] as String;
 
-        // 2. Insert payload
-        await _client.from('message_event_payload').insert({
+        // 2. Insert payload with all SQL v2 fields
+        await _client.from(SupabaseTables.messageEventPayload).insert({
           'message_id': messageId,
           'title': title,
-          'notes': description,
-          'location': location,
+          'description': description,
+          'location_name': locationName,
+          'address': address,
+          'is_online': isOnline,
+          'meeting_url': meetingUrl,
+          'cover_url': coverUrl,
           'starts_at': startDate.toUtc().toIso8601String(),
           'ends_at': endDate.toUtc().toIso8601String(),
         });
@@ -351,6 +449,27 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
     // Ensure only one active subscription
     unawaited(_messageChannel?.unsubscribe());
 
+    // Helper to fetch enriched message with poll/event payload
+    Future<void> emitEnrichedMessage(String messageId) async {
+      try {
+        final enriched = await _client.from(SupabaseTables.messages).select('''
+          *,
+          message_poll_payload(
+            *,
+            poll_options:v_poll_options_with_votes(*)
+          ),
+          message_event_payload:v_event_with_rsvp(*)
+        ''').eq('id', messageId).maybeSingle();
+
+        if (enriched != null) {
+          final message = ChatMessageModel.fromJson(enriched);
+          controller.add(message);
+        }
+      } catch (e, st) {
+        controller.addError(e, st);
+      }
+    }
+
     _messageChannel = _client
         .channel('messages:$conversationId')
         // Listen to INSERT events
@@ -364,15 +483,13 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
             value: conversationId,
           ),
           callback: (payload) {
-            try {
-              final message = ChatMessageModel.fromJson(payload.newRecord);
-              controller.add(message);
-            } catch (e, st) {
-              controller.addError(e, st);
+            final messageId = payload.newRecord['id'] as String?;
+            if (messageId != null) {
+              unawaited(emitEnrichedMessage(messageId));
             }
           },
         )
-        // Listen to UPDATE events (for edit)
+        // Listen to UPDATE events (for edit/soft delete)
         .onPostgresChanges(
           event: PostgresChangeEvent.update,
           schema: 'public',
@@ -383,33 +500,9 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
             value: conversationId,
           ),
           callback: (payload) {
-            try {
-              final message = ChatMessageModel.fromJson(payload.newRecord);
-              controller.add(message);
-            } catch (e, st) {
-              controller.addError(e, st);
-            }
-          },
-        )
-        // Listen to DELETE events (soft delete: updated with deleted_at)
-        .onPostgresChanges(
-          event: PostgresChangeEvent.update,
-          schema: 'public',
-          table: SupabaseTables.messages,
-          filter: PostgresChangeFilter(
-            type: PostgresChangeFilterType.eq,
-            column: 'conversation_id',
-            value: conversationId,
-          ),
-          callback: (payload) {
-            try {
-              // Check if it's a delete (deleted_at is set)
-              if (payload.newRecord['deleted_at'] != null) {
-                final message = ChatMessageModel.fromJson(payload.newRecord);
-                controller.add(message);
-              }
-            } catch (e, st) {
-              controller.addError(e, st);
+            final messageId = payload.newRecord['id'] as String?;
+            if (messageId != null) {
+              unawaited(emitEnrichedMessage(messageId));
             }
           },
         )
@@ -592,6 +685,33 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
   }
 
   @override
+  Future<int> markMessagesReadBatch({required List<String> messageIds}) {
+    return guardSupabase(
+      () async {
+        if (messageIds.isEmpty) return 0;
+
+        logi(
+          'Batch marking ${messageIds.length} messages as read',
+          tag: _logTag,
+        );
+
+        final result = await _client.rpc(
+          SupabaseRpc.markMessagesReadBatch,
+          params: {'p_message_ids': messageIds},
+        );
+
+        // RPC returns TABLE (marked_count INT), so result is a list
+        if (result is List && result.isNotEmpty) {
+          return (result.first['marked_count'] as int?) ?? 0;
+        }
+        return 0;
+      },
+      op: 'markMessagesReadBatch',
+      tag: _logTag,
+    );
+  }
+
+  @override
   Stream<MessageReadModel> watchMessageReads({required String conversationId}) {
     final previousController = _messageReadController;
     if (previousController != null && !previousController.isClosed) {
@@ -736,7 +856,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
   }) {
     return guardSupabase(
       () async {
-        await _client.rpc('vote_poll_option', params: {
+        await _client.rpc(SupabaseRpc.votePollOption, params: {
           'p_poll_message_id': pollMessageId,
           'p_option_id': optionId,
         });
@@ -750,7 +870,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
   Future<void> unvotePollOption({required String optionId}) {
     return guardSupabase(
       () async {
-        await _client.rpc('unvote_poll_option', params: {
+        await _client.rpc(SupabaseRpc.unvotePollOption, params: {
           'p_option_id': optionId,
         });
       },
@@ -770,7 +890,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
   }) {
     return guardSupabase(
       () async {
-        await _client.rpc('respond_to_event', params: {
+        await _client.rpc(SupabaseRpc.respondToEvent, params: {
           'p_event_message_id': eventMessageId,
           'p_status': status,
         });
@@ -784,9 +904,13 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
   Future<void> cancelEventRsvp({required String eventMessageId}) {
     return guardSupabase(
       () async {
-        await _client.rpc('cancel_event_rsvp', params: {
-          'p_event_message_id': eventMessageId,
-        });
+        final userId = _requireUserId();
+        // Delete RSVP directly from table (no RPC for cancel in SQL v2)
+        await _client
+            .from(SupabaseTables.eventRsvps)
+            .delete()
+            .eq('event_message_id', eventMessageId)
+            .eq('user_id', userId);
       },
       op: 'cancelEventRsvp',
       tag: _logTag,

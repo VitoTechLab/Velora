@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:velora/features/chat/domain/entities/user_presence_entity.dart';
 
 part 'user_presence_model.freezed.dart';
 part 'user_presence_model.g.dart';
@@ -10,9 +11,15 @@ abstract class UserPresenceModel with _$UserPresenceModel {
   const factory UserPresenceModel({
     @JsonKey(name: 'user_id') required String userId,
     @JsonKey(name: 'last_seen_at') required DateTime lastSeenAt,
-    @JsonKey(name: 'is_online') bool? isOnline,
+    @JsonKey(name: 'is_online') @Default(false) bool isOnline,
   }) = _UserPresenceModel;
 
   factory UserPresenceModel.fromJson(Map<String, dynamic> json) =>
       _$UserPresenceModelFromJson(json);
+
+  UserPresenceEntity toEntity() => UserPresenceEntity(
+        userId: userId,
+        isOnline: isOnline,
+        lastSeenAt: lastSeenAt,
+      );
 }

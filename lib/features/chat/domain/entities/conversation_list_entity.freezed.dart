@@ -16,17 +16,21 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ConversationListEntity {
-  String get userId => throw _privateConstructorUsedError;
   String get conversationId => throw _privateConstructorUsedError;
-  String get type => throw _privateConstructorUsedError; // 'direct' or 'group'
-  String? get title => throw _privateConstructorUsedError;
-  String? get photoUrl => throw _privateConstructorUsedError;
+
+  /// Other participant info (for direct conversations)
+  String? get otherUserId => throw _privateConstructorUsedError;
+  String? get otherUserUsername => throw _privateConstructorUsedError;
+  String? get otherUserFullName => throw _privateConstructorUsedError;
+  String? get otherUserAvatarUrl => throw _privateConstructorUsedError;
+
+  /// Last message preview info
+  String? get lastMessageBody => throw _privateConstructorUsedError;
   DateTime? get lastMessageAt => throw _privateConstructorUsedError;
-  String? get lastMessageId => throw _privateConstructorUsedError;
-  String? get lastMessageKind => throw _privateConstructorUsedError;
-  String? get lastMessagePreview => throw _privateConstructorUsedError;
+  String? get lastMessageSenderId => throw _privateConstructorUsedError;
+
+  /// Unread count for the current user
   int get unreadCount => throw _privateConstructorUsedError;
-  DateTime? get lastReadAt => throw _privateConstructorUsedError;
 
   /// Create a copy of ConversationListEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -42,17 +46,15 @@ abstract class $ConversationListEntityCopyWith<$Res> {
       _$ConversationListEntityCopyWithImpl<$Res, ConversationListEntity>;
   @useResult
   $Res call(
-      {String userId,
-      String conversationId,
-      String type,
-      String? title,
-      String? photoUrl,
+      {String conversationId,
+      String? otherUserId,
+      String? otherUserUsername,
+      String? otherUserFullName,
+      String? otherUserAvatarUrl,
+      String? lastMessageBody,
       DateTime? lastMessageAt,
-      String? lastMessageId,
-      String? lastMessageKind,
-      String? lastMessagePreview,
-      int unreadCount,
-      DateTime? lastReadAt});
+      String? lastMessageSenderId,
+      int unreadCount});
 }
 
 /// @nodoc
@@ -71,63 +73,53 @@ class _$ConversationListEntityCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userId = null,
     Object? conversationId = null,
-    Object? type = null,
-    Object? title = freezed,
-    Object? photoUrl = freezed,
+    Object? otherUserId = freezed,
+    Object? otherUserUsername = freezed,
+    Object? otherUserFullName = freezed,
+    Object? otherUserAvatarUrl = freezed,
+    Object? lastMessageBody = freezed,
     Object? lastMessageAt = freezed,
-    Object? lastMessageId = freezed,
-    Object? lastMessageKind = freezed,
-    Object? lastMessagePreview = freezed,
+    Object? lastMessageSenderId = freezed,
     Object? unreadCount = null,
-    Object? lastReadAt = freezed,
   }) {
     return _then(_value.copyWith(
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
       conversationId: null == conversationId
           ? _value.conversationId
           : conversationId // ignore: cast_nullable_to_non_nullable
               as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: freezed == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      otherUserId: freezed == otherUserId
+          ? _value.otherUserId
+          : otherUserId // ignore: cast_nullable_to_non_nullable
               as String?,
-      photoUrl: freezed == photoUrl
-          ? _value.photoUrl
-          : photoUrl // ignore: cast_nullable_to_non_nullable
+      otherUserUsername: freezed == otherUserUsername
+          ? _value.otherUserUsername
+          : otherUserUsername // ignore: cast_nullable_to_non_nullable
+              as String?,
+      otherUserFullName: freezed == otherUserFullName
+          ? _value.otherUserFullName
+          : otherUserFullName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      otherUserAvatarUrl: freezed == otherUserAvatarUrl
+          ? _value.otherUserAvatarUrl
+          : otherUserAvatarUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastMessageBody: freezed == lastMessageBody
+          ? _value.lastMessageBody
+          : lastMessageBody // ignore: cast_nullable_to_non_nullable
               as String?,
       lastMessageAt: freezed == lastMessageAt
           ? _value.lastMessageAt
           : lastMessageAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      lastMessageId: freezed == lastMessageId
-          ? _value.lastMessageId
-          : lastMessageId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lastMessageKind: freezed == lastMessageKind
-          ? _value.lastMessageKind
-          : lastMessageKind // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lastMessagePreview: freezed == lastMessagePreview
-          ? _value.lastMessagePreview
-          : lastMessagePreview // ignore: cast_nullable_to_non_nullable
+      lastMessageSenderId: freezed == lastMessageSenderId
+          ? _value.lastMessageSenderId
+          : lastMessageSenderId // ignore: cast_nullable_to_non_nullable
               as String?,
       unreadCount: null == unreadCount
           ? _value.unreadCount
           : unreadCount // ignore: cast_nullable_to_non_nullable
               as int,
-      lastReadAt: freezed == lastReadAt
-          ? _value.lastReadAt
-          : lastReadAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
     ) as $Val);
   }
 }
@@ -142,17 +134,15 @@ abstract class _$$ConversationListEntityImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String userId,
-      String conversationId,
-      String type,
-      String? title,
-      String? photoUrl,
+      {String conversationId,
+      String? otherUserId,
+      String? otherUserUsername,
+      String? otherUserFullName,
+      String? otherUserAvatarUrl,
+      String? lastMessageBody,
       DateTime? lastMessageAt,
-      String? lastMessageId,
-      String? lastMessageKind,
-      String? lastMessagePreview,
-      int unreadCount,
-      DateTime? lastReadAt});
+      String? lastMessageSenderId,
+      int unreadCount});
 }
 
 /// @nodoc
@@ -170,63 +160,53 @@ class __$$ConversationListEntityImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userId = null,
     Object? conversationId = null,
-    Object? type = null,
-    Object? title = freezed,
-    Object? photoUrl = freezed,
+    Object? otherUserId = freezed,
+    Object? otherUserUsername = freezed,
+    Object? otherUserFullName = freezed,
+    Object? otherUserAvatarUrl = freezed,
+    Object? lastMessageBody = freezed,
     Object? lastMessageAt = freezed,
-    Object? lastMessageId = freezed,
-    Object? lastMessageKind = freezed,
-    Object? lastMessagePreview = freezed,
+    Object? lastMessageSenderId = freezed,
     Object? unreadCount = null,
-    Object? lastReadAt = freezed,
   }) {
     return _then(_$ConversationListEntityImpl(
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
       conversationId: null == conversationId
           ? _value.conversationId
           : conversationId // ignore: cast_nullable_to_non_nullable
               as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: freezed == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      otherUserId: freezed == otherUserId
+          ? _value.otherUserId
+          : otherUserId // ignore: cast_nullable_to_non_nullable
               as String?,
-      photoUrl: freezed == photoUrl
-          ? _value.photoUrl
-          : photoUrl // ignore: cast_nullable_to_non_nullable
+      otherUserUsername: freezed == otherUserUsername
+          ? _value.otherUserUsername
+          : otherUserUsername // ignore: cast_nullable_to_non_nullable
+              as String?,
+      otherUserFullName: freezed == otherUserFullName
+          ? _value.otherUserFullName
+          : otherUserFullName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      otherUserAvatarUrl: freezed == otherUserAvatarUrl
+          ? _value.otherUserAvatarUrl
+          : otherUserAvatarUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastMessageBody: freezed == lastMessageBody
+          ? _value.lastMessageBody
+          : lastMessageBody // ignore: cast_nullable_to_non_nullable
               as String?,
       lastMessageAt: freezed == lastMessageAt
           ? _value.lastMessageAt
           : lastMessageAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      lastMessageId: freezed == lastMessageId
-          ? _value.lastMessageId
-          : lastMessageId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lastMessageKind: freezed == lastMessageKind
-          ? _value.lastMessageKind
-          : lastMessageKind // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lastMessagePreview: freezed == lastMessagePreview
-          ? _value.lastMessagePreview
-          : lastMessagePreview // ignore: cast_nullable_to_non_nullable
+      lastMessageSenderId: freezed == lastMessageSenderId
+          ? _value.lastMessageSenderId
+          : lastMessageSenderId // ignore: cast_nullable_to_non_nullable
               as String?,
       unreadCount: null == unreadCount
           ? _value.unreadCount
           : unreadCount // ignore: cast_nullable_to_non_nullable
               as int,
-      lastReadAt: freezed == lastReadAt
-          ? _value.lastReadAt
-          : lastReadAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
     ));
   }
 }
@@ -235,46 +215,45 @@ class __$$ConversationListEntityImplCopyWithImpl<$Res>
 
 class _$ConversationListEntityImpl implements _ConversationListEntity {
   const _$ConversationListEntityImpl(
-      {required this.userId,
-      required this.conversationId,
-      required this.type,
-      this.title,
-      this.photoUrl,
+      {required this.conversationId,
+      this.otherUserId,
+      this.otherUserUsername,
+      this.otherUserFullName,
+      this.otherUserAvatarUrl,
+      this.lastMessageBody,
       this.lastMessageAt,
-      this.lastMessageId,
-      this.lastMessageKind,
-      this.lastMessagePreview,
-      this.unreadCount = 0,
-      this.lastReadAt});
+      this.lastMessageSenderId,
+      this.unreadCount = 0});
 
   @override
-  final String userId;
-  @override
   final String conversationId;
+
+  /// Other participant info (for direct conversations)
   @override
-  final String type;
-// 'direct' or 'group'
+  final String? otherUserId;
   @override
-  final String? title;
+  final String? otherUserUsername;
   @override
-  final String? photoUrl;
+  final String? otherUserFullName;
+  @override
+  final String? otherUserAvatarUrl;
+
+  /// Last message preview info
+  @override
+  final String? lastMessageBody;
   @override
   final DateTime? lastMessageAt;
   @override
-  final String? lastMessageId;
-  @override
-  final String? lastMessageKind;
-  @override
-  final String? lastMessagePreview;
+  final String? lastMessageSenderId;
+
+  /// Unread count for the current user
   @override
   @JsonKey()
   final int unreadCount;
-  @override
-  final DateTime? lastReadAt;
 
   @override
   String toString() {
-    return 'ConversationListEntity(userId: $userId, conversationId: $conversationId, type: $type, title: $title, photoUrl: $photoUrl, lastMessageAt: $lastMessageAt, lastMessageId: $lastMessageId, lastMessageKind: $lastMessageKind, lastMessagePreview: $lastMessagePreview, unreadCount: $unreadCount, lastReadAt: $lastReadAt)';
+    return 'ConversationListEntity(conversationId: $conversationId, otherUserId: $otherUserId, otherUserUsername: $otherUserUsername, otherUserFullName: $otherUserFullName, otherUserAvatarUrl: $otherUserAvatarUrl, lastMessageBody: $lastMessageBody, lastMessageAt: $lastMessageAt, lastMessageSenderId: $lastMessageSenderId, unreadCount: $unreadCount)';
   }
 
   @override
@@ -282,41 +261,38 @@ class _$ConversationListEntityImpl implements _ConversationListEntity {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ConversationListEntityImpl &&
-            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.conversationId, conversationId) ||
                 other.conversationId == conversationId) &&
-            (identical(other.type, type) || other.type == type) &&
-            (identical(other.title, title) || other.title == title) &&
-            (identical(other.photoUrl, photoUrl) ||
-                other.photoUrl == photoUrl) &&
+            (identical(other.otherUserId, otherUserId) ||
+                other.otherUserId == otherUserId) &&
+            (identical(other.otherUserUsername, otherUserUsername) ||
+                other.otherUserUsername == otherUserUsername) &&
+            (identical(other.otherUserFullName, otherUserFullName) ||
+                other.otherUserFullName == otherUserFullName) &&
+            (identical(other.otherUserAvatarUrl, otherUserAvatarUrl) ||
+                other.otherUserAvatarUrl == otherUserAvatarUrl) &&
+            (identical(other.lastMessageBody, lastMessageBody) ||
+                other.lastMessageBody == lastMessageBody) &&
             (identical(other.lastMessageAt, lastMessageAt) ||
                 other.lastMessageAt == lastMessageAt) &&
-            (identical(other.lastMessageId, lastMessageId) ||
-                other.lastMessageId == lastMessageId) &&
-            (identical(other.lastMessageKind, lastMessageKind) ||
-                other.lastMessageKind == lastMessageKind) &&
-            (identical(other.lastMessagePreview, lastMessagePreview) ||
-                other.lastMessagePreview == lastMessagePreview) &&
+            (identical(other.lastMessageSenderId, lastMessageSenderId) ||
+                other.lastMessageSenderId == lastMessageSenderId) &&
             (identical(other.unreadCount, unreadCount) ||
-                other.unreadCount == unreadCount) &&
-            (identical(other.lastReadAt, lastReadAt) ||
-                other.lastReadAt == lastReadAt));
+                other.unreadCount == unreadCount));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      userId,
       conversationId,
-      type,
-      title,
-      photoUrl,
+      otherUserId,
+      otherUserUsername,
+      otherUserFullName,
+      otherUserAvatarUrl,
+      lastMessageBody,
       lastMessageAt,
-      lastMessageId,
-      lastMessageKind,
-      lastMessagePreview,
-      unreadCount,
-      lastReadAt);
+      lastMessageSenderId,
+      unreadCount);
 
   /// Create a copy of ConversationListEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -330,40 +306,40 @@ class _$ConversationListEntityImpl implements _ConversationListEntity {
 
 abstract class _ConversationListEntity implements ConversationListEntity {
   const factory _ConversationListEntity(
-      {required final String userId,
-      required final String conversationId,
-      required final String type,
-      final String? title,
-      final String? photoUrl,
+      {required final String conversationId,
+      final String? otherUserId,
+      final String? otherUserUsername,
+      final String? otherUserFullName,
+      final String? otherUserAvatarUrl,
+      final String? lastMessageBody,
       final DateTime? lastMessageAt,
-      final String? lastMessageId,
-      final String? lastMessageKind,
-      final String? lastMessagePreview,
-      final int unreadCount,
-      final DateTime? lastReadAt}) = _$ConversationListEntityImpl;
+      final String? lastMessageSenderId,
+      final int unreadCount}) = _$ConversationListEntityImpl;
 
   @override
-  String get userId;
-  @override
   String get conversationId;
+
+  /// Other participant info (for direct conversations)
   @override
-  String get type; // 'direct' or 'group'
+  String? get otherUserId;
   @override
-  String? get title;
+  String? get otherUserUsername;
   @override
-  String? get photoUrl;
+  String? get otherUserFullName;
+  @override
+  String? get otherUserAvatarUrl;
+
+  /// Last message preview info
+  @override
+  String? get lastMessageBody;
   @override
   DateTime? get lastMessageAt;
   @override
-  String? get lastMessageId;
-  @override
-  String? get lastMessageKind;
-  @override
-  String? get lastMessagePreview;
+  String? get lastMessageSenderId;
+
+  /// Unread count for the current user
   @override
   int get unreadCount;
-  @override
-  DateTime? get lastReadAt;
 
   /// Create a copy of ConversationListEntity
   /// with the given fields replaced by the non-null parameter values.

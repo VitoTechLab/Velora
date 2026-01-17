@@ -107,7 +107,9 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
 
         if (cursor != null) {
           final iso = cursor.createdAt.toUtc().toIso8601String();
-          query = query.lt('created_at', iso);
+          query = query.or(
+            'created_at.lt.$iso,and(created_at.eq.$iso,id.lt.${cursor.id})',
+          );
         }
 
         final response = await query
@@ -146,7 +148,7 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
         // Fetch post details first to check current like status and get author info
         final postData = await _client
             .from(SupabaseTables.feedPostsView)
-            .select('user_id, username, is_liked, image_urls')
+            .select('user_id, username, is_liked, media_urls')
             .eq('id', postId)
             .maybeSingle();
 
@@ -157,15 +159,15 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
         final postAuthorId = postData['user_id'] as String;
         final postAuthorUsername = postData['username'] as String?;
         final wasLiked = postData['is_liked'] as bool? ?? false;
-        final imageUrls = postData['image_urls'] as List<dynamic>?;
-        final firstImageUrl = imageUrls?.isNotEmpty == true 
-            ? imageUrls!.first as String? 
+        final mediaUrls = postData['media_urls'] as List<dynamic>?;
+        final firstImageUrl = mediaUrls?.isNotEmpty == true 
+            ? mediaUrls!.first as String? 
             : null;
 
-        // Atomic toggle using database function (no race condition)
+        // Atomic toggle using database function (uses auth.uid() internally)
         await _client.rpc(
           SupabaseRpc.togglePostLike,
-          params: {'p_post_id': postId, 'p_user_id': userId},
+          params: {'p_post_id': postId},
         );
 
         // Send notification only if this is a NEW like (not unlike)
@@ -198,12 +200,10 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
   Future<void> toggleBookmarkPost(String postId) {
     return guardSupabase(
       () async {
-        final userId = _requireUserId();
-
-        // Atomic toggle using database function (no race condition)
+        // Atomic toggle using database function (uses auth.uid() internally)
         await _client.rpc(
           SupabaseRpc.togglePostBookmark,
-          params: {'p_post_id': postId, 'p_user_id': userId},
+          params: {'p_post_id': postId},
         );
       },
       op: 'toggleBookmarkPost',
@@ -219,10 +219,8 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
   }) {
     return guardSupabase(
       () async {
-        // Fetch only ROOT comments (parent_comment_id is null)
-        // Replies are loaded on-demand via getReplies()
         var query = _client
-            .from(SupabaseTables.feedComments)
+            .from(SupabaseTables.feedCommentsView)
             .select()
             .filter('post_id', 'eq', postId)
             .isFilter('parent_comment_id', null);
@@ -273,7 +271,7 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
         logi('Fetching replies for comment=$parentCommentId', tag: _logTag);
 
         final response = await _client
-            .from(SupabaseTables.feedComments)
+            .from(SupabaseTables.feedCommentsView)
             .select()
             .filter('parent_comment_id', 'eq', parentCommentId)
             .order('created_at', ascending: true);
@@ -303,18 +301,23 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
           'parent_comment_id': parentCommentId,
         };
 
-        final response = await _client
+        final insertResponse = await _client
             .from(SupabaseTables.feedComments)
             .insert(payload)
-            .select()
+            .select('id')
             .single();
 
-        final comment = CommentModel.fromJson(response);
+        final commentId = insertResponse['id'] as String;
 
-        // Send notification after successfully adding comment
-        // Fire and forget - don't wait for notification to complete
+        final commentData = await _client
+            .from(SupabaseTables.feedCommentsView)
+            .select()
+            .eq('id', commentId)
+            .single();
+
+        final comment = CommentModel.fromJson(commentData);
+
         if (parentCommentId == null) {
-          // This is a root comment on a post
           _sendPostCommentNotification(
             postId: postId,
             commentId: comment.id,
@@ -322,7 +325,6 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
             commenterId: userId,
           );
         } else {
-          // This is a reply to another comment
           _sendCommentReplyNotification(
             postId: postId,
             parentCommentId: parentCommentId,
@@ -350,7 +352,7 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
       // Fetch post author and commenter info
       final postData = await _client
           .from(SupabaseTables.feedPostsView)
-          .select('user_id, image_urls')
+          .select('user_id, media_urls')
           .eq('id', postId)
           .maybeSingle();
 
@@ -361,9 +363,9 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
       // Don't notify if commenting on own post
       if (postAuthorId == commenterId) return;
 
-      final imageUrls = postData['image_urls'] as List<dynamic>?;
-      final firstImageUrl = imageUrls?.isNotEmpty == true 
-          ? imageUrls!.first as String? 
+      final mediaUrls = postData['media_urls'] as List<dynamic>?;
+      final firstImageUrl = mediaUrls?.isNotEmpty == true 
+          ? mediaUrls!.first as String? 
           : null;
 
       // Fetch commenter username
@@ -455,12 +457,10 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
   Future<void> toggleLikeComment(String commentId) {
     return guardSupabase(
       () async {
-        final userId = _requireUserId();
-
-        // Atomic toggle using database function (no race condition)
+        // Atomic toggle using database function (uses auth.uid() internally)
         await _client.rpc(
           SupabaseRpc.toggleCommentLike,
-          params: {'p_comment_id': commentId, 'p_user_id': userId},
+          params: {'p_comment_id': commentId},
         );
       },
       op: 'toggleLikeComment',
@@ -492,10 +492,19 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
             column: 'post_id',
             value: postId,
           ),
-          callback: (payload) {
+          callback: (payload) async {
             try {
-              final comment = CommentModel.fromJson(payload.newRecord);
-              controller.add(comment);
+              final commentId = payload.newRecord['id'] as String;
+              final commentData = await _client
+                  .from(SupabaseTables.feedCommentsView)
+                  .select()
+                  .eq('id', commentId)
+                  .maybeSingle();
+
+              if (commentData != null) {
+                final comment = CommentModel.fromJson(commentData);
+                controller.add(comment);
+              }
             } catch (e, st) {
               controller.addError(e, st);
             }

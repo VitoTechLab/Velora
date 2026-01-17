@@ -14,8 +14,10 @@ import 'package:velora/features/chat/domain/usecases/get_message_reads_usecase.d
 import 'package:velora/features/chat/domain/usecases/get_messages_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/mark_conversation_read_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/mark_message_read_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/mark_messages_read_batch_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/respond_to_event_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/send_event_message_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/send_media_message_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/send_poll_message_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/send_text_message_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/send_typing_indicator_usecase.dart';
@@ -33,6 +35,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
   ChatMessageBloc({
     required this.getMessagesUseCase,
     required this.sendTextMessageUseCase,
+    required this.sendMediaMessageUseCase,
     required this.editMessageUseCase,
     required this.deleteMessageUseCase,
     required this.markConversationReadUseCase,
@@ -41,6 +44,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     required this.getConversationListUseCase,
     required this.getMessageReadsUseCase,
     required this.markMessageReadUseCase,
+    required this.markMessagesReadBatchUseCase,
     required this.watchMessageReadsUseCase,
     required this.sendTypingIndicatorUseCase,
     required this.watchTypingIndicatorsUseCase,
@@ -59,6 +63,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
       transformer: bloc_concurrency.droppable(),
     );
     on<SendChatMessageEvent>(_onSendMessage);
+    on<SendMediaMessageEvent>(_onSendMediaMessage);
     on<SendPollMessageEvent>(_onSendPollMessage);
     on<SendEventMessageEvent>(_onSendEventMessage);
     on<EditChatMessageEvent>(_onEditMessage);
@@ -96,6 +101,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     // Message Reads
     on<LoadMessageReadsEvent>(_onLoadMessageReads);
     on<MarkMessageReadEvent>(_onMarkMessageRead);
+    on<MarkMessagesReadBatchEvent>(_onMarkMessagesReadBatch);
     on<StartWatchReadsEvent>(_onStartWatchReads);
     on<StopWatchReadsEvent>(_onStopWatchReads);
     on<WatchReadArrivedEvent>(_onWatchReadArrived);
@@ -118,6 +124,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
 
   final GetMessagesUseCase getMessagesUseCase;
   final SendTextMessageUseCase sendTextMessageUseCase;
+  final SendMediaMessageUseCase sendMediaMessageUseCase;
   final EditMessageUseCase editMessageUseCase;
   final DeleteMessageUseCase deleteMessageUseCase;
   final MarkConversationReadUseCase markConversationReadUseCase;
@@ -130,6 +137,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
   // Message Reads
   final GetMessageReadsUseCase getMessageReadsUseCase;
   final MarkMessageReadUseCase markMessageReadUseCase;
+  final MarkMessagesReadBatchUseCase markMessagesReadBatchUseCase;
   final WatchMessageReadsUseCase watchMessageReadsUseCase;
 
   // Typing Indicator
@@ -407,6 +415,57 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     );
   }
 
+  Future<void> _onSendMediaMessage(
+    SendMediaMessageEvent event,
+    Emitter<ChatMessageState> emit,
+  ) async {
+    final conversationId = event.conversationId.trim();
+    if (conversationId.isEmpty) {
+      emit(state.copyWith(sendError: 'Conversation id is required'));
+      return;
+    }
+
+    if (event.mediaUrl.trim().isEmpty) {
+      emit(state.copyWith(sendError: 'Media URL is required'));
+      return;
+    }
+
+    emit(
+      state.copyWith(
+        isSending: true,
+        sendError: null,
+        sentMessage: null,
+        message: null,
+      ),
+    );
+
+    final result = await sendMediaMessageUseCase(
+      conversationId: conversationId,
+      mediaUrl: event.mediaUrl,
+      mediaType: event.mediaType,
+      mimeType: event.mimeType,
+      fileName: event.fileName,
+      fileSize: event.fileSize,
+      caption: event.caption,
+    );
+
+    result.fold(
+      (failure) {
+        emit(state.copyWith(isSending: false, sendError: failure.message));
+      },
+      (chatMessage) {
+        emit(
+          state.copyWith(
+            isSending: false,
+            messages: [chatMessage, ...state.messages],
+            sentMessage: chatMessage,
+            message: 'Media sent',
+          ),
+        );
+      },
+    );
+  }
+
   Future<void> _onSendPollMessage(
     SendPollMessageEvent event,
     Emitter<ChatMessageState> emit,
@@ -418,6 +477,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
       question: event.question,
       options: event.options,
       multipleChoice: event.multipleChoice,
+      maxUserVotes: event.maxUserVotes,
     );
 
     result.fold(
@@ -447,7 +507,11 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
       conversationId: event.conversationId,
       title: event.title,
       description: event.description,
-      location: event.location,
+      locationName: event.locationName,
+      address: event.address,
+      isOnline: event.isOnline,
+      meetingUrl: event.meetingUrl,
+      coverUrl: event.coverUrl,
       startDate: event.startDate,
       endDate: event.endDate,
     );
@@ -795,6 +859,27 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
       },
       (_) {
         logi('$_logTag: Message marked as read: ${event.messageId}');
+      },
+    );
+  }
+
+  /// Batch mark messages as read - more efficient for scroll-based reading
+  Future<void> _onMarkMessagesReadBatch(
+    MarkMessagesReadBatchEvent event,
+    Emitter<ChatMessageState> emit,
+  ) async {
+    if (event.messageIds.isEmpty) return;
+
+    final result = await markMessagesReadBatchUseCase(
+      messageIds: event.messageIds,
+    );
+    result.fold(
+      (failure) {
+        loge('$_logTag: markMessagesReadBatch error', error: failure);
+        emit(state.copyWith(readsError: failure.message));
+      },
+      (count) {
+        logi('$_logTag: Batch marked $count messages as read');
       },
     );
   }

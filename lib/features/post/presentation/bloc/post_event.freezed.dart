@@ -21,14 +21,12 @@ mixin _$PostEvent {
     required TResult Function(
             String userId,
             String content,
-            List<String> imageUrls,
-            List<String> videoUrls,
-            bool commentsEnabled,
-            bool hideLikeCount,
-            bool hideCommentCount,
-            bool hideShareCount,
-            bool hideLikesList,
-            String? campaignId,
+            List<String> mediaUrls,
+            List<String> tags,
+            List<String> mentionIds,
+            Map<String, dynamic>? location,
+            bool allowComments,
+            bool allowShare,
             String? campaignTitle)
         createPost,
     required TResult Function() clearPostTransient,
@@ -39,14 +37,12 @@ mixin _$PostEvent {
     TResult? Function(
             String userId,
             String content,
-            List<String> imageUrls,
-            List<String> videoUrls,
-            bool commentsEnabled,
-            bool hideLikeCount,
-            bool hideCommentCount,
-            bool hideShareCount,
-            bool hideLikesList,
-            String? campaignId,
+            List<String> mediaUrls,
+            List<String> tags,
+            List<String> mentionIds,
+            Map<String, dynamic>? location,
+            bool allowComments,
+            bool allowShare,
             String? campaignTitle)?
         createPost,
     TResult? Function()? clearPostTransient,
@@ -57,14 +53,12 @@ mixin _$PostEvent {
     TResult Function(
             String userId,
             String content,
-            List<String> imageUrls,
-            List<String> videoUrls,
-            bool commentsEnabled,
-            bool hideLikeCount,
-            bool hideCommentCount,
-            bool hideShareCount,
-            bool hideLikesList,
-            String? campaignId,
+            List<String> mediaUrls,
+            List<String> tags,
+            List<String> mentionIds,
+            Map<String, dynamic>? location,
+            bool allowComments,
+            bool allowShare,
             String? campaignTitle)?
         createPost,
     TResult Function()? clearPostTransient,
@@ -121,14 +115,12 @@ abstract class _$$CreatePostEventImplCopyWith<$Res> {
   $Res call(
       {String userId,
       String content,
-      List<String> imageUrls,
-      List<String> videoUrls,
-      bool commentsEnabled,
-      bool hideLikeCount,
-      bool hideCommentCount,
-      bool hideShareCount,
-      bool hideLikesList,
-      String? campaignId,
+      List<String> mediaUrls,
+      List<String> tags,
+      List<String> mentionIds,
+      Map<String, dynamic>? location,
+      bool allowComments,
+      bool allowShare,
       String? campaignTitle});
 }
 
@@ -147,14 +139,12 @@ class __$$CreatePostEventImplCopyWithImpl<$Res>
   $Res call({
     Object? userId = null,
     Object? content = null,
-    Object? imageUrls = null,
-    Object? videoUrls = null,
-    Object? commentsEnabled = null,
-    Object? hideLikeCount = null,
-    Object? hideCommentCount = null,
-    Object? hideShareCount = null,
-    Object? hideLikesList = null,
-    Object? campaignId = freezed,
+    Object? mediaUrls = null,
+    Object? tags = null,
+    Object? mentionIds = null,
+    Object? location = freezed,
+    Object? allowComments = null,
+    Object? allowShare = null,
     Object? campaignTitle = freezed,
   }) {
     return _then(_$CreatePostEventImpl(
@@ -166,38 +156,30 @@ class __$$CreatePostEventImplCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      imageUrls: null == imageUrls
-          ? _value._imageUrls
-          : imageUrls // ignore: cast_nullable_to_non_nullable
+      mediaUrls: null == mediaUrls
+          ? _value._mediaUrls
+          : mediaUrls // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      videoUrls: null == videoUrls
-          ? _value._videoUrls
-          : videoUrls // ignore: cast_nullable_to_non_nullable
+      tags: null == tags
+          ? _value._tags
+          : tags // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      commentsEnabled: null == commentsEnabled
-          ? _value.commentsEnabled
-          : commentsEnabled // ignore: cast_nullable_to_non_nullable
+      mentionIds: null == mentionIds
+          ? _value._mentionIds
+          : mentionIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      location: freezed == location
+          ? _value._location
+          : location // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      allowComments: null == allowComments
+          ? _value.allowComments
+          : allowComments // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideLikeCount: null == hideLikeCount
-          ? _value.hideLikeCount
-          : hideLikeCount // ignore: cast_nullable_to_non_nullable
+      allowShare: null == allowShare
+          ? _value.allowShare
+          : allowShare // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideCommentCount: null == hideCommentCount
-          ? _value.hideCommentCount
-          : hideCommentCount // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hideShareCount: null == hideShareCount
-          ? _value.hideShareCount
-          : hideShareCount // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hideLikesList: null == hideLikesList
-          ? _value.hideLikesList
-          : hideLikesList // ignore: cast_nullable_to_non_nullable
-              as bool,
-      campaignId: freezed == campaignId
-          ? _value.campaignId
-          : campaignId // ignore: cast_nullable_to_non_nullable
-              as String?,
       campaignTitle: freezed == campaignTitle
           ? _value.campaignTitle
           : campaignTitle // ignore: cast_nullable_to_non_nullable
@@ -212,63 +194,71 @@ class _$CreatePostEventImpl implements CreatePostEvent {
   const _$CreatePostEventImpl(
       {required this.userId,
       required this.content,
-      final List<String> imageUrls = const [],
-      final List<String> videoUrls = const [],
-      this.commentsEnabled = true,
-      this.hideLikeCount = false,
-      this.hideCommentCount = false,
-      this.hideShareCount = false,
-      this.hideLikesList = false,
-      this.campaignId,
+      final List<String> mediaUrls = const [],
+      final List<String> tags = const [],
+      final List<String> mentionIds = const [],
+      final Map<String, dynamic>? location,
+      this.allowComments = true,
+      this.allowShare = true,
       this.campaignTitle})
-      : _imageUrls = imageUrls,
-        _videoUrls = videoUrls;
+      : _mediaUrls = mediaUrls,
+        _tags = tags,
+        _mentionIds = mentionIds,
+        _location = location;
 
   @override
   final String userId;
   @override
   final String content;
-  final List<String> _imageUrls;
+  final List<String> _mediaUrls;
   @override
   @JsonKey()
-  List<String> get imageUrls {
-    if (_imageUrls is EqualUnmodifiableListView) return _imageUrls;
+  List<String> get mediaUrls {
+    if (_mediaUrls is EqualUnmodifiableListView) return _mediaUrls;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_imageUrls);
+    return EqualUnmodifiableListView(_mediaUrls);
   }
 
-  final List<String> _videoUrls;
+  final List<String> _tags;
   @override
   @JsonKey()
-  List<String> get videoUrls {
-    if (_videoUrls is EqualUnmodifiableListView) return _videoUrls;
+  List<String> get tags {
+    if (_tags is EqualUnmodifiableListView) return _tags;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_videoUrls);
+    return EqualUnmodifiableListView(_tags);
+  }
+
+  final List<String> _mentionIds;
+  @override
+  @JsonKey()
+  List<String> get mentionIds {
+    if (_mentionIds is EqualUnmodifiableListView) return _mentionIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_mentionIds);
+  }
+
+  final Map<String, dynamic>? _location;
+  @override
+  Map<String, dynamic>? get location {
+    final value = _location;
+    if (value == null) return null;
+    if (_location is EqualUnmodifiableMapView) return _location;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
   }
 
   @override
   @JsonKey()
-  final bool commentsEnabled;
+  final bool allowComments;
   @override
   @JsonKey()
-  final bool hideLikeCount;
-  @override
-  @JsonKey()
-  final bool hideCommentCount;
-  @override
-  @JsonKey()
-  final bool hideShareCount;
-  @override
-  @JsonKey()
-  final bool hideLikesList;
-  @override
-  final String? campaignId;
+  final bool allowShare;
   @override
   final String? campaignTitle;
 
   @override
   String toString() {
-    return 'PostEvent.createPost(userId: $userId, content: $content, imageUrls: $imageUrls, videoUrls: $videoUrls, commentsEnabled: $commentsEnabled, hideLikeCount: $hideLikeCount, hideCommentCount: $hideCommentCount, hideShareCount: $hideShareCount, hideLikesList: $hideLikesList, campaignId: $campaignId, campaignTitle: $campaignTitle)';
+    return 'PostEvent.createPost(userId: $userId, content: $content, mediaUrls: $mediaUrls, tags: $tags, mentionIds: $mentionIds, location: $location, allowComments: $allowComments, allowShare: $allowShare, campaignTitle: $campaignTitle)';
   }
 
   @override
@@ -279,21 +269,15 @@ class _$CreatePostEventImpl implements CreatePostEvent {
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.content, content) || other.content == content) &&
             const DeepCollectionEquality()
-                .equals(other._imageUrls, _imageUrls) &&
+                .equals(other._mediaUrls, _mediaUrls) &&
+            const DeepCollectionEquality().equals(other._tags, _tags) &&
             const DeepCollectionEquality()
-                .equals(other._videoUrls, _videoUrls) &&
-            (identical(other.commentsEnabled, commentsEnabled) ||
-                other.commentsEnabled == commentsEnabled) &&
-            (identical(other.hideLikeCount, hideLikeCount) ||
-                other.hideLikeCount == hideLikeCount) &&
-            (identical(other.hideCommentCount, hideCommentCount) ||
-                other.hideCommentCount == hideCommentCount) &&
-            (identical(other.hideShareCount, hideShareCount) ||
-                other.hideShareCount == hideShareCount) &&
-            (identical(other.hideLikesList, hideLikesList) ||
-                other.hideLikesList == hideLikesList) &&
-            (identical(other.campaignId, campaignId) ||
-                other.campaignId == campaignId) &&
+                .equals(other._mentionIds, _mentionIds) &&
+            const DeepCollectionEquality().equals(other._location, _location) &&
+            (identical(other.allowComments, allowComments) ||
+                other.allowComments == allowComments) &&
+            (identical(other.allowShare, allowShare) ||
+                other.allowShare == allowShare) &&
             (identical(other.campaignTitle, campaignTitle) ||
                 other.campaignTitle == campaignTitle));
   }
@@ -303,14 +287,12 @@ class _$CreatePostEventImpl implements CreatePostEvent {
       runtimeType,
       userId,
       content,
-      const DeepCollectionEquality().hash(_imageUrls),
-      const DeepCollectionEquality().hash(_videoUrls),
-      commentsEnabled,
-      hideLikeCount,
-      hideCommentCount,
-      hideShareCount,
-      hideLikesList,
-      campaignId,
+      const DeepCollectionEquality().hash(_mediaUrls),
+      const DeepCollectionEquality().hash(_tags),
+      const DeepCollectionEquality().hash(_mentionIds),
+      const DeepCollectionEquality().hash(_location),
+      allowComments,
+      allowShare,
       campaignTitle);
 
   /// Create a copy of PostEvent
@@ -328,30 +310,18 @@ class _$CreatePostEventImpl implements CreatePostEvent {
     required TResult Function(
             String userId,
             String content,
-            List<String> imageUrls,
-            List<String> videoUrls,
-            bool commentsEnabled,
-            bool hideLikeCount,
-            bool hideCommentCount,
-            bool hideShareCount,
-            bool hideLikesList,
-            String? campaignId,
+            List<String> mediaUrls,
+            List<String> tags,
+            List<String> mentionIds,
+            Map<String, dynamic>? location,
+            bool allowComments,
+            bool allowShare,
             String? campaignTitle)
         createPost,
     required TResult Function() clearPostTransient,
   }) {
-    return createPost(
-        userId,
-        content,
-        imageUrls,
-        videoUrls,
-        commentsEnabled,
-        hideLikeCount,
-        hideCommentCount,
-        hideShareCount,
-        hideLikesList,
-        campaignId,
-        campaignTitle);
+    return createPost(userId, content, mediaUrls, tags, mentionIds, location,
+        allowComments, allowShare, campaignTitle);
   }
 
   @override
@@ -360,30 +330,18 @@ class _$CreatePostEventImpl implements CreatePostEvent {
     TResult? Function(
             String userId,
             String content,
-            List<String> imageUrls,
-            List<String> videoUrls,
-            bool commentsEnabled,
-            bool hideLikeCount,
-            bool hideCommentCount,
-            bool hideShareCount,
-            bool hideLikesList,
-            String? campaignId,
+            List<String> mediaUrls,
+            List<String> tags,
+            List<String> mentionIds,
+            Map<String, dynamic>? location,
+            bool allowComments,
+            bool allowShare,
             String? campaignTitle)?
         createPost,
     TResult? Function()? clearPostTransient,
   }) {
-    return createPost?.call(
-        userId,
-        content,
-        imageUrls,
-        videoUrls,
-        commentsEnabled,
-        hideLikeCount,
-        hideCommentCount,
-        hideShareCount,
-        hideLikesList,
-        campaignId,
-        campaignTitle);
+    return createPost?.call(userId, content, mediaUrls, tags, mentionIds,
+        location, allowComments, allowShare, campaignTitle);
   }
 
   @override
@@ -392,32 +350,20 @@ class _$CreatePostEventImpl implements CreatePostEvent {
     TResult Function(
             String userId,
             String content,
-            List<String> imageUrls,
-            List<String> videoUrls,
-            bool commentsEnabled,
-            bool hideLikeCount,
-            bool hideCommentCount,
-            bool hideShareCount,
-            bool hideLikesList,
-            String? campaignId,
+            List<String> mediaUrls,
+            List<String> tags,
+            List<String> mentionIds,
+            Map<String, dynamic>? location,
+            bool allowComments,
+            bool allowShare,
             String? campaignTitle)?
         createPost,
     TResult Function()? clearPostTransient,
     required TResult orElse(),
   }) {
     if (createPost != null) {
-      return createPost(
-          userId,
-          content,
-          imageUrls,
-          videoUrls,
-          commentsEnabled,
-          hideLikeCount,
-          hideCommentCount,
-          hideShareCount,
-          hideLikesList,
-          campaignId,
-          campaignTitle);
+      return createPost(userId, content, mediaUrls, tags, mentionIds, location,
+          allowComments, allowShare, campaignTitle);
     }
     return orElse();
   }
@@ -458,26 +404,22 @@ abstract class CreatePostEvent implements PostEvent {
   const factory CreatePostEvent(
       {required final String userId,
       required final String content,
-      final List<String> imageUrls,
-      final List<String> videoUrls,
-      final bool commentsEnabled,
-      final bool hideLikeCount,
-      final bool hideCommentCount,
-      final bool hideShareCount,
-      final bool hideLikesList,
-      final String? campaignId,
+      final List<String> mediaUrls,
+      final List<String> tags,
+      final List<String> mentionIds,
+      final Map<String, dynamic>? location,
+      final bool allowComments,
+      final bool allowShare,
       final String? campaignTitle}) = _$CreatePostEventImpl;
 
   String get userId;
   String get content;
-  List<String> get imageUrls;
-  List<String> get videoUrls;
-  bool get commentsEnabled;
-  bool get hideLikeCount;
-  bool get hideCommentCount;
-  bool get hideShareCount;
-  bool get hideLikesList;
-  String? get campaignId;
+  List<String> get mediaUrls;
+  List<String> get tags;
+  List<String> get mentionIds;
+  Map<String, dynamic>? get location;
+  bool get allowComments;
+  bool get allowShare;
   String? get campaignTitle;
 
   /// Create a copy of PostEvent
@@ -534,14 +476,12 @@ class _$ClearPostTransientEventImpl implements ClearPostTransientEvent {
     required TResult Function(
             String userId,
             String content,
-            List<String> imageUrls,
-            List<String> videoUrls,
-            bool commentsEnabled,
-            bool hideLikeCount,
-            bool hideCommentCount,
-            bool hideShareCount,
-            bool hideLikesList,
-            String? campaignId,
+            List<String> mediaUrls,
+            List<String> tags,
+            List<String> mentionIds,
+            Map<String, dynamic>? location,
+            bool allowComments,
+            bool allowShare,
             String? campaignTitle)
         createPost,
     required TResult Function() clearPostTransient,
@@ -555,14 +495,12 @@ class _$ClearPostTransientEventImpl implements ClearPostTransientEvent {
     TResult? Function(
             String userId,
             String content,
-            List<String> imageUrls,
-            List<String> videoUrls,
-            bool commentsEnabled,
-            bool hideLikeCount,
-            bool hideCommentCount,
-            bool hideShareCount,
-            bool hideLikesList,
-            String? campaignId,
+            List<String> mediaUrls,
+            List<String> tags,
+            List<String> mentionIds,
+            Map<String, dynamic>? location,
+            bool allowComments,
+            bool allowShare,
             String? campaignTitle)?
         createPost,
     TResult? Function()? clearPostTransient,
@@ -576,14 +514,12 @@ class _$ClearPostTransientEventImpl implements ClearPostTransientEvent {
     TResult Function(
             String userId,
             String content,
-            List<String> imageUrls,
-            List<String> videoUrls,
-            bool commentsEnabled,
-            bool hideLikeCount,
-            bool hideCommentCount,
-            bool hideShareCount,
-            bool hideLikesList,
-            String? campaignId,
+            List<String> mediaUrls,
+            List<String> tags,
+            List<String> mentionIds,
+            Map<String, dynamic>? location,
+            bool allowComments,
+            bool allowShare,
             String? campaignTitle)?
         createPost,
     TResult Function()? clearPostTransient,

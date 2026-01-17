@@ -27,14 +27,27 @@ mixin _$ChatMessageEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -54,6 +67,7 @@ mixin _$ChatMessageEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -78,11 +92,23 @@ mixin _$ChatMessageEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -100,6 +126,7 @@ mixin _$ChatMessageEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -123,11 +150,23 @@ mixin _$ChatMessageEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -145,6 +184,7 @@ mixin _$ChatMessageEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -166,6 +206,7 @@ mixin _$ChatMessageEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -188,6 +229,8 @@ mixin _$ChatMessageEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -208,6 +251,7 @@ mixin _$ChatMessageEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -225,6 +269,7 @@ mixin _$ChatMessageEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -245,6 +290,7 @@ mixin _$ChatMessageEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -262,6 +308,7 @@ mixin _$ChatMessageEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -398,14 +445,27 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -425,6 +485,7 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -452,11 +513,23 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -474,6 +547,7 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -500,11 +574,23 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -522,6 +608,7 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -549,6 +636,7 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -571,6 +659,8 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -594,6 +684,7 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -611,6 +702,7 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -634,6 +726,7 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -651,6 +744,7 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -777,14 +871,27 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -804,6 +911,7 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -831,11 +939,23 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -853,6 +973,7 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -879,11 +1000,23 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -901,6 +1034,7 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -928,6 +1062,7 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -950,6 +1085,8 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -973,6 +1110,7 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -990,6 +1128,7 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -1013,6 +1152,7 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -1030,6 +1170,7 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -1157,14 +1298,27 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -1184,6 +1338,7 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -1211,11 +1366,23 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -1233,6 +1400,7 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -1259,11 +1427,23 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -1281,6 +1461,7 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -1308,6 +1489,7 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -1330,6 +1512,8 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -1353,6 +1537,7 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -1370,6 +1555,7 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -1393,6 +1579,7 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -1410,6 +1597,7 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -1547,14 +1735,27 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -1574,6 +1775,7 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -1601,11 +1803,23 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -1623,6 +1837,7 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -1649,11 +1864,23 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -1671,6 +1898,7 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -1698,6 +1926,7 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -1720,6 +1949,8 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -1743,6 +1974,7 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -1760,6 +1992,7 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -1783,6 +2016,7 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -1800,6 +2034,7 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -1839,6 +2074,504 @@ abstract class SendChatMessageEvent implements ChatMessageEvent {
 }
 
 /// @nodoc
+abstract class _$$SendMediaMessageEventImplCopyWith<$Res> {
+  factory _$$SendMediaMessageEventImplCopyWith(
+          _$SendMediaMessageEventImpl value,
+          $Res Function(_$SendMediaMessageEventImpl) then) =
+      __$$SendMediaMessageEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {String conversationId,
+      String mediaUrl,
+      String mediaType,
+      String? mimeType,
+      String? fileName,
+      int? fileSize,
+      String? caption});
+}
+
+/// @nodoc
+class __$$SendMediaMessageEventImplCopyWithImpl<$Res>
+    extends _$ChatMessageEventCopyWithImpl<$Res, _$SendMediaMessageEventImpl>
+    implements _$$SendMediaMessageEventImplCopyWith<$Res> {
+  __$$SendMediaMessageEventImplCopyWithImpl(_$SendMediaMessageEventImpl _value,
+      $Res Function(_$SendMediaMessageEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? conversationId = null,
+    Object? mediaUrl = null,
+    Object? mediaType = null,
+    Object? mimeType = freezed,
+    Object? fileName = freezed,
+    Object? fileSize = freezed,
+    Object? caption = freezed,
+  }) {
+    return _then(_$SendMediaMessageEventImpl(
+      conversationId: null == conversationId
+          ? _value.conversationId
+          : conversationId // ignore: cast_nullable_to_non_nullable
+              as String,
+      mediaUrl: null == mediaUrl
+          ? _value.mediaUrl
+          : mediaUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      mediaType: null == mediaType
+          ? _value.mediaType
+          : mediaType // ignore: cast_nullable_to_non_nullable
+              as String,
+      mimeType: freezed == mimeType
+          ? _value.mimeType
+          : mimeType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fileName: freezed == fileName
+          ? _value.fileName
+          : fileName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fileSize: freezed == fileSize
+          ? _value.fileSize
+          : fileSize // ignore: cast_nullable_to_non_nullable
+              as int?,
+      caption: freezed == caption
+          ? _value.caption
+          : caption // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SendMediaMessageEventImpl implements SendMediaMessageEvent {
+  const _$SendMediaMessageEventImpl(
+      {required this.conversationId,
+      required this.mediaUrl,
+      required this.mediaType,
+      this.mimeType,
+      this.fileName,
+      this.fileSize,
+      this.caption});
+
+  @override
+  final String conversationId;
+  @override
+  final String mediaUrl;
+  @override
+  final String mediaType;
+// 'image', 'video', 'document', 'audio'
+  @override
+  final String? mimeType;
+  @override
+  final String? fileName;
+  @override
+  final int? fileSize;
+  @override
+  final String? caption;
+
+  @override
+  String toString() {
+    return 'ChatMessageEvent.sendMediaMessage(conversationId: $conversationId, mediaUrl: $mediaUrl, mediaType: $mediaType, mimeType: $mimeType, fileName: $fileName, fileSize: $fileSize, caption: $caption)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SendMediaMessageEventImpl &&
+            (identical(other.conversationId, conversationId) ||
+                other.conversationId == conversationId) &&
+            (identical(other.mediaUrl, mediaUrl) ||
+                other.mediaUrl == mediaUrl) &&
+            (identical(other.mediaType, mediaType) ||
+                other.mediaType == mediaType) &&
+            (identical(other.mimeType, mimeType) ||
+                other.mimeType == mimeType) &&
+            (identical(other.fileName, fileName) ||
+                other.fileName == fileName) &&
+            (identical(other.fileSize, fileSize) ||
+                other.fileSize == fileSize) &&
+            (identical(other.caption, caption) || other.caption == caption));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, conversationId, mediaUrl,
+      mediaType, mimeType, fileName, fileSize, caption);
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SendMediaMessageEventImplCopyWith<_$SendMediaMessageEventImpl>
+      get copyWith => __$$SendMediaMessageEventImplCopyWithImpl<
+          _$SendMediaMessageEventImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
+    required TResult Function(String conversationId, int? limit) loadMessages,
+    required TResult Function(String conversationId, int limit)
+        loadMoreMessages,
+    required TResult Function(
+            String conversationId, String content, String? replyToMessageId)
+        sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice, int maxUserVotes)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
+    required TResult Function(String messageId, String newContent) editMessage,
+    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(String conversationId, String? uptoMessageId)
+        markConversationRead,
+    required TResult Function() clearInfo,
+    required TResult Function(String conversationId) startWatch,
+    required TResult Function() stopWatch,
+    required TResult Function(ChatMessageEntity message) watchMessageArrived,
+    required TResult Function(ChatMessageEntity message) watchMessageUpdated,
+    required TResult Function(ChatMessageEntity message) watchMessageDeleted,
+    required TResult Function(String message) watchMessageError,
+    required TResult Function() loadConversationList,
+    required TResult Function(String filter) setChatFilter,
+    required TResult Function(String query) setSearchQuery,
+    required TResult Function(String messageId) loadMessageReads,
+    required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
+    required TResult Function(String conversationId) startWatchReads,
+    required TResult Function() stopWatchReads,
+    required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
+    required TResult Function(String conversationId, bool isTyping) sendTyping,
+    required TResult Function(String conversationId) startWatchTyping,
+    required TResult Function() stopWatchTyping,
+    required TResult Function(String userId) watchTypingArrived,
+    required TResult Function() cleanupTyping,
+  }) {
+    return sendMediaMessage(conversationId, mediaUrl, mediaType, mimeType,
+        fileName, fileSize, caption);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
+    TResult? Function(String conversationId, int? limit)? loadMessages,
+    TResult? Function(String conversationId, int limit)? loadMoreMessages,
+    TResult? Function(
+            String conversationId, String content, String? replyToMessageId)?
+        sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice, int maxUserVotes)?
+        sendPollMessage,
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
+        sendEventMessage,
+    TResult? Function(String messageId, String newContent)? editMessage,
+    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(String conversationId, String? uptoMessageId)?
+        markConversationRead,
+    TResult? Function()? clearInfo,
+    TResult? Function(String conversationId)? startWatch,
+    TResult? Function()? stopWatch,
+    TResult? Function(ChatMessageEntity message)? watchMessageArrived,
+    TResult? Function(ChatMessageEntity message)? watchMessageUpdated,
+    TResult? Function(ChatMessageEntity message)? watchMessageDeleted,
+    TResult? Function(String message)? watchMessageError,
+    TResult? Function()? loadConversationList,
+    TResult? Function(String filter)? setChatFilter,
+    TResult? Function(String query)? setSearchQuery,
+    TResult? Function(String messageId)? loadMessageReads,
+    TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
+    TResult? Function(String conversationId)? startWatchReads,
+    TResult? Function()? stopWatchReads,
+    TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
+    TResult? Function(String conversationId, bool isTyping)? sendTyping,
+    TResult? Function(String conversationId)? startWatchTyping,
+    TResult? Function()? stopWatchTyping,
+    TResult? Function(String userId)? watchTypingArrived,
+    TResult? Function()? cleanupTyping,
+  }) {
+    return sendMediaMessage?.call(conversationId, mediaUrl, mediaType, mimeType,
+        fileName, fileSize, caption);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
+    TResult Function(String conversationId, int? limit)? loadMessages,
+    TResult Function(String conversationId, int limit)? loadMoreMessages,
+    TResult Function(
+            String conversationId, String content, String? replyToMessageId)?
+        sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice, int maxUserVotes)?
+        sendPollMessage,
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
+        sendEventMessage,
+    TResult Function(String messageId, String newContent)? editMessage,
+    TResult Function(String messageId)? deleteMessage,
+    TResult Function(String conversationId, String? uptoMessageId)?
+        markConversationRead,
+    TResult Function()? clearInfo,
+    TResult Function(String conversationId)? startWatch,
+    TResult Function()? stopWatch,
+    TResult Function(ChatMessageEntity message)? watchMessageArrived,
+    TResult Function(ChatMessageEntity message)? watchMessageUpdated,
+    TResult Function(ChatMessageEntity message)? watchMessageDeleted,
+    TResult Function(String message)? watchMessageError,
+    TResult Function()? loadConversationList,
+    TResult Function(String filter)? setChatFilter,
+    TResult Function(String query)? setSearchQuery,
+    TResult Function(String messageId)? loadMessageReads,
+    TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
+    TResult Function(String conversationId)? startWatchReads,
+    TResult Function()? stopWatchReads,
+    TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
+    TResult Function(String conversationId, bool isTyping)? sendTyping,
+    TResult Function(String conversationId)? startWatchTyping,
+    TResult Function()? stopWatchTyping,
+    TResult Function(String userId)? watchTypingArrived,
+    TResult Function()? cleanupTyping,
+    required TResult orElse(),
+  }) {
+    if (sendMediaMessage != null) {
+      return sendMediaMessage(conversationId, mediaUrl, mediaType, mimeType,
+          fileName, fileSize, caption);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
+    required TResult Function(LoadChatMessagesEvent value) loadMessages,
+    required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
+    required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
+    required TResult Function(EditChatMessageEvent value) editMessage,
+    required TResult Function(DeleteChatMessageEvent value) deleteMessage,
+    required TResult Function(MarkConversationReadEvent value)
+        markConversationRead,
+    required TResult Function(ClearChatMessagesInfoEvent value) clearInfo,
+    required TResult Function(StartWatchMessagesEvent value) startWatch,
+    required TResult Function(StopWatchMessagesEvent value) stopWatch,
+    required TResult Function(WatchMessageArrivedEvent value)
+        watchMessageArrived,
+    required TResult Function(WatchMessageUpdatedEvent value)
+        watchMessageUpdated,
+    required TResult Function(WatchMessageDeletedEvent value)
+        watchMessageDeleted,
+    required TResult Function(WatchMessageErrorEvent value) watchMessageError,
+    required TResult Function(LoadConversationListEvent value)
+        loadConversationList,
+    required TResult Function(SetChatFilterEvent value) setChatFilter,
+    required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
+    required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
+    required TResult Function(StartWatchReadsEvent value) startWatchReads,
+    required TResult Function(StopWatchReadsEvent value) stopWatchReads,
+    required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
+    required TResult Function(SendTypingEvent value) sendTyping,
+    required TResult Function(StartWatchTypingEvent value) startWatchTyping,
+    required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
+    required TResult Function(WatchTypingArrivedEvent value) watchTypingArrived,
+    required TResult Function(CleanupTypingEvent value) cleanupTyping,
+  }) {
+    return sendMediaMessage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
+    TResult? Function(LoadChatMessagesEvent value)? loadMessages,
+    TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
+    TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
+    TResult? Function(EditChatMessageEvent value)? editMessage,
+    TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
+    TResult? Function(MarkConversationReadEvent value)? markConversationRead,
+    TResult? Function(ClearChatMessagesInfoEvent value)? clearInfo,
+    TResult? Function(StartWatchMessagesEvent value)? startWatch,
+    TResult? Function(StopWatchMessagesEvent value)? stopWatch,
+    TResult? Function(WatchMessageArrivedEvent value)? watchMessageArrived,
+    TResult? Function(WatchMessageUpdatedEvent value)? watchMessageUpdated,
+    TResult? Function(WatchMessageDeletedEvent value)? watchMessageDeleted,
+    TResult? Function(WatchMessageErrorEvent value)? watchMessageError,
+    TResult? Function(LoadConversationListEvent value)? loadConversationList,
+    TResult? Function(SetChatFilterEvent value)? setChatFilter,
+    TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
+    TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
+    TResult? Function(StartWatchReadsEvent value)? startWatchReads,
+    TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
+    TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
+    TResult? Function(SendTypingEvent value)? sendTyping,
+    TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
+    TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
+    TResult? Function(WatchTypingArrivedEvent value)? watchTypingArrived,
+    TResult? Function(CleanupTypingEvent value)? cleanupTyping,
+  }) {
+    return sendMediaMessage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
+    TResult Function(LoadChatMessagesEvent value)? loadMessages,
+    TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
+    TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
+    TResult Function(EditChatMessageEvent value)? editMessage,
+    TResult Function(DeleteChatMessageEvent value)? deleteMessage,
+    TResult Function(MarkConversationReadEvent value)? markConversationRead,
+    TResult Function(ClearChatMessagesInfoEvent value)? clearInfo,
+    TResult Function(StartWatchMessagesEvent value)? startWatch,
+    TResult Function(StopWatchMessagesEvent value)? stopWatch,
+    TResult Function(WatchMessageArrivedEvent value)? watchMessageArrived,
+    TResult Function(WatchMessageUpdatedEvent value)? watchMessageUpdated,
+    TResult Function(WatchMessageDeletedEvent value)? watchMessageDeleted,
+    TResult Function(WatchMessageErrorEvent value)? watchMessageError,
+    TResult Function(LoadConversationListEvent value)? loadConversationList,
+    TResult Function(SetChatFilterEvent value)? setChatFilter,
+    TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
+    TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
+    TResult Function(StartWatchReadsEvent value)? startWatchReads,
+    TResult Function(StopWatchReadsEvent value)? stopWatchReads,
+    TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
+    TResult Function(SendTypingEvent value)? sendTyping,
+    TResult Function(StartWatchTypingEvent value)? startWatchTyping,
+    TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
+    TResult Function(WatchTypingArrivedEvent value)? watchTypingArrived,
+    TResult Function(CleanupTypingEvent value)? cleanupTyping,
+    required TResult orElse(),
+  }) {
+    if (sendMediaMessage != null) {
+      return sendMediaMessage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SendMediaMessageEvent implements ChatMessageEvent {
+  const factory SendMediaMessageEvent(
+      {required final String conversationId,
+      required final String mediaUrl,
+      required final String mediaType,
+      final String? mimeType,
+      final String? fileName,
+      final int? fileSize,
+      final String? caption}) = _$SendMediaMessageEventImpl;
+
+  String get conversationId;
+  String get mediaUrl;
+  String get mediaType; // 'image', 'video', 'document', 'audio'
+  String? get mimeType;
+  String? get fileName;
+  int? get fileSize;
+  String? get caption;
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SendMediaMessageEventImplCopyWith<_$SendMediaMessageEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 abstract class _$$SendPollMessageEventImplCopyWith<$Res> {
   factory _$$SendPollMessageEventImplCopyWith(_$SendPollMessageEventImpl value,
           $Res Function(_$SendPollMessageEventImpl) then) =
@@ -1848,7 +2581,8 @@ abstract class _$$SendPollMessageEventImplCopyWith<$Res> {
       {String conversationId,
       String question,
       List<String> options,
-      bool multipleChoice});
+      bool multipleChoice,
+      int maxUserVotes});
 }
 
 /// @nodoc
@@ -1868,6 +2602,7 @@ class __$$SendPollMessageEventImplCopyWithImpl<$Res>
     Object? question = null,
     Object? options = null,
     Object? multipleChoice = null,
+    Object? maxUserVotes = null,
   }) {
     return _then(_$SendPollMessageEventImpl(
       conversationId: null == conversationId
@@ -1886,6 +2621,10 @@ class __$$SendPollMessageEventImplCopyWithImpl<$Res>
           ? _value.multipleChoice
           : multipleChoice // ignore: cast_nullable_to_non_nullable
               as bool,
+      maxUserVotes: null == maxUserVotes
+          ? _value.maxUserVotes
+          : maxUserVotes // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -1897,7 +2636,8 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
       {required this.conversationId,
       required this.question,
       required final List<String> options,
-      this.multipleChoice = false})
+      this.multipleChoice = false,
+      this.maxUserVotes = 1})
       : _options = options;
 
   @override
@@ -1915,10 +2655,13 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
   @override
   @JsonKey()
   final bool multipleChoice;
+  @override
+  @JsonKey()
+  final int maxUserVotes;
 
   @override
   String toString() {
-    return 'ChatMessageEvent.sendPollMessage(conversationId: $conversationId, question: $question, options: $options, multipleChoice: $multipleChoice)';
+    return 'ChatMessageEvent.sendPollMessage(conversationId: $conversationId, question: $question, options: $options, multipleChoice: $multipleChoice, maxUserVotes: $maxUserVotes)';
   }
 
   @override
@@ -1932,12 +2675,19 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
                 other.question == question) &&
             const DeepCollectionEquality().equals(other._options, _options) &&
             (identical(other.multipleChoice, multipleChoice) ||
-                other.multipleChoice == multipleChoice));
+                other.multipleChoice == multipleChoice) &&
+            (identical(other.maxUserVotes, maxUserVotes) ||
+                other.maxUserVotes == maxUserVotes));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, conversationId, question,
-      const DeepCollectionEquality().hash(_options), multipleChoice);
+  int get hashCode => Object.hash(
+      runtimeType,
+      conversationId,
+      question,
+      const DeepCollectionEquality().hash(_options),
+      multipleChoice,
+      maxUserVotes);
 
   /// Create a copy of ChatMessageEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -1961,14 +2711,27 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -1988,6 +2751,7 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -2002,7 +2766,8 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
     required TResult Function(String userId) watchTypingArrived,
     required TResult Function() cleanupTyping,
   }) {
-    return sendPollMessage(conversationId, question, options, multipleChoice);
+    return sendPollMessage(
+        conversationId, question, options, multipleChoice, maxUserVotes);
   }
 
   @override
@@ -2015,11 +2780,23 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -2037,6 +2814,7 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -2051,7 +2829,7 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
     TResult? Function()? cleanupTyping,
   }) {
     return sendPollMessage?.call(
-        conversationId, question, options, multipleChoice);
+        conversationId, question, options, multipleChoice, maxUserVotes);
   }
 
   @override
@@ -2064,11 +2842,23 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -2086,6 +2876,7 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -2101,7 +2892,8 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
     required TResult orElse(),
   }) {
     if (sendPollMessage != null) {
-      return sendPollMessage(conversationId, question, options, multipleChoice);
+      return sendPollMessage(
+          conversationId, question, options, multipleChoice, maxUserVotes);
     }
     return orElse();
   }
@@ -2113,6 +2905,7 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -2135,6 +2928,8 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -2158,6 +2953,7 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -2175,6 +2971,7 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -2198,6 +2995,7 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -2215,6 +3013,7 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -2241,12 +3040,14 @@ abstract class SendPollMessageEvent implements ChatMessageEvent {
       {required final String conversationId,
       required final String question,
       required final List<String> options,
-      final bool multipleChoice}) = _$SendPollMessageEventImpl;
+      final bool multipleChoice,
+      final int maxUserVotes}) = _$SendPollMessageEventImpl;
 
   String get conversationId;
   String get question;
   List<String> get options;
   bool get multipleChoice;
+  int get maxUserVotes;
 
   /// Create a copy of ChatMessageEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -2266,7 +3067,11 @@ abstract class _$$SendEventMessageEventImplCopyWith<$Res> {
       {String conversationId,
       String title,
       String? description,
-      String? location,
+      String? locationName,
+      String? address,
+      bool isOnline,
+      String? meetingUrl,
+      String? coverUrl,
       DateTime startDate,
       DateTime endDate});
 }
@@ -2287,7 +3092,11 @@ class __$$SendEventMessageEventImplCopyWithImpl<$Res>
     Object? conversationId = null,
     Object? title = null,
     Object? description = freezed,
-    Object? location = freezed,
+    Object? locationName = freezed,
+    Object? address = freezed,
+    Object? isOnline = null,
+    Object? meetingUrl = freezed,
+    Object? coverUrl = freezed,
     Object? startDate = null,
     Object? endDate = null,
   }) {
@@ -2304,9 +3113,25 @@ class __$$SendEventMessageEventImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      location: freezed == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
+      locationName: freezed == locationName
+          ? _value.locationName
+          : locationName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isOnline: null == isOnline
+          ? _value.isOnline
+          : isOnline // ignore: cast_nullable_to_non_nullable
+              as bool,
+      meetingUrl: freezed == meetingUrl
+          ? _value.meetingUrl
+          : meetingUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      coverUrl: freezed == coverUrl
+          ? _value.coverUrl
+          : coverUrl // ignore: cast_nullable_to_non_nullable
               as String?,
       startDate: null == startDate
           ? _value.startDate
@@ -2327,7 +3152,11 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
       {required this.conversationId,
       required this.title,
       this.description,
-      this.location,
+      this.locationName,
+      this.address,
+      this.isOnline = false,
+      this.meetingUrl,
+      this.coverUrl,
       required this.startDate,
       required this.endDate});
 
@@ -2338,7 +3167,16 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
   @override
   final String? description;
   @override
-  final String? location;
+  final String? locationName;
+  @override
+  final String? address;
+  @override
+  @JsonKey()
+  final bool isOnline;
+  @override
+  final String? meetingUrl;
+  @override
+  final String? coverUrl;
   @override
   final DateTime startDate;
   @override
@@ -2346,7 +3184,7 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
 
   @override
   String toString() {
-    return 'ChatMessageEvent.sendEventMessage(conversationId: $conversationId, title: $title, description: $description, location: $location, startDate: $startDate, endDate: $endDate)';
+    return 'ChatMessageEvent.sendEventMessage(conversationId: $conversationId, title: $title, description: $description, locationName: $locationName, address: $address, isOnline: $isOnline, meetingUrl: $meetingUrl, coverUrl: $coverUrl, startDate: $startDate, endDate: $endDate)';
   }
 
   @override
@@ -2359,16 +3197,33 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            (identical(other.location, location) ||
-                other.location == location) &&
+            (identical(other.locationName, locationName) ||
+                other.locationName == locationName) &&
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.isOnline, isOnline) ||
+                other.isOnline == isOnline) &&
+            (identical(other.meetingUrl, meetingUrl) ||
+                other.meetingUrl == meetingUrl) &&
+            (identical(other.coverUrl, coverUrl) ||
+                other.coverUrl == coverUrl) &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, conversationId, title,
-      description, location, startDate, endDate);
+  int get hashCode => Object.hash(
+      runtimeType,
+      conversationId,
+      title,
+      description,
+      locationName,
+      address,
+      isOnline,
+      meetingUrl,
+      coverUrl,
+      startDate,
+      endDate);
 
   /// Create a copy of ChatMessageEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -2391,14 +3246,27 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -2418,6 +3286,7 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -2432,8 +3301,8 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
     required TResult Function(String userId) watchTypingArrived,
     required TResult Function() cleanupTyping,
   }) {
-    return sendEventMessage(
-        conversationId, title, description, location, startDate, endDate);
+    return sendEventMessage(conversationId, title, description, locationName,
+        address, isOnline, meetingUrl, coverUrl, startDate, endDate);
   }
 
   @override
@@ -2446,11 +3315,23 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -2468,6 +3349,7 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -2482,7 +3364,16 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
     TResult? Function()? cleanupTyping,
   }) {
     return sendEventMessage?.call(
-        conversationId, title, description, location, startDate, endDate);
+        conversationId,
+        title,
+        description,
+        locationName,
+        address,
+        isOnline,
+        meetingUrl,
+        coverUrl,
+        startDate,
+        endDate);
   }
 
   @override
@@ -2495,11 +3386,23 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -2517,6 +3420,7 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -2532,8 +3436,8 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
     required TResult orElse(),
   }) {
     if (sendEventMessage != null) {
-      return sendEventMessage(
-          conversationId, title, description, location, startDate, endDate);
+      return sendEventMessage(conversationId, title, description, locationName,
+          address, isOnline, meetingUrl, coverUrl, startDate, endDate);
     }
     return orElse();
   }
@@ -2545,6 +3449,7 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -2567,6 +3472,8 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -2590,6 +3497,7 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -2607,6 +3515,7 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -2630,6 +3539,7 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -2647,6 +3557,7 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -2673,14 +3584,22 @@ abstract class SendEventMessageEvent implements ChatMessageEvent {
       {required final String conversationId,
       required final String title,
       final String? description,
-      final String? location,
+      final String? locationName,
+      final String? address,
+      final bool isOnline,
+      final String? meetingUrl,
+      final String? coverUrl,
       required final DateTime startDate,
       required final DateTime endDate}) = _$SendEventMessageEventImpl;
 
   String get conversationId;
   String get title;
   String? get description;
-  String? get location;
+  String? get locationName;
+  String? get address;
+  bool get isOnline;
+  String? get meetingUrl;
+  String? get coverUrl;
   DateTime get startDate;
   DateTime get endDate;
 
@@ -2781,14 +3700,27 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -2808,6 +3740,7 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -2835,11 +3768,23 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -2857,6 +3802,7 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -2883,11 +3829,23 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -2905,6 +3863,7 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -2932,6 +3891,7 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -2954,6 +3914,8 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -2977,6 +3939,7 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -2994,6 +3957,7 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -3017,6 +3981,7 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -3034,6 +3999,7 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -3151,14 +4117,27 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -3178,6 +4157,7 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -3205,11 +4185,23 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -3227,6 +4219,7 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -3253,11 +4246,23 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -3275,6 +4280,7 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -3302,6 +4308,7 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -3324,6 +4331,8 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -3347,6 +4356,7 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -3364,6 +4374,7 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -3387,6 +4398,7 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -3404,6 +4416,7 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -3530,14 +4543,27 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -3557,6 +4583,7 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -3584,11 +4611,23 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -3606,6 +4645,7 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -3632,11 +4672,23 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -3654,6 +4706,7 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -3681,6 +4734,7 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -3703,6 +4757,8 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -3726,6 +4782,7 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -3743,6 +4800,7 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -3766,6 +4824,7 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -3783,6 +4842,7 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -3873,14 +4933,27 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -3900,6 +4973,7 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -3927,11 +5001,23 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -3949,6 +5035,7 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -3975,11 +5062,23 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -3997,6 +5096,7 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -4024,6 +5124,7 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -4046,6 +5147,8 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -4069,6 +5172,7 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -4086,6 +5190,7 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -4109,6 +5214,7 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -4126,6 +5232,7 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -4232,14 +5339,27 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -4259,6 +5379,7 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -4286,11 +5407,23 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -4308,6 +5441,7 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -4334,11 +5468,23 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -4356,6 +5502,7 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -4383,6 +5530,7 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -4405,6 +5553,8 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -4428,6 +5578,7 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -4445,6 +5596,7 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -4468,6 +5620,7 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -4485,6 +5638,7 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -4572,14 +5726,27 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -4599,6 +5766,7 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -4626,11 +5794,23 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -4648,6 +5828,7 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -4674,11 +5855,23 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -4696,6 +5889,7 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -4723,6 +5917,7 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -4745,6 +5940,8 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -4768,6 +5965,7 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -4785,6 +5983,7 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -4808,6 +6007,7 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -4825,6 +6025,7 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -4942,14 +6143,27 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -4969,6 +6183,7 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -4996,11 +6211,23 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -5018,6 +6245,7 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -5044,11 +6272,23 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -5066,6 +6306,7 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -5093,6 +6334,7 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -5115,6 +6357,8 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -5138,6 +6382,7 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -5155,6 +6400,7 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -5178,6 +6424,7 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -5195,6 +6442,7 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -5321,14 +6569,27 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -5348,6 +6609,7 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -5375,11 +6637,23 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -5397,6 +6671,7 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -5423,11 +6698,23 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -5445,6 +6732,7 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -5472,6 +6760,7 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -5494,6 +6783,8 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -5517,6 +6808,7 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -5534,6 +6826,7 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -5557,6 +6850,7 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -5574,6 +6868,7 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -5700,14 +6995,27 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -5727,6 +7035,7 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -5754,11 +7063,23 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -5776,6 +7097,7 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -5802,11 +7124,23 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -5824,6 +7158,7 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -5851,6 +7186,7 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -5873,6 +7209,8 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -5896,6 +7234,7 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -5913,6 +7252,7 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -5936,6 +7276,7 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -5953,6 +7294,7 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -6067,14 +7409,27 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -6094,6 +7449,7 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -6121,11 +7477,23 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -6143,6 +7511,7 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -6169,11 +7538,23 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -6191,6 +7572,7 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -6218,6 +7600,7 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -6240,6 +7623,8 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -6263,6 +7648,7 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -6280,6 +7666,7 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -6303,6 +7690,7 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -6320,6 +7708,7 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -6408,14 +7797,27 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -6435,6 +7837,7 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -6462,11 +7865,23 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -6484,6 +7899,7 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -6510,11 +7926,23 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -6532,6 +7960,7 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -6559,6 +7988,7 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -6581,6 +8011,8 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -6604,6 +8036,7 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -6621,6 +8054,7 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -6644,6 +8078,7 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -6661,6 +8096,7 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -6764,14 +8200,27 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -6791,6 +8240,7 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -6818,11 +8268,23 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -6840,6 +8302,7 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -6866,11 +8329,23 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -6888,6 +8363,7 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -6915,6 +8391,7 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -6937,6 +8414,8 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -6960,6 +8439,7 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -6977,6 +8457,7 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -7000,6 +8481,7 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -7017,6 +8499,7 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -7129,14 +8612,27 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -7156,6 +8652,7 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -7183,11 +8680,23 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -7205,6 +8714,7 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -7231,11 +8741,23 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -7253,6 +8775,7 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -7280,6 +8803,7 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -7302,6 +8826,8 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -7325,6 +8851,7 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -7342,6 +8869,7 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -7365,6 +8893,7 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -7382,6 +8911,7 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -7496,14 +9026,27 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -7523,6 +9066,7 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -7550,11 +9094,23 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -7572,6 +9128,7 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -7598,11 +9155,23 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -7620,6 +9189,7 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -7647,6 +9217,7 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -7669,6 +9240,8 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -7692,6 +9265,7 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -7709,6 +9283,7 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -7732,6 +9307,7 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -7749,6 +9325,7 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -7863,14 +9440,27 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -7890,6 +9480,7 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -7917,11 +9508,23 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -7939,6 +9542,7 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -7965,11 +9569,23 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -7987,6 +9603,7 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -8014,6 +9631,7 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -8036,6 +9654,8 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -8059,6 +9679,7 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -8076,6 +9697,7 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -8099,6 +9721,7 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -8116,6 +9739,7 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -8147,6 +9771,431 @@ abstract class MarkMessageReadEvent implements ChatMessageEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MarkMessageReadEventImplCopyWith<_$MarkMessageReadEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$MarkMessagesReadBatchEventImplCopyWith<$Res> {
+  factory _$$MarkMessagesReadBatchEventImplCopyWith(
+          _$MarkMessagesReadBatchEventImpl value,
+          $Res Function(_$MarkMessagesReadBatchEventImpl) then) =
+      __$$MarkMessagesReadBatchEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<String> messageIds});
+}
+
+/// @nodoc
+class __$$MarkMessagesReadBatchEventImplCopyWithImpl<$Res>
+    extends _$ChatMessageEventCopyWithImpl<$Res,
+        _$MarkMessagesReadBatchEventImpl>
+    implements _$$MarkMessagesReadBatchEventImplCopyWith<$Res> {
+  __$$MarkMessagesReadBatchEventImplCopyWithImpl(
+      _$MarkMessagesReadBatchEventImpl _value,
+      $Res Function(_$MarkMessagesReadBatchEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? messageIds = null,
+  }) {
+    return _then(_$MarkMessagesReadBatchEventImpl(
+      messageIds: null == messageIds
+          ? _value._messageIds
+          : messageIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$MarkMessagesReadBatchEventImpl implements MarkMessagesReadBatchEvent {
+  const _$MarkMessagesReadBatchEventImpl(
+      {required final List<String> messageIds})
+      : _messageIds = messageIds;
+
+  final List<String> _messageIds;
+  @override
+  List<String> get messageIds {
+    if (_messageIds is EqualUnmodifiableListView) return _messageIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_messageIds);
+  }
+
+  @override
+  String toString() {
+    return 'ChatMessageEvent.markMessagesReadBatch(messageIds: $messageIds)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MarkMessagesReadBatchEventImpl &&
+            const DeepCollectionEquality()
+                .equals(other._messageIds, _messageIds));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_messageIds));
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$MarkMessagesReadBatchEventImplCopyWith<_$MarkMessagesReadBatchEventImpl>
+      get copyWith => __$$MarkMessagesReadBatchEventImplCopyWithImpl<
+          _$MarkMessagesReadBatchEventImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
+    required TResult Function(String conversationId, int? limit) loadMessages,
+    required TResult Function(String conversationId, int limit)
+        loadMoreMessages,
+    required TResult Function(
+            String conversationId, String content, String? replyToMessageId)
+        sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice, int maxUserVotes)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
+    required TResult Function(String messageId, String newContent) editMessage,
+    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(String conversationId, String? uptoMessageId)
+        markConversationRead,
+    required TResult Function() clearInfo,
+    required TResult Function(String conversationId) startWatch,
+    required TResult Function() stopWatch,
+    required TResult Function(ChatMessageEntity message) watchMessageArrived,
+    required TResult Function(ChatMessageEntity message) watchMessageUpdated,
+    required TResult Function(ChatMessageEntity message) watchMessageDeleted,
+    required TResult Function(String message) watchMessageError,
+    required TResult Function() loadConversationList,
+    required TResult Function(String filter) setChatFilter,
+    required TResult Function(String query) setSearchQuery,
+    required TResult Function(String messageId) loadMessageReads,
+    required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
+    required TResult Function(String conversationId) startWatchReads,
+    required TResult Function() stopWatchReads,
+    required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
+    required TResult Function(String conversationId, bool isTyping) sendTyping,
+    required TResult Function(String conversationId) startWatchTyping,
+    required TResult Function() stopWatchTyping,
+    required TResult Function(String userId) watchTypingArrived,
+    required TResult Function() cleanupTyping,
+  }) {
+    return markMessagesReadBatch(messageIds);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
+    TResult? Function(String conversationId, int? limit)? loadMessages,
+    TResult? Function(String conversationId, int limit)? loadMoreMessages,
+    TResult? Function(
+            String conversationId, String content, String? replyToMessageId)?
+        sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice, int maxUserVotes)?
+        sendPollMessage,
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
+        sendEventMessage,
+    TResult? Function(String messageId, String newContent)? editMessage,
+    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(String conversationId, String? uptoMessageId)?
+        markConversationRead,
+    TResult? Function()? clearInfo,
+    TResult? Function(String conversationId)? startWatch,
+    TResult? Function()? stopWatch,
+    TResult? Function(ChatMessageEntity message)? watchMessageArrived,
+    TResult? Function(ChatMessageEntity message)? watchMessageUpdated,
+    TResult? Function(ChatMessageEntity message)? watchMessageDeleted,
+    TResult? Function(String message)? watchMessageError,
+    TResult? Function()? loadConversationList,
+    TResult? Function(String filter)? setChatFilter,
+    TResult? Function(String query)? setSearchQuery,
+    TResult? Function(String messageId)? loadMessageReads,
+    TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
+    TResult? Function(String conversationId)? startWatchReads,
+    TResult? Function()? stopWatchReads,
+    TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
+    TResult? Function(String conversationId, bool isTyping)? sendTyping,
+    TResult? Function(String conversationId)? startWatchTyping,
+    TResult? Function()? stopWatchTyping,
+    TResult? Function(String userId)? watchTypingArrived,
+    TResult? Function()? cleanupTyping,
+  }) {
+    return markMessagesReadBatch?.call(messageIds);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
+    TResult Function(String conversationId, int? limit)? loadMessages,
+    TResult Function(String conversationId, int limit)? loadMoreMessages,
+    TResult Function(
+            String conversationId, String content, String? replyToMessageId)?
+        sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice, int maxUserVotes)?
+        sendPollMessage,
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
+        sendEventMessage,
+    TResult Function(String messageId, String newContent)? editMessage,
+    TResult Function(String messageId)? deleteMessage,
+    TResult Function(String conversationId, String? uptoMessageId)?
+        markConversationRead,
+    TResult Function()? clearInfo,
+    TResult Function(String conversationId)? startWatch,
+    TResult Function()? stopWatch,
+    TResult Function(ChatMessageEntity message)? watchMessageArrived,
+    TResult Function(ChatMessageEntity message)? watchMessageUpdated,
+    TResult Function(ChatMessageEntity message)? watchMessageDeleted,
+    TResult Function(String message)? watchMessageError,
+    TResult Function()? loadConversationList,
+    TResult Function(String filter)? setChatFilter,
+    TResult Function(String query)? setSearchQuery,
+    TResult Function(String messageId)? loadMessageReads,
+    TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
+    TResult Function(String conversationId)? startWatchReads,
+    TResult Function()? stopWatchReads,
+    TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
+    TResult Function(String conversationId, bool isTyping)? sendTyping,
+    TResult Function(String conversationId)? startWatchTyping,
+    TResult Function()? stopWatchTyping,
+    TResult Function(String userId)? watchTypingArrived,
+    TResult Function()? cleanupTyping,
+    required TResult orElse(),
+  }) {
+    if (markMessagesReadBatch != null) {
+      return markMessagesReadBatch(messageIds);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
+    required TResult Function(LoadChatMessagesEvent value) loadMessages,
+    required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
+    required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
+    required TResult Function(EditChatMessageEvent value) editMessage,
+    required TResult Function(DeleteChatMessageEvent value) deleteMessage,
+    required TResult Function(MarkConversationReadEvent value)
+        markConversationRead,
+    required TResult Function(ClearChatMessagesInfoEvent value) clearInfo,
+    required TResult Function(StartWatchMessagesEvent value) startWatch,
+    required TResult Function(StopWatchMessagesEvent value) stopWatch,
+    required TResult Function(WatchMessageArrivedEvent value)
+        watchMessageArrived,
+    required TResult Function(WatchMessageUpdatedEvent value)
+        watchMessageUpdated,
+    required TResult Function(WatchMessageDeletedEvent value)
+        watchMessageDeleted,
+    required TResult Function(WatchMessageErrorEvent value) watchMessageError,
+    required TResult Function(LoadConversationListEvent value)
+        loadConversationList,
+    required TResult Function(SetChatFilterEvent value) setChatFilter,
+    required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
+    required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
+    required TResult Function(StartWatchReadsEvent value) startWatchReads,
+    required TResult Function(StopWatchReadsEvent value) stopWatchReads,
+    required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
+    required TResult Function(SendTypingEvent value) sendTyping,
+    required TResult Function(StartWatchTypingEvent value) startWatchTyping,
+    required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
+    required TResult Function(WatchTypingArrivedEvent value) watchTypingArrived,
+    required TResult Function(CleanupTypingEvent value) cleanupTyping,
+  }) {
+    return markMessagesReadBatch(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
+    TResult? Function(LoadChatMessagesEvent value)? loadMessages,
+    TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
+    TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
+    TResult? Function(EditChatMessageEvent value)? editMessage,
+    TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
+    TResult? Function(MarkConversationReadEvent value)? markConversationRead,
+    TResult? Function(ClearChatMessagesInfoEvent value)? clearInfo,
+    TResult? Function(StartWatchMessagesEvent value)? startWatch,
+    TResult? Function(StopWatchMessagesEvent value)? stopWatch,
+    TResult? Function(WatchMessageArrivedEvent value)? watchMessageArrived,
+    TResult? Function(WatchMessageUpdatedEvent value)? watchMessageUpdated,
+    TResult? Function(WatchMessageDeletedEvent value)? watchMessageDeleted,
+    TResult? Function(WatchMessageErrorEvent value)? watchMessageError,
+    TResult? Function(LoadConversationListEvent value)? loadConversationList,
+    TResult? Function(SetChatFilterEvent value)? setChatFilter,
+    TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
+    TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
+    TResult? Function(StartWatchReadsEvent value)? startWatchReads,
+    TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
+    TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
+    TResult? Function(SendTypingEvent value)? sendTyping,
+    TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
+    TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
+    TResult? Function(WatchTypingArrivedEvent value)? watchTypingArrived,
+    TResult? Function(CleanupTypingEvent value)? cleanupTyping,
+  }) {
+    return markMessagesReadBatch?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
+    TResult Function(LoadChatMessagesEvent value)? loadMessages,
+    TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
+    TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
+    TResult Function(EditChatMessageEvent value)? editMessage,
+    TResult Function(DeleteChatMessageEvent value)? deleteMessage,
+    TResult Function(MarkConversationReadEvent value)? markConversationRead,
+    TResult Function(ClearChatMessagesInfoEvent value)? clearInfo,
+    TResult Function(StartWatchMessagesEvent value)? startWatch,
+    TResult Function(StopWatchMessagesEvent value)? stopWatch,
+    TResult Function(WatchMessageArrivedEvent value)? watchMessageArrived,
+    TResult Function(WatchMessageUpdatedEvent value)? watchMessageUpdated,
+    TResult Function(WatchMessageDeletedEvent value)? watchMessageDeleted,
+    TResult Function(WatchMessageErrorEvent value)? watchMessageError,
+    TResult Function(LoadConversationListEvent value)? loadConversationList,
+    TResult Function(SetChatFilterEvent value)? setChatFilter,
+    TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
+    TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
+    TResult Function(StartWatchReadsEvent value)? startWatchReads,
+    TResult Function(StopWatchReadsEvent value)? stopWatchReads,
+    TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
+    TResult Function(SendTypingEvent value)? sendTyping,
+    TResult Function(StartWatchTypingEvent value)? startWatchTyping,
+    TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
+    TResult Function(WatchTypingArrivedEvent value)? watchTypingArrived,
+    TResult Function(CleanupTypingEvent value)? cleanupTyping,
+    required TResult orElse(),
+  }) {
+    if (markMessagesReadBatch != null) {
+      return markMessagesReadBatch(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class MarkMessagesReadBatchEvent implements ChatMessageEvent {
+  const factory MarkMessagesReadBatchEvent(
+          {required final List<String> messageIds}) =
+      _$MarkMessagesReadBatchEventImpl;
+
+  List<String> get messageIds;
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$MarkMessagesReadBatchEventImplCopyWith<_$MarkMessagesReadBatchEventImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -8230,14 +10279,27 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -8257,6 +10319,7 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -8284,11 +10347,23 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -8306,6 +10381,7 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -8332,11 +10408,23 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -8354,6 +10442,7 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -8381,6 +10470,7 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -8403,6 +10493,8 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -8426,6 +10518,7 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -8443,6 +10536,7 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -8466,6 +10560,7 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -8483,6 +10578,7 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -8568,14 +10664,27 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -8595,6 +10704,7 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -8622,11 +10732,23 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -8644,6 +10766,7 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -8670,11 +10793,23 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -8692,6 +10827,7 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -8719,6 +10855,7 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -8741,6 +10878,8 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -8764,6 +10903,7 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -8781,6 +10921,7 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -8804,6 +10945,7 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -8821,6 +10963,7 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -8938,14 +11081,27 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -8965,6 +11121,7 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -8992,11 +11149,23 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -9014,6 +11183,7 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -9040,11 +11210,23 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -9062,6 +11244,7 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -9089,6 +11272,7 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -9111,6 +11295,8 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -9134,6 +11320,7 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -9151,6 +11338,7 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -9174,6 +11362,7 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -9191,6 +11380,7 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -9313,14 +11503,27 @@ class _$VotePollEventImpl implements VotePollEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -9340,6 +11543,7 @@ class _$VotePollEventImpl implements VotePollEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -9367,11 +11571,23 @@ class _$VotePollEventImpl implements VotePollEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -9389,6 +11605,7 @@ class _$VotePollEventImpl implements VotePollEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -9415,11 +11632,23 @@ class _$VotePollEventImpl implements VotePollEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -9437,6 +11666,7 @@ class _$VotePollEventImpl implements VotePollEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -9464,6 +11694,7 @@ class _$VotePollEventImpl implements VotePollEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -9486,6 +11717,8 @@ class _$VotePollEventImpl implements VotePollEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -9509,6 +11742,7 @@ class _$VotePollEventImpl implements VotePollEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -9526,6 +11760,7 @@ class _$VotePollEventImpl implements VotePollEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -9549,6 +11784,7 @@ class _$VotePollEventImpl implements VotePollEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -9566,6 +11802,7 @@ class _$VotePollEventImpl implements VotePollEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -9681,14 +11918,27 @@ class _$UnvotePollEventImpl implements UnvotePollEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -9708,6 +11958,7 @@ class _$UnvotePollEventImpl implements UnvotePollEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -9735,11 +11986,23 @@ class _$UnvotePollEventImpl implements UnvotePollEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -9757,6 +12020,7 @@ class _$UnvotePollEventImpl implements UnvotePollEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -9783,11 +12047,23 @@ class _$UnvotePollEventImpl implements UnvotePollEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -9805,6 +12081,7 @@ class _$UnvotePollEventImpl implements UnvotePollEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -9832,6 +12109,7 @@ class _$UnvotePollEventImpl implements UnvotePollEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -9854,6 +12132,8 @@ class _$UnvotePollEventImpl implements UnvotePollEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -9877,6 +12157,7 @@ class _$UnvotePollEventImpl implements UnvotePollEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -9894,6 +12175,7 @@ class _$UnvotePollEventImpl implements UnvotePollEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -9917,6 +12199,7 @@ class _$UnvotePollEventImpl implements UnvotePollEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -9934,6 +12217,7 @@ class _$UnvotePollEventImpl implements UnvotePollEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -10056,14 +12340,27 @@ class _$RespondToEventEventImpl implements RespondToEventEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -10083,6 +12380,7 @@ class _$RespondToEventEventImpl implements RespondToEventEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -10110,11 +12408,23 @@ class _$RespondToEventEventImpl implements RespondToEventEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -10132,6 +12442,7 @@ class _$RespondToEventEventImpl implements RespondToEventEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -10158,11 +12469,23 @@ class _$RespondToEventEventImpl implements RespondToEventEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -10180,6 +12503,7 @@ class _$RespondToEventEventImpl implements RespondToEventEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -10207,6 +12531,7 @@ class _$RespondToEventEventImpl implements RespondToEventEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -10229,6 +12554,8 @@ class _$RespondToEventEventImpl implements RespondToEventEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -10252,6 +12579,7 @@ class _$RespondToEventEventImpl implements RespondToEventEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -10269,6 +12597,7 @@ class _$RespondToEventEventImpl implements RespondToEventEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -10292,6 +12621,7 @@ class _$RespondToEventEventImpl implements RespondToEventEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -10309,6 +12639,7 @@ class _$RespondToEventEventImpl implements RespondToEventEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -10425,14 +12756,27 @@ class _$CancelEventRsvpEventImpl implements CancelEventRsvpEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -10452,6 +12796,7 @@ class _$CancelEventRsvpEventImpl implements CancelEventRsvpEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -10479,11 +12824,23 @@ class _$CancelEventRsvpEventImpl implements CancelEventRsvpEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -10501,6 +12858,7 @@ class _$CancelEventRsvpEventImpl implements CancelEventRsvpEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -10527,11 +12885,23 @@ class _$CancelEventRsvpEventImpl implements CancelEventRsvpEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -10549,6 +12919,7 @@ class _$CancelEventRsvpEventImpl implements CancelEventRsvpEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -10576,6 +12947,7 @@ class _$CancelEventRsvpEventImpl implements CancelEventRsvpEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -10598,6 +12970,8 @@ class _$CancelEventRsvpEventImpl implements CancelEventRsvpEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -10621,6 +12995,7 @@ class _$CancelEventRsvpEventImpl implements CancelEventRsvpEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -10638,6 +13013,7 @@ class _$CancelEventRsvpEventImpl implements CancelEventRsvpEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -10661,6 +13037,7 @@ class _$CancelEventRsvpEventImpl implements CancelEventRsvpEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -10678,6 +13055,7 @@ class _$CancelEventRsvpEventImpl implements CancelEventRsvpEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -10801,14 +13179,27 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -10828,6 +13219,7 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -10855,11 +13247,23 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -10877,6 +13281,7 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -10903,11 +13308,23 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -10925,6 +13342,7 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -10952,6 +13370,7 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -10974,6 +13393,8 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -10997,6 +13418,7 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -11014,6 +13436,7 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -11037,6 +13460,7 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -11054,6 +13478,7 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -11170,14 +13595,27 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -11197,6 +13635,7 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -11224,11 +13663,23 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -11246,6 +13697,7 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -11272,11 +13724,23 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -11294,6 +13758,7 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -11321,6 +13786,7 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -11343,6 +13809,8 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -11366,6 +13834,7 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -11383,6 +13852,7 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -11406,6 +13876,7 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -11423,6 +13894,7 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -11508,14 +13980,27 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -11535,6 +14020,7 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -11562,11 +14048,23 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -11584,6 +14082,7 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -11610,11 +14109,23 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -11632,6 +14143,7 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -11659,6 +14171,7 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -11681,6 +14194,8 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -11704,6 +14219,7 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -11721,6 +14237,7 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -11744,6 +14261,7 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -11761,6 +14279,7 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -11866,14 +14385,27 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -11893,6 +14425,7 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -11920,11 +14453,23 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -11942,6 +14487,7 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -11968,11 +14514,23 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -11990,6 +14548,7 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -12017,6 +14576,7 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -12039,6 +14599,8 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -12062,6 +14624,7 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -12079,6 +14642,7 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -12102,6 +14666,7 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -12119,6 +14684,7 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -12203,14 +14769,27 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     required TResult Function(
             String conversationId, String content, String? replyToMessageId)
         sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
     required TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)
+            List<String> options, bool multipleChoice, int maxUserVotes)
         sendPollMessage,
     required TResult Function(
             String conversationId,
             String title,
             String? description,
-            String? location,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
             DateTime startDate,
             DateTime endDate)
         sendEventMessage,
@@ -12230,6 +14809,7 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     required TResult Function(String query) setSearchQuery,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
     required TResult Function(String conversationId) startWatchReads,
     required TResult Function() stopWatchReads,
     required TResult Function(MessageReadEntity readEntity) watchReadArrived,
@@ -12257,11 +14837,23 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     TResult? Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult? Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult? Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult? Function(String messageId, String newContent)? editMessage,
     TResult? Function(String messageId)? deleteMessage,
@@ -12279,6 +14871,7 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     TResult? Function(String query)? setSearchQuery,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
     TResult? Function(String conversationId)? startWatchReads,
     TResult? Function()? stopWatchReads,
     TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -12305,11 +14898,23 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     TResult Function(
             String conversationId, String content, String? replyToMessageId)?
         sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
     TResult Function(String conversationId, String question,
-            List<String> options, bool multipleChoice)?
+            List<String> options, bool multipleChoice, int maxUserVotes)?
         sendPollMessage,
-    TResult Function(String conversationId, String title, String? description,
-            String? location, DateTime startDate, DateTime endDate)?
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
         sendEventMessage,
     TResult Function(String messageId, String newContent)? editMessage,
     TResult Function(String messageId)? deleteMessage,
@@ -12327,6 +14932,7 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     TResult Function(String query)? setSearchQuery,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
     TResult Function(String conversationId)? startWatchReads,
     TResult Function()? stopWatchReads,
     TResult Function(MessageReadEntity readEntity)? watchReadArrived,
@@ -12354,6 +14960,7 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     required TResult Function(LoadChatMessagesEvent value) loadMessages,
     required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
     required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
     required TResult Function(SendPollMessageEvent value) sendPollMessage,
     required TResult Function(SendEventMessageEvent value) sendEventMessage,
     required TResult Function(EditChatMessageEvent value) editMessage,
@@ -12376,6 +14983,8 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
     required TResult Function(StartWatchReadsEvent value) startWatchReads,
     required TResult Function(StopWatchReadsEvent value) stopWatchReads,
     required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
@@ -12399,6 +15008,7 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     TResult? Function(LoadChatMessagesEvent value)? loadMessages,
     TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult? Function(SendPollMessageEvent value)? sendPollMessage,
     TResult? Function(SendEventMessageEvent value)? sendEventMessage,
     TResult? Function(EditChatMessageEvent value)? editMessage,
@@ -12416,6 +15026,7 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult? Function(StartWatchReadsEvent value)? startWatchReads,
     TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
@@ -12439,6 +15050,7 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     TResult Function(LoadChatMessagesEvent value)? loadMessages,
     TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
     TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
     TResult Function(SendPollMessageEvent value)? sendPollMessage,
     TResult Function(SendEventMessageEvent value)? sendEventMessage,
     TResult Function(EditChatMessageEvent value)? editMessage,
@@ -12456,6 +15068,7 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
     TResult Function(StartWatchReadsEvent value)? startWatchReads,
     TResult Function(StopWatchReadsEvent value)? stopWatchReads,
     TResult Function(WatchReadArrivedEvent value)? watchReadArrived,

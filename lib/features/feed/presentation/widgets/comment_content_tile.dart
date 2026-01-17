@@ -87,7 +87,7 @@ class CommentContentTile extends HookWidget {
               children: [
                 // Username + timestamp row
                 _UserInfoRow(
-                  username: comment.userFullName ?? t.feedUnknownUser,
+                  username: comment.username ?? t.feedUnknownUser,
                   createdAt: comment.createdAt,
                 ),
                 const SizedBox(height: 4),

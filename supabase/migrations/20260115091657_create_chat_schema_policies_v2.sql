@@ -147,13 +147,17 @@ CREATE TRIGGER set_messages_updated_at
 BEFORE UPDATE ON public.messages
 FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
 
--- 2.5 Attachments
+-- 2.5 Attachments (supports both Supabase Storage and external URLs like Cloudinary)
 CREATE TABLE IF NOT EXISTS public.message_attachments (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   message_id UUID NOT NULL REFERENCES public.messages(id) ON DELETE CASCADE,
   kind public.attachment_kind NOT NULL,
-  bucket TEXT NOT NULL DEFAULT 'chat',
-  path TEXT NOT NULL,
+  -- For Supabase Storage
+  bucket TEXT,
+  path TEXT,
+  -- For external URLs (Cloudinary, etc.)
+  url TEXT,
+  -- Common metadata
   filename TEXT,
   mime_type TEXT,
   size_bytes BIGINT,
@@ -161,7 +165,11 @@ CREATE TABLE IF NOT EXISTS public.message_attachments (
   height INT,
   duration_seconds NUMERIC(10,2),
   blurhash TEXT,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  -- Ensure at least one source is provided
+  CONSTRAINT chk_attachment_source CHECK (
+    (bucket IS NOT NULL AND path IS NOT NULL) OR url IS NOT NULL
+  )
 );
 
 CREATE INDEX IF NOT EXISTS idx_attachments_message
@@ -700,6 +708,19 @@ FOR INSERT TO authenticated WITH CHECK (
 
 CREATE POLICY "update_own_messages" ON public.messages
 FOR UPDATE TO authenticated USING (sender_id = auth.uid());
+
+-- Attachment policies
+CREATE POLICY "view_attachments" ON public.message_attachments
+FOR SELECT TO authenticated USING (
+  message_id IN (SELECT id FROM messages WHERE conversation_id IN (
+    SELECT conversation_id FROM conversation_members WHERE user_id = auth.uid() AND left_at IS NULL
+  ))
+);
+
+CREATE POLICY "insert_attachments" ON public.message_attachments
+FOR INSERT TO authenticated WITH CHECK (
+  message_id IN (SELECT id FROM messages WHERE sender_id = auth.uid())
+);
 
 CREATE POLICY "view_poll_payload" ON public.message_poll_payload
 FOR SELECT TO authenticated USING (

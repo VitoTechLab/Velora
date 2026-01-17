@@ -5,63 +5,38 @@ import 'package:velora/features/feed/domain/entities/feed_entity.dart';
 part 'feed_model.freezed.dart';
 part 'feed_model.g.dart';
 
-/// Feed post data model for API responses.
 @freezed
-abstract class FeedModel with _$FeedModel {
+class FeedModel with _$FeedModel {
   const FeedModel._();
 
   const factory FeedModel({
     @JsonKey(name: 'id') required String id,
     @JsonKey(name: 'user_id') required String userId,
-    @JsonKey(name: 'content') required String content,
-    @UtcDateTimeConverter()
-    @JsonKey(name: 'created_at')
-    required DateTime createdAt,
-
-    // Joined from profiles (read-only)
+    @JsonKey(name: 'caption') required String content,
+    @UtcDateTimeConverter() @JsonKey(name: 'created_at') required DateTime createdAt,
     @JsonKey(name: 'username') String? username,
     @JsonKey(name: 'photo_url') String? photoUrl,
-
-    @StringListConverter()
-    @JsonKey(name: 'image_urls')
-    @Default([])
-    List<String> imageUrls,
-
-    @StringListConverter()
-    @JsonKey(name: 'video_urls')
-    @Default([])
-    List<String> videoUrls,
-
-    // Counts can be masked (nullable)
-    @JsonKey(name: 'likes_count') int? likesCount,
-    @JsonKey(name: 'comments_count') int? commentsCount,
-    @JsonKey(name: 'shares_count') int? sharesCount,
-
-    // Computed per viewer (read-only)
+    @StringListConverter() @JsonKey(name: 'media_urls') @Default([]) List<String> mediaUrls,
+    @JsonKey(name: 'location') Map<String, dynamic>? location,
+    @StringListConverter() @JsonKey(name: 'tags') @Default([]) List<String> tags,
+    @StringListConverter() @JsonKey(name: 'mention_ids') @Default([]) List<String> mentionIds,
+    @JsonKey(name: 'likes_count') @Default(0) int likesCount,
+    @JsonKey(name: 'comments_count') @Default(0) int commentsCount,
+    @JsonKey(name: 'shares_count') @Default(0) int sharesCount,
     @JsonKey(name: 'is_liked') @Default(false) bool isLiked,
     @JsonKey(name: 'is_bookmarked') @Default(false) bool isBookmarked,
     @JsonKey(name: 'is_following') @Default(false) bool isFollowing,
-    @JsonKey(name: 'is_follow_request_pending')
-    @Default(false)
-    bool isFollowRequestPending,
+    @JsonKey(name: 'is_follow_request_pending') @Default(false) bool isFollowRequestPending,
     @JsonKey(name: 'is_me') @Default(false) bool isMe,
-
-    // Post privacy settings
-    @JsonKey(name: 'comments_enabled') @Default(true) bool commentsEnabled,
-    @JsonKey(name: 'hide_like_count') @Default(false) bool hideLikeCount,
-    @JsonKey(name: 'hide_comment_count') @Default(false) bool hideCommentCount,
-    @JsonKey(name: 'hide_share_count') @Default(false) bool hideShareCount,
-    @JsonKey(name: 'hide_likes_list') @Default(false) bool hideLikesList,
-
-    // Campaign association
+    @JsonKey(name: 'allow_comments') @Default(true) bool allowComments,
+    @JsonKey(name: 'allow_share') @Default(true) bool allowShare,
+    @JsonKey(name: 'is_active') @Default(true) bool isActive,
     @JsonKey(name: 'campaign_id') String? campaignId,
     @JsonKey(name: 'campaign_title') String? campaignTitle,
   }) = _FeedModel;
 
-  factory FeedModel.fromJson(Map<String, dynamic> json) =>
-      _$FeedModelFromJson(json);
+  factory FeedModel.fromJson(Map<String, dynamic> json) => _$FeedModelFromJson(json);
 
-  /// Converts to domain entity.
   FeedEntity toEntity() {
     return FeedEntity(
       id: id,
@@ -70,8 +45,10 @@ abstract class FeedModel with _$FeedModel {
       createdAt: createdAt,
       username: username,
       photoUrl: photoUrl,
-      imageUrls: imageUrls,
-      videoUrls: videoUrls,
+      mediaUrls: mediaUrls,
+      location: location,
+      tags: tags,
+      mentionIds: mentionIds,
       likesCount: likesCount,
       commentsCount: commentsCount,
       sharesCount: sharesCount,
@@ -80,17 +57,14 @@ abstract class FeedModel with _$FeedModel {
       isFollowing: isFollowing,
       isFollowRequestPending: isFollowRequestPending,
       isMe: isMe,
-      commentsEnabled: commentsEnabled,
-      hideLikeCount: hideLikeCount,
-      hideCommentCount: hideCommentCount,
-      hideShareCount: hideShareCount,
-      hideLikesList: hideLikesList,
+      allowComments: allowComments,
+      allowShare: allowShare,
+      isActive: isActive,
       campaignId: campaignId,
       campaignTitle: campaignTitle,
     );
   }
 
-  /// Creates from domain entity.
   factory FeedModel.fromEntity(FeedEntity entity) {
     return FeedModel(
       id: entity.id,
@@ -99,8 +73,10 @@ abstract class FeedModel with _$FeedModel {
       createdAt: entity.createdAt,
       username: entity.username,
       photoUrl: entity.photoUrl,
-      imageUrls: entity.imageUrls,
-      videoUrls: entity.videoUrls,
+      mediaUrls: entity.mediaUrls,
+      location: entity.location,
+      tags: entity.tags,
+      mentionIds: entity.mentionIds,
       likesCount: entity.likesCount,
       commentsCount: entity.commentsCount,
       sharesCount: entity.sharesCount,
@@ -109,11 +85,9 @@ abstract class FeedModel with _$FeedModel {
       isFollowing: entity.isFollowing,
       isFollowRequestPending: entity.isFollowRequestPending,
       isMe: entity.isMe,
-      commentsEnabled: entity.commentsEnabled,
-      hideLikeCount: entity.hideLikeCount,
-      hideCommentCount: entity.hideCommentCount,
-      hideShareCount: entity.hideShareCount,
-      hideLikesList: entity.hideLikesList,
+      allowComments: entity.allowComments,
+      allowShare: entity.allowShare,
+      isActive: entity.isActive,
       campaignId: entity.campaignId,
       campaignTitle: entity.campaignTitle,
     );

@@ -5,41 +5,43 @@ import 'package:velora/features/chat/domain/entities/conversation_list_entity.da
 part 'conversation_list_model.freezed.dart';
 part 'conversation_list_model.g.dart';
 
-/// Model for v_conversation_list view
+/// Model for get_conversation_list_optimized RPC result
 @freezed
 abstract class ConversationListModel with _$ConversationListModel {
   const ConversationListModel._();
 
   const factory ConversationListModel({
-    @JsonKey(name: 'user_id') required String userId,
     @JsonKey(name: 'conversation_id') required String conversationId,
-    @JsonKey(name: 'type') required String type, // 'direct' or 'group'
-    @JsonKey(name: 'title') String? title,
-    @JsonKey(name: 'photo_url') String? photoUrl,
+
+    /// Other participant info (for direct conversations)
+    @JsonKey(name: 'other_user_id') String? otherUserId,
+    @JsonKey(name: 'other_user_username') String? otherUserUsername,
+    @JsonKey(name: 'other_user_full_name') String? otherUserFullName,
+    @JsonKey(name: 'other_user_avatar_url') String? otherUserAvatarUrl,
+
+    /// Last message preview info
+    @JsonKey(name: 'last_message_body') String? lastMessageBody,
     @UtcDateTimeConverter()
     @JsonKey(name: 'last_message_at')
     DateTime? lastMessageAt,
-    @JsonKey(name: 'last_message_id') String? lastMessageId,
-    @JsonKey(name: 'last_message_kind') String? lastMessageKind,
-    @JsonKey(name: 'last_message_preview') String? lastMessagePreview,
+    @JsonKey(name: 'last_message_sender_id') String? lastMessageSenderId,
+
+    /// Unread count for the current user
     @JsonKey(name: 'unread_count') @Default(0) int unreadCount,
-    @UtcDateTimeConverter() @JsonKey(name: 'last_read_at') DateTime? lastReadAt,
   }) = _ConversationListModel;
 
   factory ConversationListModel.fromJson(Map<String, dynamic> json) =>
       _$ConversationListModelFromJson(json);
 
   ConversationListEntity toEntity() => ConversationListEntity(
-    userId: userId,
-    conversationId: conversationId,
-    type: type,
-    title: title,
-    photoUrl: photoUrl,
-    lastMessageAt: lastMessageAt,
-    lastMessageId: lastMessageId,
-    lastMessageKind: lastMessageKind,
-    lastMessagePreview: lastMessagePreview,
-    unreadCount: unreadCount,
-    lastReadAt: lastReadAt,
-  );
+        conversationId: conversationId,
+        otherUserId: otherUserId,
+        otherUserUsername: otherUserUsername,
+        otherUserFullName: otherUserFullName,
+        otherUserAvatarUrl: otherUserAvatarUrl,
+        lastMessageBody: lastMessageBody,
+        lastMessageAt: lastMessageAt,
+        lastMessageSenderId: lastMessageSenderId,
+        unreadCount: unreadCount,
+      );
 }

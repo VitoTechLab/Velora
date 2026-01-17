@@ -9,7 +9,7 @@ import 'package:velora/features/media/data/models/media_asset_model.dart';
 import 'package:velora/features/media/data/models/upload_signature_model.dart';
 
 /// Remote datasource for media upload operations
-/// 
+///
 /// Features:
 /// - Parallel upload with concurrency control
 /// - Retry mechanism with exponential backoff
@@ -28,14 +28,20 @@ class MediaRemoteDataSourceImpl implements MediaRemoteDataSource {
   static const _logTag = 'MediaRemoteDataSource';
   static const int _maxRetries = 2;
   static const Duration _uploadTimeout = Duration(seconds: 30);
+  static const Duration _videoUploadTimeout = Duration(minutes: 5);
 
   @override
   Future<UploadSignatureModel> getUploadSignature({
     required String publicId,
     required String folder,
+    String resourceType = 'image',
   }) async {
     return await _retryWithBackoff(
-      () => _getUploadSignatureImpl(publicId: publicId, folder: folder),
+      () => _getUploadSignatureImpl(
+        publicId: publicId,
+        folder: folder,
+        resourceType: resourceType,
+      ),
       operationName: 'getUploadSignature',
     );
   }
@@ -43,16 +49,21 @@ class MediaRemoteDataSourceImpl implements MediaRemoteDataSource {
   Future<UploadSignatureModel> _getUploadSignatureImpl({
     required String publicId,
     required String folder,
+    required String resourceType,
   }) async {
     try {
       logi(
-        'Requesting signature: publicId=$publicId folder=$folder',
+        'Requesting signature: publicId=$publicId folder=$folder resourceType=$resourceType',
         tag: _logTag,
       );
 
       final response = await _supabaseFunctionsDio.post(
         '/cloudinary-sign',
-        data: <String, dynamic>{'public_id': publicId, 'folder': folder},
+        data: <String, dynamic>{
+          'public_id': publicId,
+          'folder': folder,
+          'resource_type': resourceType,
+        },
         options: Options(
           sendTimeout: const Duration(seconds: 10),
           receiveTimeout: const Duration(seconds: 10),
@@ -89,7 +100,7 @@ class MediaRemoteDataSourceImpl implements MediaRemoteDataSource {
         error: error,
         stackTrace: stackTrace,
       );
-      
+
       if (error is ServerException) rethrow;
       throw ServerException('Failed to get signature: $error');
     }
@@ -195,6 +206,128 @@ class MediaRemoteDataSourceImpl implements MediaRemoteDataSource {
     }
   }
 
+  @override
+  Future<MediaAssetModel> uploadVideoToCloudinary({
+    required File file,
+    required UploadSignatureModel signature,
+  }) async {
+    return await _retryWithBackoff(
+      () => _uploadToCloudinaryImpl(
+        file: file,
+        signature: signature,
+        resourceType: 'video',
+        timeout: _videoUploadTimeout,
+      ),
+      operationName: 'uploadVideoToCloudinary',
+    );
+  }
+
+  @override
+  Future<MediaAssetModel> uploadRawToCloudinary({
+    required File file,
+    required UploadSignatureModel signature,
+  }) async {
+    return await _retryWithBackoff(
+      () => _uploadToCloudinaryImpl(
+        file: file,
+        signature: signature,
+        resourceType: 'raw',
+        timeout: _uploadTimeout,
+      ),
+      operationName: 'uploadRawToCloudinary',
+    );
+  }
+
+  /// Generic upload method for any resource type
+  Future<MediaAssetModel> _uploadToCloudinaryImpl({
+    required File file,
+    required UploadSignatureModel signature,
+    required String resourceType,
+    required Duration timeout,
+  }) async {
+    try {
+      if (!await file.exists()) {
+        throw ServerException('File does not exist: ${file.path}');
+      }
+
+      final cloudName = dotenv.get(
+        'CLOUDINARY_CLOUD_NAME',
+        fallback: 'dcaskzvqd',
+      );
+
+      if (cloudName.isEmpty) {
+        throw ServerException('CLOUDINARY_CLOUD_NAME not configured');
+      }
+
+      final url =
+          'https://api.cloudinary.com/v1_1/$cloudName/$resourceType/upload';
+      final fileSize = await file.length();
+
+      logi(
+        'Uploading $resourceType to Cloudinary:\n'
+        '  File: ${file.path}\n'
+        '  Size: ${fileSize ~/ 1024}KB\n'
+        '  PublicId: ${signature.publicId}',
+        tag: _logTag,
+      );
+
+      final formData = FormData.fromMap(<String, dynamic>{
+        'file': await MultipartFile.fromFile(
+          file.path,
+          filename: signature.publicId,
+        ),
+        'api_key': signature.apiKey,
+        'timestamp': signature.timestamp.toString(),
+        'signature': signature.signature,
+        'public_id': signature.publicId,
+        'folder': signature.folder,
+        'resource_type': resourceType,
+      });
+
+      final response = await _cloudinaryDio.post(
+        url,
+        data: formData,
+        options: Options(
+          headers: {'Content-Type': 'multipart/form-data'},
+          sendTimeout: timeout,
+          receiveTimeout: timeout,
+          validateStatus: (status) => status != null && status < 500,
+        ),
+      );
+
+      if (response.statusCode != 200) {
+        throw ServerException(
+          'Upload failed: ${response.statusCode} - ${response.data}',
+        );
+      }
+
+      final data = response.data;
+      if (data is! Map<String, dynamic>) {
+        throw ServerException('Invalid response: ${data.runtimeType}');
+      }
+
+      if (data['error'] != null) {
+        throw ServerException(
+          'Cloudinary error: ${data['error']['message'] ?? data['error']}',
+        );
+      }
+
+      logi('$resourceType upload success: ${data['secure_url']}', tag: _logTag);
+
+      return MediaAssetModel.fromJson(data);
+    } catch (error, stackTrace) {
+      loge(
+        '$resourceType upload failed',
+        tag: _logTag,
+        error: error,
+        stackTrace: stackTrace,
+      );
+
+      if (error is ServerException) rethrow;
+      throw ServerException('$resourceType upload failed: $error');
+    }
+  }
+
   /// Retry operation with exponential backoff
   Future<T> _retryWithBackoff<T>(
     Future<T> Function() operation, {
@@ -208,7 +341,7 @@ class MediaRemoteDataSourceImpl implements MediaRemoteDataSource {
         return await operation();
       } catch (e) {
         attempt++;
-        
+
         if (attempt > _maxRetries) {
           logw('Max retries reached for $operationName', tag: _logTag);
           rethrow;

@@ -43,18 +43,13 @@ class UploadStatusCard extends StatelessWidget {
             final userId = context.read<AuthBloc>().state.userId ?? '';
             final caption = PostDraftService.getCaption();
 
-            // Trigger post creation
             context.read<PostBloc>().add(
               CreatePostEvent(
                 userId: userId,
                 content: caption,
-                imageUrls: imageUrls,
-                videoUrls: videoUrls,
-                commentsEnabled: true,
-                hideLikeCount: false,
-                hideCommentCount: false,
-                hideShareCount: false,
-                hideLikesList: false,
+                mediaUrls: [...imageUrls, ...videoUrls],
+                allowComments: true,
+                allowShare: true,
               ),
             );
           },

@@ -92,7 +92,6 @@
       }
     }
   },
-  "feedWriteCommentHint": "Tulis komentar...",
   "feedAddCommentHint": "Tambahkan komentar untuk {name}",
   "@feedAddCommentHint": {
     "placeholders": {
@@ -904,6 +903,17 @@
   "chatPollDialogAddOption": "Tambah opsi",
   "chatPollDialogQuestionError": "Harap isi pertanyaan",
   "chatPollDialogOptionsError": "Tambahkan minimal 2 opsi",
+  "chatPollDialogMultipleChoiceLabel": "Pilihan ganda",
+  "chatPollDialogMultipleChoiceHint": "Izinkan pengguna memilih beberapa opsi",
+  "chatPollDialogMaxVotesLabel": "Maksimal suara",
+  "chatPollDialogMaxVotesHint": "Pengguna dapat memilih hingga {count} opsi",
+  "@chatPollDialogMaxVotesHint": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "chatPollDialogSend": "Kirim jajak pendapat",
   "chatEventLabel": "Acara",
   "chatEventSemanticsYour": "Acara Anda",
@@ -923,6 +933,13 @@
   "chatEventDialogDescriptionHint": "Masukkan deskripsi acara…",
   "chatEventDialogLocationLabel": "Lokasi (opsional)",
   "chatEventDialogLocationHint": "Masukkan lokasi…",
+  "chatEventDialogAddressLabel": "Alamat",
+  "chatEventDialogAddressHint": "Masukkan alamat lengkap…",
+  "chatEventDialogOnlineLabel": "Acara online",
+  "chatEventDialogOnlineHint": "Acara ini akan diadakan secara virtual",
+  "chatEventDialogMeetingUrlLabel": "URL Meeting",
+  "chatEventDialogMeetingUrlHint": "Masukkan tautan meeting (Zoom, Google Meet, dll.)",
+  "chatEventDialogMeetingUrlError": "Harap masukkan URL meeting untuk acara online",
   "chatEventDialogStartLabel": "Mulai",
   "chatEventDialogEndLabel": "Selesai",
   "chatEventDialogTitleError": "Harap isi judul acara",

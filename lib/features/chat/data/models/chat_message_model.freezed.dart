@@ -50,6 +50,9 @@ mixin _$ChatMessageModel {
   PollPayloadModel? get pollPayload => throw _privateConstructorUsedError;
   @JsonKey(name: 'message_event_payload')
   EventPayloadModel? get eventPayload => throw _privateConstructorUsedError;
+  @JsonKey(name: 'message_attachments')
+  List<MessageAttachmentModel> get attachments =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this ChatMessageModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -80,7 +83,9 @@ abstract class $ChatMessageModelCopyWith<$Res> {
       @UtcDateTimeConverter() @JsonKey(name: 'created_at') DateTime createdAt,
       @UtcDateTimeConverter() @JsonKey(name: 'updated_at') DateTime updatedAt,
       @JsonKey(name: 'message_poll_payload') PollPayloadModel? pollPayload,
-      @JsonKey(name: 'message_event_payload') EventPayloadModel? eventPayload});
+      @JsonKey(name: 'message_event_payload') EventPayloadModel? eventPayload,
+      @JsonKey(name: 'message_attachments')
+      List<MessageAttachmentModel> attachments});
 
   $PollPayloadModelCopyWith<$Res>? get pollPayload;
   $EventPayloadModelCopyWith<$Res>? get eventPayload;
@@ -114,6 +119,7 @@ class _$ChatMessageModelCopyWithImpl<$Res, $Val extends ChatMessageModel>
     Object? updatedAt = null,
     Object? pollPayload = freezed,
     Object? eventPayload = freezed,
+    Object? attachments = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -168,6 +174,10 @@ class _$ChatMessageModelCopyWithImpl<$Res, $Val extends ChatMessageModel>
           ? _value.eventPayload
           : eventPayload // ignore: cast_nullable_to_non_nullable
               as EventPayloadModel?,
+      attachments: null == attachments
+          ? _value.attachments
+          : attachments // ignore: cast_nullable_to_non_nullable
+              as List<MessageAttachmentModel>,
     ) as $Val);
   }
 
@@ -221,7 +231,9 @@ abstract class _$$ChatMessageModelImplCopyWith<$Res>
       @UtcDateTimeConverter() @JsonKey(name: 'created_at') DateTime createdAt,
       @UtcDateTimeConverter() @JsonKey(name: 'updated_at') DateTime updatedAt,
       @JsonKey(name: 'message_poll_payload') PollPayloadModel? pollPayload,
-      @JsonKey(name: 'message_event_payload') EventPayloadModel? eventPayload});
+      @JsonKey(name: 'message_event_payload') EventPayloadModel? eventPayload,
+      @JsonKey(name: 'message_attachments')
+      List<MessageAttachmentModel> attachments});
 
   @override
   $PollPayloadModelCopyWith<$Res>? get pollPayload;
@@ -255,6 +267,7 @@ class __$$ChatMessageModelImplCopyWithImpl<$Res>
     Object? updatedAt = null,
     Object? pollPayload = freezed,
     Object? eventPayload = freezed,
+    Object? attachments = null,
   }) {
     return _then(_$ChatMessageModelImpl(
       id: null == id
@@ -309,6 +322,10 @@ class __$$ChatMessageModelImplCopyWithImpl<$Res>
           ? _value.eventPayload
           : eventPayload // ignore: cast_nullable_to_non_nullable
               as EventPayloadModel?,
+      attachments: null == attachments
+          ? _value._attachments
+          : attachments // ignore: cast_nullable_to_non_nullable
+              as List<MessageAttachmentModel>,
     ));
   }
 }
@@ -333,8 +350,11 @@ class _$ChatMessageModelImpl extends _ChatMessageModel {
       @JsonKey(name: 'updated_at')
       required this.updatedAt,
       @JsonKey(name: 'message_poll_payload') this.pollPayload,
-      @JsonKey(name: 'message_event_payload') this.eventPayload})
-      : super._();
+      @JsonKey(name: 'message_event_payload') this.eventPayload,
+      @JsonKey(name: 'message_attachments')
+      final List<MessageAttachmentModel> attachments = const []})
+      : _attachments = attachments,
+        super._();
 
   factory _$ChatMessageModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ChatMessageModelImplFromJson(json);
@@ -382,10 +402,18 @@ class _$ChatMessageModelImpl extends _ChatMessageModel {
   @override
   @JsonKey(name: 'message_event_payload')
   final EventPayloadModel? eventPayload;
+  final List<MessageAttachmentModel> _attachments;
+  @override
+  @JsonKey(name: 'message_attachments')
+  List<MessageAttachmentModel> get attachments {
+    if (_attachments is EqualUnmodifiableListView) return _attachments;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_attachments);
+  }
 
   @override
   String toString() {
-    return 'ChatMessageModel(id: $id, conversationId: $conversationId, senderId: $senderId, kind: $kind, body: $body, replyToMessageId: $replyToMessageId, editedAt: $editedAt, deletedAt: $deletedAt, deletedBy: $deletedBy, createdAt: $createdAt, updatedAt: $updatedAt, pollPayload: $pollPayload, eventPayload: $eventPayload)';
+    return 'ChatMessageModel(id: $id, conversationId: $conversationId, senderId: $senderId, kind: $kind, body: $body, replyToMessageId: $replyToMessageId, editedAt: $editedAt, deletedAt: $deletedAt, deletedBy: $deletedBy, createdAt: $createdAt, updatedAt: $updatedAt, pollPayload: $pollPayload, eventPayload: $eventPayload, attachments: $attachments)';
   }
 
   @override
@@ -415,7 +443,9 @@ class _$ChatMessageModelImpl extends _ChatMessageModel {
             (identical(other.pollPayload, pollPayload) ||
                 other.pollPayload == pollPayload) &&
             (identical(other.eventPayload, eventPayload) ||
-                other.eventPayload == eventPayload));
+                other.eventPayload == eventPayload) &&
+            const DeepCollectionEquality()
+                .equals(other._attachments, _attachments));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -434,7 +464,8 @@ class _$ChatMessageModelImpl extends _ChatMessageModel {
       createdAt,
       updatedAt,
       pollPayload,
-      eventPayload);
+      eventPayload,
+      const DeepCollectionEquality().hash(_attachments));
 
   /// Create a copy of ChatMessageModel
   /// with the given fields replaced by the non-null parameter values.
@@ -477,7 +508,9 @@ abstract class _ChatMessageModel extends ChatMessageModel {
       @JsonKey(name: 'message_poll_payload')
       final PollPayloadModel? pollPayload,
       @JsonKey(name: 'message_event_payload')
-      final EventPayloadModel? eventPayload}) = _$ChatMessageModelImpl;
+      final EventPayloadModel? eventPayload,
+      @JsonKey(name: 'message_attachments')
+      final List<MessageAttachmentModel> attachments}) = _$ChatMessageModelImpl;
   const _ChatMessageModel._() : super._();
 
   factory _ChatMessageModel.fromJson(Map<String, dynamic> json) =
@@ -526,6 +559,9 @@ abstract class _ChatMessageModel extends ChatMessageModel {
   @override
   @JsonKey(name: 'message_event_payload')
   EventPayloadModel? get eventPayload;
+  @override
+  @JsonKey(name: 'message_attachments')
+  List<MessageAttachmentModel> get attachments;
 
   /// Create a copy of ChatMessageModel
   /// with the given fields replaced by the non-null parameter values.

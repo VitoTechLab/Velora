@@ -21,30 +21,31 @@ ConversationListModel _$ConversationListModelFromJson(
 
 /// @nodoc
 mixin _$ConversationListModel {
-  @JsonKey(name: 'user_id')
-  String get userId => throw _privateConstructorUsedError;
   @JsonKey(name: 'conversation_id')
   String get conversationId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'type')
-  String get type => throw _privateConstructorUsedError; // 'direct' or 'group'
-  @JsonKey(name: 'title')
-  String? get title => throw _privateConstructorUsedError;
-  @JsonKey(name: 'photo_url')
-  String? get photoUrl => throw _privateConstructorUsedError;
+
+  /// Other participant info (for direct conversations)
+  @JsonKey(name: 'other_user_id')
+  String? get otherUserId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'other_user_username')
+  String? get otherUserUsername => throw _privateConstructorUsedError;
+  @JsonKey(name: 'other_user_full_name')
+  String? get otherUserFullName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'other_user_avatar_url')
+  String? get otherUserAvatarUrl => throw _privateConstructorUsedError;
+
+  /// Last message preview info
+  @JsonKey(name: 'last_message_body')
+  String? get lastMessageBody => throw _privateConstructorUsedError;
   @UtcDateTimeConverter()
   @JsonKey(name: 'last_message_at')
   DateTime? get lastMessageAt => throw _privateConstructorUsedError;
-  @JsonKey(name: 'last_message_id')
-  String? get lastMessageId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'last_message_kind')
-  String? get lastMessageKind => throw _privateConstructorUsedError;
-  @JsonKey(name: 'last_message_preview')
-  String? get lastMessagePreview => throw _privateConstructorUsedError;
+  @JsonKey(name: 'last_message_sender_id')
+  String? get lastMessageSenderId => throw _privateConstructorUsedError;
+
+  /// Unread count for the current user
   @JsonKey(name: 'unread_count')
   int get unreadCount => throw _privateConstructorUsedError;
-  @UtcDateTimeConverter()
-  @JsonKey(name: 'last_read_at')
-  DateTime? get lastReadAt => throw _privateConstructorUsedError;
 
   /// Serializes this ConversationListModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -63,21 +64,17 @@ abstract class $ConversationListModelCopyWith<$Res> {
       _$ConversationListModelCopyWithImpl<$Res, ConversationListModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'user_id') String userId,
-      @JsonKey(name: 'conversation_id') String conversationId,
-      @JsonKey(name: 'type') String type,
-      @JsonKey(name: 'title') String? title,
-      @JsonKey(name: 'photo_url') String? photoUrl,
+      {@JsonKey(name: 'conversation_id') String conversationId,
+      @JsonKey(name: 'other_user_id') String? otherUserId,
+      @JsonKey(name: 'other_user_username') String? otherUserUsername,
+      @JsonKey(name: 'other_user_full_name') String? otherUserFullName,
+      @JsonKey(name: 'other_user_avatar_url') String? otherUserAvatarUrl,
+      @JsonKey(name: 'last_message_body') String? lastMessageBody,
       @UtcDateTimeConverter()
       @JsonKey(name: 'last_message_at')
       DateTime? lastMessageAt,
-      @JsonKey(name: 'last_message_id') String? lastMessageId,
-      @JsonKey(name: 'last_message_kind') String? lastMessageKind,
-      @JsonKey(name: 'last_message_preview') String? lastMessagePreview,
-      @JsonKey(name: 'unread_count') int unreadCount,
-      @UtcDateTimeConverter()
-      @JsonKey(name: 'last_read_at')
-      DateTime? lastReadAt});
+      @JsonKey(name: 'last_message_sender_id') String? lastMessageSenderId,
+      @JsonKey(name: 'unread_count') int unreadCount});
 }
 
 /// @nodoc
@@ -96,63 +93,53 @@ class _$ConversationListModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userId = null,
     Object? conversationId = null,
-    Object? type = null,
-    Object? title = freezed,
-    Object? photoUrl = freezed,
+    Object? otherUserId = freezed,
+    Object? otherUserUsername = freezed,
+    Object? otherUserFullName = freezed,
+    Object? otherUserAvatarUrl = freezed,
+    Object? lastMessageBody = freezed,
     Object? lastMessageAt = freezed,
-    Object? lastMessageId = freezed,
-    Object? lastMessageKind = freezed,
-    Object? lastMessagePreview = freezed,
+    Object? lastMessageSenderId = freezed,
     Object? unreadCount = null,
-    Object? lastReadAt = freezed,
   }) {
     return _then(_value.copyWith(
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
       conversationId: null == conversationId
           ? _value.conversationId
           : conversationId // ignore: cast_nullable_to_non_nullable
               as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: freezed == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      otherUserId: freezed == otherUserId
+          ? _value.otherUserId
+          : otherUserId // ignore: cast_nullable_to_non_nullable
               as String?,
-      photoUrl: freezed == photoUrl
-          ? _value.photoUrl
-          : photoUrl // ignore: cast_nullable_to_non_nullable
+      otherUserUsername: freezed == otherUserUsername
+          ? _value.otherUserUsername
+          : otherUserUsername // ignore: cast_nullable_to_non_nullable
+              as String?,
+      otherUserFullName: freezed == otherUserFullName
+          ? _value.otherUserFullName
+          : otherUserFullName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      otherUserAvatarUrl: freezed == otherUserAvatarUrl
+          ? _value.otherUserAvatarUrl
+          : otherUserAvatarUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastMessageBody: freezed == lastMessageBody
+          ? _value.lastMessageBody
+          : lastMessageBody // ignore: cast_nullable_to_non_nullable
               as String?,
       lastMessageAt: freezed == lastMessageAt
           ? _value.lastMessageAt
           : lastMessageAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      lastMessageId: freezed == lastMessageId
-          ? _value.lastMessageId
-          : lastMessageId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lastMessageKind: freezed == lastMessageKind
-          ? _value.lastMessageKind
-          : lastMessageKind // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lastMessagePreview: freezed == lastMessagePreview
-          ? _value.lastMessagePreview
-          : lastMessagePreview // ignore: cast_nullable_to_non_nullable
+      lastMessageSenderId: freezed == lastMessageSenderId
+          ? _value.lastMessageSenderId
+          : lastMessageSenderId // ignore: cast_nullable_to_non_nullable
               as String?,
       unreadCount: null == unreadCount
           ? _value.unreadCount
           : unreadCount // ignore: cast_nullable_to_non_nullable
               as int,
-      lastReadAt: freezed == lastReadAt
-          ? _value.lastReadAt
-          : lastReadAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
     ) as $Val);
   }
 }
@@ -167,21 +154,17 @@ abstract class _$$ConversationListModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'user_id') String userId,
-      @JsonKey(name: 'conversation_id') String conversationId,
-      @JsonKey(name: 'type') String type,
-      @JsonKey(name: 'title') String? title,
-      @JsonKey(name: 'photo_url') String? photoUrl,
+      {@JsonKey(name: 'conversation_id') String conversationId,
+      @JsonKey(name: 'other_user_id') String? otherUserId,
+      @JsonKey(name: 'other_user_username') String? otherUserUsername,
+      @JsonKey(name: 'other_user_full_name') String? otherUserFullName,
+      @JsonKey(name: 'other_user_avatar_url') String? otherUserAvatarUrl,
+      @JsonKey(name: 'last_message_body') String? lastMessageBody,
       @UtcDateTimeConverter()
       @JsonKey(name: 'last_message_at')
       DateTime? lastMessageAt,
-      @JsonKey(name: 'last_message_id') String? lastMessageId,
-      @JsonKey(name: 'last_message_kind') String? lastMessageKind,
-      @JsonKey(name: 'last_message_preview') String? lastMessagePreview,
-      @JsonKey(name: 'unread_count') int unreadCount,
-      @UtcDateTimeConverter()
-      @JsonKey(name: 'last_read_at')
-      DateTime? lastReadAt});
+      @JsonKey(name: 'last_message_sender_id') String? lastMessageSenderId,
+      @JsonKey(name: 'unread_count') int unreadCount});
 }
 
 /// @nodoc
@@ -198,63 +181,53 @@ class __$$ConversationListModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userId = null,
     Object? conversationId = null,
-    Object? type = null,
-    Object? title = freezed,
-    Object? photoUrl = freezed,
+    Object? otherUserId = freezed,
+    Object? otherUserUsername = freezed,
+    Object? otherUserFullName = freezed,
+    Object? otherUserAvatarUrl = freezed,
+    Object? lastMessageBody = freezed,
     Object? lastMessageAt = freezed,
-    Object? lastMessageId = freezed,
-    Object? lastMessageKind = freezed,
-    Object? lastMessagePreview = freezed,
+    Object? lastMessageSenderId = freezed,
     Object? unreadCount = null,
-    Object? lastReadAt = freezed,
   }) {
     return _then(_$ConversationListModelImpl(
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
       conversationId: null == conversationId
           ? _value.conversationId
           : conversationId // ignore: cast_nullable_to_non_nullable
               as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: freezed == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      otherUserId: freezed == otherUserId
+          ? _value.otherUserId
+          : otherUserId // ignore: cast_nullable_to_non_nullable
               as String?,
-      photoUrl: freezed == photoUrl
-          ? _value.photoUrl
-          : photoUrl // ignore: cast_nullable_to_non_nullable
+      otherUserUsername: freezed == otherUserUsername
+          ? _value.otherUserUsername
+          : otherUserUsername // ignore: cast_nullable_to_non_nullable
+              as String?,
+      otherUserFullName: freezed == otherUserFullName
+          ? _value.otherUserFullName
+          : otherUserFullName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      otherUserAvatarUrl: freezed == otherUserAvatarUrl
+          ? _value.otherUserAvatarUrl
+          : otherUserAvatarUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastMessageBody: freezed == lastMessageBody
+          ? _value.lastMessageBody
+          : lastMessageBody // ignore: cast_nullable_to_non_nullable
               as String?,
       lastMessageAt: freezed == lastMessageAt
           ? _value.lastMessageAt
           : lastMessageAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      lastMessageId: freezed == lastMessageId
-          ? _value.lastMessageId
-          : lastMessageId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lastMessageKind: freezed == lastMessageKind
-          ? _value.lastMessageKind
-          : lastMessageKind // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lastMessagePreview: freezed == lastMessagePreview
-          ? _value.lastMessagePreview
-          : lastMessagePreview // ignore: cast_nullable_to_non_nullable
+      lastMessageSenderId: freezed == lastMessageSenderId
+          ? _value.lastMessageSenderId
+          : lastMessageSenderId // ignore: cast_nullable_to_non_nullable
               as String?,
       unreadCount: null == unreadCount
           ? _value.unreadCount
           : unreadCount // ignore: cast_nullable_to_non_nullable
               as int,
-      lastReadAt: freezed == lastReadAt
-          ? _value.lastReadAt
-          : lastReadAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
     ));
   }
 }
@@ -263,64 +236,60 @@ class __$$ConversationListModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ConversationListModelImpl extends _ConversationListModel {
   const _$ConversationListModelImpl(
-      {@JsonKey(name: 'user_id') required this.userId,
-      @JsonKey(name: 'conversation_id') required this.conversationId,
-      @JsonKey(name: 'type') required this.type,
-      @JsonKey(name: 'title') this.title,
-      @JsonKey(name: 'photo_url') this.photoUrl,
+      {@JsonKey(name: 'conversation_id') required this.conversationId,
+      @JsonKey(name: 'other_user_id') this.otherUserId,
+      @JsonKey(name: 'other_user_username') this.otherUserUsername,
+      @JsonKey(name: 'other_user_full_name') this.otherUserFullName,
+      @JsonKey(name: 'other_user_avatar_url') this.otherUserAvatarUrl,
+      @JsonKey(name: 'last_message_body') this.lastMessageBody,
       @UtcDateTimeConverter()
       @JsonKey(name: 'last_message_at')
       this.lastMessageAt,
-      @JsonKey(name: 'last_message_id') this.lastMessageId,
-      @JsonKey(name: 'last_message_kind') this.lastMessageKind,
-      @JsonKey(name: 'last_message_preview') this.lastMessagePreview,
-      @JsonKey(name: 'unread_count') this.unreadCount = 0,
-      @UtcDateTimeConverter() @JsonKey(name: 'last_read_at') this.lastReadAt})
+      @JsonKey(name: 'last_message_sender_id') this.lastMessageSenderId,
+      @JsonKey(name: 'unread_count') this.unreadCount = 0})
       : super._();
 
   factory _$ConversationListModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ConversationListModelImplFromJson(json);
 
   @override
-  @JsonKey(name: 'user_id')
-  final String userId;
-  @override
   @JsonKey(name: 'conversation_id')
   final String conversationId;
+
+  /// Other participant info (for direct conversations)
   @override
-  @JsonKey(name: 'type')
-  final String type;
-// 'direct' or 'group'
+  @JsonKey(name: 'other_user_id')
+  final String? otherUserId;
   @override
-  @JsonKey(name: 'title')
-  final String? title;
+  @JsonKey(name: 'other_user_username')
+  final String? otherUserUsername;
   @override
-  @JsonKey(name: 'photo_url')
-  final String? photoUrl;
+  @JsonKey(name: 'other_user_full_name')
+  final String? otherUserFullName;
+  @override
+  @JsonKey(name: 'other_user_avatar_url')
+  final String? otherUserAvatarUrl;
+
+  /// Last message preview info
+  @override
+  @JsonKey(name: 'last_message_body')
+  final String? lastMessageBody;
   @override
   @UtcDateTimeConverter()
   @JsonKey(name: 'last_message_at')
   final DateTime? lastMessageAt;
   @override
-  @JsonKey(name: 'last_message_id')
-  final String? lastMessageId;
-  @override
-  @JsonKey(name: 'last_message_kind')
-  final String? lastMessageKind;
-  @override
-  @JsonKey(name: 'last_message_preview')
-  final String? lastMessagePreview;
+  @JsonKey(name: 'last_message_sender_id')
+  final String? lastMessageSenderId;
+
+  /// Unread count for the current user
   @override
   @JsonKey(name: 'unread_count')
   final int unreadCount;
-  @override
-  @UtcDateTimeConverter()
-  @JsonKey(name: 'last_read_at')
-  final DateTime? lastReadAt;
 
   @override
   String toString() {
-    return 'ConversationListModel(userId: $userId, conversationId: $conversationId, type: $type, title: $title, photoUrl: $photoUrl, lastMessageAt: $lastMessageAt, lastMessageId: $lastMessageId, lastMessageKind: $lastMessageKind, lastMessagePreview: $lastMessagePreview, unreadCount: $unreadCount, lastReadAt: $lastReadAt)';
+    return 'ConversationListModel(conversationId: $conversationId, otherUserId: $otherUserId, otherUserUsername: $otherUserUsername, otherUserFullName: $otherUserFullName, otherUserAvatarUrl: $otherUserAvatarUrl, lastMessageBody: $lastMessageBody, lastMessageAt: $lastMessageAt, lastMessageSenderId: $lastMessageSenderId, unreadCount: $unreadCount)';
   }
 
   @override
@@ -328,42 +297,39 @@ class _$ConversationListModelImpl extends _ConversationListModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ConversationListModelImpl &&
-            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.conversationId, conversationId) ||
                 other.conversationId == conversationId) &&
-            (identical(other.type, type) || other.type == type) &&
-            (identical(other.title, title) || other.title == title) &&
-            (identical(other.photoUrl, photoUrl) ||
-                other.photoUrl == photoUrl) &&
+            (identical(other.otherUserId, otherUserId) ||
+                other.otherUserId == otherUserId) &&
+            (identical(other.otherUserUsername, otherUserUsername) ||
+                other.otherUserUsername == otherUserUsername) &&
+            (identical(other.otherUserFullName, otherUserFullName) ||
+                other.otherUserFullName == otherUserFullName) &&
+            (identical(other.otherUserAvatarUrl, otherUserAvatarUrl) ||
+                other.otherUserAvatarUrl == otherUserAvatarUrl) &&
+            (identical(other.lastMessageBody, lastMessageBody) ||
+                other.lastMessageBody == lastMessageBody) &&
             (identical(other.lastMessageAt, lastMessageAt) ||
                 other.lastMessageAt == lastMessageAt) &&
-            (identical(other.lastMessageId, lastMessageId) ||
-                other.lastMessageId == lastMessageId) &&
-            (identical(other.lastMessageKind, lastMessageKind) ||
-                other.lastMessageKind == lastMessageKind) &&
-            (identical(other.lastMessagePreview, lastMessagePreview) ||
-                other.lastMessagePreview == lastMessagePreview) &&
+            (identical(other.lastMessageSenderId, lastMessageSenderId) ||
+                other.lastMessageSenderId == lastMessageSenderId) &&
             (identical(other.unreadCount, unreadCount) ||
-                other.unreadCount == unreadCount) &&
-            (identical(other.lastReadAt, lastReadAt) ||
-                other.lastReadAt == lastReadAt));
+                other.unreadCount == unreadCount));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      userId,
       conversationId,
-      type,
-      title,
-      photoUrl,
+      otherUserId,
+      otherUserUsername,
+      otherUserFullName,
+      otherUserAvatarUrl,
+      lastMessageBody,
       lastMessageAt,
-      lastMessageId,
-      lastMessageKind,
-      lastMessagePreview,
-      unreadCount,
-      lastReadAt);
+      lastMessageSenderId,
+      unreadCount);
 
   /// Create a copy of ConversationListModel
   /// with the given fields replaced by the non-null parameter values.
@@ -384,61 +350,58 @@ class _$ConversationListModelImpl extends _ConversationListModel {
 
 abstract class _ConversationListModel extends ConversationListModel {
   const factory _ConversationListModel(
-      {@JsonKey(name: 'user_id') required final String userId,
-      @JsonKey(name: 'conversation_id') required final String conversationId,
-      @JsonKey(name: 'type') required final String type,
-      @JsonKey(name: 'title') final String? title,
-      @JsonKey(name: 'photo_url') final String? photoUrl,
+      {@JsonKey(name: 'conversation_id') required final String conversationId,
+      @JsonKey(name: 'other_user_id') final String? otherUserId,
+      @JsonKey(name: 'other_user_username') final String? otherUserUsername,
+      @JsonKey(name: 'other_user_full_name') final String? otherUserFullName,
+      @JsonKey(name: 'other_user_avatar_url') final String? otherUserAvatarUrl,
+      @JsonKey(name: 'last_message_body') final String? lastMessageBody,
       @UtcDateTimeConverter()
       @JsonKey(name: 'last_message_at')
       final DateTime? lastMessageAt,
-      @JsonKey(name: 'last_message_id') final String? lastMessageId,
-      @JsonKey(name: 'last_message_kind') final String? lastMessageKind,
-      @JsonKey(name: 'last_message_preview') final String? lastMessagePreview,
-      @JsonKey(name: 'unread_count') final int unreadCount,
-      @UtcDateTimeConverter()
-      @JsonKey(name: 'last_read_at')
-      final DateTime? lastReadAt}) = _$ConversationListModelImpl;
+      @JsonKey(name: 'last_message_sender_id')
+      final String? lastMessageSenderId,
+      @JsonKey(name: 'unread_count')
+      final int unreadCount}) = _$ConversationListModelImpl;
   const _ConversationListModel._() : super._();
 
   factory _ConversationListModel.fromJson(Map<String, dynamic> json) =
       _$ConversationListModelImpl.fromJson;
 
   @override
-  @JsonKey(name: 'user_id')
-  String get userId;
-  @override
   @JsonKey(name: 'conversation_id')
   String get conversationId;
+
+  /// Other participant info (for direct conversations)
   @override
-  @JsonKey(name: 'type')
-  String get type; // 'direct' or 'group'
+  @JsonKey(name: 'other_user_id')
+  String? get otherUserId;
   @override
-  @JsonKey(name: 'title')
-  String? get title;
+  @JsonKey(name: 'other_user_username')
+  String? get otherUserUsername;
   @override
-  @JsonKey(name: 'photo_url')
-  String? get photoUrl;
+  @JsonKey(name: 'other_user_full_name')
+  String? get otherUserFullName;
+  @override
+  @JsonKey(name: 'other_user_avatar_url')
+  String? get otherUserAvatarUrl;
+
+  /// Last message preview info
+  @override
+  @JsonKey(name: 'last_message_body')
+  String? get lastMessageBody;
   @override
   @UtcDateTimeConverter()
   @JsonKey(name: 'last_message_at')
   DateTime? get lastMessageAt;
   @override
-  @JsonKey(name: 'last_message_id')
-  String? get lastMessageId;
-  @override
-  @JsonKey(name: 'last_message_kind')
-  String? get lastMessageKind;
-  @override
-  @JsonKey(name: 'last_message_preview')
-  String? get lastMessagePreview;
+  @JsonKey(name: 'last_message_sender_id')
+  String? get lastMessageSenderId;
+
+  /// Unread count for the current user
   @override
   @JsonKey(name: 'unread_count')
   int get unreadCount;
-  @override
-  @UtcDateTimeConverter()
-  @JsonKey(name: 'last_read_at')
-  DateTime? get lastReadAt;
 
   /// Create a copy of ConversationListModel
   /// with the given fields replaced by the non-null parameter values.

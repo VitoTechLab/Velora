@@ -228,9 +228,6 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get feedWriteCommentHint => '写下评论...';
-
-  @override
   String feedAddCommentHint(String name) {
     return '为 $name 添加评论';
   }
@@ -1618,6 +1615,53 @@ class AppLocalizationsZh extends AppLocalizations {
   String get chatDetailVoiceMessage => '语音消息';
 
   @override
+  String get chatDetailVoiceError => 'Failed to record voice message';
+
+  @override
+  String get chatDetailVoiceRecorded => 'Uploading voice message...';
+
+  @override
+  String get voiceRecorderTitle => 'Voice Message';
+
+  @override
+  String get voiceRecorderCheckingPermission =>
+      'Checking microphone permission...';
+
+  @override
+  String get voiceRecorderNoPermission =>
+      'Microphone permission is required to record voice messages';
+
+  @override
+  String get voiceRecorderRetryPermission => 'Grant Permission';
+
+  @override
+  String get voiceRecorderTapToStart => 'Tap to start recording';
+
+  @override
+  String get voiceRecorderRecording => 'Recording...';
+
+  @override
+  String get voiceRecorderPaused => 'Paused';
+
+  @override
+  String get voiceRecorderCancel => 'Cancel';
+
+  @override
+  String get voiceRecorderPause => 'Pause';
+
+  @override
+  String get voiceRecorderResume => 'Resume';
+
+  @override
+  String get voiceRecorderSend => 'Send';
+
+  @override
+  String get chatDetailAudioUnavailable => 'Audio unavailable';
+
+  @override
+  String get chatDetailFileDownloading => 'Downloading file...';
+
+  @override
   String get chatDetailStatusOnline => '在线';
 
   @override
@@ -1758,6 +1802,20 @@ class AppLocalizationsZh extends AppLocalizations {
   String get chatPollDialogOptionsError => '请至少添加 2 个选项';
 
   @override
+  String get chatPollDialogMultipleChoiceLabel => '多选';
+
+  @override
+  String get chatPollDialogMultipleChoiceHint => '允许用户选择多个选项';
+
+  @override
+  String get chatPollDialogMaxVotesLabel => '最大投票数';
+
+  @override
+  String chatPollDialogMaxVotesHint(int count) {
+    return '用户最多可以选择 $count 个选项';
+  }
+
+  @override
   String get chatPollDialogSend => '发送投票';
 
   @override
@@ -1794,6 +1852,27 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get chatEventDialogLocationHint => '输入地点…';
+
+  @override
+  String get chatEventDialogAddressLabel => '地址';
+
+  @override
+  String get chatEventDialogAddressHint => '输入完整地址…';
+
+  @override
+  String get chatEventDialogOnlineLabel => '线上活动';
+
+  @override
+  String get chatEventDialogOnlineHint => '此活动将在线上举行';
+
+  @override
+  String get chatEventDialogMeetingUrlLabel => '会议链接';
+
+  @override
+  String get chatEventDialogMeetingUrlHint => '输入会议链接（Zoom、Google Meet 等）';
+
+  @override
+  String get chatEventDialogMeetingUrlError => '线上活动请输入会议链接';
 
   @override
   String get chatEventDialogStartLabel => '开始';
@@ -2558,4 +2637,82 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get settingsHelpAboutFooterMadeWith => '以 ❤️ 打造，只为更美好的世界';
+
+  @override
+  String get chatGallerySelectPhotos => 'Select Photos';
+
+  @override
+  String get chatGallerySelectAtLeastOne => 'Please select at least one image';
+
+  @override
+  String get chatGalleryUnableToLoad => 'Unable to load the selected images';
+
+  @override
+  String get chatGallerySomeImagesNotAccessed =>
+      'Some images could not be accessed';
+
+  @override
+  String get chatGallerySend => 'Send';
+
+  @override
+  String chatGallerySendCount(int count) {
+    return 'Send ($count)';
+  }
+
+  @override
+  String chatGallerySelectedCount(int selected, int max) {
+    return '$selected of $max selected';
+  }
+
+  @override
+  String get chatGalleryClearAll => 'Clear all';
+
+  @override
+  String get chatDocumentTitle => 'Select Documents';
+
+  @override
+  String get chatDocumentSend => 'Send';
+
+  @override
+  String chatDocumentSendCount(int count) {
+    return 'Send ($count)';
+  }
+
+  @override
+  String chatDocumentSelectedCount(int selected, int max) {
+    return '$selected of $max selected';
+  }
+
+  @override
+  String get chatDocumentClearAll => 'Clear all';
+
+  @override
+  String chatDocumentMaxReached(int max) {
+    return 'Maximum $max documents allowed';
+  }
+
+  @override
+  String chatDocumentSomeLimited(int max) {
+    return 'Some files were skipped (max $max)';
+  }
+
+  @override
+  String get chatDocumentPickError => 'Failed to pick documents';
+
+  @override
+  String get chatDocumentSelectAtLeastOne =>
+      'Please select at least one document';
+
+  @override
+  String get chatDocumentEmptyTitle => 'No documents selected';
+
+  @override
+  String get chatDocumentEmptySubtitle =>
+      'Tap the button below to browse and select files';
+
+  @override
+  String get chatDocumentBrowseFiles => 'Browse Files';
+
+  @override
+  String get chatDocumentAddMore => 'Add more documents';
 }

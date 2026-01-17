@@ -25,7 +25,7 @@ mixin _$UserPresenceModel {
   @JsonKey(name: 'last_seen_at')
   DateTime get lastSeenAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_online')
-  bool? get isOnline => throw _privateConstructorUsedError;
+  bool get isOnline => throw _privateConstructorUsedError;
 
   /// Serializes this UserPresenceModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,7 +46,7 @@ abstract class $UserPresenceModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'last_seen_at') DateTime lastSeenAt,
-      @JsonKey(name: 'is_online') bool? isOnline});
+      @JsonKey(name: 'is_online') bool isOnline});
 }
 
 /// @nodoc
@@ -66,7 +66,7 @@ class _$UserPresenceModelCopyWithImpl<$Res, $Val extends UserPresenceModel>
   $Res call({
     Object? userId = null,
     Object? lastSeenAt = null,
-    Object? isOnline = freezed,
+    Object? isOnline = null,
   }) {
     return _then(_value.copyWith(
       userId: null == userId
@@ -77,10 +77,10 @@ class _$UserPresenceModelCopyWithImpl<$Res, $Val extends UserPresenceModel>
           ? _value.lastSeenAt
           : lastSeenAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      isOnline: freezed == isOnline
+      isOnline: null == isOnline
           ? _value.isOnline
           : isOnline // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as bool,
     ) as $Val);
   }
 }
@@ -96,7 +96,7 @@ abstract class _$$UserPresenceModelImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'last_seen_at') DateTime lastSeenAt,
-      @JsonKey(name: 'is_online') bool? isOnline});
+      @JsonKey(name: 'is_online') bool isOnline});
 }
 
 /// @nodoc
@@ -114,7 +114,7 @@ class __$$UserPresenceModelImplCopyWithImpl<$Res>
   $Res call({
     Object? userId = null,
     Object? lastSeenAt = null,
-    Object? isOnline = freezed,
+    Object? isOnline = null,
   }) {
     return _then(_$UserPresenceModelImpl(
       userId: null == userId
@@ -125,10 +125,10 @@ class __$$UserPresenceModelImplCopyWithImpl<$Res>
           ? _value.lastSeenAt
           : lastSeenAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      isOnline: freezed == isOnline
+      isOnline: null == isOnline
           ? _value.isOnline
           : isOnline // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as bool,
     ));
   }
 }
@@ -139,7 +139,7 @@ class _$UserPresenceModelImpl extends _UserPresenceModel {
   const _$UserPresenceModelImpl(
       {@JsonKey(name: 'user_id') required this.userId,
       @JsonKey(name: 'last_seen_at') required this.lastSeenAt,
-      @JsonKey(name: 'is_online') this.isOnline})
+      @JsonKey(name: 'is_online') this.isOnline = false})
       : super._();
 
   factory _$UserPresenceModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -153,7 +153,7 @@ class _$UserPresenceModelImpl extends _UserPresenceModel {
   final DateTime lastSeenAt;
   @override
   @JsonKey(name: 'is_online')
-  final bool? isOnline;
+  final bool isOnline;
 
   @override
   String toString() {
@@ -197,7 +197,7 @@ abstract class _UserPresenceModel extends UserPresenceModel {
   const factory _UserPresenceModel(
           {@JsonKey(name: 'user_id') required final String userId,
           @JsonKey(name: 'last_seen_at') required final DateTime lastSeenAt,
-          @JsonKey(name: 'is_online') final bool? isOnline}) =
+          @JsonKey(name: 'is_online') final bool isOnline}) =
       _$UserPresenceModelImpl;
   const _UserPresenceModel._() : super._();
 
@@ -212,7 +212,7 @@ abstract class _UserPresenceModel extends UserPresenceModel {
   DateTime get lastSeenAt;
   @override
   @JsonKey(name: 'is_online')
-  bool? get isOnline;
+  bool get isOnline;
 
   /// Create a copy of UserPresenceModel
   /// with the given fields replaced by the non-null parameter values.

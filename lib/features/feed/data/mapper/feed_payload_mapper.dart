@@ -9,15 +9,15 @@ extension FeedEntityToPayloadX on FeedEntity {
     bool settings = true,
     bool campaign = true,
   }) => UpdateFeedModel(
-    content: content ? this.content : null,
-    imageUrls: media ? imageUrls : null,
-    videoUrls: media ? videoUrls : null,
-    commentsEnabled: settings ? commentsEnabled : null,
-    hideLikeCount: settings ? hideLikeCount : null,
-    hideCommentCount: settings ? hideCommentCount : null,
-    hideShareCount: settings ? hideShareCount : null,
-    hideLikesList: settings ? hideLikesList : null,
-    campaignId: campaign ? campaignId : null,
-    campaignTitle: campaign ? campaignTitle : null,
-  );
+        content: content ? this.content : null,
+        mediaUrls: media ? mediaUrls : null,
+        location: media ? location : null,
+        tags: settings ? tags : null,
+        mentionIds: settings ? mentionIds : null,
+        allowComments: settings ? allowComments : null,
+        allowShare: settings ? allowShare : null,
+        isActive: settings ? isActive : null,
+        campaignId: campaign ? campaignId : null,
+        campaignTitle: campaign ? campaignTitle : null,
+      );
 }

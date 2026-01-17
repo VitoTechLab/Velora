@@ -256,7 +256,7 @@ class FeedCommentBloc extends Bloc<FeedCommentEvent, FeedCommentState> {
 
     // Resolve the actual Root Parent ID
     String? effectiveParentId = event.parentCommentId;
-    if (effectiveParentId.isNotEmpty) {
+    if (effectiveParentId != null && effectiveParentId.isNotEmpty) {
       for (final root in state.comments) {
         if (root.id == effectiveParentId) {
           effectiveParentId = root.id;

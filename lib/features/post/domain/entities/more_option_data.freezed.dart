@@ -16,11 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MoreOptionData {
-  bool get commentsEnabled => throw _privateConstructorUsedError;
-  bool get hideLikeCount => throw _privateConstructorUsedError;
-  bool get hideShareCount => throw _privateConstructorUsedError;
-  bool get hideCommentCount => throw _privateConstructorUsedError;
-  bool get hideLikesList => throw _privateConstructorUsedError;
+  bool get allowComments => throw _privateConstructorUsedError;
+  bool get allowShare => throw _privateConstructorUsedError;
 
   /// Create a copy of MoreOptionData
   /// with the given fields replaced by the non-null parameter values.
@@ -35,12 +32,7 @@ abstract class $MoreOptionDataCopyWith<$Res> {
           MoreOptionData value, $Res Function(MoreOptionData) then) =
       _$MoreOptionDataCopyWithImpl<$Res, MoreOptionData>;
   @useResult
-  $Res call(
-      {bool commentsEnabled,
-      bool hideLikeCount,
-      bool hideShareCount,
-      bool hideCommentCount,
-      bool hideLikesList});
+  $Res call({bool allowComments, bool allowShare});
 }
 
 /// @nodoc
@@ -58,32 +50,17 @@ class _$MoreOptionDataCopyWithImpl<$Res, $Val extends MoreOptionData>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? commentsEnabled = null,
-    Object? hideLikeCount = null,
-    Object? hideShareCount = null,
-    Object? hideCommentCount = null,
-    Object? hideLikesList = null,
+    Object? allowComments = null,
+    Object? allowShare = null,
   }) {
     return _then(_value.copyWith(
-      commentsEnabled: null == commentsEnabled
-          ? _value.commentsEnabled
-          : commentsEnabled // ignore: cast_nullable_to_non_nullable
+      allowComments: null == allowComments
+          ? _value.allowComments
+          : allowComments // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideLikeCount: null == hideLikeCount
-          ? _value.hideLikeCount
-          : hideLikeCount // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hideShareCount: null == hideShareCount
-          ? _value.hideShareCount
-          : hideShareCount // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hideCommentCount: null == hideCommentCount
-          ? _value.hideCommentCount
-          : hideCommentCount // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hideLikesList: null == hideLikesList
-          ? _value.hideLikesList
-          : hideLikesList // ignore: cast_nullable_to_non_nullable
+      allowShare: null == allowShare
+          ? _value.allowShare
+          : allowShare // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -97,12 +74,7 @@ abstract class _$$MoreOptionDataImplCopyWith<$Res>
       __$$MoreOptionDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {bool commentsEnabled,
-      bool hideLikeCount,
-      bool hideShareCount,
-      bool hideCommentCount,
-      bool hideLikesList});
+  $Res call({bool allowComments, bool allowShare});
 }
 
 /// @nodoc
@@ -118,32 +90,17 @@ class __$$MoreOptionDataImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? commentsEnabled = null,
-    Object? hideLikeCount = null,
-    Object? hideShareCount = null,
-    Object? hideCommentCount = null,
-    Object? hideLikesList = null,
+    Object? allowComments = null,
+    Object? allowShare = null,
   }) {
     return _then(_$MoreOptionDataImpl(
-      commentsEnabled: null == commentsEnabled
-          ? _value.commentsEnabled
-          : commentsEnabled // ignore: cast_nullable_to_non_nullable
+      allowComments: null == allowComments
+          ? _value.allowComments
+          : allowComments // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideLikeCount: null == hideLikeCount
-          ? _value.hideLikeCount
-          : hideLikeCount // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hideShareCount: null == hideShareCount
-          ? _value.hideShareCount
-          : hideShareCount // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hideCommentCount: null == hideCommentCount
-          ? _value.hideCommentCount
-          : hideCommentCount // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hideLikesList: null == hideLikesList
-          ? _value.hideLikesList
-          : hideLikesList // ignore: cast_nullable_to_non_nullable
+      allowShare: null == allowShare
+          ? _value.allowShare
+          : allowShare // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -153,31 +110,18 @@ class __$$MoreOptionDataImplCopyWithImpl<$Res>
 
 class _$MoreOptionDataImpl implements _MoreOptionData {
   const _$MoreOptionDataImpl(
-      {this.commentsEnabled = true,
-      this.hideLikeCount = false,
-      this.hideShareCount = false,
-      this.hideCommentCount = false,
-      this.hideLikesList = false});
+      {this.allowComments = true, this.allowShare = true});
 
   @override
   @JsonKey()
-  final bool commentsEnabled;
+  final bool allowComments;
   @override
   @JsonKey()
-  final bool hideLikeCount;
-  @override
-  @JsonKey()
-  final bool hideShareCount;
-  @override
-  @JsonKey()
-  final bool hideCommentCount;
-  @override
-  @JsonKey()
-  final bool hideLikesList;
+  final bool allowShare;
 
   @override
   String toString() {
-    return 'MoreOptionData(commentsEnabled: $commentsEnabled, hideLikeCount: $hideLikeCount, hideShareCount: $hideShareCount, hideCommentCount: $hideCommentCount, hideLikesList: $hideLikesList)';
+    return 'MoreOptionData(allowComments: $allowComments, allowShare: $allowShare)';
   }
 
   @override
@@ -185,21 +129,14 @@ class _$MoreOptionDataImpl implements _MoreOptionData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MoreOptionDataImpl &&
-            (identical(other.commentsEnabled, commentsEnabled) ||
-                other.commentsEnabled == commentsEnabled) &&
-            (identical(other.hideLikeCount, hideLikeCount) ||
-                other.hideLikeCount == hideLikeCount) &&
-            (identical(other.hideShareCount, hideShareCount) ||
-                other.hideShareCount == hideShareCount) &&
-            (identical(other.hideCommentCount, hideCommentCount) ||
-                other.hideCommentCount == hideCommentCount) &&
-            (identical(other.hideLikesList, hideLikesList) ||
-                other.hideLikesList == hideLikesList));
+            (identical(other.allowComments, allowComments) ||
+                other.allowComments == allowComments) &&
+            (identical(other.allowShare, allowShare) ||
+                other.allowShare == allowShare));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, commentsEnabled, hideLikeCount,
-      hideShareCount, hideCommentCount, hideLikesList);
+  int get hashCode => Object.hash(runtimeType, allowComments, allowShare);
 
   /// Create a copy of MoreOptionData
   /// with the given fields replaced by the non-null parameter values.
@@ -213,22 +150,12 @@ class _$MoreOptionDataImpl implements _MoreOptionData {
 
 abstract class _MoreOptionData implements MoreOptionData {
   const factory _MoreOptionData(
-      {final bool commentsEnabled,
-      final bool hideLikeCount,
-      final bool hideShareCount,
-      final bool hideCommentCount,
-      final bool hideLikesList}) = _$MoreOptionDataImpl;
+      {final bool allowComments, final bool allowShare}) = _$MoreOptionDataImpl;
 
   @override
-  bool get commentsEnabled;
+  bool get allowComments;
   @override
-  bool get hideLikeCount;
-  @override
-  bool get hideShareCount;
-  @override
-  bool get hideCommentCount;
-  @override
-  bool get hideLikesList;
+  bool get allowShare;
 
   /// Create a copy of MoreOptionData
   /// with the given fields replaced by the non-null parameter values.

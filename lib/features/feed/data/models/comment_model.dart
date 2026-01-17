@@ -5,9 +5,8 @@ import 'package:velora/features/feed/domain/entities/comment_entity.dart';
 part 'comment_model.freezed.dart';
 part 'comment_model.g.dart';
 
-/// Comment data model for API responses.
 @freezed
-abstract class CommentModel with _$CommentModel {
+class CommentModel with _$CommentModel {
   const CommentModel._();
 
   const factory CommentModel({
@@ -15,24 +14,20 @@ abstract class CommentModel with _$CommentModel {
     @JsonKey(name: 'post_id') required String postId,
     @JsonKey(name: 'user_id') required String userId,
     @JsonKey(name: 'content') required String content,
-    @UtcDateTimeConverter()
-    @JsonKey(name: 'created_at')
-    required DateTime createdAt,
-    @JsonKey(name: 'user_full_name') String? userFullName,
-    @JsonKey(name: 'user_photo_url') String? userPhotoUrl,
+    @UtcDateTimeConverter() @JsonKey(name: 'created_at') required DateTime createdAt,
+    @JsonKey(name: 'username') String? username,
+    @JsonKey(name: 'photo_url') String? photoUrl,
     @JsonKey(name: 'parent_comment_id') String? parentCommentId,
-    @JsonKey(includeFromJson: false, includeToJson: false)
-    @Default([])
-    List<CommentModel> replies,
+    @JsonKey(includeFromJson: false, includeToJson: false) @Default([]) List<CommentModel> replies,
     @JsonKey(name: 'likes_count') @Default(0) int likesCount,
     @JsonKey(includeToJson: false) @Default(false) bool isLiked,
     @JsonKey(name: 'reply_count') @Default(0) int replyCount,
+    @StringListConverter() @JsonKey(name: 'mention_ids') @Default([]) List<String> mentionIds,
+    @JsonKey(name: 'is_active') @Default(true) bool isActive,
   }) = _CommentModel;
 
-  factory CommentModel.fromJson(Map<String, dynamic> json) =>
-      _$CommentModelFromJson(json);
+  factory CommentModel.fromJson(Map<String, dynamic> json) => _$CommentModelFromJson(json);
 
-  /// Converts to domain entity.
   CommentEntity toEntity() {
     return CommentEntity(
       id: id,
@@ -40,32 +35,31 @@ abstract class CommentModel with _$CommentModel {
       userId: userId,
       content: content,
       createdAt: createdAt,
-      userFullName: userFullName,
-      userPhotoUrl: userPhotoUrl,
+      username: username,
+      photoUrl: photoUrl,
       parentCommentId: parentCommentId,
       replies: replies.map((r) => r.toEntity()).toList(),
       likesCount: likesCount,
       isLiked: isLiked,
       replyCount: replyCount,
       repliesLoaded: replies.isNotEmpty,
+      mentionIds: mentionIds,
+      isActive: isActive,
     );
   }
 
-  /// Converts to insert payload.
   Map<String, dynamic> toInsertJson() {
     final payload = <String, dynamic>{
       'post_id': postId,
       'user_id': userId,
       'content': content,
       'parent_comment_id': parentCommentId,
-      'user_full_name': userFullName,
-      'user_photo_url': userPhotoUrl,
+      'mention_ids': mentionIds.isEmpty ? null : mentionIds,
     };
     payload.removeWhere((key, value) => value == null);
     return payload;
   }
 
-  /// Creates from domain entity.
   factory CommentModel.fromEntity(CommentEntity entity) {
     return CommentModel(
       id: entity.id,
@@ -73,13 +67,15 @@ abstract class CommentModel with _$CommentModel {
       userId: entity.userId,
       content: entity.content,
       createdAt: entity.createdAt,
-      userFullName: entity.userFullName,
-      userPhotoUrl: entity.userPhotoUrl,
+      username: entity.username,
+      photoUrl: entity.photoUrl,
       parentCommentId: entity.parentCommentId,
       replies: entity.replies.map((r) => CommentModel.fromEntity(r)).toList(),
       likesCount: entity.likesCount,
       isLiked: entity.isLiked,
       replyCount: entity.replyCount,
+      mentionIds: entity.mentionIds,
+      isActive: entity.isActive,
     );
   }
 }

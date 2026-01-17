@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:velora/core/serialization/json_converters.dart';
 import 'package:velora/features/chat/data/models/event_content_model.dart';
+import 'package:velora/features/chat/data/models/message_attachment_model.dart';
 import 'package:velora/features/chat/data/models/poll_content_model.dart';
 import 'package:velora/features/chat/domain/entities/chat_message_entity.dart';
 
@@ -29,26 +30,30 @@ abstract class ChatMessageModel with _$ChatMessageModel {
     required DateTime updatedAt,
     @JsonKey(name: 'message_poll_payload') PollPayloadModel? pollPayload,
     @JsonKey(name: 'message_event_payload') EventPayloadModel? eventPayload,
+    @JsonKey(name: 'message_attachments')
+    @Default([])
+    List<MessageAttachmentModel> attachments,
   }) = _ChatMessageModel;
 
   factory ChatMessageModel.fromJson(Map<String, dynamic> json) =>
       _$ChatMessageModelFromJson(json);
 
   ChatMessageEntity toEntity() => ChatMessageEntity(
-    id: id,
-    conversationId: conversationId,
-    senderId: senderId,
-    kind: kind,
-    body: body,
-    replyToMessageId: replyToMessageId,
-    editedAt: editedAt,
-    deletedAt: deletedAt,
-    deletedBy: deletedBy,
-    createdAt: createdAt,
-    updatedAt: updatedAt,
-    poll: pollPayload?.toEntity(),
-    event: eventPayload?.toEntity(),
-  );
+        id: id,
+        conversationId: conversationId,
+        senderId: senderId,
+        kind: kind,
+        body: body,
+        replyToMessageId: replyToMessageId,
+        editedAt: editedAt,
+        deletedAt: deletedAt,
+        deletedBy: deletedBy,
+        createdAt: createdAt,
+        updatedAt: updatedAt,
+        poll: pollPayload?.toEntity(),
+        event: eventPayload?.toEntity(),
+        attachments: attachments.map((a) => a.toEntity()).toList(),
+      );
 
   factory ChatMessageModel.fromEntity(ChatMessageEntity entity) =>
       ChatMessageModel(
@@ -65,6 +70,7 @@ abstract class ChatMessageModel with _$ChatMessageModel {
         updatedAt: entity.updatedAt,
         pollPayload: null, // Optimization: avoided mapping back for now
         eventPayload: null,
+        attachments: [],
       );
 
   Map<String, dynamic> toInsertJson() {

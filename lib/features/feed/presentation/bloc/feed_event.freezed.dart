@@ -27,12 +27,6 @@ mixin _$FeedEvent {
     required TResult Function(String postId) toggleLikePost,
     required TResult Function(String postId) toggleBookmarkPost,
     required TResult Function(FeedEntity post) addNewPost,
-    required TResult Function(String postId, int? limit) loadComments,
-    required TResult Function(
-            String postId, String content, String? parentCommentId)
-        addComment,
-    required TResult Function(String commentId) deleteComment,
-    required TResult Function(String commentId) toggleLikeComment,
     required TResult Function() clearTransient,
   }) =>
       throw _privateConstructorUsedError;
@@ -47,11 +41,6 @@ mixin _$FeedEvent {
     TResult? Function(String postId)? toggleLikePost,
     TResult? Function(String postId)? toggleBookmarkPost,
     TResult? Function(FeedEntity post)? addNewPost,
-    TResult? Function(String postId, int? limit)? loadComments,
-    TResult? Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult? Function(String commentId)? deleteComment,
-    TResult? Function(String commentId)? toggleLikeComment,
     TResult? Function()? clearTransient,
   }) =>
       throw _privateConstructorUsedError;
@@ -66,11 +55,6 @@ mixin _$FeedEvent {
     TResult Function(String postId)? toggleLikePost,
     TResult Function(String postId)? toggleBookmarkPost,
     TResult Function(FeedEntity post)? addNewPost,
-    TResult Function(String postId, int? limit)? loadComments,
-    TResult Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult Function(String commentId)? deleteComment,
-    TResult Function(String commentId)? toggleLikeComment,
     TResult Function()? clearTransient,
     required TResult orElse(),
   }) =>
@@ -86,10 +70,6 @@ mixin _$FeedEvent {
     required TResult Function(ToggleLikePostEvent value) toggleLikePost,
     required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
     required TResult Function(AddNewPostEvent value) addNewPost,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(ToggleLikeCommentEvent value) toggleLikeComment,
     required TResult Function(ClearTransientEvent value) clearTransient,
   }) =>
       throw _privateConstructorUsedError;
@@ -104,10 +84,6 @@ mixin _$FeedEvent {
     TResult? Function(ToggleLikePostEvent value)? toggleLikePost,
     TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult? Function(AddNewPostEvent value)? addNewPost,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(ToggleLikeCommentEvent value)? toggleLikeComment,
     TResult? Function(ClearTransientEvent value)? clearTransient,
   }) =>
       throw _privateConstructorUsedError;
@@ -122,10 +98,6 @@ mixin _$FeedEvent {
     TResult Function(ToggleLikePostEvent value)? toggleLikePost,
     TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult Function(AddNewPostEvent value)? addNewPost,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(ToggleLikeCommentEvent value)? toggleLikeComment,
     TResult Function(ClearTransientEvent value)? clearTransient,
     required TResult orElse(),
   }) =>
@@ -240,12 +212,6 @@ class _$LoadInitialFeedEventImpl implements LoadInitialFeedEvent {
     required TResult Function(String postId) toggleLikePost,
     required TResult Function(String postId) toggleBookmarkPost,
     required TResult Function(FeedEntity post) addNewPost,
-    required TResult Function(String postId, int? limit) loadComments,
-    required TResult Function(
-            String postId, String content, String? parentCommentId)
-        addComment,
-    required TResult Function(String commentId) deleteComment,
-    required TResult Function(String commentId) toggleLikeComment,
     required TResult Function() clearTransient,
   }) {
     return loadInitialFeed(limit, userId);
@@ -263,11 +229,6 @@ class _$LoadInitialFeedEventImpl implements LoadInitialFeedEvent {
     TResult? Function(String postId)? toggleLikePost,
     TResult? Function(String postId)? toggleBookmarkPost,
     TResult? Function(FeedEntity post)? addNewPost,
-    TResult? Function(String postId, int? limit)? loadComments,
-    TResult? Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult? Function(String commentId)? deleteComment,
-    TResult? Function(String commentId)? toggleLikeComment,
     TResult? Function()? clearTransient,
   }) {
     return loadInitialFeed?.call(limit, userId);
@@ -285,11 +246,6 @@ class _$LoadInitialFeedEventImpl implements LoadInitialFeedEvent {
     TResult Function(String postId)? toggleLikePost,
     TResult Function(String postId)? toggleBookmarkPost,
     TResult Function(FeedEntity post)? addNewPost,
-    TResult Function(String postId, int? limit)? loadComments,
-    TResult Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult Function(String commentId)? deleteComment,
-    TResult Function(String commentId)? toggleLikeComment,
     TResult Function()? clearTransient,
     required TResult orElse(),
   }) {
@@ -311,10 +267,6 @@ class _$LoadInitialFeedEventImpl implements LoadInitialFeedEvent {
     required TResult Function(ToggleLikePostEvent value) toggleLikePost,
     required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
     required TResult Function(AddNewPostEvent value) addNewPost,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(ToggleLikeCommentEvent value) toggleLikeComment,
     required TResult Function(ClearTransientEvent value) clearTransient,
   }) {
     return loadInitialFeed(this);
@@ -332,10 +284,6 @@ class _$LoadInitialFeedEventImpl implements LoadInitialFeedEvent {
     TResult? Function(ToggleLikePostEvent value)? toggleLikePost,
     TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult? Function(AddNewPostEvent value)? addNewPost,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(ToggleLikeCommentEvent value)? toggleLikeComment,
     TResult? Function(ClearTransientEvent value)? clearTransient,
   }) {
     return loadInitialFeed?.call(this);
@@ -353,10 +301,6 @@ class _$LoadInitialFeedEventImpl implements LoadInitialFeedEvent {
     TResult Function(ToggleLikePostEvent value)? toggleLikePost,
     TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult Function(AddNewPostEvent value)? addNewPost,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(ToggleLikeCommentEvent value)? toggleLikeComment,
     TResult Function(ClearTransientEvent value)? clearTransient,
     required TResult orElse(),
   }) {
@@ -468,12 +412,6 @@ class _$LoadMoreFeedEventImpl implements LoadMoreFeedEvent {
     required TResult Function(String postId) toggleLikePost,
     required TResult Function(String postId) toggleBookmarkPost,
     required TResult Function(FeedEntity post) addNewPost,
-    required TResult Function(String postId, int? limit) loadComments,
-    required TResult Function(
-            String postId, String content, String? parentCommentId)
-        addComment,
-    required TResult Function(String commentId) deleteComment,
-    required TResult Function(String commentId) toggleLikeComment,
     required TResult Function() clearTransient,
   }) {
     return loadMoreFeed(limit, userId);
@@ -491,11 +429,6 @@ class _$LoadMoreFeedEventImpl implements LoadMoreFeedEvent {
     TResult? Function(String postId)? toggleLikePost,
     TResult? Function(String postId)? toggleBookmarkPost,
     TResult? Function(FeedEntity post)? addNewPost,
-    TResult? Function(String postId, int? limit)? loadComments,
-    TResult? Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult? Function(String commentId)? deleteComment,
-    TResult? Function(String commentId)? toggleLikeComment,
     TResult? Function()? clearTransient,
   }) {
     return loadMoreFeed?.call(limit, userId);
@@ -513,11 +446,6 @@ class _$LoadMoreFeedEventImpl implements LoadMoreFeedEvent {
     TResult Function(String postId)? toggleLikePost,
     TResult Function(String postId)? toggleBookmarkPost,
     TResult Function(FeedEntity post)? addNewPost,
-    TResult Function(String postId, int? limit)? loadComments,
-    TResult Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult Function(String commentId)? deleteComment,
-    TResult Function(String commentId)? toggleLikeComment,
     TResult Function()? clearTransient,
     required TResult orElse(),
   }) {
@@ -539,10 +467,6 @@ class _$LoadMoreFeedEventImpl implements LoadMoreFeedEvent {
     required TResult Function(ToggleLikePostEvent value) toggleLikePost,
     required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
     required TResult Function(AddNewPostEvent value) addNewPost,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(ToggleLikeCommentEvent value) toggleLikeComment,
     required TResult Function(ClearTransientEvent value) clearTransient,
   }) {
     return loadMoreFeed(this);
@@ -560,10 +484,6 @@ class _$LoadMoreFeedEventImpl implements LoadMoreFeedEvent {
     TResult? Function(ToggleLikePostEvent value)? toggleLikePost,
     TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult? Function(AddNewPostEvent value)? addNewPost,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(ToggleLikeCommentEvent value)? toggleLikeComment,
     TResult? Function(ClearTransientEvent value)? clearTransient,
   }) {
     return loadMoreFeed?.call(this);
@@ -581,10 +501,6 @@ class _$LoadMoreFeedEventImpl implements LoadMoreFeedEvent {
     TResult Function(ToggleLikePostEvent value)? toggleLikePost,
     TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult Function(AddNewPostEvent value)? addNewPost,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(ToggleLikeCommentEvent value)? toggleLikeComment,
     TResult Function(ClearTransientEvent value)? clearTransient,
     required TResult orElse(),
   }) {
@@ -687,12 +603,6 @@ class _$GetPostByIdEventImpl implements GetPostByIdEvent {
     required TResult Function(String postId) toggleLikePost,
     required TResult Function(String postId) toggleBookmarkPost,
     required TResult Function(FeedEntity post) addNewPost,
-    required TResult Function(String postId, int? limit) loadComments,
-    required TResult Function(
-            String postId, String content, String? parentCommentId)
-        addComment,
-    required TResult Function(String commentId) deleteComment,
-    required TResult Function(String commentId) toggleLikeComment,
     required TResult Function() clearTransient,
   }) {
     return getPostById(postId);
@@ -710,11 +620,6 @@ class _$GetPostByIdEventImpl implements GetPostByIdEvent {
     TResult? Function(String postId)? toggleLikePost,
     TResult? Function(String postId)? toggleBookmarkPost,
     TResult? Function(FeedEntity post)? addNewPost,
-    TResult? Function(String postId, int? limit)? loadComments,
-    TResult? Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult? Function(String commentId)? deleteComment,
-    TResult? Function(String commentId)? toggleLikeComment,
     TResult? Function()? clearTransient,
   }) {
     return getPostById?.call(postId);
@@ -732,11 +637,6 @@ class _$GetPostByIdEventImpl implements GetPostByIdEvent {
     TResult Function(String postId)? toggleLikePost,
     TResult Function(String postId)? toggleBookmarkPost,
     TResult Function(FeedEntity post)? addNewPost,
-    TResult Function(String postId, int? limit)? loadComments,
-    TResult Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult Function(String commentId)? deleteComment,
-    TResult Function(String commentId)? toggleLikeComment,
     TResult Function()? clearTransient,
     required TResult orElse(),
   }) {
@@ -758,10 +658,6 @@ class _$GetPostByIdEventImpl implements GetPostByIdEvent {
     required TResult Function(ToggleLikePostEvent value) toggleLikePost,
     required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
     required TResult Function(AddNewPostEvent value) addNewPost,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(ToggleLikeCommentEvent value) toggleLikeComment,
     required TResult Function(ClearTransientEvent value) clearTransient,
   }) {
     return getPostById(this);
@@ -779,10 +675,6 @@ class _$GetPostByIdEventImpl implements GetPostByIdEvent {
     TResult? Function(ToggleLikePostEvent value)? toggleLikePost,
     TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult? Function(AddNewPostEvent value)? addNewPost,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(ToggleLikeCommentEvent value)? toggleLikeComment,
     TResult? Function(ClearTransientEvent value)? clearTransient,
   }) {
     return getPostById?.call(this);
@@ -800,10 +692,6 @@ class _$GetPostByIdEventImpl implements GetPostByIdEvent {
     TResult Function(ToggleLikePostEvent value)? toggleLikePost,
     TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult Function(AddNewPostEvent value)? addNewPost,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(ToggleLikeCommentEvent value)? toggleLikeComment,
     TResult Function(ClearTransientEvent value)? clearTransient,
     required TResult orElse(),
   }) {
@@ -917,12 +805,6 @@ class _$UpdatePostEventImpl implements UpdatePostEvent {
     required TResult Function(String postId) toggleLikePost,
     required TResult Function(String postId) toggleBookmarkPost,
     required TResult Function(FeedEntity post) addNewPost,
-    required TResult Function(String postId, int? limit) loadComments,
-    required TResult Function(
-            String postId, String content, String? parentCommentId)
-        addComment,
-    required TResult Function(String commentId) deleteComment,
-    required TResult Function(String commentId) toggleLikeComment,
     required TResult Function() clearTransient,
   }) {
     return updatePostEntity(post);
@@ -940,11 +822,6 @@ class _$UpdatePostEventImpl implements UpdatePostEvent {
     TResult? Function(String postId)? toggleLikePost,
     TResult? Function(String postId)? toggleBookmarkPost,
     TResult? Function(FeedEntity post)? addNewPost,
-    TResult? Function(String postId, int? limit)? loadComments,
-    TResult? Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult? Function(String commentId)? deleteComment,
-    TResult? Function(String commentId)? toggleLikeComment,
     TResult? Function()? clearTransient,
   }) {
     return updatePostEntity?.call(post);
@@ -962,11 +839,6 @@ class _$UpdatePostEventImpl implements UpdatePostEvent {
     TResult Function(String postId)? toggleLikePost,
     TResult Function(String postId)? toggleBookmarkPost,
     TResult Function(FeedEntity post)? addNewPost,
-    TResult Function(String postId, int? limit)? loadComments,
-    TResult Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult Function(String commentId)? deleteComment,
-    TResult Function(String commentId)? toggleLikeComment,
     TResult Function()? clearTransient,
     required TResult orElse(),
   }) {
@@ -988,10 +860,6 @@ class _$UpdatePostEventImpl implements UpdatePostEvent {
     required TResult Function(ToggleLikePostEvent value) toggleLikePost,
     required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
     required TResult Function(AddNewPostEvent value) addNewPost,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(ToggleLikeCommentEvent value) toggleLikeComment,
     required TResult Function(ClearTransientEvent value) clearTransient,
   }) {
     return updatePostEntity(this);
@@ -1009,10 +877,6 @@ class _$UpdatePostEventImpl implements UpdatePostEvent {
     TResult? Function(ToggleLikePostEvent value)? toggleLikePost,
     TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult? Function(AddNewPostEvent value)? addNewPost,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(ToggleLikeCommentEvent value)? toggleLikeComment,
     TResult? Function(ClearTransientEvent value)? clearTransient,
   }) {
     return updatePostEntity?.call(this);
@@ -1030,10 +894,6 @@ class _$UpdatePostEventImpl implements UpdatePostEvent {
     TResult Function(ToggleLikePostEvent value)? toggleLikePost,
     TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult Function(AddNewPostEvent value)? addNewPost,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(ToggleLikeCommentEvent value)? toggleLikeComment,
     TResult Function(ClearTransientEvent value)? clearTransient,
     required TResult orElse(),
   }) {
@@ -1135,12 +995,6 @@ class _$DeletePostEventImpl implements DeletePostEvent {
     required TResult Function(String postId) toggleLikePost,
     required TResult Function(String postId) toggleBookmarkPost,
     required TResult Function(FeedEntity post) addNewPost,
-    required TResult Function(String postId, int? limit) loadComments,
-    required TResult Function(
-            String postId, String content, String? parentCommentId)
-        addComment,
-    required TResult Function(String commentId) deleteComment,
-    required TResult Function(String commentId) toggleLikeComment,
     required TResult Function() clearTransient,
   }) {
     return deletePost(postId);
@@ -1158,11 +1012,6 @@ class _$DeletePostEventImpl implements DeletePostEvent {
     TResult? Function(String postId)? toggleLikePost,
     TResult? Function(String postId)? toggleBookmarkPost,
     TResult? Function(FeedEntity post)? addNewPost,
-    TResult? Function(String postId, int? limit)? loadComments,
-    TResult? Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult? Function(String commentId)? deleteComment,
-    TResult? Function(String commentId)? toggleLikeComment,
     TResult? Function()? clearTransient,
   }) {
     return deletePost?.call(postId);
@@ -1180,11 +1029,6 @@ class _$DeletePostEventImpl implements DeletePostEvent {
     TResult Function(String postId)? toggleLikePost,
     TResult Function(String postId)? toggleBookmarkPost,
     TResult Function(FeedEntity post)? addNewPost,
-    TResult Function(String postId, int? limit)? loadComments,
-    TResult Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult Function(String commentId)? deleteComment,
-    TResult Function(String commentId)? toggleLikeComment,
     TResult Function()? clearTransient,
     required TResult orElse(),
   }) {
@@ -1206,10 +1050,6 @@ class _$DeletePostEventImpl implements DeletePostEvent {
     required TResult Function(ToggleLikePostEvent value) toggleLikePost,
     required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
     required TResult Function(AddNewPostEvent value) addNewPost,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(ToggleLikeCommentEvent value) toggleLikeComment,
     required TResult Function(ClearTransientEvent value) clearTransient,
   }) {
     return deletePost(this);
@@ -1227,10 +1067,6 @@ class _$DeletePostEventImpl implements DeletePostEvent {
     TResult? Function(ToggleLikePostEvent value)? toggleLikePost,
     TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult? Function(AddNewPostEvent value)? addNewPost,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(ToggleLikeCommentEvent value)? toggleLikeComment,
     TResult? Function(ClearTransientEvent value)? clearTransient,
   }) {
     return deletePost?.call(this);
@@ -1248,10 +1084,6 @@ class _$DeletePostEventImpl implements DeletePostEvent {
     TResult Function(ToggleLikePostEvent value)? toggleLikePost,
     TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult Function(AddNewPostEvent value)? addNewPost,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(ToggleLikeCommentEvent value)? toggleLikeComment,
     TResult Function(ClearTransientEvent value)? clearTransient,
     required TResult orElse(),
   }) {
@@ -1325,12 +1157,6 @@ class _$RefreshFeedEventImpl implements RefreshFeedEvent {
     required TResult Function(String postId) toggleLikePost,
     required TResult Function(String postId) toggleBookmarkPost,
     required TResult Function(FeedEntity post) addNewPost,
-    required TResult Function(String postId, int? limit) loadComments,
-    required TResult Function(
-            String postId, String content, String? parentCommentId)
-        addComment,
-    required TResult Function(String commentId) deleteComment,
-    required TResult Function(String commentId) toggleLikeComment,
     required TResult Function() clearTransient,
   }) {
     return refreshFeed();
@@ -1348,11 +1174,6 @@ class _$RefreshFeedEventImpl implements RefreshFeedEvent {
     TResult? Function(String postId)? toggleLikePost,
     TResult? Function(String postId)? toggleBookmarkPost,
     TResult? Function(FeedEntity post)? addNewPost,
-    TResult? Function(String postId, int? limit)? loadComments,
-    TResult? Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult? Function(String commentId)? deleteComment,
-    TResult? Function(String commentId)? toggleLikeComment,
     TResult? Function()? clearTransient,
   }) {
     return refreshFeed?.call();
@@ -1370,11 +1191,6 @@ class _$RefreshFeedEventImpl implements RefreshFeedEvent {
     TResult Function(String postId)? toggleLikePost,
     TResult Function(String postId)? toggleBookmarkPost,
     TResult Function(FeedEntity post)? addNewPost,
-    TResult Function(String postId, int? limit)? loadComments,
-    TResult Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult Function(String commentId)? deleteComment,
-    TResult Function(String commentId)? toggleLikeComment,
     TResult Function()? clearTransient,
     required TResult orElse(),
   }) {
@@ -1396,10 +1212,6 @@ class _$RefreshFeedEventImpl implements RefreshFeedEvent {
     required TResult Function(ToggleLikePostEvent value) toggleLikePost,
     required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
     required TResult Function(AddNewPostEvent value) addNewPost,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(ToggleLikeCommentEvent value) toggleLikeComment,
     required TResult Function(ClearTransientEvent value) clearTransient,
   }) {
     return refreshFeed(this);
@@ -1417,10 +1229,6 @@ class _$RefreshFeedEventImpl implements RefreshFeedEvent {
     TResult? Function(ToggleLikePostEvent value)? toggleLikePost,
     TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult? Function(AddNewPostEvent value)? addNewPost,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(ToggleLikeCommentEvent value)? toggleLikeComment,
     TResult? Function(ClearTransientEvent value)? clearTransient,
   }) {
     return refreshFeed?.call(this);
@@ -1438,10 +1246,6 @@ class _$RefreshFeedEventImpl implements RefreshFeedEvent {
     TResult Function(ToggleLikePostEvent value)? toggleLikePost,
     TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult Function(AddNewPostEvent value)? addNewPost,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(ToggleLikeCommentEvent value)? toggleLikeComment,
     TResult Function(ClearTransientEvent value)? clearTransient,
     required TResult orElse(),
   }) {
@@ -1534,12 +1338,6 @@ class _$ToggleLikePostEventImpl implements ToggleLikePostEvent {
     required TResult Function(String postId) toggleLikePost,
     required TResult Function(String postId) toggleBookmarkPost,
     required TResult Function(FeedEntity post) addNewPost,
-    required TResult Function(String postId, int? limit) loadComments,
-    required TResult Function(
-            String postId, String content, String? parentCommentId)
-        addComment,
-    required TResult Function(String commentId) deleteComment,
-    required TResult Function(String commentId) toggleLikeComment,
     required TResult Function() clearTransient,
   }) {
     return toggleLikePost(postId);
@@ -1557,11 +1355,6 @@ class _$ToggleLikePostEventImpl implements ToggleLikePostEvent {
     TResult? Function(String postId)? toggleLikePost,
     TResult? Function(String postId)? toggleBookmarkPost,
     TResult? Function(FeedEntity post)? addNewPost,
-    TResult? Function(String postId, int? limit)? loadComments,
-    TResult? Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult? Function(String commentId)? deleteComment,
-    TResult? Function(String commentId)? toggleLikeComment,
     TResult? Function()? clearTransient,
   }) {
     return toggleLikePost?.call(postId);
@@ -1579,11 +1372,6 @@ class _$ToggleLikePostEventImpl implements ToggleLikePostEvent {
     TResult Function(String postId)? toggleLikePost,
     TResult Function(String postId)? toggleBookmarkPost,
     TResult Function(FeedEntity post)? addNewPost,
-    TResult Function(String postId, int? limit)? loadComments,
-    TResult Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult Function(String commentId)? deleteComment,
-    TResult Function(String commentId)? toggleLikeComment,
     TResult Function()? clearTransient,
     required TResult orElse(),
   }) {
@@ -1605,10 +1393,6 @@ class _$ToggleLikePostEventImpl implements ToggleLikePostEvent {
     required TResult Function(ToggleLikePostEvent value) toggleLikePost,
     required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
     required TResult Function(AddNewPostEvent value) addNewPost,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(ToggleLikeCommentEvent value) toggleLikeComment,
     required TResult Function(ClearTransientEvent value) clearTransient,
   }) {
     return toggleLikePost(this);
@@ -1626,10 +1410,6 @@ class _$ToggleLikePostEventImpl implements ToggleLikePostEvent {
     TResult? Function(ToggleLikePostEvent value)? toggleLikePost,
     TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult? Function(AddNewPostEvent value)? addNewPost,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(ToggleLikeCommentEvent value)? toggleLikeComment,
     TResult? Function(ClearTransientEvent value)? clearTransient,
   }) {
     return toggleLikePost?.call(this);
@@ -1647,10 +1427,6 @@ class _$ToggleLikePostEventImpl implements ToggleLikePostEvent {
     TResult Function(ToggleLikePostEvent value)? toggleLikePost,
     TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult Function(AddNewPostEvent value)? addNewPost,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(ToggleLikeCommentEvent value)? toggleLikeComment,
     TResult Function(ClearTransientEvent value)? clearTransient,
     required TResult orElse(),
   }) {
@@ -1754,12 +1530,6 @@ class _$ToggleBookmarkPostEventImpl implements ToggleBookmarkPostEvent {
     required TResult Function(String postId) toggleLikePost,
     required TResult Function(String postId) toggleBookmarkPost,
     required TResult Function(FeedEntity post) addNewPost,
-    required TResult Function(String postId, int? limit) loadComments,
-    required TResult Function(
-            String postId, String content, String? parentCommentId)
-        addComment,
-    required TResult Function(String commentId) deleteComment,
-    required TResult Function(String commentId) toggleLikeComment,
     required TResult Function() clearTransient,
   }) {
     return toggleBookmarkPost(postId);
@@ -1777,11 +1547,6 @@ class _$ToggleBookmarkPostEventImpl implements ToggleBookmarkPostEvent {
     TResult? Function(String postId)? toggleLikePost,
     TResult? Function(String postId)? toggleBookmarkPost,
     TResult? Function(FeedEntity post)? addNewPost,
-    TResult? Function(String postId, int? limit)? loadComments,
-    TResult? Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult? Function(String commentId)? deleteComment,
-    TResult? Function(String commentId)? toggleLikeComment,
     TResult? Function()? clearTransient,
   }) {
     return toggleBookmarkPost?.call(postId);
@@ -1799,11 +1564,6 @@ class _$ToggleBookmarkPostEventImpl implements ToggleBookmarkPostEvent {
     TResult Function(String postId)? toggleLikePost,
     TResult Function(String postId)? toggleBookmarkPost,
     TResult Function(FeedEntity post)? addNewPost,
-    TResult Function(String postId, int? limit)? loadComments,
-    TResult Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult Function(String commentId)? deleteComment,
-    TResult Function(String commentId)? toggleLikeComment,
     TResult Function()? clearTransient,
     required TResult orElse(),
   }) {
@@ -1825,10 +1585,6 @@ class _$ToggleBookmarkPostEventImpl implements ToggleBookmarkPostEvent {
     required TResult Function(ToggleLikePostEvent value) toggleLikePost,
     required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
     required TResult Function(AddNewPostEvent value) addNewPost,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(ToggleLikeCommentEvent value) toggleLikeComment,
     required TResult Function(ClearTransientEvent value) clearTransient,
   }) {
     return toggleBookmarkPost(this);
@@ -1846,10 +1602,6 @@ class _$ToggleBookmarkPostEventImpl implements ToggleBookmarkPostEvent {
     TResult? Function(ToggleLikePostEvent value)? toggleLikePost,
     TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult? Function(AddNewPostEvent value)? addNewPost,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(ToggleLikeCommentEvent value)? toggleLikeComment,
     TResult? Function(ClearTransientEvent value)? clearTransient,
   }) {
     return toggleBookmarkPost?.call(this);
@@ -1867,10 +1619,6 @@ class _$ToggleBookmarkPostEventImpl implements ToggleBookmarkPostEvent {
     TResult Function(ToggleLikePostEvent value)? toggleLikePost,
     TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult Function(AddNewPostEvent value)? addNewPost,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(ToggleLikeCommentEvent value)? toggleLikeComment,
     TResult Function(ClearTransientEvent value)? clearTransient,
     required TResult orElse(),
   }) {
@@ -1984,12 +1732,6 @@ class _$AddNewPostEventImpl implements AddNewPostEvent {
     required TResult Function(String postId) toggleLikePost,
     required TResult Function(String postId) toggleBookmarkPost,
     required TResult Function(FeedEntity post) addNewPost,
-    required TResult Function(String postId, int? limit) loadComments,
-    required TResult Function(
-            String postId, String content, String? parentCommentId)
-        addComment,
-    required TResult Function(String commentId) deleteComment,
-    required TResult Function(String commentId) toggleLikeComment,
     required TResult Function() clearTransient,
   }) {
     return addNewPost(post);
@@ -2007,11 +1749,6 @@ class _$AddNewPostEventImpl implements AddNewPostEvent {
     TResult? Function(String postId)? toggleLikePost,
     TResult? Function(String postId)? toggleBookmarkPost,
     TResult? Function(FeedEntity post)? addNewPost,
-    TResult? Function(String postId, int? limit)? loadComments,
-    TResult? Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult? Function(String commentId)? deleteComment,
-    TResult? Function(String commentId)? toggleLikeComment,
     TResult? Function()? clearTransient,
   }) {
     return addNewPost?.call(post);
@@ -2029,11 +1766,6 @@ class _$AddNewPostEventImpl implements AddNewPostEvent {
     TResult Function(String postId)? toggleLikePost,
     TResult Function(String postId)? toggleBookmarkPost,
     TResult Function(FeedEntity post)? addNewPost,
-    TResult Function(String postId, int? limit)? loadComments,
-    TResult Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult Function(String commentId)? deleteComment,
-    TResult Function(String commentId)? toggleLikeComment,
     TResult Function()? clearTransient,
     required TResult orElse(),
   }) {
@@ -2055,10 +1787,6 @@ class _$AddNewPostEventImpl implements AddNewPostEvent {
     required TResult Function(ToggleLikePostEvent value) toggleLikePost,
     required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
     required TResult Function(AddNewPostEvent value) addNewPost,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(ToggleLikeCommentEvent value) toggleLikeComment,
     required TResult Function(ClearTransientEvent value) clearTransient,
   }) {
     return addNewPost(this);
@@ -2076,10 +1804,6 @@ class _$AddNewPostEventImpl implements AddNewPostEvent {
     TResult? Function(ToggleLikePostEvent value)? toggleLikePost,
     TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult? Function(AddNewPostEvent value)? addNewPost,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(ToggleLikeCommentEvent value)? toggleLikeComment,
     TResult? Function(ClearTransientEvent value)? clearTransient,
   }) {
     return addNewPost?.call(this);
@@ -2097,10 +1821,6 @@ class _$AddNewPostEventImpl implements AddNewPostEvent {
     TResult Function(ToggleLikePostEvent value)? toggleLikePost,
     TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult Function(AddNewPostEvent value)? addNewPost,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(ToggleLikeCommentEvent value)? toggleLikeComment,
     TResult Function(ClearTransientEvent value)? clearTransient,
     required TResult orElse(),
   }) {
@@ -2121,915 +1841,6 @@ abstract class AddNewPostEvent implements FeedEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AddNewPostEventImplCopyWith<_$AddNewPostEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$LoadCommentsEventImplCopyWith<$Res> {
-  factory _$$LoadCommentsEventImplCopyWith(_$LoadCommentsEventImpl value,
-          $Res Function(_$LoadCommentsEventImpl) then) =
-      __$$LoadCommentsEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String postId, int? limit});
-}
-
-/// @nodoc
-class __$$LoadCommentsEventImplCopyWithImpl<$Res>
-    extends _$FeedEventCopyWithImpl<$Res, _$LoadCommentsEventImpl>
-    implements _$$LoadCommentsEventImplCopyWith<$Res> {
-  __$$LoadCommentsEventImplCopyWithImpl(_$LoadCommentsEventImpl _value,
-      $Res Function(_$LoadCommentsEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of FeedEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? postId = null,
-    Object? limit = freezed,
-  }) {
-    return _then(_$LoadCommentsEventImpl(
-      postId: null == postId
-          ? _value.postId
-          : postId // ignore: cast_nullable_to_non_nullable
-              as String,
-      limit: freezed == limit
-          ? _value.limit
-          : limit // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$LoadCommentsEventImpl implements LoadCommentsEvent {
-  const _$LoadCommentsEventImpl({required this.postId, this.limit});
-
-  @override
-  final String postId;
-  @override
-  final int? limit;
-
-  @override
-  String toString() {
-    return 'FeedEvent.loadComments(postId: $postId, limit: $limit)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadCommentsEventImpl &&
-            (identical(other.postId, postId) || other.postId == postId) &&
-            (identical(other.limit, limit) || other.limit == limit));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, postId, limit);
-
-  /// Create a copy of FeedEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadCommentsEventImplCopyWith<_$LoadCommentsEventImpl> get copyWith =>
-      __$$LoadCommentsEventImplCopyWithImpl<_$LoadCommentsEventImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int limit, String? userId) loadInitialFeed,
-    required TResult Function(int limit, String? userId) loadMoreFeed,
-    required TResult Function(String postId) getPostById,
-    required TResult Function(FeedEntity post) updatePostEntity,
-    required TResult Function(String postId) deletePost,
-    required TResult Function() refreshFeed,
-    required TResult Function(String postId) toggleLikePost,
-    required TResult Function(String postId) toggleBookmarkPost,
-    required TResult Function(FeedEntity post) addNewPost,
-    required TResult Function(String postId, int? limit) loadComments,
-    required TResult Function(
-            String postId, String content, String? parentCommentId)
-        addComment,
-    required TResult Function(String commentId) deleteComment,
-    required TResult Function(String commentId) toggleLikeComment,
-    required TResult Function() clearTransient,
-  }) {
-    return loadComments(postId, limit);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int limit, String? userId)? loadInitialFeed,
-    TResult? Function(int limit, String? userId)? loadMoreFeed,
-    TResult? Function(String postId)? getPostById,
-    TResult? Function(FeedEntity post)? updatePostEntity,
-    TResult? Function(String postId)? deletePost,
-    TResult? Function()? refreshFeed,
-    TResult? Function(String postId)? toggleLikePost,
-    TResult? Function(String postId)? toggleBookmarkPost,
-    TResult? Function(FeedEntity post)? addNewPost,
-    TResult? Function(String postId, int? limit)? loadComments,
-    TResult? Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult? Function(String commentId)? deleteComment,
-    TResult? Function(String commentId)? toggleLikeComment,
-    TResult? Function()? clearTransient,
-  }) {
-    return loadComments?.call(postId, limit);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int limit, String? userId)? loadInitialFeed,
-    TResult Function(int limit, String? userId)? loadMoreFeed,
-    TResult Function(String postId)? getPostById,
-    TResult Function(FeedEntity post)? updatePostEntity,
-    TResult Function(String postId)? deletePost,
-    TResult Function()? refreshFeed,
-    TResult Function(String postId)? toggleLikePost,
-    TResult Function(String postId)? toggleBookmarkPost,
-    TResult Function(FeedEntity post)? addNewPost,
-    TResult Function(String postId, int? limit)? loadComments,
-    TResult Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult Function(String commentId)? deleteComment,
-    TResult Function(String commentId)? toggleLikeComment,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadComments != null) {
-      return loadComments(postId, limit);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadInitialFeedEvent value) loadInitialFeed,
-    required TResult Function(LoadMoreFeedEvent value) loadMoreFeed,
-    required TResult Function(GetPostByIdEvent value) getPostById,
-    required TResult Function(UpdatePostEvent value) updatePostEntity,
-    required TResult Function(DeletePostEvent value) deletePost,
-    required TResult Function(RefreshFeedEvent value) refreshFeed,
-    required TResult Function(ToggleLikePostEvent value) toggleLikePost,
-    required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
-    required TResult Function(AddNewPostEvent value) addNewPost,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(ToggleLikeCommentEvent value) toggleLikeComment,
-    required TResult Function(ClearTransientEvent value) clearTransient,
-  }) {
-    return loadComments(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadInitialFeedEvent value)? loadInitialFeed,
-    TResult? Function(LoadMoreFeedEvent value)? loadMoreFeed,
-    TResult? Function(GetPostByIdEvent value)? getPostById,
-    TResult? Function(UpdatePostEvent value)? updatePostEntity,
-    TResult? Function(DeletePostEvent value)? deletePost,
-    TResult? Function(RefreshFeedEvent value)? refreshFeed,
-    TResult? Function(ToggleLikePostEvent value)? toggleLikePost,
-    TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
-    TResult? Function(AddNewPostEvent value)? addNewPost,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(ToggleLikeCommentEvent value)? toggleLikeComment,
-    TResult? Function(ClearTransientEvent value)? clearTransient,
-  }) {
-    return loadComments?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadInitialFeedEvent value)? loadInitialFeed,
-    TResult Function(LoadMoreFeedEvent value)? loadMoreFeed,
-    TResult Function(GetPostByIdEvent value)? getPostById,
-    TResult Function(UpdatePostEvent value)? updatePostEntity,
-    TResult Function(DeletePostEvent value)? deletePost,
-    TResult Function(RefreshFeedEvent value)? refreshFeed,
-    TResult Function(ToggleLikePostEvent value)? toggleLikePost,
-    TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
-    TResult Function(AddNewPostEvent value)? addNewPost,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(ToggleLikeCommentEvent value)? toggleLikeComment,
-    TResult Function(ClearTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadComments != null) {
-      return loadComments(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class LoadCommentsEvent implements FeedEvent {
-  const factory LoadCommentsEvent(
-      {required final String postId,
-      final int? limit}) = _$LoadCommentsEventImpl;
-
-  String get postId;
-  int? get limit;
-
-  /// Create a copy of FeedEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LoadCommentsEventImplCopyWith<_$LoadCommentsEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$AddCommentEventImplCopyWith<$Res> {
-  factory _$$AddCommentEventImplCopyWith(_$AddCommentEventImpl value,
-          $Res Function(_$AddCommentEventImpl) then) =
-      __$$AddCommentEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String postId, String content, String? parentCommentId});
-}
-
-/// @nodoc
-class __$$AddCommentEventImplCopyWithImpl<$Res>
-    extends _$FeedEventCopyWithImpl<$Res, _$AddCommentEventImpl>
-    implements _$$AddCommentEventImplCopyWith<$Res> {
-  __$$AddCommentEventImplCopyWithImpl(
-      _$AddCommentEventImpl _value, $Res Function(_$AddCommentEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of FeedEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? postId = null,
-    Object? content = null,
-    Object? parentCommentId = freezed,
-  }) {
-    return _then(_$AddCommentEventImpl(
-      postId: null == postId
-          ? _value.postId
-          : postId // ignore: cast_nullable_to_non_nullable
-              as String,
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
-              as String,
-      parentCommentId: freezed == parentCommentId
-          ? _value.parentCommentId
-          : parentCommentId // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$AddCommentEventImpl implements AddCommentEvent {
-  const _$AddCommentEventImpl(
-      {required this.postId, required this.content, this.parentCommentId});
-
-  @override
-  final String postId;
-  @override
-  final String content;
-  @override
-  final String? parentCommentId;
-
-  @override
-  String toString() {
-    return 'FeedEvent.addComment(postId: $postId, content: $content, parentCommentId: $parentCommentId)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AddCommentEventImpl &&
-            (identical(other.postId, postId) || other.postId == postId) &&
-            (identical(other.content, content) || other.content == content) &&
-            (identical(other.parentCommentId, parentCommentId) ||
-                other.parentCommentId == parentCommentId));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, postId, content, parentCommentId);
-
-  /// Create a copy of FeedEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AddCommentEventImplCopyWith<_$AddCommentEventImpl> get copyWith =>
-      __$$AddCommentEventImplCopyWithImpl<_$AddCommentEventImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int limit, String? userId) loadInitialFeed,
-    required TResult Function(int limit, String? userId) loadMoreFeed,
-    required TResult Function(String postId) getPostById,
-    required TResult Function(FeedEntity post) updatePostEntity,
-    required TResult Function(String postId) deletePost,
-    required TResult Function() refreshFeed,
-    required TResult Function(String postId) toggleLikePost,
-    required TResult Function(String postId) toggleBookmarkPost,
-    required TResult Function(FeedEntity post) addNewPost,
-    required TResult Function(String postId, int? limit) loadComments,
-    required TResult Function(
-            String postId, String content, String? parentCommentId)
-        addComment,
-    required TResult Function(String commentId) deleteComment,
-    required TResult Function(String commentId) toggleLikeComment,
-    required TResult Function() clearTransient,
-  }) {
-    return addComment(postId, content, parentCommentId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int limit, String? userId)? loadInitialFeed,
-    TResult? Function(int limit, String? userId)? loadMoreFeed,
-    TResult? Function(String postId)? getPostById,
-    TResult? Function(FeedEntity post)? updatePostEntity,
-    TResult? Function(String postId)? deletePost,
-    TResult? Function()? refreshFeed,
-    TResult? Function(String postId)? toggleLikePost,
-    TResult? Function(String postId)? toggleBookmarkPost,
-    TResult? Function(FeedEntity post)? addNewPost,
-    TResult? Function(String postId, int? limit)? loadComments,
-    TResult? Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult? Function(String commentId)? deleteComment,
-    TResult? Function(String commentId)? toggleLikeComment,
-    TResult? Function()? clearTransient,
-  }) {
-    return addComment?.call(postId, content, parentCommentId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int limit, String? userId)? loadInitialFeed,
-    TResult Function(int limit, String? userId)? loadMoreFeed,
-    TResult Function(String postId)? getPostById,
-    TResult Function(FeedEntity post)? updatePostEntity,
-    TResult Function(String postId)? deletePost,
-    TResult Function()? refreshFeed,
-    TResult Function(String postId)? toggleLikePost,
-    TResult Function(String postId)? toggleBookmarkPost,
-    TResult Function(FeedEntity post)? addNewPost,
-    TResult Function(String postId, int? limit)? loadComments,
-    TResult Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult Function(String commentId)? deleteComment,
-    TResult Function(String commentId)? toggleLikeComment,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (addComment != null) {
-      return addComment(postId, content, parentCommentId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadInitialFeedEvent value) loadInitialFeed,
-    required TResult Function(LoadMoreFeedEvent value) loadMoreFeed,
-    required TResult Function(GetPostByIdEvent value) getPostById,
-    required TResult Function(UpdatePostEvent value) updatePostEntity,
-    required TResult Function(DeletePostEvent value) deletePost,
-    required TResult Function(RefreshFeedEvent value) refreshFeed,
-    required TResult Function(ToggleLikePostEvent value) toggleLikePost,
-    required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
-    required TResult Function(AddNewPostEvent value) addNewPost,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(ToggleLikeCommentEvent value) toggleLikeComment,
-    required TResult Function(ClearTransientEvent value) clearTransient,
-  }) {
-    return addComment(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadInitialFeedEvent value)? loadInitialFeed,
-    TResult? Function(LoadMoreFeedEvent value)? loadMoreFeed,
-    TResult? Function(GetPostByIdEvent value)? getPostById,
-    TResult? Function(UpdatePostEvent value)? updatePostEntity,
-    TResult? Function(DeletePostEvent value)? deletePost,
-    TResult? Function(RefreshFeedEvent value)? refreshFeed,
-    TResult? Function(ToggleLikePostEvent value)? toggleLikePost,
-    TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
-    TResult? Function(AddNewPostEvent value)? addNewPost,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(ToggleLikeCommentEvent value)? toggleLikeComment,
-    TResult? Function(ClearTransientEvent value)? clearTransient,
-  }) {
-    return addComment?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadInitialFeedEvent value)? loadInitialFeed,
-    TResult Function(LoadMoreFeedEvent value)? loadMoreFeed,
-    TResult Function(GetPostByIdEvent value)? getPostById,
-    TResult Function(UpdatePostEvent value)? updatePostEntity,
-    TResult Function(DeletePostEvent value)? deletePost,
-    TResult Function(RefreshFeedEvent value)? refreshFeed,
-    TResult Function(ToggleLikePostEvent value)? toggleLikePost,
-    TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
-    TResult Function(AddNewPostEvent value)? addNewPost,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(ToggleLikeCommentEvent value)? toggleLikeComment,
-    TResult Function(ClearTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (addComment != null) {
-      return addComment(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class AddCommentEvent implements FeedEvent {
-  const factory AddCommentEvent(
-      {required final String postId,
-      required final String content,
-      final String? parentCommentId}) = _$AddCommentEventImpl;
-
-  String get postId;
-  String get content;
-  String? get parentCommentId;
-
-  /// Create a copy of FeedEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AddCommentEventImplCopyWith<_$AddCommentEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$DeleteCommentEventImplCopyWith<$Res> {
-  factory _$$DeleteCommentEventImplCopyWith(_$DeleteCommentEventImpl value,
-          $Res Function(_$DeleteCommentEventImpl) then) =
-      __$$DeleteCommentEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String commentId});
-}
-
-/// @nodoc
-class __$$DeleteCommentEventImplCopyWithImpl<$Res>
-    extends _$FeedEventCopyWithImpl<$Res, _$DeleteCommentEventImpl>
-    implements _$$DeleteCommentEventImplCopyWith<$Res> {
-  __$$DeleteCommentEventImplCopyWithImpl(_$DeleteCommentEventImpl _value,
-      $Res Function(_$DeleteCommentEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of FeedEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? commentId = null,
-  }) {
-    return _then(_$DeleteCommentEventImpl(
-      null == commentId
-          ? _value.commentId
-          : commentId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$DeleteCommentEventImpl implements DeleteCommentEvent {
-  const _$DeleteCommentEventImpl(this.commentId);
-
-  @override
-  final String commentId;
-
-  @override
-  String toString() {
-    return 'FeedEvent.deleteComment(commentId: $commentId)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$DeleteCommentEventImpl &&
-            (identical(other.commentId, commentId) ||
-                other.commentId == commentId));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, commentId);
-
-  /// Create a copy of FeedEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$DeleteCommentEventImplCopyWith<_$DeleteCommentEventImpl> get copyWith =>
-      __$$DeleteCommentEventImplCopyWithImpl<_$DeleteCommentEventImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int limit, String? userId) loadInitialFeed,
-    required TResult Function(int limit, String? userId) loadMoreFeed,
-    required TResult Function(String postId) getPostById,
-    required TResult Function(FeedEntity post) updatePostEntity,
-    required TResult Function(String postId) deletePost,
-    required TResult Function() refreshFeed,
-    required TResult Function(String postId) toggleLikePost,
-    required TResult Function(String postId) toggleBookmarkPost,
-    required TResult Function(FeedEntity post) addNewPost,
-    required TResult Function(String postId, int? limit) loadComments,
-    required TResult Function(
-            String postId, String content, String? parentCommentId)
-        addComment,
-    required TResult Function(String commentId) deleteComment,
-    required TResult Function(String commentId) toggleLikeComment,
-    required TResult Function() clearTransient,
-  }) {
-    return deleteComment(commentId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int limit, String? userId)? loadInitialFeed,
-    TResult? Function(int limit, String? userId)? loadMoreFeed,
-    TResult? Function(String postId)? getPostById,
-    TResult? Function(FeedEntity post)? updatePostEntity,
-    TResult? Function(String postId)? deletePost,
-    TResult? Function()? refreshFeed,
-    TResult? Function(String postId)? toggleLikePost,
-    TResult? Function(String postId)? toggleBookmarkPost,
-    TResult? Function(FeedEntity post)? addNewPost,
-    TResult? Function(String postId, int? limit)? loadComments,
-    TResult? Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult? Function(String commentId)? deleteComment,
-    TResult? Function(String commentId)? toggleLikeComment,
-    TResult? Function()? clearTransient,
-  }) {
-    return deleteComment?.call(commentId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int limit, String? userId)? loadInitialFeed,
-    TResult Function(int limit, String? userId)? loadMoreFeed,
-    TResult Function(String postId)? getPostById,
-    TResult Function(FeedEntity post)? updatePostEntity,
-    TResult Function(String postId)? deletePost,
-    TResult Function()? refreshFeed,
-    TResult Function(String postId)? toggleLikePost,
-    TResult Function(String postId)? toggleBookmarkPost,
-    TResult Function(FeedEntity post)? addNewPost,
-    TResult Function(String postId, int? limit)? loadComments,
-    TResult Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult Function(String commentId)? deleteComment,
-    TResult Function(String commentId)? toggleLikeComment,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (deleteComment != null) {
-      return deleteComment(commentId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadInitialFeedEvent value) loadInitialFeed,
-    required TResult Function(LoadMoreFeedEvent value) loadMoreFeed,
-    required TResult Function(GetPostByIdEvent value) getPostById,
-    required TResult Function(UpdatePostEvent value) updatePostEntity,
-    required TResult Function(DeletePostEvent value) deletePost,
-    required TResult Function(RefreshFeedEvent value) refreshFeed,
-    required TResult Function(ToggleLikePostEvent value) toggleLikePost,
-    required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
-    required TResult Function(AddNewPostEvent value) addNewPost,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(ToggleLikeCommentEvent value) toggleLikeComment,
-    required TResult Function(ClearTransientEvent value) clearTransient,
-  }) {
-    return deleteComment(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadInitialFeedEvent value)? loadInitialFeed,
-    TResult? Function(LoadMoreFeedEvent value)? loadMoreFeed,
-    TResult? Function(GetPostByIdEvent value)? getPostById,
-    TResult? Function(UpdatePostEvent value)? updatePostEntity,
-    TResult? Function(DeletePostEvent value)? deletePost,
-    TResult? Function(RefreshFeedEvent value)? refreshFeed,
-    TResult? Function(ToggleLikePostEvent value)? toggleLikePost,
-    TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
-    TResult? Function(AddNewPostEvent value)? addNewPost,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(ToggleLikeCommentEvent value)? toggleLikeComment,
-    TResult? Function(ClearTransientEvent value)? clearTransient,
-  }) {
-    return deleteComment?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadInitialFeedEvent value)? loadInitialFeed,
-    TResult Function(LoadMoreFeedEvent value)? loadMoreFeed,
-    TResult Function(GetPostByIdEvent value)? getPostById,
-    TResult Function(UpdatePostEvent value)? updatePostEntity,
-    TResult Function(DeletePostEvent value)? deletePost,
-    TResult Function(RefreshFeedEvent value)? refreshFeed,
-    TResult Function(ToggleLikePostEvent value)? toggleLikePost,
-    TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
-    TResult Function(AddNewPostEvent value)? addNewPost,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(ToggleLikeCommentEvent value)? toggleLikeComment,
-    TResult Function(ClearTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (deleteComment != null) {
-      return deleteComment(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class DeleteCommentEvent implements FeedEvent {
-  const factory DeleteCommentEvent(final String commentId) =
-      _$DeleteCommentEventImpl;
-
-  String get commentId;
-
-  /// Create a copy of FeedEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DeleteCommentEventImplCopyWith<_$DeleteCommentEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$ToggleLikeCommentEventImplCopyWith<$Res> {
-  factory _$$ToggleLikeCommentEventImplCopyWith(
-          _$ToggleLikeCommentEventImpl value,
-          $Res Function(_$ToggleLikeCommentEventImpl) then) =
-      __$$ToggleLikeCommentEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String commentId});
-}
-
-/// @nodoc
-class __$$ToggleLikeCommentEventImplCopyWithImpl<$Res>
-    extends _$FeedEventCopyWithImpl<$Res, _$ToggleLikeCommentEventImpl>
-    implements _$$ToggleLikeCommentEventImplCopyWith<$Res> {
-  __$$ToggleLikeCommentEventImplCopyWithImpl(
-      _$ToggleLikeCommentEventImpl _value,
-      $Res Function(_$ToggleLikeCommentEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of FeedEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? commentId = null,
-  }) {
-    return _then(_$ToggleLikeCommentEventImpl(
-      null == commentId
-          ? _value.commentId
-          : commentId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$ToggleLikeCommentEventImpl implements ToggleLikeCommentEvent {
-  const _$ToggleLikeCommentEventImpl(this.commentId);
-
-  @override
-  final String commentId;
-
-  @override
-  String toString() {
-    return 'FeedEvent.toggleLikeComment(commentId: $commentId)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ToggleLikeCommentEventImpl &&
-            (identical(other.commentId, commentId) ||
-                other.commentId == commentId));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, commentId);
-
-  /// Create a copy of FeedEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ToggleLikeCommentEventImplCopyWith<_$ToggleLikeCommentEventImpl>
-      get copyWith => __$$ToggleLikeCommentEventImplCopyWithImpl<
-          _$ToggleLikeCommentEventImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int limit, String? userId) loadInitialFeed,
-    required TResult Function(int limit, String? userId) loadMoreFeed,
-    required TResult Function(String postId) getPostById,
-    required TResult Function(FeedEntity post) updatePostEntity,
-    required TResult Function(String postId) deletePost,
-    required TResult Function() refreshFeed,
-    required TResult Function(String postId) toggleLikePost,
-    required TResult Function(String postId) toggleBookmarkPost,
-    required TResult Function(FeedEntity post) addNewPost,
-    required TResult Function(String postId, int? limit) loadComments,
-    required TResult Function(
-            String postId, String content, String? parentCommentId)
-        addComment,
-    required TResult Function(String commentId) deleteComment,
-    required TResult Function(String commentId) toggleLikeComment,
-    required TResult Function() clearTransient,
-  }) {
-    return toggleLikeComment(commentId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int limit, String? userId)? loadInitialFeed,
-    TResult? Function(int limit, String? userId)? loadMoreFeed,
-    TResult? Function(String postId)? getPostById,
-    TResult? Function(FeedEntity post)? updatePostEntity,
-    TResult? Function(String postId)? deletePost,
-    TResult? Function()? refreshFeed,
-    TResult? Function(String postId)? toggleLikePost,
-    TResult? Function(String postId)? toggleBookmarkPost,
-    TResult? Function(FeedEntity post)? addNewPost,
-    TResult? Function(String postId, int? limit)? loadComments,
-    TResult? Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult? Function(String commentId)? deleteComment,
-    TResult? Function(String commentId)? toggleLikeComment,
-    TResult? Function()? clearTransient,
-  }) {
-    return toggleLikeComment?.call(commentId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int limit, String? userId)? loadInitialFeed,
-    TResult Function(int limit, String? userId)? loadMoreFeed,
-    TResult Function(String postId)? getPostById,
-    TResult Function(FeedEntity post)? updatePostEntity,
-    TResult Function(String postId)? deletePost,
-    TResult Function()? refreshFeed,
-    TResult Function(String postId)? toggleLikePost,
-    TResult Function(String postId)? toggleBookmarkPost,
-    TResult Function(FeedEntity post)? addNewPost,
-    TResult Function(String postId, int? limit)? loadComments,
-    TResult Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult Function(String commentId)? deleteComment,
-    TResult Function(String commentId)? toggleLikeComment,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (toggleLikeComment != null) {
-      return toggleLikeComment(commentId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadInitialFeedEvent value) loadInitialFeed,
-    required TResult Function(LoadMoreFeedEvent value) loadMoreFeed,
-    required TResult Function(GetPostByIdEvent value) getPostById,
-    required TResult Function(UpdatePostEvent value) updatePostEntity,
-    required TResult Function(DeletePostEvent value) deletePost,
-    required TResult Function(RefreshFeedEvent value) refreshFeed,
-    required TResult Function(ToggleLikePostEvent value) toggleLikePost,
-    required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
-    required TResult Function(AddNewPostEvent value) addNewPost,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(ToggleLikeCommentEvent value) toggleLikeComment,
-    required TResult Function(ClearTransientEvent value) clearTransient,
-  }) {
-    return toggleLikeComment(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadInitialFeedEvent value)? loadInitialFeed,
-    TResult? Function(LoadMoreFeedEvent value)? loadMoreFeed,
-    TResult? Function(GetPostByIdEvent value)? getPostById,
-    TResult? Function(UpdatePostEvent value)? updatePostEntity,
-    TResult? Function(DeletePostEvent value)? deletePost,
-    TResult? Function(RefreshFeedEvent value)? refreshFeed,
-    TResult? Function(ToggleLikePostEvent value)? toggleLikePost,
-    TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
-    TResult? Function(AddNewPostEvent value)? addNewPost,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(ToggleLikeCommentEvent value)? toggleLikeComment,
-    TResult? Function(ClearTransientEvent value)? clearTransient,
-  }) {
-    return toggleLikeComment?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadInitialFeedEvent value)? loadInitialFeed,
-    TResult Function(LoadMoreFeedEvent value)? loadMoreFeed,
-    TResult Function(GetPostByIdEvent value)? getPostById,
-    TResult Function(UpdatePostEvent value)? updatePostEntity,
-    TResult Function(DeletePostEvent value)? deletePost,
-    TResult Function(RefreshFeedEvent value)? refreshFeed,
-    TResult Function(ToggleLikePostEvent value)? toggleLikePost,
-    TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
-    TResult Function(AddNewPostEvent value)? addNewPost,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(ToggleLikeCommentEvent value)? toggleLikeComment,
-    TResult Function(ClearTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (toggleLikeComment != null) {
-      return toggleLikeComment(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class ToggleLikeCommentEvent implements FeedEvent {
-  const factory ToggleLikeCommentEvent(final String commentId) =
-      _$ToggleLikeCommentEventImpl;
-
-  String get commentId;
-
-  /// Create a copy of FeedEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ToggleLikeCommentEventImplCopyWith<_$ToggleLikeCommentEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -3083,12 +1894,6 @@ class _$ClearTransientEventImpl implements ClearTransientEvent {
     required TResult Function(String postId) toggleLikePost,
     required TResult Function(String postId) toggleBookmarkPost,
     required TResult Function(FeedEntity post) addNewPost,
-    required TResult Function(String postId, int? limit) loadComments,
-    required TResult Function(
-            String postId, String content, String? parentCommentId)
-        addComment,
-    required TResult Function(String commentId) deleteComment,
-    required TResult Function(String commentId) toggleLikeComment,
     required TResult Function() clearTransient,
   }) {
     return clearTransient();
@@ -3106,11 +1911,6 @@ class _$ClearTransientEventImpl implements ClearTransientEvent {
     TResult? Function(String postId)? toggleLikePost,
     TResult? Function(String postId)? toggleBookmarkPost,
     TResult? Function(FeedEntity post)? addNewPost,
-    TResult? Function(String postId, int? limit)? loadComments,
-    TResult? Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult? Function(String commentId)? deleteComment,
-    TResult? Function(String commentId)? toggleLikeComment,
     TResult? Function()? clearTransient,
   }) {
     return clearTransient?.call();
@@ -3128,11 +1928,6 @@ class _$ClearTransientEventImpl implements ClearTransientEvent {
     TResult Function(String postId)? toggleLikePost,
     TResult Function(String postId)? toggleBookmarkPost,
     TResult Function(FeedEntity post)? addNewPost,
-    TResult Function(String postId, int? limit)? loadComments,
-    TResult Function(String postId, String content, String? parentCommentId)?
-        addComment,
-    TResult Function(String commentId)? deleteComment,
-    TResult Function(String commentId)? toggleLikeComment,
     TResult Function()? clearTransient,
     required TResult orElse(),
   }) {
@@ -3154,10 +1949,6 @@ class _$ClearTransientEventImpl implements ClearTransientEvent {
     required TResult Function(ToggleLikePostEvent value) toggleLikePost,
     required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
     required TResult Function(AddNewPostEvent value) addNewPost,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(ToggleLikeCommentEvent value) toggleLikeComment,
     required TResult Function(ClearTransientEvent value) clearTransient,
   }) {
     return clearTransient(this);
@@ -3175,10 +1966,6 @@ class _$ClearTransientEventImpl implements ClearTransientEvent {
     TResult? Function(ToggleLikePostEvent value)? toggleLikePost,
     TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult? Function(AddNewPostEvent value)? addNewPost,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(ToggleLikeCommentEvent value)? toggleLikeComment,
     TResult? Function(ClearTransientEvent value)? clearTransient,
   }) {
     return clearTransient?.call(this);
@@ -3196,10 +1983,6 @@ class _$ClearTransientEventImpl implements ClearTransientEvent {
     TResult Function(ToggleLikePostEvent value)? toggleLikePost,
     TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult Function(AddNewPostEvent value)? addNewPost,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(ToggleLikeCommentEvent value)? toggleLikeComment,
     TResult Function(ClearTransientEvent value)? clearTransient,
     required TResult orElse(),
   }) {
