@@ -93,12 +93,12 @@ class _CommentSheetContent extends HookWidget {
       }
 
       context.read<FeedCommentBloc>().add(
-        AddFeedCommentEvent(
-          postId: post.id,
-          content: content,
-          parentCommentId: targetParentId,
-        ),
-      );
+            AddFeedCommentEvent(
+              postId: post.id,
+              content: content,
+              parentCommentId: targetParentId,
+            ),
+          );
 
       commentController.clear();
       replyingTo.value = null;
@@ -106,8 +106,8 @@ class _CommentSheetContent extends HookWidget {
 
     void handleLikeComment(CommentEntity comment) {
       context.read<FeedCommentBloc>().add(
-        ToggleFeedCommentLikeEvent(comment.id),
-      );
+            ToggleFeedCommentLikeEvent(comment.id),
+          );
     }
 
     return BlocListener<FeedCommentBloc, FeedCommentState>(
@@ -164,12 +164,12 @@ class _CommentSheetContent extends HookWidget {
         duration: const Duration(seconds: 2),
       );
       context.read<FeedCommentBloc>().add(
-        const ClearFeedCommentMessagesEvent(),
-      );
+            const ClearFeedCommentMessagesEvent(),
+          );
     } else if (state.message != null) {
       context.read<FeedCommentBloc>().add(
-        const ClearFeedCommentMessagesEvent(),
-      );
+            const ClearFeedCommentMessagesEvent(),
+          );
     }
   }
 }
@@ -190,7 +190,8 @@ void _useScrollPagination({
       if (isNearBottom) {
         final bloc = context.read<FeedCommentBloc>();
         final state = bloc.state;
-        final canLoadMore = state.hasMore && !state.isLoadingMore && !state.isLoading;
+        final canLoadMore =
+            state.hasMore && !state.isLoadingMore && !state.isLoading;
 
         if (canLoadMore) {
           bloc.add(LoadMoreFeedCommentsEvent(postId: postId, limit: 20));
@@ -226,8 +227,38 @@ class _CommentsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     if (isLoading && comments.isEmpty) {
-      return const Center(child: CircularProgressIndicator());
+      return Center(
+        child: Container(
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                colorScheme.primaryContainer.withValues(alpha: 0.3),
+                colorScheme.secondaryContainer.withValues(alpha: 0.2),
+              ],
+            ),
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: colorScheme.primary.withValues(alpha: 0.1),
+                blurRadius: 16,
+                spreadRadius: 2,
+              ),
+            ],
+          ),
+          child: SizedBox(
+            width: 40,
+            height: 40,
+            child: CircularProgressIndicator(
+              strokeWidth: 2.5,
+              color: colorScheme.primary,
+            ),
+          ),
+        ),
+      );
     }
 
     if (comments.isEmpty) {
@@ -241,9 +272,41 @@ class _CommentsList extends StatelessWidget {
       itemBuilder: (context, index) {
         // Loading indicator at the end
         if (index == comments.length) {
-          return const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Center(child: CircularProgressIndicator()),
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+            child: Center(
+              child: Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Theme.of(context)
+                      .colorScheme
+                      .surfaceContainerHighest
+                      .withValues(alpha: 0.5),
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .shadow
+                          .withValues(alpha: 0.05),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  width: 28,
+                  height: 28,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2.5,
+                    color: Theme.of(context)
+                        .colorScheme
+                        .primary
+                        .withValues(alpha: 0.8),
+                  ),
+                ),
+              ),
+            ),
           );
         }
 
@@ -271,16 +334,62 @@ class _EmptyCommentsView extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
-            Icons.comment_outlined,
-            size: 64,
-            color: colorScheme.onSurfaceVariant,
+          TweenAnimationBuilder<double>(
+            tween: Tween(begin: 0.0, end: 1.0),
+            duration: const Duration(milliseconds: 600),
+            curve: Curves.easeOutBack,
+            builder: (context, value, child) {
+              return Transform.scale(
+                scale: value,
+                child: Opacity(
+                  opacity: value,
+                  child: child,
+                ),
+              );
+            },
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    colorScheme.primaryContainer.withValues(alpha: 0.3),
+                    colorScheme.secondaryContainer.withValues(alpha: 0.2),
+                  ],
+                ),
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: colorScheme.primary.withValues(alpha: 0.1),
+                    blurRadius: 20,
+                    spreadRadius: 3,
+                  ),
+                ],
+              ),
+              child: ShaderMask(
+                shaderCallback: (bounds) => LinearGradient(
+                  colors: [
+                    colorScheme.primary,
+                    colorScheme.secondary,
+                  ],
+                ).createShader(bounds),
+                child: Icon(
+                  Icons.comment_outlined,
+                  size: 56,
+                  color: Colors.white,
+                ),
+              ),
+            ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 24),
           Text(
             t.feedNoCommentsTitle,
             style: textTheme.titleMedium?.copyWith(
-              color: colorScheme.onSurfaceVariant,
+              color: colorScheme.onSurface,
+              fontWeight: FontWeight.w700,
+              fontSize: 18,
+              letterSpacing: 0.2,
             ),
           ),
           const SizedBox(height: 8),
@@ -288,6 +397,8 @@ class _EmptyCommentsView extends StatelessWidget {
             t.feedNoCommentsSubtitle,
             style: textTheme.bodyMedium?.copyWith(
               color: colorScheme.onSurfaceVariant,
+              fontSize: 14,
+              letterSpacing: 0.1,
             ),
           ),
         ],
@@ -372,16 +483,37 @@ class _CommentInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final t = AppLocalizations.of(context)!;
+    final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
 
     return BlocBuilder<FeedCommentBloc, FeedCommentState>(
       buildWhen: (prev, curr) => prev.isAdding != curr.isAdding,
       builder: (context, state) {
-        return Container(
+        return AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.easeOut,
+          padding: EdgeInsets.only(bottom: keyboardHeight),
           decoration: BoxDecoration(
-            color: colorScheme.surface,
-            border: Border(
-              top: BorderSide(color: colorScheme.outlineVariant, width: 0.5),
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                colorScheme.surface,
+                colorScheme.surfaceContainerLowest,
+              ],
             ),
+            border: Border(
+              top: BorderSide(
+                color: colorScheme.outlineVariant.withValues(alpha: 0.5),
+                width: 1,
+              ),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: colorScheme.shadow.withValues(alpha: 0.08),
+                blurRadius: 12,
+                offset: const Offset(0, -2),
+              ),
+            ],
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -395,7 +527,8 @@ class _CommentInputField extends StatelessWidget {
 
               // Input row
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                 child: Row(
                   children: [
                     // Avatar
@@ -455,26 +588,60 @@ class _ReplyBanner extends StatelessWidget {
     final t = AppLocalizations.of(context)!;
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      color: colorScheme.surfaceContainerHighest,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            colorScheme.primaryContainer.withValues(alpha: 0.15),
+            colorScheme.secondaryContainer.withValues(alpha: 0.1),
+          ],
+        ),
+        border: Border(
+          bottom: BorderSide(
+            color: colorScheme.primary.withValues(alpha: 0.2),
+            width: 1.5,
+          ),
+        ),
+      ),
       child: Row(
         children: [
-          Icon(Icons.reply, size: 16, color: colorScheme.primary),
-          const SizedBox(width: 8),
+          Container(
+            padding: const EdgeInsets.all(6),
+            decoration: BoxDecoration(
+              color: colorScheme.primary.withValues(alpha: 0.15),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Icon(
+              Icons.reply_rounded,
+              size: 16,
+              color: colorScheme.primary,
+            ),
+          ),
+          const SizedBox(width: 10),
           Expanded(
             child: Text(
               t.feedReplyingTo(username),
               style: textTheme.bodySmall?.copyWith(
-                color: colorScheme.onSurfaceVariant,
+                color: colorScheme.onSurface,
+                fontWeight: FontWeight.w600,
+                fontSize: 13,
+                letterSpacing: 0.1,
               ),
             ),
           ),
-          InkWell(
-            onTap: onCancel,
-            child: Icon(
-              Icons.close,
-              size: 18,
-              color: colorScheme.onSurfaceVariant,
+          Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: onCancel,
+              borderRadius: BorderRadius.circular(20),
+              child: Padding(
+                padding: const EdgeInsets.all(4),
+                child: Icon(
+                  Icons.close_rounded,
+                  size: 20,
+                  color: colorScheme.onSurfaceVariant,
+                ),
+              ),
             ),
           ),
         ],
@@ -502,10 +669,21 @@ class _InputTextField extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       decoration: BoxDecoration(
-        border: Border.all(color: colorScheme.outlineVariant, width: 1),
+        color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+        border: Border.all(
+          color: colorScheme.outline.withValues(alpha: 0.3),
+          width: 1.5,
+        ),
         borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: colorScheme.shadow.withValues(alpha: 0.05),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: TextField(
         controller: controller,
@@ -513,8 +691,9 @@ class _InputTextField extends StatelessWidget {
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: textTheme.bodyMedium?.copyWith(
-            color: colorScheme.onSurfaceVariant,
+            color: colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
             fontSize: 14,
+            letterSpacing: 0.1,
           ),
           border: InputBorder.none,
           enabledBorder: InputBorder.none,
@@ -522,7 +701,10 @@ class _InputTextField extends StatelessWidget {
           contentPadding: EdgeInsets.zero,
           isDense: true,
         ),
-        style: textTheme.bodyMedium?.copyWith(fontSize: 14),
+        style: textTheme.bodyMedium?.copyWith(
+          fontSize: 14,
+          letterSpacing: 0.1,
+        ),
         maxLines: 3,
         minLines: 1,
         textCapitalization: TextCapitalization.sentences,
@@ -546,18 +728,53 @@ class _SendButton extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     if (isLoading) {
-      return const SizedBox(
-        width: 24,
-        height: 24,
-        child: CircularProgressIndicator(strokeWidth: 2),
+      return Container(
+        width: 36,
+        height: 36,
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: colorScheme.primaryContainer.withValues(alpha: 0.3),
+          shape: BoxShape.circle,
+        ),
+        child: CircularProgressIndicator(
+          strokeWidth: 2,
+          color: colorScheme.primary,
+        ),
       );
     }
 
-    return IconButton(
-      onPressed: onSend,
-      icon: Icon(Icons.send_rounded, color: colorScheme.primary),
-      padding: EdgeInsets.zero,
-      constraints: const BoxConstraints(),
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            colorScheme.primary,
+            colorScheme.primary.withValues(alpha: 0.85),
+          ],
+        ),
+        shape: BoxShape.circle,
+        boxShadow: [
+          BoxShadow(
+            color: colorScheme.primary.withValues(alpha: 0.3),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onSend,
+          customBorder: const CircleBorder(),
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Icon(
+              Icons.send_rounded,
+              color: colorScheme.onPrimary,
+              size: 20,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

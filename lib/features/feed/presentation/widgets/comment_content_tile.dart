@@ -43,7 +43,7 @@ class CommentContentTile extends HookWidget {
 
   /// Whether this is a reply (smaller avatar, indented)
   final bool isReply;
- 
+
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -67,15 +67,35 @@ class CommentContentTile extends HookWidget {
         children: [
           // Indent spacer for replies (only indent content, not like button)
           if (isReply) const SizedBox(width: 32),
-          
-          // Avatar
-          CircleAvatar(
-            radius: avatarRadius,
-            backgroundColor: colorScheme.surfaceContainerHighest,
-            child: Icon(
-              Icons.person,
-              size: iconSize,
-              color: colorScheme.onSurfaceVariant,
+
+          // Avatar with gradient
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  colorScheme.primaryContainer.withValues(alpha: 0.3),
+                  colorScheme.secondaryContainer.withValues(alpha: 0.2),
+                ],
+              ),
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: colorScheme.shadow.withValues(alpha: 0.08),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: CircleAvatar(
+              radius: avatarRadius,
+              backgroundColor: Colors.transparent,
+              child: Icon(
+                Icons.person,
+                size: iconSize,
+                color: colorScheme.onSurfaceVariant,
+              ),
             ),
           ),
           const SizedBox(width: 12),
@@ -104,7 +124,9 @@ class CommentContentTile extends HookWidget {
                 ),
 
                 // View replies toggle (only for root comments with replies)
-                if (!isReply && comment.replies.isNotEmpty && onToggleReplies != null)
+                if (!isReply &&
+                    comment.replies.isNotEmpty &&
+                    onToggleReplies != null)
                   _ViewRepliesToggle(
                     replyCount: comment.replies.length,
                     showReplies: showReplies,
@@ -147,14 +169,24 @@ class _UserInfoRow extends StatelessWidget {
         Text(
           username,
           style: textTheme.bodyMedium?.copyWith(
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w700,
+            letterSpacing: 0.1,
           ),
         ),
         const SizedBox(width: 8),
-        Text(
-          FormatUtils.formatTimeAgo(createdAt, context: context),
-          style: textTheme.bodySmall?.copyWith(
-            color: colorScheme.onSurfaceVariant,
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+          decoration: BoxDecoration(
+            color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Text(
+            FormatUtils.formatTimeAgo(createdAt, context: context),
+            style: textTheme.bodySmall?.copyWith(
+              color: colorScheme.onSurfaceVariant,
+              fontSize: 11,
+              letterSpacing: 0.1,
+            ),
           ),
         ),
       ],
@@ -223,36 +255,50 @@ class _ActionButtonsRow extends StatelessWidget {
       children: [
         // Reply button (optional)
         if (onReply != null) ...[
-          InkWell(
-            onTap: onReply,
-            child: Text(t.feedReplyAction, style: actionStyle),
+          Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: onReply,
+              borderRadius: BorderRadius.circular(12),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                child: Text(t.feedReplyAction, style: actionStyle),
+              ),
+            ),
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: 12),
         ],
 
         // Translate button - only show if source != target language
         if (translation.shouldShowButton)
-          InkWell(
-            onTap: translation.toggle,
-            child: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 200),
-              child: Text(
-                translation.getButtonText(
-                  t.feedSeeTranslation,
-                  t.feedTranslating,
-                  t.feedSeeOriginal,
+          Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: translation.toggle,
+              borderRadius: BorderRadius.circular(12),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 200),
+                  child: Text(
+                    translation.getButtonText(
+                      t.feedSeeTranslation,
+                      t.feedTranslating,
+                      t.feedSeeOriginal,
+                    ),
+                    key: ValueKey(translation.status),
+                    style: textTheme.bodySmall?.copyWith(
+                      color: translation.isLoading
+                          ? colorScheme.primary
+                          : colorScheme.onSurfaceVariant,
+                      fontWeight: FontWeight.w600,
+                      fontSize: actionFontSize,
+                    ),
+                  ),
                 ),
-                key: ValueKey(translation.status),
-                style: textTheme.bodySmall?.copyWith(
-                  color: translation.isLoading
-                      ? colorScheme.primary
-                      : colorScheme.onSurfaceVariant,
-                  fontWeight: FontWeight.w600,
-                  fontSize: actionFontSize,
-                ),
+              ),
             ),
           ),
-        ),
       ],
     );
   }
@@ -278,27 +324,43 @@ class _ViewRepliesToggle extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.only(top: 12),
-      child: InkWell(
-        onTap: onTap,
-        child: Row(
-          children: [
-            Container(
-              width: 32,
-              height: 1,
-              color: colorScheme.outlineVariant,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(12),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: 32,
+                  height: 1.5,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        colorScheme.outlineVariant,
+                        colorScheme.outlineVariant.withValues(alpha: 0.3),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Text(
+                  showReplies
+                      ? t.feedHideReplies
+                      : t.feedViewReplies(replyCount),
+                  style: textTheme.bodySmall?.copyWith(
+                    color: colorScheme.onSurfaceVariant,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 13,
+                    letterSpacing: 0.1,
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(width: 12),
-            Text(
-              showReplies
-                  ? t.feedHideReplies
-                  : t.feedViewReplies(replyCount),
-              style: textTheme.bodySmall?.copyWith(
-                color: colorScheme.onSurfaceVariant,
-                fontWeight: FontWeight.w600,
-                fontSize: 13,
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -326,22 +388,60 @@ class _LikeButton extends StatelessWidget {
 
     return Column(
       children: [
-        InkWell(
-          onTap: onTap,
-          child: Icon(
-            isLiked ? Icons.favorite : Icons.favorite_border,
-            size: iconSize,
-            color: isLiked ? colorScheme.error : colorScheme.onSurfaceVariant,
+        AnimatedScale(
+          scale: isLiked ? 1.0 : 0.95,
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.easeOut,
+          child: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: isLiked
+                  ? LinearGradient(
+                      colors: [
+                        colorScheme.error.withValues(alpha: 0.15),
+                        colorScheme.error.withValues(alpha: 0.05),
+                      ],
+                    )
+                  : null,
+              boxShadow: isLiked
+                  ? [
+                      BoxShadow(
+                        color: colorScheme.error.withValues(alpha: 0.2),
+                        blurRadius: 8,
+                        spreadRadius: 1,
+                      ),
+                    ]
+                  : null,
+            ),
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: onTap,
+                customBorder: const CircleBorder(),
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Icon(
+                    isLiked ? Icons.favorite : Icons.favorite_border,
+                    size: iconSize,
+                    color: isLiked
+                        ? colorScheme.error
+                        : colorScheme.onSurfaceVariant,
+                  ),
+                ),
+              ),
+            ),
           ),
         ),
         if (likesCount > 0)
           Padding(
-            padding: const EdgeInsets.only(top: 2),
+            padding: const EdgeInsets.only(top: 4),
             child: Text(
               likesCount.toString(),
               style: textTheme.bodySmall?.copyWith(
-                color: colorScheme.onSurfaceVariant,
+                color:
+                    isLiked ? colorScheme.error : colorScheme.onSurfaceVariant,
                 fontSize: 11,
+                fontWeight: isLiked ? FontWeight.w600 : FontWeight.normal,
               ),
             ),
           ),

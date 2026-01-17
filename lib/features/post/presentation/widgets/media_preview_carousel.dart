@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:velora/core/themes/color_material.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
 /// Media preview carousel with page indicators
@@ -53,11 +52,15 @@ class MediaPreviewCarousel extends HookWidget {
         decoration: BoxDecoration(
           color: colorScheme.surface,
           borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: colorScheme.outlineVariant.withValues(alpha: 0.3),
+            width: 1.5,
+          ),
           boxShadow: [
             BoxShadow(
-              color: MaterialColorsCustom.shadowColor.withValues(alpha: 0.15),
+              color: colorScheme.shadow.withValues(alpha: 0.12),
               blurRadius: 20,
-              offset: const Offset(0, 4),
+              offset: const Offset(0, 8),
             ),
           ],
         ),
@@ -77,7 +80,7 @@ class MediaPreviewCarousel extends HookWidget {
                 },
               ),
 
-              // Page indicators
+              // Page indicators with gradient
               if (mediaFiles.length > 1)
                 Positioned(
                   bottom: 16,
@@ -90,20 +93,38 @@ class MediaPreviewCarousel extends HookWidget {
                       (index) => AnimatedContainer(
                         duration: const Duration(milliseconds: 300),
                         margin: const EdgeInsets.symmetric(horizontal: 4),
-                        width: currentPage.value == index ? 24 : 8,
+                        width: currentPage.value == index ? 28 : 8,
                         height: 8,
                         decoration: BoxDecoration(
+                          gradient: currentPage.value == index
+                              ? LinearGradient(
+                                  colors: [
+                                    colorScheme.primary,
+                                    colorScheme.secondary,
+                                  ],
+                                )
+                              : null,
                           color: currentPage.value == index
-                              ? colorScheme.onSurface
+                              ? null
                               : colorScheme.onSurface.withValues(alpha: 0.3),
                           borderRadius: BorderRadius.circular(4),
+                          boxShadow: currentPage.value == index
+                              ? [
+                                  BoxShadow(
+                                    color: colorScheme.primary
+                                        .withValues(alpha: 0.3),
+                                    blurRadius: 8,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ]
+                              : null,
                         ),
                       ),
                     ),
                   ),
                 ),
 
-              // Remove button (optional)
+              // Remove button with gradient (optional)
               if (onRemove != null)
                 Positioned(
                   top: 12,
@@ -112,42 +133,77 @@ class MediaPreviewCarousel extends HookWidget {
                     button: true,
                     label: t.postMediaRemoveLabel,
                     hint: t.postMediaRemoveHint(currentPage.value + 1),
-                    child: GestureDetector(
-                      onTap: () => onRemove?.call(currentPage.value),
-                      child: Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: colorScheme.scrim.withValues(alpha: 0.6),
-                          shape: BoxShape.circle,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            colorScheme.error,
+                            colorScheme.error.withValues(alpha: 0.85),
+                          ],
                         ),
-                        child: Icon(
-                          Icons.close,
-                          color: colorScheme.onPrimary,
-                          size: 20,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: colorScheme.error.withValues(alpha: 0.3),
+                            blurRadius: 8,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap: () => onRemove?.call(currentPage.value),
+                          customBorder: const CircleBorder(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Icon(
+                              Icons.close_rounded,
+                              color: colorScheme.onError,
+                              size: 20,
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
 
-              // Image counter
+              // Image counter with gradient
               Positioned(
                 top: 12,
                 left: 12,
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
+                    horizontal: 14,
+                    vertical: 7,
                   ),
                   decoration: BoxDecoration(
-                    color: colorScheme.scrim.withValues(alpha: 0.6),
+                    gradient: LinearGradient(
+                      colors: [
+                        colorScheme.primary,
+                        colorScheme.secondary,
+                      ],
+                    ),
                     borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: colorScheme.onPrimary.withValues(alpha: 0.2),
+                      width: 1,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: colorScheme.primary.withValues(alpha: 0.4),
+                        blurRadius: 12,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
                   ),
                   child: Text(
                     '${currentPage.value + 1}/${mediaFiles.length}',
                     style: textTheme.labelMedium?.copyWith(
                       color: colorScheme.onPrimary,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 0.3,
                     ),
                   ),
                 ),

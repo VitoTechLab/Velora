@@ -7,54 +7,42 @@ ThemeData buildTheme(Brightness brightness) {
 
   final ColorScheme colorScheme = ColorScheme(
     brightness: brightness,
-    primary: MaterialColorsCustom.primaryYellow,
-    onPrimary: isLight
-        ? MaterialColorsCustom.lightButtonText
-        : MaterialColorsCustom.darkButtonText,
-    secondary: MaterialColorsCustom.accentYellow,
-    onSecondary: MaterialColorsCustom.black,
+    primary: MaterialColorsCustom.neonViolet,
+    onPrimary: MaterialColorsCustom.white,
+    secondary: MaterialColorsCustom.neonPurple,
+    onSecondary: MaterialColorsCustom.white,
     error: MaterialColorsCustom.brandRed,
     onError: MaterialColorsCustom.white,
-    surface: isLight
-        ? MaterialColorsCustom.greyLightContainer
-        : MaterialColorsCustom.darkSurface,
+    surface:
+        isLight ? MaterialColorsCustom.white : MaterialColorsCustom.darkNavy1,
     onSurface: isLight
         ? MaterialColorsCustom.lightTextPrimary
         : MaterialColorsCustom.darkTextPrimary,
     outline: isLight
         ? MaterialColorsCustom.greyLightBorder
         : MaterialColorsCustom.darkOutline,
-    inverseSurface: isLight
-        ? MaterialColorsCustom.darkBackground
-        : MaterialColorsCustom.lightBackground,
-    inversePrimary: MaterialColorsCustom.brandBlue,
-    tertiary: MaterialColorsCustom.brandBlueSoft,
-    onTertiary: isLight
-        ? MaterialColorsCustom.black
-        : MaterialColorsCustom.white,
+    inverseSurface:
+        isLight ? MaterialColorsCustom.darkNavy1 : MaterialColorsCustom.white,
+    inversePrimary: MaterialColorsCustom.neonIndigo,
+    tertiary: MaterialColorsCustom.neonTeal,
+    onTertiary: MaterialColorsCustom.white,
 
-    // Tambahan Properti Baru (Gak wajib semua diisi, tergantung kebutuhan)
-    surfaceDim: isLight
-        ? MaterialColorsCustom.greyLightContainer
-        : MaterialColorsCustom.darkCard,
-    surfaceBright: isLight
-        ? MaterialColorsCustom.white
-        : MaterialColorsCustom.darkSurface,
-    surfaceContainerLowest: isLight
-        ? MaterialColorsCustom.white
-        : MaterialColorsCustom.darkCard,
-    surfaceContainerLow: isLight
-        ? MaterialColorsCustom.greyLightContainer
-        : MaterialColorsCustom.darkSurface,
-    surfaceContainer: isLight
-        ? MaterialColorsCustom.greyLightContainer
-        : MaterialColorsCustom.darkSurface,
-    surfaceContainerHigh: isLight
-        ? MaterialColorsCustom.greyLightContainer
-        : MaterialColorsCustom.darkSurface,
+    // Surface variants: clean white untuk light, dark navy untuk dark
+    surfaceDim:
+        isLight ? MaterialColorsCustom.mist : MaterialColorsCustom.darkNavy2,
+    surfaceBright:
+        isLight ? MaterialColorsCustom.white : MaterialColorsCustom.darkNavy1,
+    surfaceContainerLowest:
+        isLight ? MaterialColorsCustom.white : MaterialColorsCustom.darkNavy1,
+    surfaceContainerLow:
+        isLight ? MaterialColorsCustom.white : MaterialColorsCustom.darkNavy2,
+    surfaceContainer:
+        isLight ? MaterialColorsCustom.mist : MaterialColorsCustom.darkNavy2,
+    surfaceContainerHigh:
+        isLight ? MaterialColorsCustom.mist : MaterialColorsCustom.darkNavy3,
     surfaceContainerHighest: isLight
         ? MaterialColorsCustom.greyLightContainer
-        : MaterialColorsCustom.darkSurface,
+        : MaterialColorsCustom.darkCard,
 
     // Optional, tapi recommended untuk icon atau outline halus
     onSurfaceVariant: isLight
@@ -158,18 +146,20 @@ ThemeData buildTheme(Brightness brightness) {
       style: ElevatedButton.styleFrom(
         backgroundColor: colorScheme.primary,
         foregroundColor: colorScheme.onPrimary,
-        textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        elevation: 4,
-        shadowColor: MaterialColorsCustom.shadowColor,
-        minimumSize: const Size.fromHeight(50),
+        textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        elevation: 0,
+        shadowColor: Colors.transparent,
+        minimumSize: const Size.fromHeight(56),
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        foregroundColor: colorScheme.primary,
+        foregroundColor: colorScheme.onSurface,
         side: BorderSide(color: colorScheme.outline),
         textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        minimumSize: const Size.fromHeight(48),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
@@ -180,27 +170,37 @@ ThemeData buildTheme(Brightness brightness) {
     ),
     inputDecorationTheme: InputDecorationTheme(
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide(color: colorScheme.outline),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
         borderSide: BorderSide(color: colorScheme.outline),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(color: colorScheme.primary),
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide(color: colorScheme.outline),
       ),
       errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide(color: colorScheme.error),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
         borderSide: BorderSide(color: colorScheme.error),
       ),
       hintStyle: TextStyle(color: colorScheme.onSurfaceVariant),
       isDense: true,
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: colorScheme.secondaryContainer,
-      foregroundColor: colorScheme.onSecondary,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      backgroundColor: colorScheme.primary,
+      foregroundColor: colorScheme.onPrimary,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      elevation: 0,
     ),
     navigationBarTheme: NavigationBarThemeData(
-      backgroundColor: colorScheme.surfaceContainerLow,
+      backgroundColor:
+          isLight ? MaterialColorsCustom.white : MaterialColorsCustom.darkNavy1,
       indicatorColor: Colors.transparent,
       labelTextStyle: WidgetStateProperty.all(
         const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
@@ -213,11 +213,13 @@ ThemeData buildTheme(Brightness brightness) {
         );
       }),
       labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+      elevation: 0,
     ),
     cardTheme: CardThemeData(
-      color: colorScheme.surface,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      elevation: 2,
+      color:
+          isLight ? MaterialColorsCustom.white : MaterialColorsCustom.darkNavy2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      elevation: 0,
       margin: const EdgeInsets.all(8),
     ),
     dividerTheme: DividerThemeData(
@@ -248,11 +250,15 @@ ThemeData buildTheme(Brightness brightness) {
       ),
     ),
     snackBarTheme: SnackBarThemeData(
-      backgroundColor: colorScheme.surfaceContainer,
-      contentTextStyle: textTheme.bodyMedium,
+      backgroundColor:
+          isLight ? MaterialColorsCustom.black : MaterialColorsCustom.darkNavy2,
+      contentTextStyle: textTheme.bodyMedium?.copyWith(
+        color: MaterialColorsCustom.white,
+      ),
       actionTextColor: colorScheme.primary,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       behavior: SnackBarBehavior.floating,
+      elevation: 0,
     ),
   );
 }

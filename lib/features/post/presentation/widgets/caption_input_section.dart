@@ -21,7 +21,30 @@ class CaptionInputSection extends StatelessWidget {
     final t = AppLocalizations.of(context)!;
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+            colorScheme.surfaceContainer.withValues(alpha: 0.2),
+          ],
+        ),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: colorScheme.outline.withValues(alpha: 0.2),
+          width: 1,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: colorScheme.shadow.withValues(alpha: 0.05),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
       child: TextField(
         controller: controller,
         focusNode: focusNode,
@@ -30,8 +53,9 @@ class CaptionInputSection extends StatelessWidget {
         maxLength: maxLength,
         style: theme.textTheme.bodyLarge?.copyWith(
           fontSize: 16,
-          height: 1.5,
+          height: 1.6,
           color: colorScheme.onSurface,
+          letterSpacing: 0.2,
         ),
         decoration: InputDecoration(
           border: InputBorder.none,
@@ -42,8 +66,9 @@ class CaptionInputSection extends StatelessWidget {
           disabledBorder: InputBorder.none,
           hintText: t.postCaptionHint,
           hintStyle: theme.textTheme.bodyLarge?.copyWith(
-            color: colorScheme.onSurface.withValues(alpha: 0.4),
+            color: colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
             fontSize: 16,
+            letterSpacing: 0.2,
           ),
           contentPadding: EdgeInsets.zero,
           counterText: '', // Hide counter

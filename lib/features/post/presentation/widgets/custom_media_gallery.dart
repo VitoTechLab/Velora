@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:velora/core/themes/color_material.dart';
 import 'package:velora/core/ui/app_messenger.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
@@ -64,8 +63,41 @@ class CustomMediaGallery extends HookWidget {
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(32),
-            child: CircularProgressIndicator(
-              color: Theme.of(context).colorScheme.primary,
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Theme.of(context)
+                        .colorScheme
+                        .primaryContainer
+                        .withValues(alpha: 0.3),
+                    Theme.of(context)
+                        .colorScheme
+                        .secondaryContainer
+                        .withValues(alpha: 0.2),
+                  ],
+                ),
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: Theme.of(context)
+                        .colorScheme
+                        .primary
+                        .withValues(alpha: 0.1),
+                    blurRadius: 16,
+                    spreadRadius: 2,
+                  ),
+                ],
+              ),
+              child: SizedBox(
+                width: 40,
+                height: 40,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2.5,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
             ),
           ),
         ),
@@ -156,15 +188,15 @@ class _MediaThumbnail extends HookWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: isSelected ? colorScheme.secondary : Colors.transparent,
-                width: 3,
+                color: isSelected ? colorScheme.primary : Colors.transparent,
+                width: 2.5,
               ),
               boxShadow: isSelected
                   ? [
                       BoxShadow(
-                        color: colorScheme.secondary.withValues(alpha: 0.4),
-                        blurRadius: 8,
-                        offset: const Offset(0, 2),
+                        color: colorScheme.primary.withValues(alpha: 0.35),
+                        blurRadius: 12,
+                        spreadRadius: 1,
                       ),
                     ]
                   : null,
@@ -177,7 +209,16 @@ class _MediaThumbnail extends HookWidget {
                   Image.file(file, fit: BoxFit.cover),
                   if (isSelected)
                     Container(
-                      color: colorScheme.secondary.withValues(alpha: 0.2),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            colorScheme.primary.withValues(alpha: 0.25),
+                            colorScheme.secondary.withValues(alpha: 0.15),
+                          ],
+                        ),
+                      ),
                     ),
                   if (isSelected)
                     Positioned(
@@ -187,17 +228,21 @@ class _MediaThumbnail extends HookWidget {
                         width: 28,
                         height: 28,
                         decoration: BoxDecoration(
-                          gradient: const LinearGradient(
+                          gradient: LinearGradient(
                             colors: [
-                              MaterialColorsCustom.brandSeafoam,
-                              MaterialColorsCustom.brandEmerald,
+                              colorScheme.primary,
+                              colorScheme.secondary,
                             ],
                           ),
                           shape: BoxShape.circle,
+                          border: Border.all(
+                            color: colorScheme.onPrimary.withValues(alpha: 0.3),
+                            width: 1.5,
+                          ),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withValues(alpha: 0.2),
-                              blurRadius: 4,
+                              color: colorScheme.primary.withValues(alpha: 0.4),
+                              blurRadius: 8,
                               offset: const Offset(0, 2),
                             ),
                           ],
@@ -206,8 +251,9 @@ class _MediaThumbnail extends HookWidget {
                           child: Text(
                             '$selectionNumber',
                             style: textTheme.labelSmall?.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
+                              color: colorScheme.onPrimary,
+                              fontWeight: FontWeight.w900,
+                              fontSize: 12,
                             ),
                           ),
                         ),
@@ -232,50 +278,127 @@ class _EmptyGalleryPlaceholder extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
     final t = AppLocalizations.of(context)!;
 
     return Padding(
       padding: const EdgeInsets.all(32),
       child: Column(
         children: [
-          Container(
-            width: 120,
-            height: 120,
-            decoration: BoxDecoration(
-              color: colorScheme.surfaceContainerHighest,
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              Icons.photo_library_outlined,
-              size: 56,
-              color: colorScheme.onSurfaceVariant,
+          TweenAnimationBuilder<double>(
+            tween: Tween(begin: 0.0, end: 1.0),
+            duration: const Duration(milliseconds: 600),
+            curve: Curves.easeOutBack,
+            builder: (context, value, child) {
+              return Transform.scale(
+                scale: value,
+                child: Opacity(
+                  opacity: value,
+                  child: child,
+                ),
+              );
+            },
+            child: Container(
+              width: 120,
+              height: 120,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    colorScheme.primaryContainer.withValues(alpha: 0.3),
+                    colorScheme.secondaryContainer.withValues(alpha: 0.2),
+                  ],
+                ),
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: colorScheme.primary.withValues(alpha: 0.1),
+                    blurRadius: 20,
+                    spreadRadius: 3,
+                  ),
+                ],
+              ),
+              child: ShaderMask(
+                shaderCallback: (bounds) => LinearGradient(
+                  colors: [
+                    colorScheme.primary,
+                    colorScheme.secondary,
+                  ],
+                ).createShader(bounds),
+                child: Icon(
+                  Icons.photo_library_outlined,
+                  size: 56,
+                  color: Colors.white,
+                ),
+              ),
             ),
           ),
           const SizedBox(height: 24),
           Text(
             t.postGalleryEmptyTitle,
-            style: theme.textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.w600,
+            style: textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.w700,
               color: colorScheme.onSurface,
+              letterSpacing: 0.2,
             ),
           ),
           const SizedBox(height: 8),
           Text(
             t.postGalleryEmptySubtitle,
             textAlign: TextAlign.center,
-            style: theme.textTheme.bodyMedium?.copyWith(
+            style: textTheme.bodyMedium?.copyWith(
               color: colorScheme.onSurfaceVariant,
+              letterSpacing: 0.1,
             ),
           ),
           const SizedBox(height: 24),
-          FilledButton.icon(
-            onPressed: onSelectImages,
-            icon: const Icon(Icons.add_photo_alternate_outlined),
-            label: Text(t.postGallerySelectButton),
-            style: FilledButton.styleFrom(
-              backgroundColor: colorScheme.primary,
-              foregroundColor: colorScheme.onPrimary,
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  colorScheme.primary,
+                  colorScheme.primary.withValues(alpha: 0.85),
+                ],
+              ),
+              borderRadius: BorderRadius.circular(24),
+              boxShadow: [
+                BoxShadow(
+                  color: colorScheme.primary.withValues(alpha: 0.3),
+                  blurRadius: 12,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: onSelectImages,
+                borderRadius: BorderRadius.circular(24),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.add_photo_alternate_outlined,
+                        color: colorScheme.onPrimary,
+                        size: 20,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        t.postGallerySelectButton,
+                        style: textTheme.labelLarge?.copyWith(
+                          color: colorScheme.onPrimary,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 0.3,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ),
         ],

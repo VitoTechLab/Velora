@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:velora/core/themes/color_material.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
 /// Minimal app bar for post creation with close and next actions
@@ -23,10 +22,23 @@ class CreatePostAppBar extends StatelessWidget {
     return Container(
       height: 56,
       decoration: BoxDecoration(
-        color: Colors.white,
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            theme.colorScheme.surface,
+            theme.colorScheme.surfaceContainerLowest,
+          ],
+        ),
+        border: Border(
+          bottom: BorderSide(
+            color: theme.colorScheme.outlineVariant.withValues(alpha: 0.3),
+            width: 1,
+          ),
+        ),
         boxShadow: [
           BoxShadow(
-            color: MaterialColorsCustom.shadowColor,
+            color: theme.colorScheme.shadow.withValues(alpha: 0.08),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -36,23 +48,49 @@ class CreatePostAppBar extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 4),
         child: Row(
           children: [
-            // Close button
-            IconButton(
-              onPressed: onClosePressed,
-              icon: const Icon(Icons.close, size: 24),
-              color: MaterialColorsCustom.lightTextPrimary,
-              splashRadius: 24,
+            // Close button with modern container
+            Container(
+              margin: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: theme.colorScheme.surfaceContainerHighest
+                    .withValues(alpha: 0.5),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: onClosePressed,
+                  borderRadius: BorderRadius.circular(12),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Icon(
+                      Icons.close,
+                      size: 24,
+                      color: theme.colorScheme.onSurface,
+                    ),
+                  ),
+                ),
+              ),
             ),
 
-            // Title
+            // Title with gradient
             Expanded(
-              child: Text(
-                t.postCreateAppBarTitle,
-                textAlign: TextAlign.center,
-                style: theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 17,
-                  color: MaterialColorsCustom.lightTextPrimary,
+              child: ShaderMask(
+                shaderCallback: (bounds) => LinearGradient(
+                  colors: [
+                    theme.colorScheme.primary,
+                    theme.colorScheme.secondary,
+                  ],
+                ).createShader(bounds),
+                child: Text(
+                  t.postCreateAppBarTitle,
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 17,
+                    color: Colors.white,
+                    letterSpacing: 0.2,
+                  ),
                 ),
               ),
             ),
@@ -86,29 +124,30 @@ class _NextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
     return AnimatedOpacity(
       duration: const Duration(milliseconds: 200),
       opacity: isEnabled ? 1.0 : 0.4,
       child: Container(
         decoration: BoxDecoration(
           gradient: isEnabled
-              ? const LinearGradient(
+              ? LinearGradient(
                   colors: [
-                    MaterialColorsCustom.brandSeafoam,
-                    MaterialColorsCustom.brandEmerald,
+                    colorScheme.primary,
+                    colorScheme.primary.withValues(alpha: 0.85),
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 )
               : null,
-          color: isEnabled ? null : MaterialColorsCustom.greyMedium,
+          color: isEnabled ? null : colorScheme.surfaceContainerHighest,
           borderRadius: BorderRadius.circular(20),
           boxShadow: isEnabled
               ? [
                   BoxShadow(
-                    color: MaterialColorsCustom.brandSeafoam.withValues(
-                      alpha: 0.3,
-                    ),
+                    color: colorScheme.primary.withValues(alpha: 0.3),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),
@@ -124,10 +163,12 @@ class _NextButton extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
               child: Text(
                 label,
-                style: TextStyle(
-                  color: Colors.white,
+                style: textTheme.labelLarge?.copyWith(
+                  color: isEnabled
+                      ? colorScheme.onPrimary
+                      : colorScheme.onSurfaceVariant,
                   fontSize: 15,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w700,
                   letterSpacing: 0.3,
                 ),
               ),

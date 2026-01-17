@@ -79,8 +79,8 @@ class FeedScreen extends HookWidget {
     // Load unread count once on mount
     useEffect(() {
       context.read<NotificationBloc>().add(
-        const NotificationEvent.loadUnreadCount(),
-      );
+            const NotificationEvent.loadUnreadCount(),
+          );
       return null;
     }, const []);
 
@@ -89,28 +89,116 @@ class FeedScreen extends HookWidget {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          tooltip: t.feedCreatePostTooltip,
-          icon: const Icon(Icons.add_box_outlined, size: 32),
-          onPressed: () {
-            context.pushNamed(AppRouteName.mediaGallery);
-          },
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Theme.of(context).colorScheme.surface,
+                Theme.of(context).colorScheme.surfaceContainerLowest,
+              ],
+            ),
+          ),
         ),
-        title: Text('Velora', style: Theme.of(context).textTheme.displayMedium),
+        elevation: 0,
+        shadowColor: Colors.transparent,
+        surfaceTintColor: Colors.transparent,
+        leading: Container(
+          margin: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Theme.of(context).colorScheme.primary,
+                Theme.of(context).colorScheme.primary.withValues(alpha: 0.85),
+              ],
+            ),
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Theme.of(context)
+                    .colorScheme
+                    .primary
+                    .withValues(alpha: 0.3),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: () {
+                context.pushNamed(AppRouteName.mediaGallery);
+              },
+              borderRadius: BorderRadius.circular(12),
+              child: Icon(
+                Icons.add_box_outlined,
+                size: 28,
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
+            ),
+          ),
+        ),
+        title: ShaderMask(
+          shaderCallback: (bounds) => LinearGradient(
+            colors: [
+              Theme.of(context).colorScheme.primary,
+              Theme.of(context).colorScheme.secondary,
+            ],
+          ).createShader(bounds),
+          child: Text(
+            'Velora',
+            style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 0.5,
+                  color: Colors.white,
+                ),
+          ),
+        ),
         actions: [
           BlocBuilder<NotificationBloc, NotificationState>(
             buildWhen: (previous, current) =>
                 previous.unreadCount != current.unreadCount,
             builder: (context, notificationState) {
-              return IconButton(
-                tooltip: 'Notifications',
-                icon: NotificationBadge(
-                  count: notificationState.unreadCount,
-                  child: const Icon(Icons.favorite_border, size: 32),
+              return Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      if (notificationState.unreadCount > 0)
+                        BoxShadow(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .error
+                              .withValues(alpha: 0.3),
+                          blurRadius: 12,
+                          spreadRadius: 2,
+                        ),
+                    ],
+                  ),
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () {
+                        context.pushNamed(AppRouteName.notification);
+                      },
+                      customBorder: const CircleBorder(),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: NotificationBadge(
+                          count: notificationState.unreadCount,
+                          child: Icon(
+                            Icons.favorite_border,
+                            size: 28,
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-                onPressed: () {
-                  context.pushNamed(AppRouteName.notification);
-                },
               );
             },
           ),
@@ -221,35 +309,80 @@ class FeedScreen extends HookWidget {
                     SliverList(
                       delegate: SliverChildBuilderDelegate(
                         (context, index) {
-                          final postIndex = FeedAdPositionCalculator.getPostIndex(
+                          final postIndex =
+                              FeedAdPositionCalculator.getPostIndex(
                             index,
                             posts.length,
                           );
 
                           // Show loading indicator at the end
                           if (postIndex == -2 && state.isLoadingMore) {
-                            return const Padding(
-                              padding: EdgeInsets.all(16.0),
-                              child: Center(child: CircularProgressIndicator()),
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 24.0,
+                                horizontal: 16.0,
+                              ),
+                              child: Center(
+                                child: Container(
+                                  padding: const EdgeInsets.all(16),
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .surfaceContainerHighest
+                                        .withValues(alpha: 0.5),
+                                    borderRadius: BorderRadius.circular(16),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .shadow
+                                            .withValues(alpha: 0.05),
+                                        blurRadius: 8,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: SizedBox(
+                                    width: 32,
+                                    height: 32,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2.5,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary
+                                          .withValues(alpha: 0.8),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             );
                           }
 
                           // Show ad at specific positions
                           if (postIndex == -1) {
-                            return NativeAdWidget(
-                              key: ValueKey('native_ad_$index'),
-                              height: FeedLayoutConstants.nativeAdHeight,
-                              useTestAds: false,
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 8,
+                                horizontal: 0,
+                              ),
+                              child: NativeAdWidget(
+                                key: ValueKey('native_ad_$index'),
+                                height: FeedLayoutConstants.nativeAdHeight,
+                                useTestAds: false,
+                              ),
                             );
                           }
 
                           // Show regular post
                           final post = posts[postIndex];
-                          return FeedCard(
-                            key: ValueKey('feed_post_${post.id}'),
-                            post: post,
-                            onTap: () => onPostTap(post),
-                            onCommentTap: () => onCommentsTap(post),
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 4),
+                            child: FeedCard(
+                              key: ValueKey('feed_post_${post.id}'),
+                              post: post,
+                              onTap: () => onPostTap(post),
+                              onCommentTap: () => onCommentsTap(post),
+                            ),
                           );
                         },
                         childCount: FeedAdPositionCalculator.calculateItemCount(
@@ -257,7 +390,8 @@ class FeedScreen extends HookWidget {
                           hasLoadingIndicator: state.isLoadingMore,
                         ),
                         semanticIndexCallback: (widget, localIndex) {
-                          final postIndex = FeedAdPositionCalculator.getPostIndex(
+                          final postIndex =
+                              FeedAdPositionCalculator.getPostIndex(
                             localIndex,
                             posts.length,
                           );

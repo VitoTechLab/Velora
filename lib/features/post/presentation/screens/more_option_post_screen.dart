@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:velora/features/post/domain/entities/more_option_data.dart';
 import 'package:velora/l10n/app_localizations.dart';
+import 'package:velora/shared/widgets/modern_toggle_switch.dart';
 
 class MoreOptionPostScreen extends HookWidget {
   final MoreOptionData initialOptions;
@@ -41,17 +42,55 @@ class MoreOptionPostScreen extends HookWidget {
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
-        backgroundColor: colorScheme.surfaceContainerHigh,
+        backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: colorScheme.onSurface),
-          onPressed: onBackPressed,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                colorScheme.surface,
+                colorScheme.surfaceContainerLowest,
+              ],
+            ),
+            border: Border(
+              bottom: BorderSide(
+                color: colorScheme.outlineVariant.withValues(alpha: 0.3),
+                width: 1,
+              ),
+            ),
+          ),
         ),
-        title: Text(
-          t.postMoreOptionsTitle,
-          style: textTheme.titleMedium?.copyWith(
-            color: colorScheme.onSurface,
-            fontWeight: FontWeight.w600,
+        leading: Container(
+          margin: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: onBackPressed,
+              borderRadius: BorderRadius.circular(12),
+              child: Icon(Icons.arrow_back, color: colorScheme.onSurface),
+            ),
+          ),
+        ),
+        title: ShaderMask(
+          shaderCallback: (bounds) => LinearGradient(
+            colors: [
+              colorScheme.primary,
+              colorScheme.secondary,
+            ],
+          ).createShader(bounds),
+          child: Text(
+            t.postMoreOptionsTitle,
+            style: textTheme.titleMedium?.copyWith(
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 0.2,
+            ),
           ),
         ),
         centerTitle: false,
@@ -59,13 +98,53 @@ class MoreOptionPostScreen extends HookWidget {
       body: ListView(
         children: [
           // Header section
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Text(
-              t.postMoreOptionsHeader,
-              style: textTheme.bodySmall?.copyWith(
-                color: colorScheme.onSurface.withValues(alpha: 0.6),
+          Container(
+            margin: const EdgeInsets.all(16),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  colorScheme.primaryContainer.withValues(alpha: 0.2),
+                  colorScheme.secondaryContainer.withValues(alpha: 0.1),
+                ],
               ),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: colorScheme.outline.withValues(alpha: 0.2),
+                width: 1,
+              ),
+            ),
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        colorScheme.primary.withValues(alpha: 0.2),
+                        colorScheme.secondary.withValues(alpha: 0.15),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Icon(
+                    Icons.info_outline,
+                    size: 20,
+                    color: colorScheme.primary,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    t.postMoreOptionsHeader,
+                    style: textTheme.bodySmall?.copyWith(
+                      color: colorScheme.onSurface.withValues(alpha: 0.7),
+                      fontSize: 13,
+                      letterSpacing: 0.1,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
 
@@ -121,16 +200,54 @@ class MoreOptionPostScreen extends HookWidget {
       toggled: value,
       label: title,
       hint: hint,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: value
+                ? colorScheme.primary.withValues(alpha: 0.3)
+                : colorScheme.outline.withValues(alpha: 0.2),
+            width: 1.5,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: value
+                  ? colorScheme.primary.withValues(alpha: 0.08)
+                  : colorScheme.shadow.withValues(alpha: 0.05),
+              blurRadius: value ? 12 : 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
         child: Row(
           children: [
-            // Icon
+            // Icon with gradient background
             Container(
-              width: 24,
-              height: 24,
-              alignment: Alignment.center,
-              child: Icon(icon, size: 24, color: colorScheme.onSurface),
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    colorScheme.primaryContainer.withValues(alpha: 0.4),
+                    colorScheme.secondaryContainer.withValues(alpha: 0.3),
+                  ],
+                ),
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: colorScheme.primary.withValues(alpha: 0.1),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Icon(
+                icon,
+                size: 24,
+                color: colorScheme.primary,
+              ),
             ),
             const SizedBox(width: 16),
 
@@ -143,7 +260,8 @@ class MoreOptionPostScreen extends HookWidget {
                     title,
                     style: textTheme.bodyMedium?.copyWith(
                       color: colorScheme.onSurface,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.1,
                     ),
                   ),
                   if (subtitle != null) ...[
@@ -151,8 +269,10 @@ class MoreOptionPostScreen extends HookWidget {
                     Text(
                       subtitle,
                       style: textTheme.bodySmall?.copyWith(
-                        color: colorScheme.onSurface.withValues(alpha: 0.6),
+                        color: colorScheme.onSurfaceVariant,
                         height: 1.4,
+                        fontSize: 12,
+                        letterSpacing: 0.1,
                       ),
                     ),
                   ],
@@ -162,11 +282,10 @@ class MoreOptionPostScreen extends HookWidget {
 
             const SizedBox(width: 16),
 
-            // Toggle switch
-            Switch(
+            // Modern toggle switch
+            ModernToggleSwitch(
               value: value,
               onChanged: onChanged,
-              activeThumbColor: colorScheme.primary,
             ),
           ],
         ),

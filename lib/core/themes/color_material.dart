@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MaterialColorsCustom {
-  /// Core brand palette tuned for a clean, modern campaign identity.
-  static const Color brandEmerald = Color(0xFF1F6F5C);
-  static const Color brandSeafoam = Color(0xFF4CC4A7);
-  static const Color brandCoral = Color(0xFFFF8A63);
-  static const Color brandIndigo = Color(0xFF415371);
-  static const Color brandSky = Color(0xFFBBDDF6);
-
-  /// Neon/Vibrant palette for dark theme auth screens
+  /// Neon/Vibrant palette - Primary brand colors for modern dark UI
   static const Color neonViolet = Color(0xFF6366F1);
   static const Color neonPurple = Color(0xFF8B5CF6);
   static const Color neonMagenta = Color(0xFFA855F7);
@@ -21,20 +14,17 @@ class MaterialColorsCustom {
   static const Color neonLightPurple = Color(0xFFA78BFA);
   static const Color neonLilac = Color(0xFFC4B5FD);
 
-  /// Dark gradient backgrounds for auth
+  /// Dark gradient backgrounds for auth screens
   static const Color darkNavy1 = Color(0xFF1a1a2e);
   static const Color darkNavy2 = Color(0xFF16213e);
   static const Color darkNavy3 = Color(0xFF0f3460);
   static const Color darkNavy4 = Color(0xFF533483);
 
-  /// Legacy aliases kept for backward compatibility with older widgets.
-  static const Color primaryYellow = brandEmerald;
-  static const Color accentYellow = brandSeafoam;
+  /// Brand colors for general UI
   static const Color brandBlue = Color(0xFF4AA3F2);
-  static const Color brandBlueSoft = brandSky;
+  static const Color brandSky = Color(0xFFBBDDF6);
   static const Color brandRed = Color(0xFFEB6A64);
-  static const Color brandGreen = Color(0xFF2BB673);
-  static const Color brandOrange = brandCoral;
+  static const Color brandCoral = Color(0xFFFF8A63);
   static const Color black = Color(0xFF0B1A24);
   static const Color white = Colors.white;
 
@@ -59,18 +49,18 @@ class MaterialColorsCustom {
   static const Color lightTextSecondary = Color(0xFF5C6C7D);
   static const Color lightIcon = lightTextPrimary;
   static const Color lightOutline = greyLightBorder;
-  static const Color lightHighlightIcon = brandSeafoam;
-  static const Color lightIconBackground = Color(0xFFE4F4F0);
+  static const Color lightHighlightIcon = neonIndigo;
+  static const Color lightIconBackground = Color(0xFFEEEFFE);
   static const Color lightElevatedButtonText = white;
   static const Color lightNavigationBarBackground = white;
-  static const Color lightButtonBackground = brandEmerald;
+  static const Color lightButtonBackground = neonViolet;
   static const Color lightButtonText = white;
-  static const Color lightButtonOutline = brandSeafoam;
+  static const Color lightButtonOutline = neonIndigo;
   static const Color lightContainerDoftBlue = Color(0xFFE2F0FF);
   static const Color lightArrowIndicator = arrowIndicatorLight;
   static const Color lightContainerBorder = Color(0xFFD2DCE5);
 
-  // Dark Mode - Enhanced with neon colors
+  // Dark Mode - Neon themed
   static const Color darkBackground = darkNavy1;
   static const Color darkCard = Color(0xFF0F1F2D);
   static const Color darkSurface = dusk;
@@ -79,7 +69,7 @@ class MaterialColorsCustom {
   static const Color darkIcon = darkTextPrimary;
   static const Color darkOutline = greyDarkBorder;
   static const Color darkHighlightIcon = neonIndigo;
-  static const Color darkIconBackground = Color(0xFF113B38);
+  static const Color darkIconBackground = Color(0xFF1A1F3A);
   static const Color darkElevatedButtonText = white;
   static const Color darkNavigationBarBackground = Color(0xFF081723);
   static const Color darkButtonBackground = neonViolet;
@@ -91,7 +81,7 @@ class MaterialColorsCustom {
 
   // Status Colors
   static const Color error = brandRed;
-  static const Color success = brandGreen;
+  static const Color success = neonTeal;
   static const Color warning = Color(0xFFF6B756);
   static const Color info = brandBlue;
 

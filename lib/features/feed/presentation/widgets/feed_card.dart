@@ -64,9 +64,8 @@ class FeedCard extends HookWidget {
     void handleLikeToggle() {
       isLiked.value = !isLiked.value;
       if (likesCount.value != null) {
-        likesCount.value = isLiked.value
-            ? likesCount.value! + 1
-            : likesCount.value! - 1;
+        likesCount.value =
+            isLiked.value ? likesCount.value! + 1 : likesCount.value! - 1;
       }
 
       context.read<FeedBloc>().add(FeedEvent.toggleLikePost(post.id));
@@ -157,11 +156,20 @@ class FeedCard extends HookWidget {
         hint: onTap != null ? t.feedOpenPostHint : null,
         child: ExcludeSemantics(
           child: Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: Container(
-              padding: const EdgeInsets.only(bottom: 6),
-              color: colorScheme.surface,
-
+            padding: const EdgeInsets.only(bottom: 12.0),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              padding: const EdgeInsets.only(bottom: 8),
+              decoration: BoxDecoration(
+                color: colorScheme.surface,
+                boxShadow: [
+                  BoxShadow(
+                    color: colorScheme.shadow.withValues(alpha: 0.03),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -284,27 +292,43 @@ class FeedCard extends HookWidget {
           ),
           // Follow button - only show when not own post, not following, and no pending request
           if (!post.isMe && !isFollowing && !hasFollowRequest) ...[
-            TextButton(
-              onPressed: onFollowToggle,
-              style: TextButton.styleFrom(
-                backgroundColor: colorScheme.primary,
-                foregroundColor: colorScheme.onPrimary,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 6,
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    colorScheme.primary,
+                    colorScheme.primary.withValues(alpha: 0.85),
+                  ],
                 ),
-                minimumSize: Size.zero,
-                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: colorScheme.primary.withValues(alpha: 0.3),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
               ),
-              child: Text(
-                'Follow',
-                style: textTheme.labelMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 13,
-                  color: colorScheme.onPrimary,
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: onFollowToggle,
+                  borderRadius: BorderRadius.circular(8),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    child: Text(
+                      'Follow',
+                      style: textTheme.labelMedium?.copyWith(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 13,
+                        color: colorScheme.onPrimary,
+                        letterSpacing: 0.2,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -364,8 +388,22 @@ class FeedCard extends HookWidget {
               fit: BoxFit.cover,
               width: double.infinity,
               placeholder: (context, url) => Container(
-                color: colorScheme.surfaceContainerHighest,
-                child: const Center(child: CircularProgressIndicator()),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      colorScheme.surfaceContainerHighest,
+                      colorScheme.surfaceContainerHigh,
+                    ],
+                  ),
+                ),
+                child: Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2.5,
+                    color: colorScheme.primary.withValues(alpha: 0.6),
+                  ),
+                ),
               ),
               errorWidget: (context, url, error) => Container(
                 color: colorScheme.surfaceContainerHighest,
@@ -411,19 +449,36 @@ class FeedCard extends HookWidget {
                       right: 12,
                       child: Container(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 4,
+                          horizontal: 10,
+                          vertical: 5,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.black.withValues(alpha: 0.6),
-                          borderRadius: BorderRadius.circular(12),
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.black.withValues(alpha: 0.75),
+                              Colors.black.withValues(alpha: 0.65),
+                            ],
+                          ),
+                          borderRadius: BorderRadius.circular(14),
+                          border: Border.all(
+                            color: Colors.white.withValues(alpha: 0.15),
+                            width: 0.5,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.3),
+                              blurRadius: 8,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
                         ),
                         child: Text(
                           '${index + 1}/${post.imageUrls.length}',
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 12,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 0.3,
                           ),
                         ),
                       ),
@@ -482,31 +537,58 @@ class FeedCard extends HookWidget {
           },
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: colorScheme.primary.withValues(alpha: 0.08),
-              borderRadius: BorderRadius.circular(6),
-              border: Border.all(
-                color: colorScheme.primary.withValues(alpha: 0.2),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  colorScheme.primary.withValues(alpha: 0.12),
+                  colorScheme.primary.withValues(alpha: 0.06),
+                ],
               ),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: colorScheme.primary.withValues(alpha: 0.25),
+                width: 1.5,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: colorScheme.primary.withValues(alpha: 0.08),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
+              ],
             ),
             child: Row(
               children: [
-                Icon(Icons.campaign, color: colorScheme.primary, size: 20),
-                const SizedBox(width: 8),
+                Container(
+                  padding: const EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    color: colorScheme.primary.withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Icon(
+                    Icons.campaign,
+                    color: colorScheme.primary,
+                    size: 18,
+                  ),
+                ),
+                const SizedBox(width: 10),
                 Expanded(
                   child: Text(
                     campaignTitle,
                     style: textTheme.bodySmall?.copyWith(
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w700,
                       color: colorScheme.primary,
                       fontSize: 13,
+                      letterSpacing: 0.1,
                     ),
                   ),
                 ),
                 Icon(
                   Icons.arrow_forward_ios,
-                  size: 14,
+                  size: 15,
                   color: colorScheme.primary,
                 ),
               ],
@@ -629,27 +711,49 @@ class _ActionItem extends StatelessWidget {
       label: semanticsLabel,
       hint: semanticsHint,
       child: ExcludeSemantics(
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(24),
-          child: Padding(
-            padding: const EdgeInsets.all(6),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(icon, size: 26, color: baseColor),
-                if (count != null && count! > 0) ...[
-                  const SizedBox(width: 6),
-                  Text(
-                    FormatUtils.formatCount(count!, context: context),
-                    style: textTheme.bodySmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 13,
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: onTap,
+            borderRadius: BorderRadius.circular(24),
+            splashColor: baseColor.withValues(alpha: 0.1),
+            highlightColor: baseColor.withValues(alpha: 0.05),
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  AnimatedScale(
+                    scale: isToggled ? 1.0 : 1.0,
+                    duration: const Duration(milliseconds: 200),
+                    child: Icon(
+                      icon,
+                      size: 27,
                       color: baseColor,
+                      shadows: isToggled
+                          ? [
+                              Shadow(
+                                color: baseColor.withValues(alpha: 0.3),
+                                blurRadius: 8,
+                              ),
+                            ]
+                          : null,
                     ),
                   ),
+                  if (count != null && count! > 0) ...[
+                    const SizedBox(width: 6),
+                    Text(
+                      FormatUtils.formatCount(count!, context: context),
+                      style: textTheme.bodySmall?.copyWith(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 13,
+                        color: baseColor,
+                        letterSpacing: 0.2,
+                      ),
+                    ),
+                  ],
                 ],
-              ],
+              ),
             ),
           ),
         ),

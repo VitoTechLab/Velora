@@ -27,6 +27,7 @@ class LoginScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
     final size = MediaQuery.of(context).size;
     final t = AppLocalizations.of(context)!;
 
@@ -34,24 +35,34 @@ class LoginScreen extends HookWidget {
     final passwordController = useTextEditingController();
     final emailFocusNode = useFocusNode();
     final passwordFocusNode = useFocusNode();
-    final formKey = useMemoized(() => GlobalKey<FormState>());
-    final obscurePassword = useState(true);
+
+    // Proper disposal of focus nodes
+    useEffect(() {
+      return () {
+        emailFocusNode.dispose();
+        passwordFocusNode.dispose();
+      };
+    }, []);
 
     final submitLogin = useCallback(() {
       final bloc = context.read<AuthBloc>();
+
+      // Unfocus untuk tutup keyboard dan prevent keyboard popup bug
       FocusScope.of(context).unfocus();
 
-      Future.microtask(() {
-        if (formKey.currentState?.validate() ?? false) {
-          bloc.add(
-            AuthEvent.signIn(
-              email: emailController.text.trim(),
-              password: passwordController.text,
-            ),
-          );
-        }
-      });
-    }, [emailController, passwordController, formKey]);
+      // Validasi manual karena CustomTextField sudah handle validator sendiri
+      final emailError = FieldValidator.email(emailController.text);
+      final passwordError = FieldValidator.password(passwordController.text);
+
+      if (emailError == null && passwordError == null) {
+        bloc.add(
+          AuthEvent.signIn(
+            email: emailController.text.trim(),
+            password: passwordController.text,
+          ),
+        );
+      }
+    }, [emailController, passwordController]);
 
     final signInWithGoogle = useCallback(() {
       AppLogger.i("[ModernLogin] Google sign-in tapped");
@@ -81,19 +92,28 @@ class LoginScreen extends HookWidget {
       child: Scaffold(
         body: Stack(
           children: [
-            // Beautiful Full Gradient Background
+            // Beautiful Adaptive Gradient Background
             Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [
-                    Color(0xFF1a1a2e), // Deep navy
-                    Color(0xFF16213e), // Dark blue
-                    Color(0xFF0f3460), // Medium blue
-                    Color(0xFF533483), // Purple accent
-                  ],
-                  stops: [0.0, 0.3, 0.6, 1.0],
+                  colors: colorScheme.brightness == Brightness.light
+                      ? [
+                          // Light mode: Soft pastel gradient
+                          const Color(0xFFF8F9FF), // Soft lavender white
+                          const Color(0xFFFFF3F8), // Soft pink white
+                          const Color(0xFFF5F3FF), // Soft purple white
+                          const Color(0xFFFFEFF5), // Soft rose white
+                        ]
+                      : [
+                          // Dark mode: Deep navy gradient
+                          MaterialColorsCustom.darkNavy1,
+                          MaterialColorsCustom.darkNavy2,
+                          MaterialColorsCustom.darkNavy3,
+                          MaterialColorsCustom.darkNavy4,
+                        ],
+                  stops: const [0.0, 0.3, 0.6, 1.0],
                 ),
               ),
             ),
@@ -105,8 +125,14 @@ class LoginScreen extends HookWidget {
                   center: Alignment.topRight,
                   radius: 1.2,
                   colors: [
-                    MaterialColorsCustom.neonIndigo.withValues(alpha: 0.15),
-                    Colors.transparent,
+                    (colorScheme.brightness == Brightness.light
+                            ? MaterialColorsCustom.neonIndigo
+                            : MaterialColorsCustom.neonIndigo)
+                        .withValues(
+                            alpha: colorScheme.brightness == Brightness.light
+                                ? 0.08
+                                : 0.15),
+                    colorScheme.surface.withValues(alpha: 0.0),
                   ],
                 ),
               ),
@@ -117,15 +143,21 @@ class LoginScreen extends HookWidget {
                   center: Alignment.bottomLeft,
                   radius: 1.0,
                   colors: [
-                    MaterialColorsCustom.neonMagenta.withValues(alpha: 0.12),
-                    Colors.transparent,
+                    (colorScheme.brightness == Brightness.light
+                            ? MaterialColorsCustom.neonRose
+                            : MaterialColorsCustom.neonMagenta)
+                        .withValues(
+                            alpha: colorScheme.brightness == Brightness.light
+                                ? 0.10
+                                : 0.12),
+                    colorScheme.surface.withValues(alpha: 0.0),
                   ],
                 ),
               ),
             ),
 
-            // Neon Floating Orbs
-            ..._buildNeonFloatingOrbs(size),
+            // Adaptive Floating Orbs
+            ..._buildNeonFloatingOrbs(size, colorScheme.brightness),
 
             // Floating Particles Effect (Optimized)
             const Positioned.fill(
@@ -142,179 +174,174 @@ class LoginScreen extends HookWidget {
 
                   return SingleChildScrollView(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: Form(
-                      key: formKey,
-                      child: Column(
-                        children: [
-                          SizedBox(height: size.height * 0.08),
+                    child: Column(
+                      children: [
+                        SizedBox(height: size.height * 0.08),
 
-                          // Logo with neon glow
-                          _buildLogo(),
+                        // Logo with neon glow
+                        _buildLogo(),
 
-                          const SizedBox(height: 32),
+                        const SizedBox(height: 32),
 
-                          // Glassmorphism Card
-                          _GlassCard(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // Title with gradient
-                                ShaderMask(
-                                  shaderCallback: (bounds) =>
-                                      const LinearGradient(
-                                    colors: [
-                                      Colors.white,
-                                      Color(0xFFE0E7FF),
-                                    ],
-                                  ).createShader(bounds),
-                                  child: Text(
-                                    t.authWelcomeBackTitle,
-                                    style: theme.textTheme.headlineMedium
-                                        ?.copyWith(
-                                      fontWeight: FontWeight.w700,
-                                      color: Colors.white,
-                                    ),
+                        // Glassmorphism Card
+                        _GlassCard(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Title with gradient
+                              ShaderMask(
+                                shaderCallback: (bounds) => LinearGradient(
+                                  colors: [
+                                    colorScheme.onSurface,
+                                    MaterialColorsCustom.neonLilac,
+                                  ],
+                                ).createShader(bounds),
+                                child: Text(
+                                  t.authWelcomeBackTitle,
+                                  style:
+                                      theme.textTheme.headlineMedium?.copyWith(
+                                    fontWeight: FontWeight.w700,
+                                    color: colorScheme.onSurface,
                                   ),
                                 ),
+                              ),
 
-                                const SizedBox(height: 8),
+                              const SizedBox(height: 8),
 
-                                Text(
-                                  t.authSignInSubtitle,
-                                  style: theme.textTheme.bodyMedium?.copyWith(
-                                    color: Colors.white.withValues(alpha: 0.7),
-                                  ),
+                              Text(
+                                t.authSignInSubtitle,
+                                style: theme.textTheme.bodyMedium?.copyWith(
+                                  color: colorScheme.onSurface
+                                      .withValues(alpha: 0.7),
                                 ),
+                              ),
 
-                                const SizedBox(height: 32),
+                              const SizedBox(height: 32),
 
-                                // Email Field with normalized component
-                                CustomTextField(
-                                  controller: emailController,
-                                  focusNode: emailFocusNode,
-                                  label: t.fieldEmailLabel,
-                                  hint: t.fieldEmailHint,
-                                  keyboardType: TextInputType.emailAddress,
-                                  textInputAction: TextInputAction.next,
-                                  validator: FieldValidator.email,
-                                  prefixIcon: Icon(
-                                    Icons.email_outlined,
-                                    size: 20,
-                                    color: MaterialColorsCustom.neonIndigo,
-                                  ),
-                                  enabled: !isLoading,
+                              // Email Field with normalized component
+                              CustomTextField(
+                                controller: emailController,
+                                focusNode: emailFocusNode,
+                                label: t.fieldEmailLabel,
+                                hint: t.fieldEmailHint,
+                                keyboardType: TextInputType.emailAddress,
+                                textInputAction: TextInputAction.next,
+                                validator: FieldValidator.email,
+                                prefixIcon: Icon(
+                                  Icons.email_outlined,
+                                  size: 20,
+                                  color: MaterialColorsCustom.neonIndigo,
                                 ),
+                                enabled: !isLoading,
+                              ),
 
-                                const SizedBox(height: 16),
+                              const SizedBox(height: 16),
 
-                                // Password Field with normalized component
-                                PasswordField(
-                                  controller: passwordController,
-                                  focusNode: passwordFocusNode,
-                                  label: t.fieldPasswordLabel,
-                                  validator: FieldValidator.password,
-                                  prefixIcon: Icon(
-                                    Icons.lock_outline,
-                                    size: 20,
-                                    color: MaterialColorsCustom.neonIndigo,
-                                  ),
-                                  onEditingComplete: submitLogin,
+                              // Password Field with normalized component
+                              PasswordField(
+                                controller: passwordController,
+                                focusNode: passwordFocusNode,
+                                label: t.fieldPasswordLabel,
+                                validator: FieldValidator.password,
+                                prefixIcon: Icon(
+                                  Icons.lock_outline,
+                                  size: 20,
+                                  color: MaterialColorsCustom.neonIndigo,
                                 ),
+                                onEditingComplete: submitLogin,
+                              ),
 
-                                // Forgot Password
-                                Align(
-                                  alignment: Alignment.centerRight,
-                                  child: TextButton(
-                                    onPressed: isLoading
-                                        ? null
-                                        : () => context.pushNamed(
-                                              AppRouteName.resetPassword,
-                                            ),
-                                    child: ShaderMask(
-                                      shaderCallback: (bounds) =>
-                                          LinearGradient(
-                                        colors: [
-                                          MaterialColorsCustom.neonIndigo,
-                                          MaterialColorsCustom.neonLavender,
-                                        ],
-                                      ).createShader(bounds),
-                                      child: Text(
-                                        t.authForgotPassword,
-                                        style:
-                                            theme.textTheme.bodySmall?.copyWith(
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.white,
-                                        ),
+                              // Forgot Password
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: TextButton(
+                                  onPressed: isLoading
+                                      ? null
+                                      : () => context.pushNamed(
+                                            AppRouteName.resetPassword,
+                                          ),
+                                  child: ShaderMask(
+                                    shaderCallback: (bounds) => LinearGradient(
+                                      colors: [
+                                        MaterialColorsCustom.neonIndigo,
+                                        MaterialColorsCustom.neonLavender,
+                                      ],
+                                    ).createShader(bounds),
+                                    child: Text(
+                                      t.authForgotPassword,
+                                      style:
+                                          theme.textTheme.bodySmall?.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                        color: colorScheme.onSurface,
                                       ),
                                     ),
                                   ),
                                 ),
-
-                                const SizedBox(height: 24),
-
-                                // Sign In Button with normalized component
-                                PrimaryButton(
-                                  text: t.authSignInButton,
-                                  onPressed: isLoading ? null : submitLogin,
-                                  isLoading: isEmailLoading,
-                                ),
-
-                                // Divider with normalized component
-                                AuthDivider(
-                                  text: t.authDividerText,
-                                ),
-
-                                // Google Sign In with normalized component
-                                SocialButton(
-                                  brand: 'Google',
-                                  iconAsset: 'assets/images/google.png',
-                                  onPressed:
-                                      isLoading ? null : signInWithGoogle,
-                                  isLoading: isGoogleLoading,
-                                ),
-                              ],
-                            ),
-                          ),
-
-                          const SizedBox(height: 24),
-
-                          // Sign Up Link
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                t.authNoAccount,
-                                style: theme.textTheme.bodyMedium?.copyWith(
-                                  color: Colors.white.withValues(alpha: 0.7),
-                                ),
                               ),
-                              TextButton(
-                                onPressed: isLoading
-                                    ? null
-                                    : () =>
-                                        context.goNamed(AppRouteName.signUp),
-                                child: ShaderMask(
-                                  shaderCallback: (bounds) => LinearGradient(
-                                    colors: [
-                                      MaterialColorsCustom.neonIndigo,
-                                      MaterialColorsCustom.neonLavender,
-                                    ],
-                                  ).createShader(bounds),
-                                  child: Text(
-                                    t.authSignUpLink,
-                                    style: theme.textTheme.bodyMedium?.copyWith(
-                                      fontWeight: FontWeight.w700,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
+
+                              const SizedBox(height: 24),
+
+                              // Sign In Button with normalized component
+                              PrimaryButton(
+                                text: t.authSignInButton,
+                                onPressed: isLoading ? null : submitLogin,
+                                isLoading: isEmailLoading,
+                              ),
+
+                              // Divider with normalized component
+                              AuthDivider(
+                                text: t.authDividerText,
+                              ),
+
+                              // Google Sign In with normalized component
+                              SocialButton(
+                                brand: 'Google',
+                                iconAsset: 'assets/images/google.png',
+                                onPressed: isLoading ? null : signInWithGoogle,
+                                isLoading: isGoogleLoading,
                               ),
                             ],
                           ),
+                        ),
 
-                          const SizedBox(height: 40),
-                        ],
-                      ),
+                        const SizedBox(height: 24),
+
+                        // Sign Up Link
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              t.authNoAccount,
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                color: colorScheme.onSurface
+                                    .withValues(alpha: 0.7),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: isLoading
+                                  ? null
+                                  : () => context.goNamed(AppRouteName.signUp),
+                              child: ShaderMask(
+                                shaderCallback: (bounds) => LinearGradient(
+                                  colors: [
+                                    MaterialColorsCustom.neonIndigo,
+                                    MaterialColorsCustom.neonLavender,
+                                  ],
+                                ).createShader(bounds),
+                                child: Text(
+                                  t.authSignUpLink,
+                                  style: theme.textTheme.bodyMedium?.copyWith(
+                                    fontWeight: FontWeight.w700,
+                                    color: colorScheme.onSurface,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 40),
+                      ],
                     ),
                   );
                 },
@@ -363,29 +390,39 @@ class LoginScreen extends HookWidget {
     );
   }
 
-  List<Widget> _buildNeonFloatingOrbs(Size size) {
+  List<Widget> _buildNeonFloatingOrbs(Size size, Brightness brightness) {
+    final isLight = brightness == Brightness.light;
+
     return [
-      // Top Left - Large Violet Orb
+      // Top Left - Large Violet/Indigo Orb
       Positioned(
         top: size.height * 0.05,
         left: -60,
-        child: const _NeonFloatingOrb(
+        child: _NeonFloatingOrb(
           size: 180,
-          primaryColor: Color(0xFF6366F1),
-          secondaryColor: Color(0xFF8B5CF6),
-          duration: Duration(seconds: 6),
+          primaryColor: isLight
+              ? MaterialColorsCustom.neonIndigo.withValues(alpha: 0.6)
+              : const Color(0xFF6366F1),
+          secondaryColor: isLight
+              ? MaterialColorsCustom.neonLavender.withValues(alpha: 0.5)
+              : const Color(0xFF8B5CF6),
+          duration: const Duration(seconds: 6),
           floatDistance: 25,
         ),
       ),
-      // Top Right - Medium Pink Orb
+      // Top Right - Medium Pink/Rose Orb
       Positioned(
         top: size.height * 0.12,
         right: -40,
-        child: const _NeonFloatingOrb(
+        child: _NeonFloatingOrb(
           size: 120,
-          primaryColor: Color(0xFFA855F7),
-          secondaryColor: Color(0xFFC084FC),
-          duration: Duration(seconds: 5),
+          primaryColor: isLight
+              ? MaterialColorsCustom.neonRose.withValues(alpha: 0.6)
+              : const Color(0xFFA855F7),
+          secondaryColor: isLight
+              ? MaterialColorsCustom.neonPink.withValues(alpha: 0.5)
+              : const Color(0xFFC084FC),
+          duration: const Duration(seconds: 5),
           floatDistance: 20,
           initialOffset: 0.3,
         ),
@@ -394,11 +431,15 @@ class LoginScreen extends HookWidget {
       Positioned(
         top: size.height * 0.4,
         left: -30,
-        child: const _NeonFloatingOrb(
+        child: _NeonFloatingOrb(
           size: 80,
-          primaryColor: Color(0xFF06B6D4),
-          secondaryColor: Color(0xFF22D3EE),
-          duration: Duration(seconds: 4),
+          primaryColor: isLight
+              ? MaterialColorsCustom.neonCyan.withValues(alpha: 0.6)
+              : const Color(0xFF06B6D4),
+          secondaryColor: isLight
+              ? MaterialColorsCustom.neonTeal.withValues(alpha: 0.5)
+              : const Color(0xFF22D3EE),
+          duration: const Duration(seconds: 4),
           floatDistance: 15,
           initialOffset: 0.6,
         ),
@@ -407,11 +448,15 @@ class LoginScreen extends HookWidget {
       Positioned(
         bottom: size.height * 0.15,
         right: -50,
-        child: const _NeonFloatingOrb(
+        child: _NeonFloatingOrb(
           size: 150,
-          primaryColor: Color(0xFFEC4899),
-          secondaryColor: Color(0xFFF472B6),
-          duration: Duration(seconds: 7),
+          primaryColor: isLight
+              ? MaterialColorsCustom.neonLavender.withValues(alpha: 0.6)
+              : const Color(0xFFEC4899),
+          secondaryColor: isLight
+              ? MaterialColorsCustom.neonLilac.withValues(alpha: 0.5)
+              : const Color(0xFFF472B6),
+          duration: const Duration(seconds: 7),
           floatDistance: 30,
           initialOffset: 0.5,
         ),
@@ -420,11 +465,15 @@ class LoginScreen extends HookWidget {
       Positioned(
         bottom: size.height * 0.08,
         left: size.width * 0.2,
-        child: const _NeonFloatingOrb(
+        child: _NeonFloatingOrb(
           size: 100,
-          primaryColor: Color(0xFF8B5CF6),
-          secondaryColor: Color(0xFFA78BFA),
-          duration: Duration(seconds: 5),
+          primaryColor: isLight
+              ? MaterialColorsCustom.neonPurple.withValues(alpha: 0.6)
+              : const Color(0xFF8B5CF6),
+          secondaryColor: isLight
+              ? MaterialColorsCustom.neonLightPurple.withValues(alpha: 0.5)
+              : const Color(0xFFA78BFA),
+          duration: const Duration(seconds: 5),
           floatDistance: 18,
           initialOffset: 0.8,
         ),
@@ -433,11 +482,15 @@ class LoginScreen extends HookWidget {
       Positioned(
         top: size.height * 0.25,
         right: size.width * 0.15,
-        child: const _NeonFloatingOrb(
+        child: _NeonFloatingOrb(
           size: 50,
-          primaryColor: MaterialColorsCustom.neonIndigo,
-          secondaryColor: Color(0xFFC4B5FD),
-          duration: Duration(seconds: 3),
+          primaryColor: isLight
+              ? MaterialColorsCustom.neonIndigo.withValues(alpha: 0.6)
+              : MaterialColorsCustom.neonIndigo,
+          secondaryColor: isLight
+              ? MaterialColorsCustom.neonLilac.withValues(alpha: 0.5)
+              : const Color(0xFFC4B5FD),
+          duration: const Duration(seconds: 3),
           floatDistance: 12,
           initialOffset: 0.2,
         ),
@@ -454,6 +507,8 @@ class _GlassCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(32),
       child: BackdropFilter(
@@ -461,15 +516,15 @@ class _GlassCard extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(32),
           decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.08),
+            color: colorScheme.onSurface.withValues(alpha: 0.08),
             borderRadius: BorderRadius.circular(32),
             border: Border.all(
-              color: Colors.white.withValues(alpha: 0.15),
+              color: colorScheme.onSurface.withValues(alpha: 0.15),
               width: 1.5,
             ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.1),
+                color: colorScheme.shadow.withValues(alpha: 0.1),
                 blurRadius: 40,
                 offset: const Offset(0, 20),
               ),
@@ -573,7 +628,7 @@ class _NeonFloatingOrbState extends State<_NeonFloatingOrb>
                     widget.primaryColor.withValues(alpha: 0.4),
                     widget.secondaryColor.withValues(alpha: 0.2),
                     widget.primaryColor.withValues(alpha: 0.08),
-                    Colors.transparent,
+                    widget.primaryColor.withValues(alpha: 0.0),
                   ],
                   stops: const [0.0, 0.3, 0.6, 1.0],
                 ),
