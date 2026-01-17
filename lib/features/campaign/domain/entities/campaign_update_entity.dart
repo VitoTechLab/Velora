@@ -7,6 +7,7 @@ abstract class CampaignUpdateEntity with _$CampaignUpdateEntity {
   const factory CampaignUpdateEntity({
     required String id,
     required String campaignId,
+    String? title,
     required String updateText,
     String? imageUrl,
     required DateTime createdAt,

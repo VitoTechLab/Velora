@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'campaign_entity.dart';
+part of 'campaign_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,80 +14,108 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+CampaignModel _$CampaignModelFromJson(Map<String, dynamic> json) {
+  return _CampaignModel.fromJson(json);
+}
+
 /// @nodoc
-mixin _$CampaignEntity {
+mixin _$CampaignModel {
+  @JsonKey(name: 'id')
   String get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'user_id')
   String get userId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'category_id')
   String? get categoryId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'title')
   String get title => throw _privateConstructorUsedError;
+  @JsonKey(name: 'description')
   String get description => throw _privateConstructorUsedError;
+  @JsonKey(name: 'cover_image_url')
   String? get coverImageUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'target_amount')
   double get targetAmount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'amount_raised')
   double get amountRaised => throw _privateConstructorUsedError;
+  @JsonKey(name: 'current_balance')
   double get currentBalance => throw _privateConstructorUsedError;
+  @JsonKey(name: 'donor_count')
   int get donorCount => throw _privateConstructorUsedError;
-  CampaignStatus get status => throw _privateConstructorUsedError;
+  @JsonKey(name: 'status')
+  String get status => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_verified')
   bool get isVerified => throw _privateConstructorUsedError;
+  @JsonKey(name: 'location_city')
   String? get locationCity => throw _privateConstructorUsedError;
+  @JsonKey(name: 'end_date')
   DateTime? get endDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_at')
   DateTime? get updatedAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'completed_at')
   DateTime? get completedAt =>
       throw _privateConstructorUsedError; // Joined from user_profiles (read-only)
+  @JsonKey(name: 'organizer_username')
   String? get organizerUsername => throw _privateConstructorUsedError;
+  @JsonKey(name: 'organizer_avatar_url')
   String? get organizerAvatarUrl =>
       throw _privateConstructorUsedError; // Joined from campaign_categories (read-only)
+  @JsonKey(name: 'category_name')
   String? get categoryName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'category_slug')
   String? get categorySlug => throw _privateConstructorUsedError;
 
-  /// Create a copy of CampaignEntity
+  /// Serializes this CampaignModel to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of CampaignModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $CampaignEntityCopyWith<CampaignEntity> get copyWith =>
+  $CampaignModelCopyWith<CampaignModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CampaignEntityCopyWith<$Res> {
-  factory $CampaignEntityCopyWith(
-          CampaignEntity value, $Res Function(CampaignEntity) then) =
-      _$CampaignEntityCopyWithImpl<$Res, CampaignEntity>;
+abstract class $CampaignModelCopyWith<$Res> {
+  factory $CampaignModelCopyWith(
+          CampaignModel value, $Res Function(CampaignModel) then) =
+      _$CampaignModelCopyWithImpl<$Res, CampaignModel>;
   @useResult
   $Res call(
-      {String id,
-      String userId,
-      String? categoryId,
-      String title,
-      String description,
-      String? coverImageUrl,
-      double targetAmount,
-      double amountRaised,
-      double currentBalance,
-      int donorCount,
-      CampaignStatus status,
-      bool isVerified,
-      String? locationCity,
-      DateTime? endDate,
-      DateTime createdAt,
-      DateTime? updatedAt,
-      DateTime? completedAt,
-      String? organizerUsername,
-      String? organizerAvatarUrl,
-      String? categoryName,
-      String? categorySlug});
+      {@JsonKey(name: 'id') String id,
+      @JsonKey(name: 'user_id') String userId,
+      @JsonKey(name: 'category_id') String? categoryId,
+      @JsonKey(name: 'title') String title,
+      @JsonKey(name: 'description') String description,
+      @JsonKey(name: 'cover_image_url') String? coverImageUrl,
+      @JsonKey(name: 'target_amount') double targetAmount,
+      @JsonKey(name: 'amount_raised') double amountRaised,
+      @JsonKey(name: 'current_balance') double currentBalance,
+      @JsonKey(name: 'donor_count') int donorCount,
+      @JsonKey(name: 'status') String status,
+      @JsonKey(name: 'is_verified') bool isVerified,
+      @JsonKey(name: 'location_city') String? locationCity,
+      @JsonKey(name: 'end_date') DateTime? endDate,
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt,
+      @JsonKey(name: 'completed_at') DateTime? completedAt,
+      @JsonKey(name: 'organizer_username') String? organizerUsername,
+      @JsonKey(name: 'organizer_avatar_url') String? organizerAvatarUrl,
+      @JsonKey(name: 'category_name') String? categoryName,
+      @JsonKey(name: 'category_slug') String? categorySlug});
 }
 
 /// @nodoc
-class _$CampaignEntityCopyWithImpl<$Res, $Val extends CampaignEntity>
-    implements $CampaignEntityCopyWith<$Res> {
-  _$CampaignEntityCopyWithImpl(this._value, this._then);
+class _$CampaignModelCopyWithImpl<$Res, $Val extends CampaignModel>
+    implements $CampaignModelCopyWith<$Res> {
+  _$CampaignModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CampaignEntity
+  /// Create a copy of CampaignModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -158,7 +186,7 @@ class _$CampaignEntityCopyWithImpl<$Res, $Val extends CampaignEntity>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as CampaignStatus,
+              as String,
       isVerified: null == isVerified
           ? _value.isVerified
           : isVerified // ignore: cast_nullable_to_non_nullable
@@ -204,46 +232,46 @@ class _$CampaignEntityCopyWithImpl<$Res, $Val extends CampaignEntity>
 }
 
 /// @nodoc
-abstract class _$$CampaignEntityImplCopyWith<$Res>
-    implements $CampaignEntityCopyWith<$Res> {
-  factory _$$CampaignEntityImplCopyWith(_$CampaignEntityImpl value,
-          $Res Function(_$CampaignEntityImpl) then) =
-      __$$CampaignEntityImplCopyWithImpl<$Res>;
+abstract class _$$CampaignModelImplCopyWith<$Res>
+    implements $CampaignModelCopyWith<$Res> {
+  factory _$$CampaignModelImplCopyWith(
+          _$CampaignModelImpl value, $Res Function(_$CampaignModelImpl) then) =
+      __$$CampaignModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {String id,
-      String userId,
-      String? categoryId,
-      String title,
-      String description,
-      String? coverImageUrl,
-      double targetAmount,
-      double amountRaised,
-      double currentBalance,
-      int donorCount,
-      CampaignStatus status,
-      bool isVerified,
-      String? locationCity,
-      DateTime? endDate,
-      DateTime createdAt,
-      DateTime? updatedAt,
-      DateTime? completedAt,
-      String? organizerUsername,
-      String? organizerAvatarUrl,
-      String? categoryName,
-      String? categorySlug});
+      {@JsonKey(name: 'id') String id,
+      @JsonKey(name: 'user_id') String userId,
+      @JsonKey(name: 'category_id') String? categoryId,
+      @JsonKey(name: 'title') String title,
+      @JsonKey(name: 'description') String description,
+      @JsonKey(name: 'cover_image_url') String? coverImageUrl,
+      @JsonKey(name: 'target_amount') double targetAmount,
+      @JsonKey(name: 'amount_raised') double amountRaised,
+      @JsonKey(name: 'current_balance') double currentBalance,
+      @JsonKey(name: 'donor_count') int donorCount,
+      @JsonKey(name: 'status') String status,
+      @JsonKey(name: 'is_verified') bool isVerified,
+      @JsonKey(name: 'location_city') String? locationCity,
+      @JsonKey(name: 'end_date') DateTime? endDate,
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt,
+      @JsonKey(name: 'completed_at') DateTime? completedAt,
+      @JsonKey(name: 'organizer_username') String? organizerUsername,
+      @JsonKey(name: 'organizer_avatar_url') String? organizerAvatarUrl,
+      @JsonKey(name: 'category_name') String? categoryName,
+      @JsonKey(name: 'category_slug') String? categorySlug});
 }
 
 /// @nodoc
-class __$$CampaignEntityImplCopyWithImpl<$Res>
-    extends _$CampaignEntityCopyWithImpl<$Res, _$CampaignEntityImpl>
-    implements _$$CampaignEntityImplCopyWith<$Res> {
-  __$$CampaignEntityImplCopyWithImpl(
-      _$CampaignEntityImpl _value, $Res Function(_$CampaignEntityImpl) _then)
+class __$$CampaignModelImplCopyWithImpl<$Res>
+    extends _$CampaignModelCopyWithImpl<$Res, _$CampaignModelImpl>
+    implements _$$CampaignModelImplCopyWith<$Res> {
+  __$$CampaignModelImplCopyWithImpl(
+      _$CampaignModelImpl _value, $Res Function(_$CampaignModelImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CampaignEntity
+  /// Create a copy of CampaignModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -270,7 +298,7 @@ class __$$CampaignEntityImplCopyWithImpl<$Res>
     Object? categoryName = freezed,
     Object? categorySlug = freezed,
   }) {
-    return _then(_$CampaignEntityImpl(
+    return _then(_$CampaignModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -314,7 +342,7 @@ class __$$CampaignEntityImplCopyWithImpl<$Res>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as CampaignStatus,
+              as String,
       isVerified: null == isVerified
           ? _value.isVerified
           : isVerified // ignore: cast_nullable_to_non_nullable
@@ -360,91 +388,111 @@ class __$$CampaignEntityImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
+@JsonSerializable()
+class _$CampaignModelImpl extends _CampaignModel {
+  const _$CampaignModelImpl(
+      {@JsonKey(name: 'id') required this.id,
+      @JsonKey(name: 'user_id') required this.userId,
+      @JsonKey(name: 'category_id') this.categoryId,
+      @JsonKey(name: 'title') required this.title,
+      @JsonKey(name: 'description') required this.description,
+      @JsonKey(name: 'cover_image_url') this.coverImageUrl,
+      @JsonKey(name: 'target_amount') required this.targetAmount,
+      @JsonKey(name: 'amount_raised') this.amountRaised = 0,
+      @JsonKey(name: 'current_balance') this.currentBalance = 0,
+      @JsonKey(name: 'donor_count') this.donorCount = 0,
+      @JsonKey(name: 'status') this.status = 'active',
+      @JsonKey(name: 'is_verified') this.isVerified = false,
+      @JsonKey(name: 'location_city') this.locationCity,
+      @JsonKey(name: 'end_date') this.endDate,
+      @JsonKey(name: 'created_at') required this.createdAt,
+      @JsonKey(name: 'updated_at') this.updatedAt,
+      @JsonKey(name: 'completed_at') this.completedAt,
+      @JsonKey(name: 'organizer_username') this.organizerUsername,
+      @JsonKey(name: 'organizer_avatar_url') this.organizerAvatarUrl,
+      @JsonKey(name: 'category_name') this.categoryName,
+      @JsonKey(name: 'category_slug') this.categorySlug})
+      : super._();
 
-class _$CampaignEntityImpl implements _CampaignEntity {
-  const _$CampaignEntityImpl(
-      {required this.id,
-      required this.userId,
-      this.categoryId,
-      required this.title,
-      required this.description,
-      this.coverImageUrl,
-      required this.targetAmount,
-      this.amountRaised = 0,
-      this.currentBalance = 0,
-      this.donorCount = 0,
-      this.status = CampaignStatus.active,
-      this.isVerified = false,
-      this.locationCity,
-      this.endDate,
-      required this.createdAt,
-      this.updatedAt,
-      this.completedAt,
-      this.organizerUsername,
-      this.organizerAvatarUrl,
-      this.categoryName,
-      this.categorySlug});
+  factory _$CampaignModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CampaignModelImplFromJson(json);
 
   @override
+  @JsonKey(name: 'id')
   final String id;
   @override
+  @JsonKey(name: 'user_id')
   final String userId;
   @override
+  @JsonKey(name: 'category_id')
   final String? categoryId;
   @override
+  @JsonKey(name: 'title')
   final String title;
   @override
+  @JsonKey(name: 'description')
   final String description;
   @override
+  @JsonKey(name: 'cover_image_url')
   final String? coverImageUrl;
   @override
+  @JsonKey(name: 'target_amount')
   final double targetAmount;
   @override
-  @JsonKey()
+  @JsonKey(name: 'amount_raised')
   final double amountRaised;
   @override
-  @JsonKey()
+  @JsonKey(name: 'current_balance')
   final double currentBalance;
   @override
-  @JsonKey()
+  @JsonKey(name: 'donor_count')
   final int donorCount;
   @override
-  @JsonKey()
-  final CampaignStatus status;
+  @JsonKey(name: 'status')
+  final String status;
   @override
-  @JsonKey()
+  @JsonKey(name: 'is_verified')
   final bool isVerified;
   @override
+  @JsonKey(name: 'location_city')
   final String? locationCity;
   @override
+  @JsonKey(name: 'end_date')
   final DateTime? endDate;
   @override
+  @JsonKey(name: 'created_at')
   final DateTime createdAt;
   @override
+  @JsonKey(name: 'updated_at')
   final DateTime? updatedAt;
   @override
+  @JsonKey(name: 'completed_at')
   final DateTime? completedAt;
 // Joined from user_profiles (read-only)
   @override
+  @JsonKey(name: 'organizer_username')
   final String? organizerUsername;
   @override
+  @JsonKey(name: 'organizer_avatar_url')
   final String? organizerAvatarUrl;
 // Joined from campaign_categories (read-only)
   @override
+  @JsonKey(name: 'category_name')
   final String? categoryName;
   @override
+  @JsonKey(name: 'category_slug')
   final String? categorySlug;
 
   @override
   String toString() {
-    return 'CampaignEntity(id: $id, userId: $userId, categoryId: $categoryId, title: $title, description: $description, coverImageUrl: $coverImageUrl, targetAmount: $targetAmount, amountRaised: $amountRaised, currentBalance: $currentBalance, donorCount: $donorCount, status: $status, isVerified: $isVerified, locationCity: $locationCity, endDate: $endDate, createdAt: $createdAt, updatedAt: $updatedAt, completedAt: $completedAt, organizerUsername: $organizerUsername, organizerAvatarUrl: $organizerAvatarUrl, categoryName: $categoryName, categorySlug: $categorySlug)';
+    return 'CampaignModel(id: $id, userId: $userId, categoryId: $categoryId, title: $title, description: $description, coverImageUrl: $coverImageUrl, targetAmount: $targetAmount, amountRaised: $amountRaised, currentBalance: $currentBalance, donorCount: $donorCount, status: $status, isVerified: $isVerified, locationCity: $locationCity, endDate: $endDate, createdAt: $createdAt, updatedAt: $updatedAt, completedAt: $completedAt, organizerUsername: $organizerUsername, organizerAvatarUrl: $organizerAvatarUrl, categoryName: $categoryName, categorySlug: $categorySlug)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CampaignEntityImpl &&
+            other is _$CampaignModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.categoryId, categoryId) ||
@@ -484,6 +532,7 @@ class _$CampaignEntityImpl implements _CampaignEntity {
                 other.categorySlug == categorySlug));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -510,87 +559,119 @@ class _$CampaignEntityImpl implements _CampaignEntity {
         categorySlug
       ]);
 
-  /// Create a copy of CampaignEntity
+  /// Create a copy of CampaignModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$CampaignEntityImplCopyWith<_$CampaignEntityImpl> get copyWith =>
-      __$$CampaignEntityImplCopyWithImpl<_$CampaignEntityImpl>(
-          this, _$identity);
+  _$$CampaignModelImplCopyWith<_$CampaignModelImpl> get copyWith =>
+      __$$CampaignModelImplCopyWithImpl<_$CampaignModelImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$CampaignModelImplToJson(
+      this,
+    );
+  }
 }
 
-abstract class _CampaignEntity implements CampaignEntity {
-  const factory _CampaignEntity(
-      {required final String id,
-      required final String userId,
-      final String? categoryId,
-      required final String title,
-      required final String description,
-      final String? coverImageUrl,
-      required final double targetAmount,
-      final double amountRaised,
-      final double currentBalance,
-      final int donorCount,
-      final CampaignStatus status,
-      final bool isVerified,
-      final String? locationCity,
-      final DateTime? endDate,
-      required final DateTime createdAt,
-      final DateTime? updatedAt,
-      final DateTime? completedAt,
-      final String? organizerUsername,
-      final String? organizerAvatarUrl,
-      final String? categoryName,
-      final String? categorySlug}) = _$CampaignEntityImpl;
+abstract class _CampaignModel extends CampaignModel {
+  const factory _CampaignModel(
+      {@JsonKey(name: 'id') required final String id,
+      @JsonKey(name: 'user_id') required final String userId,
+      @JsonKey(name: 'category_id') final String? categoryId,
+      @JsonKey(name: 'title') required final String title,
+      @JsonKey(name: 'description') required final String description,
+      @JsonKey(name: 'cover_image_url') final String? coverImageUrl,
+      @JsonKey(name: 'target_amount') required final double targetAmount,
+      @JsonKey(name: 'amount_raised') final double amountRaised,
+      @JsonKey(name: 'current_balance') final double currentBalance,
+      @JsonKey(name: 'donor_count') final int donorCount,
+      @JsonKey(name: 'status') final String status,
+      @JsonKey(name: 'is_verified') final bool isVerified,
+      @JsonKey(name: 'location_city') final String? locationCity,
+      @JsonKey(name: 'end_date') final DateTime? endDate,
+      @JsonKey(name: 'created_at') required final DateTime createdAt,
+      @JsonKey(name: 'updated_at') final DateTime? updatedAt,
+      @JsonKey(name: 'completed_at') final DateTime? completedAt,
+      @JsonKey(name: 'organizer_username') final String? organizerUsername,
+      @JsonKey(name: 'organizer_avatar_url') final String? organizerAvatarUrl,
+      @JsonKey(name: 'category_name') final String? categoryName,
+      @JsonKey(name: 'category_slug')
+      final String? categorySlug}) = _$CampaignModelImpl;
+  const _CampaignModel._() : super._();
+
+  factory _CampaignModel.fromJson(Map<String, dynamic> json) =
+      _$CampaignModelImpl.fromJson;
 
   @override
+  @JsonKey(name: 'id')
   String get id;
   @override
+  @JsonKey(name: 'user_id')
   String get userId;
   @override
+  @JsonKey(name: 'category_id')
   String? get categoryId;
   @override
+  @JsonKey(name: 'title')
   String get title;
   @override
+  @JsonKey(name: 'description')
   String get description;
   @override
+  @JsonKey(name: 'cover_image_url')
   String? get coverImageUrl;
   @override
+  @JsonKey(name: 'target_amount')
   double get targetAmount;
   @override
+  @JsonKey(name: 'amount_raised')
   double get amountRaised;
   @override
+  @JsonKey(name: 'current_balance')
   double get currentBalance;
   @override
+  @JsonKey(name: 'donor_count')
   int get donorCount;
   @override
-  CampaignStatus get status;
+  @JsonKey(name: 'status')
+  String get status;
   @override
+  @JsonKey(name: 'is_verified')
   bool get isVerified;
   @override
+  @JsonKey(name: 'location_city')
   String? get locationCity;
   @override
+  @JsonKey(name: 'end_date')
   DateTime? get endDate;
   @override
+  @JsonKey(name: 'created_at')
   DateTime get createdAt;
   @override
+  @JsonKey(name: 'updated_at')
   DateTime? get updatedAt;
   @override
+  @JsonKey(name: 'completed_at')
   DateTime? get completedAt; // Joined from user_profiles (read-only)
   @override
+  @JsonKey(name: 'organizer_username')
   String? get organizerUsername;
   @override
+  @JsonKey(name: 'organizer_avatar_url')
   String? get organizerAvatarUrl; // Joined from campaign_categories (read-only)
   @override
+  @JsonKey(name: 'category_name')
   String? get categoryName;
   @override
+  @JsonKey(name: 'category_slug')
   String? get categorySlug;
 
-  /// Create a copy of CampaignEntity
+  /// Create a copy of CampaignModel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CampaignEntityImplCopyWith<_$CampaignEntityImpl> get copyWith =>
+  _$$CampaignModelImplCopyWith<_$CampaignModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

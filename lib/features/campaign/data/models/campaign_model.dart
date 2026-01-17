@@ -1,135 +1,124 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:velora/features/campaign/domain/entities/campaign_entity.dart';
 
-class CampaignModel {
-  const CampaignModel({
-    required this.id,
-    required this.postId,
-    required this.userId,
-    required this.title,
-    required this.description,
-    required this.targetAmount,
-    required this.amountRaised,
-    required this.status,
-    required this.createdAt,
-    this.completedAt,
-    this.donorIds = const [],
-  });
+part 'campaign_model.freezed.dart';
+part 'campaign_model.g.dart';
 
-  final String id;
-  final String postId;
-  final String userId;
-  final String title;
-  final String description;
-  final double targetAmount;
-  final double amountRaised;
-  final CampaignStatus status;
-  final DateTime createdAt;
-  final DateTime? completedAt;
-  final List<String> donorIds;
+@freezed
+abstract class CampaignModel with _$CampaignModel {
+  const CampaignModel._();
+
+  const factory CampaignModel({
+    @JsonKey(name: 'id') required String id,
+    @JsonKey(name: 'user_id') required String userId,
+    @JsonKey(name: 'category_id') String? categoryId,
+    @JsonKey(name: 'title') required String title,
+    @JsonKey(name: 'description') required String description,
+    @JsonKey(name: 'cover_image_url') String? coverImageUrl,
+    @JsonKey(name: 'target_amount') required double targetAmount,
+    @JsonKey(name: 'amount_raised') @Default(0) double amountRaised,
+    @JsonKey(name: 'current_balance') @Default(0) double currentBalance,
+    @JsonKey(name: 'donor_count') @Default(0) int donorCount,
+    @JsonKey(name: 'status') @Default('active') String status,
+    @JsonKey(name: 'is_verified') @Default(false) bool isVerified,
+    @JsonKey(name: 'location_city') String? locationCity,
+    @JsonKey(name: 'end_date') DateTime? endDate,
+    @JsonKey(name: 'created_at') required DateTime createdAt,
+    @JsonKey(name: 'updated_at') DateTime? updatedAt,
+    @JsonKey(name: 'completed_at') DateTime? completedAt,
+
+    // Joined from user_profiles (read-only)
+    @JsonKey(name: 'organizer_username') String? organizerUsername,
+    @JsonKey(name: 'organizer_avatar_url') String? organizerAvatarUrl,
+
+    // Joined from campaign_categories (read-only)
+    @JsonKey(name: 'category_name') String? categoryName,
+    @JsonKey(name: 'category_slug') String? categorySlug,
+  }) = _CampaignModel;
+
+  factory CampaignModel.fromJson(Map<String, dynamic> json) =>
+      _$CampaignModelFromJson(json);
 
   CampaignEntity toEntity() {
     return CampaignEntity(
       id: id,
-      postId: postId,
       userId: userId,
+      categoryId: categoryId,
       title: title,
       description: description,
+      coverImageUrl: coverImageUrl,
       targetAmount: targetAmount,
       amountRaised: amountRaised,
-      status: status,
+      currentBalance: currentBalance,
+      donorCount: donorCount,
+      status: _parseStatus(status),
+      isVerified: isVerified,
+      locationCity: locationCity,
+      endDate: endDate,
       createdAt: createdAt,
+      updatedAt: updatedAt,
       completedAt: completedAt,
-      donorIds: donorIds,
-    );
-  }
-
-  CampaignModel copyWith({
-    String? id,
-    String? postId,
-    String? userId,
-    String? title,
-    String? description,
-    double? targetAmount,
-    double? amountRaised,
-    CampaignStatus? status,
-    DateTime? createdAt,
-    DateTime? completedAt,
-    List<String>? donorIds,
-  }) {
-    return CampaignModel(
-      id: id ?? this.id,
-      postId: postId ?? this.postId,
-      userId: userId ?? this.userId,
-      title: title ?? this.title,
-      description: description ?? this.description,
-      targetAmount: targetAmount ?? this.targetAmount,
-      amountRaised: amountRaised ?? this.amountRaised,
-      status: status ?? this.status,
-      createdAt: createdAt ?? this.createdAt,
-      completedAt: completedAt ?? this.completedAt,
-      donorIds: donorIds ?? this.donorIds,
-    );
-  }
-
-  Map<String, dynamic> toMap({bool includeId = false}) {
-    final map = <String, dynamic>{
-      'post_id': postId,
-      'user_id': userId,
-      'title': title,
-      'description': description,
-      'target_amount': targetAmount,
-      'amount_raised': amountRaised,
-      'status': status.name,
-      'created_at': createdAt.toIso8601String(),
-      'completed_at': completedAt?.toIso8601String(),
-      'donor_ids': donorIds,
-    };
-    if (includeId) {
-      map['id'] = id;
-    }
-    return map;
-  }
-
-  factory CampaignModel.fromMap(Map<String, dynamic> map) {
-    return CampaignModel(
-      id: map['id'] as String,
-      postId: map['post_id'] as String,
-      userId: map['user_id'] as String,
-      title: map['title'] as String,
-      description: map['description'] as String,
-      targetAmount: (map['target_amount'] as num).toDouble(),
-      amountRaised: (map['amount_raised'] as num).toDouble(),
-      status: CampaignStatus.values.firstWhere(
-        (status) => status.name == map['status'],
-        orElse: () => CampaignStatus.active,
-      ),
-      createdAt: DateTime.parse(
-        (map['created_at'] as String?) ?? DateTime.now().toIso8601String(),
-      ),
-      completedAt: (map['completed_at'] as String?) != null
-          ? DateTime.parse(map['completed_at'] as String)
-          : null,
-      donorIds:
-          (map['donor_ids'] as List<dynamic>?)
-              ?.map((e) => e.toString())
-              .toList() ??
-          const [],
+      organizerUsername: organizerUsername,
+      organizerAvatarUrl: organizerAvatarUrl,
+      categoryName: categoryName,
+      categorySlug: categorySlug,
     );
   }
 
   factory CampaignModel.fromEntity(CampaignEntity entity) {
     return CampaignModel(
       id: entity.id,
-      postId: entity.postId,
       userId: entity.userId,
+      categoryId: entity.categoryId,
       title: entity.title,
       description: entity.description,
+      coverImageUrl: entity.coverImageUrl,
       targetAmount: entity.targetAmount,
       amountRaised: entity.amountRaised,
-      status: entity.status,
+      currentBalance: entity.currentBalance,
+      donorCount: entity.donorCount,
+      status: entity.status.name,
+      isVerified: entity.isVerified,
+      locationCity: entity.locationCity,
+      endDate: entity.endDate,
       createdAt: entity.createdAt,
+      updatedAt: entity.updatedAt,
       completedAt: entity.completedAt,
-      donorIds: entity.donorIds,
+    );
+  }
+
+  /// Convert for INSERT (excludes read-only fields)
+  Map<String, dynamic> toInsertMap() {
+    return {
+      'user_id': userId,
+      'category_id': categoryId,
+      'title': title,
+      'description': description,
+      'cover_image_url': coverImageUrl,
+      'target_amount': targetAmount,
+      'status': status,
+      'location_city': locationCity,
+      'end_date': endDate?.toIso8601String(),
+    };
+  }
+
+  Map<String, dynamic> toUpdateMap() {
+    return {
+      'category_id': categoryId,
+      'title': title,
+      'description': description,
+      'cover_image_url': coverImageUrl,
+      'target_amount': targetAmount,
+      'status': status,
+      'location_city': locationCity,
+      'end_date': endDate?.toIso8601String(),
+    };
+  }
+
+  static CampaignStatus _parseStatus(String status) {
+    return CampaignStatus.values.firstWhere(
+      (e) => e.name == status,
+      orElse: () => CampaignStatus.active,
     );
   }
 }
