@@ -121,6 +121,11 @@ class LoginScreen extends HookWidget {
             // Neon Floating Orbs
             ..._buildNeonFloatingOrbs(size),
 
+            // Floating Particles Effect (Optimized)
+            const Positioned.fill(
+              child: _FloatingParticles(),
+            ),
+
             // Main Content
             SafeArea(
               child: BlocBuilder<AuthBloc, AuthState>(
@@ -499,6 +504,13 @@ class _GlassCard extends StatelessWidget {
                 blurRadius: 40,
                 offset: const Offset(0, 20),
               ),
+              // Subtle inner glow
+              BoxShadow(
+                color: const Color(0xFF818CF8).withOpacity(0.05),
+                blurRadius: 20,
+                offset: const Offset(0, 10),
+                spreadRadius: -5,
+              ),
             ],
           ),
           child: child,
@@ -509,7 +521,7 @@ class _GlassCard extends StatelessWidget {
 }
 
 /// Glass Effect Text Field for Dark Theme
-class _GlassTextField extends StatelessWidget {
+class _GlassTextField extends StatefulWidget {
   final TextEditingController controller;
   final FocusNode? focusNode;
   final String label;
@@ -539,53 +551,92 @@ class _GlassTextField extends StatelessWidget {
   });
 
   @override
+  State<_GlassTextField> createState() => _GlassTextFieldState();
+}
+
+class _GlassTextFieldState extends State<_GlassTextField> {
+  bool _isFocused = false;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.focusNode?.addListener(_onFocusChange);
+  }
+
+  @override
+  void dispose() {
+    widget.focusNode?.removeListener(_onFocusChange);
+    super.dispose();
+  }
+
+  void _onFocusChange() {
+    setState(() {
+      _isFocused = widget.focusNode?.hasFocus ?? false;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          label,
+          widget.label,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 fontWeight: FontWeight.w600,
                 color: Colors.white.withOpacity(0.8),
               ),
         ),
         const SizedBox(height: 8),
-        Container(
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.08),
+            color: Colors.white.withOpacity(_isFocused ? 0.12 : 0.08),
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: Colors.white.withOpacity(0.12),
-              width: 1,
+              color: _isFocused
+                  ? const Color(0xFF818CF8).withOpacity(0.4)
+                  : Colors.white.withOpacity(0.12),
+              width: 1.5,
             ),
+            boxShadow: _isFocused
+                ? [
+                    BoxShadow(
+                      color: const Color(0xFF818CF8).withOpacity(0.2),
+                      blurRadius: 12,
+                      offset: const Offset(0, 4),
+                    ),
+                  ]
+                : null,
           ),
           child: TextFormField(
-            controller: controller,
-            focusNode: focusNode,
-            keyboardType: keyboardType,
-            textInputAction: textInputAction,
-            validator: validator,
-            obscureText: obscureText,
-            enabled: enabled,
-            onEditingComplete: onEditingComplete,
+            controller: widget.controller,
+            focusNode: widget.focusNode,
+            keyboardType: widget.keyboardType,
+            textInputAction: widget.textInputAction,
+            validator: widget.validator,
+            obscureText: widget.obscureText,
+            enabled: widget.enabled,
+            onEditingComplete: widget.onEditingComplete,
             style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w500,
               color: Colors.white,
             ),
             decoration: InputDecoration(
-              hintText: hint,
+              hintText: widget.hint,
               hintStyle: TextStyle(
                 color: Colors.white.withOpacity(0.4),
                 fontSize: 15,
               ),
               prefixIcon: Icon(
-                prefixIcon,
+                widget.prefixIcon,
                 size: 20,
-                color: const Color(0xFF818CF8),
+                color: _isFocused
+                    ? const Color(0xFF818CF8)
+                    : const Color(0xFF818CF8).withOpacity(0.7),
               ),
-              suffixIcon: suffixIcon,
+              suffixIcon: widget.suffixIcon,
               border: InputBorder.none,
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 20,
@@ -864,5 +915,149 @@ class _NeonFloatingOrbState extends State<_NeonFloatingOrb>
         );
       },
     );
+  }
+}
+
+/// Floating Particles Effect - Optimized for Performance
+class _FloatingParticles extends StatefulWidget {
+  const _FloatingParticles();
+
+  @override
+  State<_FloatingParticles> createState() => _FloatingParticlesState();
+}
+
+class _FloatingParticlesState extends State<_FloatingParticles>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late List<_Particle> _particles;
+  static const int _particleCount = 25; // Optimized count
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 20),
+    )..repeat();
+
+    // Generate particles with fixed seed for consistency
+    final random = math.Random(42);
+    _particles = List.generate(_particleCount, (index) {
+      return _Particle(
+        x: random.nextDouble(),
+        y: random.nextDouble(),
+        size: 2.0 + random.nextDouble() * 4.0,
+        speed: 0.5 + random.nextDouble() * 1.5,
+        opacity: 0.2 + random.nextDouble() * 0.4,
+        color: _getParticleColor(index),
+      );
+    });
+  }
+
+  Color _getParticleColor(int index) {
+    final colors = [
+      const Color(0xFF818CF8), // Indigo
+      const Color(0xFFC084FC), // Purple
+      const Color(0xFFF472B6), // Pink
+      const Color(0xFF22D3EE), // Cyan
+      const Color(0xFFA78BFA), // Light Purple
+    ];
+    return colors[index % colors.length];
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return RepaintBoundary(
+      child: AnimatedBuilder(
+        animation: _controller,
+        builder: (context, child) {
+          return CustomPaint(
+            painter: _ParticlePainter(
+              particles: _particles,
+              animationValue: _controller.value,
+            ),
+            size: Size.infinite,
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _Particle {
+  final double x;
+  final double y;
+  final double size;
+  final double speed;
+  final double opacity;
+  final Color color;
+
+  _Particle({
+    required this.x,
+    required this.y,
+    required this.size,
+    required this.speed,
+    required this.opacity,
+    required this.color,
+  });
+}
+
+class _ParticlePainter extends CustomPainter {
+  final List<_Particle> particles;
+  final double animationValue;
+
+  _ParticlePainter({
+    required this.particles,
+    required this.animationValue,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    for (int i = 0; i < particles.length; i++) {
+      final particle = particles[i];
+
+      // Calculate position with floating animation
+      final baseY = particle.y * size.height;
+      final offsetY =
+          (animationValue * particle.speed * size.height) % size.height;
+      final y = (baseY + offsetY) % size.height;
+
+      // Add slight horizontal drift
+      final driftX = math.sin(animationValue * math.pi * 2 + i) * 20;
+      final x = particle.x * size.width + driftX;
+
+      // Paint particle with glow effect
+      final paint = Paint()
+        ..color = particle.color.withOpacity(particle.opacity)
+        ..maskFilter = MaskFilter.blur(BlurStyle.normal, particle.size * 0.8);
+
+      canvas.drawCircle(
+        Offset(x, y),
+        particle.size,
+        paint,
+      );
+
+      // Add core glow
+      final corePaint = Paint()
+        ..color = particle.color.withOpacity(particle.opacity * 0.6)
+        ..maskFilter = MaskFilter.blur(BlurStyle.normal, particle.size * 1.5);
+
+      canvas.drawCircle(
+        Offset(x, y),
+        particle.size * 1.2,
+        corePaint,
+      );
+    }
+  }
+
+  @override
+  bool shouldRepaint(_ParticlePainter oldDelegate) {
+    return oldDelegate.animationValue != animationValue;
   }
 }
