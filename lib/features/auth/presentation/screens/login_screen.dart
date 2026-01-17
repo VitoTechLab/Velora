@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'dart:math' as math;
+import 'dart:ui';
 
 import 'package:velora/core/ui/app_messenger.dart';
 import 'package:velora/core/utils/app_logger.dart';
@@ -13,7 +14,7 @@ import 'package:velora/features/auth/presentation/bloc/auth_state.dart';
 import 'package:velora/l10n/app_localizations.dart';
 import 'package:velora/routes/app_router.dart';
 
-/// Modern Login Screen with Glassmorphism & Floating Effects
+/// Modern Login Screen with Glassmorphism & Neon Floating Effects
 class ModernLoginScreen extends HookWidget {
   const ModernLoginScreen({super.key});
 
@@ -74,31 +75,51 @@ class ModernLoginScreen extends HookWidget {
       child: Scaffold(
         body: Stack(
           children: [
-            // Gradient Background
+            // Beautiful Full Gradient Background
             Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Color(0xFFF8F9FF), // Very light purple
-                    Color(0xFFFFFFFF), // White
-                    Color(0xFFF3F0FF), // Light purple
+                    Color(0xFF1a1a2e), // Deep navy
+                    Color(0xFF16213e), // Dark blue
+                    Color(0xFF0f3460), // Medium blue
+                    Color(0xFF533483), // Purple accent
+                  ],
+                  stops: [0.0, 0.3, 0.6, 1.0],
+                ),
+              ),
+            ),
+
+            // Mesh Gradient Overlay for depth
+            Container(
+              decoration: BoxDecoration(
+                gradient: RadialGradient(
+                  center: Alignment.topRight,
+                  radius: 1.2,
+                  colors: [
+                    const Color(0xFF6366F1).withOpacity(0.15),
+                    Colors.transparent,
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                gradient: RadialGradient(
+                  center: Alignment.bottomLeft,
+                  radius: 1.0,
+                  colors: [
+                    const Color(0xFFA855F7).withOpacity(0.12),
+                    Colors.transparent,
                   ],
                 ),
               ),
             ),
 
-            // Animated Wave Effect at Top
-            const Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              child: _AnimatedWaveHeader(),
-            ),
-
-            // Floating Decorative Circles
-            ..._buildFloatingCircles(size),
+            // Neon Floating Orbs
+            ..._buildNeonFloatingOrbs(size),
 
             // Main Content
             SafeArea(
@@ -114,32 +135,34 @@ class ModernLoginScreen extends HookWidget {
                       key: formKey,
                       child: Column(
                         children: [
-                          const SizedBox(height: 120),
+                          SizedBox(height: size.height * 0.08),
 
-                          // Logo with gradient
+                          // Logo with neon glow
                           _buildLogo(),
 
-                          const SizedBox(height: 40),
+                          const SizedBox(height: 32),
 
                           // Glassmorphism Card
                           _GlassCard(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                // Title
-                                Text(
-                                  t.authWelcomeBackTitle,
-                                  style: theme.textTheme.headlineMedium?.copyWith(
-                                    fontWeight: FontWeight.w700,
-                                    background: Paint()
-                                      ..shader = const LinearGradient(
-                                        colors: [
-                                          Color(0xFF6366F1),
-                                          Color(0xFF8B5CF6),
-                                        ],
-                                      ).createShader(
-                                        const Rect.fromLTWH(0, 0, 200, 70),
-                                      ),
+                                // Title with gradient
+                                ShaderMask(
+                                  shaderCallback: (bounds) =>
+                                      const LinearGradient(
+                                    colors: [
+                                      Colors.white,
+                                      Color(0xFFE0E7FF),
+                                    ],
+                                  ).createShader(bounds),
+                                  child: Text(
+                                    t.authWelcomeBackTitle,
+                                    style: theme.textTheme.headlineMedium
+                                        ?.copyWith(
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
 
@@ -148,7 +171,7 @@ class ModernLoginScreen extends HookWidget {
                                 Text(
                                   t.authSignInSubtitle,
                                   style: theme.textTheme.bodyMedium?.copyWith(
-                                    color: Colors.grey[600],
+                                    color: Colors.white.withOpacity(0.7),
                                   ),
                                 ),
 
@@ -185,9 +208,10 @@ class ModernLoginScreen extends HookWidget {
                                           ? Icons.visibility_outlined
                                           : Icons.visibility_off_outlined,
                                       size: 20,
+                                      color: Colors.white.withOpacity(0.7),
                                     ),
-                                    onPressed: () =>
-                                        obscurePassword.value = !obscurePassword.value,
+                                    onPressed: () => obscurePassword.value =
+                                        !obscurePassword.value,
                                   ),
                                   enabled: !isLoading,
                                   onEditingComplete: submitLogin,
@@ -202,11 +226,21 @@ class ModernLoginScreen extends HookWidget {
                                         : () => context.pushNamed(
                                               AppRouteName.resetPassword,
                                             ),
-                                    child: Text(
-                                      t.authForgotPassword,
-                                      style: theme.textTheme.bodySmall?.copyWith(
-                                        fontWeight: FontWeight.w600,
-                                        color: const Color(0xFF6366F1),
+                                    child: ShaderMask(
+                                      shaderCallback: (bounds) =>
+                                          const LinearGradient(
+                                        colors: [
+                                          Color(0xFF818CF8),
+                                          Color(0xFFC084FC),
+                                        ],
+                                      ).createShader(bounds),
+                                      child: Text(
+                                        t.authForgotPassword,
+                                        style:
+                                            theme.textTheme.bodySmall?.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -228,7 +262,7 @@ class ModernLoginScreen extends HookWidget {
                                   children: [
                                     Expanded(
                                       child: Divider(
-                                        color: Colors.grey[300],
+                                        color: Colors.white.withOpacity(0.15),
                                         thickness: 1,
                                       ),
                                     ),
@@ -238,14 +272,15 @@ class ModernLoginScreen extends HookWidget {
                                       ),
                                       child: Text(
                                         t.authDividerText,
-                                        style: theme.textTheme.bodySmall?.copyWith(
-                                          color: Colors.grey[600],
+                                        style:
+                                            theme.textTheme.bodySmall?.copyWith(
+                                          color: Colors.white.withOpacity(0.5),
                                         ),
                                       ),
                                     ),
                                     Expanded(
                                       child: Divider(
-                                        color: Colors.grey[300],
+                                        color: Colors.white.withOpacity(0.15),
                                         thickness: 1,
                                       ),
                                     ),
@@ -258,7 +293,8 @@ class ModernLoginScreen extends HookWidget {
                                 _GlassSocialButton(
                                   icon: 'assets/images/google.png',
                                   label: 'Continue with Google',
-                                  onPressed: isLoading ? null : signInWithGoogle,
+                                  onPressed:
+                                      isLoading ? null : signInWithGoogle,
                                   isLoading: isGoogleLoading,
                                 ),
                               ],
@@ -274,19 +310,20 @@ class ModernLoginScreen extends HookWidget {
                               Text(
                                 t.authNoAccount,
                                 style: theme.textTheme.bodyMedium?.copyWith(
-                                  color: Colors.grey[600],
+                                  color: Colors.white.withOpacity(0.7),
                                 ),
                               ),
                               TextButton(
                                 onPressed: isLoading
                                     ? null
-                                    : () => context.goNamed(AppRouteName.signUp),
+                                    : () =>
+                                        context.goNamed(AppRouteName.signUp),
                                 child: ShaderMask(
                                   shaderCallback: (bounds) =>
                                       const LinearGradient(
                                     colors: [
-                                      Color(0xFF6366F1),
-                                      Color(0xFF8B5CF6),
+                                      Color(0xFF818CF8),
+                                      Color(0xFFC084FC),
                                     ],
                                   ).createShader(bounds),
                                   child: Text(
@@ -317,8 +354,8 @@ class ModernLoginScreen extends HookWidget {
 
   Widget _buildLogo() {
     return Container(
-      width: 72,
-      height: 72,
+      width: 80,
+      height: 80,
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
@@ -329,60 +366,113 @@ class ModernLoginScreen extends HookWidget {
             Color(0xFFA855F7),
           ],
         ),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(24),
         boxShadow: [
+          // Neon glow effect
           BoxShadow(
-            color: const Color(0xFF6366F1).withOpacity(0.3),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
+            color: const Color(0xFF6366F1).withOpacity(0.5),
+            blurRadius: 30,
+            spreadRadius: 2,
+          ),
+          BoxShadow(
+            color: const Color(0xFF8B5CF6).withOpacity(0.3),
+            blurRadius: 50,
+            spreadRadius: 5,
           ),
         ],
       ),
       child: const Icon(
         Icons.favorite_rounded,
         color: Colors.white,
-        size: 36,
+        size: 40,
       ),
     );
   }
 
-  List<Widget> _buildFloatingCircles(Size size) {
+  List<Widget> _buildNeonFloatingOrbs(Size size) {
     return [
-      // Top Left Circle
+      // Top Left - Large Violet Orb
       Positioned(
-        top: size.height * 0.1,
-        left: -50,
-        child: const _FloatingCircle(
-          size: 150,
-          color: Color(0xFF6366F1),
-          duration: Duration(seconds: 4),
-        ),
-      ),
-      // Top Right Circle
-      Positioned(
-        top: size.height * 0.15,
-        right: -30,
-        child: const _FloatingCircle(
-          size: 100,
-          color: Color(0xFF8B5CF6),
-          duration: Duration(seconds: 5),
-        ),
-      ),
-      // Bottom Left Circle
-      Positioned(
-        bottom: size.height * 0.2,
-        left: -40,
-        child: const _FloatingCircle(
-          size: 120,
-          color: Color(0xFFA855F7),
+        top: size.height * 0.05,
+        left: -60,
+        child: const _NeonFloatingOrb(
+          size: 180,
+          primaryColor: Color(0xFF6366F1),
+          secondaryColor: Color(0xFF8B5CF6),
           duration: Duration(seconds: 6),
+          floatDistance: 25,
+        ),
+      ),
+      // Top Right - Medium Pink Orb
+      Positioned(
+        top: size.height * 0.12,
+        right: -40,
+        child: const _NeonFloatingOrb(
+          size: 120,
+          primaryColor: Color(0xFFA855F7),
+          secondaryColor: Color(0xFFC084FC),
+          duration: Duration(seconds: 5),
+          floatDistance: 20,
+          initialOffset: 0.3,
+        ),
+      ),
+      // Middle Left - Small Cyan Orb
+      Positioned(
+        top: size.height * 0.4,
+        left: -30,
+        child: const _NeonFloatingOrb(
+          size: 80,
+          primaryColor: Color(0xFF06B6D4),
+          secondaryColor: Color(0xFF22D3EE),
+          duration: Duration(seconds: 4),
+          floatDistance: 15,
+          initialOffset: 0.6,
+        ),
+      ),
+      // Bottom Right - Large Rose Orb
+      Positioned(
+        bottom: size.height * 0.15,
+        right: -50,
+        child: const _NeonFloatingOrb(
+          size: 150,
+          primaryColor: Color(0xFFEC4899),
+          secondaryColor: Color(0xFFF472B6),
+          duration: Duration(seconds: 7),
+          floatDistance: 30,
+          initialOffset: 0.5,
+        ),
+      ),
+      // Bottom Left - Medium Purple Orb
+      Positioned(
+        bottom: size.height * 0.08,
+        left: size.width * 0.2,
+        child: const _NeonFloatingOrb(
+          size: 100,
+          primaryColor: Color(0xFF8B5CF6),
+          secondaryColor: Color(0xFFA78BFA),
+          duration: Duration(seconds: 5),
+          floatDistance: 18,
+          initialOffset: 0.8,
+        ),
+      ),
+      // Center Top - Tiny Accent Orb
+      Positioned(
+        top: size.height * 0.25,
+        right: size.width * 0.15,
+        child: const _NeonFloatingOrb(
+          size: 50,
+          primaryColor: Color(0xFF818CF8),
+          secondaryColor: Color(0xFFC4B5FD),
+          duration: Duration(seconds: 3),
+          floatDistance: 12,
+          initialOffset: 0.2,
         ),
       ),
     ];
   }
 }
 
-/// Glassmorphism Card Widget
+/// Glassmorphism Card Widget with Blur Effect
 class _GlassCard extends StatelessWidget {
   final Widget child;
 
@@ -390,29 +480,35 @@ class _GlassCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(32),
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.7),
-        borderRadius: BorderRadius.circular(32),
-        border: Border.all(
-          color: Colors.white.withOpacity(0.8),
-          width: 1.5,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: const Color(0xFF6366F1).withOpacity(0.1),
-            blurRadius: 40,
-            offset: const Offset(0, 20),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(32),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+        child: Container(
+          padding: const EdgeInsets.all(32),
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.08),
+            borderRadius: BorderRadius.circular(32),
+            border: Border.all(
+              color: Colors.white.withOpacity(0.15),
+              width: 1.5,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 40,
+                offset: const Offset(0, 20),
+              ),
+            ],
           ),
-        ],
+          child: child,
+        ),
       ),
-      child: child,
     );
   }
 }
 
-/// Glass Effect Text Field
+/// Glass Effect Text Field for Dark Theme
 class _GlassTextField extends StatelessWidget {
   final TextEditingController controller;
   final FocusNode? focusNode;
@@ -451,16 +547,16 @@ class _GlassTextField extends StatelessWidget {
           label,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 fontWeight: FontWeight.w600,
-                color: Colors.grey[700],
+                color: Colors.white.withOpacity(0.8),
               ),
         ),
         const SizedBox(height: 8),
         Container(
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.6),
+            color: Colors.white.withOpacity(0.08),
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: Colors.white.withOpacity(0.8),
+              color: Colors.white.withOpacity(0.12),
               width: 1,
             ),
           ),
@@ -476,23 +572,28 @@ class _GlassTextField extends StatelessWidget {
             style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w500,
+              color: Colors.white,
             ),
             decoration: InputDecoration(
               hintText: hint,
               hintStyle: TextStyle(
-                color: Colors.grey[400],
+                color: Colors.white.withOpacity(0.4),
                 fontSize: 15,
               ),
               prefixIcon: Icon(
                 prefixIcon,
                 size: 20,
-                color: const Color(0xFF6366F1),
+                color: const Color(0xFF818CF8),
               ),
               suffixIcon: suffixIcon,
               border: InputBorder.none,
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 20,
                 vertical: 16,
+              ),
+              errorStyle: const TextStyle(
+                color: Color(0xFFF472B6),
+                fontSize: 12,
               ),
             ),
           ),
@@ -502,7 +603,7 @@ class _GlassTextField extends StatelessWidget {
   }
 }
 
-/// Gradient Button
+/// Gradient Button with Neon Glow
 class _GradientButton extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;
@@ -535,8 +636,8 @@ class _GradientButton extends StatelessWidget {
             gradient: onPressed == null
                 ? LinearGradient(
                     colors: [
-                      Colors.grey[300]!,
-                      Colors.grey[300]!,
+                      Colors.grey[600]!.withOpacity(0.3),
+                      Colors.grey[600]!.withOpacity(0.3),
                     ],
                   )
                 : const LinearGradient(
@@ -552,9 +653,14 @@ class _GradientButton extends StatelessWidget {
             boxShadow: onPressed != null
                 ? [
                     BoxShadow(
-                      color: const Color(0xFF6366F1).withOpacity(0.4),
-                      blurRadius: 20,
-                      offset: const Offset(0, 10),
+                      color: const Color(0xFF6366F1).withOpacity(0.5),
+                      blurRadius: 25,
+                      offset: const Offset(0, 8),
+                    ),
+                    BoxShadow(
+                      color: const Color(0xFF8B5CF6).withOpacity(0.3),
+                      blurRadius: 40,
+                      offset: const Offset(0, 12),
                     ),
                   ]
                 : null,
@@ -576,6 +682,7 @@ class _GradientButton extends StatelessWidget {
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
+                      letterSpacing: 0.5,
                     ),
                   ),
           ),
@@ -585,7 +692,7 @@ class _GradientButton extends StatelessWidget {
   }
 }
 
-/// Glass Social Button
+/// Glass Social Button for Dark Theme
 class _GlassSocialButton extends StatelessWidget {
   final String icon;
   final String label;
@@ -607,12 +714,12 @@ class _GlassSocialButton extends StatelessWidget {
       child: OutlinedButton(
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
-          backgroundColor: Colors.white.withOpacity(0.6),
+          backgroundColor: Colors.white.withOpacity(0.08),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
           side: BorderSide(
-            color: Colors.grey[300]!,
+            color: Colors.white.withOpacity(0.15),
             width: 1,
           ),
         ),
@@ -622,7 +729,7 @@ class _GlassSocialButton extends StatelessWidget {
                 height: 24,
                 child: CircularProgressIndicator(
                   strokeWidth: 2.5,
-                  valueColor: AlwaysStoppedAnimation(Color(0xFF6366F1)),
+                  valueColor: AlwaysStoppedAnimation(Color(0xFF818CF8)),
                 ),
               )
             : Row(
@@ -639,7 +746,7 @@ class _GlassSocialButton extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
-                      color: Color(0xFF1F2937),
+                      color: Colors.white,
                     ),
                   ),
                 ],
@@ -649,26 +756,33 @@ class _GlassSocialButton extends StatelessWidget {
   }
 }
 
-/// Floating Circle Animation
-class _FloatingCircle extends StatefulWidget {
+/// Neon Floating Orb with Glow Effect
+class _NeonFloatingOrb extends StatefulWidget {
   final double size;
-  final Color color;
+  final Color primaryColor;
+  final Color secondaryColor;
   final Duration duration;
+  final double floatDistance;
+  final double initialOffset;
 
-  const _FloatingCircle({
+  const _NeonFloatingOrb({
     required this.size,
-    required this.color,
+    required this.primaryColor,
+    required this.secondaryColor,
     required this.duration,
+    this.floatDistance = 20,
+    this.initialOffset = 0.0,
   });
 
   @override
-  State<_FloatingCircle> createState() => _FloatingCircleState();
+  State<_NeonFloatingOrb> createState() => _NeonFloatingOrbState();
 }
 
-class _FloatingCircleState extends State<_FloatingCircle>
+class _NeonFloatingOrbState extends State<_NeonFloatingOrb>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  late Animation<double> _animation;
+  late Animation<double> _floatAnimation;
+  late Animation<double> _scaleAnimation;
 
   @override
   void initState() {
@@ -676,11 +790,25 @@ class _FloatingCircleState extends State<_FloatingCircle>
     _controller = AnimationController(
       vsync: this,
       duration: widget.duration,
-    )..repeat(reverse: true);
+    );
 
-    _animation = Tween<double>(begin: 0, end: 30).animate(
+    _floatAnimation = Tween<double>(
+      begin: 0,
+      end: widget.floatDistance,
+    ).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
     );
+
+    _scaleAnimation = Tween<double>(
+      begin: 1.0,
+      end: 1.08,
+    ).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
+
+    // Start with initial offset for variety
+    _controller.value = widget.initialOffset;
+    _controller.repeat(reverse: true);
   }
 
   @override
@@ -692,20 +820,43 @@ class _FloatingCircleState extends State<_FloatingCircle>
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: _animation,
+      animation: _controller,
       builder: (context, child) {
         return Transform.translate(
-          offset: Offset(0, _animation.value),
-          child: Container(
-            width: widget.size,
-            height: widget.size,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: RadialGradient(
-                colors: [
-                  widget.color.withOpacity(0.15),
-                  widget.color.withOpacity(0.05),
-                  Colors.transparent,
+          offset: Offset(
+            math.sin(_controller.value * math.pi * 2) *
+                (widget.floatDistance * 0.3),
+            _floatAnimation.value,
+          ),
+          child: Transform.scale(
+            scale: _scaleAnimation.value,
+            child: Container(
+              width: widget.size,
+              height: widget.size,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  colors: [
+                    widget.primaryColor.withOpacity(0.4),
+                    widget.secondaryColor.withOpacity(0.2),
+                    widget.primaryColor.withOpacity(0.08),
+                    Colors.transparent,
+                  ],
+                  stops: const [0.0, 0.3, 0.6, 1.0],
+                ),
+                boxShadow: [
+                  // Inner glow
+                  BoxShadow(
+                    color: widget.primaryColor.withOpacity(0.4),
+                    blurRadius: widget.size * 0.3,
+                    spreadRadius: 0,
+                  ),
+                  // Outer glow
+                  BoxShadow(
+                    color: widget.secondaryColor.withOpacity(0.2),
+                    blurRadius: widget.size * 0.6,
+                    spreadRadius: 0,
+                  ),
                 ],
               ),
             ),
@@ -714,115 +865,4 @@ class _FloatingCircleState extends State<_FloatingCircle>
       },
     );
   }
-}
-
-/// Animated Wave Header
-class _AnimatedWaveHeader extends StatefulWidget {
-  const _AnimatedWaveHeader();
-
-  @override
-  State<_AnimatedWaveHeader> createState() => _AnimatedWaveHeaderState();
-}
-
-class _AnimatedWaveHeaderState extends State<_AnimatedWaveHeader>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 5),
-    )..repeat();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 200,
-      child: AnimatedBuilder(
-        animation: _controller,
-        builder: (context, child) {
-          return CustomPaint(
-            painter: _WavePainter(
-              animation: _controller.value,
-            ),
-            size: Size(MediaQuery.of(context).size.width, 200),
-          );
-        },
-      ),
-    );
-  }
-}
-
-class _WavePainter extends CustomPainter {
-  final double animation;
-
-  _WavePainter({required this.animation});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint1 = Paint()
-      ..shader = const LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: [
-          Color(0xFF6366F1),
-          Color(0xFF8B5CF6),
-        ],
-      ).createShader(Rect.fromLTWH(0, 0, size.width, size.height))
-      ..style = PaintingStyle.fill;
-
-    final paint2 = Paint()
-      ..shader = LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: [
-          const Color(0xFF8B5CF6).withOpacity(0.5),
-          const Color(0xFFA855F7).withOpacity(0.5),
-        ],
-      ).createShader(Rect.fromLTWH(0, 0, size.width, size.height))
-      ..style = PaintingStyle.fill;
-
-    _drawWave(canvas, size, paint1, animation, 0);
-    _drawWave(canvas, size, paint2, animation, math.pi);
-  }
-
-  void _drawWave(
-    Canvas canvas,
-    Size size,
-    Paint paint,
-    double animation,
-    double offset,
-  ) {
-    final path = Path();
-    final waveHeight = size.height * 0.2;
-    final waveLength = size.width;
-
-    path.moveTo(0, size.height);
-
-    for (double i = 0; i <= size.width; i++) {
-      final double y = size.height / 2 +
-          math.sin((i / waveLength * 2 * math.pi) +
-                  (animation * 2 * math.pi) +
-                  offset) *
-              waveHeight;
-      path.lineTo(i, y);
-    }
-
-    path.lineTo(size.width, size.height);
-    path.close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(_WavePainter oldDelegate) => true;
 }
