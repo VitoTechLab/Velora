@@ -76,13 +76,13 @@ class FeedScreen extends HookWidget {
       return () => scrollController.removeListener(onScroll);
     }, [scrollController]);
 
-    // Reload unread count on every build (when returning from notification screen)
+    // Load unread count once on mount
     useEffect(() {
       context.read<NotificationBloc>().add(
         const NotificationEvent.loadUnreadCount(),
       );
       return null;
-    });
+    }, const []);
 
     // Track if upload is in progress
     final showUploadStatus = useState(false);

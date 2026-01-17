@@ -20,14 +20,22 @@ PollPayloadModel _$PollPayloadModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PollPayloadModel {
+<<<<<<< HEAD
   @JsonKey(name: 'id')
   String get id => throw _privateConstructorUsedError;
+=======
+>>>>>>> d6108cdc17b8ed6763b0d804cd62da1e2da1cf33
   @JsonKey(name: 'message_id')
   String get messageId => throw _privateConstructorUsedError;
   @JsonKey(name: 'question')
   String get question => throw _privateConstructorUsedError;
   @JsonKey(name: 'multiple_choice')
   bool get multipleChoice => throw _privateConstructorUsedError;
+<<<<<<< HEAD
+=======
+  @JsonKey(name: 'max_user_votes')
+  int get maxUserVotes => throw _privateConstructorUsedError;
+>>>>>>> d6108cdc17b8ed6763b0d804cd62da1e2da1cf33
   @NullableUtcDateTimeConverter()
   @JsonKey(name: 'closes_at')
   DateTime? get closesAt => throw _privateConstructorUsedError;
@@ -51,10 +59,17 @@ abstract class $PollPayloadModelCopyWith<$Res> {
       _$PollPayloadModelCopyWithImpl<$Res, PollPayloadModel>;
   @useResult
   $Res call(
+<<<<<<< HEAD
       {@JsonKey(name: 'id') String id,
       @JsonKey(name: 'message_id') String messageId,
       @JsonKey(name: 'question') String question,
       @JsonKey(name: 'multiple_choice') bool multipleChoice,
+=======
+      {@JsonKey(name: 'message_id') String messageId,
+      @JsonKey(name: 'question') String question,
+      @JsonKey(name: 'multiple_choice') bool multipleChoice,
+      @JsonKey(name: 'max_user_votes') int maxUserVotes,
+>>>>>>> d6108cdc17b8ed6763b0d804cd62da1e2da1cf33
       @NullableUtcDateTimeConverter()
       @JsonKey(name: 'closes_at')
       DateTime? closesAt,
@@ -76,18 +91,28 @@ class _$PollPayloadModelCopyWithImpl<$Res, $Val extends PollPayloadModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+<<<<<<< HEAD
     Object? id = null,
     Object? messageId = null,
     Object? question = null,
     Object? multipleChoice = null,
+=======
+    Object? messageId = null,
+    Object? question = null,
+    Object? multipleChoice = null,
+    Object? maxUserVotes = null,
+>>>>>>> d6108cdc17b8ed6763b0d804cd62da1e2da1cf33
     Object? closesAt = freezed,
     Object? options = null,
   }) {
     return _then(_value.copyWith(
+<<<<<<< HEAD
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+=======
+>>>>>>> d6108cdc17b8ed6763b0d804cd62da1e2da1cf33
       messageId: null == messageId
           ? _value.messageId
           : messageId // ignore: cast_nullable_to_non_nullable
@@ -100,6 +125,13 @@ class _$PollPayloadModelCopyWithImpl<$Res, $Val extends PollPayloadModel>
           ? _value.multipleChoice
           : multipleChoice // ignore: cast_nullable_to_non_nullable
               as bool,
+<<<<<<< HEAD
+=======
+      maxUserVotes: null == maxUserVotes
+          ? _value.maxUserVotes
+          : maxUserVotes // ignore: cast_nullable_to_non_nullable
+              as int,
+>>>>>>> d6108cdc17b8ed6763b0d804cd62da1e2da1cf33
       closesAt: freezed == closesAt
           ? _value.closesAt
           : closesAt // ignore: cast_nullable_to_non_nullable
@@ -121,10 +153,17 @@ abstract class _$$PollPayloadModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
+<<<<<<< HEAD
       {@JsonKey(name: 'id') String id,
       @JsonKey(name: 'message_id') String messageId,
       @JsonKey(name: 'question') String question,
       @JsonKey(name: 'multiple_choice') bool multipleChoice,
+=======
+      {@JsonKey(name: 'message_id') String messageId,
+      @JsonKey(name: 'question') String question,
+      @JsonKey(name: 'multiple_choice') bool multipleChoice,
+      @JsonKey(name: 'max_user_votes') int maxUserVotes,
+>>>>>>> d6108cdc17b8ed6763b0d804cd62da1e2da1cf33
       @NullableUtcDateTimeConverter()
       @JsonKey(name: 'closes_at')
       DateTime? closesAt,
@@ -144,18 +183,28 @@ class __$$PollPayloadModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+<<<<<<< HEAD
     Object? id = null,
     Object? messageId = null,
     Object? question = null,
     Object? multipleChoice = null,
+=======
+    Object? messageId = null,
+    Object? question = null,
+    Object? multipleChoice = null,
+    Object? maxUserVotes = null,
+>>>>>>> d6108cdc17b8ed6763b0d804cd62da1e2da1cf33
     Object? closesAt = freezed,
     Object? options = null,
   }) {
     return _then(_$PollPayloadModelImpl(
+<<<<<<< HEAD
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+=======
+>>>>>>> d6108cdc17b8ed6763b0d804cd62da1e2da1cf33
       messageId: null == messageId
           ? _value.messageId
           : messageId // ignore: cast_nullable_to_non_nullable
@@ -168,6 +217,13 @@ class __$$PollPayloadModelImplCopyWithImpl<$Res>
           ? _value.multipleChoice
           : multipleChoice // ignore: cast_nullable_to_non_nullable
               as bool,
+<<<<<<< HEAD
+=======
+      maxUserVotes: null == maxUserVotes
+          ? _value.maxUserVotes
+          : maxUserVotes // ignore: cast_nullable_to_non_nullable
+              as int,
+>>>>>>> d6108cdc17b8ed6763b0d804cd62da1e2da1cf33
       closesAt: freezed == closesAt
           ? _value.closesAt
           : closesAt // ignore: cast_nullable_to_non_nullable
@@ -184,10 +240,17 @@ class __$$PollPayloadModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PollPayloadModelImpl implements _PollPayloadModel {
   const _$PollPayloadModelImpl(
+<<<<<<< HEAD
       {@JsonKey(name: 'id') required this.id,
       @JsonKey(name: 'message_id') required this.messageId,
       @JsonKey(name: 'question') required this.question,
       @JsonKey(name: 'multiple_choice') required this.multipleChoice,
+=======
+      {@JsonKey(name: 'message_id') required this.messageId,
+      @JsonKey(name: 'question') required this.question,
+      @JsonKey(name: 'multiple_choice') this.multipleChoice = false,
+      @JsonKey(name: 'max_user_votes') this.maxUserVotes = 1,
+>>>>>>> d6108cdc17b8ed6763b0d804cd62da1e2da1cf33
       @NullableUtcDateTimeConverter() @JsonKey(name: 'closes_at') this.closesAt,
       @JsonKey(name: 'poll_options')
       final List<PollOptionModel> options = const []})
@@ -197,9 +260,12 @@ class _$PollPayloadModelImpl implements _PollPayloadModel {
       _$$PollPayloadModelImplFromJson(json);
 
   @override
+<<<<<<< HEAD
   @JsonKey(name: 'id')
   final String id;
   @override
+=======
+>>>>>>> d6108cdc17b8ed6763b0d804cd62da1e2da1cf33
   @JsonKey(name: 'message_id')
   final String messageId;
   @override
@@ -209,6 +275,12 @@ class _$PollPayloadModelImpl implements _PollPayloadModel {
   @JsonKey(name: 'multiple_choice')
   final bool multipleChoice;
   @override
+<<<<<<< HEAD
+=======
+  @JsonKey(name: 'max_user_votes')
+  final int maxUserVotes;
+  @override
+>>>>>>> d6108cdc17b8ed6763b0d804cd62da1e2da1cf33
   @NullableUtcDateTimeConverter()
   @JsonKey(name: 'closes_at')
   final DateTime? closesAt;
@@ -223,7 +295,11 @@ class _$PollPayloadModelImpl implements _PollPayloadModel {
 
   @override
   String toString() {
+<<<<<<< HEAD
     return 'PollPayloadModel(id: $id, messageId: $messageId, question: $question, multipleChoice: $multipleChoice, closesAt: $closesAt, options: $options)';
+=======
+    return 'PollPayloadModel(messageId: $messageId, question: $question, multipleChoice: $multipleChoice, maxUserVotes: $maxUserVotes, closesAt: $closesAt, options: $options)';
+>>>>>>> d6108cdc17b8ed6763b0d804cd62da1e2da1cf33
   }
 
   @override
@@ -231,13 +307,21 @@ class _$PollPayloadModelImpl implements _PollPayloadModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PollPayloadModelImpl &&
+<<<<<<< HEAD
             (identical(other.id, id) || other.id == id) &&
+=======
+>>>>>>> d6108cdc17b8ed6763b0d804cd62da1e2da1cf33
             (identical(other.messageId, messageId) ||
                 other.messageId == messageId) &&
             (identical(other.question, question) ||
                 other.question == question) &&
             (identical(other.multipleChoice, multipleChoice) ||
                 other.multipleChoice == multipleChoice) &&
+<<<<<<< HEAD
+=======
+            (identical(other.maxUserVotes, maxUserVotes) ||
+                other.maxUserVotes == maxUserVotes) &&
+>>>>>>> d6108cdc17b8ed6763b0d804cd62da1e2da1cf33
             (identical(other.closesAt, closesAt) ||
                 other.closesAt == closesAt) &&
             const DeepCollectionEquality().equals(other._options, _options));
@@ -245,8 +329,19 @@ class _$PollPayloadModelImpl implements _PollPayloadModel {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
+<<<<<<< HEAD
   int get hashCode => Object.hash(runtimeType, id, messageId, question,
       multipleChoice, closesAt, const DeepCollectionEquality().hash(_options));
+=======
+  int get hashCode => Object.hash(
+      runtimeType,
+      messageId,
+      question,
+      multipleChoice,
+      maxUserVotes,
+      closesAt,
+      const DeepCollectionEquality().hash(_options));
+>>>>>>> d6108cdc17b8ed6763b0d804cd62da1e2da1cf33
 
   /// Create a copy of PollPayloadModel
   /// with the given fields replaced by the non-null parameter values.
@@ -267,10 +362,17 @@ class _$PollPayloadModelImpl implements _PollPayloadModel {
 
 abstract class _PollPayloadModel implements PollPayloadModel {
   const factory _PollPayloadModel(
+<<<<<<< HEAD
           {@JsonKey(name: 'id') required final String id,
           @JsonKey(name: 'message_id') required final String messageId,
           @JsonKey(name: 'question') required final String question,
           @JsonKey(name: 'multiple_choice') required final bool multipleChoice,
+=======
+          {@JsonKey(name: 'message_id') required final String messageId,
+          @JsonKey(name: 'question') required final String question,
+          @JsonKey(name: 'multiple_choice') final bool multipleChoice,
+          @JsonKey(name: 'max_user_votes') final int maxUserVotes,
+>>>>>>> d6108cdc17b8ed6763b0d804cd62da1e2da1cf33
           @NullableUtcDateTimeConverter()
           @JsonKey(name: 'closes_at')
           final DateTime? closesAt,
@@ -281,9 +383,12 @@ abstract class _PollPayloadModel implements PollPayloadModel {
       _$PollPayloadModelImpl.fromJson;
 
   @override
+<<<<<<< HEAD
   @JsonKey(name: 'id')
   String get id;
   @override
+=======
+>>>>>>> d6108cdc17b8ed6763b0d804cd62da1e2da1cf33
   @JsonKey(name: 'message_id')
   String get messageId;
   @override
@@ -293,6 +398,12 @@ abstract class _PollPayloadModel implements PollPayloadModel {
   @JsonKey(name: 'multiple_choice')
   bool get multipleChoice;
   @override
+<<<<<<< HEAD
+=======
+  @JsonKey(name: 'max_user_votes')
+  int get maxUserVotes;
+  @override
+>>>>>>> d6108cdc17b8ed6763b0d804cd62da1e2da1cf33
   @NullableUtcDateTimeConverter()
   @JsonKey(name: 'closes_at')
   DateTime? get closesAt;

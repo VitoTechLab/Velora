@@ -111,6 +111,11 @@ class FeedCard extends HookWidget {
     }
 
     return BlocListener<SocialRelationBloc, SocialRelationState>(
+      listenWhen: (prev, curr) =>
+          prev.isFollowing != curr.isFollowing ||
+          prev.hasFollowRequestPending != curr.hasFollowRequestPending ||
+          prev.successMessage != curr.successMessage ||
+          prev.errorFollow != curr.errorFollow,
       listener: (context, state) {
         // Update state setelah follow/unfollow berhasil
         if (state.isFollowing && !isFollowing.value) {
@@ -530,7 +535,7 @@ class FeedCard extends HookWidget {
         children: [
           _ActionItem(
             icon: isLiked ? Icons.favorite : Icons.favorite_border,
-            count: !post.hideLikeCount ? likesCount : null,
+            count: likesCount,
             isHidden: false,
             color: isLiked ? colorScheme.error : colorScheme.onSurface,
             onTap: onLikeToggle,

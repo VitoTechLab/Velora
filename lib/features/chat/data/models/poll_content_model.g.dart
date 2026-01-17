@@ -9,10 +9,17 @@ part of 'poll_content_model.dart';
 _$PollPayloadModelImpl _$$PollPayloadModelImplFromJson(
         Map<String, dynamic> json) =>
     _$PollPayloadModelImpl(
+<<<<<<< HEAD
       id: json['id'] as String,
       messageId: json['message_id'] as String,
       question: json['question'] as String,
       multipleChoice: json['multiple_choice'] as bool,
+=======
+      messageId: json['message_id'] as String,
+      question: json['question'] as String,
+      multipleChoice: json['multiple_choice'] as bool? ?? false,
+      maxUserVotes: (json['max_user_votes'] as num?)?.toInt() ?? 1,
+>>>>>>> d6108cdc17b8ed6763b0d804cd62da1e2da1cf33
       closesAt:
           const NullableUtcDateTimeConverter().fromJson(json['closes_at']),
       options: (json['poll_options'] as List<dynamic>?)
@@ -24,10 +31,17 @@ _$PollPayloadModelImpl _$$PollPayloadModelImplFromJson(
 Map<String, dynamic> _$$PollPayloadModelImplToJson(
         _$PollPayloadModelImpl instance) =>
     <String, dynamic>{
+<<<<<<< HEAD
       'id': instance.id,
       'message_id': instance.messageId,
       'question': instance.question,
       'multiple_choice': instance.multipleChoice,
+=======
+      'message_id': instance.messageId,
+      'question': instance.question,
+      'multiple_choice': instance.multipleChoice,
+      'max_user_votes': instance.maxUserVotes,
+>>>>>>> d6108cdc17b8ed6763b0d804cd62da1e2da1cf33
       'closes_at':
           const NullableUtcDateTimeConverter().toJson(instance.closesAt),
       'poll_options': instance.options,

@@ -20,26 +20,25 @@ UpdateFeedModel _$UpdateFeedModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UpdateFeedModel {
-  @JsonKey(name: 'content')
+  @JsonKey(name: 'caption')
   String? get content => throw _privateConstructorUsedError;
   @StringListConverter()
-  @JsonKey(name: 'image_urls')
-  List<String>? get imageUrls => throw _privateConstructorUsedError;
+  @JsonKey(name: 'media_urls')
+  List<String>? get mediaUrls => throw _privateConstructorUsedError;
+  @JsonKey(name: 'location')
+  Map<String, dynamic>? get location => throw _privateConstructorUsedError;
   @StringListConverter()
-  @JsonKey(name: 'video_urls')
-  List<String>? get videoUrls =>
-      throw _privateConstructorUsedError; // Post privacy settings
-  @JsonKey(name: 'comments_enabled')
-  bool? get commentsEnabled => throw _privateConstructorUsedError;
-  @JsonKey(name: 'hide_like_count')
-  bool? get hideLikeCount => throw _privateConstructorUsedError;
-  @JsonKey(name: 'hide_comment_count')
-  bool? get hideCommentCount => throw _privateConstructorUsedError;
-  @JsonKey(name: 'hide_share_count')
-  bool? get hideShareCount => throw _privateConstructorUsedError;
-  @JsonKey(name: 'hide_likes_list')
-  bool? get hideLikesList =>
-      throw _privateConstructorUsedError; // Campaign association
+  @JsonKey(name: 'tags')
+  List<String>? get tags => throw _privateConstructorUsedError;
+  @StringListConverter()
+  @JsonKey(name: 'mention_ids')
+  List<String>? get mentionIds => throw _privateConstructorUsedError;
+  @JsonKey(name: 'allow_comments')
+  bool? get allowComments => throw _privateConstructorUsedError;
+  @JsonKey(name: 'allow_share')
+  bool? get allowShare => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_active')
+  bool? get isActive => throw _privateConstructorUsedError;
   @JsonKey(name: 'campaign_id')
   String? get campaignId => throw _privateConstructorUsedError;
   @JsonKey(name: 'campaign_title')
@@ -62,18 +61,18 @@ abstract class $UpdateFeedModelCopyWith<$Res> {
       _$UpdateFeedModelCopyWithImpl<$Res, UpdateFeedModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'content') String? content,
+      {@JsonKey(name: 'caption') String? content,
       @StringListConverter()
-      @JsonKey(name: 'image_urls')
-      List<String>? imageUrls,
+      @JsonKey(name: 'media_urls')
+      List<String>? mediaUrls,
+      @JsonKey(name: 'location') Map<String, dynamic>? location,
+      @StringListConverter() @JsonKey(name: 'tags') List<String>? tags,
       @StringListConverter()
-      @JsonKey(name: 'video_urls')
-      List<String>? videoUrls,
-      @JsonKey(name: 'comments_enabled') bool? commentsEnabled,
-      @JsonKey(name: 'hide_like_count') bool? hideLikeCount,
-      @JsonKey(name: 'hide_comment_count') bool? hideCommentCount,
-      @JsonKey(name: 'hide_share_count') bool? hideShareCount,
-      @JsonKey(name: 'hide_likes_list') bool? hideLikesList,
+      @JsonKey(name: 'mention_ids')
+      List<String>? mentionIds,
+      @JsonKey(name: 'allow_comments') bool? allowComments,
+      @JsonKey(name: 'allow_share') bool? allowShare,
+      @JsonKey(name: 'is_active') bool? isActive,
       @JsonKey(name: 'campaign_id') String? campaignId,
       @JsonKey(name: 'campaign_title') String? campaignTitle});
 }
@@ -94,13 +93,13 @@ class _$UpdateFeedModelCopyWithImpl<$Res, $Val extends UpdateFeedModel>
   @override
   $Res call({
     Object? content = freezed,
-    Object? imageUrls = freezed,
-    Object? videoUrls = freezed,
-    Object? commentsEnabled = freezed,
-    Object? hideLikeCount = freezed,
-    Object? hideCommentCount = freezed,
-    Object? hideShareCount = freezed,
-    Object? hideLikesList = freezed,
+    Object? mediaUrls = freezed,
+    Object? location = freezed,
+    Object? tags = freezed,
+    Object? mentionIds = freezed,
+    Object? allowComments = freezed,
+    Object? allowShare = freezed,
+    Object? isActive = freezed,
     Object? campaignId = freezed,
     Object? campaignTitle = freezed,
   }) {
@@ -109,33 +108,33 @@ class _$UpdateFeedModelCopyWithImpl<$Res, $Val extends UpdateFeedModel>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String?,
-      imageUrls: freezed == imageUrls
-          ? _value.imageUrls
-          : imageUrls // ignore: cast_nullable_to_non_nullable
+      mediaUrls: freezed == mediaUrls
+          ? _value.mediaUrls
+          : mediaUrls // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      videoUrls: freezed == videoUrls
-          ? _value.videoUrls
-          : videoUrls // ignore: cast_nullable_to_non_nullable
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      tags: freezed == tags
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      commentsEnabled: freezed == commentsEnabled
-          ? _value.commentsEnabled
-          : commentsEnabled // ignore: cast_nullable_to_non_nullable
+      mentionIds: freezed == mentionIds
+          ? _value.mentionIds
+          : mentionIds // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      allowComments: freezed == allowComments
+          ? _value.allowComments
+          : allowComments // ignore: cast_nullable_to_non_nullable
               as bool?,
-      hideLikeCount: freezed == hideLikeCount
-          ? _value.hideLikeCount
-          : hideLikeCount // ignore: cast_nullable_to_non_nullable
+      allowShare: freezed == allowShare
+          ? _value.allowShare
+          : allowShare // ignore: cast_nullable_to_non_nullable
               as bool?,
-      hideCommentCount: freezed == hideCommentCount
-          ? _value.hideCommentCount
-          : hideCommentCount // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      hideShareCount: freezed == hideShareCount
-          ? _value.hideShareCount
-          : hideShareCount // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      hideLikesList: freezed == hideLikesList
-          ? _value.hideLikesList
-          : hideLikesList // ignore: cast_nullable_to_non_nullable
+      isActive: freezed == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
               as bool?,
       campaignId: freezed == campaignId
           ? _value.campaignId
@@ -158,18 +157,18 @@ abstract class _$$UpdateFeedModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'content') String? content,
+      {@JsonKey(name: 'caption') String? content,
       @StringListConverter()
-      @JsonKey(name: 'image_urls')
-      List<String>? imageUrls,
+      @JsonKey(name: 'media_urls')
+      List<String>? mediaUrls,
+      @JsonKey(name: 'location') Map<String, dynamic>? location,
+      @StringListConverter() @JsonKey(name: 'tags') List<String>? tags,
       @StringListConverter()
-      @JsonKey(name: 'video_urls')
-      List<String>? videoUrls,
-      @JsonKey(name: 'comments_enabled') bool? commentsEnabled,
-      @JsonKey(name: 'hide_like_count') bool? hideLikeCount,
-      @JsonKey(name: 'hide_comment_count') bool? hideCommentCount,
-      @JsonKey(name: 'hide_share_count') bool? hideShareCount,
-      @JsonKey(name: 'hide_likes_list') bool? hideLikesList,
+      @JsonKey(name: 'mention_ids')
+      List<String>? mentionIds,
+      @JsonKey(name: 'allow_comments') bool? allowComments,
+      @JsonKey(name: 'allow_share') bool? allowShare,
+      @JsonKey(name: 'is_active') bool? isActive,
       @JsonKey(name: 'campaign_id') String? campaignId,
       @JsonKey(name: 'campaign_title') String? campaignTitle});
 }
@@ -188,13 +187,13 @@ class __$$UpdateFeedModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? content = freezed,
-    Object? imageUrls = freezed,
-    Object? videoUrls = freezed,
-    Object? commentsEnabled = freezed,
-    Object? hideLikeCount = freezed,
-    Object? hideCommentCount = freezed,
-    Object? hideShareCount = freezed,
-    Object? hideLikesList = freezed,
+    Object? mediaUrls = freezed,
+    Object? location = freezed,
+    Object? tags = freezed,
+    Object? mentionIds = freezed,
+    Object? allowComments = freezed,
+    Object? allowShare = freezed,
+    Object? isActive = freezed,
     Object? campaignId = freezed,
     Object? campaignTitle = freezed,
   }) {
@@ -203,33 +202,33 @@ class __$$UpdateFeedModelImplCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String?,
-      imageUrls: freezed == imageUrls
-          ? _value._imageUrls
-          : imageUrls // ignore: cast_nullable_to_non_nullable
+      mediaUrls: freezed == mediaUrls
+          ? _value._mediaUrls
+          : mediaUrls // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      videoUrls: freezed == videoUrls
-          ? _value._videoUrls
-          : videoUrls // ignore: cast_nullable_to_non_nullable
+      location: freezed == location
+          ? _value._location
+          : location // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      tags: freezed == tags
+          ? _value._tags
+          : tags // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      commentsEnabled: freezed == commentsEnabled
-          ? _value.commentsEnabled
-          : commentsEnabled // ignore: cast_nullable_to_non_nullable
+      mentionIds: freezed == mentionIds
+          ? _value._mentionIds
+          : mentionIds // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      allowComments: freezed == allowComments
+          ? _value.allowComments
+          : allowComments // ignore: cast_nullable_to_non_nullable
               as bool?,
-      hideLikeCount: freezed == hideLikeCount
-          ? _value.hideLikeCount
-          : hideLikeCount // ignore: cast_nullable_to_non_nullable
+      allowShare: freezed == allowShare
+          ? _value.allowShare
+          : allowShare // ignore: cast_nullable_to_non_nullable
               as bool?,
-      hideCommentCount: freezed == hideCommentCount
-          ? _value.hideCommentCount
-          : hideCommentCount // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      hideShareCount: freezed == hideShareCount
-          ? _value.hideShareCount
-          : hideShareCount // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      hideLikesList: freezed == hideLikesList
-          ? _value.hideLikesList
-          : hideLikesList // ignore: cast_nullable_to_non_nullable
+      isActive: freezed == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
               as bool?,
       campaignId: freezed == campaignId
           ? _value.campaignId
@@ -248,70 +247,87 @@ class __$$UpdateFeedModelImplCopyWithImpl<$Res>
 @JsonSerializable(includeIfNull: false)
 class _$UpdateFeedModelImpl implements _UpdateFeedModel {
   const _$UpdateFeedModelImpl(
-      {@JsonKey(name: 'content') this.content,
+      {@JsonKey(name: 'caption') this.content,
       @StringListConverter()
-      @JsonKey(name: 'image_urls')
-      final List<String>? imageUrls,
+      @JsonKey(name: 'media_urls')
+      final List<String>? mediaUrls,
+      @JsonKey(name: 'location') final Map<String, dynamic>? location,
+      @StringListConverter() @JsonKey(name: 'tags') final List<String>? tags,
       @StringListConverter()
-      @JsonKey(name: 'video_urls')
-      final List<String>? videoUrls,
-      @JsonKey(name: 'comments_enabled') this.commentsEnabled,
-      @JsonKey(name: 'hide_like_count') this.hideLikeCount,
-      @JsonKey(name: 'hide_comment_count') this.hideCommentCount,
-      @JsonKey(name: 'hide_share_count') this.hideShareCount,
-      @JsonKey(name: 'hide_likes_list') this.hideLikesList,
+      @JsonKey(name: 'mention_ids')
+      final List<String>? mentionIds,
+      @JsonKey(name: 'allow_comments') this.allowComments,
+      @JsonKey(name: 'allow_share') this.allowShare,
+      @JsonKey(name: 'is_active') this.isActive,
       @JsonKey(name: 'campaign_id') this.campaignId,
       @JsonKey(name: 'campaign_title') this.campaignTitle})
-      : _imageUrls = imageUrls,
-        _videoUrls = videoUrls;
+      : _mediaUrls = mediaUrls,
+        _location = location,
+        _tags = tags,
+        _mentionIds = mentionIds;
 
   factory _$UpdateFeedModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$UpdateFeedModelImplFromJson(json);
 
   @override
-  @JsonKey(name: 'content')
+  @JsonKey(name: 'caption')
   final String? content;
-  final List<String>? _imageUrls;
+  final List<String>? _mediaUrls;
   @override
   @StringListConverter()
-  @JsonKey(name: 'image_urls')
-  List<String>? get imageUrls {
-    final value = _imageUrls;
+  @JsonKey(name: 'media_urls')
+  List<String>? get mediaUrls {
+    final value = _mediaUrls;
     if (value == null) return null;
-    if (_imageUrls is EqualUnmodifiableListView) return _imageUrls;
+    if (_mediaUrls is EqualUnmodifiableListView) return _mediaUrls;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
-  final List<String>? _videoUrls;
+  final Map<String, dynamic>? _location;
+  @override
+  @JsonKey(name: 'location')
+  Map<String, dynamic>? get location {
+    final value = _location;
+    if (value == null) return null;
+    if (_location is EqualUnmodifiableMapView) return _location;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
+  final List<String>? _tags;
   @override
   @StringListConverter()
-  @JsonKey(name: 'video_urls')
-  List<String>? get videoUrls {
-    final value = _videoUrls;
+  @JsonKey(name: 'tags')
+  List<String>? get tags {
+    final value = _tags;
     if (value == null) return null;
-    if (_videoUrls is EqualUnmodifiableListView) return _videoUrls;
+    if (_tags is EqualUnmodifiableListView) return _tags;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
-// Post privacy settings
+  final List<String>? _mentionIds;
   @override
-  @JsonKey(name: 'comments_enabled')
-  final bool? commentsEnabled;
+  @StringListConverter()
+  @JsonKey(name: 'mention_ids')
+  List<String>? get mentionIds {
+    final value = _mentionIds;
+    if (value == null) return null;
+    if (_mentionIds is EqualUnmodifiableListView) return _mentionIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
-  @JsonKey(name: 'hide_like_count')
-  final bool? hideLikeCount;
+  @JsonKey(name: 'allow_comments')
+  final bool? allowComments;
   @override
-  @JsonKey(name: 'hide_comment_count')
-  final bool? hideCommentCount;
+  @JsonKey(name: 'allow_share')
+  final bool? allowShare;
   @override
-  @JsonKey(name: 'hide_share_count')
-  final bool? hideShareCount;
-  @override
-  @JsonKey(name: 'hide_likes_list')
-  final bool? hideLikesList;
-// Campaign association
+  @JsonKey(name: 'is_active')
+  final bool? isActive;
   @override
   @JsonKey(name: 'campaign_id')
   final String? campaignId;
@@ -321,7 +337,7 @@ class _$UpdateFeedModelImpl implements _UpdateFeedModel {
 
   @override
   String toString() {
-    return 'UpdateFeedModel(content: $content, imageUrls: $imageUrls, videoUrls: $videoUrls, commentsEnabled: $commentsEnabled, hideLikeCount: $hideLikeCount, hideCommentCount: $hideCommentCount, hideShareCount: $hideShareCount, hideLikesList: $hideLikesList, campaignId: $campaignId, campaignTitle: $campaignTitle)';
+    return 'UpdateFeedModel(content: $content, mediaUrls: $mediaUrls, location: $location, tags: $tags, mentionIds: $mentionIds, allowComments: $allowComments, allowShare: $allowShare, isActive: $isActive, campaignId: $campaignId, campaignTitle: $campaignTitle)';
   }
 
   @override
@@ -331,19 +347,17 @@ class _$UpdateFeedModelImpl implements _UpdateFeedModel {
             other is _$UpdateFeedModelImpl &&
             (identical(other.content, content) || other.content == content) &&
             const DeepCollectionEquality()
-                .equals(other._imageUrls, _imageUrls) &&
+                .equals(other._mediaUrls, _mediaUrls) &&
+            const DeepCollectionEquality().equals(other._location, _location) &&
+            const DeepCollectionEquality().equals(other._tags, _tags) &&
             const DeepCollectionEquality()
-                .equals(other._videoUrls, _videoUrls) &&
-            (identical(other.commentsEnabled, commentsEnabled) ||
-                other.commentsEnabled == commentsEnabled) &&
-            (identical(other.hideLikeCount, hideLikeCount) ||
-                other.hideLikeCount == hideLikeCount) &&
-            (identical(other.hideCommentCount, hideCommentCount) ||
-                other.hideCommentCount == hideCommentCount) &&
-            (identical(other.hideShareCount, hideShareCount) ||
-                other.hideShareCount == hideShareCount) &&
-            (identical(other.hideLikesList, hideLikesList) ||
-                other.hideLikesList == hideLikesList) &&
+                .equals(other._mentionIds, _mentionIds) &&
+            (identical(other.allowComments, allowComments) ||
+                other.allowComments == allowComments) &&
+            (identical(other.allowShare, allowShare) ||
+                other.allowShare == allowShare) &&
+            (identical(other.isActive, isActive) ||
+                other.isActive == isActive) &&
             (identical(other.campaignId, campaignId) ||
                 other.campaignId == campaignId) &&
             (identical(other.campaignTitle, campaignTitle) ||
@@ -355,13 +369,13 @@ class _$UpdateFeedModelImpl implements _UpdateFeedModel {
   int get hashCode => Object.hash(
       runtimeType,
       content,
-      const DeepCollectionEquality().hash(_imageUrls),
-      const DeepCollectionEquality().hash(_videoUrls),
-      commentsEnabled,
-      hideLikeCount,
-      hideCommentCount,
-      hideShareCount,
-      hideLikesList,
+      const DeepCollectionEquality().hash(_mediaUrls),
+      const DeepCollectionEquality().hash(_location),
+      const DeepCollectionEquality().hash(_tags),
+      const DeepCollectionEquality().hash(_mentionIds),
+      allowComments,
+      allowShare,
+      isActive,
       campaignId,
       campaignTitle);
 
@@ -384,51 +398,52 @@ class _$UpdateFeedModelImpl implements _UpdateFeedModel {
 
 abstract class _UpdateFeedModel implements UpdateFeedModel {
   const factory _UpdateFeedModel(
-          {@JsonKey(name: 'content') final String? content,
-          @StringListConverter()
-          @JsonKey(name: 'image_urls')
-          final List<String>? imageUrls,
-          @StringListConverter()
-          @JsonKey(name: 'video_urls')
-          final List<String>? videoUrls,
-          @JsonKey(name: 'comments_enabled') final bool? commentsEnabled,
-          @JsonKey(name: 'hide_like_count') final bool? hideLikeCount,
-          @JsonKey(name: 'hide_comment_count') final bool? hideCommentCount,
-          @JsonKey(name: 'hide_share_count') final bool? hideShareCount,
-          @JsonKey(name: 'hide_likes_list') final bool? hideLikesList,
-          @JsonKey(name: 'campaign_id') final String? campaignId,
-          @JsonKey(name: 'campaign_title') final String? campaignTitle}) =
-      _$UpdateFeedModelImpl;
+      {@JsonKey(name: 'caption') final String? content,
+      @StringListConverter()
+      @JsonKey(name: 'media_urls')
+      final List<String>? mediaUrls,
+      @JsonKey(name: 'location') final Map<String, dynamic>? location,
+      @StringListConverter() @JsonKey(name: 'tags') final List<String>? tags,
+      @StringListConverter()
+      @JsonKey(name: 'mention_ids')
+      final List<String>? mentionIds,
+      @JsonKey(name: 'allow_comments') final bool? allowComments,
+      @JsonKey(name: 'allow_share') final bool? allowShare,
+      @JsonKey(name: 'is_active') final bool? isActive,
+      @JsonKey(name: 'campaign_id') final String? campaignId,
+      @JsonKey(name: 'campaign_title')
+      final String? campaignTitle}) = _$UpdateFeedModelImpl;
 
   factory _UpdateFeedModel.fromJson(Map<String, dynamic> json) =
       _$UpdateFeedModelImpl.fromJson;
 
   @override
-  @JsonKey(name: 'content')
+  @JsonKey(name: 'caption')
   String? get content;
   @override
   @StringListConverter()
-  @JsonKey(name: 'image_urls')
-  List<String>? get imageUrls;
+  @JsonKey(name: 'media_urls')
+  List<String>? get mediaUrls;
+  @override
+  @JsonKey(name: 'location')
+  Map<String, dynamic>? get location;
   @override
   @StringListConverter()
-  @JsonKey(name: 'video_urls')
-  List<String>? get videoUrls; // Post privacy settings
+  @JsonKey(name: 'tags')
+  List<String>? get tags;
   @override
-  @JsonKey(name: 'comments_enabled')
-  bool? get commentsEnabled;
+  @StringListConverter()
+  @JsonKey(name: 'mention_ids')
+  List<String>? get mentionIds;
   @override
-  @JsonKey(name: 'hide_like_count')
-  bool? get hideLikeCount;
+  @JsonKey(name: 'allow_comments')
+  bool? get allowComments;
   @override
-  @JsonKey(name: 'hide_comment_count')
-  bool? get hideCommentCount;
+  @JsonKey(name: 'allow_share')
+  bool? get allowShare;
   @override
-  @JsonKey(name: 'hide_share_count')
-  bool? get hideShareCount;
-  @override
-  @JsonKey(name: 'hide_likes_list')
-  bool? get hideLikesList; // Campaign association
+  @JsonKey(name: 'is_active')
+  bool? get isActive;
   @override
   @JsonKey(name: 'campaign_id')
   String? get campaignId;

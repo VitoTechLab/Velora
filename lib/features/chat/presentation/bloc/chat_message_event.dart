@@ -35,18 +35,34 @@ class ChatMessageEvent with _$ChatMessageEvent {
     String? replyToMessageId,
   }) = SendChatMessageEvent;
 
+  /// Send media message (image, video, document)
+  const factory ChatMessageEvent.sendMediaMessage({
+    required String conversationId,
+    required String mediaUrl,
+    required String mediaType, // 'image', 'video', 'document', 'audio'
+    String? mimeType,
+    String? fileName,
+    int? fileSize,
+    String? caption,
+  }) = SendMediaMessageEvent;
+
   const factory ChatMessageEvent.sendPollMessage({
     required String conversationId,
     required String question,
     required List<String> options,
     @Default(false) bool multipleChoice,
+    @Default(1) int maxUserVotes,
   }) = SendPollMessageEvent;
 
   const factory ChatMessageEvent.sendEventMessage({
     required String conversationId,
     required String title,
     String? description,
-    String? location,
+    String? locationName,
+    String? address,
+    @Default(false) bool isOnline,
+    String? meetingUrl,
+    String? coverUrl,
     required DateTime startDate,
     required DateTime endDate,
   }) = SendEventMessageEvent;
@@ -104,6 +120,11 @@ class ChatMessageEvent with _$ChatMessageEvent {
 
   const factory ChatMessageEvent.markMessageRead({required String messageId}) =
       MarkMessageReadEvent;
+
+  /// Batch mark multiple messages as read - efficient for scroll-based reading
+  const factory ChatMessageEvent.markMessagesReadBatch({
+    required List<String> messageIds,
+  }) = MarkMessagesReadBatchEvent;
 
   const factory ChatMessageEvent.startWatchReads({
     required String conversationId,

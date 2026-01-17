@@ -28,20 +28,36 @@ abstract class ChatRepository {
     String? replyToMessageId,
   });
 
-  /// Send a poll message
+  /// Send a media message (image, video, document, audio)
+  Future<Either<Failure, ChatMessageEntity>> sendMediaMessage({
+    required String conversationId,
+    required String mediaUrl,
+    required String mediaType, // 'image', 'video', 'document', 'audio'
+    String? mimeType,
+    String? fileName,
+    int? fileSize,
+    String? caption,
+  });
+
+  /// Send a poll message with SQL v2 fields
   Future<Either<Failure, ChatMessageEntity>> sendPollMessage({
     required String conversationId,
     required String question,
     required List<String> options,
     required bool multipleChoice,
+    int maxUserVotes = 1,
   });
 
-  /// Send an event message
+  /// Send an event message with SQL v2 fields
   Future<Either<Failure, ChatMessageEntity>> sendEventMessage({
     required String conversationId,
     required String title,
     String? description,
-    String? location,
+    String? locationName,
+    String? address,
+    bool isOnline = false,
+    String? meetingUrl,
+    String? coverUrl,
     required DateTime startDate,
     required DateTime endDate,
   });
@@ -90,8 +106,14 @@ abstract class ChatRepository {
     required String messageId,
   });
 
-  /// Mark a message as read
+  /// Mark a single message as read
   Future<Either<Failure, void>> markMessageRead({required String messageId});
+
+  /// Batch mark multiple messages as read (more efficient for scrolling)
+  /// Returns the count of messages actually marked
+  Future<Either<Failure, int>> markMessagesReadBatch({
+    required List<String> messageIds,
+  });
 
   /// Watch realtime read receipts in a conversation
   Stream<Either<Failure, MessageReadEntity>> watchMessageReads({

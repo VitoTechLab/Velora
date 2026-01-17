@@ -92,7 +92,6 @@
       }
     }
   },
-  "feedWriteCommentHint": "コメントを書く...",
   "feedAddCommentHint": "{name} へのコメントを追加",
   "@feedAddCommentHint": {
     "placeholders": {
@@ -869,6 +868,17 @@
   "chatPollDialogAddOption": "選択肢を追加",
   "chatPollDialogQuestionError": "質問を入力してください",
   "chatPollDialogOptionsError": "少なくとも 2 つの選択肢を追加してください",
+  "chatPollDialogMultipleChoiceLabel": "複数選択",
+  "chatPollDialogMultipleChoiceHint": "ユーザーが複数の選択肢を選ぶことができます",
+  "chatPollDialogMaxVotesLabel": "最大投票数",
+  "chatPollDialogMaxVotesHint": "ユーザーは最大 {count} 個の選択肢を選べます",
+  "@chatPollDialogMaxVotesHint": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "chatPollDialogSend": "投票を送信",
   "chatEventLabel": "イベント",
   "chatEventSemanticsYour": "あなたのイベント",
@@ -888,6 +898,13 @@
   "chatEventDialogDescriptionHint": "イベントの説明を入力…",
   "chatEventDialogLocationLabel": "場所（任意）",
   "chatEventDialogLocationHint": "場所を入力…",
+  "chatEventDialogAddressLabel": "住所",
+  "chatEventDialogAddressHint": "完全な住所を入力…",
+  "chatEventDialogOnlineLabel": "オンラインイベント",
+  "chatEventDialogOnlineHint": "このイベントはバーチャルで開催されます",
+  "chatEventDialogMeetingUrlLabel": "ミーティングURL",
+  "chatEventDialogMeetingUrlHint": "ミーティングリンクを入力（Zoom、Google Meetなど）",
+  "chatEventDialogMeetingUrlError": "オンラインイベントにはミーティングURLを入力してください",
   "chatEventDialogStartLabel": "開始",
   "chatEventDialogEndLabel": "終了",
   "chatEventDialogTitleError": "イベント名を入力してください",

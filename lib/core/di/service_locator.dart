@@ -79,6 +79,7 @@ import 'package:velora/features/chat/data/repositories/chat_repository_impl.dart
 import 'package:velora/features/chat/domain/repositories/chat_repository.dart';
 import 'package:velora/features/chat/domain/usecases/get_messages_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/send_text_message_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/send_media_message_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/edit_message_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/delete_message_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/mark_conversation_read_usecase.dart';
@@ -87,6 +88,7 @@ import 'package:velora/features/chat/domain/usecases/stop_watch_messages_usecase
 import 'package:velora/features/chat/domain/usecases/get_conversation_list_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/get_message_reads_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/mark_message_read_usecase.dart';
+import 'package:velora/features/chat/domain/usecases/mark_messages_read_batch_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/watch_message_reads_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/send_typing_indicator_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/watch_typing_indicators_usecase.dart';
@@ -407,6 +409,8 @@ Future<void> configureDependencies() async {
     ..registerLazySingleton(
         () => SendTextMessageUseCase(repository: getIt<ChatRepository>()))
     ..registerLazySingleton(
+        () => SendMediaMessageUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(
         () => EditMessageUseCase(repository: getIt<ChatRepository>()))
     ..registerLazySingleton(
         () => DeleteMessageUseCase(repository: getIt<ChatRepository>()))
@@ -555,6 +559,7 @@ Future<void> configureDependencies() async {
     () => ChatMessageBloc(
       getMessagesUseCase: getIt<GetMessagesUseCase>(),
       sendTextMessageUseCase: getIt<SendTextMessageUseCase>(),
+      sendMediaMessageUseCase: getIt<SendMediaMessageUseCase>(),
       editMessageUseCase: getIt<EditMessageUseCase>(),
       deleteMessageUseCase: getIt<DeleteMessageUseCase>(),
       markConversationReadUseCase: getIt<MarkConversationReadUseCase>(),
@@ -573,6 +578,7 @@ Future<void> configureDependencies() async {
       unvotePollOptionUseCase: getIt<UnvotePollOptionUseCase>(),
       respondToEventUseCase: getIt<RespondToEventUseCase>(),
       cancelEventRsvpUseCase: getIt<CancelEventRsvpUseCase>(),
+      markMessagesReadBatchUseCase: getIt<MarkMessagesReadBatchUseCase>(),
     ),
   );
 

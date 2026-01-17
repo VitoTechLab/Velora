@@ -21,21 +21,17 @@ mixin _$CommentEntity {
   String get userId => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
-  String? get userFullName => throw _privateConstructorUsedError;
-  String? get userPhotoUrl => throw _privateConstructorUsedError;
+  String? get username => throw _privateConstructorUsedError;
+  String? get photoUrl => throw _privateConstructorUsedError;
   int get likesCount => throw _privateConstructorUsedError;
   bool get isLiked => throw _privateConstructorUsedError;
   String? get parentCommentId => throw _privateConstructorUsedError;
   List<CommentEntity> get replies => throw _privateConstructorUsedError;
-
-  /// Total reply count from server.
   int get replyCount => throw _privateConstructorUsedError;
-
-  /// Whether replies have been loaded for this comment.
   bool get repliesLoaded => throw _privateConstructorUsedError;
-
-  /// Whether replies are currently being fetched.
   bool get isLoadingReplies => throw _privateConstructorUsedError;
+  List<String> get mentionIds => throw _privateConstructorUsedError;
+  bool get isActive => throw _privateConstructorUsedError;
 
   /// Create a copy of CommentEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -56,15 +52,17 @@ abstract class $CommentEntityCopyWith<$Res> {
       String userId,
       String content,
       DateTime createdAt,
-      String? userFullName,
-      String? userPhotoUrl,
+      String? username,
+      String? photoUrl,
       int likesCount,
       bool isLiked,
       String? parentCommentId,
       List<CommentEntity> replies,
       int replyCount,
       bool repliesLoaded,
-      bool isLoadingReplies});
+      bool isLoadingReplies,
+      List<String> mentionIds,
+      bool isActive});
 }
 
 /// @nodoc
@@ -87,8 +85,8 @@ class _$CommentEntityCopyWithImpl<$Res, $Val extends CommentEntity>
     Object? userId = null,
     Object? content = null,
     Object? createdAt = null,
-    Object? userFullName = freezed,
-    Object? userPhotoUrl = freezed,
+    Object? username = freezed,
+    Object? photoUrl = freezed,
     Object? likesCount = null,
     Object? isLiked = null,
     Object? parentCommentId = freezed,
@@ -96,6 +94,8 @@ class _$CommentEntityCopyWithImpl<$Res, $Val extends CommentEntity>
     Object? replyCount = null,
     Object? repliesLoaded = null,
     Object? isLoadingReplies = null,
+    Object? mentionIds = null,
+    Object? isActive = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -118,13 +118,13 @@ class _$CommentEntityCopyWithImpl<$Res, $Val extends CommentEntity>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      userFullName: freezed == userFullName
-          ? _value.userFullName
-          : userFullName // ignore: cast_nullable_to_non_nullable
+      username: freezed == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
               as String?,
-      userPhotoUrl: freezed == userPhotoUrl
-          ? _value.userPhotoUrl
-          : userPhotoUrl // ignore: cast_nullable_to_non_nullable
+      photoUrl: freezed == photoUrl
+          ? _value.photoUrl
+          : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
       likesCount: null == likesCount
           ? _value.likesCount
@@ -154,6 +154,14 @@ class _$CommentEntityCopyWithImpl<$Res, $Val extends CommentEntity>
           ? _value.isLoadingReplies
           : isLoadingReplies // ignore: cast_nullable_to_non_nullable
               as bool,
+      mentionIds: null == mentionIds
+          ? _value.mentionIds
+          : mentionIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      isActive: null == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -172,15 +180,17 @@ abstract class _$$CommentEntityImplCopyWith<$Res>
       String userId,
       String content,
       DateTime createdAt,
-      String? userFullName,
-      String? userPhotoUrl,
+      String? username,
+      String? photoUrl,
       int likesCount,
       bool isLiked,
       String? parentCommentId,
       List<CommentEntity> replies,
       int replyCount,
       bool repliesLoaded,
-      bool isLoadingReplies});
+      bool isLoadingReplies,
+      List<String> mentionIds,
+      bool isActive});
 }
 
 /// @nodoc
@@ -201,8 +211,8 @@ class __$$CommentEntityImplCopyWithImpl<$Res>
     Object? userId = null,
     Object? content = null,
     Object? createdAt = null,
-    Object? userFullName = freezed,
-    Object? userPhotoUrl = freezed,
+    Object? username = freezed,
+    Object? photoUrl = freezed,
     Object? likesCount = null,
     Object? isLiked = null,
     Object? parentCommentId = freezed,
@@ -210,6 +220,8 @@ class __$$CommentEntityImplCopyWithImpl<$Res>
     Object? replyCount = null,
     Object? repliesLoaded = null,
     Object? isLoadingReplies = null,
+    Object? mentionIds = null,
+    Object? isActive = null,
   }) {
     return _then(_$CommentEntityImpl(
       id: null == id
@@ -232,13 +244,13 @@ class __$$CommentEntityImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      userFullName: freezed == userFullName
-          ? _value.userFullName
-          : userFullName // ignore: cast_nullable_to_non_nullable
+      username: freezed == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
               as String?,
-      userPhotoUrl: freezed == userPhotoUrl
-          ? _value.userPhotoUrl
-          : userPhotoUrl // ignore: cast_nullable_to_non_nullable
+      photoUrl: freezed == photoUrl
+          ? _value.photoUrl
+          : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
       likesCount: null == likesCount
           ? _value.likesCount
@@ -268,6 +280,14 @@ class __$$CommentEntityImplCopyWithImpl<$Res>
           ? _value.isLoadingReplies
           : isLoadingReplies // ignore: cast_nullable_to_non_nullable
               as bool,
+      mentionIds: null == mentionIds
+          ? _value._mentionIds
+          : mentionIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      isActive: null == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -281,16 +301,19 @@ class _$CommentEntityImpl implements _CommentEntity {
       required this.userId,
       required this.content,
       required this.createdAt,
-      this.userFullName,
-      this.userPhotoUrl,
+      this.username,
+      this.photoUrl,
       this.likesCount = 0,
       this.isLiked = false,
       this.parentCommentId,
       final List<CommentEntity> replies = const [],
       this.replyCount = 0,
       this.repliesLoaded = false,
-      this.isLoadingReplies = false})
-      : _replies = replies;
+      this.isLoadingReplies = false,
+      final List<String> mentionIds = const [],
+      this.isActive = true})
+      : _replies = replies,
+        _mentionIds = mentionIds;
 
   @override
   final String id;
@@ -303,9 +326,9 @@ class _$CommentEntityImpl implements _CommentEntity {
   @override
   final DateTime createdAt;
   @override
-  final String? userFullName;
+  final String? username;
   @override
-  final String? userPhotoUrl;
+  final String? photoUrl;
   @override
   @JsonKey()
   final int likesCount;
@@ -323,24 +346,31 @@ class _$CommentEntityImpl implements _CommentEntity {
     return EqualUnmodifiableListView(_replies);
   }
 
-  /// Total reply count from server.
   @override
   @JsonKey()
   final int replyCount;
-
-  /// Whether replies have been loaded for this comment.
   @override
   @JsonKey()
   final bool repliesLoaded;
-
-  /// Whether replies are currently being fetched.
   @override
   @JsonKey()
   final bool isLoadingReplies;
+  final List<String> _mentionIds;
+  @override
+  @JsonKey()
+  List<String> get mentionIds {
+    if (_mentionIds is EqualUnmodifiableListView) return _mentionIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_mentionIds);
+  }
+
+  @override
+  @JsonKey()
+  final bool isActive;
 
   @override
   String toString() {
-    return 'CommentEntity(id: $id, postId: $postId, userId: $userId, content: $content, createdAt: $createdAt, userFullName: $userFullName, userPhotoUrl: $userPhotoUrl, likesCount: $likesCount, isLiked: $isLiked, parentCommentId: $parentCommentId, replies: $replies, replyCount: $replyCount, repliesLoaded: $repliesLoaded, isLoadingReplies: $isLoadingReplies)';
+    return 'CommentEntity(id: $id, postId: $postId, userId: $userId, content: $content, createdAt: $createdAt, username: $username, photoUrl: $photoUrl, likesCount: $likesCount, isLiked: $isLiked, parentCommentId: $parentCommentId, replies: $replies, replyCount: $replyCount, repliesLoaded: $repliesLoaded, isLoadingReplies: $isLoadingReplies, mentionIds: $mentionIds, isActive: $isActive)';
   }
 
   @override
@@ -354,10 +384,10 @@ class _$CommentEntityImpl implements _CommentEntity {
             (identical(other.content, content) || other.content == content) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
-            (identical(other.userFullName, userFullName) ||
-                other.userFullName == userFullName) &&
-            (identical(other.userPhotoUrl, userPhotoUrl) ||
-                other.userPhotoUrl == userPhotoUrl) &&
+            (identical(other.username, username) ||
+                other.username == username) &&
+            (identical(other.photoUrl, photoUrl) ||
+                other.photoUrl == photoUrl) &&
             (identical(other.likesCount, likesCount) ||
                 other.likesCount == likesCount) &&
             (identical(other.isLiked, isLiked) || other.isLiked == isLiked) &&
@@ -369,7 +399,11 @@ class _$CommentEntityImpl implements _CommentEntity {
             (identical(other.repliesLoaded, repliesLoaded) ||
                 other.repliesLoaded == repliesLoaded) &&
             (identical(other.isLoadingReplies, isLoadingReplies) ||
-                other.isLoadingReplies == isLoadingReplies));
+                other.isLoadingReplies == isLoadingReplies) &&
+            const DeepCollectionEquality()
+                .equals(other._mentionIds, _mentionIds) &&
+            (identical(other.isActive, isActive) ||
+                other.isActive == isActive));
   }
 
   @override
@@ -380,15 +414,17 @@ class _$CommentEntityImpl implements _CommentEntity {
       userId,
       content,
       createdAt,
-      userFullName,
-      userPhotoUrl,
+      username,
+      photoUrl,
       likesCount,
       isLiked,
       parentCommentId,
       const DeepCollectionEquality().hash(_replies),
       replyCount,
       repliesLoaded,
-      isLoadingReplies);
+      isLoadingReplies,
+      const DeepCollectionEquality().hash(_mentionIds),
+      isActive);
 
   /// Create a copy of CommentEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -406,15 +442,17 @@ abstract class _CommentEntity implements CommentEntity {
       required final String userId,
       required final String content,
       required final DateTime createdAt,
-      final String? userFullName,
-      final String? userPhotoUrl,
+      final String? username,
+      final String? photoUrl,
       final int likesCount,
       final bool isLiked,
       final String? parentCommentId,
       final List<CommentEntity> replies,
       final int replyCount,
       final bool repliesLoaded,
-      final bool isLoadingReplies}) = _$CommentEntityImpl;
+      final bool isLoadingReplies,
+      final List<String> mentionIds,
+      final bool isActive}) = _$CommentEntityImpl;
 
   @override
   String get id;
@@ -427,9 +465,9 @@ abstract class _CommentEntity implements CommentEntity {
   @override
   DateTime get createdAt;
   @override
-  String? get userFullName;
+  String? get username;
   @override
-  String? get userPhotoUrl;
+  String? get photoUrl;
   @override
   int get likesCount;
   @override
@@ -438,18 +476,16 @@ abstract class _CommentEntity implements CommentEntity {
   String? get parentCommentId;
   @override
   List<CommentEntity> get replies;
-
-  /// Total reply count from server.
   @override
   int get replyCount;
-
-  /// Whether replies have been loaded for this comment.
   @override
   bool get repliesLoaded;
-
-  /// Whether replies are currently being fetched.
   @override
   bool get isLoadingReplies;
+  @override
+  List<String> get mentionIds;
+  @override
+  bool get isActive;
 
   /// Create a copy of CommentEntity
   /// with the given fields replaced by the non-null parameter values.

@@ -31,10 +31,10 @@ mixin _$CommentModel {
   @UtcDateTimeConverter()
   @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
-  @JsonKey(name: 'user_full_name')
-  String? get userFullName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'user_photo_url')
-  String? get userPhotoUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'username')
+  String? get username => throw _privateConstructorUsedError;
+  @JsonKey(name: 'photo_url')
+  String? get photoUrl => throw _privateConstructorUsedError;
   @JsonKey(name: 'parent_comment_id')
   String? get parentCommentId => throw _privateConstructorUsedError;
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -45,6 +45,11 @@ mixin _$CommentModel {
   bool get isLiked => throw _privateConstructorUsedError;
   @JsonKey(name: 'reply_count')
   int get replyCount => throw _privateConstructorUsedError;
+  @StringListConverter()
+  @JsonKey(name: 'mention_ids')
+  List<String> get mentionIds => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_active')
+  bool get isActive => throw _privateConstructorUsedError;
 
   /// Serializes this CommentModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -68,14 +73,18 @@ abstract class $CommentModelCopyWith<$Res> {
       @JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'content') String content,
       @UtcDateTimeConverter() @JsonKey(name: 'created_at') DateTime createdAt,
-      @JsonKey(name: 'user_full_name') String? userFullName,
-      @JsonKey(name: 'user_photo_url') String? userPhotoUrl,
+      @JsonKey(name: 'username') String? username,
+      @JsonKey(name: 'photo_url') String? photoUrl,
       @JsonKey(name: 'parent_comment_id') String? parentCommentId,
       @JsonKey(includeFromJson: false, includeToJson: false)
       List<CommentModel> replies,
       @JsonKey(name: 'likes_count') int likesCount,
       @JsonKey(includeToJson: false) bool isLiked,
-      @JsonKey(name: 'reply_count') int replyCount});
+      @JsonKey(name: 'reply_count') int replyCount,
+      @StringListConverter()
+      @JsonKey(name: 'mention_ids')
+      List<String> mentionIds,
+      @JsonKey(name: 'is_active') bool isActive});
 }
 
 /// @nodoc
@@ -98,13 +107,15 @@ class _$CommentModelCopyWithImpl<$Res, $Val extends CommentModel>
     Object? userId = null,
     Object? content = null,
     Object? createdAt = null,
-    Object? userFullName = freezed,
-    Object? userPhotoUrl = freezed,
+    Object? username = freezed,
+    Object? photoUrl = freezed,
     Object? parentCommentId = freezed,
     Object? replies = null,
     Object? likesCount = null,
     Object? isLiked = null,
     Object? replyCount = null,
+    Object? mentionIds = null,
+    Object? isActive = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -127,13 +138,13 @@ class _$CommentModelCopyWithImpl<$Res, $Val extends CommentModel>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      userFullName: freezed == userFullName
-          ? _value.userFullName
-          : userFullName // ignore: cast_nullable_to_non_nullable
+      username: freezed == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
               as String?,
-      userPhotoUrl: freezed == userPhotoUrl
-          ? _value.userPhotoUrl
-          : userPhotoUrl // ignore: cast_nullable_to_non_nullable
+      photoUrl: freezed == photoUrl
+          ? _value.photoUrl
+          : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
       parentCommentId: freezed == parentCommentId
           ? _value.parentCommentId
@@ -155,6 +166,14 @@ class _$CommentModelCopyWithImpl<$Res, $Val extends CommentModel>
           ? _value.replyCount
           : replyCount // ignore: cast_nullable_to_non_nullable
               as int,
+      mentionIds: null == mentionIds
+          ? _value.mentionIds
+          : mentionIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      isActive: null == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -173,14 +192,18 @@ abstract class _$$CommentModelImplCopyWith<$Res>
       @JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'content') String content,
       @UtcDateTimeConverter() @JsonKey(name: 'created_at') DateTime createdAt,
-      @JsonKey(name: 'user_full_name') String? userFullName,
-      @JsonKey(name: 'user_photo_url') String? userPhotoUrl,
+      @JsonKey(name: 'username') String? username,
+      @JsonKey(name: 'photo_url') String? photoUrl,
       @JsonKey(name: 'parent_comment_id') String? parentCommentId,
       @JsonKey(includeFromJson: false, includeToJson: false)
       List<CommentModel> replies,
       @JsonKey(name: 'likes_count') int likesCount,
       @JsonKey(includeToJson: false) bool isLiked,
-      @JsonKey(name: 'reply_count') int replyCount});
+      @JsonKey(name: 'reply_count') int replyCount,
+      @StringListConverter()
+      @JsonKey(name: 'mention_ids')
+      List<String> mentionIds,
+      @JsonKey(name: 'is_active') bool isActive});
 }
 
 /// @nodoc
@@ -201,13 +224,15 @@ class __$$CommentModelImplCopyWithImpl<$Res>
     Object? userId = null,
     Object? content = null,
     Object? createdAt = null,
-    Object? userFullName = freezed,
-    Object? userPhotoUrl = freezed,
+    Object? username = freezed,
+    Object? photoUrl = freezed,
     Object? parentCommentId = freezed,
     Object? replies = null,
     Object? likesCount = null,
     Object? isLiked = null,
     Object? replyCount = null,
+    Object? mentionIds = null,
+    Object? isActive = null,
   }) {
     return _then(_$CommentModelImpl(
       id: null == id
@@ -230,13 +255,13 @@ class __$$CommentModelImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      userFullName: freezed == userFullName
-          ? _value.userFullName
-          : userFullName // ignore: cast_nullable_to_non_nullable
+      username: freezed == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
               as String?,
-      userPhotoUrl: freezed == userPhotoUrl
-          ? _value.userPhotoUrl
-          : userPhotoUrl // ignore: cast_nullable_to_non_nullable
+      photoUrl: freezed == photoUrl
+          ? _value.photoUrl
+          : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
       parentCommentId: freezed == parentCommentId
           ? _value.parentCommentId
@@ -258,6 +283,14 @@ class __$$CommentModelImplCopyWithImpl<$Res>
           ? _value.replyCount
           : replyCount // ignore: cast_nullable_to_non_nullable
               as int,
+      mentionIds: null == mentionIds
+          ? _value._mentionIds
+          : mentionIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      isActive: null == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -273,15 +306,20 @@ class _$CommentModelImpl extends _CommentModel {
       @UtcDateTimeConverter()
       @JsonKey(name: 'created_at')
       required this.createdAt,
-      @JsonKey(name: 'user_full_name') this.userFullName,
-      @JsonKey(name: 'user_photo_url') this.userPhotoUrl,
+      @JsonKey(name: 'username') this.username,
+      @JsonKey(name: 'photo_url') this.photoUrl,
       @JsonKey(name: 'parent_comment_id') this.parentCommentId,
       @JsonKey(includeFromJson: false, includeToJson: false)
       final List<CommentModel> replies = const [],
       @JsonKey(name: 'likes_count') this.likesCount = 0,
       @JsonKey(includeToJson: false) this.isLiked = false,
-      @JsonKey(name: 'reply_count') this.replyCount = 0})
+      @JsonKey(name: 'reply_count') this.replyCount = 0,
+      @StringListConverter()
+      @JsonKey(name: 'mention_ids')
+      final List<String> mentionIds = const [],
+      @JsonKey(name: 'is_active') this.isActive = true})
       : _replies = replies,
+        _mentionIds = mentionIds,
         super._();
 
   factory _$CommentModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -304,11 +342,11 @@ class _$CommentModelImpl extends _CommentModel {
   @JsonKey(name: 'created_at')
   final DateTime createdAt;
   @override
-  @JsonKey(name: 'user_full_name')
-  final String? userFullName;
+  @JsonKey(name: 'username')
+  final String? username;
   @override
-  @JsonKey(name: 'user_photo_url')
-  final String? userPhotoUrl;
+  @JsonKey(name: 'photo_url')
+  final String? photoUrl;
   @override
   @JsonKey(name: 'parent_comment_id')
   final String? parentCommentId;
@@ -330,10 +368,23 @@ class _$CommentModelImpl extends _CommentModel {
   @override
   @JsonKey(name: 'reply_count')
   final int replyCount;
+  final List<String> _mentionIds;
+  @override
+  @StringListConverter()
+  @JsonKey(name: 'mention_ids')
+  List<String> get mentionIds {
+    if (_mentionIds is EqualUnmodifiableListView) return _mentionIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_mentionIds);
+  }
+
+  @override
+  @JsonKey(name: 'is_active')
+  final bool isActive;
 
   @override
   String toString() {
-    return 'CommentModel(id: $id, postId: $postId, userId: $userId, content: $content, createdAt: $createdAt, userFullName: $userFullName, userPhotoUrl: $userPhotoUrl, parentCommentId: $parentCommentId, replies: $replies, likesCount: $likesCount, isLiked: $isLiked, replyCount: $replyCount)';
+    return 'CommentModel(id: $id, postId: $postId, userId: $userId, content: $content, createdAt: $createdAt, username: $username, photoUrl: $photoUrl, parentCommentId: $parentCommentId, replies: $replies, likesCount: $likesCount, isLiked: $isLiked, replyCount: $replyCount, mentionIds: $mentionIds, isActive: $isActive)';
   }
 
   @override
@@ -347,10 +398,10 @@ class _$CommentModelImpl extends _CommentModel {
             (identical(other.content, content) || other.content == content) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
-            (identical(other.userFullName, userFullName) ||
-                other.userFullName == userFullName) &&
-            (identical(other.userPhotoUrl, userPhotoUrl) ||
-                other.userPhotoUrl == userPhotoUrl) &&
+            (identical(other.username, username) ||
+                other.username == username) &&
+            (identical(other.photoUrl, photoUrl) ||
+                other.photoUrl == photoUrl) &&
             (identical(other.parentCommentId, parentCommentId) ||
                 other.parentCommentId == parentCommentId) &&
             const DeepCollectionEquality().equals(other._replies, _replies) &&
@@ -358,7 +409,11 @@ class _$CommentModelImpl extends _CommentModel {
                 other.likesCount == likesCount) &&
             (identical(other.isLiked, isLiked) || other.isLiked == isLiked) &&
             (identical(other.replyCount, replyCount) ||
-                other.replyCount == replyCount));
+                other.replyCount == replyCount) &&
+            const DeepCollectionEquality()
+                .equals(other._mentionIds, _mentionIds) &&
+            (identical(other.isActive, isActive) ||
+                other.isActive == isActive));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -370,13 +425,15 @@ class _$CommentModelImpl extends _CommentModel {
       userId,
       content,
       createdAt,
-      userFullName,
-      userPhotoUrl,
+      username,
+      photoUrl,
       parentCommentId,
       const DeepCollectionEquality().hash(_replies),
       likesCount,
       isLiked,
-      replyCount);
+      replyCount,
+      const DeepCollectionEquality().hash(_mentionIds),
+      isActive);
 
   /// Create a copy of CommentModel
   /// with the given fields replaced by the non-null parameter values.
@@ -403,14 +460,18 @@ abstract class _CommentModel extends CommentModel {
       @UtcDateTimeConverter()
       @JsonKey(name: 'created_at')
       required final DateTime createdAt,
-      @JsonKey(name: 'user_full_name') final String? userFullName,
-      @JsonKey(name: 'user_photo_url') final String? userPhotoUrl,
+      @JsonKey(name: 'username') final String? username,
+      @JsonKey(name: 'photo_url') final String? photoUrl,
       @JsonKey(name: 'parent_comment_id') final String? parentCommentId,
       @JsonKey(includeFromJson: false, includeToJson: false)
       final List<CommentModel> replies,
       @JsonKey(name: 'likes_count') final int likesCount,
       @JsonKey(includeToJson: false) final bool isLiked,
-      @JsonKey(name: 'reply_count') final int replyCount}) = _$CommentModelImpl;
+      @JsonKey(name: 'reply_count') final int replyCount,
+      @StringListConverter()
+      @JsonKey(name: 'mention_ids')
+      final List<String> mentionIds,
+      @JsonKey(name: 'is_active') final bool isActive}) = _$CommentModelImpl;
   const _CommentModel._() : super._();
 
   factory _CommentModel.fromJson(Map<String, dynamic> json) =
@@ -433,11 +494,11 @@ abstract class _CommentModel extends CommentModel {
   @JsonKey(name: 'created_at')
   DateTime get createdAt;
   @override
-  @JsonKey(name: 'user_full_name')
-  String? get userFullName;
+  @JsonKey(name: 'username')
+  String? get username;
   @override
-  @JsonKey(name: 'user_photo_url')
-  String? get userPhotoUrl;
+  @JsonKey(name: 'photo_url')
+  String? get photoUrl;
   @override
   @JsonKey(name: 'parent_comment_id')
   String? get parentCommentId;
@@ -453,6 +514,13 @@ abstract class _CommentModel extends CommentModel {
   @override
   @JsonKey(name: 'reply_count')
   int get replyCount;
+  @override
+  @StringListConverter()
+  @JsonKey(name: 'mention_ids')
+  List<String> get mentionIds;
+  @override
+  @JsonKey(name: 'is_active')
+  bool get isActive;
 
   /// Create a copy of CommentModel
   /// with the given fields replaced by the non-null parameter values.

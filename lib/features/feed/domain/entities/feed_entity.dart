@@ -2,9 +2,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'feed_entity.freezed.dart';
 
-/// Feed post entity.
 @freezed
-abstract class FeedEntity with _$FeedEntity {
+class FeedEntity with _$FeedEntity {
   const FeedEntity._();
 
   const factory FeedEntity({
@@ -14,22 +13,43 @@ abstract class FeedEntity with _$FeedEntity {
     required DateTime createdAt,
     String? username,
     String? photoUrl,
-    @Default(<String>[]) List<String> imageUrls,
-    @Default(<String>[]) List<String> videoUrls,
-    int? likesCount,
-    int? commentsCount,
-    int? sharesCount,
+    @Default(<String>[]) List<String> mediaUrls,
+    Map<String, dynamic>? location,
+    @Default(<String>[]) List<String> tags,
+    @Default(<String>[]) List<String> mentionIds,
+    @Default(0) int likesCount,
+    @Default(0) int commentsCount,
+    @Default(0) int sharesCount,
     @Default(false) bool isLiked,
     @Default(false) bool isBookmarked,
     @Default(false) bool isFollowing,
     @Default(false) bool isFollowRequestPending,
     @Default(false) bool isMe,
-    @Default(true) bool commentsEnabled,
-    @Default(false) bool hideLikeCount,
-    @Default(false) bool hideCommentCount,
-    @Default(false) bool hideShareCount,
-    @Default(false) bool hideLikesList,
+    @Default(true) bool allowComments,
+    @Default(true) bool allowShare,
+    @Default(true) bool isActive,
     String? campaignId,
     String? campaignTitle,
   }) = _FeedEntity;
+
+  List<String> get imageUrls => mediaUrls.where((url) {
+        final lower = url.toLowerCase();
+        return lower.endsWith('.jpg') ||
+            lower.endsWith('.jpeg') ||
+            lower.endsWith('.png') ||
+            lower.endsWith('.gif') ||
+            lower.endsWith('.webp');
+      }).toList();
+
+  List<String> get videoUrls => mediaUrls.where((url) {
+        final lower = url.toLowerCase();
+        return lower.endsWith('.mp4') ||
+            lower.endsWith('.mov') ||
+            lower.endsWith('.avi') ||
+            lower.endsWith('.webm');
+      }).toList();
+
+  bool get hasMedia => mediaUrls.isNotEmpty;
+  bool get hasImages => imageUrls.isNotEmpty;
+  bool get hasVideos => videoUrls.isNotEmpty;
 }

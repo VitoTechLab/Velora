@@ -26,9 +26,13 @@ mixin _$ChatMessageEntity {
   DateTime? get deletedAt => throw _privateConstructorUsedError;
   String? get deletedBy => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
-  DateTime get updatedAt => throw _privateConstructorUsedError;
+  DateTime get updatedAt =>
+      throw _privateConstructorUsedError; // Related payloads
   PollPayloadEntity? get poll => throw _privateConstructorUsedError;
-  EventPayloadEntity? get event => throw _privateConstructorUsedError;
+  EventPayloadEntity? get event =>
+      throw _privateConstructorUsedError; // Attachments (images, videos, audio, files)
+  List<MessageAttachmentEntity> get attachments =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of ChatMessageEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -56,7 +60,8 @@ abstract class $ChatMessageEntityCopyWith<$Res> {
       DateTime createdAt,
       DateTime updatedAt,
       PollPayloadEntity? poll,
-      EventPayloadEntity? event});
+      EventPayloadEntity? event,
+      List<MessageAttachmentEntity> attachments});
 
   $PollPayloadEntityCopyWith<$Res>? get poll;
   $EventPayloadEntityCopyWith<$Res>? get event;
@@ -90,6 +95,7 @@ class _$ChatMessageEntityCopyWithImpl<$Res, $Val extends ChatMessageEntity>
     Object? updatedAt = null,
     Object? poll = freezed,
     Object? event = freezed,
+    Object? attachments = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -144,6 +150,10 @@ class _$ChatMessageEntityCopyWithImpl<$Res, $Val extends ChatMessageEntity>
           ? _value.event
           : event // ignore: cast_nullable_to_non_nullable
               as EventPayloadEntity?,
+      attachments: null == attachments
+          ? _value.attachments
+          : attachments // ignore: cast_nullable_to_non_nullable
+              as List<MessageAttachmentEntity>,
     ) as $Val);
   }
 
@@ -197,7 +207,8 @@ abstract class _$$ChatMessageEntityImplCopyWith<$Res>
       DateTime createdAt,
       DateTime updatedAt,
       PollPayloadEntity? poll,
-      EventPayloadEntity? event});
+      EventPayloadEntity? event,
+      List<MessageAttachmentEntity> attachments});
 
   @override
   $PollPayloadEntityCopyWith<$Res>? get poll;
@@ -231,6 +242,7 @@ class __$$ChatMessageEntityImplCopyWithImpl<$Res>
     Object? updatedAt = null,
     Object? poll = freezed,
     Object? event = freezed,
+    Object? attachments = null,
   }) {
     return _then(_$ChatMessageEntityImpl(
       id: null == id
@@ -285,13 +297,17 @@ class __$$ChatMessageEntityImplCopyWithImpl<$Res>
           ? _value.event
           : event // ignore: cast_nullable_to_non_nullable
               as EventPayloadEntity?,
+      attachments: null == attachments
+          ? _value._attachments
+          : attachments // ignore: cast_nullable_to_non_nullable
+              as List<MessageAttachmentEntity>,
     ));
   }
 }
 
 /// @nodoc
 
-class _$ChatMessageEntityImpl implements _ChatMessageEntity {
+class _$ChatMessageEntityImpl extends _ChatMessageEntity {
   const _$ChatMessageEntityImpl(
       {required this.id,
       required this.conversationId,
@@ -305,7 +321,10 @@ class _$ChatMessageEntityImpl implements _ChatMessageEntity {
       required this.createdAt,
       required this.updatedAt,
       this.poll,
-      this.event});
+      this.event,
+      final List<MessageAttachmentEntity> attachments = const []})
+      : _attachments = attachments,
+        super._();
 
   @override
   final String id;
@@ -329,14 +348,25 @@ class _$ChatMessageEntityImpl implements _ChatMessageEntity {
   final DateTime createdAt;
   @override
   final DateTime updatedAt;
+// Related payloads
   @override
   final PollPayloadEntity? poll;
   @override
   final EventPayloadEntity? event;
+// Attachments (images, videos, audio, files)
+  final List<MessageAttachmentEntity> _attachments;
+// Attachments (images, videos, audio, files)
+  @override
+  @JsonKey()
+  List<MessageAttachmentEntity> get attachments {
+    if (_attachments is EqualUnmodifiableListView) return _attachments;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_attachments);
+  }
 
   @override
   String toString() {
-    return 'ChatMessageEntity(id: $id, conversationId: $conversationId, senderId: $senderId, kind: $kind, body: $body, replyToMessageId: $replyToMessageId, editedAt: $editedAt, deletedAt: $deletedAt, deletedBy: $deletedBy, createdAt: $createdAt, updatedAt: $updatedAt, poll: $poll, event: $event)';
+    return 'ChatMessageEntity(id: $id, conversationId: $conversationId, senderId: $senderId, kind: $kind, body: $body, replyToMessageId: $replyToMessageId, editedAt: $editedAt, deletedAt: $deletedAt, deletedBy: $deletedBy, createdAt: $createdAt, updatedAt: $updatedAt, poll: $poll, event: $event, attachments: $attachments)';
   }
 
   @override
@@ -364,7 +394,9 @@ class _$ChatMessageEntityImpl implements _ChatMessageEntity {
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
             (identical(other.poll, poll) || other.poll == poll) &&
-            (identical(other.event, event) || other.event == event));
+            (identical(other.event, event) || other.event == event) &&
+            const DeepCollectionEquality()
+                .equals(other._attachments, _attachments));
   }
 
   @override
@@ -382,7 +414,8 @@ class _$ChatMessageEntityImpl implements _ChatMessageEntity {
       createdAt,
       updatedAt,
       poll,
-      event);
+      event,
+      const DeepCollectionEquality().hash(_attachments));
 
   /// Create a copy of ChatMessageEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -394,21 +427,24 @@ class _$ChatMessageEntityImpl implements _ChatMessageEntity {
           this, _$identity);
 }
 
-abstract class _ChatMessageEntity implements ChatMessageEntity {
+abstract class _ChatMessageEntity extends ChatMessageEntity {
   const factory _ChatMessageEntity(
-      {required final String id,
-      required final String conversationId,
-      required final String? senderId,
-      required final String kind,
-      final String? body,
-      final String? replyToMessageId,
-      final DateTime? editedAt,
-      final DateTime? deletedAt,
-      final String? deletedBy,
-      required final DateTime createdAt,
-      required final DateTime updatedAt,
-      final PollPayloadEntity? poll,
-      final EventPayloadEntity? event}) = _$ChatMessageEntityImpl;
+          {required final String id,
+          required final String conversationId,
+          required final String? senderId,
+          required final String kind,
+          final String? body,
+          final String? replyToMessageId,
+          final DateTime? editedAt,
+          final DateTime? deletedAt,
+          final String? deletedBy,
+          required final DateTime createdAt,
+          required final DateTime updatedAt,
+          final PollPayloadEntity? poll,
+          final EventPayloadEntity? event,
+          final List<MessageAttachmentEntity> attachments}) =
+      _$ChatMessageEntityImpl;
+  const _ChatMessageEntity._() : super._();
 
   @override
   String get id;
@@ -431,11 +467,13 @@ abstract class _ChatMessageEntity implements ChatMessageEntity {
   @override
   DateTime get createdAt;
   @override
-  DateTime get updatedAt;
+  DateTime get updatedAt; // Related payloads
   @override
   PollPayloadEntity? get poll;
   @override
-  EventPayloadEntity? get event;
+  EventPayloadEntity? get event; // Attachments (images, videos, audio, files)
+  @override
+  List<MessageAttachmentEntity> get attachments;
 
   /// Create a copy of ChatMessageEntity
   /// with the given fields replaced by the non-null parameter values.

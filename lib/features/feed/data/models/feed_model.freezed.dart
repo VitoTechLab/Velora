@@ -24,30 +24,32 @@ mixin _$FeedModel {
   String get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_id')
   String get userId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'content')
+  @JsonKey(name: 'caption')
   String get content => throw _privateConstructorUsedError;
   @UtcDateTimeConverter()
   @JsonKey(name: 'created_at')
-  DateTime get createdAt =>
-      throw _privateConstructorUsedError; // Joined from profiles (read-only)
+  DateTime get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'username')
   String? get username => throw _privateConstructorUsedError;
   @JsonKey(name: 'photo_url')
   String? get photoUrl => throw _privateConstructorUsedError;
   @StringListConverter()
-  @JsonKey(name: 'image_urls')
-  List<String> get imageUrls => throw _privateConstructorUsedError;
+  @JsonKey(name: 'media_urls')
+  List<String> get mediaUrls => throw _privateConstructorUsedError;
+  @JsonKey(name: 'location')
+  Map<String, dynamic>? get location => throw _privateConstructorUsedError;
   @StringListConverter()
-  @JsonKey(name: 'video_urls')
-  List<String> get videoUrls =>
-      throw _privateConstructorUsedError; // Counts can be masked (nullable)
+  @JsonKey(name: 'tags')
+  List<String> get tags => throw _privateConstructorUsedError;
+  @StringListConverter()
+  @JsonKey(name: 'mention_ids')
+  List<String> get mentionIds => throw _privateConstructorUsedError;
   @JsonKey(name: 'likes_count')
-  int? get likesCount => throw _privateConstructorUsedError;
+  int get likesCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'comments_count')
-  int? get commentsCount => throw _privateConstructorUsedError;
+  int get commentsCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'shares_count')
-  int? get sharesCount =>
-      throw _privateConstructorUsedError; // Computed per viewer (read-only)
+  int get sharesCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_liked')
   bool get isLiked => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_bookmarked')
@@ -57,18 +59,13 @@ mixin _$FeedModel {
   @JsonKey(name: 'is_follow_request_pending')
   bool get isFollowRequestPending => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_me')
-  bool get isMe => throw _privateConstructorUsedError; // Post privacy settings
-  @JsonKey(name: 'comments_enabled')
-  bool get commentsEnabled => throw _privateConstructorUsedError;
-  @JsonKey(name: 'hide_like_count')
-  bool get hideLikeCount => throw _privateConstructorUsedError;
-  @JsonKey(name: 'hide_comment_count')
-  bool get hideCommentCount => throw _privateConstructorUsedError;
-  @JsonKey(name: 'hide_share_count')
-  bool get hideShareCount => throw _privateConstructorUsedError;
-  @JsonKey(name: 'hide_likes_list')
-  bool get hideLikesList =>
-      throw _privateConstructorUsedError; // Campaign association
+  bool get isMe => throw _privateConstructorUsedError;
+  @JsonKey(name: 'allow_comments')
+  bool get allowComments => throw _privateConstructorUsedError;
+  @JsonKey(name: 'allow_share')
+  bool get allowShare => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_active')
+  bool get isActive => throw _privateConstructorUsedError;
   @JsonKey(name: 'campaign_id')
   String? get campaignId => throw _privateConstructorUsedError;
   @JsonKey(name: 'campaign_title')
@@ -92,29 +89,29 @@ abstract class $FeedModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'id') String id,
       @JsonKey(name: 'user_id') String userId,
-      @JsonKey(name: 'content') String content,
+      @JsonKey(name: 'caption') String content,
       @UtcDateTimeConverter() @JsonKey(name: 'created_at') DateTime createdAt,
       @JsonKey(name: 'username') String? username,
       @JsonKey(name: 'photo_url') String? photoUrl,
       @StringListConverter()
-      @JsonKey(name: 'image_urls')
-      List<String> imageUrls,
+      @JsonKey(name: 'media_urls')
+      List<String> mediaUrls,
+      @JsonKey(name: 'location') Map<String, dynamic>? location,
+      @StringListConverter() @JsonKey(name: 'tags') List<String> tags,
       @StringListConverter()
-      @JsonKey(name: 'video_urls')
-      List<String> videoUrls,
-      @JsonKey(name: 'likes_count') int? likesCount,
-      @JsonKey(name: 'comments_count') int? commentsCount,
-      @JsonKey(name: 'shares_count') int? sharesCount,
+      @JsonKey(name: 'mention_ids')
+      List<String> mentionIds,
+      @JsonKey(name: 'likes_count') int likesCount,
+      @JsonKey(name: 'comments_count') int commentsCount,
+      @JsonKey(name: 'shares_count') int sharesCount,
       @JsonKey(name: 'is_liked') bool isLiked,
       @JsonKey(name: 'is_bookmarked') bool isBookmarked,
       @JsonKey(name: 'is_following') bool isFollowing,
       @JsonKey(name: 'is_follow_request_pending') bool isFollowRequestPending,
       @JsonKey(name: 'is_me') bool isMe,
-      @JsonKey(name: 'comments_enabled') bool commentsEnabled,
-      @JsonKey(name: 'hide_like_count') bool hideLikeCount,
-      @JsonKey(name: 'hide_comment_count') bool hideCommentCount,
-      @JsonKey(name: 'hide_share_count') bool hideShareCount,
-      @JsonKey(name: 'hide_likes_list') bool hideLikesList,
+      @JsonKey(name: 'allow_comments') bool allowComments,
+      @JsonKey(name: 'allow_share') bool allowShare,
+      @JsonKey(name: 'is_active') bool isActive,
       @JsonKey(name: 'campaign_id') String? campaignId,
       @JsonKey(name: 'campaign_title') String? campaignTitle});
 }
@@ -140,21 +137,21 @@ class _$FeedModelCopyWithImpl<$Res, $Val extends FeedModel>
     Object? createdAt = null,
     Object? username = freezed,
     Object? photoUrl = freezed,
-    Object? imageUrls = null,
-    Object? videoUrls = null,
-    Object? likesCount = freezed,
-    Object? commentsCount = freezed,
-    Object? sharesCount = freezed,
+    Object? mediaUrls = null,
+    Object? location = freezed,
+    Object? tags = null,
+    Object? mentionIds = null,
+    Object? likesCount = null,
+    Object? commentsCount = null,
+    Object? sharesCount = null,
     Object? isLiked = null,
     Object? isBookmarked = null,
     Object? isFollowing = null,
     Object? isFollowRequestPending = null,
     Object? isMe = null,
-    Object? commentsEnabled = null,
-    Object? hideLikeCount = null,
-    Object? hideCommentCount = null,
-    Object? hideShareCount = null,
-    Object? hideLikesList = null,
+    Object? allowComments = null,
+    Object? allowShare = null,
+    Object? isActive = null,
     Object? campaignId = freezed,
     Object? campaignTitle = freezed,
   }) {
@@ -183,26 +180,34 @@ class _$FeedModelCopyWithImpl<$Res, $Val extends FeedModel>
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      imageUrls: null == imageUrls
-          ? _value.imageUrls
-          : imageUrls // ignore: cast_nullable_to_non_nullable
+      mediaUrls: null == mediaUrls
+          ? _value.mediaUrls
+          : mediaUrls // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      videoUrls: null == videoUrls
-          ? _value.videoUrls
-          : videoUrls // ignore: cast_nullable_to_non_nullable
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      tags: null == tags
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      likesCount: freezed == likesCount
+      mentionIds: null == mentionIds
+          ? _value.mentionIds
+          : mentionIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      likesCount: null == likesCount
           ? _value.likesCount
           : likesCount // ignore: cast_nullable_to_non_nullable
-              as int?,
-      commentsCount: freezed == commentsCount
+              as int,
+      commentsCount: null == commentsCount
           ? _value.commentsCount
           : commentsCount // ignore: cast_nullable_to_non_nullable
-              as int?,
-      sharesCount: freezed == sharesCount
+              as int,
+      sharesCount: null == sharesCount
           ? _value.sharesCount
           : sharesCount // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       isLiked: null == isLiked
           ? _value.isLiked
           : isLiked // ignore: cast_nullable_to_non_nullable
@@ -223,25 +228,17 @@ class _$FeedModelCopyWithImpl<$Res, $Val extends FeedModel>
           ? _value.isMe
           : isMe // ignore: cast_nullable_to_non_nullable
               as bool,
-      commentsEnabled: null == commentsEnabled
-          ? _value.commentsEnabled
-          : commentsEnabled // ignore: cast_nullable_to_non_nullable
+      allowComments: null == allowComments
+          ? _value.allowComments
+          : allowComments // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideLikeCount: null == hideLikeCount
-          ? _value.hideLikeCount
-          : hideLikeCount // ignore: cast_nullable_to_non_nullable
+      allowShare: null == allowShare
+          ? _value.allowShare
+          : allowShare // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideCommentCount: null == hideCommentCount
-          ? _value.hideCommentCount
-          : hideCommentCount // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hideShareCount: null == hideShareCount
-          ? _value.hideShareCount
-          : hideShareCount // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hideLikesList: null == hideLikesList
-          ? _value.hideLikesList
-          : hideLikesList // ignore: cast_nullable_to_non_nullable
+      isActive: null == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
               as bool,
       campaignId: freezed == campaignId
           ? _value.campaignId
@@ -266,29 +263,29 @@ abstract class _$$FeedModelImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'id') String id,
       @JsonKey(name: 'user_id') String userId,
-      @JsonKey(name: 'content') String content,
+      @JsonKey(name: 'caption') String content,
       @UtcDateTimeConverter() @JsonKey(name: 'created_at') DateTime createdAt,
       @JsonKey(name: 'username') String? username,
       @JsonKey(name: 'photo_url') String? photoUrl,
       @StringListConverter()
-      @JsonKey(name: 'image_urls')
-      List<String> imageUrls,
+      @JsonKey(name: 'media_urls')
+      List<String> mediaUrls,
+      @JsonKey(name: 'location') Map<String, dynamic>? location,
+      @StringListConverter() @JsonKey(name: 'tags') List<String> tags,
       @StringListConverter()
-      @JsonKey(name: 'video_urls')
-      List<String> videoUrls,
-      @JsonKey(name: 'likes_count') int? likesCount,
-      @JsonKey(name: 'comments_count') int? commentsCount,
-      @JsonKey(name: 'shares_count') int? sharesCount,
+      @JsonKey(name: 'mention_ids')
+      List<String> mentionIds,
+      @JsonKey(name: 'likes_count') int likesCount,
+      @JsonKey(name: 'comments_count') int commentsCount,
+      @JsonKey(name: 'shares_count') int sharesCount,
       @JsonKey(name: 'is_liked') bool isLiked,
       @JsonKey(name: 'is_bookmarked') bool isBookmarked,
       @JsonKey(name: 'is_following') bool isFollowing,
       @JsonKey(name: 'is_follow_request_pending') bool isFollowRequestPending,
       @JsonKey(name: 'is_me') bool isMe,
-      @JsonKey(name: 'comments_enabled') bool commentsEnabled,
-      @JsonKey(name: 'hide_like_count') bool hideLikeCount,
-      @JsonKey(name: 'hide_comment_count') bool hideCommentCount,
-      @JsonKey(name: 'hide_share_count') bool hideShareCount,
-      @JsonKey(name: 'hide_likes_list') bool hideLikesList,
+      @JsonKey(name: 'allow_comments') bool allowComments,
+      @JsonKey(name: 'allow_share') bool allowShare,
+      @JsonKey(name: 'is_active') bool isActive,
       @JsonKey(name: 'campaign_id') String? campaignId,
       @JsonKey(name: 'campaign_title') String? campaignTitle});
 }
@@ -312,21 +309,21 @@ class __$$FeedModelImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? username = freezed,
     Object? photoUrl = freezed,
-    Object? imageUrls = null,
-    Object? videoUrls = null,
-    Object? likesCount = freezed,
-    Object? commentsCount = freezed,
-    Object? sharesCount = freezed,
+    Object? mediaUrls = null,
+    Object? location = freezed,
+    Object? tags = null,
+    Object? mentionIds = null,
+    Object? likesCount = null,
+    Object? commentsCount = null,
+    Object? sharesCount = null,
     Object? isLiked = null,
     Object? isBookmarked = null,
     Object? isFollowing = null,
     Object? isFollowRequestPending = null,
     Object? isMe = null,
-    Object? commentsEnabled = null,
-    Object? hideLikeCount = null,
-    Object? hideCommentCount = null,
-    Object? hideShareCount = null,
-    Object? hideLikesList = null,
+    Object? allowComments = null,
+    Object? allowShare = null,
+    Object? isActive = null,
     Object? campaignId = freezed,
     Object? campaignTitle = freezed,
   }) {
@@ -355,26 +352,34 @@ class __$$FeedModelImplCopyWithImpl<$Res>
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      imageUrls: null == imageUrls
-          ? _value._imageUrls
-          : imageUrls // ignore: cast_nullable_to_non_nullable
+      mediaUrls: null == mediaUrls
+          ? _value._mediaUrls
+          : mediaUrls // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      videoUrls: null == videoUrls
-          ? _value._videoUrls
-          : videoUrls // ignore: cast_nullable_to_non_nullable
+      location: freezed == location
+          ? _value._location
+          : location // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      tags: null == tags
+          ? _value._tags
+          : tags // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      likesCount: freezed == likesCount
+      mentionIds: null == mentionIds
+          ? _value._mentionIds
+          : mentionIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      likesCount: null == likesCount
           ? _value.likesCount
           : likesCount // ignore: cast_nullable_to_non_nullable
-              as int?,
-      commentsCount: freezed == commentsCount
+              as int,
+      commentsCount: null == commentsCount
           ? _value.commentsCount
           : commentsCount // ignore: cast_nullable_to_non_nullable
-              as int?,
-      sharesCount: freezed == sharesCount
+              as int,
+      sharesCount: null == sharesCount
           ? _value.sharesCount
           : sharesCount // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       isLiked: null == isLiked
           ? _value.isLiked
           : isLiked // ignore: cast_nullable_to_non_nullable
@@ -395,25 +400,17 @@ class __$$FeedModelImplCopyWithImpl<$Res>
           ? _value.isMe
           : isMe // ignore: cast_nullable_to_non_nullable
               as bool,
-      commentsEnabled: null == commentsEnabled
-          ? _value.commentsEnabled
-          : commentsEnabled // ignore: cast_nullable_to_non_nullable
+      allowComments: null == allowComments
+          ? _value.allowComments
+          : allowComments // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideLikeCount: null == hideLikeCount
-          ? _value.hideLikeCount
-          : hideLikeCount // ignore: cast_nullable_to_non_nullable
+      allowShare: null == allowShare
+          ? _value.allowShare
+          : allowShare // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideCommentCount: null == hideCommentCount
-          ? _value.hideCommentCount
-          : hideCommentCount // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hideShareCount: null == hideShareCount
-          ? _value.hideShareCount
-          : hideShareCount // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hideLikesList: null == hideLikesList
-          ? _value.hideLikesList
-          : hideLikesList // ignore: cast_nullable_to_non_nullable
+      isActive: null == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
               as bool,
       campaignId: freezed == campaignId
           ? _value.campaignId
@@ -433,36 +430,40 @@ class _$FeedModelImpl extends _FeedModel {
   const _$FeedModelImpl(
       {@JsonKey(name: 'id') required this.id,
       @JsonKey(name: 'user_id') required this.userId,
-      @JsonKey(name: 'content') required this.content,
+      @JsonKey(name: 'caption') required this.content,
       @UtcDateTimeConverter()
       @JsonKey(name: 'created_at')
       required this.createdAt,
       @JsonKey(name: 'username') this.username,
       @JsonKey(name: 'photo_url') this.photoUrl,
       @StringListConverter()
-      @JsonKey(name: 'image_urls')
-      final List<String> imageUrls = const [],
+      @JsonKey(name: 'media_urls')
+      final List<String> mediaUrls = const [],
+      @JsonKey(name: 'location') final Map<String, dynamic>? location,
       @StringListConverter()
-      @JsonKey(name: 'video_urls')
-      final List<String> videoUrls = const [],
-      @JsonKey(name: 'likes_count') this.likesCount,
-      @JsonKey(name: 'comments_count') this.commentsCount,
-      @JsonKey(name: 'shares_count') this.sharesCount,
+      @JsonKey(name: 'tags')
+      final List<String> tags = const [],
+      @StringListConverter()
+      @JsonKey(name: 'mention_ids')
+      final List<String> mentionIds = const [],
+      @JsonKey(name: 'likes_count') this.likesCount = 0,
+      @JsonKey(name: 'comments_count') this.commentsCount = 0,
+      @JsonKey(name: 'shares_count') this.sharesCount = 0,
       @JsonKey(name: 'is_liked') this.isLiked = false,
       @JsonKey(name: 'is_bookmarked') this.isBookmarked = false,
       @JsonKey(name: 'is_following') this.isFollowing = false,
       @JsonKey(name: 'is_follow_request_pending')
       this.isFollowRequestPending = false,
       @JsonKey(name: 'is_me') this.isMe = false,
-      @JsonKey(name: 'comments_enabled') this.commentsEnabled = true,
-      @JsonKey(name: 'hide_like_count') this.hideLikeCount = false,
-      @JsonKey(name: 'hide_comment_count') this.hideCommentCount = false,
-      @JsonKey(name: 'hide_share_count') this.hideShareCount = false,
-      @JsonKey(name: 'hide_likes_list') this.hideLikesList = false,
+      @JsonKey(name: 'allow_comments') this.allowComments = true,
+      @JsonKey(name: 'allow_share') this.allowShare = true,
+      @JsonKey(name: 'is_active') this.isActive = true,
       @JsonKey(name: 'campaign_id') this.campaignId,
       @JsonKey(name: 'campaign_title') this.campaignTitle})
-      : _imageUrls = imageUrls,
-        _videoUrls = videoUrls,
+      : _mediaUrls = mediaUrls,
+        _location = location,
+        _tags = tags,
+        _mentionIds = mentionIds,
         super._();
 
   factory _$FeedModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -475,50 +476,68 @@ class _$FeedModelImpl extends _FeedModel {
   @JsonKey(name: 'user_id')
   final String userId;
   @override
-  @JsonKey(name: 'content')
+  @JsonKey(name: 'caption')
   final String content;
   @override
   @UtcDateTimeConverter()
   @JsonKey(name: 'created_at')
   final DateTime createdAt;
-// Joined from profiles (read-only)
   @override
   @JsonKey(name: 'username')
   final String? username;
   @override
   @JsonKey(name: 'photo_url')
   final String? photoUrl;
-  final List<String> _imageUrls;
+  final List<String> _mediaUrls;
   @override
   @StringListConverter()
-  @JsonKey(name: 'image_urls')
-  List<String> get imageUrls {
-    if (_imageUrls is EqualUnmodifiableListView) return _imageUrls;
+  @JsonKey(name: 'media_urls')
+  List<String> get mediaUrls {
+    if (_mediaUrls is EqualUnmodifiableListView) return _mediaUrls;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_imageUrls);
+    return EqualUnmodifiableListView(_mediaUrls);
   }
 
-  final List<String> _videoUrls;
+  final Map<String, dynamic>? _location;
+  @override
+  @JsonKey(name: 'location')
+  Map<String, dynamic>? get location {
+    final value = _location;
+    if (value == null) return null;
+    if (_location is EqualUnmodifiableMapView) return _location;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
+  final List<String> _tags;
   @override
   @StringListConverter()
-  @JsonKey(name: 'video_urls')
-  List<String> get videoUrls {
-    if (_videoUrls is EqualUnmodifiableListView) return _videoUrls;
+  @JsonKey(name: 'tags')
+  List<String> get tags {
+    if (_tags is EqualUnmodifiableListView) return _tags;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_videoUrls);
+    return EqualUnmodifiableListView(_tags);
   }
 
-// Counts can be masked (nullable)
+  final List<String> _mentionIds;
+  @override
+  @StringListConverter()
+  @JsonKey(name: 'mention_ids')
+  List<String> get mentionIds {
+    if (_mentionIds is EqualUnmodifiableListView) return _mentionIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_mentionIds);
+  }
+
   @override
   @JsonKey(name: 'likes_count')
-  final int? likesCount;
+  final int likesCount;
   @override
   @JsonKey(name: 'comments_count')
-  final int? commentsCount;
+  final int commentsCount;
   @override
   @JsonKey(name: 'shares_count')
-  final int? sharesCount;
-// Computed per viewer (read-only)
+  final int sharesCount;
   @override
   @JsonKey(name: 'is_liked')
   final bool isLiked;
@@ -534,23 +553,15 @@ class _$FeedModelImpl extends _FeedModel {
   @override
   @JsonKey(name: 'is_me')
   final bool isMe;
-// Post privacy settings
   @override
-  @JsonKey(name: 'comments_enabled')
-  final bool commentsEnabled;
+  @JsonKey(name: 'allow_comments')
+  final bool allowComments;
   @override
-  @JsonKey(name: 'hide_like_count')
-  final bool hideLikeCount;
+  @JsonKey(name: 'allow_share')
+  final bool allowShare;
   @override
-  @JsonKey(name: 'hide_comment_count')
-  final bool hideCommentCount;
-  @override
-  @JsonKey(name: 'hide_share_count')
-  final bool hideShareCount;
-  @override
-  @JsonKey(name: 'hide_likes_list')
-  final bool hideLikesList;
-// Campaign association
+  @JsonKey(name: 'is_active')
+  final bool isActive;
   @override
   @JsonKey(name: 'campaign_id')
   final String? campaignId;
@@ -560,7 +571,7 @@ class _$FeedModelImpl extends _FeedModel {
 
   @override
   String toString() {
-    return 'FeedModel(id: $id, userId: $userId, content: $content, createdAt: $createdAt, username: $username, photoUrl: $photoUrl, imageUrls: $imageUrls, videoUrls: $videoUrls, likesCount: $likesCount, commentsCount: $commentsCount, sharesCount: $sharesCount, isLiked: $isLiked, isBookmarked: $isBookmarked, isFollowing: $isFollowing, isFollowRequestPending: $isFollowRequestPending, isMe: $isMe, commentsEnabled: $commentsEnabled, hideLikeCount: $hideLikeCount, hideCommentCount: $hideCommentCount, hideShareCount: $hideShareCount, hideLikesList: $hideLikesList, campaignId: $campaignId, campaignTitle: $campaignTitle)';
+    return 'FeedModel(id: $id, userId: $userId, content: $content, createdAt: $createdAt, username: $username, photoUrl: $photoUrl, mediaUrls: $mediaUrls, location: $location, tags: $tags, mentionIds: $mentionIds, likesCount: $likesCount, commentsCount: $commentsCount, sharesCount: $sharesCount, isLiked: $isLiked, isBookmarked: $isBookmarked, isFollowing: $isFollowing, isFollowRequestPending: $isFollowRequestPending, isMe: $isMe, allowComments: $allowComments, allowShare: $allowShare, isActive: $isActive, campaignId: $campaignId, campaignTitle: $campaignTitle)';
   }
 
   @override
@@ -578,9 +589,11 @@ class _$FeedModelImpl extends _FeedModel {
             (identical(other.photoUrl, photoUrl) ||
                 other.photoUrl == photoUrl) &&
             const DeepCollectionEquality()
-                .equals(other._imageUrls, _imageUrls) &&
+                .equals(other._mediaUrls, _mediaUrls) &&
+            const DeepCollectionEquality().equals(other._location, _location) &&
+            const DeepCollectionEquality().equals(other._tags, _tags) &&
             const DeepCollectionEquality()
-                .equals(other._videoUrls, _videoUrls) &&
+                .equals(other._mentionIds, _mentionIds) &&
             (identical(other.likesCount, likesCount) ||
                 other.likesCount == likesCount) &&
             (identical(other.commentsCount, commentsCount) ||
@@ -595,16 +608,12 @@ class _$FeedModelImpl extends _FeedModel {
             (identical(other.isFollowRequestPending, isFollowRequestPending) ||
                 other.isFollowRequestPending == isFollowRequestPending) &&
             (identical(other.isMe, isMe) || other.isMe == isMe) &&
-            (identical(other.commentsEnabled, commentsEnabled) ||
-                other.commentsEnabled == commentsEnabled) &&
-            (identical(other.hideLikeCount, hideLikeCount) ||
-                other.hideLikeCount == hideLikeCount) &&
-            (identical(other.hideCommentCount, hideCommentCount) ||
-                other.hideCommentCount == hideCommentCount) &&
-            (identical(other.hideShareCount, hideShareCount) ||
-                other.hideShareCount == hideShareCount) &&
-            (identical(other.hideLikesList, hideLikesList) ||
-                other.hideLikesList == hideLikesList) &&
+            (identical(other.allowComments, allowComments) ||
+                other.allowComments == allowComments) &&
+            (identical(other.allowShare, allowShare) ||
+                other.allowShare == allowShare) &&
+            (identical(other.isActive, isActive) ||
+                other.isActive == isActive) &&
             (identical(other.campaignId, campaignId) ||
                 other.campaignId == campaignId) &&
             (identical(other.campaignTitle, campaignTitle) ||
@@ -621,8 +630,10 @@ class _$FeedModelImpl extends _FeedModel {
         createdAt,
         username,
         photoUrl,
-        const DeepCollectionEquality().hash(_imageUrls),
-        const DeepCollectionEquality().hash(_videoUrls),
+        const DeepCollectionEquality().hash(_mediaUrls),
+        const DeepCollectionEquality().hash(_location),
+        const DeepCollectionEquality().hash(_tags),
+        const DeepCollectionEquality().hash(_mentionIds),
         likesCount,
         commentsCount,
         sharesCount,
@@ -631,11 +642,9 @@ class _$FeedModelImpl extends _FeedModel {
         isFollowing,
         isFollowRequestPending,
         isMe,
-        commentsEnabled,
-        hideLikeCount,
-        hideCommentCount,
-        hideShareCount,
-        hideLikesList,
+        allowComments,
+        allowShare,
+        isActive,
         campaignId,
         campaignTitle
       ]);
@@ -660,32 +669,32 @@ abstract class _FeedModel extends FeedModel {
   const factory _FeedModel(
           {@JsonKey(name: 'id') required final String id,
           @JsonKey(name: 'user_id') required final String userId,
-          @JsonKey(name: 'content') required final String content,
+          @JsonKey(name: 'caption') required final String content,
           @UtcDateTimeConverter()
           @JsonKey(name: 'created_at')
           required final DateTime createdAt,
           @JsonKey(name: 'username') final String? username,
           @JsonKey(name: 'photo_url') final String? photoUrl,
           @StringListConverter()
-          @JsonKey(name: 'image_urls')
-          final List<String> imageUrls,
+          @JsonKey(name: 'media_urls')
+          final List<String> mediaUrls,
+          @JsonKey(name: 'location') final Map<String, dynamic>? location,
+          @StringListConverter() @JsonKey(name: 'tags') final List<String> tags,
           @StringListConverter()
-          @JsonKey(name: 'video_urls')
-          final List<String> videoUrls,
-          @JsonKey(name: 'likes_count') final int? likesCount,
-          @JsonKey(name: 'comments_count') final int? commentsCount,
-          @JsonKey(name: 'shares_count') final int? sharesCount,
+          @JsonKey(name: 'mention_ids')
+          final List<String> mentionIds,
+          @JsonKey(name: 'likes_count') final int likesCount,
+          @JsonKey(name: 'comments_count') final int commentsCount,
+          @JsonKey(name: 'shares_count') final int sharesCount,
           @JsonKey(name: 'is_liked') final bool isLiked,
           @JsonKey(name: 'is_bookmarked') final bool isBookmarked,
           @JsonKey(name: 'is_following') final bool isFollowing,
           @JsonKey(name: 'is_follow_request_pending')
           final bool isFollowRequestPending,
           @JsonKey(name: 'is_me') final bool isMe,
-          @JsonKey(name: 'comments_enabled') final bool commentsEnabled,
-          @JsonKey(name: 'hide_like_count') final bool hideLikeCount,
-          @JsonKey(name: 'hide_comment_count') final bool hideCommentCount,
-          @JsonKey(name: 'hide_share_count') final bool hideShareCount,
-          @JsonKey(name: 'hide_likes_list') final bool hideLikesList,
+          @JsonKey(name: 'allow_comments') final bool allowComments,
+          @JsonKey(name: 'allow_share') final bool allowShare,
+          @JsonKey(name: 'is_active') final bool isActive,
           @JsonKey(name: 'campaign_id') final String? campaignId,
           @JsonKey(name: 'campaign_title') final String? campaignTitle}) =
       _$FeedModelImpl;
@@ -701,12 +710,12 @@ abstract class _FeedModel extends FeedModel {
   @JsonKey(name: 'user_id')
   String get userId;
   @override
-  @JsonKey(name: 'content')
+  @JsonKey(name: 'caption')
   String get content;
   @override
   @UtcDateTimeConverter()
   @JsonKey(name: 'created_at')
-  DateTime get createdAt; // Joined from profiles (read-only)
+  DateTime get createdAt;
   @override
   @JsonKey(name: 'username')
   String? get username;
@@ -715,21 +724,28 @@ abstract class _FeedModel extends FeedModel {
   String? get photoUrl;
   @override
   @StringListConverter()
-  @JsonKey(name: 'image_urls')
-  List<String> get imageUrls;
+  @JsonKey(name: 'media_urls')
+  List<String> get mediaUrls;
+  @override
+  @JsonKey(name: 'location')
+  Map<String, dynamic>? get location;
   @override
   @StringListConverter()
-  @JsonKey(name: 'video_urls')
-  List<String> get videoUrls; // Counts can be masked (nullable)
+  @JsonKey(name: 'tags')
+  List<String> get tags;
+  @override
+  @StringListConverter()
+  @JsonKey(name: 'mention_ids')
+  List<String> get mentionIds;
   @override
   @JsonKey(name: 'likes_count')
-  int? get likesCount;
+  int get likesCount;
   @override
   @JsonKey(name: 'comments_count')
-  int? get commentsCount;
+  int get commentsCount;
   @override
   @JsonKey(name: 'shares_count')
-  int? get sharesCount; // Computed per viewer (read-only)
+  int get sharesCount;
   @override
   @JsonKey(name: 'is_liked')
   bool get isLiked;
@@ -744,22 +760,16 @@ abstract class _FeedModel extends FeedModel {
   bool get isFollowRequestPending;
   @override
   @JsonKey(name: 'is_me')
-  bool get isMe; // Post privacy settings
+  bool get isMe;
   @override
-  @JsonKey(name: 'comments_enabled')
-  bool get commentsEnabled;
+  @JsonKey(name: 'allow_comments')
+  bool get allowComments;
   @override
-  @JsonKey(name: 'hide_like_count')
-  bool get hideLikeCount;
+  @JsonKey(name: 'allow_share')
+  bool get allowShare;
   @override
-  @JsonKey(name: 'hide_comment_count')
-  bool get hideCommentCount;
-  @override
-  @JsonKey(name: 'hide_share_count')
-  bool get hideShareCount;
-  @override
-  @JsonKey(name: 'hide_likes_list')
-  bool get hideLikesList; // Campaign association
+  @JsonKey(name: 'is_active')
+  bool get isActive;
   @override
   @JsonKey(name: 'campaign_id')
   String? get campaignId;

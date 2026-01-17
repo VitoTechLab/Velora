@@ -22,6 +22,7 @@ class _CreatePollDialogState extends State<CreatePollDialog> {
     TextEditingController(),
   ];
   bool _isMultipleChoice = false;
+  int _maxUserVotes = 1;
 
   @override
   void dispose() {
@@ -75,6 +76,7 @@ class _CreatePollDialogState extends State<CreatePollDialog> {
       'question': question,
       'options': options,
       'multiple_choice': _isMultipleChoice,
+      'max_user_votes': _isMultipleChoice ? _maxUserVotes : 1,
     });
   }
 
@@ -210,6 +212,9 @@ class _CreatePollDialogState extends State<CreatePollDialog> {
                       onChanged: (value) {
                         setState(() {
                           _isMultipleChoice = value;
+                          if (!value) {
+                            _maxUserVotes = 1;
+                          }
                         });
                       },
                       title: Text(t.chatPollDialogMultipleChoiceLabel),
@@ -217,6 +222,57 @@ class _CreatePollDialogState extends State<CreatePollDialog> {
                       secondary: const Icon(Icons.checklist_rtl),
                       contentPadding: EdgeInsets.zero,
                     ),
+                    // Max votes slider (only for multiple choice)
+                    if (_isMultipleChoice) ...[
+                      const SizedBox(height: 12),
+                      Row(
+                        children: [
+                          const Icon(Icons.how_to_vote_outlined, size: 24),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  t.chatPollDialogMaxVotesLabel,
+                                  style: textTheme.bodyLarge,
+                                ),
+                                Text(
+                                  t.chatPollDialogMaxVotesHint(_maxUserVotes),
+                                  style: textTheme.bodySmall?.copyWith(
+                                    color: colorScheme.onSurfaceVariant,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                onPressed: _maxUserVotes > 1
+                                    ? () => setState(() => _maxUserVotes--)
+                                    : null,
+                                icon: const Icon(Icons.remove_circle_outline),
+                              ),
+                              Text(
+                                '$_maxUserVotes',
+                                style: textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              IconButton(
+                                onPressed:
+                                    _maxUserVotes < _optionControllers.length
+                                        ? () => setState(() => _maxUserVotes++)
+                                        : null,
+                                icon: const Icon(Icons.add_circle_outline),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
                   ],
                 ),
               ),

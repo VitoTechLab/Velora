@@ -16,10 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PollPayloadEntity {
-  String get id => throw _privateConstructorUsedError;
   String get messageId => throw _privateConstructorUsedError;
   String get question => throw _privateConstructorUsedError;
   bool get multipleChoice => throw _privateConstructorUsedError;
+  int get maxUserVotes => throw _privateConstructorUsedError;
   DateTime? get closesAt => throw _privateConstructorUsedError;
   List<PollOptionEntity> get options => throw _privateConstructorUsedError;
 
@@ -37,10 +37,10 @@ abstract class $PollPayloadEntityCopyWith<$Res> {
       _$PollPayloadEntityCopyWithImpl<$Res, PollPayloadEntity>;
   @useResult
   $Res call(
-      {String id,
-      String messageId,
+      {String messageId,
       String question,
       bool multipleChoice,
+      int maxUserVotes,
       DateTime? closesAt,
       List<PollOptionEntity> options});
 }
@@ -60,18 +60,14 @@ class _$PollPayloadEntityCopyWithImpl<$Res, $Val extends PollPayloadEntity>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? messageId = null,
     Object? question = null,
     Object? multipleChoice = null,
+    Object? maxUserVotes = null,
     Object? closesAt = freezed,
     Object? options = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       messageId: null == messageId
           ? _value.messageId
           : messageId // ignore: cast_nullable_to_non_nullable
@@ -84,6 +80,10 @@ class _$PollPayloadEntityCopyWithImpl<$Res, $Val extends PollPayloadEntity>
           ? _value.multipleChoice
           : multipleChoice // ignore: cast_nullable_to_non_nullable
               as bool,
+      maxUserVotes: null == maxUserVotes
+          ? _value.maxUserVotes
+          : maxUserVotes // ignore: cast_nullable_to_non_nullable
+              as int,
       closesAt: freezed == closesAt
           ? _value.closesAt
           : closesAt // ignore: cast_nullable_to_non_nullable
@@ -105,10 +105,10 @@ abstract class _$$PollPayloadEntityImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id,
-      String messageId,
+      {String messageId,
       String question,
       bool multipleChoice,
+      int maxUserVotes,
       DateTime? closesAt,
       List<PollOptionEntity> options});
 }
@@ -126,18 +126,14 @@ class __$$PollPayloadEntityImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? messageId = null,
     Object? question = null,
     Object? multipleChoice = null,
+    Object? maxUserVotes = null,
     Object? closesAt = freezed,
     Object? options = null,
   }) {
     return _then(_$PollPayloadEntityImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       messageId: null == messageId
           ? _value.messageId
           : messageId // ignore: cast_nullable_to_non_nullable
@@ -150,6 +146,10 @@ class __$$PollPayloadEntityImplCopyWithImpl<$Res>
           ? _value.multipleChoice
           : multipleChoice // ignore: cast_nullable_to_non_nullable
               as bool,
+      maxUserVotes: null == maxUserVotes
+          ? _value.maxUserVotes
+          : maxUserVotes // ignore: cast_nullable_to_non_nullable
+              as int,
       closesAt: freezed == closesAt
           ? _value.closesAt
           : closesAt // ignore: cast_nullable_to_non_nullable
@@ -166,26 +166,29 @@ class __$$PollPayloadEntityImplCopyWithImpl<$Res>
 
 class _$PollPayloadEntityImpl implements _PollPayloadEntity {
   const _$PollPayloadEntityImpl(
-      {required this.id,
-      required this.messageId,
+      {required this.messageId,
       required this.question,
-      required this.multipleChoice,
+      this.multipleChoice = false,
+      this.maxUserVotes = 1,
       this.closesAt,
-      required final List<PollOptionEntity> options})
+      final List<PollOptionEntity> options = const []})
       : _options = options;
 
-  @override
-  final String id;
   @override
   final String messageId;
   @override
   final String question;
   @override
+  @JsonKey()
   final bool multipleChoice;
+  @override
+  @JsonKey()
+  final int maxUserVotes;
   @override
   final DateTime? closesAt;
   final List<PollOptionEntity> _options;
   @override
+  @JsonKey()
   List<PollOptionEntity> get options {
     if (_options is EqualUnmodifiableListView) return _options;
     // ignore: implicit_dynamic_type
@@ -194,7 +197,7 @@ class _$PollPayloadEntityImpl implements _PollPayloadEntity {
 
   @override
   String toString() {
-    return 'PollPayloadEntity(id: $id, messageId: $messageId, question: $question, multipleChoice: $multipleChoice, closesAt: $closesAt, options: $options)';
+    return 'PollPayloadEntity(messageId: $messageId, question: $question, multipleChoice: $multipleChoice, maxUserVotes: $maxUserVotes, closesAt: $closesAt, options: $options)';
   }
 
   @override
@@ -202,21 +205,28 @@ class _$PollPayloadEntityImpl implements _PollPayloadEntity {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PollPayloadEntityImpl &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.messageId, messageId) ||
                 other.messageId == messageId) &&
             (identical(other.question, question) ||
                 other.question == question) &&
             (identical(other.multipleChoice, multipleChoice) ||
                 other.multipleChoice == multipleChoice) &&
+            (identical(other.maxUserVotes, maxUserVotes) ||
+                other.maxUserVotes == maxUserVotes) &&
             (identical(other.closesAt, closesAt) ||
                 other.closesAt == closesAt) &&
             const DeepCollectionEquality().equals(other._options, _options));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, messageId, question,
-      multipleChoice, closesAt, const DeepCollectionEquality().hash(_options));
+  int get hashCode => Object.hash(
+      runtimeType,
+      messageId,
+      question,
+      multipleChoice,
+      maxUserVotes,
+      closesAt,
+      const DeepCollectionEquality().hash(_options));
 
   /// Create a copy of PollPayloadEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -230,21 +240,21 @@ class _$PollPayloadEntityImpl implements _PollPayloadEntity {
 
 abstract class _PollPayloadEntity implements PollPayloadEntity {
   const factory _PollPayloadEntity(
-      {required final String id,
-      required final String messageId,
+      {required final String messageId,
       required final String question,
-      required final bool multipleChoice,
+      final bool multipleChoice,
+      final int maxUserVotes,
       final DateTime? closesAt,
-      required final List<PollOptionEntity> options}) = _$PollPayloadEntityImpl;
+      final List<PollOptionEntity> options}) = _$PollPayloadEntityImpl;
 
-  @override
-  String get id;
   @override
   String get messageId;
   @override
   String get question;
   @override
   bool get multipleChoice;
+  @override
+  int get maxUserVotes;
   @override
   DateTime? get closesAt;
   @override

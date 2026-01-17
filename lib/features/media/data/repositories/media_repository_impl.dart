@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:path/path.dart' as p;
 import 'package:uuid/uuid.dart';
 import 'package:velora/core/errors/exceptions.dart';
 import 'package:velora/core/errors/failure.dart';
@@ -8,11 +9,12 @@ import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/media/data/datasources/remote/media_remote_datasource.dart';
 import 'package:velora/features/media/data/models/media_asset_model.dart';
 import 'package:velora/features/media/data/services/media_compressor.dart';
+import 'package:velora/features/media/data/services/video_compressor.dart';
 import 'package:velora/features/media/domain/entities/media_asset_entity.dart';
 import 'package:velora/features/media/domain/repositories/media_repository.dart';
 
 /// Repository implementation for media upload operations
-/// 
+///
 /// Features:
 /// - Parallel upload with adaptive concurrency
 /// - Automatic compression before upload
@@ -55,8 +57,78 @@ class MediaRepositoryImpl implements MediaRepository {
     );
   }
 
+  @override
+  Future<Either<Failure, List<MediaAsset>>> uploadImagesForChat({
+    required List<File> files,
+    required String userId,
+    required String conversationId,
+  }) async {
+    return _uploadScopedBatch(
+      files: files,
+      userId: userId,
+      scope: 'chat',
+      scopeId: conversationId,
+    );
+  }
+
+  @override
+  Future<Either<Failure, MediaAsset>> uploadVideoForChat({
+    required File file,
+    required String userId,
+    required String conversationId,
+  }) async {
+    return _uploadVideo(
+      file: file,
+      userId: userId,
+      scope: 'chat',
+      scopeId: conversationId,
+    );
+  }
+
+  @override
+  Future<Either<Failure, MediaAsset>> uploadDocumentForChat({
+    required File file,
+    required String userId,
+    required String conversationId,
+  }) async {
+    return _uploadDocument(
+      file: file,
+      userId: userId,
+      scope: 'chat',
+      scopeId: conversationId,
+    );
+  }
+
+  @override
+  Future<Either<Failure, List<MediaAsset>>> uploadDocumentsForChat({
+    required List<File> files,
+    required String userId,
+    required String conversationId,
+  }) async {
+    return _uploadDocumentsBatch(
+      files: files,
+      userId: userId,
+      scope: 'chat',
+      scopeId: conversationId,
+    );
+  }
+
+  @override
+  Future<Either<Failure, MediaAsset>> uploadAudioForChat({
+    required File file,
+    required String userId,
+    required String conversationId,
+  }) async {
+    return _uploadAudio(
+      file: file,
+      userId: userId,
+      scope: 'chat',
+      scopeId: conversationId,
+    );
+  }
+
   /// Upload multiple files with adaptive concurrency
-  /// 
+  ///
   /// Concurrency strategy:
   /// - 1 file: Sequential (no parallelism needed)
   /// - 2-4 files: 2 concurrent uploads
@@ -89,15 +161,15 @@ class MediaRepositoryImpl implements MediaRepository {
       final tasks = files.asMap().entries.map((entry) {
         final index = entry.key;
         final file = entry.value;
-        
+
         return () => _uploadWithProgress(
-          file: file,
-          userId: userId,
-          scope: scope,
-          scopeId: scopeId,
-          index: index,
-          total: files.length,
-        );
+              file: file,
+              userId: userId,
+              scope: scope,
+              scopeId: scopeId,
+              index: index,
+              total: files.length,
+            );
       }).toList();
 
       final results = await _runWithConcurrency<Either<Failure, MediaAsset>>(
@@ -147,7 +219,7 @@ class MediaRepositoryImpl implements MediaRepository {
     required int total,
   }) async {
     try {
-      logi('Upload [${ index + 1}/$total] starting...', tag: _logTag);
+      logi('Upload [${index + 1}/$total] starting...', tag: _logTag);
 
       final result = await _uploadScoped(
         file: file,
@@ -251,5 +323,219 @@ class MediaRepositoryImpl implements MediaRepository {
   String _buildPublicId(String userId, String scope, String scopeId) {
     final uuid = _uuid.v4();
     return 'velora/users/$userId/$scope/$scopeId/$uuid';
+  }
+
+  /// Upload single video with compression
+  Future<Either<Failure, MediaAsset>> _uploadVideo({
+    required File file,
+    required String userId,
+    required String scope,
+    required String scopeId,
+  }) async {
+    try {
+      if (userId.trim().isEmpty) {
+        return const Left(Failure('User id is required'));
+      }
+      if (scopeId.trim().isEmpty) {
+        return const Left(Failure('Scope id is required'));
+      }
+
+      logi('Starting video upload...', tag: _logTag);
+
+      // 1) Compress video if needed
+      final compressedFile = await VideoCompressor.compressVideoIfNeeded(file);
+
+      // 2) Build Cloudinary path
+      final folder = _buildFolder(userId, scope, scopeId);
+      final publicId = _buildPublicIdWithExt(userId, scope, scopeId, file.path);
+
+      // 3) Request signature from Supabase Edge Function
+      final signature = await _remoteDataSource.getUploadSignature(
+        publicId: publicId,
+        folder: folder,
+        resourceType: 'video',
+      );
+
+      // 4) Upload to Cloudinary
+      final MediaAssetModel model = await _remoteDataSource
+          .uploadVideoToCloudinary(file: compressedFile, signature: signature);
+
+      logi('Video upload completed', tag: _logTag);
+      return Right(model.toEntity());
+    } on AppException catch (error) {
+      loge('Video upload failed (AppException)', tag: _logTag, error: error);
+      return Left(Failure(error.message));
+    } catch (error, stackTrace) {
+      loge(
+        'Video upload failed (unknown)',
+        tag: _logTag,
+        error: error,
+        stackTrace: stackTrace,
+      );
+      return Left(Failure(error.toString()));
+    }
+  }
+
+  /// Upload single document (no compression)
+  Future<Either<Failure, MediaAsset>> _uploadDocument({
+    required File file,
+    required String userId,
+    required String scope,
+    required String scopeId,
+  }) async {
+    try {
+      if (userId.trim().isEmpty) {
+        return const Left(Failure('User id is required'));
+      }
+      if (scopeId.trim().isEmpty) {
+        return const Left(Failure('Scope id is required'));
+      }
+
+      logi('Starting document upload...', tag: _logTag);
+
+      // Documents are not compressed
+      final folder = _buildFolder(userId, scope, scopeId);
+      final publicId = _buildPublicIdWithExt(userId, scope, scopeId, file.path);
+
+      // Request signature for raw resource
+      final signature = await _remoteDataSource.getUploadSignature(
+        publicId: publicId,
+        folder: folder,
+        resourceType: 'raw',
+      );
+
+      // Upload to Cloudinary
+      final MediaAssetModel model = await _remoteDataSource
+          .uploadRawToCloudinary(file: file, signature: signature);
+
+      logi('Document upload completed', tag: _logTag);
+      return Right(model.toEntity());
+    } on AppException catch (error) {
+      loge('Document upload failed (AppException)', tag: _logTag, error: error);
+      return Left(Failure(error.message));
+    } catch (error, stackTrace) {
+      loge(
+        'Document upload failed (unknown)',
+        tag: _logTag,
+        error: error,
+        stackTrace: stackTrace,
+      );
+      return Left(Failure(error.toString()));
+    }
+  }
+
+  /// Upload multiple documents with concurrency
+  Future<Either<Failure, List<MediaAsset>>> _uploadDocumentsBatch({
+    required List<File> files,
+    required String userId,
+    required String scope,
+    required String scopeId,
+  }) async {
+    try {
+      if (files.isEmpty) {
+        return const Right(<MediaAsset>[]);
+      }
+
+      final concurrency = _calculateConcurrency(files.length);
+
+      logi(
+        'Uploading ${files.length} documents with concurrency=$concurrency',
+        tag: _logTag,
+      );
+
+      final tasks = files.asMap().entries.map((entry) {
+        return () => _uploadDocument(
+              file: entry.value,
+              userId: userId,
+              scope: scope,
+              scopeId: scopeId,
+            );
+      }).toList();
+
+      final results = await _runWithConcurrency<Either<Failure, MediaAsset>>(
+        tasks: tasks,
+        concurrency: concurrency,
+      );
+
+      final assets = <MediaAsset>[];
+
+      for (final result in results) {
+        final failureOrNull = result.fold((l) => l, (_) => null);
+        if (failureOrNull != null) {
+          loge('Document upload failed, aborting batch', tag: _logTag);
+          return Left(failureOrNull);
+        }
+        result.fold((_) {}, (asset) => assets.add(asset));
+      }
+
+      logi('Document batch upload completed: ${assets.length} files',
+          tag: _logTag);
+      return Right(assets);
+    } catch (e, st) {
+      loge('Document batch upload failed',
+          tag: _logTag, error: e, stackTrace: st);
+      return Left(Failure(e.toString()));
+    }
+  }
+
+  /// Build public ID preserving original extension
+  String _buildPublicIdWithExt(
+    String userId,
+    String scope,
+    String scopeId,
+    String filePath,
+  ) {
+    final uuid = _uuid.v4();
+    final ext = p.extension(filePath);
+    return 'velora/users/$userId/$scope/$scopeId/$uuid$ext';
+  }
+
+  /// Upload single audio file (voice message or audio file)
+  Future<Either<Failure, MediaAsset>> _uploadAudio({
+    required File file,
+    required String userId,
+    required String scope,
+    required String scopeId,
+  }) async {
+    try {
+      if (userId.trim().isEmpty) {
+        return const Left(Failure('User id is required'));
+      }
+      if (scopeId.trim().isEmpty) {
+        return const Left(Failure('Scope id is required'));
+      }
+
+      logi('Starting audio upload...', tag: _logTag);
+
+      // Audio files are uploaded as video resource type in Cloudinary
+      // (Cloudinary treats audio as a subset of video)
+      final folder = _buildFolder(userId, scope, scopeId);
+      final publicId = _buildPublicIdWithExt(userId, scope, scopeId, file.path);
+
+      // Request signature for video resource (audio is part of video in Cloudinary)
+      final signature = await _remoteDataSource.getUploadSignature(
+        publicId: publicId,
+        folder: folder,
+        resourceType: 'video',
+      );
+
+      // Upload to Cloudinary using video endpoint
+      final MediaAssetModel model = await _remoteDataSource
+          .uploadVideoToCloudinary(file: file, signature: signature);
+
+      logi('Audio upload completed', tag: _logTag);
+      return Right(model.toEntity());
+    } on AppException catch (error) {
+      loge('Audio upload failed (AppException)', tag: _logTag, error: error);
+      return Left(Failure(error.message));
+    } catch (error, stackTrace) {
+      loge(
+        'Audio upload failed (unknown)',
+        tag: _logTag,
+        error: error,
+        stackTrace: stackTrace,
+      );
+      return Left(Failure(error.toString()));
+    }
   }
 }

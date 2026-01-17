@@ -20,6 +20,10 @@ class _CreateEventDialogState extends State<CreateEventDialog> {
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _locationController = TextEditingController();
+  final _addressController = TextEditingController();
+  final _meetingUrlController = TextEditingController();
+
+  bool _isOnline = false;
 
   DateTime _startDate = DateTime.now();
   TimeOfDay _startTime = TimeOfDay.now();
@@ -34,6 +38,8 @@ class _CreateEventDialogState extends State<CreateEventDialog> {
     _titleController.dispose();
     _descriptionController.dispose();
     _locationController.dispose();
+    _addressController.dispose();
+    _meetingUrlController.dispose();
     super.dispose();
   }
 
@@ -96,12 +102,22 @@ class _CreateEventDialogState extends State<CreateEventDialog> {
     final title = _titleController.text.trim();
     final description = _descriptionController.text.trim();
     final location = _locationController.text.trim();
+    final address = _addressController.text.trim();
+    final meetingUrl = _meetingUrlController.text.trim();
     final t = AppLocalizations.of(context)!;
 
     if (title.isEmpty) {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text(t.chatEventDialogTitleError)));
+      return;
+    }
+
+    // Validate meeting URL for online events
+    if (_isOnline && meetingUrl.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(t.chatEventDialogMeetingUrlError)),
+      );
       return;
     }
 
@@ -130,8 +146,11 @@ class _CreateEventDialogState extends State<CreateEventDialog> {
 
     Navigator.pop(context, {
       'title': title,
-      'description': description,
-      'location': location.isNotEmpty ? location : null,
+      'description': description.isNotEmpty ? description : null,
+      'location_name': location.isNotEmpty ? location : null,
+      'address': address.isNotEmpty ? address : null,
+      'is_online': _isOnline,
+      'meeting_url': meetingUrl.isNotEmpty ? meetingUrl : null,
       'startDate': startDateTime.toIso8601String(),
       'endDate': endDateTime.toIso8601String(),
     });
@@ -223,20 +242,68 @@ class _CreateEventDialogState extends State<CreateEventDialog> {
                       maxLines: 3,
                       textCapitalization: TextCapitalization.sentences,
                     ),
-                    const SizedBox(height: 16),
-                    // Location field
-                    TextField(
-                      controller: _locationController,
-                      decoration: InputDecoration(
-                        labelText: t.chatEventDialogLocationLabel,
-                        hintText: t.chatEventDialogLocationHint,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        prefixIcon: const Icon(Icons.location_on_outlined),
+                    const SizedBox(height: 20),
+                    // Online event toggle
+                    SwitchListTile(
+                      value: _isOnline,
+                      onChanged: (value) {
+                        setState(() {
+                          _isOnline = value;
+                        });
+                      },
+                      title: Text(t.chatEventDialogOnlineLabel),
+                      subtitle: Text(t.chatEventDialogOnlineHint),
+                      secondary: Icon(
+                        _isOnline ? Icons.videocam_outlined : Icons.place,
                       ),
-                      textCapitalization: TextCapitalization.words,
+                      contentPadding: EdgeInsets.zero,
                     ),
+                    const SizedBox(height: 16),
+                    // Location fields (for in-person events)
+                    if (!_isOnline) ...[
+                      // Location name field
+                      TextField(
+                        controller: _locationController,
+                        decoration: InputDecoration(
+                          labelText: t.chatEventDialogLocationLabel,
+                          hintText: t.chatEventDialogLocationHint,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          prefixIcon: const Icon(Icons.location_on_outlined),
+                        ),
+                        textCapitalization: TextCapitalization.words,
+                      ),
+                      const SizedBox(height: 12),
+                      // Address field
+                      TextField(
+                        controller: _addressController,
+                        decoration: InputDecoration(
+                          labelText: t.chatEventDialogAddressLabel,
+                          hintText: t.chatEventDialogAddressHint,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          prefixIcon: const Icon(Icons.map_outlined),
+                        ),
+                        maxLines: 2,
+                        textCapitalization: TextCapitalization.sentences,
+                      ),
+                    ],
+                    // Meeting URL field (for online events)
+                    if (_isOnline)
+                      TextField(
+                        controller: _meetingUrlController,
+                        decoration: InputDecoration(
+                          labelText: t.chatEventDialogMeetingUrlLabel,
+                          hintText: t.chatEventDialogMeetingUrlHint,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          prefixIcon: const Icon(Icons.link),
+                        ),
+                        keyboardType: TextInputType.url,
+                      ),
                     const SizedBox(height: 20),
                     // Start date & time
                     Text(

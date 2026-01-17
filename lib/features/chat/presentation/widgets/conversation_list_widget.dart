@@ -64,8 +64,9 @@ class ConversationListWidget extends StatelessWidget {
     if (searchQuery.isNotEmpty) {
       // Apply search filter
       return conversations.where((conv) {
-        final name = (conv.title ?? '').toLowerCase();
-        final lastMessage = (conv.lastMessagePreview ?? '').toLowerCase();
+        final name =
+            (conv.otherUserFullName ?? conv.otherUserUsername ?? '').toLowerCase();
+        final lastMessage = (conv.lastMessageBody ?? '').toLowerCase();
         return name.contains(searchQuery) || lastMessage.contains(searchQuery);
       }).toList();
     }
@@ -79,7 +80,8 @@ class ConversationListWidget extends StatelessWidget {
           // TODO: Add isFavourite field to ConversationListEntity
           return false;
         case 'groups':
-          return conv.type == 'group';
+          // Heuristic: treat conversations without a specific otherUserId as groups
+          return conv.otherUserId == null;
         case 'all':
         default:
           return true;
@@ -215,31 +217,32 @@ class _ConversationListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isGroup = conversation.type == 'group';
+    final isGroup = conversation.otherUserId == null;
 
     // Check if peer user is typing (for 1-on-1 chats only)
     return BlocSelector<ChatMessageBloc, ChatMessageState, bool>(
       selector: (state) {
         if (isGroup) return false;
-        return state.typingUsers.containsKey(conversation.userId);
+        return state.typingUsers.containsKey(conversation.otherUserId);
       },
       builder: (context, isTyping) {
         // Determine message preview - show typing if peer is typing
         final messagePreview = isTyping
             ? t.chatScreenTyping
-            : (conversation.lastMessagePreview ?? '');
+          : (conversation.lastMessageBody ?? '');
 
         return ChatListItem(
-          profileImageUrl:
-              conversation.photoUrl ?? 'https://i.pravatar.cc/150?img=12',
-          name: conversation.title ??
-              (isGroup ? t.chatScreenUnnamedGroup : t.chatScreenUnnamed),
+          profileImageUrl: conversation.otherUserAvatarUrl ??
+            'https://i.pravatar.cc/150?img=12',
+          name: conversation.otherUserFullName ??
+            conversation.otherUserUsername ??
+            (isGroup ? t.chatScreenUnnamedGroup : t.chatScreenUnnamed),
           message: messagePreview,
           time: conversation.lastMessageAt != null
               ? FormatUtils.formatChatListTime(conversation.lastMessageAt!)
               : '',
           isRead: conversation.unreadCount == 0,
-          messageType: isTyping ? null : conversation.lastMessageKind,
+              messageType: null,
           unreadCount:
               conversation.unreadCount > 0 ? conversation.unreadCount : null,
           isGroup: isGroup,
@@ -249,15 +252,18 @@ class _ConversationListItemWidget extends StatelessWidget {
               AppRouteName.chatDetail,
               extra: ChatDetailArgs(
                 conversationId: conversation.conversationId,
-                chatName: conversation.title ??
-                    (isGroup ? t.chatScreenUnnamedGroup : t.chatScreenUnnamed),
+                chatName: conversation.otherUserFullName ??
+                    conversation.otherUserUsername ??
+                    (isGroup
+                        ? t.chatScreenUnnamedGroup
+                        : t.chatScreenUnnamed),
                 chatSubtitle: isGroup
                     ? t.chatDetailGroupSubtitle
                     : t.chatDetailSelfSubtitle,
-                profileImageUrl:
-                    conversation.photoUrl ?? 'https://i.pravatar.cc/150?img=12',
+                profileImageUrl: conversation.otherUserAvatarUrl ??
+                    'https://i.pravatar.cc/150?img=12',
                 isGroup: isGroup,
-                peerUserId: isGroup ? null : conversation.userId,
+                peerUserId: isGroup ? null : conversation.otherUserId,
               ),
             );
           },

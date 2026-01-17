@@ -26,20 +26,36 @@ abstract class ChatRemoteDataSource {
     String? replyToMessageId,
   });
 
-  /// Send a poll message
+  /// Send a media message (image, video, document, audio)
+  Future<ChatMessageModel> sendMediaMessage({
+    required String conversationId,
+    required String mediaUrl,
+    required String mediaType,
+    String? mimeType,
+    String? fileName,
+    int? fileSize,
+    String? caption,
+  });
+
+  /// Send a poll message with SQL v2 fields
   Future<ChatMessageModel> sendPollMessage({
     required String conversationId,
     required String question,
     required List<String> options,
     required bool multipleChoice,
+    int maxUserVotes = 1,
   });
 
-  /// Send an event message
+  /// Send an event message with SQL v2 fields
   Future<ChatMessageModel> sendEventMessage({
     required String conversationId,
     required String title,
     String? description,
-    String? location,
+    String? locationName,
+    String? address,
+    bool isOnline = false,
+    String? meetingUrl,
+    String? coverUrl,
     required DateTime startDate,
     required DateTime endDate,
   });
@@ -63,7 +79,7 @@ abstract class ChatRemoteDataSource {
   // CONVERSATIONS
   // =========================================================
 
-  /// Get conversation list from v_conversation_list view
+  /// Get conversation list using get_conversation_list_optimized RPC
   Future<List<ConversationListModel>> getConversationList();
 
   /// Create or get direct conversation with another user (uses create_direct_conversation RPC)
@@ -82,8 +98,12 @@ abstract class ChatRemoteDataSource {
   /// Get read receipts for a specific message
   Future<List<MessageReadModel>> getMessageReads({required String messageId});
 
-  /// Mark a message as read (insert into message_reads)
+  /// Mark a single message as read (insert into message_reads)
   Future<void> markMessageRead({required String messageId});
+
+  /// Batch mark multiple messages as read (uses mark_messages_read_batch RPC)
+  /// More efficient for scrolling through many messages
+  Future<int> markMessagesReadBatch({required List<String> messageIds});
 
   /// Watch realtime read receipts for messages in a conversation
   Stream<MessageReadModel> watchMessageReads({required String conversationId});

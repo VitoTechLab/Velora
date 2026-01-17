@@ -7,7 +7,6 @@ import 'package:velora/features/post/data/models/post_feed_model.dart';
 import 'package:velora/features/post/domain/entities/post_feed_entity.dart';
 import 'package:velora/features/post/domain/repositories/post_repository.dart';
 
-/// Implementation of post repository using remote datasource
 class PostRepositoryImpl implements PostRepository {
   const PostRepositoryImpl({required this.remoteDataSource});
 
@@ -15,7 +14,6 @@ class PostRepositoryImpl implements PostRepository {
 
   static const _logTag = 'PostRepository';
 
-  /// Create new feed post with media and visibility settings
   @override
   Future<Either<Failure, FeedEntity>> createFeedPost({
     required PostFeedEntity post,
@@ -25,14 +23,12 @@ class PostRepositoryImpl implements PostRepository {
       final payload = PostFeedModel(
         userId: post.userId,
         content: post.content,
-        imageUrls: post.imageUrls,
-        videoUrls: post.videoUrls,
-        commentsEnabled: post.commentsEnabled,
-        hideLikeCount: post.hideLikeCount,
-        hideCommentCount: post.hideCommentCount,
-        hideShareCount: post.hideShareCount,
-        hideLikesList: post.hideLikesList,
-        campaignId: post.campaignId,
+        mediaUrls: post.mediaUrls,
+        tags: post.tags,
+        mentionIds: post.mentionIds,
+        location: post.location,
+        allowComments: post.allowComments,
+        allowShare: post.allowShare,
         campaignTitle: post.campaignTitle,
       );
       final result = await remoteDataSource.createFeedPost(payload);

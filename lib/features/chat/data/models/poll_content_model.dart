@@ -5,13 +5,14 @@ import 'package:velora/features/chat/domain/entities/poll_content_entity.dart';
 part 'poll_content_model.freezed.dart';
 part 'poll_content_model.g.dart';
 
+/// Model for message_poll_payload table
 @freezed
 class PollPayloadModel with _$PollPayloadModel {
   const factory PollPayloadModel({
-    @JsonKey(name: 'id') required String id,
     @JsonKey(name: 'message_id') required String messageId,
     @JsonKey(name: 'question') required String question,
-    @JsonKey(name: 'multiple_choice') required bool multipleChoice,
+    @JsonKey(name: 'multiple_choice') @Default(false) bool multipleChoice,
+    @JsonKey(name: 'max_user_votes') @Default(1) int maxUserVotes,
     @NullableUtcDateTimeConverter()
     @JsonKey(name: 'closes_at')
     DateTime? closesAt,
@@ -43,10 +44,10 @@ class PollOptionModel with _$PollOptionModel {
 
 extension PollPayloadModelX on PollPayloadModel {
   PollPayloadEntity toEntity() => PollPayloadEntity(
-        id: id,
         messageId: messageId,
         question: question,
         multipleChoice: multipleChoice,
+        maxUserVotes: maxUserVotes,
         closesAt: closesAt,
         options: options.map((e) => e.toEntity()).toList(),
       );

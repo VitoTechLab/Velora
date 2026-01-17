@@ -112,7 +112,7 @@ SELECT
   -- Settings (V2)
   p.allow_comments,
   p.allow_share,
-  p.campaign_title,
+  p.campaign_id,
   p.created_at
 
 FROM public.feed_posts p

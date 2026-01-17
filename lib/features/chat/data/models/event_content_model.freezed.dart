@@ -20,22 +20,29 @@ EventPayloadModel _$EventPayloadModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$EventPayloadModel {
-  @JsonKey(name: 'id')
-  String get id => throw _privateConstructorUsedError;
+  /// From message_event_payload table
   @JsonKey(name: 'message_id')
   String get messageId => throw _privateConstructorUsedError;
   @JsonKey(name: 'title')
   String get title => throw _privateConstructorUsedError;
-  @JsonKey(name: 'notes')
+  @JsonKey(name: 'description')
   String? get description => throw _privateConstructorUsedError;
-  @JsonKey(name: 'location')
-  String? get location => throw _privateConstructorUsedError;
+  @JsonKey(name: 'location_name')
+  String? get locationName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'address')
+  String? get address => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_online')
+  bool get isOnline => throw _privateConstructorUsedError;
+  @JsonKey(name: 'meeting_url')
+  String? get meetingUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'cover_url')
+  String? get coverUrl => throw _privateConstructorUsedError;
   @UtcDateTimeConverter()
   @JsonKey(name: 'starts_at')
-  DateTime get startDate => throw _privateConstructorUsedError;
-  @UtcDateTimeConverter()
+  DateTime get startsAt => throw _privateConstructorUsedError;
+  @NullableUtcDateTimeConverter()
   @JsonKey(name: 'ends_at')
-  DateTime get endDate => throw _privateConstructorUsedError;
+  DateTime? get endsAt => throw _privateConstructorUsedError;
 
   /// RSVP counts from v_event_with_rsvp view
   @JsonKey(name: 'going_count')
@@ -66,13 +73,18 @@ abstract class $EventPayloadModelCopyWith<$Res> {
       _$EventPayloadModelCopyWithImpl<$Res, EventPayloadModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') String id,
-      @JsonKey(name: 'message_id') String messageId,
+      {@JsonKey(name: 'message_id') String messageId,
       @JsonKey(name: 'title') String title,
-      @JsonKey(name: 'notes') String? description,
-      @JsonKey(name: 'location') String? location,
-      @UtcDateTimeConverter() @JsonKey(name: 'starts_at') DateTime startDate,
-      @UtcDateTimeConverter() @JsonKey(name: 'ends_at') DateTime endDate,
+      @JsonKey(name: 'description') String? description,
+      @JsonKey(name: 'location_name') String? locationName,
+      @JsonKey(name: 'address') String? address,
+      @JsonKey(name: 'is_online') bool isOnline,
+      @JsonKey(name: 'meeting_url') String? meetingUrl,
+      @JsonKey(name: 'cover_url') String? coverUrl,
+      @UtcDateTimeConverter() @JsonKey(name: 'starts_at') DateTime startsAt,
+      @NullableUtcDateTimeConverter()
+      @JsonKey(name: 'ends_at')
+      DateTime? endsAt,
       @JsonKey(name: 'going_count') int goingCount,
       @JsonKey(name: 'interested_count') int interestedCount,
       @JsonKey(name: 'not_going_count') int notGoingCount,
@@ -94,23 +106,22 @@ class _$EventPayloadModelCopyWithImpl<$Res, $Val extends EventPayloadModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? messageId = null,
     Object? title = null,
     Object? description = freezed,
-    Object? location = freezed,
-    Object? startDate = null,
-    Object? endDate = null,
+    Object? locationName = freezed,
+    Object? address = freezed,
+    Object? isOnline = null,
+    Object? meetingUrl = freezed,
+    Object? coverUrl = freezed,
+    Object? startsAt = null,
+    Object? endsAt = freezed,
     Object? goingCount = null,
     Object? interestedCount = null,
     Object? notGoingCount = null,
     Object? userResponse = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       messageId: null == messageId
           ? _value.messageId
           : messageId // ignore: cast_nullable_to_non_nullable
@@ -123,18 +134,34 @@ class _$EventPayloadModelCopyWithImpl<$Res, $Val extends EventPayloadModel>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      location: freezed == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
+      locationName: freezed == locationName
+          ? _value.locationName
+          : locationName // ignore: cast_nullable_to_non_nullable
               as String?,
-      startDate: null == startDate
-          ? _value.startDate
-          : startDate // ignore: cast_nullable_to_non_nullable
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isOnline: null == isOnline
+          ? _value.isOnline
+          : isOnline // ignore: cast_nullable_to_non_nullable
+              as bool,
+      meetingUrl: freezed == meetingUrl
+          ? _value.meetingUrl
+          : meetingUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      coverUrl: freezed == coverUrl
+          ? _value.coverUrl
+          : coverUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      startsAt: null == startsAt
+          ? _value.startsAt
+          : startsAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      endDate: null == endDate
-          ? _value.endDate
-          : endDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+      endsAt: freezed == endsAt
+          ? _value.endsAt
+          : endsAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       goingCount: null == goingCount
           ? _value.goingCount
           : goingCount // ignore: cast_nullable_to_non_nullable
@@ -164,13 +191,18 @@ abstract class _$$EventPayloadModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') String id,
-      @JsonKey(name: 'message_id') String messageId,
+      {@JsonKey(name: 'message_id') String messageId,
       @JsonKey(name: 'title') String title,
-      @JsonKey(name: 'notes') String? description,
-      @JsonKey(name: 'location') String? location,
-      @UtcDateTimeConverter() @JsonKey(name: 'starts_at') DateTime startDate,
-      @UtcDateTimeConverter() @JsonKey(name: 'ends_at') DateTime endDate,
+      @JsonKey(name: 'description') String? description,
+      @JsonKey(name: 'location_name') String? locationName,
+      @JsonKey(name: 'address') String? address,
+      @JsonKey(name: 'is_online') bool isOnline,
+      @JsonKey(name: 'meeting_url') String? meetingUrl,
+      @JsonKey(name: 'cover_url') String? coverUrl,
+      @UtcDateTimeConverter() @JsonKey(name: 'starts_at') DateTime startsAt,
+      @NullableUtcDateTimeConverter()
+      @JsonKey(name: 'ends_at')
+      DateTime? endsAt,
       @JsonKey(name: 'going_count') int goingCount,
       @JsonKey(name: 'interested_count') int interestedCount,
       @JsonKey(name: 'not_going_count') int notGoingCount,
@@ -190,23 +222,22 @@ class __$$EventPayloadModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? messageId = null,
     Object? title = null,
     Object? description = freezed,
-    Object? location = freezed,
-    Object? startDate = null,
-    Object? endDate = null,
+    Object? locationName = freezed,
+    Object? address = freezed,
+    Object? isOnline = null,
+    Object? meetingUrl = freezed,
+    Object? coverUrl = freezed,
+    Object? startsAt = null,
+    Object? endsAt = freezed,
     Object? goingCount = null,
     Object? interestedCount = null,
     Object? notGoingCount = null,
     Object? userResponse = freezed,
   }) {
     return _then(_$EventPayloadModelImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       messageId: null == messageId
           ? _value.messageId
           : messageId // ignore: cast_nullable_to_non_nullable
@@ -219,18 +250,34 @@ class __$$EventPayloadModelImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      location: freezed == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
+      locationName: freezed == locationName
+          ? _value.locationName
+          : locationName // ignore: cast_nullable_to_non_nullable
               as String?,
-      startDate: null == startDate
-          ? _value.startDate
-          : startDate // ignore: cast_nullable_to_non_nullable
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isOnline: null == isOnline
+          ? _value.isOnline
+          : isOnline // ignore: cast_nullable_to_non_nullable
+              as bool,
+      meetingUrl: freezed == meetingUrl
+          ? _value.meetingUrl
+          : meetingUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      coverUrl: freezed == coverUrl
+          ? _value.coverUrl
+          : coverUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      startsAt: null == startsAt
+          ? _value.startsAt
+          : startsAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      endDate: null == endDate
-          ? _value.endDate
-          : endDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+      endsAt: freezed == endsAt
+          ? _value.endsAt
+          : endsAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       goingCount: null == goingCount
           ? _value.goingCount
           : goingCount // ignore: cast_nullable_to_non_nullable
@@ -255,15 +302,18 @@ class __$$EventPayloadModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$EventPayloadModelImpl implements _EventPayloadModel {
   const _$EventPayloadModelImpl(
-      {@JsonKey(name: 'id') required this.id,
-      @JsonKey(name: 'message_id') required this.messageId,
+      {@JsonKey(name: 'message_id') required this.messageId,
       @JsonKey(name: 'title') required this.title,
-      @JsonKey(name: 'notes') this.description,
-      @JsonKey(name: 'location') this.location,
+      @JsonKey(name: 'description') this.description,
+      @JsonKey(name: 'location_name') this.locationName,
+      @JsonKey(name: 'address') this.address,
+      @JsonKey(name: 'is_online') this.isOnline = false,
+      @JsonKey(name: 'meeting_url') this.meetingUrl,
+      @JsonKey(name: 'cover_url') this.coverUrl,
       @UtcDateTimeConverter()
       @JsonKey(name: 'starts_at')
-      required this.startDate,
-      @UtcDateTimeConverter() @JsonKey(name: 'ends_at') required this.endDate,
+      required this.startsAt,
+      @NullableUtcDateTimeConverter() @JsonKey(name: 'ends_at') this.endsAt,
       @JsonKey(name: 'going_count') this.goingCount = 0,
       @JsonKey(name: 'interested_count') this.interestedCount = 0,
       @JsonKey(name: 'not_going_count') this.notGoingCount = 0,
@@ -272,9 +322,7 @@ class _$EventPayloadModelImpl implements _EventPayloadModel {
   factory _$EventPayloadModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$EventPayloadModelImplFromJson(json);
 
-  @override
-  @JsonKey(name: 'id')
-  final String id;
+  /// From message_event_payload table
   @override
   @JsonKey(name: 'message_id')
   final String messageId;
@@ -282,19 +330,31 @@ class _$EventPayloadModelImpl implements _EventPayloadModel {
   @JsonKey(name: 'title')
   final String title;
   @override
-  @JsonKey(name: 'notes')
+  @JsonKey(name: 'description')
   final String? description;
   @override
-  @JsonKey(name: 'location')
-  final String? location;
+  @JsonKey(name: 'location_name')
+  final String? locationName;
+  @override
+  @JsonKey(name: 'address')
+  final String? address;
+  @override
+  @JsonKey(name: 'is_online')
+  final bool isOnline;
+  @override
+  @JsonKey(name: 'meeting_url')
+  final String? meetingUrl;
+  @override
+  @JsonKey(name: 'cover_url')
+  final String? coverUrl;
   @override
   @UtcDateTimeConverter()
   @JsonKey(name: 'starts_at')
-  final DateTime startDate;
+  final DateTime startsAt;
   @override
-  @UtcDateTimeConverter()
+  @NullableUtcDateTimeConverter()
   @JsonKey(name: 'ends_at')
-  final DateTime endDate;
+  final DateTime? endsAt;
 
   /// RSVP counts from v_event_with_rsvp view
   @override
@@ -314,7 +374,7 @@ class _$EventPayloadModelImpl implements _EventPayloadModel {
 
   @override
   String toString() {
-    return 'EventPayloadModel(id: $id, messageId: $messageId, title: $title, description: $description, location: $location, startDate: $startDate, endDate: $endDate, goingCount: $goingCount, interestedCount: $interestedCount, notGoingCount: $notGoingCount, userResponse: $userResponse)';
+    return 'EventPayloadModel(messageId: $messageId, title: $title, description: $description, locationName: $locationName, address: $address, isOnline: $isOnline, meetingUrl: $meetingUrl, coverUrl: $coverUrl, startsAt: $startsAt, endsAt: $endsAt, goingCount: $goingCount, interestedCount: $interestedCount, notGoingCount: $notGoingCount, userResponse: $userResponse)';
   }
 
   @override
@@ -322,17 +382,23 @@ class _$EventPayloadModelImpl implements _EventPayloadModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$EventPayloadModelImpl &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.messageId, messageId) ||
                 other.messageId == messageId) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            (identical(other.location, location) ||
-                other.location == location) &&
-            (identical(other.startDate, startDate) ||
-                other.startDate == startDate) &&
-            (identical(other.endDate, endDate) || other.endDate == endDate) &&
+            (identical(other.locationName, locationName) ||
+                other.locationName == locationName) &&
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.isOnline, isOnline) ||
+                other.isOnline == isOnline) &&
+            (identical(other.meetingUrl, meetingUrl) ||
+                other.meetingUrl == meetingUrl) &&
+            (identical(other.coverUrl, coverUrl) ||
+                other.coverUrl == coverUrl) &&
+            (identical(other.startsAt, startsAt) ||
+                other.startsAt == startsAt) &&
+            (identical(other.endsAt, endsAt) || other.endsAt == endsAt) &&
             (identical(other.goingCount, goingCount) ||
                 other.goingCount == goingCount) &&
             (identical(other.interestedCount, interestedCount) ||
@@ -347,13 +413,16 @@ class _$EventPayloadModelImpl implements _EventPayloadModel {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      id,
       messageId,
       title,
       description,
-      location,
-      startDate,
-      endDate,
+      locationName,
+      address,
+      isOnline,
+      meetingUrl,
+      coverUrl,
+      startsAt,
+      endsAt,
       goingCount,
       interestedCount,
       notGoingCount,
@@ -378,17 +447,20 @@ class _$EventPayloadModelImpl implements _EventPayloadModel {
 
 abstract class _EventPayloadModel implements EventPayloadModel {
   const factory _EventPayloadModel(
-          {@JsonKey(name: 'id') required final String id,
-          @JsonKey(name: 'message_id') required final String messageId,
+          {@JsonKey(name: 'message_id') required final String messageId,
           @JsonKey(name: 'title') required final String title,
-          @JsonKey(name: 'notes') final String? description,
-          @JsonKey(name: 'location') final String? location,
+          @JsonKey(name: 'description') final String? description,
+          @JsonKey(name: 'location_name') final String? locationName,
+          @JsonKey(name: 'address') final String? address,
+          @JsonKey(name: 'is_online') final bool isOnline,
+          @JsonKey(name: 'meeting_url') final String? meetingUrl,
+          @JsonKey(name: 'cover_url') final String? coverUrl,
           @UtcDateTimeConverter()
           @JsonKey(name: 'starts_at')
-          required final DateTime startDate,
-          @UtcDateTimeConverter()
+          required final DateTime startsAt,
+          @NullableUtcDateTimeConverter()
           @JsonKey(name: 'ends_at')
-          required final DateTime endDate,
+          final DateTime? endsAt,
           @JsonKey(name: 'going_count') final int goingCount,
           @JsonKey(name: 'interested_count') final int interestedCount,
           @JsonKey(name: 'not_going_count') final int notGoingCount,
@@ -398,9 +470,7 @@ abstract class _EventPayloadModel implements EventPayloadModel {
   factory _EventPayloadModel.fromJson(Map<String, dynamic> json) =
       _$EventPayloadModelImpl.fromJson;
 
-  @override
-  @JsonKey(name: 'id')
-  String get id;
+  /// From message_event_payload table
   @override
   @JsonKey(name: 'message_id')
   String get messageId;
@@ -408,19 +478,31 @@ abstract class _EventPayloadModel implements EventPayloadModel {
   @JsonKey(name: 'title')
   String get title;
   @override
-  @JsonKey(name: 'notes')
+  @JsonKey(name: 'description')
   String? get description;
   @override
-  @JsonKey(name: 'location')
-  String? get location;
+  @JsonKey(name: 'location_name')
+  String? get locationName;
+  @override
+  @JsonKey(name: 'address')
+  String? get address;
+  @override
+  @JsonKey(name: 'is_online')
+  bool get isOnline;
+  @override
+  @JsonKey(name: 'meeting_url')
+  String? get meetingUrl;
+  @override
+  @JsonKey(name: 'cover_url')
+  String? get coverUrl;
   @override
   @UtcDateTimeConverter()
   @JsonKey(name: 'starts_at')
-  DateTime get startDate;
+  DateTime get startsAt;
   @override
-  @UtcDateTimeConverter()
+  @NullableUtcDateTimeConverter()
   @JsonKey(name: 'ends_at')
-  DateTime get endDate;
+  DateTime? get endsAt;
 
   /// RSVP counts from v_event_with_rsvp view
   @override

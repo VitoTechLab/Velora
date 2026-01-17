@@ -4,7 +4,6 @@ import 'package:velora/features/feed/domain/entities/comment_entity.dart';
 
 part 'comment_pagination_result.freezed.dart';
 
-/// Pagination result for comments.
 @freezed
 abstract class CommentPaginationResult with _$CommentPaginationResult {
   const factory CommentPaginationResult({

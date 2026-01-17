@@ -2,15 +2,16 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'poll_content_entity.freezed.dart';
 
+/// Entity for poll payload from message_poll_payload table
 @freezed
 class PollPayloadEntity with _$PollPayloadEntity {
   const factory PollPayloadEntity({
-    required String id,
     required String messageId,
     required String question,
-    required bool multipleChoice,
+    @Default(false) bool multipleChoice,
+    @Default(1) int maxUserVotes,
     DateTime? closesAt,
-    required List<PollOptionEntity> options,
+    @Default([]) List<PollOptionEntity> options,
   }) = _PollPayloadEntity;
 }
 

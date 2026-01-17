@@ -9,36 +9,31 @@ part of 'conversation_list_model.dart';
 _$ConversationListModelImpl _$$ConversationListModelImplFromJson(
         Map<String, dynamic> json) =>
     _$ConversationListModelImpl(
-      userId: json['user_id'] as String,
       conversationId: json['conversation_id'] as String,
-      type: json['type'] as String,
-      title: json['title'] as String?,
-      photoUrl: json['photo_url'] as String?,
+      otherUserId: json['other_user_id'] as String?,
+      otherUserUsername: json['other_user_username'] as String?,
+      otherUserFullName: json['other_user_full_name'] as String?,
+      otherUserAvatarUrl: json['other_user_avatar_url'] as String?,
+      lastMessageBody: json['last_message_body'] as String?,
       lastMessageAt:
           const UtcDateTimeConverter().fromJson(json['last_message_at']),
-      lastMessageId: json['last_message_id'] as String?,
-      lastMessageKind: json['last_message_kind'] as String?,
-      lastMessagePreview: json['last_message_preview'] as String?,
+      lastMessageSenderId: json['last_message_sender_id'] as String?,
       unreadCount: (json['unread_count'] as num?)?.toInt() ?? 0,
-      lastReadAt: const UtcDateTimeConverter().fromJson(json['last_read_at']),
     );
 
 Map<String, dynamic> _$$ConversationListModelImplToJson(
         _$ConversationListModelImpl instance) =>
     <String, dynamic>{
-      'user_id': instance.userId,
       'conversation_id': instance.conversationId,
-      'type': instance.type,
-      'title': instance.title,
-      'photo_url': instance.photoUrl,
+      'other_user_id': instance.otherUserId,
+      'other_user_username': instance.otherUserUsername,
+      'other_user_full_name': instance.otherUserFullName,
+      'other_user_avatar_url': instance.otherUserAvatarUrl,
+      'last_message_body': instance.lastMessageBody,
       'last_message_at': _$JsonConverterToJson<Object?, DateTime>(
           instance.lastMessageAt, const UtcDateTimeConverter().toJson),
-      'last_message_id': instance.lastMessageId,
-      'last_message_kind': instance.lastMessageKind,
-      'last_message_preview': instance.lastMessagePreview,
+      'last_message_sender_id': instance.lastMessageSenderId,
       'unread_count': instance.unreadCount,
-      'last_read_at': _$JsonConverterToJson<Object?, DateTime>(
-          instance.lastReadAt, const UtcDateTimeConverter().toJson),
     };
 
 Json? _$JsonConverterToJson<Json, Value>(

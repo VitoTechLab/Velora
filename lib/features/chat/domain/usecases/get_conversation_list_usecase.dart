@@ -3,7 +3,7 @@ import 'package:velora/core/errors/failure.dart';
 import 'package:velora/features/chat/domain/entities/conversation_list_entity.dart';
 import 'package:velora/features/chat/domain/repositories/chat_repository.dart';
 
-/// Get user conversation list from v_conversation_list view
+/// Get user conversation list from get_conversation_list_optimized RPC
 class GetConversationListUseCase {
   const GetConversationListUseCase({required this.repository});
 

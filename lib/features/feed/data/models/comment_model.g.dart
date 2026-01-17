@@ -13,12 +13,16 @@ _$CommentModelImpl _$$CommentModelImplFromJson(Map<String, dynamic> json) =>
       userId: json['user_id'] as String,
       content: json['content'] as String,
       createdAt: const UtcDateTimeConverter().fromJson(json['created_at']),
-      userFullName: json['user_full_name'] as String?,
-      userPhotoUrl: json['user_photo_url'] as String?,
+      username: json['username'] as String?,
+      photoUrl: json['photo_url'] as String?,
       parentCommentId: json['parent_comment_id'] as String?,
       likesCount: (json['likes_count'] as num?)?.toInt() ?? 0,
       isLiked: json['isLiked'] as bool? ?? false,
       replyCount: (json['reply_count'] as num?)?.toInt() ?? 0,
+      mentionIds: json['mention_ids'] == null
+          ? const []
+          : const StringListConverter().fromJson(json['mention_ids']),
+      isActive: json['is_active'] as bool? ?? true,
     );
 
 Map<String, dynamic> _$$CommentModelImplToJson(_$CommentModelImpl instance) =>
@@ -28,9 +32,11 @@ Map<String, dynamic> _$$CommentModelImplToJson(_$CommentModelImpl instance) =>
       'user_id': instance.userId,
       'content': instance.content,
       'created_at': const UtcDateTimeConverter().toJson(instance.createdAt),
-      'user_full_name': instance.userFullName,
-      'user_photo_url': instance.userPhotoUrl,
+      'username': instance.username,
+      'photo_url': instance.photoUrl,
       'parent_comment_id': instance.parentCommentId,
       'likes_count': instance.likesCount,
       'reply_count': instance.replyCount,
+      'mention_ids': const StringListConverter().toJson(instance.mentionIds),
+      'is_active': instance.isActive,
     };

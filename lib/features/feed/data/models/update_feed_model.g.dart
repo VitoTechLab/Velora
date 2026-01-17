@@ -9,14 +9,14 @@ part of 'update_feed_model.dart';
 _$UpdateFeedModelImpl _$$UpdateFeedModelImplFromJson(
         Map<String, dynamic> json) =>
     _$UpdateFeedModelImpl(
-      content: json['content'] as String?,
-      imageUrls: const StringListConverter().fromJson(json['image_urls']),
-      videoUrls: const StringListConverter().fromJson(json['video_urls']),
-      commentsEnabled: json['comments_enabled'] as bool?,
-      hideLikeCount: json['hide_like_count'] as bool?,
-      hideCommentCount: json['hide_comment_count'] as bool?,
-      hideShareCount: json['hide_share_count'] as bool?,
-      hideLikesList: json['hide_likes_list'] as bool?,
+      content: json['caption'] as String?,
+      mediaUrls: const StringListConverter().fromJson(json['media_urls']),
+      location: json['location'] as Map<String, dynamic>?,
+      tags: const StringListConverter().fromJson(json['tags']),
+      mentionIds: const StringListConverter().fromJson(json['mention_ids']),
+      allowComments: json['allow_comments'] as bool?,
+      allowShare: json['allow_share'] as bool?,
+      isActive: json['is_active'] as bool?,
       campaignId: json['campaign_id'] as String?,
       campaignTitle: json['campaign_title'] as String?,
     );
@@ -24,21 +24,23 @@ _$UpdateFeedModelImpl _$$UpdateFeedModelImplFromJson(
 Map<String, dynamic> _$$UpdateFeedModelImplToJson(
         _$UpdateFeedModelImpl instance) =>
     <String, dynamic>{
-      if (instance.content case final value?) 'content': value,
+      if (instance.content case final value?) 'caption': value,
       if (_$JsonConverterToJson<Object?, List<String>>(
-              instance.imageUrls, const StringListConverter().toJson)
+              instance.mediaUrls, const StringListConverter().toJson)
           case final value?)
-        'image_urls': value,
+        'media_urls': value,
+      if (instance.location case final value?) 'location': value,
       if (_$JsonConverterToJson<Object?, List<String>>(
-              instance.videoUrls, const StringListConverter().toJson)
+              instance.tags, const StringListConverter().toJson)
           case final value?)
-        'video_urls': value,
-      if (instance.commentsEnabled case final value?) 'comments_enabled': value,
-      if (instance.hideLikeCount case final value?) 'hide_like_count': value,
-      if (instance.hideCommentCount case final value?)
-        'hide_comment_count': value,
-      if (instance.hideShareCount case final value?) 'hide_share_count': value,
-      if (instance.hideLikesList case final value?) 'hide_likes_list': value,
+        'tags': value,
+      if (_$JsonConverterToJson<Object?, List<String>>(
+              instance.mentionIds, const StringListConverter().toJson)
+          case final value?)
+        'mention_ids': value,
+      if (instance.allowComments case final value?) 'allow_comments': value,
+      if (instance.allowShare case final value?) 'allow_share': value,
+      if (instance.isActive case final value?) 'is_active': value,
       if (instance.campaignId case final value?) 'campaign_id': value,
       if (instance.campaignTitle case final value?) 'campaign_title': value,
     };

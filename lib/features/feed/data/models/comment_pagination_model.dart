@@ -14,9 +14,8 @@ CommentCursorModel? _cursorFromJson(Object? json) {
 
 Object? _cursorToJson(CommentCursorModel? cursor) => cursor?.toJson();
 
-/// Pagination model for comments.
 @freezed
-abstract class CommentPaginationModel with _$CommentPaginationModel {
+class CommentPaginationModel with _$CommentPaginationModel {
   const CommentPaginationModel._();
 
   const factory CommentPaginationModel({

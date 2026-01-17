@@ -4,8 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 
 import 'package:velora/core/ui/app_messenger.dart';
+import 'package:velora/features/auth/domain/entities/auth_status_entity.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_event.dart';
+import 'package:velora/features/auth/presentation/bloc/auth_state.dart';
 import 'package:velora/features/auth/presentation/widgets/components/primary_button.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
@@ -16,8 +18,17 @@ import 'package:velora/l10n/app_localizations.dart';
 /// - Clear next action
 /// - Visible resend option
 /// - Escape hatch (sign out)
-class VerificationEmailScreen extends StatelessWidget {
+/// - Auto-navigate when verified
+class VerificationEmailScreen extends StatefulWidget {
   const VerificationEmailScreen({super.key});
+
+  @override
+  State<VerificationEmailScreen> createState() =>
+      _VerificationEmailScreenState();
+}
+
+class _VerificationEmailScreenState extends State<VerificationEmailScreen> {
+  bool _isCheckingVerification = false;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +36,40 @@ class VerificationEmailScreen extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     final t = AppLocalizations.of(context)!;
 
-    return Scaffold(
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        // Auto-navigate when user becomes authenticated
+        if (state.status == AuthStatusEntity.authenticated) {
+          if (mounted) {
+            context.go('/');
+          }
+        }
+        
+        // Show error if verification check fails
+        if (state.errorMessage != null && _isCheckingVerification) {
+          AppMessenger.showToast(
+            message: state.errorMessage!,
+            icon: Icons.error_outline,
+            isError: true,
+          );
+          setState(() {
+            _isCheckingVerification = false;
+          });
+        }
+
+        // Still unverified after check
+        if (state.status == AuthStatusEntity.emailUnverified && _isCheckingVerification) {
+          AppMessenger.showToast(
+            message: 'Email not yet verified. Please check your inbox.',
+            icon: Icons.info_outline,
+            isError: true,
+          );
+          setState(() {
+            _isCheckingVerification = false;
+          });
+        }
+      },
+      child: Scaffold(
       backgroundColor: colorScheme.surfaceContainerLowest,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -33,7 +77,11 @@ class VerificationEmailScreen extends StatelessWidget {
         leading: IconButton(
           tooltip: t.commonGoBack,
           icon: Icon(Icons.arrow_back, color: colorScheme.onSurface),
-          onPressed: () => context.pop(),
+          onPressed: () {
+            // Sign out before going back to prevent stuck state
+            context.read<AuthBloc>().add(const AuthEvent.signOut());
+            context.go('/auth/signin');
+          },
         ),
       ),
       body: SafeArea(
@@ -96,14 +144,37 @@ class VerificationEmailScreen extends StatelessWidget {
                 const SizedBox(height: 40),
 
                 // Primary CTA: I've Verified
-                PrimaryButton(
-                  text: t.authVerifiedCta,
-                  icon: Icons.check_circle_outline,
-                  onPressed: () {
-                    // After verifying via email link, user can go back to sign in.
-                    context.go('/auth/signin');
+                BlocBuilder<AuthBloc, AuthState>(
+                  builder: (context, state) {
+                    return PrimaryButton(
+                      text: t.authVerifiedCta,
+                      icon: Icons.check_circle_outline,
+                      onPressed: _isCheckingVerification
+                          ? null
+                          : () {
+                              // Reload current session to check if email is verified
+                              setState(() {
+                                _isCheckingVerification = true;
+                              });
+                              
+                              // Sign out and sign in again to refresh session
+                              // This will trigger authSnapshotChanged event
+                              context.read<AuthBloc>().add(const AuthEvent.signOut());
+                              
+                              // Wait a bit then show message to sign in again
+                              Future.delayed(const Duration(milliseconds: 500), () {
+                                if (mounted) {
+                                  AppMessenger.showToast(
+                                    message: 'Please sign in again to check verification status.',
+                                    icon: Icons.info_outline,
+                                  );
+                                  context.go('/auth/signin');
+                                }
+                              });
+                            },
+                      isLoading: _isCheckingVerification,
+                    );
                   },
-                  isLoading: false,
                 ),
 
                 const SizedBox(height: 16),
@@ -165,6 +236,7 @@ class VerificationEmailScreen extends StatelessWidget {
             ),
           ),
         ),
+      ),
       ),
     );
   }

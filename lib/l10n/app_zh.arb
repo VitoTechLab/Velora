@@ -92,7 +92,6 @@
       }
     }
   },
-  "feedWriteCommentHint": "写下评论...",
   "feedAddCommentHint": "为 {name} 添加评论",
   "@feedAddCommentHint": {
     "placeholders": {
@@ -869,6 +868,17 @@
   "chatPollDialogAddOption": "添加选项",
   "chatPollDialogQuestionError": "请输入问题",
   "chatPollDialogOptionsError": "请至少添加 2 个选项",
+  "chatPollDialogMultipleChoiceLabel": "多选",
+  "chatPollDialogMultipleChoiceHint": "允许用户选择多个选项",
+  "chatPollDialogMaxVotesLabel": "最大投票数",
+  "chatPollDialogMaxVotesHint": "用户最多可以选择 {count} 个选项",
+  "@chatPollDialogMaxVotesHint": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "chatPollDialogSend": "发送投票",
   "chatEventLabel": "活动",
   "chatEventSemanticsYour": "你的活动",
@@ -888,6 +898,13 @@
   "chatEventDialogDescriptionHint": "输入活动描述…",
   "chatEventDialogLocationLabel": "地点（可选）",
   "chatEventDialogLocationHint": "输入地点…",
+  "chatEventDialogAddressLabel": "地址",
+  "chatEventDialogAddressHint": "输入完整地址…",
+  "chatEventDialogOnlineLabel": "线上活动",
+  "chatEventDialogOnlineHint": "此活动将在线上举行",
+  "chatEventDialogMeetingUrlLabel": "会议链接",
+  "chatEventDialogMeetingUrlHint": "输入会议链接（Zoom、Google Meet 等）",
+  "chatEventDialogMeetingUrlError": "线上活动请输入会议链接",
   "chatEventDialogStartLabel": "开始",
   "chatEventDialogEndLabel": "结束",
   "chatEventDialogTitleError": "请输入活动标题",

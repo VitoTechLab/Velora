@@ -3,8 +3,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:velora/features/post/domain/entities/more_option_data.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
-/// More Options Screen untuk post
-/// Menampilkan opsi tambahan seperti turn off commenting, hide like count, dll
 class MoreOptionPostScreen extends HookWidget {
   final MoreOptionData initialOptions;
 
@@ -14,37 +12,22 @@ class MoreOptionPostScreen extends HookWidget {
   });
   @override
   Widget build(BuildContext context) {
-    final turnOffCommenting = useState(!initialOptions.commentsEnabled);
-    final hideLikeCount = useState(initialOptions.hideLikeCount);
-    final hideShareCount = useState(initialOptions.hideShareCount);
-    final hideCommentCount = useState(initialOptions.hideCommentCount);
-    final hideLikesList = useState(initialOptions.hideLikesList);
+    final allowComments = useState(initialOptions.allowComments);
+    final allowShare = useState(initialOptions.allowShare);
 
     useEffect(
       () {
-        turnOffCommenting.value = !initialOptions.commentsEnabled;
-        hideLikeCount.value = initialOptions.hideLikeCount;
-        hideShareCount.value = initialOptions.hideShareCount;
-        hideCommentCount.value = initialOptions.hideCommentCount;
-        hideLikesList.value = initialOptions.hideLikesList;
+        allowComments.value = initialOptions.allowComments;
+        allowShare.value = initialOptions.allowShare;
         return null;
       },
-      [
-        initialOptions.commentsEnabled,
-        initialOptions.hideLikeCount,
-        initialOptions.hideShareCount,
-        initialOptions.hideCommentCount,
-        initialOptions.hideLikesList,
-      ],
+      [initialOptions.allowComments, initialOptions.allowShare],
     );
 
     void onBackPressed() {
       final result = MoreOptionData(
-        commentsEnabled: !turnOffCommenting.value,
-        hideLikeCount: hideLikeCount.value,
-        hideShareCount: hideShareCount.value,
-        hideCommentCount: hideCommentCount.value,
-        hideLikesList: hideLikesList.value,
+        allowComments: allowComments.value,
+        allowShare: allowShare.value,
       );
       Navigator.pop(context, result);
     }
@@ -86,14 +69,14 @@ class MoreOptionPostScreen extends HookWidget {
             ),
           ),
 
-          // Turn off commenting
+          // Allow commenting
           _buildOptionTile(
             icon: Icons.chat_bubble_outline,
             title: t.postMoreOptionsTurnOffCommentsTitle,
             subtitle: t.postMoreOptionsTurnOffCommentsSubtitle,
-            value: turnOffCommenting.value,
+            value: !allowComments.value, // Inverted: "Turn off" = !allowComments
             onChanged: (value) {
-              turnOffCommenting.value = value;
+              allowComments.value = !value;
             },
             colorScheme: colorScheme,
             textTheme: textTheme,
@@ -102,62 +85,14 @@ class MoreOptionPostScreen extends HookWidget {
 
           const Divider(height: 1),
 
-          // Hide like count
-          _buildOptionTile(
-            icon: Icons.favorite_border,
-            title: t.postMoreOptionsHideLikeCountTitle,
-            subtitle: null,
-            value: hideLikeCount.value,
-            onChanged: (value) {
-              hideLikeCount.value = value;
-            },
-            colorScheme: colorScheme,
-            textTheme: textTheme,
-            t: t,
-          ),
-
-          const Divider(height: 1),
-
-          // Hide share count
+          // Allow share
           _buildOptionTile(
             icon: Icons.share_outlined,
             title: t.postMoreOptionsHideShareCountTitle,
             subtitle: t.postMoreOptionsHideShareCountSubtitle,
-            value: hideShareCount.value,
+            value: !allowShare.value, // Inverted: "Turn off" = !allowShare
             onChanged: (value) {
-              hideShareCount.value = value;
-            },
-            colorScheme: colorScheme,
-            textTheme: textTheme,
-            t: t,
-          ),
-
-          const Divider(height: 1),
-
-          // Hide comment count
-          _buildOptionTile(
-            icon: Icons.chat_bubble_outline,
-            title: t.postMoreOptionsHideCommentCountTitle,
-            subtitle: null,
-            value: hideCommentCount.value,
-            onChanged: (value) {
-              hideCommentCount.value = value;
-            },
-            colorScheme: colorScheme,
-            textTheme: textTheme,
-            t: t,
-          ),
-
-          const Divider(height: 1),
-
-          // Hide likes list
-          _buildOptionTile(
-            icon: Icons.people_outline,
-            title: t.postMoreOptionsHideLikesListTitle,
-            subtitle: t.postMoreOptionsHideLikesListSubtitle,
-            value: hideLikesList.value,
-            onChanged: (value) {
-              hideLikesList.value = value;
+              allowShare.value = !value;
             },
             colorScheme: colorScheme,
             textTheme: textTheme,

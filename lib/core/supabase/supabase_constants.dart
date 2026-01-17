@@ -6,11 +6,13 @@ class SupabaseTables {
   static const feedPosts = 'feed_posts';
   static const feedPostLikes = 'feed_post_likes';
   static const feedPostBookmarks = 'feed_post_bookmarks';
+  static const feedPostShares = 'feed_post_shares';
   static const feedComments = 'feed_comments';
   static const feedCommentLikes = 'feed_comment_likes';
 
   // Feed Views
   static const feedPostsView = 'feed_posts_feed_view';
+  static const feedCommentsView = 'feed_comments_view';
 
   // Presence Tables / Views
   static const userPresence = 'user_presence';
@@ -36,7 +38,7 @@ class SupabaseTables {
   static const eventRsvps = 'event_rsvps';
 
   // Chat Views
-  static const conversationListView = 'v_conversation_list';
+  static const conversationListView = 'v_conversation_list_optimized';
 
   // Profile Tables
   static const userProfiles = 'user_profiles';
@@ -61,7 +63,11 @@ class SupabaseRpc {
   static const getMessagesPage = 'get_messages_page';
   static const createDirectConversation = 'create_direct_conversation';
   static const markConversationRead = 'mark_conversation_read';
+  static const markMessagesReadBatch = 'mark_messages_read_batch';
   static const getConversationListOptimized = 'get_conversation_list_optimized';
+  static const votePollOption = 'vote_poll_option';
+  static const unvotePollOption = 'unvote_poll_option';
+  static const respondToEvent = 'respond_to_event';
 
   // Presence RPCs
   static const touchPresence = 'touch_presence';

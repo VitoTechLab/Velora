@@ -530,12 +530,6 @@ abstract class AppLocalizations {
   /// **'Replying to {name}'**
   String feedReplyingTo(String name);
 
-  /// No description provided for @feedWriteCommentHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Write a comment...'**
-  String get feedWriteCommentHint;
-
   /// No description provided for @feedAddCommentHint.
   ///
   /// In en, this message translates to:
@@ -3014,6 +3008,96 @@ abstract class AppLocalizations {
   /// **'Voice message'**
   String get chatDetailVoiceMessage;
 
+  /// No description provided for @chatDetailVoiceError.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to record voice message'**
+  String get chatDetailVoiceError;
+
+  /// No description provided for @chatDetailVoiceRecorded.
+  ///
+  /// In en, this message translates to:
+  /// **'Uploading voice message...'**
+  String get chatDetailVoiceRecorded;
+
+  /// No description provided for @voiceRecorderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Voice Message'**
+  String get voiceRecorderTitle;
+
+  /// No description provided for @voiceRecorderCheckingPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'Checking microphone permission...'**
+  String get voiceRecorderCheckingPermission;
+
+  /// No description provided for @voiceRecorderNoPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'Microphone permission is required to record voice messages'**
+  String get voiceRecorderNoPermission;
+
+  /// No description provided for @voiceRecorderRetryPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'Grant Permission'**
+  String get voiceRecorderRetryPermission;
+
+  /// No description provided for @voiceRecorderTapToStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to start recording'**
+  String get voiceRecorderTapToStart;
+
+  /// No description provided for @voiceRecorderRecording.
+  ///
+  /// In en, this message translates to:
+  /// **'Recording...'**
+  String get voiceRecorderRecording;
+
+  /// No description provided for @voiceRecorderPaused.
+  ///
+  /// In en, this message translates to:
+  /// **'Paused'**
+  String get voiceRecorderPaused;
+
+  /// No description provided for @voiceRecorderCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get voiceRecorderCancel;
+
+  /// No description provided for @voiceRecorderPause.
+  ///
+  /// In en, this message translates to:
+  /// **'Pause'**
+  String get voiceRecorderPause;
+
+  /// No description provided for @voiceRecorderResume.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume'**
+  String get voiceRecorderResume;
+
+  /// No description provided for @voiceRecorderSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get voiceRecorderSend;
+
+  /// No description provided for @chatDetailAudioUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Audio unavailable'**
+  String get chatDetailAudioUnavailable;
+
+  /// No description provided for @chatDetailFileDownloading.
+  ///
+  /// In en, this message translates to:
+  /// **'Downloading file...'**
+  String get chatDetailFileDownloading;
+
   /// No description provided for @chatDetailStatusOnline.
   ///
   /// In en, this message translates to:
@@ -3242,6 +3326,30 @@ abstract class AppLocalizations {
   /// **'Please add at least 2 options'**
   String get chatPollDialogOptionsError;
 
+  /// No description provided for @chatPollDialogMultipleChoiceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Multiple choice'**
+  String get chatPollDialogMultipleChoiceLabel;
+
+  /// No description provided for @chatPollDialogMultipleChoiceHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow users to select multiple options'**
+  String get chatPollDialogMultipleChoiceHint;
+
+  /// No description provided for @chatPollDialogMaxVotesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum votes'**
+  String get chatPollDialogMaxVotesLabel;
+
+  /// No description provided for @chatPollDialogMaxVotesHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Users can vote for up to {count} options'**
+  String chatPollDialogMaxVotesHint(int count);
+
   /// No description provided for @chatPollDialogSend.
   ///
   /// In en, this message translates to:
@@ -3313,6 +3421,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter location…'**
   String get chatEventDialogLocationHint;
+
+  /// No description provided for @chatEventDialogAddressLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get chatEventDialogAddressLabel;
+
+  /// No description provided for @chatEventDialogAddressHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter full address…'**
+  String get chatEventDialogAddressHint;
+
+  /// No description provided for @chatEventDialogOnlineLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Online event'**
+  String get chatEventDialogOnlineLabel;
+
+  /// No description provided for @chatEventDialogOnlineHint.
+  ///
+  /// In en, this message translates to:
+  /// **'This event will be held virtually'**
+  String get chatEventDialogOnlineHint;
+
+  /// No description provided for @chatEventDialogMeetingUrlLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Meeting URL'**
+  String get chatEventDialogMeetingUrlLabel;
+
+  /// No description provided for @chatEventDialogMeetingUrlHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter meeting link (Zoom, Google Meet, etc.)'**
+  String get chatEventDialogMeetingUrlHint;
+
+  /// No description provided for @chatEventDialogMeetingUrlError.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a meeting URL for online events'**
+  String get chatEventDialogMeetingUrlError;
 
   /// No description provided for @chatEventDialogStartLabel.
   ///
@@ -4765,6 +4915,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Made with ❤️ for a better world'**
   String get settingsHelpAboutFooterMadeWith;
+
+  /// No description provided for @chatGallerySelectPhotos.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Photos'**
+  String get chatGallerySelectPhotos;
+
+  /// No description provided for @chatGallerySelectAtLeastOne.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select at least one image'**
+  String get chatGallerySelectAtLeastOne;
+
+  /// No description provided for @chatGalleryUnableToLoad.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to load the selected images'**
+  String get chatGalleryUnableToLoad;
+
+  /// No description provided for @chatGallerySomeImagesNotAccessed.
+  ///
+  /// In en, this message translates to:
+  /// **'Some images could not be accessed'**
+  String get chatGallerySomeImagesNotAccessed;
+
+  /// No description provided for @chatGallerySend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get chatGallerySend;
+
+  /// No description provided for @chatGallerySendCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Send ({count})'**
+  String chatGallerySendCount(int count);
+
+  /// No description provided for @chatGallerySelectedCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{selected} of {max} selected'**
+  String chatGallerySelectedCount(int selected, int max);
+
+  /// No description provided for @chatGalleryClearAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear all'**
+  String get chatGalleryClearAll;
+
+  /// No description provided for @chatDocumentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Documents'**
+  String get chatDocumentTitle;
+
+  /// No description provided for @chatDocumentSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get chatDocumentSend;
+
+  /// No description provided for @chatDocumentSendCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Send ({count})'**
+  String chatDocumentSendCount(int count);
+
+  /// No description provided for @chatDocumentSelectedCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{selected} of {max} selected'**
+  String chatDocumentSelectedCount(int selected, int max);
+
+  /// No description provided for @chatDocumentClearAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear all'**
+  String get chatDocumentClearAll;
+
+  /// No description provided for @chatDocumentMaxReached.
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum {max} documents allowed'**
+  String chatDocumentMaxReached(int max);
+
+  /// No description provided for @chatDocumentSomeLimited.
+  ///
+  /// In en, this message translates to:
+  /// **'Some files were skipped (max {max})'**
+  String chatDocumentSomeLimited(int max);
+
+  /// No description provided for @chatDocumentPickError.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to pick documents'**
+  String get chatDocumentPickError;
+
+  /// No description provided for @chatDocumentSelectAtLeastOne.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select at least one document'**
+  String get chatDocumentSelectAtLeastOne;
+
+  /// No description provided for @chatDocumentEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No documents selected'**
+  String get chatDocumentEmptyTitle;
+
+  /// No description provided for @chatDocumentEmptySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the button below to browse and select files'**
+  String get chatDocumentEmptySubtitle;
+
+  /// No description provided for @chatDocumentBrowseFiles.
+  ///
+  /// In en, this message translates to:
+  /// **'Browse Files'**
+  String get chatDocumentBrowseFiles;
+
+  /// No description provided for @chatDocumentAddMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Add more documents'**
+  String get chatDocumentAddMore;
 }
 
 class _AppLocalizationsDelegate

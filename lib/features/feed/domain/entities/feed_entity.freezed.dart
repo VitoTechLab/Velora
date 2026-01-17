@@ -22,21 +22,21 @@ mixin _$FeedEntity {
   DateTime get createdAt => throw _privateConstructorUsedError;
   String? get username => throw _privateConstructorUsedError;
   String? get photoUrl => throw _privateConstructorUsedError;
-  List<String> get imageUrls => throw _privateConstructorUsedError;
-  List<String> get videoUrls => throw _privateConstructorUsedError;
-  int? get likesCount => throw _privateConstructorUsedError;
-  int? get commentsCount => throw _privateConstructorUsedError;
-  int? get sharesCount => throw _privateConstructorUsedError;
+  List<String> get mediaUrls => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get location => throw _privateConstructorUsedError;
+  List<String> get tags => throw _privateConstructorUsedError;
+  List<String> get mentionIds => throw _privateConstructorUsedError;
+  int get likesCount => throw _privateConstructorUsedError;
+  int get commentsCount => throw _privateConstructorUsedError;
+  int get sharesCount => throw _privateConstructorUsedError;
   bool get isLiked => throw _privateConstructorUsedError;
   bool get isBookmarked => throw _privateConstructorUsedError;
   bool get isFollowing => throw _privateConstructorUsedError;
   bool get isFollowRequestPending => throw _privateConstructorUsedError;
   bool get isMe => throw _privateConstructorUsedError;
-  bool get commentsEnabled => throw _privateConstructorUsedError;
-  bool get hideLikeCount => throw _privateConstructorUsedError;
-  bool get hideCommentCount => throw _privateConstructorUsedError;
-  bool get hideShareCount => throw _privateConstructorUsedError;
-  bool get hideLikesList => throw _privateConstructorUsedError;
+  bool get allowComments => throw _privateConstructorUsedError;
+  bool get allowShare => throw _privateConstructorUsedError;
+  bool get isActive => throw _privateConstructorUsedError;
   String? get campaignId => throw _privateConstructorUsedError;
   String? get campaignTitle => throw _privateConstructorUsedError;
 
@@ -60,21 +60,21 @@ abstract class $FeedEntityCopyWith<$Res> {
       DateTime createdAt,
       String? username,
       String? photoUrl,
-      List<String> imageUrls,
-      List<String> videoUrls,
-      int? likesCount,
-      int? commentsCount,
-      int? sharesCount,
+      List<String> mediaUrls,
+      Map<String, dynamic>? location,
+      List<String> tags,
+      List<String> mentionIds,
+      int likesCount,
+      int commentsCount,
+      int sharesCount,
       bool isLiked,
       bool isBookmarked,
       bool isFollowing,
       bool isFollowRequestPending,
       bool isMe,
-      bool commentsEnabled,
-      bool hideLikeCount,
-      bool hideCommentCount,
-      bool hideShareCount,
-      bool hideLikesList,
+      bool allowComments,
+      bool allowShare,
+      bool isActive,
       String? campaignId,
       String? campaignTitle});
 }
@@ -100,21 +100,21 @@ class _$FeedEntityCopyWithImpl<$Res, $Val extends FeedEntity>
     Object? createdAt = null,
     Object? username = freezed,
     Object? photoUrl = freezed,
-    Object? imageUrls = null,
-    Object? videoUrls = null,
-    Object? likesCount = freezed,
-    Object? commentsCount = freezed,
-    Object? sharesCount = freezed,
+    Object? mediaUrls = null,
+    Object? location = freezed,
+    Object? tags = null,
+    Object? mentionIds = null,
+    Object? likesCount = null,
+    Object? commentsCount = null,
+    Object? sharesCount = null,
     Object? isLiked = null,
     Object? isBookmarked = null,
     Object? isFollowing = null,
     Object? isFollowRequestPending = null,
     Object? isMe = null,
-    Object? commentsEnabled = null,
-    Object? hideLikeCount = null,
-    Object? hideCommentCount = null,
-    Object? hideShareCount = null,
-    Object? hideLikesList = null,
+    Object? allowComments = null,
+    Object? allowShare = null,
+    Object? isActive = null,
     Object? campaignId = freezed,
     Object? campaignTitle = freezed,
   }) {
@@ -143,26 +143,34 @@ class _$FeedEntityCopyWithImpl<$Res, $Val extends FeedEntity>
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      imageUrls: null == imageUrls
-          ? _value.imageUrls
-          : imageUrls // ignore: cast_nullable_to_non_nullable
+      mediaUrls: null == mediaUrls
+          ? _value.mediaUrls
+          : mediaUrls // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      videoUrls: null == videoUrls
-          ? _value.videoUrls
-          : videoUrls // ignore: cast_nullable_to_non_nullable
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      tags: null == tags
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      likesCount: freezed == likesCount
+      mentionIds: null == mentionIds
+          ? _value.mentionIds
+          : mentionIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      likesCount: null == likesCount
           ? _value.likesCount
           : likesCount // ignore: cast_nullable_to_non_nullable
-              as int?,
-      commentsCount: freezed == commentsCount
+              as int,
+      commentsCount: null == commentsCount
           ? _value.commentsCount
           : commentsCount // ignore: cast_nullable_to_non_nullable
-              as int?,
-      sharesCount: freezed == sharesCount
+              as int,
+      sharesCount: null == sharesCount
           ? _value.sharesCount
           : sharesCount // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       isLiked: null == isLiked
           ? _value.isLiked
           : isLiked // ignore: cast_nullable_to_non_nullable
@@ -183,25 +191,17 @@ class _$FeedEntityCopyWithImpl<$Res, $Val extends FeedEntity>
           ? _value.isMe
           : isMe // ignore: cast_nullable_to_non_nullable
               as bool,
-      commentsEnabled: null == commentsEnabled
-          ? _value.commentsEnabled
-          : commentsEnabled // ignore: cast_nullable_to_non_nullable
+      allowComments: null == allowComments
+          ? _value.allowComments
+          : allowComments // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideLikeCount: null == hideLikeCount
-          ? _value.hideLikeCount
-          : hideLikeCount // ignore: cast_nullable_to_non_nullable
+      allowShare: null == allowShare
+          ? _value.allowShare
+          : allowShare // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideCommentCount: null == hideCommentCount
-          ? _value.hideCommentCount
-          : hideCommentCount // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hideShareCount: null == hideShareCount
-          ? _value.hideShareCount
-          : hideShareCount // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hideLikesList: null == hideLikesList
-          ? _value.hideLikesList
-          : hideLikesList // ignore: cast_nullable_to_non_nullable
+      isActive: null == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
               as bool,
       campaignId: freezed == campaignId
           ? _value.campaignId
@@ -230,21 +230,21 @@ abstract class _$$FeedEntityImplCopyWith<$Res>
       DateTime createdAt,
       String? username,
       String? photoUrl,
-      List<String> imageUrls,
-      List<String> videoUrls,
-      int? likesCount,
-      int? commentsCount,
-      int? sharesCount,
+      List<String> mediaUrls,
+      Map<String, dynamic>? location,
+      List<String> tags,
+      List<String> mentionIds,
+      int likesCount,
+      int commentsCount,
+      int sharesCount,
       bool isLiked,
       bool isBookmarked,
       bool isFollowing,
       bool isFollowRequestPending,
       bool isMe,
-      bool commentsEnabled,
-      bool hideLikeCount,
-      bool hideCommentCount,
-      bool hideShareCount,
-      bool hideLikesList,
+      bool allowComments,
+      bool allowShare,
+      bool isActive,
       String? campaignId,
       String? campaignTitle});
 }
@@ -268,21 +268,21 @@ class __$$FeedEntityImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? username = freezed,
     Object? photoUrl = freezed,
-    Object? imageUrls = null,
-    Object? videoUrls = null,
-    Object? likesCount = freezed,
-    Object? commentsCount = freezed,
-    Object? sharesCount = freezed,
+    Object? mediaUrls = null,
+    Object? location = freezed,
+    Object? tags = null,
+    Object? mentionIds = null,
+    Object? likesCount = null,
+    Object? commentsCount = null,
+    Object? sharesCount = null,
     Object? isLiked = null,
     Object? isBookmarked = null,
     Object? isFollowing = null,
     Object? isFollowRequestPending = null,
     Object? isMe = null,
-    Object? commentsEnabled = null,
-    Object? hideLikeCount = null,
-    Object? hideCommentCount = null,
-    Object? hideShareCount = null,
-    Object? hideLikesList = null,
+    Object? allowComments = null,
+    Object? allowShare = null,
+    Object? isActive = null,
     Object? campaignId = freezed,
     Object? campaignTitle = freezed,
   }) {
@@ -311,26 +311,34 @@ class __$$FeedEntityImplCopyWithImpl<$Res>
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      imageUrls: null == imageUrls
-          ? _value._imageUrls
-          : imageUrls // ignore: cast_nullable_to_non_nullable
+      mediaUrls: null == mediaUrls
+          ? _value._mediaUrls
+          : mediaUrls // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      videoUrls: null == videoUrls
-          ? _value._videoUrls
-          : videoUrls // ignore: cast_nullable_to_non_nullable
+      location: freezed == location
+          ? _value._location
+          : location // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      tags: null == tags
+          ? _value._tags
+          : tags // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      likesCount: freezed == likesCount
+      mentionIds: null == mentionIds
+          ? _value._mentionIds
+          : mentionIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      likesCount: null == likesCount
           ? _value.likesCount
           : likesCount // ignore: cast_nullable_to_non_nullable
-              as int?,
-      commentsCount: freezed == commentsCount
+              as int,
+      commentsCount: null == commentsCount
           ? _value.commentsCount
           : commentsCount // ignore: cast_nullable_to_non_nullable
-              as int?,
-      sharesCount: freezed == sharesCount
+              as int,
+      sharesCount: null == sharesCount
           ? _value.sharesCount
           : sharesCount // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       isLiked: null == isLiked
           ? _value.isLiked
           : isLiked // ignore: cast_nullable_to_non_nullable
@@ -351,25 +359,17 @@ class __$$FeedEntityImplCopyWithImpl<$Res>
           ? _value.isMe
           : isMe // ignore: cast_nullable_to_non_nullable
               as bool,
-      commentsEnabled: null == commentsEnabled
-          ? _value.commentsEnabled
-          : commentsEnabled // ignore: cast_nullable_to_non_nullable
+      allowComments: null == allowComments
+          ? _value.allowComments
+          : allowComments // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideLikeCount: null == hideLikeCount
-          ? _value.hideLikeCount
-          : hideLikeCount // ignore: cast_nullable_to_non_nullable
+      allowShare: null == allowShare
+          ? _value.allowShare
+          : allowShare // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideCommentCount: null == hideCommentCount
-          ? _value.hideCommentCount
-          : hideCommentCount // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hideShareCount: null == hideShareCount
-          ? _value.hideShareCount
-          : hideShareCount // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hideLikesList: null == hideLikesList
-          ? _value.hideLikesList
-          : hideLikesList // ignore: cast_nullable_to_non_nullable
+      isActive: null == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
               as bool,
       campaignId: freezed == campaignId
           ? _value.campaignId
@@ -393,25 +393,27 @@ class _$FeedEntityImpl extends _FeedEntity {
       required this.createdAt,
       this.username,
       this.photoUrl,
-      final List<String> imageUrls = const <String>[],
-      final List<String> videoUrls = const <String>[],
-      this.likesCount,
-      this.commentsCount,
-      this.sharesCount,
+      final List<String> mediaUrls = const <String>[],
+      final Map<String, dynamic>? location,
+      final List<String> tags = const <String>[],
+      final List<String> mentionIds = const <String>[],
+      this.likesCount = 0,
+      this.commentsCount = 0,
+      this.sharesCount = 0,
       this.isLiked = false,
       this.isBookmarked = false,
       this.isFollowing = false,
       this.isFollowRequestPending = false,
       this.isMe = false,
-      this.commentsEnabled = true,
-      this.hideLikeCount = false,
-      this.hideCommentCount = false,
-      this.hideShareCount = false,
-      this.hideLikesList = false,
+      this.allowComments = true,
+      this.allowShare = true,
+      this.isActive = true,
       this.campaignId,
       this.campaignTitle})
-      : _imageUrls = imageUrls,
-        _videoUrls = videoUrls,
+      : _mediaUrls = mediaUrls,
+        _location = location,
+        _tags = tags,
+        _mentionIds = mentionIds,
         super._();
 
   @override
@@ -426,30 +428,52 @@ class _$FeedEntityImpl extends _FeedEntity {
   final String? username;
   @override
   final String? photoUrl;
-  final List<String> _imageUrls;
+  final List<String> _mediaUrls;
   @override
   @JsonKey()
-  List<String> get imageUrls {
-    if (_imageUrls is EqualUnmodifiableListView) return _imageUrls;
+  List<String> get mediaUrls {
+    if (_mediaUrls is EqualUnmodifiableListView) return _mediaUrls;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_imageUrls);
+    return EqualUnmodifiableListView(_mediaUrls);
   }
 
-  final List<String> _videoUrls;
+  final Map<String, dynamic>? _location;
+  @override
+  Map<String, dynamic>? get location {
+    final value = _location;
+    if (value == null) return null;
+    if (_location is EqualUnmodifiableMapView) return _location;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
+  final List<String> _tags;
   @override
   @JsonKey()
-  List<String> get videoUrls {
-    if (_videoUrls is EqualUnmodifiableListView) return _videoUrls;
+  List<String> get tags {
+    if (_tags is EqualUnmodifiableListView) return _tags;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_videoUrls);
+    return EqualUnmodifiableListView(_tags);
+  }
+
+  final List<String> _mentionIds;
+  @override
+  @JsonKey()
+  List<String> get mentionIds {
+    if (_mentionIds is EqualUnmodifiableListView) return _mentionIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_mentionIds);
   }
 
   @override
-  final int? likesCount;
+  @JsonKey()
+  final int likesCount;
   @override
-  final int? commentsCount;
+  @JsonKey()
+  final int commentsCount;
   @override
-  final int? sharesCount;
+  @JsonKey()
+  final int sharesCount;
   @override
   @JsonKey()
   final bool isLiked;
@@ -467,19 +491,13 @@ class _$FeedEntityImpl extends _FeedEntity {
   final bool isMe;
   @override
   @JsonKey()
-  final bool commentsEnabled;
+  final bool allowComments;
   @override
   @JsonKey()
-  final bool hideLikeCount;
+  final bool allowShare;
   @override
   @JsonKey()
-  final bool hideCommentCount;
-  @override
-  @JsonKey()
-  final bool hideShareCount;
-  @override
-  @JsonKey()
-  final bool hideLikesList;
+  final bool isActive;
   @override
   final String? campaignId;
   @override
@@ -487,7 +505,7 @@ class _$FeedEntityImpl extends _FeedEntity {
 
   @override
   String toString() {
-    return 'FeedEntity(id: $id, userId: $userId, content: $content, createdAt: $createdAt, username: $username, photoUrl: $photoUrl, imageUrls: $imageUrls, videoUrls: $videoUrls, likesCount: $likesCount, commentsCount: $commentsCount, sharesCount: $sharesCount, isLiked: $isLiked, isBookmarked: $isBookmarked, isFollowing: $isFollowing, isFollowRequestPending: $isFollowRequestPending, isMe: $isMe, commentsEnabled: $commentsEnabled, hideLikeCount: $hideLikeCount, hideCommentCount: $hideCommentCount, hideShareCount: $hideShareCount, hideLikesList: $hideLikesList, campaignId: $campaignId, campaignTitle: $campaignTitle)';
+    return 'FeedEntity(id: $id, userId: $userId, content: $content, createdAt: $createdAt, username: $username, photoUrl: $photoUrl, mediaUrls: $mediaUrls, location: $location, tags: $tags, mentionIds: $mentionIds, likesCount: $likesCount, commentsCount: $commentsCount, sharesCount: $sharesCount, isLiked: $isLiked, isBookmarked: $isBookmarked, isFollowing: $isFollowing, isFollowRequestPending: $isFollowRequestPending, isMe: $isMe, allowComments: $allowComments, allowShare: $allowShare, isActive: $isActive, campaignId: $campaignId, campaignTitle: $campaignTitle)';
   }
 
   @override
@@ -505,9 +523,11 @@ class _$FeedEntityImpl extends _FeedEntity {
             (identical(other.photoUrl, photoUrl) ||
                 other.photoUrl == photoUrl) &&
             const DeepCollectionEquality()
-                .equals(other._imageUrls, _imageUrls) &&
+                .equals(other._mediaUrls, _mediaUrls) &&
+            const DeepCollectionEquality().equals(other._location, _location) &&
+            const DeepCollectionEquality().equals(other._tags, _tags) &&
             const DeepCollectionEquality()
-                .equals(other._videoUrls, _videoUrls) &&
+                .equals(other._mentionIds, _mentionIds) &&
             (identical(other.likesCount, likesCount) ||
                 other.likesCount == likesCount) &&
             (identical(other.commentsCount, commentsCount) ||
@@ -522,16 +542,12 @@ class _$FeedEntityImpl extends _FeedEntity {
             (identical(other.isFollowRequestPending, isFollowRequestPending) ||
                 other.isFollowRequestPending == isFollowRequestPending) &&
             (identical(other.isMe, isMe) || other.isMe == isMe) &&
-            (identical(other.commentsEnabled, commentsEnabled) ||
-                other.commentsEnabled == commentsEnabled) &&
-            (identical(other.hideLikeCount, hideLikeCount) ||
-                other.hideLikeCount == hideLikeCount) &&
-            (identical(other.hideCommentCount, hideCommentCount) ||
-                other.hideCommentCount == hideCommentCount) &&
-            (identical(other.hideShareCount, hideShareCount) ||
-                other.hideShareCount == hideShareCount) &&
-            (identical(other.hideLikesList, hideLikesList) ||
-                other.hideLikesList == hideLikesList) &&
+            (identical(other.allowComments, allowComments) ||
+                other.allowComments == allowComments) &&
+            (identical(other.allowShare, allowShare) ||
+                other.allowShare == allowShare) &&
+            (identical(other.isActive, isActive) ||
+                other.isActive == isActive) &&
             (identical(other.campaignId, campaignId) ||
                 other.campaignId == campaignId) &&
             (identical(other.campaignTitle, campaignTitle) ||
@@ -547,8 +563,10 @@ class _$FeedEntityImpl extends _FeedEntity {
         createdAt,
         username,
         photoUrl,
-        const DeepCollectionEquality().hash(_imageUrls),
-        const DeepCollectionEquality().hash(_videoUrls),
+        const DeepCollectionEquality().hash(_mediaUrls),
+        const DeepCollectionEquality().hash(_location),
+        const DeepCollectionEquality().hash(_tags),
+        const DeepCollectionEquality().hash(_mentionIds),
         likesCount,
         commentsCount,
         sharesCount,
@@ -557,11 +575,9 @@ class _$FeedEntityImpl extends _FeedEntity {
         isFollowing,
         isFollowRequestPending,
         isMe,
-        commentsEnabled,
-        hideLikeCount,
-        hideCommentCount,
-        hideShareCount,
-        hideLikesList,
+        allowComments,
+        allowShare,
+        isActive,
         campaignId,
         campaignTitle
       ]);
@@ -583,21 +599,21 @@ abstract class _FeedEntity extends FeedEntity {
       required final DateTime createdAt,
       final String? username,
       final String? photoUrl,
-      final List<String> imageUrls,
-      final List<String> videoUrls,
-      final int? likesCount,
-      final int? commentsCount,
-      final int? sharesCount,
+      final List<String> mediaUrls,
+      final Map<String, dynamic>? location,
+      final List<String> tags,
+      final List<String> mentionIds,
+      final int likesCount,
+      final int commentsCount,
+      final int sharesCount,
       final bool isLiked,
       final bool isBookmarked,
       final bool isFollowing,
       final bool isFollowRequestPending,
       final bool isMe,
-      final bool commentsEnabled,
-      final bool hideLikeCount,
-      final bool hideCommentCount,
-      final bool hideShareCount,
-      final bool hideLikesList,
+      final bool allowComments,
+      final bool allowShare,
+      final bool isActive,
       final String? campaignId,
       final String? campaignTitle}) = _$FeedEntityImpl;
   const _FeedEntity._() : super._();
@@ -615,15 +631,19 @@ abstract class _FeedEntity extends FeedEntity {
   @override
   String? get photoUrl;
   @override
-  List<String> get imageUrls;
+  List<String> get mediaUrls;
   @override
-  List<String> get videoUrls;
+  Map<String, dynamic>? get location;
   @override
-  int? get likesCount;
+  List<String> get tags;
   @override
-  int? get commentsCount;
+  List<String> get mentionIds;
   @override
-  int? get sharesCount;
+  int get likesCount;
+  @override
+  int get commentsCount;
+  @override
+  int get sharesCount;
   @override
   bool get isLiked;
   @override
@@ -635,15 +655,11 @@ abstract class _FeedEntity extends FeedEntity {
   @override
   bool get isMe;
   @override
-  bool get commentsEnabled;
+  bool get allowComments;
   @override
-  bool get hideLikeCount;
+  bool get allowShare;
   @override
-  bool get hideCommentCount;
-  @override
-  bool get hideShareCount;
-  @override
-  bool get hideLikesList;
+  bool get isActive;
   @override
   String? get campaignId;
   @override

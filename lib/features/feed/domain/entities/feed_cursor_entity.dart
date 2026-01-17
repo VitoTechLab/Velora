@@ -1,4 +1,3 @@
-/// Cursor entity for feed pagination.
 class FeedCursorEntity {
   const FeedCursorEntity({required this.createdAt, required this.id});
 

@@ -4,7 +4,6 @@ import 'package:velora/features/feed/domain/entities/feed_cursor_entity.dart';
 part 'feed_cursor_model.freezed.dart';
 part 'feed_cursor_model.g.dart';
 
-/// Cursor model for feed pagination.
 @freezed
 abstract class FeedCursorModel with _$FeedCursorModel {
   const FeedCursorModel._();

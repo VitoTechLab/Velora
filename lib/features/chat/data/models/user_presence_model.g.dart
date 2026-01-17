@@ -11,7 +11,7 @@ _$UserPresenceModelImpl _$$UserPresenceModelImplFromJson(
     _$UserPresenceModelImpl(
       userId: json['user_id'] as String,
       lastSeenAt: DateTime.parse(json['last_seen_at'] as String),
-      isOnline: json['is_online'] as bool?,
+      isOnline: json['is_online'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$UserPresenceModelImplToJson(

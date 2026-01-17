@@ -8,6 +8,7 @@ class ProfileActions extends StatelessWidget {
   final VoidCallback? onShareProfile;
   final VoidCallback? onFollowToggle;
   final VoidCallback? onAddFriend;
+  final VoidCallback? onMessagePressed;
 
   const ProfileActions({
     super.key,
@@ -18,6 +19,7 @@ class ProfileActions extends StatelessWidget {
     this.onShareProfile,
     this.onFollowToggle,
     this.onAddFriend,
+    this.onMessagePressed,
   });
 
   @override
@@ -28,8 +30,8 @@ class ProfileActions extends StatelessWidget {
     final followLabel = isFollowRequestPending
         ? 'Requested'
         : isFollowing
-        ? 'Following'
-        : 'Follow';
+            ? 'Following'
+            : 'Follow';
 
     return Row(
       children: [
@@ -62,9 +64,7 @@ class ProfileActions extends StatelessWidget {
           Expanded(
             child: _ActionButton(
               label: 'Message',
-              onPressed: () {
-                // Note: Navigation to chat will be implemented
-              },
+              onPressed: onMessagePressed,
               colorScheme: colorScheme,
             ),
           ),
@@ -103,9 +103,8 @@ class _ActionButton extends StatelessWidget {
           backgroundColor: isPrimary
               ? colorScheme.primary
               : colorScheme.surfaceContainerHighest,
-          foregroundColor: isPrimary
-              ? colorScheme.onPrimary
-              : colorScheme.onSurface,
+          foregroundColor:
+              isPrimary ? colorScheme.onPrimary : colorScheme.onSurface,
           side: isPrimary
               ? BorderSide.none
               : BorderSide(

@@ -61,11 +61,40 @@ class ChatRepositoryImpl implements ChatRepository {
   }
 
   @override
+  Future<Either<Failure, ChatMessageEntity>> sendMediaMessage({
+    required String conversationId,
+    required String mediaUrl,
+    required String mediaType,
+    String? mimeType,
+    String? fileName,
+    int? fileSize,
+    String? caption,
+  }) async {
+    try {
+      logi('[CHAT REPOSITORY] sendMediaMessage - conversation: $conversationId, type: $mediaType');
+      final result = await remoteDataSource.sendMediaMessage(
+        conversationId: conversationId,
+        mediaUrl: mediaUrl,
+        mediaType: mediaType,
+        mimeType: mimeType,
+        fileName: fileName,
+        fileSize: fileSize,
+        caption: caption,
+      );
+      return Right(result.toEntity());
+    } catch (e) {
+      loge('[CHAT REPOSITORY ERROR] sendMediaMessage', error: e);
+      return Left(ChatFailure.fromException(e));
+    }
+  }
+
+  @override
   Future<Either<Failure, ChatMessageEntity>> sendPollMessage({
     required String conversationId,
     required String question,
     required List<String> options,
     required bool multipleChoice,
+    int maxUserVotes = 1,
   }) async {
     try {
       logi('[CHAT REPOSITORY] sendPollMessage - conversation: $conversationId');
@@ -74,6 +103,7 @@ class ChatRepositoryImpl implements ChatRepository {
         question: question,
         options: options,
         multipleChoice: multipleChoice,
+        maxUserVotes: maxUserVotes,
       );
       return Right(result.toEntity());
     } catch (e) {
@@ -87,7 +117,11 @@ class ChatRepositoryImpl implements ChatRepository {
     required String conversationId,
     required String title,
     String? description,
-    String? location,
+    String? locationName,
+    String? address,
+    bool isOnline = false,
+    String? meetingUrl,
+    String? coverUrl,
     required DateTime startDate,
     required DateTime endDate,
   }) async {
@@ -99,7 +133,11 @@ class ChatRepositoryImpl implements ChatRepository {
         conversationId: conversationId,
         title: title,
         description: description,
-        location: location,
+        locationName: locationName,
+        address: address,
+        isOnline: isOnline,
+        meetingUrl: meetingUrl,
+        coverUrl: coverUrl,
         startDate: startDate,
         endDate: endDate,
       );
@@ -204,16 +242,7 @@ class ChatRepositoryImpl implements ChatRepository {
       await for (final models in remoteDataSource.watchUserPresence(
         myUserId: myUserId,
       )) {
-        final entities = models
-            .map(
-              (e) => UserPresenceEntity(
-                userId: e.userId,
-                isOnline: e.isOnline ?? false,
-                lastSeenAt: e.lastSeenAt,
-              ),
-            )
-            .toList();
-        yield Right(entities);
+        yield Right(models.map((e) => e.toEntity()).toList());
       }
     } catch (e) {
       yield Left(ChatFailure.fromException(e));
@@ -239,16 +268,7 @@ class ChatRepositoryImpl implements ChatRepository {
       final result = await remoteDataSource.fetchLastSeenStatus(
         userIds: userIds,
       );
-      final entities = result
-          .map(
-            (e) => UserPresenceEntity(
-              userId: e.userId,
-              isOnline: e.isOnline ?? false,
-              lastSeenAt: e.lastSeenAt,
-            ),
-          )
-          .toList();
-      return Right(entities);
+      return Right(result.map((e) => e.toEntity()).toList());
     } catch (e) {
       loge('[CHAT REPOSITORY ERROR] fetchLastSeenStatus', error: e);
       return Left(ChatFailure.fromException(e));
@@ -302,6 +322,24 @@ class ChatRepositoryImpl implements ChatRepository {
       return const Right(null);
     } catch (e) {
       loge('[CHAT REPOSITORY ERROR] markMessageRead', error: e);
+      return Left(ChatFailure.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, int>> markMessagesReadBatch({
+    required List<String> messageIds,
+  }) async {
+    try {
+      logi(
+        '[CHAT REPOSITORY] markMessagesReadBatch - count: ${messageIds.length}',
+      );
+      final count = await remoteDataSource.markMessagesReadBatch(
+        messageIds: messageIds,
+      );
+      return Right(count);
+    } catch (e) {
+      loge('[CHAT REPOSITORY ERROR] markMessagesReadBatch', error: e);
       return Left(ChatFailure.fromException(e));
     }
   }

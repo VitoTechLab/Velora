@@ -43,24 +43,6 @@ class FeedEvent with _$FeedEvent {
   /// Add new post to top of feed.
   const factory FeedEvent.addNewPost(FeedEntity post) = AddNewPostEvent;
 
-  /// Load comments for a post.
-  const factory FeedEvent.loadComments({required String postId, int? limit}) =
-      LoadCommentsEvent;
-
-  /// Add a comment to a post.
-  const factory FeedEvent.addComment({
-    required String postId,
-    required String content,
-    String? parentCommentId,
-  }) = AddCommentEvent;
-
-  /// Delete a comment.
-  const factory FeedEvent.deleteComment(String commentId) = DeleteCommentEvent;
-
-  /// Toggle like on a comment.
-  const factory FeedEvent.toggleLikeComment(String commentId) =
-      ToggleLikeCommentEvent;
-
   /// Clear transient UI messages.
   const factory FeedEvent.clearTransient() = ClearTransientEvent;
 }

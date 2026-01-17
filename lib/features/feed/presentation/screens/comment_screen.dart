@@ -389,7 +389,7 @@ class _CommentInputField extends StatelessWidget {
               // Reply banner
               if (replyingTo != null)
                 _ReplyBanner(
-                  username: replyingTo!.userFullName ?? t.feedUnknownUser,
+                  username: replyingTo!.username ?? t.feedUnknownUser,
                   onCancel: onCancelReply,
                 ),
 

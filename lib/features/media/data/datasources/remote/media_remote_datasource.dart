@@ -7,9 +7,20 @@ abstract class MediaRemoteDataSource {
   Future<UploadSignatureModel> getUploadSignature({
     required String publicId,
     required String folder,
+    String resourceType = 'image',
   });
 
   Future<MediaAssetModel> uploadImageToCloudinary({
+    required File file,
+    required UploadSignatureModel signature,
+  });
+
+  Future<MediaAssetModel> uploadVideoToCloudinary({
+    required File file,
+    required UploadSignatureModel signature,
+  });
+
+  Future<MediaAssetModel> uploadRawToCloudinary({
     required File file,
     required UploadSignatureModel signature,
   });
