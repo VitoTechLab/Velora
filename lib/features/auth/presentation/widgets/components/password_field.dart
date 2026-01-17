@@ -12,6 +12,7 @@ class PasswordField extends HookWidget {
   final bool showStrengthIndicator;
   final bool showPasswordHints;
   final VoidCallback? onEditingComplete;
+  final bool isDarkTheme;
 
   const PasswordField({
     super.key,
@@ -23,6 +24,7 @@ class PasswordField extends HookWidget {
     this.showStrengthIndicator = false,
     this.showPasswordHints = false,
     this.onEditingComplete,
+    this.isDarkTheme = false,
   });
 
   @override
@@ -37,12 +39,14 @@ class PasswordField extends HookWidget {
     final strengthColor = useState<Color?>(null);
     final strengthText = useState('');
 
-    final regexPatterns = useMemoized(() => (
-      upperCase: RegExp(r'[A-Z]'),
-      lowerCase: RegExp(r'[a-z]'),
-      number: RegExp(r"\d"),
-      symbol: RegExp(r'[!@#\$%^&*()_+{}\[\]:;<>,.?/~\\-]'),
-    ), []);
+    final regexPatterns = useMemoized(
+        () => (
+              upperCase: RegExp(r'[A-Z]'),
+              lowerCase: RegExp(r'[a-z]'),
+              number: RegExp(r"\d"),
+              symbol: RegExp(r'[!@#\$%^&*()_+{}\[\]:;<>,.?/~\\-]'),
+            ),
+        []);
 
     void updatePasswordStrength() {
       final password = controller.text;
@@ -100,12 +104,14 @@ class PasswordField extends HookWidget {
           textInputAction: TextInputAction.done,
           onEditingComplete: onEditingComplete,
           showSuccessIcon: false,
+          isDarkTheme: isDarkTheme,
           suffixIcon: IconButton(
             icon: Icon(
               isObscured.value
                   ? Icons.visibility_outlined
                   : Icons.visibility_off_outlined,
               size: 20,
+              color: isDarkTheme ? Colors.white.withOpacity(0.7) : null,
             ),
             onPressed: toggleVisibility,
             tooltip: isObscured.value ? t.authPasswordShow : t.authPasswordHide,
@@ -216,9 +222,8 @@ class PasswordField extends HookWidget {
             child: Text(
               text,
               style: theme.textTheme.bodySmall?.copyWith(
-                color: isMet
-                    ? colorScheme.tertiary
-                    : colorScheme.onSurfaceVariant,
+                color:
+                    isMet ? colorScheme.tertiary : colorScheme.onSurfaceVariant,
               ),
             ),
           ),

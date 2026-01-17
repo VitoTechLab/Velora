@@ -11,6 +11,11 @@ import 'package:velora/core/utils/validator_field.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_event.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_state.dart';
+import 'package:velora/features/auth/presentation/widgets/components/auth_divider.dart';
+import 'package:velora/features/auth/presentation/widgets/components/custom_text_field.dart';
+import 'package:velora/features/auth/presentation/widgets/components/password_field.dart';
+import 'package:velora/features/auth/presentation/widgets/components/primary_button.dart';
+import 'package:velora/features/auth/presentation/widgets/components/social_button.dart';
 import 'package:velora/l10n/app_localizations.dart';
 import 'package:velora/routes/app_router.dart';
 
@@ -182,8 +187,8 @@ class LoginScreen extends HookWidget {
 
                                 const SizedBox(height: 32),
 
-                                // Email Field with Glass Effect
-                                _GlassTextField(
+                                // Email Field with normalized component
+                                CustomTextField(
                                   controller: emailController,
                                   focusNode: emailFocusNode,
                                   label: t.fieldEmailLabel,
@@ -191,35 +196,30 @@ class LoginScreen extends HookWidget {
                                   keyboardType: TextInputType.emailAddress,
                                   textInputAction: TextInputAction.next,
                                   validator: FieldValidator.email,
-                                  prefixIcon: Icons.email_outlined,
+                                  prefixIcon: const Icon(
+                                    Icons.email_outlined,
+                                    size: 20,
+                                    color: Color(0xFF818CF8),
+                                  ),
                                   enabled: !isLoading,
+                                  isDarkTheme: true,
                                 ),
 
                                 const SizedBox(height: 16),
 
-                                // Password Field with Glass Effect
-                                _GlassTextField(
+                                // Password Field with normalized component
+                                PasswordField(
                                   controller: passwordController,
                                   focusNode: passwordFocusNode,
                                   label: t.fieldPasswordLabel,
-                                  hint: '••••••••',
-                                  obscureText: obscurePassword.value,
-                                  textInputAction: TextInputAction.done,
                                   validator: FieldValidator.password,
-                                  prefixIcon: Icons.lock_outline,
-                                  suffixIcon: IconButton(
-                                    icon: Icon(
-                                      obscurePassword.value
-                                          ? Icons.visibility_outlined
-                                          : Icons.visibility_off_outlined,
-                                      size: 20,
-                                      color: Colors.white.withOpacity(0.7),
-                                    ),
-                                    onPressed: () => obscurePassword.value =
-                                        !obscurePassword.value,
+                                  prefixIcon: const Icon(
+                                    Icons.lock_outline,
+                                    size: 20,
+                                    color: Color(0xFF818CF8),
                                   ),
-                                  enabled: !isLoading,
                                   onEditingComplete: submitLogin,
+                                  isDarkTheme: true,
                                 ),
 
                                 // Forgot Password
@@ -253,54 +253,28 @@ class LoginScreen extends HookWidget {
 
                                 const SizedBox(height: 24),
 
-                                // Sign In Button with Gradient
-                                _GradientButton(
+                                // Sign In Button with normalized component
+                                PrimaryButton(
                                   text: t.authSignInButton,
                                   onPressed: isLoading ? null : submitLogin,
                                   isLoading: isEmailLoading,
+                                  isDarkTheme: true,
                                 ),
 
-                                const SizedBox(height: 24),
-
-                                // Divider
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: Divider(
-                                        color: Colors.white.withOpacity(0.15),
-                                        thickness: 1,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 16,
-                                      ),
-                                      child: Text(
-                                        t.authDividerText,
-                                        style:
-                                            theme.textTheme.bodySmall?.copyWith(
-                                          color: Colors.white.withOpacity(0.5),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Divider(
-                                        color: Colors.white.withOpacity(0.15),
-                                        thickness: 1,
-                                      ),
-                                    ),
-                                  ],
+                                // Divider with normalized component
+                                AuthDivider(
+                                  text: t.authDividerText,
+                                  isDarkTheme: true,
                                 ),
 
-                                const SizedBox(height: 24),
-
-                                // Google Sign In with Glass Effect
-                                _GlassSocialButton(
-                                  icon: 'assets/images/google.png',
-                                  label: 'Continue with Google',
+                                // Google Sign In with normalized component
+                                SocialButton(
+                                  brand: 'Google',
+                                  iconAsset: 'assets/images/google.png',
                                   onPressed:
                                       isLoading ? null : signInWithGoogle,
                                   isLoading: isGoogleLoading,
+                                  isDarkTheme: true,
                                 ),
                               ],
                             ),
@@ -515,293 +489,6 @@ class _GlassCard extends StatelessWidget {
           ),
           child: child,
         ),
-      ),
-    );
-  }
-}
-
-/// Glass Effect Text Field for Dark Theme
-class _GlassTextField extends StatefulWidget {
-  final TextEditingController controller;
-  final FocusNode? focusNode;
-  final String label;
-  final String hint;
-  final TextInputType? keyboardType;
-  final TextInputAction? textInputAction;
-  final String? Function(String?)? validator;
-  final IconData prefixIcon;
-  final Widget? suffixIcon;
-  final bool obscureText;
-  final bool enabled;
-  final VoidCallback? onEditingComplete;
-
-  const _GlassTextField({
-    required this.controller,
-    this.focusNode,
-    required this.label,
-    required this.hint,
-    this.keyboardType,
-    this.textInputAction,
-    this.validator,
-    required this.prefixIcon,
-    this.suffixIcon,
-    this.obscureText = false,
-    this.enabled = true,
-    this.onEditingComplete,
-  });
-
-  @override
-  State<_GlassTextField> createState() => _GlassTextFieldState();
-}
-
-class _GlassTextFieldState extends State<_GlassTextField> {
-  bool _isFocused = false;
-
-  @override
-  void initState() {
-    super.initState();
-    widget.focusNode?.addListener(_onFocusChange);
-  }
-
-  @override
-  void dispose() {
-    widget.focusNode?.removeListener(_onFocusChange);
-    super.dispose();
-  }
-
-  void _onFocusChange() {
-    setState(() {
-      _isFocused = widget.focusNode?.hasFocus ?? false;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          widget.label,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                fontWeight: FontWeight.w600,
-                color: Colors.white.withOpacity(0.8),
-              ),
-        ),
-        const SizedBox(height: 8),
-        AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(_isFocused ? 0.12 : 0.08),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: _isFocused
-                  ? const Color(0xFF818CF8).withOpacity(0.4)
-                  : Colors.white.withOpacity(0.12),
-              width: 1.5,
-            ),
-            boxShadow: _isFocused
-                ? [
-                    BoxShadow(
-                      color: const Color(0xFF818CF8).withOpacity(0.2),
-                      blurRadius: 12,
-                      offset: const Offset(0, 4),
-                    ),
-                  ]
-                : null,
-          ),
-          child: TextFormField(
-            controller: widget.controller,
-            focusNode: widget.focusNode,
-            keyboardType: widget.keyboardType,
-            textInputAction: widget.textInputAction,
-            validator: widget.validator,
-            obscureText: widget.obscureText,
-            enabled: widget.enabled,
-            onEditingComplete: widget.onEditingComplete,
-            style: const TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
-              color: Colors.white,
-            ),
-            decoration: InputDecoration(
-              hintText: widget.hint,
-              hintStyle: TextStyle(
-                color: Colors.white.withOpacity(0.4),
-                fontSize: 15,
-              ),
-              prefixIcon: Icon(
-                widget.prefixIcon,
-                size: 20,
-                color: _isFocused
-                    ? const Color(0xFF818CF8)
-                    : const Color(0xFF818CF8).withOpacity(0.7),
-              ),
-              suffixIcon: widget.suffixIcon,
-              border: InputBorder.none,
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 16,
-              ),
-              errorStyle: const TextStyle(
-                color: Color(0xFFF472B6),
-                fontSize: 12,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-/// Gradient Button with Neon Glow
-class _GradientButton extends StatelessWidget {
-  final String text;
-  final VoidCallback? onPressed;
-  final bool isLoading;
-
-  const _GradientButton({
-    required this.text,
-    this.onPressed,
-    this.isLoading = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: 56,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.zero,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          disabledBackgroundColor: Colors.transparent,
-        ),
-        child: Ink(
-          decoration: BoxDecoration(
-            gradient: onPressed == null
-                ? LinearGradient(
-                    colors: [
-                      Colors.grey[600]!.withOpacity(0.3),
-                      Colors.grey[600]!.withOpacity(0.3),
-                    ],
-                  )
-                : const LinearGradient(
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                    colors: [
-                      Color(0xFF6366F1),
-                      Color(0xFF8B5CF6),
-                      Color(0xFFA855F7),
-                    ],
-                  ),
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: onPressed != null
-                ? [
-                    BoxShadow(
-                      color: const Color(0xFF6366F1).withOpacity(0.5),
-                      blurRadius: 25,
-                      offset: const Offset(0, 8),
-                    ),
-                    BoxShadow(
-                      color: const Color(0xFF8B5CF6).withOpacity(0.3),
-                      blurRadius: 40,
-                      offset: const Offset(0, 12),
-                    ),
-                  ]
-                : null,
-          ),
-          child: Container(
-            alignment: Alignment.center,
-            child: isLoading
-                ? const SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2.5,
-                      valueColor: AlwaysStoppedAnimation(Colors.white),
-                    ),
-                  )
-                : Text(
-                    text,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-/// Glass Social Button for Dark Theme
-class _GlassSocialButton extends StatelessWidget {
-  final String icon;
-  final String label;
-  final VoidCallback? onPressed;
-  final bool isLoading;
-
-  const _GlassSocialButton({
-    required this.icon,
-    required this.label,
-    this.onPressed,
-    this.isLoading = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: 56,
-      child: OutlinedButton(
-        onPressed: onPressed,
-        style: OutlinedButton.styleFrom(
-          backgroundColor: Colors.white.withOpacity(0.08),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          side: BorderSide(
-            color: Colors.white.withOpacity(0.15),
-            width: 1,
-          ),
-        ),
-        child: isLoading
-            ? const SizedBox(
-                width: 24,
-                height: 24,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2.5,
-                  valueColor: AlwaysStoppedAnimation(Color(0xFF818CF8)),
-                ),
-              )
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    icon,
-                    width: 24,
-                    height: 24,
-                  ),
-                  const SizedBox(width: 12),
-                  Text(
-                    label,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
       ),
     );
   }

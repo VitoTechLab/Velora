@@ -21,6 +21,7 @@ class CustomTextField extends HookWidget {
   final VoidCallback? onEditingComplete;
   final bool showSuccessIcon;
   final bool validateOnChange;
+  final bool isDarkTheme;
 
   const CustomTextField({
     super.key,
@@ -42,13 +43,14 @@ class CustomTextField extends HookWidget {
     this.onEditingComplete,
     this.showSuccessIcon = true,
     this.validateOnChange = true,
+    this.isDarkTheme = false,
   });
-  
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    
+
     final errorTextState = useState<String?>(null);
     final isValidState = useState(false);
     final hasInteractedState = useState(false);
@@ -91,73 +93,151 @@ class CustomTextField extends HookWidget {
       if (hasInteractedState.value && isValidState.value && showSuccessIcon) {
         return Icon(
           Icons.check_circle,
-          color: colorScheme.tertiary,
+          color: isDarkTheme ? const Color(0xFF22D3EE) : colorScheme.tertiary,
           size: 20,
         );
       }
       return null;
-    }, [suffixIcon, hasInteractedState.value, isValidState.value, showSuccessIcon, colorScheme]);
+    }, [
+      suffixIcon,
+      hasInteractedState.value,
+      isValidState.value,
+      showSuccessIcon,
+      colorScheme,
+      isDarkTheme
+    ]);
+
+    // Determine if we should use dark theme styling
+    final brightness = Theme.of(context).brightness;
+    final useDarkStyle = isDarkTheme || brightness == Brightness.dark;
+    final isFocused = focusNode?.hasFocus ?? false;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TextFormField(
-          controller: controller,
-          focusNode: focusNode,
-          enabled: enabled,
-          keyboardType: keyboardType,
-          textInputAction: textInputAction,
-          obscureText: obscureText,
-          maxLines: maxLines,
-          maxLength: maxLength,
-          inputFormatters: inputFormatters,
-          onChanged: (value) {
-            // Don't set hasInteractedState here - wait for focus lost
-            // This prevents red error while user is still typing
-            onChanged?.call(value);
-          },
-          onEditingComplete: onEditingComplete,
-          style: theme.textTheme.bodyLarge,
-          decoration: InputDecoration(
-            labelText: label,
-            hintText: hint,
-            floatingLabelBehavior: FloatingLabelBehavior.auto,
-            prefixIcon: prefixIcon,
-            suffixIcon: suffixIconWidget,
-            errorText: hasInteractedState.value ? errorTextState.value : null,
-            errorMaxLines: 2,
-            filled: true,
-            fillColor: colorScheme.surface,
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 16,
+        if (useDarkStyle)
+          Text(
+            label,
+            style: theme.textTheme.bodySmall?.copyWith(
+              fontWeight: FontWeight.w600,
+              color: Colors.white.withOpacity(0.8),
             ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: colorScheme.outline),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: colorScheme.outline, width: 1),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: colorScheme.primary, width: 2),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: colorScheme.error, width: 1),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: colorScheme.error, width: 2),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(
-                color: colorScheme.outline.withValues(alpha: 0.5),
-                width: 1,
+          ),
+        if (useDarkStyle) const SizedBox(height: 8),
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          decoration: useDarkStyle
+              ? BoxDecoration(
+                  color: Colors.white.withOpacity(isFocused ? 0.12 : 0.08),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color: isFocused
+                        ? const Color(0xFF818CF8).withOpacity(0.4)
+                        : Colors.white.withOpacity(0.12),
+                    width: 1.5,
+                  ),
+                  boxShadow: isFocused
+                      ? [
+                          BoxShadow(
+                            color: const Color(0xFF818CF8).withOpacity(0.2),
+                            blurRadius: 12,
+                            offset: const Offset(0, 4),
+                          ),
+                        ]
+                      : null,
+                )
+              : null,
+          child: TextFormField(
+            controller: controller,
+            focusNode: focusNode,
+            enabled: enabled,
+            keyboardType: keyboardType,
+            textInputAction: textInputAction,
+            obscureText: obscureText,
+            maxLines: maxLines,
+            maxLength: maxLength,
+            inputFormatters: inputFormatters,
+            onChanged: (value) {
+              onChanged?.call(value);
+            },
+            onEditingComplete: onEditingComplete,
+            style: useDarkStyle
+                ? const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  )
+                : theme.textTheme.bodyLarge,
+            decoration: InputDecoration(
+              labelText: useDarkStyle ? null : label,
+              hintText: hint,
+              hintStyle: useDarkStyle
+                  ? TextStyle(
+                      color: Colors.white.withOpacity(0.4),
+                      fontSize: 15,
+                    )
+                  : null,
+              floatingLabelBehavior: FloatingLabelBehavior.auto,
+              prefixIcon: prefixIcon,
+              suffixIcon: suffixIconWidget,
+              errorText: hasInteractedState.value ? errorTextState.value : null,
+              errorMaxLines: 2,
+              errorStyle: useDarkStyle
+                  ? const TextStyle(
+                      color: Color(0xFFF472B6),
+                      fontSize: 12,
+                    )
+                  : null,
+              filled: !useDarkStyle,
+              fillColor:
+                  useDarkStyle ? Colors.transparent : colorScheme.surface,
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 16,
               ),
+              border: useDarkStyle
+                  ? InputBorder.none
+                  : OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(color: colorScheme.outline),
+                    ),
+              enabledBorder: useDarkStyle
+                  ? InputBorder.none
+                  : OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide:
+                          BorderSide(color: colorScheme.outline, width: 1),
+                    ),
+              focusedBorder: useDarkStyle
+                  ? InputBorder.none
+                  : OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide:
+                          BorderSide(color: colorScheme.primary, width: 2),
+                    ),
+              errorBorder: useDarkStyle
+                  ? InputBorder.none
+                  : OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide:
+                          BorderSide(color: colorScheme.error, width: 1),
+                    ),
+              focusedErrorBorder: useDarkStyle
+                  ? InputBorder.none
+                  : OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide:
+                          BorderSide(color: colorScheme.error, width: 2),
+                    ),
+              disabledBorder: useDarkStyle
+                  ? InputBorder.none
+                  : OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                        color: colorScheme.outline.withValues(alpha: 0.5),
+                        width: 1,
+                      ),
+                    ),
             ),
           ),
         ),
