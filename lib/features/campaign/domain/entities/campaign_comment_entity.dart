@@ -9,10 +9,15 @@ abstract class CampaignCommentEntity with _$CampaignCommentEntity {
     required String campaignId,
     required String userId,
     required String commentText,
+    String? parentId,
     required DateTime createdAt,
-    String? userFullName,
-    String? userPhotoUrl,
-    @Default(false) bool isDonorComment,
-    @Default(false) bool isNameHidden,
+
+    // Joined from user_profiles (read-only)
+    String? username,
+    String? displayName,
+    String? avatarUrl,
+
+    // For threaded comments
+    @Default([]) List<CampaignCommentEntity> replies,
   }) = _CampaignCommentEntity;
 }

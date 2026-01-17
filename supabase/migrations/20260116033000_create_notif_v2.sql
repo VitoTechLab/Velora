@@ -13,7 +13,8 @@ CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 DO $$ BEGIN
   CREATE TYPE public.notification_type AS ENUM (
     'like', 'comment', 'follow', 'follow_request', 'follow_accepted', 
-    'donation', 'mention', 'post_share', 'channel_invite'
+    'donation', 'mention', 'post_share', 'channel_invite',
+    'campaign_created', 'campaign_update'
   );
 EXCEPTION WHEN duplicate_object THEN NULL; END $$;
 
@@ -420,6 +421,106 @@ DROP TRIGGER IF EXISTS trg_notif_mention ON public.mentions;
 CREATE TRIGGER trg_notif_mention 
 AFTER INSERT ON public.mentions 
 FOR EACH ROW EXECUTE FUNCTION public.trg_fn_notify_mention();
+
+-- [TRIGGER] CAMPAIGN CREATED (Notify Followers)
+CREATE OR REPLACE FUNCTION public.trg_fn_notify_campaign_created()
+RETURNS TRIGGER AS $$
+BEGIN
+  -- Batch insert for followers
+  INSERT INTO public.notifications (
+    user_id, actor_id, type, target_id, target_type, metadata
+  )
+  SELECT 
+    follower_id,       -- Target: The follower
+    NEW.user_id,       -- Actor: The creator
+    'campaign_created',
+    NEW.id,
+    'campaign',
+    jsonb_build_object('title', NEW.title, 'description', LEFT(NEW.description, 50))
+  FROM public.user_follows
+  WHERE following_id = NEW.user_id;
+
+  RETURN NULL;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public;
+
+DROP TRIGGER IF EXISTS trg_notif_campaign_created ON public.campaigns;
+CREATE TRIGGER trg_notif_campaign_created
+AFTER INSERT ON public.campaigns
+FOR EACH ROW EXECUTE FUNCTION public.trg_fn_notify_campaign_created();
+
+-- [TRIGGER] CAMPAIGN UPDATE (Notify Donors)
+CREATE OR REPLACE FUNCTION public.trg_fn_notify_campaign_update()
+RETURNS TRIGGER AS $$
+DECLARE 
+  v_campaign_title TEXT;
+  v_owner_id UUID;
+BEGIN
+  SELECT title, user_id INTO v_campaign_title, v_owner_id 
+  FROM public.campaigns WHERE id = NEW.campaign_id;
+
+  -- Notify unique donors
+  INSERT INTO public.notifications (
+    user_id, actor_id, type, target_id, target_type, metadata
+  )
+  SELECT DISTINCT
+    user_id,
+    v_owner_id,
+    'campaign_update',
+    NEW.campaign_id,
+    'campaign',
+    jsonb_build_object(
+      'update_title', LEFT(NEW.update_text, 50), 
+      'campaign_title', v_campaign_title
+    )
+  FROM public.donations
+  WHERE campaign_id = NEW.campaign_id 
+    AND user_id IS NOT NULL 
+    AND payment_status = 'success'
+    AND user_id != v_owner_id;
+
+  RETURN NULL;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public;
+
+DROP TRIGGER IF EXISTS trg_notif_campaign_update ON public.campaign_updates;
+CREATE TRIGGER trg_notif_campaign_update
+AFTER INSERT ON public.campaign_updates
+FOR EACH ROW EXECUTE FUNCTION public.trg_fn_notify_campaign_update();
+
+-- [TRIGGER] DONATION RECEIVED (Notify Owner)
+CREATE OR REPLACE FUNCTION public.trg_fn_notify_donation()
+RETURNS TRIGGER AS $$
+DECLARE v_owner UUID; v_title TEXT;
+BEGIN
+  IF NEW.payment_status != 'success' THEN RETURN NULL; END IF;
+  IF (TG_OP = 'UPDATE' AND OLD.payment_status = 'success') THEN RETURN NULL; END IF;
+
+  SELECT user_id, title INTO v_owner, v_title FROM public.campaigns WHERE id = NEW.campaign_id;
+  
+  -- Skip self-donation notifs
+  IF v_owner = NEW.user_id THEN RETURN NULL; END IF;
+
+  PERFORM public.upsert_notification(
+    v_owner, 
+    NEW.user_id, -- Can be NULL (Guest)
+    'donation'::public.notification_type,
+    NEW.campaign_id, 
+    'campaign'::public.notification_target_type,
+    NULL,
+    jsonb_build_object(
+      'amount', NEW.amount_total, 
+      'donor_name', CASE WHEN NEW.is_anonymous THEN 'Anonymous' ELSE NULL END
+    )
+  );
+  RETURN NULL;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public;
+
+DROP TRIGGER IF EXISTS trg_notif_donation ON public.donations;
+CREATE TRIGGER trg_notif_donation 
+AFTER INSERT OR UPDATE ON public.donations 
+FOR EACH ROW EXECUTE FUNCTION public.trg_fn_notify_donation();
 
 -- ===========================================================================
 -- 6. RLS & GRANTS

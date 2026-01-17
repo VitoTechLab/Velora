@@ -28,11 +28,14 @@ _$ChatMessageModelImpl _$$ChatMessageModelImplFromJson(
           ? null
           : EventPayloadModel.fromJson(
               json['message_event_payload'] as Map<String, dynamic>),
+<<<<<<< HEAD
+=======
       attachments: (json['message_attachments'] as List<dynamic>?)
               ?.map((e) =>
                   MessageAttachmentModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+>>>>>>> d6108cdc17b8ed6763b0d804cd62da1e2da1cf33
     );
 
 Map<String, dynamic> _$$ChatMessageModelImplToJson(
@@ -53,7 +56,10 @@ Map<String, dynamic> _$$ChatMessageModelImplToJson(
       'updated_at': const UtcDateTimeConverter().toJson(instance.updatedAt),
       'message_poll_payload': instance.pollPayload,
       'message_event_payload': instance.eventPayload,
+<<<<<<< HEAD
+=======
       'message_attachments': instance.attachments,
+>>>>>>> d6108cdc17b8ed6763b0d804cd62da1e2da1cf33
     };
 
 Json? _$JsonConverterToJson<Json, Value>(

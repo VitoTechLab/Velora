@@ -2,21 +2,36 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'campaign_entity.freezed.dart';
 
-enum CampaignStatus { active, completed, cancelled }
+/// Campaign status enum matching SQL schema
+enum CampaignStatus { active, paused, completed, withdrawn, banned }
 
 @freezed
 abstract class CampaignEntity with _$CampaignEntity {
   const factory CampaignEntity({
     required String id,
-    required String postId,
     required String userId,
+    String? categoryId,
     required String title,
     required String description,
+    String? coverImageUrl,
     required double targetAmount,
-    required double amountRaised,
-    required CampaignStatus status,
+    @Default(0) double amountRaised,
+    @Default(0) double currentBalance,
+    @Default(0) int donorCount,
+    @Default(CampaignStatus.active) CampaignStatus status,
+    @Default(false) bool isVerified,
+    String? locationCity,
+    DateTime? endDate,
     required DateTime createdAt,
+    DateTime? updatedAt,
     DateTime? completedAt,
-    @Default(<String>[]) List<String> donorIds,
+
+    // Joined from user_profiles (read-only)
+    String? organizerUsername,
+    String? organizerAvatarUrl,
+
+    // Joined from campaign_categories (read-only)
+    String? categoryName,
+    String? categorySlug,
   }) = _CampaignEntity;
 }
