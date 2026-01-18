@@ -48,7 +48,7 @@ class _VerificationEmailScreenState extends State<VerificationEmailScreen> {
             context.go('/');
           }
         }
-        
+
         // Show error if verification check fails
         if (state.errorMessage != null && _isCheckingVerification) {
           AppMessenger.showToast(
@@ -62,7 +62,8 @@ class _VerificationEmailScreenState extends State<VerificationEmailScreen> {
         }
 
         // Still unverified after check
-        if (state.status == AuthStatusEntity.emailUnverified && _isCheckingVerification) {
+        if (state.status == AuthStatusEntity.emailUnverified &&
+            _isCheckingVerification) {
           AppMessenger.showToast(
             message: 'Email not yet verified. Please check your inbox.',
             icon: Icons.info_outline,
@@ -74,274 +75,273 @@ class _VerificationEmailScreenState extends State<VerificationEmailScreen> {
         }
       },
       child: Scaffold(
-      backgroundColor: colorScheme.surfaceContainerLowest,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          tooltip: t.commonGoBack,
-          icon: Icon(Icons.arrow_back, color: colorScheme.onSurface),
-          onPressed: () {
-            // Sign out before going back to prevent stuck state
-            context.read<AuthBloc>().add(const AuthEvent.signOut());
-            context.go('/auth/signin');
-          },
+        backgroundColor: colorScheme.surfaceContainerLowest,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: IconButton(
+            tooltip: t.commonGoBack,
+            icon: Icon(Icons.arrow_back, color: colorScheme.onSurface),
+            onPressed: () {
+              // Sign out before going back to prevent stuck state
+              context.read<AuthBloc>().add(const AuthEvent.signOut());
+              context.go('/auth/signin');
+            },
+          ),
         ),
-      ),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          final size = Size(constraints.maxWidth, constraints.maxHeight);
-          final brightness = colorScheme.brightness;
-          final isLight = brightness == Brightness.light;
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            final size = Size(constraints.maxWidth, constraints.maxHeight);
+            final brightness = colorScheme.brightness;
+            final isLight = brightness == Brightness.light;
 
-          return Stack(
-            children: [
-              // Adaptive Gradient Background
-              Positioned.fill(
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: isLight
-                          ? [
-                              // Soft pastel gradients for light mode
-                              const Color(0xFFF0FFF4), // Very soft green tint
-                              const Color(0xFFF0F9FF), // Very soft blue
-                              const Color(0xFFF5F0FF), // Very soft lavender
-                            ]
-                          : [
-                              // Deep navy gradients for dark mode
-                              MaterialColorsCustom.darkNavy1,
-                              MaterialColorsCustom.darkNavy2,
-                              MaterialColorsCustom.darkNavy3,
-                              MaterialColorsCustom.darkNavy4,
-                            ],
+            return Stack(
+              children: [
+                // Adaptive Gradient Background
+                Positioned.fill(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: isLight
+                            ? [
+                                // Soft pastel gradients for light mode
+                                const Color(0xFFF0FFF4), // Very soft green tint
+                                const Color(0xFFF0F9FF), // Very soft blue
+                                const Color(0xFFF5F0FF), // Very soft lavender
+                              ]
+                            : [
+                                // Deep navy gradients for dark mode
+                                MaterialColorsCustom.darkNavy1,
+                                MaterialColorsCustom.darkNavy2,
+                                MaterialColorsCustom.darkNavy3,
+                                MaterialColorsCustom.darkNavy4,
+                              ],
+                      ),
                     ),
                   ),
                 ),
-              ),
 
-              // Mesh Gradient Overlays
-              Positioned.fill(
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  decoration: BoxDecoration(
-                    gradient: RadialGradient(
-                      center: Alignment.topLeft,
-                      radius: 1.5,
-                      colors: [
-                        MaterialColorsCustom.neonTeal.withValues(
-                          alpha: isLight ? 0.08 : 0.15,
-                        ),
-                        Colors.transparent,
-                      ],
+                // Mesh Gradient Overlays
+                Positioned.fill(
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    decoration: BoxDecoration(
+                      gradient: RadialGradient(
+                        center: Alignment.topLeft,
+                        radius: 1.5,
+                        colors: [
+                          MaterialColorsCustom.neonTeal.withValues(
+                            alpha: isLight ? 0.18 : 0.15,
+                          ),
+                          Colors.transparent,
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
 
-              Positioned.fill(
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  decoration: BoxDecoration(
-                    gradient: RadialGradient(
-                      center: Alignment.bottomRight,
-                      radius: 1.5,
-                      colors: [
-                        MaterialColorsCustom.neonLavender.withValues(
-                          alpha: isLight ? 0.08 : 0.15,
-                        ),
-                        Colors.transparent,
-                      ],
+                Positioned.fill(
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    decoration: BoxDecoration(
+                      gradient: RadialGradient(
+                        center: Alignment.bottomRight,
+                        radius: 1.5,
+                        colors: [
+                          MaterialColorsCustom.neonLavender.withValues(
+                            alpha: isLight ? 0.18 : 0.15,
+                          ),
+                          Colors.transparent,
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
 
-              // Floating Orbs (fewer for minimal effect)
-              ..._buildFloatingOrbs(size, brightness),
+                // Floating Orbs (fewer for minimal effect)
+                ..._buildFloatingOrbs(size, brightness),
 
-              // Floating Particles
-              const Positioned.fill(
-                child: _FloatingParticles(),
-              ),
+                // Floating Particles
+                const Positioned.fill(
+                  child: _FloatingParticles(),
+                ),
 
-              // Main Content
-              SafeArea(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Semantics(
-                    container: true,
-                    label: t.authEmailVerificationLabel,
-                    child: Column(
-                      children: [
-                                const SizedBox(height: 20),
+                // Main Content
+                SafeArea(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Semantics(
+                      container: true,
+                      label: t.authEmailVerificationLabel,
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 20),
 
-                        // Glassmorphism Card wrapping content
-                        _GlassCard(
-                          child: Column(
-                            children: [
-                              // Lottie Animation (OK here - waiting state)
-                              Semantics(
-                                label: t.authAnimatedEmailLabel,
-                                image: true,
-                                child: ExcludeSemantics(
-                                  child: SizedBox(
-                                    width: 200,
-                                    height: 200,
-                                    child: Lottie.asset(
-                                      'assets/lottie/email.json',
-                                      fit: BoxFit.contain,
-                                    ),
-                                  ),
-                                ),
-                              ),
-
-                              const SizedBox(height: 32),
-
-                              // Headline
-                              Semantics(
-                                header: true,
-                                child: Text(
-                                  t.authCheckEmailTitle,
-                                  style: theme.textTheme.headlineLarge
-                                      ?.copyWith(
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-
-                              const SizedBox(height: 16),
-
-                              // Instructions
-                              Semantics(
-                                label: t.authVerificationInstructions,
-                                child: ExcludeSemantics(
-                                  child: Text(
-                                    t.authVerificationInstructions,
-                                    style: theme.textTheme.bodyMedium
-                                        ?.copyWith(
-                                      color: colorScheme.onSurfaceVariant,
-                                      height: 1.6,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ),
-
-                              const SizedBox(height: 40),
-
-                              // Primary CTA: I've Verified
-                              BlocBuilder<AuthBloc, AuthState>(
-                                builder: (context, state) {
-                                  return PrimaryButton(
-                                    text: t.authVerifiedCta,
-                                    icon: Icons.check_circle_outline,
-                                    onPressed: _isCheckingVerification
-                                        ? null
-                                        : () {
-                                            // Reload current session to check if email is verified
-                                            setState(() {
-                                              _isCheckingVerification = true;
-                                            });
-
-                                            // Sign out and sign in again to refresh session
-                                            // This will trigger authSnapshotChanged event
-                                            context
-                                                .read<AuthBloc>()
-                                                .add(const AuthEvent.signOut());
-
-                                            // Wait a bit then show message to sign in again
-                                            Future.delayed(
-                                                const Duration(
-                                                    milliseconds: 500), () {
-                                              if (mounted) {
-                                                AppMessenger.showToast(
-                                                  message:
-                                                      'Please sign in again to check verification status.',
-                                                  icon: Icons.info_outline,
-                                                );
-                                                context.go('/auth/signin');
-                                              }
-                                            });
-                                          },
-                                    isLoading: _isCheckingVerification,
-                                  );
-                                },
-                              ),
-
-                              const SizedBox(height: 16),
-
-                              // Secondary CTA: Resend Email
-                              Semantics(
-                                button: true,
-                                label: t.authResendVerificationLabel,
-                                child: ExcludeSemantics(
-                                  child: TextButton.icon(
-                                    onPressed: () {
-                                      _showInlineMessage(
-                                        context,
-                                        t.authVerificationEmailResent,
-                                        isError: false,
-                                      );
-                                    },
-                                    icon: Icon(
-                                      Icons.refresh,
-                                      size: 18,
-                                      color: colorScheme.primary,
-                                    ),
-                                    label: Text(
-                                      t.authResendVerificationLabel,
-                                      style: theme.textTheme.bodyMedium
-                                          ?.copyWith(
-                                        color: colorScheme.primary,
-                                        fontWeight: FontWeight.w600,
+                          // Glassmorphism Card wrapping content
+                          _GlassCard(
+                            child: Column(
+                              children: [
+                                // Lottie Animation (OK here - waiting state)
+                                Semantics(
+                                  label: t.authAnimatedEmailLabel,
+                                  image: true,
+                                  child: ExcludeSemantics(
+                                    child: SizedBox(
+                                      width: 200,
+                                      height: 200,
+                                      child: Lottie.asset(
+                                        'assets/lottie/email.json',
+                                        fit: BoxFit.contain,
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ), // End of _GlassCard
 
-                        const SizedBox(height: 32),
+                                const SizedBox(height: 32),
 
-                        // Footer: Wrong email? Sign out (outside card)
-                        Semantics(
-                          button: true,
-                          label: t.authWrongEmail,
-                          hint: t.authSignOutHint,
-                          child: ExcludeSemantics(
-                            child: TextButton(
-                              onPressed: () {
-                                context
-                                    .read<AuthBloc>()
-                                    .add(const AuthEvent.signOut());
-                                context.go('/auth/signin');
-                              },
-                              child: Text(
-                                t.authWrongEmail,
-                                style: theme.textTheme.bodySmall?.copyWith(
-                                  color: colorScheme.onSurfaceVariant,
+                                // Headline
+                                Semantics(
+                                  header: true,
+                                  child: Text(
+                                    t.authCheckEmailTitle,
+                                    style:
+                                        theme.textTheme.headlineLarge?.copyWith(
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+
+                                const SizedBox(height: 16),
+
+                                // Instructions
+                                Semantics(
+                                  label: t.authVerificationInstructions,
+                                  child: ExcludeSemantics(
+                                    child: Text(
+                                      t.authVerificationInstructions,
+                                      style:
+                                          theme.textTheme.bodyMedium?.copyWith(
+                                        color: colorScheme.onSurfaceVariant,
+                                        height: 1.6,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ),
+
+                                const SizedBox(height: 40),
+
+                                // Primary CTA: I've Verified
+                                BlocBuilder<AuthBloc, AuthState>(
+                                  builder: (context, state) {
+                                    return PrimaryButton(
+                                      text: t.authVerifiedCta,
+                                      icon: Icons.check_circle_outline,
+                                      onPressed: _isCheckingVerification
+                                          ? null
+                                          : () {
+                                              // Reload current session to check if email is verified
+                                              setState(() {
+                                                _isCheckingVerification = true;
+                                              });
+
+                                              // Sign out and sign in again to refresh session
+                                              // This will trigger authSnapshotChanged event
+                                              context.read<AuthBloc>().add(
+                                                  const AuthEvent.signOut());
+
+                                              // Wait a bit then show message to sign in again
+                                              Future.delayed(
+                                                  const Duration(
+                                                      milliseconds: 500), () {
+                                                if (mounted) {
+                                                  AppMessenger.showToast(
+                                                    message:
+                                                        'Please sign in again to check verification status.',
+                                                    icon: Icons.info_outline,
+                                                  );
+                                                  context.go('/auth/signin');
+                                                }
+                                              });
+                                            },
+                                      isLoading: _isCheckingVerification,
+                                    );
+                                  },
+                                ),
+
+                                const SizedBox(height: 16),
+
+                                // Secondary CTA: Resend Email
+                                Semantics(
+                                  button: true,
+                                  label: t.authResendVerificationLabel,
+                                  child: ExcludeSemantics(
+                                    child: TextButton.icon(
+                                      onPressed: () {
+                                        _showInlineMessage(
+                                          context,
+                                          t.authVerificationEmailResent,
+                                          isError: false,
+                                        );
+                                      },
+                                      icon: Icon(
+                                        Icons.refresh,
+                                        size: 18,
+                                        color: colorScheme.primary,
+                                      ),
+                                      label: Text(
+                                        t.authResendVerificationLabel,
+                                        style: theme.textTheme.bodyMedium
+                                            ?.copyWith(
+                                          color: colorScheme.primary,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ), // End of _GlassCard
+
+                          const SizedBox(height: 32),
+
+                          // Footer: Wrong email? Sign out (outside card)
+                          Semantics(
+                            button: true,
+                            label: t.authWrongEmail,
+                            hint: t.authSignOutHint,
+                            child: ExcludeSemantics(
+                              child: TextButton(
+                                onPressed: () {
+                                  context
+                                      .read<AuthBloc>()
+                                      .add(const AuthEvent.signOut());
+                                  context.go('/auth/signin');
+                                },
+                                child: Text(
+                                  t.authWrongEmail,
+                                  style: theme.textTheme.bodySmall?.copyWith(
+                                    color: colorScheme.onSurfaceVariant,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
 
-                        const SizedBox(height: 40),
-                      ],
+                          const SizedBox(height: 40),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          );
-        },
-      ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
@@ -368,15 +368,15 @@ class _VerificationEmailScreenState extends State<VerificationEmailScreen> {
         top: size.height * 0.1,
         right: -35,
         child: _NeonFloatingOrb(
-          size: 120,
+          size: 140,
           primaryColor: isLight
-              ? MaterialColorsCustom.neonTeal.withValues(alpha: 0.6)
+              ? MaterialColorsCustom.neonTeal.withValues(alpha: 0.8)
               : const Color(0xFF14B8A6),
           secondaryColor: isLight
-              ? MaterialColorsCustom.neonCyan.withValues(alpha: 0.5)
+              ? MaterialColorsCustom.neonCyan.withValues(alpha: 0.7)
               : const Color(0xFF2DD4BF),
           duration: const Duration(seconds: 6),
-          floatDistance: 22,
+          floatDistance: 28,
         ),
       ),
       // Bottom Left - Medium Lavender Orb
@@ -384,15 +384,15 @@ class _VerificationEmailScreenState extends State<VerificationEmailScreen> {
         bottom: size.height * 0.15,
         left: -30,
         child: _NeonFloatingOrb(
-          size: 100,
+          size: 120,
           primaryColor: isLight
-              ? MaterialColorsCustom.neonLavender.withValues(alpha: 0.6)
+              ? MaterialColorsCustom.neonLavender.withValues(alpha: 0.8)
               : const Color(0xFF8B5CF6),
           secondaryColor: isLight
-              ? MaterialColorsCustom.neonLilac.withValues(alpha: 0.5)
+              ? MaterialColorsCustom.neonLilac.withValues(alpha: 0.7)
               : const Color(0xFFA78BFA),
           duration: const Duration(seconds: 5),
-          floatDistance: 18,
+          floatDistance: 22,
           initialOffset: 0.5,
         ),
       ),
@@ -400,7 +400,7 @@ class _VerificationEmailScreenState extends State<VerificationEmailScreen> {
   }
 }
 
-/// Glassmorphism Card Widget with Blur Effect
+/// Glassmorphism Card Widget with Blur Effect - Adaptive Light/Dark
 class _GlassCard extends StatelessWidget {
   final Widget child;
 
@@ -409,36 +409,69 @@ class _GlassCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final isLight = colorScheme.brightness == Brightness.light;
 
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(32),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-        child: Container(
-          padding: const EdgeInsets.all(32),
-          decoration: BoxDecoration(
-            color: colorScheme.onSurface.withValues(alpha: 0.08),
-            borderRadius: BorderRadius.circular(32),
-            border: Border.all(
-              color: colorScheme.onSurface.withValues(alpha: 0.15),
-              width: 1.5,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: colorScheme.shadow.withValues(alpha: 0.1),
-                blurRadius: 40,
-                offset: const Offset(0, 20),
-              ),
-              // Subtle inner glow
-              BoxShadow(
-                color: MaterialColorsCustom.neonTeal.withValues(alpha: 0.05),
-                blurRadius: 20,
-                offset: const Offset(0, 10),
-                spreadRadius: -5,
-              ),
-            ],
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(32),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            MaterialColorsCustom.neonTeal.withValues(alpha: 0.15),
+            MaterialColorsCustom.neonCyan.withValues(alpha: 0.15),
+            MaterialColorsCustom.neonLavender.withValues(alpha: 0.12),
+          ],
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: MaterialColorsCustom.neonTeal
+                .withValues(alpha: isLight ? 0.25 : 0.4),
+            blurRadius: 40,
+            spreadRadius: 0,
+            offset: const Offset(0, 20),
           ),
-          child: child,
+          BoxShadow(
+            color: MaterialColorsCustom.neonCyan
+                .withValues(alpha: isLight ? 0.2 : 0.3),
+            blurRadius: 60,
+            spreadRadius: -10,
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(32),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+          child: Container(
+            padding: const EdgeInsets.all(32),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: isLight
+                    ? [
+                        Colors.white.withValues(alpha: 0.95),
+                        Colors.white.withValues(alpha: 0.90),
+                        const Color(0xFFFDFDFD).withValues(alpha: 0.92),
+                      ]
+                    : [
+                        colorScheme.surface.withValues(alpha: 0.8),
+                        colorScheme.surface.withValues(alpha: 0.7),
+                        colorScheme.surfaceContainerHighest
+                            .withValues(alpha: 0.75),
+                      ],
+              ),
+              borderRadius: BorderRadius.circular(32),
+              border: Border.all(
+                color: isLight
+                    ? Colors.white.withValues(alpha: 0.9)
+                    : colorScheme.onSurface.withValues(alpha: 0.15),
+                width: 2,
+              ),
+            ),
+            child: child,
+          ),
         ),
       ),
     );

@@ -169,6 +169,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get authPasswordStrengthFair => 'やや弱い';
 
   @override
+  String get authPasswordStrengthLabel => 'パスワード強度';
+
+  @override
   String get authPasswordShow => 'パスワードを表示';
 
   @override

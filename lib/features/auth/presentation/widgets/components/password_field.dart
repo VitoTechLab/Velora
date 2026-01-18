@@ -119,79 +119,195 @@ class PasswordField extends HookWidget {
 
         // Password Strength Indicator
         if (showStrengthIndicator && controller.text.isNotEmpty) ...[
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Expanded(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(4),
-                  child: LinearProgressIndicator(
-                    value: strengthValue.value,
-                    minHeight: 4,
-                    backgroundColor: colorScheme.outline.withValues(alpha: 0.2),
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                      strengthColor.value ?? colorScheme.outline,
+          const SizedBox(height: 12),
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  (strengthColor.value ?? colorScheme.primary)
+                      .withValues(alpha: 0.08),
+                  (strengthColor.value ?? colorScheme.primary)
+                      .withValues(alpha: 0.05),
+                ],
+              ),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: (strengthColor.value ?? colorScheme.primary)
+                    .withValues(alpha: 0.2),
+                width: 1.5,
+              ),
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        t.authPasswordStrengthLabel,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: colorScheme.onSurfaceVariant,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: LinearProgressIndicator(
+                          value: strengthValue.value,
+                          minHeight: 6,
+                          backgroundColor:
+                              colorScheme.outline.withValues(alpha: 0.2),
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            strengthColor.value ?? colorScheme.outline,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        strengthColor.value ?? colorScheme.primary,
+                        (strengthColor.value ?? colorScheme.primary)
+                            .withValues(alpha: 0.8),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: [
+                      BoxShadow(
+                        color: (strengthColor.value ?? colorScheme.primary)
+                            .withValues(alpha: 0.3),
+                        blurRadius: 8,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: Text(
+                    strengthText.value,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 11,
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(width: 12),
-              Text(
-                strengthText.value,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: strengthColor.value,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
 
         // Password Hints
         if (showPasswordHints && focusNode?.hasFocus == true) ...[
           const SizedBox(height: 12),
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(
-                color: colorScheme.outline.withValues(alpha: 0.3),
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  t.authPasswordRequirementsTitle,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: colorScheme.onSurfaceVariant,
+          TweenAnimationBuilder<double>(
+            tween: Tween(begin: 0.0, end: 1.0),
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeOutCubic,
+            builder: (context, value, child) {
+              return Transform.scale(
+                scale: 0.95 + (0.05 * value),
+                child: Opacity(
+                  opacity: value,
+                  child: child,
+                ),
+              );
+            },
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    colorScheme.primaryContainer.withValues(alpha: 0.4),
+                    colorScheme.secondaryContainer.withValues(alpha: 0.3),
+                  ],
+                ),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: colorScheme.outline.withValues(alpha: 0.2),
+                  width: 1.5,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: colorScheme.primary.withValues(alpha: 0.1),
+                    blurRadius: 12,
+                    offset: const Offset(0, 4),
                   ),
-                ),
-                const SizedBox(height: 8),
-                _buildPasswordRequirement(
-                  context,
-                  t.authPasswordRequirementLength,
-                  controller.text.length >= 8,
-                ),
-                _buildPasswordRequirement(
-                  context,
-                  t.authPasswordRequirementCase,
-                  regexPatterns.upperCase.hasMatch(controller.text) &&
-                      regexPatterns.lowerCase.hasMatch(controller.text),
-                ),
-                _buildPasswordRequirement(
-                  context,
-                  t.authPasswordRequirementNumber,
-                  regexPatterns.number.hasMatch(controller.text),
-                ),
-                _buildPasswordRequirement(
-                  context,
-                  t.authPasswordRequirementSpecial,
-                  regexPatterns.symbol.hasMatch(controller.text),
-                ),
-              ],
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              colorScheme.primary,
+                              colorScheme.secondary,
+                            ],
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: colorScheme.primary.withValues(alpha: 0.3),
+                              blurRadius: 8,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: const Icon(
+                          Icons.shield_outlined,
+                          size: 16,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          t.authPasswordRequirementsTitle,
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: colorScheme.onSurface,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  _buildPasswordRequirement(
+                    context,
+                    t.authPasswordRequirementLength,
+                    controller.text.length >= 8,
+                  ),
+                  _buildPasswordRequirement(
+                    context,
+                    t.authPasswordRequirementCase,
+                    regexPatterns.upperCase.hasMatch(controller.text) &&
+                        regexPatterns.lowerCase.hasMatch(controller.text),
+                  ),
+                  _buildPasswordRequirement(
+                    context,
+                    t.authPasswordRequirementNumber,
+                    regexPatterns.number.hasMatch(controller.text),
+                  ),
+                  _buildPasswordRequirement(
+                    context,
+                    t.authPasswordRequirementSpecial,
+                    regexPatterns.symbol.hasMatch(controller.text),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
@@ -208,21 +324,54 @@ class PasswordField extends HookWidget {
     final colorScheme = theme.colorScheme;
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 6),
+      padding: const EdgeInsets.only(bottom: 8),
       child: Row(
         children: [
-          Icon(
-            isMet ? Icons.check_circle : Icons.circle_outlined,
-            size: 16,
-            color: isMet ? colorScheme.tertiary : colorScheme.onSurfaceVariant,
+          Container(
+            width: 24,
+            height: 24,
+            decoration: BoxDecoration(
+              gradient: isMet
+                  ? LinearGradient(
+                      colors: [
+                        colorScheme.tertiary,
+                        colorScheme.tertiary.withValues(alpha: 0.8),
+                      ],
+                    )
+                  : null,
+              color: isMet ? null : colorScheme.surfaceContainerHighest,
+              shape: BoxShape.circle,
+              border: isMet
+                  ? null
+                  : Border.all(
+                      color: colorScheme.outline.withValues(alpha: 0.5),
+                      width: 2,
+                    ),
+              boxShadow: isMet
+                  ? [
+                      BoxShadow(
+                        color: colorScheme.tertiary.withValues(alpha: 0.4),
+                        blurRadius: 6,
+                        offset: const Offset(0, 2),
+                      ),
+                    ]
+                  : null,
+            ),
+            child: Icon(
+              isMet ? Icons.check_rounded : Icons.circle_outlined,
+              size: 14,
+              color: isMet ? Colors.white : Colors.transparent,
+            ),
           ),
-          const SizedBox(width: 8),
+          const SizedBox(width: 12),
           Expanded(
             child: Text(
               text,
               style: theme.textTheme.bodySmall?.copyWith(
-                color:
-                    isMet ? colorScheme.tertiary : colorScheme.onSurfaceVariant,
+                color: isMet
+                    ? colorScheme.onSurface
+                    : colorScheme.onSurfaceVariant.withValues(alpha: 0.7),
+                fontWeight: isMet ? FontWeight.w600 : FontWeight.normal,
               ),
             ),
           ),

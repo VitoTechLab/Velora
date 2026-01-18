@@ -59,6 +59,7 @@
   "authPasswordStrengthStrong": "强",
   "authPasswordStrengthMedium": "中等",
   "authPasswordStrengthFair": "一般",
+  "authPasswordStrengthLabel": "密码强度",
   "authPasswordShow": "显示密码",
   "authPasswordHide": "隐藏密码",
   "authPasswordRequirementsTitle": "密码必须包含：",

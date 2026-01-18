@@ -59,6 +59,7 @@
   "authPasswordStrengthStrong": "強い",
   "authPasswordStrengthMedium": "中程度",
   "authPasswordStrengthFair": "やや弱い",
+  "authPasswordStrengthLabel": "パスワード強度",
   "authPasswordShow": "パスワードを表示",
   "authPasswordHide": "パスワードを非表示",
   "authPasswordRequirementsTitle": "パスワードには次が含まれている必要があります:",

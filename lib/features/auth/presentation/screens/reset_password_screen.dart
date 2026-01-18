@@ -56,8 +56,8 @@ class ResetPasswordScreen extends HookWidget {
       }
 
       context.read<AuthBloc>().add(
-        AuthEvent.resetPassword(email: emailController.text.trim()),
-      );
+            AuthEvent.resetPassword(email: emailController.text.trim()),
+          );
     }, [emailController]);
 
     return BlocListener<AuthBloc, AuthState>(
@@ -128,7 +128,7 @@ class ResetPasswordScreen extends HookWidget {
                         radius: 1.5,
                         colors: [
                           MaterialColorsCustom.neonIndigo.withValues(
-                            alpha: isLight ? 0.08 : 0.15,
+                            alpha: isLight ? 0.18 : 0.15,
                           ),
                           Colors.transparent,
                         ],
@@ -146,7 +146,7 @@ class ResetPasswordScreen extends HookWidget {
                         radius: 1.5,
                         colors: [
                           MaterialColorsCustom.neonPurple.withValues(
-                            alpha: isLight ? 0.08 : 0.15,
+                            alpha: isLight ? 0.18 : 0.15,
                           ),
                           Colors.transparent,
                         ],
@@ -177,7 +177,7 @@ class ResetPasswordScreen extends HookWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                                    const SizedBox(height: 40),
+                              const SizedBox(height: 40),
 
                               // Glassmorphism Card wrapping the content
                               _GlassCard(
@@ -252,8 +252,7 @@ class ResetPasswordScreen extends HookWidget {
                                           t.authResetPasswordSubtitle,
                                           style: theme.textTheme.bodyMedium
                                               ?.copyWith(
-                                            color:
-                                                colorScheme.onSurfaceVariant,
+                                            color: colorScheme.onSurfaceVariant,
                                             height: 1.6,
                                           ),
                                           textAlign: TextAlign.center,
@@ -423,15 +422,15 @@ class ResetPasswordScreen extends HookWidget {
         top: size.height * 0.08,
         left: -50,
         child: _NeonFloatingOrb(
-          size: 150,
+          size: 180,
           primaryColor: isLight
-              ? MaterialColorsCustom.neonCyan.withValues(alpha: 0.6)
+              ? MaterialColorsCustom.neonCyan.withValues(alpha: 0.8)
               : const Color(0xFF06B6D4),
           secondaryColor: isLight
-              ? MaterialColorsCustom.neonTeal.withValues(alpha: 0.5)
+              ? MaterialColorsCustom.neonTeal.withValues(alpha: 0.7)
               : const Color(0xFF22D3EE),
           duration: const Duration(seconds: 6),
-          floatDistance: 25,
+          floatDistance: 30,
         ),
       ),
       // Top Right - Medium Indigo Orb
@@ -439,15 +438,15 @@ class ResetPasswordScreen extends HookWidget {
         top: size.height * 0.15,
         right: -40,
         child: _NeonFloatingOrb(
-          size: 110,
+          size: 130,
           primaryColor: isLight
-              ? MaterialColorsCustom.neonIndigo.withValues(alpha: 0.6)
+              ? MaterialColorsCustom.neonIndigo.withValues(alpha: 0.8)
               : const Color(0xFF6366F1),
           secondaryColor: isLight
-              ? MaterialColorsCustom.neonLavender.withValues(alpha: 0.5)
+              ? MaterialColorsCustom.neonLavender.withValues(alpha: 0.7)
               : const Color(0xFF8B5CF6),
           duration: const Duration(seconds: 5),
-          floatDistance: 20,
+          floatDistance: 25,
           initialOffset: 0.3,
         ),
       ),
@@ -456,15 +455,15 @@ class ResetPasswordScreen extends HookWidget {
         bottom: size.height * 0.12,
         right: -45,
         child: _NeonFloatingOrb(
-          size: 140,
+          size: 170,
           primaryColor: isLight
-              ? MaterialColorsCustom.neonTeal.withValues(alpha: 0.6)
+              ? MaterialColorsCustom.neonTeal.withValues(alpha: 0.8)
               : const Color(0xFF14B8A6),
           secondaryColor: isLight
-              ? MaterialColorsCustom.neonCyan.withValues(alpha: 0.5)
+              ? MaterialColorsCustom.neonCyan.withValues(alpha: 0.7)
               : const Color(0xFF2DD4BF),
           duration: const Duration(seconds: 7),
-          floatDistance: 28,
+          floatDistance: 35,
           initialOffset: 0.5,
         ),
       ),
@@ -472,7 +471,7 @@ class ResetPasswordScreen extends HookWidget {
   }
 }
 
-/// Glassmorphism Card Widget with Blur Effect
+/// Glassmorphism Card Widget with Blur Effect - Adaptive Light/Dark
 class _GlassCard extends StatelessWidget {
   final Widget child;
 
@@ -481,36 +480,69 @@ class _GlassCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final isLight = colorScheme.brightness == Brightness.light;
 
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(32),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-        child: Container(
-          padding: const EdgeInsets.all(32),
-          decoration: BoxDecoration(
-            color: colorScheme.onSurface.withValues(alpha: 0.08),
-            borderRadius: BorderRadius.circular(32),
-            border: Border.all(
-              color: colorScheme.onSurface.withValues(alpha: 0.15),
-              width: 1.5,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: colorScheme.shadow.withValues(alpha: 0.1),
-                blurRadius: 40,
-                offset: const Offset(0, 20),
-              ),
-              // Subtle inner glow
-              BoxShadow(
-                color: MaterialColorsCustom.neonCyan.withValues(alpha: 0.05),
-                blurRadius: 20,
-                offset: const Offset(0, 10),
-                spreadRadius: -5,
-              ),
-            ],
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(32),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            MaterialColorsCustom.neonCyan.withValues(alpha: 0.15),
+            MaterialColorsCustom.neonIndigo.withValues(alpha: 0.15),
+            MaterialColorsCustom.neonTeal.withValues(alpha: 0.12),
+          ],
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: MaterialColorsCustom.neonCyan
+                .withValues(alpha: isLight ? 0.25 : 0.4),
+            blurRadius: 40,
+            spreadRadius: 0,
+            offset: const Offset(0, 20),
           ),
-          child: child,
+          BoxShadow(
+            color: MaterialColorsCustom.neonIndigo
+                .withValues(alpha: isLight ? 0.2 : 0.3),
+            blurRadius: 60,
+            spreadRadius: -10,
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(32),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+          child: Container(
+            padding: const EdgeInsets.all(32),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: isLight
+                    ? [
+                        Colors.white.withValues(alpha: 0.95),
+                        Colors.white.withValues(alpha: 0.90),
+                        const Color(0xFFFDFDFD).withValues(alpha: 0.92),
+                      ]
+                    : [
+                        colorScheme.surface.withValues(alpha: 0.8),
+                        colorScheme.surface.withValues(alpha: 0.7),
+                        colorScheme.surfaceContainerHighest
+                            .withValues(alpha: 0.75),
+                      ],
+              ),
+              borderRadius: BorderRadius.circular(32),
+              border: Border.all(
+                color: isLight
+                    ? Colors.white.withValues(alpha: 0.9)
+                    : colorScheme.onSurface.withValues(alpha: 0.15),
+                width: 2,
+              ),
+            ),
+            child: child,
+          ),
         ),
       ),
     );

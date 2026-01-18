@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:velora/core/firebase/firebase_analytics_service.dart';
 import 'package:velora/core/firebase/firebase_messaging_service.dart';
@@ -9,6 +10,8 @@ import 'package:velora/core/services/file_download_service.dart';
 import 'package:velora/core/supabase/supabase_initializer.dart';
 import 'package:velora/features/auth/domain/usecases/watch_auth_snapshot_usecase.dart';
 import 'package:velora/features/settings/domain/entities/user_preferences.dart';
+import 'package:velora/features/settings/data/datasources/local/settings_local_datasource.dart';
+import 'package:velora/features/settings/data/datasources/local/settings_local_datasource_impl.dart';
 import 'package:velora/routes/app_router.dart';
 import 'package:velora/features/navigation/services/navigation_service.dart';
 
@@ -156,6 +159,21 @@ final GetIt getIt = GetIt.instance;
 Future<void> configureDependencies() async {
   if (getIt.isRegistered<NavigationService>()) {
     return;
+  }
+
+  // SharedPreferences - must be registered first (async initialization)
+  if (!getIt.isRegistered<SharedPreferences>()) {
+    final prefs = await SharedPreferences.getInstance();
+    getIt.registerSingleton<SharedPreferences>(prefs);
+  }
+
+  // Settings feature - Local Data Source (depends on SharedPreferences)
+  if (!getIt.isRegistered<SettingsLocalDataSource>()) {
+    getIt.registerLazySingleton<SettingsLocalDataSource>(
+      () => SettingsLocalDataSourceImpl(
+        sharedPreferences: getIt<SharedPreferences>(),
+      ),
+    );
   }
 
   // Core services
@@ -665,7 +683,11 @@ Future<void> configureDependencies() async {
 
   // Settings feature - Bloc (global singleton)
   if (!getIt.isRegistered<SettingsBloc>()) {
-    getIt.registerLazySingleton<SettingsBloc>(() => SettingsBloc());
+    getIt.registerLazySingleton<SettingsBloc>(
+      () => SettingsBloc(
+        localDataSource: getIt<SettingsLocalDataSource>(),
+      ),
+    );
   }
 
   // Auth feature - Bloc (global)

@@ -173,6 +173,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get authPasswordStrengthFair => 'Cukup';
 
   @override
+  String get authPasswordStrengthLabel => 'Kekuatan Kata Sandi';
+
+  @override
   String get authPasswordShow => 'Tampilkan kata sandi';
 
   @override

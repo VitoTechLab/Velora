@@ -59,6 +59,7 @@
   "authPasswordStrengthStrong": "Kuat",
   "authPasswordStrengthMedium": "Sedang",
   "authPasswordStrengthFair": "Cukup",
+  "authPasswordStrengthLabel": "Kekuatan Kata Sandi",
   "authPasswordShow": "Tampilkan kata sandi",
   "authPasswordHide": "Sembunyikan kata sandi",
   "authPasswordRequirementsTitle": "Kata sandi harus berisi:",

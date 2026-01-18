@@ -63,10 +63,14 @@ class AndroidApp extends StatelessWidget {
         ),
       ],
       child: BlocBuilder<SettingsBloc, SettingsState>(
-        buildWhen: (prev, curr) => prev.languageCode != curr.languageCode,
+        buildWhen: (prev, curr) =>
+            prev.languageCode != curr.languageCode ||
+            prev.themeMode != curr.themeMode,
         builder: (context, settingsState) {
           // Convert language code string to Locale
           final locale = _parseLocale(settingsState.languageCode);
+          // Convert theme mode string to ThemeMode
+          final themeMode = _parseThemeMode(settingsState.themeMode);
 
           return MaterialApp.router(
             debugShowCheckedModeBanner: false,
@@ -82,12 +86,30 @@ class AndroidApp extends StatelessWidget {
             supportedLocales: AppLocalizations.supportedLocales,
             theme: buildTheme(Brightness.light),
             darkTheme: buildTheme(Brightness.dark),
+            // Dynamic theme mode based on user settings
+            themeMode: themeMode,
             scaffoldMessengerKey: AppMessenger.messengerKey,
             routerConfig: router,
           );
         },
       ),
     );
+  }
+
+  /// Parse theme mode string to ThemeMode
+  /// Supports: light, dark, system
+  ThemeMode _parseThemeMode(String? mode) {
+    if (mode == null || mode.isEmpty) return ThemeMode.system;
+
+    switch (mode.toLowerCase()) {
+      case 'light':
+        return ThemeMode.light;
+      case 'dark':
+        return ThemeMode.dark;
+      case 'system':
+      default:
+        return ThemeMode.system;
+    }
   }
 
   /// Parse language code string to Locale

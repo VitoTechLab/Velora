@@ -416,6 +416,12 @@ abstract class AppLocalizations {
   /// **'Fair'**
   String get authPasswordStrengthFair;
 
+  /// No description provided for @authPasswordStrengthLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Password Strength'**
+  String get authPasswordStrengthLabel;
+
   /// No description provided for @authPasswordShow.
   ///
   /// In en, this message translates to:

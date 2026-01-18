@@ -59,6 +59,7 @@
   "authPasswordStrengthStrong": "Strong",
   "authPasswordStrengthMedium": "Medium",
   "authPasswordStrengthFair": "Fair",
+  "authPasswordStrengthLabel": "Password Strength",
   "authPasswordShow": "Show password",
   "authPasswordHide": "Hide password",
   "authPasswordRequirementsTitle": "Password must contain:",

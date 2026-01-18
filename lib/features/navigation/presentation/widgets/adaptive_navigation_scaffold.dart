@@ -85,43 +85,9 @@ class AdaptiveNavigationScaffold extends StatelessWidget {
 
     return Scaffold(
       body: SafeArea(child: body),
-      bottomNavigationBar: Container(
-        margin: const EdgeInsets.only(bottom: 8, left: 12, right: 12),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Theme.of(context).colorScheme.surface.withValues(alpha: 0.95),
-              Theme.of(context)
-                  .colorScheme
-                  .surfaceContainerHighest
-                  .withValues(alpha: 0.9),
-            ],
-          ),
-          borderRadius: BorderRadius.circular(24),
-          border: Border.all(
-            color:
-                Theme.of(context).colorScheme.outline.withValues(alpha: 0.15),
-            width: 1,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color:
-                  Theme.of(context).colorScheme.shadow.withValues(alpha: 0.1),
-              blurRadius: 20,
-              offset: const Offset(0, -2),
-              spreadRadius: 0,
-            ),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(24),
-          child: _isIOS
-              ? _buildCupertinoTabBar(context)
-              : _buildMaterialNavigationBar(context),
-        ),
-      ),
+      bottomNavigationBar: _isIOS
+          ? _buildCupertinoTabBar(context)
+          : _buildMaterialNavigationBar(context),
     );
   }
 
@@ -157,13 +123,17 @@ class AdaptiveNavigationScaffold extends StatelessWidget {
   }
 
   Widget _buildMaterialNavigationBar(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return NavigationBar(
       selectedIndex: currentIndex,
       onDestinationSelected: onDestinationSelected,
       height: _navBarHeight,
       labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
-      backgroundColor: Colors.transparent,
+      backgroundColor: colorScheme.surface,
       elevation: 0,
+      surfaceTintColor: Colors.transparent,
+      shadowColor: Colors.transparent,
       indicatorColor: Colors.transparent,
       overlayColor: WidgetStateProperty.all(Colors.transparent),
       destinations: tabs
@@ -183,12 +153,19 @@ class AdaptiveNavigationScaffold extends StatelessWidget {
   }
 
   Widget _buildCupertinoTabBar(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return CupertinoTabBar(
       currentIndex: currentIndex,
       onTap: onDestinationSelected,
       iconSize: _mobileIconSize,
-      backgroundColor: Colors.transparent,
-      border: null,
+      backgroundColor: colorScheme.surface,
+      border: Border(
+        top: BorderSide(
+          color: colorScheme.outline.withValues(alpha: 0.1),
+          width: 0.5,
+        ),
+      ),
       height: _navBarHeight,
       items: tabs
           .asMap()
@@ -311,34 +288,10 @@ class AdaptiveNavigationScaffold extends StatelessWidget {
           ? (selected ? tab.cupertinoActiveIcon : tab.cupertinoIcon)
           : (selected ? tab.activeIcon : tab.icon),
       size: size,
-      color: selected ? Colors.white : colorScheme.onSurfaceVariant,
+      color: selected ? colorScheme.primary : colorScheme.onSurfaceVariant,
       weight: _iconStrokeWeight,
       fill: selected ? 1.0 : 0.0,
     );
-
-    if (selected) {
-      return Container(
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              colorScheme.primary.withValues(alpha: 0.8),
-              colorScheme.secondary.withValues(alpha: 0.7),
-            ],
-          ),
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: colorScheme.primary.withValues(alpha: 0.3),
-              blurRadius: 12,
-              offset: const Offset(0, 4),
-              spreadRadius: 0,
-            ),
-          ],
-        ),
-        child: icon,
-      );
-    }
 
     return Padding(
       padding: const EdgeInsets.all(12),

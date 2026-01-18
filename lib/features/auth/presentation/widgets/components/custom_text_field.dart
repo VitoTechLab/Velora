@@ -179,6 +179,24 @@ class CustomTextField extends HookWidget {
                     )
                   : null,
               floatingLabelBehavior: FloatingLabelBehavior.auto,
+              floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                (Set<MaterialState> states) {
+                  final color = states.contains(MaterialState.focused)
+                      ? colorScheme.primary
+                      : colorScheme.onSurfaceVariant;
+                  return TextStyle(
+                    color: color,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    backgroundColor: colorScheme.surface,
+                    // Add padding to label background
+                  );
+                },
+              ),
+              labelStyle: TextStyle(
+                color: colorScheme.onSurfaceVariant,
+                fontSize: 16,
+              ),
               prefixIcon: prefixIcon,
               suffixIcon: suffixIconWidget,
               errorText: hasInteractedState.value ? errorTextState.value : null,
@@ -189,7 +207,7 @@ class CustomTextField extends HookWidget {
                       fontSize: 12,
                     )
                   : null,
-              filled: !isDark,
+              filled: true,
               fillColor: isDark ? Colors.transparent : colorScheme.surface,
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 20,

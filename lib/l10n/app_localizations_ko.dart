@@ -169,6 +169,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get authPasswordStrengthFair => '보통';
 
   @override
+  String get authPasswordStrengthLabel => '비밀번호 강도';
+
+  @override
   String get authPasswordShow => '비밀번호 표시';
 
   @override

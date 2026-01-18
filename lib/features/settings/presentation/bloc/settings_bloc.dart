@@ -1,16 +1,18 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velora/core/utils/app_logger.dart';
+import 'package:velora/features/settings/data/datasources/local/settings_local_datasource.dart';
 import 'package:velora/features/settings/presentation/bloc/settings_event.dart';
 import 'package:velora/features/settings/presentation/bloc/settings_state.dart';
 
 /// SettingsBloc manages user preferences for theme, language, accessibility,
-/// and notifications. Settings are persisted to SharedPreferences for offline
-/// support and synced to Supabase when online.
+/// and notifications. Settings are persisted to SharedPreferences via
+/// [SettingsLocalDataSource] for offline support and fast loading.
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
-  SettingsBloc() : super(const SettingsState()) {
+  SettingsBloc({required SettingsLocalDataSource localDataSource})
+      : _localDataSource = localDataSource,
+        super(const SettingsState()) {
     on<LoadSettingsEvent>(_onLoadSettings);
     on<UpdateLanguageEvent>(_onUpdateLanguage);
     on<UpdateThemeModeEvent>(_onUpdateThemeMode);
@@ -35,18 +37,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     add(const LoadSettingsEvent());
   }
 
-  // SharedPreferences keys
-  static const _keyLanguage = 'settings_language';
-  static const _keyThemeMode = 'theme_mode';
-  static const _keyDynamicColor = 'theme_dynamic';
-  static const _keyColorPalette = 'theme_palette';
-  static const _keyCornerRadius = 'theme_corner';
-  static const _keyFontSize = 'settings_fontSize';
-  static const _keyFontFamily = 'settings_fontFamily';
-  static const _keyTextAlign = 'settings_textAlign';
-  static const _keyLineSpacing = 'settings_lineSpacing';
-  static const _keyHighContrast = 'settings_highContrast';
-  static const _keyMotionReduced = 'settings_motionReduced';
+  final SettingsLocalDataSource _localDataSource;
 
   // ==========================================
   // Load Settings
@@ -59,27 +50,26 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     emit(state.copyWith(isLoading: true));
 
     try {
-      final prefs = await SharedPreferences.getInstance();
+      final settings = await _localDataSource.loadAllSettings();
 
       emit(
         state.copyWith(
           isLoading: false,
           // Language
-          languageCode: prefs.getString(_keyLanguage) ?? 'en',
+          languageCode: settings.languageCode,
           // Theme
-          themeMode: prefs.getString(_keyThemeMode) ?? 'system',
-          dynamicColor: prefs.getBool(_keyDynamicColor) ?? true,
-          colorPalette: prefs.getString(_keyColorPalette) ?? 'Ocean',
-          cornerRadius: prefs.getDouble(_keyCornerRadius) ?? 16.0,
+          themeMode: settings.themeMode,
+          dynamicColor: settings.dynamicColor,
+          colorPalette: settings.colorPalette,
+          cornerRadius: settings.cornerRadius,
           // Accessibility - Text
-          fontSize: prefs.getDouble(_keyFontSize) ?? 16.0,
-          fontFamily: prefs.getString(_keyFontFamily) ?? 'Inter',
-          textAlignment:
-              _textAlignFromIndex(prefs.getInt(_keyTextAlign) ?? 0),
-          lineSpacing: prefs.getDouble(_keyLineSpacing) ?? 1.4,
+          fontSize: settings.fontSize,
+          fontFamily: settings.fontFamily,
+          textAlignment: settings.textAlignmentString,
+          lineSpacing: settings.lineSpacing,
           // Accessibility - Visual
-          highContrast: prefs.getBool(_keyHighContrast) ?? false,
-          motionReduced: prefs.getBool(_keyMotionReduced) ?? false,
+          highContrast: settings.highContrast,
+          motionReduced: settings.motionReduced,
         ),
       );
 
@@ -92,17 +82,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           errorMessage: 'Failed to load settings',
         ),
       );
-    }
-  }
-
-  String _textAlignFromIndex(int index) {
-    switch (index) {
-      case 1:
-        return 'center';
-      case 2:
-        return 'justify';
-      default:
-        return 'left';
     }
   }
 
@@ -126,8 +105,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     Emitter<SettingsState> emit,
   ) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString(_keyLanguage, event.languageCode);
+      await _localDataSource.setLanguageCode(event.languageCode);
 
       emit(
         state.copyWith(
@@ -153,8 +131,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     Emitter<SettingsState> emit,
   ) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString(_keyThemeMode, event.mode);
+      await _localDataSource.setThemeMode(event.mode);
       emit(state.copyWith(themeMode: event.mode));
     } catch (e, st) {
       AppLogger.e('[SettingsBloc] Failed to update theme mode', error: e, stackTrace: st);
@@ -166,8 +143,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     Emitter<SettingsState> emit,
   ) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setBool(_keyDynamicColor, event.enabled);
+      await _localDataSource.setDynamicColor(event.enabled);
       emit(state.copyWith(dynamicColor: event.enabled));
     } catch (e, st) {
       AppLogger.e('[SettingsBloc] Failed to toggle dynamic color', error: e, stackTrace: st);
@@ -179,8 +155,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     Emitter<SettingsState> emit,
   ) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString(_keyColorPalette, event.palette);
+      await _localDataSource.setColorPalette(event.palette);
       emit(state.copyWith(colorPalette: event.palette));
     } catch (e, st) {
       AppLogger.e('[SettingsBloc] Failed to update color palette', error: e, stackTrace: st);
@@ -192,8 +167,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     Emitter<SettingsState> emit,
   ) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setDouble(_keyCornerRadius, event.radius);
+      await _localDataSource.setCornerRadius(event.radius);
       emit(state.copyWith(cornerRadius: event.radius));
     } catch (e, st) {
       AppLogger.e('[SettingsBloc] Failed to update corner radius', error: e, stackTrace: st);
@@ -209,8 +183,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     Emitter<SettingsState> emit,
   ) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setDouble(_keyFontSize, event.size);
+      await _localDataSource.setFontSize(event.size);
       emit(state.copyWith(fontSize: event.size));
     } catch (e, st) {
       AppLogger.e('[SettingsBloc] Failed to update font size', error: e, stackTrace: st);
@@ -222,8 +195,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     Emitter<SettingsState> emit,
   ) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString(_keyFontFamily, event.family);
+      await _localDataSource.setFontFamily(event.family);
       emit(state.copyWith(fontFamily: event.family));
     } catch (e, st) {
       AppLogger.e('[SettingsBloc] Failed to update font family', error: e, stackTrace: st);
@@ -235,8 +207,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     Emitter<SettingsState> emit,
   ) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setInt(_keyTextAlign, _textAlignToIndex(event.alignment));
+      await _localDataSource.setTextAlignment(_textAlignToIndex(event.alignment));
       emit(state.copyWith(textAlignment: event.alignment));
     } catch (e, st) {
       AppLogger.e('[SettingsBloc] Failed to update text alignment', error: e, stackTrace: st);
@@ -248,8 +219,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     Emitter<SettingsState> emit,
   ) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setDouble(_keyLineSpacing, event.spacing);
+      await _localDataSource.setLineSpacing(event.spacing);
       emit(state.copyWith(lineSpacing: event.spacing));
     } catch (e, st) {
       AppLogger.e('[SettingsBloc] Failed to update line spacing', error: e, stackTrace: st);
@@ -261,8 +231,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     Emitter<SettingsState> emit,
   ) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setBool(_keyHighContrast, event.enabled);
+      await _localDataSource.setHighContrast(event.enabled);
       emit(state.copyWith(highContrast: event.enabled));
     } catch (e, st) {
       AppLogger.e('[SettingsBloc] Failed to toggle high contrast', error: e, stackTrace: st);
@@ -274,8 +243,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     Emitter<SettingsState> emit,
   ) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setBool(_keyMotionReduced, event.enabled);
+      await _localDataSource.setMotionReduced(event.enabled);
       emit(state.copyWith(motionReduced: event.enabled));
     } catch (e, st) {
       AppLogger.e('[SettingsBloc] Failed to toggle motion reduced', error: e, stackTrace: st);

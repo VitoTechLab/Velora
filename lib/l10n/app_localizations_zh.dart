@@ -167,6 +167,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get authPasswordStrengthFair => '一般';
 
   @override
+  String get authPasswordStrengthLabel => '密码强度';
+
+  @override
   String get authPasswordShow => '显示密码';
 
   @override

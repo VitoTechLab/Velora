@@ -59,6 +59,7 @@
   "authPasswordStrengthStrong": "강함",
   "authPasswordStrengthMedium": "중간",
   "authPasswordStrengthFair": "보통",
+  "authPasswordStrengthLabel": "비밀번호 강도",
   "authPasswordShow": "비밀번호 표시",
   "authPasswordHide": "비밀번호 숨기기",
   "authPasswordRequirementsTitle": "비밀번호에는 다음이 포함되어야 합니다:",

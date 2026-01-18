@@ -172,6 +172,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authPasswordStrengthFair => 'Fair';
 
   @override
+  String get authPasswordStrengthLabel => 'Password Strength';
+
+  @override
   String get authPasswordShow => 'Show password';
 
   @override
