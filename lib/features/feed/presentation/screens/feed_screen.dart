@@ -163,37 +163,21 @@ class FeedScreen extends HookWidget {
             builder: (context, notificationState) {
               return Padding(
                 padding: const EdgeInsets.only(right: 8),
-                child: Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      if (notificationState.unreadCount > 0)
-                        BoxShadow(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .error
-                              .withValues(alpha: 0.3),
-                          blurRadius: 12,
-                          spreadRadius: 2,
-                        ),
-                    ],
-                  ),
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      onTap: () {
-                        context.pushNamed(AppRouteName.notification);
-                      },
-                      customBorder: const CircleBorder(),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: NotificationBadge(
-                          count: notificationState.unreadCount,
-                          child: Icon(
-                            Icons.favorite_border,
-                            size: 28,
-                            color: Theme.of(context).colorScheme.onSurface,
-                          ),
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () {
+                      context.pushNamed(AppRouteName.notification);
+                    },
+                    customBorder: const CircleBorder(),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: NotificationBadge(
+                        count: notificationState.unreadCount,
+                        child: Icon(
+                          Icons.notifications_none_outlined,
+                          size: 28,
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                     ),

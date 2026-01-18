@@ -339,10 +339,11 @@ class _EmptyCommentsView extends StatelessWidget {
             duration: const Duration(milliseconds: 600),
             curve: Curves.easeOutBack,
             builder: (context, value, child) {
+              final clampedValue = value.clamp(0.0, 1.0);
               return Transform.scale(
-                scale: value,
+                scale: clampedValue,
                 child: Opacity(
-                  opacity: value,
+                  opacity: clampedValue,
                   child: child,
                 ),
               );

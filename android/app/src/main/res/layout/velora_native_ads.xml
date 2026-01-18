@@ -3,30 +3,32 @@
     android:id="@+id/native_ad_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white">
+    android:background="?android:attr/colorBackground">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- HEADER: Avatar, Username, Subtitle (Iklan) -->
+        <!-- HEADER: Avatar, Advertiser Name, Sponsored Badge -->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="12dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
             android:gravity="center_vertical">
 
             <!-- Avatar Icon -->
             <ImageView
                 android:id="@+id/ad_icon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@mipmap/ic_launcher"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:scaleType="centerCrop" />
 
-            <!-- Username & Subtitle -->
+            <!-- Advertiser Name & Sponsored Badge -->
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="0dp"
@@ -34,68 +36,114 @@
                 android:layout_weight="1"
                 android:layout_marginStart="12dp">
 
+                <!-- Advertiser Name -->
                 <TextView
-                    android:text="Velora"
-                    android:textSize="14sp"
+                    android:id="@+id/ad_advertiser"
+                    android:textSize="15sp"
                     android:textStyle="bold"
-                    android:textColor="#000000"
+                    android:textColor="?android:attr/textColorPrimary"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:ellipsize="end" />
 
+                <!-- Sponsored Badge -->
                 <TextView
-                    android:text="Iklan"
-                    android:textSize="12sp"
-                    android:textColor="#888888"
+                    android:text="Sponsored"
+                    android:textSize="11sp"
+                    android:textColor="?android:attr/textColorSecondary"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp" />
             </LinearLayout>
+
+            <!-- Ad Choices Icon (Optional) -->
+            <ImageView
+                android:id="@+id/ad_choices"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:scaleType="centerInside"
+                android:contentDescription="Ad Choices" />
 
         </LinearLayout>
 
-        <!-- HEADLINE (Content) -->
+        <!-- HEADLINE -->
         <TextView
             android:id="@+id/ad_headline"
-            android:textSize="14sp"
-            android:textColor="#000000"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:paddingBottom="8dp"
+            android:textSize="15sp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="12dp"
+            android:lineSpacingExtra="2dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:ellipsize="end" />
 
         <!-- MEDIA (IMAGE / VIDEO) -->
         <com.google.android.gms.ads.nativead.MediaView
             android:id="@+id/ad_media"
             android:layout_width="match_parent"
-            android:layout_height="300dp" />
+            android:layout_height="280dp"
+            android:scaleType="centerCrop" />
 
-        <!-- ACTION BAR -->
+        <!-- BODY TEXT (Optional) -->
+        <TextView
+            android:id="@+id/ad_body"
+            android:textSize="14sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="12dp"
+            android:lineSpacingExtra="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:visibility="gone" />
+
+        <!-- BOTTOM ACTION BAR -->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="12dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="16dp"
             android:gravity="center_vertical">
 
-            <!-- Sponsored Label -->
+            <!-- Star Rating (Optional) -->
             <TextView
-                android:text="Sponsored"
-                android:textSize="11sp"
-                android:textColor="#888888"
+                android:id="@+id/ad_rating"
+                android:textSize="12sp"
+                android:textColor="?android:attr/textColorSecondary"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:drawablePadding="4dp"
+                android:gravity="center_vertical"
+                android:visibility="gone" />
 
             <!-- CTA Button -->
             <Button
                 android:id="@+id/ad_cta"
                 android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:minWidth="100dp"
-                android:textSize="12sp"
+                android:layout_height="40dp"
+                android:minWidth="120dp"
+                android:textSize="14sp"
+                android:textStyle="bold"
                 android:textAllCaps="false"
-                android:text="Learn more" />
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp" />
         </LinearLayout>
+
+        <!-- DIVIDER -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/divider" />
 
     </LinearLayout>
 

@@ -69,100 +69,55 @@ class NotificationScreen extends HookWidget {
       appBar: AppBar(
         elevation: 0,
         scrolledUnderElevation: 0,
-        backgroundColor: Colors.transparent,
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                theme.colorScheme.surface.withValues(alpha: 0.98),
-                theme.colorScheme.surfaceContainerHighest
-                    .withValues(alpha: 0.95),
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            border: Border(
-              bottom: BorderSide(
-                color: theme.colorScheme.outline.withValues(alpha: 0.15),
-                width: 1,
-              ),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: theme.colorScheme.primary.withValues(alpha: 0.08),
-                blurRadius: 12,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-        ),
-        title: ShaderMask(
-          shaderCallback: (bounds) => LinearGradient(
-            colors: [
-              theme.colorScheme.primary,
-              theme.colorScheme.secondary,
-            ],
-          ).createShader(bounds),
-          child: Text(
-            'Notifications',
-            style: theme.textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
+        backgroundColor: theme.colorScheme.surface,
+        surfaceTintColor: Colors.transparent,
+        title: Text(
+          'Notifications',
+          style: theme.textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.bold,
           ),
         ),
         actions: [
-          Container(
-            margin: const EdgeInsets.only(right: 8),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  theme.colorScheme.primaryContainer.withValues(alpha: 0.6),
-                  theme.colorScheme.secondaryContainer.withValues(alpha: 0.6),
-                ],
-              ),
-              shape: BoxShape.circle,
+          IconButton(
+            icon: Icon(
+              Icons.more_vert,
+              color: theme.colorScheme.onSurface,
             ),
-            child: PopupMenuButton<String>(
-              icon: Icon(
-                Icons.more_vert,
-                color: theme.colorScheme.onPrimaryContainer,
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              onSelected: (value) {
-                if (value == 'mark_all_read') {
-                  context.read<NotificationBloc>().add(
-                        const NotificationEvent.markAllAsRead(),
-                      );
-                }
-              },
-              itemBuilder: (context) => [
-                PopupMenuItem(
-                  value: 'mark_all_read',
-                  child: Row(
-                    children: [
-                      ShaderMask(
-                        shaderCallback: (bounds) => LinearGradient(
-                          colors: [
-                            theme.colorScheme.primary,
-                            theme.colorScheme.secondary,
-                          ],
-                        ).createShader(bounds),
-                        child: const Icon(
-                          Icons.done_all,
-                          color: Colors.white,
-                          size: 20,
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      const Text('Mark all as read'),
-                    ],
-                  ),
+            onPressed: () {
+              showMenu(
+                context: context,
+                position: RelativeRect.fromLTRB(
+                  MediaQuery.of(context).size.width,
+                  kToolbarHeight,
+                  0,
+                  0,
                 ),
-              ],
-            ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                items: [
+                  PopupMenuItem(
+                    value: 'mark_all_read',
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.done_all,
+                          size: 20,
+                          color: theme.colorScheme.primary,
+                        ),
+                        const SizedBox(width: 12),
+                        const Text('Mark all as read'),
+                      ],
+                    ),
+                    onTap: () {
+                      context.read<NotificationBloc>().add(
+                            const NotificationEvent.markAllAsRead(),
+                          );
+                    },
+                  ),
+                ],
+              );
+            },
           ),
         ],
       ),
