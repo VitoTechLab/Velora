@@ -44,6 +44,11 @@ class NotificationRepositoryImpl implements NotificationRepository {
         return 'post_share';
       case NotificationType.channelInvite:
         return 'channel_invite';
+      case NotificationType.campaignCreated:
+        return 'campaign_created';
+      case NotificationType.campaignUpdate:
+        // TODO: Handle this case.
+        throw UnimplementedError();
     }
   }
 

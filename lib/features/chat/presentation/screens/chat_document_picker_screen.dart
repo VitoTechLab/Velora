@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:velora/core/themes/color_material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:velora/core/ui/app_messenger.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
@@ -62,22 +62,6 @@ class ChatDocumentPickerScreen extends HookWidget {
     'zip',
     'rar',
   ];
-
-  /// Show document picker and return selected files
-  static Future<List<File>?> show(
-    BuildContext context, {
-    int maxDocuments = 10,
-    List<String>? allowedExtensions,
-  }) async {
-    return await Navigator.of(context).push<List<File>>(
-      MaterialPageRoute(
-        builder: (context) => ChatDocumentPickerScreen(
-          maxDocuments: maxDocuments,
-          allowedExtensions: allowedExtensions,
-        ),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -173,39 +157,128 @@ class ChatDocumentPickerScreen extends HookWidget {
         return;
       }
 
-      Navigator.of(context).pop(
+      context.pop(
         selectedDocuments.value.map((d) => d.file).toList(),
       );
     }
 
     return Scaffold(
-      backgroundColor: theme.scaffoldBackgroundColor,
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.close),
-          onPressed: () => Navigator.pop(context),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                theme.colorScheme.surface,
+                theme.colorScheme.surfaceContainerLowest,
+              ],
+            ),
+            border: Border(
+              bottom: BorderSide(
+                color: theme.colorScheme.outlineVariant.withValues(alpha: 0.3),
+                width: 1,
+              ),
+            ),
+          ),
         ),
-        title: Text(t.chatDocumentTitle),
+        leading: Container(
+          margin: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: theme.colorScheme.surfaceContainerHighest
+                .withValues(alpha: 0.5),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: () => context.pop(),
+              borderRadius: BorderRadius.circular(12),
+              child: Icon(Icons.close, color: theme.colorScheme.onSurface),
+            ),
+          ),
+        ),
+        title: ShaderMask(
+          shaderCallback: (bounds) => LinearGradient(
+            colors: [
+              theme.colorScheme.primary,
+              theme.colorScheme.secondary,
+            ],
+          ).createShader(bounds),
+          child: Text(
+            t.chatDocumentTitle,
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 0.2,
+            ),
+          ),
+        ),
         centerTitle: false,
         actions: [
-          TextButton.icon(
-            onPressed: selectedDocuments.value.isEmpty ? null : sendDocuments,
-            icon: Icon(
-              Icons.send_rounded,
-              size: 18,
-              color: selectedDocuments.value.isEmpty
-                  ? theme.disabledColor
-                  : MaterialColorsCustom.brandSeafoam,
+          Container(
+            margin: const EdgeInsets.only(right: 8),
+            decoration: BoxDecoration(
+              gradient: selectedDocuments.value.isEmpty
+                  ? null
+                  : LinearGradient(
+                      colors: [
+                        theme.colorScheme.primary,
+                        theme.colorScheme.primary.withValues(alpha: 0.85),
+                      ],
+                    ),
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: selectedDocuments.value.isEmpty
+                  ? null
+                  : [
+                      BoxShadow(
+                        color: theme.colorScheme.primary.withValues(alpha: 0.3),
+                        blurRadius: 8,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
             ),
-            label: Text(
-              selectedDocuments.value.isNotEmpty
-                  ? t.chatDocumentSendCount(selectedDocuments.value.length)
-                  : t.chatDocumentSend,
-              style: TextStyle(
-                color: selectedDocuments.value.isEmpty
-                    ? theme.disabledColor
-                    : MaterialColorsCustom.brandSeafoam,
-                fontWeight: FontWeight.w600,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: selectedDocuments.value.isEmpty ? null : sendDocuments,
+                borderRadius: BorderRadius.circular(20),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.send_rounded,
+                        size: 18,
+                        color: selectedDocuments.value.isEmpty
+                            ? theme.colorScheme.onSurfaceVariant
+                                .withValues(alpha: 0.4)
+                            : theme.colorScheme.onPrimary,
+                      ),
+                      const SizedBox(width: 6),
+                      Text(
+                        selectedDocuments.value.isNotEmpty
+                            ? t.chatDocumentSendCount(
+                                selectedDocuments.value.length)
+                            : t.chatDocumentSend,
+                        style: TextStyle(
+                          color: selectedDocuments.value.isEmpty
+                              ? theme.colorScheme.onSurfaceVariant
+                                  .withValues(alpha: 0.4)
+                              : theme.colorScheme.onPrimary,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 14,
+                          letterSpacing: 0.2,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
@@ -217,13 +290,20 @@ class ChatDocumentPickerScreen extends HookWidget {
           // Selection count header
           if (selectedDocuments.value.isNotEmpty)
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
               decoration: BoxDecoration(
-                color: theme.colorScheme.surfaceContainerHighest
-                    .withValues(alpha: 0.5),
+                gradient: LinearGradient(
+                  colors: [
+                    theme.colorScheme.surfaceContainerHighest
+                        .withValues(alpha: 0.3),
+                    theme.colorScheme.surfaceContainer.withValues(alpha: 0.2),
+                  ],
+                ),
                 border: Border(
                   bottom: BorderSide(
-                    color: theme.dividerColor.withValues(alpha: 0.5),
+                    color:
+                        theme.colorScheme.outlineVariant.withValues(alpha: 0.3),
+                    width: 1,
                   ),
                 ),
               ),
@@ -231,38 +311,83 @@ class ChatDocumentPickerScreen extends HookWidget {
                 children: [
                   Container(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 6,
+                      horizontal: 14,
+                      vertical: 7,
                     ),
                     decoration: BoxDecoration(
-                      gradient: const LinearGradient(
+                      gradient: LinearGradient(
                         colors: [
-                          MaterialColorsCustom.brandSeafoam,
-                          MaterialColorsCustom.brandEmerald,
+                          theme.colorScheme.primary,
+                          theme.colorScheme.secondary,
                         ],
                       ),
                       borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color:
+                            theme.colorScheme.onPrimary.withValues(alpha: 0.2),
+                        width: 1,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color:
+                              theme.colorScheme.primary.withValues(alpha: 0.3),
+                          blurRadius: 8,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
                     ),
-                    child: Text(
-                      t.chatDocumentSelectedCount(
-                        selectedDocuments.value.length,
-                        maxDocuments,
-                      ),
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.check_circle_rounded,
+                          size: 16,
+                          color: theme.colorScheme.onPrimary,
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          t.chatDocumentSelectedCount(
+                            selectedDocuments.value.length,
+                            maxDocuments,
+                          ),
+                          style: TextStyle(
+                            color: theme.colorScheme.onPrimary,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 0.2,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   const Spacer(),
-                  TextButton(
-                    onPressed: () => selectedDocuments.value = [],
-                    child: Text(
-                      t.chatDocumentClearAll,
-                      style: TextStyle(
-                        color:
-                            theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () => selectedDocuments.value = [],
+                      borderRadius: BorderRadius.circular(12),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 6),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.clear_all_rounded,
+                              size: 18,
+                              color: theme.colorScheme.error,
+                            ),
+                            const SizedBox(width: 4),
+                            Text(
+                              t.chatDocumentClearAll,
+                              style: TextStyle(
+                                color: theme.colorScheme.error,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 13,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -304,61 +429,131 @@ class ChatDocumentPickerScreen extends HookWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              width: 100,
-              height: 100,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    MaterialColorsCustom.brandSeafoam.withValues(alpha: 0.2),
-                    MaterialColorsCustom.brandEmerald.withValues(alpha: 0.2),
+            TweenAnimationBuilder<double>(
+              tween: Tween(begin: 0.0, end: 1.0),
+              duration: const Duration(milliseconds: 600),
+              curve: Curves.easeOutBack,
+              builder: (context, value, child) {
+                return Transform.scale(
+                  scale: value,
+                  child: Opacity(
+                    opacity: value,
+                    child: child,
+                  ),
+                );
+              },
+              child: Container(
+                width: 120,
+                height: 120,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      theme.colorScheme.primaryContainer.withValues(alpha: 0.3),
+                      theme.colorScheme.secondaryContainer
+                          .withValues(alpha: 0.2),
+                    ],
+                  ),
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: theme.colorScheme.primary.withValues(alpha: 0.1),
+                      blurRadius: 20,
+                      spreadRadius: 3,
+                    ),
                   ],
                 ),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                Icons.folder_open_outlined,
-                size: 48,
-                color: MaterialColorsCustom.brandSeafoam.withValues(alpha: 0.8),
+                child: ShaderMask(
+                  shaderCallback: (bounds) => LinearGradient(
+                    colors: [
+                      theme.colorScheme.primary,
+                      theme.colorScheme.secondary,
+                    ],
+                  ).createShader(bounds),
+                  child: Icon(
+                    Icons.folder_open_outlined,
+                    size: 56,
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ),
             const SizedBox(height: 24),
             Text(
               t.chatDocumentEmptyTitle,
               style: theme.textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 0.2,
               ),
             ),
             const SizedBox(height: 8),
             Text(
               t.chatDocumentEmptySubtitle,
               style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+                color: theme.colorScheme.onSurfaceVariant,
+                letterSpacing: 0.1,
               ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 32),
-            FilledButton.icon(
-              onPressed: isLoading ? null : onPickFiles,
-              icon: isLoading
-                  ? const SizedBox(
-                      width: 18,
-                      height: 18,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        color: Colors.white,
-                      ),
-                    )
-                  : const Icon(Icons.attach_file_rounded),
-              label: Text(t.chatDocumentBrowseFiles),
-              style: FilledButton.styleFrom(
-                backgroundColor: MaterialColorsCustom.brandSeafoam,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 12,
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    theme.colorScheme.primary,
+                    theme.colorScheme.primary.withValues(alpha: 0.85),
+                  ],
+                ),
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: [
+                  BoxShadow(
+                    color: theme.colorScheme.primary.withValues(alpha: 0.3),
+                    blurRadius: 12,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: isLoading ? null : onPickFiles,
+                  borderRadius: BorderRadius.circular(24),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 14,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        isLoading
+                            ? SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  color: theme.colorScheme.onPrimary,
+                                ),
+                              )
+                            : Icon(
+                                Icons.attach_file_rounded,
+                                color: theme.colorScheme.onPrimary,
+                                size: 20,
+                              ),
+                        const SizedBox(width: 8),
+                        Text(
+                          t.chatDocumentBrowseFiles,
+                          style: TextStyle(
+                            color: theme.colorScheme.onPrimary,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 15,
+                            letterSpacing: 0.3,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -376,7 +571,17 @@ class ChatDocumentPickerScreen extends HookWidget {
     return ListView.separated(
       padding: const EdgeInsets.symmetric(vertical: 8),
       itemCount: documents.length,
-      separatorBuilder: (_, __) => const Divider(height: 1, indent: 72),
+      separatorBuilder: (context, index) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Divider(
+          height: 1,
+          indent: 56,
+          color: Theme.of(context)
+              .colorScheme
+              .outlineVariant
+              .withValues(alpha: 0.3),
+        ),
+      ),
       itemBuilder: (context, index) {
         final doc = documents[index];
         return _DocumentListTile(
@@ -398,31 +603,75 @@ class ChatDocumentPickerScreen extends HookWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: theme.scaffoldBackgroundColor,
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            theme.colorScheme.surface,
+            theme.colorScheme.surfaceContainerLowest,
+          ],
+        ),
         border: Border(
           top: BorderSide(
-            color: theme.dividerColor.withValues(alpha: 0.5),
+            color: theme.colorScheme.outlineVariant.withValues(alpha: 0.3),
+            width: 1,
           ),
         ),
+        boxShadow: [
+          BoxShadow(
+            color: theme.colorScheme.shadow.withValues(alpha: 0.08),
+            blurRadius: 12,
+            offset: const Offset(0, -2),
+          ),
+        ],
       ),
       child: SafeArea(
-        child: OutlinedButton.icon(
-          onPressed: isLoading ? null : onPickFiles,
-          icon: isLoading
-              ? const SizedBox(
-                  width: 18,
-                  height: 18,
-                  child: CircularProgressIndicator(strokeWidth: 2),
-                )
-              : const Icon(Icons.add_rounded),
-          label: Text(t.chatDocumentAddMore),
-          style: OutlinedButton.styleFrom(
-            foregroundColor: MaterialColorsCustom.brandSeafoam,
-            side: const BorderSide(
-              color: MaterialColorsCustom.brandSeafoam,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: theme.colorScheme.primary.withValues(alpha: 0.5),
+              width: 1.5,
             ),
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            minimumSize: const Size.fromHeight(48),
+          ),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: isLoading ? null : onPickFiles,
+              borderRadius: BorderRadius.circular(16),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    isLoading
+                        ? SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: theme.colorScheme.primary,
+                            ),
+                          )
+                        : Icon(
+                            Icons.add_rounded,
+                            color: theme.colorScheme.primary,
+                            size: 20,
+                          ),
+                    const SizedBox(width: 8),
+                    Text(
+                      t.chatDocumentAddMore,
+                      style: TextStyle(
+                        color: theme.colorScheme.primary,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 15,
+                        letterSpacing: 0.2,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
         ),
       ),
@@ -451,60 +700,104 @@ class _DocumentListTile extends StatelessWidget {
       background: Container(
         alignment: Alignment.centerRight,
         padding: const EdgeInsets.only(right: 24),
-        color: theme.colorScheme.error,
-        child: const Icon(
-          Icons.delete_outline,
-          color: Colors.white,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              theme.colorScheme.error,
+              theme.colorScheme.error.withValues(alpha: 0.85),
+            ],
+          ),
+        ),
+        child: Icon(
+          Icons.delete_outline_rounded,
+          color: theme.colorScheme.onError,
+          size: 24,
         ),
       ),
-      child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 8,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+        decoration: BoxDecoration(
+          color:
+              theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+          borderRadius: BorderRadius.circular(12),
         ),
-        leading: Container(
-          width: 48,
-          height: 48,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: _getExtensionGradient(document.extension),
-            ),
-            borderRadius: BorderRadius.circular(12),
+        child: ListTile(
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 12,
+            vertical: 8,
           ),
-          child: Center(
-            child: Text(
-              document.extension.toUpperCase(),
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 11,
-                fontWeight: FontWeight.bold,
+          leading: Container(
+            width: 48,
+            height: 48,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: _getExtensionGradient(document.extension),
+              ),
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: _getExtensionGradient(document.extension)[0]
+                      .withValues(alpha: 0.3),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Center(
+              child: Text(
+                document.extension.toUpperCase(),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 0.5,
+                ),
               ),
             ),
           ),
-        ),
-        title: Text(
-          document.name,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: const TextStyle(
-            fontWeight: FontWeight.w500,
+          title: Text(
+            document.name,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              letterSpacing: 0.1,
+            ),
           ),
-        ),
-        subtitle: Text(
-          document.formattedSize,
-          style: TextStyle(
-            fontSize: 13,
-            color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+          subtitle: Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: Text(
+              document.formattedSize,
+              style: TextStyle(
+                fontSize: 12,
+                color: theme.colorScheme.onSurfaceVariant,
+                letterSpacing: 0.1,
+              ),
+            ),
           ),
-        ),
-        trailing: IconButton(
-          icon: Icon(
-            Icons.close,
-            color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
+          trailing: Container(
+            decoration: BoxDecoration(
+              color: theme.colorScheme.error.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: onRemove,
+                borderRadius: BorderRadius.circular(8),
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Icon(
+                    Icons.close_rounded,
+                    color: theme.colorScheme.error,
+                    size: 20,
+                  ),
+                ),
+              ),
+            ),
           ),
-          onPressed: onRemove,
         ),
       ),
     );
@@ -531,10 +824,7 @@ class _DocumentListTile extends StatelessWidget {
       case 'rar':
         return [const Color(0xFFFFB300), const Color(0xFFFFA000)];
       default:
-        return [
-          MaterialColorsCustom.brandSeafoam,
-          MaterialColorsCustom.brandEmerald,
-        ];
+        return [const Color(0xFF26A69A), const Color(0xFF00897B)];
     }
   }
 }

@@ -32,10 +32,6 @@ class ChatBubbleWidget extends StatelessWidget {
     final textTheme = theme.textTheme;
     final t = AppLocalizations.of(context)!;
 
-    final bubbleColor = isSender
-        ? colorScheme.primaryContainer
-        : colorScheme.surfaceContainerHigh;
-
     final textColor = isSender
         ? colorScheme.onPrimaryContainer
         : colorScheme.onSurface;
@@ -49,22 +45,60 @@ class ChatBubbleWidget extends StatelessWidget {
           constraints: BoxConstraints(
             maxWidth: MediaQuery.of(context).size.width * 0.75,
           ),
-          child: CustomPaint(
-            painter: _BubbleTailPainter(
-              color: bubbleColor,
-              isSender: isSender,
-            ),
+          child: TweenAnimationBuilder<double>(
+            duration: const Duration(milliseconds: 300),
+            tween: Tween(begin: 0.0, end: 1.0),
+            curve: Curves.easeOutCubic,
+            builder: (context, value, child) {
+              return Opacity(
+                opacity: value,
+                child: Transform.scale(
+                  scale: 0.95 + (0.05 * value),
+                  alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
+                  child: child,
+                ),
+              );
+            },
             child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              margin: EdgeInsets.only(
+                left: isSender ? 40 : 8,
+                right: isSender ? 8 : 40,
+                top: 3,
+                bottom: 3,
+              ),
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
               decoration: BoxDecoration(
-                color: bubbleColor,
-                borderRadius: BorderRadius.circular(16),
+                gradient: isSender
+                    ? LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          colorScheme.primaryContainer,
+                          colorScheme.primaryContainer.withValues(alpha: 0.9),
+                        ],
+                      )
+                    : null,
+                color: isSender ? null : colorScheme.surfaceContainerHigh,
+                borderRadius: BorderRadius.only(
+                  topLeft: const Radius.circular(18),
+                  topRight: const Radius.circular(18),
+                  bottomLeft: Radius.circular(isSender ? 18 : 4),
+                  bottomRight: Radius.circular(isSender ? 4 : 18),
+                ),
+                border: Border.all(
+                  color: isSender
+                      ? colorScheme.primary.withValues(alpha: 0.15)
+                      : colorScheme.outline.withValues(alpha: 0.1),
+                  width: 1,
+                ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.06),
-                    blurRadius: 4,
+                    color: isSender
+                        ? colorScheme.primary.withValues(alpha: 0.15)
+                        : Colors.black.withValues(alpha: 0.05),
+                    blurRadius: 8,
                     offset: const Offset(0, 2),
+                    spreadRadius: 0,
                   ),
                 ],
               ),
@@ -78,9 +112,10 @@ class ChatBubbleWidget extends StatelessWidget {
                     style: textTheme.bodyMedium?.copyWith(
                       color: textColor,
                       height: 1.4,
+                      letterSpacing: 0.15,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 6),
 
                   // Time and read receipt
                   Row(
@@ -89,14 +124,21 @@ class ChatBubbleWidget extends StatelessWidget {
                       Text(
                         time,
                         style: textTheme.bodySmall?.copyWith(
-                          color: textColor.withValues(alpha: 0.65),
+                          color: textColor.withValues(alpha: 0.6),
                           fontSize: 11,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                       if (isSender) ...[
                         const SizedBox(width: 4),
                         AnimatedSwitcher(
-                          duration: const Duration(milliseconds: 200),
+                          duration: const Duration(milliseconds: 300),
+                          transitionBuilder: (child, animation) {
+                            return ScaleTransition(
+                              scale: animation,
+                              child: child,
+                            );
+                          },
                           child: Icon(
                             isRead ? Icons.done_all_rounded : Icons.check_rounded,
                             key: ValueKey(isRead),
@@ -119,63 +161,4 @@ class ChatBubbleWidget extends StatelessWidget {
   }
 }
 
-/// Custom painter for elegant bubble tail
-class _BubbleTailPainter extends CustomPainter {
-  final Color color;
-  final bool isSender;
 
-  _BubbleTailPainter({
-    required this.color,
-    required this.isSender,
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill
-      ..strokeJoin = StrokeJoin.round;
-
-    final path = Path();
-
-    if (isSender) {
-      // Tail pointing right (sender)
-      path.moveTo(size.width, size.height - 8);
-      path.quadraticBezierTo(
-        size.width + 4,
-        size.height - 4,
-        size.width + 6,
-        size.height,
-      );
-      path.quadraticBezierTo(
-        size.width + 2,
-        size.height - 2,
-        size.width,
-        size.height - 6,
-      );
-    } else {
-      // Tail pointing left (receiver)
-      path.moveTo(0, size.height - 8);
-      path.quadraticBezierTo(
-        -4,
-        size.height - 4,
-        -6,
-        size.height,
-      );
-      path.quadraticBezierTo(
-        -2,
-        size.height - 2,
-        0,
-        size.height - 6,
-      );
-    }
-
-    path.close();
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant _BubbleTailPainter oldDelegate) {
-    return oldDelegate.color != color || oldDelegate.isSender != isSender;
-  }
-}

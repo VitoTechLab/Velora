@@ -7,11 +7,12 @@ import 'package:velora/features/auth/domain/entities/auth_status_entity.dart';
 import 'package:velora/features/auth/presentation/screens/auth_screens.dart';
 import 'package:velora/features/campaign/presentation/screens/campaign_screen.dart';
 import 'package:velora/features/chat/presentation/screens/chat_detail_screen.dart';
+import 'package:velora/features/chat/presentation/screens/chat_document_picker_screen.dart';
 import 'package:velora/features/chat/presentation/screens/chat_screen.dart';
-import 'package:velora/features/chat/presentation/screens/chat_search_screen.dart';
 import 'package:velora/features/chat/presentation/screens/user_search_screen.dart';
 import 'package:velora/features/media/presentation/screens/media_gallery_screen.dart';
 import 'package:velora/features/navigation/models/chat_detail_args.dart';
+import 'package:velora/features/navigation/models/chat_document_picker_args.dart';
 import 'package:velora/features/navigation/models/create_post_media_args.dart';
 import 'package:velora/features/navigation/models/more_option_post_args.dart';
 import 'package:velora/features/navigation/models/profile_field_edit_args.dart';
@@ -217,7 +218,7 @@ class AppRouter {
                   GoRoute(
                     path: AppRoutePath.search,
                     name: AppRouteName.search,
-                    builder: (context, state) => const ChatSearchScreen(),
+                    builder: (context, state) => const UserSearchScreen(),
                   ),
                 ],
               ),
@@ -229,6 +230,18 @@ class AppRouter {
                     name: AppRouteName.chat,
                     builder: (context, state) => const ChatScreen(),
                     routes: [
+                      GoRoute(
+                        path: AppRouteSinglePath.chatDocumentPicker,
+                        name: AppRouteName.chatDocumentPicker,
+                        parentNavigatorKey: navigationService.navigatorKey,
+                        builder: (context, state) {
+                          final args = state.extra as ChatDocumentPickerArgs?;
+                          return ChatDocumentPickerScreen(
+                            maxDocuments: args?.maxDocuments ?? 10,
+                            allowedExtensions: args?.allowedExtensions,
+                          );
+                        },
+                      ),
                       GoRoute(
                         path: AppRouteSinglePath.searchFollowUser,
                         name: AppRouteName.searchFollowUser,
@@ -444,6 +457,7 @@ class AppRouteName {
   static const mediaGallery = 'mediaGallery';
   static const notification = 'notification';
   static const chatDetail = 'chatDetail';
+  static const chatDocumentPicker = 'chatDocumentPicker';
   static const userProfile = 'userProfile';
   static const postFeed = 'postFeed';
   static const moreOptions = 'moreOptions';
@@ -483,6 +497,7 @@ class AppRoutePath {
   static const notification = '/home/notification';
   static const userProfile = '/home/user/:userId';
   static const chatDetail = '/chat/chat-detail';
+  static const chatDocumentPicker = '/chat/document-picker';
   static const postFeed = '/home/post-feed';
   static const moreOptions = '/home/post-feed/more-options';
   static const settings = '/profile/settings';
@@ -520,6 +535,7 @@ class AppRouteSinglePath {
   static const notification = 'notification';
   static const userProfile = 'user/:userId';
   static const chatDetail = 'chat-detail';
+  static const chatDocumentPicker = 'document-picker';
   static const postFeed = 'post-feed';
   static const moreOptions = 'more-options';
   static const settings = 'settings';

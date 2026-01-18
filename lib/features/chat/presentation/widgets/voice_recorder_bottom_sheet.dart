@@ -150,8 +150,28 @@ class _VoiceRecorderBottomSheetState extends State<VoiceRecorderBottomSheet>
 
     return Container(
       decoration: BoxDecoration(
-        color: colorScheme.surface,
+        gradient: LinearGradient(
+          colors: [
+            colorScheme.surface.withValues(alpha: 0.98),
+            colorScheme.surfaceContainerHighest.withValues(alpha: 0.95),
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
         borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+        border: Border(
+          top: BorderSide(
+            color: colorScheme.outline.withValues(alpha: 0.15),
+            width: 1,
+          ),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.15),
+            blurRadius: 20,
+            offset: const Offset(0, -4),
+          ),
+        ],
       ),
       child: SafeArea(
         top: false,
@@ -165,8 +185,19 @@ class _VoiceRecorderBottomSheetState extends State<VoiceRecorderBottomSheet>
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
+                  gradient: LinearGradient(
+                    colors: [
+                      colorScheme.primary.withValues(alpha: 0.3),
+                      colorScheme.secondary.withValues(alpha: 0.3),
+                    ],
+                  ),
                   borderRadius: BorderRadius.circular(2),
+                  boxShadow: [
+                    BoxShadow(
+                      color: colorScheme.primary.withValues(alpha: 0.2),
+                      blurRadius: 4,
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(height: 24),
@@ -220,9 +251,36 @@ class _VoiceRecorderBottomSheetState extends State<VoiceRecorderBottomSheet>
                               : 1.0),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: _isRecording
-                            ? colorScheme.error.withValues(alpha: 0.2)
-                            : colorScheme.primary.withValues(alpha: 0.1),
+                        gradient: RadialGradient(
+                          colors: _isRecording
+                              ? [
+                                  colorScheme.error.withValues(alpha: 0.3),
+                                  colorScheme.error.withValues(alpha: 0.1),
+                                  Colors.transparent,
+                                ]
+                              : [
+                                  colorScheme.primary.withValues(alpha: 0.2),
+                                  colorScheme.secondary.withValues(alpha: 0.1),
+                                  Colors.transparent,
+                                ],
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: (_isRecording
+                                    ? colorScheme.error
+                                    : colorScheme.primary)
+                                .withValues(
+                                    alpha: 0.3 *
+                                        (_isRecording && !_isPaused
+                                            ? _pulseAnimation.value
+                                            : 1.0)),
+                            blurRadius: 20 *
+                                (_isRecording && !_isPaused
+                                    ? _pulseAnimation.value
+                                    : 1.0),
+                            spreadRadius: 5,
+                          ),
+                        ],
                       ),
                       child: Center(
                         child: Container(
@@ -230,16 +288,36 @@ class _VoiceRecorderBottomSheetState extends State<VoiceRecorderBottomSheet>
                           height: 80,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: _isRecording
-                                ? colorScheme.error
-                                : colorScheme.primary,
+                            gradient: LinearGradient(
+                              colors: _isRecording
+                                  ? [
+                                      colorScheme.error,
+                                      colorScheme.error.withValues(alpha: 0.8),
+                                    ]
+                                  : [
+                                      colorScheme.primary,
+                                      colorScheme.secondary,
+                                    ],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: (_isRecording
+                                        ? colorScheme.error
+                                        : colorScheme.primary)
+                                    .withValues(alpha: 0.4),
+                                blurRadius: 12,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
                           ),
                           child: Icon(
                             _isRecording
                                 ? (_isPaused ? Icons.pause : Icons.mic)
                                 : Icons.mic,
                             size: 40,
-                            color: colorScheme.onPrimary,
+                            color: Colors.white,
                           ),
                         ),
                       ),
@@ -335,19 +413,40 @@ class _VoiceRecorderBottomSheetState extends State<VoiceRecorderBottomSheet>
     required Color backgroundColor,
     required Color iconColor,
   }) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       children: [
-        Material(
-          color: backgroundColor,
-          shape: const CircleBorder(),
-          child: InkWell(
-            onTap: onPressed,
-            customBorder: const CircleBorder(),
-            child: Container(
-              width: 56,
-              height: 56,
-              alignment: Alignment.center,
-              child: Icon(icon, color: iconColor, size: 28),
+        Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: LinearGradient(
+              colors: [
+                backgroundColor,
+                backgroundColor.withValues(alpha: 0.8),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: backgroundColor.withValues(alpha: 0.3),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Material(
+            color: Colors.transparent,
+            shape: const CircleBorder(),
+            child: InkWell(
+              onTap: onPressed,
+              customBorder: const CircleBorder(),
+              child: Container(
+                width: 56,
+                height: 56,
+                alignment: Alignment.center,
+                child: Icon(icon, color: Colors.white, size: 28),
+              ),
             ),
           ),
         ),
@@ -366,19 +465,39 @@ class _VoiceRecorderBottomSheetState extends State<VoiceRecorderBottomSheet>
     required Color backgroundColor,
     required Color iconColor,
   }) {
-    return Material(
-      color: backgroundColor,
-      shape: const CircleBorder(),
-      elevation: 4,
-      shadowColor: backgroundColor.withValues(alpha: 0.4),
-      child: InkWell(
-        onTap: onPressed,
-        customBorder: const CircleBorder(),
-        child: Container(
-          width: 72,
-          height: 72,
-          alignment: Alignment.center,
-          child: Icon(icon, color: iconColor, size: 36),
+    final colorScheme = Theme.of(context).colorScheme;
+    return Container(
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: LinearGradient(
+          colors: [
+            backgroundColor,
+            backgroundColor.withValues(alpha: 0.8),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: backgroundColor.withValues(alpha: 0.4),
+            blurRadius: 12,
+            offset: const Offset(0, 6),
+            spreadRadius: 2,
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        shape: const CircleBorder(),
+        child: InkWell(
+          onTap: onPressed,
+          customBorder: const CircleBorder(),
+          child: Container(
+            width: 72,
+            height: 72,
+            alignment: Alignment.center,
+            child: Icon(icon, color: Colors.white, size: 36),
+          ),
         ),
       ),
     );

@@ -32,6 +32,11 @@ abstract class ChatMessageState with _$ChatMessageState {
     @Default(false) bool isWatching,
     String? watchError,
 
+    // Upload Media
+    @Default(false) bool isUploadingMedia,
+    String? uploadError,
+    String? uploadSuccessMessage,
+
     // Conversation List
     @Default(<ConversationListEntity>[])
     List<ConversationListEntity> conversations,

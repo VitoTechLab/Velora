@@ -46,6 +46,35 @@ class ChatMessageEvent with _$ChatMessageEvent {
     String? caption,
   }) = SendMediaMessageEvent;
 
+  /// Upload and send images
+  const factory ChatMessageEvent.uploadAndSendImages({
+    required String conversationId,
+    required List<String> filePaths,
+    required String userId,
+  }) = UploadAndSendImagesEvent;
+
+  /// Upload and send video
+  const factory ChatMessageEvent.uploadAndSendVideo({
+    required String conversationId,
+    required String filePath,
+    required String userId,
+  }) = UploadAndSendVideoEvent;
+
+  /// Upload and send documents
+  const factory ChatMessageEvent.uploadAndSendDocuments({
+    required String conversationId,
+    required List<String> filePaths,
+    required String userId,
+  }) = UploadAndSendDocumentsEvent;
+
+  /// Upload and send audio
+  const factory ChatMessageEvent.uploadAndSendAudio({
+    required String conversationId,
+    required String filePath,
+    required String userId,
+    @Default(false) bool isVoiceMessage,
+  }) = UploadAndSendAudioEvent;
+
   const factory ChatMessageEvent.sendPollMessage({
     required String conversationId,
     required String question,

@@ -1627,6 +1627,21 @@ class AppLocalizationsJa extends AppLocalizations {
   String get chatDetailVoiceRecorded => 'Uploading voice message...';
 
   @override
+  String get chatDetailDownloadFile => 'Download file';
+
+  @override
+  String get chatDetailDownloading => 'Downloading...';
+
+  @override
+  String get chatDetailDownloadSuccess => 'File downloaded successfully';
+
+  @override
+  String get chatDetailDownloadError => 'Failed to download file';
+
+  @override
+  String get chatDetailOpenFile => 'Open file';
+
+  @override
   String get voiceRecorderTitle => 'Voice Message';
 
   @override

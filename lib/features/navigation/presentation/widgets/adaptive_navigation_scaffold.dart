@@ -22,11 +22,14 @@ class AdaptiveNavigationScaffold extends StatelessWidget {
   final int currentIndex;
   final ValueChanged<int> onDestinationSelected;
 
-  // Increased icon sizes for better visibility
-  static const double _mobileIconSize = 30;
-  static const double _railIconSize = 28;
-  // Thicker stroke weight for icons
-  static const double _iconStrokeWeight = 600;
+  // Modern elegant icon sizes - smaller and refined
+  static const double _mobileIconSize = 24;
+  static const double _railIconSize = 24;
+  // Optimal stroke weight for clarity
+  static const double _iconStrokeWeight = 400;
+  // Spacing and padding
+  static const double _navBarHeight = 72;
+  static const double _railWidth = 80;
 
   bool get _isIOS => defaultTargetPlatform == TargetPlatform.iOS;
 
@@ -39,8 +42,41 @@ class AdaptiveNavigationScaffold extends StatelessWidget {
       return Scaffold(
         body: Row(
           children: [
-            SafeArea(child: _buildNavigationRail(context)),
-            const VerticalDivider(width: 1),
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Theme.of(context).colorScheme.surface,
+                    Theme.of(context)
+                        .colorScheme
+                        .surfaceContainerHighest
+                        .withValues(alpha: 0.5),
+                  ],
+                ),
+              ),
+              child: SafeArea(child: _buildNavigationRail(context)),
+            ),
+            Container(
+              width: 1,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Theme.of(context)
+                        .colorScheme
+                        .outline
+                        .withValues(alpha: 0.1),
+                    Theme.of(context)
+                        .colorScheme
+                        .outline
+                        .withValues(alpha: 0.05),
+                  ],
+                ),
+              ),
+            ),
             Expanded(child: SafeArea(child: body)),
           ],
         ),
@@ -49,22 +85,60 @@ class AdaptiveNavigationScaffold extends StatelessWidget {
 
     return Scaffold(
       body: SafeArea(child: body),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 8),
-        child: _isIOS
-            ? _buildCupertinoTabBar(context)
-            : _buildMaterialNavigationBar(context),
+      bottomNavigationBar: Container(
+        margin: const EdgeInsets.only(bottom: 8, left: 12, right: 12),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Theme.of(context).colorScheme.surface.withValues(alpha: 0.95),
+              Theme.of(context)
+                  .colorScheme
+                  .surfaceContainerHighest
+                  .withValues(alpha: 0.9),
+            ],
+          ),
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(
+            color:
+                Theme.of(context).colorScheme.outline.withValues(alpha: 0.15),
+            width: 1,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color:
+                  Theme.of(context).colorScheme.shadow.withValues(alpha: 0.1),
+              blurRadius: 20,
+              offset: const Offset(0, -2),
+              spreadRadius: 0,
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(24),
+          child: _isIOS
+              ? _buildCupertinoTabBar(context)
+              : _buildMaterialNavigationBar(context),
+        ),
       ),
     );
   }
 
   Widget _buildNavigationRail(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return NavigationRail(
       selectedIndex: currentIndex,
       onDestinationSelected: onDestinationSelected,
       labelType: NavigationRailLabelType.none,
       groupAlignment: 0,
-      minWidth: 72,
+      minWidth: _railWidth,
+      backgroundColor: Colors.transparent,
+      indicatorColor: colorScheme.primaryContainer.withValues(alpha: 0.3),
+      indicatorShape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
       destinations: tabs
           .asMap()
           .entries
@@ -75,6 +149,7 @@ class AdaptiveNavigationScaffold extends StatelessWidget {
               selectedIcon: _buildNavIcon(context, entry.value, entry.key, true,
                   size: _railIconSize),
               label: Text(entry.value.label),
+              padding: const EdgeInsets.symmetric(vertical: 8),
             ),
           )
           .toList(),
@@ -85,9 +160,12 @@ class AdaptiveNavigationScaffold extends StatelessWidget {
     return NavigationBar(
       selectedIndex: currentIndex,
       onDestinationSelected: onDestinationSelected,
-      height: 65,
+      height: _navBarHeight,
       labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+      backgroundColor: Colors.transparent,
+      elevation: 0,
       indicatorColor: Colors.transparent,
+      overlayColor: WidgetStateProperty.all(Colors.transparent),
       destinations: tabs
           .asMap()
           .entries
@@ -109,6 +187,9 @@ class AdaptiveNavigationScaffold extends StatelessWidget {
       currentIndex: currentIndex,
       onTap: onDestinationSelected,
       iconSize: _mobileIconSize,
+      backgroundColor: Colors.transparent,
+      border: null,
+      height: _navBarHeight,
       items: tabs
           .asMap()
           .entries
@@ -150,17 +231,31 @@ class AdaptiveNavigationScaffold extends StatelessWidget {
           previous.profile?.avatarUrl != current.profile?.avatarUrl,
       builder: (context, state) {
         final avatarUrl = state.profile?.avatarUrl;
-        final avatarRenderSize = size - 4; // Slightly smaller for border
+        final avatarRenderSize = size - 6; // Space for gradient border
 
         return Container(
           width: size,
           height: size,
+          padding: selected ? const EdgeInsets.all(2) : null,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            border: Border.all(
-              color: selected ? colorScheme.onSurface : Colors.transparent,
-              width: selected ? 2 : 0,
-            ),
+            gradient: selected
+                ? LinearGradient(
+                    colors: [
+                      colorScheme.primary,
+                      colorScheme.secondary,
+                    ],
+                  )
+                : null,
+            boxShadow: selected
+                ? [
+                    BoxShadow(
+                      color: colorScheme.primary.withValues(alpha: 0.3),
+                      blurRadius: 8,
+                      spreadRadius: 1,
+                    ),
+                  ]
+                : null,
           ),
           child: ClipOval(
             child: avatarUrl != null && avatarUrl.isNotEmpty
@@ -211,14 +306,43 @@ class AdaptiveNavigationScaffold extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final isCupertino = _isIOS;
 
-    return Icon(
+    final icon = Icon(
       isCupertino
           ? (selected ? tab.cupertinoActiveIcon : tab.cupertinoIcon)
           : (selected ? tab.activeIcon : tab.icon),
       size: size,
-      color: selected ? colorScheme.onSurface : colorScheme.onSurfaceVariant,
+      color: selected ? Colors.white : colorScheme.onSurfaceVariant,
       weight: _iconStrokeWeight,
       fill: selected ? 1.0 : 0.0,
+    );
+
+    if (selected) {
+      return Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              colorScheme.primary.withValues(alpha: 0.8),
+              colorScheme.secondary.withValues(alpha: 0.7),
+            ],
+          ),
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: colorScheme.primary.withValues(alpha: 0.3),
+              blurRadius: 12,
+              offset: const Offset(0, 4),
+              spreadRadius: 0,
+            ),
+          ],
+        ),
+        child: icon,
+      );
+    }
+
+    return Padding(
+      padding: const EdgeInsets.all(12),
+      child: icon,
     );
   }
 }

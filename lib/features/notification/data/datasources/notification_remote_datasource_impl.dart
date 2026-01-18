@@ -8,6 +8,7 @@ import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/notification/data/models/notification_cursor_model.dart';
 import 'package:velora/features/notification/data/models/notification_model.dart';
 import 'package:velora/features/notification/data/models/notification_pagination_model.dart';
+import 'package:velora/features/notification/domain/entities/notification_entity.dart';
 import 'notification_remote_datasource.dart';
 
 /// Remote datasource implementation for notification operations
@@ -17,6 +18,17 @@ import 'notification_remote_datasource.dart';
 /// - Realtime Supabase subscriptions for new notifications
 /// - Type filtering for notification categories
 /// - Time-based grouping support (Today, Yesterday, Last 7/30 Days, Older)
+/// 
+/// Supported notification types (from SQL schema):
+/// - like, comment, follow, follow_request, follow_accepted
+/// - donation, mention, post_share, channel_invite
+/// - campaign_created, campaign_update
+/// 
+/// Metadata structure (from SQL):
+/// - Like: { thumbnail: string }
+/// - Comment: { thumbnail: string, preview: string }
+/// - Campaign: { title: string, description: string }
+/// - Donation: { amount: number, donor_name: string? }
 class NotificationRemoteDataSourceImpl implements NotificationRemoteDataSource {
   NotificationRemoteDataSourceImpl({required SupabaseClient supabaseClient})
     : _client = supabaseClient;
@@ -221,5 +233,160 @@ class NotificationRemoteDataSourceImpl implements NotificationRemoteDataSource {
       await controller.close();
     }
     _watchController = null;
+  }
+
+  /// Group notifications by time category
+  /// 
+  /// Uses [NotificationTimeCategory] from entity for consistency.
+  /// Returns a map with ordered categories:
+  /// - today: Notifications from the current day
+  /// - yesterday: Notifications from the previous day
+  /// - last7Days: Notifications from 2-7 days ago
+  /// - last30Days: Notifications from 8-30 days ago
+  /// - older: Notifications older than 30 days
+  /// 
+  /// Each category only appears if it has notifications.
+  /// 
+  /// Note: This method converts NotificationModel to entity internally
+  /// to leverage the existing timeCategory getter in [NotificationEntity].
+  Map<NotificationTimeCategory, List<NotificationModel>> groupNotificationsByTimeCategory(
+    List<NotificationModel> notifications,
+  ) {
+    final grouped = <NotificationTimeCategory, List<NotificationModel>>{};
+
+    for (final notification in notifications) {
+      // Use entity's timeCategory getter for consistency
+      final category = notification.toEntity().timeCategory;
+      grouped.putIfAbsent(category, () => []).add(notification);
+    }
+
+    // Return in order: today, yesterday, last7Days, last30Days, older
+    final ordered = <NotificationTimeCategory, List<NotificationModel>>{};
+    for (final category in NotificationTimeCategory.values) {
+      if (grouped.containsKey(category)) {
+        ordered[category] = grouped[category]!;
+      }
+    }
+
+    return ordered;
+  }
+
+  /// Get notification type display info
+  /// 
+  /// Returns a map with display info for each notification type:
+  /// - icon: Material icon name
+  /// - color: Hex color code
+  /// - titleKey: Localization key for title
+  static Map<String, String> getNotificationTypeDisplayInfo(String type) {
+    switch (type) {
+      case 'like':
+        return {
+          'icon': 'favorite',
+          'color': '#E91E63',
+          'titleKey': 'notification_like',
+        };
+      case 'comment':
+        return {
+          'icon': 'comment',
+          'color': '#2196F3',
+          'titleKey': 'notification_comment',
+        };
+      case 'follow':
+        return {
+          'icon': 'person_add',
+          'color': '#4CAF50',
+          'titleKey': 'notification_follow',
+        };
+      case 'follow_request':
+        return {
+          'icon': 'person_add',
+          'color': '#FF9800',
+          'titleKey': 'notification_follow_request',
+        };
+      case 'follow_accepted':
+        return {
+          'icon': 'check_circle',
+          'color': '#4CAF50',
+          'titleKey': 'notification_follow_accepted',
+        };
+      case 'donation':
+        return {
+          'icon': 'volunteer_activism',
+          'color': '#9C27B0',
+          'titleKey': 'notification_donation',
+        };
+      case 'mention':
+        return {
+          'icon': 'alternate_email',
+          'color': '#00BCD4',
+          'titleKey': 'notification_mention',
+        };
+      case 'post_share':
+        return {
+          'icon': 'share',
+          'color': '#607D8B',
+          'titleKey': 'notification_post_share',
+        };
+      case 'channel_invite':
+        return {
+          'icon': 'group_add',
+          'color': '#3F51B5',
+          'titleKey': 'notification_channel_invite',
+        };
+      case 'campaign_created':
+        return {
+          'icon': 'campaign',
+          'color': '#FF5722',
+          'titleKey': 'notification_campaign_created',
+        };
+      case 'campaign_update':
+        return {
+          'icon': 'update',
+          'color': '#795548',
+          'titleKey': 'notification_campaign_update',
+        };
+      default:
+        return {
+          'icon': 'notifications',
+          'color': '#9E9E9E',
+          'titleKey': 'notification_default',
+        };
+    }
+  }
+
+  /// Extract preview text from notification metadata
+  /// 
+  /// Handles different notification types:
+  /// - Comment: Returns preview text
+  /// - Campaign: Returns title and/or description
+  /// - Donation: Returns amount with optional donor name
+  static String? getPreviewFromMetadata(
+    String type,
+    Map<String, dynamic> metadata,
+  ) {
+    switch (type) {
+      case 'comment':
+        return metadata['preview'] as String?;
+      case 'campaign_created':
+      case 'campaign_update':
+        final title = metadata['title'] as String?;
+        final description = metadata['description'] as String?;
+        if (title != null && description != null) {
+          return '$title: $description';
+        }
+        return title ?? description;
+      case 'donation':
+        final amount = metadata['amount'];
+        final donorName = metadata['donor_name'] as String?;
+        if (amount != null) {
+          final amountStr = amount.toString();
+          return donorName != null
+              ? '$donorName donated $amountStr'
+              : 'Donated $amountStr';
+        }
+        return null;
+      default:
+        return null;
+    }
   }
 }

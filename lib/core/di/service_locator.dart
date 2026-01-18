@@ -5,6 +5,7 @@ import 'package:velora/core/firebase/firebase_analytics_service.dart';
 import 'package:velora/core/firebase/firebase_messaging_service.dart';
 import 'package:velora/core/network/dio_factory.dart';
 import 'package:velora/core/services/connectivity_service.dart';
+import 'package:velora/core/services/file_download_service.dart';
 import 'package:velora/core/supabase/supabase_initializer.dart';
 import 'package:velora/features/auth/domain/usecases/watch_auth_snapshot_usecase.dart';
 import 'package:velora/features/settings/domain/entities/user_preferences.dart';
@@ -161,6 +162,9 @@ Future<void> configureDependencies() async {
   getIt
     ..registerLazySingleton<NavigationService>(() => NavigationService())
     ..registerLazySingleton<ConnectivityService>(() => ConnectivityService())
+    ..registerLazySingleton<FileDownloadService>(
+      () => FileDownloadService(dio: getIt<Dio>()),
+    )
     ..registerLazySingleton<FirebaseAnalyticsService>(
       () => FirebaseAnalyticsService(),
     )
@@ -579,6 +583,7 @@ Future<void> configureDependencies() async {
       respondToEventUseCase: getIt<RespondToEventUseCase>(),
       cancelEventRsvpUseCase: getIt<CancelEventRsvpUseCase>(),
       markMessagesReadBatchUseCase: getIt<MarkMessagesReadBatchUseCase>(),
+      mediaRepository: getIt<MediaRepository>(),
     ),
   );
 

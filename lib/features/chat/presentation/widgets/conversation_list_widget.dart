@@ -64,8 +64,8 @@ class ConversationListWidget extends StatelessWidget {
     if (searchQuery.isNotEmpty) {
       // Apply search filter
       return conversations.where((conv) {
-        final name =
-            (conv.otherUserFullName ?? conv.otherUserUsername ?? '').toLowerCase();
+        final name = (conv.otherUserFullName ?? conv.otherUserUsername ?? '')
+            .toLowerCase();
         final lastMessage = (conv.lastMessageBody ?? '').toLowerCase();
         return name.contains(searchQuery) || lastMessage.contains(searchQuery);
       }).toList();
@@ -139,38 +139,62 @@ class ConversationListWidget extends StatelessWidget {
     final isFiltered = state.selectedFilter != 'all';
 
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            hasSearch ? Icons.search_off : Icons.chat_bubble_outline,
-            size: 80,
-            color: colorScheme.outline,
-          ),
-          const SizedBox(height: 16),
-          Text(
-            hasSearch
-                ? 'No results for "${state.searchQuery}"'
-                : isFiltered
-                    ? 'No ${state.selectedFilter} chats'
-                    : t.chatScreenNoChats,
-            style: textTheme.titleLarge?.copyWith(
-              color: colorScheme.onSurfaceVariant,
+      child: TweenAnimationBuilder<double>(
+        tween: Tween(begin: 0.0, end: 1.0),
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeOutCubic,
+        builder: (context, value, child) {
+          return Transform.scale(
+            scale: 0.9 + (0.1 * value),
+            child: Opacity(
+              opacity: value,
+              child: child,
             ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            hasSearch
-                ? 'Try searching for something else'
-                : isFiltered
-                    ? 'Try selecting a different filter'
-                    : t.chatScreenNoChatsHint,
-            style: textTheme.bodyMedium?.copyWith(
-              color: colorScheme.outline,
+          );
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ShaderMask(
+              shaderCallback: (bounds) => LinearGradient(
+                colors: [
+                  colorScheme.primary.withValues(alpha: 0.6),
+                  colorScheme.secondary.withValues(alpha: 0.6),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ).createShader(bounds),
+              child: Icon(
+                hasSearch ? Icons.search_off : Icons.chat_bubble_outline,
+                size: 80,
+                color: Colors.white,
+              ),
             ),
-            textAlign: TextAlign.center,
-          ),
-        ],
+            const SizedBox(height: 16),
+            Text(
+              hasSearch
+                  ? 'No results for "${state.searchQuery}"'
+                  : isFiltered
+                      ? 'No ${state.selectedFilter} chats'
+                      : t.chatScreenNoChats,
+              style: textTheme.titleLarge?.copyWith(
+                color: colorScheme.onSurfaceVariant,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              hasSearch
+                  ? 'Try searching for something else'
+                  : isFiltered
+                      ? 'Try selecting a different filter'
+                      : t.chatScreenNoChatsHint,
+              style: textTheme.bodyMedium?.copyWith(
+                color: colorScheme.outline,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -193,10 +217,24 @@ class ConversationListWidget extends StatelessWidget {
         itemCount: conversations.length,
         itemBuilder: (context, index) {
           final conversation = conversations[index];
-          return _ConversationListItemWidget(
+          return TweenAnimationBuilder<double>(
             key: ValueKey('chat_${conversation.conversationId}'),
-            conversation: conversation,
-            t: t,
+            tween: Tween(begin: 0.0, end: 1.0),
+            duration: Duration(milliseconds: 300 + (index * 50).clamp(0, 500)),
+            curve: Curves.easeOutCubic,
+            builder: (context, value, child) {
+              return Transform.translate(
+                offset: Offset(0, 20 * (1 - value)),
+                child: Opacity(
+                  opacity: value,
+                  child: child,
+                ),
+              );
+            },
+            child: _ConversationListItemWidget(
+              conversation: conversation,
+              t: t,
+            ),
           );
         },
       ),
@@ -229,20 +267,20 @@ class _ConversationListItemWidget extends StatelessWidget {
         // Determine message preview - show typing if peer is typing
         final messagePreview = isTyping
             ? t.chatScreenTyping
-          : (conversation.lastMessageBody ?? '');
+            : (conversation.lastMessageBody ?? '');
 
         return ChatListItem(
           profileImageUrl: conversation.otherUserAvatarUrl ??
-            'https://i.pravatar.cc/150?img=12',
+              'https://i.pravatar.cc/150?img=12',
           name: conversation.otherUserFullName ??
-            conversation.otherUserUsername ??
-            (isGroup ? t.chatScreenUnnamedGroup : t.chatScreenUnnamed),
+              conversation.otherUserUsername ??
+              (isGroup ? t.chatScreenUnnamedGroup : t.chatScreenUnnamed),
           message: messagePreview,
           time: conversation.lastMessageAt != null
               ? FormatUtils.formatChatListTime(conversation.lastMessageAt!)
               : '',
           isRead: conversation.unreadCount == 0,
-              messageType: null,
+          messageType: null,
           unreadCount:
               conversation.unreadCount > 0 ? conversation.unreadCount : null,
           isGroup: isGroup,
@@ -254,9 +292,7 @@ class _ConversationListItemWidget extends StatelessWidget {
                 conversationId: conversation.conversationId,
                 chatName: conversation.otherUserFullName ??
                     conversation.otherUserUsername ??
-                    (isGroup
-                        ? t.chatScreenUnnamedGroup
-                        : t.chatScreenUnnamed),
+                    (isGroup ? t.chatScreenUnnamedGroup : t.chatScreenUnnamed),
                 chatSubtitle: isGroup
                     ? t.chatDetailGroupSubtitle
                     : t.chatDetailSelfSubtitle,

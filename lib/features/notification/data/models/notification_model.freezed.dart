@@ -23,7 +23,7 @@ mixin _$NotificationModel {
   @JsonKey(name: 'id')
   String get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_id')
-  String get userId => throw _privateConstructorUsedError;
+  String? get userId => throw _privateConstructorUsedError;
   @JsonKey(name: 'actor_id')
   String? get actorId => throw _privateConstructorUsedError;
   @JsonKey(name: 'type')
@@ -44,14 +44,14 @@ mixin _$NotificationModel {
   @UtcDateTimeConverter()
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt =>
-      throw _privateConstructorUsedError; // Actor info (from joined profile - optional)
+      throw _privateConstructorUsedError; // Actor info (from joined profile - matches SQL: actor_username, actor_avatar_url)
   @JsonKey(name: 'actor_username')
   String? get actorUsername => throw _privateConstructorUsedError;
-  @JsonKey(name: 'actor_photo_url')
-  String? get actorPhotoUrl =>
-      throw _privateConstructorUsedError; // Target preview
-  @JsonKey(name: 'target_preview_url')
-  String? get targetPreviewUrl =>
+  @JsonKey(name: 'actor_avatar_url')
+  String? get actorAvatarUrl =>
+      throw _privateConstructorUsedError; // Metadata for rich notification content (thumbnail, preview, title, etc.)
+  @JsonKey(name: 'metadata')
+  Map<String, dynamic> get metadata =>
       throw _privateConstructorUsedError; // Follow relationship - whether current user follows the actor
   @JsonKey(name: 'is_following_actor')
   bool get isFollowingActor => throw _privateConstructorUsedError;
@@ -74,7 +74,7 @@ abstract class $NotificationModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'id') String id,
-      @JsonKey(name: 'user_id') String userId,
+      @JsonKey(name: 'user_id') String? userId,
       @JsonKey(name: 'actor_id') String? actorId,
       @JsonKey(name: 'type') String type,
       @JsonKey(name: 'target_id') String? targetId,
@@ -85,8 +85,8 @@ abstract class $NotificationModelCopyWith<$Res> {
       @UtcDateTimeConverter() @JsonKey(name: 'created_at') DateTime createdAt,
       @UtcDateTimeConverter() @JsonKey(name: 'updated_at') DateTime? updatedAt,
       @JsonKey(name: 'actor_username') String? actorUsername,
-      @JsonKey(name: 'actor_photo_url') String? actorPhotoUrl,
-      @JsonKey(name: 'target_preview_url') String? targetPreviewUrl,
+      @JsonKey(name: 'actor_avatar_url') String? actorAvatarUrl,
+      @JsonKey(name: 'metadata') Map<String, dynamic> metadata,
       @JsonKey(name: 'is_following_actor') bool isFollowingActor});
 }
 
@@ -106,7 +106,7 @@ class _$NotificationModelCopyWithImpl<$Res, $Val extends NotificationModel>
   @override
   $Res call({
     Object? id = null,
-    Object? userId = null,
+    Object? userId = freezed,
     Object? actorId = freezed,
     Object? type = null,
     Object? targetId = freezed,
@@ -117,8 +117,8 @@ class _$NotificationModelCopyWithImpl<$Res, $Val extends NotificationModel>
     Object? createdAt = null,
     Object? updatedAt = freezed,
     Object? actorUsername = freezed,
-    Object? actorPhotoUrl = freezed,
-    Object? targetPreviewUrl = freezed,
+    Object? actorAvatarUrl = freezed,
+    Object? metadata = null,
     Object? isFollowingActor = null,
   }) {
     return _then(_value.copyWith(
@@ -126,10 +126,10 @@ class _$NotificationModelCopyWithImpl<$Res, $Val extends NotificationModel>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      userId: null == userId
+      userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       actorId: freezed == actorId
           ? _value.actorId
           : actorId // ignore: cast_nullable_to_non_nullable
@@ -170,14 +170,14 @@ class _$NotificationModelCopyWithImpl<$Res, $Val extends NotificationModel>
           ? _value.actorUsername
           : actorUsername // ignore: cast_nullable_to_non_nullable
               as String?,
-      actorPhotoUrl: freezed == actorPhotoUrl
-          ? _value.actorPhotoUrl
-          : actorPhotoUrl // ignore: cast_nullable_to_non_nullable
+      actorAvatarUrl: freezed == actorAvatarUrl
+          ? _value.actorAvatarUrl
+          : actorAvatarUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      targetPreviewUrl: freezed == targetPreviewUrl
-          ? _value.targetPreviewUrl
-          : targetPreviewUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+      metadata: null == metadata
+          ? _value.metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
       isFollowingActor: null == isFollowingActor
           ? _value.isFollowingActor
           : isFollowingActor // ignore: cast_nullable_to_non_nullable
@@ -196,7 +196,7 @@ abstract class _$$NotificationModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'id') String id,
-      @JsonKey(name: 'user_id') String userId,
+      @JsonKey(name: 'user_id') String? userId,
       @JsonKey(name: 'actor_id') String? actorId,
       @JsonKey(name: 'type') String type,
       @JsonKey(name: 'target_id') String? targetId,
@@ -207,8 +207,8 @@ abstract class _$$NotificationModelImplCopyWith<$Res>
       @UtcDateTimeConverter() @JsonKey(name: 'created_at') DateTime createdAt,
       @UtcDateTimeConverter() @JsonKey(name: 'updated_at') DateTime? updatedAt,
       @JsonKey(name: 'actor_username') String? actorUsername,
-      @JsonKey(name: 'actor_photo_url') String? actorPhotoUrl,
-      @JsonKey(name: 'target_preview_url') String? targetPreviewUrl,
+      @JsonKey(name: 'actor_avatar_url') String? actorAvatarUrl,
+      @JsonKey(name: 'metadata') Map<String, dynamic> metadata,
       @JsonKey(name: 'is_following_actor') bool isFollowingActor});
 }
 
@@ -226,7 +226,7 @@ class __$$NotificationModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? userId = null,
+    Object? userId = freezed,
     Object? actorId = freezed,
     Object? type = null,
     Object? targetId = freezed,
@@ -237,8 +237,8 @@ class __$$NotificationModelImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? updatedAt = freezed,
     Object? actorUsername = freezed,
-    Object? actorPhotoUrl = freezed,
-    Object? targetPreviewUrl = freezed,
+    Object? actorAvatarUrl = freezed,
+    Object? metadata = null,
     Object? isFollowingActor = null,
   }) {
     return _then(_$NotificationModelImpl(
@@ -246,10 +246,10 @@ class __$$NotificationModelImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      userId: null == userId
+      userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       actorId: freezed == actorId
           ? _value.actorId
           : actorId // ignore: cast_nullable_to_non_nullable
@@ -290,14 +290,14 @@ class __$$NotificationModelImplCopyWithImpl<$Res>
           ? _value.actorUsername
           : actorUsername // ignore: cast_nullable_to_non_nullable
               as String?,
-      actorPhotoUrl: freezed == actorPhotoUrl
-          ? _value.actorPhotoUrl
-          : actorPhotoUrl // ignore: cast_nullable_to_non_nullable
+      actorAvatarUrl: freezed == actorAvatarUrl
+          ? _value.actorAvatarUrl
+          : actorAvatarUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      targetPreviewUrl: freezed == targetPreviewUrl
-          ? _value.targetPreviewUrl
-          : targetPreviewUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+      metadata: null == metadata
+          ? _value._metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
       isFollowingActor: null == isFollowingActor
           ? _value.isFollowingActor
           : isFollowingActor // ignore: cast_nullable_to_non_nullable
@@ -311,7 +311,7 @@ class __$$NotificationModelImplCopyWithImpl<$Res>
 class _$NotificationModelImpl extends _NotificationModel {
   const _$NotificationModelImpl(
       {@JsonKey(name: 'id') required this.id,
-      @JsonKey(name: 'user_id') required this.userId,
+      @JsonKey(name: 'user_id') this.userId,
       @JsonKey(name: 'actor_id') this.actorId,
       @JsonKey(name: 'type') required this.type,
       @JsonKey(name: 'target_id') this.targetId,
@@ -324,10 +324,11 @@ class _$NotificationModelImpl extends _NotificationModel {
       required this.createdAt,
       @UtcDateTimeConverter() @JsonKey(name: 'updated_at') this.updatedAt,
       @JsonKey(name: 'actor_username') this.actorUsername,
-      @JsonKey(name: 'actor_photo_url') this.actorPhotoUrl,
-      @JsonKey(name: 'target_preview_url') this.targetPreviewUrl,
+      @JsonKey(name: 'actor_avatar_url') this.actorAvatarUrl,
+      @JsonKey(name: 'metadata') final Map<String, dynamic> metadata = const {},
       @JsonKey(name: 'is_following_actor') this.isFollowingActor = false})
-      : super._();
+      : _metadata = metadata,
+        super._();
 
   factory _$NotificationModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$NotificationModelImplFromJson(json);
@@ -337,7 +338,7 @@ class _$NotificationModelImpl extends _NotificationModel {
   final String id;
   @override
   @JsonKey(name: 'user_id')
-  final String userId;
+  final String? userId;
   @override
   @JsonKey(name: 'actor_id')
   final String? actorId;
@@ -367,17 +368,24 @@ class _$NotificationModelImpl extends _NotificationModel {
   @UtcDateTimeConverter()
   @JsonKey(name: 'updated_at')
   final DateTime? updatedAt;
-// Actor info (from joined profile - optional)
+// Actor info (from joined profile - matches SQL: actor_username, actor_avatar_url)
   @override
   @JsonKey(name: 'actor_username')
   final String? actorUsername;
   @override
-  @JsonKey(name: 'actor_photo_url')
-  final String? actorPhotoUrl;
-// Target preview
+  @JsonKey(name: 'actor_avatar_url')
+  final String? actorAvatarUrl;
+// Metadata for rich notification content (thumbnail, preview, title, etc.)
+  final Map<String, dynamic> _metadata;
+// Metadata for rich notification content (thumbnail, preview, title, etc.)
   @override
-  @JsonKey(name: 'target_preview_url')
-  final String? targetPreviewUrl;
+  @JsonKey(name: 'metadata')
+  Map<String, dynamic> get metadata {
+    if (_metadata is EqualUnmodifiableMapView) return _metadata;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_metadata);
+  }
+
 // Follow relationship - whether current user follows the actor
   @override
   @JsonKey(name: 'is_following_actor')
@@ -385,7 +393,7 @@ class _$NotificationModelImpl extends _NotificationModel {
 
   @override
   String toString() {
-    return 'NotificationModel(id: $id, userId: $userId, actorId: $actorId, type: $type, targetId: $targetId, targetType: $targetType, groupKey: $groupKey, groupCount: $groupCount, isRead: $isRead, createdAt: $createdAt, updatedAt: $updatedAt, actorUsername: $actorUsername, actorPhotoUrl: $actorPhotoUrl, targetPreviewUrl: $targetPreviewUrl, isFollowingActor: $isFollowingActor)';
+    return 'NotificationModel(id: $id, userId: $userId, actorId: $actorId, type: $type, targetId: $targetId, targetType: $targetType, groupKey: $groupKey, groupCount: $groupCount, isRead: $isRead, createdAt: $createdAt, updatedAt: $updatedAt, actorUsername: $actorUsername, actorAvatarUrl: $actorAvatarUrl, metadata: $metadata, isFollowingActor: $isFollowingActor)';
   }
 
   @override
@@ -412,10 +420,9 @@ class _$NotificationModelImpl extends _NotificationModel {
                 other.updatedAt == updatedAt) &&
             (identical(other.actorUsername, actorUsername) ||
                 other.actorUsername == actorUsername) &&
-            (identical(other.actorPhotoUrl, actorPhotoUrl) ||
-                other.actorPhotoUrl == actorPhotoUrl) &&
-            (identical(other.targetPreviewUrl, targetPreviewUrl) ||
-                other.targetPreviewUrl == targetPreviewUrl) &&
+            (identical(other.actorAvatarUrl, actorAvatarUrl) ||
+                other.actorAvatarUrl == actorAvatarUrl) &&
+            const DeepCollectionEquality().equals(other._metadata, _metadata) &&
             (identical(other.isFollowingActor, isFollowingActor) ||
                 other.isFollowingActor == isFollowingActor));
   }
@@ -436,8 +443,8 @@ class _$NotificationModelImpl extends _NotificationModel {
       createdAt,
       updatedAt,
       actorUsername,
-      actorPhotoUrl,
-      targetPreviewUrl,
+      actorAvatarUrl,
+      const DeepCollectionEquality().hash(_metadata),
       isFollowingActor);
 
   /// Create a copy of NotificationModel
@@ -460,7 +467,7 @@ class _$NotificationModelImpl extends _NotificationModel {
 abstract class _NotificationModel extends NotificationModel {
   const factory _NotificationModel(
           {@JsonKey(name: 'id') required final String id,
-          @JsonKey(name: 'user_id') required final String userId,
+          @JsonKey(name: 'user_id') final String? userId,
           @JsonKey(name: 'actor_id') final String? actorId,
           @JsonKey(name: 'type') required final String type,
           @JsonKey(name: 'target_id') final String? targetId,
@@ -475,8 +482,8 @@ abstract class _NotificationModel extends NotificationModel {
           @JsonKey(name: 'updated_at')
           final DateTime? updatedAt,
           @JsonKey(name: 'actor_username') final String? actorUsername,
-          @JsonKey(name: 'actor_photo_url') final String? actorPhotoUrl,
-          @JsonKey(name: 'target_preview_url') final String? targetPreviewUrl,
+          @JsonKey(name: 'actor_avatar_url') final String? actorAvatarUrl,
+          @JsonKey(name: 'metadata') final Map<String, dynamic> metadata,
           @JsonKey(name: 'is_following_actor') final bool isFollowingActor}) =
       _$NotificationModelImpl;
   const _NotificationModel._() : super._();
@@ -489,7 +496,7 @@ abstract class _NotificationModel extends NotificationModel {
   String get id;
   @override
   @JsonKey(name: 'user_id')
-  String get userId;
+  String? get userId;
   @override
   @JsonKey(name: 'actor_id')
   String? get actorId;
@@ -518,17 +525,19 @@ abstract class _NotificationModel extends NotificationModel {
   @override
   @UtcDateTimeConverter()
   @JsonKey(name: 'updated_at')
-  DateTime? get updatedAt; // Actor info (from joined profile - optional)
+  DateTime?
+      get updatedAt; // Actor info (from joined profile - matches SQL: actor_username, actor_avatar_url)
   @override
   @JsonKey(name: 'actor_username')
   String? get actorUsername;
   @override
-  @JsonKey(name: 'actor_photo_url')
-  String? get actorPhotoUrl; // Target preview
-  @override
-  @JsonKey(name: 'target_preview_url')
+  @JsonKey(name: 'actor_avatar_url')
   String?
-      get targetPreviewUrl; // Follow relationship - whether current user follows the actor
+      get actorAvatarUrl; // Metadata for rich notification content (thumbnail, preview, title, etc.)
+  @override
+  @JsonKey(name: 'metadata')
+  Map<String, dynamic>
+      get metadata; // Follow relationship - whether current user follows the actor
   @override
   @JsonKey(name: 'is_following_actor')
   bool get isFollowingActor;

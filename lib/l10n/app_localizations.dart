@@ -3020,6 +3020,36 @@ abstract class AppLocalizations {
   /// **'Uploading voice message...'**
   String get chatDetailVoiceRecorded;
 
+  /// No description provided for @chatDetailDownloadFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Download file'**
+  String get chatDetailDownloadFile;
+
+  /// No description provided for @chatDetailDownloading.
+  ///
+  /// In en, this message translates to:
+  /// **'Downloading...'**
+  String get chatDetailDownloading;
+
+  /// No description provided for @chatDetailDownloadSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'File downloaded successfully'**
+  String get chatDetailDownloadSuccess;
+
+  /// No description provided for @chatDetailDownloadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to download file'**
+  String get chatDetailDownloadError;
+
+  /// No description provided for @chatDetailOpenFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Open file'**
+  String get chatDetailOpenFile;
+
   /// No description provided for @voiceRecorderTitle.
   ///
   /// In en, this message translates to:

@@ -37,7 +37,10 @@ mixin _$ChatMessageState {
   String? get markReadError => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
   bool get isWatching => throw _privateConstructorUsedError;
-  String? get watchError =>
+  String? get watchError => throw _privateConstructorUsedError; // Upload Media
+  bool get isUploadingMedia => throw _privateConstructorUsedError;
+  String? get uploadError => throw _privateConstructorUsedError;
+  String? get uploadSuccessMessage =>
       throw _privateConstructorUsedError; // Conversation List
   List<ConversationListEntity> get conversations =>
       throw _privateConstructorUsedError;
@@ -90,6 +93,9 @@ abstract class $ChatMessageStateCopyWith<$Res> {
       String? message,
       bool isWatching,
       String? watchError,
+      bool isUploadingMedia,
+      String? uploadError,
+      String? uploadSuccessMessage,
       List<ConversationListEntity> conversations,
       bool isLoadingConversations,
       String? conversationsError,
@@ -143,6 +149,9 @@ class _$ChatMessageStateCopyWithImpl<$Res, $Val extends ChatMessageState>
     Object? message = freezed,
     Object? isWatching = null,
     Object? watchError = freezed,
+    Object? isUploadingMedia = null,
+    Object? uploadError = freezed,
+    Object? uploadSuccessMessage = freezed,
     Object? conversations = null,
     Object? isLoadingConversations = null,
     Object? conversationsError = freezed,
@@ -239,6 +248,18 @@ class _$ChatMessageStateCopyWithImpl<$Res, $Val extends ChatMessageState>
       watchError: freezed == watchError
           ? _value.watchError
           : watchError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isUploadingMedia: null == isUploadingMedia
+          ? _value.isUploadingMedia
+          : isUploadingMedia // ignore: cast_nullable_to_non_nullable
+              as bool,
+      uploadError: freezed == uploadError
+          ? _value.uploadError
+          : uploadError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      uploadSuccessMessage: freezed == uploadSuccessMessage
+          ? _value.uploadSuccessMessage
+          : uploadSuccessMessage // ignore: cast_nullable_to_non_nullable
               as String?,
       conversations: null == conversations
           ? _value.conversations
@@ -360,6 +381,9 @@ abstract class _$$ChatMessageStateImplCopyWith<$Res>
       String? message,
       bool isWatching,
       String? watchError,
+      bool isUploadingMedia,
+      String? uploadError,
+      String? uploadSuccessMessage,
       List<ConversationListEntity> conversations,
       bool isLoadingConversations,
       String? conversationsError,
@@ -414,6 +438,9 @@ class __$$ChatMessageStateImplCopyWithImpl<$Res>
     Object? message = freezed,
     Object? isWatching = null,
     Object? watchError = freezed,
+    Object? isUploadingMedia = null,
+    Object? uploadError = freezed,
+    Object? uploadSuccessMessage = freezed,
     Object? conversations = null,
     Object? isLoadingConversations = null,
     Object? conversationsError = freezed,
@@ -511,6 +538,18 @@ class __$$ChatMessageStateImplCopyWithImpl<$Res>
           ? _value.watchError
           : watchError // ignore: cast_nullable_to_non_nullable
               as String?,
+      isUploadingMedia: null == isUploadingMedia
+          ? _value.isUploadingMedia
+          : isUploadingMedia // ignore: cast_nullable_to_non_nullable
+              as bool,
+      uploadError: freezed == uploadError
+          ? _value.uploadError
+          : uploadError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      uploadSuccessMessage: freezed == uploadSuccessMessage
+          ? _value.uploadSuccessMessage
+          : uploadSuccessMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
       conversations: null == conversations
           ? _value._conversations
           : conversations // ignore: cast_nullable_to_non_nullable
@@ -584,6 +623,9 @@ class _$ChatMessageStateImpl implements _ChatMessageState {
       this.message,
       this.isWatching = false,
       this.watchError,
+      this.isUploadingMedia = false,
+      this.uploadError,
+      this.uploadSuccessMessage,
       final List<ConversationListEntity> conversations =
           const <ConversationListEntity>[],
       this.isLoadingConversations = false,
@@ -662,6 +704,14 @@ class _$ChatMessageStateImpl implements _ChatMessageState {
   final bool isWatching;
   @override
   final String? watchError;
+// Upload Media
+  @override
+  @JsonKey()
+  final bool isUploadingMedia;
+  @override
+  final String? uploadError;
+  @override
+  final String? uploadSuccessMessage;
 // Conversation List
   final List<ConversationListEntity> _conversations;
 // Conversation List
@@ -720,7 +770,7 @@ class _$ChatMessageStateImpl implements _ChatMessageState {
 
   @override
   String toString() {
-    return 'ChatMessageState(messages: $messages, conversationId: $conversationId, unreadCount: $unreadCount, hasMore: $hasMore, cursor: $cursor, isLoading: $isLoading, isLoadingMore: $isLoadingMore, errorMessage: $errorMessage, isSending: $isSending, sendError: $sendError, sentMessage: $sentMessage, isEditing: $isEditing, editError: $editError, editedMessage: $editedMessage, isDeleting: $isDeleting, deleteError: $deleteError, isMarkingRead: $isMarkingRead, markReadError: $markReadError, message: $message, isWatching: $isWatching, watchError: $watchError, conversations: $conversations, isLoadingConversations: $isLoadingConversations, conversationsError: $conversationsError, selectedFilter: $selectedFilter, searchQuery: $searchQuery, messageReads: $messageReads, isLoadingReads: $isLoadingReads, readsError: $readsError, isWatchingReads: $isWatchingReads, typingUsers: $typingUsers, isWatchingTyping: $isWatchingTyping)';
+    return 'ChatMessageState(messages: $messages, conversationId: $conversationId, unreadCount: $unreadCount, hasMore: $hasMore, cursor: $cursor, isLoading: $isLoading, isLoadingMore: $isLoadingMore, errorMessage: $errorMessage, isSending: $isSending, sendError: $sendError, sentMessage: $sentMessage, isEditing: $isEditing, editError: $editError, editedMessage: $editedMessage, isDeleting: $isDeleting, deleteError: $deleteError, isMarkingRead: $isMarkingRead, markReadError: $markReadError, message: $message, isWatching: $isWatching, watchError: $watchError, isUploadingMedia: $isUploadingMedia, uploadError: $uploadError, uploadSuccessMessage: $uploadSuccessMessage, conversations: $conversations, isLoadingConversations: $isLoadingConversations, conversationsError: $conversationsError, selectedFilter: $selectedFilter, searchQuery: $searchQuery, messageReads: $messageReads, isLoadingReads: $isLoadingReads, readsError: $readsError, isWatchingReads: $isWatchingReads, typingUsers: $typingUsers, isWatchingTyping: $isWatchingTyping)';
   }
 
   @override
@@ -766,6 +816,12 @@ class _$ChatMessageStateImpl implements _ChatMessageState {
                 other.isWatching == isWatching) &&
             (identical(other.watchError, watchError) ||
                 other.watchError == watchError) &&
+            (identical(other.isUploadingMedia, isUploadingMedia) ||
+                other.isUploadingMedia == isUploadingMedia) &&
+            (identical(other.uploadError, uploadError) ||
+                other.uploadError == uploadError) &&
+            (identical(other.uploadSuccessMessage, uploadSuccessMessage) ||
+                other.uploadSuccessMessage == uploadSuccessMessage) &&
             const DeepCollectionEquality()
                 .equals(other._conversations, _conversations) &&
             (identical(other.isLoadingConversations, isLoadingConversations) ||
@@ -814,6 +870,9 @@ class _$ChatMessageStateImpl implements _ChatMessageState {
         message,
         isWatching,
         watchError,
+        isUploadingMedia,
+        uploadError,
+        uploadSuccessMessage,
         const DeepCollectionEquality().hash(_conversations),
         isLoadingConversations,
         conversationsError,
@@ -860,6 +919,9 @@ abstract class _ChatMessageState implements ChatMessageState {
       final String? message,
       final bool isWatching,
       final String? watchError,
+      final bool isUploadingMedia,
+      final String? uploadError,
+      final String? uploadSuccessMessage,
       final List<ConversationListEntity> conversations,
       final bool isLoadingConversations,
       final String? conversationsError,
@@ -914,7 +976,13 @@ abstract class _ChatMessageState implements ChatMessageState {
   @override
   bool get isWatching;
   @override
-  String? get watchError; // Conversation List
+  String? get watchError; // Upload Media
+  @override
+  bool get isUploadingMedia;
+  @override
+  String? get uploadError;
+  @override
+  String? get uploadSuccessMessage; // Conversation List
   @override
   List<ConversationListEntity> get conversations;
   @override

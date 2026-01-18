@@ -65,29 +65,104 @@ class NotificationScreen extends HookWidget {
     }, [scrollController]);
 
     return Scaffold(
+      extendBodyBehindAppBar: false,
       appBar: AppBar(
-        title: Text(
-          'Notifications',
-          style: theme.textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.bold,
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        backgroundColor: Colors.transparent,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                theme.colorScheme.surface.withValues(alpha: 0.98),
+                theme.colorScheme.surfaceContainerHighest
+                    .withValues(alpha: 0.95),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            border: Border(
+              bottom: BorderSide(
+                color: theme.colorScheme.outline.withValues(alpha: 0.15),
+                width: 1,
+              ),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: theme.colorScheme.primary.withValues(alpha: 0.08),
+                blurRadius: 12,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+        ),
+        title: ShaderMask(
+          shaderCallback: (bounds) => LinearGradient(
+            colors: [
+              theme.colorScheme.primary,
+              theme.colorScheme.secondary,
+            ],
+          ).createShader(bounds),
+          child: Text(
+            'Notifications',
+            style: theme.textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           ),
         ),
         actions: [
-          PopupMenuButton<String>(
-            icon: const Icon(Icons.more_vert),
-            onSelected: (value) {
-              if (value == 'mark_all_read') {
-                context.read<NotificationBloc>().add(
-                      const NotificationEvent.markAllAsRead(),
-                    );
-              }
-            },
-            itemBuilder: (context) => [
-              const PopupMenuItem(
-                value: 'mark_all_read',
-                child: Text('Mark all as read'),
+          Container(
+            margin: const EdgeInsets.only(right: 8),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  theme.colorScheme.primaryContainer.withValues(alpha: 0.6),
+                  theme.colorScheme.secondaryContainer.withValues(alpha: 0.6),
+                ],
               ),
-            ],
+              shape: BoxShape.circle,
+            ),
+            child: PopupMenuButton<String>(
+              icon: Icon(
+                Icons.more_vert,
+                color: theme.colorScheme.onPrimaryContainer,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              onSelected: (value) {
+                if (value == 'mark_all_read') {
+                  context.read<NotificationBloc>().add(
+                        const NotificationEvent.markAllAsRead(),
+                      );
+                }
+              },
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                  value: 'mark_all_read',
+                  child: Row(
+                    children: [
+                      ShaderMask(
+                        shaderCallback: (bounds) => LinearGradient(
+                          colors: [
+                            theme.colorScheme.primary,
+                            theme.colorScheme.secondary,
+                          ],
+                        ).createShader(bounds),
+                        child: const Icon(
+                          Icons.done_all,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      const Text('Mark all as read'),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -169,11 +244,25 @@ class NotificationScreen extends HookWidget {
                   // Follow requests card at top
                   if (followRequests.isNotEmpty)
                     SliverToBoxAdapter(
-                      child: FollowRequestsCard(
-                        requests: followRequests,
-                        onTap: () {
-                          // Navigate to follow requests screen
+                      child: TweenAnimationBuilder<double>(
+                        tween: Tween(begin: 0.0, end: 1.0),
+                        duration: const Duration(milliseconds: 400),
+                        curve: Curves.easeOutCubic,
+                        builder: (context, value, child) {
+                          return Transform.translate(
+                            offset: Offset(0, 20 * (1 - value)),
+                            child: Opacity(
+                              opacity: value,
+                              child: child,
+                            ),
+                          );
                         },
+                        child: FollowRequestsCard(
+                          requests: followRequests,
+                          onTap: () {
+                            // Navigate to follow requests screen
+                          },
+                        ),
                       ),
                     ),
 
@@ -187,7 +276,24 @@ class NotificationScreen extends HookWidget {
                         (context, index) {
                           final notification =
                               groupedNotifications.today[index];
-                          return _buildNotificationTile(context, notification);
+                          return TweenAnimationBuilder<double>(
+                            tween: Tween(begin: 0.0, end: 1.0),
+                            duration: Duration(
+                              milliseconds: 300 + (index * 50).clamp(0, 500),
+                            ),
+                            curve: Curves.easeOutCubic,
+                            builder: (context, value, child) {
+                              return Transform.translate(
+                                offset: Offset(20 * (1 - value), 0),
+                                child: Opacity(
+                                  opacity: value,
+                                  child: child,
+                                ),
+                              );
+                            },
+                            child:
+                                _buildNotificationTile(context, notification),
+                          );
                         },
                         childCount: groupedNotifications.today.length,
                       ),
@@ -204,7 +310,24 @@ class NotificationScreen extends HookWidget {
                         (context, index) {
                           final notification =
                               groupedNotifications.yesterday[index];
-                          return _buildNotificationTile(context, notification);
+                          return TweenAnimationBuilder<double>(
+                            tween: Tween(begin: 0.0, end: 1.0),
+                            duration: Duration(
+                              milliseconds: 300 + (index * 50).clamp(0, 500),
+                            ),
+                            curve: Curves.easeOutCubic,
+                            builder: (context, value, child) {
+                              return Transform.translate(
+                                offset: Offset(20 * (1 - value), 0),
+                                child: Opacity(
+                                  opacity: value,
+                                  child: child,
+                                ),
+                              );
+                            },
+                            child:
+                                _buildNotificationTile(context, notification),
+                          );
                         },
                         childCount: groupedNotifications.yesterday.length,
                       ),
@@ -264,10 +387,31 @@ class NotificationScreen extends HookWidget {
 
                   // Loading more indicator
                   if (state.isLoadingMore)
-                    const SliverToBoxAdapter(
+                    SliverToBoxAdapter(
                       child: Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Center(child: CircularProgressIndicator()),
+                        padding: const EdgeInsets.all(16.0),
+                        child: Center(
+                          child: TweenAnimationBuilder<double>(
+                            tween: Tween(begin: 0.0, end: 1.0),
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeOut,
+                            builder: (context, value, child) {
+                              return Transform.scale(
+                                scale: value,
+                                child: Opacity(
+                                  opacity: value,
+                                  child: child,
+                                ),
+                              );
+                            },
+                            child: CircularProgressIndicator(
+                              strokeWidth: 3,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                theme.colorScheme.primary,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
 
@@ -305,8 +449,33 @@ class NotificationScreen extends HookWidget {
           background: Container(
             alignment: Alignment.centerRight,
             padding: const EdgeInsets.only(right: 20),
-            color: Theme.of(context).colorScheme.error,
-            child: const Icon(Icons.delete, color: Colors.white),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Theme.of(context).colorScheme.error.withValues(alpha: 0.8),
+                  Theme.of(context).colorScheme.error,
+                ],
+              ),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.delete_outline,
+                  color: Colors.white,
+                  size: 28,
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  'Delete',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
           ),
           onDismissed: (_) {
             if (context.mounted) {
@@ -367,6 +536,8 @@ class NotificationScreen extends HookWidget {
         }
         break;
       case NotificationType.donation:
+      case NotificationType.campaignCreated:
+      case NotificationType.campaignUpdate:
         // Navigate to campaign
         if (notification.targetId != null) {
           // context.pushNamed(AppRouteName.campaignDetail, pathParameters: {'id': notification.targetId!});

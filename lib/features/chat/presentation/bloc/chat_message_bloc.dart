@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,6 +28,7 @@ import 'package:velora/features/chat/domain/usecases/vote_poll_option_usecase.da
 import 'package:velora/features/chat/domain/usecases/watch_message_reads_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/watch_new_messages_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/watch_typing_indicators_usecase.dart';
+import 'package:velora/features/media/domain/repositories/media_repository.dart';
 
 import 'chat_message_event.dart';
 import 'chat_message_state.dart';
@@ -55,6 +57,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     required this.unvotePollOptionUseCase,
     required this.respondToEventUseCase,
     required this.cancelEventRsvpUseCase,
+    required this.mediaRepository,
   }) : super(const ChatMessageState()) {
     on<InitializeChatEvent>(_onInitializeChat);
     on<LoadChatMessagesEvent>(_onLoadInitialMessages);
@@ -64,6 +67,10 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     );
     on<SendChatMessageEvent>(_onSendMessage);
     on<SendMediaMessageEvent>(_onSendMediaMessage);
+    on<UploadAndSendImagesEvent>(_onUploadAndSendImages);
+    on<UploadAndSendVideoEvent>(_onUploadAndSendVideo);
+    on<UploadAndSendDocumentsEvent>(_onUploadAndSendDocuments);
+    on<UploadAndSendAudioEvent>(_onUploadAndSendAudio);
     on<SendPollMessageEvent>(_onSendPollMessage);
     on<SendEventMessageEvent>(_onSendEventMessage);
     on<EditChatMessageEvent>(_onEditMessage);
@@ -81,6 +88,8 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
           watchError: null,
           conversationsError: null,
           readsError: null,
+          uploadError: null,
+          uploadSuccessMessage: null,
         ),
       ),
     );
@@ -154,6 +163,9 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
   final UnvotePollOptionUseCase unvotePollOptionUseCase;
   final RespondToEventUseCase respondToEventUseCase;
   final CancelEventRsvpUseCase cancelEventRsvpUseCase;
+
+  // Media Repository
+  final MediaRepository mediaRepository;
 
   StreamSubscription? _watchSub;
   StreamSubscription? _readWatchSub;
@@ -464,6 +476,331 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
         );
       },
     );
+  }
+
+  /// Upload and send images
+  Future<void> _onUploadAndSendImages(
+    UploadAndSendImagesEvent event,
+    Emitter<ChatMessageState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        isUploadingMedia: true,
+        uploadError: null,
+        uploadSuccessMessage: null,
+      ),
+    );
+
+    try {
+      // Convert file paths to File objects
+      final files = event.filePaths.map((path) => File(path)).toList();
+
+      // Upload images to Cloudinary
+      final result = await mediaRepository.uploadImagesForChat(
+        files: files,
+        userId: event.userId,
+        conversationId: event.conversationId,
+      );
+
+      result.fold(
+        (failure) {
+          emit(
+            state.copyWith(
+              isUploadingMedia: false,
+              uploadError: failure.message,
+            ),
+          );
+        },
+        (assets) async {
+          // Send media message for each uploaded image
+          for (final asset in assets) {
+            final sendResult = await sendMediaMessageUseCase(
+              conversationId: event.conversationId,
+              mediaUrl: asset.secureUrl,
+              mediaType: 'image',
+              mimeType: 'image/jpeg',
+            );
+
+            sendResult.fold(
+              (failure) {
+                loge('Failed to send image message: ${failure.message}',
+                    tag: _logTag);
+              },
+              (chatMessage) {
+                emit(
+                  state.copyWith(
+                    messages: [chatMessage, ...state.messages],
+                  ),
+                );
+              },
+            );
+          }
+
+          emit(
+            state.copyWith(
+              isUploadingMedia: false,
+              uploadSuccessMessage: 'Images uploaded and sent successfully',
+            ),
+          );
+        },
+      );
+    } catch (e) {
+      emit(
+        state.copyWith(
+          isUploadingMedia: false,
+          uploadError: 'Failed to upload images: $e',
+        ),
+      );
+    }
+  }
+
+  /// Upload and send video
+  Future<void> _onUploadAndSendVideo(
+    UploadAndSendVideoEvent event,
+    Emitter<ChatMessageState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        isUploadingMedia: true,
+        uploadError: null,
+        uploadSuccessMessage: null,
+      ),
+    );
+
+    try {
+      final file = File(event.filePath);
+
+      // Upload video to Cloudinary
+      final result = await mediaRepository.uploadVideoForChat(
+        file: file,
+        userId: event.userId,
+        conversationId: event.conversationId,
+      );
+
+      result.fold(
+        (failure) {
+          emit(
+            state.copyWith(
+              isUploadingMedia: false,
+              uploadError: failure.message,
+            ),
+          );
+        },
+        (asset) async {
+          // Send media message
+          final sendResult = await sendMediaMessageUseCase(
+            conversationId: event.conversationId,
+            mediaUrl: asset.secureUrl,
+            mediaType: 'video',
+            mimeType: 'video/mp4',
+          );
+
+          sendResult.fold(
+            (failure) {
+              emit(
+                state.copyWith(
+                  isUploadingMedia: false,
+                  uploadError: failure.message,
+                ),
+              );
+            },
+            (chatMessage) {
+              emit(
+                state.copyWith(
+                  isUploadingMedia: false,
+                  messages: [chatMessage, ...state.messages],
+                  uploadSuccessMessage: 'Video uploaded and sent successfully',
+                ),
+              );
+            },
+          );
+        },
+      );
+    } catch (e) {
+      emit(
+        state.copyWith(
+          isUploadingMedia: false,
+          uploadError: 'Failed to upload video: $e',
+        ),
+      );
+    }
+  }
+
+  /// Upload and send documents
+  Future<void> _onUploadAndSendDocuments(
+    UploadAndSendDocumentsEvent event,
+    Emitter<ChatMessageState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        isUploadingMedia: true,
+        uploadError: null,
+        uploadSuccessMessage: null,
+      ),
+    );
+
+    try {
+      // Convert file paths to File objects
+      final files = event.filePaths.map((path) => File(path)).toList();
+
+      // Upload documents to Cloudinary
+      final result = await mediaRepository.uploadDocumentsForChat(
+        files: files,
+        userId: event.userId,
+        conversationId: event.conversationId,
+      );
+
+      result.fold(
+        (failure) {
+          emit(
+            state.copyWith(
+              isUploadingMedia: false,
+              uploadError: failure.message,
+            ),
+          );
+        },
+        (assets) async {
+          // Send media message for each uploaded document
+          for (final asset in assets) {
+            final sendResult = await sendMediaMessageUseCase(
+              conversationId: event.conversationId,
+              mediaUrl: asset.secureUrl,
+              mediaType: 'document',
+              mimeType: _getMimeTypeFromUrl(asset.secureUrl),
+            );
+
+            sendResult.fold(
+              (failure) {
+                loge('Failed to send document message: ${failure.message}',
+                    tag: _logTag);
+              },
+              (chatMessage) {
+                emit(
+                  state.copyWith(
+                    messages: [chatMessage, ...state.messages],
+                  ),
+                );
+              },
+            );
+          }
+
+          emit(
+            state.copyWith(
+              isUploadingMedia: false,
+              uploadSuccessMessage: 'Documents uploaded and sent successfully',
+            ),
+          );
+        },
+      );
+    } catch (e) {
+      emit(
+        state.copyWith(
+          isUploadingMedia: false,
+          uploadError: 'Failed to upload documents: $e',
+        ),
+      );
+    }
+  }
+
+  /// Upload and send audio
+  Future<void> _onUploadAndSendAudio(
+    UploadAndSendAudioEvent event,
+    Emitter<ChatMessageState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        isUploadingMedia: true,
+        uploadError: null,
+        uploadSuccessMessage: null,
+      ),
+    );
+
+    try {
+      final file = File(event.filePath);
+
+      // Upload audio to Cloudinary
+      final result = await mediaRepository.uploadAudioForChat(
+        file: file,
+        userId: event.userId,
+        conversationId: event.conversationId,
+      );
+
+      result.fold(
+        (failure) {
+          emit(
+            state.copyWith(
+              isUploadingMedia: false,
+              uploadError: failure.message,
+            ),
+          );
+        },
+        (asset) async {
+          // Send media message
+          final sendResult = await sendMediaMessageUseCase(
+            conversationId: event.conversationId,
+            mediaUrl: asset.secureUrl,
+            mediaType: 'audio',
+            mimeType: event.isVoiceMessage ? 'audio/m4a' : _getMimeTypeFromUrl(asset.secureUrl),
+          );
+
+          sendResult.fold(
+            (failure) {
+              emit(
+                state.copyWith(
+                  isUploadingMedia: false,
+                  uploadError: failure.message,
+                ),
+              );
+            },
+            (chatMessage) {
+              emit(
+                state.copyWith(
+                  isUploadingMedia: false,
+                  messages: [chatMessage, ...state.messages],
+                  uploadSuccessMessage:
+                      event.isVoiceMessage ? 'Voice message sent successfully' : 'Audio uploaded and sent successfully',
+                ),
+              );
+            },
+          );
+        },
+      );
+    } catch (e) {
+      emit(
+        state.copyWith(
+          isUploadingMedia: false,
+          uploadError: 'Failed to upload audio: $e',
+        ),
+      );
+    }
+  }
+
+  /// Helper to get mime type from URL
+  String _getMimeTypeFromUrl(String url) {
+    final ext = url.split('.').last.toLowerCase();
+    switch (ext) {
+      case 'pdf':
+        return 'application/pdf';
+      case 'doc':
+      case 'docx':
+        return 'application/msword';
+      case 'xls':
+      case 'xlsx':
+        return 'application/vnd.ms-excel';
+      case 'ppt':
+      case 'pptx':
+        return 'application/vnd.ms-powerpoint';
+      case 'txt':
+        return 'text/plain';
+      case 'mp3':
+        return 'audio/mpeg';
+      case 'm4a':
+        return 'audio/m4a';
+      case 'wav':
+        return 'audio/wav';
+      default:
+        return 'application/octet-stream';
+    }
   }
 
   Future<void> _onSendPollMessage(

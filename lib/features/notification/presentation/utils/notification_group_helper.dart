@@ -22,7 +22,7 @@ class NotificationGroupHelper {
     };
 
     for (final notification in notifications) {
-      final category = notification.getTimeCategory();
+      final category = notification.timeCategory.key;
       grouped[category]?.add(notification);
     }
 

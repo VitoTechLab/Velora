@@ -42,48 +42,102 @@ class ChatListItem extends StatelessWidget {
       button: true,
       label: t.chatListItemSemanticsLabel(name),
       hint: t.chatListItemSemanticsHint,
-      child: InkWell(
-        onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildProfileImage(colorScheme),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            name,
-                            style: textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              color: colorScheme.onSurface,
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          time,
-                          style: textTheme.bodySmall?.copyWith(
-                            color: colorScheme.onSurfaceVariant,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 4),
-                    _buildMessagePreview(colorScheme, textTheme, t),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          child: TweenAnimationBuilder<double>(
+            duration: const Duration(milliseconds: 300),
+            tween: Tween(begin: 0.0, end: 1.0),
+            curve: Curves.easeOutCubic,
+            builder: (context, value, child) {
+              return Opacity(opacity: value, child: child);
+            },
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+                    colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
                   ],
                 ),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: isRead
+                      ? colorScheme.outline.withValues(alpha: 0.1)
+                      : colorScheme.primary.withValues(alpha: 0.3),
+                  width: isRead ? 1 : 1.5,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: isRead
+                        ? Colors.black.withValues(alpha: 0.03)
+                        : colorScheme.primary.withValues(alpha: 0.1),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                    spreadRadius: 0,
+                  ),
+                ],
               ),
-            ],
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildProfileImage(colorScheme),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                name,
+                                style: textTheme.titleMedium?.copyWith(
+                                  fontWeight: isRead ? FontWeight.w600 : FontWeight.bold,
+                                  color: colorScheme.onSurface,
+                                  letterSpacing: 0.15,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    colorScheme.primary.withValues(alpha: 0.15),
+                                    colorScheme.secondary.withValues(alpha: 0.1),
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text(
+                                time,
+                                style: textTheme.labelSmall?.copyWith(
+                                  color: colorScheme.onSurface.withValues(alpha: 0.7),
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 11,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 6),
+                        _buildMessagePreview(colorScheme, textTheme, t),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ),
@@ -93,27 +147,62 @@ class ChatListItem extends StatelessWidget {
   Widget _buildProfileImage(ColorScheme colorScheme) {
     return Stack(
       children: [
-        CircleAvatar(
-          radius: 28,
-          backgroundImage: NetworkImage(profileImageUrl),
-          backgroundColor: colorScheme.surfaceContainerHighest,
+        Container(
+          padding: const EdgeInsets.all(2.5),
+          decoration: BoxDecoration(
+            gradient: !isRead
+                ? LinearGradient(
+                    colors: [
+                      colorScheme.primary,
+                      colorScheme.secondary,
+                    ],
+                  )
+                : null,
+            shape: BoxShape.circle,
+            boxShadow: !isRead
+                ? [
+                    BoxShadow(
+                      color: colorScheme.primary.withValues(alpha: 0.3),
+                      blurRadius: 8,
+                      spreadRadius: 1,
+                    ),
+                  ]
+                : null,
+          ),
+          child: CircleAvatar(
+            radius: 28,
+            backgroundImage: NetworkImage(profileImageUrl),
+            backgroundColor: colorScheme.surfaceContainerHighest,
+          ),
         ),
         if (isGroup)
           Positioned(
             bottom: 0,
             right: 0,
             child: Container(
-              width: 20,
-              height: 20,
+              width: 22,
+              height: 22,
               decoration: BoxDecoration(
-                color: colorScheme.surface,
+                gradient: LinearGradient(
+                  colors: [
+                    colorScheme.tertiary,
+                    colorScheme.secondary,
+                  ],
+                ),
                 shape: BoxShape.circle,
                 border: Border.all(color: colorScheme.surface, width: 2),
+                boxShadow: [
+                  BoxShadow(
+                    color: colorScheme.tertiary.withValues(alpha: 0.4),
+                    blurRadius: 4,
+                    spreadRadius: 0,
+                  ),
+                ],
               ),
               child: Icon(
-                Icons.groups,
+                Icons.groups_rounded,
                 size: 12,
-                color: colorScheme.onSurfaceVariant,
+                color: Colors.white,
               ),
             ),
           ),
@@ -130,22 +219,38 @@ class ChatListItem extends StatelessWidget {
       children: [
         if (isRead && !isMissedCall && messageType != 'call')
           Padding(
-            padding: const EdgeInsets.only(right: 4),
-            child: Icon(Icons.done_all, size: 16, color: colorScheme.primary),
+            padding: const EdgeInsets.only(right: 6),
+            child: Icon(
+              Icons.done_all_rounded,
+              size: 16,
+              color: colorScheme.primary,
+            ),
           ),
         if (messageType == 'photo' || messageType == 'photos')
           Padding(
-            padding: const EdgeInsets.only(right: 4),
-            child: Icon(
-              Icons.image_outlined,
-              size: 16,
-              color: colorScheme.onSurfaceVariant,
+            padding: const EdgeInsets.only(right: 6),
+            child: ShaderMask(
+              shaderCallback: (bounds) => LinearGradient(
+                colors: [
+                  colorScheme.primary,
+                  colorScheme.secondary,
+                ],
+              ).createShader(bounds),
+              child: Icon(
+                Icons.image_rounded,
+                size: 16,
+                color: Colors.white,
+              ),
             ),
           ),
         if (isMissedCall)
           Padding(
-            padding: const EdgeInsets.only(right: 4),
-            child: Icon(Icons.phone_missed, size: 16, color: colorScheme.error),
+            padding: const EdgeInsets.only(right: 6),
+            child: Icon(
+              Icons.phone_missed_rounded,
+              size: 16,
+              color: colorScheme.error,
+            ),
           ),
         Expanded(
           child: Text(
@@ -158,8 +263,9 @@ class ChatListItem extends StatelessWidget {
                       : isRead
                           ? colorScheme.onSurfaceVariant
                           : colorScheme.onSurface,
-              fontWeight: isRead ? FontWeight.normal : FontWeight.w500,
+              fontWeight: isRead ? FontWeight.w500 : FontWeight.w600,
               fontStyle: isTyping ? FontStyle.italic : FontStyle.normal,
+              letterSpacing: 0.15,
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -167,17 +273,30 @@ class ChatListItem extends StatelessWidget {
         ),
         if (unreadCount != null && unreadCount! > 0)
           Container(
-            margin: const EdgeInsets.only(left: 8),
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+            margin: const EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
-              color: colorScheme.primary,
+              gradient: LinearGradient(
+                colors: [
+                  colorScheme.primary,
+                  colorScheme.secondary,
+                ],
+              ),
               borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: colorScheme.primary.withValues(alpha: 0.4),
+                  blurRadius: 6,
+                  spreadRadius: 0,
+                ),
+              ],
             ),
             child: Text(
               unreadCount.toString(),
               style: textTheme.labelSmall?.copyWith(
                 color: colorScheme.onPrimary,
                 fontWeight: FontWeight.bold,
+                fontSize: 11,
               ),
             ),
           ),

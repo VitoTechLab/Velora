@@ -13,6 +13,8 @@ enum NotificationType {
   mention,
   postShare,
   channelInvite,
+  campaignCreated,
+  campaignUpdate,
 }
 
 /// Alias for followAccepted
@@ -22,7 +24,7 @@ extension NotificationTypeExtension on NotificationType {
 }
 
 /// Target type enum matching the database enum
-enum NotificationTargetType { post, comment, campaign, user }
+enum NotificationTargetType { post, comment, campaign, user, message }
 
 /// Time category for grouping notifications
 enum NotificationTimeCategory { 
@@ -31,6 +33,25 @@ enum NotificationTimeCategory {
   last7Days, 
   last30Days, 
   older,
+}
+
+/// Extension on [NotificationTimeCategory] for display-friendly string keys
+extension NotificationTimeCategoryExtension on NotificationTimeCategory {
+  /// Convert to display-friendly string key for localization
+  String get key {
+    switch (this) {
+      case NotificationTimeCategory.today:
+        return 'today';
+      case NotificationTimeCategory.yesterday:
+        return 'yesterday';
+      case NotificationTimeCategory.last7Days:
+        return 'last_7_days';
+      case NotificationTimeCategory.last30Days:
+        return 'last_30_days';
+      case NotificationTimeCategory.older:
+        return 'older';
+    }
+  }
 }
 
 @freezed
@@ -59,6 +80,9 @@ abstract class NotificationEntity with _$NotificationEntity {
 
     // Follow relationship - whether current user is following the actor
     @Default(false) bool isFollowingActor,
+
+    // Metadata for rich notification content (thumbnails, previews, titles)
+    @Default({}) Map<String, dynamic> metadata,
   }) = _NotificationEntity;
 
   /// Check if this is a grouped notification (multiple actors)
@@ -89,31 +113,6 @@ abstract class NotificationEntity with _$NotificationEntity {
       return NotificationTimeCategory.last30Days;
     } else {
       return NotificationTimeCategory.older;
-    }
-  }
-
-  /// Calculate time category based on createdAt (string version)
-  String getTimeCategory() {
-    final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
-    final notificationDate = DateTime(
-      createdAt.year,
-      createdAt.month,
-      createdAt.day,
-    );
-    
-    final diff = today.difference(notificationDate).inDays;
-
-    if (diff == 0) {
-      return 'today';
-    } else if (diff == 1) {
-      return 'yesterday';
-    } else if (diff <= 7) {
-      return 'last_7_days';
-    } else if (diff <= 30) {
-      return 'last_30_days';
-    } else {
-      return 'older';
     }
   }
 

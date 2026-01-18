@@ -142,19 +142,64 @@ class _ChatAudioWidgetState extends State<ChatAudioWidget> {
         ? _position.inMilliseconds / _duration.inMilliseconds
         : 0.0;
 
-    return Container(
-      constraints: const BoxConstraints(maxWidth: 280, minWidth: 200),
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: bubbleColor,
-        borderRadius: BorderRadius.only(
-          topLeft: const Radius.circular(16),
-          topRight: const Radius.circular(16),
-          bottomLeft: widget.isSender ? const Radius.circular(16) : Radius.zero,
-          bottomRight:
-              widget.isSender ? Radius.zero : const Radius.circular(16),
+    return TweenAnimationBuilder<double>(
+      duration: const Duration(milliseconds: 300),
+      tween: Tween(begin: 0.0, end: 1.0),
+      curve: Curves.easeOutCubic,
+      builder: (context, value, child) {
+        return Opacity(
+          opacity: value,
+          child: Transform.scale(
+            scale: 0.95 + (0.05 * value),
+            alignment: widget.isSender ? Alignment.centerRight : Alignment.centerLeft,
+            child: child,
+          ),
+        );
+      },
+      child: Container(
+        constraints: const BoxConstraints(maxWidth: 280, minWidth: 220),
+        margin: EdgeInsets.only(
+          left: widget.isSender ? 40 : 8,
+          right: widget.isSender ? 8 : 40,
+          top: 3,
+          bottom: 3,
         ),
-      ),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          gradient: widget.isSender
+              ? LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    colorScheme.primaryContainer,
+                    colorScheme.primaryContainer.withValues(alpha: 0.9),
+                  ],
+                )
+              : null,
+          color: widget.isSender ? null : bubbleColor,
+          borderRadius: BorderRadius.only(
+            topLeft: const Radius.circular(18),
+            topRight: const Radius.circular(18),
+            bottomLeft: Radius.circular(widget.isSender ? 18 : 4),
+            bottomRight: Radius.circular(widget.isSender ? 4 : 18),
+          ),
+          border: Border.all(
+            color: widget.isSender
+                ? colorScheme.primary.withValues(alpha: 0.15)
+                : colorScheme.outline.withValues(alpha: 0.1),
+            width: 1,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: widget.isSender
+                  ? colorScheme.primary.withValues(alpha: 0.15)
+                  : Colors.black.withValues(alpha: 0.05),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+              spreadRadius: 0,
+            ),
+          ],
+        ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -163,36 +208,60 @@ class _ChatAudioWidgetState extends State<ChatAudioWidget> {
           Row(
             children: [
               // Play/Pause button
-              Material(
-                color: widget.isSender
-                    ? colorScheme.onPrimary.withValues(alpha: 0.2)
-                    : colorScheme.primary.withValues(alpha: 0.1),
-                shape: const CircleBorder(),
-                child: InkWell(
-                  onTap: _isLoading ? null : _playPause,
-                  customBorder: const CircleBorder(),
-                  child: Container(
-                    width: 44,
-                    height: 44,
-                    alignment: Alignment.center,
-                    child: _isLoading
-                        ? SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
+              Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  gradient: widget.isSender
+                      ? LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            colorScheme.onPrimaryContainer.withValues(alpha: 0.25),
+                            colorScheme.onPrimaryContainer.withValues(alpha: 0.15),
+                          ],
+                        )
+                      : LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            colorScheme.primary.withValues(alpha: 0.15),
+                            colorScheme.secondary.withValues(alpha: 0.1),
+                          ],
+                        ),
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: widget.isSender
+                        ? colorScheme.onPrimaryContainer.withValues(alpha: 0.2)
+                        : colorScheme.primary.withValues(alpha: 0.2),
+                    width: 1.5,
+                  ),
+                ),
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: _isLoading ? null : _playPause,
+                    customBorder: const CircleBorder(),
+                    child: Center(
+                      child: _isLoading
+                          ? SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2.5,
+                                color: widget.isSender
+                                    ? colorScheme.onPrimaryContainer
+                                    : colorScheme.primary,
+                              ),
+                            )
+                          : Icon(
+                              isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
                               color: widget.isSender
-                                  ? colorScheme.onPrimary
+                                  ? colorScheme.onPrimaryContainer
                                   : colorScheme.primary,
+                              size: 26,
                             ),
-                          )
-                        : Icon(
-                            isPlaying ? Icons.pause : Icons.play_arrow,
-                            color: widget.isSender
-                                ? colorScheme.onPrimary
-                                : colorScheme.primary,
-                            size: 24,
-                          ),
+                    ),
                   ),
                 ),
               ),
@@ -239,17 +308,30 @@ class _ChatAudioWidgetState extends State<ChatAudioWidget> {
 
           // Caption if exists
           if (widget.caption != null && widget.caption!.isNotEmpty) ...[
-            const SizedBox(height: 8),
-            Text(
-              widget.caption!,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: contentColor,
+            const SizedBox(height: 10),
+            Container(
+              padding: const EdgeInsets.only(top: 8),
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                    color: contentColor.withValues(alpha: 0.15),
+                    width: 0.5,
+                  ),
+                ),
+              ),
+              child: Text(
+                widget.caption!,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: contentColor,
+                  height: 1.4,
+                  letterSpacing: 0.15,
+                ),
               ),
             ),
           ],
 
           // Time and read status
-          const SizedBox(height: 4),
+          const SizedBox(height: 6),
           Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.end,
@@ -259,21 +341,36 @@ class _ChatAudioWidgetState extends State<ChatAudioWidget> {
                 widget.time,
                 style: theme.textTheme.labelSmall?.copyWith(
                   color: secondaryContentColor,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 11,
                 ),
               ),
               if (widget.isSender) ...[
                 const SizedBox(width: 4),
-                Icon(
-                  widget.isRead ? Icons.done_all : Icons.done,
-                  size: 14,
-                  color: widget.isRead
-                      ? (widget.isSender ? Colors.white70 : colorScheme.primary)
-                      : secondaryContentColor,
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  transitionBuilder: (child, animation) {
+                    return ScaleTransition(
+                      scale: animation,
+                      child: child,
+                    );
+                  },
+                  child: Icon(
+                    widget.isRead ? Icons.done_all_rounded : Icons.check_rounded,
+                    key: ValueKey(widget.isRead),
+                    size: 16,
+                    color: widget.isRead
+                        ? (widget.isSender
+                            ? colorScheme.primary.withValues(alpha: 0.9)
+                            : colorScheme.primary)
+                        : secondaryContentColor,
+                  ),
                 ),
               ],
             ],
           ),
         ],
+      ),
       ),
     );
   }
@@ -312,11 +409,21 @@ class _ChatAudioWidgetState extends State<ChatAudioWidget> {
 
             return Expanded(
               child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 0.5),
+                margin: const EdgeInsets.symmetric(horizontal: 0.8),
                 height: height,
                 decoration: BoxDecoration(
-                  color: isActive ? activeColor : inactiveColor,
-                  borderRadius: BorderRadius.circular(2),
+                  gradient: isActive
+                      ? LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            activeColor,
+                            activeColor.withValues(alpha: 0.7),
+                          ],
+                        )
+                      : null,
+                  color: isActive ? null : inactiveColor.withValues(alpha: 0.4),
+                  borderRadius: BorderRadius.circular(3),
                 ),
               ),
             );
@@ -361,13 +468,20 @@ class _ChatAudioWidgetState extends State<ChatAudioWidget> {
       child: Container(
         height: 28,
         alignment: Alignment.center,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(4),
-          child: LinearProgressIndicator(
-            value: progress,
-            backgroundColor: inactiveColor,
-            valueColor: AlwaysStoppedAnimation<Color>(activeColor),
-            minHeight: 4,
+        child: Container(
+          height: 6,
+          decoration: BoxDecoration(
+            color: inactiveColor.withValues(alpha: 0.3),
+            borderRadius: BorderRadius.circular(3),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(3),
+            child: LinearProgressIndicator(
+              value: progress,
+              backgroundColor: Colors.transparent,
+              valueColor: AlwaysStoppedAnimation<Color>(activeColor),
+              minHeight: 6,
+            ),
           ),
         ),
       ),

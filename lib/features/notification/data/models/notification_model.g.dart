@@ -10,7 +10,7 @@ _$NotificationModelImpl _$$NotificationModelImplFromJson(
         Map<String, dynamic> json) =>
     _$NotificationModelImpl(
       id: json['id'] as String,
-      userId: json['user_id'] as String,
+      userId: json['user_id'] as String?,
       actorId: json['actor_id'] as String?,
       type: json['type'] as String,
       targetId: json['target_id'] as String?,
@@ -21,8 +21,8 @@ _$NotificationModelImpl _$$NotificationModelImplFromJson(
       createdAt: const UtcDateTimeConverter().fromJson(json['created_at']),
       updatedAt: const UtcDateTimeConverter().fromJson(json['updated_at']),
       actorUsername: json['actor_username'] as String?,
-      actorPhotoUrl: json['actor_photo_url'] as String?,
-      targetPreviewUrl: json['target_preview_url'] as String?,
+      actorAvatarUrl: json['actor_avatar_url'] as String?,
+      metadata: json['metadata'] as Map<String, dynamic>? ?? const {},
       isFollowingActor: json['is_following_actor'] as bool? ?? false,
     );
 
@@ -42,8 +42,8 @@ Map<String, dynamic> _$$NotificationModelImplToJson(
       'updated_at': _$JsonConverterToJson<Object?, DateTime>(
           instance.updatedAt, const UtcDateTimeConverter().toJson),
       'actor_username': instance.actorUsername,
-      'actor_photo_url': instance.actorPhotoUrl,
-      'target_preview_url': instance.targetPreviewUrl,
+      'actor_avatar_url': instance.actorAvatarUrl,
+      'metadata': instance.metadata,
       'is_following_actor': instance.isFollowingActor,
     };
 

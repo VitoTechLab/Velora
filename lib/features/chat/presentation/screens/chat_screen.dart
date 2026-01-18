@@ -40,7 +40,6 @@ class ChatScreen extends HookWidget {
     }, [animationController]);
 
     final backgroundColor = colorScheme.surface;
-    final appBarColor = colorScheme.surface;
 
     return BlocProvider(
       create: (context) =>
@@ -48,32 +47,94 @@ class ChatScreen extends HookWidget {
       child: Scaffold(
         backgroundColor: backgroundColor,
         appBar: AppBar(
-          backgroundColor: appBarColor,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  colorScheme.surface,
+                  colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+                ],
+              ),
+            ),
+          ),
+          backgroundColor: Colors.transparent,
           elevation: 0,
           toolbarHeight: 64,
-          title: Semantics(
-            header: true,
-            child: Text(
-              t.chatScreenTitle,
-              style: textTheme.headlineMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: colorScheme.onSurface,
+          title: TweenAnimationBuilder<double>(
+            duration: const Duration(milliseconds: 600),
+            tween: Tween(begin: 0.0, end: 1.0),
+            curve: Curves.easeOutCubic,
+            builder: (context, value, child) {
+              return Opacity(
+                opacity: value,
+                child: Transform.translate(
+                  offset: Offset(-20 * (1 - value), 0),
+                  child: child,
+                ),
+              );
+            },
+            child: Semantics(
+              header: true,
+              child: Text(
+                t.chatScreenTitle,
+                style: textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: colorScheme.onSurface,
+                  letterSpacing: 0.5,
+                ),
               ),
             ),
           ),
           actions: [
-            Semantics(
-              button: true,
-              label: t.chatScreenNewChatLabel,
-              child: IconButton(
-                icon: Icon(
-                  Icons.add_box_outlined,
-                  color: colorScheme.onSurface,
+            TweenAnimationBuilder<double>(
+              duration: const Duration(milliseconds: 500),
+              tween: Tween(begin: 0.0, end: 1.0),
+              curve: Curves.easeOutBack,
+              builder: (context, value, child) {
+                return Transform.scale(
+                  scale: 0.5 + (0.5 * value),
+                  child: Opacity(opacity: value, child: child),
+                );
+              },
+              child: Container(
+                margin: const EdgeInsets.only(right: 8),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      colorScheme.primary,
+                      colorScheme.secondary,
+                    ],
+                  ),
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: colorScheme.primary.withValues(alpha: 0.3),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
                 ),
-                onPressed: () {
-                  context.pushNamed(AppRouteName.searchFollowUser);
-                },
-                tooltip: t.chatScreenNewChatTooltip,
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () => context.pushNamed(AppRouteName.searchFollowUser),
+                    borderRadius: BorderRadius.circular(12),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Semantics(
+                        button: true,
+                        label: t.chatScreenNewChatLabel,
+                        child: Icon(
+                          Icons.add_box_outlined,
+                          color: colorScheme.onPrimary,
+                          size: 24,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
             const SizedBox(width: 8),
@@ -88,57 +149,127 @@ class ChatScreen extends HookWidget {
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
                   child: Column(
                     children: [
-                      GestureDetector(
-                        onTap: () =>
-                            context.pushNamed(AppRouteName.searchFollowUser),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 12,
-                          ),
-                          decoration: BoxDecoration(
-                            color: colorScheme.surfaceContainerHighest,
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.search,
-                                color: colorScheme.onSurfaceVariant,
-                                size: 20,
+                      TweenAnimationBuilder<double>(
+                        duration: const Duration(milliseconds: 600),
+                        tween: Tween(begin: 0.0, end: 1.0),
+                        curve: Curves.easeOutCubic,
+                        builder: (context, value, child) {
+                          return Opacity(
+                            opacity: value,
+                            child: Transform.translate(
+                              offset: Offset(0, 20 * (1 - value)),
+                              child: child,
+                            ),
+                          );
+                        },
+                        child: GestureDetector(
+                          onTap: () =>
+                              context.pushNamed(AppRouteName.searchFollowUser),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 12,
+                            ),
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  colorScheme.surfaceContainerHighest,
+                                  colorScheme.surfaceContainerHighest
+                                      .withValues(alpha: 0.8),
+                                ],
                               ),
-                              const SizedBox(width: 12),
-                              Text(
-                                'Search',
-                                style: textTheme.bodyMedium?.copyWith(
-                                  color: colorScheme.onSurfaceVariant
-                                      .withValues(alpha: 0.6),
+                              borderRadius: BorderRadius.circular(24),
+                              border: Border.all(
+                                color:
+                                    colorScheme.primary.withValues(alpha: 0.1),
+                                width: 1,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: colorScheme.shadow
+                                      .withValues(alpha: 0.05),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 2),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
+                            child: Row(
+                              children: [
+                                ShaderMask(
+                                  shaderCallback: (bounds) => LinearGradient(
+                                    colors: [
+                                      colorScheme.primary,
+                                      colorScheme.secondary,
+                                    ],
+                                  ).createShader(bounds),
+                                  child: Icon(
+                                    Icons.search,
+                                    color: Colors.white,
+                                    size: 22,
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                Text(
+                                  'Search',
+                                  style: textTheme.bodyMedium?.copyWith(
+                                    color: colorScheme.onSurfaceVariant
+                                        .withValues(alpha: 0.6),
+                                    letterSpacing: 0.3,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                       const SizedBox(height: 12),
-                      BlocSelector<ChatMessageBloc, ChatMessageState, String>(
-                        selector: (state) => state.selectedFilter,
-                        builder: (context, selectedFilter) {
-                          return ChatFilterChips(
-                            selectedFilter: selectedFilter,
-                            onFilterSelected: (filter) {
-                              context.read<ChatMessageBloc>().add(
-                                ChatMessageEvent.setChatFilter(filter),
-                              );
-                            },
+                      TweenAnimationBuilder<double>(
+                        duration: const Duration(milliseconds: 700),
+                        tween: Tween(begin: 0.0, end: 1.0),
+                        curve: Curves.easeOutCubic,
+                        builder: (context, value, child) {
+                          return Opacity(
+                            opacity: value,
+                            child: Transform.translate(
+                              offset: Offset(0, 20 * (1 - value)),
+                              child: child,
+                            ),
                           );
                         },
+                        child: BlocSelector<ChatMessageBloc, ChatMessageState,
+                            String>(
+                          selector: (state) => state.selectedFilter,
+                          builder: (context, selectedFilter) {
+                            return ChatFilterChips(
+                              selectedFilter: selectedFilter,
+                              onFilterSelected: (filter) {
+                                context.read<ChatMessageBloc>().add(
+                                      ChatMessageEvent.setChatFilter(filter),
+                                    );
+                              },
+                            );
+                          },
+                        ),
                       ),
                     ],
                   ),
                 ),
-                Expanded(
-                  child: ConversationListWidget(
-                    scrollController: scrollController,
+                TweenAnimationBuilder<double>(
+                  duration: const Duration(milliseconds: 800),
+                  tween: Tween(begin: 0.0, end: 1.0),
+                  curve: Curves.easeOutCubic,
+                  builder: (context, value, child) {
+                    return Opacity(
+                      opacity: value,
+                      child: child,
+                    );
+                  },
+                  child: Expanded(
+                    child: ConversationListWidget(
+                      scrollController: scrollController,
+                    ),
                   ),
                 ),
               ],

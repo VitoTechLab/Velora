@@ -61,19 +61,50 @@ class NotificationTile extends StatelessWidget {
   Widget _buildAvatar(ColorScheme colorScheme) {
     return Stack(
       children: [
-        CircleAvatar(
-          radius: 24,
-          backgroundColor: colorScheme.surfaceContainerHighest,
-          backgroundImage: notification.actorPhotoUrl != null
-              ? CachedNetworkImageProvider(notification.actorPhotoUrl!)
-              : null,
-          child: notification.actorPhotoUrl == null
-              ? Icon(
-                  _getNotificationIcon(),
-                  color: colorScheme.onSurfaceVariant,
-                  size: 24,
-                )
-              : null,
+        Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: notification.isRead
+                ? null
+                : LinearGradient(
+                    colors: [
+                      colorScheme.primary.withValues(alpha: 0.6),
+                      colorScheme.secondary.withValues(alpha: 0.6),
+                    ],
+                  ),
+            boxShadow: !notification.isRead
+                ? [
+                    BoxShadow(
+                      color: colorScheme.primary.withValues(alpha: 0.3),
+                      blurRadius: 8,
+                      spreadRadius: 1,
+                    ),
+                  ]
+                : null,
+          ),
+          padding: notification.isRead ? null : const EdgeInsets.all(2),
+          child: CircleAvatar(
+            radius: 24,
+            backgroundColor: colorScheme.surfaceContainerHighest,
+            backgroundImage: notification.actorPhotoUrl != null
+                ? CachedNetworkImageProvider(notification.actorPhotoUrl!)
+                : null,
+            child: notification.actorPhotoUrl == null
+                ? ShaderMask(
+                    shaderCallback: (bounds) => LinearGradient(
+                      colors: [
+                        colorScheme.primary,
+                        colorScheme.secondary,
+                      ],
+                    ).createShader(bounds),
+                    child: Icon(
+                      _getNotificationIcon(),
+                      color: Colors.white,
+                      size: 24,
+                    ),
+                  )
+                : null,
+          ),
         ),
         // Notification type badge
         if (notification.type == NotificationType.like ||
@@ -84,12 +115,26 @@ class NotificationTile extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(4),
               decoration: BoxDecoration(
-                color: _getNotificationTypeColor(colorScheme),
+                gradient: LinearGradient(
+                  colors: [
+                    _getNotificationTypeColor(colorScheme),
+                    _getNotificationTypeColor(colorScheme)
+                        .withValues(alpha: 0.8),
+                  ],
+                ),
                 shape: BoxShape.circle,
                 border: Border.all(
                   color: colorScheme.surface,
                   width: 2,
                 ),
+                boxShadow: [
+                  BoxShadow(
+                    color: _getNotificationTypeColor(colorScheme)
+                        .withValues(alpha: 0.4),
+                    blurRadius: 6,
+                    spreadRadius: 1,
+                  ),
+                ],
               ),
               child: Icon(
                 _getNotificationIcon(),
@@ -178,8 +223,20 @@ class NotificationTile extends StatelessWidget {
         width: 8,
         height: 8,
         decoration: BoxDecoration(
-          color: colorScheme.primary,
+          gradient: LinearGradient(
+            colors: [
+              colorScheme.primary,
+              colorScheme.secondary,
+            ],
+          ),
           shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: colorScheme.primary.withValues(alpha: 0.5),
+              blurRadius: 6,
+              spreadRadius: 1,
+            ),
+          ],
         ),
       );
     }
@@ -206,30 +263,78 @@ class NotificationTile extends StatelessWidget {
       );
     }
 
-    // Already following - show "Following" with gray style
+    // Already following - show "Following" with glass effect
     if (notification.isFollowingActor) {
-      return OutlinedButton(
-        onPressed: onFollowBack,
-        style: OutlinedButton.styleFrom(
-          foregroundColor: colorScheme.onSurfaceVariant,
-          side: BorderSide(color: colorScheme.outlineVariant),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          minimumSize: const Size(80, 32),
+      return Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              colorScheme.surfaceContainerHighest.withValues(alpha: 0.8),
+              colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
+            ],
+          ),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: colorScheme.outline.withValues(alpha: 0.3),
+          ),
         ),
-        child: const Text('Following'),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: onFollowBack,
+            borderRadius: BorderRadius.circular(16),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Text(
+                'Following',
+                style: TextStyle(
+                  color: colorScheme.onSurface,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ),
+        ),
       );
     }
 
-    // Not following - show "Follow back" with primary color
-    return FilledButton(
-      onPressed: onFollowBack,
-      style: FilledButton.styleFrom(
-        backgroundColor: colorScheme.primary,
-        foregroundColor: colorScheme.onPrimary,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        minimumSize: const Size(80, 32),
+    // Not following - show "Follow back" with gradient
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            colorScheme.primary,
+            colorScheme.secondary,
+          ],
+        ),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: colorScheme.primary.withValues(alpha: 0.3),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
-      child: const Text('Follow back'),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onFollowBack,
+          borderRadius: BorderRadius.circular(16),
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Text(
+              'Follow',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 
@@ -239,50 +344,39 @@ class NotificationTile extends StatelessWidget {
   }
 
   IconData _getNotificationIcon() {
-    switch (notification.type) {
-      case NotificationType.like:
-        return Icons.favorite;
-      case NotificationType.comment:
-        return Icons.chat_bubble;
-      case NotificationType.mention:
-        return Icons.alternate_email;
-      case NotificationType.follow:
-      case NotificationType.followRequest:
-        return Icons.person_add;
-      case NotificationType.followAccepted:
-        return Icons.how_to_reg;
-      case NotificationType.donation:
-        return Icons.volunteer_activism;
-      case NotificationType.channelInvite:
-        return Icons.group_add;
-      case NotificationType.postShare:
-        return Icons.share;
-    }
+    return switch (notification.type) {
+      NotificationType.like => Icons.favorite,
+      NotificationType.comment => Icons.chat_bubble,
+      NotificationType.mention => Icons.alternate_email,
+      NotificationType.follow => Icons.person_add,
+      NotificationType.followRequest => Icons.person_add,
+      NotificationType.followAccepted => Icons.how_to_reg,
+      NotificationType.donation => Icons.volunteer_activism,
+      NotificationType.channelInvite => Icons.group_add,
+      NotificationType.postShare => Icons.share,
+      NotificationType.campaignCreated => Icons.campaign,
+      NotificationType.campaignUpdate => Icons.campaign,
+    };
   }
 
   Color _getNotificationTypeColor(ColorScheme colorScheme) {
-    switch (notification.type) {
-      case NotificationType.like:
-        return Colors.red;
-      case NotificationType.comment:
-        return colorScheme.primary;
-      case NotificationType.mention:
-        return Colors.blue;
-      case NotificationType.follow:
-      case NotificationType.followRequest:
-      case NotificationType.followAccepted:
-        return colorScheme.primary;
-      case NotificationType.donation:
-        return Colors.green;
-      case NotificationType.channelInvite:
-        return Colors.purple;
-      case NotificationType.postShare:
-        return Colors.orange;
-    }
+    return switch (notification.type) {
+      NotificationType.like => Colors.red,
+      NotificationType.comment => colorScheme.primary,
+      NotificationType.mention => Colors.blue,
+      NotificationType.follow => colorScheme.primary,
+      NotificationType.followRequest => colorScheme.primary,
+      NotificationType.followAccepted => colorScheme.primary,
+      NotificationType.donation => Colors.green,
+      NotificationType.channelInvite => Colors.purple,
+      NotificationType.postShare => Colors.orange,
+      NotificationType.campaignCreated => Colors.amber,
+      NotificationType.campaignUpdate => Colors.amber,
+    };
   }
 
   String _getActionText() {
-    switch (notification.type) {
+    git  (notification.type) {
       case NotificationType.like:
         return 'liked your ${notification.targetType == NotificationTargetType.post ? 'photo' : 'content'}.';
       case NotificationType.comment:
@@ -301,6 +395,10 @@ class NotificationTile extends StatelessWidget {
         return 'invited you to join their channel.';
       case NotificationType.postShare:
         return 'shared your post.';
+      case NotificationType.campaignCreated:
+        return 'created a new campaign.';
+      case NotificationType.campaignUpdate:
+        return 'posted an update to their campaign.';
     }
   }
 

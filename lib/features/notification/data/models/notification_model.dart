@@ -11,7 +11,7 @@ abstract class NotificationModel with _$NotificationModel {
 
   const factory NotificationModel({
     @JsonKey(name: 'id') required String id,
-    @JsonKey(name: 'user_id') required String userId,
+    @JsonKey(name: 'user_id') String? userId,
     @JsonKey(name: 'actor_id') String? actorId,
     @JsonKey(name: 'type') required String type,
     @JsonKey(name: 'target_id') String? targetId,
@@ -24,12 +24,12 @@ abstract class NotificationModel with _$NotificationModel {
     required DateTime createdAt,
     @UtcDateTimeConverter() @JsonKey(name: 'updated_at') DateTime? updatedAt,
 
-    // Actor info (from joined profile - optional)
+    // Actor info (from joined profile - matches SQL: actor_username, actor_avatar_url)
     @JsonKey(name: 'actor_username') String? actorUsername,
-    @JsonKey(name: 'actor_photo_url') String? actorPhotoUrl,
+    @JsonKey(name: 'actor_avatar_url') String? actorAvatarUrl,
 
-    // Target preview
-    @JsonKey(name: 'target_preview_url') String? targetPreviewUrl,
+    // Metadata for rich notification content (thumbnail, preview, title, etc.)
+    @JsonKey(name: 'metadata') @Default({}) Map<String, dynamic> metadata,
 
     // Follow relationship - whether current user follows the actor
     @JsonKey(name: 'is_following_actor') @Default(false) bool isFollowingActor,
@@ -39,9 +39,12 @@ abstract class NotificationModel with _$NotificationModel {
       _$NotificationModelFromJson(json);
 
   NotificationEntity toEntity() {
+    // Extract thumbnail from metadata if available
+    final thumbnail = metadata['thumbnail'] as String?;
+    
     return NotificationEntity(
       id: id,
-      userId: userId,
+      userId: userId ?? '',
       actorId: actorId,
       type: _parseNotificationType(type),
       targetId: targetId,
@@ -52,9 +55,10 @@ abstract class NotificationModel with _$NotificationModel {
       createdAt: createdAt,
       updatedAt: updatedAt,
       actorUsername: actorUsername,
-      actorPhotoUrl: actorPhotoUrl,
-      targetPreviewUrl: targetPreviewUrl,
+      actorPhotoUrl: actorAvatarUrl,
+      targetPreviewUrl: thumbnail,
       isFollowingActor: isFollowingActor,
+      metadata: metadata,
     );
   }
 
@@ -78,6 +82,10 @@ abstract class NotificationModel with _$NotificationModel {
         return NotificationType.postShare;
       case 'channel_invite':
         return NotificationType.channelInvite;
+      case 'campaign_created':
+        return NotificationType.campaignCreated;
+      case 'campaign_update':
+        return NotificationType.campaignUpdate;
       default:
         return NotificationType.like;
     }
@@ -94,6 +102,8 @@ abstract class NotificationModel with _$NotificationModel {
         return NotificationTargetType.campaign;
       case 'user':
         return NotificationTargetType.user;
+      case 'message':
+        return NotificationTargetType.message;
       default:
         return null;
     }

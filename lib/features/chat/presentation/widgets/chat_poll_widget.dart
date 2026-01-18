@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
-/// Chat poll bubble with elegant tail design
+/// Chat poll bubble with modern design
 ///
 /// Pure UI widget for poll messages.
 /// Avatar and user info should be handled by parent widget.
 ///
 /// Features:
-/// - Interactive poll options
+/// - Interactive poll options with gradient progress
 /// - Real-time vote percentage
-/// - Smooth curved tail
-/// - Subtle shadow for depth
+/// - Modern rounded corners with pointy style
+/// - Gradient backgrounds and icons
+/// - Entrance animation
 class ChatPollWidget extends StatelessWidget {
   final String question;
   final List<PollOption> options;
@@ -42,39 +43,73 @@ class ChatPollWidget extends StatelessWidget {
     final textTheme = theme.textTheme;
     final t = AppLocalizations.of(context)!;
 
-    final bubbleColor = isSender
-        ? colorScheme.primaryContainer
-        : colorScheme.surfaceContainerHigh;
-
     final textColor =
         isSender ? colorScheme.onPrimaryContainer : colorScheme.onSurface;
 
-    return Semantics(
-      label: isSender ? t.chatPollSemanticsYour : t.chatPollSemanticsReceived,
-      hint: t.chatPollSemanticsHint(totalVotes),
-      child: Align(
-        alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width * 0.75,
-            minWidth: 250,
+    return TweenAnimationBuilder<double>(
+      duration: const Duration(milliseconds: 400),
+      tween: Tween(begin: 0.0, end: 1.0),
+      curve: Curves.easeOutCubic,
+      builder: (context, value, child) {
+        return Opacity(
+          opacity: value,
+          child: Transform.scale(
+            scale: 0.95 + (0.05 * value),
+            alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
+            child: child,
           ),
-          child: CustomPaint(
-            painter: _BubbleTailPainter(
-              color: bubbleColor,
-              isSender: isSender,
+        );
+      },
+      child: Semantics(
+        label: isSender ? t.chatPollSemanticsYour : t.chatPollSemanticsReceived,
+        hint: t.chatPollSemanticsHint(totalVotes),
+        child: Align(
+          alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: MediaQuery.of(context).size.width * 0.75,
+              minWidth: 250,
             ),
             child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              margin: EdgeInsets.only(
+                left: isSender ? 40 : 8,
+                right: isSender ? 8 : 40,
+                top: 3,
+                bottom: 3,
+              ),
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: bubbleColor,
-                borderRadius: BorderRadius.circular(16),
+                gradient: isSender
+                    ? LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          colorScheme.primaryContainer,
+                          colorScheme.primaryContainer.withValues(alpha: 0.9),
+                        ],
+                      )
+                    : null,
+                color: isSender ? null : colorScheme.surfaceContainerHigh,
+                borderRadius: BorderRadius.only(
+                  topLeft: const Radius.circular(18),
+                  topRight: const Radius.circular(18),
+                  bottomLeft: Radius.circular(isSender ? 18 : 4),
+                  bottomRight: Radius.circular(isSender ? 4 : 18),
+                ),
+                border: Border.all(
+                  color: isSender
+                      ? colorScheme.primary.withValues(alpha: 0.15)
+                      : colorScheme.outline.withValues(alpha: 0.1),
+                  width: 1,
+                ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.06),
-                    blurRadius: 4,
+                    color: isSender
+                        ? colorScheme.primary.withValues(alpha: 0.15)
+                        : Colors.black.withValues(alpha: 0.05),
+                    blurRadius: 8,
                     offset: const Offset(0, 2),
+                    spreadRadius: 0,
                   ),
                 ],
               ),
@@ -82,21 +117,49 @@ class ChatPollWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // Poll header
+                  // Poll header with gradient icon
                   Row(
                     children: [
-                      Icon(
-                        Icons.poll_rounded,
-                        size: 20,
-                        color: textColor.withValues(alpha: 0.7),
+                      ShaderMask(
+                        shaderCallback: (bounds) => LinearGradient(
+                          colors: [
+                            colorScheme.primary,
+                            colorScheme.secondary,
+                          ],
+                        ).createShader(bounds),
+                        child: const Icon(
+                          Icons.poll_rounded,
+                          size: 20,
+                          color: Colors.white,
+                        ),
                       ),
                       const SizedBox(width: 6),
-                      Text(
-                        t.chatPollLabel,
-                        style: textTheme.labelSmall?.copyWith(
-                          color: textColor.withValues(alpha: 0.7),
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 0.5,
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 3,
+                        ),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              colorScheme.primary.withValues(alpha: 0.15),
+                              colorScheme.secondary.withValues(alpha: 0.1),
+                            ],
+                          ),
+                          borderRadius: BorderRadius.circular(6),
+                          border: Border.all(
+                            color: colorScheme.primary.withValues(alpha: 0.2),
+                            width: 1,
+                          ),
+                        ),
+                        child: Text(
+                          t.chatPollLabel,
+                          style: textTheme.labelSmall?.copyWith(
+                            color: colorScheme.primary,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 0.5,
+                            fontSize: 11,
+                          ),
                         ),
                       ),
                     ],
@@ -151,11 +214,27 @@ class ChatPollWidget extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        t.chatPollTotalVotes(totalVotes),
-                        style: textTheme.bodySmall?.copyWith(
-                          color: textColor.withValues(alpha: 0.65),
-                          fontSize: 11,
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 3,
+                        ),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              colorScheme.primary.withValues(alpha: 0.1),
+                              colorScheme.secondary.withValues(alpha: 0.05),
+                            ],
+                          ),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Text(
+                          t.chatPollTotalVotes(totalVotes),
+                          style: textTheme.bodySmall?.copyWith(
+                            color: textColor.withValues(alpha: 0.7),
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                       Row(
@@ -164,14 +243,21 @@ class ChatPollWidget extends StatelessWidget {
                           Text(
                             time,
                             style: textTheme.bodySmall?.copyWith(
-                              color: textColor.withValues(alpha: 0.65),
+                              color: textColor.withValues(alpha: 0.6),
                               fontSize: 11,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                           if (isSender) ...[
                             const SizedBox(width: 4),
                             AnimatedSwitcher(
-                              duration: const Duration(milliseconds: 200),
+                              duration: const Duration(milliseconds: 300),
+                              transitionBuilder: (child, animation) {
+                                return ScaleTransition(
+                                  scale: animation,
+                                  child: child,
+                                );
+                              },
                               child: Icon(
                                 isRead
                                     ? Icons.done_all_rounded
@@ -226,9 +312,6 @@ class _PollOptionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final showResults = hasVoted || isSender;
-    final progressColor = isSender
-        ? colorScheme.primary.withValues(alpha: 0.25)
-        : colorScheme.primary.withValues(alpha: 0.15);
 
     return Semantics(
       button: onTap != null,
@@ -241,32 +324,48 @@ class _PollOptionItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           child: Ink(
             decoration: BoxDecoration(
-              color: showResults
-                  ? Colors.transparent
-                  : textColor.withValues(alpha: 0.03),
+              gradient: showResults
+                  ? null
+                  : LinearGradient(
+                      colors: [
+                        textColor.withValues(alpha: 0.04),
+                        textColor.withValues(alpha: 0.02),
+                      ],
+                    ),
               border: Border.all(
                 color: showResults
                     ? Colors.transparent
-                    : textColor.withValues(alpha: 0.15),
+                    : textColor.withValues(alpha: 0.12),
                 width: 1,
               ),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Stack(
               children: [
-                // Progress bar background
+                // Progress bar with gradient
                 if (showResults)
                   Positioned.fill(
                     child: AnimatedFractionallySizedBox(
-                      duration: const Duration(milliseconds: 300),
+                      duration: const Duration(milliseconds: 500),
                       curve: Curves.easeOutCubic,
                       alignment: Alignment.centerLeft,
                       widthFactor:
                           totalVotes > 0 ? option.votes / totalVotes : 0,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: progressColor,
+                          gradient: LinearGradient(
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                            colors: [
+                              colorScheme.primary.withValues(alpha: 0.25),
+                              colorScheme.secondary.withValues(alpha: 0.15),
+                            ],
+                          ),
                           borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: colorScheme.primary.withValues(alpha: 0.2),
+                            width: 1,
+                          ),
                         ),
                       ),
                     ),
@@ -278,14 +377,45 @@ class _PollOptionItem extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                   child: Row(
                     children: [
-                      // Selected indicator
+                      // Selected indicator with animation
                       if (option.isSelected && showResults)
                         Padding(
                           padding: const EdgeInsets.only(right: 10),
-                          child: Icon(
-                            Icons.check_circle_rounded,
-                            size: 20,
-                            color: colorScheme.primary,
+                          child: TweenAnimationBuilder<double>(
+                            duration: const Duration(milliseconds: 400),
+                            tween: Tween(begin: 0.0, end: 1.0),
+                            curve: Curves.elasticOut,
+                            builder: (context, value, child) {
+                              return Transform.scale(
+                                scale: value,
+                                child: child,
+                              );
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    colorScheme.primary,
+                                    colorScheme.secondary,
+                                  ],
+                                ),
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: colorScheme.primary
+                                        .withValues(alpha: 0.4),
+                                    blurRadius: 6,
+                                    spreadRadius: 1,
+                                  ),
+                                ],
+                              ),
+                              child: const Icon(
+                                Icons.check_circle_rounded,
+                                size: 18,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                         ),
 
@@ -303,17 +433,34 @@ class _PollOptionItem extends StatelessWidget {
                         ),
                       ),
 
-                      // Percentage
+                      // Percentage with gradient badge
                       if (showResults) ...[
                         const SizedBox(width: 12),
                         Container(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
+                            horizontal: 10,
+                            vertical: 5,
                           ),
                           decoration: BoxDecoration(
-                            color: colorScheme.primary.withValues(alpha: 0.15),
+                            gradient: LinearGradient(
+                              colors: [
+                                colorScheme.primary.withValues(alpha: 0.2),
+                                colorScheme.secondary.withValues(alpha: 0.15),
+                              ],
+                            ),
                             borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: colorScheme.primary.withValues(alpha: 0.3),
+                              width: 1,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color:
+                                    colorScheme.primary.withValues(alpha: 0.15),
+                                blurRadius: 4,
+                                offset: const Offset(0, 2),
+                              ),
+                            ],
                           ),
                           child: Text(
                             '$percentage%',
@@ -321,6 +468,7 @@ class _PollOptionItem extends StatelessWidget {
                               color: colorScheme.primary,
                               fontWeight: FontWeight.bold,
                               fontSize: 11,
+                              letterSpacing: 0.3,
                             ),
                           ),
                         ),
@@ -349,65 +497,4 @@ class PollOption {
     required this.votes,
     this.isSelected = false,
   });
-}
-
-/// Custom painter for elegant bubble tail
-class _BubbleTailPainter extends CustomPainter {
-  final Color color;
-  final bool isSender;
-
-  _BubbleTailPainter({
-    required this.color,
-    required this.isSender,
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill
-      ..strokeJoin = StrokeJoin.round;
-
-    final path = Path();
-
-    if (isSender) {
-      // Tail pointing right (sender)
-      path.moveTo(size.width, size.height - 8);
-      path.quadraticBezierTo(
-        size.width + 4,
-        size.height - 4,
-        size.width + 6,
-        size.height,
-      );
-      path.quadraticBezierTo(
-        size.width + 2,
-        size.height - 2,
-        size.width,
-        size.height - 6,
-      );
-    } else {
-      // Tail pointing left (receiver)
-      path.moveTo(0, size.height - 8);
-      path.quadraticBezierTo(
-        -4,
-        size.height - 4,
-        -6,
-        size.height,
-      );
-      path.quadraticBezierTo(
-        -2,
-        size.height - 2,
-        0,
-        size.height - 6,
-      );
-    }
-
-    path.close();
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant _BubbleTailPainter oldDelegate) {
-    return oldDelegate.color != color || oldDelegate.isSender != isSender;
-  }
 }

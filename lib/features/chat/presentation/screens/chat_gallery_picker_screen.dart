@@ -6,7 +6,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
-import 'package:velora/core/themes/color_material.dart';
+import 'package:velora/core/di/service_locator.dart';
 import 'package:velora/core/ui/app_messenger.dart';
 import 'package:velora/features/media/domain/entities/gallery_media_asset_entity.dart';
 import 'package:velora/features/media/presentation/bloc/media_gallery_bloc.dart';
@@ -43,10 +43,13 @@ class ChatGalleryPickerScreen extends HookWidget {
   }) async {
     return await Navigator.of(context).push<List<File>>(
       MaterialPageRoute(
-        builder: (context) => ChatGalleryPickerScreen(
-          maxImages: maxImages,
-          allowVideo: allowVideo,
-          title: title,
+        builder: (context) => BlocProvider(
+          create: (_) => getIt<MediaGalleryBloc>(),
+          child: ChatGalleryPickerScreen(
+            maxImages: maxImages,
+            allowVideo: allowVideo,
+            title: title,
+          ),
         ),
       ),
     );
@@ -55,6 +58,7 @@ class ChatGalleryPickerScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final t = AppLocalizations.of(context)!;
+    final colorScheme = Theme.of(context).colorScheme;
     final scrollController = useScrollController();
     final mediaGalleryBloc = context.read<MediaGalleryBloc>();
 
@@ -117,20 +121,55 @@ class ChatGalleryPickerScreen extends HookWidget {
     }
 
     return Scaffold(
-      backgroundColor: MaterialColorsCustom.black,
+      backgroundColor: colorScheme.surface,
       appBar: AppBar(
-        backgroundColor: MaterialColorsCustom.black,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.close, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                colorScheme.surface,
+                colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+              ],
+            ),
+          ),
         ),
-        title: Text(
-          screenTitle,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: Container(
+          margin: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: colorScheme.onSurface.withValues(alpha: 0.1),
+            shape: BoxShape.circle,
+          ),
+          child: IconButton(
+            icon: Icon(Icons.close, color: colorScheme.onSurface, size: 20),
+            onPressed: () => Navigator.pop(context),
+            padding: EdgeInsets.zero,
+          ),
+        ),
+        title: TweenAnimationBuilder<double>(
+          duration: const Duration(milliseconds: 600),
+          tween: Tween(begin: 0.0, end: 1.0),
+          curve: Curves.easeOutCubic,
+          builder: (context, value, child) {
+            return Opacity(
+              opacity: value,
+              child: Transform.translate(
+                offset: Offset(0, 20 * (1 - value)),
+                child: child,
+              ),
+            );
+          },
+          child: Text(
+            screenTitle,
+            style: TextStyle(
+              color: colorScheme.onSurface,
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 0.3,
+            ),
           ),
         ),
         centerTitle: false,
@@ -140,40 +179,113 @@ class ChatGalleryPickerScreen extends HookWidget {
               final selectedCount = state.selectedMedia.length;
 
               if (state.isConvertingFiles) {
-                return const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Center(
-                    child: SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        color: MaterialColorsCustom.brandSeafoam,
+                    child: TweenAnimationBuilder<double>(
+                      duration: const Duration(milliseconds: 1200),
+                      tween: Tween(begin: 0.0, end: 1.0),
+                      builder: (context, value, child) {
+                        return Transform.rotate(
+                          angle: value * 2 * 3.14159,
+                          child: child,
+                        );
+                      },
+                      child: ShaderMask(
+                        shaderCallback: (bounds) => LinearGradient(
+                          colors: [
+                            colorScheme.primary,
+                            colorScheme.secondary,
+                          ],
+                        ).createShader(bounds),
+                        child: SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            color: colorScheme.onSurface,
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 );
               }
 
-              return TextButton.icon(
-                onPressed: selectedCount == 0 ? null : onSendPressed,
-                icon: Icon(
-                  Icons.send_rounded,
-                  size: 18,
-                  color: selectedCount == 0
-                      ? Colors.white38
-                      : MaterialColorsCustom.brandSeafoam,
-                ),
-                label: Text(
-                  selectedCount > 0
-                      ? t.chatGallerySendCount(selectedCount)
-                      : t.chatGallerySend,
-                  style: TextStyle(
+              return TweenAnimationBuilder<double>(
+                duration: const Duration(milliseconds: 400),
+                tween: Tween(begin: 0.0, end: 1.0),
+                curve: Curves.easeOutBack,
+                builder: (context, value, child) {
+                  return Transform.scale(
+                    scale: 0.8 + (0.2 * value),
+                    child: Opacity(opacity: value, child: child),
+                  );
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(right: 8),
+                  decoration: BoxDecoration(
+                    gradient: selectedCount > 0
+                        ? LinearGradient(
+                            colors: [
+                              colorScheme.primary,
+                              colorScheme.secondary,
+                            ],
+                          )
+                        : null,
                     color: selectedCount == 0
-                        ? Colors.white38
-                        : MaterialColorsCustom.brandSeafoam,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
+                        ? colorScheme.onSurface.withValues(alpha: 0.1)
+                        : null,
+                    borderRadius: BorderRadius.circular(24),
+                    boxShadow: selectedCount > 0
+                        ? [
+                            BoxShadow(
+                              color: colorScheme.primary
+                                  .withValues(alpha: 0.4),
+                              blurRadius: 12,
+                              offset: const Offset(0, 4),
+                            ),
+                          ]
+                        : null,
+                  ),
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: selectedCount == 0 ? null : onSendPressed,
+                      borderRadius: BorderRadius.circular(24),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.send_rounded,
+                              size: 18,
+                              color: selectedCount == 0
+                                  ? colorScheme.onSurface.withValues(alpha: 0.38)
+                                  : colorScheme.onPrimary,
+                            ),
+                            const SizedBox(width: 6),
+                            Text(
+                              selectedCount > 0
+                                  ? t.chatGallerySendCount(selectedCount)
+                                  : t.chatGallerySend,
+                              style: TextStyle(
+                                color: selectedCount == 0
+                                    ? colorScheme.onSurface.withValues(alpha: 0.38)
+                                    : colorScheme.onPrimary,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 0.3,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               );
@@ -224,56 +336,141 @@ class ChatGalleryPickerScreen extends HookWidget {
     int maxImages,
   ) {
     final t = AppLocalizations.of(context)!;
+    final colorScheme = Theme.of(context).colorScheme;
     final selectedCount = state.selectedMedia.length;
 
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: BoxDecoration(
-        color: MaterialColorsCustom.greyMedium.withValues(alpha: 0.8),
-        border: Border(
-          bottom: BorderSide(
-            color: Colors.white.withValues(alpha: 0.1),
+    return TweenAnimationBuilder<double>(
+      duration: const Duration(milliseconds: 500),
+      tween: Tween(begin: 0.0, end: 1.0),
+      curve: Curves.easeOutCubic,
+      builder: (context, value, child) {
+        return Transform.translate(
+          offset: Offset(0, -50 * (1 - value)),
+          child: Opacity(opacity: value, child: child),
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              colorScheme.surfaceContainerHighest.withValues(alpha: 0.9),
+              colorScheme.surfaceContainerHighest.withValues(alpha: 0.7),
+            ],
           ),
+          border: Border(
+            bottom: BorderSide(
+              color: colorScheme.primary.withValues(alpha: 0.2),
+              width: 1,
+            ),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: colorScheme.primary.withValues(alpha: 0.1),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
         ),
-      ),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [
-                  MaterialColorsCustom.brandSeafoam,
-                  MaterialColorsCustom.brandEmerald,
-                ],
+        child: Row(
+          children: [
+            TweenAnimationBuilder<double>(
+              key: ValueKey(selectedCount),
+              duration: const Duration(milliseconds: 400),
+              tween: Tween(begin: 0.8, end: 1.0),
+              curve: Curves.elasticOut,
+              builder: (context, scale, child) {
+                return Transform.scale(scale: scale, child: child);
+              },
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      colorScheme.primary,
+                      colorScheme.secondary,
+                    ],
+                  ),
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: colorScheme.primary
+                          .withValues(alpha: 0.3),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.check_circle_rounded,
+                      size: 16,
+                      color: colorScheme.onPrimary,
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      t.chatGallerySelectedCount(selectedCount, maxImages),
+                      style: TextStyle(
+                        color: colorScheme.onPrimary,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 0.3,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              borderRadius: BorderRadius.circular(20),
             ),
-            child: Text(
-              t.chatGallerySelectedCount(selectedCount, maxImages),
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
+            const Spacer(),
+            Container(
+              decoration: BoxDecoration(
+                color: colorScheme.onSurface.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () {
+                    context
+                        .read<MediaGalleryBloc>()
+                        .add(const MediaGalleryEvent.clearSelection());
+                  },
+                  borderRadius: BorderRadius.circular(16),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.close_rounded,
+                          size: 16,
+                          color: colorScheme.onSurface.withValues(alpha: 0.7),
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          t.chatGalleryClearAll,
+                          style: TextStyle(
+                            color: colorScheme.onSurface.withValues(alpha: 0.7),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
             ),
-          ),
-          const Spacer(),
-          TextButton(
-            onPressed: () {
-              context
-                  .read<MediaGalleryBloc>()
-                  .add(const MediaGalleryEvent.clearSelection());
-            },
-            child: Text(
-              t.chatGalleryClearAll,
-              style: const TextStyle(
-                color: Colors.white70,
-                fontSize: 14,
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -328,28 +525,53 @@ class ChatGalleryPickerScreen extends HookWidget {
     int selectionNumber,
     bool isDisabled,
   ) {
+    final colorScheme = Theme.of(context).colorScheme;
     final isVideo = asset.assetEntity.type == AssetType.video;
 
-    return GestureDetector(
-      onTap: isDisabled
-          ? null
-          : () {
-              context.read<MediaGalleryBloc>().add(
-                    MediaGalleryEvent.toggleSelection(asset),
-                  );
-            },
-      child: AspectRatio(
-        aspectRatio: 1, // Square tiles
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 150),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: isSelected
-                  ? MaterialColorsCustom.brandSeafoam
-                  : Colors.transparent,
-              width: 2,
-            ),
+    return TweenAnimationBuilder<double>(
+      duration: const Duration(milliseconds: 300),
+      tween: Tween(begin: 0.0, end: 1.0),
+      curve: Curves.easeOutCubic,
+      builder: (context, value, child) {
+        return Opacity(
+          opacity: 0.5 + (0.5 * value),
+          child: Transform.scale(
+            scale: 0.8 + (0.2 * value),
+            child: child,
           ),
+        );
+      },
+      child: GestureDetector(
+        onTap: isDisabled
+            ? null
+            : () {
+                context.read<MediaGalleryBloc>().add(
+                      MediaGalleryEvent.toggleSelection(asset),
+                    );
+              },
+        child: AspectRatio(
+          aspectRatio: 1, // Square tiles
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 250),
+            curve: Curves.easeOutCubic,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: isSelected
+                    ? colorScheme.primary
+                    : Colors.transparent,
+                width: 2.5,
+              ),
+              boxShadow: isSelected
+                  ? [
+                      BoxShadow(
+                        color: colorScheme.primary
+                            .withValues(alpha: 0.4),
+                        blurRadius: 8,
+                        offset: const Offset(0, 2),
+                      ),
+                    ]
+                  : null,
+            ),
           child: Stack(
             fit: StackFit.expand,
             children: [
@@ -361,11 +583,11 @@ class ChatGalleryPickerScreen extends HookWidget {
                 thumbnailSize: const ThumbnailSize.square(300),
                 errorBuilder: (context, error, stackTrace) {
                   return Container(
-                    color: MaterialColorsCustom.greyMedium,
-                    child: const Center(
+                    color: colorScheme.surfaceContainerHighest,
+                    child: Center(
                       child: Icon(
                         Icons.broken_image,
-                        color: Colors.white54,
+                        color: colorScheme.onSurface.withValues(alpha: 0.54),
                         size: 24,
                       ),
                     ),
@@ -375,49 +597,91 @@ class ChatGalleryPickerScreen extends HookWidget {
 
               // Selection overlay
               if (isSelected)
-                Container(
-                  color:
-                      MaterialColorsCustom.brandSeafoam.withValues(alpha: 0.25),
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 250),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        colorScheme.primary
+                            .withValues(alpha: 0.3),
+                        colorScheme.secondary
+                            .withValues(alpha: 0.2),
+                      ],
+                    ),
+                  ),
                 ),
 
               // Disabled overlay
               if (isDisabled)
-                Container(
-                  color: Colors.black.withValues(alpha: 0.5),
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  decoration: BoxDecoration(
+                    color: colorScheme.surface.withValues(alpha: 0.8),
+                  ),
+                  child: Center(
+                    child: Icon(
+                      Icons.lock_outline,
+                      color: colorScheme.onSurface.withValues(alpha: 0.5),
+                      size: 24,
+                    ),
+                  ),
                 ),
 
               // Video duration badge
               if (isVideo)
                 Positioned(
-                  bottom: 4,
-                  left: 4,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 6,
-                      vertical: 2,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withValues(alpha: 0.7),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(
-                          Icons.videocam,
-                          color: Colors.white,
-                          size: 12,
+                  bottom: 6,
+                  left: 6,
+                  child: TweenAnimationBuilder<double>(
+                    duration: const Duration(milliseconds: 400),
+                    tween: Tween(begin: 0.0, end: 1.0),
+                    curve: Curves.easeOutBack,
+                    builder: (context, value, child) {
+                      return Transform.scale(
+                        scale: 0.7 + (0.3 * value),
+                        child: Opacity(opacity: value, child: child),
+                      );
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            colorScheme.surface.withValues(alpha: 0.9),
+                            colorScheme.surface.withValues(alpha: 0.7),
+                          ],
                         ),
-                        const SizedBox(width: 2),
-                        Text(
-                          _formatDuration(asset.assetEntity.videoDuration),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 10,
-                            fontWeight: FontWeight.w500,
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(
+                          color: colorScheme.outline.withValues(alpha: 0.3),
+                          width: 1,
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.play_circle_outline,
+                            color: colorScheme.onSurface,
+                            size: 14,
                           ),
-                        ),
-                      ],
+                          const SizedBox(width: 4),
+                          Text(
+                            _formatDuration(asset.assetEntity.videoDuration),
+                            style: TextStyle(
+                              color: colorScheme.onSurface,
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 0.3,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -427,7 +691,19 @@ class ChatGalleryPickerScreen extends HookWidget {
                 Positioned(
                   top: 6,
                   right: 6,
-                  child: _buildSelectionBadge(selectionNumber),
+                  child: TweenAnimationBuilder<double>(
+                    key: ValueKey(selectionNumber),
+                    duration: const Duration(milliseconds: 400),
+                    tween: Tween(begin: 0.0, end: 1.0),
+                    curve: Curves.elasticOut,
+                    builder: (context, value, child) {
+                      return Transform.scale(
+                        scale: 0.5 + (0.5 * value),
+                        child: Opacity(opacity: value, child: child),
+                      );
+                    },
+                    child: _buildSelectionBadge(selectionNumber, context),
+                  ),
                 ),
 
               // Unselected circle indicator
@@ -435,16 +711,30 @@ class ChatGalleryPickerScreen extends HookWidget {
                 Positioned(
                   top: 6,
                   right: 6,
-                  child: Container(
-                    width: 24,
-                    height: 24,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Colors.white.withValues(alpha: 0.8),
-                        width: 2,
+                  child: TweenAnimationBuilder<double>(
+                    duration: const Duration(milliseconds: 300),
+                    tween: Tween(begin: 0.0, end: 1.0),
+                    builder: (context, value, child) {
+                      return Opacity(opacity: value * 0.8, child: child);
+                    },
+                    child: Container(
+                      width: 26,
+                      height: 26,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: colorScheme.onSurface.withValues(alpha: 0.9),
+                          width: 2.5,
+                        ),
+                        color: colorScheme.surface.withValues(alpha: 0.4),
+                        boxShadow: [
+                          BoxShadow(
+                            color: colorScheme.shadow.withValues(alpha: 0.3),
+                            blurRadius: 4,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
                       ),
-                      color: Colors.black.withValues(alpha: 0.3),
                     ),
                   ),
                 ),
@@ -452,29 +742,45 @@ class ChatGalleryPickerScreen extends HookWidget {
           ),
         ),
       ),
+    ),
     );
   }
 
-  Widget _buildSelectionBadge(int number) {
+  Widget _buildSelectionBadge(int number, BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
-      width: 24,
-      height: 24,
-      decoration: const BoxDecoration(
+      width: 26,
+      height: 26,
+      decoration: BoxDecoration(
         gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
           colors: [
-            MaterialColorsCustom.brandSeafoam,
-            MaterialColorsCustom.brandEmerald,
+            colorScheme.primary,
+            colorScheme.secondary,
           ],
         ),
         shape: BoxShape.circle,
+        border: Border.all(
+          color: colorScheme.onPrimary.withValues(alpha: 0.3),
+          width: 2,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: colorScheme.primary.withValues(alpha: 0.5),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: Center(
         child: Text(
           '$number',
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
+          style: TextStyle(
+            color: colorScheme.onPrimary,
+            fontSize: 13,
+            fontWeight: FontWeight.w900,
+            letterSpacing: 0.3,
           ),
         ),
       ),

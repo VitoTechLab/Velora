@@ -37,10 +37,6 @@ class ChatMediaWidget extends StatelessWidget {
     final textTheme = theme.textTheme;
     final t = AppLocalizations.of(context)!;
 
-    final bubbleColor = isSender
-        ? colorScheme.primaryContainer
-        : colorScheme.surfaceContainerHigh;
-
     final textColor = isSender
         ? colorScheme.onPrimaryContainer
         : colorScheme.onSurface;
@@ -48,28 +44,66 @@ class ChatMediaWidget extends StatelessWidget {
     return Semantics(
       label: isSender ? t.chatMediaYourLabel : t.chatMediaReceivedLabel,
       hint: t.chatMediaHint(time),
-      child: Align(
-        alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width * 0.75,
-            minWidth: 200,
-          ),
-          child: CustomPaint(
-            painter: _BubbleTailPainter(
-              color: bubbleColor,
-              isSender: isSender,
+      child: TweenAnimationBuilder<double>(
+        duration: const Duration(milliseconds: 400),
+        tween: Tween(begin: 0.0, end: 1.0),
+        curve: Curves.easeOutCubic,
+        builder: (context, value, child) {
+          return Opacity(
+            opacity: value,
+            child: Transform.scale(
+              scale: 0.95 + (0.05 * value),
+              alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
+              child: child,
+            ),
+          );
+        },
+        child: Align(
+          alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: MediaQuery.of(context).size.width * 0.75,
+              minWidth: 220,
             ),
             child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              margin: EdgeInsets.only(
+                left: isSender ? 40 : 8,
+                right: isSender ? 8 : 40,
+                top: 3,
+                bottom: 3,
+              ),
               decoration: BoxDecoration(
-                color: bubbleColor,
-                borderRadius: BorderRadius.circular(16),
+                gradient: isSender
+                    ? LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          colorScheme.primaryContainer,
+                          colorScheme.primaryContainer.withValues(alpha: 0.9),
+                        ],
+                      )
+                    : null,
+                color: isSender ? null : colorScheme.surfaceContainerHigh,
+                borderRadius: BorderRadius.only(
+                  topLeft: const Radius.circular(18),
+                  topRight: const Radius.circular(18),
+                  bottomLeft: Radius.circular(isSender ? 18 : 4),
+                  bottomRight: Radius.circular(isSender ? 4 : 18),
+                ),
+                border: Border.all(
+                  color: isSender
+                      ? colorScheme.primary.withValues(alpha: 0.15)
+                      : colorScheme.outline.withValues(alpha: 0.1),
+                  width: 1,
+                ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.06),
-                    blurRadius: 4,
+                    color: isSender
+                        ? colorScheme.primary.withValues(alpha: 0.15)
+                        : Colors.black.withValues(alpha: 0.05),
+                    blurRadius: 8,
                     offset: const Offset(0, 2),
+                    spreadRadius: 0,
                   ),
                 ],
               ),
@@ -80,10 +114,10 @@ class ChatMediaWidget extends StatelessWidget {
                   // Media content
                   ClipRRect(
                     borderRadius: BorderRadius.vertical(
-                      top: const Radius.circular(16),
+                      top: const Radius.circular(18),
                       bottom: caption != null
                           ? Radius.zero
-                          : const Radius.circular(16),
+                          : const Radius.circular(18),
                     ),
                     child: Stack(
                       children: [
@@ -93,18 +127,39 @@ class ChatMediaWidget extends StatelessWidget {
                         if (isVideo)
                           Positioned.fill(
                             child: Container(
-                              color: Colors.black.withValues(alpha: 0.2),
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    Colors.black.withValues(alpha: 0.1),
+                                    Colors.black.withValues(alpha: 0.4),
+                                  ],
+                                ),
+                              ),
                               child: Center(
                                 child: Container(
-                                  padding: const EdgeInsets.all(16),
+                                  padding: const EdgeInsets.all(18),
                                   decoration: BoxDecoration(
-                                    color: Colors.black.withValues(alpha: 0.6),
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        colorScheme.primary,
+                                        colorScheme.secondary,
+                                      ],
+                                    ),
                                     shape: BoxShape.circle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: colorScheme.primary.withValues(alpha: 0.5),
+                                        blurRadius: 16,
+                                        spreadRadius: 2,
+                                      ),
+                                    ],
                                   ),
-                                  child: const Icon(
+                                  child: Icon(
                                     Icons.play_arrow_rounded,
-                                    color: Colors.white,
-                                    size: 36,
+                                    color: colorScheme.onPrimary,
+                                    size: 40,
                                   ),
                                 ),
                               ),
@@ -118,28 +173,45 @@ class ChatMediaWidget extends StatelessWidget {
                             top: 12,
                             child: Container(
                               padding: const EdgeInsets.symmetric(
-                                horizontal: 10,
+                                horizontal: 12,
                                 vertical: 6,
                               ),
                               decoration: BoxDecoration(
-                                color: Colors.black.withValues(alpha: 0.5),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Colors.black.withValues(alpha: 0.7),
+                                    Colors.black.withValues(alpha: 0.5),
+                                  ],
+                                ),
                                 borderRadius: BorderRadius.circular(12),
+                                border: Border.all(
+                                  color: Colors.white.withValues(alpha: 0.2),
+                                  width: 1,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withValues(alpha: 0.3),
+                                    blurRadius: 8,
+                                    spreadRadius: 0,
+                                  ),
+                                ],
                               ),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   const Icon(
                                     Icons.collections_rounded,
-                                    size: 14,
+                                    size: 15,
                                     color: Colors.white,
                                   ),
-                                  const SizedBox(width: 4),
+                                  const SizedBox(width: 5),
                                   Text(
                                     '${mediaUrls.length}',
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 12,
-                                      fontWeight: FontWeight.w600,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 0.3,
                                     ),
                                   ),
                                 ],
@@ -152,13 +224,22 @@ class ChatMediaWidget extends StatelessWidget {
 
                   // Caption
                   if (caption != null && caption!.isNotEmpty)
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(14, 10, 14, 4),
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(14, 12, 14, 4),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          top: BorderSide(
+                            color: textColor.withValues(alpha: 0.1),
+                            width: 0.5,
+                          ),
+                        ),
+                      ),
                       child: Text(
                         caption!,
                         style: textTheme.bodyMedium?.copyWith(
                           color: textColor,
-                          height: 1.4,
+                          height: 1.5,
+                          letterSpacing: 0.15,
                         ),
                       ),
                     ),
@@ -167,25 +248,33 @@ class ChatMediaWidget extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.fromLTRB(
                       14,
-                      caption != null ? 4 : 10,
+                      caption != null ? 6 : 12,
                       14,
-                      10,
+                      12,
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
+                        const Spacer(),
                         Text(
                           time,
                           style: textTheme.bodySmall?.copyWith(
-                            color: textColor.withValues(alpha: 0.65),
+                            color: textColor.withValues(alpha: 0.6),
                             fontSize: 11,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                         if (isSender) ...[
                           const SizedBox(width: 4),
                           AnimatedSwitcher(
-                            duration: const Duration(milliseconds: 200),
+                            duration: const Duration(milliseconds: 300),
+                            transitionBuilder: (child, animation) {
+                              return ScaleTransition(
+                                scale: animation,
+                                child: child,
+                              );
+                            },
                             child: Icon(
                               isRead
                                   ? Icons.done_all_rounded
@@ -349,63 +438,3 @@ class ChatMediaWidget extends StatelessWidget {
   }
 }
 
-/// Custom painter for elegant bubble tail
-class _BubbleTailPainter extends CustomPainter {
-  final Color color;
-  final bool isSender;
-
-  _BubbleTailPainter({
-    required this.color,
-    required this.isSender,
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill
-      ..strokeJoin = StrokeJoin.round;
-
-    final path = Path();
-
-    if (isSender) {
-      // Tail pointing right (sender)
-      path.moveTo(size.width, size.height - 8);
-      path.quadraticBezierTo(
-        size.width + 4,
-        size.height - 4,
-        size.width + 6,
-        size.height,
-      );
-      path.quadraticBezierTo(
-        size.width + 2,
-        size.height - 2,
-        size.width,
-        size.height - 6,
-      );
-    } else {
-      // Tail pointing left (receiver)
-      path.moveTo(0, size.height - 8);
-      path.quadraticBezierTo(
-        -4,
-        size.height - 4,
-        -6,
-        size.height,
-      );
-      path.quadraticBezierTo(
-        -2,
-        size.height - 2,
-        0,
-        size.height - 6,
-      );
-    }
-
-    path.close();
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant _BubbleTailPainter oldDelegate) {
-    return oldDelegate.color != color || oldDelegate.isSender != isSender;
-  }
-}

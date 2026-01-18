@@ -100,14 +100,28 @@ class _ChatInputBarState extends State<ChatInputBar> {
     final t = AppLocalizations.of(context)!;
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
-        color: colorScheme.surfaceContainerHighest,
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            colorScheme.surface.withValues(alpha: 0.95),
+            colorScheme.surfaceContainerHighest.withValues(alpha: 0.98),
+          ],
+        ),
+        border: Border(
+          top: BorderSide(
+            color: colorScheme.outline.withValues(alpha: 0.1),
+            width: 1,
+          ),
+        ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 4,
-            offset: const Offset(0, -2),
+            color: Colors.black.withValues(alpha: 0.08),
+            blurRadius: 12,
+            offset: const Offset(0, -4),
+            spreadRadius: 0,
           ),
         ],
       ),
@@ -120,23 +134,62 @@ class _ChatInputBarState extends State<ChatInputBar> {
               button: true,
               label: t.chatInputEmojiLabel,
               hint: t.chatInputEmojiHint,
-              child: IconButton(
-                icon: Icon(
-                  Icons.emoji_emotions_outlined,
-                  color: colorScheme.onSurfaceVariant,
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 2),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+                      colorScheme.surfaceContainerHighest.withValues(alpha: 0.1),
+                    ],
+                  ),
+                  shape: BoxShape.circle,
                 ),
-                onPressed: () {
-                  // Open emoji picker
-                },
-                tooltip: t.chatInputEmojiTooltip,
+                child: IconButton(
+                  icon: ShaderMask(
+                    shaderCallback: (bounds) => LinearGradient(
+                      colors: [
+                        colorScheme.primary,
+                        colorScheme.secondary,
+                      ],
+                    ).createShader(bounds),
+                    child: Icon(
+                      Icons.emoji_emotions_outlined,
+                      color: Colors.white,
+                    ),
+                  ),
+                  onPressed: () {
+                    // Open emoji picker
+                  },
+                  tooltip: t.chatInputEmojiTooltip,
+                ),
               ),
             ),
             Expanded(
               child: Container(
                 constraints: const BoxConstraints(maxHeight: 120),
                 decoration: BoxDecoration(
-                  color: colorScheme.surface,
-                  borderRadius: BorderRadius.circular(24),
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      colorScheme.surface.withValues(alpha: 0.9),
+                      colorScheme.surfaceContainerHigh.withValues(alpha: 0.8),
+                    ],
+                  ),
+                  borderRadius: BorderRadius.circular(28),
+                  border: Border.all(
+                    color: colorScheme.outline.withValues(alpha: 0.15),
+                    width: 1.5,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.05),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                      spreadRadius: 0,
+                    ),
+                  ],
                 ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -187,9 +240,17 @@ class _ChatInputBarState extends State<ChatInputBar> {
                               label: t.chatInputAttachLabel,
                               hint: t.chatInputAttachHint,
                               child: IconButton(
-                                icon: Icon(
-                                  Icons.attach_file,
-                                  color: colorScheme.onSurfaceVariant,
+                                icon: ShaderMask(
+                                  shaderCallback: (bounds) => LinearGradient(
+                                    colors: [
+                                      colorScheme.primary,
+                                      colorScheme.tertiary,
+                                    ],
+                                  ).createShader(bounds),
+                                  child: Icon(
+                                    Icons.attach_file_rounded,
+                                    color: Colors.white,
+                                  ),
                                 ),
                                 onPressed: () {
                                   AttachmentMenuBottomSheet.show(
@@ -213,9 +274,17 @@ class _ChatInputBarState extends State<ChatInputBar> {
                               label: t.chatInputCameraLabel,
                               hint: t.chatInputCameraHint,
                               child: IconButton(
-                                icon: Icon(
-                                  Icons.camera_alt_outlined,
-                                  color: colorScheme.onSurfaceVariant,
+                                icon: ShaderMask(
+                                  shaderCallback: (bounds) => LinearGradient(
+                                    colors: [
+                                      colorScheme.secondary,
+                                      colorScheme.primary,
+                                    ],
+                                  ).createShader(bounds),
+                                  child: Icon(
+                                    Icons.camera_alt_outlined,
+                                    color: Colors.white,
+                                  ),
                                 ),
                                 onPressed: widget.onCameraPressed,
                                 tooltip: t.chatInputCameraTooltip,
@@ -230,7 +299,7 @@ class _ChatInputBarState extends State<ChatInputBar> {
                 ),
               ),
             ),
-            const SizedBox(width: 8),
+            const SizedBox(width: 10),
             // Use ValueListenableBuilder for send/voice button
             ValueListenableBuilder<TextEditingValue>(
               valueListenable: widget.controller,
@@ -240,19 +309,43 @@ class _ChatInputBarState extends State<ChatInputBar> {
                   button: true,
                   label: hasText ? t.chatInputSendLabel : t.chatInputVoiceLabel,
                   hint: hasText ? t.chatInputSendHint : t.chatInputVoiceHint,
-                  child: GestureDetector(
-                    onTap: hasText ? _handleSend : widget.onVoicePressed,
-                    child: Container(
-                      width: 48,
-                      height: 48,
-                      decoration: BoxDecoration(
-                        color: colorScheme.primary,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        hasText ? Icons.send : Icons.mic,
-                        color: colorScheme.onPrimary,
-                        size: 24,
+                  child: AnimatedScale(
+                    scale: hasText ? 1.0 : 0.95,
+                    duration: const Duration(milliseconds: 200),
+                    curve: Curves.easeOutBack,
+                    child: Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: hasText ? _handleSend : widget.onVoicePressed,
+                        borderRadius: BorderRadius.circular(28),
+                        child: Container(
+                          width: 56,
+                          height: 56,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                colorScheme.primary,
+                                colorScheme.secondary,
+                              ],
+                            ),
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: colorScheme.primary.withValues(alpha: 0.4),
+                                blurRadius: 12,
+                                offset: const Offset(0, 4),
+                                spreadRadius: 0,
+                              ),
+                            ],
+                          ),
+                          child: Icon(
+                            hasText ? Icons.send_rounded : Icons.mic_rounded,
+                            color: colorScheme.onPrimary,
+                            size: 26,
+                          ),
+                        ),
                       ),
                     ),
                   ),

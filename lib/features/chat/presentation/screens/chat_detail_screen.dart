@@ -2,10 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:velora/core/di/service_locator.dart';
+import 'package:velora/core/services/file_download_service.dart';
 import 'package:velora/core/ui/app_messenger.dart';
 import 'package:velora/features/chat/presentation/bloc/chat_message_bloc.dart';
 import 'package:velora/features/chat/presentation/bloc/chat_message_event.dart';
@@ -15,7 +17,6 @@ import 'package:velora/features/chat/presentation/bloc/user_presence_event.dart'
 import 'package:velora/features/chat/presentation/bloc/user_presence_state.dart';
 import 'package:velora/features/chat/presentation/dialogs/create_event_dialog.dart';
 import 'package:velora/features/chat/presentation/dialogs/create_poll_dialog.dart';
-import 'package:velora/features/chat/presentation/screens/chat_document_picker_screen.dart';
 import 'package:velora/features/chat/presentation/screens/chat_gallery_picker_screen.dart';
 import 'package:velora/features/chat/presentation/widgets/chat_bubble_widget.dart';
 import 'package:velora/features/chat/presentation/widgets/chat_audio_widget.dart';
@@ -27,9 +28,9 @@ import 'package:velora/features/chat/presentation/widgets/chat_poll_widget.dart'
 import 'package:velora/features/chat/presentation/widgets/date_separator_widget.dart';
 import 'package:velora/features/chat/presentation/widgets/voice_recorder_bottom_sheet.dart';
 import 'package:velora/features/media/data/datasources/local/media_local_datasource.dart';
-import 'package:velora/features/media/domain/repositories/media_repository.dart';
-import 'package:velora/features/media/presentation/bloc/media_gallery_bloc.dart';
+import 'package:velora/features/navigation/models/chat_document_picker_args.dart';
 import 'package:velora/l10n/app_localizations.dart';
+import 'package:velora/routes/app_router.dart';
 
 class ChatDetailScreen extends HookWidget {
   final String conversationId;
@@ -84,7 +85,6 @@ class ChatDetailScreen extends HookWidget {
 
     // Image picker instance
     final imagePicker = useMemoized(() => ImagePicker());
-    final mediaRepository = useMemoized(() => getIt<MediaRepository>());
 
     // Get current user ID
     String? getCurrentUserId() {
@@ -103,59 +103,25 @@ class ChatDetailScreen extends HookWidget {
         return;
       }
 
-      // Show gallery picker screen with BlocProvider
-      final selectedFiles = await Navigator.of(context).push<List<File>>(
-        MaterialPageRoute(
-          builder: (ctx) => BlocProvider(
-            create: (_) => getIt<MediaGalleryBloc>(),
-            child: const ChatGalleryPickerScreen(
-              maxImages: 10,
-              allowVideo: true,
-            ),
-          ),
-        ),
+      // Show gallery picker screen using the static show method
+      final selectedFiles = await ChatGalleryPickerScreen.show(
+        context,
+        maxImages: 10,
+        allowVideo: true,
       );
 
       if (selectedFiles == null || selectedFiles.isEmpty) return;
 
-      // Show uploading indicator
-      AppMessenger.showToast(
-        message: t.chatDetailImagesSelected(selectedFiles.length),
-        icon: Icons.cloud_upload_outlined,
-      );
-
-      // Upload images to Cloudinary
-      final result = await mediaRepository.uploadImagesForChat(
-        files: selectedFiles,
-        userId: userId,
-        conversationId: conversationId,
-      );
-
-      result.fold(
-        (failure) {
-          AppMessenger.showToast(
-            message: failure.message,
-            icon: Icons.error_outline,
-            isError: true,
-          );
-        },
-        (assets) {
-          // Send media message with uploaded URLs
-          if (context.mounted) {
-            final chatBloc = context.read<ChatMessageBloc>();
-            for (final asset in assets) {
-              chatBloc.add(
-                SendMediaMessageEvent(
-                  conversationId: conversationId,
-                  mediaUrl: asset.secureUrl,
-                  mediaType: 'image',
-                  mimeType: 'image/jpeg',
-                ),
-              );
-            }
-          }
-        },
-      );
+      // Dispatch event to Bloc to handle upload and send
+      if (context.mounted) {
+        context.read<ChatMessageBloc>().add(
+              ChatMessageEvent.uploadAndSendImages(
+                conversationId: conversationId,
+                filePaths: selectedFiles.map((f) => f.path).toList(),
+                userId: userId,
+              ),
+            );
+      }
     }
 
     // Handler - Camera (uses default Android camera)
@@ -207,40 +173,16 @@ class ChatDetailScreen extends HookWidget {
 
           if (pickedFile == null) return;
 
-          AppMessenger.showToast(
-            message: t.chatDetailPhotoCaptured,
-            icon: Icons.cloud_upload_outlined,
-          );
-
-          // Upload to Cloudinary
-          final file = File(pickedFile.path);
-          final result = await mediaRepository.uploadImagesForChat(
-            files: [file],
-            userId: userId,
-            conversationId: conversationId,
-          );
-
-          result.fold(
-            (failure) {
-              AppMessenger.showToast(
-                message: failure.message,
-                icon: Icons.error_outline,
-                isError: true,
-              );
-            },
-            (assets) {
-              if (assets.isNotEmpty && context.mounted) {
-                context.read<ChatMessageBloc>().add(
-                      SendMediaMessageEvent(
-                        conversationId: conversationId,
-                        mediaUrl: assets.first.secureUrl,
-                        mediaType: 'image',
-                        mimeType: 'image/jpeg',
-                      ),
-                    );
-              }
-            },
-          );
+          // Dispatch event to Bloc to handle upload and send
+          if (context.mounted) {
+            context.read<ChatMessageBloc>().add(
+                  ChatMessageEvent.uploadAndSendImages(
+                    conversationId: conversationId,
+                    filePaths: [pickedFile.path],
+                    userId: userId,
+                  ),
+                );
+          }
         } else if (choice == 'video') {
           final pickedFile = await imagePicker.pickVideo(
             source: ImageSource.camera,
@@ -250,40 +192,16 @@ class ChatDetailScreen extends HookWidget {
 
           if (pickedFile == null) return;
 
-          AppMessenger.showToast(
-            message: t.chatDetailVideoRecorded,
-            icon: Icons.cloud_upload_outlined,
-          );
-
-          // Upload video to Cloudinary
-          final file = File(pickedFile.path);
-          final result = await mediaRepository.uploadVideoForChat(
-            file: file,
-            userId: userId,
-            conversationId: conversationId,
-          );
-
-          result.fold(
-            (failure) {
-              AppMessenger.showToast(
-                message: failure.message,
-                icon: Icons.error_outline,
-                isError: true,
-              );
-            },
-            (asset) {
-              if (context.mounted) {
-                context.read<ChatMessageBloc>().add(
-                      SendMediaMessageEvent(
-                        conversationId: conversationId,
-                        mediaUrl: asset.secureUrl,
-                        mediaType: 'video',
-                        mimeType: 'video/mp4',
-                      ),
-                    );
-              }
-            },
-          );
+          // Dispatch event to Bloc to handle upload and send
+          if (context.mounted) {
+            context.read<ChatMessageBloc>().add(
+                  ChatMessageEvent.uploadAndSendVideo(
+                    conversationId: conversationId,
+                    filePath: pickedFile.path,
+                    userId: userId,
+                  ),
+                );
+          }
         }
       } catch (e) {
         AppMessenger.showToast(
@@ -348,28 +266,6 @@ class ChatDetailScreen extends HookWidget {
       );
     }
 
-    // Helper to get mime type from URL
-    String getMimeTypeFromUrl(String url) {
-      final ext = url.split('.').last.toLowerCase();
-      switch (ext) {
-        case 'pdf':
-          return 'application/pdf';
-        case 'doc':
-        case 'docx':
-          return 'application/msword';
-        case 'xls':
-        case 'xlsx':
-          return 'application/vnd.ms-excel';
-        case 'ppt':
-        case 'pptx':
-          return 'application/vnd.ms-powerpoint';
-        case 'txt':
-          return 'text/plain';
-        default:
-          return 'application/octet-stream';
-      }
-    }
-
     // Handler - Document Picker
     Future<void> handleDocumentPressed() async {
       final userId = getCurrentUserId();
@@ -382,50 +278,26 @@ class ChatDetailScreen extends HookWidget {
         return;
       }
 
-      // Show document picker screen
-      final selectedFiles = await ChatDocumentPickerScreen.show(
-        context,
-        maxDocuments: 10,
+      // Show document picker screen using GoRouter
+      final selectedFiles = await context.pushNamed<List<File>>(
+        AppRouteName.chatDocumentPicker,
+        extra: ChatDocumentPickerArgs(
+          maxDocuments: 10,
+        ),
       );
 
       if (selectedFiles == null || selectedFiles.isEmpty) return;
 
-      AppMessenger.showToast(
-        message: t.chatDetailDocumentsSelected(selectedFiles.length),
-        icon: Icons.cloud_upload_outlined,
-      );
-
-      // Upload documents to Cloudinary
-      final result = await mediaRepository.uploadDocumentsForChat(
-        files: selectedFiles,
-        userId: userId,
-        conversationId: conversationId,
-      );
-
-      result.fold(
-        (failure) {
-          AppMessenger.showToast(
-            message: failure.message,
-            icon: Icons.error_outline,
-            isError: true,
-          );
-        },
-        (assets) {
-          if (context.mounted) {
-            final chatBloc = context.read<ChatMessageBloc>();
-            for (final asset in assets) {
-              chatBloc.add(
-                SendMediaMessageEvent(
-                  conversationId: conversationId,
-                  mediaUrl: asset.secureUrl,
-                  mediaType: 'document',
-                  mimeType: getMimeTypeFromUrl(asset.secureUrl),
-                ),
-              );
-            }
-          }
-        },
-      );
+      // Dispatch event to Bloc to handle upload and send
+      if (context.mounted) {
+        context.read<ChatMessageBloc>().add(
+              ChatMessageEvent.uploadAndSendDocuments(
+                conversationId: conversationId,
+                filePaths: selectedFiles.map((f) => f.path).toList(),
+                userId: userId,
+              ),
+            );
+      }
     }
 
     Future<void> handleAudioPressed() async {
@@ -445,39 +317,17 @@ class ChatDetailScreen extends HookWidget {
 
         if (file == null) return;
 
-        AppMessenger.showToast(
-          message: t.chatDetailAudioSelected,
-          icon: Icons.cloud_upload_outlined,
-        );
-
-        // Upload audio to Cloudinary
-        final result = await mediaRepository.uploadAudioForChat(
-          file: file,
-          userId: userId,
-          conversationId: conversationId,
-        );
-
-        result.fold(
-          (failure) {
-            AppMessenger.showToast(
-              message: failure.message,
-              icon: Icons.error_outline,
-              isError: true,
-            );
-          },
-          (asset) {
-            if (context.mounted) {
-              context.read<ChatMessageBloc>().add(
-                    SendMediaMessageEvent(
-                      conversationId: conversationId,
-                      mediaUrl: asset.secureUrl,
-                      mediaType: 'audio',
-                      mimeType: getMimeTypeFromUrl(asset.secureUrl),
-                    ),
-                  );
-            }
-          },
-        );
+        // Dispatch event to Bloc to handle upload and send
+        if (context.mounted) {
+          context.read<ChatMessageBloc>().add(
+                ChatMessageEvent.uploadAndSendAudio(
+                  conversationId: conversationId,
+                  filePath: file.path,
+                  userId: userId,
+                  isVoiceMessage: false,
+                ),
+              );
+        }
       } catch (e) {
         AppMessenger.showToast(
           message: t.chatDetailAudioError,
@@ -507,44 +357,24 @@ class ChatDetailScreen extends HookWidget {
       final file = File(recordedFilePath);
       if (!await file.exists()) return;
 
-      AppMessenger.showToast(
-        message: t.chatDetailVoiceRecorded,
-        icon: Icons.cloud_upload_outlined,
-      );
+      // Dispatch event to Bloc to handle upload and send
+      if (context.mounted) {
+        context.read<ChatMessageBloc>().add(
+              ChatMessageEvent.uploadAndSendAudio(
+                conversationId: conversationId,
+                filePath: recordedFilePath,
+                userId: userId,
+                isVoiceMessage: true,
+              ),
+            );
+      }
 
-      // Upload voice message to Cloudinary
-      final result = await mediaRepository.uploadAudioForChat(
-        file: file,
-        userId: userId,
-        conversationId: conversationId,
-      );
-
-      result.fold(
-        (failure) {
-          AppMessenger.showToast(
-            message: failure.message,
-            icon: Icons.error_outline,
-            isError: true,
-          );
-        },
-        (asset) {
-          if (context.mounted) {
-            context.read<ChatMessageBloc>().add(
-                  SendMediaMessageEvent(
-                    conversationId: conversationId,
-                    mediaUrl: asset.secureUrl,
-                    mediaType: 'audio',
-                    mimeType: 'audio/m4a',
-                  ),
-                );
-          }
-        },
-      );
-
-      // Clean up temp file
-      try {
-        await file.delete();
-      } catch (_) {}
+      // Clean up temp file after a delay (let upload finish first)
+      Future.delayed(const Duration(seconds: 2), () async {
+        try {
+          await file.delete();
+        } catch (_) {}
+      });
     }
 
     final backgroundColor = Color.lerp(
@@ -630,6 +460,10 @@ class _ChatDetailContent extends StatefulWidget {
 }
 
 class _ChatDetailContentState extends State<_ChatDetailContent> {
+  // Track downloading files by URL
+  final Map<String, double> _downloadProgress = {};
+  final Set<String> _downloadedFiles = {};
+
   @override
   void initState() {
     super.initState();
@@ -699,13 +533,35 @@ class _ChatDetailContentState extends State<_ChatDetailContent> {
           ),
           builder: (context, presence) {
             if (presence.isOnline) {
-              return Text(
-                t.chatDetailStatusOnline,
-                style: textTheme.bodySmall?.copyWith(
-                  color: Colors.green,
-                ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+              return Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: 6,
+                    height: 6,
+                    decoration: BoxDecoration(
+                      color: colorScheme.tertiary,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: colorScheme.tertiary.withValues(alpha: 0.5),
+                          blurRadius: 4,
+                          spreadRadius: 1,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 6),
+                  Text(
+                    t.chatDetailStatusOnline,
+                    style: textTheme.bodySmall?.copyWith(
+                      color: colorScheme.tertiary,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
               );
             }
 
@@ -758,6 +614,8 @@ class _ChatDetailContentState extends State<_ChatDetailContent> {
           prev.sendError != curr.sendError ||
           prev.editError != curr.editError ||
           prev.deleteError != curr.deleteError ||
+          prev.uploadError != curr.uploadError ||
+          prev.uploadSuccessMessage != curr.uploadSuccessMessage ||
           prev.message != curr.message,
       listener: (context, state) {
         // Show error snackbar
@@ -765,20 +623,34 @@ class _ChatDetailContentState extends State<_ChatDetailContent> {
           AppMessenger.showToast(
             message: state.sendError!,
             icon: Icons.error_outline,
+            isError: true,
           );
         } else if (state.editError != null) {
           AppMessenger.showToast(
             message: state.editError!,
             icon: Icons.error_outline,
+            isError: true,
           );
         } else if (state.deleteError != null) {
           AppMessenger.showToast(
             message: state.deleteError!,
             icon: Icons.error_outline,
+            isError: true,
+          );
+        } else if (state.uploadError != null) {
+          AppMessenger.showToast(
+            message: state.uploadError!,
+            icon: Icons.error_outline,
+            isError: true,
           );
         }
         // Show success message
-        else if (state.message != null) {
+        else if (state.uploadSuccessMessage != null) {
+          AppMessenger.showToast(
+            message: state.uploadSuccessMessage!,
+            icon: Icons.cloud_done_outlined,
+          );
+        } else if (state.message != null) {
           AppMessenger.showToast(
             message: state.message!,
             icon: Icons.check_circle_outline,
@@ -786,9 +658,22 @@ class _ChatDetailContentState extends State<_ChatDetailContent> {
         }
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         backgroundColor: widget.backgroundColor,
         appBar: AppBar(
-          backgroundColor: colorScheme.surfaceContainerHighest,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  colorScheme.surfaceContainerHighest,
+                  colorScheme.surfaceContainerHighest.withValues(alpha: 0.8),
+                ],
+              ),
+            ),
+          ),
+          backgroundColor: Colors.transparent,
           elevation: 0,
           leading: Semantics(
             button: true,
@@ -804,10 +689,42 @@ class _ChatDetailContentState extends State<_ChatDetailContent> {
             label: t.chatDetailTitleLabel(widget.chatName),
             child: Row(
               children: [
-                CircleAvatar(
-                  radius: 20,
-                  backgroundImage: NetworkImage(widget.profileImageUrl),
-                  backgroundColor: colorScheme.surfaceContainerHighest,
+                // Modern avatar with gradient border for online status
+                BlocBuilder<UserPresenceBloc, UserPresenceState>(
+                  builder: (context, presenceState) {
+                    final isOnline = !widget.isGroup &&
+                            widget.peerUserId != null
+                        ? presenceState.onlineUsers[widget.peerUserId] ?? false
+                        : false;
+
+                    return Container(
+                      decoration: isOnline
+                          ? BoxDecoration(
+                              shape: BoxShape.circle,
+                              gradient: LinearGradient(
+                                colors: [
+                                  colorScheme.primary,
+                                  colorScheme.tertiary,
+                                ],
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: colorScheme.primary
+                                      .withValues(alpha: 0.3),
+                                  blurRadius: 8,
+                                  spreadRadius: 2,
+                                ),
+                              ],
+                            )
+                          : null,
+                      padding: isOnline ? const EdgeInsets.all(2) : null,
+                      child: CircleAvatar(
+                        radius: 20,
+                        backgroundImage: NetworkImage(widget.profileImageUrl),
+                        backgroundColor: colorScheme.surfaceContainerHighest,
+                      ),
+                    );
+                  },
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -866,54 +783,104 @@ class _ChatDetailContentState extends State<_ChatDetailContent> {
                     }
 
                     if (state.errorMessage != null && state.messages.isEmpty) {
-                      return Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.error_outline,
-                              size: 64,
-                              color: colorScheme.error,
+                      return TweenAnimationBuilder<double>(
+                        duration: const Duration(milliseconds: 400),
+                        tween: Tween(begin: 0.0, end: 1.0),
+                        builder: (context, value, child) {
+                          return Opacity(
+                            opacity: value,
+                            child: Transform.translate(
+                              offset: Offset(0, 20 * (1 - value)),
+                              child: child,
                             ),
-                            const SizedBox(height: 16),
-                            Text(
-                              state.errorMessage!,
-                              style: textTheme.bodyLarge?.copyWith(
-                                color: colorScheme.error,
+                          );
+                        },
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  color:
+                                      colorScheme.error.withValues(alpha: 0.1),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  Icons.error_outline,
+                                  size: 64,
+                                  color: colorScheme.error,
+                                ),
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
+                              const SizedBox(height: 24),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 32),
+                                child: Text(
+                                  state.errorMessage!,
+                                  style: textTheme.bodyLarge?.copyWith(
+                                    color: colorScheme.error,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     }
 
                     if (state.messages.isEmpty) {
-                      return Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.chat_bubble_outline,
-                              size: 80,
-                              color: colorScheme.outline,
+                      return TweenAnimationBuilder<double>(
+                        duration: const Duration(milliseconds: 600),
+                        tween: Tween(begin: 0.0, end: 1.0),
+                        curve: Curves.easeOutCubic,
+                        builder: (context, value, child) {
+                          return Opacity(
+                            opacity: value,
+                            child: Transform.scale(
+                              scale: 0.8 + (0.2 * value),
+                              child: child,
                             ),
-                            const SizedBox(height: 16),
-                            Text(
-                              t.chatDetailNoMessages,
-                              style: textTheme.titleLarge?.copyWith(
-                                color: colorScheme.onSurfaceVariant,
+                          );
+                        },
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ShaderMask(
+                                shaderCallback: (bounds) => LinearGradient(
+                                  colors: [
+                                    colorScheme.primary.withValues(alpha: 0.5),
+                                    colorScheme.secondary
+                                        .withValues(alpha: 0.5),
+                                  ],
+                                ).createShader(bounds),
+                                child: Icon(
+                                  Icons.chat_bubble_outline,
+                                  size: 80,
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              t.chatDetailNoMessagesHint,
-                              style: textTheme.bodyMedium?.copyWith(
-                                color: colorScheme.outline,
+                              const SizedBox(height: 24),
+                              Text(
+                                t.chatDetailNoMessages,
+                                style: textTheme.titleLarge?.copyWith(
+                                  color: colorScheme.onSurfaceVariant,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
+                              const SizedBox(height: 8),
+                              Text(
+                                t.chatDetailNoMessagesHint,
+                                style: textTheme.bodyMedium?.copyWith(
+                                  color: colorScheme.outline,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     }
@@ -960,27 +927,42 @@ class _ChatDetailContentState extends State<_ChatDetailContent> {
                                   messages[reversedIndex - 1].createdAt,
                                 );
 
-                            return Column(
-                              children: [
-                                if (showDateSeparator)
-                                  DateSeparatorWidget(
-                                    date: _formatDate(message.createdAt),
+                            return TweenAnimationBuilder<double>(
+                              key: ValueKey(message.id),
+                              duration: const Duration(milliseconds: 400),
+                              tween: Tween(begin: 0.0, end: 1.0),
+                              curve: Curves.easeOutCubic,
+                              builder: (context, value, child) {
+                                return Opacity(
+                                  opacity: 0.5 + (0.5 * value),
+                                  child: Transform.translate(
+                                    offset: Offset(0, 20 * (1 - value)),
+                                    child: child,
                                   ),
-                                if (isDeleted)
-                                  ChatBubbleWidget(
-                                    message: t.chatDetailMessageDeleted,
-                                    time: _formatTime(message.createdAt),
-                                    isSender: isSender,
-                                    isRead: true,
-                                  )
-                                else
-                                  _buildMessageWidget(
-                                    context: context,
-                                    message: message,
-                                    isSender: isSender,
-                                    t: t,
-                                  ),
-                              ],
+                                );
+                              },
+                              child: Column(
+                                children: [
+                                  if (showDateSeparator)
+                                    DateSeparatorWidget(
+                                      date: _formatDate(message.createdAt),
+                                    ),
+                                  if (isDeleted)
+                                    ChatBubbleWidget(
+                                      message: t.chatDetailMessageDeleted,
+                                      time: _formatTime(message.createdAt),
+                                      isSender: isSender,
+                                      isRead: true,
+                                    )
+                                  else
+                                    _buildMessageWidget(
+                                      context: context,
+                                      message: message,
+                                      isSender: isSender,
+                                      t: t,
+                                    ),
+                                ],
+                              ),
                             );
                           },
                         ),
@@ -988,6 +970,87 @@ class _ChatDetailContentState extends State<_ChatDetailContent> {
                     );
                   },
                 ),
+              ),
+              // Upload progress indicator
+              BlocBuilder<ChatMessageBloc, ChatMessageState>(
+                builder: (context, state) {
+                  if (!state.isUploadingMedia) return const SizedBox.shrink();
+
+                  return TweenAnimationBuilder<double>(
+                    duration: const Duration(milliseconds: 300),
+                    tween: Tween(begin: 0.0, end: 1.0),
+                    builder: (context, value, child) {
+                      return Opacity(
+                        opacity: value,
+                        child: Transform.translate(
+                          offset: Offset(0, 20 * (1 - value)),
+                          child: child,
+                        ),
+                      );
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 10,
+                      ),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            colorScheme.surfaceContainerHighest,
+                            colorScheme.surfaceContainer,
+                          ],
+                        ),
+                        border: Border(
+                          top: BorderSide(
+                            color: colorScheme.primary.withValues(alpha: 0.2),
+                            width: 1,
+                          ),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: colorScheme.shadow.withValues(alpha: 0.05),
+                            blurRadius: 8,
+                            offset: const Offset(0, -2),
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        children: [
+                          ShaderMask(
+                            shaderCallback: (bounds) => LinearGradient(
+                              colors: [
+                                colorScheme.primary,
+                                colorScheme.secondary,
+                              ],
+                            ).createShader(bounds),
+                            child: const SizedBox(
+                              width: 18,
+                              height: 18,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2.5,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Text(
+                            'Uploading...',
+                            style: textTheme.bodySmall?.copyWith(
+                              color: colorScheme.onSurface,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const Spacer(),
+                          Icon(
+                            Icons.cloud_upload_outlined,
+                            size: 18,
+                            color: colorScheme.primary.withValues(alpha: 0.7),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
               ),
               BlocBuilder<ChatMessageBloc, ChatMessageState>(
                 builder: (context, state) {
@@ -1359,123 +1422,233 @@ class _ChatDetailContentState extends State<_ChatDetailContent> {
     final colorScheme = theme.colorScheme;
     final t = AppLocalizations.of(context)!;
 
-    final bubbleColor =
-        isSender ? colorScheme.primary : colorScheme.surfaceContainerHighest;
-    final contentColor =
-        isSender ? colorScheme.onPrimary : colorScheme.onSurface;
+    final textColor =
+        isSender ? colorScheme.onPrimaryContainer : colorScheme.onSurface;
     final secondaryContentColor = isSender
-        ? colorScheme.onPrimary.withValues(alpha: 0.7)
+        ? colorScheme.onPrimaryContainer.withValues(alpha: 0.7)
         : colorScheme.onSurfaceVariant;
 
     // Get file extension for icon color
     final ext = fileName.split('.').last.toLowerCase();
     final iconColor = _getFileIconColor(ext);
 
-    return Container(
-      constraints: const BoxConstraints(maxWidth: 280),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: bubbleColor,
-        borderRadius: BorderRadius.only(
-          topLeft: const Radius.circular(16),
-          topRight: const Radius.circular(16),
-          bottomLeft: isSender ? const Radius.circular(16) : Radius.zero,
-          bottomRight: isSender ? Radius.zero : const Radius.circular(16),
+    return TweenAnimationBuilder<double>(
+      duration: const Duration(milliseconds: 400),
+      tween: Tween(begin: 0.0, end: 1.0),
+      curve: Curves.easeOutCubic,
+      builder: (context, value, child) {
+        return Opacity(
+          opacity: value,
+          child: Transform.scale(
+            scale: 0.95 + (0.05 * value),
+            alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
+            child: child,
+          ),
+        );
+      },
+      child: Container(
+        constraints: const BoxConstraints(maxWidth: 280),
+        margin: EdgeInsets.only(
+          left: isSender ? 40 : 8,
+          right: isSender ? 8 : 40,
+          top: 3,
+          bottom: 3,
         ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // File info row
-          Row(
-            children: [
-              // File icon
-              Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  color: iconColor.withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Center(
-                  child: Text(
-                    ext.toUpperCase(),
-                    style: theme.textTheme.labelSmall?.copyWith(
-                      color: iconColor,
-                      fontWeight: FontWeight.bold,
+        padding: const EdgeInsets.all(14),
+        decoration: BoxDecoration(
+          gradient: isSender
+              ? LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    colorScheme.primaryContainer,
+                    colorScheme.primaryContainer.withValues(alpha: 0.9),
+                  ],
+                )
+              : null,
+          color: isSender ? null : colorScheme.surfaceContainerHigh,
+          borderRadius: BorderRadius.only(
+            topLeft: const Radius.circular(18),
+            topRight: const Radius.circular(18),
+            bottomLeft: Radius.circular(isSender ? 18 : 4),
+            bottomRight: Radius.circular(isSender ? 4 : 18),
+          ),
+          border: Border.all(
+            color: isSender
+                ? colorScheme.primary.withValues(alpha: 0.15)
+                : colorScheme.outline.withValues(alpha: 0.1),
+            width: 1,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: isSender
+                  ? colorScheme.primary.withValues(alpha: 0.15)
+                  : Colors.black.withValues(alpha: 0.05),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+              spreadRadius: 0,
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // File info row
+            Row(
+              children: [
+                // File icon with gradient
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        iconColor.withValues(alpha: 0.2),
+                        iconColor.withValues(alpha: 0.1),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: iconColor.withValues(alpha: 0.3),
+                      width: 1.5,
                     ),
                   ),
+                  child: Icon(
+                    _getFileIcon(ext),
+                    size: 28,
+                    color: iconColor,
+                  ),
                 ),
-              ),
-              const SizedBox(width: 12),
-              // File name and size
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      fileName,
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        color: contentColor,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    if (fileSize != null) ...[
-                      const SizedBox(height: 2),
+                const SizedBox(width: 12),
+                // File details
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                       Text(
-                        _formatFileSize(fileSize),
-                        style: theme.textTheme.labelSmall?.copyWith(
-                          color: secondaryContentColor,
+                        fileName,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: textColor,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0.15,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      if (fileSize != null) ...[
+                        const SizedBox(height: 4),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 3,
+                          ),
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                secondaryContentColor.withValues(alpha: 0.15),
+                                secondaryContentColor.withValues(alpha: 0.08),
+                              ],
+                            ),
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Text(
+                            _formatFileSize(fileSize),
+                            style: theme.textTheme.labelSmall?.copyWith(
+                              color: secondaryContentColor,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 11,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 8),
+                // Download button with progress indicator
+                _downloadProgress.containsKey(fileUrl)
+                    ? SizedBox(
+                        width: 40,
+                        height: 40,
+                        child: CircularProgressIndicator(
+                          value: _downloadProgress[fileUrl],
+                          strokeWidth: 3,
+                          color: colorScheme.primary,
+                        ),
+                      )
+                    : Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              colorScheme.primary.withValues(alpha: 0.15),
+                              colorScheme.secondary.withValues(alpha: 0.1),
+                            ],
+                          ),
+                          shape: BoxShape.circle,
+                        ),
+                        child: IconButton(
+                          icon: ShaderMask(
+                            shaderCallback: (bounds) => LinearGradient(
+                              colors: [
+                                colorScheme.primary,
+                                colorScheme.secondary,
+                              ],
+                            ).createShader(bounds),
+                            child: Icon(
+                              _downloadedFiles.contains(fileUrl)
+                                  ? Icons.folder_open_rounded
+                                  : Icons.download_rounded,
+                              color: Colors.white,
+                              size: 22,
+                            ),
+                          ),
+                          onPressed: () => _downloadFile(
+                            fileUrl: fileUrl,
+                            fileName: fileName,
+                            context: context,
+                          ),
+                          tooltip: _downloadedFiles.contains(fileUrl)
+                              ? t.chatDetailOpenFile
+                              : t.chatDetailDownloadFile,
                         ),
                       ),
-                    ],
-                  ],
-                ),
-              ),
-              // Download button
-              IconButton(
-                onPressed: () {
-                  // TODO: Implement file download/open
-                  AppMessenger.showToast(
-                    message: t.chatDetailFileDownloading,
-                    icon: Icons.download_outlined,
-                  );
-                },
-                icon: Icon(
-                  Icons.download_outlined,
-                  color: contentColor,
-                ),
-                iconSize: 24,
-              ),
-            ],
-          ),
-          // Time
-          const SizedBox(height: 8),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              const Spacer(),
-              Text(
-                time,
-                style: theme.textTheme.labelSmall?.copyWith(
-                  color: secondaryContentColor,
-                ),
-              ),
-              if (isSender) ...[
-                const SizedBox(width: 4),
-                Icon(
-                  Icons.done_all,
-                  size: 14,
-                  color: secondaryContentColor,
-                ),
               ],
-            ],
-          ),
-        ],
+            ),
+            // Time and read status
+            const SizedBox(height: 12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  time,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: textColor.withValues(alpha: 0.6),
+                    fontSize: 11,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                if (isSender) ...[
+                  const SizedBox(width: 4),
+                  AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 300),
+                    transitionBuilder: (child, animation) {
+                      return ScaleTransition(
+                        scale: animation,
+                        child: child,
+                      );
+                    },
+                    child: Icon(
+                      Icons.check_rounded,
+                      key: const ValueKey('check'),
+                      size: 16,
+                      color: colorScheme.primary,
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -1500,6 +1673,29 @@ class _ChatDetailContentState extends State<_ChatDetailContent> {
         return Colors.amber;
       default:
         return Colors.blueGrey;
+    }
+  }
+
+  IconData _getFileIcon(String ext) {
+    switch (ext) {
+      case 'pdf':
+        return Icons.picture_as_pdf_rounded;
+      case 'doc':
+      case 'docx':
+        return Icons.description_rounded;
+      case 'xls':
+      case 'xlsx':
+        return Icons.table_chart_rounded;
+      case 'ppt':
+      case 'pptx':
+        return Icons.slideshow_rounded;
+      case 'txt':
+        return Icons.article_rounded;
+      case 'zip':
+      case 'rar':
+        return Icons.folder_zip_rounded;
+      default:
+        return Icons.insert_drive_file_rounded;
     }
   }
 
@@ -1541,6 +1737,92 @@ class _ChatDetailContentState extends State<_ChatDetailContent> {
 
   String _formatTime(DateTime time) {
     return '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
+  }
+
+  /// Download file to device storage using FileDownloadService
+  Future<void> _downloadFile({
+    required String fileUrl,
+    required String fileName,
+    required BuildContext context,
+  }) async {
+    final t = AppLocalizations.of(context)!;
+    final downloadService = getIt<FileDownloadService>();
+
+    if (_downloadProgress.containsKey(fileUrl)) {
+      // Already downloading
+      return;
+    }
+
+    setState(() {
+      _downloadProgress[fileUrl] = 0.0;
+    });
+
+    try {
+      // Show downloading toast
+      AppMessenger.showToast(
+        message: t.chatDetailDownloading,
+        icon: Icons.download_rounded,
+      );
+
+      // Download file using service with progress callback
+      final filePath = await downloadService.downloadFile(
+        fileUrl: fileUrl,
+        fileName: fileName,
+        onProgress: (progress) {
+          setState(() {
+            _downloadProgress[fileUrl] = progress;
+          });
+        },
+      );
+
+      // Mark as downloaded
+      setState(() {
+        _downloadProgress.remove(fileUrl);
+        _downloadedFiles.add(fileUrl);
+      });
+
+      if (context.mounted) {
+        // Show success with option to open
+        AppMessenger.showToast(
+          message: t.chatDetailDownloadSuccess,
+          icon: Icons.check_circle_outline,
+        );
+
+        // Show dialog to open file
+        showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            title: Text(t.chatDetailDownloadSuccess),
+            content: Text('Saved to: $filePath'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx),
+                child: Text(t.commonCancel),
+              ),
+              FilledButton(
+                onPressed: () async {
+                  Navigator.pop(ctx);
+                  await downloadService.openFile(filePath);
+                },
+                child: Text(t.chatDetailOpenFile),
+              ),
+            ],
+          ),
+        );
+      }
+    } catch (e) {
+      setState(() {
+        _downloadProgress.remove(fileUrl);
+      });
+
+      if (context.mounted) {
+        AppMessenger.showToast(
+          message: '${t.chatDetailDownloadError}: $e',
+          icon: Icons.error_outline,
+          isError: true,
+        );
+      }
+    }
   }
 }
 

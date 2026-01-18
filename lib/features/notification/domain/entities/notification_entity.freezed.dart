@@ -33,7 +33,9 @@ mixin _$NotificationEntity {
       throw _privateConstructorUsedError; // Target preview (for post thumbnail, etc.)
   String? get targetPreviewUrl =>
       throw _privateConstructorUsedError; // Follow relationship - whether current user is following the actor
-  bool get isFollowingActor => throw _privateConstructorUsedError;
+  bool get isFollowingActor =>
+      throw _privateConstructorUsedError; // Metadata for rich notification content (thumbnails, previews, titles)
+  Map<String, dynamic> get metadata => throw _privateConstructorUsedError;
 
   /// Create a copy of NotificationEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -63,7 +65,8 @@ abstract class $NotificationEntityCopyWith<$Res> {
       String? actorUsername,
       String? actorPhotoUrl,
       String? targetPreviewUrl,
-      bool isFollowingActor});
+      bool isFollowingActor,
+      Map<String, dynamic> metadata});
 }
 
 /// @nodoc
@@ -96,6 +99,7 @@ class _$NotificationEntityCopyWithImpl<$Res, $Val extends NotificationEntity>
     Object? actorPhotoUrl = freezed,
     Object? targetPreviewUrl = freezed,
     Object? isFollowingActor = null,
+    Object? metadata = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -158,6 +162,10 @@ class _$NotificationEntityCopyWithImpl<$Res, $Val extends NotificationEntity>
           ? _value.isFollowingActor
           : isFollowingActor // ignore: cast_nullable_to_non_nullable
               as bool,
+      metadata: null == metadata
+          ? _value.metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
     ) as $Val);
   }
 }
@@ -185,7 +193,8 @@ abstract class _$$NotificationEntityImplCopyWith<$Res>
       String? actorUsername,
       String? actorPhotoUrl,
       String? targetPreviewUrl,
-      bool isFollowingActor});
+      bool isFollowingActor,
+      Map<String, dynamic> metadata});
 }
 
 /// @nodoc
@@ -216,6 +225,7 @@ class __$$NotificationEntityImplCopyWithImpl<$Res>
     Object? actorPhotoUrl = freezed,
     Object? targetPreviewUrl = freezed,
     Object? isFollowingActor = null,
+    Object? metadata = null,
   }) {
     return _then(_$NotificationEntityImpl(
       id: null == id
@@ -278,6 +288,10 @@ class __$$NotificationEntityImplCopyWithImpl<$Res>
           ? _value.isFollowingActor
           : isFollowingActor // ignore: cast_nullable_to_non_nullable
               as bool,
+      metadata: null == metadata
+          ? _value._metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
     ));
   }
 }
@@ -300,8 +314,10 @@ class _$NotificationEntityImpl extends _NotificationEntity {
       this.actorUsername,
       this.actorPhotoUrl,
       this.targetPreviewUrl,
-      this.isFollowingActor = false})
-      : super._();
+      this.isFollowingActor = false,
+      final Map<String, dynamic> metadata = const {}})
+      : _metadata = metadata,
+        super._();
 
   @override
   final String id;
@@ -339,10 +355,20 @@ class _$NotificationEntityImpl extends _NotificationEntity {
   @override
   @JsonKey()
   final bool isFollowingActor;
+// Metadata for rich notification content (thumbnails, previews, titles)
+  final Map<String, dynamic> _metadata;
+// Metadata for rich notification content (thumbnails, previews, titles)
+  @override
+  @JsonKey()
+  Map<String, dynamic> get metadata {
+    if (_metadata is EqualUnmodifiableMapView) return _metadata;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_metadata);
+  }
 
   @override
   String toString() {
-    return 'NotificationEntity(id: $id, userId: $userId, actorId: $actorId, type: $type, targetId: $targetId, targetType: $targetType, groupKey: $groupKey, groupCount: $groupCount, isRead: $isRead, createdAt: $createdAt, updatedAt: $updatedAt, actorUsername: $actorUsername, actorPhotoUrl: $actorPhotoUrl, targetPreviewUrl: $targetPreviewUrl, isFollowingActor: $isFollowingActor)';
+    return 'NotificationEntity(id: $id, userId: $userId, actorId: $actorId, type: $type, targetId: $targetId, targetType: $targetType, groupKey: $groupKey, groupCount: $groupCount, isRead: $isRead, createdAt: $createdAt, updatedAt: $updatedAt, actorUsername: $actorUsername, actorPhotoUrl: $actorPhotoUrl, targetPreviewUrl: $targetPreviewUrl, isFollowingActor: $isFollowingActor, metadata: $metadata)';
   }
 
   @override
@@ -374,7 +400,8 @@ class _$NotificationEntityImpl extends _NotificationEntity {
             (identical(other.targetPreviewUrl, targetPreviewUrl) ||
                 other.targetPreviewUrl == targetPreviewUrl) &&
             (identical(other.isFollowingActor, isFollowingActor) ||
-                other.isFollowingActor == isFollowingActor));
+                other.isFollowingActor == isFollowingActor) &&
+            const DeepCollectionEquality().equals(other._metadata, _metadata));
   }
 
   @override
@@ -394,7 +421,8 @@ class _$NotificationEntityImpl extends _NotificationEntity {
       actorUsername,
       actorPhotoUrl,
       targetPreviewUrl,
-      isFollowingActor);
+      isFollowingActor,
+      const DeepCollectionEquality().hash(_metadata));
 
   /// Create a copy of NotificationEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -422,7 +450,8 @@ abstract class _NotificationEntity extends NotificationEntity {
       final String? actorUsername,
       final String? actorPhotoUrl,
       final String? targetPreviewUrl,
-      final bool isFollowingActor}) = _$NotificationEntityImpl;
+      final bool isFollowingActor,
+      final Map<String, dynamic> metadata}) = _$NotificationEntityImpl;
   const _NotificationEntity._() : super._();
 
   @override
@@ -455,7 +484,10 @@ abstract class _NotificationEntity extends NotificationEntity {
   String?
       get targetPreviewUrl; // Follow relationship - whether current user is following the actor
   @override
-  bool get isFollowingActor;
+  bool
+      get isFollowingActor; // Metadata for rich notification content (thumbnails, previews, titles)
+  @override
+  Map<String, dynamic> get metadata;
 
   /// Create a copy of NotificationEntity
   /// with the given fields replaced by the non-null parameter values.
