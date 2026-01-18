@@ -376,7 +376,7 @@ class NotificationTile extends StatelessWidget {
   }
 
   String _getActionText() {
-    git  (notification.type) {
+    switch (notification.type) {
       case NotificationType.like:
         return 'liked your ${notification.targetType == NotificationTargetType.post ? 'photo' : 'content'}.';
       case NotificationType.comment:

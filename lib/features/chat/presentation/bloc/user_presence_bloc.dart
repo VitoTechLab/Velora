@@ -16,11 +16,12 @@ class UserPresenceBloc extends Bloc<UserPresenceEvent, UserPresenceState>
     required this.chatRepository,
     required this.supabaseClient,
     Connectivity? connectivity,
-    this.baseInterval = const Duration(minutes: 2), // Increased from 60s to 2 minutes
+    this.baseInterval =
+        const Duration(minutes: 2), // Increased from 60s to 2 minutes
     this.maxBackoff = const Duration(minutes: 5), // Increased max backoff
     this.jitterSeconds = 15, // Increased jitter
-  }) : _connectivity = connectivity ?? Connectivity(),
-       super(const UserPresenceState()) {
+  })  : _connectivity = connectivity ?? Connectivity(),
+        super(const UserPresenceState()) {
     on<UserPresenceEvent>((event, emit) async {
       await event.map(
         started: (e) => _onStarted(e, emit),
@@ -108,28 +109,27 @@ class UserPresenceBloc extends Bloc<UserPresenceEvent, UserPresenceState>
         return;
       }
 
-      _presenceSub = chatRepository
-          .watchUserPresence(myUserId: myUserId)
-          .listen(
-            (result) {
-              result.fold(
-                (l) => loge(
-                  'watchUserPresence failed',
-                  tag: 'UserPresenceBloc',
-                  error: l,
-                ),
-                (users) => add(UserPresenceEvent.presenceUpdated(users)),
-              );
-            },
-            onError: (e, s) {
-              loge(
-                'Presence stream crashed',
-                tag: 'UserPresenceBloc',
-                error: e,
-                stackTrace: s,
-              );
-            },
+      _presenceSub =
+          chatRepository.watchUserPresence(myUserId: myUserId).listen(
+        (result) {
+          result.fold(
+            (l) => loge(
+              'watchUserPresence failed',
+              tag: 'UserPresenceBloc',
+              error: l,
+            ),
+            (users) => add(UserPresenceEvent.presenceUpdated(users)),
           );
+        },
+        onError: (e, s) {
+          loge(
+            'Presence stream crashed',
+            tag: 'UserPresenceBloc',
+            error: e,
+            stackTrace: s,
+          );
+        },
+      );
 
       // ---- Start heartbeat ----
       add(const UserPresenceEvent.heartbeatTick());
@@ -150,6 +150,14 @@ class UserPresenceBloc extends Bloc<UserPresenceEvent, UserPresenceState>
     if (!_isForeground) return;
 
     if (!_isOnline) {
+      _scheduleNextHeartbeat();
+      return;
+    }
+
+    // Skip heartbeat if user is not authenticated
+    final userId = supabaseClient.auth.currentUser?.id;
+    if (userId == null) {
+      logi('User not logged in, skip heartbeat', tag: 'UserPresenceBloc');
       _scheduleNextHeartbeat();
       return;
     }

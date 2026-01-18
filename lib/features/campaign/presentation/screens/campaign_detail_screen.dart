@@ -138,7 +138,7 @@ class CampaignDetailScreen extends HookWidget {
               titlePadding: EdgeInsets.zero,
               centerTitle: false,
               title: AnimatedOpacity(
-                opacity: showTitle.value ? 1.0 : 0.0,
+                opacity: showTitle.value ? 1 : 0,
                 duration: const Duration(milliseconds: 200),
                 child: Container(
                   padding: const EdgeInsets.fromLTRB(56, 0, 56, 16),

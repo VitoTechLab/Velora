@@ -95,7 +95,7 @@ class ChatScreen extends HookWidget {
               builder: (context, value, child) {
                 return Transform.scale(
                   scale: 0.5 + (0.5 * value),
-                  child: Opacity(opacity: value, child: child),
+                  child: Opacity(opacity: value.clamp(0.0, 1.0), child: child),
                 );
               },
               child: Container(
@@ -119,7 +119,8 @@ class ChatScreen extends HookWidget {
                 child: Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: () => context.pushNamed(AppRouteName.searchFollowUser),
+                    onTap: () =>
+                        context.pushNamed(AppRouteName.searchFollowUser),
                     borderRadius: BorderRadius.circular(12),
                     child: Padding(
                       padding: const EdgeInsets.all(8),

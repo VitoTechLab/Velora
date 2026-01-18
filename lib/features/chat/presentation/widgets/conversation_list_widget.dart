@@ -248,7 +248,6 @@ class _ConversationListItemWidget extends StatelessWidget {
   final AppLocalizations t;
 
   const _ConversationListItemWidget({
-    super.key,
     required this.conversation,
     required this.t,
   });

@@ -24,7 +24,7 @@ SELECT
   up.followers_count,
   up.following_count,
   up.bio,
-  up.website,
+  up.website_url,
   up.created_at,
   up.updated_at,
   
@@ -112,7 +112,7 @@ SELECT
   -- Settings (V2)
   p.allow_comments,
   p.allow_share,
-  p.campaign_id,
+  p.campaign_title,
   p.created_at
 
 FROM public.feed_posts p

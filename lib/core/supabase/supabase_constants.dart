@@ -53,6 +53,9 @@ class SupabaseTables {
 
   // Notification Tables
   static const notifications = 'notifications';
+
+  // Mention Tables
+  static const mentions = 'mentions';
 }
 
 /// Constants for Supabase RPC (Remote Procedure Call) function names
