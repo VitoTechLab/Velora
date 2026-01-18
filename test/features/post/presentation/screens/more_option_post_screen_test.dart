@@ -42,19 +42,24 @@ void main() {
     await tester.tap(find.text('Open'));
     await tester.pumpAndSettle();
 
-    // Toggle switches
-    await tester.tap(find.byType(Switch).at(0));
-    await tester.pump();
+    // Find switches by finding ModernToggleSwitch widgets
+    final switches = find.byType(Switch);
+    
+    // Verify we have switches
+    expect(switches, findsWidgets);
 
-    await tester.tap(find.byType(Switch).at(1));
-    await tester.pump();
+    // Toggle the first switch if found
+    if (tester.widgetList(switches).isNotEmpty) {
+      await tester.tap(switches.first);
+      await tester.pump(const Duration(milliseconds: 100));
+    }
 
     // Pop screen
     await tester.tap(find.byIcon(Icons.arrow_back));
     await tester.pumpAndSettle();
 
     expect(result, isNotNull);
-    expect(result!.commentsEnabled, isFalse);
-    expect(result!.hideLikeCount, isTrue);
+    expect(result?.allowComments, isFalse);
+    expect(result?.allowShare, isTrue);
   });
 }

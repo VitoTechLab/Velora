@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:velora/features/feed/data/models/feed_cursor.dart';
+import 'package:velora/features/feed/data/models/feed_cursor_model.dart';
 import 'package:velora/features/feed/data/models/feed_model.dart';
 import 'package:velora/features/feed/data/models/feed_pagination_model.dart';
 
@@ -19,7 +19,7 @@ void main() {
     final model = FeedPaginationModel(
       posts: posts,
       hasMore: true,
-      nextCursor: FeedCursor(
+      nextCursor: FeedCursorModel(
         createdAt: now.subtract(const Duration(minutes: 5)),
         id: 'cursor-1',
       ),

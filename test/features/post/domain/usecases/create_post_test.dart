@@ -3,17 +3,17 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:velora/core/errors/failure.dart';
 import 'package:velora/features/feed/domain/entities/feed_entity.dart';
-import 'package:velora/features/post/domain/entities/create_post_entity.dart';
+import 'package:velora/features/post/domain/entities/post_feed_entity.dart';
 import 'package:velora/features/post/domain/repositories/post_repository.dart';
-import 'package:velora/features/post/domain/usecases/create_post.dart';
+import 'package:velora/features/post/domain/usecases/create_post_feed_usecase.dart';
 
 class _MockPostRepository extends Mock implements PostRepository {}
 
-class _FakeCreatePostEntity extends Fake implements CreatePostEntity {}
+class _FakePostFeedEntity extends Fake implements PostFeedEntity {}
 
 void main() {
   late _MockPostRepository repository;
-  late CreatePost usecase;
+  late CreatePostFeedUseCase usecase;
 
   final feed = FeedEntity(
     id: 'post-1',
@@ -23,17 +23,17 @@ void main() {
   );
 
   setUpAll(() {
-    registerFallbackValue(_FakeCreatePostEntity());
+    registerFallbackValue(_FakePostFeedEntity());
   });
 
   setUp(() {
     repository = _MockPostRepository();
-    usecase = CreatePost(repository);
+    usecase = CreatePostFeedUseCase(repository: repository);
   });
 
   test('delegates to repository with built entity', () async {
     when(
-      () => repository.createPost(post: any(named: 'post')),
+      () => repository.createFeedPost(post: any(named: 'post')),
     ).thenAnswer((_) async => Right(feed));
 
     final result = await usecase(
@@ -43,8 +43,8 @@ void main() {
 
     expect(result, equals(Right(feed)));
     verify(
-      () => repository.createPost(
-        post: const CreatePostEntity(
+      () => repository.createFeedPost(
+        post: const PostFeedEntity(
           userId: 'user-1',
           content: 'Caption',
         ),
@@ -54,7 +54,7 @@ void main() {
 
   test('bubbles failures from repository', () async {
     when(
-      () => repository.createPost(post: any(named: 'post')),
+      () => repository.createFeedPost(post: any(named: 'post')),
     ).thenAnswer((_) async => Left(Failure('error')));
 
     final result = await usecase(userId: 'user', content: 'Caption');

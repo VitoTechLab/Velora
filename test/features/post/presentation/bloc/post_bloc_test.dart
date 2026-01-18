@@ -4,15 +4,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:velora/core/errors/failure.dart';
 import 'package:velora/features/feed/domain/entities/feed_entity.dart';
-import 'package:velora/features/post/domain/usecases/create_post.dart';
+import 'package:velora/features/post/domain/usecases/create_post_feed_usecase.dart';
 import 'package:velora/features/post/presentation/bloc/post_bloc.dart';
 import 'package:velora/features/post/presentation/bloc/post_event.dart';
 import 'package:velora/features/post/presentation/bloc/post_state.dart';
 
-class _MockCreatePost extends Mock implements CreatePost {}
+class _MockCreatePostFeed extends Mock implements CreatePostFeedUseCase {}
 
 void main() {
-  late _MockCreatePost createPost;
+  late _MockCreatePostFeed createPostFeed;
 
   final createdPost = FeedEntity(
     id: 'post-1',
@@ -22,10 +22,10 @@ void main() {
   );
 
   setUp(() {
-    createPost = _MockCreatePost();
+    createPostFeed = _MockCreatePostFeed();
   });
 
-  PostBloc buildBloc() => PostBloc(createPostUseCase: createPost);
+  PostBloc buildBloc() => PostBloc(createPostFeedUseCase: createPostFeed);
 
   group('CreatePostEvent', () {
     blocTest<PostBloc, PostState>(
@@ -35,7 +35,7 @@ void main() {
           bloc.add(const PostEvent.createPost(userId: '', content: 'hello')),
       expect: () => const [PostState(errorCreatePost: 'User id is required')],
       verify: (_) => verifyNever(
-        () => createPost.call(
+        () => createPostFeed.call(
           userId: any(named: 'userId'),
           content: any(named: 'content'),
         ),
@@ -56,17 +56,15 @@ void main() {
       'emits createdPost when usecase succeeds',
       build: () {
         when(
-          () => createPost.call(
+          () => createPostFeed.call(
             userId: any(named: 'userId'),
             content: any(named: 'content'),
-            imageUrls: any(named: 'imageUrls'),
-            videoUrls: any(named: 'videoUrls'),
-            commentsEnabled: any(named: 'commentsEnabled'),
-            hideLikeCount: any(named: 'hideLikeCount'),
-            hideCommentCount: any(named: 'hideCommentCount'),
-            hideShareCount: any(named: 'hideShareCount'),
-            hideLikesList: any(named: 'hideLikesList'),
-            campaignId: any(named: 'campaignId'),
+            mediaUrls: any(named: 'mediaUrls'),
+            tags: any(named: 'tags'),
+            mentionIds: any(named: 'mentionIds'),
+            location: any(named: 'location'),
+            allowComments: any(named: 'allowComments'),
+            allowShare: any(named: 'allowShare'),
             campaignTitle: any(named: 'campaignTitle'),
           ),
         ).thenAnswer((_) async => Right(createdPost));
@@ -89,17 +87,15 @@ void main() {
       'emits failure message when usecase fails',
       build: () {
         when(
-          () => createPost.call(
+          () => createPostFeed.call(
             userId: any(named: 'userId'),
             content: any(named: 'content'),
-            imageUrls: any(named: 'imageUrls'),
-            videoUrls: any(named: 'videoUrls'),
-            commentsEnabled: any(named: 'commentsEnabled'),
-            hideLikeCount: any(named: 'hideLikeCount'),
-            hideCommentCount: any(named: 'hideCommentCount'),
-            hideShareCount: any(named: 'hideShareCount'),
-            hideLikesList: any(named: 'hideLikesList'),
-            campaignId: any(named: 'campaignId'),
+            mediaUrls: any(named: 'mediaUrls'),
+            tags: any(named: 'tags'),
+            mentionIds: any(named: 'mentionIds'),
+            location: any(named: 'location'),
+            allowComments: any(named: 'allowComments'),
+            allowShare: any(named: 'allowShare'),
             campaignTitle: any(named: 'campaignTitle'),
           ),
         ).thenAnswer((_) async => Left(Failure('network')));
