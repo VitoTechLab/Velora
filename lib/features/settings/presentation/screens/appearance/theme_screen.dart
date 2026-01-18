@@ -11,7 +11,7 @@ import 'package:velora/features/settings/presentation/widgets/settings_tile.dart
 import 'package:velora/l10n/app_localizations.dart';
 
 /// Theme settings screen with real-time theme switching via SettingsBloc
-/// 
+///
 /// Features:
 /// - Theme mode: Light, Dark, System
 /// - Dynamic color toggle (Material You)
@@ -78,9 +78,7 @@ class ThemeScreen extends HookWidget {
                           final value = selection.first;
                           // Convert display mode to storage mode (lowercase)
                           context.read<SettingsBloc>().add(
-                                UpdateThemeModeEvent(
-                                  mode: value.toLowerCase(),
-                                ),
+                                UpdateThemeModeEvent(value.toLowerCase()),
                               );
                         },
                       ),
@@ -128,31 +126,31 @@ class ThemeScreen extends HookWidget {
                         divisions: 32,
                         onChanged: (value) {
                           context.read<SettingsBloc>().add(
-                                UpdateCornerRadiusEvent(radius: value),
+                                UpdateCornerRadiusEvent(value),
                               );
                         },
                       ),
                       const SizedBox(height: 12),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const _RadiusPreview(
+                          _RadiusPreview(
                             radius: 0,
                             label: 'Square',
                           ),
-                          const _RadiusPreview(
+                          _RadiusPreview(
                             radius: 8,
                             label: 'Small',
                           ),
-                          const _RadiusPreview(
+                          _RadiusPreview(
                             radius: 16,
                             label: 'Medium',
                           ),
-                          const _RadiusPreview(
+                          _RadiusPreview(
                             radius: 24,
                             label: 'Large',
                           ),
-                          const _RadiusPreview(
+                          _RadiusPreview(
                             radius: 32,
                             label: 'Max',
                           ),
@@ -161,82 +159,84 @@ class ThemeScreen extends HookWidget {
                     ],
                   ),
                 ),
-            const SizedBox(height: 8),
-            SettingsSection(
-              title: t.settingsAppearanceThemeAdvancedSection,
-              child: Column(
-                children: [
-                  SettingsTile(
-                    data: SettingsTileData(
-                      title: t.settingsAppearanceThemeAccentTitle,
-                      subtitle: t.settingsAppearanceThemeAccentSubtitle,
-                      icon: Icons.colorize,
-                      iconColor: colorScheme.primary,
-                      trailing: Container(
-                        width: 32,
-                        height: 32,
-                        decoration: BoxDecoration(
-                          color: colorScheme.primary,
-                          borderRadius: BorderRadius.circular(8),
+                const SizedBox(height: 8),
+                SettingsSection(
+                  title: t.settingsAppearanceThemeAdvancedSection,
+                  child: Column(
+                    children: [
+                      SettingsTile(
+                        data: SettingsTileData(
+                          title: t.settingsAppearanceThemeAccentTitle,
+                          subtitle: t.settingsAppearanceThemeAccentSubtitle,
+                          icon: Icons.colorize,
+                          iconColor: colorScheme.primary,
+                          trailing: Container(
+                            width: 32,
+                            height: 32,
+                            decoration: BoxDecoration(
+                              color: colorScheme.primary,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          onTap: () {
+                            AppMessenger.showToast(
+                              message: t.settingsAppearanceThemeAccentToast,
+                              icon: Icons.colorize,
+                              duration: const Duration(seconds: 2),
+                            );
+                          },
                         ),
                       ),
-                      onTap: () {
-                        AppMessenger.showToast(
-                          message: t.settingsAppearanceThemeAccentToast,
-                          icon: Icons.colorize,
-                          duration: const Duration(seconds: 2),
-                        );
-                      },
-                    ),
-                  ),
-                  Divider(
-                    height: 0,
-                    indent: 72,
-                    endIndent: 16,
-                    color: colorScheme.outlineVariant.withOpacity(0.4),
-                  ),
-                  SettingsTile(
-                    data: SettingsTileData(
-                      title: t.settingsAppearanceThemeTypographyTitle,
-                      subtitle: t.settingsAppearanceThemeTypographySubtitle,
-                      icon: Icons.font_download,
-                      iconColor: colorScheme.secondary,
-                      onTap: () {
-                        AppMessenger.showToast(
-                          message: t.settingsAppearanceThemeTypographyToast,
+                      Divider(
+                        height: 0,
+                        indent: 72,
+                        endIndent: 16,
+                        color: colorScheme.outlineVariant.withOpacity(0.4),
+                      ),
+                      SettingsTile(
+                        data: SettingsTileData(
+                          title: t.settingsAppearanceThemeTypographyTitle,
+                          subtitle: t.settingsAppearanceThemeTypographySubtitle,
                           icon: Icons.font_download,
-                          duration: const Duration(seconds: 2),
-                        );
-                      },
-                    ),
-                  ),
-                  Divider(
-                    height: 0,
-                    indent: 72,
-                    endIndent: 16,
-                    color: colorScheme.outlineVariant.withOpacity(0.4),
-                  ),
-                  SettingsTile(
-                    data: SettingsTileData(
-                      title: t.settingsAppearanceThemeAnimationsTitle,
-                      subtitle: t.settingsAppearanceThemeAnimationsSubtitle,
-                      icon: Icons.animation_outlined,
-                      iconColor: colorScheme.tertiary,
-                      onTap: () {
-                        AppMessenger.showToast(
-                          message: t.settingsAppearanceThemeAnimationsToast,
+                          iconColor: colorScheme.secondary,
+                          onTap: () {
+                            AppMessenger.showToast(
+                              message: t.settingsAppearanceThemeTypographyToast,
+                              icon: Icons.font_download,
+                              duration: const Duration(seconds: 2),
+                            );
+                          },
+                        ),
+                      ),
+                      Divider(
+                        height: 0,
+                        indent: 72,
+                        endIndent: 16,
+                        color: colorScheme.outlineVariant.withOpacity(0.4),
+                      ),
+                      SettingsTile(
+                        data: SettingsTileData(
+                          title: t.settingsAppearanceThemeAnimationsTitle,
+                          subtitle: t.settingsAppearanceThemeAnimationsSubtitle,
                           icon: Icons.animation_outlined,
-                          duration: const Duration(seconds: 2),
-                        );
-                      },
-                    ),
+                          iconColor: colorScheme.tertiary,
+                          onTap: () {
+                            AppMessenger.showToast(
+                              message: t.settingsAppearanceThemeAnimationsToast,
+                              icon: Icons.animation_outlined,
+                              duration: const Duration(seconds: 2),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
@@ -266,9 +266,10 @@ class _ThemePreview extends StatelessWidget {
       children: [
         Text(
           t.settingsAppearanceThemePreviewTitle,
-          style: Theme.of(
-            context,
-          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium
+              ?.copyWith(fontWeight: FontWeight.w700),
         ),
         const SizedBox(height: 12),
         Container(
@@ -290,9 +291,9 @@ class _ThemePreview extends StatelessWidget {
               Text(
                 t.settingsAppearanceThemeModeLabel(modeLabel),
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: colorScheme.onPrimary,
-                  fontWeight: FontWeight.bold,
-                ),
+                      color: colorScheme.onPrimary,
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
               const SizedBox(height: 12),
               Container(
@@ -307,8 +308,8 @@ class _ThemePreview extends StatelessWidget {
                     Text(
                       t.settingsAppearanceThemePreviewSampleCard,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: colorScheme.onPrimary,
-                      ),
+                            color: colorScheme.onPrimary,
+                          ),
                     ),
                     Icon(Icons.chevron_right, color: colorScheme.onPrimary),
                   ],
