@@ -934,7 +934,8 @@ class _ChatDetailContentState extends State<_ChatDetailContent> {
                               curve: Curves.easeOutCubic,
                               builder: (context, value, child) {
                                 return Opacity(
-                                  opacity: 0.5 + (0.5 * value),
+                                  opacity: 0.5,
+                                  // + (0.5 * value),
                                   child: Transform.translate(
                                     offset: Offset(0, 20 * (1 - value)),
                                     child: child,
@@ -1057,6 +1058,7 @@ class _ChatDetailContentState extends State<_ChatDetailContent> {
                   final conversationId =
                       state.conversationId ?? widget.conversationId;
                   return ChatInputBar(
+                    conversationId: conversationId,
                     controller: widget.messageController,
                     focusNode: widget.focusNode,
                     onSendMessage: (message) {

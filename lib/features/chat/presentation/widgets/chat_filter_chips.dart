@@ -34,7 +34,7 @@ class ChatFilterChips extends StatelessWidget {
           final filter = entry.value;
           final isSelected = filter == selectedFilter;
           final label = _labelFor(filter, t);
-          
+
           return TweenAnimationBuilder<double>(
             duration: Duration(milliseconds: 400 + (index * 50)),
             tween: Tween(begin: 0.0, end: 1.0),
@@ -42,7 +42,7 @@ class ChatFilterChips extends StatelessWidget {
             builder: (context, value, child) {
               return Transform.scale(
                 scale: 0.8 + (0.2 * value),
-                child: Opacity(opacity: value, child: child),
+                child: Opacity(opacity: value.clamp(0.0, 1.0), child: child),
               );
             },
             child: Padding(
@@ -71,15 +71,18 @@ class ChatFilterChips extends StatelessWidget {
                                 end: Alignment.bottomRight,
                                 colors: [
                                   colorScheme.primaryContainer,
-                                  colorScheme.primaryContainer.withValues(alpha: 0.8),
+                                  colorScheme.primaryContainer
+                                      .withValues(alpha: 0.8),
                                 ],
                               )
                             : LinearGradient(
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
                                 colors: [
-                                  colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
-                                  colorScheme.surfaceContainerHighest.withValues(alpha: 0.4),
+                                  colorScheme.surfaceContainerHighest
+                                      .withValues(alpha: 0.6),
+                                  colorScheme.surfaceContainerHighest
+                                      .withValues(alpha: 0.4),
                                 ],
                               ),
                         borderRadius: BorderRadius.circular(24),
@@ -92,7 +95,8 @@ class ChatFilterChips extends StatelessWidget {
                         boxShadow: isSelected
                             ? [
                                 BoxShadow(
-                                  color: colorScheme.primary.withValues(alpha: 0.2),
+                                  color: colorScheme.primary
+                                      .withValues(alpha: 0.2),
                                   blurRadius: 8,
                                   offset: const Offset(0, 2),
                                   spreadRadius: 0,
@@ -124,7 +128,9 @@ class ChatFilterChips extends StatelessWidget {
                               color: isSelected
                                   ? colorScheme.onPrimaryContainer
                                   : colorScheme.onSurface,
-                              fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
+                              fontWeight: isSelected
+                                  ? FontWeight.w700
+                                  : FontWeight.w600,
                               letterSpacing: 0.3,
                             ),
                           ),

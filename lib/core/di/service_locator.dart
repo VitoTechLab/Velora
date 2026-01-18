@@ -148,6 +148,15 @@ import 'package:velora/features/notification/domain/usecases/delete_notification
 import 'package:velora/features/notification/domain/usecases/watch_notifications_usecase.dart';
 import 'package:velora/features/notification/presentation/bloc/notification_bloc.dart';
 
+// Mention feature imports
+import 'package:velora/features/mention/data/datasources/mention_remote_datasource.dart';
+import 'package:velora/features/mention/data/datasources/mention_remote_datasource_impl.dart';
+import 'package:velora/features/mention/domain/repositories/mention_repository.dart';
+import 'package:velora/features/mention/data/repositories/mention_repository_impl.dart';
+import 'package:velora/features/mention/domain/usecases/get_my_mentions_usecase.dart';
+import 'package:velora/features/mention/domain/usecases/get_entity_mentions_usecase.dart';
+import 'package:velora/features/mention/presentation/bloc/mention_bloc.dart';
+
 // Settings feature imports
 import 'package:velora/features/settings/presentation/bloc/settings_bloc.dart';
 
@@ -353,10 +362,26 @@ Future<void> configureDependencies() async {
     );
   }
 
+  // Mention feature - Data source
+  if (!getIt.isRegistered<MentionRemoteDataSource>()) {
+    getIt.registerLazySingleton<MentionRemoteDataSource>(
+      () => MentionRemoteDataSourceImpl(
+        supabaseClient: getIt<SupabaseClient>(),
+      ),
+    );
+  }
+
   // Notification feature - Repositories
   getIt.registerLazySingleton<NotificationRepository>(
     () => NotificationRepositoryImpl(
       remoteDataSource: getIt<NotificationRemoteDataSource>(),
+    ),
+  );
+
+  // Mention feature - Repositories
+  getIt.registerLazySingleton<MentionRepository>(
+    () => MentionRepositoryImpl(
+      remoteDataSource: getIt<MentionRemoteDataSource>(),
     ),
   );
 
@@ -448,6 +473,8 @@ Future<void> configureDependencies() async {
         () => GetMessageReadsUseCase(repository: getIt<ChatRepository>()))
     ..registerLazySingleton(
         () => MarkMessageReadUseCase(repository: getIt<ChatRepository>()))
+    ..registerLazySingleton(
+        () => MarkMessagesReadBatchUseCase(repository: getIt<ChatRepository>()))
     ..registerLazySingleton(
         () => WatchMessageReadsUseCase(repository: getIt<ChatRepository>()))
     ..registerLazySingleton(
@@ -549,6 +576,15 @@ Future<void> configureDependencies() async {
       () => StopWatchNotificationsUseCase(
         repository: getIt<NotificationRepository>(),
       ),
+    );
+
+  // Mention feature - Use cases
+  getIt
+    ..registerLazySingleton(
+      () => GetMyMentionsUseCase(repository: getIt<MentionRepository>()),
+    )
+    ..registerLazySingleton(
+      () => GetEntityMentionsUseCase(repository: getIt<MentionRepository>()),
     );
 
   // Feed feature - Bloc
@@ -659,6 +695,13 @@ Future<void> configureDependencies() async {
       watchNewNotificationsUseCase: getIt<WatchNewNotificationsUseCase>(),
       stopWatchNotificationsUseCase: getIt<StopWatchNotificationsUseCase>(),
       profileDataSource: getIt<ProfileRemoteDataSource>(),
+    ),
+  );
+
+  // Mention feature - Bloc
+  getIt.registerFactory(
+    () => MentionBloc(
+      getMyMentions: getIt<GetMyMentionsUseCase>(),
     ),
   );
 

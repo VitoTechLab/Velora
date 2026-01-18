@@ -610,6 +610,8 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
   Future<void> touchPresence() {
     return guardSupabase(
       () async {
+        // Ensure user is authenticated before touching presence
+        _requireUserId();
         await _client.rpc(SupabaseRpc.touchPresence);
       },
       op: 'touchPresence',

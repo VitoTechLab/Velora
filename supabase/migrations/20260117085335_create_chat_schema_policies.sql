@@ -401,10 +401,11 @@ WITH (security_invoker=true) AS
 SELECT 
   ep.message_id,
   ep.title,
-  ep.location,
+  ep.location_name AS location,
+  ep.address,
   ep.starts_at,
   ep.ends_at,
-  ep.notes,
+  ep.description AS notes,
   COALESCE(gc.going_count, 0) AS going_count,
   COALESCE(ic.interested_count, 0) AS interested_count,
   COALESCE(nc.not_going_count, 0) AS not_going_count,

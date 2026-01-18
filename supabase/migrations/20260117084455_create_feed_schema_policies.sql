@@ -315,13 +315,7 @@ ALTER TABLE public.feed_post_shares ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.feed_comment_likes ENABLE ROW LEVEL SECURITY;
 
 -- 5.1 POSTS POLICIES
-DROP POLICY IF EXISTS "posts_select_auth" ON public.feed_posts;
-CREATE POLICY "posts_select_auth" ON public.feed_posts
-  FOR SELECT TO authenticated
-  USING (
-    public.can_view_user_content(user_id) 
-    AND (is_active = TRUE OR user_id = auth.uid())
-  );
+-- [MOVED] Select policies moved to Social Relation migration due to dependency on can_view_user_content
 
 DROP POLICY IF EXISTS "posts_insert_own" ON public.feed_posts;
 CREATE POLICY "posts_insert_own" ON public.feed_posts
@@ -336,29 +330,7 @@ CREATE POLICY "posts_delete_own" ON public.feed_posts
   FOR DELETE TO authenticated USING (user_id = auth.uid());
 
 -- 5.2 COMMENTS POLICIES
-DROP POLICY IF EXISTS "comments_select_auth" ON public.feed_comments;
-CREATE POLICY "comments_select_auth" ON public.feed_comments
-  FOR SELECT TO authenticated
-  USING (
-    (is_active = TRUE OR user_id = auth.uid()) AND
-    EXISTS (
-      SELECT 1 FROM public.feed_posts 
-      WHERE id = post_id AND public.can_view_user_content(feed_posts.user_id)
-    )
-  );
-
-DROP POLICY IF EXISTS "comments_insert_auth" ON public.feed_comments;
-CREATE POLICY "comments_insert_auth" ON public.feed_comments
-  FOR INSERT TO authenticated
-  WITH CHECK (
-    user_id = auth.uid() AND
-    EXISTS (
-      SELECT 1 FROM public.feed_posts 
-      WHERE id = post_id 
-      AND public.can_view_user_content(feed_posts.user_id)
-      AND (allow_comments = TRUE OR feed_posts.user_id = auth.uid())
-    )
-  );
+-- [MOVED] Select/Insert policies moved to Social Relation migration due to dependency on can_view_user_content
 
 DROP POLICY IF EXISTS "comments_delete_own_or_post_owner" ON public.feed_comments;
 CREATE POLICY "comments_delete_own_or_post_owner" ON public.feed_comments
@@ -393,18 +365,7 @@ CREATE POLICY "bookmarks_delete_own" ON public.feed_post_bookmarks FOR DELETE TO
 DROP POLICY IF EXISTS "shares_select" ON public.feed_post_shares;
 CREATE POLICY "shares_select" ON public.feed_post_shares FOR SELECT TO authenticated USING (TRUE);
 
-DROP POLICY IF EXISTS "shares_insert" ON public.feed_post_shares;
-CREATE POLICY "shares_insert" ON public.feed_post_shares 
-  FOR INSERT TO authenticated 
-  WITH CHECK (
-    user_id = auth.uid() AND
-    EXISTS (
-      SELECT 1 FROM public.feed_posts 
-      WHERE id = post_id 
-      AND allow_share = TRUE 
-      AND public.can_view_user_content(feed_posts.user_id)
-    )
-  );
+-- [MOVED] Insert policy moved to Social Relation migration due to dependency on can_view_user_content
 
 -- Comment Likes
 DROP POLICY IF EXISTS "comment_likes_select" ON public.feed_comment_likes;

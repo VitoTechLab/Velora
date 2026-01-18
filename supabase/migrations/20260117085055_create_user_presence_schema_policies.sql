@@ -127,6 +127,8 @@ END $$;
 
 -- 7. CLEANUP JOB (Maintenance)
 -- ---------------------------------------------------------------------------
+DROP POLICY IF EXISTS presence_modify_own ON public.user_presence;
+
 CREATE OR REPLACE FUNCTION public.cleanup_old_presence(days_threshold INT DEFAULT 30)
 RETURNS BIGINT
 LANGUAGE plpgsql

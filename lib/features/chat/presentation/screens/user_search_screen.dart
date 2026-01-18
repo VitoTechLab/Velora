@@ -20,11 +20,11 @@ class UserSearchScreen extends HookWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final searchController = useTextEditingController();
-    
+
     final animationController = useAnimationController(
       duration: const Duration(milliseconds: 400),
     );
-    
+
     final fadeAnimation = useMemoized(
       () => CurvedAnimation(
         parent: animationController,
@@ -39,9 +39,8 @@ class UserSearchScreen extends HookWidget {
     }, [animationController]);
 
     return BlocProvider(
-      create: (context) =>
-          getIt<SearchUserBloc>()
-            ..add(const SearchUserEvent.loadFollowedUsers()),
+      create: (context) => getIt<SearchUserBloc>()
+        ..add(const SearchUserEvent.loadFollowedUsers()),
       child: Builder(
         builder: (context) {
           return Scaffold(
@@ -54,7 +53,8 @@ class UserSearchScreen extends HookWidget {
                     end: Alignment.bottomRight,
                     colors: [
                       colorScheme.surface,
-                      colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+                      colorScheme.surfaceContainerHighest
+                          .withValues(alpha: 0.3),
                     ],
                   ),
                 ),
@@ -68,7 +68,8 @@ class UserSearchScreen extends HookWidget {
                   shape: BoxShape.circle,
                 ),
                 child: IconButton(
-                  icon: Icon(Icons.arrow_back, color: colorScheme.onSurface, size: 20),
+                  icon: Icon(Icons.arrow_back,
+                      color: colorScheme.onSurface, size: 20),
                   onPressed: () => Navigator.pop(context),
                   padding: EdgeInsets.zero,
                 ),
@@ -80,7 +81,8 @@ class UserSearchScreen extends HookWidget {
                     end: Alignment.bottomRight,
                     colors: [
                       colorScheme.surfaceContainerHighest,
-                      colorScheme.surfaceContainerHighest.withValues(alpha: 0.8),
+                      colorScheme.surfaceContainerHighest
+                          .withValues(alpha: 0.8),
                     ],
                   ),
                   borderRadius: BorderRadius.circular(24),
@@ -106,7 +108,8 @@ class UserSearchScreen extends HookWidget {
                   decoration: InputDecoration(
                     hintText: 'Search or ask Meta AI',
                     hintStyle: TextStyle(
-                      color: colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
+                      color:
+                          colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
                       fontSize: 15,
                     ),
                     prefixIcon: ShaderMask(
@@ -131,15 +134,15 @@ class UserSearchScreen extends HookWidget {
                   onSubmitted: (value) {
                     if (value.isNotEmpty) {
                       context.read<SearchUserBloc>().add(
-                        SearchUserEvent.searchQueryChanged(value),
-                      );
+                            SearchUserEvent.searchQueryChanged(value),
+                          );
                     }
                   },
                   onChanged: (value) {
                     if (value.isEmpty) {
                       context.read<SearchUserBloc>().add(
-                        const SearchUserEvent.clearSearch(),
-                      );
+                            const SearchUserEvent.clearSearch(),
+                          );
                     }
                   },
                 ),
@@ -169,10 +172,10 @@ class UserSearchScreen extends HookWidget {
                       onTap: () {
                         if (searchController.text.isNotEmpty) {
                           context.read<SearchUserBloc>().add(
-                            SearchUserEvent.searchQueryChanged(
-                              searchController.text,
-                            ),
-                          );
+                                SearchUserEvent.searchQueryChanged(
+                                  searchController.text,
+                                ),
+                              );
                         }
                       },
                       borderRadius: BorderRadius.circular(12),
@@ -209,7 +212,8 @@ class UserSearchScreen extends HookWidget {
     );
   }
 
-  static Widget _buildSearchResults(BuildContext context, SearchUserState state) {
+  static Widget _buildSearchResults(
+      BuildContext context, SearchUserState state) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
@@ -242,7 +246,8 @@ class UserSearchScreen extends HookWidget {
                   color: colorScheme.error.withValues(alpha: 0.1),
                   shape: BoxShape.circle,
                 ),
-                child: Icon(Icons.error_outline, size: 64, color: colorScheme.error),
+                child: Icon(Icons.error_outline,
+                    size: 64, color: colorScheme.error),
               ),
               const SizedBox(height: 24),
               Text(
@@ -429,7 +434,8 @@ class UserSearchScreen extends HookWidget {
                       Icon(
                         Icons.access_time,
                         size: 48,
-                        color: colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+                        color:
+                            colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
                       ),
                       const SizedBox(height: 12),
                       Text(
@@ -579,7 +585,8 @@ class UserSearchScreen extends HookWidget {
                       Icon(
                         Icons.person_add_outlined,
                         size: 48,
-                        color: colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+                        color:
+                            colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
                       ),
                       const SizedBox(height: 12),
                       Text(
@@ -615,7 +622,7 @@ class UserSearchScreen extends HookWidget {
   ) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    
+
     return TweenAnimationBuilder<double>(
       duration: Duration(milliseconds: 400 + (index * 50)),
       tween: Tween(begin: 0.0, end: 1.0),
@@ -623,7 +630,7 @@ class UserSearchScreen extends HookWidget {
       builder: (context, value, child) {
         return Transform.scale(
           scale: 0.5 + (0.5 * value),
-          child: Opacity(opacity: value, child: child),
+          child: Opacity(opacity: value.clamp(0.0, 1.0), child: child),
         );
       },
       child: Padding(
@@ -696,10 +703,11 @@ class UserSearchScreen extends HookWidget {
     );
   }
 
-  static Widget _buildUserListTile(BuildContext context, UserSearchEntity user) {
+  static Widget _buildUserListTile(
+      BuildContext context, UserSearchEntity user) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(

@@ -262,7 +262,7 @@ SELECT
     d.is_anonymous,
     CASE 
         WHEN d.is_anonymous THEN 'Anonymous'
-        ELSE up.display_name 
+        ELSE up.username 
     END as donor_name,
     CASE 
         WHEN d.is_anonymous THEN NULL 

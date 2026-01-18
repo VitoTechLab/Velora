@@ -219,7 +219,8 @@ class ChatGalleryPickerScreen extends HookWidget {
                 builder: (context, value, child) {
                   return Transform.scale(
                     scale: 0.8 + (0.2 * value),
-                    child: Opacity(opacity: value, child: child),
+                    child:
+                        Opacity(opacity: value.clamp(0.0, 1.0), child: child),
                   );
                 },
                 child: Container(
@@ -240,8 +241,7 @@ class ChatGalleryPickerScreen extends HookWidget {
                     boxShadow: selectedCount > 0
                         ? [
                             BoxShadow(
-                              color: colorScheme.primary
-                                  .withValues(alpha: 0.4),
+                              color: colorScheme.primary.withValues(alpha: 0.4),
                               blurRadius: 12,
                               offset: const Offset(0, 4),
                             ),
@@ -265,7 +265,8 @@ class ChatGalleryPickerScreen extends HookWidget {
                               Icons.send_rounded,
                               size: 18,
                               color: selectedCount == 0
-                                  ? colorScheme.onSurface.withValues(alpha: 0.38)
+                                  ? colorScheme.onSurface
+                                      .withValues(alpha: 0.38)
                                   : colorScheme.onPrimary,
                             ),
                             const SizedBox(width: 6),
@@ -275,7 +276,8 @@ class ChatGalleryPickerScreen extends HookWidget {
                                   : t.chatGallerySend,
                               style: TextStyle(
                                 color: selectedCount == 0
-                                    ? colorScheme.onSurface.withValues(alpha: 0.38)
+                                    ? colorScheme.onSurface
+                                        .withValues(alpha: 0.38)
                                     : colorScheme.onPrimary,
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600,
@@ -397,8 +399,7 @@ class ChatGalleryPickerScreen extends HookWidget {
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: colorScheme.primary
-                          .withValues(alpha: 0.3),
+                      color: colorScheme.primary.withValues(alpha: 0.3),
                       blurRadius: 8,
                       offset: const Offset(0, 2),
                     ),
@@ -534,7 +535,8 @@ class ChatGalleryPickerScreen extends HookWidget {
       curve: Curves.easeOutCubic,
       builder: (context, value, child) {
         return Opacity(
-          opacity: 0.5 + (0.5 * value),
+          opacity: 0.5,
+          // + (0.5 * value),
           child: Transform.scale(
             scale: 0.8 + (0.2 * value),
             child: child,
@@ -556,193 +558,189 @@ class ChatGalleryPickerScreen extends HookWidget {
             curve: Curves.easeOutCubic,
             decoration: BoxDecoration(
               border: Border.all(
-                color: isSelected
-                    ? colorScheme.primary
-                    : Colors.transparent,
+                color: isSelected ? colorScheme.primary : Colors.transparent,
                 width: 2.5,
               ),
               boxShadow: isSelected
                   ? [
                       BoxShadow(
-                        color: colorScheme.primary
-                            .withValues(alpha: 0.4),
+                        color: colorScheme.primary.withValues(alpha: 0.4),
                         blurRadius: 8,
                         offset: const Offset(0, 2),
                       ),
                     ]
                   : null,
             ),
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              // Image thumbnail
-              AssetEntityImage(
-                asset.assetEntity,
-                fit: BoxFit.cover,
-                isOriginal: false,
-                thumbnailSize: const ThumbnailSize.square(300),
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    color: colorScheme.surfaceContainerHighest,
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                // Image thumbnail
+                AssetEntityImage(
+                  asset.assetEntity,
+                  fit: BoxFit.cover,
+                  isOriginal: false,
+                  thumbnailSize: const ThumbnailSize.square(300),
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      color: colorScheme.surfaceContainerHighest,
+                      child: Center(
+                        child: Icon(
+                          Icons.broken_image,
+                          color: colorScheme.onSurface.withValues(alpha: 0.54),
+                          size: 24,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+
+                // Selection overlay
+                if (isSelected)
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 250),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          colorScheme.primary.withValues(alpha: 0.3),
+                          colorScheme.secondary.withValues(alpha: 0.2),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                // Disabled overlay
+                if (isDisabled)
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    decoration: BoxDecoration(
+                      color: colorScheme.surface.withValues(alpha: 0.8),
+                    ),
                     child: Center(
                       child: Icon(
-                        Icons.broken_image,
-                        color: colorScheme.onSurface.withValues(alpha: 0.54),
+                        Icons.lock_outline,
+                        color: colorScheme.onSurface.withValues(alpha: 0.5),
                         size: 24,
                       ),
                     ),
-                  );
-                },
-              ),
-
-              // Selection overlay
-              if (isSelected)
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 250),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        colorScheme.primary
-                            .withValues(alpha: 0.3),
-                        colorScheme.secondary
-                            .withValues(alpha: 0.2),
-                      ],
-                    ),
                   ),
-                ),
 
-              // Disabled overlay
-              if (isDisabled)
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  decoration: BoxDecoration(
-                    color: colorScheme.surface.withValues(alpha: 0.8),
-                  ),
-                  child: Center(
-                    child: Icon(
-                      Icons.lock_outline,
-                      color: colorScheme.onSurface.withValues(alpha: 0.5),
-                      size: 24,
-                    ),
-                  ),
-                ),
-
-              // Video duration badge
-              if (isVideo)
-                Positioned(
-                  bottom: 6,
-                  left: 6,
-                  child: TweenAnimationBuilder<double>(
-                    duration: const Duration(milliseconds: 400),
-                    tween: Tween(begin: 0.0, end: 1.0),
-                    curve: Curves.easeOutBack,
-                    builder: (context, value, child) {
-                      return Transform.scale(
-                        scale: 0.7 + (0.3 * value),
-                        child: Opacity(opacity: value, child: child),
-                      );
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 4,
-                      ),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            colorScheme.surface.withValues(alpha: 0.9),
-                            colorScheme.surface.withValues(alpha: 0.7),
+                // Video duration badge
+                if (isVideo)
+                  Positioned(
+                    bottom: 6,
+                    left: 6,
+                    child: TweenAnimationBuilder<double>(
+                      duration: const Duration(milliseconds: 400),
+                      tween: Tween(begin: 0.0, end: 1.0),
+                      curve: Curves.easeOutBack,
+                      builder: (context, value, child) {
+                        return Transform.scale(
+                          scale: 0.7 + (0.3 * value),
+                          child: Opacity(
+                              opacity: value.clamp(0.0, 1.0), child: child),
+                        );
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              colorScheme.surface.withValues(alpha: 0.9),
+                              colorScheme.surface.withValues(alpha: 0.7),
+                            ],
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            color: colorScheme.outline.withValues(alpha: 0.3),
+                            width: 1,
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.play_circle_outline,
+                              color: colorScheme.onSurface,
+                              size: 14,
+                            ),
+                            const SizedBox(width: 4),
+                            Text(
+                              _formatDuration(asset.assetEntity.videoDuration),
+                              style: TextStyle(
+                                color: colorScheme.onSurface,
+                                fontSize: 11,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 0.3,
+                              ),
+                            ),
                           ],
                         ),
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(
-                          color: colorScheme.outline.withValues(alpha: 0.3),
-                          width: 1,
-                        ),
                       ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            Icons.play_circle_outline,
-                            color: colorScheme.onSurface,
-                            size: 14,
+                    ),
+                  ),
+
+                // Selection number badge
+                if (isSelected)
+                  Positioned(
+                    top: 6,
+                    right: 6,
+                    child: TweenAnimationBuilder<double>(
+                      key: ValueKey(selectionNumber),
+                      duration: const Duration(milliseconds: 400),
+                      tween: Tween(begin: 0.0, end: 1.0),
+                      curve: Curves.elasticOut,
+                      builder: (context, value, child) {
+                        return Transform.scale(
+                          scale: 0.5 + (0.5 * value),
+                          child: Opacity(opacity: value, child: child),
+                        );
+                      },
+                      child: _buildSelectionBadge(selectionNumber, context),
+                    ),
+                  ),
+
+                // Unselected circle indicator
+                if (!isSelected && !isDisabled)
+                  Positioned(
+                    top: 6,
+                    right: 6,
+                    child: TweenAnimationBuilder<double>(
+                      duration: const Duration(milliseconds: 300),
+                      tween: Tween(begin: 0.0, end: 1.0),
+                      builder: (context, value, child) {
+                        return Opacity(opacity: value * 0.8, child: child);
+                      },
+                      child: Container(
+                        width: 26,
+                        height: 26,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: colorScheme.onSurface.withValues(alpha: 0.9),
+                            width: 2.5,
                           ),
-                          const SizedBox(width: 4),
-                          Text(
-                            _formatDuration(asset.assetEntity.videoDuration),
-                            style: TextStyle(
-                              color: colorScheme.onSurface,
-                              fontSize: 11,
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: 0.3,
+                          color: colorScheme.surface.withValues(alpha: 0.4),
+                          boxShadow: [
+                            BoxShadow(
+                              color: colorScheme.shadow.withValues(alpha: 0.3),
+                              blurRadius: 4,
+                              offset: const Offset(0, 2),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-
-              // Selection number badge
-              if (isSelected)
-                Positioned(
-                  top: 6,
-                  right: 6,
-                  child: TweenAnimationBuilder<double>(
-                    key: ValueKey(selectionNumber),
-                    duration: const Duration(milliseconds: 400),
-                    tween: Tween(begin: 0.0, end: 1.0),
-                    curve: Curves.elasticOut,
-                    builder: (context, value, child) {
-                      return Transform.scale(
-                        scale: 0.5 + (0.5 * value),
-                        child: Opacity(opacity: value, child: child),
-                      );
-                    },
-                    child: _buildSelectionBadge(selectionNumber, context),
-                  ),
-                ),
-
-              // Unselected circle indicator
-              if (!isSelected && !isDisabled)
-                Positioned(
-                  top: 6,
-                  right: 6,
-                  child: TweenAnimationBuilder<double>(
-                    duration: const Duration(milliseconds: 300),
-                    tween: Tween(begin: 0.0, end: 1.0),
-                    builder: (context, value, child) {
-                      return Opacity(opacity: value * 0.8, child: child);
-                    },
-                    child: Container(
-                      width: 26,
-                      height: 26,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: colorScheme.onSurface.withValues(alpha: 0.9),
-                          width: 2.5,
+                          ],
                         ),
-                        color: colorScheme.surface.withValues(alpha: 0.4),
-                        boxShadow: [
-                          BoxShadow(
-                            color: colorScheme.shadow.withValues(alpha: 0.3),
-                            blurRadius: 4,
-                            offset: const Offset(0, 2),
-                          ),
-                        ],
                       ),
                     ),
                   ),
-                ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
-    ),
     );
   }
 

@@ -196,18 +196,6 @@ BEGIN
   );
 END;
 $$;
-    ORDER BY fp.created_at DESC -- Berita terbaru dulu jika relevan
-    LIMIT limit_count
-  ) t;
-
-  -- Return Combined Result
-  RETURN jsonb_build_object(
-    'users', COALESCE(result_users, '[]'::jsonb),
-    'campaigns', COALESCE(result_campaigns, '[]'::jsonb),
-    'posts', COALESCE(result_posts, '[]'::jsonb)
-  );
-END;
-$$;
 
 -- Grant Execution to App Users
 GRANT EXECUTE ON FUNCTION public.search_app(TEXT, INT) TO authenticated;
