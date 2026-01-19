@@ -33,7 +33,9 @@ import 'package:velora/features/settings/domain/entities/user_preferences.dart';
 import 'package:velora/features/settings/presentation/screens/account/account_status_screen.dart';
 import 'package:velora/features/settings/presentation/screens/account/account_type_screen.dart';
 import 'package:velora/features/settings/presentation/screens/account/activity_screen.dart';
+import 'package:velora/features/settings/presentation/screens/account/ad_preferences_screen.dart';
 import 'package:velora/features/settings/presentation/screens/account/my_donation_screen.dart';
+import 'package:velora/features/settings/presentation/screens/account/profiles_list_screen.dart';
 import 'package:velora/features/settings/presentation/screens/appearance/accessibility_screen.dart';
 import 'package:velora/features/settings/presentation/screens/appearance/language_screen.dart';
 import 'package:velora/features/settings/presentation/screens/appearance/notification_detail_screen.dart';
@@ -44,8 +46,12 @@ import 'package:velora/features/settings/presentation/screens/help/help_screen.d
 import 'package:velora/features/settings/presentation/screens/profile/edit_profile_screen.dart';
 import 'package:velora/features/settings/presentation/screens/profile/profile_detail_screen.dart';
 import 'package:velora/features/settings/presentation/screens/profile/profile_field_edit_screen.dart';
+import 'package:velora/features/settings/presentation/screens/security/active_sessions_screen.dart';
 import 'package:velora/features/settings/presentation/screens/security/password_security_screen.dart';
 import 'package:velora/features/settings/presentation/screens/security/privacy_screen.dart';
+import 'package:velora/features/settings/presentation/screens/security/recovery_codes_screen.dart';
+import 'package:velora/features/settings/presentation/screens/security/trusted_contacts_screen.dart';
+import 'package:velora/features/settings/presentation/screens/security/two_factor_setup_screen.dart';
 import 'package:velora/features/settings/presentation/screens/settings_screen.dart';
 import 'package:velora/features/wallet/presentation/screens/wallet_dashboard_screen.dart';
 import 'package:velora/l10n/app_localizations.dart';
@@ -343,6 +349,14 @@ class AppRouter {
                             parentNavigatorKey:
                                 navigationService.navigatorKey, // root
                             builder: (context, state) =>
+                                const ProfilesListScreen(),
+                          ),
+                          GoRoute(
+                            path: AppRouteSinglePath.settingsProfileDetail,
+                            name: AppRouteName.settingsProfileDetail,
+                            parentNavigatorKey:
+                                navigationService.navigatorKey, // root
+                            builder: (context, state) =>
                                 const ProfileDetailScreen(),
                           ),
                           GoRoute(
@@ -350,6 +364,12 @@ class AppRouter {
                             name: AppRouteName.settingsActivity,
                             parentNavigatorKey: navigationService.navigatorKey,
                             builder: (context, state) => const ActivityScreen(),
+                          ),
+                          GoRoute(
+                            path: AppRouteSinglePath.settingsAdPreferences,
+                            name: AppRouteName.settingsAdPreferences,
+                            parentNavigatorKey: navigationService.navigatorKey,
+                            builder: (context, state) => const AdPreferencesScreen(),
                           ),
                           GoRoute(
                             path: AppRouteSinglePath.settingsAccountStatus,
@@ -371,6 +391,32 @@ class AppRouter {
                             parentNavigatorKey: navigationService.navigatorKey,
                             builder: (context, state) =>
                                 const PasswordSecurityScreen(),
+                            routes: [
+                              GoRoute(
+                                path: 'two-factor-setup',
+                                parentNavigatorKey: navigationService.navigatorKey,
+                                builder: (context, state) =>
+                                    const TwoFactorSetupScreen(),
+                              ),
+                              GoRoute(
+                                path: 'active-sessions',
+                                parentNavigatorKey: navigationService.navigatorKey,
+                                builder: (context, state) =>
+                                    const ActiveSessionsScreen(),
+                              ),
+                              GoRoute(
+                                path: 'trusted-contacts',
+                                parentNavigatorKey: navigationService.navigatorKey,
+                                builder: (context, state) =>
+                                    const TrustedContactsScreen(),
+                              ),
+                              GoRoute(
+                                path: 'recovery-codes',
+                                parentNavigatorKey: navigationService.navigatorKey,
+                                builder: (context, state) =>
+                                    const RecoveryCodesScreen(),
+                              ),
+                            ],
                           ),
                           GoRoute(
                             path: AppRouteSinglePath.settingsEditProfile,
@@ -508,7 +554,9 @@ class AppRouteName {
   static const profile = 'profile';
   static const settings = 'settings';
   static const settingsProfiles = 'settingsProfiles';
+  static const settingsProfileDetail = 'settingsProfileDetail';
   static const settingsActivity = 'settingsActivity';
+  static const settingsAdPreferences = 'settingsAdPreferences';
   static const settingsAccountStatus = 'settingsAccountStatus';
   static const settingsAccountType = 'settingsAccountType';
   static const settingsPasswordSecurity = 'settingsPasswordSecurity';
@@ -543,6 +591,7 @@ class AppRoutePath {
   static const createCampaignPost = '/campaign/create-campaign';
   static const settings = '/profile/settings';
   static const settingsProfiles = '/profile/settings/profiles';
+  static const settingsProfileDetail = '/profile/settings/profile-detail';
   static const settingsActivity = '/profile/settings/activity';
   static const settingsAccountStatus = '/profile/settings/account-status';
   static const settingsAccountType = '/profile/settings/account-type';
@@ -583,7 +632,9 @@ class AppRouteSinglePath {
   static const createCampaignPost = 'create-campaign';
   static const settings = 'settings';
   static const settingsProfiles = 'profiles';
+  static const settingsProfileDetail = 'profile-detail';
   static const settingsActivity = 'activity';
+  static const settingsAdPreferences = 'ad-preferences';
   static const settingsAccountStatus = 'account-status';
   static const settingsAccountType = 'account-type';
   static const settingsPasswordSecurity = 'password-security';

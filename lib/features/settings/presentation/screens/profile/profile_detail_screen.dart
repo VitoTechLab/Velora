@@ -7,7 +7,6 @@ import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:velora/features/navigation/models/profile_field_edit_args.dart';
 import 'package:velora/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:velora/features/profile/presentation/bloc/profile_event.dart';
-import 'package:velora/features/profile/presentation/bloc/profile_state.dart';
 import 'package:velora/features/settings/presentation/widgets/edge_to_edge_section.dart';
 import 'package:velora/features/settings/presentation/widgets/settings_page_scaffold.dart';
 import 'package:velora/features/settings/presentation/widgets/settings_tile.dart';
@@ -25,10 +24,12 @@ class ProfileDetailScreen extends HookWidget {
     final colorScheme = theme.colorScheme;
     final t = AppLocalizations.of(context)!;
 
-    final bio = useState('Passionate about making a difference');
-    final website = useState('velora.app');
+    // Initialize hooks at the top level of build method
+    final bio = useState('');
+    final website = useState('');
     final accountType = useState('personal');
 
+    // Load profile on mount
     useEffect(
       () {
         final authState = context.read<AuthBloc>().state;
@@ -40,6 +41,22 @@ class ProfileDetailScreen extends HookWidget {
         return null;
       },
       const [],
+    );
+
+    // Get current profile state
+    final profileState = context.watch<ProfileBloc>().state;
+    final profile = profileState.profile;
+    final isLoading = profileState.isLoading;
+
+    // Update hooks when profile changes
+    useEffect(
+      () {
+        if (profile != null) {
+          bio.value = profile.bio ?? '';
+        }
+        return null;
+      },
+      [profile?.id],
     );
 
     void showPhotoOptions() {
@@ -130,18 +147,13 @@ class ProfileDetailScreen extends HookWidget {
       }
     }
 
-    return BlocBuilder<ProfileBloc, ProfileState>(
-      builder: (context, profileState) {
-        final profile = profileState.profile;
-        final isLoading = profileState.isLoading;
-
-        return SettingsPageScaffold(
-          title: t.settingsProfileTitle,
-          subtitle: t.settingsProfileSubtitle,
-          padding: EdgeInsets.zero,
-          child: isLoading
-              ? const Center(child: CircularProgressIndicator())
-              : ListView(
+    return SettingsPageScaffold(
+      title: t.settingsProfileTitle,
+      subtitle: t.settingsProfileSubtitle,
+      padding: EdgeInsets.zero,
+      child: isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : ListView(
                   padding: const EdgeInsets.only(bottom: 24),
                   children: [
                     const SizedBox(height: 12),
@@ -274,8 +286,6 @@ class ProfileDetailScreen extends HookWidget {
                   ],
                 ),
         );
-      },
-    );
   }
 }
 

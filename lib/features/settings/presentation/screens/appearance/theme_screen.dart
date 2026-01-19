@@ -191,7 +191,7 @@ class ThemeScreen extends HookWidget {
                         height: 0,
                         indent: 72,
                         endIndent: 16,
-                        color: colorScheme.outlineVariant.withOpacity(0.4),
+                        color: colorScheme.outlineVariant.withValues(alpha: 0.4),
                       ),
                       SettingsTile(
                         data: SettingsTileData(
@@ -212,7 +212,7 @@ class ThemeScreen extends HookWidget {
                         height: 0,
                         indent: 72,
                         endIndent: 16,
-                        color: colorScheme.outlineVariant.withOpacity(0.4),
+                        color: colorScheme.outlineVariant.withValues(alpha: 0.4),
                       ),
                       SettingsTile(
                         data: SettingsTileData(
@@ -299,7 +299,7 @@ class _ThemePreview extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: colorScheme.onPrimary.withOpacity(0.2),
+                  color: colorScheme.onPrimary.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(cornerRadius * 0.6),
                 ),
                 child: Row(

@@ -72,7 +72,7 @@ class SettingsToggleTile extends StatelessWidget {
               Switch.adaptive(
                 value: value,
                 onChanged: onChanged,
-                activeColor: colorScheme.primary,
+                activeTrackColor: colorScheme.primary,
               ),
             ],
           ),

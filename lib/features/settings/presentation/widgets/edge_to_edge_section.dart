@@ -62,16 +62,13 @@ class EdgeToEdgeSection extends StatelessWidget {
     );
 
     // Non-tappable: same as before
-    if (onTap == null) {
-      return ColoredBox(color: resolvedBackground, child: content);
-    }
 
     // Tappable with pressed state
     return Semantics(
       button: true,
       label: semanticLabel ?? title,
       child: Material(
-        color: resolvedBackground,
+
         child: InkWell(
           onTap: onTap,
           overlayColor: WidgetStateProperty.resolveWith((states) {

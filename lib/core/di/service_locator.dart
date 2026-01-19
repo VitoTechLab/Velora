@@ -183,6 +183,10 @@ import 'package:velora/features/mention/domain/usecases/get_my_mentions_usecase.
 import 'package:velora/features/mention/domain/usecases/get_entity_mentions_usecase.dart';
 import 'package:velora/features/mention/presentation/bloc/mention_bloc.dart';
 
+// Search feature imports
+import 'package:velora/features/search/data/datasources/search_remote_datasource.dart';
+import 'package:velora/features/search/data/datasources/search_remote_datasource_impl.dart';
+
 // Settings feature imports
 import 'package:velora/features/settings/presentation/bloc/settings_bloc.dart';
 
@@ -408,6 +412,15 @@ Future<void> configureDependencies() async {
   if (!getIt.isRegistered<MentionRemoteDataSource>()) {
     getIt.registerLazySingleton<MentionRemoteDataSource>(
       () => MentionRemoteDataSourceImpl(
+        supabaseClient: getIt<SupabaseClient>(),
+      ),
+    );
+  }
+
+  // Search feature - Data source
+  if (!getIt.isRegistered<SearchRemoteDataSource>()) {
+    getIt.registerLazySingleton<SearchRemoteDataSource>(
+      () => SearchRemoteDataSourceImpl(
         supabaseClient: getIt<SupabaseClient>(),
       ),
     );

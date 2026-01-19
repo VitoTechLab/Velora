@@ -95,4 +95,9 @@ class SupabaseRpc {
   static const acceptFollowRequest = 'accept_follow_request';
   static const getFriendSuggestions = 'get_friend_suggestions';
   static const getMutualFriends = 'get_mutual_friends';
+
+  // Search RPCs
+  static const searchUsers = 'search_users';
+  static const searchCampaigns = 'search_campaigns';
+  static const searchApp = 'search_app';
 }
