@@ -152,10 +152,22 @@ class _UserProfileContent extends HookWidget {
                                                 profile?.followingCount ?? 0,
                                             onPostsTap: () {},
                                             onFollowersTap: () {
-                                              // Note: Navigation to followers list will be implemented
+                                              if (profile != null) {
+                                                context.pushNamed(
+                                                  AppRouteName.relationDetail,
+                                                  pathParameters: {'userId': profile.id},
+                                                  queryParameters: {'tab': '0'},
+                                                );
+                                              }
                                             },
                                             onFollowingTap: () {
-                                              // Note: Navigation to following list will be implemented
+                                              if (profile != null) {
+                                                context.pushNamed(
+                                                  AppRouteName.relationDetail,
+                                                  pathParameters: {'userId': profile.id},
+                                                  queryParameters: {'tab': '1'},
+                                                );
+                                              }
                                             },
                                           ),
                                         ),

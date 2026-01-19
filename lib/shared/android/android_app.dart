@@ -8,6 +8,7 @@ import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:velora/features/chat/presentation/bloc/user_presence_bloc.dart';
 import 'package:velora/features/feed/presentation/bloc/feed_bloc.dart';
 import 'package:velora/features/media/presentation/bloc/media_gallery_bloc.dart';
+import 'package:velora/features/campaign/presentation/bloc/campaign_bloc.dart';
 import 'package:velora/features/media/presentation/bloc/media_upload_bloc.dart';
 import 'package:velora/features/post/presentation/bloc/post_bloc.dart';
 import 'package:velora/features/profile/presentation/bloc/profile_bloc.dart';
@@ -51,6 +52,8 @@ class AndroidApp extends StatelessWidget {
         BlocProvider<MediaGalleryBloc>(
           create: (_) => getIt<MediaGalleryBloc>(),
         ),
+        // CampaignBloc - factory instance
+        BlocProvider<CampaignBloc>(create: (_) => getIt<CampaignBloc>()),
         // SocialRelationBloc - factory instance
         BlocProvider<SocialRelationBloc>(
           create: (_) => getIt<SocialRelationBloc>(),
