@@ -37,6 +37,8 @@
   "authSignInLink": "登录",
   "commonGoBack": "返回",
   "commonCancel": "取消",
+  "commonError": "发生错误",
+  "commonRetry": "重试",
   "authResetPasswordFormLabel": "重置密码表单",
   "authEmailIllustrationLabel": "电子邮件插图",
   "authResetPasswordTitle": "重置密码",

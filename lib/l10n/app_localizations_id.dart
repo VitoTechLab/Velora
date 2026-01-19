@@ -104,6 +104,12 @@ class AppLocalizationsId extends AppLocalizations {
   String get commonCancel => 'Batal';
 
   @override
+  String get commonError => 'Terjadi kesalahan';
+
+  @override
+  String get commonRetry => 'Coba lagi';
+
+  @override
   String get authResetPasswordFormLabel => 'Form atur ulang kata sandi';
 
   @override
@@ -2835,4 +2841,16 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get chatDocumentAddMore => 'Add more documents';
+
+  @override
+  String get mediaPreviewTitle => 'Pratinjau';
+
+  @override
+  String get mediaPreviewAddCaption => 'Tambahkan keterangan...';
+
+  @override
+  String get mediaPreviewRemove => 'Hapus';
+
+  @override
+  String get mediaPreviewSend => 'Kirim';
 }

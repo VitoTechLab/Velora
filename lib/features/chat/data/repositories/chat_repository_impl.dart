@@ -9,6 +9,7 @@ import 'package:velora/features/chat/domain/entities/chat_message_pagination_res
 import 'package:velora/features/chat/domain/entities/conversation_list_entity.dart';
 import 'package:velora/features/chat/domain/entities/message_cursor_entity.dart';
 import 'package:velora/features/chat/domain/entities/message_read_entity.dart';
+import 'package:velora/features/chat/domain/entities/realtime_message_event_entity.dart';
 import 'package:velora/features/chat/domain/entities/user_presence_entity.dart';
 import 'package:velora/features/chat/domain/entities/user_search_entity.dart';
 import 'package:velora/features/chat/domain/repositories/chat_repository.dart';
@@ -69,9 +70,11 @@ class ChatRepositoryImpl implements ChatRepository {
     String? fileName,
     int? fileSize,
     String? caption,
+    double? durationSeconds,
   }) async {
     try {
-      logi('[CHAT REPOSITORY] sendMediaMessage - conversation: $conversationId, type: $mediaType');
+      logi(
+          '[CHAT REPOSITORY] sendMediaMessage - conversation: $conversationId, type: $mediaType');
       final result = await remoteDataSource.sendMediaMessage(
         conversationId: conversationId,
         mediaUrl: mediaUrl,
@@ -80,6 +83,7 @@ class ChatRepositoryImpl implements ChatRepository {
         fileName: fileName,
         fileSize: fileSize,
         caption: caption,
+        durationSeconds: durationSeconds,
       );
       return Right(result.toEntity());
     } catch (e) {
@@ -217,14 +221,14 @@ class ChatRepositoryImpl implements ChatRepository {
   }
 
   @override
-  Stream<Either<Failure, ChatMessageEntity>> watchNewMessages({
+  Stream<Either<Failure, RealtimeMessageEventEntity>> watchNewMessages({
     required String conversationId,
   }) async* {
     try {
-      await for (final model in remoteDataSource.watchNewMessages(
+      await for (final event in remoteDataSource.watchNewMessages(
         conversationId: conversationId,
       )) {
-        yield Right(model.toEntity());
+        yield Right(event.toEntity());
       }
     } catch (e) {
       yield Left(ChatFailure.fromException(e));

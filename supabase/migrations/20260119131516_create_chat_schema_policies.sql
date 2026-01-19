@@ -49,6 +49,7 @@ EXCEPTION WHEN duplicate_object THEN NULL; END $$;
 -- ===========================================================================
 
 -- 2.1 Conversations
+DROP TABLE IF EXISTS public.conversations CASCADE;
 CREATE TABLE IF NOT EXISTS public.conversations (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   type public.conversation_type NOT NULL,
@@ -69,6 +70,7 @@ BEFORE UPDATE ON public.conversations
 FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
 
 -- 2.2 Conversation Members
+DROP TABLE IF EXISTS public.conversation_members CASCADE;
 CREATE TABLE IF NOT EXISTS public.conversation_members (
   conversation_id UUID NOT NULL REFERENCES public.conversations(id) ON DELETE CASCADE,
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
@@ -98,6 +100,7 @@ BEFORE UPDATE ON public.conversation_members
 FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
 
 -- Helper function for RLS
+DROP FUNCTION IF EXISTS public.my_conversation_ids() CASCADE;
 CREATE OR REPLACE FUNCTION public.my_conversation_ids()
 RETURNS SETOF UUID
 LANGUAGE sql STABLE SECURITY DEFINER
@@ -110,6 +113,7 @@ $$;
 GRANT EXECUTE ON FUNCTION public.my_conversation_ids() TO authenticated;
 
 -- 2.3 Direct Pairs (Optimization for Direct Chat lookup)
+DROP TABLE IF EXISTS public.conversation_direct_pairs CASCADE;
 CREATE TABLE IF NOT EXISTS public.conversation_direct_pairs (
   conversation_id UUID PRIMARY KEY REFERENCES public.conversations(id) ON DELETE CASCADE,
   user_a UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
@@ -121,6 +125,7 @@ CREATE UNIQUE INDEX IF NOT EXISTS ux_direct_pair
   ON public.conversation_direct_pairs (LEAST(user_a, user_b), GREATEST(user_a, user_b));
 
 -- 2.4 Messages
+DROP TABLE IF EXISTS public.messages CASCADE;
 CREATE TABLE IF NOT EXISTS public.messages (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   conversation_id UUID NOT NULL REFERENCES public.conversations(id) ON DELETE CASCADE,
@@ -148,6 +153,7 @@ BEFORE UPDATE ON public.messages
 FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
 
 -- 2.5 Attachments (supports both Supabase Storage and external URLs like Cloudinary)
+DROP TABLE IF EXISTS public.message_attachments CASCADE;
 CREATE TABLE IF NOT EXISTS public.message_attachments (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   message_id UUID NOT NULL REFERENCES public.messages(id) ON DELETE CASCADE,
@@ -176,6 +182,7 @@ CREATE INDEX IF NOT EXISTS idx_attachments_message
   ON public.message_attachments (message_id);
 
 -- 2.6 Message Reads (Blue Ticks - Detailed Receipt)
+DROP TABLE IF EXISTS public.message_reads CASCADE;
 CREATE TABLE IF NOT EXISTS public.message_reads (
   message_id UUID NOT NULL REFERENCES public.messages(id) ON DELETE CASCADE,
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
@@ -191,6 +198,7 @@ CREATE INDEX IF NOT EXISTS idx_reads_lookup
 -- ===========================================================================
 
 -- 3.1 Calls
+DROP TABLE IF EXISTS public.message_call_payload CASCADE;
 CREATE TABLE IF NOT EXISTS public.message_call_payload (
   message_id UUID PRIMARY KEY REFERENCES public.messages(id) ON DELETE CASCADE,
   call_kind public.call_kind NOT NULL,
@@ -202,6 +210,7 @@ CREATE TABLE IF NOT EXISTS public.message_call_payload (
 );
 
 -- 3.2 Polls (Updated)
+DROP TABLE IF EXISTS public.message_poll_payload CASCADE;
 CREATE TABLE IF NOT EXISTS public.message_poll_payload (
   message_id UUID PRIMARY KEY REFERENCES public.messages(id) ON DELETE CASCADE,
   id UUID NOT NULL DEFAULT gen_random_uuid(), 
@@ -211,6 +220,7 @@ CREATE TABLE IF NOT EXISTS public.message_poll_payload (
   closes_at TIMESTAMPTZ
 );
 
+DROP TABLE IF EXISTS public.poll_options CASCADE;
 CREATE TABLE IF NOT EXISTS public.poll_options (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   poll_message_id UUID NOT NULL REFERENCES public.message_poll_payload(message_id) ON DELETE CASCADE,
@@ -221,6 +231,7 @@ CREATE TABLE IF NOT EXISTS public.poll_options (
 CREATE UNIQUE INDEX IF NOT EXISTS ux_poll_options_position
   ON public.poll_options (poll_message_id, position);
 
+DROP TABLE IF EXISTS public.poll_votes CASCADE;
 CREATE TABLE IF NOT EXISTS public.poll_votes (
   poll_option_id UUID NOT NULL REFERENCES public.poll_options(id) ON DELETE CASCADE,
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
@@ -228,7 +239,11 @@ CREATE TABLE IF NOT EXISTS public.poll_votes (
   PRIMARY KEY (poll_option_id, user_id)
 );
 
+CREATE UNIQUE INDEX IF NOT EXISTS ux_poll_vote_unique
+  ON public.poll_votes (poll_option_id, user_id);
+
 -- 3.3 Events (Modern)
+DROP TABLE IF EXISTS public.message_event_payload CASCADE;
 CREATE TABLE IF NOT EXISTS public.message_event_payload (
   message_id UUID PRIMARY KEY REFERENCES public.messages(id) ON DELETE CASCADE,
   id UUID NOT NULL DEFAULT gen_random_uuid(),
@@ -243,6 +258,7 @@ CREATE TABLE IF NOT EXISTS public.message_event_payload (
   ends_at TIMESTAMPTZ
 );
 
+DROP TABLE IF EXISTS public.event_rsvps CASCADE;
 CREATE TABLE IF NOT EXISTS public.event_rsvps (
   event_message_id UUID NOT NULL REFERENCES public.message_event_payload(message_id) ON DELETE CASCADE,
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
@@ -256,6 +272,7 @@ CREATE TABLE IF NOT EXISTS public.event_rsvps (
 -- ===========================================================================
 
 -- Light trigger to update conversation timestamps and unread counts
+DROP FUNCTION IF EXISTS public.on_message_insert() CASCADE;
 CREATE OR REPLACE FUNCTION public.on_message_insert()
 RETURNS TRIGGER
 LANGUAGE plpgsql
@@ -283,6 +300,7 @@ AFTER INSERT ON public.messages
 FOR EACH ROW EXECUTE FUNCTION public.on_message_insert();
 
 -- Sync ID Triggers
+DROP FUNCTION IF EXISTS public.sync_payload_id() CASCADE;
 CREATE OR REPLACE FUNCTION public.sync_payload_id()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -430,6 +448,7 @@ LEFT JOIN event_rsvps ur ON ur.event_message_id = ep.message_id AND ur.user_id =
 -- ===========================================================================
 
 -- 6.1 Create Conversation
+DROP FUNCTION IF EXISTS public.create_direct_conversation(UUID) CASCADE;
 CREATE OR REPLACE FUNCTION public.create_direct_conversation(other_user_id UUID)
 RETURNS UUID
 LANGUAGE plpgsql
@@ -481,6 +500,7 @@ $$;
 GRANT EXECUTE ON FUNCTION public.create_direct_conversation(UUID) TO authenticated;
 
 -- 6.2 Mark Conversation Read
+DROP FUNCTION IF EXISTS public.mark_conversation_read(UUID) CASCADE;
 CREATE OR REPLACE FUNCTION public.mark_conversation_read(
   p_conversation_id UUID
 )
@@ -512,6 +532,7 @@ $$;
 GRANT EXECUTE ON FUNCTION public.mark_conversation_read(UUID) TO authenticated;
 
 -- 6.3 Batch Mark Read
+DROP FUNCTION IF EXISTS public.mark_messages_read_batch(UUID[]) CASCADE;
 CREATE OR REPLACE FUNCTION public.mark_messages_read_batch(p_message_ids UUID[])
 RETURNS TABLE (marked_count INT)
 LANGUAGE plpgsql
@@ -538,7 +559,52 @@ END;
 $$;
 GRANT EXECUTE ON FUNCTION public.mark_messages_read_batch(UUID[]) TO authenticated;
 
--- 6.4 Get Conversation List (Now using Regular View)
+-- 6.4 Edit & Delete Message (via RPC only)
+DROP FUNCTION IF EXISTS public.edit_message(UUID, TEXT) CASCADE;
+CREATE OR REPLACE FUNCTION public.edit_message(
+  p_message_id UUID,
+  p_body TEXT
+)
+RETURNS VOID
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public
+AS $$
+BEGIN
+  UPDATE messages
+  SET body = p_body,
+      edited_at = NOW()
+  WHERE id = p_message_id
+    AND sender_id = auth.uid()
+    AND deleted_at IS NULL;
+END;
+$$;
+
+GRANT EXECUTE ON FUNCTION public.edit_message(UUID, TEXT) TO authenticated;
+
+DROP FUNCTION IF EXISTS public.delete_message(UUID) CASCADE;
+CREATE OR REPLACE FUNCTION public.delete_message(
+  p_message_id UUID
+)
+RETURNS VOID
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public
+AS $$
+BEGIN
+  UPDATE messages
+  SET deleted_at = NOW(),
+      deleted_by = auth.uid()
+  WHERE id = p_message_id
+    AND sender_id = auth.uid()
+    AND deleted_at IS NULL;
+END;
+$$;
+
+GRANT EXECUTE ON FUNCTION public.delete_message(UUID) TO authenticated;
+
+-- 6.5 Get Conversation List (Now using Regular View)
+DROP FUNCTION IF EXISTS public.get_conversation_list_optimized() CASCADE;
 CREATE OR REPLACE FUNCTION public.get_conversation_list_optimized()
 RETURNS TABLE (
     conversation_id UUID,
@@ -577,7 +643,8 @@ END;
 $$;
 GRANT EXECUTE ON FUNCTION public.get_conversation_list_optimized() TO authenticated;
 
--- 6.5 Vote Poll
+-- 6.6 Vote Poll (validated + max vote guard)
+DROP FUNCTION IF EXISTS public.vote_poll_option(UUID, UUID) CASCADE;
 CREATE OR REPLACE FUNCTION public.vote_poll_option(
   p_poll_message_id UUID,
   p_option_id UUID
@@ -589,46 +656,61 @@ SET search_path = public
 AS $$
 DECLARE
   v_uid UUID := auth.uid();
-  v_poll_data RECORD;
+  v_multiple BOOLEAN;
+  v_max_votes INT;
   v_current_votes INT;
 BEGIN
-  IF v_uid IS NULL THEN RAISE EXCEPTION 'Not authenticated'; END IF;
+  IF v_uid IS NULL THEN
+    RAISE EXCEPTION 'Not authenticated';
+  END IF;
 
-  SELECT multiple_choice, max_user_votes 
-  INTO v_poll_data
+  -- Load poll settings
+  SELECT multiple_choice, max_user_votes
+  INTO v_multiple, v_max_votes
   FROM message_poll_payload
   WHERE message_id = p_poll_message_id;
 
-  IF NOT FOUND THEN RAISE EXCEPTION 'Poll not found'; END IF;
-
-  IF EXISTS (SELECT 1 FROM poll_votes WHERE poll_option_id = p_option_id AND user_id = v_uid) THEN
-    RETURN; 
+  IF NOT FOUND THEN
+    RAISE EXCEPTION 'Poll not found';
   END IF;
 
-  IF NOT v_poll_data.multiple_choice THEN
-     DELETE FROM poll_votes pv
-     USING poll_options po
-     WHERE pv.poll_option_id = po.id
-       AND po.poll_message_id = p_poll_message_id
-       AND pv.user_id = v_uid;
+  -- Validate option belongs to poll
+  IF NOT EXISTS (
+    SELECT 1 FROM poll_options
+    WHERE id = p_option_id
+      AND poll_message_id = p_poll_message_id
+  ) THEN
+    RAISE EXCEPTION 'Invalid poll option';
+  END IF;
+
+  -- Single choice → remove previous votes
+  IF NOT v_multiple THEN
+    DELETE FROM poll_votes pv
+    USING poll_options po
+    WHERE pv.poll_option_id = po.id
+      AND po.poll_message_id = p_poll_message_id
+      AND pv.user_id = v_uid;
   ELSE
-     SELECT COUNT(*) INTO v_current_votes
-     FROM poll_votes pv
-     JOIN poll_options po ON po.id = pv.poll_option_id
-     WHERE po.poll_message_id = p_poll_message_id
-       AND pv.user_id = v_uid;
-       
-     IF v_current_votes >= v_poll_data.max_user_votes THEN
-       RAISE EXCEPTION 'Max votes limit reached (%)', v_poll_data.max_user_votes;
-     END IF;
+    -- Multiple choice → enforce max_user_votes
+    SELECT COUNT(*) INTO v_current_votes
+    FROM poll_votes pv
+    JOIN poll_options po ON po.id = pv.poll_option_id
+    WHERE po.poll_message_id = p_poll_message_id
+      AND pv.user_id = v_uid;
+
+    IF v_current_votes >= v_max_votes THEN
+      RAISE EXCEPTION 'Max votes reached';
+    END IF;
   END IF;
 
   INSERT INTO poll_votes (poll_option_id, user_id)
-  VALUES (p_option_id, v_uid);
+  VALUES (p_option_id, v_uid)
+  ON CONFLICT DO NOTHING;
 END;
 $$;
 GRANT EXECUTE ON FUNCTION public.vote_poll_option(UUID, UUID) TO authenticated;
 
+DROP FUNCTION IF EXISTS public.unvote_poll_option(UUID) CASCADE;
 CREATE OR REPLACE FUNCTION public.unvote_poll_option(p_option_id UUID)
 RETURNS VOID
 LANGUAGE plpgsql
@@ -642,6 +724,7 @@ $$;
 GRANT EXECUTE ON FUNCTION public.unvote_poll_option(UUID) TO authenticated;
 
 -- 6.6 Respond Event
+DROP FUNCTION IF EXISTS public.respond_to_event(UUID, public.rsvp_status) CASCADE;
 CREATE OR REPLACE FUNCTION public.respond_to_event(
   p_event_message_id UUID,
   p_status public.rsvp_status
@@ -677,10 +760,22 @@ ALTER TABLE public.poll_votes ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.message_event_payload ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.event_rsvps ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.message_reads ENABLE ROW LEVEL SECURITY;
+-- Conversation members
+CREATE POLICY "view_members" ON public.conversation_members
+FOR SELECT TO authenticated USING (
+  conversation_id IN (SELECT public.my_conversation_ids())
+);
 
+-- Allow users to see their own membership record directly
+CREATE POLICY "view_own_membership" ON public.conversation_members
+FOR SELECT TO authenticated USING (
+  user_id = auth.uid()
+);
+
+-- Conversations
 CREATE POLICY "view_my_conversations" ON public.conversations
 FOR SELECT TO authenticated USING (
-  id IN (SELECT conversation_id FROM conversation_members WHERE user_id = auth.uid() AND left_at IS NULL)
+  id IN (SELECT public.my_conversation_ids())
 );
 
 CREATE POLICY "create_conversations" ON public.conversations
@@ -688,48 +783,74 @@ FOR INSERT TO authenticated WITH CHECK (created_by = auth.uid());
 
 CREATE POLICY "update_my_conversations" ON public.conversations
 FOR UPDATE TO authenticated USING (
-  id IN (SELECT conversation_id FROM conversation_members WHERE user_id = auth.uid())
+  id IN (SELECT public.my_conversation_ids())
 );
 
-CREATE POLICY "view_members" ON public.conversation_members
-FOR SELECT TO authenticated USING (
-  conversation_id IN (SELECT conversation_id FROM conversation_members WHERE user_id = auth.uid() AND left_at IS NULL)
-);
-
+-- Messages
 CREATE POLICY "view_messages" ON public.messages
 FOR SELECT TO authenticated USING (
-  conversation_id IN (SELECT conversation_id FROM conversation_members WHERE user_id = auth.uid() AND left_at IS NULL)
+  conversation_id IN (SELECT public.my_conversation_ids())
 );
 
 CREATE POLICY "insert_messages" ON public.messages
 FOR INSERT TO authenticated WITH CHECK (
   sender_id = auth.uid() AND
-  conversation_id IN (SELECT conversation_id FROM conversation_members WHERE user_id = auth.uid() AND left_at IS NULL)
+  conversation_id IN (SELECT public.my_conversation_ids())
 );
 
-CREATE POLICY "update_own_messages" ON public.messages
-FOR UPDATE TO authenticated USING (sender_id = auth.uid());
-
--- Attachment policies
+-- Attachments
 CREATE POLICY "view_attachments" ON public.message_attachments
 FOR SELECT TO authenticated USING (
-  message_id IN (SELECT id FROM messages WHERE conversation_id IN (
-    SELECT conversation_id FROM conversation_members WHERE user_id = auth.uid() AND left_at IS NULL
-  ))
+  message_id IN (
+    SELECT id FROM public.messages
+    WHERE conversation_id IN (SELECT public.my_conversation_ids())
+  )
 );
 
 CREATE POLICY "insert_attachments" ON public.message_attachments
 FOR INSERT TO authenticated WITH CHECK (
-  message_id IN (SELECT id FROM messages WHERE sender_id = auth.uid())
+  message_id IN (SELECT id FROM public.messages WHERE sender_id = auth.uid())
 );
 
+-- Poll payload
 CREATE POLICY "view_poll_payload" ON public.message_poll_payload
 FOR SELECT TO authenticated USING (
-  message_id IN (SELECT id FROM messages WHERE conversation_id IN (
-    SELECT conversation_id FROM conversation_members WHERE user_id = auth.uid() AND left_at IS NULL
-  ))
+  message_id IN (
+    SELECT id FROM public.messages
+    WHERE conversation_id IN (SELECT public.my_conversation_ids())
+  )
 );
 
+-- Allow inserting poll payload only for own messages in conversations user belongs to
+CREATE POLICY "insert_poll_payload" ON public.message_poll_payload
+FOR INSERT TO authenticated WITH CHECK (
+  message_id IN (
+    SELECT id FROM public.messages
+    WHERE sender_id = auth.uid()
+      AND conversation_id IN (SELECT public.my_conversation_ids())
+  )
+);
+
+-- Poll options
+CREATE POLICY "view_poll_options" ON public.poll_options
+FOR SELECT TO authenticated USING (
+  poll_message_id IN (
+    SELECT id FROM public.messages
+    WHERE conversation_id IN (SELECT public.my_conversation_ids())
+  )
+);
+
+-- Allow inserting poll options only for polls owned by current user
+CREATE POLICY "insert_poll_options" ON public.poll_options
+FOR INSERT TO authenticated WITH CHECK (
+  poll_message_id IN (
+    SELECT id FROM public.messages
+    WHERE sender_id = auth.uid()
+      AND conversation_id IN (SELECT public.my_conversation_ids())
+  )
+);
+
+-- Poll votes
 CREATE POLICY "insert_poll_votes" ON public.poll_votes
 FOR INSERT TO authenticated WITH CHECK (user_id = auth.uid());
 
@@ -739,11 +860,59 @@ FOR DELETE TO authenticated USING (user_id = auth.uid());
 CREATE POLICY "view_poll_votes" ON public.poll_votes
 FOR SELECT TO authenticated USING (
   poll_option_id IN (
-    SELECT id FROM poll_options WHERE poll_message_id IN (
-       SELECT id FROM messages WHERE conversation_id IN (SELECT conversation_id FROM conversation_members WHERE user_id = auth.uid())
-    )
+    SELECT po.id FROM public.poll_options po
+    JOIN public.messages m ON m.id = po.poll_message_id
+    WHERE m.conversation_id IN (SELECT public.my_conversation_ids())
   )
 );
+
+-- Event payload
+CREATE POLICY "view_event_payload" ON public.message_event_payload
+FOR SELECT TO authenticated USING (
+  message_id IN (
+    SELECT id FROM public.messages
+    WHERE conversation_id IN (SELECT public.my_conversation_ids())
+  )
+);
+
+CREATE POLICY "insert_event_payload" ON public.message_event_payload
+FOR INSERT TO authenticated WITH CHECK (
+  message_id IN (
+    SELECT id FROM public.messages
+    WHERE sender_id = auth.uid()
+      AND conversation_id IN (SELECT public.my_conversation_ids())
+  )
+);
+
+-- Event RSVPs
+CREATE POLICY "view_event_rsvps" ON public.event_rsvps
+FOR SELECT TO authenticated USING (
+  event_message_id IN (
+    SELECT id FROM public.messages
+    WHERE conversation_id IN (SELECT public.my_conversation_ids())
+  )
+);
+
+CREATE POLICY "insert_event_rsvps" ON public.event_rsvps
+FOR INSERT TO authenticated WITH CHECK (user_id = auth.uid());
+
+CREATE POLICY "update_event_rsvps" ON public.event_rsvps
+FOR UPDATE TO authenticated USING (user_id = auth.uid());
+
+CREATE POLICY "delete_event_rsvps" ON public.event_rsvps
+FOR DELETE TO authenticated USING (user_id = auth.uid());
+
+-- Message reads
+CREATE POLICY "view_message_reads" ON public.message_reads
+FOR SELECT TO authenticated USING (
+  message_id IN (
+    SELECT id FROM public.messages
+    WHERE conversation_id IN (SELECT public.my_conversation_ids())
+  )
+);
+
+CREATE POLICY "insert_message_reads" ON public.message_reads
+FOR INSERT TO authenticated WITH CHECK (user_id = auth.uid());
 
 -- ===========================================================================
 -- 8. REALTIME & CLEANUP

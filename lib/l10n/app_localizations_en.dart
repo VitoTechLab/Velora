@@ -103,6 +103,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get commonCancel => 'Cancel';
 
   @override
+  String get commonError => 'Something went wrong';
+
+  @override
+  String get commonRetry => 'Retry';
+
+  @override
   String get authResetPasswordFormLabel => 'Reset password form';
 
   @override
@@ -2822,4 +2828,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chatDocumentAddMore => 'Add more documents';
+
+  @override
+  String get mediaPreviewTitle => 'Preview';
+
+  @override
+  String get mediaPreviewAddCaption => 'Add a caption...';
+
+  @override
+  String get mediaPreviewRemove => 'Remove';
+
+  @override
+  String get mediaPreviewSend => 'Send';
 }

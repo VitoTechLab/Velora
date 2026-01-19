@@ -37,6 +37,8 @@
   "authSignInLink": "Masuk",
   "commonGoBack": "Kembali",
   "commonCancel": "Batal",
+  "commonError": "Terjadi kesalahan",
+  "commonRetry": "Coba lagi",
   "authResetPasswordFormLabel": "Form atur ulang kata sandi",
   "authEmailIllustrationLabel": "Ilustrasi email",
   "authResetPasswordTitle": "Atur ulang kata sandi",
@@ -1258,5 +1260,10 @@
   "settingsHelpAboutAcknowledgementSupabase": "Supabase",
   "settingsHelpAboutAcknowledgementMaterial": "Material Design",
   "settingsHelpAboutFooterCopyright": "© 2025 VitoTechLab. Seluruh hak cipta.",
-  "settingsHelpAboutFooterMadeWith": "Dibuat dengan ❤️ untuk dunia yang lebih baik"
+  "settingsHelpAboutFooterMadeWith": "Dibuat dengan ❤️ untuk dunia yang lebih baik",
+
+  "mediaPreviewTitle": "Pratinjau",
+  "mediaPreviewAddCaption": "Tambahkan keterangan...",
+  "mediaPreviewRemove": "Hapus",
+  "mediaPreviewSend": "Kirim"
 }

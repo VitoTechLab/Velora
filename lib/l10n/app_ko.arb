@@ -37,6 +37,8 @@
   "authSignInLink": "로그인",
   "commonGoBack": "돌아가기",
   "commonCancel": "취소",
+  "commonError": "오류가 발생했습니다",
+  "commonRetry": "다시 시도",
   "authResetPasswordFormLabel": "비밀번호 재설정 양식",
   "authEmailIllustrationLabel": "이메일 일러스트",
   "authResetPasswordTitle": "비밀번호 재설정",

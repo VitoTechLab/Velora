@@ -15,15 +15,6 @@ class ChatInputBar extends StatefulWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
   final ValueChanged<String> onSendMessage;
-  final VoidCallback onGalleryPressed;
-  final VoidCallback onCameraPressed;
-  final VoidCallback onLocationPressed;
-  final VoidCallback onContactPressed;
-  final VoidCallback onDocumentPressed;
-  final VoidCallback onAudioPressed;
-  final VoidCallback onPollPressed;
-  final VoidCallback onEventPressed;
-  final VoidCallback onAiImagesPressed;
   final VoidCallback onVoicePressed;
   final ValueChanged<bool>? onTyping;
   final String conversationId;
@@ -33,15 +24,6 @@ class ChatInputBar extends StatefulWidget {
     required this.controller,
     required this.focusNode,
     required this.onSendMessage,
-    required this.onGalleryPressed,
-    required this.onCameraPressed,
-    required this.onLocationPressed,
-    required this.onContactPressed,
-    required this.onDocumentPressed,
-    required this.onAudioPressed,
-    required this.onPollPressed,
-    required this.onEventPressed,
-    required this.onAiImagesPressed,
     required this.onVoicePressed,
     required this.conversationId,
     this.onTyping,
@@ -342,15 +324,7 @@ class _ChatInputBarState extends State<ChatInputBar> {
                                     onPressed: () {
                                       AttachmentMenuBottomSheet.show(
                                         context,
-                                        onGalleryTap: widget.onGalleryPressed,
-                                        onCameraTap: widget.onCameraPressed,
-                                        onLocationTap: widget.onLocationPressed,
-                                        onContactTap: widget.onContactPressed,
-                                        onDocumentTap: widget.onDocumentPressed,
-                                        onAudioTap: widget.onAudioPressed,
-                                        onPollTap: widget.onPollPressed,
-                                        onEventTap: widget.onEventPressed,
-                                        onAiImagesTap: widget.onAiImagesPressed,
+                                        conversationId: widget.conversationId,
                                       );
                                     },
                                     tooltip: t.chatInputAttachTooltip,
@@ -374,7 +348,12 @@ class _ChatInputBarState extends State<ChatInputBar> {
                                         color: Colors.white,
                                       ),
                                     ),
-                                    onPressed: widget.onCameraPressed,
+                                    onPressed: () {
+                                      AttachmentActions.onCameraTap(
+                                        context,
+                                        widget.conversationId,
+                                      );
+                                    },
                                     tooltip: t.chatInputCameraTooltip,
                                     padding: const EdgeInsets.only(right: 8),
                                   ),

@@ -10,10 +10,12 @@ import 'package:velora/features/chat/data/models/conversation_list_model.dart';
 import 'package:velora/features/chat/data/models/message_cursor_model.dart';
 import 'package:velora/features/chat/data/models/message_pagination_model.dart';
 import 'package:velora/features/chat/data/models/message_read_model.dart';
+import 'package:velora/features/chat/data/models/realtime_message_event.dart';
 import 'package:velora/features/chat/data/models/typing_indicator_model.dart';
 import 'package:velora/features/chat/data/models/user_presence_model.dart';
 import 'package:velora/features/chat/data/models/user_search_model.dart';
 import 'package:velora/features/chat/data/models/message_attachment_model.dart';
+import 'package:velora/features/chat/domain/entities/realtime_message_event_entity.dart';
 
 import 'chat_remote_datasource.dart';
 
@@ -25,7 +27,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
   RealtimeChannel? _messageChannel;
   RealtimeChannel? _messageReadChannel;
   RealtimeChannel? _typingChannel;
-  StreamController<ChatMessageModel>? _messageWatchController;
+  StreamController<RealtimeMessageEvent>? _messageWatchController;
   StreamController<MessageReadModel>? _messageReadController;
   StreamController<TypingIndicatorModel>? _typingController;
 
@@ -151,6 +153,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
     String? fileName,
     int? fileSize,
     String? caption,
+    double? durationSeconds,
   }) {
     return guardSupabase(
       () async {
@@ -197,7 +200,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
 
         final messageId = messageResponse['id'] as String;
 
-        // 2. Insert attachment
+        // 2. Insert attachment with duration for audio/video
         final attachmentPayload = MessageAttachmentModel.toInsertJson(
           messageId: messageId,
           kind: attachmentKind,
@@ -205,6 +208,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
           filename: fileName,
           mimeType: mimeType,
           sizeBytes: fileSize,
+          durationSeconds: durationSeconds,
         );
 
         await _client
@@ -361,17 +365,25 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
   }) {
     return guardSupabase(
       () async {
-        final payload = <String, dynamic>{
-          'body': newBody,
-          'edited_at': DateTime.now().toUtc().toIso8601String(),
-        };
+        // Use secure RPC that enforces sender ownership and non-deleted messages.
+        await _client.rpc(
+          'edit_message',
+          params: {
+            'p_message_id': messageId,
+            'p_body': newBody,
+          },
+        );
 
-        final response = await _client
-            .from(SupabaseTables.messages)
-            .update(payload)
-            .eq('id', messageId)
-            .select()
-            .single();
+        // Fetch the updated message with full payload (poll/event/attachments)
+        final response = await _client.from(SupabaseTables.messages).select('''
+              *,
+              message_poll_payload(
+                *,
+                poll_options:v_poll_options_with_votes(*)
+              ),
+              message_event_payload:v_event_with_rsvp(*),
+              message_attachments(*)
+            ''').eq('id', messageId).single();
 
         return ChatMessageModel.fromJson(response);
       },
@@ -384,16 +396,13 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
   Future<void> deleteMessage({required String messageId}) {
     return guardSupabase(
       () async {
-        final userId = _requireUserId();
-        final payload = <String, dynamic>{
-          'deleted_at': DateTime.now().toUtc().toIso8601String(),
-          'deleted_by': userId,
-        };
-
-        await _client
-            .from(SupabaseTables.messages)
-            .update(payload)
-            .eq('id', messageId);
+        // Use secure RPC that enforces sender ownership and soft-delete.
+        await _client.rpc(
+          'delete_message',
+          params: {
+            'p_message_id': messageId,
+          },
+        );
       },
       op: 'deleteMessage',
       tag: _logTag,
@@ -436,21 +445,23 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
   }
 
   @override
-  Stream<ChatMessageModel> watchNewMessages({required String conversationId}) {
+  Stream<RealtimeMessageEvent> watchNewMessages(
+      {required String conversationId}) {
     final previousController = _messageWatchController;
     if (previousController != null && !previousController.isClosed) {
       unawaited(previousController.close());
     }
     _messageWatchController = null;
 
-    final controller = StreamController<ChatMessageModel>.broadcast();
+    final controller = StreamController<RealtimeMessageEvent>.broadcast();
     _messageWatchController = controller;
 
     // Ensure only one active subscription
     unawaited(_messageChannel?.unsubscribe());
 
     // Helper to fetch enriched message with poll/event payload
-    Future<void> emitEnrichedMessage(String messageId) async {
+    Future<void> emitEnrichedMessage(
+        String messageId, RealtimeEventType eventType) async {
       try {
         final enriched = await _client.from(SupabaseTables.messages).select('''
           *,
@@ -463,7 +474,10 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
 
         if (enriched != null) {
           final message = ChatMessageModel.fromJson(enriched);
-          controller.add(message);
+          controller.add(RealtimeMessageEvent(
+            message: message,
+            eventType: eventType,
+          ));
         }
       } catch (e, st) {
         controller.addError(e, st);
@@ -485,7 +499,8 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
           callback: (payload) {
             final messageId = payload.newRecord['id'] as String?;
             if (messageId != null) {
-              unawaited(emitEnrichedMessage(messageId));
+              unawaited(
+                  emitEnrichedMessage(messageId, RealtimeEventType.insert));
             }
           },
         )
@@ -502,7 +517,8 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
           callback: (payload) {
             final messageId = payload.newRecord['id'] as String?;
             if (messageId != null) {
-              unawaited(emitEnrichedMessage(messageId));
+              unawaited(
+                  emitEnrichedMessage(messageId, RealtimeEventType.update));
             }
           },
         )

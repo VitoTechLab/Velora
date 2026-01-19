@@ -45,8 +45,13 @@ abstract class ChatMessageModel with _$ChatMessageModel {
         kind: kind,
         body: body,
         replyToMessageId: replyToMessageId,
-        editedAt: editedAt,
-        deletedAt: deletedAt,
+        // Treat default epoch (1970-01-01) as null for optional dates
+        editedAt: editedAt != null && editedAt?.millisecondsSinceEpoch == 0
+            ? null
+            : editedAt,
+        deletedAt: deletedAt != null && deletedAt?.millisecondsSinceEpoch == 0
+            ? null
+            : deletedAt,
         deletedBy: deletedBy,
         createdAt: createdAt,
         updatedAt: updatedAt,

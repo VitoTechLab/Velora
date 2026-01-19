@@ -37,6 +37,8 @@
   "authSignInLink": "Sign in",
   "commonGoBack": "Go back",
   "commonCancel": "Cancel",
+  "commonError": "Something went wrong",
+  "commonRetry": "Retry",
   "authResetPasswordFormLabel": "Reset password form",
   "authEmailIllustrationLabel": "Email illustration",
   "authResetPasswordTitle": "Reset password",
@@ -1349,5 +1351,10 @@
   "chatDocumentEmptyTitle": "No documents selected",
   "chatDocumentEmptySubtitle": "Tap the button below to browse and select files",
   "chatDocumentBrowseFiles": "Browse Files",
-  "chatDocumentAddMore": "Add more documents"
+  "chatDocumentAddMore": "Add more documents",
+
+  "mediaPreviewTitle": "Preview",
+  "mediaPreviewAddCaption": "Add a caption...",
+  "mediaPreviewRemove": "Remove",
+  "mediaPreviewSend": "Send"
 }

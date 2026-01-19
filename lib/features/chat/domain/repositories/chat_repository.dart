@@ -5,6 +5,7 @@ import 'package:velora/features/chat/domain/entities/chat_message_pagination_res
 import 'package:velora/features/chat/domain/entities/conversation_list_entity.dart';
 import 'package:velora/features/chat/domain/entities/message_cursor_entity.dart';
 import 'package:velora/features/chat/domain/entities/message_read_entity.dart';
+import 'package:velora/features/chat/domain/entities/realtime_message_event_entity.dart';
 import 'package:velora/features/chat/domain/entities/user_presence_entity.dart';
 import 'package:velora/features/chat/domain/entities/user_search_entity.dart';
 
@@ -37,6 +38,7 @@ abstract class ChatRepository {
     String? fileName,
     int? fileSize,
     String? caption,
+    double? durationSeconds, // For audio/video
   });
 
   /// Send a poll message with SQL v2 fields
@@ -72,7 +74,8 @@ abstract class ChatRepository {
   Future<Either<Failure, void>> deleteMessage({required String messageId});
 
   /// Watch realtime new messages in a conversation
-  Stream<Either<Failure, ChatMessageEntity>> watchNewMessages({
+  /// Returns a stream of [RealtimeMessageEventEntity] containing message and event type (insert/update)
+  Stream<Either<Failure, RealtimeMessageEventEntity>> watchNewMessages({
     required String conversationId,
   });
 

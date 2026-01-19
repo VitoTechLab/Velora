@@ -51,6 +51,7 @@ class ChatMessageEvent with _$ChatMessageEvent {
     required String conversationId,
     required List<String> filePaths,
     required String userId,
+    String? caption,
   }) = UploadAndSendImagesEvent;
 
   /// Upload and send video
@@ -58,6 +59,7 @@ class ChatMessageEvent with _$ChatMessageEvent {
     required String conversationId,
     required String filePath,
     required String userId,
+    String? caption,
   }) = UploadAndSendVideoEvent;
 
   /// Upload and send documents

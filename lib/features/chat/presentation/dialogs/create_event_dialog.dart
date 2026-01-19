@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:velora/core/ui/app_messenger.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
 class CreateEventDialog extends StatefulWidget {
@@ -8,6 +9,8 @@ class CreateEventDialog extends StatefulWidget {
   static Future<Map<String, dynamic>?> show(BuildContext context) {
     return showDialog<Map<String, dynamic>>(
       context: context,
+      useRootNavigator: true,
+      barrierDismissible: true,
       builder: (context) => const CreateEventDialog(),
     );
   }
@@ -107,16 +110,20 @@ class _CreateEventDialogState extends State<CreateEventDialog> {
     final t = AppLocalizations.of(context)!;
 
     if (title.isEmpty) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(t.chatEventDialogTitleError)));
+      AppMessenger.showToast(
+        message: t.chatEventDialogTitleError,
+        icon: Icons.error_outline,
+        isError: true,
+      );
       return;
     }
 
     // Validate meeting URL for online events
     if (_isOnline && meetingUrl.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(t.chatEventDialogMeetingUrlError)),
+      AppMessenger.showToast(
+        message: t.chatEventDialogMeetingUrlError,
+        icon: Icons.error_outline,
+        isError: true,
       );
       return;
     }
@@ -138,9 +145,11 @@ class _CreateEventDialogState extends State<CreateEventDialog> {
     );
 
     if (endDateTime.isBefore(startDateTime)) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(t.chatEventDialogEndTimeError)));
+      AppMessenger.showToast(
+        message: t.chatEventDialogEndTimeError,
+        icon: Icons.error_outline,
+        isError: true,
+      );
       return;
     }
 

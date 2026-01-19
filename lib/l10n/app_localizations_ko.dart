@@ -101,6 +101,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get commonCancel => '취소';
 
   @override
+  String get commonError => '오류가 발생했습니다';
+
+  @override
+  String get commonRetry => '다시 시도';
+
+  @override
   String get authResetPasswordFormLabel => '비밀번호 재설정 양식';
 
   @override
@@ -2755,4 +2761,16 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get chatDocumentAddMore => 'Add more documents';
+
+  @override
+  String get mediaPreviewTitle => 'Preview';
+
+  @override
+  String get mediaPreviewAddCaption => 'Add a caption...';
+
+  @override
+  String get mediaPreviewRemove => 'Remove';
+
+  @override
+  String get mediaPreviewSend => 'Send';
 }

@@ -101,6 +101,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get commonCancel => 'キャンセル';
 
   @override
+  String get commonError => 'エラーが発生しました';
+
+  @override
+  String get commonRetry => '再試行';
+
+  @override
   String get authResetPasswordFormLabel => 'パスワード再設定フォーム';
 
   @override
@@ -2751,4 +2757,16 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get chatDocumentAddMore => 'Add more documents';
+
+  @override
+  String get mediaPreviewTitle => 'Preview';
+
+  @override
+  String get mediaPreviewAddCaption => 'Add a caption...';
+
+  @override
+  String get mediaPreviewRemove => 'Remove';
+
+  @override
+  String get mediaPreviewSend => 'Send';
 }

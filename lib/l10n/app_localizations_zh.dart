@@ -101,6 +101,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get commonCancel => '取消';
 
   @override
+  String get commonError => '发生错误';
+
+  @override
+  String get commonRetry => '重试';
+
+  @override
   String get authResetPasswordFormLabel => '重置密码表单';
 
   @override
@@ -2733,4 +2739,16 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get chatDocumentAddMore => 'Add more documents';
+
+  @override
+  String get mediaPreviewTitle => 'Preview';
+
+  @override
+  String get mediaPreviewAddCaption => 'Add a caption...';
+
+  @override
+  String get mediaPreviewRemove => 'Remove';
+
+  @override
+  String get mediaPreviewSend => 'Send';
 }

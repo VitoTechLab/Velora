@@ -284,6 +284,18 @@ abstract class AppLocalizations {
   /// **'Cancel'**
   String get commonCancel;
 
+  /// No description provided for @commonError.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong'**
+  String get commonError;
+
+  /// No description provided for @commonRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get commonRetry;
+
   /// No description provided for @authResetPasswordFormLabel.
   ///
   /// In en, this message translates to:
@@ -5077,6 +5089,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add more documents'**
   String get chatDocumentAddMore;
+
+  /// No description provided for @mediaPreviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get mediaPreviewTitle;
+
+  /// No description provided for @mediaPreviewAddCaption.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a caption...'**
+  String get mediaPreviewAddCaption;
+
+  /// No description provided for @mediaPreviewRemove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get mediaPreviewRemove;
+
+  /// No description provided for @mediaPreviewSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get mediaPreviewSend;
 }
 
 class _AppLocalizationsDelegate

@@ -37,6 +37,8 @@
   "authSignInLink": "ログイン",
   "commonGoBack": "戻る",
   "commonCancel": "キャンセル",
+  "commonError": "エラーが発生しました",
+  "commonRetry": "再試行",
   "authResetPasswordFormLabel": "パスワード再設定フォーム",
   "authEmailIllustrationLabel": "メールのイラスト",
   "authResetPasswordTitle": "パスワードをリセット",

@@ -338,7 +338,7 @@ class _RadiusPreview extends StatelessWidget {
           width: 46,
           height: 46,
           decoration: BoxDecoration(
-            color: colorScheme.surfaceVariant,
+            color: colorScheme.surfaceContainerHighest,
             borderRadius: BorderRadius.circular(radius),
           ),
         ),
