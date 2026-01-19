@@ -22,8 +22,13 @@ import 'package:velora/features/navigation/presentation/widgets/adaptive_branch_
 import 'package:velora/features/navigation/services/navigation_service.dart';
 import 'package:velora/features/post/presentation/screens/post_feed_screen.dart';
 import 'package:velora/features/post/presentation/screens/more_option_post_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:velora/core/di/service_locator.dart';
+import 'package:velora/features/post/presentation/bloc/campaign_post_bloc.dart';
+import 'package:velora/features/post/presentation/screens/create_campaign_post_screen.dart';
 import 'package:velora/features/profile/presentation/screens/profile_screen.dart';
 import 'package:velora/features/profile/presentation/screens/other_user_profile_screen.dart';
+import 'package:velora/features/social_relation/presentation/screens/relation_detail_screen.dart';
 import 'package:velora/features/settings/domain/entities/user_preferences.dart';
 import 'package:velora/features/settings/presentation/screens/account/account_status_screen.dart';
 import 'package:velora/features/settings/presentation/screens/account/account_type_screen.dart';
@@ -174,6 +179,27 @@ class AppRouter {
                         },
                       ),
                       GoRoute(
+                        path: AppRouteSinglePath.relationDetail,
+                        name: AppRouteName.relationDetail,
+                        parentNavigatorKey:
+                            navigationService.navigatorKey, // root
+                        builder: (context, state) {
+                          final userId = state.pathParameters['userId'];
+                          final tabStr = state.uri.queryParameters['tab'];
+                          final initialTab = int.tryParse(tabStr ?? '0') ?? 0;
+                          
+                          if (userId == null || userId.isEmpty) {
+                            return const Scaffold(
+                              body: Center(child: Text('User not found')),
+                            );
+                          }
+                          return RelationDetailScreen(
+                            userId: userId,
+                            initialTab: initialTab,
+                          );
+                        },
+                      ),
+                      GoRoute(
                         path: AppRouteSinglePath.postFeed,
                         name: AppRouteName.postFeed,
                         parentNavigatorKey:
@@ -283,6 +309,17 @@ class AppRouter {
                     path: AppRoutePath.campaign,
                     name: AppRouteName.campaign,
                     builder: (context, state) => const CampaignScreen(),
+                    routes: [
+                      GoRoute(
+                        path: AppRouteSinglePath.createCampaignPost,
+                        name: AppRouteName.createCampaignPost,
+                        parentNavigatorKey: navigationService.navigatorKey,
+                        builder: (context, state) => BlocProvider(
+                          create: (_) => getIt<CampaignPostBloc>(),
+                          child: const CreateCampaignPostScreen(),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -459,8 +496,11 @@ class AppRouteName {
   static const chatDetail = 'chatDetail';
   static const chatDocumentPicker = 'chatDocumentPicker';
   static const userProfile = 'userProfile';
+  static const otherUserProfile = 'otherUserProfile';
+  static const relationDetail = 'relationDetail';
   static const postFeed = 'postFeed';
   static const moreOptions = 'moreOptions';
+  static const createCampaignPost = 'createCampaignPost';
   static const search = 'search';
   static const chat = 'chat';
   static const searchFollowUser = 'searchFollowUser';
@@ -500,6 +540,7 @@ class AppRoutePath {
   static const chatDocumentPicker = '/chat/document-picker';
   static const postFeed = '/home/post-feed';
   static const moreOptions = '/home/post-feed/more-options';
+  static const createCampaignPost = '/campaign/create-campaign';
   static const settings = '/profile/settings';
   static const settingsProfiles = '/profile/settings/profiles';
   static const settingsActivity = '/profile/settings/activity';
@@ -534,10 +575,12 @@ class AppRoutePath {
 class AppRouteSinglePath {
   static const notification = 'notification';
   static const userProfile = 'user/:userId';
+  static const relationDetail = 'user/:userId/relations';
   static const chatDetail = 'chat-detail';
   static const chatDocumentPicker = 'document-picker';
   static const postFeed = 'post-feed';
   static const moreOptions = 'more-options';
+  static const createCampaignPost = 'create-campaign';
   static const settings = 'settings';
   static const settingsProfiles = 'profiles';
   static const settingsActivity = 'activity';

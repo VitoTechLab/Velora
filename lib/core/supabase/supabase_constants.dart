@@ -42,14 +42,18 @@ class SupabaseTables {
 
   // Profile Tables
   static const userProfiles = 'user_profiles';
+
+  // Profile Views
+  static const userProfileHeaderView = 'v_user_profile_header';
+  static const profileFollowersListView = 'v_profile_followers_list';
+  static const profileFollowingListView = 'v_profile_following_list';
+
+  // Social Relation Tables
   static const userFollows = 'user_follows';
   static const userFollowRequests = 'user_follow_requests';
   static const userBlocks = 'user_blocks';
   static const userMutes = 'user_mutes';
   static const userRestricts = 'user_restricts';
-
-  // Profile Views
-  static const userProfileHeaderView = 'user_profile_header_view';
 
   // Notification Tables
   static const notifications = 'notifications';
@@ -86,4 +90,9 @@ class SupabaseRpc {
   static const getUnreadNotificationCount = 'get_unread_notification_count';
   static const markAllNotificationsRead = 'mark_all_notifications_read';
   static const markNotificationsRead = 'mark_notifications_read';
+
+  // Social Relation RPCs
+  static const acceptFollowRequest = 'accept_follow_request';
+  static const getFriendSuggestions = 'get_friend_suggestions';
+  static const getMutualFriends = 'get_mutual_friends';
 }

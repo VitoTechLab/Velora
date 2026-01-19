@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:velora/features/feed/data/models/comment_cursor.dart';
+import 'package:velora/features/feed/data/models/comment_cursor_model.dart';
 import 'package:velora/features/feed/data/models/comment_model.dart';
 import 'package:velora/features/feed/data/models/comment_pagination_model.dart';
 
@@ -16,7 +16,7 @@ void main() {
   ];
 
   test('CommentPaginationModel -> entity retains cursor', () {
-    final cursor = CommentCursor(createdAt: now, id: 'cursor');
+    final cursor = CommentCursorModel(createdAt: now, id: 'cursor');
     final model = CommentPaginationModel(
       comments: comments,
       hasMore: false,

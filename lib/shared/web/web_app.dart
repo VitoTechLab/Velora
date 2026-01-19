@@ -9,6 +9,7 @@ import 'package:velora/features/feed/presentation/bloc/feed_bloc.dart';
 import 'package:velora/features/post/presentation/bloc/post_bloc.dart';
 import 'package:velora/features/media/presentation/bloc/media_upload_bloc.dart';
 import 'package:velora/features/media/presentation/bloc/media_gallery_bloc.dart';
+import 'package:velora/features/campaign/presentation/bloc/campaign_bloc.dart';
 
 class WebApp extends StatelessWidget {
   const WebApp({super.key});
@@ -33,6 +34,8 @@ class WebApp extends StatelessWidget {
         BlocProvider<MediaGalleryBloc>(
           create: (_) => getIt<MediaGalleryBloc>(),
         ),
+        // CampaignBloc - factory instance
+        BlocProvider<CampaignBloc>(create: (_) => getIt<CampaignBloc>()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

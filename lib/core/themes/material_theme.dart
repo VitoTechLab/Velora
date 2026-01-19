@@ -13,44 +13,41 @@ ThemeData buildTheme(Brightness brightness) {
     onSecondary: MaterialColorsCustom.white,
     error: MaterialColorsCustom.brandRed,
     onError: MaterialColorsCustom.white,
-    surface:
-        isLight ? MaterialColorsCustom.white : MaterialColorsCustom.darkNavy1,
+    surface: isLight ? MaterialColorsCustom.white : const Color(0xFF121212),
     onSurface: isLight
         ? MaterialColorsCustom.lightTextPrimary
         : MaterialColorsCustom.darkTextPrimary,
     outline: isLight
         ? MaterialColorsCustom.greyLightBorder
-        : MaterialColorsCustom.darkOutline,
+        : const Color(0xFF3D3D3D),
     inverseSurface:
-        isLight ? MaterialColorsCustom.darkNavy1 : MaterialColorsCustom.white,
+        isLight ? const Color(0xFF121212) : MaterialColorsCustom.white,
     inversePrimary: MaterialColorsCustom.neonIndigo,
     tertiary: MaterialColorsCustom.neonTeal,
     onTertiary: MaterialColorsCustom.white,
 
-    // Surface variants: clean white untuk light, dark navy untuk dark
-    surfaceDim:
-        isLight ? MaterialColorsCustom.mist : MaterialColorsCustom.darkNavy2,
+    // Surface variants: clean white untuk light, pure dark untuk dark
+    surfaceDim: isLight ? MaterialColorsCustom.mist : const Color(0xFF0D0D0D),
     surfaceBright:
-        isLight ? MaterialColorsCustom.white : MaterialColorsCustom.darkNavy1,
+        isLight ? MaterialColorsCustom.white : const Color(0xFF1E1E1E),
     surfaceContainerLowest:
-        isLight ? MaterialColorsCustom.white : MaterialColorsCustom.darkNavy1,
+        isLight ? MaterialColorsCustom.white : const Color(0xFF121212),
     surfaceContainerLow:
-        isLight ? MaterialColorsCustom.white : MaterialColorsCustom.darkNavy2,
+        isLight ? MaterialColorsCustom.white : const Color(0xFF1A1A1A),
     surfaceContainer:
-        isLight ? MaterialColorsCustom.mist : MaterialColorsCustom.darkNavy2,
+        isLight ? MaterialColorsCustom.mist : const Color(0xFF1E1E1E),
     surfaceContainerHigh:
-        isLight ? MaterialColorsCustom.mist : MaterialColorsCustom.darkNavy3,
+        isLight ? MaterialColorsCustom.mist : const Color(0xFF222222),
     surfaceContainerHighest: isLight
         ? MaterialColorsCustom.greyLightContainer
-        : MaterialColorsCustom.darkCard,
+        : const Color(0xFF2A2A2A),
 
     // Optional, tapi recommended untuk icon atau outline halus
-    onSurfaceVariant: isLight
-        ? MaterialColorsCustom.greyMedium
-        : MaterialColorsCustom.darkTextSecondary,
+    onSurfaceVariant:
+        isLight ? MaterialColorsCustom.greyMedium : const Color(0xFF9E9E9E),
     outlineVariant: isLight
         ? MaterialColorsCustom.greyLightBorder
-        : MaterialColorsCustom.darkOutline,
+        : const Color(0xFF3D3D3D),
     shadow: MaterialColorsCustom.shadowColor,
   );
 
@@ -200,7 +197,7 @@ ThemeData buildTheme(Brightness brightness) {
     ),
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor:
-          isLight ? MaterialColorsCustom.white : MaterialColorsCustom.darkNavy1,
+          isLight ? MaterialColorsCustom.white : const Color(0xFF121212),
       indicatorColor: Colors.transparent,
       labelTextStyle: WidgetStateProperty.all(
         const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
@@ -216,8 +213,7 @@ ThemeData buildTheme(Brightness brightness) {
       elevation: 0,
     ),
     cardTheme: CardThemeData(
-      color:
-          isLight ? MaterialColorsCustom.white : MaterialColorsCustom.darkNavy2,
+      color: isLight ? MaterialColorsCustom.white : const Color(0xFF1E1E1E),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       elevation: 0,
       margin: const EdgeInsets.all(8),
@@ -251,7 +247,7 @@ ThemeData buildTheme(Brightness brightness) {
     ),
     snackBarTheme: SnackBarThemeData(
       backgroundColor:
-          isLight ? MaterialColorsCustom.black : MaterialColorsCustom.darkNavy2,
+          isLight ? MaterialColorsCustom.black : const Color(0xFF1E1E1E),
       contentTextStyle: textTheme.bodyMedium?.copyWith(
         color: MaterialColorsCustom.white,
       ),

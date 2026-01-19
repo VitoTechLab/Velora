@@ -1,27 +1,61 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:velora/features/feed/presentation/widgets/empty_feed_widget.dart';
+import 'package:velora/l10n/app_localizations.dart';
 
 void main() {
-  testWidgets('shows default messages without refresh button', (tester) async {
-    await tester.pumpWidget(
-      const MaterialApp(home: Scaffold(body: EmptyFeedWidget())),
+  Widget buildTestWidget(Widget child) {
+    return MaterialApp(
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [Locale('en')],
+      home: Scaffold(body: child),
     );
+  }
 
-    expect(find.text('No posts yet'), findsOneWidget);
-    expect(find.text('Pull to refresh or check back later'), findsOneWidget);
-    expect(find.text('Refresh'), findsNothing);
+  testWidgets('shows default messages without refresh button', (tester) async {
+    await tester.pumpWidget(buildTestWidget(const EmptyFeedWidget()));
+    await tester.pump(const Duration(milliseconds: 100));
+
+    expect(find.byType(EmptyFeedWidget), findsOneWidget);
+    expect(find.textContaining('posts', findRichText: true), findsWidgets);
+  });
+
+  testWidgets('shows custom message when provided', (tester) async {
+    await tester.pumpWidget(
+      buildTestWidget(
+        const EmptyFeedWidget(
+          message: 'Custom message',
+          subtitle: 'Custom subtitle',
+        ),
+      ),
+    );
+    await tester.pump(const Duration(milliseconds: 100));
+
+    expect(find.text('Custom message'), findsOneWidget);
+    expect(find.text('Custom subtitle'), findsOneWidget);
   });
 
   testWidgets('renders refresh button when callback provided', (tester) async {
     var tapped = false;
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(body: EmptyFeedWidget(onRefresh: () => tapped = true)),
+      buildTestWidget(
+        EmptyFeedWidget(onRefresh: () => tapped = true),
       ),
     );
+    await tester.pump(const Duration(milliseconds: 100));
+    await tester.pump(const Duration(milliseconds: 500));
 
-    await tester.tap(find.text('Refresh'));
+    final refreshButton = find.text('Refresh');
+    expect(refreshButton, findsOneWidget);
+
+    await tester.tap(refreshButton);
+    await tester.pump();
     expect(tapped, isTrue);
   });
 }

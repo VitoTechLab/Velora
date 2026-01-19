@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../domain/entities/campaign_detail_model.dart';
-import '../../domain/entities/campaign_type.dart';
-import '../../data/mock_campaign_detail.dart';
-import '../widgets/campaign_cover_header.dart';
-import '../widgets/creator_row_header.dart';
-import '../widgets/progress_summary_card.dart';
-import '../widgets/equity_market_module.dart';
-import '../widgets/overview_tab_content.dart';
-import '../widgets/updates_tab_content.dart';
-import '../widgets/discussion_tab_content.dart';
-import '../widgets/transparency_tab_content.dart';
-import '../widgets/primary_cta_button.dart';
-import '../widgets/invest_bottom_sheet.dart';
+import 'package:velora/features/campaign/domain/entities/campaign_detail_model.dart';
+import 'package:velora/features/campaign/domain/entities/campaign_type.dart';
+import 'package:velora/features/campaign/data/mock_campaign_detail.dart';
+import 'package:velora/features/campaign/presentation/widgets/campaign_cover_header.dart';
+import 'package:velora/features/campaign/presentation/widgets/creator_row_header.dart';
+import 'package:velora/features/campaign/presentation/widgets/progress_summary_card.dart';
+import 'package:velora/features/campaign/presentation/widgets/equity_market_module.dart';
+import 'package:velora/features/campaign/presentation/widgets/overview_tab_content.dart';
+import 'package:velora/features/campaign/presentation/widgets/updates_tab_content.dart';
+import 'package:velora/features/campaign/presentation/widgets/discussion_tab_content.dart';
+import 'package:velora/features/campaign/presentation/widgets/transparency_tab_content.dart';
+import 'package:velora/features/campaign/presentation/widgets/primary_cta_button.dart';
+import 'package:velora/features/campaign/presentation/widgets/invest_bottom_sheet.dart';
 
 class CampaignDetailScreen extends HookWidget {
   final CampaignDetailModel campaign;

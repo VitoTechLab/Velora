@@ -154,8 +154,20 @@ class _ProfileScreenContent extends HookWidget {
                                         followingCount:
                                             profile?.followingCount ?? 0,
                                         onPostsTap: () {},
-                                        onFollowersTap: () {},
-                                        onFollowingTap: () {},
+                                        onFollowersTap: () {
+                                          context.pushNamed(
+                                            AppRouteName.relationDetail,
+                                            pathParameters: {'userId': userId},
+                                            queryParameters: {'tab': '0'},
+                                          );
+                                        },
+                                        onFollowingTap: () {
+                                          context.pushNamed(
+                                            AppRouteName.relationDetail,
+                                            pathParameters: {'userId': userId},
+                                            queryParameters: {'tab': '1'},
+                                          );
+                                        },
                                       ),
                                     ),
                                   ],

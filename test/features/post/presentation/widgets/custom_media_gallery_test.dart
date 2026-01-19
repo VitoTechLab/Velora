@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:velora/l10n/app_localizations.dart';
 import 'package:velora/features/post/presentation/widgets/custom_media_gallery.dart';
 
 class FakeImagePicker extends ImagePicker {
@@ -33,6 +35,13 @@ void main() {
   }) async {
     await tester.pumpWidget(
       MaterialApp(
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: AppLocalizations.supportedLocales,
         home: CustomScrollView(
           slivers: [
             CustomMediaGallery(
@@ -45,7 +54,7 @@ void main() {
         ),
       ),
     );
-    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
   }
 
   testWidgets('shows placeholder when picker returns empty list', (

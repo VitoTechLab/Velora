@@ -8,6 +8,7 @@ import 'package:velora/features/feed/presentation/bloc/feed_bloc.dart';
 import 'package:velora/features/post/presentation/bloc/post_bloc.dart';
 import 'package:velora/features/media/presentation/bloc/media_upload_bloc.dart';
 import 'package:velora/features/media/presentation/bloc/media_gallery_bloc.dart';
+import 'package:velora/features/campaign/presentation/bloc/campaign_bloc.dart';
 
 class IOSApp extends StatelessWidget {
   const IOSApp({super.key});
@@ -32,6 +33,8 @@ class IOSApp extends StatelessWidget {
         BlocProvider<MediaGalleryBloc>(
           create: (_) => getIt<MediaGalleryBloc>(),
         ),
+          // CampaignBloc - factory instance
+          BlocProvider<CampaignBloc>(create: (_) => getIt<CampaignBloc>()),
       ],
       child: CupertinoApp.router(
         debugShowCheckedModeBanner: false,

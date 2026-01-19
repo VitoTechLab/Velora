@@ -23,6 +23,12 @@ abstract class ProfileRemoteDataSource {
   /// Unblock a user
   Future<void> unblockUser(String targetUserId);
 
+  /// Get followers list for a user
+  Future<List<UserProfileModel>> getFollowers(String userId);
+
+  /// Get following list for a user
+  Future<List<UserProfileModel>> getFollowing(String userId);
+
   /// Check if username is available
   Future<bool> isUsernameAvailable(String username);
 }
