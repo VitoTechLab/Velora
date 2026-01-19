@@ -57,6 +57,7 @@ import 'package:velora/features/post/data/repositories/post_repository_impl.dart
 import 'package:velora/features/post/domain/repositories/post_repository.dart';
 import 'package:velora/features/post/domain/usecases/create_post_feed_usecase.dart';
 import 'package:velora/features/post/presentation/bloc/post_bloc.dart';
+import 'package:velora/features/post/presentation/bloc/campaign_post_bloc.dart';
 
 // Media feature imports
 import 'package:velora/features/media/data/datasources/remote/media_remote_datasource.dart';
@@ -108,6 +109,31 @@ import 'package:velora/features/chat/presentation/bloc/chat_message_bloc.dart';
 import 'package:velora/features/chat/presentation/bloc/user_presence_bloc.dart';
 import 'package:velora/features/chat/presentation/bloc/search_user_bloc.dart';
 
+// Campaign feature imports
+import 'package:velora/features/campaign/data/datasources/campaign_remote_datasource.dart';
+import 'package:velora/features/campaign/data/datasources/campaign_remote_datasource_impl.dart';
+import 'package:velora/features/campaign/data/repositories/campaign_repository_impl.dart';
+import 'package:velora/features/campaign/domain/repositories/campaign_repository.dart';
+import 'package:velora/features/campaign/domain/usecases/add_campaign_comment_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/create_campaign_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/create_donation_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/delete_campaign_comment_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/delete_campaign_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/get_all_campaigns_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/get_campaign_by_id_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/get_campaign_categories_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/get_campaign_comments_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/get_comment_replies_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/get_donations_by_campaign_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/get_withdrawal_by_id_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/get_withdrawals_by_campaign_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/request_withdrawal_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/search_campaigns_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/update_campaign_status_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/update_campaign_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/update_donation_status_usecase.dart';
+import 'package:velora/features/campaign/presentation/bloc/campaign_bloc.dart';
+
 // Social Relation feature imports
 import 'package:velora/features/social_relation/data/datasources/social_relation_remote_datasource.dart';
 import 'package:velora/features/social_relation/data/datasources/social_relation_remote_datasource_impl.dart';
@@ -156,6 +182,10 @@ import 'package:velora/features/mention/data/repositories/mention_repository_imp
 import 'package:velora/features/mention/domain/usecases/get_my_mentions_usecase.dart';
 import 'package:velora/features/mention/domain/usecases/get_entity_mentions_usecase.dart';
 import 'package:velora/features/mention/presentation/bloc/mention_bloc.dart';
+
+// Search feature imports
+import 'package:velora/features/search/data/datasources/search_remote_datasource.dart';
+import 'package:velora/features/search/data/datasources/search_remote_datasource_impl.dart';
 
 // Settings feature imports
 import 'package:velora/features/settings/presentation/bloc/settings_bloc.dart';
@@ -290,6 +320,15 @@ Future<void> configureDependencies() async {
     );
   }
 
+  // Campaign feature - Data source
+  if (!getIt.isRegistered<CampaignRemoteDataSource>()) {
+    getIt.registerLazySingleton<CampaignRemoteDataSource>(
+      () => CampaignRemoteDataSourceImpl(
+        supabaseClient: getIt<SupabaseClient>(),
+      ),
+    );
+  }
+
   // Social Relation feature - Data source
   if (!getIt.isRegistered<SocialRelationRemoteDataSource>()) {
     getIt.registerLazySingleton<SocialRelationRemoteDataSource>(
@@ -334,6 +373,13 @@ Future<void> configureDependencies() async {
     () => ChatRepositoryImpl(remoteDataSource: getIt<ChatRemoteDataSource>()),
   );
 
+  // Campaign feature - Repositories
+  getIt.registerLazySingleton<CampaignRepository>(
+    () => CampaignRepositoryImpl(
+      remoteDataSource: getIt<CampaignRemoteDataSource>(),
+    ),
+  );
+
   // Auth feature - Repositories
   getIt.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(remoteDataSource: getIt<AuthRemoteDataSource>()),
@@ -366,6 +412,15 @@ Future<void> configureDependencies() async {
   if (!getIt.isRegistered<MentionRemoteDataSource>()) {
     getIt.registerLazySingleton<MentionRemoteDataSource>(
       () => MentionRemoteDataSourceImpl(
+        supabaseClient: getIt<SupabaseClient>(),
+      ),
+    );
+  }
+
+  // Search feature - Data source
+  if (!getIt.isRegistered<SearchRemoteDataSource>()) {
+    getIt.registerLazySingleton<SearchRemoteDataSource>(
+      () => SearchRemoteDataSourceImpl(
         supabaseClient: getIt<SupabaseClient>(),
       ),
     );
@@ -498,6 +553,83 @@ Future<void> configureDependencies() async {
         () => RespondToEventUseCase(repository: getIt<ChatRepository>()))
     ..registerLazySingleton(
         () => CancelEventRsvpUseCase(repository: getIt<ChatRepository>()))
+    // Campaign feature - Use cases
+    ..registerLazySingleton(
+      () => GetAllCampaignsUsecase(repository: getIt<CampaignRepository>()),
+    )
+    ..registerLazySingleton(
+      () => SearchCampaignsUsecase(repository: getIt<CampaignRepository>()),
+    )
+    ..registerLazySingleton(
+      () => GetCampaignByIdUsecase(repository: getIt<CampaignRepository>()),
+    )
+    ..registerLazySingleton(
+      () => CreateCampaignUsecase(repository: getIt<CampaignRepository>()),
+    )
+    ..registerLazySingleton(
+      () => UpdateCampaignUsecase(repository: getIt<CampaignRepository>()),
+    )
+    ..registerLazySingleton(
+      () => DeleteCampaignUsecase(repository: getIt<CampaignRepository>()),
+    )
+    ..registerLazySingleton(
+      () => UpdateCampaignStatusUsecase(
+        repository: getIt<CampaignRepository>(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => GetCampaignCategoriesUsecase(
+        repository: getIt<CampaignRepository>(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => CreateDonationUsecase(repository: getIt<CampaignRepository>()),
+    )
+    ..registerLazySingleton(
+      () => GetDonationsByCampaignUsecase(
+        repository: getIt<CampaignRepository>(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => UpdateDonationStatusUsecase(
+        repository: getIt<CampaignRepository>(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => GetCampaignCommentsUsecase(
+        repository: getIt<CampaignRepository>(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => AddCampaignCommentUsecase(
+        repository: getIt<CampaignRepository>(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => DeleteCampaignCommentUsecase(
+        repository: getIt<CampaignRepository>(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => GetCommentRepliesUsecase(
+        repository: getIt<CampaignRepository>(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => RequestWithdrawalUsecase(
+        repository: getIt<CampaignRepository>(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => GetWithdrawalsByCampaignUsecase(
+        repository: getIt<CampaignRepository>(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => GetWithdrawalByIdUsecase(
+        repository: getIt<CampaignRepository>(),
+      ),
+    )
     // Social Relation feature - Use cases
     ..registerLazySingleton(() => FollowUser(getIt<SocialRelationRepository>()))
     ..registerLazySingleton(
@@ -708,6 +840,38 @@ Future<void> configureDependencies() async {
   // Post feature - Bloc
   getIt.registerFactory(
     () => PostBloc(createPostFeedUseCase: getIt<CreatePostFeedUseCase>()),
+  );
+
+  // Campaign feature - Bloc
+  getIt.registerFactory(
+    () => CampaignBloc(
+      getAllCampaignsUsecase: getIt<GetAllCampaignsUsecase>(),
+      searchCampaignsUsecase: getIt<SearchCampaignsUsecase>(),
+      getCampaignByIdUsecase: getIt<GetCampaignByIdUsecase>(),
+      createCampaignUsecase: getIt<CreateCampaignUsecase>(),
+      updateCampaignUsecase: getIt<UpdateCampaignUsecase>(),
+      deleteCampaignUsecase: getIt<DeleteCampaignUsecase>(),
+      updateCampaignStatusUsecase: getIt<UpdateCampaignStatusUsecase>(),
+      getCampaignCategoriesUsecase: getIt<GetCampaignCategoriesUsecase>(),
+      createDonationUsecase: getIt<CreateDonationUsecase>(),
+      getDonationsByCampaignUsecase: getIt<GetDonationsByCampaignUsecase>(),
+      updateDonationStatusUsecase: getIt<UpdateDonationStatusUsecase>(),
+      getCampaignCommentsUsecase: getIt<GetCampaignCommentsUsecase>(),
+      addCampaignCommentUsecase: getIt<AddCampaignCommentUsecase>(),
+      deleteCampaignCommentUsecase: getIt<DeleteCampaignCommentUsecase>(),
+      getCommentRepliesUsecase: getIt<GetCommentRepliesUsecase>(),
+      requestWithdrawalUsecase: getIt<RequestWithdrawalUsecase>(),
+      getWithdrawalsByCampaignUsecase: getIt<GetWithdrawalsByCampaignUsecase>(),
+      getWithdrawalByIdUsecase: getIt<GetWithdrawalByIdUsecase>(),
+    ),
+  );
+
+  // Campaign Post feature - Bloc
+  getIt.registerFactory(
+    () => CampaignPostBloc(
+      createCampaignUsecase: getIt<CreateCampaignUsecase>(),
+      uploadMediaAssetUseCase: getIt<UploadMediaAssetUseCase>(),
+    ),
   );
 
   // Media feature - Bloc

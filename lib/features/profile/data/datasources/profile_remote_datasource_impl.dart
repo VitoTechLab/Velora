@@ -240,4 +240,72 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
       tag: _logTag,
     );
   }
+
+  @override
+  Future<List<UserProfileModel>> getFollowers(String userId) {
+    return guardSupabase(
+      () async {
+        logi('Getting followers for userId=$userId', tag: _logTag);
+        
+        final response = await _client
+            .from(SupabaseTables.userFollows)
+            .select('follower_id')
+            .eq('following_id', userId);
+
+        final followerIds = (response as List)
+            .map((row) => row['follower_id'] as String)
+            .toList();
+
+        if (followerIds.isEmpty) {
+          return [];
+        }
+
+        // Fetch user profiles for all follower IDs
+        final profilesResponse = await _client
+            .from(SupabaseTables.userProfiles)
+            .select()
+            .inFilter('id', followerIds);
+
+        return (profilesResponse as List)
+            .map((json) => UserProfileModel.fromJson(json))
+            .toList();
+      },
+      op: 'getFollowers',
+      tag: _logTag,
+    );
+  }
+
+  @override
+  Future<List<UserProfileModel>> getFollowing(String userId) {
+    return guardSupabase(
+      () async {
+        logi('Getting following for userId=$userId', tag: _logTag);
+        
+        final response = await _client
+            .from(SupabaseTables.userFollows)
+            .select('following_id')
+            .eq('follower_id', userId);
+
+        final followingIds = (response as List)
+            .map((row) => row['following_id'] as String)
+            .toList();
+
+        if (followingIds.isEmpty) {
+          return [];
+        }
+
+        // Fetch user profiles for all following IDs
+        final profilesResponse = await _client
+            .from(SupabaseTables.userProfiles)
+            .select()
+            .inFilter('id', followingIds);
+
+        return (profilesResponse as List)
+            .map((json) => UserProfileModel.fromJson(json))
+            .toList();
+      },
+      op: 'getFollowing',
+      tag: _logTag,
+    );
+  }
 }
