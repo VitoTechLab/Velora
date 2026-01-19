@@ -19,6 +19,11 @@ abstract class AuthRepository {
 
   Future<Either<Failure, void>> resetPassword({required String email});
 
+  Future<Either<Failure, void>> updatePassword({
+    required String currentPassword,
+    required String newPassword,
+  });
+
   Future<Either<Failure, void>> signOut();
 
   /// Stream of auth status changes derived from the underlying auth provider.

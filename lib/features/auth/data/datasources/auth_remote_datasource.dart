@@ -23,6 +23,12 @@ abstract class AuthRemoteDataSource {
   /// Send password reset email.
   Future<void> resetPassword({required String email});
 
+  /// Update user's password.
+  Future<void> updatePassword({
+    required String currentPassword,
+    required String newPassword,
+  });
+
   /// Sign out current user.
   Future<void> signOut();
 

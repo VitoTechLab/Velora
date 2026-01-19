@@ -135,7 +135,42 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       redirectTo: 'velora://auth/reset-password',
     );
   }
+  /// Update user's password
+  @override
+  Future<void> updatePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    logi('Supabase updatePassword', tag: _logTag);
+    
+    try {
+      // First, verify current password by attempting to re-authenticate
+      final currentUser = _client.auth.currentUser;
+      if (currentUser?.email == null) {
+        throw Exception('No authenticated user found');
+      }
 
+      // Re-authenticate with current password to verify it
+      await _client.auth.signInWithPassword(
+        email: currentUser!.email!,
+        password: currentPassword,
+      );
+
+      // If re-authentication succeeds, update to new password
+      final response = await _client.auth.updateUser(
+        UserAttributes(password: newPassword),
+      );
+
+      if (response.user == null) {
+        throw Exception('Failed to update password');
+      }
+
+      logi('Password updated successfully', tag: _logTag);
+    } catch (e) {
+      loge('Update password failed', error: e, tag: _logTag);
+      rethrow;
+    }
+  }
   /// Sign out from Supabase and Google (if mobile)
   @override
   Future<void> signOut() async {

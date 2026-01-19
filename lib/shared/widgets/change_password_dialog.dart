@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:get_it/get_it.dart';
 import 'package:velora/core/services/security_settings_service.dart';
 import 'package:velora/core/ui/app_messenger.dart';
+import 'package:velora/features/auth/domain/repositories/auth_repository.dart';
 
 class ChangePasswordDialog extends HookWidget {
   const ChangePasswordDialog({super.key});
@@ -24,33 +26,57 @@ class ChangePasswordDialog extends HookWidget {
     final newPasswordVisible = useState(false);
     final confirmPasswordVisible = useState(false);
     final isLoading = useState(false);
+    final errorMessage = useState<String?>(null);
     final formKey = useMemoized(() => GlobalKey<FormState>());
+    final authRepository = useMemoized(() => GetIt.instance<AuthRepository>());
 
     Future<void> handleChangePassword() async {
       if (!formKey.currentState!.validate()) {
         return;
       }
 
+      errorMessage.value = null;
       isLoading.value = true;
 
-      // Simulate API call
-      await Future.delayed(const Duration(seconds: 1));
-
-      // In production, validate with backend API
-      // For now, just update the last changed date
-      final securityService = SecuritySettingsService();
-      final success = await securityService.updatePasswordChangeDate();
+      // Update password via Supabase
+      final result = await authRepository.updatePassword(
+        currentPassword: currentPasswordController.text,
+        newPassword: newPasswordController.text,
+      );
 
       isLoading.value = false;
 
-      if (success && context.mounted) {
-        Navigator.of(context).pop(true);
-        AppMessenger.showToast(
-          message: 'Password changed successfully',
-          icon: Icons.check_circle_outline,
-          duration: const Duration(seconds: 2),
-        );
-      }
+      result.fold(
+        (failure) {
+          // Handle error
+          final message = failure.message;
+          errorMessage.value = message.isNotEmpty 
+              ? message 
+              : 'Failed to change password';
+          
+          if (context.mounted) {
+            AppMessenger.showToast(
+              message: errorMessage.value!,
+              icon: Icons.error_outline,
+              duration: const Duration(seconds: 3),
+            );
+          }
+        },
+        (_) async {
+          // Success - update last changed date locally
+          final securityService = SecuritySettingsService();
+          await securityService.updatePasswordChangeDate();
+
+          if (context.mounted) {
+            Navigator.of(context).pop(true);
+            AppMessenger.showToast(
+              message: 'Password changed successfully',
+              icon: Icons.check_circle_outline,
+              duration: const Duration(seconds: 2),
+            );
+          }
+        },
+      );
     }
 
     return AlertDialog(
@@ -158,6 +184,34 @@ class ChangePasswordDialog extends HookWidget {
                   return null;
                 },
               ),
+              if (errorMessage.value != null) ...[
+                const SizedBox(height: 16),
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: colorScheme.errorContainer.withValues(alpha: 0.5),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.error_outline,
+                        size: 20,
+                        color: colorScheme.error,
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          errorMessage.value!,
+                          style: textTheme.bodySmall?.copyWith(
+                            color: colorScheme.onErrorContainer,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
               const SizedBox(height: 16),
               Container(
                 padding: const EdgeInsets.all(12),
