@@ -9,7 +9,7 @@ import 'package:velora/features/feed/data/models/feed_pagination_model.dart';
 import 'package:velora/features/feed/domain/entities/comment_entity.dart';
 import 'package:velora/features/feed/domain/entities/feed_entity.dart';
 import 'package:velora/features/feed/domain/entities/feed_pagination_result.dart';
-import 'package:velora/features/feed/data/models/feed_cursor.dart';
+import 'package:velora/features/feed/data/models/feed_cursor_model.dart';
 import 'package:velora/features/feed/data/repositories/feed_repository_impl.dart';
 
 class _MockFeedRemoteDataSource extends Mock implements FeedRemoteDataSource {}
@@ -41,7 +41,7 @@ void main() {
         (_) async => FeedPaginationModel(
           posts: [feedModel],
           hasMore: true,
-          nextCursor: FeedCursor(
+          nextCursor: FeedCursorModel(
             createdAt: DateTime.utc(2024, 1, 1),
             id: 'cursor-1',
           ),

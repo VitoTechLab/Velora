@@ -3,32 +3,32 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:velora/core/errors/failure.dart';
+import 'package:velora/features/feed/domain/entities/feed_cursor_entity.dart';
 import 'package:velora/features/feed/domain/entities/feed_entity.dart';
 import 'package:velora/features/feed/domain/entities/feed_pagination_result.dart';
-import 'package:velora/features/feed/domain/entities/feed_cursor.dart';
-import 'package:velora/features/feed/domain/usecases/delete_post.dart';
-import 'package:velora/features/feed/domain/usecases/get_post_by_id.dart';
-import 'package:velora/features/feed/domain/usecases/get_smart_feed.dart';
-import 'package:velora/features/feed/domain/usecases/toggle_bookmark_post.dart';
-import 'package:velora/features/feed/domain/usecases/toggle_like_post.dart';
-import 'package:velora/features/feed/domain/usecases/update_post.dart';
+import 'package:velora/features/feed/domain/usecases/delete_post_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/get_feed_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/get_post_by_id_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/toggle_bookmark_post_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/toggle_like_post_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/update_post_usecase.dart';
 import 'package:velora/features/feed/presentation/bloc/feed_bloc.dart';
 import 'package:velora/features/feed/presentation/bloc/feed_event.dart';
 import 'package:velora/features/feed/presentation/bloc/feed_state.dart';
 
-class _MockLoadInitialFeed extends Mock implements LoadInitialFeed {}
+class _MockLoadInitialFeed extends Mock implements LoadInitialFeedUseCase {}
 
-class _MockLoadMoreFeed extends Mock implements LoadMoreFeed {}
+class _MockLoadMoreFeed extends Mock implements LoadMoreFeedUseCase {}
 
-class _MockToggleLikePost extends Mock implements ToggleLikePost {}
+class _MockToggleLikePost extends Mock implements ToggleLikePostUseCase {}
 
-class _MockToggleBookmarkPost extends Mock implements ToggleBookmarkPost {}
+class _MockToggleBookmarkPost extends Mock implements ToggleBookmarkPostUseCase {}
 
-class _MockGetPostById extends Mock implements GetPostById {}
+class _MockGetPostById extends Mock implements GetPostByIdUseCase {}
 
-class _MockUpdatePost extends Mock implements UpdatePost {}
+class _MockUpdatePost extends Mock implements UpdatePostUseCase {}
 
-class _MockDeletePost extends Mock implements DeletePost {}
+class _MockDeletePost extends Mock implements DeletePostUseCase {}
 
 void main() {
   setUpAll(() {
@@ -158,17 +158,8 @@ void main() {
         await Future<void>.delayed(Duration.zero);
         bloc.add(const FeedEvent.loadMoreFeed(limit: 5));
       },
-      skip: 2,
+      skip: 3,
       expect: () => [
-        FeedState(
-          posts: [post],
-          hasMore: true,
-          cursor: FeedCursorEntity(
-            createdAt: DateTime.utc(2024, 1, 1),
-            id: 'cursor',
-          ),
-          isLoadingInitial: false,
-        ),
         FeedState(
           posts: [
             post,

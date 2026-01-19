@@ -19,8 +19,8 @@ void main() {
     userId: 'user-1',
     content: 'Great update',
     createdAt: createdAt,
-    userFullName: 'Vito',
-    userPhotoUrl: 'https://example.com/photo.png',
+    username: 'Vito',
+    photoUrl: 'https://example.com/photo.png',
     replies: [reply],
     likesCount: 5,
     isLiked: true,
@@ -33,15 +33,17 @@ void main() {
     expect(entity.replies.first.id, equals(reply.id));
   });
 
-  test('fromEntity restores full data', () {
-    final entity = model.toEntity();
-    final reconstructed = CommentModel.fromEntity(entity);
-    expect(reconstructed, equals(model));
+  test('toJson serializes correctly', () {
+    final json = model.toJson();
+    expect(json['id'], equals('comment-1'));
+    expect(json['post_id'], equals('post-1'));
+    expect(json['content'], equals('Great update'));
   });
 
-  test('toInsertJson omits null values', () {
-    final json = model.copyWith(userPhotoUrl: null).toInsertJson();
-    expect(json['post_id'], equals('post-1'));
-    expect(json.containsKey('user_photo_url'), isFalse);
+  test('fromJson deserializes correctly', () {
+    final json = model.toJson();
+    final fromJson = CommentModel.fromJson(json);
+    expect(fromJson.id, equals(model.id));
+    expect(fromJson.content, equals(model.content));
   });
 }

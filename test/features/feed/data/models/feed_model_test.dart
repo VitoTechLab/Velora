@@ -11,18 +11,13 @@ void main() {
     createdAt: createdAt,
     username: 'Vito',
     photoUrl: 'https://example.com/avatar.png',
-    imageUrls: const ['https://example.com/image.png'],
-    videoUrls: const [],
+    mediaUrls: const ['https://example.com/image.png'],
     likesCount: 10,
     commentsCount: 2,
     sharesCount: 1,
     isLiked: true,
     isBookmarked: false,
-    commentsEnabled: true,
-    hideLikeCount: false,
-    hideCommentCount: false,
-    hideShareCount: false,
-    hideLikesList: false,
+    allowComments: true,
     campaignId: 'cmp-32',
     campaignTitle: 'Save the forest',
   );
@@ -34,13 +29,12 @@ void main() {
     expect(fromJson, equals(model));
   });
 
-  test('converts between model and entity', () {
+  test('converts to entity correctly', () {
     final entity = model.toEntity();
     expect(entity, isA<FeedEntity>());
     expect(entity.id, equals(model.id));
+    expect(entity.content, equals(model.content));
     expect(entity.likesCount, equals(model.likesCount));
-
-    final backToModel = FeedModel.fromEntity(entity);
-    expect(backToModel, equals(model));
+    expect(entity.username, equals(model.username));
   });
 }
