@@ -938,6 +938,126 @@ abstract class AppLocalizations {
   /// **'Wallet'**
   String get settingsWalletTitle;
 
+  /// No description provided for @campaignCreateRequiredFields.
+  ///
+  /// In en, this message translates to:
+  /// **'Please fill all required fields'**
+  String get campaignCreateRequiredFields;
+
+  /// No description provided for @campaignCreateInvalidTarget.
+  ///
+  /// In en, this message translates to:
+  /// **'Target amount must be > 0'**
+  String get campaignCreateInvalidTarget;
+
+  /// No description provided for @campaignCreateSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Campaign created successfully'**
+  String get campaignCreateSuccess;
+
+  /// No description provided for @campaignCreateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Campaign'**
+  String get campaignCreateTitle;
+
+  /// No description provided for @campaignCreateSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell your story clearly and set a transparent goal.'**
+  String get campaignCreateSubtitle;
+
+  /// No description provided for @campaignCreateBasicInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Basic information'**
+  String get campaignCreateBasicInfo;
+
+  /// No description provided for @campaignCreateTitleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get campaignCreateTitleLabel;
+
+  /// No description provided for @campaignCreateTitleHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Save a local cafe'**
+  String get campaignCreateTitleHint;
+
+  /// No description provided for @campaignCreateDescriptionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get campaignCreateDescriptionLabel;
+
+  /// No description provided for @campaignCreateDescriptionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Share the background, impact, and how funds will be used.'**
+  String get campaignCreateDescriptionHint;
+
+  /// No description provided for @campaignCreateGoalSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Goal & duration'**
+  String get campaignCreateGoalSection;
+
+  /// No description provided for @campaignCreateTargetLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Target amount'**
+  String get campaignCreateTargetLabel;
+
+  /// No description provided for @campaignCreateTargetHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. 5000000'**
+  String get campaignCreateTargetHint;
+
+  /// No description provided for @campaignCreateEndDateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'End date (optional)'**
+  String get campaignCreateEndDateLabel;
+
+  /// No description provided for @campaignCreateContextSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Context'**
+  String get campaignCreateContextSection;
+
+  /// No description provided for @campaignCreateLocationLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'City (optional)'**
+  String get campaignCreateLocationLabel;
+
+  /// No description provided for @campaignCreateLocationHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Where is this campaign located?'**
+  String get campaignCreateLocationHint;
+
+  /// No description provided for @campaignCreateLoadingCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading categories...'**
+  String get campaignCreateLoadingCategories;
+
+  /// No description provided for @campaignCreateCategoryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get campaignCreateCategoryLabel;
+
+  /// No description provided for @campaignCreateCTA.
+  ///
+  /// In en, this message translates to:
+  /// **'Publish campaign'**
+  String get campaignCreateCTA;
+
   /// No description provided for @walletDashboardTitle.
   ///
   /// In en, this message translates to:

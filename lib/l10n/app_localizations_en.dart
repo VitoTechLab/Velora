@@ -479,6 +479,68 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsWalletTitle => 'Wallet';
 
   @override
+  String get campaignCreateRequiredFields => 'Please fill all required fields';
+
+  @override
+  String get campaignCreateInvalidTarget => 'Target amount must be > 0';
+
+  @override
+  String get campaignCreateSuccess => 'Campaign created successfully';
+
+  @override
+  String get campaignCreateTitle => 'Create Campaign';
+
+  @override
+  String get campaignCreateSubtitle =>
+      'Tell your story clearly and set a transparent goal.';
+
+  @override
+  String get campaignCreateBasicInfo => 'Basic information';
+
+  @override
+  String get campaignCreateTitleLabel => 'Title';
+
+  @override
+  String get campaignCreateTitleHint => 'Save a local cafe';
+
+  @override
+  String get campaignCreateDescriptionLabel => 'Description';
+
+  @override
+  String get campaignCreateDescriptionHint =>
+      'Share the background, impact, and how funds will be used.';
+
+  @override
+  String get campaignCreateGoalSection => 'Goal & duration';
+
+  @override
+  String get campaignCreateTargetLabel => 'Target amount';
+
+  @override
+  String get campaignCreateTargetHint => 'e.g. 5000000';
+
+  @override
+  String get campaignCreateEndDateLabel => 'End date (optional)';
+
+  @override
+  String get campaignCreateContextSection => 'Context';
+
+  @override
+  String get campaignCreateLocationLabel => 'City (optional)';
+
+  @override
+  String get campaignCreateLocationHint => 'Where is this campaign located?';
+
+  @override
+  String get campaignCreateLoadingCategories => 'Loading categories...';
+
+  @override
+  String get campaignCreateCategoryLabel => 'Category';
+
+  @override
+  String get campaignCreateCTA => 'Publish campaign';
+
+  @override
   String get walletDashboardTitle => 'Wallet Dashboard';
 
   @override

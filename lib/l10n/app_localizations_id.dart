@@ -482,6 +482,69 @@ class AppLocalizationsId extends AppLocalizations {
   String get settingsWalletTitle => 'Dompet';
 
   @override
+  String get campaignCreateRequiredFields =>
+      'Lengkapi semua kolom yang wajib diisi';
+
+  @override
+  String get campaignCreateInvalidTarget => 'Target donasi harus lebih dari 0';
+
+  @override
+  String get campaignCreateSuccess => 'Kampanye berhasil dibuat';
+
+  @override
+  String get campaignCreateTitle => 'Buat Kampanye';
+
+  @override
+  String get campaignCreateSubtitle =>
+      'Ceritakan tujuanmu dengan jelas dan tetapkan target yang transparan.';
+
+  @override
+  String get campaignCreateBasicInfo => 'Informasi dasar';
+
+  @override
+  String get campaignCreateTitleLabel => 'Judul';
+
+  @override
+  String get campaignCreateTitleHint => 'Selamatkan kafe lokal';
+
+  @override
+  String get campaignCreateDescriptionLabel => 'Deskripsi';
+
+  @override
+  String get campaignCreateDescriptionHint =>
+      'Ceritakan latar belakang, dampak, dan bagaimana dana akan digunakan.';
+
+  @override
+  String get campaignCreateGoalSection => 'Target & durasi';
+
+  @override
+  String get campaignCreateTargetLabel => 'Target donasi';
+
+  @override
+  String get campaignCreateTargetHint => 'mis. 5000000';
+
+  @override
+  String get campaignCreateEndDateLabel => 'Tanggal selesai (opsional)';
+
+  @override
+  String get campaignCreateContextSection => 'Konteks';
+
+  @override
+  String get campaignCreateLocationLabel => 'Kota (opsional)';
+
+  @override
+  String get campaignCreateLocationHint => 'Di mana kampanye ini berlangsung?';
+
+  @override
+  String get campaignCreateLoadingCategories => 'Memuat kategori...';
+
+  @override
+  String get campaignCreateCategoryLabel => 'Kategori';
+
+  @override
+  String get campaignCreateCTA => 'Terbitkan kampanye';
+
+  @override
   String get walletDashboardTitle => 'Dashboard Dompet';
 
   @override

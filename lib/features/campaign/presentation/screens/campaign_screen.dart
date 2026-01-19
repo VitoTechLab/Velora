@@ -41,7 +41,7 @@ class CampaignScreen extends HookWidget {
       return null;
     }, const []);
 
-    List<CampaignModel> _applyFilters(
+    List<CampaignModel> applyFilters(
       List<CampaignModel> source,
       CampaignType type,
       SortOption sort,
@@ -88,7 +88,7 @@ class CampaignScreen extends HookWidget {
       return filtered;
     }
 
-    CampaignModel _mapEntityToModel(CampaignEntity entity) {
+    CampaignModel mapEntityToModel(CampaignEntity entity) {
       final now = DateTime.now();
       String timeLeftLabel;
       if (entity.endDate == null) {
@@ -137,9 +137,9 @@ class CampaignScreen extends HookWidget {
       body: BlocBuilder<CampaignBloc, CampaignState>(
         builder: (context, state) {
           final allModels = state.campaigns
-              .map(_mapEntityToModel)
+              .map(mapEntityToModel)
               .toList();
-          final filteredCampaigns = _applyFilters(
+          final filteredCampaigns = applyFilters(
             allModels,
             selectedType.value,
             selectedSort.value,

@@ -464,6 +464,66 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsWalletTitle => '钱包';
 
   @override
+  String get campaignCreateRequiredFields => '请填写所有必填字段';
+
+  @override
+  String get campaignCreateInvalidTarget => '目标金额必须大于 0';
+
+  @override
+  String get campaignCreateSuccess => '活动创建成功';
+
+  @override
+  String get campaignCreateTitle => '创建活动';
+
+  @override
+  String get campaignCreateSubtitle => '清晰地讲述你的故事，并设定一个透明的筹款目标。';
+
+  @override
+  String get campaignCreateBasicInfo => '基本信息';
+
+  @override
+  String get campaignCreateTitleLabel => '标题';
+
+  @override
+  String get campaignCreateTitleHint => '拯救一家本地咖啡馆';
+
+  @override
+  String get campaignCreateDescriptionLabel => '说明';
+
+  @override
+  String get campaignCreateDescriptionHint => '说明背景、影响以及资金将如何使用。';
+
+  @override
+  String get campaignCreateGoalSection => '目标与期限';
+
+  @override
+  String get campaignCreateTargetLabel => '目标金额';
+
+  @override
+  String get campaignCreateTargetHint => '例如 5000000';
+
+  @override
+  String get campaignCreateEndDateLabel => '结束日期（可选）';
+
+  @override
+  String get campaignCreateContextSection => '背景';
+
+  @override
+  String get campaignCreateLocationLabel => '城市（可选）';
+
+  @override
+  String get campaignCreateLocationHint => '该活动主要发生在什么地方？';
+
+  @override
+  String get campaignCreateLoadingCategories => '正在加载分类...';
+
+  @override
+  String get campaignCreateCategoryLabel => '分类';
+
+  @override
+  String get campaignCreateCTA => '发布活动';
+
+  @override
   String get walletDashboardTitle => '钱包仪表板';
 
   @override

@@ -309,7 +309,7 @@ class CreateCampaignPostScreen extends HookWidget {
                       )
                     else
                       DropdownButtonFormField<CampaignCategoryEntity>(
-                        value: selectedCategory.value,
+                        initialValue: selectedCategory.value,
                         items: categories.value
                             .map(
                               (c) => DropdownMenuItem(

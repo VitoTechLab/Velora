@@ -466,6 +466,66 @@ class AppLocalizationsKo extends AppLocalizations {
   String get settingsWalletTitle => '지갑';
 
   @override
+  String get campaignCreateRequiredFields => '필수 항목을 모두 입력해주세요';
+
+  @override
+  String get campaignCreateInvalidTarget => '목표 금액은 0보다 커야 합니다';
+
+  @override
+  String get campaignCreateSuccess => '캠페인이 성공적으로 생성되었습니다';
+
+  @override
+  String get campaignCreateTitle => '캠페인 만들기';
+
+  @override
+  String get campaignCreateSubtitle => '목표를 명확하게 설명하고 투명한 목표 금액을 설정하세요.';
+
+  @override
+  String get campaignCreateBasicInfo => '기본 정보';
+
+  @override
+  String get campaignCreateTitleLabel => '제목';
+
+  @override
+  String get campaignCreateTitleHint => '동네 카페를 살려주세요';
+
+  @override
+  String get campaignCreateDescriptionLabel => '설명';
+
+  @override
+  String get campaignCreateDescriptionHint => '배경, 영향, 모금 사용 계획을 자세히 적어주세요.';
+
+  @override
+  String get campaignCreateGoalSection => '목표 & 기간';
+
+  @override
+  String get campaignCreateTargetLabel => '목표 금액';
+
+  @override
+  String get campaignCreateTargetHint => '예: 5000000';
+
+  @override
+  String get campaignCreateEndDateLabel => '종료일 (선택)';
+
+  @override
+  String get campaignCreateContextSection => '상황';
+
+  @override
+  String get campaignCreateLocationLabel => '도시 (선택)';
+
+  @override
+  String get campaignCreateLocationHint => '이 캠페인은 어디에서 진행되나요?';
+
+  @override
+  String get campaignCreateLoadingCategories => '카테고리를 불러오는 중...';
+
+  @override
+  String get campaignCreateCategoryLabel => '카테고리';
+
+  @override
+  String get campaignCreateCTA => '캠페인 게시하기';
+
+  @override
   String get walletDashboardTitle => '지갑 대시보드';
 
   @override
