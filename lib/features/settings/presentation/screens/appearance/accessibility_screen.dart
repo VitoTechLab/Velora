@@ -254,7 +254,7 @@ class _AppearanceTab extends StatelessWidget {
                     (prefs) => prefs.setBool('settings_highContrast', value),
                   );
                 },
-                activeColor: colorScheme.primary,
+                activeTrackColor: colorScheme.primary,
               ),
             ],
           ),
@@ -281,7 +281,7 @@ class _AppearanceTab extends StatelessWidget {
                     (prefs) => prefs.setBool('settings_motionReduced', value),
                   );
                 },
-                activeColor: colorScheme.primary,
+                activeTrackColor: colorScheme.primary,
               ),
             ],
           ),

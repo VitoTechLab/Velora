@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:intl/intl.dart';
 import 'package:velora/core/ui/app_messenger.dart';
+import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:velora/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:velora/features/profile/presentation/bloc/profile_event.dart';
+import 'package:velora/features/profile/presentation/bloc/profile_state.dart';
 import 'package:velora/features/settings/presentation/widgets/settings_page_scaffold.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
@@ -16,6 +21,19 @@ class EditProfileScreen extends HookWidget {
       Tab(text: t.settingsProfileEditTabName),
       Tab(text: t.settingsProfileEditTabBio),
     ];
+
+    useEffect(
+      () {
+        final authState = context.read<AuthBloc>().state;
+        if (authState.userId != null) {
+          context.read<ProfileBloc>().add(
+            LoadProfileEvent(userId: authState.userId!),
+          );
+        }
+        return null;
+      },
+      const [],
+    );
 
     return SettingsPageScaffold(
       title: t.settingsProfileEditTitle,
@@ -41,43 +59,57 @@ class _NameTab extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final formKey = useMemoized(() => GlobalKey<FormState>());
-    final firstNameController = useTextEditingController(text: 'Vito');
-    final middleNameController = useTextEditingController();
-    final lastNameController = useTextEditingController(text: 'Ananda');
-    final reviewDate = useState<DateTime?>(null);
-    final selectedProfile = useState('All profiles');
     final t = AppLocalizations.of(context)!;
 
-    Future<void> pickReviewDate() async {
-      final now = DateTime.now();
-      final picked = await showDatePicker(
-        context: context,
-        initialDate: reviewDate.value ?? now,
-        firstDate: now.subtract(const Duration(days: 365)),
-        lastDate: now.add(const Duration(days: 365)),
-      );
-      if (picked != null) {
-        reviewDate.value = picked;
-      }
-    }
-
-    void submit() {
-      if (formKey.currentState?.validate() ?? false) {
-        AppMessenger.showToast(
-          message: t.settingsProfileEditNameSubmitted,
-          icon: Icons.check_circle_outline,
-          duration: const Duration(seconds: 2),
+    return BlocBuilder<ProfileBloc, ProfileState>(
+      builder: (context, profileState) {
+        final profile = profileState.profile;
+        final fullName = profile?.fullName ?? '';
+        final nameParts = fullName.split(' ');
+        
+        final firstNameController = useTextEditingController(
+          text: nameParts.isNotEmpty ? nameParts.first : '',
         );
-      }
-    }
+        final middleNameController = useTextEditingController(
+          text: nameParts.length > 2 ? nameParts[1] : '',
+        );
+        final lastNameController = useTextEditingController(
+          text: nameParts.length > 1 ? nameParts.last : '',
+        );
+        
+        final reviewDate = useState<DateTime?>(null);
+        final selectedProfile = useState('All profiles');
 
-    return SingleChildScrollView(
-      child: Form(
-        key: formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
+        Future<void> pickReviewDate() async {
+          final now = DateTime.now();
+          final picked = await showDatePicker(
+            context: context,
+            initialDate: reviewDate.value ?? now,
+            firstDate: now.subtract(const Duration(days: 365)),
+            lastDate: now.add(const Duration(days: 365)),
+          );
+          if (picked != null) {
+            reviewDate.value = picked;
+          }
+        }
+
+        void submit() {
+          if (formKey.currentState?.validate() ?? false) {
+            AppMessenger.showToast(
+              message: t.settingsProfileEditNameSubmitted,
+              icon: Icons.check_circle_outline,
+              duration: const Duration(seconds: 2),
+            );
+          }
+        }
+
+        return SingleChildScrollView(
+          child: Form(
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
               t.settingsProfileEditUsedProfiles,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -179,127 +211,133 @@ class _NameTab extends HookWidget {
               ),
             ),
             const SizedBox(height: 12),
-            FilledButton(
-              onPressed: submit,
-              child: Text(t.settingsProfileEditReviewChange),
-            ),
           ],
         ),
       ),
+    );
+      },
     );
   }
 }
 
 // Bio & Details Tab
 class _BioDetailsTab extends HookWidget {
+  const _BioDetailsTab();
+  
   @override
   Widget build(BuildContext context) {
     final formKey = useMemoized(() => GlobalKey<FormState>());
-    final bioController = useTextEditingController(
-      text: 'Community mobilizer in Jakarta.',
-    );
-    final websiteController = useTextEditingController(
-      text: 'https://velora.app',
-    );
-    final pronounController = useTextEditingController(text: 'they/them');
-    final showProfileInfo = useState(true);
-    final displayFollowCount = useState(true);
-    final contactPref = useState('Everyone');
     final t = AppLocalizations.of(context)!;
 
-    return SingleChildScrollView(
-      child: Form(
-        key: formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _SectionTitle(t.settingsProfileEditIdentitySection),
-            TextFormField(
-              controller: bioController,
-              maxLines: 3,
-              decoration: InputDecoration(
-                labelText: t.settingsProfileFieldBio,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
+    return BlocBuilder<ProfileBloc, ProfileState>(
+      builder: (context, profileState) {
+        final profile = profileState.profile;
+        
+        final bioController = useTextEditingController(
+          text: profile?.bio ?? '',
+        );
+        final websiteController = useTextEditingController(
+          text: profile?.bio ?? '',
+        );
+        final pronounController = useTextEditingController(text: 'they/them');
+        final showProfileInfo = useState(true);
+        final displayFollowCount = useState(true);
+        final contactPref = useState('Everyone');
+
+        return SingleChildScrollView(
+          child: Form(
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _SectionTitle(t.settingsProfileEditIdentitySection),
+                TextFormField(
+                  controller: bioController,
+                  maxLines: 3,
+                  decoration: InputDecoration(
+                    labelText: t.settingsProfileFieldBio,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            const SizedBox(height: 12),
-            TextFormField(
-              controller: websiteController,
-              decoration: InputDecoration(
-                labelText: t.settingsProfileFieldWebsite,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
+                const SizedBox(height: 12),
+                TextFormField(
+                  controller: websiteController,
+                  decoration: InputDecoration(
+                    labelText: t.settingsProfileFieldWebsite,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            const SizedBox(height: 12),
-            TextFormField(
-              controller: pronounController,
-              decoration: InputDecoration(
-                labelText: t.settingsProfileEditPronounsLabel,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
+                const SizedBox(height: 12),
+                TextFormField(
+                  controller: pronounController,
+                  decoration: InputDecoration(
+                    labelText: t.settingsProfileEditPronounsLabel,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            const SizedBox(height: 24),
-            _SectionTitle(t.settingsProfileEditContactSection),
-            SegmentedButton<String>(
-              segments: [
-                ButtonSegment(
-                  value: 'Everyone',
-                  label: Text(t.settingsProfileEditContactEveryone),
+                const SizedBox(height: 24),
+                _SectionTitle(t.settingsProfileEditContactSection),
+                SegmentedButton<String>(
+                  segments: [
+                    ButtonSegment(
+                      value: 'Everyone',
+                      label: Text(t.settingsProfileEditContactEveryone),
+                    ),
+                    ButtonSegment(
+                      value: 'Followers',
+                      label: Text(t.settingsProfileEditContactFollowers),
+                    ),
+                    ButtonSegment(
+                      value: 'No one',
+                      label: Text(t.settingsProfileEditContactNoOne),
+                    ),
+                  ],
+                  selected: {contactPref.value},
+                  onSelectionChanged: (value) => contactPref.value = value.first,
                 ),
-                ButtonSegment(
-                  value: 'Followers',
-                  label: Text(t.settingsProfileEditContactFollowers),
+                const SizedBox(height: 12),
+                SwitchListTile.adaptive(
+                  value: showProfileInfo.value,
+                  title: Text(t.settingsProfileEditShowProfileInfo),
+                  contentPadding: EdgeInsets.zero,
+                  onChanged: (value) => showProfileInfo.value = value,
                 ),
-                ButtonSegment(
-                  value: 'No one',
-                  label: Text(t.settingsProfileEditContactNoOne),
+                SwitchListTile.adaptive(
+                  value: displayFollowCount.value,
+                  title: Text(t.settingsProfileEditDisplayFollowerCount),
+                  contentPadding: EdgeInsets.zero,
+                  onChanged: (value) => displayFollowCount.value = value,
+                ),
+                const SizedBox(height: 24),
+                FilledButton(
+                  onPressed: () {
+                    if (formKey.currentState?.validate() ?? false) {
+                      AppMessenger.showToast(
+                        message: t.settingsProfileEditProfileUpdated,
+                        icon: Icons.check_circle_outline,
+                        duration: const Duration(seconds: 2),
+                      );
+                    }
+                  },
+                  child: Text(t.settingsProfileEditSaveChanges),
                 ),
               ],
-              selected: {contactPref.value},
-              onSelectionChanged: (value) => contactPref.value = value.first,
             ),
-            const SizedBox(height: 12),
-            SwitchListTile.adaptive(
-              value: showProfileInfo.value,
-              title: Text(t.settingsProfileEditShowProfileInfo),
-              contentPadding: EdgeInsets.zero,
-              onChanged: (value) => showProfileInfo.value = value,
-            ),
-            SwitchListTile.adaptive(
-              value: displayFollowCount.value,
-              title: Text(t.settingsProfileEditDisplayFollowerCount),
-              contentPadding: EdgeInsets.zero,
-              onChanged: (value) => displayFollowCount.value = value,
-            ),
-            const SizedBox(height: 24),
-            FilledButton(
-              onPressed: () {
-                if (formKey.currentState?.validate() ?? false) {
-                  AppMessenger.showToast(
-                    message: t.settingsProfileEditProfileUpdated,
-                    icon: Icons.check_circle_outline,
-                    duration: const Duration(seconds: 2),
-                  );
-                }
-              },
-              child: Text(t.settingsProfileEditSaveChanges),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
 
 class _SectionTitle extends StatelessWidget {
   const _SectionTitle(this.text);
-
   final String text;
 
   @override
@@ -308,9 +346,9 @@ class _SectionTitle extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 12),
       child: Text(
         text,
-        style: Theme.of(
-          context,
-        ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }

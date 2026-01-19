@@ -81,7 +81,7 @@ class NotificationDetailScreen extends HookWidget {
                   trailing: Switch.adaptive(
                     value: pauseAll.value,
                     onChanged: (val) => pauseAll.value = val,
-                    activeColor: colorScheme.primary,
+                    activeTrackColor: colorScheme.primary,
                   ),
                 ),
               ],
@@ -106,7 +106,7 @@ class NotificationDetailScreen extends HookWidget {
                       Switch.adaptive(
                         value: sleepModeEnabled.value,
                         onChanged: (val) => sleepModeEnabled.value = val,
-                        activeColor: colorScheme.primary,
+                        activeTrackColor: colorScheme.primary,
                       ),
                     ],
                   ),
@@ -156,7 +156,7 @@ class NotificationDetailScreen extends HookWidget {
                   trailing: Switch.adaptive(
                     value: postsAndStories.value,
                     onChanged: (val) => postsAndStories.value = val,
-                    activeColor: colorScheme.primary,
+                    activeTrackColor: colorScheme.primary,
                   ),
                 ),
                 SettingsTileData(
@@ -165,7 +165,7 @@ class NotificationDetailScreen extends HookWidget {
                   trailing: Switch.adaptive(
                     value: liveVideos.value,
                     onChanged: (val) => liveVideos.value = val,
-                    activeColor: colorScheme.primary,
+                    activeTrackColor: colorScheme.primary,
                   ),
                 ),
                 SettingsTileData(
@@ -175,7 +175,7 @@ class NotificationDetailScreen extends HookWidget {
                   trailing: Switch.adaptive(
                     value: newCampaigns.value,
                     onChanged: (val) => newCampaigns.value = val,
-                    activeColor: colorScheme.primary,
+                    activeTrackColor: colorScheme.primary,
                   ),
                 ),
               ],
@@ -190,7 +190,7 @@ class NotificationDetailScreen extends HookWidget {
                   trailing: Switch.adaptive(
                     value: likesOnPosts.value,
                     onChanged: (val) => likesOnPosts.value = val,
-                    activeColor: colorScheme.primary,
+                    activeTrackColor: colorScheme.primary,
                   ),
                 ),
                 SettingsTileData(
@@ -198,7 +198,7 @@ class NotificationDetailScreen extends HookWidget {
                   trailing: Switch.adaptive(
                     value: commentReplies.value,
                     onChanged: (val) => commentReplies.value = val,
-                    activeColor: colorScheme.primary,
+                    activeTrackColor: colorScheme.primary,
                   ),
                 ),
                 SettingsTileData(
@@ -208,7 +208,7 @@ class NotificationDetailScreen extends HookWidget {
                   trailing: Switch.adaptive(
                     value: mentions.value,
                     onChanged: (val) => mentions.value = val,
-                    activeColor: colorScheme.primary,
+                    activeTrackColor: colorScheme.primary,
                   ),
                 ),
                 SettingsTileData(
@@ -216,7 +216,7 @@ class NotificationDetailScreen extends HookWidget {
                   trailing: Switch.adaptive(
                     value: newFollowers.value,
                     onChanged: (val) => newFollowers.value = val,
-                    activeColor: colorScheme.primary,
+                    activeTrackColor: colorScheme.primary,
                   ),
                 ),
               ],
@@ -234,7 +234,7 @@ class NotificationDetailScreen extends HookWidget {
                   trailing: Switch.adaptive(
                     value: donationReceived.value,
                     onChanged: (val) => donationReceived.value = val,
-                    activeColor: colorScheme.primary,
+                    activeTrackColor: colorScheme.primary,
                   ),
                 ),
                 SettingsTileData(
@@ -245,7 +245,7 @@ class NotificationDetailScreen extends HookWidget {
                   trailing: Switch.adaptive(
                     value: campaignMilestone.value,
                     onChanged: (val) => campaignMilestone.value = val,
-                    activeColor: colorScheme.primary,
+                    activeTrackColor: colorScheme.primary,
                   ),
                 ),
                 SettingsTileData(
@@ -255,7 +255,7 @@ class NotificationDetailScreen extends HookWidget {
                   trailing: Switch.adaptive(
                     value: campaignUpdates.value,
                     onChanged: (val) => campaignUpdates.value = val,
-                    activeColor: colorScheme.primary,
+                    activeTrackColor: colorScheme.primary,
                   ),
                 ),
                 SettingsTileData(
@@ -266,7 +266,7 @@ class NotificationDetailScreen extends HookWidget {
                   trailing: Switch.adaptive(
                     value: withdrawalStatus.value,
                     onChanged: (val) => withdrawalStatus.value = val,
-                    activeColor: colorScheme.primary,
+                    activeTrackColor: colorScheme.primary,
                   ),
                 ),
               ],
@@ -282,7 +282,7 @@ class NotificationDetailScreen extends HookWidget {
                   trailing: Switch.adaptive(
                     value: directMessages.value,
                     onChanged: (val) => directMessages.value = val,
-                    activeColor: colorScheme.primary,
+                    activeTrackColor: colorScheme.primary,
                   ),
                 ),
                 SettingsTileData(
@@ -292,7 +292,7 @@ class NotificationDetailScreen extends HookWidget {
                   trailing: Switch.adaptive(
                     value: messageRequests.value,
                     onChanged: (val) => messageRequests.value = val,
-                    activeColor: colorScheme.primary,
+                    activeTrackColor: colorScheme.primary,
                   ),
                 ),
                 SettingsTileData(
@@ -300,7 +300,7 @@ class NotificationDetailScreen extends HookWidget {
                   trailing: Switch.adaptive(
                     value: groupInvites.value,
                     onChanged: (val) => groupInvites.value = val,
-                    activeColor: colorScheme.primary,
+                    activeTrackColor: colorScheme.primary,
                   ),
                 ),
               ],
@@ -364,7 +364,7 @@ class NotificationDetailScreen extends HookWidget {
                   trailing: Switch.adaptive(
                     value: emailNotifications.value,
                     onChanged: (val) => emailNotifications.value = val,
-                    activeColor: colorScheme.primary,
+                    activeTrackColor: colorScheme.primary,
                   ),
                 ),
                 SettingsTileData(
@@ -374,7 +374,7 @@ class NotificationDetailScreen extends HookWidget {
                   trailing: Switch.adaptive(
                     value: smsNotifications.value,
                     onChanged: (val) => smsNotifications.value = val,
-                    activeColor: colorScheme.primary,
+                    activeTrackColor: colorScheme.primary,
                   ),
                 ),
               ],

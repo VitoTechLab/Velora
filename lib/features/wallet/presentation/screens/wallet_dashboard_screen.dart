@@ -4,6 +4,7 @@ import 'package:velora/features/settings/presentation/widgets/settings_section_c
 import 'package:velora/features/settings/presentation/widgets/settings_tile.dart';
 import 'package:velora/l10n/app_localizations.dart';
 import 'package:velora/routes/app_router.dart';
+import 'package:velora/shared/widgets/under_development_dialog.dart';
 
 class WalletDashboardScreen extends StatefulWidget {
   const WalletDashboardScreen({super.key});
@@ -112,7 +113,7 @@ class _WalletDashboardScreenState extends State<WalletDashboardScreen> {
                   subtitle: t.walletDashboardDonationHistorySubtitle,
                   icon: Icons.history,
                   iconColor: const Color(0xFF00BCD4),
-                  onTap: () => _showUnderDevelopment(context, t),
+                  onTap: () => UnderDevelopmentDialog.show(context),
                 ),
                 SettingsTileData(
                   title: t.walletDashboardMyCampaigns,
@@ -133,29 +134,12 @@ class _WalletDashboardScreenState extends State<WalletDashboardScreen> {
                   subtitle: t.walletDashboardAnalyticsSubtitle,
                   icon: Icons.analytics_outlined,
                   iconColor: const Color(0xFF8B5CF6),
-                  onTap: () => _showUnderDevelopment(context, t),
+                  onTap: () => UnderDevelopmentDialog.show(context),
                 ),
               ],
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  void _showUnderDevelopment(BuildContext context, AppLocalizations t) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        icon: const Icon(Icons.construction),
-        title: Text(t.walletDashboardUnderDevelopmentTitle),
-        content: Text(t.walletDashboardUnderDevelopmentMessage),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(t.walletDashboardUnderDevelopmentButton),
-          ),
-        ],
       ),
     );
   }
