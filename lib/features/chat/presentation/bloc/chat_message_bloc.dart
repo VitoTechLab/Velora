@@ -510,8 +510,8 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
         conversationId: event.conversationId,
       );
 
-      result.fold(
-        (failure) {
+      await result.fold(
+        (failure) async {
           emit(
             state.copyWith(
               isUploadingMedia: false,
@@ -588,8 +588,8 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
         conversationId: event.conversationId,
       );
 
-      result.fold(
-        (failure) {
+      await result.fold(
+        (failure) async {
           emit(
             state.copyWith(
               isUploadingMedia: false,
@@ -665,8 +665,8 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
         conversationId: event.conversationId,
       );
 
-      result.fold(
-        (failure) {
+      await result.fold(
+        (failure) async {
           emit(
             state.copyWith(
               isUploadingMedia: false,
@@ -738,8 +738,8 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
         conversationId: event.conversationId,
       );
 
-      result.fold(
-        (failure) {
+      await result.fold(
+        (failure) async {
           emit(
             state.copyWith(
               isUploadingMedia: false,

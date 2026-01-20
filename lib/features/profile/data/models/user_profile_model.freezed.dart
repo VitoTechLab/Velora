@@ -436,8 +436,8 @@ class __$$UserProfileModelImplCopyWithImpl<$Res>
 class _$UserProfileModelImpl implements _UserProfileModel {
   const _$UserProfileModelImpl(
       {required this.id,
-      required this.email,
-      required this.username,
+      this.email = '',
+      this.username = '',
       @JsonKey(name: 'full_name') this.fullName,
       @JsonKey(name: 'avatar_url') this.avatarUrl,
       this.bio,
@@ -473,8 +473,10 @@ class _$UserProfileModelImpl implements _UserProfileModel {
   @override
   final String id;
   @override
+  @JsonKey()
   final String email;
   @override
+  @JsonKey()
   final String username;
   @override
   @JsonKey(name: 'full_name')
@@ -650,8 +652,8 @@ class _$UserProfileModelImpl implements _UserProfileModel {
 abstract class _UserProfileModel implements UserProfileModel {
   const factory _UserProfileModel(
           {required final String id,
-          required final String email,
-          required final String username,
+          final String email,
+          final String username,
           @JsonKey(name: 'full_name') final String? fullName,
           @JsonKey(name: 'avatar_url') final String? avatarUrl,
           final String? bio,

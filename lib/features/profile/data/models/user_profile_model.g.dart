@@ -10,8 +10,8 @@ _$UserProfileModelImpl _$$UserProfileModelImplFromJson(
         Map<String, dynamic> json) =>
     _$UserProfileModelImpl(
       id: json['id'] as String,
-      email: json['email'] as String,
-      username: json['username'] as String,
+      email: json['email'] as String? ?? '',
+      username: json['username'] as String? ?? '',
       fullName: json['full_name'] as String?,
       avatarUrl: json['avatar_url'] as String?,
       bio: json['bio'] as String?,
