@@ -19,6 +19,7 @@ mixin _$ProfileEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) loadProfile,
+    required TResult Function(UpdateProfileModel updateModel) updateProfile,
     required TResult Function(String targetUserId, bool isPrivate) toggleFollow,
     required TResult Function(String targetUserId) blockUser,
     required TResult Function(String targetUserId) unblockUser,
@@ -27,6 +28,7 @@ mixin _$ProfileEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId)? loadProfile,
+    TResult? Function(UpdateProfileModel updateModel)? updateProfile,
     TResult? Function(String targetUserId, bool isPrivate)? toggleFollow,
     TResult? Function(String targetUserId)? blockUser,
     TResult? Function(String targetUserId)? unblockUser,
@@ -35,6 +37,7 @@ mixin _$ProfileEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? loadProfile,
+    TResult Function(UpdateProfileModel updateModel)? updateProfile,
     TResult Function(String targetUserId, bool isPrivate)? toggleFollow,
     TResult Function(String targetUserId)? blockUser,
     TResult Function(String targetUserId)? unblockUser,
@@ -44,6 +47,7 @@ mixin _$ProfileEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadProfileEvent value) loadProfile,
+    required TResult Function(UpdateProfileEvent value) updateProfile,
     required TResult Function(ToggleFollowEvent value) toggleFollow,
     required TResult Function(BlockUserEvent value) blockUser,
     required TResult Function(UnblockUserEvent value) unblockUser,
@@ -52,6 +56,7 @@ mixin _$ProfileEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadProfileEvent value)? loadProfile,
+    TResult? Function(UpdateProfileEvent value)? updateProfile,
     TResult? Function(ToggleFollowEvent value)? toggleFollow,
     TResult? Function(BlockUserEvent value)? blockUser,
     TResult? Function(UnblockUserEvent value)? unblockUser,
@@ -60,6 +65,7 @@ mixin _$ProfileEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadProfileEvent value)? loadProfile,
+    TResult Function(UpdateProfileEvent value)? updateProfile,
     TResult Function(ToggleFollowEvent value)? toggleFollow,
     TResult Function(BlockUserEvent value)? blockUser,
     TResult Function(UnblockUserEvent value)? unblockUser,
@@ -159,6 +165,7 @@ class _$LoadProfileEventImpl implements LoadProfileEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) loadProfile,
+    required TResult Function(UpdateProfileModel updateModel) updateProfile,
     required TResult Function(String targetUserId, bool isPrivate) toggleFollow,
     required TResult Function(String targetUserId) blockUser,
     required TResult Function(String targetUserId) unblockUser,
@@ -170,6 +177,7 @@ class _$LoadProfileEventImpl implements LoadProfileEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId)? loadProfile,
+    TResult? Function(UpdateProfileModel updateModel)? updateProfile,
     TResult? Function(String targetUserId, bool isPrivate)? toggleFollow,
     TResult? Function(String targetUserId)? blockUser,
     TResult? Function(String targetUserId)? unblockUser,
@@ -181,6 +189,7 @@ class _$LoadProfileEventImpl implements LoadProfileEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? loadProfile,
+    TResult Function(UpdateProfileModel updateModel)? updateProfile,
     TResult Function(String targetUserId, bool isPrivate)? toggleFollow,
     TResult Function(String targetUserId)? blockUser,
     TResult Function(String targetUserId)? unblockUser,
@@ -196,6 +205,7 @@ class _$LoadProfileEventImpl implements LoadProfileEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadProfileEvent value) loadProfile,
+    required TResult Function(UpdateProfileEvent value) updateProfile,
     required TResult Function(ToggleFollowEvent value) toggleFollow,
     required TResult Function(BlockUserEvent value) blockUser,
     required TResult Function(UnblockUserEvent value) unblockUser,
@@ -207,6 +217,7 @@ class _$LoadProfileEventImpl implements LoadProfileEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadProfileEvent value)? loadProfile,
+    TResult? Function(UpdateProfileEvent value)? updateProfile,
     TResult? Function(ToggleFollowEvent value)? toggleFollow,
     TResult? Function(BlockUserEvent value)? blockUser,
     TResult? Function(UnblockUserEvent value)? unblockUser,
@@ -218,6 +229,7 @@ class _$LoadProfileEventImpl implements LoadProfileEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadProfileEvent value)? loadProfile,
+    TResult Function(UpdateProfileEvent value)? updateProfile,
     TResult Function(ToggleFollowEvent value)? toggleFollow,
     TResult Function(BlockUserEvent value)? blockUser,
     TResult Function(UnblockUserEvent value)? unblockUser,
@@ -240,6 +252,180 @@ abstract class LoadProfileEvent implements ProfileEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadProfileEventImplCopyWith<_$LoadProfileEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateProfileEventImplCopyWith<$Res> {
+  factory _$$UpdateProfileEventImplCopyWith(_$UpdateProfileEventImpl value,
+          $Res Function(_$UpdateProfileEventImpl) then) =
+      __$$UpdateProfileEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({UpdateProfileModel updateModel});
+
+  $UpdateProfileModelCopyWith<$Res> get updateModel;
+}
+
+/// @nodoc
+class __$$UpdateProfileEventImplCopyWithImpl<$Res>
+    extends _$ProfileEventCopyWithImpl<$Res, _$UpdateProfileEventImpl>
+    implements _$$UpdateProfileEventImplCopyWith<$Res> {
+  __$$UpdateProfileEventImplCopyWithImpl(_$UpdateProfileEventImpl _value,
+      $Res Function(_$UpdateProfileEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? updateModel = null,
+  }) {
+    return _then(_$UpdateProfileEventImpl(
+      updateModel: null == updateModel
+          ? _value.updateModel
+          : updateModel // ignore: cast_nullable_to_non_nullable
+              as UpdateProfileModel,
+    ));
+  }
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UpdateProfileModelCopyWith<$Res> get updateModel {
+    return $UpdateProfileModelCopyWith<$Res>(_value.updateModel, (value) {
+      return _then(_value.copyWith(updateModel: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$UpdateProfileEventImpl implements UpdateProfileEvent {
+  const _$UpdateProfileEventImpl({required this.updateModel});
+
+  @override
+  final UpdateProfileModel updateModel;
+
+  @override
+  String toString() {
+    return 'ProfileEvent.updateProfile(updateModel: $updateModel)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateProfileEventImpl &&
+            (identical(other.updateModel, updateModel) ||
+                other.updateModel == updateModel));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, updateModel);
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateProfileEventImplCopyWith<_$UpdateProfileEventImpl> get copyWith =>
+      __$$UpdateProfileEventImplCopyWithImpl<_$UpdateProfileEventImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId) loadProfile,
+    required TResult Function(UpdateProfileModel updateModel) updateProfile,
+    required TResult Function(String targetUserId, bool isPrivate) toggleFollow,
+    required TResult Function(String targetUserId) blockUser,
+    required TResult Function(String targetUserId) unblockUser,
+  }) {
+    return updateProfile(updateModel);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId)? loadProfile,
+    TResult? Function(UpdateProfileModel updateModel)? updateProfile,
+    TResult? Function(String targetUserId, bool isPrivate)? toggleFollow,
+    TResult? Function(String targetUserId)? blockUser,
+    TResult? Function(String targetUserId)? unblockUser,
+  }) {
+    return updateProfile?.call(updateModel);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId)? loadProfile,
+    TResult Function(UpdateProfileModel updateModel)? updateProfile,
+    TResult Function(String targetUserId, bool isPrivate)? toggleFollow,
+    TResult Function(String targetUserId)? blockUser,
+    TResult Function(String targetUserId)? unblockUser,
+    required TResult orElse(),
+  }) {
+    if (updateProfile != null) {
+      return updateProfile(updateModel);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadProfileEvent value) loadProfile,
+    required TResult Function(UpdateProfileEvent value) updateProfile,
+    required TResult Function(ToggleFollowEvent value) toggleFollow,
+    required TResult Function(BlockUserEvent value) blockUser,
+    required TResult Function(UnblockUserEvent value) unblockUser,
+  }) {
+    return updateProfile(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadProfileEvent value)? loadProfile,
+    TResult? Function(UpdateProfileEvent value)? updateProfile,
+    TResult? Function(ToggleFollowEvent value)? toggleFollow,
+    TResult? Function(BlockUserEvent value)? blockUser,
+    TResult? Function(UnblockUserEvent value)? unblockUser,
+  }) {
+    return updateProfile?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadProfileEvent value)? loadProfile,
+    TResult Function(UpdateProfileEvent value)? updateProfile,
+    TResult Function(ToggleFollowEvent value)? toggleFollow,
+    TResult Function(BlockUserEvent value)? blockUser,
+    TResult Function(UnblockUserEvent value)? unblockUser,
+    required TResult orElse(),
+  }) {
+    if (updateProfile != null) {
+      return updateProfile(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdateProfileEvent implements ProfileEvent {
+  const factory UpdateProfileEvent(
+          {required final UpdateProfileModel updateModel}) =
+      _$UpdateProfileEventImpl;
+
+  UpdateProfileModel get updateModel;
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UpdateProfileEventImplCopyWith<_$UpdateProfileEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -324,6 +510,7 @@ class _$ToggleFollowEventImpl implements ToggleFollowEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) loadProfile,
+    required TResult Function(UpdateProfileModel updateModel) updateProfile,
     required TResult Function(String targetUserId, bool isPrivate) toggleFollow,
     required TResult Function(String targetUserId) blockUser,
     required TResult Function(String targetUserId) unblockUser,
@@ -335,6 +522,7 @@ class _$ToggleFollowEventImpl implements ToggleFollowEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId)? loadProfile,
+    TResult? Function(UpdateProfileModel updateModel)? updateProfile,
     TResult? Function(String targetUserId, bool isPrivate)? toggleFollow,
     TResult? Function(String targetUserId)? blockUser,
     TResult? Function(String targetUserId)? unblockUser,
@@ -346,6 +534,7 @@ class _$ToggleFollowEventImpl implements ToggleFollowEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? loadProfile,
+    TResult Function(UpdateProfileModel updateModel)? updateProfile,
     TResult Function(String targetUserId, bool isPrivate)? toggleFollow,
     TResult Function(String targetUserId)? blockUser,
     TResult Function(String targetUserId)? unblockUser,
@@ -361,6 +550,7 @@ class _$ToggleFollowEventImpl implements ToggleFollowEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadProfileEvent value) loadProfile,
+    required TResult Function(UpdateProfileEvent value) updateProfile,
     required TResult Function(ToggleFollowEvent value) toggleFollow,
     required TResult Function(BlockUserEvent value) blockUser,
     required TResult Function(UnblockUserEvent value) unblockUser,
@@ -372,6 +562,7 @@ class _$ToggleFollowEventImpl implements ToggleFollowEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadProfileEvent value)? loadProfile,
+    TResult? Function(UpdateProfileEvent value)? updateProfile,
     TResult? Function(ToggleFollowEvent value)? toggleFollow,
     TResult? Function(BlockUserEvent value)? blockUser,
     TResult? Function(UnblockUserEvent value)? unblockUser,
@@ -383,6 +574,7 @@ class _$ToggleFollowEventImpl implements ToggleFollowEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadProfileEvent value)? loadProfile,
+    TResult Function(UpdateProfileEvent value)? updateProfile,
     TResult Function(ToggleFollowEvent value)? toggleFollow,
     TResult Function(BlockUserEvent value)? blockUser,
     TResult Function(UnblockUserEvent value)? unblockUser,
@@ -481,6 +673,7 @@ class _$BlockUserEventImpl implements BlockUserEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) loadProfile,
+    required TResult Function(UpdateProfileModel updateModel) updateProfile,
     required TResult Function(String targetUserId, bool isPrivate) toggleFollow,
     required TResult Function(String targetUserId) blockUser,
     required TResult Function(String targetUserId) unblockUser,
@@ -492,6 +685,7 @@ class _$BlockUserEventImpl implements BlockUserEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId)? loadProfile,
+    TResult? Function(UpdateProfileModel updateModel)? updateProfile,
     TResult? Function(String targetUserId, bool isPrivate)? toggleFollow,
     TResult? Function(String targetUserId)? blockUser,
     TResult? Function(String targetUserId)? unblockUser,
@@ -503,6 +697,7 @@ class _$BlockUserEventImpl implements BlockUserEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? loadProfile,
+    TResult Function(UpdateProfileModel updateModel)? updateProfile,
     TResult Function(String targetUserId, bool isPrivate)? toggleFollow,
     TResult Function(String targetUserId)? blockUser,
     TResult Function(String targetUserId)? unblockUser,
@@ -518,6 +713,7 @@ class _$BlockUserEventImpl implements BlockUserEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadProfileEvent value) loadProfile,
+    required TResult Function(UpdateProfileEvent value) updateProfile,
     required TResult Function(ToggleFollowEvent value) toggleFollow,
     required TResult Function(BlockUserEvent value) blockUser,
     required TResult Function(UnblockUserEvent value) unblockUser,
@@ -529,6 +725,7 @@ class _$BlockUserEventImpl implements BlockUserEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadProfileEvent value)? loadProfile,
+    TResult? Function(UpdateProfileEvent value)? updateProfile,
     TResult? Function(ToggleFollowEvent value)? toggleFollow,
     TResult? Function(BlockUserEvent value)? blockUser,
     TResult? Function(UnblockUserEvent value)? unblockUser,
@@ -540,6 +737,7 @@ class _$BlockUserEventImpl implements BlockUserEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadProfileEvent value)? loadProfile,
+    TResult Function(UpdateProfileEvent value)? updateProfile,
     TResult Function(ToggleFollowEvent value)? toggleFollow,
     TResult Function(BlockUserEvent value)? blockUser,
     TResult Function(UnblockUserEvent value)? unblockUser,
@@ -636,6 +834,7 @@ class _$UnblockUserEventImpl implements UnblockUserEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) loadProfile,
+    required TResult Function(UpdateProfileModel updateModel) updateProfile,
     required TResult Function(String targetUserId, bool isPrivate) toggleFollow,
     required TResult Function(String targetUserId) blockUser,
     required TResult Function(String targetUserId) unblockUser,
@@ -647,6 +846,7 @@ class _$UnblockUserEventImpl implements UnblockUserEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId)? loadProfile,
+    TResult? Function(UpdateProfileModel updateModel)? updateProfile,
     TResult? Function(String targetUserId, bool isPrivate)? toggleFollow,
     TResult? Function(String targetUserId)? blockUser,
     TResult? Function(String targetUserId)? unblockUser,
@@ -658,6 +858,7 @@ class _$UnblockUserEventImpl implements UnblockUserEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? loadProfile,
+    TResult Function(UpdateProfileModel updateModel)? updateProfile,
     TResult Function(String targetUserId, bool isPrivate)? toggleFollow,
     TResult Function(String targetUserId)? blockUser,
     TResult Function(String targetUserId)? unblockUser,
@@ -673,6 +874,7 @@ class _$UnblockUserEventImpl implements UnblockUserEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadProfileEvent value) loadProfile,
+    required TResult Function(UpdateProfileEvent value) updateProfile,
     required TResult Function(ToggleFollowEvent value) toggleFollow,
     required TResult Function(BlockUserEvent value) blockUser,
     required TResult Function(UnblockUserEvent value) unblockUser,
@@ -684,6 +886,7 @@ class _$UnblockUserEventImpl implements UnblockUserEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadProfileEvent value)? loadProfile,
+    TResult? Function(UpdateProfileEvent value)? updateProfile,
     TResult? Function(ToggleFollowEvent value)? toggleFollow,
     TResult? Function(BlockUserEvent value)? blockUser,
     TResult? Function(UnblockUserEvent value)? unblockUser,
@@ -695,6 +898,7 @@ class _$UnblockUserEventImpl implements UnblockUserEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadProfileEvent value)? loadProfile,
+    TResult Function(UpdateProfileEvent value)? updateProfile,
     TResult Function(ToggleFollowEvent value)? toggleFollow,
     TResult Function(BlockUserEvent value)? blockUser,
     TResult Function(UnblockUserEvent value)? unblockUser,

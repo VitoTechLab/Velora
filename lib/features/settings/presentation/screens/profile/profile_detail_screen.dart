@@ -167,17 +167,11 @@ class ProfileDetailScreen extends HookWidget {
                             ),
                           ),
                           const SizedBox(height: 16),
-                          Text(
-                            profile?.fullName ?? profile?.username ?? '...',
-                            style: theme.textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          Text(
-                            '@${profile?.username ?? '...'}',
-                            style: theme.textTheme.bodyMedium?.copyWith(
-                              color: colorScheme.onSurfaceVariant,
-                            ),
+                          FilledButton.tonal(
+                            onPressed: () {
+                              context.pushNamed(AppRouteName.settingsEditProfile);
+                            },
+                            child: Text(t.settingsProfileEditTitle),
                           ),
                         ],
                       ),

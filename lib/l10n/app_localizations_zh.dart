@@ -1008,6 +1008,51 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsProfileEditPronounsLabel => 'Pronouns';
 
   @override
+  String get settingsProfileEditProfileNotFound => '未找到个人资料';
+
+  @override
+  String get settingsProfileEditTapToChangePhoto => '点击更改照片';
+
+  @override
+  String settingsProfileEditFailedToPickImage(String error) {
+    return '选择图片失败: $error';
+  }
+
+  @override
+  String settingsProfileEditUploadFailed(String error) {
+    return '上传失败: $error';
+  }
+
+  @override
+  String settingsProfileEditUploadError(String error) {
+    return '上传错误: $error';
+  }
+
+  @override
+  String get settingsProfileEditUserNotAuthenticated => '用户未认证';
+
+  @override
+  String get settingsProfileEditNoChanges => '没有要保存的更改';
+
+  @override
+  String get settingsProfileFieldFullName => '全名';
+
+  @override
+  String get settingsProfileFieldEmail => '电子邮件';
+
+  @override
+  String get settingsProfileFieldLocation => '位置';
+
+  @override
+  String get settingsProfileFieldLocationHint => '你住在哪里？';
+
+  @override
+  String get settingsProfileFieldWebsiteHint => 'https://example.com';
+
+  @override
+  String get settingsProfileFieldBioHint => '介绍一下你自己';
+
+  @override
   String get settingsProfileFieldSave => 'Save';
 
   @override

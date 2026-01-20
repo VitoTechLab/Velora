@@ -1014,6 +1014,51 @@ class AppLocalizationsJa extends AppLocalizations {
   String get settingsProfileEditPronounsLabel => 'Pronouns';
 
   @override
+  String get settingsProfileEditProfileNotFound => 'プロフィールが見つかりません';
+
+  @override
+  String get settingsProfileEditTapToChangePhoto => 'タップして写真を変更';
+
+  @override
+  String settingsProfileEditFailedToPickImage(String error) {
+    return '画像の選択に失敗しました: $error';
+  }
+
+  @override
+  String settingsProfileEditUploadFailed(String error) {
+    return 'アップロードに失敗しました: $error';
+  }
+
+  @override
+  String settingsProfileEditUploadError(String error) {
+    return 'アップロードエラー: $error';
+  }
+
+  @override
+  String get settingsProfileEditUserNotAuthenticated => 'ユーザーが認証されていません';
+
+  @override
+  String get settingsProfileEditNoChanges => '保存する変更はありません';
+
+  @override
+  String get settingsProfileFieldFullName => 'フルネーム';
+
+  @override
+  String get settingsProfileFieldEmail => 'メール';
+
+  @override
+  String get settingsProfileFieldLocation => '場所';
+
+  @override
+  String get settingsProfileFieldLocationHint => 'どこに住んでいますか？';
+
+  @override
+  String get settingsProfileFieldWebsiteHint => 'https://example.com';
+
+  @override
+  String get settingsProfileFieldBioHint => '自己紹介';
+
+  @override
   String get settingsProfileFieldSave => 'Save';
 
   @override

@@ -88,10 +88,10 @@ class SettingScreen extends StatelessWidget {
                     BlocBuilder<ProfileBloc, ProfileState>(
                       builder: (context, profileState) {
                         final profile = profileState.profile;
-                        final profileSubtitle = profile?.username ?? 
-                            profile?.email ?? 
+                        final profileSubtitle = profile?.username ??
+                            profile?.email ??
                             t.settingsConnectedSubtitle;
-                        
+
                         return SettingsSectionCard(
                           title: t.settingsConnectedTitle,
                           subtitle: t.settingsConnectedSubtitle,
@@ -134,16 +134,6 @@ class SettingScreen extends StatelessWidget {
                           ),
                         ),
                         SettingsTileData(
-                          title: t.settingsTilePersonalDetailsTitle,
-                          subtitle: t.settingsTilePersonalDetailsSubtitle,
-                          icon: Icons.badge_outlined,
-                          iconColor: const Color(0xFF3B82F6),
-                          onTap: () => _openNamed(
-                            context,
-                            AppRouteName.settingsEditProfile,
-                          ),
-                        ),
-                        SettingsTileData(
                           title: t.settingsTileInfoPermissionsTitle,
                           subtitle: t.settingsTileInfoPermissionsSubtitle,
                           icon: Icons.verified_user_outlined,
@@ -163,7 +153,6 @@ class SettingScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    
                     SettingsSectionCard(
                       title: t.settingsPersonalizationTitle,
                       tiles: [
@@ -275,8 +264,8 @@ class SettingScreen extends StatelessWidget {
                         ),
                         onTap: () {
                           context.read<AuthBloc>().add(
-                            const AuthEvent.signOut(),
-                          );
+                                const AuthEvent.signOut(),
+                              );
                         },
                       ),
                     ),
@@ -309,8 +298,8 @@ class _AccountHeroCardState extends State<_AccountHeroCard> {
     final authState = context.read<AuthBloc>().state;
     if (authState.userId != null) {
       context.read<ProfileBloc>().add(
-        LoadProfileEvent(userId: authState.userId!),
-      );
+            LoadProfileEvent(userId: authState.userId!),
+          );
     }
   }
 
@@ -348,19 +337,19 @@ class _AccountHeroCardState extends State<_AccountHeroCard> {
                   children: [
                     CircleAvatar(
                       radius: 36,
-                      backgroundImage: profile?.avatarUrl != null && 
-                          profile!.avatarUrl!.isNotEmpty
-                        ? NetworkImage(profile.avatarUrl!)
-                        : null,
+                      backgroundImage: profile?.avatarUrl != null &&
+                              profile!.avatarUrl!.isNotEmpty
+                          ? NetworkImage(profile.avatarUrl!)
+                          : null,
                       backgroundColor: colorScheme.primaryContainer,
-                      child: profile?.avatarUrl == null || 
-                          profile!.avatarUrl!.isEmpty
-                        ? Icon(
-                            Icons.person,
-                            size: 36,
-                            color: colorScheme.onPrimaryContainer,
-                          )
-                        : null,
+                      child: profile?.avatarUrl == null ||
+                              profile!.avatarUrl!.isEmpty
+                          ? Icon(
+                              Icons.person,
+                              size: 36,
+                              color: colorScheme.onPrimaryContainer,
+                            )
+                          : null,
                     ),
                     const SizedBox(width: 16),
                     Expanded(
@@ -387,9 +376,9 @@ class _AccountHeroCardState extends State<_AccountHeroCard> {
                       ),
                     ),
                     IconButton.filledTonal(
-                      onPressed: () => context.pushNamed(
-                        AppRouteName.settingsProfileDetail,
-                      ),
+                      onPressed: () {
+                        context.pushNamed(AppRouteName.settingsEditProfile);
+                      },
                       icon: const Icon(Icons.edit_outlined),
                     ),
                   ],

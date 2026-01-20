@@ -810,28 +810,29 @@ class AppLocalizationsId extends AppLocalizations {
   String get settingsSearchPayments => 'Pembayaran';
 
   @override
-  String get settingsProfileTitle => 'Profile';
+  String get settingsProfileTitle => 'Profil';
 
   @override
-  String get settingsProfileSubtitle => 'Update what people can see on Velora';
+  String get settingsProfileSubtitle =>
+      'Perbarui apa yang dapat dilihat orang di Velora';
 
   @override
-  String get settingsProfilePhotoLabelCover => 'cover photo';
+  String get settingsProfilePhotoLabelCover => 'foto sampul';
 
   @override
-  String get settingsProfilePhotoLabelProfile => 'profile photo';
+  String get settingsProfilePhotoLabelProfile => 'foto profil';
 
   @override
-  String get settingsProfilePhotoActionTake => 'Take photo';
+  String get settingsProfilePhotoActionTake => 'Ambil foto';
 
   @override
-  String get settingsProfilePhotoActionGallery => 'Choose from gallery';
+  String get settingsProfilePhotoActionGallery => 'Pilih dari galeri';
 
   @override
-  String get settingsProfilePhotoActionRemove => 'Remove photo';
+  String get settingsProfilePhotoActionRemove => 'Hapus foto';
 
   @override
-  String get settingsProfilePhotoActionCancel => 'Cancel';
+  String get settingsProfilePhotoActionCancel => 'Batal';
 
   @override
   String settingsProfilePhotoToastCamera(String target) {
@@ -849,78 +850,79 @@ class AppLocalizationsId extends AppLocalizations {
   }
 
   @override
-  String get settingsProfileInfoSectionTitle => 'Profile info';
+  String get settingsProfileInfoSectionTitle => 'Info profil';
 
   @override
-  String get settingsProfileFieldName => 'Name';
+  String get settingsProfileFieldName => 'Nama';
 
   @override
   String get settingsProfileFieldNameHelper =>
-      'You can only change your name twice within 14 days.';
+      'Anda hanya dapat mengubah nama Anda dua kali dalam 14 hari.';
 
   @override
-  String get settingsProfileFieldUsername => 'Username';
+  String get settingsProfileFieldUsername => 'Nama pengguna';
 
   @override
   String get settingsProfileFieldUsernameHelper =>
-      'Pick a unique username. People can find you with @username.';
+      'Pilih nama pengguna yang unik. Orang dapat menemukan Anda dengan @nampengguna.';
 
   @override
   String get settingsProfileFieldBio => 'Bio';
 
   @override
   String get settingsProfileFieldBioHelper =>
-      'Share a short description. Keep it under 150 characters.';
+      'Bagikan deskripsi singkat. Maksimal 150 karakter.';
 
   @override
-  String get settingsProfileFieldWebsite => 'Website';
+  String get settingsProfileFieldWebsite => 'Situs web';
 
   @override
   String get settingsProfileFieldWebsiteHelper =>
-      'Enter a valid URL people can tap from your bio.';
+      'Masukkan URL yang valid agar orang dapat mengklik dari bio Anda.';
 
   @override
   String get settingsProfileInfoSyncTitle =>
-      'Profile info syncing is no longer available';
+      'Sinkronisasi info profil tidak lagi tersedia';
 
   @override
   String get settingsProfileInfoSyncDescription =>
-      'Your name and username will no longer sync across apps. Manage synced profile pictures through Connected experiences.';
+      'Nama dan nama pengguna Anda tidak akan lagi disinkronkan di seluruh aplikasi. Kelola foto profil yang disinkronkan melalui pengalaman Terhubung.';
 
   @override
   String get settingsProfileAccountSectionTitle => 'Akun';
 
   @override
-  String get settingsProfileAccountTypeTitle => 'Account type';
+  String get settingsProfileAccountTypeTitle => 'Tipe akun';
 
   @override
-  String get settingsProfileAccountTypeSubtitle => 'Choose how you use Velora';
+  String get settingsProfileAccountTypeSubtitle =>
+      'Pilih cara Anda menggunakan Velora';
 
   @override
   String get settingsProfileAccountTypePersonal => 'Personal';
 
   @override
-  String get settingsProfileAccountTypeOrganization => 'Organization';
+  String get settingsProfileAccountTypeOrganization => 'Organisasi';
 
   @override
   String get settingsProfileAccountTypePersonalDescription =>
-      'Personal accounts are for individual supporters.';
+      'Akun personal untuk pendukung individu.';
 
   @override
   String get settingsProfileAccountTypeOrganizationDescription =>
-      'Organization accounts unlock verifications and analytics.';
+      'Akun organisasi membuka verifikasi dan analitik.';
 
   @override
-  String get settingsProfileConnectedTitle => 'Connected accounts';
+  String get settingsProfileConnectedTitle => 'Akun terhubung';
 
   @override
-  String get settingsProfileConnectedNotConnected => 'Not connected';
+  String get settingsProfileConnectedNotConnected => 'Tidak terhubung';
 
   @override
-  String get settingsProfileConnectedDisconnect => 'Disconnect';
+  String get settingsProfileConnectedDisconnect => 'Putuskan';
 
   @override
-  String get settingsProfileConnectedConnect => 'Connect';
+  String get settingsProfileConnectedConnect => 'Hubungkan';
 
   @override
   String get settingsProfileCrossTitle => 'Cross-platform';
@@ -951,57 +953,57 @@ class AppLocalizationsId extends AppLocalizations {
       'Match people from other networks';
 
   @override
-  String get settingsProfileEditTitle => 'Edit profile';
+  String get settingsProfileEditTitle => 'Edit profil';
 
   @override
-  String get settingsProfileEditSubtitle => 'Update your personal information';
+  String get settingsProfileEditSubtitle => 'Perbarui informasi pribadi Anda';
 
   @override
-  String get settingsProfileEditTabName => 'Name';
+  String get settingsProfileEditTabName => 'Nama';
 
   @override
-  String get settingsProfileEditTabBio => 'Bio & Details';
+  String get settingsProfileEditTabBio => 'Bio & Detail';
 
   @override
-  String get settingsProfileEditUsedProfiles => 'Used for 2 profiles';
+  String get settingsProfileEditUsedProfiles => 'Digunakan untuk 2 profil';
 
   @override
-  String get settingsProfileEditFirstName => 'First name';
+  String get settingsProfileEditFirstName => 'Nama depan';
 
   @override
-  String get settingsProfileEditMiddleName => 'Middle name';
+  String get settingsProfileEditMiddleName => 'Nama tengah';
 
   @override
-  String get settingsProfileEditLastName => 'Last name';
+  String get settingsProfileEditLastName => 'Nama belakang';
 
   @override
-  String get settingsProfileEditRequiredField => 'Required field';
+  String get settingsProfileEditRequiredField => 'Bidang wajib diisi';
 
   @override
-  String get settingsProfileEditApplyTo => 'Apply to';
+  String get settingsProfileEditApplyTo => 'Terapkan ke';
 
   @override
-  String get settingsProfileEditApplyAllProfiles => 'All profiles';
+  String get settingsProfileEditApplyAllProfiles => 'Semua profil';
 
   @override
-  String get settingsProfileEditApplyFacebook => 'Facebook only';
+  String get settingsProfileEditApplyFacebook => 'Hanya Facebook';
 
   @override
-  String get settingsProfileEditApplyInstagram => 'Instagram only';
+  String get settingsProfileEditApplyInstagram => 'Hanya Instagram';
 
   @override
   String get settingsProfileEditNameChangeInfo =>
-      'If you change your name, you can\'t change it again for 60 days. Use your authentic name so friends know it\'s you.';
+      'Jika Anda mengubah nama, Anda tidak dapat mengubahnya lagi selama 60 hari. Gunakan nama asli Anda agar teman tahu ini Anda.';
 
   @override
-  String get settingsProfileEditOtherNamesTitle => 'Other names';
+  String get settingsProfileEditOtherNamesTitle => 'Nama lain';
 
   @override
   String get settingsProfileEditOtherNamesDescription =>
-      'Other names are always public and help people find you on Velora.';
+      'Nama lain selalu bersifat publik dan membantu orang menemukan Anda di Velora.';
 
   @override
-  String get settingsProfileEditOtherNamesManage => 'Manage other names';
+  String get settingsProfileEditOtherNamesManage => 'Kelola nama lain';
 
   @override
   String get settingsProfileEditReviewSchedule => 'Schedule review';
@@ -1031,33 +1033,80 @@ class AppLocalizationsId extends AppLocalizations {
   String get settingsProfileEditContactFollowers => 'Followers';
 
   @override
-  String get settingsProfileEditContactNoOne => 'No one';
+  String get settingsProfileEditContactNoOne => 'Tidak ada';
 
   @override
   String get settingsProfileEditShowProfileInfo =>
-      'Show profile info on donations';
+      'Tampilkan info profil pada donasi';
 
   @override
   String get settingsProfileEditDisplayFollowerCount =>
-      'Display follower count';
+      'Tampilkan jumlah pengikut';
 
   @override
-  String get settingsProfileEditProfileUpdated => 'Profile updated';
+  String get settingsProfileEditProfileUpdated => 'Profil diperbarui';
 
   @override
-  String get settingsProfileEditSaveChanges => 'Save changes';
+  String get settingsProfileEditSaveChanges => 'Simpan perubahan';
 
   @override
-  String get settingsProfileEditPronounsLabel => 'Pronouns';
+  String get settingsProfileEditPronounsLabel => 'Kata ganti';
 
   @override
-  String get settingsProfileFieldSave => 'Save';
+  String get settingsProfileEditProfileNotFound => 'Profil tidak ditemukan';
 
   @override
-  String get settingsProfileFieldEditFallbackTitle => 'Edit field';
+  String get settingsProfileEditTapToChangePhoto => 'Ketuk untuk mengubah foto';
 
   @override
-  String get settingsProfileFieldEditFallbackLabel => 'Field';
+  String settingsProfileEditFailedToPickImage(String error) {
+    return 'Gagal memilih gambar: $error';
+  }
+
+  @override
+  String settingsProfileEditUploadFailed(String error) {
+    return 'Unggah gagal: $error';
+  }
+
+  @override
+  String settingsProfileEditUploadError(String error) {
+    return 'Kesalahan unggah: $error';
+  }
+
+  @override
+  String get settingsProfileEditUserNotAuthenticated =>
+      'Pengguna tidak terautentikasi';
+
+  @override
+  String get settingsProfileEditNoChanges =>
+      'Tidak ada perubahan untuk disimpan';
+
+  @override
+  String get settingsProfileFieldFullName => 'Nama Lengkap';
+
+  @override
+  String get settingsProfileFieldEmail => 'Email';
+
+  @override
+  String get settingsProfileFieldLocation => 'Lokasi';
+
+  @override
+  String get settingsProfileFieldLocationHint => 'Di mana Anda tinggal?';
+
+  @override
+  String get settingsProfileFieldWebsiteHint => 'https://contoh.com';
+
+  @override
+  String get settingsProfileFieldBioHint => 'Ceritakan tentang diri Anda';
+
+  @override
+  String get settingsProfileFieldSave => 'Simpan';
+
+  @override
+  String get settingsProfileFieldEditFallbackTitle => 'Edit bidang';
+
+  @override
+  String get settingsProfileFieldEditFallbackLabel => 'Bidang';
 
   @override
   String get settingsSecurityPasswordSectionTitle => 'Password';
@@ -1235,22 +1284,23 @@ class AppLocalizationsId extends AppLocalizations {
       'Use my activity to tailor content and ads';
 
   @override
-  String get postCreateAppBarTitle => 'Create Post';
+  String get postCreateAppBarTitle => 'Buat Postingan';
 
   @override
-  String get postCreateAppBarNext => 'Next';
+  String get postCreateAppBarNext => 'Selanjutnya';
 
   @override
-  String get postCreateTitle => 'New Post';
+  String get postCreateTitle => 'Postingan Baru';
 
   @override
-  String get postCreatePublishTooltip => 'Publish post';
+  String get postCreatePublishTooltip => 'Terbitkan postingan';
 
   @override
-  String get postCreatePublishHint => 'Double tap to publish your post';
+  String get postCreatePublishHint =>
+      'Ketuk dua kali untuk menerbitkan postingan Anda';
 
   @override
-  String get postCreatePublishLabel => 'Publish';
+  String get postCreatePublishLabel => 'Terbitkan';
 
   @override
   String get postCreateMediaLabel => 'Selected media preview';

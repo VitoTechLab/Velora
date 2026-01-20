@@ -4,6 +4,7 @@ import 'package:velora/core/errors/profile_failure.dart';
 import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/profile/data/datasources/profile_remote_datasource.dart';
 import 'package:velora/features/profile/data/models/user_profile_model.dart';
+import 'package:velora/features/profile/data/models/update_profile_model.dart';
 import 'package:velora/features/profile/domain/repositories/profile_repository.dart';
 
 class ProfileRepositoryImpl implements ProfileRepository {
@@ -20,6 +21,20 @@ class ProfileRepositoryImpl implements ProfileRepository {
       return Right(profile);
     } catch (e) {
       loge('Repository Error: getProfile', error: e, tag: _logTag);
+      return Left(ProfileFailure.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserProfileModel>> updateProfile(
+    UpdateProfileModel updateModel,
+  ) async {
+    try {
+      logi('Repository: updateProfile', tag: _logTag);
+      final profile = await remoteDataSource.updateProfile(updateModel);
+      return Right(profile);
+    } catch (e) {
+      loge('Repository Error: updateProfile', error: e, tag: _logTag);
       return Left(ProfileFailure.fromException(e));
     }
   }

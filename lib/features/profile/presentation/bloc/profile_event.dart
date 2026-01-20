@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:velora/features/profile/data/models/update_profile_model.dart';
 
 part 'profile_event.freezed.dart';
 
@@ -6,6 +7,10 @@ part 'profile_event.freezed.dart';
 class ProfileEvent with _$ProfileEvent {
   const factory ProfileEvent.loadProfile({required String userId}) =
       LoadProfileEvent;
+
+  const factory ProfileEvent.updateProfile({
+    required UpdateProfileModel updateModel,
+  }) = UpdateProfileEvent;
 
   const factory ProfileEvent.toggleFollow({
     required String targetUserId,

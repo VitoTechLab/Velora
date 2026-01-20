@@ -1046,6 +1046,52 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsProfileEditPronounsLabel => 'Pronouns';
 
   @override
+  String get settingsProfileEditProfileNotFound => 'Profile not found';
+
+  @override
+  String get settingsProfileEditTapToChangePhoto => 'Tap to change photo';
+
+  @override
+  String settingsProfileEditFailedToPickImage(String error) {
+    return 'Failed to pick image: $error';
+  }
+
+  @override
+  String settingsProfileEditUploadFailed(String error) {
+    return 'Upload failed: $error';
+  }
+
+  @override
+  String settingsProfileEditUploadError(String error) {
+    return 'Upload error: $error';
+  }
+
+  @override
+  String get settingsProfileEditUserNotAuthenticated =>
+      'User not authenticated';
+
+  @override
+  String get settingsProfileEditNoChanges => 'No changes to save';
+
+  @override
+  String get settingsProfileFieldFullName => 'Full Name';
+
+  @override
+  String get settingsProfileFieldEmail => 'Email';
+
+  @override
+  String get settingsProfileFieldLocation => 'Location';
+
+  @override
+  String get settingsProfileFieldLocationHint => 'Where are you based?';
+
+  @override
+  String get settingsProfileFieldWebsiteHint => 'https://example.com';
+
+  @override
+  String get settingsProfileFieldBioHint => 'Tell us about yourself';
+
+  @override
   String get settingsProfileFieldSave => 'Save';
 
   @override

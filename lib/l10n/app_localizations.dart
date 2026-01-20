@@ -1976,6 +1976,84 @@ abstract class AppLocalizations {
   /// **'Pronouns'**
   String get settingsProfileEditPronounsLabel;
 
+  /// No description provided for @settingsProfileEditProfileNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile not found'**
+  String get settingsProfileEditProfileNotFound;
+
+  /// No description provided for @settingsProfileEditTapToChangePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to change photo'**
+  String get settingsProfileEditTapToChangePhoto;
+
+  /// No description provided for @settingsProfileEditFailedToPickImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to pick image: {error}'**
+  String settingsProfileEditFailedToPickImage(String error);
+
+  /// No description provided for @settingsProfileEditUploadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload failed: {error}'**
+  String settingsProfileEditUploadFailed(String error);
+
+  /// No description provided for @settingsProfileEditUploadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload error: {error}'**
+  String settingsProfileEditUploadError(String error);
+
+  /// No description provided for @settingsProfileEditUserNotAuthenticated.
+  ///
+  /// In en, this message translates to:
+  /// **'User not authenticated'**
+  String get settingsProfileEditUserNotAuthenticated;
+
+  /// No description provided for @settingsProfileEditNoChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'No changes to save'**
+  String get settingsProfileEditNoChanges;
+
+  /// No description provided for @settingsProfileFieldFullName.
+  ///
+  /// In en, this message translates to:
+  /// **'Full Name'**
+  String get settingsProfileFieldFullName;
+
+  /// No description provided for @settingsProfileFieldEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get settingsProfileFieldEmail;
+
+  /// No description provided for @settingsProfileFieldLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get settingsProfileFieldLocation;
+
+  /// No description provided for @settingsProfileFieldLocationHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Where are you based?'**
+  String get settingsProfileFieldLocationHint;
+
+  /// No description provided for @settingsProfileFieldWebsiteHint.
+  ///
+  /// In en, this message translates to:
+  /// **'https://example.com'**
+  String get settingsProfileFieldWebsiteHint;
+
+  /// No description provided for @settingsProfileFieldBioHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell us about yourself'**
+  String get settingsProfileFieldBioHint;
+
   /// No description provided for @settingsProfileFieldSave.
   ///
   /// In en, this message translates to:

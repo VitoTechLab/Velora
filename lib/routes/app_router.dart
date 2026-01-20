@@ -360,6 +360,14 @@ class AppRouter {
                                 const ProfileDetailScreen(),
                           ),
                           GoRoute(
+                            path: AppRouteSinglePath.settingsEditProfile,
+                            name: AppRouteName.settingsEditProfile,
+                            parentNavigatorKey:
+                                navigationService.navigatorKey, // root
+                            builder: (context, state) =>
+                                const EditProfileScreen(),
+                          ),
+                          GoRoute(
                             path: AppRouteSinglePath.settingsActivity,
                             name: AppRouteName.settingsActivity,
                             parentNavigatorKey: navigationService.navigatorKey,
@@ -417,13 +425,6 @@ class AppRouter {
                                     const RecoveryCodesScreen(),
                               ),
                             ],
-                          ),
-                          GoRoute(
-                            path: AppRouteSinglePath.settingsEditProfile,
-                            name: AppRouteName.settingsEditProfile,
-                            parentNavigatorKey: navigationService.navigatorKey,
-                            builder: (context, state) =>
-                                const EditProfileScreen(),
                           ),
                           GoRoute(
                             path: AppRouteSinglePath.settingsPrivacy,
@@ -593,6 +594,7 @@ class AppRoutePath {
   static const settingsProfiles = '/profile/settings/profiles';
   static const settingsProfileDetail = '/profile/settings/profile-detail';
   static const settingsActivity = '/profile/settings/activity';
+  static const settingsAdPreferences = '/profile/settings/ad-preferences';
   static const settingsAccountStatus = '/profile/settings/account-status';
   static const settingsAccountType = '/profile/settings/account-type';
   static const settingsPasswordSecurity = '/profile/settings/password-security';

@@ -1015,6 +1015,51 @@ class AppLocalizationsKo extends AppLocalizations {
   String get settingsProfileEditPronounsLabel => 'Pronouns';
 
   @override
+  String get settingsProfileEditProfileNotFound => '프로필을 찾을 수 없습니다';
+
+  @override
+  String get settingsProfileEditTapToChangePhoto => '탭하여 사진 변경';
+
+  @override
+  String settingsProfileEditFailedToPickImage(String error) {
+    return '이미지 선택 실패: $error';
+  }
+
+  @override
+  String settingsProfileEditUploadFailed(String error) {
+    return '업로드 실패: $error';
+  }
+
+  @override
+  String settingsProfileEditUploadError(String error) {
+    return '업로드 오류: $error';
+  }
+
+  @override
+  String get settingsProfileEditUserNotAuthenticated => '사용자가 인증되지 않았습니다';
+
+  @override
+  String get settingsProfileEditNoChanges => '저장할 변경 사항이 없습니다';
+
+  @override
+  String get settingsProfileFieldFullName => '전체 이름';
+
+  @override
+  String get settingsProfileFieldEmail => '이메일';
+
+  @override
+  String get settingsProfileFieldLocation => '위치';
+
+  @override
+  String get settingsProfileFieldLocationHint => '어디에 사시나요?';
+
+  @override
+  String get settingsProfileFieldWebsiteHint => 'https://example.com';
+
+  @override
+  String get settingsProfileFieldBioHint => '자기소개';
+
+  @override
   String get settingsProfileFieldSave => 'Save';
 
   @override

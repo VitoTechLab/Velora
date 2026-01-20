@@ -1,26 +1,27 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:intl/intl.dart';
+import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:velora/core/ui/app_messenger.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:velora/features/media/domain/repositories/media_repository.dart';
+import 'package:velora/features/profile/data/models/update_profile_model.dart';
 import 'package:velora/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:velora/features/profile/presentation/bloc/profile_event.dart';
 import 'package:velora/features/profile/presentation/bloc/profile_state.dart';
 import 'package:velora/features/settings/presentation/widgets/settings_page_scaffold.dart';
 import 'package:velora/l10n/app_localizations.dart';
+import 'package:velora/core/di/service_locator.dart';
 
 class EditProfileScreen extends HookWidget {
   const EditProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final tabController = useTabController(initialLength: 2);
     final t = AppLocalizations.of(context)!;
-    final tabs = [
-      Tab(text: t.settingsProfileEditTabName),
-      Tab(text: t.settingsProfileEditTabBio),
-    ];
 
     useEffect(
       () {
@@ -35,321 +36,483 @@ class EditProfileScreen extends HookWidget {
       const [],
     );
 
-    return SettingsPageScaffold(
-      title: t.settingsProfileEditTitle,
-      subtitle: t.settingsProfileEditSubtitle,
-      child: Column(
-        children: [
-          TabBar(controller: tabController, tabs: tabs),
-          const SizedBox(height: 24),
-          Expanded(
-            child: TabBarView(
-              controller: tabController,
-              children: [_NameTab(), _BioDetailsTab()],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-// Name Tab
-class _NameTab extends HookWidget {
-  @override
-  Widget build(BuildContext context) {
-    final formKey = useMemoized(() => GlobalKey<FormState>());
-    final t = AppLocalizations.of(context)!;
-
-    return BlocBuilder<ProfileBloc, ProfileState>(
-      builder: (context, profileState) {
-        final profile = profileState.profile;
-        final fullName = profile?.fullName ?? '';
-        final nameParts = fullName.split(' ');
-        
-        final firstNameController = useTextEditingController(
-          text: nameParts.isNotEmpty ? nameParts.first : '',
-        );
-        final middleNameController = useTextEditingController(
-          text: nameParts.length > 2 ? nameParts[1] : '',
-        );
-        final lastNameController = useTextEditingController(
-          text: nameParts.length > 1 ? nameParts.last : '',
-        );
-        
-        final reviewDate = useState<DateTime?>(null);
-        final selectedProfile = useState('All profiles');
-
-        Future<void> pickReviewDate() async {
-          final now = DateTime.now();
-          final picked = await showDatePicker(
-            context: context,
-            initialDate: reviewDate.value ?? now,
-            firstDate: now.subtract(const Duration(days: 365)),
-            lastDate: now.add(const Duration(days: 365)),
+    return BlocListener<ProfileBloc, ProfileState>(
+      listener: (context, state) {
+        if (state.error != null && !state.isLoading) {
+          AppMessenger.showToast(
+            message: state.error!,
+            icon: Icons.error_outline,
+            isError: true,
           );
-          if (picked != null) {
-            reviewDate.value = picked;
-          }
         }
+      },
+      child: SettingsPageScaffold(
+        title: t.settingsProfileEditTitle,
+        subtitle: t.settingsProfileEditSubtitle,
+        child: BlocBuilder<ProfileBloc, ProfileState>(
+          builder: (context, profileState) {
+            if (profileState.isLoading && profileState.profile == null) {
+              return const Center(
+                child: Padding(
+                  padding: EdgeInsets.all(32.0),
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            }
 
-        void submit() {
-          if (formKey.currentState?.validate() ?? false) {
-            AppMessenger.showToast(
-              message: t.settingsProfileEditNameSubmitted,
-              icon: Icons.check_circle_outline,
-              duration: const Duration(seconds: 2),
-            );
-          }
-        }
-
-        return SingleChildScrollView(
-          child: Form(
-            key: formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-              t.settingsProfileEditUsedProfiles,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
-            ),
-            const SizedBox(height: 16),
-            TextFormField(
-              controller: firstNameController,
-              decoration: InputDecoration(
-                labelText: t.settingsProfileEditFirstName,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-              ),
-              validator: (value) => (value == null || value.trim().isEmpty)
-                  ? t.settingsProfileEditRequiredField
-                  : null,
-            ),
-            const SizedBox(height: 12),
-            TextFormField(
-              controller: middleNameController,
-              decoration: InputDecoration(
-                labelText: t.settingsProfileEditMiddleName,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-              ),
-            ),
-            const SizedBox(height: 12),
-            TextFormField(
-              controller: lastNameController,
-              decoration: InputDecoration(
-                labelText: t.settingsProfileEditLastName,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-              ),
-              validator: (value) => (value == null || value.trim().isEmpty)
-                  ? t.settingsProfileEditRequiredField
-                  : null,
-            ),
-            const SizedBox(height: 12),
-            DropdownButtonFormField<String>(
-              decoration: InputDecoration(
-                labelText: t.settingsProfileEditApplyTo,
-                border: const OutlineInputBorder(),
-              ),
-              initialValue: selectedProfile.value,
-              items: [
-                DropdownMenuItem(
-                  value: 'All profiles',
-                  child: Text(t.settingsProfileEditApplyAllProfiles),
-                ),
-                DropdownMenuItem(
-                  value: 'Facebook only',
-                  child: Text(t.settingsProfileEditApplyFacebook),
-                ),
-                DropdownMenuItem(
-                  value: 'Instagram only',
-                  child: Text(t.settingsProfileEditApplyInstagram),
-                ),
-              ],
-              onChanged: (value) {
-                if (value != null) selectedProfile.value = value;
-              },
-            ),
-            const SizedBox(height: 16),
-            Text(
-              t.settingsProfileEditNameChangeInfo,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              t.settingsProfileEditOtherNamesTitle,
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              t.settingsProfileEditOtherNamesDescription,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-            const SizedBox(height: 8),
-            OutlinedButton(
-              onPressed: () {},
-              child: Text(t.settingsProfileEditOtherNamesManage),
-            ),
-            const SizedBox(height: 24),
-            OutlinedButton.icon(
-              onPressed: pickReviewDate,
-              icon: const Icon(Icons.calendar_today),
-              label: Text(
-                reviewDate.value == null
-                    ? t.settingsProfileEditReviewSchedule
-                    : t.settingsProfileEditReviewScheduled(
-                        DateFormat.yMMMd().format(reviewDate.value!),
+            final profile = profileState.profile;
+            if (profile == null) {
+              return Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.person_off_outlined,
+                        size: 64,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
-              ),
-            ),
-            const SizedBox(height: 12),
-          ],
+                      const SizedBox(height: 16),
+                      Text(
+                        t.settingsProfileEditProfileNotFound,
+                        style: Theme.of(context).textTheme.titleMedium,
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 24),
+                      FilledButton.tonal(
+                        onPressed: () {
+                          final authState = context.read<AuthBloc>().state;
+                          if (authState.userId != null) {
+                            context.read<ProfileBloc>().add(
+                              LoadProfileEvent(userId: authState.userId!),
+                            );
+                          }
+                        },
+                        child: const Text('Coba Lagi'),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }
+
+            return _EditProfileForm(profile: profile);
+          },
         ),
       ),
     );
-      },
-    );
   }
 }
 
-// Bio & Details Tab
-class _BioDetailsTab extends HookWidget {
-  const _BioDetailsTab();
+class _EditProfileForm extends HookWidget {
+  const _EditProfileForm({required this.profile});
   
+  final dynamic profile;
+
   @override
   Widget build(BuildContext context) {
-    final formKey = useMemoized(() => GlobalKey<FormState>());
     final t = AppLocalizations.of(context)!;
+    final formKey = useMemoized(() => GlobalKey<FormState>());
+    
+    final fullNameController = useTextEditingController(
+      text: profile.fullName ?? '',
+    );
+    final bioController = useTextEditingController(
+      text: profile.bio ?? '',
+    );
+    final websiteController = useTextEditingController(
+      text: profile.websiteUrl ?? '',
+    );
+    final locationController = useTextEditingController(
+      text: profile.location ?? '',
+    );
+    
+    final selectedAvatar = useState<File?>(null);
+    final isUploading = useState(false);
+    final uploadedAvatarUrl = useState<String?>(null);
+
+    Future<void> pickImage() async {
+      try {
+        final picker = ImagePicker();
+        
+        // Show bottom sheet to choose source
+        final source = await showModalBottomSheet<ImageSource>(
+          context: context,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          ),
+          builder: (context) => SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ListTile(
+                    leading: const Icon(Icons.camera_alt),
+                    title: Text(t.settingsProfilePhotoActionTake),
+                    onTap: () => Navigator.pop(context, ImageSource.camera),
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.photo_library),
+                    title: Text(t.settingsProfilePhotoActionGallery),
+                    onTap: () => Navigator.pop(context, ImageSource.gallery),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+
+        if (source == null) return;
+
+        final XFile? image = await picker.pickImage(
+          source: source,
+          maxWidth: 1024,
+          maxHeight: 1024,
+          imageQuality: 85,
+        );
+        
+        if (image != null) {
+          selectedAvatar.value = File(image.path);
+        }
+      } catch (e) {
+        if (!context.mounted) return;
+        AppMessenger.showToast(
+          message: t.settingsProfileEditFailedToPickImage(e.toString()),
+          icon: Icons.error_outline,
+          isError: true,
+        );
+      }
+    }
+
+    Future<String?> uploadAvatar(File file) async {
+      isUploading.value = true;
+      try {
+        final authState = context.read<AuthBloc>().state;
+        final userId = authState.userId;
+        if (userId == null) {
+          throw Exception('User not authenticated');
+        }
+
+        final mediaRepository = getIt<MediaRepository>();
+        final result = await mediaRepository.uploadImagesForPost(
+          files: [file],
+          userId: userId,
+          postId: 'profile_$userId',
+        );
+
+        return result.fold(
+          (failure) {
+            AppMessenger.showToast(
+              message: t.settingsProfileEditUploadFailed(failure.message),
+              icon: Icons.error_outline,
+              isError: true,
+            );
+            return null;
+          },
+          (assets) {
+            if (assets.isNotEmpty) {
+              return assets.first.secureUrl;
+            }
+            return null;
+          },
+        );
+      } catch (e) {
+        AppMessenger.showToast(
+          message: t.settingsProfileEditUploadError(e.toString()),
+          icon: Icons.error_outline,
+          isError: true,
+        );
+        return null;
+      } finally {
+        isUploading.value = false;
+      }
+    }
+
+    Future<void> saveProfile() async {
+      if (!(formKey.currentState?.validate() ?? false)) {
+        return;
+      }
+
+      // Upload avatar if selected
+      String? newAvatarUrl;
+      if (selectedAvatar.value != null) {
+        newAvatarUrl = await uploadAvatar(selectedAvatar.value!);
+        if (newAvatarUrl == null) {
+          return; // Upload failed
+        }
+        uploadedAvatarUrl.value = newAvatarUrl;
+      }
+
+      final updateModel = UpdateProfileModel(
+        fullName: fullNameController.text.trim().isNotEmpty
+            ? fullNameController.text.trim()
+            : null,
+        bio: bioController.text.trim().isNotEmpty
+            ? bioController.text.trim()
+            : null,
+        websiteUrl: websiteController.text.trim().isNotEmpty
+            ? websiteController.text.trim()
+            : null,
+        location: locationController.text.trim().isNotEmpty
+            ? locationController.text.trim()
+            : null,
+        avatarUrl: newAvatarUrl ?? uploadedAvatarUrl.value,
+      );
+
+      if (updateModel.isEmpty) {
+        AppMessenger.showToast(
+          message: t.settingsProfileEditNoChanges,
+          icon: Icons.info_outline,
+        );
+        return;
+      }
+
+      if (!context.mounted) return;
+      
+      // Dispatch update event
+      context.read<ProfileBloc>().add(
+        UpdateProfileEvent(updateModel: updateModel),
+      );
+
+      // Wait a bit for the update to complete
+      await Future.delayed(const Duration(milliseconds: 500));
+
+      if (!context.mounted) return;
+
+      // Reload profile to get updated data
+      final authState = context.read<AuthBloc>().state;
+      if (authState.userId != null) {
+        context.read<ProfileBloc>().add(
+          LoadProfileEvent(userId: authState.userId!),
+        );
+      }
+
+      AppMessenger.showToast(
+        message: t.settingsProfileEditProfileUpdated,
+        icon: Icons.check_circle_outline,
+      );
+      
+      // Clear selected avatar after successful save
+      selectedAvatar.value = null;
+
+      // Navigate back after short delay
+      Future.delayed(const Duration(milliseconds: 300), () {
+        if (context.mounted) {
+          context.pop();
+        }
+      });
+    }
 
     return BlocBuilder<ProfileBloc, ProfileState>(
-      builder: (context, profileState) {
-        final profile = profileState.profile;
+      builder: (context, state) {
+        final isLoading = state.isLoading || isUploading.value;
         
-        final bioController = useTextEditingController(
-          text: profile?.bio ?? '',
-        );
-        final websiteController = useTextEditingController(
-          text: profile?.bio ?? '',
-        );
-        final pronounController = useTextEditingController(text: 'they/them');
-        final showProfileInfo = useState(true);
-        final displayFollowCount = useState(true);
-        final contactPref = useState('Everyone');
-
         return SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
           child: Form(
             key: formKey,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                _SectionTitle(t.settingsProfileEditIdentitySection),
-                TextFormField(
-                  controller: bioController,
-                  maxLines: 3,
-                  decoration: InputDecoration(
-                    labelText: t.settingsProfileFieldBio,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
+                // Avatar Section
+                Center(
+                  child: Column(
+                    children: [
+                      Stack(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
+                                width: 3,
+                              ),
+                            ),
+                            child: CircleAvatar(
+                              radius: 60,
+                              backgroundImage: selectedAvatar.value != null
+                                  ? FileImage(selectedAvatar.value!)
+                                  : (uploadedAvatarUrl.value ?? profile.avatarUrl) != null
+                                      ? NetworkImage(uploadedAvatarUrl.value ?? profile.avatarUrl!)
+                                      : null as ImageProvider?,
+                              child: (selectedAvatar.value == null &&
+                                      uploadedAvatarUrl.value == null &&
+                                      profile.avatarUrl == null)
+                                  ? Text(
+                                      profile.fullName?.substring(0, 1).toUpperCase() ?? 'U',
+                                      style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                                    )
+                                  : null,
+                            ),
+                          ),
+                          if (isUploading.value)
+                            Positioned.fill(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.black54,
+                                ),
+                                child: const Center(
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          Positioned(
+                            bottom: 0,
+                            right: 0,
+                            child: Material(
+                              elevation: 4,
+                              shape: const CircleBorder(),
+                              child: CircleAvatar(
+                                radius: 22,
+                                backgroundColor: Theme.of(context).colorScheme.primary,
+                                child: IconButton(
+                                  icon: const Icon(Icons.camera_alt, size: 20),
+                                  onPressed: isLoading ? null : pickImage,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
+                        t.settingsProfileEditTapToChangePhoto,
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 32),
+
+                // Email (Read-only)
+                TextFormField(
+                  initialValue: profile.email,
+                  decoration: InputDecoration(
+                    labelText: t.settingsProfileFieldEmail,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    filled: true,
+                    fillColor: Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.3),
+                    suffixIcon: const Icon(Icons.lock_outline),
+                    helperText: 'Email tidak dapat diubah',
+                  ),
+                  enabled: false,
+                ),
+                const SizedBox(height: 20),
+
+                // Full Name
+                TextFormField(
+                  controller: fullNameController,
+                  decoration: InputDecoration(
+                    labelText: t.settingsProfileFieldFullName,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    prefixIcon: const Icon(Icons.person_outline),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return t.settingsProfileEditRequiredField;
+                    }
+                    return null;
+                  },
+                  enabled: !isLoading,
+                  textCapitalization: TextCapitalization.words,
+                ),
+                const SizedBox(height: 20),
+
+                // Bio
+                TextFormField(
+                  controller: bioController,
+                  maxLines: 4,
+                  maxLength: 150,
+                  decoration: InputDecoration(
+                    labelText: t.settingsProfileFieldBio,
+                    hintText: t.settingsProfileFieldBioHint,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    prefixIcon: const Padding(
+                      padding: EdgeInsets.only(bottom: 60),
+                      child: Icon(Icons.info_outline),
+                    ),
+                    alignLabelWithHint: true,
+                  ),
+                  enabled: !isLoading,
+                ),
+                const SizedBox(height: 20),
+
+                // Website
                 TextFormField(
                   controller: websiteController,
                   decoration: InputDecoration(
                     labelText: t.settingsProfileFieldWebsite,
+                    hintText: t.settingsProfileFieldWebsiteHint,
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(12),
                     ),
+                    prefixIcon: const Icon(Icons.link),
                   ),
+                  keyboardType: TextInputType.url,
+                  enabled: !isLoading,
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 20),
+
+                // Location
                 TextFormField(
-                  controller: pronounController,
+                  controller: locationController,
                   decoration: InputDecoration(
-                    labelText: t.settingsProfileEditPronounsLabel,
+                    labelText: t.settingsProfileFieldLocation,
+                    hintText: t.settingsProfileFieldLocationHint,
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    prefixIcon: const Icon(Icons.location_on_outlined),
+                  ),
+                  enabled: !isLoading,
+                  textCapitalization: TextCapitalization.words,
+                ),
+                const SizedBox(height: 32),
+
+                // Save Button
+                FilledButton(
+                  onPressed: isLoading ? null : saveProfile,
+                  style: FilledButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
                     ),
                   ),
+                  child: isLoading
+                      ? const SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            color: Colors.white,
+                          ),
+                        )
+                      : Text(
+                          t.settingsProfileEditSaveChanges,
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                        ),
                 ),
-                const SizedBox(height: 24),
-                _SectionTitle(t.settingsProfileEditContactSection),
-                SegmentedButton<String>(
-                  segments: [
-                    ButtonSegment(
-                      value: 'Everyone',
-                      label: Text(t.settingsProfileEditContactEveryone),
-                    ),
-                    ButtonSegment(
-                      value: 'Followers',
-                      label: Text(t.settingsProfileEditContactFollowers),
-                    ),
-                    ButtonSegment(
-                      value: 'No one',
-                      label: Text(t.settingsProfileEditContactNoOne),
-                    ),
-                  ],
-                  selected: {contactPref.value},
-                  onSelectionChanged: (value) => contactPref.value = value.first,
-                ),
-                const SizedBox(height: 12),
-                SwitchListTile.adaptive(
-                  value: showProfileInfo.value,
-                  title: Text(t.settingsProfileEditShowProfileInfo),
-                  contentPadding: EdgeInsets.zero,
-                  onChanged: (value) => showProfileInfo.value = value,
-                ),
-                SwitchListTile.adaptive(
-                  value: displayFollowCount.value,
-                  title: Text(t.settingsProfileEditDisplayFollowerCount),
-                  contentPadding: EdgeInsets.zero,
-                  onChanged: (value) => displayFollowCount.value = value,
-                ),
-                const SizedBox(height: 24),
-                FilledButton(
-                  onPressed: () {
-                    if (formKey.currentState?.validate() ?? false) {
-                      AppMessenger.showToast(
-                        message: t.settingsProfileEditProfileUpdated,
-                        icon: Icons.check_circle_outline,
-                        duration: const Duration(seconds: 2),
-                      );
-                    }
-                  },
-                  child: Text(t.settingsProfileEditSaveChanges),
-                ),
+                const SizedBox(height: 16),
               ],
             ),
           ),
         );
       },
-    );
-  }
-}
-
-class _SectionTitle extends StatelessWidget {
-  const _SectionTitle(this.text);
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
-      child: Text(
-        text,
-        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-          fontWeight: FontWeight.bold,
-        ),
-      ),
     );
   }
 }

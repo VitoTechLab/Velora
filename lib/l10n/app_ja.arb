@@ -466,6 +466,34 @@
   "settingsProfileFieldSave": "Save",
   "settingsProfileFieldEditFallbackTitle": "Edit field",
   "settingsProfileFieldEditFallbackLabel": "Field",
+  "settingsProfileEditProfileNotFound": "プロフィールが見つかりません",
+  "settingsProfileEditTapToChangePhoto": "タップして写真を変更",
+  "settingsProfileEditFailedToPickImage": "画像の選択に失敗しました: {error}",
+  "@settingsProfileEditFailedToPickImage": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+  "settingsProfileEditUploadFailed": "アップロードに失敗しました: {error}",
+  "@settingsProfileEditUploadFailed": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+  "settingsProfileEditUploadError": "アップロードエラー: {error}",
+  "@settingsProfileEditUploadError": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+  "settingsProfileEditUserNotAuthenticated": "ユーザーが認証されていません",
+  "settingsProfileEditNoChanges": "保存する変更はありません",
+  "settingsProfileFieldFullName": "フルネーム",
+  "settingsProfileFieldEmail": "メール",
+  "settingsProfileFieldLocation": "場所",
+  "settingsProfileFieldLocationHint": "どこに住んでいますか？",
+  "settingsProfileFieldWebsiteHint": "https://example.com",
+  "settingsProfileFieldBioHint": "自己紹介",
   "settingsSecurityPasswordSectionTitle": "Password",
   "settingsSecurityPasswordChange": "Change password",
   "settingsSecurityPasswordLastChanged": "Last changed 2 months ago",
