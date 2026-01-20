@@ -4,7 +4,6 @@ import 'package:velora/core/errors/profile_failure.dart';
 import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/profile/data/datasources/profile_remote_datasource.dart';
 import 'package:velora/features/profile/data/models/user_profile_model.dart';
-import 'package:velora/features/profile/data/models/update_profile_model.dart';
 import 'package:velora/features/profile/domain/repositories/profile_repository.dart';
 
 class ProfileRepositoryImpl implements ProfileRepository {
