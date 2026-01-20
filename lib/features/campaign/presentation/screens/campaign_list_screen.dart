@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/di/service_locator.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../domain/entities/campaign_detail_model.dart';
 import '../../domain/entities/campaign_model.dart';
-import '../../data/mock_campaigns.dart';
+import '../../domain/entities/campaign_type.dart';
+import '../bloc/campaign_bloc.dart';
+import '../bloc/campaign_event.dart';
+import '../bloc/campaign_state.dart';
 import '../widgets/campaign_list_card.dart';
 import '../widgets/campaign_empty_state.dart';
+import 'campaign_detail_screen.dart';
 
-/// Screen to display campaigns by category with pagination
+/// Screen to display campaigns by category with data from Supabase
 class CampaignListScreen extends HookWidget {
   final String categoryName;
   final String categoryFilter;
@@ -27,9 +34,13 @@ class CampaignListScreen extends HookWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => CampaignListScreen(
-          categoryName: categoryName,
-          categoryFilter: categoryFilter,
+        builder: (context) => BlocProvider(
+          create: (_) => getIt<CampaignBloc>()
+            ..add(const CampaignEvent.loadCampaigns(limit: 50)),
+          child: CampaignListScreen(
+            categoryName: categoryName,
+            categoryFilter: categoryFilter,
+          ),
         ),
       ),
     );
@@ -40,132 +51,75 @@ class CampaignListScreen extends HookWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final l10n = AppLocalizations.of(context);
-    final scrollController = useScrollController();
 
-    // State management
-    final campaigns = useState<List<CampaignModel>>([]);
-    final isLoading = useState(false);
-    final isLoadingMore = useState(false);
-    final hasMore = useState(true);
-    final cursor = useState<String?>(null);
-    final error = useState<String?>(null);
-
-    // Pagination config
-    const int pageSize = 20;
-
-    // Load initial data
-    Future<void> loadCampaigns({bool isRefresh = false}) async {
-      if (isRefresh) {
-        cursor.value = null;
-        hasMore.value = true;
-        campaigns.value = [];
-      }
-
-      if (!hasMore.value) return;
-
-      if (isRefresh || campaigns.value.isEmpty) {
-        isLoading.value = true;
+    // Map entity to model
+    CampaignModel mapEntityToModel(dynamic entity) {
+      final now = DateTime.now();
+      String timeLeftLabel;
+      if (entity.endDate == null) {
+        timeLeftLabel = 'Flexible';
       } else {
-        isLoadingMore.value = true;
+        final diff = entity.endDate!.difference(now);
+        if (diff.isNegative) {
+          timeLeftLabel = 'Ended';
+        } else if (diff.inDays >= 1) {
+          timeLeftLabel = 'D-${diff.inDays}';
+        } else if (diff.inHours >= 1) {
+          timeLeftLabel = '${diff.inHours}h';
+        } else {
+          timeLeftLabel = '${diff.inMinutes}m';
+        }
       }
 
-      error.value = null;
-
-      try {
-        // Simulate API call with delay
-        await Future.delayed(const Duration(milliseconds: 800));
-
-        // Filter campaigns by category
-        final allCampaigns = mockCampaigns
-            .where((c) => c.category == categoryFilter)
-            .toList();
-
-        // Simulate pagination
-        final startIndex = cursor.value != null
-            ? int.tryParse(cursor.value!) ?? 0
-            : 0;
-        final endIndex = (startIndex + pageSize).clamp(0, allCampaigns.length);
-        final newCampaigns = allCampaigns.sublist(startIndex, endIndex);
-
-        // Update state
-        if (isRefresh || campaigns.value.isEmpty) {
-          campaigns.value = newCampaigns;
-        } else {
-          campaigns.value = [...campaigns.value, ...newCampaigns];
-        }
-
-        // Update cursor and hasMore
-        if (endIndex >= allCampaigns.length) {
-          hasMore.value = false;
-          cursor.value = null;
-        } else {
-          cursor.value = endIndex.toString();
-        }
-      } catch (e) {
-        error.value = 'Failed to load campaigns';
-      } finally {
-        isLoading.value = false;
-        isLoadingMore.value = false;
-      }
+      return CampaignModel(
+        id: entity.id,
+        title: entity.title,
+        creatorName: entity.organizerUsername ?? 'Organizer',
+        isVerified: entity.isVerified,
+        type: CampaignType.donation,
+        category: entity.categoryName ?? 'General',
+        raised: entity.amountRaised,
+        target: entity.targetAmount,
+        donorsCount: entity.donorCount,
+        updatesCount: 0,
+        milestonesCount: 0,
+        timeLeftLabel: timeLeftLabel,
+        isFeatured: entity.isVerified,
+      );
     }
 
-    // Scroll listener for infinite scroll
-    void onScroll() {
-      if (!scrollController.hasClients) return;
-
-      final maxScroll = scrollController.position.maxScrollExtent;
-      final currentScroll = scrollController.position.pixels;
-      const threshold = 200.0;
-
-      if (currentScroll >= maxScroll - threshold) {
-        if (!isLoadingMore.value && !isLoading.value && hasMore.value) {
-          loadCampaigns();
-        }
-      }
+    // Navigate to campaign detail
+    void onCampaignTap(CampaignModel campaign, dynamic entity) {
+      final detailModel = CampaignDetailModel(
+        id: campaign.id,
+        title: campaign.title,
+        creatorName: campaign.creatorName,
+        isVerified: campaign.isVerified,
+        type: campaign.type,
+        category: campaign.category,
+        raised: campaign.raised,
+        target: campaign.target,
+        timeLeftLabel: campaign.timeLeftLabel,
+        donorsCount: campaign.donorsCount,
+        updatesCount: campaign.updatesCount,
+        milestonesCount: campaign.milestonesCount,
+        commentsCount: 0,
+        description: entity?.description,
+        coverImageUrl: entity?.coverImageUrl,
+      );
+      Navigator.push(
+        context,
+        CampaignDetailScreen.route(campaign: detailModel),
+      );
     }
 
     // Refresh handler
     Future<void> onRefresh() async {
-      await loadCampaigns(isRefresh: true);
+      context.read<CampaignBloc>().add(
+            const CampaignEvent.refreshCampaigns(limit: 50),
+          );
+      await Future.delayed(const Duration(milliseconds: 400));
     }
-
-    // Campaign tap handler
-    void onCampaignTap(CampaignModel campaign) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => Scaffold(
-            appBar: AppBar(
-              title: Text('Campaign Detail'),
-            ),
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    campaign.title,
-                    style: theme.textTheme.headlineSmall,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    'ID: ${campaign.id}',
-                    style: theme.textTheme.bodyMedium,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
-    }
-
-    // Initialize
-    useEffect(() {
-      loadCampaigns();
-      scrollController.addListener(onScroll);
-      return () => scrollController.removeListener(onScroll);
-    }, []);
 
     return Scaffold(
       backgroundColor: colorScheme.surface,
@@ -184,10 +138,16 @@ class CampaignListScreen extends HookWidget {
           ),
         ),
       ),
-      body: Builder(
-        builder: (context) {
+      body: BlocBuilder<CampaignBloc, CampaignState>(
+        builder: (context, state) {
+          // Filter campaigns by category
+          final allCampaigns = state.campaigns
+              .where((c) => c.categoryName == categoryFilter)
+              .toList();
+          final campaignModels = allCampaigns.map(mapEntityToModel).toList();
+
           // Loading initial state
-          if (isLoading.value && campaigns.value.isEmpty) {
+          if (state.isLoadingCampaigns && campaignModels.isEmpty) {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -206,7 +166,7 @@ class CampaignListScreen extends HookWidget {
           }
 
           // Error state
-          if (error.value != null && campaigns.value.isEmpty) {
+          if (state.errorCampaigns != null && campaignModels.isEmpty) {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -214,14 +174,16 @@ class CampaignListScreen extends HookWidget {
                   Icon(Icons.error_outline, size: 64, color: colorScheme.error),
                   const SizedBox(height: 16),
                   Text(
-                    error.value!,
+                    state.errorCampaigns!,
                     style: theme.textTheme.titleMedium?.copyWith(
                       color: colorScheme.onSurface,
                     ),
                   ),
                   const SizedBox(height: 24),
                   FilledButton.icon(
-                    onPressed: () => loadCampaigns(isRefresh: true),
+                    onPressed: () => context.read<CampaignBloc>().add(
+                          const CampaignEvent.loadCampaigns(limit: 50),
+                        ),
                     icon: const Icon(Icons.refresh),
                     label: const Text('Try Again'),
                   ),
@@ -231,7 +193,7 @@ class CampaignListScreen extends HookWidget {
           }
 
           // Empty state
-          if (campaigns.value.isEmpty) {
+          if (campaignModels.isEmpty) {
             return RefreshIndicator(
               onRefresh: onRefresh,
               child: CustomScrollView(
@@ -239,7 +201,9 @@ class CampaignListScreen extends HookWidget {
                 slivers: [
                   SliverFillRemaining(
                     child: CampaignEmptyState(
-                      onRetry: () => loadCampaigns(isRefresh: true),
+                      onRetry: () => context.read<CampaignBloc>().add(
+                            const CampaignEvent.loadCampaigns(limit: 50),
+                          ),
                     ),
                   ),
                 ],
@@ -254,14 +218,13 @@ class CampaignListScreen extends HookWidget {
               physics: const AlwaysScrollableScrollPhysics(
                 parent: BouncingScrollPhysics(),
               ),
-              controller: scrollController,
               slivers: [
                 // Header with count
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 8, 20, 16),
                     child: Text(
-                      '${campaigns.value.length} campaign${campaigns.value.length != 1 ? 's' : ''} found',
+                      '${campaignModels.length} campaign${campaignModels.length != 1 ? 's' : ''} found',
                       style: theme.textTheme.bodyMedium?.copyWith(
                         color: colorScheme.onSurfaceVariant,
                       ),
@@ -275,47 +238,33 @@ class CampaignListScreen extends HookWidget {
                   sliver: SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
-                        final campaign = campaigns.value[index];
+                        final campaign = campaignModels[index];
+                        final entity = allCampaigns[index];
                         return CampaignListCard(
                           key: ValueKey('campaign_${campaign.id}'),
                           campaign: campaign,
-                          onTap: () => onCampaignTap(campaign),
+                          onTap: () => onCampaignTap(campaign, entity),
                         );
                       },
-                      childCount: campaigns.value.length,
-                      semanticIndexCallback: (widget, localIndex) => localIndex,
+                      childCount: campaignModels.length,
                     ),
                   ),
                 ),
 
-                // Loading more indicator
-                if (isLoadingMore.value)
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Center(
-                        child: CircularProgressIndicator(
-                          color: colorScheme.primary,
-                        ),
-                      ),
-                    ),
-                  ),
-
                 // End of list indicator
-                if (!hasMore.value && campaigns.value.isNotEmpty)
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
-                      child: Center(
-                        child: Text(
-                          l10n?.campaignEndOfList ?? 'No more campaigns',
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            color: colorScheme.onSurfaceVariant,
-                          ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+                    child: Center(
+                      child: Text(
+                        l10n?.campaignEndOfList ?? 'End of list',
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ),
                   ),
+                ),
 
                 // Bottom spacing
                 const SliverToBoxAdapter(child: SizedBox(height: 24)),

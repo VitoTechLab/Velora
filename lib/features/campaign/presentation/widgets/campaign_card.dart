@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../domain/entities/campaign_model.dart';
 import '../../domain/entities/campaign_type.dart';
-import '../routes/campaign_routes.dart';
 import 'verified_badge.dart';
 import 'category_pill.dart';
 import 'progress_bar.dart';
@@ -19,8 +18,9 @@ String formatCurrency(double amount) {
 
 class CampaignCard extends StatelessWidget {
   final CampaignModel campaign;
+  final VoidCallback? onTap;
 
-  const CampaignCard({super.key, required this.campaign});
+  const CampaignCard({super.key, required this.campaign, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +32,7 @@ class CampaignCard extends StatelessWidget {
       label:
           'Campaign ${campaign.title} by ${campaign.creatorName}, ${campaign.progressPercent.toStringAsFixed(0)}% funded, ${campaign.timeLeftLabel} remaining',
       child: InkWell(
-        onTap: () {
-          CampaignRoutes.showDonationDetail(context);
-        },
+        onTap: onTap,
         borderRadius: BorderRadius.circular(16),
         child: Container(
           decoration: BoxDecoration(

@@ -25,7 +25,7 @@ class SearchCampaignResultModel {
     final dynamic amountRaisedRaw = json['amount_raised'];
     final dynamic targetAmountRaw = json['target_amount'];
 
-    double _toDouble(dynamic value) {
+    double toDouble(dynamic value) {
       if (value == null) return 0;
       if (value is num) return value.toDouble();
       if (value is String) return double.tryParse(value) ?? 0;
@@ -36,8 +36,8 @@ class SearchCampaignResultModel {
       id: json['id'] as String,
       title: json['title'] as String,
       coverImageUrl: json['cover_image_url'] as String?,
-      amountRaised: _toDouble(amountRaisedRaw),
-      targetAmount: _toDouble(targetAmountRaw),
+      amountRaised: toDouble(amountRaisedRaw),
+      targetAmount: toDouble(targetAmountRaw),
       organizerUsername: (json['organizer_username'] as String?) ?? '',
       categoryName: json['category_name'] as String?,
     );

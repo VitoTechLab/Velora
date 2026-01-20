@@ -37,9 +37,8 @@ class ChatMediaWidget extends StatelessWidget {
     final textTheme = theme.textTheme;
     final t = AppLocalizations.of(context)!;
 
-    final textColor = isSender
-        ? colorScheme.onPrimaryContainer
-        : colorScheme.onSurface;
+    final textColor =
+        isSender ? colorScheme.onPrimaryContainer : colorScheme.onSurface;
 
     return Semantics(
       label: isSender ? t.chatMediaYourLabel : t.chatMediaReceivedLabel,
@@ -53,7 +52,8 @@ class ChatMediaWidget extends StatelessWidget {
             opacity: value,
             child: Transform.scale(
               scale: 0.95 + (0.05 * value),
-              alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
+              alignment:
+                  isSender ? Alignment.centerRight : Alignment.centerLeft,
               child: child,
             ),
           );
@@ -150,7 +150,8 @@ class ChatMediaWidget extends StatelessWidget {
                                     shape: BoxShape.circle,
                                     boxShadow: [
                                       BoxShadow(
-                                        color: colorScheme.primary.withValues(alpha: 0.5),
+                                        color: colorScheme.primary
+                                            .withValues(alpha: 0.5),
                                         blurRadius: 16,
                                         spreadRadius: 2,
                                       ),
@@ -254,9 +255,8 @@ class ChatMediaWidget extends StatelessWidget {
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const Spacer(),
                         Text(
                           time,
                           style: textTheme.bodySmall?.copyWith(
@@ -437,4 +437,3 @@ class ChatMediaWidget extends StatelessWidget {
     );
   }
 }
-

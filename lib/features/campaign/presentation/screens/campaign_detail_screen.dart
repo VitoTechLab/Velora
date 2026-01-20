@@ -3,7 +3,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'package:velora/features/campaign/domain/entities/campaign_detail_model.dart';
 import 'package:velora/features/campaign/domain/entities/campaign_type.dart';
-import 'package:velora/features/campaign/data/mock_campaign_detail.dart';
 import 'package:velora/features/campaign/presentation/widgets/campaign_cover_header.dart';
 import 'package:velora/features/campaign/presentation/widgets/creator_row_header.dart';
 import 'package:velora/features/campaign/presentation/widgets/progress_summary_card.dart';
@@ -20,11 +19,10 @@ class CampaignDetailScreen extends HookWidget {
 
   const CampaignDetailScreen({super.key, required this.campaign});
 
-  // Static route helper with mock data for preview
-  static Route<void> route({CampaignDetailModel? campaign}) {
+  // Static route helper - requires campaign data
+  static Route<void> route({required CampaignDetailModel campaign}) {
     return MaterialPageRoute(
-      builder: (context) =>
-          CampaignDetailScreen(campaign: campaign ?? mockDonationCampaign),
+      builder: (context) => CampaignDetailScreen(campaign: campaign),
     );
   }
 
@@ -239,20 +237,23 @@ class CampaignDetailScreen extends HookWidget {
               controller: tabController,
               children: [
                 // Overview Tab
-                OverviewTabContent(campaignType: campaign.type.name),
+                OverviewTabContent(
+                  campaignType: campaign.type.name,
+                  description: campaign.description,
+                ),
 
-                // Updates Tab
-                UpdatesTabContent(updates: mockUpdates),
+                // Updates Tab - TODO: Fetch from Supabase
+                const UpdatesTabContent(updates: []),
 
-                // Discussion Tab
-                DiscussionTabContent(comments: mockComments),
+                // Discussion Tab - TODO: Fetch from Supabase
+                const DiscussionTabContent(comments: []),
 
-                // Transparency Tab
+                // Transparency Tab - TODO: Fetch from Supabase
                 TransparencyTabContent(
-                  fundBreakdown: mockFundBreakdown,
-                  documents: mockDocuments,
-                  milestones: mockMilestones,
-                  proofItems: mockProofItems,
+                  fundBreakdown: const [],
+                  documents: const [],
+                  milestones: const [],
+                  proofItems: const [],
                   showRiskDisclaimer: showRiskDisclaimer,
                   riskGrade: campaign.riskGrade,
                 ),

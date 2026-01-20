@@ -3,10 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../l10n/app_localizations.dart';
 import '../../../campaign/presentation/screens/campaign_list_screen.dart';
-import '../../../campaign/data/mock_campaigns.dart';
 import '../../domain/entities/campaign_category.dart';
 import '../widgets/category_card.dart';
-import '../widgets/discover_card.dart';
 
 /// Search screen with sticky search bar and category browsing
 class SearchScreen extends HookWidget {
@@ -140,21 +138,16 @@ class SearchScreen extends HookWidget {
                       ),
                     ),
 
-                    // Horizontal scroll of discover cards
+                    // Placeholder for discover section - TODO: Integrate with CampaignBloc
                     SizedBox(
                       height: 200,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        itemCount: mockCampaigns.take(10).length,
-                        itemBuilder: (context, index) {
-                          final campaign = mockCampaigns[index];
-                          return DiscoverCard(
-                            title: campaign.title,
-                            imageUrl: '',
-                            onTap: () => onDiscoverTap(campaign.id),
-                          );
-                        },
+                      child: Center(
+                        child: Text(
+                          'Browse categories below to discover campaigns',
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color: colorScheme.onSurfaceVariant,
+                          ),
+                        ),
                       ),
                     ),
                   ],

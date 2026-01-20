@@ -2,12 +2,12 @@ package com.example.velora
 
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.google.android.gms.ads.nativead.MediaView
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
+import com.google.android.material.button.MaterialButton
 import io.flutter.plugins.googlemobileads.GoogleMobileAdsPlugin
 
 class VeloraFeedNativeAdFactory(
@@ -21,7 +21,8 @@ class VeloraFeedNativeAdFactory(
 
         val adView = inflater.inflate(
             R.layout.velora_native_ads,
-            null
+            null,
+            false
         ) as NativeAdView
 
         try {
@@ -31,7 +32,7 @@ class VeloraFeedNativeAdFactory(
             val headline = adView.findViewById<TextView>(R.id.ad_headline)
             val body = adView.findViewById<TextView>(R.id.ad_body)
             val rating = adView.findViewById<TextView>(R.id.ad_rating)
-            val cta = adView.findViewById<Button>(R.id.ad_cta)
+            val cta = adView.findViewById<MaterialButton>(R.id.ad_cta)
             val mediaView = adView.findViewById<MediaView>(R.id.ad_media)
 
             // Assign views to ad view (only non-null views)
@@ -96,7 +97,7 @@ class VeloraFeedNativeAdFactory(
             // Populate media content
             mediaView?.let { media ->
                 nativeAd.mediaContent?.let {
-                    media.setMediaContent(it)
+                    media.mediaContent = it
                 }
             }
 
