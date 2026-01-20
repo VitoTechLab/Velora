@@ -40,7 +40,6 @@ class ChatDetailScreen extends HookWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final t = AppLocalizations.of(context)!;
 
     final messageController = useTextEditingController();
     final scrollController = useScrollController();
@@ -68,51 +67,6 @@ class ChatDetailScreen extends HookWidget {
       }
       return null;
     }, [peerUserId]);
-    // Get current user ID (for voice messages)
-    String? getCurrentUserId() {
-      return Supabase.instance.client.auth.currentUser?.id;
-    }
-
-    // Handler - Voice Recording
-    Future<void> handleVoicePressed() async {
-      // Ambil userId dari Supabase auth
-      final userId = getCurrentUserId();
-      if (userId == null) {
-        AppMessenger.showToast(
-          message: t.chatDetailVoiceError,
-          icon: Icons.error_outline,
-          isError: true,
-        );
-        return;
-      }
-
-      // Show voice recorder bottom sheet
-      final recordedFilePath = await VoiceRecorderBottomSheet.show(context);
-
-      if (recordedFilePath == null) return;
-
-      final file = File(recordedFilePath);
-      if (!await file.exists()) return;
-
-      // Dispatch event to Bloc to handle upload and send
-      if (context.mounted) {
-        context.read<ChatMessageBloc>().add(
-              ChatMessageEvent.uploadAndSendAudio(
-                conversationId: conversationId,
-                filePath: recordedFilePath,
-                userId: userId,
-                isVoiceMessage: true,
-              ),
-            );
-      }
-
-      // Clean up temp file after a delay (let upload finish first)
-      Future.delayed(const Duration(seconds: 2), () async {
-        try {
-          await file.delete();
-        } catch (_) {}
-      });
-    }
 
     final backgroundColor = Color.lerp(
       colorScheme.surface,
@@ -139,7 +93,6 @@ class ChatDetailScreen extends HookWidget {
         focusNode: focusNode,
         fadeAnimation: fadeAnimation,
         backgroundColor: backgroundColor,
-        handleVoicePressed: handleVoicePressed,
       ),
     );
   }
@@ -157,7 +110,6 @@ class _ChatDetailContent extends StatefulWidget {
   final FocusNode focusNode;
   final Animation<double> fadeAnimation;
   final Color? backgroundColor;
-  final Future<void> Function() handleVoicePressed;
 
   const _ChatDetailContent({
     required this.conversationId,
@@ -171,7 +123,6 @@ class _ChatDetailContent extends StatefulWidget {
     required this.focusNode,
     required this.fadeAnimation,
     this.backgroundColor,
-    required this.handleVoicePressed,
   });
 
   @override
@@ -189,6 +140,54 @@ class _ChatDetailContentState extends State<_ChatDetailContent> {
   void dispose() {
     widget.scrollController.removeListener(_onScroll);
     super.dispose();
+  }
+
+  // Get current user ID (for voice messages)
+  String? _getCurrentUserId() {
+    return Supabase.instance.client.auth.currentUser?.id;
+  }
+
+  // Handler - Voice Recording
+  Future<void> _handleVoicePressed() async {
+    final t = AppLocalizations.of(context)!;
+
+    // Get userId from Supabase auth
+    final userId = _getCurrentUserId();
+    if (userId == null) {
+      AppMessenger.showToast(
+        message: t.chatDetailVoiceError,
+        icon: Icons.error_outline,
+        isError: true,
+      );
+      return;
+    }
+
+    // Show voice recorder bottom sheet
+    final recordedFilePath = await VoiceRecorderBottomSheet.show(context);
+
+    if (recordedFilePath == null) return;
+
+    final file = File(recordedFilePath);
+    if (!await file.exists()) return;
+
+    // Dispatch event to Bloc to handle upload and send
+    if (mounted) {
+      context.read<ChatMessageBloc>().add(
+            ChatMessageEvent.uploadAndSendAudio(
+              conversationId: widget.conversationId,
+              filePath: recordedFilePath,
+              userId: userId,
+              isVoiceMessage: true,
+            ),
+          );
+    }
+
+    // Clean up temp file after a delay (let upload finish first)
+    Future.delayed(const Duration(seconds: 2), () async {
+      try {
+        await file.delete();
+      } catch (_) {}
+    });
   }
 
   void _onScroll() {
@@ -495,7 +494,7 @@ class _ChatDetailContentState extends State<_ChatDetailContent> {
                             );
                       }
                     },
-                    onVoicePressed: widget.handleVoicePressed,
+                    onVoicePressed: _handleVoicePressed,
                   );
                 },
               ),
