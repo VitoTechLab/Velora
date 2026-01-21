@@ -7,6 +7,7 @@ import 'package:velora/features/chat/presentation/bloc/user_presence_bloc.dart';
 import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:velora/features/chat/domain/entities/chat_message_entity.dart';
+import 'package:velora/features/chat/domain/entities/message_read_entity.dart';
 import 'package:velora/features/chat/domain/entities/message_status.dart';
 import 'package:velora/features/chat/presentation/widgets/chat_audio_widget.dart';
 import 'package:velora/features/chat/presentation/widgets/chat_bubble_widget.dart';
@@ -191,6 +192,20 @@ class ChatMessageList extends StatelessWidget {
         final myUserId = authState.userId;
         final messages = state.messages;
 
+        // For 1-on-1 chats, find the latest message from the peer to determine read status
+        // If the peer has sent a message after ours, it means they've read our message
+        DateTime? latestPeerMessageTime;
+        if (!isGroup && peerUserId != null) {
+          for (final msg in messages) {
+            if (msg.senderId == peerUserId) {
+              if (latestPeerMessageTime == null ||
+                  msg.createdAt.isAfter(latestPeerMessageTime)) {
+                latestPeerMessageTime = msg.createdAt;
+              }
+            }
+          }
+        }
+
         return FadeTransition(
           opacity: fadeAnimation,
           child: Semantics(
@@ -218,7 +233,8 @@ class ChatMessageList extends StatelessWidget {
                 }
 
                 final message = messages[index];
-                final isSender = message.senderId == myUserId || message.status == MessageStatus.sending;
+                final isSender = message.senderId == myUserId ||
+                    message.status == MessageStatus.sending;
                 final isDeleted = message.deletedAt != null;
 
                 // Debug log: observe deletedAt flag vs UI isDeleted
@@ -266,7 +282,14 @@ class ChatMessageList extends StatelessWidget {
                           message: message,
                           isSender: isSender,
                           t: t,
-                          isRead: state.messageReads[message.id]?.isNotEmpty ?? false,
+                          // For 1-on-1: message is read if peer has replied after this message
+                          // or if realtime read receipt exists
+                          isRead: _isMessageRead(
+                            message: message,
+                            isSender: isSender,
+                            latestPeerMessageTime: latestPeerMessageTime,
+                            messageReads: state.messageReads,
+                          ),
                         ),
                     ],
                   ),
@@ -575,6 +598,34 @@ class ChatMessageList extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  /// Determine if a message has been read by the recipient
+  /// For 1-on-1 chats: message is read if:
+  /// 1. The peer has sent a message after this message (they must have seen it to reply)
+  /// 2. Or there's a realtime read receipt in messageReads
+  bool _isMessageRead({
+    required ChatMessageEntity message,
+    required bool isSender,
+    DateTime? latestPeerMessageTime,
+    required Map<String, List<MessageReadEntity>> messageReads,
+  }) {
+    // Only check read status for sender's messages
+    if (!isSender) return false;
+
+    // Check realtime read receipts first
+    if (messageReads[message.id]?.isNotEmpty ?? false) {
+      return true;
+    }
+
+    // For 1-on-1 chats: if peer has replied after this message, it's been read
+    if (latestPeerMessageTime != null) {
+      if (message.createdAt.isBefore(latestPeerMessageTime)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   bool _isSameDay(DateTime date1, DateTime date2) {

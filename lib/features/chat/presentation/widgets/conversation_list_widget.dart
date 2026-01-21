@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:velora/core/utils/format_utils.dart';
 import 'package:velora/features/chat/domain/entities/conversation_list_entity.dart';
 import 'package:velora/features/chat/presentation/bloc/chat_message_bloc.dart';
@@ -253,6 +254,12 @@ class _ConversationListItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isGroup = conversation.otherUserId == null;
+    final currentUserId = Supabase.instance.client.auth.currentUser?.id;
+    final isLastMessageFromMe =
+        conversation.lastMessageSenderId == currentUserId;
+    // If unread count is 0 and last message is from me, it means recipient has read it
+    final isLastMessageRead =
+        isLastMessageFromMe && conversation.unreadCount == 0;
 
     // Check if peer user is typing (for 1-on-1 chats only)
     return BlocSelector<ChatMessageBloc, ChatMessageState, bool>(
@@ -282,6 +289,8 @@ class _ConversationListItemWidget extends StatelessWidget {
               conversation.unreadCount > 0 ? conversation.unreadCount : null,
           isGroup: isGroup,
           isTyping: isTyping,
+          isLastMessageFromMe: isLastMessageFromMe,
+          isLastMessageRead: isLastMessageRead,
           onTap: () {
             context.pushNamed(
               AppRouteName.chatDetail,

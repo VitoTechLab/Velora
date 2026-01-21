@@ -366,14 +366,12 @@ class _ChatAudioWidgetState extends State<ChatAudioWidget> {
                       );
                     },
                     child: Icon(
-                      widget.isRead
-                          ? Icons.done_all_rounded
-                          : Icons.check_rounded,
+                      Icons.done_all_rounded, // Always double check
                       key: ValueKey(widget.isRead),
                       size: 16,
                       color: widget.isRead
-                          ? Colors.lightBlueAccent.shade200
-                          : Colors.grey.shade500,
+                          ? Colors.lightBlueAccent.shade200 // Blue when read
+                          : Colors.grey.shade500, // Gray when not read
                     ),
                   ),
                 ],

@@ -103,26 +103,27 @@ class ChatBubbleWidget extends StatelessWidget {
                 ],
               ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   // Message text
-                  Text(
-                    message,
-                    style: textTheme.bodyMedium?.copyWith(
-                      color: textColor,
-                      height: 1.4,
-                      letterSpacing: 0.15,
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      message,
+                      style: textTheme.bodyMedium?.copyWith(
+                        color: textColor,
+                        height: 1.4,
+                        letterSpacing: 0.15,
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 6),
+                  const SizedBox(height: 4),
 
                   // Time and read receipt (right-aligned)
                   Row(
                     mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      const Spacer(),
                       Text(
                         time,
                         style: textTheme.bodySmall?.copyWith(
@@ -142,14 +143,14 @@ class ChatBubbleWidget extends StatelessWidget {
                             );
                           },
                           child: Icon(
-                            isRead
-                                ? Icons.done_all_rounded
-                                : Icons.check_rounded,
+                            Icons
+                                .done_all_rounded, // Always double check for sent messages
                             key: ValueKey(isRead),
                             size: 16,
                             color: isRead
-                                ? Colors.lightBlueAccent.shade200
-                                : Colors.grey.shade500,
+                                ? Colors
+                                    .lightBlueAccent.shade200 // Blue when read
+                                : Colors.grey.shade500, // Gray when not read
                           ),
                         ),
                       ],

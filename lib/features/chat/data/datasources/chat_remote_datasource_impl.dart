@@ -751,9 +751,42 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
           table: SupabaseTables.messageReads,
           callback: (payload) {
             try {
+              logi(
+                'Realtime message_reads INSERT received: ${payload.newRecord}',
+                tag: _logTag,
+              );
               final read = MessageReadModel.fromJson(payload.newRecord);
               controller.add(read);
             } catch (e, st) {
+              loge(
+                'Error parsing message_reads payload',
+                error: e,
+                stackTrace: st,
+                tag: _logTag,
+              );
+              controller.addError(e, st);
+            }
+          },
+        )
+        .onPostgresChanges(
+          event: PostgresChangeEvent.update,
+          schema: 'public',
+          table: SupabaseTables.messageReads,
+          callback: (payload) {
+            try {
+              logi(
+                'Realtime message_reads UPDATE received: ${payload.newRecord}',
+                tag: _logTag,
+              );
+              final read = MessageReadModel.fromJson(payload.newRecord);
+              controller.add(read);
+            } catch (e, st) {
+              loge(
+                'Error parsing message_reads UPDATE payload',
+                error: e,
+                stackTrace: st,
+                tag: _logTag,
+              );
               controller.addError(e, st);
             }
           },
