@@ -45,4 +45,13 @@ class FeedEvent with _$FeedEvent {
 
   /// Clear transient UI messages.
   const factory FeedEvent.clearTransient() = ClearTransientEvent;
+
+  /// Start watching realtime feed changes.
+  const factory FeedEvent.startWatchFeed() = StartWatchFeedEvent;
+
+  /// Stop watching realtime feed changes.
+  const factory FeedEvent.stopWatchFeed() = StopWatchFeedEvent;
+
+  /// Handle new post arrived from realtime.
+  const factory FeedEvent.feedPostArrived(FeedEntity post) = FeedPostArrivedEvent;
 }

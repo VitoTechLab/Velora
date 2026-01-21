@@ -219,4 +219,20 @@ class FeedRepositoryImpl implements FeedRepository {
   /// Stop watching realtime comments and cleanup
   @override
   Future<void> stopWatchComments() => remoteDataSource.stopWatch();
+
+  /// Stream realtime feed changes (inserts, updates)
+  @override
+  Stream<Either<Failure, FeedEntity>> watchFeedChanges() async* {
+    try {
+      await for (final model in remoteDataSource.watchFeedChanges()) {
+        yield Right(model.toEntity());
+      }
+    } catch (e) {
+      yield Left(FeedFailure.fromException(e));
+    }
+  }
+
+  /// Stop watching feed changes
+  @override
+  Future<void> stopWatchFeed() => remoteDataSource.stopWatchFeed();
 }

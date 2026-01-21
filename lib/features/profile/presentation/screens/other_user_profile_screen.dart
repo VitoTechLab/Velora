@@ -143,31 +143,34 @@ class _UserProfileContent extends HookWidget {
                                         ),
                                         const SizedBox(width: 24),
                                         Expanded(
-                                          child: ProfileStats(
-                                            postsCount:
-                                                profile?.followersCount ?? 0,
-                                            followersCount:
-                                                profile?.followersCount ?? 0,
-                                            followingCount:
-                                                profile?.followingCount ?? 0,
-                                            onPostsTap: () {},
-                                            onFollowersTap: () {
-                                              if (profile != null) {
-                                                context.pushNamed(
-                                                  AppRouteName.relationDetail,
-                                                  pathParameters: {'userId': profile.id},
-                                                  queryParameters: {'tab': '0'},
-                                                );
-                                              }
-                                            },
-                                            onFollowingTap: () {
-                                              if (profile != null) {
-                                                context.pushNamed(
-                                                  AppRouteName.relationDetail,
-                                                  pathParameters: {'userId': profile.id},
-                                                  queryParameters: {'tab': '1'},
-                                                );
-                                              }
+                                          child: BlocBuilder<FeedBloc, FeedState>(
+                                            builder: (context, feedState) {
+                                              return ProfileStats(
+                                                postsCount: feedState.posts.length,
+                                                followersCount:
+                                                    profile?.followersCount ?? 0,
+                                                followingCount:
+                                                    profile?.followingCount ?? 0,
+                                                onPostsTap: () {},
+                                                onFollowersTap: () {
+                                                  if (profile != null) {
+                                                    context.pushNamed(
+                                                      AppRouteName.relationDetail,
+                                                      pathParameters: {'userId': profile.id},
+                                                      queryParameters: {'tab': '0'},
+                                                    );
+                                                  }
+                                                },
+                                                onFollowingTap: () {
+                                                  if (profile != null) {
+                                                    context.pushNamed(
+                                                      AppRouteName.relationDetail,
+                                                      pathParameters: {'userId': profile.id},
+                                                      queryParameters: {'tab': '1'},
+                                                    );
+                                                  }
+                                                },
+                                              );
                                             },
                                           ),
                                         ),
@@ -194,6 +197,16 @@ class _UserProfileContent extends HookWidget {
                                               fontWeight: FontWeight.w600,
                                             ),
                                           ),
+                                        if (profile?.bio != null &&
+                                            profile!.bio!.isNotEmpty) ...[
+                                          const SizedBox(height: 4),
+                                          Text(
+                                            profile.bio!,
+                                            style: const TextStyle(fontSize: 14),
+                                            maxLines: 3,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ],
                                         const SizedBox(height: 4),
                                         Row(
                                           children: [

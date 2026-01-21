@@ -28,6 +28,9 @@ mixin _$FeedEvent {
     required TResult Function(String postId) toggleBookmarkPost,
     required TResult Function(FeedEntity post) addNewPost,
     required TResult Function() clearTransient,
+    required TResult Function() startWatchFeed,
+    required TResult Function() stopWatchFeed,
+    required TResult Function(FeedEntity post) feedPostArrived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -42,6 +45,9 @@ mixin _$FeedEvent {
     TResult? Function(String postId)? toggleBookmarkPost,
     TResult? Function(FeedEntity post)? addNewPost,
     TResult? Function()? clearTransient,
+    TResult? Function()? startWatchFeed,
+    TResult? Function()? stopWatchFeed,
+    TResult? Function(FeedEntity post)? feedPostArrived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +62,9 @@ mixin _$FeedEvent {
     TResult Function(String postId)? toggleBookmarkPost,
     TResult Function(FeedEntity post)? addNewPost,
     TResult Function()? clearTransient,
+    TResult Function()? startWatchFeed,
+    TResult Function()? stopWatchFeed,
+    TResult Function(FeedEntity post)? feedPostArrived,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -71,6 +80,9 @@ mixin _$FeedEvent {
     required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
     required TResult Function(AddNewPostEvent value) addNewPost,
     required TResult Function(ClearTransientEvent value) clearTransient,
+    required TResult Function(StartWatchFeedEvent value) startWatchFeed,
+    required TResult Function(StopWatchFeedEvent value) stopWatchFeed,
+    required TResult Function(FeedPostArrivedEvent value) feedPostArrived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -85,6 +97,9 @@ mixin _$FeedEvent {
     TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult? Function(AddNewPostEvent value)? addNewPost,
     TResult? Function(ClearTransientEvent value)? clearTransient,
+    TResult? Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult? Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult? Function(FeedPostArrivedEvent value)? feedPostArrived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -99,6 +114,9 @@ mixin _$FeedEvent {
     TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult Function(AddNewPostEvent value)? addNewPost,
     TResult Function(ClearTransientEvent value)? clearTransient,
+    TResult Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult Function(FeedPostArrivedEvent value)? feedPostArrived,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -213,6 +231,9 @@ class _$LoadInitialFeedEventImpl implements LoadInitialFeedEvent {
     required TResult Function(String postId) toggleBookmarkPost,
     required TResult Function(FeedEntity post) addNewPost,
     required TResult Function() clearTransient,
+    required TResult Function() startWatchFeed,
+    required TResult Function() stopWatchFeed,
+    required TResult Function(FeedEntity post) feedPostArrived,
   }) {
     return loadInitialFeed(limit, userId);
   }
@@ -230,6 +251,9 @@ class _$LoadInitialFeedEventImpl implements LoadInitialFeedEvent {
     TResult? Function(String postId)? toggleBookmarkPost,
     TResult? Function(FeedEntity post)? addNewPost,
     TResult? Function()? clearTransient,
+    TResult? Function()? startWatchFeed,
+    TResult? Function()? stopWatchFeed,
+    TResult? Function(FeedEntity post)? feedPostArrived,
   }) {
     return loadInitialFeed?.call(limit, userId);
   }
@@ -247,6 +271,9 @@ class _$LoadInitialFeedEventImpl implements LoadInitialFeedEvent {
     TResult Function(String postId)? toggleBookmarkPost,
     TResult Function(FeedEntity post)? addNewPost,
     TResult Function()? clearTransient,
+    TResult Function()? startWatchFeed,
+    TResult Function()? stopWatchFeed,
+    TResult Function(FeedEntity post)? feedPostArrived,
     required TResult orElse(),
   }) {
     if (loadInitialFeed != null) {
@@ -268,6 +295,9 @@ class _$LoadInitialFeedEventImpl implements LoadInitialFeedEvent {
     required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
     required TResult Function(AddNewPostEvent value) addNewPost,
     required TResult Function(ClearTransientEvent value) clearTransient,
+    required TResult Function(StartWatchFeedEvent value) startWatchFeed,
+    required TResult Function(StopWatchFeedEvent value) stopWatchFeed,
+    required TResult Function(FeedPostArrivedEvent value) feedPostArrived,
   }) {
     return loadInitialFeed(this);
   }
@@ -285,6 +315,9 @@ class _$LoadInitialFeedEventImpl implements LoadInitialFeedEvent {
     TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult? Function(AddNewPostEvent value)? addNewPost,
     TResult? Function(ClearTransientEvent value)? clearTransient,
+    TResult? Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult? Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult? Function(FeedPostArrivedEvent value)? feedPostArrived,
   }) {
     return loadInitialFeed?.call(this);
   }
@@ -302,6 +335,9 @@ class _$LoadInitialFeedEventImpl implements LoadInitialFeedEvent {
     TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult Function(AddNewPostEvent value)? addNewPost,
     TResult Function(ClearTransientEvent value)? clearTransient,
+    TResult Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult Function(FeedPostArrivedEvent value)? feedPostArrived,
     required TResult orElse(),
   }) {
     if (loadInitialFeed != null) {
@@ -413,6 +449,9 @@ class _$LoadMoreFeedEventImpl implements LoadMoreFeedEvent {
     required TResult Function(String postId) toggleBookmarkPost,
     required TResult Function(FeedEntity post) addNewPost,
     required TResult Function() clearTransient,
+    required TResult Function() startWatchFeed,
+    required TResult Function() stopWatchFeed,
+    required TResult Function(FeedEntity post) feedPostArrived,
   }) {
     return loadMoreFeed(limit, userId);
   }
@@ -430,6 +469,9 @@ class _$LoadMoreFeedEventImpl implements LoadMoreFeedEvent {
     TResult? Function(String postId)? toggleBookmarkPost,
     TResult? Function(FeedEntity post)? addNewPost,
     TResult? Function()? clearTransient,
+    TResult? Function()? startWatchFeed,
+    TResult? Function()? stopWatchFeed,
+    TResult? Function(FeedEntity post)? feedPostArrived,
   }) {
     return loadMoreFeed?.call(limit, userId);
   }
@@ -447,6 +489,9 @@ class _$LoadMoreFeedEventImpl implements LoadMoreFeedEvent {
     TResult Function(String postId)? toggleBookmarkPost,
     TResult Function(FeedEntity post)? addNewPost,
     TResult Function()? clearTransient,
+    TResult Function()? startWatchFeed,
+    TResult Function()? stopWatchFeed,
+    TResult Function(FeedEntity post)? feedPostArrived,
     required TResult orElse(),
   }) {
     if (loadMoreFeed != null) {
@@ -468,6 +513,9 @@ class _$LoadMoreFeedEventImpl implements LoadMoreFeedEvent {
     required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
     required TResult Function(AddNewPostEvent value) addNewPost,
     required TResult Function(ClearTransientEvent value) clearTransient,
+    required TResult Function(StartWatchFeedEvent value) startWatchFeed,
+    required TResult Function(StopWatchFeedEvent value) stopWatchFeed,
+    required TResult Function(FeedPostArrivedEvent value) feedPostArrived,
   }) {
     return loadMoreFeed(this);
   }
@@ -485,6 +533,9 @@ class _$LoadMoreFeedEventImpl implements LoadMoreFeedEvent {
     TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult? Function(AddNewPostEvent value)? addNewPost,
     TResult? Function(ClearTransientEvent value)? clearTransient,
+    TResult? Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult? Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult? Function(FeedPostArrivedEvent value)? feedPostArrived,
   }) {
     return loadMoreFeed?.call(this);
   }
@@ -502,6 +553,9 @@ class _$LoadMoreFeedEventImpl implements LoadMoreFeedEvent {
     TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult Function(AddNewPostEvent value)? addNewPost,
     TResult Function(ClearTransientEvent value)? clearTransient,
+    TResult Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult Function(FeedPostArrivedEvent value)? feedPostArrived,
     required TResult orElse(),
   }) {
     if (loadMoreFeed != null) {
@@ -604,6 +658,9 @@ class _$GetPostByIdEventImpl implements GetPostByIdEvent {
     required TResult Function(String postId) toggleBookmarkPost,
     required TResult Function(FeedEntity post) addNewPost,
     required TResult Function() clearTransient,
+    required TResult Function() startWatchFeed,
+    required TResult Function() stopWatchFeed,
+    required TResult Function(FeedEntity post) feedPostArrived,
   }) {
     return getPostById(postId);
   }
@@ -621,6 +678,9 @@ class _$GetPostByIdEventImpl implements GetPostByIdEvent {
     TResult? Function(String postId)? toggleBookmarkPost,
     TResult? Function(FeedEntity post)? addNewPost,
     TResult? Function()? clearTransient,
+    TResult? Function()? startWatchFeed,
+    TResult? Function()? stopWatchFeed,
+    TResult? Function(FeedEntity post)? feedPostArrived,
   }) {
     return getPostById?.call(postId);
   }
@@ -638,6 +698,9 @@ class _$GetPostByIdEventImpl implements GetPostByIdEvent {
     TResult Function(String postId)? toggleBookmarkPost,
     TResult Function(FeedEntity post)? addNewPost,
     TResult Function()? clearTransient,
+    TResult Function()? startWatchFeed,
+    TResult Function()? stopWatchFeed,
+    TResult Function(FeedEntity post)? feedPostArrived,
     required TResult orElse(),
   }) {
     if (getPostById != null) {
@@ -659,6 +722,9 @@ class _$GetPostByIdEventImpl implements GetPostByIdEvent {
     required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
     required TResult Function(AddNewPostEvent value) addNewPost,
     required TResult Function(ClearTransientEvent value) clearTransient,
+    required TResult Function(StartWatchFeedEvent value) startWatchFeed,
+    required TResult Function(StopWatchFeedEvent value) stopWatchFeed,
+    required TResult Function(FeedPostArrivedEvent value) feedPostArrived,
   }) {
     return getPostById(this);
   }
@@ -676,6 +742,9 @@ class _$GetPostByIdEventImpl implements GetPostByIdEvent {
     TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult? Function(AddNewPostEvent value)? addNewPost,
     TResult? Function(ClearTransientEvent value)? clearTransient,
+    TResult? Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult? Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult? Function(FeedPostArrivedEvent value)? feedPostArrived,
   }) {
     return getPostById?.call(this);
   }
@@ -693,6 +762,9 @@ class _$GetPostByIdEventImpl implements GetPostByIdEvent {
     TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult Function(AddNewPostEvent value)? addNewPost,
     TResult Function(ClearTransientEvent value)? clearTransient,
+    TResult Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult Function(FeedPostArrivedEvent value)? feedPostArrived,
     required TResult orElse(),
   }) {
     if (getPostById != null) {
@@ -806,6 +878,9 @@ class _$UpdatePostEventImpl implements UpdatePostEvent {
     required TResult Function(String postId) toggleBookmarkPost,
     required TResult Function(FeedEntity post) addNewPost,
     required TResult Function() clearTransient,
+    required TResult Function() startWatchFeed,
+    required TResult Function() stopWatchFeed,
+    required TResult Function(FeedEntity post) feedPostArrived,
   }) {
     return updatePostEntity(post);
   }
@@ -823,6 +898,9 @@ class _$UpdatePostEventImpl implements UpdatePostEvent {
     TResult? Function(String postId)? toggleBookmarkPost,
     TResult? Function(FeedEntity post)? addNewPost,
     TResult? Function()? clearTransient,
+    TResult? Function()? startWatchFeed,
+    TResult? Function()? stopWatchFeed,
+    TResult? Function(FeedEntity post)? feedPostArrived,
   }) {
     return updatePostEntity?.call(post);
   }
@@ -840,6 +918,9 @@ class _$UpdatePostEventImpl implements UpdatePostEvent {
     TResult Function(String postId)? toggleBookmarkPost,
     TResult Function(FeedEntity post)? addNewPost,
     TResult Function()? clearTransient,
+    TResult Function()? startWatchFeed,
+    TResult Function()? stopWatchFeed,
+    TResult Function(FeedEntity post)? feedPostArrived,
     required TResult orElse(),
   }) {
     if (updatePostEntity != null) {
@@ -861,6 +942,9 @@ class _$UpdatePostEventImpl implements UpdatePostEvent {
     required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
     required TResult Function(AddNewPostEvent value) addNewPost,
     required TResult Function(ClearTransientEvent value) clearTransient,
+    required TResult Function(StartWatchFeedEvent value) startWatchFeed,
+    required TResult Function(StopWatchFeedEvent value) stopWatchFeed,
+    required TResult Function(FeedPostArrivedEvent value) feedPostArrived,
   }) {
     return updatePostEntity(this);
   }
@@ -878,6 +962,9 @@ class _$UpdatePostEventImpl implements UpdatePostEvent {
     TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult? Function(AddNewPostEvent value)? addNewPost,
     TResult? Function(ClearTransientEvent value)? clearTransient,
+    TResult? Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult? Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult? Function(FeedPostArrivedEvent value)? feedPostArrived,
   }) {
     return updatePostEntity?.call(this);
   }
@@ -895,6 +982,9 @@ class _$UpdatePostEventImpl implements UpdatePostEvent {
     TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult Function(AddNewPostEvent value)? addNewPost,
     TResult Function(ClearTransientEvent value)? clearTransient,
+    TResult Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult Function(FeedPostArrivedEvent value)? feedPostArrived,
     required TResult orElse(),
   }) {
     if (updatePostEntity != null) {
@@ -996,6 +1086,9 @@ class _$DeletePostEventImpl implements DeletePostEvent {
     required TResult Function(String postId) toggleBookmarkPost,
     required TResult Function(FeedEntity post) addNewPost,
     required TResult Function() clearTransient,
+    required TResult Function() startWatchFeed,
+    required TResult Function() stopWatchFeed,
+    required TResult Function(FeedEntity post) feedPostArrived,
   }) {
     return deletePost(postId);
   }
@@ -1013,6 +1106,9 @@ class _$DeletePostEventImpl implements DeletePostEvent {
     TResult? Function(String postId)? toggleBookmarkPost,
     TResult? Function(FeedEntity post)? addNewPost,
     TResult? Function()? clearTransient,
+    TResult? Function()? startWatchFeed,
+    TResult? Function()? stopWatchFeed,
+    TResult? Function(FeedEntity post)? feedPostArrived,
   }) {
     return deletePost?.call(postId);
   }
@@ -1030,6 +1126,9 @@ class _$DeletePostEventImpl implements DeletePostEvent {
     TResult Function(String postId)? toggleBookmarkPost,
     TResult Function(FeedEntity post)? addNewPost,
     TResult Function()? clearTransient,
+    TResult Function()? startWatchFeed,
+    TResult Function()? stopWatchFeed,
+    TResult Function(FeedEntity post)? feedPostArrived,
     required TResult orElse(),
   }) {
     if (deletePost != null) {
@@ -1051,6 +1150,9 @@ class _$DeletePostEventImpl implements DeletePostEvent {
     required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
     required TResult Function(AddNewPostEvent value) addNewPost,
     required TResult Function(ClearTransientEvent value) clearTransient,
+    required TResult Function(StartWatchFeedEvent value) startWatchFeed,
+    required TResult Function(StopWatchFeedEvent value) stopWatchFeed,
+    required TResult Function(FeedPostArrivedEvent value) feedPostArrived,
   }) {
     return deletePost(this);
   }
@@ -1068,6 +1170,9 @@ class _$DeletePostEventImpl implements DeletePostEvent {
     TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult? Function(AddNewPostEvent value)? addNewPost,
     TResult? Function(ClearTransientEvent value)? clearTransient,
+    TResult? Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult? Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult? Function(FeedPostArrivedEvent value)? feedPostArrived,
   }) {
     return deletePost?.call(this);
   }
@@ -1085,6 +1190,9 @@ class _$DeletePostEventImpl implements DeletePostEvent {
     TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult Function(AddNewPostEvent value)? addNewPost,
     TResult Function(ClearTransientEvent value)? clearTransient,
+    TResult Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult Function(FeedPostArrivedEvent value)? feedPostArrived,
     required TResult orElse(),
   }) {
     if (deletePost != null) {
@@ -1158,6 +1266,9 @@ class _$RefreshFeedEventImpl implements RefreshFeedEvent {
     required TResult Function(String postId) toggleBookmarkPost,
     required TResult Function(FeedEntity post) addNewPost,
     required TResult Function() clearTransient,
+    required TResult Function() startWatchFeed,
+    required TResult Function() stopWatchFeed,
+    required TResult Function(FeedEntity post) feedPostArrived,
   }) {
     return refreshFeed();
   }
@@ -1175,6 +1286,9 @@ class _$RefreshFeedEventImpl implements RefreshFeedEvent {
     TResult? Function(String postId)? toggleBookmarkPost,
     TResult? Function(FeedEntity post)? addNewPost,
     TResult? Function()? clearTransient,
+    TResult? Function()? startWatchFeed,
+    TResult? Function()? stopWatchFeed,
+    TResult? Function(FeedEntity post)? feedPostArrived,
   }) {
     return refreshFeed?.call();
   }
@@ -1192,6 +1306,9 @@ class _$RefreshFeedEventImpl implements RefreshFeedEvent {
     TResult Function(String postId)? toggleBookmarkPost,
     TResult Function(FeedEntity post)? addNewPost,
     TResult Function()? clearTransient,
+    TResult Function()? startWatchFeed,
+    TResult Function()? stopWatchFeed,
+    TResult Function(FeedEntity post)? feedPostArrived,
     required TResult orElse(),
   }) {
     if (refreshFeed != null) {
@@ -1213,6 +1330,9 @@ class _$RefreshFeedEventImpl implements RefreshFeedEvent {
     required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
     required TResult Function(AddNewPostEvent value) addNewPost,
     required TResult Function(ClearTransientEvent value) clearTransient,
+    required TResult Function(StartWatchFeedEvent value) startWatchFeed,
+    required TResult Function(StopWatchFeedEvent value) stopWatchFeed,
+    required TResult Function(FeedPostArrivedEvent value) feedPostArrived,
   }) {
     return refreshFeed(this);
   }
@@ -1230,6 +1350,9 @@ class _$RefreshFeedEventImpl implements RefreshFeedEvent {
     TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult? Function(AddNewPostEvent value)? addNewPost,
     TResult? Function(ClearTransientEvent value)? clearTransient,
+    TResult? Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult? Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult? Function(FeedPostArrivedEvent value)? feedPostArrived,
   }) {
     return refreshFeed?.call(this);
   }
@@ -1247,6 +1370,9 @@ class _$RefreshFeedEventImpl implements RefreshFeedEvent {
     TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult Function(AddNewPostEvent value)? addNewPost,
     TResult Function(ClearTransientEvent value)? clearTransient,
+    TResult Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult Function(FeedPostArrivedEvent value)? feedPostArrived,
     required TResult orElse(),
   }) {
     if (refreshFeed != null) {
@@ -1339,6 +1465,9 @@ class _$ToggleLikePostEventImpl implements ToggleLikePostEvent {
     required TResult Function(String postId) toggleBookmarkPost,
     required TResult Function(FeedEntity post) addNewPost,
     required TResult Function() clearTransient,
+    required TResult Function() startWatchFeed,
+    required TResult Function() stopWatchFeed,
+    required TResult Function(FeedEntity post) feedPostArrived,
   }) {
     return toggleLikePost(postId);
   }
@@ -1356,6 +1485,9 @@ class _$ToggleLikePostEventImpl implements ToggleLikePostEvent {
     TResult? Function(String postId)? toggleBookmarkPost,
     TResult? Function(FeedEntity post)? addNewPost,
     TResult? Function()? clearTransient,
+    TResult? Function()? startWatchFeed,
+    TResult? Function()? stopWatchFeed,
+    TResult? Function(FeedEntity post)? feedPostArrived,
   }) {
     return toggleLikePost?.call(postId);
   }
@@ -1373,6 +1505,9 @@ class _$ToggleLikePostEventImpl implements ToggleLikePostEvent {
     TResult Function(String postId)? toggleBookmarkPost,
     TResult Function(FeedEntity post)? addNewPost,
     TResult Function()? clearTransient,
+    TResult Function()? startWatchFeed,
+    TResult Function()? stopWatchFeed,
+    TResult Function(FeedEntity post)? feedPostArrived,
     required TResult orElse(),
   }) {
     if (toggleLikePost != null) {
@@ -1394,6 +1529,9 @@ class _$ToggleLikePostEventImpl implements ToggleLikePostEvent {
     required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
     required TResult Function(AddNewPostEvent value) addNewPost,
     required TResult Function(ClearTransientEvent value) clearTransient,
+    required TResult Function(StartWatchFeedEvent value) startWatchFeed,
+    required TResult Function(StopWatchFeedEvent value) stopWatchFeed,
+    required TResult Function(FeedPostArrivedEvent value) feedPostArrived,
   }) {
     return toggleLikePost(this);
   }
@@ -1411,6 +1549,9 @@ class _$ToggleLikePostEventImpl implements ToggleLikePostEvent {
     TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult? Function(AddNewPostEvent value)? addNewPost,
     TResult? Function(ClearTransientEvent value)? clearTransient,
+    TResult? Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult? Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult? Function(FeedPostArrivedEvent value)? feedPostArrived,
   }) {
     return toggleLikePost?.call(this);
   }
@@ -1428,6 +1569,9 @@ class _$ToggleLikePostEventImpl implements ToggleLikePostEvent {
     TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult Function(AddNewPostEvent value)? addNewPost,
     TResult Function(ClearTransientEvent value)? clearTransient,
+    TResult Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult Function(FeedPostArrivedEvent value)? feedPostArrived,
     required TResult orElse(),
   }) {
     if (toggleLikePost != null) {
@@ -1531,6 +1675,9 @@ class _$ToggleBookmarkPostEventImpl implements ToggleBookmarkPostEvent {
     required TResult Function(String postId) toggleBookmarkPost,
     required TResult Function(FeedEntity post) addNewPost,
     required TResult Function() clearTransient,
+    required TResult Function() startWatchFeed,
+    required TResult Function() stopWatchFeed,
+    required TResult Function(FeedEntity post) feedPostArrived,
   }) {
     return toggleBookmarkPost(postId);
   }
@@ -1548,6 +1695,9 @@ class _$ToggleBookmarkPostEventImpl implements ToggleBookmarkPostEvent {
     TResult? Function(String postId)? toggleBookmarkPost,
     TResult? Function(FeedEntity post)? addNewPost,
     TResult? Function()? clearTransient,
+    TResult? Function()? startWatchFeed,
+    TResult? Function()? stopWatchFeed,
+    TResult? Function(FeedEntity post)? feedPostArrived,
   }) {
     return toggleBookmarkPost?.call(postId);
   }
@@ -1565,6 +1715,9 @@ class _$ToggleBookmarkPostEventImpl implements ToggleBookmarkPostEvent {
     TResult Function(String postId)? toggleBookmarkPost,
     TResult Function(FeedEntity post)? addNewPost,
     TResult Function()? clearTransient,
+    TResult Function()? startWatchFeed,
+    TResult Function()? stopWatchFeed,
+    TResult Function(FeedEntity post)? feedPostArrived,
     required TResult orElse(),
   }) {
     if (toggleBookmarkPost != null) {
@@ -1586,6 +1739,9 @@ class _$ToggleBookmarkPostEventImpl implements ToggleBookmarkPostEvent {
     required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
     required TResult Function(AddNewPostEvent value) addNewPost,
     required TResult Function(ClearTransientEvent value) clearTransient,
+    required TResult Function(StartWatchFeedEvent value) startWatchFeed,
+    required TResult Function(StopWatchFeedEvent value) stopWatchFeed,
+    required TResult Function(FeedPostArrivedEvent value) feedPostArrived,
   }) {
     return toggleBookmarkPost(this);
   }
@@ -1603,6 +1759,9 @@ class _$ToggleBookmarkPostEventImpl implements ToggleBookmarkPostEvent {
     TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult? Function(AddNewPostEvent value)? addNewPost,
     TResult? Function(ClearTransientEvent value)? clearTransient,
+    TResult? Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult? Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult? Function(FeedPostArrivedEvent value)? feedPostArrived,
   }) {
     return toggleBookmarkPost?.call(this);
   }
@@ -1620,6 +1779,9 @@ class _$ToggleBookmarkPostEventImpl implements ToggleBookmarkPostEvent {
     TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult Function(AddNewPostEvent value)? addNewPost,
     TResult Function(ClearTransientEvent value)? clearTransient,
+    TResult Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult Function(FeedPostArrivedEvent value)? feedPostArrived,
     required TResult orElse(),
   }) {
     if (toggleBookmarkPost != null) {
@@ -1733,6 +1895,9 @@ class _$AddNewPostEventImpl implements AddNewPostEvent {
     required TResult Function(String postId) toggleBookmarkPost,
     required TResult Function(FeedEntity post) addNewPost,
     required TResult Function() clearTransient,
+    required TResult Function() startWatchFeed,
+    required TResult Function() stopWatchFeed,
+    required TResult Function(FeedEntity post) feedPostArrived,
   }) {
     return addNewPost(post);
   }
@@ -1750,6 +1915,9 @@ class _$AddNewPostEventImpl implements AddNewPostEvent {
     TResult? Function(String postId)? toggleBookmarkPost,
     TResult? Function(FeedEntity post)? addNewPost,
     TResult? Function()? clearTransient,
+    TResult? Function()? startWatchFeed,
+    TResult? Function()? stopWatchFeed,
+    TResult? Function(FeedEntity post)? feedPostArrived,
   }) {
     return addNewPost?.call(post);
   }
@@ -1767,6 +1935,9 @@ class _$AddNewPostEventImpl implements AddNewPostEvent {
     TResult Function(String postId)? toggleBookmarkPost,
     TResult Function(FeedEntity post)? addNewPost,
     TResult Function()? clearTransient,
+    TResult Function()? startWatchFeed,
+    TResult Function()? stopWatchFeed,
+    TResult Function(FeedEntity post)? feedPostArrived,
     required TResult orElse(),
   }) {
     if (addNewPost != null) {
@@ -1788,6 +1959,9 @@ class _$AddNewPostEventImpl implements AddNewPostEvent {
     required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
     required TResult Function(AddNewPostEvent value) addNewPost,
     required TResult Function(ClearTransientEvent value) clearTransient,
+    required TResult Function(StartWatchFeedEvent value) startWatchFeed,
+    required TResult Function(StopWatchFeedEvent value) stopWatchFeed,
+    required TResult Function(FeedPostArrivedEvent value) feedPostArrived,
   }) {
     return addNewPost(this);
   }
@@ -1805,6 +1979,9 @@ class _$AddNewPostEventImpl implements AddNewPostEvent {
     TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult? Function(AddNewPostEvent value)? addNewPost,
     TResult? Function(ClearTransientEvent value)? clearTransient,
+    TResult? Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult? Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult? Function(FeedPostArrivedEvent value)? feedPostArrived,
   }) {
     return addNewPost?.call(this);
   }
@@ -1822,6 +1999,9 @@ class _$AddNewPostEventImpl implements AddNewPostEvent {
     TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult Function(AddNewPostEvent value)? addNewPost,
     TResult Function(ClearTransientEvent value)? clearTransient,
+    TResult Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult Function(FeedPostArrivedEvent value)? feedPostArrived,
     required TResult orElse(),
   }) {
     if (addNewPost != null) {
@@ -1895,6 +2075,9 @@ class _$ClearTransientEventImpl implements ClearTransientEvent {
     required TResult Function(String postId) toggleBookmarkPost,
     required TResult Function(FeedEntity post) addNewPost,
     required TResult Function() clearTransient,
+    required TResult Function() startWatchFeed,
+    required TResult Function() stopWatchFeed,
+    required TResult Function(FeedEntity post) feedPostArrived,
   }) {
     return clearTransient();
   }
@@ -1912,6 +2095,9 @@ class _$ClearTransientEventImpl implements ClearTransientEvent {
     TResult? Function(String postId)? toggleBookmarkPost,
     TResult? Function(FeedEntity post)? addNewPost,
     TResult? Function()? clearTransient,
+    TResult? Function()? startWatchFeed,
+    TResult? Function()? stopWatchFeed,
+    TResult? Function(FeedEntity post)? feedPostArrived,
   }) {
     return clearTransient?.call();
   }
@@ -1929,6 +2115,9 @@ class _$ClearTransientEventImpl implements ClearTransientEvent {
     TResult Function(String postId)? toggleBookmarkPost,
     TResult Function(FeedEntity post)? addNewPost,
     TResult Function()? clearTransient,
+    TResult Function()? startWatchFeed,
+    TResult Function()? stopWatchFeed,
+    TResult Function(FeedEntity post)? feedPostArrived,
     required TResult orElse(),
   }) {
     if (clearTransient != null) {
@@ -1950,6 +2139,9 @@ class _$ClearTransientEventImpl implements ClearTransientEvent {
     required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
     required TResult Function(AddNewPostEvent value) addNewPost,
     required TResult Function(ClearTransientEvent value) clearTransient,
+    required TResult Function(StartWatchFeedEvent value) startWatchFeed,
+    required TResult Function(StopWatchFeedEvent value) stopWatchFeed,
+    required TResult Function(FeedPostArrivedEvent value) feedPostArrived,
   }) {
     return clearTransient(this);
   }
@@ -1967,6 +2159,9 @@ class _$ClearTransientEventImpl implements ClearTransientEvent {
     TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult? Function(AddNewPostEvent value)? addNewPost,
     TResult? Function(ClearTransientEvent value)? clearTransient,
+    TResult? Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult? Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult? Function(FeedPostArrivedEvent value)? feedPostArrived,
   }) {
     return clearTransient?.call(this);
   }
@@ -1984,6 +2179,9 @@ class _$ClearTransientEventImpl implements ClearTransientEvent {
     TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
     TResult Function(AddNewPostEvent value)? addNewPost,
     TResult Function(ClearTransientEvent value)? clearTransient,
+    TResult Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult Function(FeedPostArrivedEvent value)? feedPostArrived,
     required TResult orElse(),
   }) {
     if (clearTransient != null) {
@@ -1995,4 +2193,568 @@ class _$ClearTransientEventImpl implements ClearTransientEvent {
 
 abstract class ClearTransientEvent implements FeedEvent {
   const factory ClearTransientEvent() = _$ClearTransientEventImpl;
+}
+
+/// @nodoc
+abstract class _$$StartWatchFeedEventImplCopyWith<$Res> {
+  factory _$$StartWatchFeedEventImplCopyWith(_$StartWatchFeedEventImpl value,
+          $Res Function(_$StartWatchFeedEventImpl) then) =
+      __$$StartWatchFeedEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$StartWatchFeedEventImplCopyWithImpl<$Res>
+    extends _$FeedEventCopyWithImpl<$Res, _$StartWatchFeedEventImpl>
+    implements _$$StartWatchFeedEventImplCopyWith<$Res> {
+  __$$StartWatchFeedEventImplCopyWithImpl(_$StartWatchFeedEventImpl _value,
+      $Res Function(_$StartWatchFeedEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of FeedEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$StartWatchFeedEventImpl implements StartWatchFeedEvent {
+  const _$StartWatchFeedEventImpl();
+
+  @override
+  String toString() {
+    return 'FeedEvent.startWatchFeed()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$StartWatchFeedEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int limit, String? userId) loadInitialFeed,
+    required TResult Function(int limit, String? userId) loadMoreFeed,
+    required TResult Function(String postId) getPostById,
+    required TResult Function(FeedEntity post) updatePostEntity,
+    required TResult Function(String postId) deletePost,
+    required TResult Function() refreshFeed,
+    required TResult Function(String postId) toggleLikePost,
+    required TResult Function(String postId) toggleBookmarkPost,
+    required TResult Function(FeedEntity post) addNewPost,
+    required TResult Function() clearTransient,
+    required TResult Function() startWatchFeed,
+    required TResult Function() stopWatchFeed,
+    required TResult Function(FeedEntity post) feedPostArrived,
+  }) {
+    return startWatchFeed();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int limit, String? userId)? loadInitialFeed,
+    TResult? Function(int limit, String? userId)? loadMoreFeed,
+    TResult? Function(String postId)? getPostById,
+    TResult? Function(FeedEntity post)? updatePostEntity,
+    TResult? Function(String postId)? deletePost,
+    TResult? Function()? refreshFeed,
+    TResult? Function(String postId)? toggleLikePost,
+    TResult? Function(String postId)? toggleBookmarkPost,
+    TResult? Function(FeedEntity post)? addNewPost,
+    TResult? Function()? clearTransient,
+    TResult? Function()? startWatchFeed,
+    TResult? Function()? stopWatchFeed,
+    TResult? Function(FeedEntity post)? feedPostArrived,
+  }) {
+    return startWatchFeed?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int limit, String? userId)? loadInitialFeed,
+    TResult Function(int limit, String? userId)? loadMoreFeed,
+    TResult Function(String postId)? getPostById,
+    TResult Function(FeedEntity post)? updatePostEntity,
+    TResult Function(String postId)? deletePost,
+    TResult Function()? refreshFeed,
+    TResult Function(String postId)? toggleLikePost,
+    TResult Function(String postId)? toggleBookmarkPost,
+    TResult Function(FeedEntity post)? addNewPost,
+    TResult Function()? clearTransient,
+    TResult Function()? startWatchFeed,
+    TResult Function()? stopWatchFeed,
+    TResult Function(FeedEntity post)? feedPostArrived,
+    required TResult orElse(),
+  }) {
+    if (startWatchFeed != null) {
+      return startWatchFeed();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadInitialFeedEvent value) loadInitialFeed,
+    required TResult Function(LoadMoreFeedEvent value) loadMoreFeed,
+    required TResult Function(GetPostByIdEvent value) getPostById,
+    required TResult Function(UpdatePostEvent value) updatePostEntity,
+    required TResult Function(DeletePostEvent value) deletePost,
+    required TResult Function(RefreshFeedEvent value) refreshFeed,
+    required TResult Function(ToggleLikePostEvent value) toggleLikePost,
+    required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
+    required TResult Function(AddNewPostEvent value) addNewPost,
+    required TResult Function(ClearTransientEvent value) clearTransient,
+    required TResult Function(StartWatchFeedEvent value) startWatchFeed,
+    required TResult Function(StopWatchFeedEvent value) stopWatchFeed,
+    required TResult Function(FeedPostArrivedEvent value) feedPostArrived,
+  }) {
+    return startWatchFeed(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadInitialFeedEvent value)? loadInitialFeed,
+    TResult? Function(LoadMoreFeedEvent value)? loadMoreFeed,
+    TResult? Function(GetPostByIdEvent value)? getPostById,
+    TResult? Function(UpdatePostEvent value)? updatePostEntity,
+    TResult? Function(DeletePostEvent value)? deletePost,
+    TResult? Function(RefreshFeedEvent value)? refreshFeed,
+    TResult? Function(ToggleLikePostEvent value)? toggleLikePost,
+    TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
+    TResult? Function(AddNewPostEvent value)? addNewPost,
+    TResult? Function(ClearTransientEvent value)? clearTransient,
+    TResult? Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult? Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult? Function(FeedPostArrivedEvent value)? feedPostArrived,
+  }) {
+    return startWatchFeed?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadInitialFeedEvent value)? loadInitialFeed,
+    TResult Function(LoadMoreFeedEvent value)? loadMoreFeed,
+    TResult Function(GetPostByIdEvent value)? getPostById,
+    TResult Function(UpdatePostEvent value)? updatePostEntity,
+    TResult Function(DeletePostEvent value)? deletePost,
+    TResult Function(RefreshFeedEvent value)? refreshFeed,
+    TResult Function(ToggleLikePostEvent value)? toggleLikePost,
+    TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
+    TResult Function(AddNewPostEvent value)? addNewPost,
+    TResult Function(ClearTransientEvent value)? clearTransient,
+    TResult Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult Function(FeedPostArrivedEvent value)? feedPostArrived,
+    required TResult orElse(),
+  }) {
+    if (startWatchFeed != null) {
+      return startWatchFeed(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class StartWatchFeedEvent implements FeedEvent {
+  const factory StartWatchFeedEvent() = _$StartWatchFeedEventImpl;
+}
+
+/// @nodoc
+abstract class _$$StopWatchFeedEventImplCopyWith<$Res> {
+  factory _$$StopWatchFeedEventImplCopyWith(_$StopWatchFeedEventImpl value,
+          $Res Function(_$StopWatchFeedEventImpl) then) =
+      __$$StopWatchFeedEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$StopWatchFeedEventImplCopyWithImpl<$Res>
+    extends _$FeedEventCopyWithImpl<$Res, _$StopWatchFeedEventImpl>
+    implements _$$StopWatchFeedEventImplCopyWith<$Res> {
+  __$$StopWatchFeedEventImplCopyWithImpl(_$StopWatchFeedEventImpl _value,
+      $Res Function(_$StopWatchFeedEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of FeedEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$StopWatchFeedEventImpl implements StopWatchFeedEvent {
+  const _$StopWatchFeedEventImpl();
+
+  @override
+  String toString() {
+    return 'FeedEvent.stopWatchFeed()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$StopWatchFeedEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int limit, String? userId) loadInitialFeed,
+    required TResult Function(int limit, String? userId) loadMoreFeed,
+    required TResult Function(String postId) getPostById,
+    required TResult Function(FeedEntity post) updatePostEntity,
+    required TResult Function(String postId) deletePost,
+    required TResult Function() refreshFeed,
+    required TResult Function(String postId) toggleLikePost,
+    required TResult Function(String postId) toggleBookmarkPost,
+    required TResult Function(FeedEntity post) addNewPost,
+    required TResult Function() clearTransient,
+    required TResult Function() startWatchFeed,
+    required TResult Function() stopWatchFeed,
+    required TResult Function(FeedEntity post) feedPostArrived,
+  }) {
+    return stopWatchFeed();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int limit, String? userId)? loadInitialFeed,
+    TResult? Function(int limit, String? userId)? loadMoreFeed,
+    TResult? Function(String postId)? getPostById,
+    TResult? Function(FeedEntity post)? updatePostEntity,
+    TResult? Function(String postId)? deletePost,
+    TResult? Function()? refreshFeed,
+    TResult? Function(String postId)? toggleLikePost,
+    TResult? Function(String postId)? toggleBookmarkPost,
+    TResult? Function(FeedEntity post)? addNewPost,
+    TResult? Function()? clearTransient,
+    TResult? Function()? startWatchFeed,
+    TResult? Function()? stopWatchFeed,
+    TResult? Function(FeedEntity post)? feedPostArrived,
+  }) {
+    return stopWatchFeed?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int limit, String? userId)? loadInitialFeed,
+    TResult Function(int limit, String? userId)? loadMoreFeed,
+    TResult Function(String postId)? getPostById,
+    TResult Function(FeedEntity post)? updatePostEntity,
+    TResult Function(String postId)? deletePost,
+    TResult Function()? refreshFeed,
+    TResult Function(String postId)? toggleLikePost,
+    TResult Function(String postId)? toggleBookmarkPost,
+    TResult Function(FeedEntity post)? addNewPost,
+    TResult Function()? clearTransient,
+    TResult Function()? startWatchFeed,
+    TResult Function()? stopWatchFeed,
+    TResult Function(FeedEntity post)? feedPostArrived,
+    required TResult orElse(),
+  }) {
+    if (stopWatchFeed != null) {
+      return stopWatchFeed();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadInitialFeedEvent value) loadInitialFeed,
+    required TResult Function(LoadMoreFeedEvent value) loadMoreFeed,
+    required TResult Function(GetPostByIdEvent value) getPostById,
+    required TResult Function(UpdatePostEvent value) updatePostEntity,
+    required TResult Function(DeletePostEvent value) deletePost,
+    required TResult Function(RefreshFeedEvent value) refreshFeed,
+    required TResult Function(ToggleLikePostEvent value) toggleLikePost,
+    required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
+    required TResult Function(AddNewPostEvent value) addNewPost,
+    required TResult Function(ClearTransientEvent value) clearTransient,
+    required TResult Function(StartWatchFeedEvent value) startWatchFeed,
+    required TResult Function(StopWatchFeedEvent value) stopWatchFeed,
+    required TResult Function(FeedPostArrivedEvent value) feedPostArrived,
+  }) {
+    return stopWatchFeed(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadInitialFeedEvent value)? loadInitialFeed,
+    TResult? Function(LoadMoreFeedEvent value)? loadMoreFeed,
+    TResult? Function(GetPostByIdEvent value)? getPostById,
+    TResult? Function(UpdatePostEvent value)? updatePostEntity,
+    TResult? Function(DeletePostEvent value)? deletePost,
+    TResult? Function(RefreshFeedEvent value)? refreshFeed,
+    TResult? Function(ToggleLikePostEvent value)? toggleLikePost,
+    TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
+    TResult? Function(AddNewPostEvent value)? addNewPost,
+    TResult? Function(ClearTransientEvent value)? clearTransient,
+    TResult? Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult? Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult? Function(FeedPostArrivedEvent value)? feedPostArrived,
+  }) {
+    return stopWatchFeed?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadInitialFeedEvent value)? loadInitialFeed,
+    TResult Function(LoadMoreFeedEvent value)? loadMoreFeed,
+    TResult Function(GetPostByIdEvent value)? getPostById,
+    TResult Function(UpdatePostEvent value)? updatePostEntity,
+    TResult Function(DeletePostEvent value)? deletePost,
+    TResult Function(RefreshFeedEvent value)? refreshFeed,
+    TResult Function(ToggleLikePostEvent value)? toggleLikePost,
+    TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
+    TResult Function(AddNewPostEvent value)? addNewPost,
+    TResult Function(ClearTransientEvent value)? clearTransient,
+    TResult Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult Function(FeedPostArrivedEvent value)? feedPostArrived,
+    required TResult orElse(),
+  }) {
+    if (stopWatchFeed != null) {
+      return stopWatchFeed(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class StopWatchFeedEvent implements FeedEvent {
+  const factory StopWatchFeedEvent() = _$StopWatchFeedEventImpl;
+}
+
+/// @nodoc
+abstract class _$$FeedPostArrivedEventImplCopyWith<$Res> {
+  factory _$$FeedPostArrivedEventImplCopyWith(_$FeedPostArrivedEventImpl value,
+          $Res Function(_$FeedPostArrivedEventImpl) then) =
+      __$$FeedPostArrivedEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({FeedEntity post});
+
+  $FeedEntityCopyWith<$Res> get post;
+}
+
+/// @nodoc
+class __$$FeedPostArrivedEventImplCopyWithImpl<$Res>
+    extends _$FeedEventCopyWithImpl<$Res, _$FeedPostArrivedEventImpl>
+    implements _$$FeedPostArrivedEventImplCopyWith<$Res> {
+  __$$FeedPostArrivedEventImplCopyWithImpl(_$FeedPostArrivedEventImpl _value,
+      $Res Function(_$FeedPostArrivedEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of FeedEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? post = null,
+  }) {
+    return _then(_$FeedPostArrivedEventImpl(
+      null == post
+          ? _value.post
+          : post // ignore: cast_nullable_to_non_nullable
+              as FeedEntity,
+    ));
+  }
+
+  /// Create a copy of FeedEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $FeedEntityCopyWith<$Res> get post {
+    return $FeedEntityCopyWith<$Res>(_value.post, (value) {
+      return _then(_value.copyWith(post: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$FeedPostArrivedEventImpl implements FeedPostArrivedEvent {
+  const _$FeedPostArrivedEventImpl(this.post);
+
+  @override
+  final FeedEntity post;
+
+  @override
+  String toString() {
+    return 'FeedEvent.feedPostArrived(post: $post)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FeedPostArrivedEventImpl &&
+            (identical(other.post, post) || other.post == post));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, post);
+
+  /// Create a copy of FeedEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FeedPostArrivedEventImplCopyWith<_$FeedPostArrivedEventImpl>
+      get copyWith =>
+          __$$FeedPostArrivedEventImplCopyWithImpl<_$FeedPostArrivedEventImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int limit, String? userId) loadInitialFeed,
+    required TResult Function(int limit, String? userId) loadMoreFeed,
+    required TResult Function(String postId) getPostById,
+    required TResult Function(FeedEntity post) updatePostEntity,
+    required TResult Function(String postId) deletePost,
+    required TResult Function() refreshFeed,
+    required TResult Function(String postId) toggleLikePost,
+    required TResult Function(String postId) toggleBookmarkPost,
+    required TResult Function(FeedEntity post) addNewPost,
+    required TResult Function() clearTransient,
+    required TResult Function() startWatchFeed,
+    required TResult Function() stopWatchFeed,
+    required TResult Function(FeedEntity post) feedPostArrived,
+  }) {
+    return feedPostArrived(post);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int limit, String? userId)? loadInitialFeed,
+    TResult? Function(int limit, String? userId)? loadMoreFeed,
+    TResult? Function(String postId)? getPostById,
+    TResult? Function(FeedEntity post)? updatePostEntity,
+    TResult? Function(String postId)? deletePost,
+    TResult? Function()? refreshFeed,
+    TResult? Function(String postId)? toggleLikePost,
+    TResult? Function(String postId)? toggleBookmarkPost,
+    TResult? Function(FeedEntity post)? addNewPost,
+    TResult? Function()? clearTransient,
+    TResult? Function()? startWatchFeed,
+    TResult? Function()? stopWatchFeed,
+    TResult? Function(FeedEntity post)? feedPostArrived,
+  }) {
+    return feedPostArrived?.call(post);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int limit, String? userId)? loadInitialFeed,
+    TResult Function(int limit, String? userId)? loadMoreFeed,
+    TResult Function(String postId)? getPostById,
+    TResult Function(FeedEntity post)? updatePostEntity,
+    TResult Function(String postId)? deletePost,
+    TResult Function()? refreshFeed,
+    TResult Function(String postId)? toggleLikePost,
+    TResult Function(String postId)? toggleBookmarkPost,
+    TResult Function(FeedEntity post)? addNewPost,
+    TResult Function()? clearTransient,
+    TResult Function()? startWatchFeed,
+    TResult Function()? stopWatchFeed,
+    TResult Function(FeedEntity post)? feedPostArrived,
+    required TResult orElse(),
+  }) {
+    if (feedPostArrived != null) {
+      return feedPostArrived(post);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadInitialFeedEvent value) loadInitialFeed,
+    required TResult Function(LoadMoreFeedEvent value) loadMoreFeed,
+    required TResult Function(GetPostByIdEvent value) getPostById,
+    required TResult Function(UpdatePostEvent value) updatePostEntity,
+    required TResult Function(DeletePostEvent value) deletePost,
+    required TResult Function(RefreshFeedEvent value) refreshFeed,
+    required TResult Function(ToggleLikePostEvent value) toggleLikePost,
+    required TResult Function(ToggleBookmarkPostEvent value) toggleBookmarkPost,
+    required TResult Function(AddNewPostEvent value) addNewPost,
+    required TResult Function(ClearTransientEvent value) clearTransient,
+    required TResult Function(StartWatchFeedEvent value) startWatchFeed,
+    required TResult Function(StopWatchFeedEvent value) stopWatchFeed,
+    required TResult Function(FeedPostArrivedEvent value) feedPostArrived,
+  }) {
+    return feedPostArrived(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadInitialFeedEvent value)? loadInitialFeed,
+    TResult? Function(LoadMoreFeedEvent value)? loadMoreFeed,
+    TResult? Function(GetPostByIdEvent value)? getPostById,
+    TResult? Function(UpdatePostEvent value)? updatePostEntity,
+    TResult? Function(DeletePostEvent value)? deletePost,
+    TResult? Function(RefreshFeedEvent value)? refreshFeed,
+    TResult? Function(ToggleLikePostEvent value)? toggleLikePost,
+    TResult? Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
+    TResult? Function(AddNewPostEvent value)? addNewPost,
+    TResult? Function(ClearTransientEvent value)? clearTransient,
+    TResult? Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult? Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult? Function(FeedPostArrivedEvent value)? feedPostArrived,
+  }) {
+    return feedPostArrived?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadInitialFeedEvent value)? loadInitialFeed,
+    TResult Function(LoadMoreFeedEvent value)? loadMoreFeed,
+    TResult Function(GetPostByIdEvent value)? getPostById,
+    TResult Function(UpdatePostEvent value)? updatePostEntity,
+    TResult Function(DeletePostEvent value)? deletePost,
+    TResult Function(RefreshFeedEvent value)? refreshFeed,
+    TResult Function(ToggleLikePostEvent value)? toggleLikePost,
+    TResult Function(ToggleBookmarkPostEvent value)? toggleBookmarkPost,
+    TResult Function(AddNewPostEvent value)? addNewPost,
+    TResult Function(ClearTransientEvent value)? clearTransient,
+    TResult Function(StartWatchFeedEvent value)? startWatchFeed,
+    TResult Function(StopWatchFeedEvent value)? stopWatchFeed,
+    TResult Function(FeedPostArrivedEvent value)? feedPostArrived,
+    required TResult orElse(),
+  }) {
+    if (feedPostArrived != null) {
+      return feedPostArrived(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FeedPostArrivedEvent implements FeedEvent {
+  const factory FeedPostArrivedEvent(final FeedEntity post) =
+      _$FeedPostArrivedEventImpl;
+
+  FeedEntity get post;
+
+  /// Create a copy of FeedEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FeedPostArrivedEventImplCopyWith<_$FeedPostArrivedEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

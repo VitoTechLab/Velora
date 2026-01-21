@@ -145,27 +145,33 @@ class _ProfileScreenContent extends HookWidget {
                                     ),
                                     const SizedBox(width: 24),
                                     Expanded(
-                                      child: ProfileStats(
-                                        postsCount:
-                                            profile?.followersCount ??
-                                            0, // Should be posts count, but for now we follow migration tables
-                                        followersCount:
-                                            profile?.followersCount ?? 0,
-                                        followingCount:
-                                            profile?.followingCount ?? 0,
-                                        onPostsTap: () {},
-                                        onFollowersTap: () {
-                                          context.pushNamed(
-                                            AppRouteName.relationDetail,
-                                            pathParameters: {'userId': userId},
-                                            queryParameters: {'tab': '0'},
-                                          );
-                                        },
-                                        onFollowingTap: () {
-                                          context.pushNamed(
-                                            AppRouteName.relationDetail,
-                                            pathParameters: {'userId': userId},
-                                            queryParameters: {'tab': '1'},
+                                      child: BlocBuilder<FeedBloc, FeedState>(
+                                        builder: (context, feedState) {
+                                          return ProfileStats(
+                                            postsCount: feedState.posts.length,
+                                            followersCount:
+                                                profile?.followersCount ?? 0,
+                                            followingCount:
+                                                profile?.followingCount ?? 0,
+                                            onPostsTap: () {},
+                                            onFollowersTap: () {
+                                              context.pushNamed(
+                                                AppRouteName.relationDetail,
+                                                pathParameters: {
+                                                  'userId': userId
+                                                },
+                                                queryParameters: {'tab': '0'},
+                                              );
+                                            },
+                                            onFollowingTap: () {
+                                              context.pushNamed(
+                                                AppRouteName.relationDetail,
+                                                pathParameters: {
+                                                  'userId': userId
+                                                },
+                                                queryParameters: {'tab': '1'},
+                                              );
+                                            },
                                           );
                                         },
                                       ),
@@ -188,11 +194,16 @@ class _ProfileScreenContent extends HookWidget {
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    const SizedBox(height: 2),
-                                    const Text(
-                                      '💥',
-                                      style: TextStyle(fontSize: 14),
-                                    ),
+                                    if (profile?.bio != null &&
+                                        profile!.bio!.isNotEmpty) ...[
+                                      const SizedBox(height: 4),
+                                      Text(
+                                        profile.bio!,
+                                        style: const TextStyle(fontSize: 14),
+                                        maxLines: 3,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ],
                                     const SizedBox(height: 4),
                                     Row(
                                       children: [

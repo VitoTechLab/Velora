@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
@@ -11,7 +12,8 @@ class FirebaseInitializer {
       options: DefaultFirebaseOptions.currentPlatform,
     );
 
-    if (!kIsWeb) {
+    // Only activate Firebase App Check on supported mobile platforms
+    if (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) {
       // ignore: deprecated_member_use
       await FirebaseAppCheck.instance.activate(
         webProvider: ReCaptchaV3Provider('recaptcha-v3-site-key'),

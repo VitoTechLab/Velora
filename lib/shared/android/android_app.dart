@@ -11,6 +11,7 @@ import 'package:velora/features/media/presentation/bloc/media_gallery_bloc.dart'
 import 'package:velora/features/campaign/presentation/bloc/campaign_bloc.dart';
 import 'package:velora/features/media/presentation/bloc/media_upload_bloc.dart';
 import 'package:velora/features/post/presentation/bloc/post_bloc.dart';
+import 'package:velora/features/post/services/post_sync_service.dart';
 import 'package:velora/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:velora/features/notification/presentation/bloc/notification_bloc.dart';
 import 'package:velora/features/settings/presentation/bloc/settings_bloc.dart';
@@ -19,8 +20,29 @@ import 'package:velora/features/social_relation/presentation/bloc/social_relatio
 import 'package:velora/l10n/app_localizations.dart';
 import 'package:velora/routes/app_router.dart';
 
-class AndroidApp extends StatelessWidget {
+class AndroidApp extends StatefulWidget {
   const AndroidApp({super.key});
+
+  @override
+  State<AndroidApp> createState() => _AndroidAppState();
+}
+
+class _AndroidAppState extends State<AndroidApp> {
+  late final PostSyncService _syncService;
+
+  @override
+  void initState() {
+    super.initState();
+    // Start auto-sync service for offline posts
+    _syncService = getIt<PostSyncService>();
+    _syncService.startAutoSync();
+  }
+
+  @override
+  void dispose() {
+    _syncService.stopAutoSync();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
