@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velora/features/settings/presentation/widgets/settings_section.dart';
 import 'package:velora/features/settings/presentation/widgets/settings_page_scaffold.dart';
 import 'package:velora/features/settings/presentation/widgets/settings_tile.dart';
@@ -10,6 +11,39 @@ import 'package:velora/l10n/app_localizations.dart';
 class NotificationDetailScreen extends HookWidget {
   const NotificationDetailScreen({super.key});
 
+  // SharedPreferences keys
+  static const String _keyPauseAll = 'notification_pause_all';
+  static const String _keySleepMode = 'notification_sleep_mode';
+  static const String _keySleepStart = 'notification_sleep_start';
+  static const String _keySleepEnd = 'notification_sleep_end';
+  static const String _keySummaryFreq = 'notification_summary_freq';
+  
+  // Posts & Stories keys
+  static const String _keyPostsAndStories = 'notification_posts_stories';
+  static const String _keyLiveVideos = 'notification_live_videos';
+  static const String _keyNewCampaigns = 'notification_new_campaigns';
+  
+  // Engagement keys
+  static const String _keyLikesOnPosts = 'notification_likes_posts';
+  static const String _keyCommentReplies = 'notification_comment_replies';
+  static const String _keyMentions = 'notification_mentions';
+  static const String _keyNewFollowers = 'notification_new_followers';
+  
+  // Donations keys
+  static const String _keyDonationReceived = 'notification_donation_received';
+  static const String _keyCampaignMilestone = 'notification_campaign_milestone';
+  static const String _keyCampaignUpdates = 'notification_campaign_updates';
+  static const String _keyWithdrawalStatus = 'notification_withdrawal_status';
+  
+  // Messages keys
+  static const String _keyDirectMessages = 'notification_direct_messages';
+  static const String _keyMessageRequests = 'notification_message_requests';
+  static const String _keyGroupInvites = 'notification_group_invites';
+  
+  // Other channels keys
+  static const String _keyEmailNotifications = 'notification_email';
+  static const String _keySmsNotifications = 'notification_sms';
+
   @override
   Widget build(BuildContext context) {
     final pauseAll = useState(false);
@@ -17,32 +51,99 @@ class NotificationDetailScreen extends HookWidget {
     final sleepStartTime = useState(const TimeOfDay(hour: 22, minute: 0));
     final sleepEndTime = useState(const TimeOfDay(hour: 7, minute: 0));
     final summaryFrequency = useState('Daily');
+    final isLoading = useState(true);
 
-    // Notification toggles by category
-    final postsAndStories = useState(true);
-    final liveVideos = useState(true);
-    final newCampaigns = useState(true);
+    // Notification toggles by category (Under Development - all OFF)
+    final postsAndStories = useState(false);
+    final liveVideos = useState(false);
+    final newCampaigns = useState(false);
 
-    final likesOnPosts = useState(true);
-    final commentReplies = useState(true);
-    final mentions = useState(true);
-    final newFollowers = useState(true);
+    final likesOnPosts = useState(false);
+    final commentReplies = useState(false);
+    final mentions = useState(false);
+    final newFollowers = useState(false);
 
-    final donationReceived = useState(true);
-    final campaignMilestone = useState(true);
-    final campaignUpdates = useState(true);
-    final withdrawalStatus = useState(true);
+    final donationReceived = useState(false);
+    final campaignMilestone = useState(false);
+    final campaignUpdates = useState(false);
+    final withdrawalStatus = useState(false);
 
-    final directMessages = useState(true);
+    final directMessages = useState(false);
     final messageRequests = useState(false);
-    final groupInvites = useState(true);
+    final groupInvites = useState(false);
 
-    final emailNotifications = useState(true);
+    final emailNotifications = useState(false);
     final smsNotifications = useState(false);
+
+    // Load settings from SharedPreferences
+    useEffect(() {
+      Future<void> loadSettings() async {
+        final prefs = await SharedPreferences.getInstance();
+        pauseAll.value = prefs.getBool(_keyPauseAll) ?? false;
+        sleepModeEnabled.value = prefs.getBool(_keySleepMode) ?? false;
+        
+        final sleepStart = prefs.getInt(_keySleepStart) ?? 22 * 60;
+        sleepStartTime.value = TimeOfDay(
+          hour: sleepStart ~/ 60,
+          minute: sleepStart % 60,
+        );
+        
+        final sleepEnd = prefs.getInt(_keySleepEnd) ?? 7 * 60;
+        sleepEndTime.value = TimeOfDay(
+          hour: sleepEnd ~/ 60,
+          minute: sleepEnd % 60,
+        );
+        
+        summaryFrequency.value = prefs.getString(_keySummaryFreq) ?? 'Daily';
+        
+        // Load Posts & Stories
+        postsAndStories.value = prefs.getBool(_keyPostsAndStories) ?? false;
+        liveVideos.value = prefs.getBool(_keyLiveVideos) ?? false;
+        newCampaigns.value = prefs.getBool(_keyNewCampaigns) ?? false;
+        
+        // Load Engagement
+        likesOnPosts.value = prefs.getBool(_keyLikesOnPosts) ?? false;
+        commentReplies.value = prefs.getBool(_keyCommentReplies) ?? false;
+        mentions.value = prefs.getBool(_keyMentions) ?? false;
+        newFollowers.value = prefs.getBool(_keyNewFollowers) ?? false;
+        
+        // Load Donations
+        donationReceived.value = prefs.getBool(_keyDonationReceived) ?? false;
+        campaignMilestone.value = prefs.getBool(_keyCampaignMilestone) ?? false;
+        campaignUpdates.value = prefs.getBool(_keyCampaignUpdates) ?? false;
+        withdrawalStatus.value = prefs.getBool(_keyWithdrawalStatus) ?? false;
+        
+        // Load Messages
+        directMessages.value = prefs.getBool(_keyDirectMessages) ?? false;
+        messageRequests.value = prefs.getBool(_keyMessageRequests) ?? false;
+        groupInvites.value = prefs.getBool(_keyGroupInvites) ?? false;
+        
+        // Load Other Channels
+        emailNotifications.value = prefs.getBool(_keyEmailNotifications) ?? false;
+        smsNotifications.value = prefs.getBool(_keySmsNotifications) ?? false;
+        
+        isLoading.value = false;
+      }
+      
+      loadSettings();
+      return null;
+    }, const []);
+
+    Future<void> saveSetting(String key, dynamic value) async {
+      final prefs = await SharedPreferences.getInstance();
+      if (value is bool) {
+        await prefs.setBool(key, value);
+      } else if (value is int) {
+        await prefs.setInt(key, value);
+      } else if (value is String) {
+        await prefs.setString(key, value);
+      }
+    }
 
     Future<void> selectTime(
       BuildContext context,
       ValueNotifier<TimeOfDay> timeNotifier,
+      String saveKey,
     ) async {
       final picked = await showTimePicker(
         context: context,
@@ -50,12 +151,28 @@ class NotificationDetailScreen extends HookWidget {
       );
       if (picked != null) {
         timeNotifier.value = picked;
+        final minutes = picked.hour * 60 + picked.minute;
+        await saveSetting(saveKey, minutes);
       }
+    }
+
+    void handleSummaryChange(String value) {
+      summaryFrequency.value = value;
+      saveSetting(_keySummaryFreq, value);
     }
 
     final t = AppLocalizations.of(context)!;
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+
+    if (isLoading.value) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(t.settingsAppearanceNotificationsTitle),
+        ),
+        body: const Center(child: CircularProgressIndicator()),
+      );
+    }
 
     return SettingsPageScaffold(
       title: t.settingsAppearanceNotificationsTitle,
@@ -66,6 +183,8 @@ class NotificationDetailScreen extends HookWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const SizedBox(height: 12),
+            
+            // ═══ Quick Settings ═══
             _NotificationSection(
               title: t.settingsAppearanceNotificationsQuick,
               tiles: [
@@ -80,13 +199,19 @@ class NotificationDetailScreen extends HookWidget {
                       : colorScheme.primary,
                   trailing: Switch.adaptive(
                     value: pauseAll.value,
-                    onChanged: (val) => pauseAll.value = val,
+                    onChanged: (val) {
+                      pauseAll.value = val;
+                      saveSetting(_keyPauseAll, val);
+                    },
                     activeTrackColor: colorScheme.primary,
                   ),
                 ),
               ],
             ),
+            
             const SizedBox(height: 8),
+            
+            // ═══ Sleep Mode ═══
             SettingsSection(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,7 +230,10 @@ class NotificationDetailScreen extends HookWidget {
                       ),
                       Switch.adaptive(
                         value: sleepModeEnabled.value,
-                        onChanged: (val) => sleepModeEnabled.value = val,
+                        onChanged: (val) {
+                          sleepModeEnabled.value = val;
+                          saveSetting(_keySleepMode, val);
+                        },
                         activeTrackColor: colorScheme.primary,
                       ),
                     ],
@@ -123,8 +251,11 @@ class NotificationDetailScreen extends HookWidget {
                       children: [
                         Expanded(
                           child: OutlinedButton.icon(
-                            onPressed: () =>
-                                selectTime(context, sleepStartTime),
+                            onPressed: () => selectTime(
+                              context,
+                              sleepStartTime,
+                              _keySleepStart,
+                            ),
                             icon: const Icon(Icons.bedtime),
                             label: Text(sleepStartTime.value.format(context)),
                           ),
@@ -135,7 +266,11 @@ class NotificationDetailScreen extends HookWidget {
                         ),
                         Expanded(
                           child: OutlinedButton.icon(
-                            onPressed: () => selectTime(context, sleepEndTime),
+                            onPressed: () => selectTime(
+                              context,
+                              sleepEndTime,
+                              _keySleepEnd,
+                            ),
                             icon: const Icon(Icons.wb_sunny),
                             label: Text(sleepEndTime.value.format(context)),
                           ),
@@ -146,7 +281,10 @@ class NotificationDetailScreen extends HookWidget {
                 ],
               ),
             ),
+            
             const SizedBox(height: 8),
+            
+            // ═══ Posts & Stories ═══
             _NotificationSection(
               title: t.settingsAppearanceNotificationsPostsSection,
               tiles: [
@@ -155,7 +293,10 @@ class NotificationDetailScreen extends HookWidget {
                   icon: Icons.feed,
                   trailing: Switch.adaptive(
                     value: postsAndStories.value,
-                    onChanged: (val) => postsAndStories.value = val,
+                    onChanged: (val) {
+                      postsAndStories.value = val;
+                      saveSetting(_keyPostsAndStories, val);
+                    },
                     activeTrackColor: colorScheme.primary,
                   ),
                 ),
@@ -164,23 +305,31 @@ class NotificationDetailScreen extends HookWidget {
                   subtitle: t.settingsAppearanceNotificationsPostsLiveSubtitle,
                   trailing: Switch.adaptive(
                     value: liveVideos.value,
-                    onChanged: (val) => liveVideos.value = val,
+                    onChanged: (val) {
+                      liveVideos.value = val;
+                      saveSetting(_keyLiveVideos, val);
+                    },
                     activeTrackColor: colorScheme.primary,
                   ),
                 ),
                 SettingsTileData(
                   title: t.settingsAppearanceNotificationsPostsCampaigns,
-                  subtitle:
-                      t.settingsAppearanceNotificationsPostsCampaignsSubtitle,
+                  subtitle: t.settingsAppearanceNotificationsPostsCampaignsSubtitle,
                   trailing: Switch.adaptive(
                     value: newCampaigns.value,
-                    onChanged: (val) => newCampaigns.value = val,
+                    onChanged: (val) {
+                      newCampaigns.value = val;
+                      saveSetting(_keyNewCampaigns, val);
+                    },
                     activeTrackColor: colorScheme.primary,
                   ),
                 ),
               ],
             ),
+            
             const SizedBox(height: 8),
+            
+            // ═══ Engagement ═══
             _NotificationSection(
               title: t.settingsAppearanceNotificationsEngagementSection,
               tiles: [
@@ -189,7 +338,10 @@ class NotificationDetailScreen extends HookWidget {
                   icon: Icons.favorite,
                   trailing: Switch.adaptive(
                     value: likesOnPosts.value,
-                    onChanged: (val) => likesOnPosts.value = val,
+                    onChanged: (val) {
+                      likesOnPosts.value = val;
+                      saveSetting(_keyLikesOnPosts, val);
+                    },
                     activeTrackColor: colorScheme.primary,
                   ),
                 ),
@@ -197,17 +349,22 @@ class NotificationDetailScreen extends HookWidget {
                   title: t.settingsAppearanceNotificationsEngagementReplies,
                   trailing: Switch.adaptive(
                     value: commentReplies.value,
-                    onChanged: (val) => commentReplies.value = val,
+                    onChanged: (val) {
+                      commentReplies.value = val;
+                      saveSetting(_keyCommentReplies, val);
+                    },
                     activeTrackColor: colorScheme.primary,
                   ),
                 ),
                 SettingsTileData(
                   title: t.settingsAppearanceNotificationsEngagementMentions,
-                  subtitle: t
-                      .settingsAppearanceNotificationsEngagementMentionsSubtitle,
+                  subtitle: t.settingsAppearanceNotificationsEngagementMentionsSubtitle,
                   trailing: Switch.adaptive(
                     value: mentions.value,
-                    onChanged: (val) => mentions.value = val,
+                    onChanged: (val) {
+                      mentions.value = val;
+                      saveSetting(_keyMentions, val);
+                    },
                     activeTrackColor: colorScheme.primary,
                   ),
                 ),
@@ -215,63 +372,80 @@ class NotificationDetailScreen extends HookWidget {
                   title: t.settingsAppearanceNotificationsEngagementFollowers,
                   trailing: Switch.adaptive(
                     value: newFollowers.value,
-                    onChanged: (val) => newFollowers.value = val,
+                    onChanged: (val) {
+                      newFollowers.value = val;
+                      saveSetting(_keyNewFollowers, val);
+                    },
                     activeTrackColor: colorScheme.primary,
                   ),
                 ),
               ],
             ),
+            
             const SizedBox(height: 8),
+            
+            // ═══ Donations & Campaigns ═══
             _NotificationSection(
               title: t.settingsAppearanceNotificationsDonationsSection,
               tiles: [
                 SettingsTileData(
                   title:
                       t.settingsAppearanceNotificationsDonationsReceivedTitle,
-                  subtitle: t
-                      .settingsAppearanceNotificationsDonationsReceivedSubtitle,
+                  subtitle: t.settingsAppearanceNotificationsDonationsReceivedSubtitle,
                   icon: Icons.volunteer_activism,
                   trailing: Switch.adaptive(
                     value: donationReceived.value,
-                    onChanged: (val) => donationReceived.value = val,
+                    onChanged: (val) {
+                      donationReceived.value = val;
+                      saveSetting(_keyDonationReceived, val);
+                    },
                     activeTrackColor: colorScheme.primary,
                   ),
                 ),
                 SettingsTileData(
                   title:
                       t.settingsAppearanceNotificationsDonationsMilestonesTitle,
-                  subtitle: t
-                      .settingsAppearanceNotificationsDonationsMilestonesSubtitle,
+                  subtitle: t.settingsAppearanceNotificationsDonationsMilestonesSubtitle,
                   trailing: Switch.adaptive(
                     value: campaignMilestone.value,
-                    onChanged: (val) => campaignMilestone.value = val,
+                    onChanged: (val) {
+                      campaignMilestone.value = val;
+                      saveSetting(_keyCampaignMilestone, val);
+                    },
                     activeTrackColor: colorScheme.primary,
                   ),
                 ),
                 SettingsTileData(
                   title: t.settingsAppearanceNotificationsDonationsUpdatesTitle,
-                  subtitle:
-                      t.settingsAppearanceNotificationsDonationsUpdatesSubtitle,
+                  subtitle: t.settingsAppearanceNotificationsDonationsUpdatesSubtitle,
                   trailing: Switch.adaptive(
                     value: campaignUpdates.value,
-                    onChanged: (val) => campaignUpdates.value = val,
+                    onChanged: (val) {
+                      campaignUpdates.value = val;
+                      saveSetting(_keyCampaignUpdates, val);
+                    },
                     activeTrackColor: colorScheme.primary,
                   ),
                 ),
                 SettingsTileData(
                   title:
                       t.settingsAppearanceNotificationsDonationsWithdrawTitle,
-                  subtitle: t
-                      .settingsAppearanceNotificationsDonationsWithdrawSubtitle,
+                  subtitle: t.settingsAppearanceNotificationsDonationsWithdrawSubtitle,
                   trailing: Switch.adaptive(
                     value: withdrawalStatus.value,
-                    onChanged: (val) => withdrawalStatus.value = val,
+                    onChanged: (val) {
+                      withdrawalStatus.value = val;
+                      saveSetting(_keyWithdrawalStatus, val);
+                    },
                     activeTrackColor: colorScheme.primary,
                   ),
                 ),
               ],
             ),
+            
             const SizedBox(height: 8),
+            
+            // ═══ Messages ═══
             _NotificationSection(
               title: t.settingsAppearanceNotificationsMessagesSection,
               tiles: [
@@ -281,17 +455,22 @@ class NotificationDetailScreen extends HookWidget {
                   iconColor: colorScheme.tertiary,
                   trailing: Switch.adaptive(
                     value: directMessages.value,
-                    onChanged: (val) => directMessages.value = val,
+                    onChanged: (val) {
+                      directMessages.value = val;
+                      saveSetting(_keyDirectMessages, val);
+                    },
                     activeTrackColor: colorScheme.primary,
                   ),
                 ),
                 SettingsTileData(
                   title: t.settingsAppearanceNotificationsMessagesRequests,
-                  subtitle:
-                      t.settingsAppearanceNotificationsMessagesRequestsSubtitle,
+                  subtitle: t.settingsAppearanceNotificationsMessagesRequestsSubtitle,
                   trailing: Switch.adaptive(
                     value: messageRequests.value,
-                    onChanged: (val) => messageRequests.value = val,
+                    onChanged: (val) {
+                      messageRequests.value = val;
+                      saveSetting(_keyMessageRequests, val);
+                    },
                     activeTrackColor: colorScheme.primary,
                   ),
                 ),
@@ -299,13 +478,19 @@ class NotificationDetailScreen extends HookWidget {
                   title: t.settingsAppearanceNotificationsMessagesGroups,
                   trailing: Switch.adaptive(
                     value: groupInvites.value,
-                    onChanged: (val) => groupInvites.value = val,
+                    onChanged: (val) {
+                      groupInvites.value = val;
+                      saveSetting(_keyGroupInvites, val);
+                    },
                     activeTrackColor: colorScheme.primary,
                   ),
                 ),
               ],
             ),
+            
             const SizedBox(height: 8),
+            
+            // ═══ Summary ═══
             SettingsSection(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -347,13 +532,16 @@ class NotificationDetailScreen extends HookWidget {
                     ],
                     selected: {summaryFrequency.value},
                     onSelectionChanged: (Set<String> newSelection) {
-                      summaryFrequency.value = newSelection.first;
+                      handleSummaryChange(newSelection.first);
                     },
                   ),
                 ],
               ),
             ),
+            
             const SizedBox(height: 8),
+            
+            // ═══ Other Channels ═══
             _NotificationSection(
               title: t.settingsAppearanceNotificationsOtherSection,
               tiles: [
@@ -363,7 +551,10 @@ class NotificationDetailScreen extends HookWidget {
                   icon: Icons.email_outlined,
                   trailing: Switch.adaptive(
                     value: emailNotifications.value,
-                    onChanged: (val) => emailNotifications.value = val,
+                    onChanged: (val) {
+                      emailNotifications.value = val;
+                      saveSetting(_keyEmailNotifications, val);
+                    },
                     activeTrackColor: colorScheme.primary,
                   ),
                 ),
@@ -373,7 +564,10 @@ class NotificationDetailScreen extends HookWidget {
                   icon: Icons.sms_outlined,
                   trailing: Switch.adaptive(
                     value: smsNotifications.value,
-                    onChanged: (val) => smsNotifications.value = val,
+                    onChanged: (val) {
+                      smsNotifications.value = val;
+                      saveSetting(_keySmsNotifications, val);
+                    },
                     activeTrackColor: colorScheme.primary,
                   ),
                 ),

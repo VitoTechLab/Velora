@@ -4,16 +4,28 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:velora/core/di/service_locator.dart';
+import 'package:velora/core/services/notification_preferences_service.dart';
 import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/navigation/services/navigation_service.dart';
 
+/// Firebase Cloud Messaging service with notification preferences support
+/// 
+/// Notifications are filtered based on user preferences set in Settings > Notifications
+/// FCM messages must include a "type" field in the data payload to be filtered correctly.
+/// 
+/// Supported types: like, comment, reply, mention, follow, post, story, live, campaign,
+/// donation, milestone, campaign_update, withdrawal, message, message_request, group_invite
+/// 
+/// See docs/fcm_notification_types.md for complete documentation
 class FirebaseMessagingService {
   FirebaseMessagingService()
     : _messaging = FirebaseMessaging.instance,
-      _notifications = FlutterLocalNotificationsPlugin();
+      _notifications = FlutterLocalNotificationsPlugin(),
+      _preferencesService = NotificationPreferencesService();
 
   final FirebaseMessaging _messaging;
   final FlutterLocalNotificationsPlugin _notifications;
+  final NotificationPreferencesService _preferencesService;
 
   Future<void> initialize() async {
     const androidSettings = AndroidInitializationSettings(
@@ -52,11 +64,21 @@ class FirebaseMessagingService {
     return _messaging.getToken();
   }
 
-  void _showForegroundNotification(RemoteMessage message) {
+  void _showForegroundNotification(RemoteMessage message) async {
     final notification = message.notification;
     final android = notification?.android;
 
     if (notification == null || android == null) return;
+
+    // Check if notification should be shown based on preferences
+    final notificationType = _preferencesService.getNotificationTypeFromData(message.data);
+    if (notificationType != null) {
+      final shouldShow = await _preferencesService.shouldShowNotification(notificationType);
+      if (!shouldShow) {
+        logi('Notification blocked by preferences: ${notificationType.name}');
+        return;
+      }
+    }
 
     _notifications.show(
       notification.hashCode,
@@ -72,6 +94,7 @@ class FirebaseMessagingService {
           icon: '@mipmap/ic_launcher',
         ),
       ),
+      payload: message.data.toString(),
     );
   }
 
@@ -90,5 +113,18 @@ class FirebaseMessagingService {
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
+  
+  // Check notification preferences before showing
+  final preferencesService = NotificationPreferencesService();
+  final notificationType = preferencesService.getNotificationTypeFromData(message.data);
+  
+  if (notificationType != null) {
+    final shouldShow = await preferencesService.shouldShowNotification(notificationType);
+    if (!shouldShow) {
+      print("BG notification blocked by preferences: ${notificationType.name}");
+      return;
+    }
+  }
+  
   print("BG message: ${message.messageId}");
 }
