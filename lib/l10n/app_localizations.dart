@@ -1067,7 +1067,7 @@ abstract class AppLocalizations {
   /// No description provided for @walletDashboardWalletId.
   ///
   /// In en, this message translates to:
-  /// **'Wallet ID: #VLR2024001'**
+  /// **'Wallet ID'**
   String get walletDashboardWalletId;
 
   /// No description provided for @walletDashboardTotalBalance.
@@ -1165,6 +1165,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'OK'**
   String get walletDashboardUnderDevelopmentButton;
+
+  /// No description provided for @walletDashboardMainWallet.
+  ///
+  /// In en, this message translates to:
+  /// **'Main Wallet'**
+  String get walletDashboardMainWallet;
+
+  /// No description provided for @walletDashboardCampaignWallets.
+  ///
+  /// In en, this message translates to:
+  /// **'Campaign Wallets'**
+  String get walletDashboardCampaignWallets;
+
+  /// No description provided for @walletDashboardAvailableBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Available Balance'**
+  String get walletDashboardAvailableBalance;
+
+  /// No description provided for @walletDashboardTopUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Top Up'**
+  String get walletDashboardTopUp;
+
+  /// No description provided for @walletDashboardWithdraw.
+  ///
+  /// In en, this message translates to:
+  /// **'Withdraw'**
+  String get walletDashboardWithdraw;
+
+  /// No description provided for @walletDashboardSetupBank.
+  ///
+  /// In en, this message translates to:
+  /// **'Setup Bank'**
+  String get walletDashboardSetupBank;
+
+  /// No description provided for @walletDashboardBankDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Bank Details'**
+  String get walletDashboardBankDetails;
+
+  /// No description provided for @walletDashboardBankName.
+  ///
+  /// In en, this message translates to:
+  /// **'Bank Name'**
+  String get walletDashboardBankName;
+
+  /// No description provided for @walletDashboardAccountNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Account Number'**
+  String get walletDashboardAccountNumber;
+
+  /// No description provided for @walletDashboardAccountHolder.
+  ///
+  /// In en, this message translates to:
+  /// **'Account Holder Name'**
+  String get walletDashboardAccountHolder;
+
+  /// No description provided for @walletDashboardAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get walletDashboardAmount;
+
+  /// No description provided for @walletDashboardTo.
+  ///
+  /// In en, this message translates to:
+  /// **'To'**
+  String get walletDashboardTo;
+
+  /// No description provided for @walletDashboardNoMainWallet.
+  ///
+  /// In en, this message translates to:
+  /// **'No wallet yet'**
+  String get walletDashboardNoMainWallet;
+
+  /// No description provided for @walletDashboardCreateWallet.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Wallet'**
+  String get walletDashboardCreateWallet;
+
+  /// No description provided for @walletDashboardNoCampaignWallets.
+  ///
+  /// In en, this message translates to:
+  /// **'No campaign wallets yet. Start a campaign to receive donations!'**
+  String get walletDashboardNoCampaignWallets;
+
+  /// No description provided for @walletDashboardStartCampaign.
+  ///
+  /// In en, this message translates to:
+  /// **'Start a Campaign'**
+  String get walletDashboardStartCampaign;
 
   /// No description provided for @settingsPersonalizationTitle.
   ///

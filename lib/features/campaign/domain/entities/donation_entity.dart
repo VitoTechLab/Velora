@@ -25,5 +25,9 @@ abstract class DonationEntity with _$DonationEntity {
     String? donorUsername,
     String? donorDisplayName,
     String? donorAvatarUrl,
+
+    // Joined from campaigns (read-only)
+    String? campaignTitle,
+    String? campaignImageUrl,
   }) = _DonationEntity;
 }

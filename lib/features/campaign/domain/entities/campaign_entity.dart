@@ -34,9 +34,18 @@ abstract class CampaignEntity with _$CampaignEntity {
     // Joined from campaign_categories (read-only)
     String? categoryName,
     String? categorySlug,
+
+    // Bank details for withdrawal processing
+    String? withdrawalBankName,
+    String? withdrawalAccountNumber,
+    String? withdrawalAccountHolder,
   }) = _CampaignEntity;
 
   const CampaignEntity._();
+
+  /// Calculate progress percentage based on amount raised vs target
+  double get progressPercent =>
+      targetAmount > 0 ? (amountRaised / targetAmount * 100).clamp(0, 100) : 0;
 
   /// Convert to SearchCampaignResultModel for search results
   SearchCampaignResultModel toSearchResultModel() {

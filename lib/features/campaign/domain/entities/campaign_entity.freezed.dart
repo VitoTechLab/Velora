@@ -38,7 +38,11 @@ mixin _$CampaignEntity {
   String? get organizerAvatarUrl =>
       throw _privateConstructorUsedError; // Joined from campaign_categories (read-only)
   String? get categoryName => throw _privateConstructorUsedError;
-  String? get categorySlug => throw _privateConstructorUsedError;
+  String? get categorySlug =>
+      throw _privateConstructorUsedError; // Bank details for withdrawal processing
+  String? get withdrawalBankName => throw _privateConstructorUsedError;
+  String? get withdrawalAccountNumber => throw _privateConstructorUsedError;
+  String? get withdrawalAccountHolder => throw _privateConstructorUsedError;
 
   /// Create a copy of CampaignEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -74,7 +78,10 @@ abstract class $CampaignEntityCopyWith<$Res> {
       String? organizerUsername,
       String? organizerAvatarUrl,
       String? categoryName,
-      String? categorySlug});
+      String? categorySlug,
+      String? withdrawalBankName,
+      String? withdrawalAccountNumber,
+      String? withdrawalAccountHolder});
 }
 
 /// @nodoc
@@ -113,6 +120,9 @@ class _$CampaignEntityCopyWithImpl<$Res, $Val extends CampaignEntity>
     Object? organizerAvatarUrl = freezed,
     Object? categoryName = freezed,
     Object? categorySlug = freezed,
+    Object? withdrawalBankName = freezed,
+    Object? withdrawalAccountNumber = freezed,
+    Object? withdrawalAccountHolder = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -199,6 +209,18 @@ class _$CampaignEntityCopyWithImpl<$Res, $Val extends CampaignEntity>
           ? _value.categorySlug
           : categorySlug // ignore: cast_nullable_to_non_nullable
               as String?,
+      withdrawalBankName: freezed == withdrawalBankName
+          ? _value.withdrawalBankName
+          : withdrawalBankName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      withdrawalAccountNumber: freezed == withdrawalAccountNumber
+          ? _value.withdrawalAccountNumber
+          : withdrawalAccountNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      withdrawalAccountHolder: freezed == withdrawalAccountHolder
+          ? _value.withdrawalAccountHolder
+          : withdrawalAccountHolder // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -232,7 +254,10 @@ abstract class _$$CampaignEntityImplCopyWith<$Res>
       String? organizerUsername,
       String? organizerAvatarUrl,
       String? categoryName,
-      String? categorySlug});
+      String? categorySlug,
+      String? withdrawalBankName,
+      String? withdrawalAccountNumber,
+      String? withdrawalAccountHolder});
 }
 
 /// @nodoc
@@ -269,6 +294,9 @@ class __$$CampaignEntityImplCopyWithImpl<$Res>
     Object? organizerAvatarUrl = freezed,
     Object? categoryName = freezed,
     Object? categorySlug = freezed,
+    Object? withdrawalBankName = freezed,
+    Object? withdrawalAccountNumber = freezed,
+    Object? withdrawalAccountHolder = freezed,
   }) {
     return _then(_$CampaignEntityImpl(
       id: null == id
@@ -355,6 +383,18 @@ class __$$CampaignEntityImplCopyWithImpl<$Res>
           ? _value.categorySlug
           : categorySlug // ignore: cast_nullable_to_non_nullable
               as String?,
+      withdrawalBankName: freezed == withdrawalBankName
+          ? _value.withdrawalBankName
+          : withdrawalBankName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      withdrawalAccountNumber: freezed == withdrawalAccountNumber
+          ? _value.withdrawalAccountNumber
+          : withdrawalAccountNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      withdrawalAccountHolder: freezed == withdrawalAccountHolder
+          ? _value.withdrawalAccountHolder
+          : withdrawalAccountHolder // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -383,7 +423,10 @@ class _$CampaignEntityImpl extends _CampaignEntity {
       this.organizerUsername,
       this.organizerAvatarUrl,
       this.categoryName,
-      this.categorySlug})
+      this.categorySlug,
+      this.withdrawalBankName,
+      this.withdrawalAccountNumber,
+      this.withdrawalAccountHolder})
       : super._();
 
   @override
@@ -435,10 +478,17 @@ class _$CampaignEntityImpl extends _CampaignEntity {
   final String? categoryName;
   @override
   final String? categorySlug;
+// Bank details for withdrawal processing
+  @override
+  final String? withdrawalBankName;
+  @override
+  final String? withdrawalAccountNumber;
+  @override
+  final String? withdrawalAccountHolder;
 
   @override
   String toString() {
-    return 'CampaignEntity(id: $id, userId: $userId, categoryId: $categoryId, title: $title, description: $description, coverImageUrl: $coverImageUrl, targetAmount: $targetAmount, amountRaised: $amountRaised, currentBalance: $currentBalance, donorCount: $donorCount, status: $status, isVerified: $isVerified, locationCity: $locationCity, endDate: $endDate, createdAt: $createdAt, updatedAt: $updatedAt, completedAt: $completedAt, organizerUsername: $organizerUsername, organizerAvatarUrl: $organizerAvatarUrl, categoryName: $categoryName, categorySlug: $categorySlug)';
+    return 'CampaignEntity(id: $id, userId: $userId, categoryId: $categoryId, title: $title, description: $description, coverImageUrl: $coverImageUrl, targetAmount: $targetAmount, amountRaised: $amountRaised, currentBalance: $currentBalance, donorCount: $donorCount, status: $status, isVerified: $isVerified, locationCity: $locationCity, endDate: $endDate, createdAt: $createdAt, updatedAt: $updatedAt, completedAt: $completedAt, organizerUsername: $organizerUsername, organizerAvatarUrl: $organizerAvatarUrl, categoryName: $categoryName, categorySlug: $categorySlug, withdrawalBankName: $withdrawalBankName, withdrawalAccountNumber: $withdrawalAccountNumber, withdrawalAccountHolder: $withdrawalAccountHolder)';
   }
 
   @override
@@ -482,7 +532,15 @@ class _$CampaignEntityImpl extends _CampaignEntity {
             (identical(other.categoryName, categoryName) ||
                 other.categoryName == categoryName) &&
             (identical(other.categorySlug, categorySlug) ||
-                other.categorySlug == categorySlug));
+                other.categorySlug == categorySlug) &&
+            (identical(other.withdrawalBankName, withdrawalBankName) ||
+                other.withdrawalBankName == withdrawalBankName) &&
+            (identical(
+                    other.withdrawalAccountNumber, withdrawalAccountNumber) ||
+                other.withdrawalAccountNumber == withdrawalAccountNumber) &&
+            (identical(
+                    other.withdrawalAccountHolder, withdrawalAccountHolder) ||
+                other.withdrawalAccountHolder == withdrawalAccountHolder));
   }
 
   @override
@@ -508,7 +566,10 @@ class _$CampaignEntityImpl extends _CampaignEntity {
         organizerUsername,
         organizerAvatarUrl,
         categoryName,
-        categorySlug
+        categorySlug,
+        withdrawalBankName,
+        withdrawalAccountNumber,
+        withdrawalAccountHolder
       ]);
 
   /// Create a copy of CampaignEntity
@@ -543,7 +604,10 @@ abstract class _CampaignEntity extends CampaignEntity {
       final String? organizerUsername,
       final String? organizerAvatarUrl,
       final String? categoryName,
-      final String? categorySlug}) = _$CampaignEntityImpl;
+      final String? categorySlug,
+      final String? withdrawalBankName,
+      final String? withdrawalAccountNumber,
+      final String? withdrawalAccountHolder}) = _$CampaignEntityImpl;
   const _CampaignEntity._() : super._();
 
   @override
@@ -587,7 +651,13 @@ abstract class _CampaignEntity extends CampaignEntity {
   @override
   String? get categoryName;
   @override
-  String? get categorySlug;
+  String? get categorySlug; // Bank details for withdrawal processing
+  @override
+  String? get withdrawalBankName;
+  @override
+  String? get withdrawalAccountNumber;
+  @override
+  String? get withdrawalAccountHolder;
 
   /// Create a copy of CampaignEntity
   /// with the given fields replaced by the non-null parameter values.

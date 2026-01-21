@@ -43,6 +43,14 @@ mixin _$CampaignState {
   List<WithdrawalEntity> get withdrawals => throw _privateConstructorUsedError;
   bool get isLoadingWithdrawals => throw _privateConstructorUsedError;
   String? get errorWithdrawals =>
+      throw _privateConstructorUsedError; // User's own campaigns (for My Campaigns screen)
+  List<CampaignEntity> get userCampaigns => throw _privateConstructorUsedError;
+  bool get isLoadingUserCampaigns => throw _privateConstructorUsedError;
+  String? get errorUserCampaigns =>
+      throw _privateConstructorUsedError; // User's donations (for My Donations screen)
+  List<DonationEntity> get userDonations => throw _privateConstructorUsedError;
+  bool get isLoadingUserDonations => throw _privateConstructorUsedError;
+  String? get errorUserDonations =>
       throw _privateConstructorUsedError; // Mutating operations
   bool get isCreatingCampaign => throw _privateConstructorUsedError;
   String? get errorCreateCampaign => throw _privateConstructorUsedError;
@@ -53,7 +61,9 @@ mixin _$CampaignState {
   bool get isPerformingDonation => throw _privateConstructorUsedError;
   String? get errorDonation => throw _privateConstructorUsedError;
   bool get isRequestingWithdrawal => throw _privateConstructorUsedError;
-  String? get errorWithdrawal =>
+  String? get errorWithdrawal => throw _privateConstructorUsedError;
+  bool get isUpdatingBankDetails => throw _privateConstructorUsedError;
+  String? get errorBankDetails =>
       throw _privateConstructorUsedError; // Generic UI message
   String? get message => throw _privateConstructorUsedError;
 
@@ -90,6 +100,12 @@ abstract class $CampaignStateCopyWith<$Res> {
       List<WithdrawalEntity> withdrawals,
       bool isLoadingWithdrawals,
       String? errorWithdrawals,
+      List<CampaignEntity> userCampaigns,
+      bool isLoadingUserCampaigns,
+      String? errorUserCampaigns,
+      List<DonationEntity> userDonations,
+      bool isLoadingUserDonations,
+      String? errorUserDonations,
       bool isCreatingCampaign,
       String? errorCreateCampaign,
       bool isUpdatingCampaign,
@@ -100,6 +116,8 @@ abstract class $CampaignStateCopyWith<$Res> {
       String? errorDonation,
       bool isRequestingWithdrawal,
       String? errorWithdrawal,
+      bool isUpdatingBankDetails,
+      String? errorBankDetails,
       String? message});
 
   $CampaignEntityCopyWith<$Res>? get selectedCampaign;
@@ -139,6 +157,12 @@ class _$CampaignStateCopyWithImpl<$Res, $Val extends CampaignState>
     Object? withdrawals = null,
     Object? isLoadingWithdrawals = null,
     Object? errorWithdrawals = freezed,
+    Object? userCampaigns = null,
+    Object? isLoadingUserCampaigns = null,
+    Object? errorUserCampaigns = freezed,
+    Object? userDonations = null,
+    Object? isLoadingUserDonations = null,
+    Object? errorUserDonations = freezed,
     Object? isCreatingCampaign = null,
     Object? errorCreateCampaign = freezed,
     Object? isUpdatingCampaign = null,
@@ -149,6 +173,8 @@ class _$CampaignStateCopyWithImpl<$Res, $Val extends CampaignState>
     Object? errorDonation = freezed,
     Object? isRequestingWithdrawal = null,
     Object? errorWithdrawal = freezed,
+    Object? isUpdatingBankDetails = null,
+    Object? errorBankDetails = freezed,
     Object? message = freezed,
   }) {
     return _then(_value.copyWith(
@@ -228,6 +254,30 @@ class _$CampaignStateCopyWithImpl<$Res, $Val extends CampaignState>
           ? _value.errorWithdrawals
           : errorWithdrawals // ignore: cast_nullable_to_non_nullable
               as String?,
+      userCampaigns: null == userCampaigns
+          ? _value.userCampaigns
+          : userCampaigns // ignore: cast_nullable_to_non_nullable
+              as List<CampaignEntity>,
+      isLoadingUserCampaigns: null == isLoadingUserCampaigns
+          ? _value.isLoadingUserCampaigns
+          : isLoadingUserCampaigns // ignore: cast_nullable_to_non_nullable
+              as bool,
+      errorUserCampaigns: freezed == errorUserCampaigns
+          ? _value.errorUserCampaigns
+          : errorUserCampaigns // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userDonations: null == userDonations
+          ? _value.userDonations
+          : userDonations // ignore: cast_nullable_to_non_nullable
+              as List<DonationEntity>,
+      isLoadingUserDonations: null == isLoadingUserDonations
+          ? _value.isLoadingUserDonations
+          : isLoadingUserDonations // ignore: cast_nullable_to_non_nullable
+              as bool,
+      errorUserDonations: freezed == errorUserDonations
+          ? _value.errorUserDonations
+          : errorUserDonations // ignore: cast_nullable_to_non_nullable
+              as String?,
       isCreatingCampaign: null == isCreatingCampaign
           ? _value.isCreatingCampaign
           : isCreatingCampaign // ignore: cast_nullable_to_non_nullable
@@ -267,6 +317,14 @@ class _$CampaignStateCopyWithImpl<$Res, $Val extends CampaignState>
       errorWithdrawal: freezed == errorWithdrawal
           ? _value.errorWithdrawal
           : errorWithdrawal // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isUpdatingBankDetails: null == isUpdatingBankDetails
+          ? _value.isUpdatingBankDetails
+          : isUpdatingBankDetails // ignore: cast_nullable_to_non_nullable
+              as bool,
+      errorBankDetails: freezed == errorBankDetails
+          ? _value.errorBankDetails
+          : errorBankDetails // ignore: cast_nullable_to_non_nullable
               as String?,
       message: freezed == message
           ? _value.message
@@ -318,6 +376,12 @@ abstract class _$$CampaignStateImplCopyWith<$Res>
       List<WithdrawalEntity> withdrawals,
       bool isLoadingWithdrawals,
       String? errorWithdrawals,
+      List<CampaignEntity> userCampaigns,
+      bool isLoadingUserCampaigns,
+      String? errorUserCampaigns,
+      List<DonationEntity> userDonations,
+      bool isLoadingUserDonations,
+      String? errorUserDonations,
       bool isCreatingCampaign,
       String? errorCreateCampaign,
       bool isUpdatingCampaign,
@@ -328,6 +392,8 @@ abstract class _$$CampaignStateImplCopyWith<$Res>
       String? errorDonation,
       bool isRequestingWithdrawal,
       String? errorWithdrawal,
+      bool isUpdatingBankDetails,
+      String? errorBankDetails,
       String? message});
 
   @override
@@ -366,6 +432,12 @@ class __$$CampaignStateImplCopyWithImpl<$Res>
     Object? withdrawals = null,
     Object? isLoadingWithdrawals = null,
     Object? errorWithdrawals = freezed,
+    Object? userCampaigns = null,
+    Object? isLoadingUserCampaigns = null,
+    Object? errorUserCampaigns = freezed,
+    Object? userDonations = null,
+    Object? isLoadingUserDonations = null,
+    Object? errorUserDonations = freezed,
     Object? isCreatingCampaign = null,
     Object? errorCreateCampaign = freezed,
     Object? isUpdatingCampaign = null,
@@ -376,6 +448,8 @@ class __$$CampaignStateImplCopyWithImpl<$Res>
     Object? errorDonation = freezed,
     Object? isRequestingWithdrawal = null,
     Object? errorWithdrawal = freezed,
+    Object? isUpdatingBankDetails = null,
+    Object? errorBankDetails = freezed,
     Object? message = freezed,
   }) {
     return _then(_$CampaignStateImpl(
@@ -455,6 +529,30 @@ class __$$CampaignStateImplCopyWithImpl<$Res>
           ? _value.errorWithdrawals
           : errorWithdrawals // ignore: cast_nullable_to_non_nullable
               as String?,
+      userCampaigns: null == userCampaigns
+          ? _value._userCampaigns
+          : userCampaigns // ignore: cast_nullable_to_non_nullable
+              as List<CampaignEntity>,
+      isLoadingUserCampaigns: null == isLoadingUserCampaigns
+          ? _value.isLoadingUserCampaigns
+          : isLoadingUserCampaigns // ignore: cast_nullable_to_non_nullable
+              as bool,
+      errorUserCampaigns: freezed == errorUserCampaigns
+          ? _value.errorUserCampaigns
+          : errorUserCampaigns // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userDonations: null == userDonations
+          ? _value._userDonations
+          : userDonations // ignore: cast_nullable_to_non_nullable
+              as List<DonationEntity>,
+      isLoadingUserDonations: null == isLoadingUserDonations
+          ? _value.isLoadingUserDonations
+          : isLoadingUserDonations // ignore: cast_nullable_to_non_nullable
+              as bool,
+      errorUserDonations: freezed == errorUserDonations
+          ? _value.errorUserDonations
+          : errorUserDonations // ignore: cast_nullable_to_non_nullable
+              as String?,
       isCreatingCampaign: null == isCreatingCampaign
           ? _value.isCreatingCampaign
           : isCreatingCampaign // ignore: cast_nullable_to_non_nullable
@@ -495,6 +593,14 @@ class __$$CampaignStateImplCopyWithImpl<$Res>
           ? _value.errorWithdrawal
           : errorWithdrawal // ignore: cast_nullable_to_non_nullable
               as String?,
+      isUpdatingBankDetails: null == isUpdatingBankDetails
+          ? _value.isUpdatingBankDetails
+          : isUpdatingBankDetails // ignore: cast_nullable_to_non_nullable
+              as bool,
+      errorBankDetails: freezed == errorBankDetails
+          ? _value.errorBankDetails
+          : errorBankDetails // ignore: cast_nullable_to_non_nullable
+              as String?,
       message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -528,6 +634,12 @@ class _$CampaignStateImpl implements _CampaignState {
       final List<WithdrawalEntity> withdrawals = const <WithdrawalEntity>[],
       this.isLoadingWithdrawals = false,
       this.errorWithdrawals,
+      final List<CampaignEntity> userCampaigns = const <CampaignEntity>[],
+      this.isLoadingUserCampaigns = false,
+      this.errorUserCampaigns,
+      final List<DonationEntity> userDonations = const <DonationEntity>[],
+      this.isLoadingUserDonations = false,
+      this.errorUserDonations,
       this.isCreatingCampaign = false,
       this.errorCreateCampaign,
       this.isUpdatingCampaign = false,
@@ -538,12 +650,16 @@ class _$CampaignStateImpl implements _CampaignState {
       this.errorDonation,
       this.isRequestingWithdrawal = false,
       this.errorWithdrawal,
+      this.isUpdatingBankDetails = false,
+      this.errorBankDetails,
       this.message})
       : _campaigns = campaigns,
         _categories = categories,
         _donations = donations,
         _comments = comments,
-        _withdrawals = withdrawals;
+        _withdrawals = withdrawals,
+        _userCampaigns = userCampaigns,
+        _userDonations = userDonations;
 
 // Campaign list
   final List<CampaignEntity> _campaigns;
@@ -636,6 +752,38 @@ class _$CampaignStateImpl implements _CampaignState {
   final bool isLoadingWithdrawals;
   @override
   final String? errorWithdrawals;
+// User's own campaigns (for My Campaigns screen)
+  final List<CampaignEntity> _userCampaigns;
+// User's own campaigns (for My Campaigns screen)
+  @override
+  @JsonKey()
+  List<CampaignEntity> get userCampaigns {
+    if (_userCampaigns is EqualUnmodifiableListView) return _userCampaigns;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_userCampaigns);
+  }
+
+  @override
+  @JsonKey()
+  final bool isLoadingUserCampaigns;
+  @override
+  final String? errorUserCampaigns;
+// User's donations (for My Donations screen)
+  final List<DonationEntity> _userDonations;
+// User's donations (for My Donations screen)
+  @override
+  @JsonKey()
+  List<DonationEntity> get userDonations {
+    if (_userDonations is EqualUnmodifiableListView) return _userDonations;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_userDonations);
+  }
+
+  @override
+  @JsonKey()
+  final bool isLoadingUserDonations;
+  @override
+  final String? errorUserDonations;
 // Mutating operations
   @override
   @JsonKey()
@@ -662,13 +810,18 @@ class _$CampaignStateImpl implements _CampaignState {
   final bool isRequestingWithdrawal;
   @override
   final String? errorWithdrawal;
+  @override
+  @JsonKey()
+  final bool isUpdatingBankDetails;
+  @override
+  final String? errorBankDetails;
 // Generic UI message
   @override
   final String? message;
 
   @override
   String toString() {
-    return 'CampaignState(campaigns: $campaigns, isLoadingCampaigns: $isLoadingCampaigns, isRefreshingCampaigns: $isRefreshingCampaigns, errorCampaigns: $errorCampaigns, selectedCampaign: $selectedCampaign, isLoadingCampaignDetail: $isLoadingCampaignDetail, errorCampaignDetail: $errorCampaignDetail, categories: $categories, isLoadingCategories: $isLoadingCategories, errorCategories: $errorCategories, donations: $donations, isLoadingDonations: $isLoadingDonations, errorDonations: $errorDonations, comments: $comments, isLoadingComments: $isLoadingComments, errorComments: $errorComments, withdrawals: $withdrawals, isLoadingWithdrawals: $isLoadingWithdrawals, errorWithdrawals: $errorWithdrawals, isCreatingCampaign: $isCreatingCampaign, errorCreateCampaign: $errorCreateCampaign, isUpdatingCampaign: $isUpdatingCampaign, errorUpdateCampaign: $errorUpdateCampaign, isDeletingCampaign: $isDeletingCampaign, errorDeleteCampaign: $errorDeleteCampaign, isPerformingDonation: $isPerformingDonation, errorDonation: $errorDonation, isRequestingWithdrawal: $isRequestingWithdrawal, errorWithdrawal: $errorWithdrawal, message: $message)';
+    return 'CampaignState(campaigns: $campaigns, isLoadingCampaigns: $isLoadingCampaigns, isRefreshingCampaigns: $isRefreshingCampaigns, errorCampaigns: $errorCampaigns, selectedCampaign: $selectedCampaign, isLoadingCampaignDetail: $isLoadingCampaignDetail, errorCampaignDetail: $errorCampaignDetail, categories: $categories, isLoadingCategories: $isLoadingCategories, errorCategories: $errorCategories, donations: $donations, isLoadingDonations: $isLoadingDonations, errorDonations: $errorDonations, comments: $comments, isLoadingComments: $isLoadingComments, errorComments: $errorComments, withdrawals: $withdrawals, isLoadingWithdrawals: $isLoadingWithdrawals, errorWithdrawals: $errorWithdrawals, userCampaigns: $userCampaigns, isLoadingUserCampaigns: $isLoadingUserCampaigns, errorUserCampaigns: $errorUserCampaigns, userDonations: $userDonations, isLoadingUserDonations: $isLoadingUserDonations, errorUserDonations: $errorUserDonations, isCreatingCampaign: $isCreatingCampaign, errorCreateCampaign: $errorCreateCampaign, isUpdatingCampaign: $isUpdatingCampaign, errorUpdateCampaign: $errorUpdateCampaign, isDeletingCampaign: $isDeletingCampaign, errorDeleteCampaign: $errorDeleteCampaign, isPerformingDonation: $isPerformingDonation, errorDonation: $errorDonation, isRequestingWithdrawal: $isRequestingWithdrawal, errorWithdrawal: $errorWithdrawal, isUpdatingBankDetails: $isUpdatingBankDetails, errorBankDetails: $errorBankDetails, message: $message)';
   }
 
   @override
@@ -686,8 +839,7 @@ class _$CampaignStateImpl implements _CampaignState {
                 other.errorCampaigns == errorCampaigns) &&
             (identical(other.selectedCampaign, selectedCampaign) ||
                 other.selectedCampaign == selectedCampaign) &&
-            (identical(
-                    other.isLoadingCampaignDetail, isLoadingCampaignDetail) ||
+            (identical(other.isLoadingCampaignDetail, isLoadingCampaignDetail) ||
                 other.isLoadingCampaignDetail == isLoadingCampaignDetail) &&
             (identical(other.errorCampaignDetail, errorCampaignDetail) ||
                 other.errorCampaignDetail == errorCampaignDetail) &&
@@ -714,6 +866,18 @@ class _$CampaignStateImpl implements _CampaignState {
                 other.isLoadingWithdrawals == isLoadingWithdrawals) &&
             (identical(other.errorWithdrawals, errorWithdrawals) ||
                 other.errorWithdrawals == errorWithdrawals) &&
+            const DeepCollectionEquality()
+                .equals(other._userCampaigns, _userCampaigns) &&
+            (identical(other.isLoadingUserCampaigns, isLoadingUserCampaigns) ||
+                other.isLoadingUserCampaigns == isLoadingUserCampaigns) &&
+            (identical(other.errorUserCampaigns, errorUserCampaigns) ||
+                other.errorUserCampaigns == errorUserCampaigns) &&
+            const DeepCollectionEquality()
+                .equals(other._userDonations, _userDonations) &&
+            (identical(other.isLoadingUserDonations, isLoadingUserDonations) ||
+                other.isLoadingUserDonations == isLoadingUserDonations) &&
+            (identical(other.errorUserDonations, errorUserDonations) ||
+                other.errorUserDonations == errorUserDonations) &&
             (identical(other.isCreatingCampaign, isCreatingCampaign) ||
                 other.isCreatingCampaign == isCreatingCampaign) &&
             (identical(other.errorCreateCampaign, errorCreateCampaign) ||
@@ -732,8 +896,9 @@ class _$CampaignStateImpl implements _CampaignState {
                 other.errorDonation == errorDonation) &&
             (identical(other.isRequestingWithdrawal, isRequestingWithdrawal) ||
                 other.isRequestingWithdrawal == isRequestingWithdrawal) &&
-            (identical(other.errorWithdrawal, errorWithdrawal) ||
-                other.errorWithdrawal == errorWithdrawal) &&
+            (identical(other.errorWithdrawal, errorWithdrawal) || other.errorWithdrawal == errorWithdrawal) &&
+            (identical(other.isUpdatingBankDetails, isUpdatingBankDetails) || other.isUpdatingBankDetails == isUpdatingBankDetails) &&
+            (identical(other.errorBankDetails, errorBankDetails) || other.errorBankDetails == errorBankDetails) &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -759,6 +924,12 @@ class _$CampaignStateImpl implements _CampaignState {
         const DeepCollectionEquality().hash(_withdrawals),
         isLoadingWithdrawals,
         errorWithdrawals,
+        const DeepCollectionEquality().hash(_userCampaigns),
+        isLoadingUserCampaigns,
+        errorUserCampaigns,
+        const DeepCollectionEquality().hash(_userDonations),
+        isLoadingUserDonations,
+        errorUserDonations,
         isCreatingCampaign,
         errorCreateCampaign,
         isUpdatingCampaign,
@@ -769,6 +940,8 @@ class _$CampaignStateImpl implements _CampaignState {
         errorDonation,
         isRequestingWithdrawal,
         errorWithdrawal,
+        isUpdatingBankDetails,
+        errorBankDetails,
         message
       ]);
 
@@ -802,6 +975,12 @@ abstract class _CampaignState implements CampaignState {
       final List<WithdrawalEntity> withdrawals,
       final bool isLoadingWithdrawals,
       final String? errorWithdrawals,
+      final List<CampaignEntity> userCampaigns,
+      final bool isLoadingUserCampaigns,
+      final String? errorUserCampaigns,
+      final List<DonationEntity> userDonations,
+      final bool isLoadingUserDonations,
+      final String? errorUserDonations,
       final bool isCreatingCampaign,
       final String? errorCreateCampaign,
       final bool isUpdatingCampaign,
@@ -812,6 +991,8 @@ abstract class _CampaignState implements CampaignState {
       final String? errorDonation,
       final bool isRequestingWithdrawal,
       final String? errorWithdrawal,
+      final bool isUpdatingBankDetails,
+      final String? errorBankDetails,
       final String? message}) = _$CampaignStateImpl;
 
 // Campaign list
@@ -852,7 +1033,20 @@ abstract class _CampaignState implements CampaignState {
   @override
   bool get isLoadingWithdrawals;
   @override
-  String? get errorWithdrawals; // Mutating operations
+  String?
+      get errorWithdrawals; // User's own campaigns (for My Campaigns screen)
+  @override
+  List<CampaignEntity> get userCampaigns;
+  @override
+  bool get isLoadingUserCampaigns;
+  @override
+  String? get errorUserCampaigns; // User's donations (for My Donations screen)
+  @override
+  List<DonationEntity> get userDonations;
+  @override
+  bool get isLoadingUserDonations;
+  @override
+  String? get errorUserDonations; // Mutating operations
   @override
   bool get isCreatingCampaign;
   @override
@@ -872,7 +1066,11 @@ abstract class _CampaignState implements CampaignState {
   @override
   bool get isRequestingWithdrawal;
   @override
-  String? get errorWithdrawal; // Generic UI message
+  String? get errorWithdrawal;
+  @override
+  bool get isUpdatingBankDetails;
+  @override
+  String? get errorBankDetails; // Generic UI message
   @override
   String? get message;
 

@@ -54,6 +54,11 @@ import 'package:velora/features/settings/presentation/screens/security/trusted_c
 import 'package:velora/features/settings/presentation/screens/security/two_factor_setup_screen.dart';
 import 'package:velora/features/settings/presentation/screens/settings_screen.dart';
 import 'package:velora/features/wallet/presentation/screens/wallet_dashboard_screen.dart';
+import 'package:velora/features/wallet/presentation/screens/wallet_detail_screen.dart';
+import 'package:velora/features/campaign/presentation/screens/my_campaigns_screen.dart';
+import 'package:velora/features/campaign/presentation/screens/campaign_bank_settings_screen.dart';
+import 'package:velora/features/campaign/presentation/screens/campaign_earnings_detail_screen.dart';
+import 'package:velora/features/campaign/presentation/screens/request_withdrawal_screen.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
 import 'package:velora/features/feed/presentation/screens/feed_screen.dart';
@@ -448,6 +453,50 @@ class AppRouter {
                             parentNavigatorKey: navigationService.navigatorKey,
                             builder: (context, state) =>
                                 const WalletDashboardScreen(),
+                            routes: [
+                              GoRoute(
+                                path: ':walletId',
+                                name: AppRouteName.walletDetail,
+                                builder: (context, state) => WalletDetailScreen(
+                                  walletId: state.pathParameters['walletId']!,
+                                ),
+                              ),
+                              GoRoute(
+                                path: 'my-campaigns',
+                                name: 'myCampaigns',
+                                builder: (context, state) =>
+                                    const MyCampaignsScreen(),
+                                routes: [
+                                  GoRoute(
+                                    path: ':campaignId/bank-settings',
+                                    name: 'campaignBankSettings',
+                                    builder: (context, state) =>
+                                        CampaignBankSettingsScreen(
+                                      campaignId:
+                                          state.pathParameters['campaignId']!,
+                                    ),
+                                  ),
+                                  GoRoute(
+                                    path: ':campaignId/earnings',
+                                    name: 'campaignEarnings',
+                                    builder: (context, state) =>
+                                        CampaignEarningsDetailScreen(
+                                      campaignId:
+                                          state.pathParameters['campaignId']!,
+                                    ),
+                                  ),
+                                  GoRoute(
+                                    path: ':campaignId/withdraw',
+                                    name: 'requestWithdrawal',
+                                    builder: (context, state) =>
+                                        RequestWithdrawalScreen(
+                                      campaignId:
+                                          state.pathParameters['campaignId']!,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                           GoRoute(
                             path: AppRouteSinglePath.settingsNotificationDetail,
@@ -568,6 +617,7 @@ class AppRouteName {
   static const settingsPrivacy = 'settingsPrivacy';
   static const settingsMyDonation = 'settingsMyDonation';
   static const settingsWalletDashboard = 'settingsWalletDashboard';
+  static const walletDetail = 'walletDetail';
   static const settingsNotificationDetail = 'settingsNotificationDetail';
   static const settingsTheme = 'settingsTheme';
   static const settingsLanguage = 'settingsLanguage';

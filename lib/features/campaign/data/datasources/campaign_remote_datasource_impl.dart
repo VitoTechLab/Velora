@@ -303,7 +303,10 @@ class CampaignRemoteDataSourceImpl implements CampaignRemoteDataSource {
         logi('Getting donations by user: $userId', tag: _logTag);
         final response = await _client
             .from(_donations)
-            .select()
+            .select('''
+              *,
+              campaigns(title, image_url)
+            ''')
             .eq('user_id', userId)
             .order('created_at', ascending: false)
             .limit(limit);

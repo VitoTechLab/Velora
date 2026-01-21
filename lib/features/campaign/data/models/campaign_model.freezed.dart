@@ -63,7 +63,14 @@ mixin _$CampaignModel {
   @JsonKey(name: 'category_name')
   String? get categoryName => throw _privateConstructorUsedError;
   @JsonKey(name: 'category_slug')
-  String? get categorySlug => throw _privateConstructorUsedError;
+  String? get categorySlug =>
+      throw _privateConstructorUsedError; // Bank details for withdrawal processing
+  @JsonKey(name: 'withdrawal_bank_name')
+  String? get withdrawalBankName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'withdrawal_account_number')
+  String? get withdrawalAccountNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'withdrawal_account_holder')
+  String? get withdrawalAccountHolder => throw _privateConstructorUsedError;
 
   /// Serializes this CampaignModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -102,7 +109,12 @@ abstract class $CampaignModelCopyWith<$Res> {
       @JsonKey(name: 'organizer_username') String? organizerUsername,
       @JsonKey(name: 'organizer_avatar_url') String? organizerAvatarUrl,
       @JsonKey(name: 'category_name') String? categoryName,
-      @JsonKey(name: 'category_slug') String? categorySlug});
+      @JsonKey(name: 'category_slug') String? categorySlug,
+      @JsonKey(name: 'withdrawal_bank_name') String? withdrawalBankName,
+      @JsonKey(name: 'withdrawal_account_number')
+      String? withdrawalAccountNumber,
+      @JsonKey(name: 'withdrawal_account_holder')
+      String? withdrawalAccountHolder});
 }
 
 /// @nodoc
@@ -141,6 +153,9 @@ class _$CampaignModelCopyWithImpl<$Res, $Val extends CampaignModel>
     Object? organizerAvatarUrl = freezed,
     Object? categoryName = freezed,
     Object? categorySlug = freezed,
+    Object? withdrawalBankName = freezed,
+    Object? withdrawalAccountNumber = freezed,
+    Object? withdrawalAccountHolder = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -227,6 +242,18 @@ class _$CampaignModelCopyWithImpl<$Res, $Val extends CampaignModel>
           ? _value.categorySlug
           : categorySlug // ignore: cast_nullable_to_non_nullable
               as String?,
+      withdrawalBankName: freezed == withdrawalBankName
+          ? _value.withdrawalBankName
+          : withdrawalBankName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      withdrawalAccountNumber: freezed == withdrawalAccountNumber
+          ? _value.withdrawalAccountNumber
+          : withdrawalAccountNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      withdrawalAccountHolder: freezed == withdrawalAccountHolder
+          ? _value.withdrawalAccountHolder
+          : withdrawalAccountHolder // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -260,7 +287,12 @@ abstract class _$$CampaignModelImplCopyWith<$Res>
       @JsonKey(name: 'organizer_username') String? organizerUsername,
       @JsonKey(name: 'organizer_avatar_url') String? organizerAvatarUrl,
       @JsonKey(name: 'category_name') String? categoryName,
-      @JsonKey(name: 'category_slug') String? categorySlug});
+      @JsonKey(name: 'category_slug') String? categorySlug,
+      @JsonKey(name: 'withdrawal_bank_name') String? withdrawalBankName,
+      @JsonKey(name: 'withdrawal_account_number')
+      String? withdrawalAccountNumber,
+      @JsonKey(name: 'withdrawal_account_holder')
+      String? withdrawalAccountHolder});
 }
 
 /// @nodoc
@@ -297,6 +329,9 @@ class __$$CampaignModelImplCopyWithImpl<$Res>
     Object? organizerAvatarUrl = freezed,
     Object? categoryName = freezed,
     Object? categorySlug = freezed,
+    Object? withdrawalBankName = freezed,
+    Object? withdrawalAccountNumber = freezed,
+    Object? withdrawalAccountHolder = freezed,
   }) {
     return _then(_$CampaignModelImpl(
       id: null == id
@@ -383,6 +418,18 @@ class __$$CampaignModelImplCopyWithImpl<$Res>
           ? _value.categorySlug
           : categorySlug // ignore: cast_nullable_to_non_nullable
               as String?,
+      withdrawalBankName: freezed == withdrawalBankName
+          ? _value.withdrawalBankName
+          : withdrawalBankName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      withdrawalAccountNumber: freezed == withdrawalAccountNumber
+          ? _value.withdrawalAccountNumber
+          : withdrawalAccountNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      withdrawalAccountHolder: freezed == withdrawalAccountHolder
+          ? _value.withdrawalAccountHolder
+          : withdrawalAccountHolder // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -411,7 +458,10 @@ class _$CampaignModelImpl extends _CampaignModel {
       @JsonKey(name: 'organizer_username') this.organizerUsername,
       @JsonKey(name: 'organizer_avatar_url') this.organizerAvatarUrl,
       @JsonKey(name: 'category_name') this.categoryName,
-      @JsonKey(name: 'category_slug') this.categorySlug})
+      @JsonKey(name: 'category_slug') this.categorySlug,
+      @JsonKey(name: 'withdrawal_bank_name') this.withdrawalBankName,
+      @JsonKey(name: 'withdrawal_account_number') this.withdrawalAccountNumber,
+      @JsonKey(name: 'withdrawal_account_holder') this.withdrawalAccountHolder})
       : super._();
 
   factory _$CampaignModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -482,10 +532,20 @@ class _$CampaignModelImpl extends _CampaignModel {
   @override
   @JsonKey(name: 'category_slug')
   final String? categorySlug;
+// Bank details for withdrawal processing
+  @override
+  @JsonKey(name: 'withdrawal_bank_name')
+  final String? withdrawalBankName;
+  @override
+  @JsonKey(name: 'withdrawal_account_number')
+  final String? withdrawalAccountNumber;
+  @override
+  @JsonKey(name: 'withdrawal_account_holder')
+  final String? withdrawalAccountHolder;
 
   @override
   String toString() {
-    return 'CampaignModel(id: $id, userId: $userId, categoryId: $categoryId, title: $title, description: $description, coverImageUrl: $coverImageUrl, targetAmount: $targetAmount, amountRaised: $amountRaised, currentBalance: $currentBalance, donorCount: $donorCount, status: $status, isVerified: $isVerified, locationCity: $locationCity, endDate: $endDate, createdAt: $createdAt, updatedAt: $updatedAt, completedAt: $completedAt, organizerUsername: $organizerUsername, organizerAvatarUrl: $organizerAvatarUrl, categoryName: $categoryName, categorySlug: $categorySlug)';
+    return 'CampaignModel(id: $id, userId: $userId, categoryId: $categoryId, title: $title, description: $description, coverImageUrl: $coverImageUrl, targetAmount: $targetAmount, amountRaised: $amountRaised, currentBalance: $currentBalance, donorCount: $donorCount, status: $status, isVerified: $isVerified, locationCity: $locationCity, endDate: $endDate, createdAt: $createdAt, updatedAt: $updatedAt, completedAt: $completedAt, organizerUsername: $organizerUsername, organizerAvatarUrl: $organizerAvatarUrl, categoryName: $categoryName, categorySlug: $categorySlug, withdrawalBankName: $withdrawalBankName, withdrawalAccountNumber: $withdrawalAccountNumber, withdrawalAccountHolder: $withdrawalAccountHolder)';
   }
 
   @override
@@ -529,7 +589,15 @@ class _$CampaignModelImpl extends _CampaignModel {
             (identical(other.categoryName, categoryName) ||
                 other.categoryName == categoryName) &&
             (identical(other.categorySlug, categorySlug) ||
-                other.categorySlug == categorySlug));
+                other.categorySlug == categorySlug) &&
+            (identical(other.withdrawalBankName, withdrawalBankName) ||
+                other.withdrawalBankName == withdrawalBankName) &&
+            (identical(
+                    other.withdrawalAccountNumber, withdrawalAccountNumber) ||
+                other.withdrawalAccountNumber == withdrawalAccountNumber) &&
+            (identical(
+                    other.withdrawalAccountHolder, withdrawalAccountHolder) ||
+                other.withdrawalAccountHolder == withdrawalAccountHolder));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -556,7 +624,10 @@ class _$CampaignModelImpl extends _CampaignModel {
         organizerUsername,
         organizerAvatarUrl,
         categoryName,
-        categorySlug
+        categorySlug,
+        withdrawalBankName,
+        withdrawalAccountNumber,
+        withdrawalAccountHolder
       ]);
 
   /// Create a copy of CampaignModel
@@ -597,8 +668,12 @@ abstract class _CampaignModel extends CampaignModel {
       @JsonKey(name: 'organizer_username') final String? organizerUsername,
       @JsonKey(name: 'organizer_avatar_url') final String? organizerAvatarUrl,
       @JsonKey(name: 'category_name') final String? categoryName,
-      @JsonKey(name: 'category_slug')
-      final String? categorySlug}) = _$CampaignModelImpl;
+      @JsonKey(name: 'category_slug') final String? categorySlug,
+      @JsonKey(name: 'withdrawal_bank_name') final String? withdrawalBankName,
+      @JsonKey(name: 'withdrawal_account_number')
+      final String? withdrawalAccountNumber,
+      @JsonKey(name: 'withdrawal_account_holder')
+      final String? withdrawalAccountHolder}) = _$CampaignModelImpl;
   const _CampaignModel._() : super._();
 
   factory _CampaignModel.fromJson(Map<String, dynamic> json) =
@@ -666,7 +741,16 @@ abstract class _CampaignModel extends CampaignModel {
   String? get categoryName;
   @override
   @JsonKey(name: 'category_slug')
-  String? get categorySlug;
+  String? get categorySlug; // Bank details for withdrawal processing
+  @override
+  @JsonKey(name: 'withdrawal_bank_name')
+  String? get withdrawalBankName;
+  @override
+  @JsonKey(name: 'withdrawal_account_number')
+  String? get withdrawalAccountNumber;
+  @override
+  @JsonKey(name: 'withdrawal_account_holder')
+  String? get withdrawalAccountHolder;
 
   /// Create a copy of CampaignModel
   /// with the given fields replaced by the non-null parameter values.

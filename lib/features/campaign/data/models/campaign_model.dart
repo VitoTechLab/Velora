@@ -34,6 +34,11 @@ abstract class CampaignModel with _$CampaignModel {
     // Joined from campaign_categories (read-only)
     @JsonKey(name: 'category_name') String? categoryName,
     @JsonKey(name: 'category_slug') String? categorySlug,
+
+    // Bank details for withdrawal processing
+    @JsonKey(name: 'withdrawal_bank_name') String? withdrawalBankName,
+    @JsonKey(name: 'withdrawal_account_number') String? withdrawalAccountNumber,
+    @JsonKey(name: 'withdrawal_account_holder') String? withdrawalAccountHolder,
   }) = _CampaignModel;
 
   factory CampaignModel.fromJson(Map<String, dynamic> json) =>
@@ -62,6 +67,9 @@ abstract class CampaignModel with _$CampaignModel {
       organizerAvatarUrl: organizerAvatarUrl,
       categoryName: categoryName,
       categorySlug: categorySlug,
+      withdrawalBankName: withdrawalBankName,
+      withdrawalAccountNumber: withdrawalAccountNumber,
+      withdrawalAccountHolder: withdrawalAccountHolder,
     );
   }
 
@@ -84,6 +92,9 @@ abstract class CampaignModel with _$CampaignModel {
       createdAt: entity.createdAt,
       updatedAt: entity.updatedAt,
       completedAt: entity.completedAt,
+      withdrawalBankName: entity.withdrawalBankName,
+      withdrawalAccountNumber: entity.withdrawalAccountNumber,
+      withdrawalAccountHolder: entity.withdrawalAccountHolder,
     );
   }
 
@@ -112,6 +123,9 @@ abstract class CampaignModel with _$CampaignModel {
       'status': status,
       'location_city': locationCity,
       'end_date': endDate?.toIso8601String(),
+      'withdrawal_bank_name': withdrawalBankName,
+      'withdrawal_account_number': withdrawalAccountNumber,
+      'withdrawal_account_holder': withdrawalAccountHolder,
     };
   }
 

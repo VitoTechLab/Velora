@@ -24,6 +24,9 @@ _$DonationModelImpl _$$DonationModelImplFromJson(Map<String, dynamic> json) =>
       donorUsername: json['donor_username'] as String?,
       donorDisplayName: json['donor_display_name'] as String?,
       donorAvatarUrl: json['donor_avatar_url'] as String?,
+      campaignTitle: _readCampaignTitle(json, 'campaign_title') as String?,
+      campaignImageUrl:
+          _readCampaignImageUrl(json, 'campaign_image_url') as String?,
     );
 
 Map<String, dynamic> _$$DonationModelImplToJson(_$DonationModelImpl instance) =>
@@ -43,4 +46,6 @@ Map<String, dynamic> _$$DonationModelImplToJson(_$DonationModelImpl instance) =>
       'donor_username': instance.donorUsername,
       'donor_display_name': instance.donorDisplayName,
       'donor_avatar_url': instance.donorAvatarUrl,
+      'campaign_title': instance.campaignTitle,
+      'campaign_image_url': instance.campaignImageUrl,
     };

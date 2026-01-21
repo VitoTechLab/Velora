@@ -35,6 +35,9 @@ _$CampaignModelImpl _$$CampaignModelImplFromJson(Map<String, dynamic> json) =>
       organizerAvatarUrl: json['organizer_avatar_url'] as String?,
       categoryName: json['category_name'] as String?,
       categorySlug: json['category_slug'] as String?,
+      withdrawalBankName: json['withdrawal_bank_name'] as String?,
+      withdrawalAccountNumber: json['withdrawal_account_number'] as String?,
+      withdrawalAccountHolder: json['withdrawal_account_holder'] as String?,
     );
 
 Map<String, dynamic> _$$CampaignModelImplToJson(_$CampaignModelImpl instance) =>
@@ -60,4 +63,7 @@ Map<String, dynamic> _$$CampaignModelImplToJson(_$CampaignModelImpl instance) =>
       'organizer_avatar_url': instance.organizerAvatarUrl,
       'category_name': instance.categoryName,
       'category_slug': instance.categorySlug,
+      'withdrawal_bank_name': instance.withdrawalBankName,
+      'withdrawal_account_number': instance.withdrawalAccountNumber,
+      'withdrawal_account_holder': instance.withdrawalAccountHolder,
     };

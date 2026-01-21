@@ -28,6 +28,12 @@ abstract class DonationModel with _$DonationModel {
     @JsonKey(name: 'donor_username') String? donorUsername,
     @JsonKey(name: 'donor_display_name') String? donorDisplayName,
     @JsonKey(name: 'donor_avatar_url') String? donorAvatarUrl,
+
+    // Joined from campaigns (read-only)
+    @JsonKey(name: 'campaign_title', readValue: _readCampaignTitle)
+    String? campaignTitle,
+    @JsonKey(name: 'campaign_image_url', readValue: _readCampaignImageUrl)
+    String? campaignImageUrl,
   }) = _DonationModel;
 
   factory DonationModel.fromJson(Map<String, dynamic> json) =>
@@ -50,6 +56,8 @@ abstract class DonationModel with _$DonationModel {
       donorUsername: donorUsername,
       donorDisplayName: donorDisplayName,
       donorAvatarUrl: donorAvatarUrl,
+      campaignTitle: campaignTitle,
+      campaignImageUrl: campaignImageUrl,
     );
   }
 
@@ -65,6 +73,8 @@ abstract class DonationModel with _$DonationModel {
       paymentStatus: entity.paymentStatus.name,
       paymentId: entity.paymentId,
       createdAt: entity.createdAt,
+      campaignTitle: entity.campaignTitle,
+      campaignImageUrl: entity.campaignImageUrl,
     );
   }
 
@@ -88,4 +98,18 @@ abstract class DonationModel with _$DonationModel {
       orElse: () => PaymentStatus.pending,
     );
   }
+}
+
+Object? _readCampaignTitle(Map json, String key) {
+  if (json['campaigns'] is Map) {
+    return json['campaigns']['title'];
+  }
+  return json['campaign_title']; // Fallback
+}
+
+Object? _readCampaignImageUrl(Map json, String key) {
+  if (json['campaigns'] is Map) {
+    return json['campaigns']['image_url'];
+  }
+  return json['campaign_image_url']; // Fallback
 }

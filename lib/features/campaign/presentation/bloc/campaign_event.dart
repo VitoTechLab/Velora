@@ -99,6 +99,35 @@ class CampaignEvent with _$CampaignEvent {
     required String campaignId,
   }) = LoadWithdrawalsEvent;
 
+  /// Load campaigns owned by current user (for My Campaigns screen)
+  const factory CampaignEvent.loadUserCampaigns({
+    required String userId,
+  }) = LoadUserCampaignsEvent;
+
+  /// Load donations made by current user (for My Donations screen)
+  const factory CampaignEvent.loadUserDonations({
+    required String userId,
+    @Default(50) int limit,
+  }) = LoadUserDonationsEvent;
+
+  /// Update campaign bank details for withdrawals
+  const factory CampaignEvent.updateCampaignBankDetails({
+    required String campaignId,
+    required String bankName,
+    required String accountNumber,
+    required String accountHolder,
+  }) = UpdateCampaignBankDetailsEvent;
+
+  /// Process a donation via mock Bank Transfer gateway
+  /// **MOCK**: Auto-approves payment immediately after creation
+  const factory CampaignEvent.processDonation({
+    required String campaignId,
+    required String userId,
+    required double amount,
+    String? message,
+    @Default(false) bool isAnonymous,
+  }) = ProcessDonationEvent;
+
   /// Clear transient messages/errors
   const factory CampaignEvent.clearTransient() = ClearCampaignTransientEvent;
 }

@@ -17,6 +17,7 @@ import 'package:velora/features/notification/presentation/bloc/notification_bloc
 import 'package:velora/features/settings/presentation/bloc/settings_bloc.dart';
 import 'package:velora/features/settings/presentation/bloc/settings_state.dart';
 import 'package:velora/features/social_relation/presentation/bloc/social_relation_bloc.dart';
+import 'package:velora/features/wallet/presentation/bloc/wallet_bloc.dart';
 import 'package:velora/l10n/app_localizations.dart';
 import 'package:velora/routes/app_router.dart';
 
@@ -76,6 +77,8 @@ class _AndroidAppState extends State<AndroidApp> {
         ),
         // CampaignBloc - factory instance
         BlocProvider<CampaignBloc>(create: (_) => getIt<CampaignBloc>()),
+        // WalletBloc - factory instance
+        BlocProvider<WalletBloc>(create: (_) => getIt<WalletBloc>()),
         // SocialRelationBloc - factory instance
         BlocProvider<SocialRelationBloc>(
           create: (_) => getIt<SocialRelationBloc>(),

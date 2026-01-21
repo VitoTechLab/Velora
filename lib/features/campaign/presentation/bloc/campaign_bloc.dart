@@ -1,6 +1,7 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velora/core/utils/log_alias.dart';
+import 'package:velora/features/campaign/domain/entities/donation_entity.dart';
 import 'package:velora/features/campaign/domain/usecases/add_campaign_comment_usecase.dart';
 import 'package:velora/features/campaign/domain/usecases/create_campaign_usecase.dart';
 import 'package:velora/features/campaign/domain/usecases/create_donation_usecase.dart';
@@ -12,6 +13,8 @@ import 'package:velora/features/campaign/domain/usecases/get_campaign_categories
 import 'package:velora/features/campaign/domain/usecases/get_campaign_comments_usecase.dart';
 import 'package:velora/features/campaign/domain/usecases/get_comment_replies_usecase.dart';
 import 'package:velora/features/campaign/domain/usecases/get_donations_by_campaign_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/get_donations_by_user_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/get_campaigns_by_user_usecase.dart';
 import 'package:velora/features/campaign/domain/usecases/get_withdrawal_by_id_usecase.dart';
 import 'package:velora/features/campaign/domain/usecases/get_withdrawals_by_campaign_usecase.dart';
 import 'package:velora/features/campaign/domain/usecases/request_withdrawal_usecase.dart';
@@ -43,6 +46,8 @@ class CampaignBloc extends Bloc<CampaignEvent, CampaignState> {
     required RequestWithdrawalUsecase requestWithdrawalUsecase,
     required GetWithdrawalsByCampaignUsecase getWithdrawalsByCampaignUsecase,
     required GetWithdrawalByIdUsecase getWithdrawalByIdUsecase,
+    required GetCampaignsByUserUsecase getCampaignsByUserUsecase,
+    required GetDonationsByUserUsecase getDonationsByUserUsecase,
   })  : _getAllCampaignsUsecase = getAllCampaignsUsecase,
         _searchCampaignsUsecase = searchCampaignsUsecase,
         _getCampaignByIdUsecase = getCampaignByIdUsecase,
@@ -61,6 +66,8 @@ class CampaignBloc extends Bloc<CampaignEvent, CampaignState> {
         _requestWithdrawalUsecase = requestWithdrawalUsecase,
         _getWithdrawalsByCampaignUsecase = getWithdrawalsByCampaignUsecase,
         _getWithdrawalByIdUsecase = getWithdrawalByIdUsecase,
+        _getCampaignsByUserUsecase = getCampaignsByUserUsecase,
+        _getDonationsByUserUsecase = getDonationsByUserUsecase,
         super(const CampaignState()) {
     on<LoadCampaignsEvent>(
       _onLoadCampaigns,
@@ -88,6 +95,10 @@ class CampaignBloc extends Bloc<CampaignEvent, CampaignState> {
     on<LoadCommentRepliesEvent>(_onLoadCommentReplies);
     on<RequestWithdrawalEvent>(_onRequestWithdrawal);
     on<LoadWithdrawalsEvent>(_onLoadWithdrawals);
+    on<LoadUserCampaignsEvent>(_onLoadUserCampaigns);
+    on<LoadUserDonationsEvent>(_onLoadUserDonations);
+    on<UpdateCampaignBankDetailsEvent>(_onUpdateCampaignBankDetails);
+    on<ProcessDonationEvent>(_onProcessDonation);
     on<ClearCampaignTransientEvent>(_onClearTransient);
   }
 
@@ -113,6 +124,8 @@ class CampaignBloc extends Bloc<CampaignEvent, CampaignState> {
   final RequestWithdrawalUsecase _requestWithdrawalUsecase;
   final GetWithdrawalsByCampaignUsecase _getWithdrawalsByCampaignUsecase;
   final GetWithdrawalByIdUsecase _getWithdrawalByIdUsecase;
+  final GetCampaignsByUserUsecase _getCampaignsByUserUsecase;
+  final GetDonationsByUserUsecase _getDonationsByUserUsecase;
 
   int _validatedLimit(int limit) => limit.clamp(_minPageSize, _maxPageSize);
 
@@ -733,6 +746,242 @@ class CampaignBloc extends Bloc<CampaignEvent, CampaignState> {
     );
   }
 
+  // ======================== User Campaigns & Donations ========================
+  Future<void> _onLoadUserCampaigns(
+    LoadUserCampaignsEvent event,
+    Emitter<CampaignState> emit,
+  ) async {
+    final userId = event.userId.trim();
+    if (userId.isEmpty) return;
+
+    logi('Load user campaigns userId=$userId', tag: _logTag);
+
+    emit(state.copyWith(isLoadingUserCampaigns: true, errorUserCampaigns: null));
+
+    final result = await _getCampaignsByUserUsecase(userId);
+
+    result.fold(
+      (failure) {
+        emit(
+          state.copyWith(
+            isLoadingUserCampaigns: false,
+            errorUserCampaigns: failure.message,
+          ),
+        );
+      },
+      (campaigns) {
+        emit(
+          state.copyWith(
+            isLoadingUserCampaigns: false,
+            userCampaigns: campaigns,
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _onLoadUserDonations(
+    LoadUserDonationsEvent event,
+    Emitter<CampaignState> emit,
+  ) async {
+    final userId = event.userId.trim();
+    if (userId.isEmpty) return;
+
+    final limit = _validatedLimit(event.limit);
+    logi('Load user donations userId=$userId limit=$limit', tag: _logTag);
+
+    emit(state.copyWith(isLoadingUserDonations: true, errorUserDonations: null));
+
+    final result = await _getDonationsByUserUsecase(userId, limit: limit);
+
+    result.fold(
+      (failure) {
+        emit(
+          state.copyWith(
+            isLoadingUserDonations: false,
+            errorUserDonations: failure.message,
+          ),
+        );
+      },
+      (donations) {
+        emit(
+          state.copyWith(
+            isLoadingUserDonations: false,
+            userDonations: donations,
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _onUpdateCampaignBankDetails(
+    UpdateCampaignBankDetailsEvent event,
+    Emitter<CampaignState> emit,
+  ) async {
+    final campaignId = event.campaignId.trim();
+    if (campaignId.isEmpty) {
+      emit(state.copyWith(errorBankDetails: 'Campaign ID is required'));
+      return;
+    }
+
+    logi('Update bank details for campaign=$campaignId', tag: _logTag);
+
+    emit(
+      state.copyWith(
+        isUpdatingBankDetails: true,
+        errorBankDetails: null,
+        message: null,
+      ),
+    );
+
+    // First, get the current campaign to preserve other fields
+    final getResult = await _getCampaignByIdUsecase(campaignId);
+
+    await getResult.fold(
+      (failure) async {
+        emit(
+          state.copyWith(
+            isUpdatingBankDetails: false,
+            errorBankDetails: failure.message,
+          ),
+        );
+      },
+      (campaign) async {
+        if (campaign == null) {
+          emit(
+            state.copyWith(
+              isUpdatingBankDetails: false,
+              errorBankDetails: 'Campaign not found',
+            ),
+          );
+          return;
+        }
+
+        // Update with new bank details
+        final updatedCampaign = campaign.copyWith(
+          withdrawalBankName: event.bankName,
+          withdrawalAccountNumber: event.accountNumber,
+          withdrawalAccountHolder: event.accountHolder,
+        );
+
+        final updateResult = await _updateCampaignUsecase(updatedCampaign);
+
+        updateResult.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                isUpdatingBankDetails: false,
+                errorBankDetails: failure.message,
+              ),
+            );
+          },
+          (updated) {
+            // Update in userCampaigns list
+            final updatedUserCampaigns = state.userCampaigns
+                .map((c) => c.id == updated.id ? updated : c)
+                .toList();
+
+            emit(
+              state.copyWith(
+                isUpdatingBankDetails: false,
+                userCampaigns: updatedUserCampaigns,
+                selectedCampaign:
+                    state.selectedCampaign?.id == updated.id ? updated : state.selectedCampaign,
+                message: 'Bank details saved',
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  /// Process donation via mock Bank Transfer gateway.
+  /// **MOCK**: Auto-approves payment immediately after creation.
+  Future<void> _onProcessDonation(
+    ProcessDonationEvent event,
+    Emitter<CampaignState> emit,
+  ) async {
+    final campaignId = event.campaignId.trim();
+    final userId = event.userId.trim();
+
+    if (campaignId.isEmpty || userId.isEmpty) {
+      emit(state.copyWith(errorDonation: 'Campaign and user ID required'));
+      return;
+    }
+
+    if (event.amount <= 0) {
+      emit(state.copyWith(errorDonation: 'Amount must be greater than 0'));
+      return;
+    }
+
+    logi('Process donation campaign=$campaignId amount=${event.amount}', tag: _logTag);
+
+    emit(
+      state.copyWith(
+        isPerformingDonation: true,
+        errorDonation: null,
+        message: null,
+      ),
+    );
+
+    // Create donation with pending status
+    final donation = DonationEntity(
+      id: '',
+      campaignId: campaignId,
+      userId: userId,
+      amountTotal: event.amount,
+      platformFeePercent: 5.0, // Platform fee percentage
+      isAnonymous: event.isAnonymous,
+      message: event.message,
+      paymentStatus: PaymentStatus.pending,
+      createdAt: DateTime.now(),
+    );
+
+    final createResult = await _createDonationUsecase(donation);
+
+    await createResult.fold(
+      (failure) async {
+        emit(
+          state.copyWith(
+            isPerformingDonation: false,
+            errorDonation: failure.message,
+          ),
+        );
+      },
+      (createdDonation) async {
+        // **MOCK**: Auto-approve payment immediately
+        final mockPaymentId = 'MOCK-${DateTime.now().millisecondsSinceEpoch}';
+        final approveResult = await _updateDonationStatusUsecase(
+          createdDonation.id,
+          'success',
+          paymentId: mockPaymentId,
+        );
+
+        approveResult.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                isPerformingDonation: false,
+                errorDonation: 'Payment confirmation failed: ${failure.message}',
+              ),
+            );
+          },
+          (approvedDonation) {
+            final updatedDonations = [approvedDonation, ...state.donations];
+            emit(
+              state.copyWith(
+                isPerformingDonation: false,
+                donations: updatedDonations,
+                message: 'Donation successful! Thank you for your support.',
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
   // ======================== Helpers ========================
   void _onClearTransient(
     ClearCampaignTransientEvent event,
@@ -748,8 +997,12 @@ class CampaignBloc extends Bloc<CampaignEvent, CampaignState> {
         errorDeleteCampaign: null,
         errorComments: null,
         errorDonations: null,
+        errorDonation: null,
         errorWithdrawal: null,
         errorWithdrawals: null,
+        errorUserCampaigns: null,
+        errorUserDonations: null,
+        errorBankDetails: null,
       ),
     );
   }

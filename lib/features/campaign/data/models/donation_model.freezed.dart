@@ -50,7 +50,12 @@ mixin _$DonationModel {
   @JsonKey(name: 'donor_display_name')
   String? get donorDisplayName => throw _privateConstructorUsedError;
   @JsonKey(name: 'donor_avatar_url')
-  String? get donorAvatarUrl => throw _privateConstructorUsedError;
+  String? get donorAvatarUrl =>
+      throw _privateConstructorUsedError; // Joined from campaigns (read-only)
+  @JsonKey(name: 'campaign_title', readValue: _readCampaignTitle)
+  String? get campaignTitle => throw _privateConstructorUsedError;
+  @JsonKey(name: 'campaign_image_url', readValue: _readCampaignImageUrl)
+  String? get campaignImageUrl => throw _privateConstructorUsedError;
 
   /// Serializes this DonationModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -83,7 +88,11 @@ abstract class $DonationModelCopyWith<$Res> {
       @JsonKey(name: 'created_at') DateTime createdAt,
       @JsonKey(name: 'donor_username') String? donorUsername,
       @JsonKey(name: 'donor_display_name') String? donorDisplayName,
-      @JsonKey(name: 'donor_avatar_url') String? donorAvatarUrl});
+      @JsonKey(name: 'donor_avatar_url') String? donorAvatarUrl,
+      @JsonKey(name: 'campaign_title', readValue: _readCampaignTitle)
+      String? campaignTitle,
+      @JsonKey(name: 'campaign_image_url', readValue: _readCampaignImageUrl)
+      String? campaignImageUrl});
 }
 
 /// @nodoc
@@ -116,6 +125,8 @@ class _$DonationModelCopyWithImpl<$Res, $Val extends DonationModel>
     Object? donorUsername = freezed,
     Object? donorDisplayName = freezed,
     Object? donorAvatarUrl = freezed,
+    Object? campaignTitle = freezed,
+    Object? campaignImageUrl = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -178,6 +189,14 @@ class _$DonationModelCopyWithImpl<$Res, $Val extends DonationModel>
           ? _value.donorAvatarUrl
           : donorAvatarUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      campaignTitle: freezed == campaignTitle
+          ? _value.campaignTitle
+          : campaignTitle // ignore: cast_nullable_to_non_nullable
+              as String?,
+      campaignImageUrl: freezed == campaignImageUrl
+          ? _value.campaignImageUrl
+          : campaignImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -205,7 +224,11 @@ abstract class _$$DonationModelImplCopyWith<$Res>
       @JsonKey(name: 'created_at') DateTime createdAt,
       @JsonKey(name: 'donor_username') String? donorUsername,
       @JsonKey(name: 'donor_display_name') String? donorDisplayName,
-      @JsonKey(name: 'donor_avatar_url') String? donorAvatarUrl});
+      @JsonKey(name: 'donor_avatar_url') String? donorAvatarUrl,
+      @JsonKey(name: 'campaign_title', readValue: _readCampaignTitle)
+      String? campaignTitle,
+      @JsonKey(name: 'campaign_image_url', readValue: _readCampaignImageUrl)
+      String? campaignImageUrl});
 }
 
 /// @nodoc
@@ -236,6 +259,8 @@ class __$$DonationModelImplCopyWithImpl<$Res>
     Object? donorUsername = freezed,
     Object? donorDisplayName = freezed,
     Object? donorAvatarUrl = freezed,
+    Object? campaignTitle = freezed,
+    Object? campaignImageUrl = freezed,
   }) {
     return _then(_$DonationModelImpl(
       id: null == id
@@ -298,6 +323,14 @@ class __$$DonationModelImplCopyWithImpl<$Res>
           ? _value.donorAvatarUrl
           : donorAvatarUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      campaignTitle: freezed == campaignTitle
+          ? _value.campaignTitle
+          : campaignTitle // ignore: cast_nullable_to_non_nullable
+              as String?,
+      campaignImageUrl: freezed == campaignImageUrl
+          ? _value.campaignImageUrl
+          : campaignImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -320,7 +353,11 @@ class _$DonationModelImpl extends _DonationModel {
       @JsonKey(name: 'created_at') required this.createdAt,
       @JsonKey(name: 'donor_username') this.donorUsername,
       @JsonKey(name: 'donor_display_name') this.donorDisplayName,
-      @JsonKey(name: 'donor_avatar_url') this.donorAvatarUrl})
+      @JsonKey(name: 'donor_avatar_url') this.donorAvatarUrl,
+      @JsonKey(name: 'campaign_title', readValue: _readCampaignTitle)
+      this.campaignTitle,
+      @JsonKey(name: 'campaign_image_url', readValue: _readCampaignImageUrl)
+      this.campaignImageUrl})
       : super._();
 
   factory _$DonationModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -372,10 +409,17 @@ class _$DonationModelImpl extends _DonationModel {
   @override
   @JsonKey(name: 'donor_avatar_url')
   final String? donorAvatarUrl;
+// Joined from campaigns (read-only)
+  @override
+  @JsonKey(name: 'campaign_title', readValue: _readCampaignTitle)
+  final String? campaignTitle;
+  @override
+  @JsonKey(name: 'campaign_image_url', readValue: _readCampaignImageUrl)
+  final String? campaignImageUrl;
 
   @override
   String toString() {
-    return 'DonationModel(id: $id, campaignId: $campaignId, userId: $userId, amountTotal: $amountTotal, platformFeePercent: $platformFeePercent, platformFeeAmount: $platformFeeAmount, amountNet: $amountNet, isAnonymous: $isAnonymous, message: $message, paymentStatus: $paymentStatus, paymentId: $paymentId, createdAt: $createdAt, donorUsername: $donorUsername, donorDisplayName: $donorDisplayName, donorAvatarUrl: $donorAvatarUrl)';
+    return 'DonationModel(id: $id, campaignId: $campaignId, userId: $userId, amountTotal: $amountTotal, platformFeePercent: $platformFeePercent, platformFeeAmount: $platformFeeAmount, amountNet: $amountNet, isAnonymous: $isAnonymous, message: $message, paymentStatus: $paymentStatus, paymentId: $paymentId, createdAt: $createdAt, donorUsername: $donorUsername, donorDisplayName: $donorDisplayName, donorAvatarUrl: $donorAvatarUrl, campaignTitle: $campaignTitle, campaignImageUrl: $campaignImageUrl)';
   }
 
   @override
@@ -409,7 +453,11 @@ class _$DonationModelImpl extends _DonationModel {
             (identical(other.donorDisplayName, donorDisplayName) ||
                 other.donorDisplayName == donorDisplayName) &&
             (identical(other.donorAvatarUrl, donorAvatarUrl) ||
-                other.donorAvatarUrl == donorAvatarUrl));
+                other.donorAvatarUrl == donorAvatarUrl) &&
+            (identical(other.campaignTitle, campaignTitle) ||
+                other.campaignTitle == campaignTitle) &&
+            (identical(other.campaignImageUrl, campaignImageUrl) ||
+                other.campaignImageUrl == campaignImageUrl));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -430,7 +478,9 @@ class _$DonationModelImpl extends _DonationModel {
       createdAt,
       donorUsername,
       donorDisplayName,
-      donorAvatarUrl);
+      donorAvatarUrl,
+      campaignTitle,
+      campaignImageUrl);
 
   /// Create a copy of DonationModel
   /// with the given fields replaced by the non-null parameter values.
@@ -464,8 +514,11 @@ abstract class _DonationModel extends DonationModel {
       @JsonKey(name: 'created_at') required final DateTime createdAt,
       @JsonKey(name: 'donor_username') final String? donorUsername,
       @JsonKey(name: 'donor_display_name') final String? donorDisplayName,
-      @JsonKey(name: 'donor_avatar_url')
-      final String? donorAvatarUrl}) = _$DonationModelImpl;
+      @JsonKey(name: 'donor_avatar_url') final String? donorAvatarUrl,
+      @JsonKey(name: 'campaign_title', readValue: _readCampaignTitle)
+      final String? campaignTitle,
+      @JsonKey(name: 'campaign_image_url', readValue: _readCampaignImageUrl)
+      final String? campaignImageUrl}) = _$DonationModelImpl;
   const _DonationModel._() : super._();
 
   factory _DonationModel.fromJson(Map<String, dynamic> json) =
@@ -515,7 +568,13 @@ abstract class _DonationModel extends DonationModel {
   String? get donorDisplayName;
   @override
   @JsonKey(name: 'donor_avatar_url')
-  String? get donorAvatarUrl;
+  String? get donorAvatarUrl; // Joined from campaigns (read-only)
+  @override
+  @JsonKey(name: 'campaign_title', readValue: _readCampaignTitle)
+  String? get campaignTitle;
+  @override
+  @JsonKey(name: 'campaign_image_url', readValue: _readCampaignImageUrl)
+  String? get campaignImageUrl;
 
   /// Create a copy of DonationModel
   /// with the given fields replaced by the non-null parameter values.

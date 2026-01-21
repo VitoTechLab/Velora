@@ -548,7 +548,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get walletDashboardTitle => 'Dashboard Dompet';
 
   @override
-  String get walletDashboardWalletId => 'ID Dompet: #VLR2024001';
+  String get walletDashboardWalletId => 'ID Dompet';
 
   @override
   String get walletDashboardTotalBalance => 'Saldo Total';
@@ -601,6 +601,55 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get walletDashboardUnderDevelopmentButton => 'OK';
+
+  @override
+  String get walletDashboardMainWallet => 'Dompet Utama';
+
+  @override
+  String get walletDashboardCampaignWallets => 'Dompet Kampanye';
+
+  @override
+  String get walletDashboardAvailableBalance => 'Saldo Tersedia';
+
+  @override
+  String get walletDashboardTopUp => 'Isi Saldo';
+
+  @override
+  String get walletDashboardWithdraw => 'Tarik Dana';
+
+  @override
+  String get walletDashboardSetupBank => 'Atur Bank';
+
+  @override
+  String get walletDashboardBankDetails => 'Detail Bank';
+
+  @override
+  String get walletDashboardBankName => 'Nama Bank';
+
+  @override
+  String get walletDashboardAccountNumber => 'Nomor Rekening';
+
+  @override
+  String get walletDashboardAccountHolder => 'Nama Pemilik Rekening';
+
+  @override
+  String get walletDashboardAmount => 'Jumlah';
+
+  @override
+  String get walletDashboardTo => 'Ke';
+
+  @override
+  String get walletDashboardNoMainWallet => 'Belum ada dompet';
+
+  @override
+  String get walletDashboardCreateWallet => 'Buat Dompet';
+
+  @override
+  String get walletDashboardNoCampaignWallets =>
+      'Belum ada dompet kampanye. Mulai kampanye untuk menerima donasi!';
+
+  @override
+  String get walletDashboardStartCampaign => 'Mulai Kampanye';
 
   @override
   String get settingsPersonalizationTitle => 'Personalisasi';

@@ -10,6 +10,7 @@ import 'package:velora/features/post/presentation/bloc/post_bloc.dart';
 import 'package:velora/features/media/presentation/bloc/media_upload_bloc.dart';
 import 'package:velora/features/media/presentation/bloc/media_gallery_bloc.dart';
 import 'package:velora/features/campaign/presentation/bloc/campaign_bloc.dart';
+import 'package:velora/features/wallet/presentation/bloc/wallet_bloc.dart';
 
 class WebApp extends StatelessWidget {
   const WebApp({super.key});
@@ -36,6 +37,8 @@ class WebApp extends StatelessWidget {
         ),
         // CampaignBloc - factory instance
         BlocProvider<CampaignBloc>(create: (_) => getIt<CampaignBloc>()),
+        // WalletBloc - factory instance
+        BlocProvider<WalletBloc>(create: (_) => getIt<WalletBloc>()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

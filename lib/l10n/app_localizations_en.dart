@@ -544,7 +544,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get walletDashboardTitle => 'Wallet Dashboard';
 
   @override
-  String get walletDashboardWalletId => 'Wallet ID: #VLR2024001';
+  String get walletDashboardWalletId => 'Wallet ID';
 
   @override
   String get walletDashboardTotalBalance => 'Total Balance';
@@ -597,6 +597,55 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get walletDashboardUnderDevelopmentButton => 'OK';
+
+  @override
+  String get walletDashboardMainWallet => 'Main Wallet';
+
+  @override
+  String get walletDashboardCampaignWallets => 'Campaign Wallets';
+
+  @override
+  String get walletDashboardAvailableBalance => 'Available Balance';
+
+  @override
+  String get walletDashboardTopUp => 'Top Up';
+
+  @override
+  String get walletDashboardWithdraw => 'Withdraw';
+
+  @override
+  String get walletDashboardSetupBank => 'Setup Bank';
+
+  @override
+  String get walletDashboardBankDetails => 'Bank Details';
+
+  @override
+  String get walletDashboardBankName => 'Bank Name';
+
+  @override
+  String get walletDashboardAccountNumber => 'Account Number';
+
+  @override
+  String get walletDashboardAccountHolder => 'Account Holder Name';
+
+  @override
+  String get walletDashboardAmount => 'Amount';
+
+  @override
+  String get walletDashboardTo => 'To';
+
+  @override
+  String get walletDashboardNoMainWallet => 'No wallet yet';
+
+  @override
+  String get walletDashboardCreateWallet => 'Create Wallet';
+
+  @override
+  String get walletDashboardNoCampaignWallets =>
+      'No campaign wallets yet. Start a campaign to receive donations!';
+
+  @override
+  String get walletDashboardStartCampaign => 'Start a Campaign';
 
   @override
   String get settingsPersonalizationTitle => 'Personalization';

@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:intl/intl.dart';
+import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:velora/features/campaign/domain/entities/donation_entity.dart';
+import 'package:velora/features/campaign/presentation/bloc/campaign_bloc.dart';
+import 'package:velora/features/campaign/presentation/bloc/campaign_event.dart';
+import 'package:velora/features/campaign/presentation/bloc/campaign_state.dart';
 import 'package:velora/features/settings/presentation/widgets/edge_to_edge_section.dart';
 import 'package:velora/features/settings/presentation/widgets/settings_page_scaffold.dart';
 import 'package:velora/l10n/app_localizations.dart';
@@ -12,19 +18,18 @@ class MyDonationScreen extends HookWidget {
   Widget build(BuildContext context) {
     final selectedFilter = useState<String>('all');
     final selectedYear = useState<int>(DateTime.now().year);
-    final donations = _mockDonations;
 
-    final filteredDonations = switch (selectedFilter.value) {
-      'all' => donations,
-      'recurring' => donations.where((d) => d.isRecurring).toList(),
-      _ => donations.where((d) => d.isMatched).toList(),
-    };
+    final authState = context.read<AuthBloc>().state;
+    final userId = authState.userId;
 
-    final totalDonated = donations.fold<int>(0, (sum, d) => sum + d.amount);
-    final recurringCount = donations.where((d) => d.isRecurring).length;
-    final matchedAmount = donations
-        .where((d) => d.isMatched)
-        .fold<int>(0, (sum, d) => sum + d.amount);
+    useEffect(() {
+      if (userId != null) {
+        context.read<CampaignBloc>().add(
+              CampaignEvent.loadUserDonations(userId: userId),
+            );
+      }
+      return null;
+    }, [userId]);
 
     final currency = NumberFormat.currency(
       locale: 'id_ID',
@@ -38,125 +43,158 @@ class MyDonationScreen extends HookWidget {
       title: t.settingsAccountDonationsTitle,
       subtitle: t.settingsAccountDonationsSubtitle,
       padding: EdgeInsets.zero,
-      child: Column(
-        children: [
-          const SizedBox(height: 12),
-          EdgeToEdgeSection(
-            title: t.settingsAccountDonationsImpactTitle,
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: BlocBuilder<CampaignBloc, CampaignState>(
+        builder: (context, state) {
+          if (state.isLoadingUserDonations) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          final donations = state.userDonations.cast<DonationEntity>();
+
+          final filteredDonations = switch (selectedFilter.value) {
+            'all' => donations,
+            // 'recurring' => donations.where((d) => d.isRecurring).toList(), // Not supported yet
+            // 'matched' => donations.where((d) => d.isMatched).toList(), // Not supported yet
+            _ => donations, // Fallback
+          };
+
+          final totalDonated =
+              donations.fold<double>(0, (sum, d) => sum + d.amountTotal).toInt();
+          final recurringCount = 0; // donations.where((d) => d.isRecurring).length;
+          final matchedAmount = 0; // donations.where((d) => d.isMatched).fold<double>(0, (sum, d) => sum + d.amountTotal).toInt();
+
+          return Column(
+            children: [
+              const SizedBox(height: 12),
+              EdgeToEdgeSection(
+                title: t.settingsAccountDonationsImpactTitle,
+                child: Column(
                   children: [
-                    _StatPill(
-                      label: t.settingsAccountDonationsTotalLabel,
-                      value: currency.format(totalDonated),
-                      icon: Icons.volunteer_activism,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        _StatPill(
+                          label: t.settingsAccountDonationsTotalLabel,
+                          value: currency.format(totalDonated),
+                          icon: Icons.volunteer_activism,
+                        ),
+                        _StatPill(
+                          label: t.settingsAccountDonationsCampaignsLabel,
+                          value: '${donations.length}',
+                          icon: Icons.campaign_outlined,
+                        ),
+                      ],
                     ),
-                    _StatPill(
-                      label: t.settingsAccountDonationsCampaignsLabel,
-                      value: '${donations.length}',
-                      icon: Icons.campaign_outlined,
+                    const SizedBox(height: 16),
+                    Divider(
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.outlineVariant.withValues(alpha: 0.4),
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        _StatPill(
+                          label: t.settingsAccountDonationsRecurringLabel,
+                          value: t.settingsAccountDonationsRecurringValue(
+                            recurringCount,
+                          ),
+                          icon: Icons.autorenew,
+                        ),
+                        _StatPill(
+                          label: t.settingsAccountDonationsMatchedLabel,
+                          value: currency.format(matchedAmount),
+                          icon: Icons.star_outline,
+                        ),
+                      ],
                     ),
                   ],
                 ),
-                const SizedBox(height: 16),
-                Divider(
-                  color: Theme.of(
-                    context,
-                  ).colorScheme.outlineVariant.withValues(alpha: 0.4),
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    _StatPill(
-                      label: t.settingsAccountDonationsRecurringLabel,
-                      value: t.settingsAccountDonationsRecurringValue(
-                        recurringCount,
-                      ),
-                      icon: Icons.autorenew,
-                    ),
-                    _StatPill(
-                      label: t.settingsAccountDonationsMatchedLabel,
-                      value: currency.format(matchedAmount),
-                      icon: Icons.star_outline,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 2),
-          EdgeToEdgeSection(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(vertical: 4),
-              child: Row(
-                children: [
-                  _FilterChip(
-                    label: t.settingsAccountDonationsFilterAll,
-                    selected: selectedFilter.value == 'all',
-                    onSelected: () => selectedFilter.value = 'all',
-                  ),
-                  _FilterChip(
-                    label: t.settingsAccountDonationsFilterRecurring,
-                    selected: selectedFilter.value == 'recurring',
-                    onSelected: () => selectedFilter.value = 'recurring',
-                  ),
-                  _FilterChip(
-                    label: t.settingsAccountDonationsFilterMatched,
-                    selected: selectedFilter.value == 'matched',
-                    onSelected: () => selectedFilter.value = 'matched',
-                  ),
-                  FilterChip(
-                    label: Text('${selectedYear.value}'),
-                    avatar: const Icon(Icons.calendar_today, size: 18),
-                    selected: false,
-                    onSelected: (_) {},
-                  ),
-                ],
               ),
-            ),
-          ),
-          const SizedBox(height: 2),
-          Expanded(
-            child: filteredDonations.isEmpty
-                ? const _EmptyState()
-                : ListView.separated(
-                    padding: const EdgeInsets.only(bottom: 24),
-                    itemCount: filteredDonations.length,
-                    separatorBuilder: (_, __) => const SizedBox(height: 2),
-                    itemBuilder: (context, index) {
-                      final donation = filteredDonations[index];
-                      return _DonationCard(
-                        donation: donation,
-                        currency: currency,
+              const SizedBox(height: 2),
+              EdgeToEdgeSection(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: Row(
+                    children: [
+                      _FilterChip(
+                        label: t.settingsAccountDonationsFilterAll,
+                        selected: selectedFilter.value == 'all',
+                        onSelected: () => selectedFilter.value = 'all',
+                      ),
+                      // Mock filters disabled visually until supported
+                      Opacity(
+                        opacity: 0.5,
+                        child: _FilterChip(
+                          label: t.settingsAccountDonationsFilterRecurring,
+                          selected: selectedFilter.value == 'recurring',
+                          onSelected: () {
+                             // selectedFilter.value = 'recurring';
+                          },
+                        ),
+                      ),
+                      Opacity(
+                        opacity: 0.5,
+                        child: _FilterChip(
+                          label: t.settingsAccountDonationsFilterMatched,
+                          selected: selectedFilter.value == 'matched',
+                          onSelected: () {
+                             // selectedFilter.value = 'matched';
+                          },
+                        ),
+                      ),
+                      FilterChip(
+                        label: Text('${selectedYear.value}'),
+                        avatar: const Icon(Icons.calendar_today, size: 18),
+                        selected: false,
+                        onSelected: (_) {},
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 2),
+              Expanded(
+                child: filteredDonations.isEmpty
+                    ? const _EmptyState()
+                    : ListView.separated(
+                        padding: const EdgeInsets.only(bottom: 24),
+                        itemCount: filteredDonations.length,
+                        separatorBuilder: (_, __) => const SizedBox(height: 2),
+                        itemBuilder: (context, index) {
+                          final donation = filteredDonations[index];
+                          return _DonationCard(
+                            donation: donation,
+                            currency: currency,
+                          );
+                        },
+                      ),
+              ),
+              const SizedBox(height: 2),
+              EdgeToEdgeSection(
+                child: SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton.icon(
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(t.settingsAccountDonationsExportingToast),
+                        ),
                       );
                     },
-                  ),
-          ),
-          const SizedBox(height: 2),
-          EdgeToEdgeSection(
-            child: SizedBox(
-              width: double.infinity,
-              child: OutlinedButton.icon(
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(t.settingsAccountDonationsExportingToast),
+                    icon: const Icon(Icons.download_outlined),
+                    label: Text(t.settingsAccountDonationsExportButton),
+                    style: OutlinedButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 48),
                     ),
-                  );
-                },
-                icon: const Icon(Icons.download_outlined),
-                label: Text(t.settingsAccountDonationsExportButton),
-                style: OutlinedButton.styleFrom(
-                  minimumSize: const Size(double.infinity, 48),
+                  ),
                 ),
               ),
-            ),
-          ),
-        ],
+            ],
+          );
+        },
       ),
     );
   }
@@ -165,7 +203,7 @@ class MyDonationScreen extends HookWidget {
 class _DonationCard extends StatelessWidget {
   const _DonationCard({required this.donation, required this.currency});
 
-  final _DonationData donation;
+  final DonationEntity donation;
   final NumberFormat currency;
 
   @override
@@ -184,8 +222,9 @@ class _DonationCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               color: colorScheme.primaryContainer,
+              image: donation.campaignImageUrl != null ? DecorationImage(image: NetworkImage(donation.campaignImageUrl!), fit: BoxFit.cover) : null,
             ),
-            child: Icon(Icons.campaign, color: colorScheme.primary),
+            child: donation.campaignImageUrl == null ? Icon(Icons.campaign, color: colorScheme.primary) : null,
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -193,14 +232,14 @@ class _DonationCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  donation.campaignTitle,
+                  donation.campaignTitle ?? 'Unknown Campaign',
                   style: theme.textTheme.titleSmall?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  currency.format(donation.amount),
+                  currency.format(donation.amountTotal),
                   style: theme.textTheme.titleMedium?.copyWith(
                     color: colorScheme.primary,
                     fontWeight: FontWeight.bold,
@@ -216,26 +255,10 @@ class _DonationCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      DateFormat.yMMMd().format(donation.date),
+                      DateFormat.yMMMd().format(donation.createdAt),
                       style: theme.textTheme.bodySmall,
                     ),
-                    if (donation.isRecurring) ...[
-                      const SizedBox(width: 8),
-                      _StatusPill(
-                        label: t.settingsAccountDonationsStatusRecurring,
-                        background: colorScheme.secondaryContainer,
-                        foreground: colorScheme.onSecondaryContainer,
-                      ),
-                    ],
-                    if (donation.isMatched) ...[
-                      const SizedBox(width: 8),
-                      _StatusPill(
-                        label: t.settingsAccountDonationsStatusMatched,
-                        background: colorScheme.tertiaryContainer,
-                        foreground: colorScheme.onTertiaryContainer,
-                        icon: Icons.star,
-                      ),
-                    ],
+                    // Recurring and matched badges removed/hidden for now as not in entity
                   ],
                 ),
               ],
@@ -407,62 +430,3 @@ class _EmptyState extends StatelessWidget {
     );
   }
 }
-
-class _DonationData {
-  const _DonationData({
-    required this.campaignTitle,
-    required this.amount,
-    required this.date,
-    required this.status,
-    required this.isRecurring,
-    required this.isMatched,
-    required this.receiptId,
-  });
-
-  final String campaignTitle;
-  final int amount;
-  final DateTime date;
-  final String status;
-  final bool isRecurring;
-  final bool isMatched;
-  final String receiptId;
-}
-
-final _mockDonations = [
-  _DonationData(
-    campaignTitle: 'Help Budi Recover from Accident',
-    amount: 250000,
-    date: DateTime(2025, 2, 20),
-    status: 'Completed',
-    isRecurring: false,
-    isMatched: true,
-    receiptId: 'RCP-2025-02-001',
-  ),
-  _DonationData(
-    campaignTitle: 'Support Local School Library',
-    amount: 100000,
-    date: DateTime(2025, 2, 15),
-    status: 'Completed',
-    isRecurring: true,
-    isMatched: false,
-    receiptId: 'RCP-2025-02-002',
-  ),
-  _DonationData(
-    campaignTitle: 'Flood Relief Fund - Jakarta',
-    amount: 500000,
-    date: DateTime(2025, 2, 10),
-    status: 'Completed',
-    isRecurring: false,
-    isMatched: true,
-    receiptId: 'RCP-2025-02-003',
-  ),
-  _DonationData(
-    campaignTitle: 'Medical Emergency: Sarah Treatment',
-    amount: 150000,
-    date: DateTime(2025, 1, 25),
-    status: 'Completed',
-    isRecurring: false,
-    isMatched: false,
-    receiptId: 'RCP-2025-01-004',
-  ),
-];

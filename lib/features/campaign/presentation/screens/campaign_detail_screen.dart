@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:velora/core/di/service_locator.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'package:velora/features/campaign/domain/entities/campaign_detail_model.dart';
 import 'package:velora/features/campaign/domain/entities/campaign_type.dart';
@@ -13,6 +15,7 @@ import 'package:velora/features/campaign/presentation/widgets/discussion_tab_con
 import 'package:velora/features/campaign/presentation/widgets/transparency_tab_content.dart';
 import 'package:velora/features/campaign/presentation/widgets/primary_cta_button.dart';
 import 'package:velora/features/campaign/presentation/widgets/invest_bottom_sheet.dart';
+import 'package:velora/features/campaign/presentation/widgets/donate_bottom_sheet.dart';
 
 class CampaignDetailScreen extends HookWidget {
   final CampaignDetailModel campaign;
@@ -47,16 +50,40 @@ class CampaignDetailScreen extends HookWidget {
 
     final isEquity = campaign.type == CampaignType.equity;
     final isDebt = campaign.type == CampaignType.debt;
+    final isDonation = campaign.type == CampaignType.donation;
     final showRiskDisclaimer = isEquity || isDebt;
 
     void handleCTAPress() {
       if (isEquity) {
+        // Equity investment flow
         InvestBottomSheet.show(
           context,
           campaign.unitPrice ?? 0,
           campaign.minBuyUnits ?? 1,
         );
+      } else if (isDonation) {
+        // Donation flow with Bank Transfer gateway
+        final supabase = getIt<SupabaseClient>();
+        final userId = supabase.auth.currentUser?.id;
+        
+        if (userId == null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Please login to donate'),
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+          return;
+        }
+        
+        DonateBottomSheet.show(
+          context,
+          campaignId: campaign.id,
+          campaignTitle: campaign.title,
+          userId: userId,
+        );
       } else {
+        // Other types - mock action
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('${campaign.ctaLabel} (mock action)'),

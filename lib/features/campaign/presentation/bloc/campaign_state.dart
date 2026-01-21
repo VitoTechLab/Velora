@@ -42,6 +42,16 @@ abstract class CampaignState with _$CampaignState {
     @Default(false) bool isLoadingWithdrawals,
     String? errorWithdrawals,
 
+    // User's own campaigns (for My Campaigns screen)
+    @Default(<CampaignEntity>[]) List<CampaignEntity> userCampaigns,
+    @Default(false) bool isLoadingUserCampaigns,
+    String? errorUserCampaigns,
+
+    // User's donations (for My Donations screen)
+    @Default(<DonationEntity>[]) List<DonationEntity> userDonations,
+    @Default(false) bool isLoadingUserDonations,
+    String? errorUserDonations,
+
     // Mutating operations
     @Default(false) bool isCreatingCampaign,
     String? errorCreateCampaign,
@@ -53,6 +63,8 @@ abstract class CampaignState with _$CampaignState {
     String? errorDonation,
     @Default(false) bool isRequestingWithdrawal,
     String? errorWithdrawal,
+    @Default(false) bool isUpdatingBankDetails,
+    String? errorBankDetails,
 
     // Generic UI message
     String? message,

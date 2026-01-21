@@ -31,7 +31,10 @@ mixin _$DonationEntity {
       throw _privateConstructorUsedError; // Joined from user_profiles (read-only)
   String? get donorUsername => throw _privateConstructorUsedError;
   String? get donorDisplayName => throw _privateConstructorUsedError;
-  String? get donorAvatarUrl => throw _privateConstructorUsedError;
+  String? get donorAvatarUrl =>
+      throw _privateConstructorUsedError; // Joined from campaigns (read-only)
+  String? get campaignTitle => throw _privateConstructorUsedError;
+  String? get campaignImageUrl => throw _privateConstructorUsedError;
 
   /// Create a copy of DonationEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -61,7 +64,9 @@ abstract class $DonationEntityCopyWith<$Res> {
       DateTime createdAt,
       String? donorUsername,
       String? donorDisplayName,
-      String? donorAvatarUrl});
+      String? donorAvatarUrl,
+      String? campaignTitle,
+      String? campaignImageUrl});
 }
 
 /// @nodoc
@@ -94,6 +99,8 @@ class _$DonationEntityCopyWithImpl<$Res, $Val extends DonationEntity>
     Object? donorUsername = freezed,
     Object? donorDisplayName = freezed,
     Object? donorAvatarUrl = freezed,
+    Object? campaignTitle = freezed,
+    Object? campaignImageUrl = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -156,6 +163,14 @@ class _$DonationEntityCopyWithImpl<$Res, $Val extends DonationEntity>
           ? _value.donorAvatarUrl
           : donorAvatarUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      campaignTitle: freezed == campaignTitle
+          ? _value.campaignTitle
+          : campaignTitle // ignore: cast_nullable_to_non_nullable
+              as String?,
+      campaignImageUrl: freezed == campaignImageUrl
+          ? _value.campaignImageUrl
+          : campaignImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -183,7 +198,9 @@ abstract class _$$DonationEntityImplCopyWith<$Res>
       DateTime createdAt,
       String? donorUsername,
       String? donorDisplayName,
-      String? donorAvatarUrl});
+      String? donorAvatarUrl,
+      String? campaignTitle,
+      String? campaignImageUrl});
 }
 
 /// @nodoc
@@ -214,6 +231,8 @@ class __$$DonationEntityImplCopyWithImpl<$Res>
     Object? donorUsername = freezed,
     Object? donorDisplayName = freezed,
     Object? donorAvatarUrl = freezed,
+    Object? campaignTitle = freezed,
+    Object? campaignImageUrl = freezed,
   }) {
     return _then(_$DonationEntityImpl(
       id: null == id
@@ -276,6 +295,14 @@ class __$$DonationEntityImplCopyWithImpl<$Res>
           ? _value.donorAvatarUrl
           : donorAvatarUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      campaignTitle: freezed == campaignTitle
+          ? _value.campaignTitle
+          : campaignTitle // ignore: cast_nullable_to_non_nullable
+              as String?,
+      campaignImageUrl: freezed == campaignImageUrl
+          ? _value.campaignImageUrl
+          : campaignImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -298,7 +325,9 @@ class _$DonationEntityImpl implements _DonationEntity {
       required this.createdAt,
       this.donorUsername,
       this.donorDisplayName,
-      this.donorAvatarUrl});
+      this.donorAvatarUrl,
+      this.campaignTitle,
+      this.campaignImageUrl});
 
   @override
   final String id;
@@ -334,10 +363,15 @@ class _$DonationEntityImpl implements _DonationEntity {
   final String? donorDisplayName;
   @override
   final String? donorAvatarUrl;
+// Joined from campaigns (read-only)
+  @override
+  final String? campaignTitle;
+  @override
+  final String? campaignImageUrl;
 
   @override
   String toString() {
-    return 'DonationEntity(id: $id, campaignId: $campaignId, userId: $userId, amountTotal: $amountTotal, platformFeePercent: $platformFeePercent, platformFeeAmount: $platformFeeAmount, amountNet: $amountNet, isAnonymous: $isAnonymous, message: $message, paymentStatus: $paymentStatus, paymentId: $paymentId, createdAt: $createdAt, donorUsername: $donorUsername, donorDisplayName: $donorDisplayName, donorAvatarUrl: $donorAvatarUrl)';
+    return 'DonationEntity(id: $id, campaignId: $campaignId, userId: $userId, amountTotal: $amountTotal, platformFeePercent: $platformFeePercent, platformFeeAmount: $platformFeeAmount, amountNet: $amountNet, isAnonymous: $isAnonymous, message: $message, paymentStatus: $paymentStatus, paymentId: $paymentId, createdAt: $createdAt, donorUsername: $donorUsername, donorDisplayName: $donorDisplayName, donorAvatarUrl: $donorAvatarUrl, campaignTitle: $campaignTitle, campaignImageUrl: $campaignImageUrl)';
   }
 
   @override
@@ -371,7 +405,11 @@ class _$DonationEntityImpl implements _DonationEntity {
             (identical(other.donorDisplayName, donorDisplayName) ||
                 other.donorDisplayName == donorDisplayName) &&
             (identical(other.donorAvatarUrl, donorAvatarUrl) ||
-                other.donorAvatarUrl == donorAvatarUrl));
+                other.donorAvatarUrl == donorAvatarUrl) &&
+            (identical(other.campaignTitle, campaignTitle) ||
+                other.campaignTitle == campaignTitle) &&
+            (identical(other.campaignImageUrl, campaignImageUrl) ||
+                other.campaignImageUrl == campaignImageUrl));
   }
 
   @override
@@ -391,7 +429,9 @@ class _$DonationEntityImpl implements _DonationEntity {
       createdAt,
       donorUsername,
       donorDisplayName,
-      donorAvatarUrl);
+      donorAvatarUrl,
+      campaignTitle,
+      campaignImageUrl);
 
   /// Create a copy of DonationEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -419,7 +459,9 @@ abstract class _DonationEntity implements DonationEntity {
       required final DateTime createdAt,
       final String? donorUsername,
       final String? donorDisplayName,
-      final String? donorAvatarUrl}) = _$DonationEntityImpl;
+      final String? donorAvatarUrl,
+      final String? campaignTitle,
+      final String? campaignImageUrl}) = _$DonationEntityImpl;
 
   @override
   String get id;
@@ -450,7 +492,11 @@ abstract class _DonationEntity implements DonationEntity {
   @override
   String? get donorDisplayName;
   @override
-  String? get donorAvatarUrl;
+  String? get donorAvatarUrl; // Joined from campaigns (read-only)
+  @override
+  String? get campaignTitle;
+  @override
+  String? get campaignImageUrl;
 
   /// Create a copy of DonationEntity
   /// with the given fields replaced by the non-null parameter values.
