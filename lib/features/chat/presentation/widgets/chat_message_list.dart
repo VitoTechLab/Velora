@@ -7,6 +7,7 @@ import 'package:velora/features/chat/presentation/bloc/user_presence_bloc.dart';
 import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:velora/features/chat/domain/entities/chat_message_entity.dart';
+import 'package:velora/features/chat/domain/entities/message_status.dart';
 import 'package:velora/features/chat/presentation/widgets/chat_audio_widget.dart';
 import 'package:velora/features/chat/presentation/widgets/chat_bubble_widget.dart';
 import 'package:velora/features/chat/presentation/widgets/chat_event_widget.dart';
@@ -217,7 +218,7 @@ class ChatMessageList extends StatelessWidget {
                 }
 
                 final message = messages[index];
-                final isSender = message.senderId == myUserId;
+                final isSender = message.senderId == myUserId || message.status == MessageStatus.sending;
                 final isDeleted = message.deletedAt != null;
 
                 // Debug log: observe deletedAt flag vs UI isDeleted
@@ -265,6 +266,7 @@ class ChatMessageList extends StatelessWidget {
                           message: message,
                           isSender: isSender,
                           t: t,
+                          isRead: state.messageReads[message.id]?.isNotEmpty ?? false,
                         ),
                     ],
                   ),
@@ -282,6 +284,7 @@ class ChatMessageList extends StatelessWidget {
     required ChatMessageEntity message,
     required bool isSender,
     required AppLocalizations t,
+    required bool isRead,
   }) {
     final time = _formatTime(message.createdAt);
 
@@ -307,7 +310,7 @@ class ChatMessageList extends StatelessWidget {
           message: message.body ?? '',
           time: time,
           isSender: isSender,
-          isRead: true,
+          isRead: isRead,
         );
         break;
 
@@ -322,7 +325,7 @@ class ChatMessageList extends StatelessWidget {
           caption: message.body,
           time: time,
           isSender: isSender,
-          isRead: true,
+          isRead: isRead,
           isVideo: message.kind == 'video',
         );
         break;
@@ -343,7 +346,7 @@ class ChatMessageList extends StatelessWidget {
             caption: message.body,
             time: time,
             isSender: isSender,
-            isRead: true,
+            isRead: isRead,
             durationSeconds: attachment?.durationSeconds,
             isVoiceMessage: attachment?.isVoiceMessage ?? false,
           );
@@ -454,7 +457,7 @@ class ChatMessageList extends StatelessWidget {
           message: body,
           time: time,
           isSender: isSender,
-          isRead: true,
+          isRead: isRead,
         );
         break;
     }

@@ -33,6 +33,7 @@ mixin _$ChatMessageEntity {
       throw _privateConstructorUsedError; // Attachments (images, videos, audio, files)
   List<MessageAttachmentEntity> get attachments =>
       throw _privateConstructorUsedError;
+  MessageStatus get status => throw _privateConstructorUsedError;
 
   /// Create a copy of ChatMessageEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -61,7 +62,8 @@ abstract class $ChatMessageEntityCopyWith<$Res> {
       DateTime updatedAt,
       PollPayloadEntity? poll,
       EventPayloadEntity? event,
-      List<MessageAttachmentEntity> attachments});
+      List<MessageAttachmentEntity> attachments,
+      MessageStatus status});
 
   $PollPayloadEntityCopyWith<$Res>? get poll;
   $EventPayloadEntityCopyWith<$Res>? get event;
@@ -96,6 +98,7 @@ class _$ChatMessageEntityCopyWithImpl<$Res, $Val extends ChatMessageEntity>
     Object? poll = freezed,
     Object? event = freezed,
     Object? attachments = null,
+    Object? status = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -154,6 +157,10 @@ class _$ChatMessageEntityCopyWithImpl<$Res, $Val extends ChatMessageEntity>
           ? _value.attachments
           : attachments // ignore: cast_nullable_to_non_nullable
               as List<MessageAttachmentEntity>,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as MessageStatus,
     ) as $Val);
   }
 
@@ -208,7 +215,8 @@ abstract class _$$ChatMessageEntityImplCopyWith<$Res>
       DateTime updatedAt,
       PollPayloadEntity? poll,
       EventPayloadEntity? event,
-      List<MessageAttachmentEntity> attachments});
+      List<MessageAttachmentEntity> attachments,
+      MessageStatus status});
 
   @override
   $PollPayloadEntityCopyWith<$Res>? get poll;
@@ -243,6 +251,7 @@ class __$$ChatMessageEntityImplCopyWithImpl<$Res>
     Object? poll = freezed,
     Object? event = freezed,
     Object? attachments = null,
+    Object? status = null,
   }) {
     return _then(_$ChatMessageEntityImpl(
       id: null == id
@@ -301,6 +310,10 @@ class __$$ChatMessageEntityImplCopyWithImpl<$Res>
           ? _value._attachments
           : attachments // ignore: cast_nullable_to_non_nullable
               as List<MessageAttachmentEntity>,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as MessageStatus,
     ));
   }
 }
@@ -322,7 +335,8 @@ class _$ChatMessageEntityImpl extends _ChatMessageEntity {
       required this.updatedAt,
       this.poll,
       this.event,
-      final List<MessageAttachmentEntity> attachments = const []})
+      final List<MessageAttachmentEntity> attachments = const [],
+      this.status = MessageStatus.sent})
       : _attachments = attachments,
         super._();
 
@@ -365,8 +379,12 @@ class _$ChatMessageEntityImpl extends _ChatMessageEntity {
   }
 
   @override
+  @JsonKey()
+  final MessageStatus status;
+
+  @override
   String toString() {
-    return 'ChatMessageEntity(id: $id, conversationId: $conversationId, senderId: $senderId, kind: $kind, body: $body, replyToMessageId: $replyToMessageId, editedAt: $editedAt, deletedAt: $deletedAt, deletedBy: $deletedBy, createdAt: $createdAt, updatedAt: $updatedAt, poll: $poll, event: $event, attachments: $attachments)';
+    return 'ChatMessageEntity(id: $id, conversationId: $conversationId, senderId: $senderId, kind: $kind, body: $body, replyToMessageId: $replyToMessageId, editedAt: $editedAt, deletedAt: $deletedAt, deletedBy: $deletedBy, createdAt: $createdAt, updatedAt: $updatedAt, poll: $poll, event: $event, attachments: $attachments, status: $status)';
   }
 
   @override
@@ -396,7 +414,8 @@ class _$ChatMessageEntityImpl extends _ChatMessageEntity {
             (identical(other.poll, poll) || other.poll == poll) &&
             (identical(other.event, event) || other.event == event) &&
             const DeepCollectionEquality()
-                .equals(other._attachments, _attachments));
+                .equals(other._attachments, _attachments) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @override
@@ -415,7 +434,8 @@ class _$ChatMessageEntityImpl extends _ChatMessageEntity {
       updatedAt,
       poll,
       event,
-      const DeepCollectionEquality().hash(_attachments));
+      const DeepCollectionEquality().hash(_attachments),
+      status);
 
   /// Create a copy of ChatMessageEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -429,21 +449,21 @@ class _$ChatMessageEntityImpl extends _ChatMessageEntity {
 
 abstract class _ChatMessageEntity extends ChatMessageEntity {
   const factory _ChatMessageEntity(
-          {required final String id,
-          required final String conversationId,
-          required final String? senderId,
-          required final String kind,
-          final String? body,
-          final String? replyToMessageId,
-          final DateTime? editedAt,
-          final DateTime? deletedAt,
-          final String? deletedBy,
-          required final DateTime createdAt,
-          required final DateTime updatedAt,
-          final PollPayloadEntity? poll,
-          final EventPayloadEntity? event,
-          final List<MessageAttachmentEntity> attachments}) =
-      _$ChatMessageEntityImpl;
+      {required final String id,
+      required final String conversationId,
+      required final String? senderId,
+      required final String kind,
+      final String? body,
+      final String? replyToMessageId,
+      final DateTime? editedAt,
+      final DateTime? deletedAt,
+      final String? deletedBy,
+      required final DateTime createdAt,
+      required final DateTime updatedAt,
+      final PollPayloadEntity? poll,
+      final EventPayloadEntity? event,
+      final List<MessageAttachmentEntity> attachments,
+      final MessageStatus status}) = _$ChatMessageEntityImpl;
   const _ChatMessageEntity._() : super._();
 
   @override
@@ -474,6 +494,8 @@ abstract class _ChatMessageEntity extends ChatMessageEntity {
   EventPayloadEntity? get event; // Attachments (images, videos, audio, files)
   @override
   List<MessageAttachmentEntity> get attachments;
+  @override
+  MessageStatus get status;
 
   /// Create a copy of ChatMessageEntity
   /// with the given fields replaced by the non-null parameter values.

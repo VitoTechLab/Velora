@@ -30,6 +30,8 @@ import 'package:velora/features/chat/domain/usecases/watch_message_reads_usecase
 import 'package:velora/features/chat/domain/usecases/watch_new_messages_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/watch_typing_indicators_usecase.dart';
 import 'package:velora/features/media/domain/repositories/media_repository.dart';
+import 'package:velora/features/chat/domain/entities/message_status.dart';
+import 'package:uuid/uuid.dart';
 
 import 'chat_message_event.dart';
 import 'chat_message_state.dart';
@@ -406,12 +408,27 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
       return;
     }
 
+    // Optimistic UI: Create temporary message
+    final tempId = 'temp-${const Uuid().v4()}';
+    final tempMessage = ChatMessageEntity(
+      id: tempId,
+      conversationId: conversationId,
+      senderId: null, // Will be filled generally, or we can fetch current user if we have it in state/repo
+      kind: 'text',
+      body: trimmed,
+      replyToMessageId: event.replyToMessageId,
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+      status: MessageStatus.sending,
+    );
+
     emit(
       state.copyWith(
         isSending: true,
         sendError: null,
         sentMessage: null,
         message: null,
+        messages: [tempMessage, ...state.messages],
       ),
     );
 
@@ -423,13 +440,33 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
 
     result.fold(
       (failure) {
-        emit(state.copyWith(isSending: false, sendError: failure.message));
+        // Mark as error
+        final updatedMessages = state.messages.map((m) {
+          if (m.id == tempId) {
+            return m.copyWith(status: MessageStatus.error);
+          }
+          return m;
+        }).toList();
+
+        emit(state.copyWith(
+          isSending: false,
+          sendError: failure.message,
+          messages: updatedMessages,
+        ));
       },
       (chatMessage) {
+        // Replace temp message with real one
+        final updatedMessages = state.messages.map((m) {
+          if (m.id == tempId) {
+            return chatMessage;
+          }
+          return m;
+        }).toList();
+        
         emit(
           state.copyWith(
             isSending: false,
-            messages: [chatMessage, ...state.messages],
+            messages: updatedMessages,
             sentMessage: chatMessage,
             message: 'Message sent',
           ),

@@ -4,6 +4,7 @@ import 'package:velora/features/chat/data/models/event_content_model.dart';
 import 'package:velora/features/chat/data/models/message_attachment_model.dart';
 import 'package:velora/features/chat/data/models/poll_content_model.dart';
 import 'package:velora/features/chat/domain/entities/chat_message_entity.dart';
+import 'package:velora/features/chat/domain/entities/message_status.dart';
 
 part 'chat_message_model.freezed.dart';
 part 'chat_message_model.g.dart';
@@ -33,6 +34,9 @@ abstract class ChatMessageModel with _$ChatMessageModel {
     @JsonKey(name: 'message_attachments')
     @Default([])
     List<MessageAttachmentModel> attachments,
+    @Default(MessageStatus.sent)
+    @JsonKey(includeFromJson: false, includeToJson: false)
+    MessageStatus status,
   }) = _ChatMessageModel;
 
   factory ChatMessageModel.fromJson(Map<String, dynamic> json) =>
@@ -55,6 +59,7 @@ abstract class ChatMessageModel with _$ChatMessageModel {
         deletedBy: deletedBy,
         createdAt: createdAt,
         updatedAt: updatedAt,
+        status: status,
         poll: pollPayload?.toEntity(),
         event: eventPayload?.toEntity(),
         attachments: attachments.map((a) => a.toEntity()).toList(),
@@ -75,6 +80,7 @@ abstract class ChatMessageModel with _$ChatMessageModel {
         updatedAt: entity.updatedAt,
         pollPayload: null, // Optimization: avoided mapping back for now
         eventPayload: null,
+        status: entity.status,
         attachments: [],
       );
 

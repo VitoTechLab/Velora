@@ -53,6 +53,8 @@ mixin _$ChatMessageModel {
   @JsonKey(name: 'message_attachments')
   List<MessageAttachmentModel> get attachments =>
       throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  MessageStatus get status => throw _privateConstructorUsedError;
 
   /// Serializes this ChatMessageModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -85,7 +87,9 @@ abstract class $ChatMessageModelCopyWith<$Res> {
       @JsonKey(name: 'message_poll_payload') PollPayloadModel? pollPayload,
       @JsonKey(name: 'message_event_payload') EventPayloadModel? eventPayload,
       @JsonKey(name: 'message_attachments')
-      List<MessageAttachmentModel> attachments});
+      List<MessageAttachmentModel> attachments,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      MessageStatus status});
 
   $PollPayloadModelCopyWith<$Res>? get pollPayload;
   $EventPayloadModelCopyWith<$Res>? get eventPayload;
@@ -120,6 +124,7 @@ class _$ChatMessageModelCopyWithImpl<$Res, $Val extends ChatMessageModel>
     Object? pollPayload = freezed,
     Object? eventPayload = freezed,
     Object? attachments = null,
+    Object? status = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -178,6 +183,10 @@ class _$ChatMessageModelCopyWithImpl<$Res, $Val extends ChatMessageModel>
           ? _value.attachments
           : attachments // ignore: cast_nullable_to_non_nullable
               as List<MessageAttachmentModel>,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as MessageStatus,
     ) as $Val);
   }
 
@@ -233,7 +242,9 @@ abstract class _$$ChatMessageModelImplCopyWith<$Res>
       @JsonKey(name: 'message_poll_payload') PollPayloadModel? pollPayload,
       @JsonKey(name: 'message_event_payload') EventPayloadModel? eventPayload,
       @JsonKey(name: 'message_attachments')
-      List<MessageAttachmentModel> attachments});
+      List<MessageAttachmentModel> attachments,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      MessageStatus status});
 
   @override
   $PollPayloadModelCopyWith<$Res>? get pollPayload;
@@ -268,6 +279,7 @@ class __$$ChatMessageModelImplCopyWithImpl<$Res>
     Object? pollPayload = freezed,
     Object? eventPayload = freezed,
     Object? attachments = null,
+    Object? status = null,
   }) {
     return _then(_$ChatMessageModelImpl(
       id: null == id
@@ -326,6 +338,10 @@ class __$$ChatMessageModelImplCopyWithImpl<$Res>
           ? _value._attachments
           : attachments // ignore: cast_nullable_to_non_nullable
               as List<MessageAttachmentModel>,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as MessageStatus,
     ));
   }
 }
@@ -352,7 +368,9 @@ class _$ChatMessageModelImpl extends _ChatMessageModel {
       @JsonKey(name: 'message_poll_payload') this.pollPayload,
       @JsonKey(name: 'message_event_payload') this.eventPayload,
       @JsonKey(name: 'message_attachments')
-      final List<MessageAttachmentModel> attachments = const []})
+      final List<MessageAttachmentModel> attachments = const [],
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      this.status = MessageStatus.sent})
       : _attachments = attachments,
         super._();
 
@@ -412,8 +430,12 @@ class _$ChatMessageModelImpl extends _ChatMessageModel {
   }
 
   @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final MessageStatus status;
+
+  @override
   String toString() {
-    return 'ChatMessageModel(id: $id, conversationId: $conversationId, senderId: $senderId, kind: $kind, body: $body, replyToMessageId: $replyToMessageId, editedAt: $editedAt, deletedAt: $deletedAt, deletedBy: $deletedBy, createdAt: $createdAt, updatedAt: $updatedAt, pollPayload: $pollPayload, eventPayload: $eventPayload, attachments: $attachments)';
+    return 'ChatMessageModel(id: $id, conversationId: $conversationId, senderId: $senderId, kind: $kind, body: $body, replyToMessageId: $replyToMessageId, editedAt: $editedAt, deletedAt: $deletedAt, deletedBy: $deletedBy, createdAt: $createdAt, updatedAt: $updatedAt, pollPayload: $pollPayload, eventPayload: $eventPayload, attachments: $attachments, status: $status)';
   }
 
   @override
@@ -445,7 +467,8 @@ class _$ChatMessageModelImpl extends _ChatMessageModel {
             (identical(other.eventPayload, eventPayload) ||
                 other.eventPayload == eventPayload) &&
             const DeepCollectionEquality()
-                .equals(other._attachments, _attachments));
+                .equals(other._attachments, _attachments) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -465,7 +488,8 @@ class _$ChatMessageModelImpl extends _ChatMessageModel {
       updatedAt,
       pollPayload,
       eventPayload,
-      const DeepCollectionEquality().hash(_attachments));
+      const DeepCollectionEquality().hash(_attachments),
+      status);
 
   /// Create a copy of ChatMessageModel
   /// with the given fields replaced by the non-null parameter values.
@@ -510,7 +534,9 @@ abstract class _ChatMessageModel extends ChatMessageModel {
       @JsonKey(name: 'message_event_payload')
       final EventPayloadModel? eventPayload,
       @JsonKey(name: 'message_attachments')
-      final List<MessageAttachmentModel> attachments}) = _$ChatMessageModelImpl;
+      final List<MessageAttachmentModel> attachments,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      final MessageStatus status}) = _$ChatMessageModelImpl;
   const _ChatMessageModel._() : super._();
 
   factory _ChatMessageModel.fromJson(Map<String, dynamic> json) =
@@ -562,6 +588,9 @@ abstract class _ChatMessageModel extends ChatMessageModel {
   @override
   @JsonKey(name: 'message_attachments')
   List<MessageAttachmentModel> get attachments;
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  MessageStatus get status;
 
   /// Create a copy of ChatMessageModel
   /// with the given fields replaced by the non-null parameter values.
