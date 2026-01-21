@@ -11,6 +11,73 @@ class FeedNotificationService {
   static const _logTag = 'FeedNotificationService';
   static const _functionName = 'send-notification';
 
+  /// Send notification to all followers when user creates a new post
+  Future<void> sendNewPostNotification({
+    required String postAuthorId,
+    required String postAuthorUsername,
+    required String postId,
+    String? postImageUrl,
+    String? postContent,
+  }) async {
+    try {
+      logi(
+        'Sending new post notification to followers of $postAuthorUsername',
+        tag: _logTag,
+      );
+
+      // Fetch all followers of the post author
+      final followersResponse = await _client
+          .from('user_follows')
+          .select('follower_id')
+          .eq('following_id', postAuthorId)
+          .eq('status', 'accepted');
+
+      final followers = followersResponse as List<dynamic>;
+
+      if (followers.isEmpty) {
+        logi('No followers to notify', tag: _logTag);
+        return;
+      }
+
+      logi('Notifying ${followers.length} followers', tag: _logTag);
+
+      // Truncate content for notification body
+      final truncatedContent = postContent != null && postContent.length > 50
+          ? '${postContent.substring(0, 47)}...'
+          : postContent ?? 'shared a new post';
+
+      // Send notification to each follower
+      for (final follower in followers) {
+        final followerId = follower['follower_id'] as String;
+
+        // Send notification asynchronously (fire and forget)
+        _client.functions.invoke(
+          _functionName,
+          body: {
+            'userId': followerId,
+            'type': 'new_post',
+            'title': 'New Post',
+            'body': '$postAuthorUsername $truncatedContent',
+            'data': {
+              'postId': postId,
+              'authorId': postAuthorId,
+              'authorUsername': postAuthorUsername,
+              'type': 'new_post',
+            },
+            if (postImageUrl != null) 'imageUrl': postImageUrl,
+            'priority': 'normal',
+          },
+        );
+      }
+
+      logi('New post notifications queued for ${followers.length} followers',
+          tag: _logTag);
+    } catch (e) {
+      loge('Failed to send new post notifications', error: e, tag: _logTag);
+      // Don't throw - notification failure shouldn't break the post creation
+    }
+  }
+
   /// Send notification when a user likes a post
   Future<void> sendPostLikeNotification({
     required String postAuthorId,
@@ -80,8 +147,9 @@ class FeedNotificationService {
       );
 
       // Truncate comment text for notification
-      final truncatedText =
-          commentText.length > 100 ? '${commentText.substring(0, 97)}...' : commentText;
+      final truncatedText = commentText.length > 100
+          ? '${commentText.substring(0, 97)}...'
+          : commentText;
 
       await _client.functions.invoke(
         _functionName,
@@ -133,8 +201,9 @@ class FeedNotificationService {
       );
 
       // Truncate reply text for notification
-      final truncatedText =
-          replyText.length > 100 ? '${replyText.substring(0, 97)}...' : replyText;
+      final truncatedText = replyText.length > 100
+          ? '${replyText.substring(0, 97)}...'
+          : replyText;
 
       await _client.functions.invoke(
         _functionName,
@@ -183,8 +252,9 @@ class FeedNotificationService {
       );
 
       // Truncate comment text for notification
-      final truncatedText =
-          commentText.length > 100 ? '${commentText.substring(0, 97)}...' : commentText;
+      final truncatedText = commentText.length > 100
+          ? '${commentText.substring(0, 97)}...'
+          : commentText;
 
       await _client.functions.invoke(
         _functionName,

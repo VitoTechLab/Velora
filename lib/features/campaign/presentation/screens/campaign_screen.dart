@@ -52,8 +52,7 @@ class CampaignScreen extends HookWidget {
         if (type == CampaignType.verified) {
           filtered = filtered.where((c) => c.isVerified).toList();
         } else {
-          filtered =
-              filtered.where((c) => c.type == type).toList();
+          filtered = filtered.where((c) => c.type == type).toList();
         }
       }
 
@@ -122,6 +121,7 @@ class CampaignScreen extends HookWidget {
         equityChangePct: null,
         timeLeftLabel: timeLeftLabel,
         isFeatured: entity.isVerified,
+        imageUrl: entity.coverImageUrl,
       );
     }
 
@@ -136,9 +136,7 @@ class CampaignScreen extends HookWidget {
       backgroundColor: colorScheme.surface,
       body: BlocBuilder<CampaignBloc, CampaignState>(
         builder: (context, state) {
-          final allModels = state.campaigns
-              .map(mapEntityToModel)
-              .toList();
+          final allModels = state.campaigns.map(mapEntityToModel).toList();
           final filteredCampaigns = applyFilters(
             allModels,
             selectedType.value,
@@ -176,8 +174,7 @@ class CampaignScreen extends HookWidget {
                       icon: Container(
                         padding: const EdgeInsets.all(6),
                         decoration: BoxDecoration(
-                          color: colorScheme.primary
-                              .withValues(alpha: 0.08),
+                          color: colorScheme.primary.withValues(alpha: 0.08),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Icon(
@@ -200,14 +197,12 @@ class CampaignScreen extends HookWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding:
-                            const EdgeInsets.fromLTRB(20, 8, 20, 16),
+                        padding: const EdgeInsets.fromLTRB(20, 8, 20, 16),
                         child: CampaignSearchField(
                           onTap: () {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                content:
-                                    Text('Search campaigns...'),
+                                content: Text('Search campaigns...'),
                                 duration: Duration(seconds: 1),
                               ),
                             );
@@ -234,10 +229,8 @@ class CampaignScreen extends HookWidget {
                             bottom: 8,
                           ),
                           child: Text(
-                            l10n?.campaignFeaturedTitle ??
-                                'Featured Campaigns',
-                            style:
-                                theme.textTheme.titleLarge?.copyWith(
+                            l10n?.campaignFeaturedTitle ?? 'Featured Campaigns',
+                            style: theme.textTheme.titleLarge?.copyWith(
                               fontWeight: FontWeight.bold,
                               color: colorScheme.onSurface,
                             ),
@@ -251,16 +244,14 @@ class CampaignScreen extends HookWidget {
                       // Emergency Campaigns
                       if (emergencyCampaigns.isNotEmpty)
                         CampaignCategorySection(
-                          categoryName:
-                              l10n?.campaignEmergencyTitle ??
-                                  'Emergency Fundraisers',
+                          categoryName: l10n?.campaignEmergencyTitle ??
+                              'Emergency Fundraisers',
                           campaigns: emergencyCampaigns,
                           onSeeMore: () {
                             CampaignListScreen.show(
                               context,
-                              categoryName:
-                                  l10n?.campaignEmergencyTitle ??
-                                      'Emergency Fundraisers',
+                              categoryName: l10n?.campaignEmergencyTitle ??
+                                  'Emergency Fundraisers',
                               categoryFilter: 'Emergency',
                             );
                           },
@@ -269,16 +260,14 @@ class CampaignScreen extends HookWidget {
                       // Social Impact Campaigns
                       if (socialImpactCampaigns.isNotEmpty)
                         CampaignCategorySection(
-                          categoryName:
-                              l10n?.campaignSocialImpactTitle ??
-                                  'Social Impact',
+                          categoryName: l10n?.campaignSocialImpactTitle ??
+                              'Social Impact',
                           campaigns: socialImpactCampaigns,
                           onSeeMore: () {
                             CampaignListScreen.show(
                               context,
-                              categoryName:
-                                  l10n?.campaignSocialImpactTitle ??
-                                      'Social Impact',
+                              categoryName: l10n?.campaignSocialImpactTitle ??
+                                  'Social Impact',
                               categoryFilter: 'Social Impact',
                             );
                           },
@@ -288,15 +277,13 @@ class CampaignScreen extends HookWidget {
                       if (technologyCampaigns.isNotEmpty)
                         CampaignCategorySection(
                           categoryName:
-                              l10n?.campaignTechnologyTitle ??
-                                  'Technology',
+                              l10n?.campaignTechnologyTitle ?? 'Technology',
                           campaigns: technologyCampaigns,
                           onSeeMore: () {
                             CampaignListScreen.show(
                               context,
                               categoryName:
-                                  l10n?.campaignTechnologyTitle ??
-                                      'Technology',
+                                  l10n?.campaignTechnologyTitle ?? 'Technology',
                               categoryFilter: 'Technology',
                             );
                           },
@@ -306,8 +293,7 @@ class CampaignScreen extends HookWidget {
                     ],
                   ),
                 ),
-                if (filteredCampaigns.isEmpty &&
-                    !state.isLoadingCampaigns)
+                if (filteredCampaigns.isEmpty && !state.isLoadingCampaigns)
                   SliverFillRemaining(
                     child: CampaignEmptyState(
                       onRetry: () {

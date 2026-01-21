@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:velora/core/ui/app_messenger.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:velora/features/campaign/domain/entities/campaign_category_entity.dart';
@@ -30,6 +33,20 @@ class CreateCampaignPostScreen extends HookWidget {
     final categories = useState<List<CampaignCategoryEntity>>([]);
     final selectedCategory = useState<CampaignCategoryEntity?>(null);
     final isLoadingCategories = useState(false);
+    final coverImage = useState<File?>(null);
+
+    Future<void> pickCoverImage() async {
+      final picker = ImagePicker();
+      final picked = await picker.pickImage(
+        source: ImageSource.gallery,
+        maxWidth: 1920,
+        maxHeight: 1080,
+        imageQuality: 85,
+      );
+      if (picked != null) {
+        coverImage.value = File(picked.path);
+      }
+    }
 
     useEffect(() {
       Future<void> loadCategories() async {
@@ -113,6 +130,7 @@ class CreateCampaignPostScreen extends HookWidget {
                   ? null
                   : locationController.text.trim(),
               endDate: endDate.value,
+              mediaFiles: coverImage.value != null ? [coverImage.value!] : [],
             ),
           );
     }
@@ -167,6 +185,86 @@ class CreateCampaignPostScreen extends HookWidget {
                   ),
                 ),
                 const SizedBox(height: 24),
+                // Cover Image Section
+                _SectionCard(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Cover Image',
+                        style: textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      GestureDetector(
+                        onTap: pickCoverImage,
+                        child: Container(
+                          width: double.infinity,
+                          height: 180,
+                          decoration: BoxDecoration(
+                            color: colorScheme.surfaceContainerHighest,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: colorScheme.outlineVariant,
+                              width: 1.5,
+                            ),
+                          ),
+                          child: coverImage.value != null
+                              ? Stack(
+                                  fit: StackFit.expand,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(11),
+                                      child: Image.file(
+                                        coverImage.value!,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 8,
+                                      right: 8,
+                                      child: GestureDetector(
+                                        onTap: () => coverImage.value = null,
+                                        child: Container(
+                                          padding: const EdgeInsets.all(6),
+                                          decoration: BoxDecoration(
+                                            color: Colors.black54,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Icon(
+                                            Icons.close,
+                                            size: 18,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              : Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.add_photo_alternate_outlined,
+                                      size: 48,
+                                      color: colorScheme.onSurfaceVariant,
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      'Add cover image',
+                                      style: textTheme.bodyMedium?.copyWith(
+                                        color: colorScheme.onSurfaceVariant,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
                 _SectionCard(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -309,7 +407,7 @@ class CreateCampaignPostScreen extends HookWidget {
                         )
                       else
                         DropdownButtonFormField<CampaignCategoryEntity>(
-                          value: selectedCategory.value,
+                          initialValue: selectedCategory.value,
                           items: categories.value
                               .map(
                                 (c) => DropdownMenuItem(

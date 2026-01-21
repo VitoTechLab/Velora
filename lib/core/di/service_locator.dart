@@ -293,7 +293,10 @@ Future<void> configureDependencies() async {
 
   if (!getIt.isRegistered<PostRemoteDataSource>()) {
     getIt.registerLazySingleton<PostRemoteDataSource>(
-      () => PostRemoteDataSourceImpl(supabaseClient: getIt<SupabaseClient>()),
+      () => PostRemoteDataSourceImpl(
+        supabaseClient: getIt<SupabaseClient>(),
+        notificationService: getIt<FeedNotificationService>(),
+      ),
     );
   }
 

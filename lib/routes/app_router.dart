@@ -59,6 +59,8 @@ import 'package:velora/l10n/app_localizations.dart';
 import 'package:velora/features/feed/presentation/screens/feed_screen.dart';
 import 'package:velora/features/notification/presentation/screens/notification_screen.dart';
 
+import 'package:velora/features/search/presentation/screens/search_screen.dart';
+
 class AppRouter {
   AppRouter(
     this.navigationService,
@@ -245,12 +247,23 @@ class AppRouter {
                 ],
               ),
               StatefulShellBranch(
-                navigatorKey: NavigationKeys.searchBranch,
+                navigatorKey: NavigationKeys.campaignBranch,
                 routes: [
                   GoRoute(
-                    path: AppRoutePath.search,
-                    name: AppRouteName.search,
-                    builder: (context, state) => const UserSearchScreen(),
+                    path: AppRoutePath.campaign,
+                    name: AppRouteName.campaign,
+                    builder: (context, state) => const CampaignScreen(),
+                    routes: [
+                      GoRoute(
+                        path: AppRouteSinglePath.createCampaignPost,
+                        name: AppRouteName.createCampaignPost,
+                        parentNavigatorKey: navigationService.navigatorKey,
+                        builder: (context, state) => BlocProvider(
+                          create: (_) => getIt<CampaignPostBloc>(),
+                          child: const CreateCampaignPostScreen(),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -309,26 +322,16 @@ class AppRouter {
                 ],
               ),
               StatefulShellBranch(
-                navigatorKey: NavigationKeys.campaignBranch,
+                navigatorKey: NavigationKeys.searchBranch,
                 routes: [
                   GoRoute(
-                    path: AppRoutePath.campaign,
-                    name: AppRouteName.campaign,
-                    builder: (context, state) => const CampaignScreen(),
-                    routes: [
-                      GoRoute(
-                        path: AppRouteSinglePath.createCampaignPost,
-                        name: AppRouteName.createCampaignPost,
-                        parentNavigatorKey: navigationService.navigatorKey,
-                        builder: (context, state) => BlocProvider(
-                          create: (_) => getIt<CampaignPostBloc>(),
-                          child: const CreateCampaignPostScreen(),
-                        ),
-                      ),
-                    ],
+                    path: AppRoutePath.search,
+                    name: AppRouteName.search,
+                    builder: (context, state) => const SearchScreen(),
                   ),
                 ],
               ),
+              
               StatefulShellBranch(
                 navigatorKey: NavigationKeys.profileBranch,
                 routes: [
@@ -613,8 +616,7 @@ class AppRoutePath {
       '/profile/settings/profile-field-edit';
   static const search = '/search';
   static const chat = '/chat';
-  static const shatDetail = '/chat/detail';
-  static const cearchFollowUser = 'search-follow-user';
+  static const searchFollowUser = 'search-follow-user';
   static const campaign = '/campaign';
   static const profile = '/profile';
   static const signIn = '/auth/signin';

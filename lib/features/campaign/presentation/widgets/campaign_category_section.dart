@@ -89,7 +89,8 @@ class CampaignCategorySection extends StatelessWidget {
       decoration: BoxDecoration(
         color: colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: colorScheme.outlineVariant.withValues(alpha: 0.5)),
+        border: Border.all(
+            color: colorScheme.outlineVariant.withValues(alpha: 0.5)),
         boxShadow: [
           BoxShadow(
             color: colorScheme.shadow.withValues(alpha: 0.05),
@@ -110,26 +111,54 @@ class CampaignCategorySection extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Image Placeholder
+                // Campaign Image
                 Container(
                   width: 80,
                   height: 80,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        colorScheme.primaryContainer,
-                        colorScheme.tertiaryContainer,
-                      ],
-                    ),
                   ),
-                  child: Icon(
-                    Icons.favorite_border,
-                    size: 32,
-                    color: colorScheme.onPrimaryContainer,
-                  ),
+                  clipBehavior: Clip.antiAlias,
+                  child: campaign.imageUrl != null
+                      ? Image.network(
+                          campaign.imageUrl!,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) =>
+                              Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  colorScheme.primaryContainer,
+                                  colorScheme.tertiaryContainer,
+                                ],
+                              ),
+                            ),
+                            child: Icon(
+                              Icons.campaign_outlined,
+                              size: 32,
+                              color: colorScheme.onPrimaryContainer,
+                            ),
+                          ),
+                        )
+                      : Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                colorScheme.primaryContainer,
+                                colorScheme.tertiaryContainer,
+                              ],
+                            ),
+                          ),
+                          child: Icon(
+                            Icons.campaign_outlined,
+                            size: 32,
+                            color: colorScheme.onPrimaryContainer,
+                          ),
+                        ),
                 ),
 
                 const SizedBox(width: 16),

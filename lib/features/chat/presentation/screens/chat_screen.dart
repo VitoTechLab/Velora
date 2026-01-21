@@ -101,26 +101,15 @@ class ChatScreen extends HookWidget {
               child: Container(
                 margin: const EdgeInsets.only(right: 8),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      colorScheme.primary,
-                      colorScheme.secondary,
-                    ],
-                  ),
+                  color: colorScheme.surfaceContainerHighest,
                   borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: colorScheme.primary.withValues(alpha: 0.3),
-                      blurRadius: 8,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
                 ),
                 child: Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: () =>
-                        context.pushNamed(AppRouteName.searchFollowUser),
+                    onTap: () {
+                      // TODO: Show chat options menu
+                    },
                     borderRadius: BorderRadius.circular(12),
                     child: Padding(
                       padding: const EdgeInsets.all(8),
@@ -128,8 +117,8 @@ class ChatScreen extends HookWidget {
                         button: true,
                         label: t.chatScreenNewChatLabel,
                         child: Icon(
-                          Icons.add_box_outlined,
-                          color: colorScheme.onPrimary,
+                          Icons.more_vert,
+                          color: colorScheme.onSurface,
                           size: 24,
                         ),
                       ),

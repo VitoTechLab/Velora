@@ -117,11 +117,12 @@ class ChatBubbleWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
 
-                  // Time and read receipt (left-aligned)
+                  // Time and read receipt (right-aligned)
                   Row(
                     mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
+                      const Spacer(),
                       Text(
                         time,
                         style: textTheme.bodySmall?.copyWith(
@@ -147,8 +148,8 @@ class ChatBubbleWidget extends StatelessWidget {
                             key: ValueKey(isRead),
                             size: 16,
                             color: isRead
-                                ? colorScheme.primary
-                                : textColor.withValues(alpha: 0.5),
+                                ? Colors.lightBlueAccent.shade200
+                                : Colors.grey.shade500,
                           ),
                         ),
                       ],

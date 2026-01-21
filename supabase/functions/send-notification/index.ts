@@ -3,7 +3,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2"
 
 interface NotificationPayload {
   userId: string
-  type: 'chat_message' | 'post_like' | 'post_comment' | 'comment_reply' | 'follow' | 'mention' | 'group_invite' | 'call' | 'system'
+  type: 'chat_message' | 'post_like' | 'post_comment' | 'comment_reply' | 'follow' | 'mention' | 'group_invite' | 'call' | 'system' | 'new_post'
   title: string
   body: string
   data?: Record<string, any>

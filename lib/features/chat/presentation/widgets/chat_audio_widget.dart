@@ -151,7 +151,8 @@ class _ChatAudioWidgetState extends State<ChatAudioWidget> {
           opacity: value,
           child: Transform.scale(
             scale: 0.95 + (0.05 * value),
-            alignment: widget.isSender ? Alignment.centerRight : Alignment.centerLeft,
+            alignment:
+                widget.isSender ? Alignment.centerRight : Alignment.centerLeft,
             child: child,
           ),
         );
@@ -200,177 +201,186 @@ class _ChatAudioWidgetState extends State<ChatAudioWidget> {
             ),
           ],
         ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // Audio player row
-          Row(
-            children: [
-              // Play/Pause button
-              Container(
-                width: 48,
-                height: 48,
-                decoration: BoxDecoration(
-                  gradient: widget.isSender
-                      ? LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            colorScheme.onPrimaryContainer.withValues(alpha: 0.25),
-                            colorScheme.onPrimaryContainer.withValues(alpha: 0.15),
-                          ],
-                        )
-                      : LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            colorScheme.primary.withValues(alpha: 0.15),
-                            colorScheme.secondary.withValues(alpha: 0.1),
-                          ],
-                        ),
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: widget.isSender
-                        ? colorScheme.onPrimaryContainer.withValues(alpha: 0.2)
-                        : colorScheme.primary.withValues(alpha: 0.2),
-                    width: 1.5,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Audio player row
+            Row(
+              children: [
+                // Play/Pause button
+                Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    gradient: widget.isSender
+                        ? LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              colorScheme.onPrimaryContainer
+                                  .withValues(alpha: 0.25),
+                              colorScheme.onPrimaryContainer
+                                  .withValues(alpha: 0.15),
+                            ],
+                          )
+                        : LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              colorScheme.primary.withValues(alpha: 0.15),
+                              colorScheme.secondary.withValues(alpha: 0.1),
+                            ],
+                          ),
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: widget.isSender
+                          ? colorScheme.onPrimaryContainer
+                              .withValues(alpha: 0.2)
+                          : colorScheme.primary.withValues(alpha: 0.2),
+                      width: 1.5,
+                    ),
                   ),
-                ),
-                child: Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    onTap: _isLoading ? null : _playPause,
-                    customBorder: const CircleBorder(),
-                    child: Center(
-                      child: _isLoading
-                          ? SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2.5,
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: _isLoading ? null : _playPause,
+                      customBorder: const CircleBorder(),
+                      child: Center(
+                        child: _isLoading
+                            ? SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2.5,
+                                  color: widget.isSender
+                                      ? colorScheme.onPrimaryContainer
+                                      : colorScheme.primary,
+                                ),
+                              )
+                            : Icon(
+                                isPlaying
+                                    ? Icons.pause_rounded
+                                    : Icons.play_arrow_rounded,
                                 color: widget.isSender
                                     ? colorScheme.onPrimaryContainer
                                     : colorScheme.primary,
+                                size: 26,
                               ),
-                            )
-                          : Icon(
-                              isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
-                              color: widget.isSender
-                                  ? colorScheme.onPrimaryContainer
-                                  : colorScheme.primary,
-                              size: 26,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+
+                // Waveform / Progress
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Custom waveform-like progress bar
+                      if (widget.isVoiceMessage)
+                        _buildWaveformProgress(
+                            progress, contentColor, secondaryContentColor)
+                      else
+                        _buildLinearProgress(
+                            progress, contentColor, secondaryContentColor),
+                      const SizedBox(height: 4),
+                      // Duration
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            _formatDuration(_position),
+                            style: theme.textTheme.labelSmall?.copyWith(
+                              color: secondaryContentColor,
+                              fontFeatures: const [
+                                FontFeature.tabularFigures()
+                              ],
                             ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 8),
-
-              // Waveform / Progress
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Custom waveform-like progress bar
-                    if (widget.isVoiceMessage)
-                      _buildWaveformProgress(
-                          progress, contentColor, secondaryContentColor)
-                    else
-                      _buildLinearProgress(
-                          progress, contentColor, secondaryContentColor),
-                    const SizedBox(height: 4),
-                    // Duration
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          _formatDuration(_position),
-                          style: theme.textTheme.labelSmall?.copyWith(
-                            color: secondaryContentColor,
-                            fontFeatures: const [FontFeature.tabularFigures()],
                           ),
-                        ),
-                        Text(
-                          _formatDuration(_duration),
-                          style: theme.textTheme.labelSmall?.copyWith(
-                            color: secondaryContentColor,
-                            fontFeatures: const [FontFeature.tabularFigures()],
+                          Text(
+                            _formatDuration(_duration),
+                            style: theme.textTheme.labelSmall?.copyWith(
+                              color: secondaryContentColor,
+                              fontFeatures: const [
+                                FontFeature.tabularFigures()
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-
-          // Caption if exists
-          if (widget.caption != null && widget.caption!.isNotEmpty) ...[
-            const SizedBox(height: 10),
-            Container(
-              padding: const EdgeInsets.only(top: 8),
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: contentColor.withValues(alpha: 0.15),
-                    width: 0.5,
-                  ),
-                ),
-              ),
-              child: Text(
-                widget.caption!,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: contentColor,
-                  height: 1.4,
-                  letterSpacing: 0.15,
-                ),
-              ),
-            ),
-          ],
-
-          // Time and read status
-          const SizedBox(height: 6),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              const Spacer(),
-              Text(
-                widget.time,
-                style: theme.textTheme.labelSmall?.copyWith(
-                  color: secondaryContentColor,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 11,
-                ),
-              ),
-              if (widget.isSender) ...[
-                const SizedBox(width: 4),
-                AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  transitionBuilder: (child, animation) {
-                    return ScaleTransition(
-                      scale: animation,
-                      child: child,
-                    );
-                  },
-                  child: Icon(
-                    widget.isRead ? Icons.done_all_rounded : Icons.check_rounded,
-                    key: ValueKey(widget.isRead),
-                    size: 16,
-                    color: widget.isRead
-                        ? (widget.isSender
-                            ? colorScheme.primary.withValues(alpha: 0.9)
-                            : colorScheme.primary)
-                        : secondaryContentColor,
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ],
+            ),
+
+            // Caption if exists
+            if (widget.caption != null && widget.caption!.isNotEmpty) ...[
+              const SizedBox(height: 10),
+              Container(
+                padding: const EdgeInsets.only(top: 8),
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(
+                      color: contentColor.withValues(alpha: 0.15),
+                      width: 0.5,
+                    ),
+                  ),
+                ),
+                child: Text(
+                  widget.caption!,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: contentColor,
+                    height: 1.4,
+                    letterSpacing: 0.15,
+                  ),
+                ),
+              ),
             ],
-          ),
-        ],
-      ),
+
+            // Time and read status
+            const SizedBox(height: 6),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                const Spacer(),
+                Text(
+                  widget.time,
+                  style: theme.textTheme.labelSmall?.copyWith(
+                    color: secondaryContentColor,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 11,
+                  ),
+                ),
+                if (widget.isSender) ...[
+                  const SizedBox(width: 4),
+                  AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 300),
+                    transitionBuilder: (child, animation) {
+                      return ScaleTransition(
+                        scale: animation,
+                        child: child,
+                      );
+                    },
+                    child: Icon(
+                      widget.isRead
+                          ? Icons.done_all_rounded
+                          : Icons.check_rounded,
+                      key: ValueKey(widget.isRead),
+                      size: 16,
+                      color: widget.isRead
+                          ? Colors.lightBlueAccent.shade200
+                          : Colors.grey.shade500,
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -469,7 +469,8 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
             *,
             poll_options:v_poll_options_with_votes(*)
           ),
-          message_event_payload:v_event_with_rsvp(*)
+          message_event_payload:v_event_with_rsvp(*),
+          message_attachments(*)
         ''').eq('id', messageId).maybeSingle();
 
         if (enriched != null) {

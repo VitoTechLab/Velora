@@ -16,6 +16,7 @@ class CampaignModel {
   final double? equityChangePct;
   final String timeLeftLabel;
   final bool isFeatured;
+  final String? imageUrl;
 
   const CampaignModel({
     required this.id,
@@ -33,6 +34,7 @@ class CampaignModel {
     this.equityChangePct,
     required this.timeLeftLabel,
     this.isFeatured = false,
+    this.imageUrl,
   });
 
   double get progressPercent => (raised / target * 100).clamp(0, 100);

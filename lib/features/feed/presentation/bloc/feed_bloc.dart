@@ -379,6 +379,13 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
   ) async {
     logi('Adding new post to top of feed: ${event.post.id}', tag: _logTag);
 
+    // Check if post already exists (prevent duplicates)
+    final existingIds = state.posts.map((p) => p.id).toSet();
+    if (existingIds.contains(event.post.id)) {
+      logi('Post already exists in feed, skipping: ${event.post.id}', tag: _logTag);
+      return;
+    }
+
     // Add to top of feed
     final updatedPosts = [event.post, ...state.posts];
 

@@ -155,52 +155,42 @@ class FeedCard extends HookWidget {
         label: t.feedPostSemantics(author, summary, timeAgo),
         hint: onTap != null ? t.feedOpenPostHint : null,
         child: ExcludeSemantics(
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 12.0),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              padding: const EdgeInsets.only(bottom: 8),
-              decoration: BoxDecoration(
-                color: colorScheme.surface,
-                boxShadow: [
-                  BoxShadow(
-                    color: colorScheme.shadow.withValues(alpha: 0.03),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildHeader(
-                    context,
-                    textTheme,
-                    colorScheme,
-                    t,
-                    isFollowing.value,
-                    hasFollowRequest.value,
-                    handleFollowToggle,
-                  ),
-                  if (post.imageUrls.isNotEmpty)
-                    _buildImageStrip(context, colorScheme, t),
-                  _buildActionBar(
-                    context,
-                    colorScheme,
-                    textTheme,
-                    isLiked.value,
-                    likesCount.value,
-                    isBookmarked.value,
-                    handleLikeToggle,
-                    handleBookmarkToggle,
-                    onCommentTap ?? onTap,
-                    t,
-                  ),
-                  _buildContent(context, textTheme, t),
-                  if (post.campaignId != null)
-                    _buildCampaignCard(context, colorScheme, textTheme, t),
-                ],
-              ),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            padding: const EdgeInsets.only(bottom: 16),
+            decoration: BoxDecoration(
+              color: colorScheme.surface,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildHeader(
+                  context,
+                  textTheme,
+                  colorScheme,
+                  t,
+                  isFollowing.value,
+                  hasFollowRequest.value,
+                  handleFollowToggle,
+                ),
+                if (post.imageUrls.isNotEmpty)
+                  _buildImageStrip(context, colorScheme, t),
+                _buildActionBar(
+                  context,
+                  colorScheme,
+                  textTheme,
+                  isLiked.value,
+                  likesCount.value,
+                  isBookmarked.value,
+                  handleLikeToggle,
+                  handleBookmarkToggle,
+                  onCommentTap ?? onTap,
+                  t,
+                ),
+                _buildContent(context, textTheme, t),
+                if (post.campaignId != null)
+                  _buildCampaignCard(context, colorScheme, textTheme, t),
+              ],
             ),
           ),
         ),

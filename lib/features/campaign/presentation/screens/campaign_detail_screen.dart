@@ -151,7 +151,10 @@ class CampaignDetailScreen extends HookWidget {
                   ),
                 ),
               ),
-              background: CampaignCoverHeader(category: campaign.category),
+              background: CampaignCoverHeader(
+                category: campaign.category,
+                imageUrl: campaign.coverImageUrl,
+              ),
             ),
           ),
 
