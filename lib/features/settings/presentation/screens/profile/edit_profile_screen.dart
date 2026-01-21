@@ -115,6 +115,9 @@ class _EditProfileForm extends HookWidget {
     final t = AppLocalizations.of(context)!;
     final formKey = useMemoized(() => GlobalKey<FormState>());
     
+    final usernameController = useTextEditingController(
+      text: profile.username ?? '',
+    );
     final fullNameController = useTextEditingController(
       text: profile.fullName ?? '',
     );
@@ -246,6 +249,9 @@ class _EditProfileForm extends HookWidget {
       }
 
       final updateModel = UpdateProfileModel(
+        username: usernameController.text.trim().isNotEmpty
+            ? usernameController.text.trim()
+            : null,
         fullName: fullNameController.text.trim().isNotEmpty
             ? fullNameController.text.trim()
             : null,
@@ -407,6 +413,42 @@ class _EditProfileForm extends HookWidget {
                     helperText: 'Email tidak dapat diubah',
                   ),
                   enabled: false,
+                ),
+                const SizedBox(height: 20),
+
+                // Username
+                TextFormField(
+                  controller: usernameController,
+                  decoration: InputDecoration(
+                    labelText: 'Username',
+                    hintText: 'Masukkan username unik',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    prefixIcon: const Icon(Icons.alternate_email),
+                    prefixText: '@',
+                    helperText: 'Username akan menjadi alamat profil Anda',
+                  ),
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Username wajib diisi';
+                    }
+                    final trimmed = value.trim();
+                    if (trimmed.length < 3) {
+                      return 'Username minimal 3 karakter';
+                    }
+                    if (trimmed.length > 30) {
+                      return 'Username maksimal 30 karakter';
+                    }
+                    // Username hanya boleh huruf, angka, underscore, dan titik
+                    if (!RegExp(r'^[a-zA-Z0-9._]+$').hasMatch(trimmed)) {
+                      return 'Username hanya boleh huruf, angka, underscore, dan titik';
+                    }
+                    return null;
+                  },
+                  enabled: !isLoading,
+                  textCapitalization: TextCapitalization.none,
+                  keyboardType: TextInputType.text,
                 ),
                 const SizedBox(height: 20),
 
