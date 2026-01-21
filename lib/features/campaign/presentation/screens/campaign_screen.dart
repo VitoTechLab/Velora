@@ -126,10 +126,13 @@ class CampaignScreen extends HookWidget {
     }
 
     Future<void> onRefresh(BuildContext context) async {
-      context.read<CampaignBloc>().add(
-            const CampaignEvent.refreshCampaigns(limit: 50),
-          );
-      await Future.delayed(const Duration(milliseconds: 400));
+      final bloc = context.read<CampaignBloc>();
+      bloc.add(const CampaignEvent.refreshCampaigns(limit: 50));
+
+      // Wait until refreshing is complete
+      await bloc.stream.firstWhere(
+        (state) => !state.isRefreshingCampaigns,
+      );
     }
 
     return Scaffold(

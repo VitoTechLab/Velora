@@ -9,6 +9,8 @@ import 'package:velora/features/campaign/domain/entities/campaign_category_entit
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velora/core/di/service_locator.dart';
 import 'package:velora/features/campaign/domain/usecases/get_campaign_categories_usecase.dart';
+import 'package:velora/features/campaign/presentation/bloc/campaign_bloc.dart';
+import 'package:velora/features/campaign/presentation/bloc/campaign_event.dart';
 import 'package:velora/features/post/presentation/bloc/campaign_post_bloc.dart';
 import 'package:velora/features/post/presentation/bloc/campaign_post_event.dart';
 import 'package:velora/features/post/presentation/bloc/campaign_post_state.dart';
@@ -138,6 +140,11 @@ class CreateCampaignPostScreen extends HookWidget {
     final background = colorScheme.surface;
 
     return BlocListener<CampaignPostBloc, CampaignPostState>(
+      listenWhen: (previous, current) {
+        // Only listen when error or createdCampaign changes
+        return previous.errorMessage != current.errorMessage ||
+            previous.createdCampaign != current.createdCampaign;
+      },
       listener: (context, state) {
         if (state.errorMessage != null) {
           AppMessenger.showToast(
@@ -145,12 +152,20 @@ class CreateCampaignPostScreen extends HookWidget {
             icon: Icons.error_outline,
             isError: true,
           );
+          // Clear error after showing
+          context.read<CampaignPostBloc>().add(
+                const ClearCampaignPostTransientEvent(),
+              );
         } else if (state.createdCampaign != null) {
           AppMessenger.showToast(
             message:
                 t?.campaignCreateSuccess ?? 'Campaign created successfully',
             icon: Icons.check_circle_outline,
           );
+          // Trigger refresh in CampaignBloc so the new campaign appears in list
+          context.read<CampaignBloc>().add(
+                const CampaignEvent.refreshCampaigns(limit: 50),
+              );
           Navigator.of(context).pop(state.createdCampaign);
         }
       },
