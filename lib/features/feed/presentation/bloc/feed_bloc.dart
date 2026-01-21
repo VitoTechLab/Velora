@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velora/core/utils/log_alias.dart';
@@ -5,9 +7,11 @@ import 'package:velora/features/feed/domain/entities/feed_entity.dart';
 import 'package:velora/features/feed/domain/usecases/delete_post_usecase.dart';
 import 'package:velora/features/feed/domain/usecases/get_feed_usecase.dart';
 import 'package:velora/features/feed/domain/usecases/get_post_by_id_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/stop_watch_feed_usecase.dart';
 import 'package:velora/features/feed/domain/usecases/toggle_bookmark_post_usecase.dart';
 import 'package:velora/features/feed/domain/usecases/toggle_like_post_usecase.dart';
 import 'package:velora/features/feed/domain/usecases/update_post_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/watch_feed_changes_usecase.dart';
 import 'feed_event.dart';
 import 'feed_state.dart';
 
@@ -21,6 +25,8 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
     required this.getPostByIdUseCase,
     required this.updatePostUseCase,
     required this.deletePostUseCase,
+    required this.watchFeedChangesUseCase,
+    required this.stopWatchFeedUseCase,
   }) : super(const FeedState()) {
     on<LoadInitialFeedEvent>(_onLoadInitialFeed);
     on<LoadMoreFeedEvent>(
@@ -37,6 +43,9 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
     on<ToggleLikePostEvent>(_onToggleLikePost);
     on<ToggleBookmarkPostEvent>(_onToggleBookmarkPost);
     on<AddNewPostEvent>(_onAddNewPost);
+    on<StartWatchFeedEvent>(_onStartWatchFeed);
+    on<StopWatchFeedEvent>(_onStopWatchFeed);
+    on<FeedPostArrivedEvent>(_onFeedPostArrived);
     on<ClearTransientEvent>((event, emit) => _onClearTransient(emit));
   }
 
@@ -47,6 +56,10 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
   final GetPostByIdUseCase getPostByIdUseCase;
   final UpdatePostUseCase updatePostUseCase;
   final DeletePostUseCase deletePostUseCase;
+  final WatchFeedChangesUseCase watchFeedChangesUseCase;
+  final StopWatchFeedUseCase stopWatchFeedUseCase;
+
+  StreamSubscription? _feedWatchSubscription;
 
   static const int _minPageSize = 1;
   static const int _maxPageSize = 50;
@@ -406,5 +419,73 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
         updatedPost: null,
       ),
     );
+  }
+
+  /// Start watching realtime feed changes
+  Future<void> _onStartWatchFeed(
+    StartWatchFeedEvent event,
+    Emitter<FeedState> emit,
+  ) async {
+    logi('Starting realtime feed watch', tag: _logTag);
+
+    await _feedWatchSubscription?.cancel();
+
+    _feedWatchSubscription = watchFeedChangesUseCase().listen(
+      (result) {
+        result.fold(
+          (failure) {
+            loge('Feed watch error: ${failure.message}', tag: _logTag);
+          },
+          (post) {
+            add(FeedEvent.feedPostArrived(post));
+          },
+        );
+      },
+      onError: (error) {
+        loge('Feed watch stream error', error: error, tag: _logTag);
+      },
+    );
+  }
+
+  /// Stop watching realtime feed changes
+  Future<void> _onStopWatchFeed(
+    StopWatchFeedEvent event,
+    Emitter<FeedState> emit,
+  ) async {
+    logi('Stopping realtime feed watch', tag: _logTag);
+    await _feedWatchSubscription?.cancel();
+    _feedWatchSubscription = null;
+    await stopWatchFeedUseCase();
+  }
+
+  /// Handle new post arrived from realtime
+  Future<void> _onFeedPostArrived(
+    FeedPostArrivedEvent event,
+    Emitter<FeedState> emit,
+  ) async {
+    logi('Feed post arrived from realtime: ${event.post.id}', tag: _logTag);
+
+    // Check if post already exists
+    final existingIndex = state.posts.indexWhere((p) => p.id == event.post.id);
+
+    if (existingIndex != -1) {
+      // Update existing post
+      final updatedPosts = List<FeedEntity>.from(state.posts);
+      updatedPosts[existingIndex] = event.post;
+      emit(state.copyWith(posts: updatedPosts));
+      logi('Updated existing post in feed: ${event.post.id}', tag: _logTag);
+    } else {
+      // Add new post to top
+      final updatedPosts = [event.post, ...state.posts];
+      emit(state.copyWith(posts: updatedPosts));
+      logi('Added new post to feed: ${event.post.id}', tag: _logTag);
+    }
+  }
+
+  @override
+  Future<void> close() async {
+    await _feedWatchSubscription?.cancel();
+    await stopWatchFeedUseCase();
+    return super.close();
   }
 }

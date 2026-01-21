@@ -60,4 +60,10 @@ abstract class FeedRemoteDataSource {
 
   /// Stops any active comment watch channel.
   Future<void> stopWatch();
+
+  /// Watches realtime feed changes (new posts, updates).
+  Stream<FeedModel> watchFeedChanges();
+
+  /// Stops watching feed changes.
+  Future<void> stopWatchFeed();
 }

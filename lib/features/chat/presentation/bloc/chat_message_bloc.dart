@@ -31,6 +31,7 @@ import 'package:velora/features/chat/domain/usecases/watch_message_reads_usecase
 import 'package:velora/features/chat/domain/usecases/watch_new_messages_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/watch_typing_indicators_usecase.dart';
 import 'package:velora/features/media/domain/repositories/media_repository.dart';
+import 'package:velora/features/chat/domain/entities/chat_message_entity.dart';
 import 'package:velora/features/chat/domain/entities/message_status.dart';
 import 'package:uuid/uuid.dart';
 

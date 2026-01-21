@@ -63,4 +63,10 @@ abstract class FeedRepository {
 
   /// Stops any active comment watch channel.
   Future<void> stopWatchComments();
+
+  /// Watches realtime feed post changes (new posts, updates, deletes).
+  Stream<Either<Failure, FeedEntity>> watchFeedChanges();
+
+  /// Stops watching feed changes.
+  Future<void> stopWatchFeed();
 }

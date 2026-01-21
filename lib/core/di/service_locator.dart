@@ -48,6 +48,8 @@ import 'package:velora/features/feed/domain/usecases/update_post_usecase.dart';
 import 'package:velora/features/feed/domain/usecases/delete_post_usecase.dart';
 import 'package:velora/features/feed/domain/usecases/watch_new_comments_usecase.dart';
 import 'package:velora/features/feed/domain/usecases/stop_watch_comments_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/watch_feed_changes_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/stop_watch_feed_usecase.dart';
 import 'package:velora/features/feed/presentation/bloc/feed_bloc.dart';
 import 'package:velora/features/feed/presentation/bloc/feed_comment_bloc.dart';
 
@@ -59,6 +61,8 @@ import 'package:velora/features/post/domain/repositories/post_repository.dart';
 import 'package:velora/features/post/domain/usecases/create_post_feed_usecase.dart';
 import 'package:velora/features/post/presentation/bloc/post_bloc.dart';
 import 'package:velora/features/post/presentation/bloc/campaign_post_bloc.dart';
+import 'package:velora/features/post/services/post_offline_queue_service.dart';
+import 'package:velora/features/post/services/post_sync_service.dart';
 
 // Media feature imports
 import 'package:velora/features/media/data/datasources/remote/media_remote_datasource.dart';
@@ -352,14 +356,18 @@ Future<void> configureDependencies() async {
   }
 
   // Feed feature - Repositories
-  getIt.registerLazySingleton<FeedRepository>(
-    () => FeedRepositoryImpl(remoteDataSource: getIt<FeedRemoteDataSource>()),
-  );
+  if (!getIt.isRegistered<FeedRepository>()) {
+    getIt.registerLazySingleton<FeedRepository>(
+      () => FeedRepositoryImpl(remoteDataSource: getIt<FeedRemoteDataSource>()),
+    );
+  }
 
   // Post feature - Repositories
-  getIt.registerLazySingleton<PostRepository>(
-    () => PostRepositoryImpl(remoteDataSource: getIt<PostRemoteDataSource>()),
-  );
+  if (!getIt.isRegistered<PostRepository>()) {
+    getIt.registerLazySingleton<PostRepository>(
+      () => PostRepositoryImpl(remoteDataSource: getIt<PostRemoteDataSource>()),
+    );
+  }
 
   // Media feature - Repositories
   getIt.registerLazySingleton<MediaRepository>(
@@ -472,6 +480,10 @@ Future<void> configureDependencies() async {
     ..registerLazySingleton(
         () => StopWatchCommentsUseCase(repository: getIt<FeedRepository>()))
     ..registerLazySingleton(
+        () => WatchFeedChangesUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(
+        () => StopWatchFeedUseCase(repository: getIt<FeedRepository>()))
+    ..registerLazySingleton(
         () => GetPostByIdUseCase(repository: getIt<FeedRepository>()))
     ..registerLazySingleton(
         () => UpdatePostUseCase(repository: getIt<FeedRepository>()))
@@ -480,7 +492,22 @@ Future<void> configureDependencies() async {
     // Post feature - Use cases
     ..registerLazySingleton(
       () => CreatePostFeedUseCase(repository: getIt<PostRepository>()),
+    );
+
+  // Post feature - Services
+  getIt
+    ..registerLazySingleton<PostOfflineQueueService>(
+      () => PostOfflineQueueService(prefs: getIt<SharedPreferences>()),
     )
+    ..registerLazySingleton<PostSyncService>(
+      () => PostSyncService(
+        queueService: getIt<PostOfflineQueueService>(),
+        repository: getIt<PostRepository>(),
+        connectivityService: getIt<ConnectivityService>(),
+      ),
+    );
+
+  getIt
     // Media feature - Use cases
     ..registerLazySingleton(
         () => UploadMediaAssetUseCase(repository: getIt<MediaRepository>()))
@@ -737,6 +764,8 @@ Future<void> configureDependencies() async {
       getPostByIdUseCase: getIt<GetPostByIdUseCase>(),
       updatePostUseCase: getIt<UpdatePostUseCase>(),
       deletePostUseCase: getIt<DeletePostUseCase>(),
+      watchFeedChangesUseCase: getIt<WatchFeedChangesUseCase>(),
+      stopWatchFeedUseCase: getIt<StopWatchFeedUseCase>(),
     ),
   );
 
@@ -848,7 +877,11 @@ Future<void> configureDependencies() async {
 
   // Post feature - Bloc
   getIt.registerFactory(
-    () => PostBloc(createPostFeedUseCase: getIt<CreatePostFeedUseCase>()),
+    () => PostBloc(
+      createPostFeedUseCase: getIt<CreatePostFeedUseCase>(),
+      queueService: getIt<PostOfflineQueueService>(),
+      connectivityService: getIt<ConnectivityService>(),
+    ),
   );
 
   // Campaign feature - Bloc

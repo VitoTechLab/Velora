@@ -72,8 +72,14 @@ class FeedScreen extends HookWidget {
 
     useEffect(() {
       loadFeed();
+      // Start realtime feed watching
+      context.read<FeedBloc>().add(const FeedEvent.startWatchFeed());
       scrollController.addListener(onScroll);
-      return () => scrollController.removeListener(onScroll);
+      return () {
+        scrollController.removeListener(onScroll);
+        // Stop realtime feed watching on dispose
+        context.read<FeedBloc>().add(const FeedEvent.stopWatchFeed());
+      };
     }, [scrollController]);
 
     // Load unread count once on mount

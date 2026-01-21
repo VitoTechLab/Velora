@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:velora/features/post/domain/entities/post_feed_entity.dart';
 
 part 'post_event.freezed.dart';
 
@@ -17,4 +18,20 @@ class PostEvent with _$PostEvent {
   }) = CreatePostEvent;
 
   const factory PostEvent.clearPostTransient() = ClearPostTransientEvent;
+}
+
+extension CreatePostEventExtension on CreatePostEvent {
+  PostFeedEntity toPostEntity() {
+    return PostFeedEntity(
+      userId: userId,
+      content: content,
+      mediaUrls: mediaUrls,
+      tags: tags,
+      mentionIds: mentionIds,
+      location: location,
+      allowComments: allowComments,
+      allowShare: allowShare,
+      campaignTitle: campaignTitle,
+    );
+  }
 }

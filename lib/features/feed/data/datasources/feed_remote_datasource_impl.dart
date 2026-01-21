@@ -27,6 +27,8 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
   final FeedNotificationService _notificationService;
   RealtimeChannel? _channel;
   StreamController<CommentModel>? _commentStreamController;
+  RealtimeChannel? _feedChannel;
+  StreamController<FeedModel>? _feedStreamController;
 
   static const _logTag = 'FeedRemoteDataSource';
 
@@ -530,5 +532,72 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
       await controller.close();
     }
     _commentStreamController = null;
+  }
+
+  @override
+  Stream<FeedModel> watchFeedChanges() {
+    final previousController = _feedStreamController;
+    if (previousController != null && !previousController.isClosed) {
+      unawaited(previousController.close());
+    }
+    _feedStreamController = null;
+
+    final controller = StreamController<FeedModel>.broadcast();
+    _feedStreamController = controller;
+
+    unawaited(_feedChannel?.unsubscribe());
+
+    _feedChannel = _client
+        .channel('feed:all')
+        .onPostgresChanges(
+          event: PostgresChangeEvent.insert,
+          schema: 'public',
+          table: SupabaseTables.feedPosts,
+          callback: (payload) async {
+            try {
+              final postId = payload.newRecord['id'] as String;
+              final post = await getPostById(postId);
+              controller.add(post);
+            } catch (e, st) {
+              loge('Error fetching new post from realtime', error: e, tag: _logTag);
+              controller.addError(e, st);
+            }
+          },
+        )
+        .onPostgresChanges(
+          event: PostgresChangeEvent.update,
+          schema: 'public',
+          table: SupabaseTables.feedPosts,
+          callback: (payload) async {
+            try {
+              final postId = payload.newRecord['id'] as String;
+              final post = await getPostById(postId);
+              controller.add(post);
+            } catch (e, st) {
+              loge('Error fetching updated post from realtime', error: e, tag: _logTag);
+              controller.addError(e, st);
+            }
+          },
+        )
+        .subscribe();
+
+    controller.onCancel = () async {
+      await _feedChannel?.unsubscribe();
+      _feedChannel = null;
+      _feedStreamController = null;
+    };
+
+    return controller.stream;
+  }
+
+  @override
+  Future<void> stopWatchFeed() async {
+    await _feedChannel?.unsubscribe();
+    _feedChannel = null;
+    final controller = _feedStreamController;
+    if (controller != null && !controller.isClosed) {
+      await controller.close();
+    }
+    _feedStreamController = null;
   }
 }
