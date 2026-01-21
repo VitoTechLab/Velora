@@ -54,16 +54,16 @@ class NavigationTabs {
       cupertinoIcon: CupertinoIcons.paperplane,
       cupertinoActiveIcon: CupertinoIcons.paperplane_fill,
     ),
-    NavigationTab(
-      id: AppRouteName.search,
-      label: 'Search',
-      path: AppRoutePath.search,
-      // Rounded search icon
-      icon: Icons.search_rounded,
-      activeIcon: Icons.search_rounded,
-      cupertinoIcon: CupertinoIcons.search,
-      cupertinoActiveIcon: CupertinoIcons.search,
-    ),
+    // NavigationTab(
+    //   id: AppRouteName.search,
+    //   label: 'Search',
+    //   path: AppRoutePath.search,
+    //   // Rounded search icon
+    //   icon: Icons.search_rounded,
+    //   activeIcon: Icons.search_rounded,
+    //   cupertinoIcon: CupertinoIcons.search,
+    //   cupertinoActiveIcon: CupertinoIcons.search,
+    // ),
     NavigationTab(
       id: AppRouteName.profile,
       label: 'Profile',

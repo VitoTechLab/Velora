@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/search/data/datasources/search_remote_datasource.dart';
+import 'package:velora/features/search/data/models/search_campaign_result_model.dart';
+import 'package:velora/features/search/data/models/search_user_result_model.dart';
 import 'package:velora/features/search/presentation/bloc/search_event.dart';
 import 'package:velora/features/search/presentation/bloc/search_state.dart';
 
@@ -107,8 +109,8 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         _searchDataSource.searchCampaigns(query: event.query, limit: 20),
       ]);
 
-      final users = results[0];
-      final campaigns = results[1];
+      final users = results[0] as List<SearchUserResultModel>;
+      final campaigns = results[1] as List<SearchCampaignResultModel>;
 
       logi(
           'Found ${users.length} users and ${campaigns.length} campaigns for query: ${event.query}',

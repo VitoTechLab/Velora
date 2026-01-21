@@ -75,8 +75,8 @@ class SearchScreen extends HookWidget {
       providers: [
         BlocProvider(create: (context) => getIt<SearchBloc>()),
         BlocProvider(
-          create: (context) =>
-              getIt<CampaignBloc>()..add(const CampaignEvent.loadCampaigns(limit: 10)),
+          create: (context) => getIt<CampaignBloc>()
+            ..add(const CampaignEvent.loadCampaigns(limit: 10)),
         ),
       ],
       child: Builder(
@@ -112,7 +112,8 @@ class SearchScreen extends HookWidget {
                               const SizedBox(height: 16),
                               _SearchField(
                                 controller: searchController,
-                                onSubmit: (query) => onSearchSubmit(query, bloc),
+                                onSubmit: (query) =>
+                                    onSearchSubmit(query, bloc),
                                 isSticky: false,
                               ),
                               const SizedBox(height: 12),
@@ -129,10 +130,13 @@ class SearchScreen extends HookWidget {
                           ),
                         ),
                       ),
-                    ),                    BlocBuilder<SearchBloc, SearchState>(
+                    ),
+                    BlocBuilder<SearchBloc, SearchState>(
                       builder: (context, state) {
-                        if (state.lastQuery != null && state.lastQuery!.isNotEmpty) {
-                          if (state.isLoadingUsers || state.isLoadingCampaigns) {
+                        if (state.lastQuery != null &&
+                            state.lastQuery!.isNotEmpty) {
+                          if (state.isLoadingUsers ||
+                              state.isLoadingCampaigns) {
                             return const SliverFillRemaining(
                               child: Center(child: CircularProgressIndicator()),
                             );
@@ -141,27 +145,48 @@ class SearchScreen extends HookWidget {
                             delegate: SliverChildListDelegate([
                               if (state.users.isNotEmpty) ...[
                                 Padding(
-                                  padding: const EdgeInsets.fromLTRB(20, 24, 20, 12),
-                                  child: Text('Users', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold, color: colorScheme.onSurface)),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(20, 24, 20, 12),
+                                  child: Text('Users',
+                                      style: theme.textTheme.titleMedium
+                                          ?.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              color: colorScheme.onSurface)),
                                 ),
-                                ...state.users.map((user) => SearchUserCard(user: user, onTap: () {})),
+                                ...state.users.map((user) =>
+                                    SearchUserCard(user: user, onTap: () {})),
                               ],
                               if (state.campaigns.isNotEmpty) ...[
                                 Padding(
-                                  padding: const EdgeInsets.fromLTRB(20, 24, 20, 12),
-                                  child: Text('Campaigns', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold, color: colorScheme.onSurface)),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(20, 24, 20, 12),
+                                  child: Text('Campaigns',
+                                      style: theme.textTheme.titleMedium
+                                          ?.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              color: colorScheme.onSurface)),
                                 ),
-                                ...state.campaigns.map((campaign) => SearchCampaignCard(campaign: campaign, onTap: () {})),
+                                ...state.campaigns.map((campaign) =>
+                                    SearchCampaignCard(
+                                        campaign: campaign, onTap: () {})),
                               ],
-                              if (state.users.isEmpty && state.campaigns.isEmpty)
+                              if (state.users.isEmpty &&
+                                  state.campaigns.isEmpty)
                                 Padding(
                                   padding: const EdgeInsets.all(40),
                                   child: Center(
                                     child: Column(
                                       children: [
-                                        Icon(Icons.search_off, size: 64, color: colorScheme.onSurfaceVariant.withValues(alpha: 0.5)),
+                                        Icon(Icons.search_off,
+                                            size: 64,
+                                            color: colorScheme.onSurfaceVariant
+                                                .withValues(alpha: 0.5)),
                                         const SizedBox(height: 16),
-                                        Text('No results found', style: theme.textTheme.titleMedium?.copyWith(color: colorScheme.onSurfaceVariant)),
+                                        Text('No results found',
+                                            style: theme.textTheme.titleMedium
+                                                ?.copyWith(
+                                                    color: colorScheme
+                                                        .onSurfaceVariant)),
                                       ],
                                     ),
                                   ),
@@ -169,7 +194,7 @@ class SearchScreen extends HookWidget {
                             ]),
                           );
                         }
-                        
+
                         // Default content: Discover campaigns from real data
                         return BlocBuilder<CampaignBloc, CampaignState>(
                           builder: (context, campaignState) {
@@ -177,34 +202,43 @@ class SearchScreen extends HookWidget {
                               delegate: SliverChildListDelegate([
                                 // Discover section with real campaigns
                                 Padding(
-                                  padding: const EdgeInsets.fromLTRB(20, 24, 20, 16),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(20, 24, 20, 16),
                                   child: Text(
-                                    l10n?.searchDiscoverTitle ?? 'Discover something new',
+                                    l10n?.searchDiscoverTitle ??
+                                        'Discover something new',
                                     style: theme.textTheme.titleLarge?.copyWith(
                                       fontWeight: FontWeight.bold,
                                       color: colorScheme.onSurface,
                                     ),
                                   ),
                                 ),
-                                if (campaignState.isLoading)
+                                if (campaignState.isLoadingCampaigns)
                                   const SizedBox(
                                     height: 200,
-                                    child: Center(child: CircularProgressIndicator()),
+                                    child: Center(
+                                        child: CircularProgressIndicator()),
                                   )
                                 else if (campaignState.campaigns.isNotEmpty)
                                   SizedBox(
                                     height: 200,
                                     child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
-                                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                                      itemCount: campaignState.campaigns.take(10).length,
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20),
+                                      itemCount: campaignState.campaigns
+                                          .take(10)
+                                          .length,
                                       itemBuilder: (context, index) {
-                                        final campaign = campaignState.campaigns[index];
+                                        final campaign =
+                                            campaignState.campaigns[index];
                                         return Container(
                                           width: 280,
-                                          margin: const EdgeInsets.only(right: 16),
+                                          margin:
+                                              const EdgeInsets.only(right: 16),
                                           child: SearchCampaignCard(
-                                            campaign: campaign.toSearchResultModel(),
+                                            campaign:
+                                                campaign.toSearchResultModel(),
                                             onTap: () {
                                               // Navigate to campaign detail
                                             },
@@ -213,10 +247,11 @@ class SearchScreen extends HookWidget {
                                       },
                                     ),
                                   ),
-                                
+
                                 // Browse all categories
                                 Padding(
-                                  padding: const EdgeInsets.fromLTRB(20, 32, 20, 16),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(20, 32, 20, 16),
                                   child: Text(
                                     l10n?.searchBrowseAllTitle ?? 'Browse all',
                                     style: theme.textTheme.titleLarge?.copyWith(
@@ -226,11 +261,14 @@ class SearchScreen extends HookWidget {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(20, 0, 20, 24),
                                   child: GridView.builder(
                                     shrinkWrap: true,
-                                    physics: const NeverScrollableScrollPhysics(),
-                                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 2,
                                       crossAxisSpacing: 12,
                                       mainAxisSpacing: 12,
@@ -238,7 +276,8 @@ class SearchScreen extends HookWidget {
                                     ),
                                     itemCount: campaignCategories.length,
                                     itemBuilder: (context, index) {
-                                      final category = campaignCategories[index];
+                                      final category =
+                                          campaignCategories[index];
                                       return CategoryCard(
                                         category: category,
                                         onTap: () => onCategoryTap(category),
@@ -264,12 +303,20 @@ class SearchScreen extends HookWidget {
                       duration: const Duration(milliseconds: 200),
                       decoration: BoxDecoration(
                         color: colorScheme.surface,
-                        boxShadow: [BoxShadow(color: colorScheme.shadow.withValues(alpha: 0.1), blurRadius: 8, offset: const Offset(0, 2))],
+                        boxShadow: [
+                          BoxShadow(
+                              color: colorScheme.shadow.withValues(alpha: 0.1),
+                              blurRadius: 8,
+                              offset: const Offset(0, 2))
+                        ],
                       ),
                       padding: const EdgeInsets.fromLTRB(20, 48, 20, 12),
                       child: Column(
                         children: [
-                          _SearchField(controller: searchController, onSubmit: (query) => onSearchSubmit(query, bloc), isSticky: true),
+                          _SearchField(
+                              controller: searchController,
+                              onSubmit: (query) => onSearchSubmit(query, bloc),
+                              isSticky: true),
                           const SizedBox(height: 8),
                           _SearchTabs(
                             selectedTab: selectedTab.value,
@@ -321,16 +368,26 @@ class _SearchField extends StatelessWidget {
       child: TextField(
         controller: controller,
         onSubmitted: onSubmit,
-        style: theme.textTheme.bodyLarge?.copyWith(color: colorScheme.onSurface),
+        style:
+            theme.textTheme.bodyLarge?.copyWith(color: colorScheme.onSurface),
         decoration: InputDecoration(
           hintText: l10n?.searchHint ?? 'Search users and campaigns...',
-          hintStyle: theme.textTheme.bodyLarge?.copyWith(color: colorScheme.onSurfaceVariant.withValues(alpha: 0.6)),
-          prefixIcon: Icon(Icons.search_rounded, color: colorScheme.onSurfaceVariant, size: 24),
+          hintStyle: theme.textTheme.bodyLarge?.copyWith(
+              color: colorScheme.onSurfaceVariant.withValues(alpha: 0.6)),
+          prefixIcon: Icon(Icons.search_rounded,
+              color: colorScheme.onSurfaceVariant, size: 24),
           suffixIcon: controller.text.isNotEmpty
-              ? IconButton(icon: Icon(Icons.clear_rounded, color: colorScheme.onSurfaceVariant), onPressed: () { controller.clear(); onSubmit(''); })
+              ? IconButton(
+                  icon: Icon(Icons.clear_rounded,
+                      color: colorScheme.onSurfaceVariant),
+                  onPressed: () {
+                    controller.clear();
+                    onSubmit('');
+                  })
               : null,
           border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         ),
       ),
     );
@@ -354,11 +411,26 @@ class _SearchTabs extends StatelessWidget {
 
     return Row(
       children: [
-        _TabChip(label: 'All', isSelected: selectedTab == 0, onTap: () => onTabChanged(0), colorScheme: colorScheme, theme: theme),
+        _TabChip(
+            label: 'All',
+            isSelected: selectedTab == 0,
+            onTap: () => onTabChanged(0),
+            colorScheme: colorScheme,
+            theme: theme),
         const SizedBox(width: 8),
-        _TabChip(label: 'Users', isSelected: selectedTab == 1, onTap: () => onTabChanged(1), colorScheme: colorScheme, theme: theme),
+        _TabChip(
+            label: 'Users',
+            isSelected: selectedTab == 1,
+            onTap: () => onTabChanged(1),
+            colorScheme: colorScheme,
+            theme: theme),
         const SizedBox(width: 8),
-        _TabChip(label: 'Campaigns', isSelected: selectedTab == 2, onTap: () => onTabChanged(2), colorScheme: colorScheme, theme: theme),
+        _TabChip(
+            label: 'Campaigns',
+            isSelected: selectedTab == 2,
+            onTap: () => onTabChanged(2),
+            colorScheme: colorScheme,
+            theme: theme),
       ],
     );
   }
@@ -387,13 +459,17 @@ class _TabChip extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-          color: isSelected ? colorScheme.primaryContainer : colorScheme.surfaceContainerHighest,
+          color: isSelected
+              ? colorScheme.primaryContainer
+              : colorScheme.surfaceContainerHighest,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Text(
           label,
           style: theme.textTheme.bodyMedium?.copyWith(
-            color: isSelected ? colorScheme.onPrimaryContainer : colorScheme.onSurfaceVariant,
+            color: isSelected
+                ? colorScheme.onPrimaryContainer
+                : colorScheme.onSurfaceVariant,
             fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
           ),
         ),
