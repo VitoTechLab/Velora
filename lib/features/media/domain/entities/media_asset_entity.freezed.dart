@@ -23,6 +23,7 @@ mixin _$MediaAsset {
   int get bytes => throw _privateConstructorUsedError;
   int get width => throw _privateConstructorUsedError;
   int get height => throw _privateConstructorUsedError;
+  double? get duration => throw _privateConstructorUsedError;
 
   /// Create a copy of MediaAsset
   /// with the given fields replaced by the non-null parameter values.
@@ -44,7 +45,8 @@ abstract class $MediaAssetCopyWith<$Res> {
       String format,
       int bytes,
       int width,
-      int height});
+      int height,
+      double? duration});
 }
 
 /// @nodoc
@@ -69,6 +71,7 @@ class _$MediaAssetCopyWithImpl<$Res, $Val extends MediaAsset>
     Object? bytes = null,
     Object? width = null,
     Object? height = null,
+    Object? duration = freezed,
   }) {
     return _then(_value.copyWith(
       publicId: null == publicId
@@ -99,6 +102,10 @@ class _$MediaAssetCopyWithImpl<$Res, $Val extends MediaAsset>
           ? _value.height
           : height // ignore: cast_nullable_to_non_nullable
               as int,
+      duration: freezed == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as double?,
     ) as $Val);
   }
 }
@@ -118,7 +125,8 @@ abstract class _$$MediaAssetImplCopyWith<$Res>
       String format,
       int bytes,
       int width,
-      int height});
+      int height,
+      double? duration});
 }
 
 /// @nodoc
@@ -141,6 +149,7 @@ class __$$MediaAssetImplCopyWithImpl<$Res>
     Object? bytes = null,
     Object? width = null,
     Object? height = null,
+    Object? duration = freezed,
   }) {
     return _then(_$MediaAssetImpl(
       publicId: null == publicId
@@ -171,6 +180,10 @@ class __$$MediaAssetImplCopyWithImpl<$Res>
           ? _value.height
           : height // ignore: cast_nullable_to_non_nullable
               as int,
+      duration: freezed == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as double?,
     ));
   }
 }
@@ -185,7 +198,8 @@ class _$MediaAssetImpl implements _MediaAsset {
       required this.format,
       required this.bytes,
       required this.width,
-      required this.height});
+      required this.height,
+      this.duration});
 
   @override
   final String publicId;
@@ -201,10 +215,12 @@ class _$MediaAssetImpl implements _MediaAsset {
   final int width;
   @override
   final int height;
+  @override
+  final double? duration;
 
   @override
   String toString() {
-    return 'MediaAsset(publicId: $publicId, secureUrl: $secureUrl, resourceType: $resourceType, format: $format, bytes: $bytes, width: $width, height: $height)';
+    return 'MediaAsset(publicId: $publicId, secureUrl: $secureUrl, resourceType: $resourceType, format: $format, bytes: $bytes, width: $width, height: $height, duration: $duration)';
   }
 
   @override
@@ -221,12 +237,14 @@ class _$MediaAssetImpl implements _MediaAsset {
             (identical(other.format, format) || other.format == format) &&
             (identical(other.bytes, bytes) || other.bytes == bytes) &&
             (identical(other.width, width) || other.width == width) &&
-            (identical(other.height, height) || other.height == height));
+            (identical(other.height, height) || other.height == height) &&
+            (identical(other.duration, duration) ||
+                other.duration == duration));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, publicId, secureUrl,
-      resourceType, format, bytes, width, height);
+      resourceType, format, bytes, width, height, duration);
 
   /// Create a copy of MediaAsset
   /// with the given fields replaced by the non-null parameter values.
@@ -245,7 +263,8 @@ abstract class _MediaAsset implements MediaAsset {
       required final String format,
       required final int bytes,
       required final int width,
-      required final int height}) = _$MediaAssetImpl;
+      required final int height,
+      final double? duration}) = _$MediaAssetImpl;
 
   @override
   String get publicId;
@@ -261,6 +280,8 @@ abstract class _MediaAsset implements MediaAsset {
   int get width;
   @override
   int get height;
+  @override
+  double? get duration;
 
   /// Create a copy of MediaAsset
   /// with the given fields replaced by the non-null parameter values.

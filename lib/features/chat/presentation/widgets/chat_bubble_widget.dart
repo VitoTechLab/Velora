@@ -32,9 +32,8 @@ class ChatBubbleWidget extends StatelessWidget {
     final textTheme = theme.textTheme;
     final t = AppLocalizations.of(context)!;
 
-    final textColor = isSender
-        ? colorScheme.onPrimaryContainer
-        : colorScheme.onSurface;
+    final textColor =
+        isSender ? colorScheme.onPrimaryContainer : colorScheme.onSurface;
 
     return Semantics(
       label: isSender ? t.chatBubbleYourLabel : t.chatBubbleReceivedLabel,
@@ -54,7 +53,8 @@ class ChatBubbleWidget extends StatelessWidget {
                 opacity: value,
                 child: Transform.scale(
                   scale: 0.95 + (0.05 * value),
-                  alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
+                  alignment:
+                      isSender ? Alignment.centerRight : Alignment.centerLeft,
                   child: child,
                 ),
               );
@@ -117,10 +117,12 @@ class ChatBubbleWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
 
-                  // Time and read receipt
+                  // Time and read receipt (right-aligned)
                   Row(
                     mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
+                      const Spacer(),
                       Text(
                         time,
                         style: textTheme.bodySmall?.copyWith(
@@ -140,12 +142,14 @@ class ChatBubbleWidget extends StatelessWidget {
                             );
                           },
                           child: Icon(
-                            isRead ? Icons.done_all_rounded : Icons.check_rounded,
+                            isRead
+                                ? Icons.done_all_rounded
+                                : Icons.check_rounded,
                             key: ValueKey(isRead),
                             size: 16,
                             color: isRead
-                                ? colorScheme.primary
-                                : textColor.withValues(alpha: 0.5),
+                                ? Colors.lightBlueAccent.shade200
+                                : Colors.grey.shade500,
                           ),
                         ),
                       ],
@@ -160,5 +164,3 @@ class ChatBubbleWidget extends StatelessWidget {
     );
   }
 }
-
-

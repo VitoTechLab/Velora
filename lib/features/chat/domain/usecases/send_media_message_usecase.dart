@@ -17,6 +17,7 @@ class SendMediaMessageUseCase {
     String? fileName,
     int? fileSize,
     String? caption,
+    double? durationSeconds,
   }) {
     return repository.sendMediaMessage(
       conversationId: conversationId,
@@ -26,6 +27,7 @@ class SendMediaMessageUseCase {
       fileName: fileName,
       fileSize: fileSize,
       caption: caption,
+      durationSeconds: durationSeconds,
     );
   }
 }

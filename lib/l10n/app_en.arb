@@ -37,6 +37,8 @@
   "authSignInLink": "Sign in",
   "commonGoBack": "Go back",
   "commonCancel": "Cancel",
+  "commonError": "Something went wrong",
+  "commonRetry": "Retry",
   "authResetPasswordFormLabel": "Reset password form",
   "authEmailIllustrationLabel": "Email illustration",
   "authResetPasswordTitle": "Reset password",
@@ -461,6 +463,40 @@
   "settingsProfileEditProfileUpdated": "Profile updated",
   "settingsProfileEditSaveChanges": "Save changes",
   "settingsProfileEditPronounsLabel": "Pronouns",
+  "settingsProfileEditProfileNotFound": "Profile not found",
+  "settingsProfileEditTapToChangePhoto": "Tap to change photo",
+  "settingsProfileEditFailedToPickImage": "Failed to pick image: {error}",
+  "@settingsProfileEditFailedToPickImage": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsProfileEditUploadFailed": "Upload failed: {error}",
+  "@settingsProfileEditUploadFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsProfileEditUploadError": "Upload error: {error}",
+  "@settingsProfileEditUploadError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsProfileEditUserNotAuthenticated": "User not authenticated",
+  "settingsProfileEditNoChanges": "No changes to save",
+  "settingsProfileFieldFullName": "Full Name",
+  "settingsProfileFieldEmail": "Email",
+  "settingsProfileFieldLocation": "Location",
+  "settingsProfileFieldLocationHint": "Where are you based?",
+  "settingsProfileFieldWebsiteHint": "https://example.com",
+  "settingsProfileFieldBioHint": "Tell us about yourself",
   "settingsProfileFieldSave": "Save",
   "settingsProfileFieldEditFallbackTitle": "Edit field",
   "settingsProfileFieldEditFallbackLabel": "Field",
@@ -1369,5 +1405,10 @@
   "chatDocumentEmptyTitle": "No documents selected",
   "chatDocumentEmptySubtitle": "Tap the button below to browse and select files",
   "chatDocumentBrowseFiles": "Browse Files",
-  "chatDocumentAddMore": "Add more documents"
+  "chatDocumentAddMore": "Add more documents",
+
+  "mediaPreviewTitle": "Preview",
+  "mediaPreviewAddCaption": "Add a caption...",
+  "mediaPreviewRemove": "Remove",
+  "mediaPreviewSend": "Send"
 }

@@ -1,42 +1,374 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:velora/core/di/service_locator.dart';
+import 'package:velora/core/ui/app_messenger.dart';
+import 'package:velora/features/chat/presentation/bloc/chat_message_bloc.dart';
+import 'package:velora/features/chat/presentation/bloc/chat_message_event.dart';
+import 'package:velora/features/chat/presentation/dialogs/create_event_dialog.dart';
+import 'package:velora/features/chat/presentation/dialogs/create_poll_dialog.dart';
+import 'package:velora/features/chat/presentation/screens/chat_gallery_picker_screen.dart';
+import 'package:velora/features/chat/presentation/screens/media_preview_screen.dart';
+import 'package:velora/features/media/data/datasources/local/media_local_datasource.dart';
+import 'package:velora/features/navigation/models/chat_document_picker_args.dart';
 import 'package:velora/l10n/app_localizations.dart';
+import 'package:velora/routes/app_router.dart';
+
+class AttachmentActions {
+  static final ImagePicker _imagePicker = ImagePicker();
+
+  static String? _getCurrentUserId() {
+    return Supabase.instance.client.auth.currentUser?.id;
+  }
+
+  static Future<void> onGalleryTap(
+    BuildContext context,
+    String conversationId,
+  ) async {
+    final t = AppLocalizations.of(context)!;
+
+    final userId = _getCurrentUserId();
+    if (userId == null) {
+      AppMessenger.showToast(
+        message: t.chatDetailPickMediaError,
+        icon: Icons.error_outline,
+        isError: true,
+      );
+      return;
+    }
+
+    final selectedFiles = await ChatGalleryPickerScreen.show(
+      context,
+      maxImages: 10,
+      allowVideo: true,
+    );
+
+    if (selectedFiles == null || selectedFiles.isEmpty) return;
+
+    if (context.mounted) {
+      final result = await MediaPreviewScreen.show(
+        context,
+        files: selectedFiles,
+      );
+
+      if (result != null && context.mounted) {
+        context.read<ChatMessageBloc>().add(
+              ChatMessageEvent.uploadAndSendImages(
+                conversationId: conversationId,
+                filePaths: result.files.map((f) => f.path).toList(),
+                userId: userId,
+                caption: result.caption,
+              ),
+            );
+      }
+    }
+  }
+
+  static Future<void> onCameraTap(
+    BuildContext context,
+    String conversationId,
+  ) async {
+    final t = AppLocalizations.of(context)!;
+
+    final userId = _getCurrentUserId();
+    if (userId == null) {
+      AppMessenger.showToast(
+        message: t.chatDetailPickMediaError,
+        icon: Icons.error_outline,
+        isError: true,
+      );
+      return;
+    }
+
+    try {
+      final choice = await showDialog<String>(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text(t.chatDetailCameraModeTitle),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.camera_alt_outlined),
+                title: Text(t.chatDetailCameraTakePhoto),
+                onTap: () => Navigator.pop(ctx, 'photo'),
+              ),
+              ListTile(
+                leading: const Icon(Icons.videocam_outlined),
+                title: Text(t.chatDetailCameraRecordVideo),
+                onTap: () => Navigator.pop(ctx, 'video'),
+              ),
+            ],
+          ),
+        ),
+      );
+
+      if (choice == null) return;
+
+      if (choice == 'photo') {
+        final pickedFile = await _imagePicker.pickImage(
+          source: ImageSource.camera,
+          maxWidth: 1920,
+          maxHeight: 1920,
+          imageQuality: 85,
+          preferredCameraDevice: CameraDevice.rear,
+        );
+
+        if (pickedFile == null) return;
+
+        if (context.mounted) {
+          final result = await MediaPreviewScreen.show(
+            context,
+            files: [File(pickedFile.path)],
+            isFromCamera: true,
+          );
+
+          if (result != null && context.mounted) {
+            context.read<ChatMessageBloc>().add(
+                  ChatMessageEvent.uploadAndSendImages(
+                    conversationId: conversationId,
+                    filePaths: result.files.map((f) => f.path).toList(),
+                    userId: userId,
+                    caption: result.caption,
+                  ),
+                );
+          }
+        }
+      } else if (choice == 'video') {
+        final pickedFile = await _imagePicker.pickVideo(
+          source: ImageSource.camera,
+          maxDuration: const Duration(minutes: 5),
+          preferredCameraDevice: CameraDevice.rear,
+        );
+
+        if (pickedFile == null) return;
+
+        if (context.mounted) {
+          final result = await MediaPreviewScreen.show(
+            context,
+            files: [File(pickedFile.path)],
+            isFromCamera: true,
+          );
+
+          if (result != null && context.mounted) {
+            context.read<ChatMessageBloc>().add(
+                  ChatMessageEvent.uploadAndSendVideo(
+                    conversationId: conversationId,
+                    filePath: result.files.first.path,
+                    userId: userId,
+                    caption: result.caption,
+                  ),
+                );
+          }
+        }
+      }
+    } catch (e) {
+      AppMessenger.showToast(
+        message: t.chatDetailPickMediaError,
+        icon: Icons.error_outline,
+        isError: true,
+      );
+    }
+  }
+
+  static Future<void> onPollTap(
+    BuildContext context,
+    String conversationId,
+  ) async {
+    try {
+      final chatBloc = context.read<ChatMessageBloc>();
+
+      final result = await CreatePollDialog.show(context);
+
+      if (result == null) return;
+
+      final question = result['question'] as String;
+      final options = (result['options'] as List).cast<String>();
+      final multipleChoice = result['multiple_choice'] as bool? ?? false;
+      final maxUserVotes = result['max_user_votes'] as int? ?? 1;
+
+      chatBloc.add(
+        ChatMessageEvent.sendPollMessage(
+          conversationId: conversationId,
+          question: question,
+          options: options,
+          multipleChoice: multipleChoice,
+          maxUserVotes: maxUserVotes,
+        ),
+      );
+    } catch (e) {
+      AppMessenger.showToast(
+        message: 'Failed to create poll: $e',
+        icon: Icons.error_outline,
+        isError: true,
+      );
+    }
+  }
+
+  static Future<void> onEventTap(
+    BuildContext context,
+    String conversationId,
+  ) async {
+    try {
+      final chatBloc = context.read<ChatMessageBloc>();
+
+      final result = await CreateEventDialog.show(context);
+
+      if (result == null) return;
+
+      final title = result['title'] as String;
+      final description = result['description'] as String?;
+      final locationName = result['location_name'] as String?;
+      final address = result['address'] as String?;
+      final isOnline = result['is_online'] as bool? ?? false;
+      final meetingUrl = result['meeting_url'] as String?;
+      final startDate = DateTime.parse(result['startDate']);
+      final endDate = DateTime.parse(result['endDate']);
+
+      chatBloc.add(
+        ChatMessageEvent.sendEventMessage(
+          conversationId: conversationId,
+          title: title,
+          description: description,
+          locationName: locationName,
+          address: address,
+          isOnline: isOnline,
+          meetingUrl: meetingUrl,
+          startDate: startDate,
+          endDate: endDate,
+        ),
+      );
+    } catch (e) {
+      AppMessenger.showToast(
+        message: 'Failed to create event: $e',
+        icon: Icons.error_outline,
+        isError: true,
+      );
+    }
+  }
+
+  static Future<void> onDocumentTap(
+    BuildContext context,
+    String conversationId,
+  ) async {
+    final t = AppLocalizations.of(context)!;
+
+    final userId = _getCurrentUserId();
+    if (userId == null) {
+      AppMessenger.showToast(
+        message: t.chatDetailDocumentError,
+        icon: Icons.error_outline,
+        isError: true,
+      );
+      return;
+    }
+
+    final selectedFiles = await context.pushNamed<List<File>>(
+      AppRouteName.chatDocumentPicker,
+      extra: ChatDocumentPickerArgs(
+        maxDocuments: 10,
+      ),
+    );
+
+    if (selectedFiles == null || selectedFiles.isEmpty) return;
+
+    if (context.mounted) {
+      context.read<ChatMessageBloc>().add(
+            ChatMessageEvent.uploadAndSendDocuments(
+              conversationId: conversationId,
+              filePaths: selectedFiles.map((f) => f.path).toList(),
+              userId: userId,
+            ),
+          );
+    }
+  }
+
+  static Future<void> onAudioTap(
+    BuildContext context,
+    String conversationId,
+  ) async {
+    final t = AppLocalizations.of(context)!;
+
+    final userId = _getCurrentUserId();
+    if (userId == null) {
+      AppMessenger.showToast(
+        message: t.chatDetailAudioError,
+        icon: Icons.error_outline,
+        isError: true,
+      );
+      return;
+    }
+
+    try {
+      final localDataSource = getIt<MediaLocalDataSource>();
+      final file = await localDataSource.pickSingleAudioFile();
+
+      if (file == null) return;
+
+      if (context.mounted) {
+        context.read<ChatMessageBloc>().add(
+              ChatMessageEvent.uploadAndSendAudio(
+                conversationId: conversationId,
+                filePath: file.path,
+                userId: userId,
+                isVoiceMessage: false,
+              ),
+            );
+      }
+    } catch (e) {
+      AppMessenger.showToast(
+        message: t.chatDetailAudioError,
+        icon: Icons.error_outline,
+        isError: true,
+      );
+    }
+  }
+
+  static void onLocationTap(BuildContext context) {
+    final t = AppLocalizations.of(context)!;
+    AppMessenger.showToast(
+      message: t.chatDetailLocationSelected,
+      icon: Icons.location_on_outlined,
+    );
+  }
+
+  static void onContactTap(BuildContext context) {
+    final t = AppLocalizations.of(context)!;
+    AppMessenger.showToast(
+      message: t.chatDetailContactSelected,
+      icon: Icons.person_outline,
+    );
+  }
+
+  static void onAiImagesTap(BuildContext context) {
+    final t = AppLocalizations.of(context)!;
+    AppMessenger.showToast(
+      message: t.chatDetailAiImagesSelected,
+      icon: Icons.auto_awesome_outlined,
+    );
+  }
+}
 
 class AttachmentMenuBottomSheet extends StatefulWidget {
-  final VoidCallback onGalleryTap;
-  final VoidCallback onCameraTap;
-  final VoidCallback onLocationTap;
-  final VoidCallback onContactTap;
-  final VoidCallback onDocumentTap;
-  final VoidCallback onAudioTap;
-  final VoidCallback onPollTap;
-  final VoidCallback onEventTap;
-  final VoidCallback onAiImagesTap;
+  final String conversationId;
 
   const AttachmentMenuBottomSheet({
     super.key,
-    required this.onGalleryTap,
-    required this.onCameraTap,
-    required this.onLocationTap,
-    required this.onContactTap,
-    required this.onDocumentTap,
-    required this.onAudioTap,
-    required this.onPollTap,
-    required this.onEventTap,
-    required this.onAiImagesTap,
+    required this.conversationId,
   });
 
   static Future<void> show(
     BuildContext context, {
-    required VoidCallback onGalleryTap,
-    required VoidCallback onCameraTap,
-    required VoidCallback onLocationTap,
-    required VoidCallback onContactTap,
-    required VoidCallback onDocumentTap,
-    required VoidCallback onAudioTap,
-    required VoidCallback onPollTap,
-    required VoidCallback onEventTap,
-    required VoidCallback onAiImagesTap,
+    required String conversationId,
   }) {
+    // Ensure ChatMessageBloc from the caller context is available
+    // inside the bottom sheet subtree.
+    final chatBloc = context.read<ChatMessageBloc>();
+
     return showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
@@ -46,16 +378,11 @@ class AttachmentMenuBottomSheet extends StatefulWidget {
       elevation: 0,
       useRootNavigator: false,
       barrierColor: Colors.black.withValues(alpha: 0.5),
-      builder: (context) => AttachmentMenuBottomSheet(
-        onGalleryTap: onGalleryTap,
-        onCameraTap: onCameraTap,
-        onLocationTap: onLocationTap,
-        onContactTap: onContactTap,
-        onDocumentTap: onDocumentTap,
-        onAudioTap: onAudioTap,
-        onPollTap: onPollTap,
-        onEventTap: onEventTap,
-        onAiImagesTap: onAiImagesTap,
+      builder: (bottomSheetContext) => BlocProvider.value(
+        value: chatBloc,
+        child: AttachmentMenuBottomSheet(
+          conversationId: conversationId,
+        ),
       ),
     );
   }
@@ -173,7 +500,10 @@ class _AttachmentMenuBottomSheetState extends State<AttachmentMenuBottomSheet>
                                 ],
                                 onTap: () {
                                   Navigator.pop(context);
-                                  widget.onGalleryTap();
+                                  AttachmentActions.onGalleryTap(
+                                    context,
+                                    widget.conversationId,
+                                  );
                                 },
                                 delay: 0,
                               ),
@@ -186,7 +516,10 @@ class _AttachmentMenuBottomSheetState extends State<AttachmentMenuBottomSheet>
                                 ],
                                 onTap: () {
                                   Navigator.pop(context);
-                                  widget.onCameraTap();
+                                  AttachmentActions.onCameraTap(
+                                    context,
+                                    widget.conversationId,
+                                  );
                                 },
                                 delay: 50,
                               ),
@@ -199,7 +532,7 @@ class _AttachmentMenuBottomSheetState extends State<AttachmentMenuBottomSheet>
                                 ],
                                 onTap: () {
                                   Navigator.pop(context);
-                                  widget.onLocationTap();
+                                  AttachmentActions.onLocationTap(context);
                                 },
                                 delay: 100,
                               ),
@@ -212,7 +545,7 @@ class _AttachmentMenuBottomSheetState extends State<AttachmentMenuBottomSheet>
                                 ],
                                 onTap: () {
                                   Navigator.pop(context);
-                                  widget.onContactTap();
+                                  AttachmentActions.onContactTap(context);
                                 },
                                 delay: 150,
                               ),
@@ -227,11 +560,15 @@ class _AttachmentMenuBottomSheetState extends State<AttachmentMenuBottomSheet>
                                 label: t.chatAttachmentDocument,
                                 gradientColors: [
                                   const Color(0xFF7C4DFF),
-                                  const Color(0xFF7C4DFF).withValues(alpha: 0.7),
+                                  const Color(0xFF7C4DFF)
+                                      .withValues(alpha: 0.7),
                                 ],
                                 onTap: () {
                                   Navigator.pop(context);
-                                  widget.onDocumentTap();
+                                  AttachmentActions.onDocumentTap(
+                                    context,
+                                    widget.conversationId,
+                                  );
                                 },
                                 delay: 200,
                               ),
@@ -240,11 +577,15 @@ class _AttachmentMenuBottomSheetState extends State<AttachmentMenuBottomSheet>
                                 label: t.chatAttachmentAudio,
                                 gradientColors: [
                                   const Color(0xFFFF6F00),
-                                  const Color(0xFFFF6F00).withValues(alpha: 0.7),
+                                  const Color(0xFFFF6F00)
+                                      .withValues(alpha: 0.7),
                                 ],
                                 onTap: () {
                                   Navigator.pop(context);
-                                  widget.onAudioTap();
+                                  AttachmentActions.onAudioTap(
+                                    context,
+                                    widget.conversationId,
+                                  );
                                 },
                                 delay: 250,
                               ),
@@ -253,11 +594,15 @@ class _AttachmentMenuBottomSheetState extends State<AttachmentMenuBottomSheet>
                                 label: t.chatAttachmentPoll,
                                 gradientColors: [
                                   const Color(0xFFFFB300),
-                                  const Color(0xFFFFB300).withValues(alpha: 0.7),
+                                  const Color(0xFFFFB300)
+                                      .withValues(alpha: 0.7),
                                 ],
                                 onTap: () {
                                   Navigator.pop(context);
-                                  widget.onPollTap();
+                                  AttachmentActions.onPollTap(
+                                    context,
+                                    widget.conversationId,
+                                  );
                                 },
                                 delay: 300,
                               ),
@@ -270,7 +615,10 @@ class _AttachmentMenuBottomSheetState extends State<AttachmentMenuBottomSheet>
                                 ],
                                 onTap: () {
                                   Navigator.pop(context);
-                                  widget.onEventTap();
+                                  AttachmentActions.onEventTap(
+                                    context,
+                                    widget.conversationId,
+                                  );
                                 },
                                 delay: 350,
                               ),
@@ -290,7 +638,7 @@ class _AttachmentMenuBottomSheetState extends State<AttachmentMenuBottomSheet>
                                 ],
                                 onTap: () {
                                   Navigator.pop(context);
-                                  widget.onAiImagesTap();
+                                  AttachmentActions.onAiImagesTap(context);
                                 },
                                 delay: 400,
                               ),

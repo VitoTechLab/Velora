@@ -4,7 +4,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:velora/features/auth/domain/entities/auth_status_entity.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_event.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_state.dart';

@@ -101,6 +101,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get commonCancel => '取消';
 
   @override
+  String get commonError => '发生错误';
+
+  @override
+  String get commonRetry => '重试';
+
+  @override
   String get authResetPasswordFormLabel => '重置密码表单';
 
   @override
@@ -456,6 +462,66 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get settingsWalletTitle => '钱包';
+
+  @override
+  String get campaignCreateRequiredFields => '请填写所有必填字段';
+
+  @override
+  String get campaignCreateInvalidTarget => '目标金额必须大于 0';
+
+  @override
+  String get campaignCreateSuccess => '活动创建成功';
+
+  @override
+  String get campaignCreateTitle => '创建活动';
+
+  @override
+  String get campaignCreateSubtitle => '清晰地讲述你的故事，并设定一个透明的筹款目标。';
+
+  @override
+  String get campaignCreateBasicInfo => '基本信息';
+
+  @override
+  String get campaignCreateTitleLabel => '标题';
+
+  @override
+  String get campaignCreateTitleHint => '拯救一家本地咖啡馆';
+
+  @override
+  String get campaignCreateDescriptionLabel => '说明';
+
+  @override
+  String get campaignCreateDescriptionHint => '说明背景、影响以及资金将如何使用。';
+
+  @override
+  String get campaignCreateGoalSection => '目标与期限';
+
+  @override
+  String get campaignCreateTargetLabel => '目标金额';
+
+  @override
+  String get campaignCreateTargetHint => '例如 5000000';
+
+  @override
+  String get campaignCreateEndDateLabel => '结束日期（可选）';
+
+  @override
+  String get campaignCreateContextSection => '背景';
+
+  @override
+  String get campaignCreateLocationLabel => '城市（可选）';
+
+  @override
+  String get campaignCreateLocationHint => '该活动主要发生在什么地方？';
+
+  @override
+  String get campaignCreateLoadingCategories => '正在加载分类...';
+
+  @override
+  String get campaignCreateCategoryLabel => '分类';
+
+  @override
+  String get campaignCreateCTA => '发布活动';
 
   @override
   String get walletDashboardTitle => '钱包仪表板';
@@ -940,6 +1006,51 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get settingsProfileEditPronounsLabel => 'Pronouns';
+
+  @override
+  String get settingsProfileEditProfileNotFound => '未找到个人资料';
+
+  @override
+  String get settingsProfileEditTapToChangePhoto => '点击更改照片';
+
+  @override
+  String settingsProfileEditFailedToPickImage(String error) {
+    return '选择图片失败: $error';
+  }
+
+  @override
+  String settingsProfileEditUploadFailed(String error) {
+    return '上传失败: $error';
+  }
+
+  @override
+  String settingsProfileEditUploadError(String error) {
+    return '上传错误: $error';
+  }
+
+  @override
+  String get settingsProfileEditUserNotAuthenticated => '用户未认证';
+
+  @override
+  String get settingsProfileEditNoChanges => '没有要保存的更改';
+
+  @override
+  String get settingsProfileFieldFullName => '全名';
+
+  @override
+  String get settingsProfileFieldEmail => '电子邮件';
+
+  @override
+  String get settingsProfileFieldLocation => '位置';
+
+  @override
+  String get settingsProfileFieldLocationHint => '你住在哪里？';
+
+  @override
+  String get settingsProfileFieldWebsiteHint => 'https://example.com';
+
+  @override
+  String get settingsProfileFieldBioHint => '介绍一下你自己';
 
   @override
   String get settingsProfileFieldSave => 'Save';
@@ -2733,4 +2844,16 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get chatDocumentAddMore => 'Add more documents';
+
+  @override
+  String get mediaPreviewTitle => 'Preview';
+
+  @override
+  String get mediaPreviewAddCaption => 'Add a caption...';
+
+  @override
+  String get mediaPreviewRemove => 'Remove';
+
+  @override
+  String get mediaPreviewSend => 'Send';
 }

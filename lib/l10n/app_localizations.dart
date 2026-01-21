@@ -284,6 +284,18 @@ abstract class AppLocalizations {
   /// **'Cancel'**
   String get commonCancel;
 
+  /// No description provided for @commonError.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong'**
+  String get commonError;
+
+  /// No description provided for @commonRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get commonRetry;
+
   /// No description provided for @authResetPasswordFormLabel.
   ///
   /// In en, this message translates to:
@@ -925,6 +937,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Wallet'**
   String get settingsWalletTitle;
+
+  /// No description provided for @campaignCreateRequiredFields.
+  ///
+  /// In en, this message translates to:
+  /// **'Please fill all required fields'**
+  String get campaignCreateRequiredFields;
+
+  /// No description provided for @campaignCreateInvalidTarget.
+  ///
+  /// In en, this message translates to:
+  /// **'Target amount must be > 0'**
+  String get campaignCreateInvalidTarget;
+
+  /// No description provided for @campaignCreateSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Campaign created successfully'**
+  String get campaignCreateSuccess;
+
+  /// No description provided for @campaignCreateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Campaign'**
+  String get campaignCreateTitle;
+
+  /// No description provided for @campaignCreateSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell your story clearly and set a transparent goal.'**
+  String get campaignCreateSubtitle;
+
+  /// No description provided for @campaignCreateBasicInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Basic information'**
+  String get campaignCreateBasicInfo;
+
+  /// No description provided for @campaignCreateTitleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get campaignCreateTitleLabel;
+
+  /// No description provided for @campaignCreateTitleHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Save a local cafe'**
+  String get campaignCreateTitleHint;
+
+  /// No description provided for @campaignCreateDescriptionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get campaignCreateDescriptionLabel;
+
+  /// No description provided for @campaignCreateDescriptionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Share the background, impact, and how funds will be used.'**
+  String get campaignCreateDescriptionHint;
+
+  /// No description provided for @campaignCreateGoalSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Goal & duration'**
+  String get campaignCreateGoalSection;
+
+  /// No description provided for @campaignCreateTargetLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Target amount'**
+  String get campaignCreateTargetLabel;
+
+  /// No description provided for @campaignCreateTargetHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. 5000000'**
+  String get campaignCreateTargetHint;
+
+  /// No description provided for @campaignCreateEndDateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'End date (optional)'**
+  String get campaignCreateEndDateLabel;
+
+  /// No description provided for @campaignCreateContextSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Context'**
+  String get campaignCreateContextSection;
+
+  /// No description provided for @campaignCreateLocationLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'City (optional)'**
+  String get campaignCreateLocationLabel;
+
+  /// No description provided for @campaignCreateLocationHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Where is this campaign located?'**
+  String get campaignCreateLocationHint;
+
+  /// No description provided for @campaignCreateLoadingCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading categories...'**
+  String get campaignCreateLoadingCategories;
+
+  /// No description provided for @campaignCreateCategoryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get campaignCreateCategoryLabel;
+
+  /// No description provided for @campaignCreateCTA.
+  ///
+  /// In en, this message translates to:
+  /// **'Publish campaign'**
+  String get campaignCreateCTA;
 
   /// No description provided for @walletDashboardTitle.
   ///
@@ -1843,6 +1975,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pronouns'**
   String get settingsProfileEditPronounsLabel;
+
+  /// No description provided for @settingsProfileEditProfileNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile not found'**
+  String get settingsProfileEditProfileNotFound;
+
+  /// No description provided for @settingsProfileEditTapToChangePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to change photo'**
+  String get settingsProfileEditTapToChangePhoto;
+
+  /// No description provided for @settingsProfileEditFailedToPickImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to pick image: {error}'**
+  String settingsProfileEditFailedToPickImage(String error);
+
+  /// No description provided for @settingsProfileEditUploadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload failed: {error}'**
+  String settingsProfileEditUploadFailed(String error);
+
+  /// No description provided for @settingsProfileEditUploadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload error: {error}'**
+  String settingsProfileEditUploadError(String error);
+
+  /// No description provided for @settingsProfileEditUserNotAuthenticated.
+  ///
+  /// In en, this message translates to:
+  /// **'User not authenticated'**
+  String get settingsProfileEditUserNotAuthenticated;
+
+  /// No description provided for @settingsProfileEditNoChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'No changes to save'**
+  String get settingsProfileEditNoChanges;
+
+  /// No description provided for @settingsProfileFieldFullName.
+  ///
+  /// In en, this message translates to:
+  /// **'Full Name'**
+  String get settingsProfileFieldFullName;
+
+  /// No description provided for @settingsProfileFieldEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get settingsProfileFieldEmail;
+
+  /// No description provided for @settingsProfileFieldLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get settingsProfileFieldLocation;
+
+  /// No description provided for @settingsProfileFieldLocationHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Where are you based?'**
+  String get settingsProfileFieldLocationHint;
+
+  /// No description provided for @settingsProfileFieldWebsiteHint.
+  ///
+  /// In en, this message translates to:
+  /// **'https://example.com'**
+  String get settingsProfileFieldWebsiteHint;
+
+  /// No description provided for @settingsProfileFieldBioHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell us about yourself'**
+  String get settingsProfileFieldBioHint;
 
   /// No description provided for @settingsProfileFieldSave.
   ///
@@ -5077,6 +5287,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add more documents'**
   String get chatDocumentAddMore;
+
+  /// No description provided for @mediaPreviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get mediaPreviewTitle;
+
+  /// No description provided for @mediaPreviewAddCaption.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a caption...'**
+  String get mediaPreviewAddCaption;
+
+  /// No description provided for @mediaPreviewRemove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get mediaPreviewRemove;
+
+  /// No description provided for @mediaPreviewSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get mediaPreviewSend;
 }
 
 class _AppLocalizationsDelegate

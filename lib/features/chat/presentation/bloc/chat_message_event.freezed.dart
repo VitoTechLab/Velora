@@ -36,11 +36,11 @@ mixin _$ChatMessageEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -107,10 +107,11 @@ mixin _$ChatMessageEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -176,10 +177,11 @@ mixin _$ChatMessageEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -503,11 +505,11 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -577,10 +579,11 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -649,10 +652,11 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -978,11 +982,11 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -1052,10 +1056,11 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -1124,10 +1129,11 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -1454,11 +1460,11 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -1528,10 +1534,11 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -1600,10 +1607,11 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -1940,11 +1948,11 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -2014,10 +2022,11 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -2086,10 +2095,11 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -2476,11 +2486,11 @@ class _$SendMediaMessageEventImpl implements SendMediaMessageEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -2551,10 +2561,11 @@ class _$SendMediaMessageEventImpl implements SendMediaMessageEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -2624,10 +2635,11 @@ class _$SendMediaMessageEventImpl implements SendMediaMessageEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -2872,7 +2884,11 @@ abstract class _$$UploadAndSendImagesEventImplCopyWith<$Res> {
           $Res Function(_$UploadAndSendImagesEventImpl) then) =
       __$$UploadAndSendImagesEventImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String conversationId, List<String> filePaths, String userId});
+  $Res call(
+      {String conversationId,
+      List<String> filePaths,
+      String userId,
+      String? caption});
 }
 
 /// @nodoc
@@ -2892,6 +2908,7 @@ class __$$UploadAndSendImagesEventImplCopyWithImpl<$Res>
     Object? conversationId = null,
     Object? filePaths = null,
     Object? userId = null,
+    Object? caption = freezed,
   }) {
     return _then(_$UploadAndSendImagesEventImpl(
       conversationId: null == conversationId
@@ -2906,6 +2923,10 @@ class __$$UploadAndSendImagesEventImplCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
+      caption: freezed == caption
+          ? _value.caption
+          : caption // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -2916,7 +2937,8 @@ class _$UploadAndSendImagesEventImpl implements UploadAndSendImagesEvent {
   const _$UploadAndSendImagesEventImpl(
       {required this.conversationId,
       required final List<String> filePaths,
-      required this.userId})
+      required this.userId,
+      this.caption})
       : _filePaths = filePaths;
 
   @override
@@ -2931,10 +2953,12 @@ class _$UploadAndSendImagesEventImpl implements UploadAndSendImagesEvent {
 
   @override
   final String userId;
+  @override
+  final String? caption;
 
   @override
   String toString() {
-    return 'ChatMessageEvent.uploadAndSendImages(conversationId: $conversationId, filePaths: $filePaths, userId: $userId)';
+    return 'ChatMessageEvent.uploadAndSendImages(conversationId: $conversationId, filePaths: $filePaths, userId: $userId, caption: $caption)';
   }
 
   @override
@@ -2946,12 +2970,13 @@ class _$UploadAndSendImagesEventImpl implements UploadAndSendImagesEvent {
                 other.conversationId == conversationId) &&
             const DeepCollectionEquality()
                 .equals(other._filePaths, _filePaths) &&
-            (identical(other.userId, userId) || other.userId == userId));
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.caption, caption) || other.caption == caption));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, conversationId,
-      const DeepCollectionEquality().hash(_filePaths), userId);
+      const DeepCollectionEquality().hash(_filePaths), userId, caption);
 
   /// Create a copy of ChatMessageEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -2983,11 +3008,11 @@ class _$UploadAndSendImagesEventImpl implements UploadAndSendImagesEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -3041,7 +3066,7 @@ class _$UploadAndSendImagesEventImpl implements UploadAndSendImagesEvent {
     required TResult Function(String userId) watchTypingArrived,
     required TResult Function() cleanupTyping,
   }) {
-    return uploadAndSendImages(conversationId, filePaths, userId);
+    return uploadAndSendImages(conversationId, filePaths, userId, caption);
   }
 
   @override
@@ -3057,10 +3082,11 @@ class _$UploadAndSendImagesEventImpl implements UploadAndSendImagesEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -3113,7 +3139,8 @@ class _$UploadAndSendImagesEventImpl implements UploadAndSendImagesEvent {
     TResult? Function(String userId)? watchTypingArrived,
     TResult? Function()? cleanupTyping,
   }) {
-    return uploadAndSendImages?.call(conversationId, filePaths, userId);
+    return uploadAndSendImages?.call(
+        conversationId, filePaths, userId, caption);
   }
 
   @override
@@ -3129,10 +3156,11 @@ class _$UploadAndSendImagesEventImpl implements UploadAndSendImagesEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -3187,7 +3215,7 @@ class _$UploadAndSendImagesEventImpl implements UploadAndSendImagesEvent {
     required TResult orElse(),
   }) {
     if (uploadAndSendImages != null) {
-      return uploadAndSendImages(conversationId, filePaths, userId);
+      return uploadAndSendImages(conversationId, filePaths, userId, caption);
     }
     return orElse();
   }
@@ -3348,11 +3376,13 @@ abstract class UploadAndSendImagesEvent implements ChatMessageEvent {
   const factory UploadAndSendImagesEvent(
       {required final String conversationId,
       required final List<String> filePaths,
-      required final String userId}) = _$UploadAndSendImagesEventImpl;
+      required final String userId,
+      final String? caption}) = _$UploadAndSendImagesEventImpl;
 
   String get conversationId;
   List<String> get filePaths;
   String get userId;
+  String? get caption;
 
   /// Create a copy of ChatMessageEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -3368,7 +3398,8 @@ abstract class _$$UploadAndSendVideoEventImplCopyWith<$Res> {
           $Res Function(_$UploadAndSendVideoEventImpl) then) =
       __$$UploadAndSendVideoEventImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String conversationId, String filePath, String userId});
+  $Res call(
+      {String conversationId, String filePath, String userId, String? caption});
 }
 
 /// @nodoc
@@ -3388,6 +3419,7 @@ class __$$UploadAndSendVideoEventImplCopyWithImpl<$Res>
     Object? conversationId = null,
     Object? filePath = null,
     Object? userId = null,
+    Object? caption = freezed,
   }) {
     return _then(_$UploadAndSendVideoEventImpl(
       conversationId: null == conversationId
@@ -3402,6 +3434,10 @@ class __$$UploadAndSendVideoEventImplCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
+      caption: freezed == caption
+          ? _value.caption
+          : caption // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -3412,7 +3448,8 @@ class _$UploadAndSendVideoEventImpl implements UploadAndSendVideoEvent {
   const _$UploadAndSendVideoEventImpl(
       {required this.conversationId,
       required this.filePath,
-      required this.userId});
+      required this.userId,
+      this.caption});
 
   @override
   final String conversationId;
@@ -3420,10 +3457,12 @@ class _$UploadAndSendVideoEventImpl implements UploadAndSendVideoEvent {
   final String filePath;
   @override
   final String userId;
+  @override
+  final String? caption;
 
   @override
   String toString() {
-    return 'ChatMessageEvent.uploadAndSendVideo(conversationId: $conversationId, filePath: $filePath, userId: $userId)';
+    return 'ChatMessageEvent.uploadAndSendVideo(conversationId: $conversationId, filePath: $filePath, userId: $userId, caption: $caption)';
   }
 
   @override
@@ -3435,12 +3474,13 @@ class _$UploadAndSendVideoEventImpl implements UploadAndSendVideoEvent {
                 other.conversationId == conversationId) &&
             (identical(other.filePath, filePath) ||
                 other.filePath == filePath) &&
-            (identical(other.userId, userId) || other.userId == userId));
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.caption, caption) || other.caption == caption));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, conversationId, filePath, userId);
+      Object.hash(runtimeType, conversationId, filePath, userId, caption);
 
   /// Create a copy of ChatMessageEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -3472,11 +3512,11 @@ class _$UploadAndSendVideoEventImpl implements UploadAndSendVideoEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -3530,7 +3570,7 @@ class _$UploadAndSendVideoEventImpl implements UploadAndSendVideoEvent {
     required TResult Function(String userId) watchTypingArrived,
     required TResult Function() cleanupTyping,
   }) {
-    return uploadAndSendVideo(conversationId, filePath, userId);
+    return uploadAndSendVideo(conversationId, filePath, userId, caption);
   }
 
   @override
@@ -3546,10 +3586,11 @@ class _$UploadAndSendVideoEventImpl implements UploadAndSendVideoEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -3602,7 +3643,7 @@ class _$UploadAndSendVideoEventImpl implements UploadAndSendVideoEvent {
     TResult? Function(String userId)? watchTypingArrived,
     TResult? Function()? cleanupTyping,
   }) {
-    return uploadAndSendVideo?.call(conversationId, filePath, userId);
+    return uploadAndSendVideo?.call(conversationId, filePath, userId, caption);
   }
 
   @override
@@ -3618,10 +3659,11 @@ class _$UploadAndSendVideoEventImpl implements UploadAndSendVideoEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -3676,7 +3718,7 @@ class _$UploadAndSendVideoEventImpl implements UploadAndSendVideoEvent {
     required TResult orElse(),
   }) {
     if (uploadAndSendVideo != null) {
-      return uploadAndSendVideo(conversationId, filePath, userId);
+      return uploadAndSendVideo(conversationId, filePath, userId, caption);
     }
     return orElse();
   }
@@ -3837,11 +3879,13 @@ abstract class UploadAndSendVideoEvent implements ChatMessageEvent {
   const factory UploadAndSendVideoEvent(
       {required final String conversationId,
       required final String filePath,
-      required final String userId}) = _$UploadAndSendVideoEventImpl;
+      required final String userId,
+      final String? caption}) = _$UploadAndSendVideoEventImpl;
 
   String get conversationId;
   String get filePath;
   String get userId;
+  String? get caption;
 
   /// Create a copy of ChatMessageEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -3969,11 +4013,11 @@ class _$UploadAndSendDocumentsEventImpl implements UploadAndSendDocumentsEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -4043,10 +4087,11 @@ class _$UploadAndSendDocumentsEventImpl implements UploadAndSendDocumentsEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -4115,10 +4160,11 @@ class _$UploadAndSendDocumentsEventImpl implements UploadAndSendDocumentsEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -4473,11 +4519,11 @@ class _$UploadAndSendAudioEventImpl implements UploadAndSendAudioEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -4547,10 +4593,11 @@ class _$UploadAndSendAudioEventImpl implements UploadAndSendAudioEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -4620,10 +4667,11 @@ class _$UploadAndSendAudioEventImpl implements UploadAndSendAudioEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -5004,11 +5052,11 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -5079,10 +5127,11 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -5152,10 +5201,11 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -5588,11 +5638,11 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -5663,10 +5713,11 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -5745,10 +5796,11 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -6091,11 +6143,11 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -6165,10 +6217,11 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -6237,10 +6290,11 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -6557,11 +6611,11 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -6631,10 +6685,11 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -6703,10 +6758,11 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -7032,11 +7088,11 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -7106,10 +7162,11 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -7178,10 +7235,11 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -7471,11 +7529,11 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -7545,10 +7603,11 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -7617,10 +7676,11 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -7926,11 +7986,11 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -8000,10 +8060,11 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -8072,10 +8133,11 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -8362,11 +8424,11 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -8436,10 +8498,11 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -8508,10 +8571,11 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -8828,11 +8892,11 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -8902,10 +8966,11 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -8974,10 +9039,11 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -9303,11 +9369,11 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -9377,10 +9443,11 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -9449,10 +9516,11 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -9778,11 +9846,11 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -9852,10 +9920,11 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -9924,10 +9993,11 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -10241,11 +10311,11 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -10315,10 +10385,11 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -10387,10 +10458,11 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -10678,11 +10750,11 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -10752,10 +10824,11 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -10824,10 +10897,11 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -11130,11 +11204,11 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -11204,10 +11278,11 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -11276,10 +11351,11 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -11591,11 +11667,11 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -11665,10 +11741,11 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -11737,10 +11814,11 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -12054,11 +12132,11 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -12128,10 +12206,11 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -12200,10 +12279,11 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -12517,11 +12597,11 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -12591,10 +12671,11 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -12663,10 +12744,11 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -12990,11 +13072,11 @@ class _$MarkMessagesReadBatchEventImpl implements MarkMessagesReadBatchEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -13064,10 +13146,11 @@ class _$MarkMessagesReadBatchEventImpl implements MarkMessagesReadBatchEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -13136,10 +13219,11 @@ class _$MarkMessagesReadBatchEventImpl implements MarkMessagesReadBatchEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -13454,11 +13538,11 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -13528,10 +13612,11 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -13600,10 +13685,11 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -13888,11 +13974,11 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -13962,10 +14048,11 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -14034,10 +14121,11 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -14354,11 +14442,11 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -14428,10 +14516,11 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -14500,10 +14589,11 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -14825,11 +14915,11 @@ class _$VotePollEventImpl implements VotePollEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -14899,10 +14989,11 @@ class _$VotePollEventImpl implements VotePollEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -14971,10 +15062,11 @@ class _$VotePollEventImpl implements VotePollEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -15289,11 +15381,11 @@ class _$UnvotePollEventImpl implements UnvotePollEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -15363,10 +15455,11 @@ class _$UnvotePollEventImpl implements UnvotePollEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -15435,10 +15528,11 @@ class _$UnvotePollEventImpl implements UnvotePollEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -15760,11 +15854,11 @@ class _$RespondToEventEventImpl implements RespondToEventEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -15834,10 +15928,11 @@ class _$RespondToEventEventImpl implements RespondToEventEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -15906,10 +16001,11 @@ class _$RespondToEventEventImpl implements RespondToEventEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -16225,11 +16321,11 @@ class _$CancelEventRsvpEventImpl implements CancelEventRsvpEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -16299,10 +16395,11 @@ class _$CancelEventRsvpEventImpl implements CancelEventRsvpEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -16371,10 +16468,11 @@ class _$CancelEventRsvpEventImpl implements CancelEventRsvpEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -16697,11 +16795,11 @@ class _$SendTypingEventImpl implements SendTypingEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -16771,10 +16869,11 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -16843,10 +16942,11 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -17162,11 +17262,11 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -17236,10 +17336,11 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -17308,10 +17409,11 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -17596,11 +17698,11 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -17670,10 +17772,11 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -17742,10 +17845,11 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -18050,11 +18154,11 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -18124,10 +18228,11 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -18196,10 +18301,11 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -18483,11 +18589,11 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
             int? fileSize,
             String? caption)
         sendMediaMessage,
-    required TResult Function(
-            String conversationId, List<String> filePaths, String userId)
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
         uploadAndSendImages,
-    required TResult Function(
-            String conversationId, String filePath, String userId)
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
         uploadAndSendVideo,
     required TResult Function(
             String conversationId, List<String> filePaths, String userId)
@@ -18557,10 +18663,11 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     TResult? Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult? Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult? Function(String conversationId, String filePath, String userId)?
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult? Function(
             String conversationId, List<String> filePaths, String userId)?
@@ -18629,10 +18736,11 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     TResult Function(String conversationId, String mediaUrl, String mediaType,
             String? mimeType, String? fileName, int? fileSize, String? caption)?
         sendMediaMessage,
-    TResult Function(
-            String conversationId, List<String> filePaths, String userId)?
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
         uploadAndSendImages,
-    TResult Function(String conversationId, String filePath, String userId)?
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
         uploadAndSendVideo,
     TResult Function(
             String conversationId, List<String> filePaths, String userId)?

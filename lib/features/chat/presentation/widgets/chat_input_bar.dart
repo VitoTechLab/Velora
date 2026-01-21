@@ -15,15 +15,6 @@ class ChatInputBar extends StatefulWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
   final ValueChanged<String> onSendMessage;
-  final VoidCallback onGalleryPressed;
-  final VoidCallback onCameraPressed;
-  final VoidCallback onLocationPressed;
-  final VoidCallback onContactPressed;
-  final VoidCallback onDocumentPressed;
-  final VoidCallback onAudioPressed;
-  final VoidCallback onPollPressed;
-  final VoidCallback onEventPressed;
-  final VoidCallback onAiImagesPressed;
   final VoidCallback onVoicePressed;
   final ValueChanged<bool>? onTyping;
   final String conversationId;
@@ -33,15 +24,6 @@ class ChatInputBar extends StatefulWidget {
     required this.controller,
     required this.focusNode,
     required this.onSendMessage,
-    required this.onGalleryPressed,
-    required this.onCameraPressed,
-    required this.onLocationPressed,
-    required this.onContactPressed,
-    required this.onDocumentPressed,
-    required this.onAudioPressed,
-    required this.onPollPressed,
-    required this.onEventPressed,
-    required this.onAiImagesPressed,
     required this.onVoicePressed,
     required this.conversationId,
     this.onTyping,
@@ -213,43 +195,6 @@ class _ChatInputBarState extends State<ChatInputBar> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Semantics(
-                  button: true,
-                  label: t.chatInputEmojiLabel,
-                  hint: t.chatInputEmojiHint,
-                  child: Container(
-                    margin: const EdgeInsets.only(bottom: 2),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          colorScheme.surfaceContainerHighest
-                              .withValues(alpha: 0.3),
-                          colorScheme.surfaceContainerHighest
-                              .withValues(alpha: 0.1),
-                        ],
-                      ),
-                      shape: BoxShape.circle,
-                    ),
-                    child: IconButton(
-                      icon: ShaderMask(
-                        shaderCallback: (bounds) => LinearGradient(
-                          colors: [
-                            colorScheme.primary,
-                            colorScheme.secondary,
-                          ],
-                        ).createShader(bounds),
-                        child: Icon(
-                          Icons.emoji_emotions_outlined,
-                          color: Colors.white,
-                        ),
-                      ),
-                      onPressed: () {
-                        // Open emoji picker
-                      },
-                      tooltip: t.chatInputEmojiTooltip,
-                    ),
-                  ),
-                ),
                 Expanded(
                   child: Container(
                     constraints: const BoxConstraints(maxHeight: 120),
@@ -300,6 +245,8 @@ class _ChatInputBarState extends State<ChatInputBar> {
                                   color: colorScheme.onSurfaceVariant,
                                 ),
                                 border: InputBorder.none,
+                                enabledBorder: InputBorder.none,
+                                focusedBorder: InputBorder.none,
                                 contentPadding: const EdgeInsets.symmetric(
                                   horizontal: 16,
                                   vertical: 12,
@@ -342,15 +289,7 @@ class _ChatInputBarState extends State<ChatInputBar> {
                                     onPressed: () {
                                       AttachmentMenuBottomSheet.show(
                                         context,
-                                        onGalleryTap: widget.onGalleryPressed,
-                                        onCameraTap: widget.onCameraPressed,
-                                        onLocationTap: widget.onLocationPressed,
-                                        onContactTap: widget.onContactPressed,
-                                        onDocumentTap: widget.onDocumentPressed,
-                                        onAudioTap: widget.onAudioPressed,
-                                        onPollTap: widget.onPollPressed,
-                                        onEventTap: widget.onEventPressed,
-                                        onAiImagesTap: widget.onAiImagesPressed,
+                                        conversationId: widget.conversationId,
                                       );
                                     },
                                     tooltip: t.chatInputAttachTooltip,
@@ -374,7 +313,12 @@ class _ChatInputBarState extends State<ChatInputBar> {
                                         color: Colors.white,
                                       ),
                                     ),
-                                    onPressed: widget.onCameraPressed,
+                                    onPressed: () {
+                                      AttachmentActions.onCameraTap(
+                                        context,
+                                        widget.conversationId,
+                                      );
+                                    },
                                     tooltip: t.chatInputCameraTooltip,
                                     padding: const EdgeInsets.only(right: 8),
                                   ),
@@ -387,7 +331,7 @@ class _ChatInputBarState extends State<ChatInputBar> {
                     ),
                   ),
                 ),
-                const SizedBox(width: 10),
+                const SizedBox(width: 8),
                 // Use ValueListenableBuilder for send/voice button
                 ValueListenableBuilder<TextEditingValue>(
                   valueListenable: widget.controller,
@@ -409,10 +353,10 @@ class _ChatInputBarState extends State<ChatInputBar> {
                           child: InkWell(
                             onTap:
                                 hasText ? _handleSend : widget.onVoicePressed,
-                            borderRadius: BorderRadius.circular(28),
+                            borderRadius: BorderRadius.circular(23),
                             child: Container(
-                              width: 56,
-                              height: 56,
+                              width: 46,
+                              height: 46,
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
                                   begin: Alignment.topLeft,
@@ -427,8 +371,8 @@ class _ChatInputBarState extends State<ChatInputBar> {
                                   BoxShadow(
                                     color: colorScheme.primary
                                         .withValues(alpha: 0.4),
-                                    blurRadius: 12,
-                                    offset: const Offset(0, 4),
+                                    blurRadius: 10,
+                                    offset: const Offset(0, 3),
                                     spreadRadius: 0,
                                   ),
                                 ],
@@ -438,7 +382,7 @@ class _ChatInputBarState extends State<ChatInputBar> {
                                     ? Icons.send_rounded
                                     : Icons.mic_rounded,
                                 color: colorScheme.onPrimary,
-                                size: 26,
+                                size: 22,
                               ),
                             ),
                           ),

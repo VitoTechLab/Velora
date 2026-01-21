@@ -81,7 +81,24 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(AuthFailure.fromException(error));
     }
   }
-
+  /// Update user's password
+  @override
+  Future<Either<Failure, void>> updatePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    try {
+      logi('[\$_logTag] updatePassword');
+      await remoteDataSource.updatePassword(
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+      );
+      return const Right(null);
+    } catch (error) {
+      loge('[\$_logTag ERROR] updatePassword', error: error);
+      return Left(AuthFailure.fromException(error));
+    }
+  }
   /// Sign out current user from session
   @override
   Future<Either<Failure, void>> signOut() async {

@@ -1,12 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:velora/core/ui/app_messenger.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:velora/features/campaign/domain/entities/campaign_category_entity.dart';
-import 'package:velora/features/campaign/domain/entities/campaign_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velora/core/di/service_locator.dart';
 import 'package:velora/features/campaign/domain/usecases/get_campaign_categories_usecase.dart';
+import 'package:velora/features/campaign/presentation/bloc/campaign_bloc.dart';
+import 'package:velora/features/campaign/presentation/bloc/campaign_event.dart';
 import 'package:velora/features/post/presentation/bloc/campaign_post_bloc.dart';
 import 'package:velora/features/post/presentation/bloc/campaign_post_event.dart';
 import 'package:velora/features/post/presentation/bloc/campaign_post_state.dart';
@@ -31,6 +35,20 @@ class CreateCampaignPostScreen extends HookWidget {
     final categories = useState<List<CampaignCategoryEntity>>([]);
     final selectedCategory = useState<CampaignCategoryEntity?>(null);
     final isLoadingCategories = useState(false);
+    final coverImage = useState<File?>(null);
+
+    Future<void> pickCoverImage() async {
+      final picker = ImagePicker();
+      final picked = await picker.pickImage(
+        source: ImageSource.gallery,
+        maxWidth: 1920,
+        maxHeight: 1080,
+        imageQuality: 85,
+      );
+      if (picked != null) {
+        coverImage.value = File(picked.path);
+      }
+    }
 
     useEffect(() {
       Future<void> loadCategories() async {
@@ -97,7 +115,7 @@ class CreateCampaignPostScreen extends HookWidget {
       final userId = context.read<AuthBloc>().state.userId;
       if (userId == null || userId.isEmpty) {
         AppMessenger.showToast(
-          message: t?.authRequired ?? 'You must be signed in',
+          message: 'You must be signed in',
           icon: Icons.lock_outline,
         );
         return;
@@ -114,6 +132,7 @@ class CreateCampaignPostScreen extends HookWidget {
                   ? null
                   : locationController.text.trim(),
               endDate: endDate.value,
+              mediaFiles: coverImage.value != null ? [coverImage.value!] : [],
             ),
           );
     }
@@ -121,6 +140,11 @@ class CreateCampaignPostScreen extends HookWidget {
     final background = colorScheme.surface;
 
     return BlocListener<CampaignPostBloc, CampaignPostState>(
+      listenWhen: (previous, current) {
+        // Only listen when error or createdCampaign changes
+        return previous.errorMessage != current.errorMessage ||
+            previous.createdCampaign != current.createdCampaign;
+      },
       listener: (context, state) {
         if (state.errorMessage != null) {
           AppMessenger.showToast(
@@ -128,235 +152,325 @@ class CreateCampaignPostScreen extends HookWidget {
             icon: Icons.error_outline,
             isError: true,
           );
+          // Clear error after showing
+          context.read<CampaignPostBloc>().add(
+                const ClearCampaignPostTransientEvent(),
+              );
         } else if (state.createdCampaign != null) {
           AppMessenger.showToast(
             message:
                 t?.campaignCreateSuccess ?? 'Campaign created successfully',
             icon: Icons.check_circle_outline,
           );
+          // Trigger refresh in CampaignBloc so the new campaign appears in list
+          context.read<CampaignBloc>().add(
+                const CampaignEvent.refreshCampaigns(limit: 50),
+              );
           Navigator.of(context).pop(state.createdCampaign);
         }
       },
       child: Scaffold(
         backgroundColor: background,
         appBar: AppBar(
-        elevation: 0,
-        backgroundColor: background,
-        leading: IconButton(
-          icon: const Icon(Icons.close),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        title: Text(
-          t?.campaignCreateTitle ?? 'Create Campaign',
-          style: textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.w700,
+          elevation: 0,
+          backgroundColor: background,
+          leading: IconButton(
+            icon: const Icon(Icons.close),
+            onPressed: () => Navigator.of(context).pop(),
           ),
+          title: Text(
+            t?.campaignCreateTitle ?? 'Create Campaign',
+            style: textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          centerTitle: false,
         ),
-        centerTitle: false,
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                t?.campaignCreateSubtitle ??
-                    'Tell your story clearly and set a transparent goal.',
-                style: textTheme.bodyMedium?.copyWith(
-                  color: colorScheme.onSurface.withValues(alpha: 0.7),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  t?.campaignCreateSubtitle ??
+                      'Tell your story clearly and set a transparent goal.',
+                  style: textTheme.bodyMedium?.copyWith(
+                    color: colorScheme.onSurface.withValues(alpha: 0.7),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 24),
-              _SectionCard(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      t?.campaignCreateBasicInfo ?? 'Basic information',
-                      style: textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    TextField(
-                      controller: titleController,
-                      textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
-                        labelText: t?.campaignCreateTitleLabel ?? 'Title',
-                        hintText:
-                            t?.campaignCreateTitleHint ?? 'Save a local cafe',
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    TextField(
-                      controller: descriptionController,
-                      maxLines: 5,
-                      decoration: InputDecoration(
-                        labelText:
-                            t?.campaignCreateDescriptionLabel ?? 'Description',
-                        hintText: t?.campaignCreateDescriptionHint ??
-                            'Share the background, impact, and how funds will be used.',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 16),
-              _SectionCard(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      t?.campaignCreateGoalSection ?? 'Goal & duration',
-                      style: textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    TextField(
-                      controller: targetAmountController,
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
-                      decoration: InputDecoration(
-                        labelText:
-                            t?.campaignCreateTargetLabel ?? 'Target amount',
-                        prefixText: ' d7 ',
-                        hintText: t?.campaignCreateTargetHint ?? 'e.g. 5000000',
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    InkWell(
-                      onTap: pickEndDate,
-                      borderRadius: BorderRadius.circular(12),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 4,
-                          vertical: 8,
+                const SizedBox(height: 24),
+                // Cover Image Section
+                _SectionCard(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Cover Image',
+                        style: textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
                         ),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.calendar_today_outlined,
-                              size: 20,
-                              color: colorScheme.primary,
+                      ),
+                      const SizedBox(height: 12),
+                      GestureDetector(
+                        onTap: pickCoverImage,
+                        child: Container(
+                          width: double.infinity,
+                          height: 180,
+                          decoration: BoxDecoration(
+                            color: colorScheme.surfaceContainerHighest,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: colorScheme.outlineVariant,
+                              width: 1.5,
                             ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: Text(
-                                endDate.value == null
-                                    ? (t?.campaignCreateEndDateLabel ??
-                                        'End date (optional)')
-                                    : '${t?.campaignCreateEndDateLabel ?? 'End date'}: '
-                                        '${endDate.value?.toLocal().toString().split(' ').first}',
-                                style: textTheme.bodyMedium?.copyWith(
-                                  color: endDate.value == null
-                                      ? colorScheme.onSurface
-                                          .withValues(alpha: 0.6)
-                                      : colorScheme.onSurface,
+                          ),
+                          child: coverImage.value != null
+                              ? Stack(
+                                  fit: StackFit.expand,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(11),
+                                      child: Image.file(
+                                        coverImage.value!,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 8,
+                                      right: 8,
+                                      child: GestureDetector(
+                                        onTap: () => coverImage.value = null,
+                                        child: Container(
+                                          padding: const EdgeInsets.all(6),
+                                          decoration: BoxDecoration(
+                                            color: Colors.black54,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Icon(
+                                            Icons.close,
+                                            size: 18,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              : Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.add_photo_alternate_outlined,
+                                      size: 48,
+                                      color: colorScheme.onSurfaceVariant,
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      'Add cover image',
+                                      style: textTheme.bodyMedium?.copyWith(
+                                        color: colorScheme.onSurfaceVariant,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ),
-                            const Icon(Icons.chevron_right_rounded),
-                          ],
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(height: 16),
-              _SectionCard(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      t?.campaignCreateContextSection ?? 'Context',
-                      style: textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
+                const SizedBox(height: 16),
+                _SectionCard(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        t?.campaignCreateBasicInfo ?? 'Basic information',
+                        style: textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 16),
-                    TextField(
-                      controller: locationController,
-                      textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
-                        labelText:
-                            t?.campaignCreateLocationLabel ?? 'City (optional)',
-                        hintText: t?.campaignCreateLocationHint ??
-                            'Where is this campaign located?',
+                      const SizedBox(height: 16),
+                      TextField(
+                        controller: titleController,
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                          labelText: t?.campaignCreateTitleLabel ?? 'Title',
+                          hintText:
+                              t?.campaignCreateTitleHint ?? 'Save a local cafe',
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 16),
-                    if (isLoadingCategories.value)
-                      Row(
-                        children: [
-                          const SizedBox(
-                            width: 16,
-                            height: 16,
-                            child: CircularProgressIndicator(strokeWidth: 2),
-                          ),
-                          const SizedBox(width: 12),
-                          Text(
-                            t?.campaignCreateLoadingCategories ??
-                                'Loading categories...',
-                            style: textTheme.bodyMedium?.copyWith(
-                              color: colorScheme.onSurface
-                                  .withValues(alpha: 0.6),
-                            ),
-                          ),
-                        ],
-                      )
-                    else
-                      DropdownButtonFormField<CampaignCategoryEntity>(
-                        value: selectedCategory.value,
-                        items: categories.value
-                            .map(
-                              (c) => DropdownMenuItem(
-                                value: c,
-                                child: Text(c.name),
-                              ),
-                            )
-                            .toList(),
-                        onChanged: (value) {
-                          selectedCategory.value = value;
-                        },
+                      const SizedBox(height: 16),
+                      TextField(
+                        controller: descriptionController,
+                        maxLines: 5,
+                        decoration: InputDecoration(
+                          labelText: t?.campaignCreateDescriptionLabel ??
+                              'Description',
+                          hintText: t?.campaignCreateDescriptionHint ??
+                              'Share the background, impact, and how funds will be used.',
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+                _SectionCard(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        t?.campaignCreateGoalSection ?? 'Goal & duration',
+                        style: textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      TextField(
+                        controller: targetAmountController,
+                        keyboardType: const TextInputType.numberWithOptions(
+                            decimal: true),
                         decoration: InputDecoration(
                           labelText:
-                              t?.campaignCreateCategoryLabel ?? 'Category',
+                              t?.campaignCreateTargetLabel ?? 'Target amount',
+                          prefixText: 'Rp ',
+                          hintText:
+                              t?.campaignCreateTargetHint ?? 'e.g. 5000000',
                         ),
                       ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 24),
-              BlocBuilder<CampaignPostBloc, CampaignPostState>(
-                builder: (context, state) {
-                  final submitting = state.isSubmitting;
-                  return SizedBox(
-                    width: double.infinity,
-                    child: FilledButton.icon(
-                      onPressed: submitting ? null : onSubmit,
-                      icon: submitting
-                          ? const SizedBox(
-                              width: 16,
-                              height: 16,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  Colors.white,
+                      const SizedBox(height: 16),
+                      InkWell(
+                        onTap: pickEndDate,
+                        borderRadius: BorderRadius.circular(12),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 4,
+                            vertical: 8,
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.calendar_today_outlined,
+                                size: 20,
+                                color: colorScheme.primary,
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Text(
+                                  endDate.value == null
+                                      ? (t?.campaignCreateEndDateLabel ??
+                                          'End date (optional)')
+                                      : '${t?.campaignCreateEndDateLabel ?? 'End date'}: '
+                                          '${endDate.value?.toLocal().toString().split(' ').first}',
+                                  style: textTheme.bodyMedium?.copyWith(
+                                    color: endDate.value == null
+                                        ? colorScheme.onSurface
+                                            .withValues(alpha: 0.6)
+                                        : colorScheme.onSurface,
+                                  ),
                                 ),
                               ),
-                            )
-                          : const Icon(Icons.rocket_launch_outlined),
-                      label: Text(
-                        t?.campaignCreateCTA ?? 'Publish campaign',
+                              const Icon(Icons.chevron_right_rounded),
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
-                  );
-                },
-              ),
-            ],
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+                _SectionCard(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        t?.campaignCreateContextSection ?? 'Context',
+                        style: textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      TextField(
+                        controller: locationController,
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                          labelText: t?.campaignCreateLocationLabel ??
+                              'City (optional)',
+                          hintText: t?.campaignCreateLocationHint ??
+                              'Where is this campaign located?',
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      if (isLoadingCategories.value)
+                        Row(
+                          children: [
+                            const SizedBox(
+                              width: 16,
+                              height: 16,
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            ),
+                            const SizedBox(width: 12),
+                            Text(
+                              t?.campaignCreateLoadingCategories ??
+                                  'Loading categories...',
+                              style: textTheme.bodyMedium?.copyWith(
+                                color: colorScheme.onSurface
+                                    .withValues(alpha: 0.6),
+                              ),
+                            ),
+                          ],
+                        )
+                      else
+                        DropdownButtonFormField<CampaignCategoryEntity>(
+                          initialValue: selectedCategory.value,
+                          items: categories.value
+                              .map(
+                                (c) => DropdownMenuItem(
+                                  value: c,
+                                  child: Text(c.name),
+                                ),
+                              )
+                              .toList(),
+                          onChanged: (value) {
+                            selectedCategory.value = value;
+                          },
+                          decoration: InputDecoration(
+                            labelText:
+                                t?.campaignCreateCategoryLabel ?? 'Category',
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 24),
+                BlocBuilder<CampaignPostBloc, CampaignPostState>(
+                  builder: (context, state) {
+                    final submitting = state.isSubmitting;
+                    return SizedBox(
+                      width: double.infinity,
+                      child: FilledButton.icon(
+                        onPressed: submitting ? null : onSubmit,
+                        icon: submitting
+                            ? const SizedBox(
+                                width: 16,
+                                height: 16,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    Colors.white,
+                                  ),
+                                ),
+                              )
+                            : const Icon(Icons.rocket_launch_outlined),
+                        label: Text(
+                          t?.campaignCreateCTA ?? 'Publish campaign',
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

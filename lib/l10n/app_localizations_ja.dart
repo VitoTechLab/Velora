@@ -101,6 +101,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get commonCancel => 'キャンセル';
 
   @override
+  String get commonError => 'エラーが発生しました';
+
+  @override
+  String get commonRetry => '再試行';
+
+  @override
   String get authResetPasswordFormLabel => 'パスワード再設定フォーム';
 
   @override
@@ -458,6 +464,66 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get settingsWalletTitle => 'ウォレット';
+
+  @override
+  String get campaignCreateRequiredFields => '必須項目をすべて入力してください';
+
+  @override
+  String get campaignCreateInvalidTarget => '目標金額は 0 より大きくする必要があります';
+
+  @override
+  String get campaignCreateSuccess => 'キャンペーンが正常に作成されました';
+
+  @override
+  String get campaignCreateTitle => 'キャンペーンを作成';
+
+  @override
+  String get campaignCreateSubtitle => '目的を分かりやすく伝え、透明性のある目標金額を設定しましょう。';
+
+  @override
+  String get campaignCreateBasicInfo => '基本情報';
+
+  @override
+  String get campaignCreateTitleLabel => 'タイトル';
+
+  @override
+  String get campaignCreateTitleHint => '近所のカフェを救う';
+
+  @override
+  String get campaignCreateDescriptionLabel => '説明';
+
+  @override
+  String get campaignCreateDescriptionHint => '背景や影響、資金の使い道を詳しく書いてください。';
+
+  @override
+  String get campaignCreateGoalSection => '目標と期間';
+
+  @override
+  String get campaignCreateTargetLabel => '目標金額';
+
+  @override
+  String get campaignCreateTargetHint => '例: 5000000';
+
+  @override
+  String get campaignCreateEndDateLabel => '終了日 (任意)';
+
+  @override
+  String get campaignCreateContextSection => 'コンテキスト';
+
+  @override
+  String get campaignCreateLocationLabel => '都市 (任意)';
+
+  @override
+  String get campaignCreateLocationHint => 'このキャンペーンはどこで行われますか？';
+
+  @override
+  String get campaignCreateLoadingCategories => 'カテゴリを読み込み中...';
+
+  @override
+  String get campaignCreateCategoryLabel => 'カテゴリ';
+
+  @override
+  String get campaignCreateCTA => 'キャンペーンを公開';
 
   @override
   String get walletDashboardTitle => 'ウォレットダッシュボード';
@@ -946,6 +1012,51 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get settingsProfileEditPronounsLabel => 'Pronouns';
+
+  @override
+  String get settingsProfileEditProfileNotFound => 'プロフィールが見つかりません';
+
+  @override
+  String get settingsProfileEditTapToChangePhoto => 'タップして写真を変更';
+
+  @override
+  String settingsProfileEditFailedToPickImage(String error) {
+    return '画像の選択に失敗しました: $error';
+  }
+
+  @override
+  String settingsProfileEditUploadFailed(String error) {
+    return 'アップロードに失敗しました: $error';
+  }
+
+  @override
+  String settingsProfileEditUploadError(String error) {
+    return 'アップロードエラー: $error';
+  }
+
+  @override
+  String get settingsProfileEditUserNotAuthenticated => 'ユーザーが認証されていません';
+
+  @override
+  String get settingsProfileEditNoChanges => '保存する変更はありません';
+
+  @override
+  String get settingsProfileFieldFullName => 'フルネーム';
+
+  @override
+  String get settingsProfileFieldEmail => 'メール';
+
+  @override
+  String get settingsProfileFieldLocation => '場所';
+
+  @override
+  String get settingsProfileFieldLocationHint => 'どこに住んでいますか？';
+
+  @override
+  String get settingsProfileFieldWebsiteHint => 'https://example.com';
+
+  @override
+  String get settingsProfileFieldBioHint => '自己紹介';
 
   @override
   String get settingsProfileFieldSave => 'Save';
@@ -2751,4 +2862,16 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get chatDocumentAddMore => 'Add more documents';
+
+  @override
+  String get mediaPreviewTitle => 'Preview';
+
+  @override
+  String get mediaPreviewAddCaption => 'Add a caption...';
+
+  @override
+  String get mediaPreviewRemove => 'Remove';
+
+  @override
+  String get mediaPreviewSend => 'Send';
 }

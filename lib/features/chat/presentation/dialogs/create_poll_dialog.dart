@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:velora/core/ui/app_messenger.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
 class CreatePollDialog extends StatefulWidget {
@@ -7,6 +8,8 @@ class CreatePollDialog extends StatefulWidget {
   static Future<Map<String, dynamic>?> show(BuildContext context) {
     return showDialog<Map<String, dynamic>>(
       context: context,
+      useRootNavigator: true,
+      barrierDismissible: true,
       builder: (context) => const CreatePollDialog(),
     );
   }
@@ -59,16 +62,20 @@ class _CreatePollDialogState extends State<CreatePollDialog> {
     final t = AppLocalizations.of(context)!;
 
     if (question.isEmpty) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(t.chatPollDialogQuestionError)));
+      AppMessenger.showToast(
+        message: t.chatPollDialogQuestionError,
+        icon: Icons.error_outline,
+        isError: true,
+      );
       return;
     }
 
     if (options.length < 2) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(t.chatPollDialogOptionsError)));
+      AppMessenger.showToast(
+        message: t.chatPollDialogOptionsError,
+        icon: Icons.error_outline,
+        isError: true,
+      );
       return;
     }
 

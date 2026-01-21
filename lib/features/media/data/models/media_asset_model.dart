@@ -12,8 +12,10 @@ abstract class MediaAssetModel with _$MediaAssetModel {
     @JsonKey(name: 'resource_type') required String resourceType,
     @JsonKey(name: 'format') required String format,
     @JsonKey(name: 'bytes') required int bytes,
-    @JsonKey(name: 'width') required int width,
-    @JsonKey(name: 'height') required int height,
+    @JsonKey(name: 'width') @Default(0) int width,
+    @JsonKey(name: 'height') @Default(0) int height,
+    @JsonKey(name: 'duration')
+    double? duration, // Duration in seconds for audio/video
   }) = _MediaAssetModel;
 
   factory MediaAssetModel.fromJson(Map<String, dynamic> json) =>
@@ -30,6 +32,7 @@ extension MediaAssetModelX on MediaAssetModel {
       bytes: bytes,
       width: width,
       height: height,
+      duration: duration,
     );
   }
 }

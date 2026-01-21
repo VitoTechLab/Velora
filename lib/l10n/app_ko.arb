@@ -37,6 +37,8 @@
   "authSignInLink": "로그인",
   "commonGoBack": "돌아가기",
   "commonCancel": "취소",
+  "commonError": "오류가 발생했습니다",
+  "commonRetry": "다시 시도",
   "authResetPasswordFormLabel": "비밀번호 재설정 양식",
   "authEmailIllustrationLabel": "이메일 일러스트",
   "authResetPasswordTitle": "비밀번호 재설정",
@@ -464,6 +466,34 @@
   "settingsProfileFieldSave": "Save",
   "settingsProfileFieldEditFallbackTitle": "Edit field",
   "settingsProfileFieldEditFallbackLabel": "Field",
+  "settingsProfileEditProfileNotFound": "프로필을 찾을 수 없습니다",
+  "settingsProfileEditTapToChangePhoto": "탭하여 사진 변경",
+  "settingsProfileEditFailedToPickImage": "이미지 선택 실패: {error}",
+  "@settingsProfileEditFailedToPickImage": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+  "settingsProfileEditUploadFailed": "업로드 실패: {error}",
+  "@settingsProfileEditUploadFailed": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+  "settingsProfileEditUploadError": "업로드 오류: {error}",
+  "@settingsProfileEditUploadError": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+  "settingsProfileEditUserNotAuthenticated": "사용자가 인증되지 않았습니다",
+  "settingsProfileEditNoChanges": "저장할 변경 사항이 없습니다",
+  "settingsProfileFieldFullName": "전체 이름",
+  "settingsProfileFieldEmail": "이메일",
+  "settingsProfileFieldLocation": "위치",
+  "settingsProfileFieldLocationHint": "어디에 사시나요?",
+  "settingsProfileFieldWebsiteHint": "https://example.com",
+  "settingsProfileFieldBioHint": "자기소개",
   "settingsSecurityPasswordSectionTitle": "Password",
   "settingsSecurityPasswordChange": "Change password",
   "settingsSecurityPasswordLastChanged": "Last changed 2 months ago",

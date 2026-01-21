@@ -3,6 +3,7 @@ import 'package:velora/features/chat/data/models/conversation_list_model.dart';
 import 'package:velora/features/chat/data/models/message_cursor_model.dart';
 import 'package:velora/features/chat/data/models/message_pagination_model.dart';
 import 'package:velora/features/chat/data/models/message_read_model.dart';
+import 'package:velora/features/chat/data/models/realtime_message_event.dart';
 import 'package:velora/features/chat/data/models/typing_indicator_model.dart';
 import 'package:velora/features/chat/data/models/user_presence_model.dart';
 import 'package:velora/features/chat/data/models/user_search_model.dart';
@@ -35,6 +36,7 @@ abstract class ChatRemoteDataSource {
     String? fileName,
     int? fileSize,
     String? caption,
+    double? durationSeconds, // For audio/video
   });
 
   /// Send a poll message with SQL v2 fields
@@ -69,8 +71,10 @@ abstract class ChatRemoteDataSource {
   /// Delete message (soft delete: set deleted_at and deleted_by)
   Future<void> deleteMessage({required String messageId});
 
-  /// Watch realtime inserts for messages in a conversation
-  Stream<ChatMessageModel> watchNewMessages({required String conversationId});
+  /// Watch realtime inserts/updates for messages in a conversation
+  /// Returns a stream of [RealtimeMessageEvent] which includes both the message and event type (insert/update)
+  Stream<RealtimeMessageEvent> watchNewMessages(
+      {required String conversationId});
 
   /// Stop any active message watch channel
   Future<void> stopWatch();

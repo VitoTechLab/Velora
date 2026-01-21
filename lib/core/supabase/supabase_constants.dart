@@ -44,7 +44,7 @@ class SupabaseTables {
   static const userProfiles = 'user_profiles';
 
   // Profile Views
-  static const userProfileHeaderView = 'v_user_profile_header';
+  static const userProfileHeaderView = 'user_profile_header_view';
   static const profileFollowersListView = 'v_profile_followers_list';
   static const profileFollowingListView = 'v_profile_following_list';
 

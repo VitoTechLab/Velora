@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:velora/l10n/app_localizations.dart';
+import 'package:velora/features/chat/presentation/screens/chat_video_player_screen.dart';
 
 /// Chat media bubble with elegant tail design
 ///
@@ -37,9 +38,8 @@ class ChatMediaWidget extends StatelessWidget {
     final textTheme = theme.textTheme;
     final t = AppLocalizations.of(context)!;
 
-    final textColor = isSender
-        ? colorScheme.onPrimaryContainer
-        : colorScheme.onSurface;
+    final textColor =
+        isSender ? colorScheme.onPrimaryContainer : colorScheme.onSurface;
 
     return Semantics(
       label: isSender ? t.chatMediaYourLabel : t.chatMediaReceivedLabel,
@@ -53,7 +53,8 @@ class ChatMediaWidget extends StatelessWidget {
             opacity: value,
             child: Transform.scale(
               scale: 0.95 + (0.05 * value),
-              alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
+              alignment:
+                  isSender ? Alignment.centerRight : Alignment.centerLeft,
               child: child,
             ),
           );
@@ -119,106 +120,121 @@ class ChatMediaWidget extends StatelessWidget {
                           ? Radius.zero
                           : const Radius.circular(18),
                     ),
-                    child: Stack(
-                      children: [
-                        _buildMediaGrid(context),
-
-                        // Video play button overlay
-                        if (isVideo)
-                          Positioned.fill(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    Colors.black.withValues(alpha: 0.1),
-                                    Colors.black.withValues(alpha: 0.4),
-                                  ],
+                    child: InkWell(
+                      onTap: isVideo && mediaUrls.isNotEmpty
+                          ? () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => ChatVideoPlayerScreen(
+                                    videoUrl: mediaUrls.first,
+                                  ),
                                 ),
-                              ),
-                              child: Center(
-                                child: Container(
-                                  padding: const EdgeInsets.all(18),
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      colors: [
-                                        colorScheme.primary,
-                                        colorScheme.secondary,
-                                      ],
-                                    ),
-                                    shape: BoxShape.circle,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: colorScheme.primary.withValues(alpha: 0.5),
-                                        blurRadius: 16,
-                                        spreadRadius: 2,
-                                      ),
+                              );
+                            }
+                          : null,
+                      child: Stack(
+                        children: [
+                          _buildMediaGrid(context),
+
+                          // Video play button overlay
+                          if (isVideo)
+                            Positioned.fill(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      Colors.black.withValues(alpha: 0.1),
+                                      Colors.black.withValues(alpha: 0.4),
                                     ],
                                   ),
-                                  child: Icon(
-                                    Icons.play_arrow_rounded,
-                                    color: colorScheme.onPrimary,
-                                    size: 40,
-                                  ),
                                 ),
-                              ),
-                            ),
-                          ),
-
-                        // Media count badge (for multiple images)
-                        if (mediaUrls.length > 1)
-                          Positioned(
-                            right: 12,
-                            top: 12,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 12,
-                                vertical: 6,
-                              ),
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Colors.black.withValues(alpha: 0.7),
-                                    Colors.black.withValues(alpha: 0.5),
-                                  ],
-                                ),
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(
-                                  color: Colors.white.withValues(alpha: 0.2),
-                                  width: 1,
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withValues(alpha: 0.3),
-                                    blurRadius: 8,
-                                    spreadRadius: 0,
-                                  ),
-                                ],
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  const Icon(
-                                    Icons.collections_rounded,
-                                    size: 15,
-                                    color: Colors.white,
-                                  ),
-                                  const SizedBox(width: 5),
-                                  Text(
-                                    '${mediaUrls.length}',
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                      letterSpacing: 0.3,
+                                child: Center(
+                                  child: Container(
+                                    padding: const EdgeInsets.all(18),
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          colorScheme.primary,
+                                          colorScheme.secondary,
+                                        ],
+                                      ),
+                                      shape: BoxShape.circle,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: colorScheme.primary
+                                              .withValues(alpha: 0.5),
+                                          blurRadius: 16,
+                                          spreadRadius: 2,
+                                        ),
+                                      ],
+                                    ),
+                                    child: Icon(
+                                      Icons.play_arrow_rounded,
+                                      color: colorScheme.onPrimary,
+                                      size: 40,
                                     ),
                                   ),
-                                ],
+                                ),
                               ),
                             ),
-                          ),
-                      ],
+
+                          // Media count badge (for multiple images)
+                          if (mediaUrls.length > 1)
+                            Positioned(
+                              right: 12,
+                              top: 12,
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 6,
+                                ),
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Colors.black.withValues(alpha: 0.7),
+                                      Colors.black.withValues(alpha: 0.5),
+                                    ],
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                  border: Border.all(
+                                    color: Colors.white.withValues(alpha: 0.2),
+                                    width: 1,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color:
+                                          Colors.black.withValues(alpha: 0.3),
+                                      blurRadius: 8,
+                                      spreadRadius: 0,
+                                    ),
+                                  ],
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const Icon(
+                                      Icons.collections_rounded,
+                                      size: 15,
+                                      color: Colors.white,
+                                    ),
+                                    const SizedBox(width: 5),
+                                    Text(
+                                      '${mediaUrls.length}',
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                        letterSpacing: 0.3,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
                     ),
                   ),
 
@@ -282,8 +298,8 @@ class ChatMediaWidget extends StatelessWidget {
                               key: ValueKey(isRead),
                               size: 16,
                               color: isRead
-                                  ? colorScheme.primary
-                                  : textColor.withValues(alpha: 0.5),
+                                  ? Colors.lightBlueAccent.shade200
+                                  : Colors.grey.shade500,
                             ),
                           ),
                         ],
@@ -437,4 +453,3 @@ class ChatMediaWidget extends StatelessWidget {
     );
   }
 }
-

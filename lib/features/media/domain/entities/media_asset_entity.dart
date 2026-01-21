@@ -13,5 +13,6 @@ abstract class MediaAsset with _$MediaAsset {
     required int bytes,
     required int width,
     required int height,
+    double? duration, // Duration in seconds for audio/video
   }) = _MediaAsset;
 }

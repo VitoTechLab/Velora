@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 
 class OverviewTabContent extends StatelessWidget {
   final String campaignType;
+  final String? description;
 
-  const OverviewTabContent({super.key, required this.campaignType});
+  const OverviewTabContent({
+    super.key,
+    required this.campaignType,
+    this.description,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +23,7 @@ class OverviewTabContent extends StatelessWidget {
         children: [
           // Impact Story
           Text(
-            'Impact Story',
+            'About This Campaign',
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: colorScheme.onSurface,
@@ -26,8 +31,7 @@ class OverviewTabContent extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            'Access to clean water is a fundamental human right, yet millions of people in rural Indonesia still lack this basic necessity. Our project aims to build sustainable water wells in underserved communities, transforming lives and creating lasting impact.\n\n'
-            'Each well serves an average of 150 families, providing clean drinking water and reducing water-borne diseases by up to 80%. Beyond health benefits, these wells save families hours of daily travel, allowing children to attend school and parents to focus on income-generating activities.',
+            description ?? 'No description available.',
             style: theme.textTheme.bodyLarge?.copyWith(
               color: colorScheme.onSurface,
               height: 1.6,

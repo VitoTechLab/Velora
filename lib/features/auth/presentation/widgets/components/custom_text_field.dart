@@ -179,9 +179,9 @@ class CustomTextField extends HookWidget {
                     )
                   : null,
               floatingLabelBehavior: FloatingLabelBehavior.auto,
-              floatingLabelStyle: MaterialStateTextStyle.resolveWith(
-                (Set<MaterialState> states) {
-                  final color = states.contains(MaterialState.focused)
+              floatingLabelStyle: WidgetStateTextStyle.resolveWith(
+                (Set<WidgetState> states) {
+                  final color = states.contains(WidgetState.focused)
                       ? colorScheme.primary
                       : colorScheme.onSurfaceVariant;
                   return TextStyle(

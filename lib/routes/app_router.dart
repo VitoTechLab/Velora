@@ -33,7 +33,9 @@ import 'package:velora/features/settings/domain/entities/user_preferences.dart';
 import 'package:velora/features/settings/presentation/screens/account/account_status_screen.dart';
 import 'package:velora/features/settings/presentation/screens/account/account_type_screen.dart';
 import 'package:velora/features/settings/presentation/screens/account/activity_screen.dart';
+import 'package:velora/features/settings/presentation/screens/account/ad_preferences_screen.dart';
 import 'package:velora/features/settings/presentation/screens/account/my_donation_screen.dart';
+import 'package:velora/features/settings/presentation/screens/account/profiles_list_screen.dart';
 import 'package:velora/features/settings/presentation/screens/appearance/accessibility_screen.dart';
 import 'package:velora/features/settings/presentation/screens/appearance/language_screen.dart';
 import 'package:velora/features/settings/presentation/screens/appearance/notification_detail_screen.dart';
@@ -44,14 +46,20 @@ import 'package:velora/features/settings/presentation/screens/help/help_screen.d
 import 'package:velora/features/settings/presentation/screens/profile/edit_profile_screen.dart';
 import 'package:velora/features/settings/presentation/screens/profile/profile_detail_screen.dart';
 import 'package:velora/features/settings/presentation/screens/profile/profile_field_edit_screen.dart';
+import 'package:velora/features/settings/presentation/screens/security/active_sessions_screen.dart';
 import 'package:velora/features/settings/presentation/screens/security/password_security_screen.dart';
 import 'package:velora/features/settings/presentation/screens/security/privacy_screen.dart';
+import 'package:velora/features/settings/presentation/screens/security/recovery_codes_screen.dart';
+import 'package:velora/features/settings/presentation/screens/security/trusted_contacts_screen.dart';
+import 'package:velora/features/settings/presentation/screens/security/two_factor_setup_screen.dart';
 import 'package:velora/features/settings/presentation/screens/settings_screen.dart';
 import 'package:velora/features/wallet/presentation/screens/wallet_dashboard_screen.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
 import 'package:velora/features/feed/presentation/screens/feed_screen.dart';
 import 'package:velora/features/notification/presentation/screens/notification_screen.dart';
+
+import 'package:velora/features/search/presentation/screens/search_screen.dart';
 
 class AppRouter {
   AppRouter(
@@ -239,12 +247,23 @@ class AppRouter {
                 ],
               ),
               StatefulShellBranch(
-                navigatorKey: NavigationKeys.searchBranch,
+                navigatorKey: NavigationKeys.campaignBranch,
                 routes: [
                   GoRoute(
-                    path: AppRoutePath.search,
-                    name: AppRouteName.search,
-                    builder: (context, state) => const UserSearchScreen(),
+                    path: AppRoutePath.campaign,
+                    name: AppRouteName.campaign,
+                    builder: (context, state) => const CampaignScreen(),
+                    routes: [
+                      GoRoute(
+                        path: AppRouteSinglePath.createCampaignPost,
+                        name: AppRouteName.createCampaignPost,
+                        parentNavigatorKey: navigationService.navigatorKey,
+                        builder: (context, state) => BlocProvider(
+                          create: (_) => getIt<CampaignPostBloc>(),
+                          child: const CreateCampaignPostScreen(),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -303,26 +322,16 @@ class AppRouter {
                 ],
               ),
               StatefulShellBranch(
-                navigatorKey: NavigationKeys.campaignBranch,
+                navigatorKey: NavigationKeys.searchBranch,
                 routes: [
                   GoRoute(
-                    path: AppRoutePath.campaign,
-                    name: AppRouteName.campaign,
-                    builder: (context, state) => const CampaignScreen(),
-                    routes: [
-                      GoRoute(
-                        path: AppRouteSinglePath.createCampaignPost,
-                        name: AppRouteName.createCampaignPost,
-                        parentNavigatorKey: navigationService.navigatorKey,
-                        builder: (context, state) => BlocProvider(
-                          create: (_) => getIt<CampaignPostBloc>(),
-                          child: const CreateCampaignPostScreen(),
-                        ),
-                      ),
-                    ],
+                    path: AppRoutePath.search,
+                    name: AppRouteName.search,
+                    builder: (context, state) => const SearchScreen(),
                   ),
                 ],
               ),
+              
               StatefulShellBranch(
                 navigatorKey: NavigationKeys.profileBranch,
                 routes: [
@@ -343,13 +352,35 @@ class AppRouter {
                             parentNavigatorKey:
                                 navigationService.navigatorKey, // root
                             builder: (context, state) =>
+                                const ProfilesListScreen(),
+                          ),
+                          GoRoute(
+                            path: AppRouteSinglePath.settingsProfileDetail,
+                            name: AppRouteName.settingsProfileDetail,
+                            parentNavigatorKey:
+                                navigationService.navigatorKey, // root
+                            builder: (context, state) =>
                                 const ProfileDetailScreen(),
+                          ),
+                          GoRoute(
+                            path: AppRouteSinglePath.settingsEditProfile,
+                            name: AppRouteName.settingsEditProfile,
+                            parentNavigatorKey:
+                                navigationService.navigatorKey, // root
+                            builder: (context, state) =>
+                                const EditProfileScreen(),
                           ),
                           GoRoute(
                             path: AppRouteSinglePath.settingsActivity,
                             name: AppRouteName.settingsActivity,
                             parentNavigatorKey: navigationService.navigatorKey,
                             builder: (context, state) => const ActivityScreen(),
+                          ),
+                          GoRoute(
+                            path: AppRouteSinglePath.settingsAdPreferences,
+                            name: AppRouteName.settingsAdPreferences,
+                            parentNavigatorKey: navigationService.navigatorKey,
+                            builder: (context, state) => const AdPreferencesScreen(),
                           ),
                           GoRoute(
                             path: AppRouteSinglePath.settingsAccountStatus,
@@ -371,13 +402,32 @@ class AppRouter {
                             parentNavigatorKey: navigationService.navigatorKey,
                             builder: (context, state) =>
                                 const PasswordSecurityScreen(),
-                          ),
-                          GoRoute(
-                            path: AppRouteSinglePath.settingsEditProfile,
-                            name: AppRouteName.settingsEditProfile,
-                            parentNavigatorKey: navigationService.navigatorKey,
-                            builder: (context, state) =>
-                                const EditProfileScreen(),
+                            routes: [
+                              GoRoute(
+                                path: 'two-factor-setup',
+                                parentNavigatorKey: navigationService.navigatorKey,
+                                builder: (context, state) =>
+                                    const TwoFactorSetupScreen(),
+                              ),
+                              GoRoute(
+                                path: 'active-sessions',
+                                parentNavigatorKey: navigationService.navigatorKey,
+                                builder: (context, state) =>
+                                    const ActiveSessionsScreen(),
+                              ),
+                              GoRoute(
+                                path: 'trusted-contacts',
+                                parentNavigatorKey: navigationService.navigatorKey,
+                                builder: (context, state) =>
+                                    const TrustedContactsScreen(),
+                              ),
+                              GoRoute(
+                                path: 'recovery-codes',
+                                parentNavigatorKey: navigationService.navigatorKey,
+                                builder: (context, state) =>
+                                    const RecoveryCodesScreen(),
+                              ),
+                            ],
                           ),
                           GoRoute(
                             path: AppRouteSinglePath.settingsPrivacy,
@@ -508,7 +558,9 @@ class AppRouteName {
   static const profile = 'profile';
   static const settings = 'settings';
   static const settingsProfiles = 'settingsProfiles';
+  static const settingsProfileDetail = 'settingsProfileDetail';
   static const settingsActivity = 'settingsActivity';
+  static const settingsAdPreferences = 'settingsAdPreferences';
   static const settingsAccountStatus = 'settingsAccountStatus';
   static const settingsAccountType = 'settingsAccountType';
   static const settingsPasswordSecurity = 'settingsPasswordSecurity';
@@ -543,7 +595,9 @@ class AppRoutePath {
   static const createCampaignPost = '/campaign/create-campaign';
   static const settings = '/profile/settings';
   static const settingsProfiles = '/profile/settings/profiles';
+  static const settingsProfileDetail = '/profile/settings/profile-detail';
   static const settingsActivity = '/profile/settings/activity';
+  static const settingsAdPreferences = '/profile/settings/ad-preferences';
   static const settingsAccountStatus = '/profile/settings/account-status';
   static const settingsAccountType = '/profile/settings/account-type';
   static const settingsPasswordSecurity = '/profile/settings/password-security';
@@ -562,8 +616,7 @@ class AppRoutePath {
       '/profile/settings/profile-field-edit';
   static const search = '/search';
   static const chat = '/chat';
-  static const shatDetail = '/chat/detail';
-  static const cearchFollowUser = 'search-follow-user';
+  static const searchFollowUser = 'search-follow-user';
   static const campaign = '/campaign';
   static const profile = '/profile';
   static const signIn = '/auth/signin';
@@ -583,7 +636,9 @@ class AppRouteSinglePath {
   static const createCampaignPost = 'create-campaign';
   static const settings = 'settings';
   static const settingsProfiles = 'profiles';
+  static const settingsProfileDetail = 'profile-detail';
   static const settingsActivity = 'activity';
+  static const settingsAdPreferences = 'ad-preferences';
   static const settingsAccountStatus = 'account-status';
   static const settingsAccountType = 'account-type';
   static const settingsPasswordSecurity = 'password-security';

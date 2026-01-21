@@ -1,3 +1,4 @@
+import 'campaign_entity.dart';
 import 'campaign_type.dart';
 
 class CampaignDetailModel {
@@ -14,6 +15,8 @@ class CampaignDetailModel {
   final int updatesCount;
   final int milestonesCount;
   final int commentsCount;
+  final String? coverImageUrl;
+  final String? description;
 
   // Equity / debt extras
   final double? unitPrice;
@@ -36,12 +39,52 @@ class CampaignDetailModel {
     required this.updatesCount,
     required this.milestonesCount,
     required this.commentsCount,
+    this.coverImageUrl,
+    this.description,
     this.unitPrice,
     this.minBuyUnits,
     this.riskGrade,
     this.projectedReturn,
     this.equityChangePct,
   });
+
+  /// Factory constructor from CampaignEntity
+  factory CampaignDetailModel.fromEntity(CampaignEntity entity) {
+    final now = DateTime.now();
+    String timeLeftLabel;
+    if (entity.endDate == null) {
+      timeLeftLabel = 'Flexible';
+    } else {
+      final diff = entity.endDate!.difference(now);
+      if (diff.isNegative) {
+        timeLeftLabel = 'Ended';
+      } else if (diff.inDays >= 1) {
+        timeLeftLabel = 'D-${diff.inDays}';
+      } else if (diff.inHours >= 1) {
+        timeLeftLabel = '${diff.inHours}h';
+      } else {
+        timeLeftLabel = '${diff.inMinutes}m';
+      }
+    }
+
+    return CampaignDetailModel(
+      id: entity.id,
+      title: entity.title,
+      creatorName: entity.organizerUsername ?? 'Organizer',
+      isVerified: entity.isVerified,
+      type: CampaignType.donation, // Default, extend later
+      category: entity.categoryName ?? 'General',
+      raised: entity.amountRaised,
+      target: entity.targetAmount,
+      timeLeftLabel: timeLeftLabel,
+      donorsCount: entity.donorCount,
+      updatesCount: 0, // Will be fetched separately
+      milestonesCount: 0,
+      commentsCount: 0,
+      coverImageUrl: entity.coverImageUrl,
+      description: entity.description,
+    );
+  }
 
   double get progressPercent => (raised / target * 100).clamp(0, 100);
 

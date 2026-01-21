@@ -34,6 +34,8 @@ mixin _$MediaAssetModel {
   int get width => throw _privateConstructorUsedError;
   @JsonKey(name: 'height')
   int get height => throw _privateConstructorUsedError;
+  @JsonKey(name: 'duration')
+  double? get duration => throw _privateConstructorUsedError;
 
   /// Serializes this MediaAssetModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -58,7 +60,8 @@ abstract class $MediaAssetModelCopyWith<$Res> {
       @JsonKey(name: 'format') String format,
       @JsonKey(name: 'bytes') int bytes,
       @JsonKey(name: 'width') int width,
-      @JsonKey(name: 'height') int height});
+      @JsonKey(name: 'height') int height,
+      @JsonKey(name: 'duration') double? duration});
 }
 
 /// @nodoc
@@ -83,6 +86,7 @@ class _$MediaAssetModelCopyWithImpl<$Res, $Val extends MediaAssetModel>
     Object? bytes = null,
     Object? width = null,
     Object? height = null,
+    Object? duration = freezed,
   }) {
     return _then(_value.copyWith(
       publicId: null == publicId
@@ -113,6 +117,10 @@ class _$MediaAssetModelCopyWithImpl<$Res, $Val extends MediaAssetModel>
           ? _value.height
           : height // ignore: cast_nullable_to_non_nullable
               as int,
+      duration: freezed == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as double?,
     ) as $Val);
   }
 }
@@ -132,7 +140,8 @@ abstract class _$$MediaAssetModelImplCopyWith<$Res>
       @JsonKey(name: 'format') String format,
       @JsonKey(name: 'bytes') int bytes,
       @JsonKey(name: 'width') int width,
-      @JsonKey(name: 'height') int height});
+      @JsonKey(name: 'height') int height,
+      @JsonKey(name: 'duration') double? duration});
 }
 
 /// @nodoc
@@ -155,6 +164,7 @@ class __$$MediaAssetModelImplCopyWithImpl<$Res>
     Object? bytes = null,
     Object? width = null,
     Object? height = null,
+    Object? duration = freezed,
   }) {
     return _then(_$MediaAssetModelImpl(
       publicId: null == publicId
@@ -185,6 +195,10 @@ class __$$MediaAssetModelImplCopyWithImpl<$Res>
           ? _value.height
           : height // ignore: cast_nullable_to_non_nullable
               as int,
+      duration: freezed == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as double?,
     ));
   }
 }
@@ -198,8 +212,9 @@ class _$MediaAssetModelImpl implements _MediaAssetModel {
       @JsonKey(name: 'resource_type') required this.resourceType,
       @JsonKey(name: 'format') required this.format,
       @JsonKey(name: 'bytes') required this.bytes,
-      @JsonKey(name: 'width') required this.width,
-      @JsonKey(name: 'height') required this.height});
+      @JsonKey(name: 'width') this.width = 0,
+      @JsonKey(name: 'height') this.height = 0,
+      @JsonKey(name: 'duration') this.duration});
 
   factory _$MediaAssetModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$MediaAssetModelImplFromJson(json);
@@ -225,10 +240,13 @@ class _$MediaAssetModelImpl implements _MediaAssetModel {
   @override
   @JsonKey(name: 'height')
   final int height;
+  @override
+  @JsonKey(name: 'duration')
+  final double? duration;
 
   @override
   String toString() {
-    return 'MediaAssetModel(publicId: $publicId, secureUrl: $secureUrl, resourceType: $resourceType, format: $format, bytes: $bytes, width: $width, height: $height)';
+    return 'MediaAssetModel(publicId: $publicId, secureUrl: $secureUrl, resourceType: $resourceType, format: $format, bytes: $bytes, width: $width, height: $height, duration: $duration)';
   }
 
   @override
@@ -245,13 +263,15 @@ class _$MediaAssetModelImpl implements _MediaAssetModel {
             (identical(other.format, format) || other.format == format) &&
             (identical(other.bytes, bytes) || other.bytes == bytes) &&
             (identical(other.width, width) || other.width == width) &&
-            (identical(other.height, height) || other.height == height));
+            (identical(other.height, height) || other.height == height) &&
+            (identical(other.duration, duration) ||
+                other.duration == duration));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, publicId, secureUrl,
-      resourceType, format, bytes, width, height);
+      resourceType, format, bytes, width, height, duration);
 
   /// Create a copy of MediaAssetModel
   /// with the given fields replaced by the non-null parameter values.
@@ -277,8 +297,9 @@ abstract class _MediaAssetModel implements MediaAssetModel {
           @JsonKey(name: 'resource_type') required final String resourceType,
           @JsonKey(name: 'format') required final String format,
           @JsonKey(name: 'bytes') required final int bytes,
-          @JsonKey(name: 'width') required final int width,
-          @JsonKey(name: 'height') required final int height}) =
+          @JsonKey(name: 'width') final int width,
+          @JsonKey(name: 'height') final int height,
+          @JsonKey(name: 'duration') final double? duration}) =
       _$MediaAssetModelImpl;
 
   factory _MediaAssetModel.fromJson(Map<String, dynamic> json) =
@@ -305,6 +326,9 @@ abstract class _MediaAssetModel implements MediaAssetModel {
   @override
   @JsonKey(name: 'height')
   int get height;
+  @override
+  @JsonKey(name: 'duration')
+  double? get duration;
 
   /// Create a copy of MediaAssetModel
   /// with the given fields replaced by the non-null parameter values.

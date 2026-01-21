@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/profile/domain/usecases/get_profile_usecase.dart';
+import 'package:velora/features/profile/domain/usecases/update_profile_usecase.dart';
 import 'package:velora/features/profile/domain/usecases/toggle_follow_usecase.dart';
 import 'package:velora/features/profile/domain/usecases/block_user_usecase.dart';
 import 'package:velora/features/profile/domain/usecases/unblock_user_usecase.dart';
@@ -9,6 +10,7 @@ import 'profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final GetProfileUseCase getProfileUseCase;
+  final UpdateProfileUseCase updateProfileUseCase;
   final ToggleFollowUseCase toggleFollowUseCase;
   final BlockUserUseCase blockUserUseCase;
   final UnblockUserUseCase unblockUserUseCase;
@@ -17,11 +19,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   ProfileBloc({
     required this.getProfileUseCase,
+    required this.updateProfileUseCase,
     required this.toggleFollowUseCase,
     required this.blockUserUseCase,
     required this.unblockUserUseCase,
   }) : super(const ProfileState()) {
     on<LoadProfileEvent>(_onLoadProfile);
+    on<UpdateProfileEvent>(_onUpdateProfile);
     on<ToggleFollowEvent>(_onToggleFollow);
     on<BlockUserEvent>(_onBlockUser);
     on<UnblockUserEvent>(_onUnblockUser);
@@ -59,6 +63,34 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
             isFollowing: profile.isFollowing,
             isBlocked: profile.theyBlockedMe,
             isFollowRequestPending: profile.isFollowRequestPending,
+            error: null,
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _onUpdateProfile(
+    UpdateProfileEvent event,
+    Emitter<ProfileState> emit,
+  ) async {
+    emit(state.copyWith(isLoading: true, error: null));
+
+    logi('Updating profile', tag: _logTag);
+
+    final result = await updateProfileUseCase(event.updateModel);
+
+    result.fold(
+      (failure) {
+        loge('UpdateProfile failed: ${failure.message}', tag: _logTag);
+        emit(state.copyWith(isLoading: false, error: failure.message));
+      },
+      (profile) {
+        logi('UpdateProfile success', tag: _logTag);
+        emit(
+          state.copyWith(
+            isLoading: false,
+            profile: profile,
             error: null,
           ),
         );

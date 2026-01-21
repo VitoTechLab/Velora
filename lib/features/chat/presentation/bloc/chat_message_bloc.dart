@@ -244,6 +244,14 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
         emit(state.copyWith(isLoading: false, errorMessage: failure.message));
       },
       (pagination) {
+        // Debug: log initial messages loaded from Supabase
+        for (final m in pagination.messages) {
+          logi(
+            'InitLoad message id=${m.id} kind=${m.kind} deletedAt=${m.deletedAt} bodyPreview=${m.body?.substring(0, m.body!.length > 30 ? 30 : m.body!.length)}',
+            tag: _logTag,
+          );
+        }
+
         emit(
           state.copyWith(
             isLoading: false,
@@ -502,8 +510,8 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
         conversationId: event.conversationId,
       );
 
-      result.fold(
-        (failure) {
+      await result.fold(
+        (failure) async {
           emit(
             state.copyWith(
               isUploadingMedia: false,
@@ -513,12 +521,17 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
         },
         (assets) async {
           // Send media message for each uploaded image
-          for (final asset in assets) {
+          for (int i = 0; i < assets.length; i++) {
+            final asset = assets[i];
+            // Only include caption on the first image
+            final caption = i == 0 ? event.caption : null;
+
             final sendResult = await sendMediaMessageUseCase(
               conversationId: event.conversationId,
               mediaUrl: asset.secureUrl,
               mediaType: 'image',
               mimeType: 'image/jpeg',
+              caption: caption,
             );
 
             sendResult.fold(
@@ -527,11 +540,9 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
                     tag: _logTag);
               },
               (chatMessage) {
-                emit(
-                  state.copyWith(
-                    messages: [chatMessage, ...state.messages],
-                  ),
-                );
+                // Message will be added via realtime subscription
+                // Only log success here to prevent duplicates
+                logi('Image message sent: ${chatMessage.id}', tag: _logTag);
               },
             );
           }
@@ -577,8 +588,8 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
         conversationId: event.conversationId,
       );
 
-      result.fold(
-        (failure) {
+      await result.fold(
+        (failure) async {
           emit(
             state.copyWith(
               isUploadingMedia: false,
@@ -587,12 +598,14 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
           );
         },
         (asset) async {
-          // Send media message
+          // Send media message with duration from Cloudinary
           final sendResult = await sendMediaMessageUseCase(
             conversationId: event.conversationId,
             mediaUrl: asset.secureUrl,
             mediaType: 'video',
             mimeType: 'video/mp4',
+            durationSeconds: asset.duration,
+            caption: event.caption,
           );
 
           sendResult.fold(
@@ -605,10 +618,12 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
               );
             },
             (chatMessage) {
+              // Message will be added via realtime subscription
+              // Only update upload state to prevent duplicates
+              logi('Video message sent: ${chatMessage.id}', tag: _logTag);
               emit(
                 state.copyWith(
                   isUploadingMedia: false,
-                  messages: [chatMessage, ...state.messages],
                   uploadSuccessMessage: 'Video uploaded and sent successfully',
                 ),
               );
@@ -650,8 +665,8 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
         conversationId: event.conversationId,
       );
 
-      result.fold(
-        (failure) {
+      await result.fold(
+        (failure) async {
           emit(
             state.copyWith(
               isUploadingMedia: false,
@@ -675,11 +690,9 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
                     tag: _logTag);
               },
               (chatMessage) {
-                emit(
-                  state.copyWith(
-                    messages: [chatMessage, ...state.messages],
-                  ),
-                );
+                // Message will be added via realtime subscription
+                // Only log success here to prevent duplicates
+                logi('Document message sent: ${chatMessage.id}', tag: _logTag);
               },
             );
           }
@@ -725,8 +738,8 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
         conversationId: event.conversationId,
       );
 
-      result.fold(
-        (failure) {
+      await result.fold(
+        (failure) async {
           emit(
             state.copyWith(
               isUploadingMedia: false,
@@ -735,12 +748,15 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
           );
         },
         (asset) async {
-          // Send media message
+          // Send media message with duration from Cloudinary
           final sendResult = await sendMediaMessageUseCase(
             conversationId: event.conversationId,
             mediaUrl: asset.secureUrl,
             mediaType: 'audio',
-            mimeType: event.isVoiceMessage ? 'audio/m4a' : _getMimeTypeFromUrl(asset.secureUrl),
+            mimeType: event.isVoiceMessage
+                ? 'audio/m4a'
+                : _getMimeTypeFromUrl(asset.secureUrl),
+            durationSeconds: asset.duration,
           );
 
           sendResult.fold(
@@ -753,12 +769,15 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
               );
             },
             (chatMessage) {
+              // Message will be added via realtime subscription
+              // Only update upload state to prevent duplicates
+              logi('Audio message sent: ${chatMessage.id}', tag: _logTag);
               emit(
                 state.copyWith(
                   isUploadingMedia: false,
-                  messages: [chatMessage, ...state.messages],
-                  uploadSuccessMessage:
-                      event.isVoiceMessage ? 'Voice message sent successfully' : 'Audio uploaded and sent successfully',
+                  uploadSuccessMessage: event.isVoiceMessage
+                      ? 'Voice message sent successfully'
+                      : 'Audio uploaded and sent successfully',
                 ),
               );
             },
@@ -1023,6 +1042,9 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     _watchSub = null;
     await stopWatchMessagesUseCase();
 
+    logi('Starting realtime watch for conversation: $conversationId',
+        tag: _logTag);
+
     emit(
       state.copyWith(
         isWatching: true,
@@ -1033,20 +1055,33 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
 
     _watchSub = watchNewMessagesUseCase(conversationId: conversationId).listen(
       (either) {
-        either.fold((failure) => add(WatchMessageErrorEvent(failure.message)), (
-          message,
+        either.fold((failure) {
+          loge('Realtime watch error: ${failure.message}', tag: _logTag);
+          add(WatchMessageErrorEvent(failure.message));
+        }, (
+          realtimeEvent,
         ) {
-          // Check if it's INSERT, UPDATE, or DELETE
-          if (message.deletedAt != null) {
-            add(WatchMessageDeletedEvent(message));
-          } else if (message.editedAt != null) {
-            add(WatchMessageUpdatedEvent(message));
-          } else {
+          final message = realtimeEvent.message;
+          logi(
+              'Realtime event received: ${realtimeEvent.isInsert ? "INSERT" : "UPDATE"} for message ${message.id}',
+              tag: _logTag);
+
+          // Use event type from Postgres realtime to determine action
+          if (realtimeEvent.isInsert) {
+            // New message inserted - add to list if not already exists
             add(WatchMessageArrivedEvent(message));
+          } else if (realtimeEvent.isUpdate) {
+            // Message updated - could be edit or soft delete
+            if (message.deletedAt != null) {
+              add(WatchMessageDeletedEvent(message));
+            } else {
+              add(WatchMessageUpdatedEvent(message));
+            }
           }
         });
       },
       onError: (error, stack) {
+        loge('Realtime stream error: $error', tag: _logTag);
         final message = ChatFailure.fromException(error).message;
         add(WatchMessageErrorEvent(message));
       },
@@ -1069,9 +1104,19 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
   ) async {
     final incoming = event.message;
     final exists = state.messages.any((m) => m.id == incoming.id);
-    if (exists) return;
+    if (exists) {
+      logi(
+        'Realtime ARRIVE (duplicate) id=${incoming.id} kind=${incoming.kind} deletedAt=${incoming.deletedAt} - skipping insert',
+        tag: _logTag,
+      );
+      return;
+    }
 
     // Insert new message (realtime)
+    logi(
+      'Realtime ARRIVE id=${incoming.id} kind=${incoming.kind} deletedAt=${incoming.deletedAt}',
+      tag: _logTag,
+    );
     emit(state.copyWith(messages: [incoming, ...state.messages]));
   }
 
@@ -1080,6 +1125,10 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     Emitter<ChatMessageState> emit,
   ) async {
     final updated = event.message;
+    logi(
+      'Realtime UPDATE id=${updated.id} kind=${updated.kind} deletedAt=${updated.deletedAt}',
+      tag: _logTag,
+    );
 
     // Update existing message in list (realtime edit)
     final updatedMessages = state.messages.map((m) {
@@ -1097,6 +1146,11 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     Emitter<ChatMessageState> emit,
   ) async {
     final deleted = event.message;
+
+    logi(
+      'Realtime DELETE id=${deleted.id} kind=${deleted.kind} deletedAt=${deleted.deletedAt}',
+      tag: _logTag,
+    );
 
     // Mark message as deleted in list (realtime delete)
     final updatedMessages = state.messages.map((m) {

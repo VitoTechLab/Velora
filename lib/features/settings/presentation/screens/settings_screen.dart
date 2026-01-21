@@ -71,30 +71,54 @@ class SettingScreen extends StatelessWidget {
                     const _AccountHeroCard(),
                     const SizedBox(height: 24),
                     SettingsSectionCard(
-                      title: t.settingsConnectedTitle,
-                      subtitle: t.settingsConnectedSubtitle,
+                      title: t.settingsWalletTitle,
                       tiles: [
                         SettingsTileData(
-                          title: t.settingsTileProfilesTitle,
-                          subtitle: t.settingsTileProfilesSubtitle,
-                          icon: Icons.person_outline,
-                          iconColor: const Color(0xFF00A86B),
-                          onTap: () => _openNamed(
-                            context,
-                            AppRouteName.settingsProfiles,
-                          ),
-                        ),
-                        SettingsTileData(
-                          title: t.settingsTileActivityTitle,
-                          subtitle: t.settingsTileActivitySubtitle,
-                          icon: Icons.history,
+                          title: t.settingsTileVeloraPayTitle,
+                          subtitle: t.settingsTileVeloraPaySubtitle,
+                          icon: Icons.account_balance_wallet_outlined,
                           iconColor: const Color(0xFF00BCD4),
                           onTap: () => _openNamed(
                             context,
-                            AppRouteName.settingsActivity,
+                            AppRouteName.settingsWalletDashboard,
                           ),
                         ),
                       ],
+                    ),
+                    BlocBuilder<ProfileBloc, ProfileState>(
+                      builder: (context, profileState) {
+                        final profile = profileState.profile;
+                        final profileSubtitle = profile?.username ??
+                            profile?.email ??
+                            t.settingsConnectedSubtitle;
+
+                        return SettingsSectionCard(
+                          title: t.settingsConnectedTitle,
+                          subtitle: t.settingsConnectedSubtitle,
+                          tiles: [
+                            SettingsTileData(
+                              title: t.settingsTileProfilesTitle,
+                              subtitle: profileSubtitle,
+                              icon: Icons.person_outline,
+                              iconColor: const Color(0xFF00A86B),
+                              onTap: () => _openNamed(
+                                context,
+                                AppRouteName.settingsProfileDetail,
+                              ),
+                            ),
+                            SettingsTileData(
+                              title: t.settingsTileActivityTitle,
+                              subtitle: t.settingsTileActivitySubtitle,
+                              icon: Icons.history,
+                              iconColor: const Color(0xFF00BCD4),
+                              onTap: () => _openNamed(
+                                context,
+                                AppRouteName.settingsActivity,
+                              ),
+                            ),
+                          ],
+                        );
+                      },
                     ),
                     SettingsSectionCard(
                       title: t.settingsAccountTitle,
@@ -107,16 +131,6 @@ class SettingScreen extends StatelessWidget {
                           onTap: () => _openNamed(
                             context,
                             AppRouteName.settingsPasswordSecurity,
-                          ),
-                        ),
-                        SettingsTileData(
-                          title: t.settingsTilePersonalDetailsTitle,
-                          subtitle: t.settingsTilePersonalDetailsSubtitle,
-                          icon: Icons.badge_outlined,
-                          iconColor: const Color(0xFF3B82F6),
-                          onTap: () => _openNamed(
-                            context,
-                            AppRouteName.settingsEditProfile,
                           ),
                         ),
                         SettingsTileData(
@@ -134,22 +148,7 @@ class SettingScreen extends StatelessWidget {
                           iconColor: const Color(0xFFFF6B6B),
                           onTap: () => _openNamed(
                             context,
-                            AppRouteName.settingsActivity,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SettingsSectionCard(
-                      title: t.settingsWalletTitle,
-                      tiles: [
-                        SettingsTileData(
-                          title: t.settingsTileVeloraPayTitle,
-                          subtitle: t.settingsTileVeloraPaySubtitle,
-                          icon: Icons.account_balance_wallet_outlined,
-                          iconColor: const Color(0xFF00BCD4),
-                          onTap: () => _openNamed(
-                            context,
-                            AppRouteName.settingsWalletDashboard,
+                            AppRouteName.settingsAdPreferences,
                           ),
                         ),
                       ],
@@ -265,8 +264,8 @@ class SettingScreen extends StatelessWidget {
                         ),
                         onTap: () {
                           context.read<AuthBloc>().add(
-                            const AuthEvent.signOut(),
-                          );
+                                const AuthEvent.signOut(),
+                              );
                         },
                       ),
                     ),
@@ -299,8 +298,8 @@ class _AccountHeroCardState extends State<_AccountHeroCard> {
     final authState = context.read<AuthBloc>().state;
     if (authState.userId != null) {
       context.read<ProfileBloc>().add(
-        LoadProfileEvent(userId: authState.userId!),
-      );
+            LoadProfileEvent(userId: authState.userId!),
+          );
     }
   }
 
@@ -338,10 +337,19 @@ class _AccountHeroCardState extends State<_AccountHeroCard> {
                   children: [
                     CircleAvatar(
                       radius: 36,
-                      backgroundImage: const NetworkImage(
-                        'https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=200',
-                      ),
-                      backgroundColor: colorScheme.surfaceContainerHighest,
+                      backgroundImage: profile?.avatarUrl != null &&
+                              profile!.avatarUrl!.isNotEmpty
+                          ? NetworkImage(profile.avatarUrl!)
+                          : null,
+                      backgroundColor: colorScheme.primaryContainer,
+                      child: profile?.avatarUrl == null ||
+                              profile!.avatarUrl!.isEmpty
+                          ? Icon(
+                              Icons.person,
+                              size: 36,
+                              color: colorScheme.onPrimaryContainer,
+                            )
+                          : null,
                     ),
                     const SizedBox(width: 16),
                     Expanded(
@@ -349,7 +357,7 @@ class _AccountHeroCardState extends State<_AccountHeroCard> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            profile?.username ?? '...',
+                            profile?.fullName ?? profile?.username ?? '...',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: theme.textTheme.titleLarge?.copyWith(
@@ -357,7 +365,9 @@ class _AccountHeroCardState extends State<_AccountHeroCard> {
                             ),
                           ),
                           Text(
-                            t.settingsHeroNetworks,
+                            profile?.email ?? t.settingsHeroNetworks,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: theme.textTheme.bodyMedium?.copyWith(
                               color: colorScheme.onSurfaceVariant,
                             ),
@@ -366,8 +376,10 @@ class _AccountHeroCardState extends State<_AccountHeroCard> {
                       ),
                     ),
                     IconButton.filledTonal(
-                      onPressed: () {},
-                      icon: const Icon(Icons.swap_horiz),
+                      onPressed: () {
+                        context.pushNamed(AppRouteName.settingsEditProfile);
+                      },
+                      icon: const Icon(Icons.edit_outlined),
                     ),
                   ],
                 ),

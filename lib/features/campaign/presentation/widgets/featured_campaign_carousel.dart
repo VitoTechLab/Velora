@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import '../../domain/entities/campaign_model.dart';
-import '../routes/campaign_routes.dart';
 import 'category_pill.dart';
 import 'verified_badge.dart';
 import 'progress_bar.dart';
@@ -9,8 +8,13 @@ import 'campaign_card.dart';
 
 class FeaturedCampaignCarousel extends HookWidget {
   final List<CampaignModel> campaigns;
+  final void Function(CampaignModel campaign)? onCampaignTap;
 
-  const FeaturedCampaignCarousel({super.key, required this.campaigns});
+  const FeaturedCampaignCarousel({
+    super.key,
+    required this.campaigns,
+    this.onCampaignTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +46,12 @@ class FeaturedCampaignCarousel extends HookWidget {
                 scale: scale,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: _FeaturedCard(campaign: campaign),
+                  child: _FeaturedCard(
+                    campaign: campaign,
+                    onTap: onCampaignTap != null
+                        ? () => onCampaignTap!(campaign)
+                        : null,
+                  ),
                 ),
               );
             },
@@ -60,8 +69,9 @@ class FeaturedCampaignCarousel extends HookWidget {
 
 class _FeaturedCard extends StatelessWidget {
   final CampaignModel campaign;
+  final VoidCallback? onTap;
 
-  const _FeaturedCard({required this.campaign});
+  const _FeaturedCard({required this.campaign, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -73,9 +83,7 @@ class _FeaturedCard extends StatelessWidget {
       label:
           'Featured campaign ${campaign.title} by ${campaign.creatorName}, ${campaign.progressPercent.toStringAsFixed(0)}% funded',
       child: InkWell(
-        onTap: () {
-          CampaignRoutes.showDonationDetail(context);
-        },
+        onTap: onTap,
         borderRadius: BorderRadius.circular(20),
         child: Container(
           decoration: BoxDecoration(

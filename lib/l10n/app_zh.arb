@@ -37,6 +37,8 @@
   "authSignInLink": "登录",
   "commonGoBack": "返回",
   "commonCancel": "取消",
+  "commonError": "发生错误",
+  "commonRetry": "重试",
   "authResetPasswordFormLabel": "重置密码表单",
   "authEmailIllustrationLabel": "电子邮件插图",
   "authResetPasswordTitle": "重置密码",
@@ -464,6 +466,34 @@
   "settingsProfileFieldSave": "Save",
   "settingsProfileFieldEditFallbackTitle": "Edit field",
   "settingsProfileFieldEditFallbackLabel": "Field",
+  "settingsProfileEditProfileNotFound": "未找到个人资料",
+  "settingsProfileEditTapToChangePhoto": "点击更改照片",
+  "settingsProfileEditFailedToPickImage": "选择图片失败: {error}",
+  "@settingsProfileEditFailedToPickImage": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+  "settingsProfileEditUploadFailed": "上传失败: {error}",
+  "@settingsProfileEditUploadFailed": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+  "settingsProfileEditUploadError": "上传错误: {error}",
+  "@settingsProfileEditUploadError": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+  "settingsProfileEditUserNotAuthenticated": "用户未认证",
+  "settingsProfileEditNoChanges": "没有要保存的更改",
+  "settingsProfileFieldFullName": "全名",
+  "settingsProfileFieldEmail": "电子邮件",
+  "settingsProfileFieldLocation": "位置",
+  "settingsProfileFieldLocationHint": "你住在哪里？",
+  "settingsProfileFieldWebsiteHint": "https://example.com",
+  "settingsProfileFieldBioHint": "介绍一下你自己",
   "settingsSecurityPasswordSectionTitle": "Password",
   "settingsSecurityPasswordChange": "Change password",
   "settingsSecurityPasswordLastChanged": "Last changed 2 months ago",

@@ -14,7 +14,6 @@ import 'package:velora/features/search/presentation/widgets/discover_card.dart';
 import 'package:velora/features/search/presentation/widgets/search_user_card.dart';
 import 'package:velora/features/search/presentation/widgets/search_campaign_card.dart';
 
-/// Search screen with real-time search for users and campaigns
 class SearchScreen extends HookWidget {
   const SearchScreen({super.key});
 
@@ -123,8 +122,7 @@ class SearchScreen extends HookWidget {
                           ),
                         ),
                       ),
-                    ),
-                    BlocBuilder<SearchBloc, SearchState>(
+                    ),                    BlocBuilder<SearchBloc, SearchState>(
                       builder: (context, state) {
                         if (state.lastQuery != null && state.lastQuery!.isNotEmpty) {
                           if (state.isLoadingUsers || state.isLoadingCampaigns) {

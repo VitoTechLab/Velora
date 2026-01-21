@@ -212,8 +212,6 @@ class ConversationListWidget extends StatelessWidget {
         physics: const AlwaysScrollableScrollPhysics(
           parent: BouncingScrollPhysics(),
         ),
-        // Performance optimization: provide item extent hint
-        itemExtent: 84, // Approximate height of ChatListItem
         itemCount: conversations.length,
         itemBuilder: (context, index) {
           final conversation = conversations[index];

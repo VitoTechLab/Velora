@@ -272,11 +272,18 @@ $$;
 -- ===========================================================================
 
 -- [TRIGGER] LIKE (INSERT + DELETE in one handler)
+DROP FUNCTION IF EXISTS public.trg_fn_handler_like() CASCADE;
+
 CREATE OR REPLACE FUNCTION public.trg_fn_handler_like() 
 RETURNS TRIGGER AS $$
-DECLARE v_owner UUID; v_img TEXT; v_key TEXT;
+DECLARE 
+  v_owner UUID;
+  v_img   TEXT;
+  v_key   TEXT;
 BEGIN
-  SELECT user_id, image_urls[1] INTO v_owner, v_img 
+  -- feed_posts sekarang pakai media_urls (TEXT[]), ambil elemen pertama
+  SELECT user_id, media_urls[1]
+  INTO v_owner, v_img
   FROM public.feed_posts 
   WHERE id = COALESCE(NEW.post_id, OLD.post_id);
   
@@ -284,8 +291,12 @@ BEGIN
 
   IF (TG_OP = 'INSERT') THEN
     PERFORM public.upsert_notification(
-      v_owner, NEW.user_id, 'like'::public.notification_type, 
-      NEW.post_id, 'post'::public.notification_target_type, v_key, 
+      v_owner,
+      NEW.user_id,
+      'like'::public.notification_type, 
+      NEW.post_id,
+      'post'::public.notification_target_type,
+      v_key, 
       jsonb_build_object('thumbnail', v_img)
     );
   ELSIF (TG_OP = 'DELETE') THEN
@@ -294,7 +305,9 @@ BEGIN
   
   RETURN NULL;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public;
+$$ LANGUAGE plpgsql
+   SECURITY DEFINER
+   SET search_path = public;
 
 DROP TRIGGER IF EXISTS trg_notif_like ON public.feed_post_likes;
 CREATE TRIGGER trg_notif_like 
@@ -302,11 +315,18 @@ AFTER INSERT OR DELETE ON public.feed_post_likes
 FOR EACH ROW EXECUTE FUNCTION public.trg_fn_handler_like();
 
 -- [TRIGGER] COMMENT (INSERT + DELETE in one handler)
+DROP FUNCTION IF EXISTS public.trg_fn_handler_comment() CASCADE;
+
 CREATE OR REPLACE FUNCTION public.trg_fn_handler_comment() 
 RETURNS TRIGGER AS $$
-DECLARE v_owner UUID; v_img TEXT; v_key TEXT;
+DECLARE 
+  v_owner UUID;
+  v_img   TEXT;
+  v_key   TEXT;
 BEGIN
-  SELECT user_id, image_urls[1] INTO v_owner, v_img 
+  -- feed_posts sekarang pakai media_urls (TEXT[]), ambil elemen pertama
+  SELECT user_id, media_urls[1]
+  INTO v_owner, v_img
   FROM public.feed_posts 
   WHERE id = COALESCE(NEW.post_id, OLD.post_id);
   
@@ -314,9 +334,16 @@ BEGIN
 
   IF (TG_OP = 'INSERT') THEN
     PERFORM public.upsert_notification(
-      v_owner, NEW.user_id, 'comment'::public.notification_type, 
-      NEW.post_id, 'post'::public.notification_target_type, v_key,
-      jsonb_build_object('thumbnail', v_img, 'preview', LEFT(NEW.content, 100))
+      v_owner,
+      NEW.user_id,
+      'comment'::public.notification_type, 
+      NEW.post_id,
+      'post'::public.notification_target_type,
+      v_key,
+      jsonb_build_object(
+        'thumbnail', v_img,
+        'preview', LEFT(NEW.content, 100)
+      )
     );
   ELSIF (TG_OP = 'DELETE') THEN
     PERFORM public.reduce_or_delete_notification(v_owner, v_key);
@@ -324,7 +351,9 @@ BEGIN
   
   RETURN NULL;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public;
+$$ LANGUAGE plpgsql
+   SECURITY DEFINER
+   SET search_path = public;
 
 DROP TRIGGER IF EXISTS trg_notif_comment ON public.feed_comments;
 CREATE TRIGGER trg_notif_comment 

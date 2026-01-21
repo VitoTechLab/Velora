@@ -89,72 +89,25 @@ class FeedScreen extends HookWidget {
 
     return Scaffold(
       appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Theme.of(context).colorScheme.surface,
-                Theme.of(context).colorScheme.surfaceContainerLowest,
-              ],
-            ),
-          ),
-        ),
+        backgroundColor: Theme.of(context).colorScheme.surface,
         elevation: 0,
         shadowColor: Colors.transparent,
         surfaceTintColor: Colors.transparent,
-        leading: Container(
-          margin: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Theme.of(context).colorScheme.primary,
-                Theme.of(context).colorScheme.primary.withValues(alpha: 0.85),
-              ],
-            ),
-            borderRadius: BorderRadius.circular(12),
-            boxShadow: [
-              BoxShadow(
-                color: Theme.of(context)
-                    .colorScheme
-                    .primary
-                    .withValues(alpha: 0.3),
-                blurRadius: 8,
-                offset: const Offset(0, 2),
-              ),
-            ],
-          ),
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: () {
-                context.pushNamed(AppRouteName.mediaGallery);
-              },
-              borderRadius: BorderRadius.circular(12),
-              child: Icon(
-                Icons.add_box_outlined,
-                size: 28,
-                color: Theme.of(context).colorScheme.onPrimary,
-              ),
-            ),
+        leading: IconButton(
+          onPressed: () {
+            context.pushNamed(AppRouteName.mediaGallery);
+          },
+          icon: Icon(
+            Icons.add_box_outlined,
+            size: 28,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
-        title: ShaderMask(
-          shaderCallback: (bounds) => LinearGradient(
-            colors: [
-              Theme.of(context).colorScheme.primary,
-              Theme.of(context).colorScheme.secondary,
-            ],
-          ).createShader(bounds),
-          child: Text(
-            'Velora',
-            style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: 0.5,
-                  color: Colors.white,
-                ),
-          ),
+        title: Text(
+          'Velora',
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
         ),
         actions: [
           BlocBuilder<NotificationBloc, NotificationState>(

@@ -4,15 +4,20 @@ import 'package:velora/core/supabase/supabase_constants.dart';
 import 'package:velora/core/supabase/supabase_guard.dart';
 import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/feed/data/models/feed_model.dart';
+import 'package:velora/features/feed/data/services/feed_notification_service.dart';
 import 'package:velora/features/post/data/datasources/post_remote_datasource.dart';
 import 'package:velora/features/post/data/models/post_feed_model.dart';
 
 /// Implementation of post remote datasource using Supabase
 class PostRemoteDataSourceImpl implements PostRemoteDataSource {
-  const PostRemoteDataSourceImpl({required SupabaseClient supabaseClient})
-    : _client = supabaseClient;
+  const PostRemoteDataSourceImpl({
+    required SupabaseClient supabaseClient,
+    required FeedNotificationService notificationService,
+  })  : _client = supabaseClient,
+        _notificationService = notificationService;
 
   final SupabaseClient _client;
+  final FeedNotificationService _notificationService;
 
   static const _logTag = 'PostRemoteDataSource';
 
@@ -52,10 +57,44 @@ class PostRemoteDataSourceImpl implements PostRemoteDataSource {
           throw NotFoundException('Post not found after creation');
         }
 
-        return FeedModel.fromJson(response);
+        final feedModel = FeedModel.fromJson(response);
+
+        // Send notification to followers (fire and forget)
+        _sendNewPostNotificationToFollowers(
+          postId: feedModel.id,
+          postAuthorId: feedModel.userId,
+          postAuthorUsername: feedModel.username ?? 'Someone',
+          postContent: feedModel.content,
+          postImageUrl:
+              feedModel.mediaUrls.isNotEmpty ? feedModel.mediaUrls.first : null,
+        );
+
+        return feedModel;
       },
       op: 'createFeedPost',
       tag: _logTag,
     );
+  }
+
+  /// Send new post notification to all followers (internal helper)
+  Future<void> _sendNewPostNotificationToFollowers({
+    required String postId,
+    required String postAuthorId,
+    required String postAuthorUsername,
+    String? postContent,
+    String? postImageUrl,
+  }) async {
+    try {
+      await _notificationService.sendNewPostNotification(
+        postAuthorId: postAuthorId,
+        postAuthorUsername: postAuthorUsername,
+        postId: postId,
+        postImageUrl: postImageUrl,
+        postContent: postContent,
+      );
+    } catch (e) {
+      loge('Failed to send new post notification', error: e, tag: _logTag);
+      // Don't throw - notification failure shouldn't break post creation
+    }
   }
 }

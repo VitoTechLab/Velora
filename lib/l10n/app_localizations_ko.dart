@@ -101,6 +101,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get commonCancel => '취소';
 
   @override
+  String get commonError => '오류가 발생했습니다';
+
+  @override
+  String get commonRetry => '다시 시도';
+
+  @override
   String get authResetPasswordFormLabel => '비밀번호 재설정 양식';
 
   @override
@@ -458,6 +464,66 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get settingsWalletTitle => '지갑';
+
+  @override
+  String get campaignCreateRequiredFields => '필수 항목을 모두 입력해주세요';
+
+  @override
+  String get campaignCreateInvalidTarget => '목표 금액은 0보다 커야 합니다';
+
+  @override
+  String get campaignCreateSuccess => '캠페인이 성공적으로 생성되었습니다';
+
+  @override
+  String get campaignCreateTitle => '캠페인 만들기';
+
+  @override
+  String get campaignCreateSubtitle => '목표를 명확하게 설명하고 투명한 목표 금액을 설정하세요.';
+
+  @override
+  String get campaignCreateBasicInfo => '기본 정보';
+
+  @override
+  String get campaignCreateTitleLabel => '제목';
+
+  @override
+  String get campaignCreateTitleHint => '동네 카페를 살려주세요';
+
+  @override
+  String get campaignCreateDescriptionLabel => '설명';
+
+  @override
+  String get campaignCreateDescriptionHint => '배경, 영향, 모금 사용 계획을 자세히 적어주세요.';
+
+  @override
+  String get campaignCreateGoalSection => '목표 & 기간';
+
+  @override
+  String get campaignCreateTargetLabel => '목표 금액';
+
+  @override
+  String get campaignCreateTargetHint => '예: 5000000';
+
+  @override
+  String get campaignCreateEndDateLabel => '종료일 (선택)';
+
+  @override
+  String get campaignCreateContextSection => '상황';
+
+  @override
+  String get campaignCreateLocationLabel => '도시 (선택)';
+
+  @override
+  String get campaignCreateLocationHint => '이 캠페인은 어디에서 진행되나요?';
+
+  @override
+  String get campaignCreateLoadingCategories => '카테고리를 불러오는 중...';
+
+  @override
+  String get campaignCreateCategoryLabel => '카테고리';
+
+  @override
+  String get campaignCreateCTA => '캠페인 게시하기';
 
   @override
   String get walletDashboardTitle => '지갑 대시보드';
@@ -947,6 +1013,51 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get settingsProfileEditPronounsLabel => 'Pronouns';
+
+  @override
+  String get settingsProfileEditProfileNotFound => '프로필을 찾을 수 없습니다';
+
+  @override
+  String get settingsProfileEditTapToChangePhoto => '탭하여 사진 변경';
+
+  @override
+  String settingsProfileEditFailedToPickImage(String error) {
+    return '이미지 선택 실패: $error';
+  }
+
+  @override
+  String settingsProfileEditUploadFailed(String error) {
+    return '업로드 실패: $error';
+  }
+
+  @override
+  String settingsProfileEditUploadError(String error) {
+    return '업로드 오류: $error';
+  }
+
+  @override
+  String get settingsProfileEditUserNotAuthenticated => '사용자가 인증되지 않았습니다';
+
+  @override
+  String get settingsProfileEditNoChanges => '저장할 변경 사항이 없습니다';
+
+  @override
+  String get settingsProfileFieldFullName => '전체 이름';
+
+  @override
+  String get settingsProfileFieldEmail => '이메일';
+
+  @override
+  String get settingsProfileFieldLocation => '위치';
+
+  @override
+  String get settingsProfileFieldLocationHint => '어디에 사시나요?';
+
+  @override
+  String get settingsProfileFieldWebsiteHint => 'https://example.com';
+
+  @override
+  String get settingsProfileFieldBioHint => '자기소개';
 
   @override
   String get settingsProfileFieldSave => 'Save';
@@ -2755,4 +2866,16 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get chatDocumentAddMore => 'Add more documents';
+
+  @override
+  String get mediaPreviewTitle => 'Preview';
+
+  @override
+  String get mediaPreviewAddCaption => 'Add a caption...';
+
+  @override
+  String get mediaPreviewRemove => 'Remove';
+
+  @override
+  String get mediaPreviewSend => 'Send';
 }

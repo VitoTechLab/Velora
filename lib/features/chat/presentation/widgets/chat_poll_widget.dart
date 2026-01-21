@@ -43,8 +43,8 @@ class ChatPollWidget extends StatelessWidget {
     final textTheme = theme.textTheme;
     final t = AppLocalizations.of(context)!;
 
-    final textColor =
-        isSender ? colorScheme.onPrimaryContainer : colorScheme.onSurface;
+    // Pakai warna teks netral supaya selalu terbaca jelas
+    final textColor = colorScheme.onSurface;
 
     return TweenAnimationBuilder<double>(
       duration: const Duration(milliseconds: 400),
@@ -79,13 +79,14 @@ class ChatPollWidget extends StatelessWidget {
               ),
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
+                // Lebih mirip kartu WhatsApp: background netral
                 gradient: isSender
                     ? LinearGradient(
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
-                          colorScheme.primaryContainer,
-                          colorScheme.primaryContainer.withValues(alpha: 0.9),
+                          colorScheme.primaryContainer.withValues(alpha: 0.95),
+                          colorScheme.primaryContainer.withValues(alpha: 0.85),
                         ],
                       )
                     : null,
@@ -324,18 +325,15 @@ class _PollOptionItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           child: Ink(
             decoration: BoxDecoration(
-              gradient: showResults
-                  ? null
-                  : LinearGradient(
-                      colors: [
-                        textColor.withValues(alpha: 0.04),
-                        textColor.withValues(alpha: 0.02),
-                      ],
-                    ),
+              // Saat belum vote, opsi tampil seperti chip netral
+              color: showResults
+                  ? Colors.transparent
+                  : colorScheme.surfaceContainerLowest,
+              gradient: null,
               border: Border.all(
                 color: showResults
                     ? Colors.transparent
-                    : textColor.withValues(alpha: 0.12),
+                    : colorScheme.outline.withValues(alpha: 0.15),
                 width: 1,
               ),
               borderRadius: BorderRadius.circular(12),

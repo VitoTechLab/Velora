@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../../domain/entities/campaign_model.dart';
 import '../../domain/entities/campaign_type.dart';
-import '../routes/campaign_routes.dart';
 import 'verified_badge.dart';
 import 'category_pill.dart';
 import 'progress_bar.dart';
@@ -19,8 +19,9 @@ String formatCurrency(double amount) {
 
 class CampaignCard extends StatelessWidget {
   final CampaignModel campaign;
+  final VoidCallback? onTap;
 
-  const CampaignCard({super.key, required this.campaign});
+  const CampaignCard({super.key, required this.campaign, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +33,7 @@ class CampaignCard extends StatelessWidget {
       label:
           'Campaign ${campaign.title} by ${campaign.creatorName}, ${campaign.progressPercent.toStringAsFixed(0)}% funded, ${campaign.timeLeftLabel} remaining',
       child: InkWell(
-        onTap: () {
-          CampaignRoutes.showDonationDetail(context);
-        },
+        onTap: onTap,
         borderRadius: BorderRadius.circular(16),
         child: Container(
           decoration: BoxDecoration(
@@ -54,20 +53,79 @@ class CampaignCard extends StatelessWidget {
               Container(
                 height: 140,
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      colorScheme.secondaryContainer.withValues(alpha: 0.8),
-                      colorScheme.tertiaryContainer.withValues(alpha: 0.6),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
                   borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(16),
                   ),
                 ),
+                clipBehavior: Clip.antiAlias,
                 child: Stack(
                   children: [
+                    // Background image or gradient fallback
+                    Positioned.fill(
+                      child: campaign.imageUrl != null
+                          ? CachedNetworkImage(
+                              imageUrl: campaign.imageUrl!,
+                              fit: BoxFit.cover,
+                              placeholder: (context, url) => Container(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      colorScheme.secondaryContainer
+                                          .withValues(alpha: 0.8),
+                                      colorScheme.tertiaryContainer
+                                          .withValues(alpha: 0.6),
+                                    ],
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                  ),
+                                ),
+                                child: Center(
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    color: colorScheme.primary,
+                                  ),
+                                ),
+                              ),
+                              errorWidget: (context, url, error) => Container(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      colorScheme.secondaryContainer
+                                          .withValues(alpha: 0.8),
+                                      colorScheme.tertiaryContainer
+                                          .withValues(alpha: 0.6),
+                                    ],
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                  ),
+                                ),
+                                child: Icon(
+                                  Icons.campaign_outlined,
+                                  size: 48,
+                                  color: colorScheme.onSecondaryContainer,
+                                ),
+                              ),
+                            )
+                          : Container(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    colorScheme.secondaryContainer
+                                        .withValues(alpha: 0.8),
+                                    colorScheme.tertiaryContainer
+                                        .withValues(alpha: 0.6),
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                              ),
+                              child: Icon(
+                                Icons.campaign_outlined,
+                                size: 48,
+                                color: colorScheme.onSecondaryContainer,
+                              ),
+                            ),
+                    ),
                     Positioned(
                       top: 12,
                       left: 12,

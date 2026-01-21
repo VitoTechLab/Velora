@@ -103,6 +103,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get commonCancel => 'Cancel';
 
   @override
+  String get commonError => 'Something went wrong';
+
+  @override
+  String get commonRetry => 'Retry';
+
+  @override
   String get authResetPasswordFormLabel => 'Reset password form';
 
   @override
@@ -471,6 +477,68 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsWalletTitle => 'Wallet';
+
+  @override
+  String get campaignCreateRequiredFields => 'Please fill all required fields';
+
+  @override
+  String get campaignCreateInvalidTarget => 'Target amount must be > 0';
+
+  @override
+  String get campaignCreateSuccess => 'Campaign created successfully';
+
+  @override
+  String get campaignCreateTitle => 'Create Campaign';
+
+  @override
+  String get campaignCreateSubtitle =>
+      'Tell your story clearly and set a transparent goal.';
+
+  @override
+  String get campaignCreateBasicInfo => 'Basic information';
+
+  @override
+  String get campaignCreateTitleLabel => 'Title';
+
+  @override
+  String get campaignCreateTitleHint => 'Save a local cafe';
+
+  @override
+  String get campaignCreateDescriptionLabel => 'Description';
+
+  @override
+  String get campaignCreateDescriptionHint =>
+      'Share the background, impact, and how funds will be used.';
+
+  @override
+  String get campaignCreateGoalSection => 'Goal & duration';
+
+  @override
+  String get campaignCreateTargetLabel => 'Target amount';
+
+  @override
+  String get campaignCreateTargetHint => 'e.g. 5000000';
+
+  @override
+  String get campaignCreateEndDateLabel => 'End date (optional)';
+
+  @override
+  String get campaignCreateContextSection => 'Context';
+
+  @override
+  String get campaignCreateLocationLabel => 'City (optional)';
+
+  @override
+  String get campaignCreateLocationHint => 'Where is this campaign located?';
+
+  @override
+  String get campaignCreateLoadingCategories => 'Loading categories...';
+
+  @override
+  String get campaignCreateCategoryLabel => 'Category';
+
+  @override
+  String get campaignCreateCTA => 'Publish campaign';
 
   @override
   String get walletDashboardTitle => 'Wallet Dashboard';
@@ -976,6 +1044,52 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsProfileEditPronounsLabel => 'Pronouns';
+
+  @override
+  String get settingsProfileEditProfileNotFound => 'Profile not found';
+
+  @override
+  String get settingsProfileEditTapToChangePhoto => 'Tap to change photo';
+
+  @override
+  String settingsProfileEditFailedToPickImage(String error) {
+    return 'Failed to pick image: $error';
+  }
+
+  @override
+  String settingsProfileEditUploadFailed(String error) {
+    return 'Upload failed: $error';
+  }
+
+  @override
+  String settingsProfileEditUploadError(String error) {
+    return 'Upload error: $error';
+  }
+
+  @override
+  String get settingsProfileEditUserNotAuthenticated =>
+      'User not authenticated';
+
+  @override
+  String get settingsProfileEditNoChanges => 'No changes to save';
+
+  @override
+  String get settingsProfileFieldFullName => 'Full Name';
+
+  @override
+  String get settingsProfileFieldEmail => 'Email';
+
+  @override
+  String get settingsProfileFieldLocation => 'Location';
+
+  @override
+  String get settingsProfileFieldLocationHint => 'Where are you based?';
+
+  @override
+  String get settingsProfileFieldWebsiteHint => 'https://example.com';
+
+  @override
+  String get settingsProfileFieldBioHint => 'Tell us about yourself';
 
   @override
   String get settingsProfileFieldSave => 'Save';
@@ -2822,4 +2936,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chatDocumentAddMore => 'Add more documents';
+
+  @override
+  String get mediaPreviewTitle => 'Preview';
+
+  @override
+  String get mediaPreviewAddCaption => 'Add a caption...';
+
+  @override
+  String get mediaPreviewRemove => 'Remove';
+
+  @override
+  String get mediaPreviewSend => 'Send';
 }

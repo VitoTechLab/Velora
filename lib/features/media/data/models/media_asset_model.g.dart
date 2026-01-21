@@ -14,8 +14,9 @@ _$MediaAssetModelImpl _$$MediaAssetModelImplFromJson(
       resourceType: json['resource_type'] as String,
       format: json['format'] as String,
       bytes: (json['bytes'] as num).toInt(),
-      width: (json['width'] as num).toInt(),
-      height: (json['height'] as num).toInt(),
+      width: (json['width'] as num?)?.toInt() ?? 0,
+      height: (json['height'] as num?)?.toInt() ?? 0,
+      duration: (json['duration'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$$MediaAssetModelImplToJson(
@@ -28,4 +29,5 @@ Map<String, dynamic> _$$MediaAssetModelImplToJson(
       'bytes': instance.bytes,
       'width': instance.width,
       'height': instance.height,
+      'duration': instance.duration,
     };

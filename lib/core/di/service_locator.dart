@@ -9,6 +9,7 @@ import 'package:velora/core/services/connectivity_service.dart';
 import 'package:velora/core/services/file_download_service.dart';
 import 'package:velora/core/supabase/supabase_initializer.dart';
 import 'package:velora/features/auth/domain/usecases/watch_auth_snapshot_usecase.dart';
+import 'package:velora/features/profile/domain/usecases/update_profile_usecase.dart';
 import 'package:velora/features/settings/domain/entities/user_preferences.dart';
 import 'package:velora/features/settings/data/datasources/local/settings_local_datasource.dart';
 import 'package:velora/features/settings/data/datasources/local/settings_local_datasource_impl.dart';
@@ -293,7 +294,10 @@ Future<void> configureDependencies() async {
 
   if (!getIt.isRegistered<PostRemoteDataSource>()) {
     getIt.registerLazySingleton<PostRemoteDataSource>(
-      () => PostRemoteDataSourceImpl(supabaseClient: getIt<SupabaseClient>()),
+      () => PostRemoteDataSourceImpl(
+        supabaseClient: getIt<SupabaseClient>(),
+        notificationService: getIt<FeedNotificationService>(),
+      ),
     );
   }
 
@@ -661,6 +665,9 @@ Future<void> configureDependencies() async {
   getIt
     ..registerLazySingleton(() => GetProfileUseCase(getIt<ProfileRepository>()))
     ..registerLazySingleton(
+      () => UpdateProfileUseCase(getIt<ProfileRepository>()),
+    )
+    ..registerLazySingleton(
       () => ToggleFollowUseCase(getIt<ProfileRepository>()),
     )
     ..registerLazySingleton(() => BlockUserUseCase(getIt<ProfileRepository>()))
@@ -810,6 +817,7 @@ Future<void> configureDependencies() async {
   getIt.registerFactory(
     () => ProfileBloc(
       getProfileUseCase: getIt<GetProfileUseCase>(),
+      updateProfileUseCase: getIt<UpdateProfileUseCase>(),
       toggleFollowUseCase: getIt<ToggleFollowUseCase>(),
       blockUserUseCase: getIt<BlockUserUseCase>(),
       unblockUserUseCase: getIt<UnblockUserUseCase>(),

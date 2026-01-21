@@ -1,5 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <com.google.android.gms.ads.nativead.NativeAdView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/native_ad_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -26,7 +28,9 @@
                 android:id="@+id/ad_icon"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                android:contentDescription="Ad icon"
+                android:background="@android:color/transparent" />
 
             <!-- Advertiser Name & Sponsored Badge -->
             <LinearLayout
@@ -45,10 +49,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:ellipsize="end" />
+                    android:ellipsize="end"
+                    android:text="" />
 
                 <!-- Sponsored Badge -->
                 <TextView
+                    android:id="@+id/ad_sponsored"
                     android:text="Sponsored"
                     android:textSize="11sp"
                     android:textColor="?android:attr/textColorSecondary"
@@ -71,14 +77,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="2"
-            android:ellipsize="end" />
+            android:ellipsize="end"
+            android:text="" />
 
         <!-- MEDIA (IMAGE / VIDEO) -->
         <com.google.android.gms.ads.nativead.MediaView
             android:id="@+id/ad_media"
             android:layout_width="match_parent"
-            android:layout_height="280dp"
-            android:scaleType="centerCrop" />
+            android:layout_height="280dp" />
 
         <!-- BODY TEXT (Optional) -->
         <TextView
@@ -93,7 +99,8 @@
             android:layout_height="wrap_content"
             android:maxLines="3"
             android:ellipsize="end"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:text="" />
 
         <!-- BOTTOM ACTION BAR -->
         <LinearLayout
@@ -116,26 +123,28 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="4dp"
                 android:gravity="center_vertical"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:text="" />
 
-            <!-- CTA Button -->
-            <Button
+            <!-- CTA Button - Using MaterialButton -->
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/ad_cta"
+                style="@style/Widget.Material3.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:minWidth="120dp"
                 android:textSize="14sp"
-                android:textStyle="bold"
                 android:textAllCaps="false"
                 android:paddingStart="24dp"
-                android:paddingEnd="24dp" />
+                android:paddingEnd="24dp"
+                android:text="Learn More" />
         </LinearLayout>
 
         <!-- DIVIDER -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="?android:attr/divider" />
+            android:background="?android:attr/listDivider" />
 
     </LinearLayout>
 
