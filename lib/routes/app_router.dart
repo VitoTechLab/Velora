@@ -59,7 +59,7 @@ import 'package:velora/l10n/app_localizations.dart';
 import 'package:velora/features/feed/presentation/screens/feed_screen.dart';
 import 'package:velora/features/notification/presentation/screens/notification_screen.dart';
 
-import 'package:velora/features/search/presentation/screens/search_screen.dart';
+// import 'package:velora/features/search/presentation/screens/search_screen.dart';
 
 class AppRouter {
   AppRouter(
@@ -321,16 +321,16 @@ class AppRouter {
                   ),
                 ],
               ),
-              StatefulShellBranch(
-                navigatorKey: NavigationKeys.searchBranch,
-                routes: [
-                  GoRoute(
-                    path: AppRoutePath.search,
-                    name: AppRouteName.search,
-                    builder: (context, state) => const SearchScreen(),
-                  ),
-                ],
-              ),
+              // StatefulShellBranch(
+              //   navigatorKey: NavigationKeys.searchBranch,
+              //   routes: [
+              //     GoRoute(
+              //       path: AppRoutePath.search,
+              //       name: AppRouteName.search,
+              //       builder: (context, state) => const SearchScreen(),
+              //     ),
+              //   ],
+              // ),
               
               StatefulShellBranch(
                 navigatorKey: NavigationKeys.profileBranch,

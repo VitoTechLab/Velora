@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:velora/features/chat/domain/entities/event_content_entity.dart';
 import 'package:velora/features/chat/domain/entities/message_attachment_entity.dart';
 import 'package:velora/features/chat/domain/entities/poll_content_entity.dart';
+import 'package:velora/features/chat/domain/entities/message_status.dart';
 
 part 'chat_message_entity.freezed.dart';
 
@@ -27,6 +28,7 @@ abstract class ChatMessageEntity with _$ChatMessageEntity {
     EventPayloadEntity? event,
     // Attachments (images, videos, audio, files)
     @Default([]) List<MessageAttachmentEntity> attachments,
+    @Default(MessageStatus.sent) MessageStatus status,
   }) = _ChatMessageEntity;
 
   /// Get the first attachment (convenience getter)

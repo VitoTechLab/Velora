@@ -41,9 +41,37 @@ class ChatScreen extends HookWidget {
 
     final backgroundColor = colorScheme.surface;
 
-    return BlocProvider(
-      create: (context) =>
-          getIt<ChatMessageBloc>()..add(const LoadConversationListEvent()),
+    // Create BLoC instance that persists across rebuilds with proper disposal
+    final bloc = useMemoized(() => getIt<ChatMessageBloc>(), []);
+
+    // Dispose BLoC when widget is unmounted
+    useEffect(() {
+      return () => bloc.close();
+    }, [bloc]);
+
+    // Load conversation list on mount
+    useEffect(() {
+      bloc.add(const LoadConversationListEvent());
+      return null;
+    }, [bloc]);
+
+    // Refresh conversation list when returning from chat detail
+    useEffect(() {
+      void onRouteChange() {
+        // Refresh when this screen becomes visible again (silent refresh)
+        if (!bloc.isClosed) {
+          bloc.add(const RefreshConversationListEvent());
+        }
+      }
+
+      // Listen to route changes using GoRouter
+      final router = GoRouter.of(context);
+      router.routerDelegate.addListener(onRouteChange);
+      return () => router.routerDelegate.removeListener(onRouteChange);
+    }, [bloc]);
+
+    return BlocProvider.value(
+      value: bloc,
       child: Scaffold(
         backgroundColor: backgroundColor,
         appBar: AppBar(

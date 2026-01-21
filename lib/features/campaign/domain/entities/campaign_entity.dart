@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:velora/features/search/data/models/search_campaign_result_model.dart';
 
 part 'campaign_entity.freezed.dart';
 
@@ -34,4 +35,19 @@ abstract class CampaignEntity with _$CampaignEntity {
     String? categoryName,
     String? categorySlug,
   }) = _CampaignEntity;
+
+  const CampaignEntity._();
+
+  /// Convert to SearchCampaignResultModel for search results
+  SearchCampaignResultModel toSearchResultModel() {
+    return SearchCampaignResultModel(
+      id: id,
+      title: title,
+      coverImageUrl: coverImageUrl,
+      amountRaised: amountRaised,
+      targetAmount: targetAmount,
+      organizerUsername: organizerUsername ?? '',
+      categoryName: categoryName,
+    );
+  }
 }

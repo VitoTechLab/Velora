@@ -64,9 +64,9 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
               *,
               message_poll_payload(
                 *,
-                poll_options:v_poll_options_with_votes(*)
+                poll_options(*)
               ),
-              message_event_payload:v_event_with_rsvp(*),
+              message_event_payload(*),
               message_attachments(*)
             ''').eq('conversation_id', conversationId);
 
@@ -284,9 +284,9 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
               *,
               message_poll_payload(
                 *,
-                poll_options:v_poll_options_with_votes(*)
+                poll_options(*)
               ),
-              message_event_payload:v_event_with_rsvp(*)
+              message_event_payload(*)
             ''').eq('id', messageId).single();
 
         return ChatMessageModel.fromJson(fullMsg);

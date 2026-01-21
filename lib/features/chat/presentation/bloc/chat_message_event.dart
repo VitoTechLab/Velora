@@ -143,6 +143,19 @@ class ChatMessageEvent with _$ChatMessageEvent {
   const factory ChatMessageEvent.setSearchQuery(String query) =
       SetSearchQueryEvent;
 
+  /// Refresh conversation list from server
+  const factory ChatMessageEvent.refreshConversationList() =
+      RefreshConversationListEvent;
+
+  /// Update a specific conversation locally (optimistic update)
+  const factory ChatMessageEvent.updateConversationLocally({
+    required String conversationId,
+    String? lastMessageBody,
+    DateTime? lastMessageAt,
+    String? lastMessageSenderId,
+    int? unreadCountDelta,
+  }) = UpdateConversationLocallyEvent;
+
   // =========================================================
   // MESSAGE READS (Read Receipts)
   // =========================================================
