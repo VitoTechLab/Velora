@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:velora/core/errors/chat_failure.dart';
 import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/chat/domain/entities/message_read_entity.dart';
@@ -106,6 +107,8 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     on<LoadConversationListEvent>(_onLoadConversationList);
     on<SetChatFilterEvent>(_onSetChatFilter);
     on<SetSearchQueryEvent>(_onSetSearchQuery);
+    on<RefreshConversationListEvent>(_onRefreshConversationList);
+    on<UpdateConversationLocallyEvent>(_onUpdateConversationLocally);
 
     // Message Reads
     on<LoadMessageReadsEvent>(_onLoadMessageReads);
@@ -1021,12 +1024,31 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
         );
       },
       (_) {
-        emit(
-          state.copyWith(
-            isMarkingRead: false,
-            message: 'Conversation marked as read',
-          ),
+        // Update conversation list locally to reset unread count
+        final conversations = state.conversations;
+        final index = conversations.indexWhere(
+          (c) => c.conversationId == conversationId,
         );
+        if (index != -1) {
+          final existing = conversations[index];
+          final updated = existing.copyWith(unreadCount: 0);
+          final updatedConversations = List.of(conversations);
+          updatedConversations[index] = updated;
+          emit(
+            state.copyWith(
+              isMarkingRead: false,
+              message: 'Conversation marked as read',
+              conversations: updatedConversations,
+            ),
+          );
+        } else {
+          emit(
+            state.copyWith(
+              isMarkingRead: false,
+              message: 'Conversation marked as read',
+            ),
+          );
+        }
       },
     );
   }
@@ -1118,6 +1140,42 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
       tag: _logTag,
     );
     emit(state.copyWith(messages: [incoming, ...state.messages]));
+
+    // Update conversation list locally for real-time sync
+    // Only if we have the conversation in our list
+    if (state.conversationId != null) {
+      // Determine message preview text
+      String messagePreview;
+      switch (incoming.kind) {
+        case 'image':
+          messagePreview = '📷 Photo';
+        case 'video':
+          messagePreview = '🎬 Video';
+        case 'audio':
+          messagePreview = '🎵 Audio';
+        case 'document':
+          messagePreview = '📎 Document';
+        case 'poll':
+          messagePreview = '📊 Poll';
+        case 'event':
+          messagePreview = '📅 Event';
+        default:
+          messagePreview = incoming.body ?? '';
+      }
+
+      // Check if message is from current user
+      final currentUserId = Supabase.instance.client.auth.currentUser?.id;
+      final isFromMe = incoming.senderId == currentUserId;
+
+      add(UpdateConversationLocallyEvent(
+        conversationId: state.conversationId!,
+        lastMessageBody: messagePreview,
+        lastMessageAt: incoming.createdAt,
+        lastMessageSenderId: incoming.senderId,
+        // Increment unread only if message is not from current user
+        unreadCountDelta: isFromMe ? 0 : 1,
+      ));
+    }
   }
 
   Future<void> _onWatchMessageUpdated(
@@ -1205,6 +1263,60 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
         ),
       ),
     );
+  }
+
+  Future<void> _onRefreshConversationList(
+    RefreshConversationListEvent event,
+    Emitter<ChatMessageState> emit,
+  ) async {
+    // Silent refresh - no loading indicator
+    final result = await getConversationListUseCase();
+    result.fold(
+      (failure) {
+        loge('$_logTag: refreshConversationList error', error: failure);
+      },
+      (conversations) => emit(
+        state.copyWith(
+          conversations: conversations,
+          conversationsError: null,
+        ),
+      ),
+    );
+  }
+
+  Future<void> _onUpdateConversationLocally(
+    UpdateConversationLocallyEvent event,
+    Emitter<ChatMessageState> emit,
+  ) async {
+    final conversations = state.conversations;
+    final index = conversations.indexWhere(
+      (c) => c.conversationId == event.conversationId,
+    );
+
+    if (index == -1) {
+      // Conversation not found, trigger refresh to get it
+      add(const RefreshConversationListEvent());
+      return;
+    }
+
+    final existing = conversations[index];
+    final updated = existing.copyWith(
+      lastMessageBody: event.lastMessageBody ?? existing.lastMessageBody,
+      lastMessageAt: event.lastMessageAt ?? existing.lastMessageAt,
+      lastMessageSenderId:
+          event.lastMessageSenderId ?? existing.lastMessageSenderId,
+      unreadCount: event.unreadCountDelta != null
+          ? existing.unreadCount + event.unreadCountDelta!
+          : existing.unreadCount,
+    );
+
+    // Move updated conversation to top and emit
+    final updatedConversations = [
+      updated,
+      ...conversations.where((c) => c.conversationId != event.conversationId),
+    ];
+
+    emit(state.copyWith(conversations: updatedConversations));
   }
 
   // =========================================================

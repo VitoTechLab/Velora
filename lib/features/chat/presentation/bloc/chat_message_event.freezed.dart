@@ -77,6 +77,14 @@ mixin _$ChatMessageEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -148,6 +156,14 @@ mixin _$ChatMessageEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -218,6 +234,14 @@ mixin _$ChatMessageEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -269,6 +293,10 @@ mixin _$ChatMessageEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -314,6 +342,10 @@ mixin _$ChatMessageEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -357,6 +389,10 @@ mixin _$ChatMessageEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -546,6 +582,14 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -620,6 +664,14 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -693,6 +745,14 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -750,6 +810,10 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -798,6 +862,10 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -844,6 +912,10 @@ class _$InitializeChatEventImpl implements InitializeChatEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -1023,6 +1095,14 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -1097,6 +1177,14 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -1170,6 +1258,14 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -1227,6 +1323,10 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -1275,6 +1375,10 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -1321,6 +1425,10 @@ class _$LoadChatMessagesEventImpl implements LoadChatMessagesEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -1501,6 +1609,14 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -1575,6 +1691,14 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -1648,6 +1772,14 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -1705,6 +1837,10 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -1753,6 +1889,10 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -1799,6 +1939,10 @@ class _$LoadMoreChatMessagesEventImpl implements LoadMoreChatMessagesEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -1989,6 +2133,14 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -2063,6 +2215,14 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -2136,6 +2296,14 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -2193,6 +2361,10 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -2241,6 +2413,10 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -2287,6 +2463,10 @@ class _$SendChatMessageEventImpl implements SendChatMessageEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -2527,6 +2707,14 @@ class _$SendMediaMessageEventImpl implements SendMediaMessageEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -2602,6 +2790,14 @@ class _$SendMediaMessageEventImpl implements SendMediaMessageEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -2676,6 +2872,14 @@ class _$SendMediaMessageEventImpl implements SendMediaMessageEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -2734,6 +2938,10 @@ class _$SendMediaMessageEventImpl implements SendMediaMessageEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -2782,6 +2990,10 @@ class _$SendMediaMessageEventImpl implements SendMediaMessageEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -2828,6 +3040,10 @@ class _$SendMediaMessageEventImpl implements SendMediaMessageEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -3049,6 +3265,14 @@ class _$UploadAndSendImagesEventImpl implements UploadAndSendImagesEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -3123,6 +3347,14 @@ class _$UploadAndSendImagesEventImpl implements UploadAndSendImagesEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -3197,6 +3429,14 @@ class _$UploadAndSendImagesEventImpl implements UploadAndSendImagesEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -3254,6 +3494,10 @@ class _$UploadAndSendImagesEventImpl implements UploadAndSendImagesEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -3302,6 +3546,10 @@ class _$UploadAndSendImagesEventImpl implements UploadAndSendImagesEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -3348,6 +3596,10 @@ class _$UploadAndSendImagesEventImpl implements UploadAndSendImagesEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -3553,6 +3805,14 @@ class _$UploadAndSendVideoEventImpl implements UploadAndSendVideoEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -3627,6 +3887,14 @@ class _$UploadAndSendVideoEventImpl implements UploadAndSendVideoEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -3700,6 +3968,14 @@ class _$UploadAndSendVideoEventImpl implements UploadAndSendVideoEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -3757,6 +4033,10 @@ class _$UploadAndSendVideoEventImpl implements UploadAndSendVideoEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -3805,6 +4085,10 @@ class _$UploadAndSendVideoEventImpl implements UploadAndSendVideoEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -3851,6 +4135,10 @@ class _$UploadAndSendVideoEventImpl implements UploadAndSendVideoEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -4054,6 +4342,14 @@ class _$UploadAndSendDocumentsEventImpl implements UploadAndSendDocumentsEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -4128,6 +4424,14 @@ class _$UploadAndSendDocumentsEventImpl implements UploadAndSendDocumentsEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -4201,6 +4505,14 @@ class _$UploadAndSendDocumentsEventImpl implements UploadAndSendDocumentsEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -4258,6 +4570,10 @@ class _$UploadAndSendDocumentsEventImpl implements UploadAndSendDocumentsEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -4306,6 +4622,10 @@ class _$UploadAndSendDocumentsEventImpl implements UploadAndSendDocumentsEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -4352,6 +4672,10 @@ class _$UploadAndSendDocumentsEventImpl implements UploadAndSendDocumentsEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -4560,6 +4884,14 @@ class _$UploadAndSendAudioEventImpl implements UploadAndSendAudioEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -4634,6 +4966,14 @@ class _$UploadAndSendAudioEventImpl implements UploadAndSendAudioEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -4708,6 +5048,14 @@ class _$UploadAndSendAudioEventImpl implements UploadAndSendAudioEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -4766,6 +5114,10 @@ class _$UploadAndSendAudioEventImpl implements UploadAndSendAudioEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -4814,6 +5166,10 @@ class _$UploadAndSendAudioEventImpl implements UploadAndSendAudioEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -4860,6 +5216,10 @@ class _$UploadAndSendAudioEventImpl implements UploadAndSendAudioEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -5093,6 +5453,14 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -5168,6 +5536,14 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -5242,6 +5618,14 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -5300,6 +5684,10 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -5348,6 +5736,10 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -5394,6 +5786,10 @@ class _$SendPollMessageEventImpl implements SendPollMessageEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -5679,6 +6075,14 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -5754,6 +6158,14 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -5837,6 +6249,14 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -5895,6 +6315,10 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -5943,6 +6367,10 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -5989,6 +6417,10 @@ class _$SendEventMessageEventImpl implements SendEventMessageEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -6184,6 +6616,14 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -6258,6 +6698,14 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -6331,6 +6779,14 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -6388,6 +6844,10 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -6436,6 +6896,10 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -6482,6 +6946,10 @@ class _$EditChatMessageEventImpl implements EditChatMessageEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -6652,6 +7120,14 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -6726,6 +7202,14 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -6799,6 +7283,14 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -6856,6 +7348,10 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -6904,6 +7400,10 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -6950,6 +7450,10 @@ class _$DeleteChatMessageEventImpl implements DeleteChatMessageEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -7129,6 +7633,14 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -7203,6 +7715,14 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -7276,6 +7796,14 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -7333,6 +7861,10 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -7381,6 +7913,10 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -7427,6 +7963,10 @@ class _$MarkConversationReadEventImpl implements MarkConversationReadEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -7570,6 +8110,14 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -7644,6 +8192,14 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -7717,6 +8273,14 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -7774,6 +8338,10 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -7822,6 +8390,10 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -7868,6 +8440,10 @@ class _$ClearChatMessagesInfoEventImpl implements ClearChatMessagesInfoEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -8027,6 +8603,14 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -8101,6 +8685,14 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -8174,6 +8766,14 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -8231,6 +8831,10 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -8279,6 +8883,10 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -8325,6 +8933,10 @@ class _$StartWatchMessagesEventImpl implements StartWatchMessagesEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -8465,6 +9077,14 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -8539,6 +9159,14 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -8612,6 +9240,14 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -8669,6 +9305,10 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -8717,6 +9357,10 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -8763,6 +9407,10 @@ class _$StopWatchMessagesEventImpl implements StopWatchMessagesEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -8933,6 +9581,14 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -9007,6 +9663,14 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -9080,6 +9744,14 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -9137,6 +9809,10 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -9185,6 +9861,10 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -9231,6 +9911,10 @@ class _$WatchMessageArrivedEventImpl implements WatchMessageArrivedEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -9410,6 +10094,14 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -9484,6 +10176,14 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -9557,6 +10257,14 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -9614,6 +10322,10 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -9662,6 +10374,10 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -9708,6 +10424,10 @@ class _$WatchMessageUpdatedEventImpl implements WatchMessageUpdatedEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -9887,6 +10607,14 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -9961,6 +10689,14 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -10034,6 +10770,14 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -10091,6 +10835,10 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -10139,6 +10887,10 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -10185,6 +10937,10 @@ class _$WatchMessageDeletedEventImpl implements WatchMessageDeletedEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -10352,6 +11108,14 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -10426,6 +11190,14 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -10499,6 +11271,14 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -10556,6 +11336,10 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -10604,6 +11388,10 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -10650,6 +11438,10 @@ class _$WatchMessageErrorEventImpl implements WatchMessageErrorEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -10791,6 +11583,14 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -10865,6 +11665,14 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -10938,6 +11746,14 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -10995,6 +11811,10 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -11043,6 +11863,10 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -11089,6 +11913,10 @@ class _$LoadConversationListEventImpl implements LoadConversationListEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -11245,6 +12073,14 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -11319,6 +12155,14 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -11392,6 +12236,14 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -11449,6 +12301,10 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -11497,6 +12353,10 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -11543,6 +12403,10 @@ class _$SetChatFilterEventImpl implements SetChatFilterEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -11708,6 +12572,14 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -11782,6 +12654,14 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -11855,6 +12735,14 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -11912,6 +12800,10 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -11960,6 +12852,10 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -12006,6 +12902,10 @@ class _$SetSearchQueryEventImpl implements SetSearchQueryEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -12041,6 +12941,1038 @@ abstract class SetSearchQueryEvent implements ChatMessageEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SetSearchQueryEventImplCopyWith<_$SetSearchQueryEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$RefreshConversationListEventImplCopyWith<$Res> {
+  factory _$$RefreshConversationListEventImplCopyWith(
+          _$RefreshConversationListEventImpl value,
+          $Res Function(_$RefreshConversationListEventImpl) then) =
+      __$$RefreshConversationListEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$RefreshConversationListEventImplCopyWithImpl<$Res>
+    extends _$ChatMessageEventCopyWithImpl<$Res,
+        _$RefreshConversationListEventImpl>
+    implements _$$RefreshConversationListEventImplCopyWith<$Res> {
+  __$$RefreshConversationListEventImplCopyWithImpl(
+      _$RefreshConversationListEventImpl _value,
+      $Res Function(_$RefreshConversationListEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$RefreshConversationListEventImpl
+    implements RefreshConversationListEvent {
+  const _$RefreshConversationListEventImpl();
+
+  @override
+  String toString() {
+    return 'ChatMessageEvent.refreshConversationList()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RefreshConversationListEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
+    required TResult Function(String conversationId, int? limit) loadMessages,
+    required TResult Function(String conversationId, int limit)
+        loadMoreMessages,
+    required TResult Function(
+            String conversationId, String content, String? replyToMessageId)
+        sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
+        uploadAndSendImages,
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
+        uploadAndSendVideo,
+    required TResult Function(
+            String conversationId, List<String> filePaths, String userId)
+        uploadAndSendDocuments,
+    required TResult Function(String conversationId, String filePath,
+            String userId, bool isVoiceMessage)
+        uploadAndSendAudio,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice, int maxUserVotes)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
+    required TResult Function(String messageId, String newContent) editMessage,
+    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(String conversationId, String? uptoMessageId)
+        markConversationRead,
+    required TResult Function() clearInfo,
+    required TResult Function(String conversationId) startWatch,
+    required TResult Function() stopWatch,
+    required TResult Function(ChatMessageEntity message) watchMessageArrived,
+    required TResult Function(ChatMessageEntity message) watchMessageUpdated,
+    required TResult Function(ChatMessageEntity message) watchMessageDeleted,
+    required TResult Function(String message) watchMessageError,
+    required TResult Function() loadConversationList,
+    required TResult Function(String filter) setChatFilter,
+    required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
+    required TResult Function(String messageId) loadMessageReads,
+    required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
+    required TResult Function(String conversationId) startWatchReads,
+    required TResult Function() stopWatchReads,
+    required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
+    required TResult Function(String conversationId, bool isTyping) sendTyping,
+    required TResult Function(String conversationId) startWatchTyping,
+    required TResult Function() stopWatchTyping,
+    required TResult Function(String userId) watchTypingArrived,
+    required TResult Function() cleanupTyping,
+  }) {
+    return refreshConversationList();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
+    TResult? Function(String conversationId, int? limit)? loadMessages,
+    TResult? Function(String conversationId, int limit)? loadMoreMessages,
+    TResult? Function(
+            String conversationId, String content, String? replyToMessageId)?
+        sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
+        uploadAndSendImages,
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
+        uploadAndSendVideo,
+    TResult? Function(
+            String conversationId, List<String> filePaths, String userId)?
+        uploadAndSendDocuments,
+    TResult? Function(String conversationId, String filePath, String userId,
+            bool isVoiceMessage)?
+        uploadAndSendAudio,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice, int maxUserVotes)?
+        sendPollMessage,
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
+        sendEventMessage,
+    TResult? Function(String messageId, String newContent)? editMessage,
+    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(String conversationId, String? uptoMessageId)?
+        markConversationRead,
+    TResult? Function()? clearInfo,
+    TResult? Function(String conversationId)? startWatch,
+    TResult? Function()? stopWatch,
+    TResult? Function(ChatMessageEntity message)? watchMessageArrived,
+    TResult? Function(ChatMessageEntity message)? watchMessageUpdated,
+    TResult? Function(ChatMessageEntity message)? watchMessageDeleted,
+    TResult? Function(String message)? watchMessageError,
+    TResult? Function()? loadConversationList,
+    TResult? Function(String filter)? setChatFilter,
+    TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
+    TResult? Function(String messageId)? loadMessageReads,
+    TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
+    TResult? Function(String conversationId)? startWatchReads,
+    TResult? Function()? stopWatchReads,
+    TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
+    TResult? Function(String conversationId, bool isTyping)? sendTyping,
+    TResult? Function(String conversationId)? startWatchTyping,
+    TResult? Function()? stopWatchTyping,
+    TResult? Function(String userId)? watchTypingArrived,
+    TResult? Function()? cleanupTyping,
+  }) {
+    return refreshConversationList?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
+    TResult Function(String conversationId, int? limit)? loadMessages,
+    TResult Function(String conversationId, int limit)? loadMoreMessages,
+    TResult Function(
+            String conversationId, String content, String? replyToMessageId)?
+        sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
+        uploadAndSendImages,
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
+        uploadAndSendVideo,
+    TResult Function(
+            String conversationId, List<String> filePaths, String userId)?
+        uploadAndSendDocuments,
+    TResult Function(String conversationId, String filePath, String userId,
+            bool isVoiceMessage)?
+        uploadAndSendAudio,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice, int maxUserVotes)?
+        sendPollMessage,
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
+        sendEventMessage,
+    TResult Function(String messageId, String newContent)? editMessage,
+    TResult Function(String messageId)? deleteMessage,
+    TResult Function(String conversationId, String? uptoMessageId)?
+        markConversationRead,
+    TResult Function()? clearInfo,
+    TResult Function(String conversationId)? startWatch,
+    TResult Function()? stopWatch,
+    TResult Function(ChatMessageEntity message)? watchMessageArrived,
+    TResult Function(ChatMessageEntity message)? watchMessageUpdated,
+    TResult Function(ChatMessageEntity message)? watchMessageDeleted,
+    TResult Function(String message)? watchMessageError,
+    TResult Function()? loadConversationList,
+    TResult Function(String filter)? setChatFilter,
+    TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
+    TResult Function(String messageId)? loadMessageReads,
+    TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
+    TResult Function(String conversationId)? startWatchReads,
+    TResult Function()? stopWatchReads,
+    TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
+    TResult Function(String conversationId, bool isTyping)? sendTyping,
+    TResult Function(String conversationId)? startWatchTyping,
+    TResult Function()? stopWatchTyping,
+    TResult Function(String userId)? watchTypingArrived,
+    TResult Function()? cleanupTyping,
+    required TResult orElse(),
+  }) {
+    if (refreshConversationList != null) {
+      return refreshConversationList();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
+    required TResult Function(LoadChatMessagesEvent value) loadMessages,
+    required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
+    required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
+    required TResult Function(UploadAndSendImagesEvent value)
+        uploadAndSendImages,
+    required TResult Function(UploadAndSendVideoEvent value) uploadAndSendVideo,
+    required TResult Function(UploadAndSendDocumentsEvent value)
+        uploadAndSendDocuments,
+    required TResult Function(UploadAndSendAudioEvent value) uploadAndSendAudio,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
+    required TResult Function(EditChatMessageEvent value) editMessage,
+    required TResult Function(DeleteChatMessageEvent value) deleteMessage,
+    required TResult Function(MarkConversationReadEvent value)
+        markConversationRead,
+    required TResult Function(ClearChatMessagesInfoEvent value) clearInfo,
+    required TResult Function(StartWatchMessagesEvent value) startWatch,
+    required TResult Function(StopWatchMessagesEvent value) stopWatch,
+    required TResult Function(WatchMessageArrivedEvent value)
+        watchMessageArrived,
+    required TResult Function(WatchMessageUpdatedEvent value)
+        watchMessageUpdated,
+    required TResult Function(WatchMessageDeletedEvent value)
+        watchMessageDeleted,
+    required TResult Function(WatchMessageErrorEvent value) watchMessageError,
+    required TResult Function(LoadConversationListEvent value)
+        loadConversationList,
+    required TResult Function(SetChatFilterEvent value) setChatFilter,
+    required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
+    required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
+    required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
+    required TResult Function(StartWatchReadsEvent value) startWatchReads,
+    required TResult Function(StopWatchReadsEvent value) stopWatchReads,
+    required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
+    required TResult Function(SendTypingEvent value) sendTyping,
+    required TResult Function(StartWatchTypingEvent value) startWatchTyping,
+    required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
+    required TResult Function(WatchTypingArrivedEvent value) watchTypingArrived,
+    required TResult Function(CleanupTypingEvent value) cleanupTyping,
+  }) {
+    return refreshConversationList(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
+    TResult? Function(LoadChatMessagesEvent value)? loadMessages,
+    TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
+    TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
+    TResult? Function(UploadAndSendImagesEvent value)? uploadAndSendImages,
+    TResult? Function(UploadAndSendVideoEvent value)? uploadAndSendVideo,
+    TResult? Function(UploadAndSendDocumentsEvent value)?
+        uploadAndSendDocuments,
+    TResult? Function(UploadAndSendAudioEvent value)? uploadAndSendAudio,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
+    TResult? Function(EditChatMessageEvent value)? editMessage,
+    TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
+    TResult? Function(MarkConversationReadEvent value)? markConversationRead,
+    TResult? Function(ClearChatMessagesInfoEvent value)? clearInfo,
+    TResult? Function(StartWatchMessagesEvent value)? startWatch,
+    TResult? Function(StopWatchMessagesEvent value)? stopWatch,
+    TResult? Function(WatchMessageArrivedEvent value)? watchMessageArrived,
+    TResult? Function(WatchMessageUpdatedEvent value)? watchMessageUpdated,
+    TResult? Function(WatchMessageDeletedEvent value)? watchMessageDeleted,
+    TResult? Function(WatchMessageErrorEvent value)? watchMessageError,
+    TResult? Function(LoadConversationListEvent value)? loadConversationList,
+    TResult? Function(SetChatFilterEvent value)? setChatFilter,
+    TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
+    TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
+    TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
+    TResult? Function(StartWatchReadsEvent value)? startWatchReads,
+    TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
+    TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
+    TResult? Function(SendTypingEvent value)? sendTyping,
+    TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
+    TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
+    TResult? Function(WatchTypingArrivedEvent value)? watchTypingArrived,
+    TResult? Function(CleanupTypingEvent value)? cleanupTyping,
+  }) {
+    return refreshConversationList?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
+    TResult Function(LoadChatMessagesEvent value)? loadMessages,
+    TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
+    TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
+    TResult Function(UploadAndSendImagesEvent value)? uploadAndSendImages,
+    TResult Function(UploadAndSendVideoEvent value)? uploadAndSendVideo,
+    TResult Function(UploadAndSendDocumentsEvent value)? uploadAndSendDocuments,
+    TResult Function(UploadAndSendAudioEvent value)? uploadAndSendAudio,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
+    TResult Function(EditChatMessageEvent value)? editMessage,
+    TResult Function(DeleteChatMessageEvent value)? deleteMessage,
+    TResult Function(MarkConversationReadEvent value)? markConversationRead,
+    TResult Function(ClearChatMessagesInfoEvent value)? clearInfo,
+    TResult Function(StartWatchMessagesEvent value)? startWatch,
+    TResult Function(StopWatchMessagesEvent value)? stopWatch,
+    TResult Function(WatchMessageArrivedEvent value)? watchMessageArrived,
+    TResult Function(WatchMessageUpdatedEvent value)? watchMessageUpdated,
+    TResult Function(WatchMessageDeletedEvent value)? watchMessageDeleted,
+    TResult Function(WatchMessageErrorEvent value)? watchMessageError,
+    TResult Function(LoadConversationListEvent value)? loadConversationList,
+    TResult Function(SetChatFilterEvent value)? setChatFilter,
+    TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
+    TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
+    TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
+    TResult Function(StartWatchReadsEvent value)? startWatchReads,
+    TResult Function(StopWatchReadsEvent value)? stopWatchReads,
+    TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
+    TResult Function(SendTypingEvent value)? sendTyping,
+    TResult Function(StartWatchTypingEvent value)? startWatchTyping,
+    TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
+    TResult Function(WatchTypingArrivedEvent value)? watchTypingArrived,
+    TResult Function(CleanupTypingEvent value)? cleanupTyping,
+    required TResult orElse(),
+  }) {
+    if (refreshConversationList != null) {
+      return refreshConversationList(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class RefreshConversationListEvent implements ChatMessageEvent {
+  const factory RefreshConversationListEvent() =
+      _$RefreshConversationListEventImpl;
+}
+
+/// @nodoc
+abstract class _$$UpdateConversationLocallyEventImplCopyWith<$Res> {
+  factory _$$UpdateConversationLocallyEventImplCopyWith(
+          _$UpdateConversationLocallyEventImpl value,
+          $Res Function(_$UpdateConversationLocallyEventImpl) then) =
+      __$$UpdateConversationLocallyEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {String conversationId,
+      String? lastMessageBody,
+      DateTime? lastMessageAt,
+      String? lastMessageSenderId,
+      int? unreadCountDelta});
+}
+
+/// @nodoc
+class __$$UpdateConversationLocallyEventImplCopyWithImpl<$Res>
+    extends _$ChatMessageEventCopyWithImpl<$Res,
+        _$UpdateConversationLocallyEventImpl>
+    implements _$$UpdateConversationLocallyEventImplCopyWith<$Res> {
+  __$$UpdateConversationLocallyEventImplCopyWithImpl(
+      _$UpdateConversationLocallyEventImpl _value,
+      $Res Function(_$UpdateConversationLocallyEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? conversationId = null,
+    Object? lastMessageBody = freezed,
+    Object? lastMessageAt = freezed,
+    Object? lastMessageSenderId = freezed,
+    Object? unreadCountDelta = freezed,
+  }) {
+    return _then(_$UpdateConversationLocallyEventImpl(
+      conversationId: null == conversationId
+          ? _value.conversationId
+          : conversationId // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastMessageBody: freezed == lastMessageBody
+          ? _value.lastMessageBody
+          : lastMessageBody // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastMessageAt: freezed == lastMessageAt
+          ? _value.lastMessageAt
+          : lastMessageAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      lastMessageSenderId: freezed == lastMessageSenderId
+          ? _value.lastMessageSenderId
+          : lastMessageSenderId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      unreadCountDelta: freezed == unreadCountDelta
+          ? _value.unreadCountDelta
+          : unreadCountDelta // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateConversationLocallyEventImpl
+    implements UpdateConversationLocallyEvent {
+  const _$UpdateConversationLocallyEventImpl(
+      {required this.conversationId,
+      this.lastMessageBody,
+      this.lastMessageAt,
+      this.lastMessageSenderId,
+      this.unreadCountDelta});
+
+  @override
+  final String conversationId;
+  @override
+  final String? lastMessageBody;
+  @override
+  final DateTime? lastMessageAt;
+  @override
+  final String? lastMessageSenderId;
+  @override
+  final int? unreadCountDelta;
+
+  @override
+  String toString() {
+    return 'ChatMessageEvent.updateConversationLocally(conversationId: $conversationId, lastMessageBody: $lastMessageBody, lastMessageAt: $lastMessageAt, lastMessageSenderId: $lastMessageSenderId, unreadCountDelta: $unreadCountDelta)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateConversationLocallyEventImpl &&
+            (identical(other.conversationId, conversationId) ||
+                other.conversationId == conversationId) &&
+            (identical(other.lastMessageBody, lastMessageBody) ||
+                other.lastMessageBody == lastMessageBody) &&
+            (identical(other.lastMessageAt, lastMessageAt) ||
+                other.lastMessageAt == lastMessageAt) &&
+            (identical(other.lastMessageSenderId, lastMessageSenderId) ||
+                other.lastMessageSenderId == lastMessageSenderId) &&
+            (identical(other.unreadCountDelta, unreadCountDelta) ||
+                other.unreadCountDelta == unreadCountDelta));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, conversationId, lastMessageBody,
+      lastMessageAt, lastMessageSenderId, unreadCountDelta);
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateConversationLocallyEventImplCopyWith<
+          _$UpdateConversationLocallyEventImpl>
+      get copyWith => __$$UpdateConversationLocallyEventImplCopyWithImpl<
+          _$UpdateConversationLocallyEventImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String conversationId, String? peerUserId, int? limit)
+        initializeChat,
+    required TResult Function(String conversationId, int? limit) loadMessages,
+    required TResult Function(String conversationId, int limit)
+        loadMoreMessages,
+    required TResult Function(
+            String conversationId, String content, String? replyToMessageId)
+        sendMessage,
+    required TResult Function(
+            String conversationId,
+            String mediaUrl,
+            String mediaType,
+            String? mimeType,
+            String? fileName,
+            int? fileSize,
+            String? caption)
+        sendMediaMessage,
+    required TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)
+        uploadAndSendImages,
+    required TResult Function(String conversationId, String filePath,
+            String userId, String? caption)
+        uploadAndSendVideo,
+    required TResult Function(
+            String conversationId, List<String> filePaths, String userId)
+        uploadAndSendDocuments,
+    required TResult Function(String conversationId, String filePath,
+            String userId, bool isVoiceMessage)
+        uploadAndSendAudio,
+    required TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice, int maxUserVotes)
+        sendPollMessage,
+    required TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)
+        sendEventMessage,
+    required TResult Function(String messageId, String newContent) editMessage,
+    required TResult Function(String messageId) deleteMessage,
+    required TResult Function(String conversationId, String? uptoMessageId)
+        markConversationRead,
+    required TResult Function() clearInfo,
+    required TResult Function(String conversationId) startWatch,
+    required TResult Function() stopWatch,
+    required TResult Function(ChatMessageEntity message) watchMessageArrived,
+    required TResult Function(ChatMessageEntity message) watchMessageUpdated,
+    required TResult Function(ChatMessageEntity message) watchMessageDeleted,
+    required TResult Function(String message) watchMessageError,
+    required TResult Function() loadConversationList,
+    required TResult Function(String filter) setChatFilter,
+    required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
+    required TResult Function(String messageId) loadMessageReads,
+    required TResult Function(String messageId) markMessageRead,
+    required TResult Function(List<String> messageIds) markMessagesReadBatch,
+    required TResult Function(String conversationId) startWatchReads,
+    required TResult Function() stopWatchReads,
+    required TResult Function(MessageReadEntity readEntity) watchReadArrived,
+    required TResult Function(String pollMessageId, String optionId) votePoll,
+    required TResult Function(String optionId) unvotePoll,
+    required TResult Function(String eventMessageId, String status)
+        respondToEvent,
+    required TResult Function(String eventMessageId) cancelEventRsvp,
+    required TResult Function(String conversationId, bool isTyping) sendTyping,
+    required TResult Function(String conversationId) startWatchTyping,
+    required TResult Function() stopWatchTyping,
+    required TResult Function(String userId) watchTypingArrived,
+    required TResult Function() cleanupTyping,
+  }) {
+    return updateConversationLocally(conversationId, lastMessageBody,
+        lastMessageAt, lastMessageSenderId, unreadCountDelta);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
+    TResult? Function(String conversationId, int? limit)? loadMessages,
+    TResult? Function(String conversationId, int limit)? loadMoreMessages,
+    TResult? Function(
+            String conversationId, String content, String? replyToMessageId)?
+        sendMessage,
+    TResult? Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
+    TResult? Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
+        uploadAndSendImages,
+    TResult? Function(String conversationId, String filePath, String userId,
+            String? caption)?
+        uploadAndSendVideo,
+    TResult? Function(
+            String conversationId, List<String> filePaths, String userId)?
+        uploadAndSendDocuments,
+    TResult? Function(String conversationId, String filePath, String userId,
+            bool isVoiceMessage)?
+        uploadAndSendAudio,
+    TResult? Function(String conversationId, String question,
+            List<String> options, bool multipleChoice, int maxUserVotes)?
+        sendPollMessage,
+    TResult? Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
+        sendEventMessage,
+    TResult? Function(String messageId, String newContent)? editMessage,
+    TResult? Function(String messageId)? deleteMessage,
+    TResult? Function(String conversationId, String? uptoMessageId)?
+        markConversationRead,
+    TResult? Function()? clearInfo,
+    TResult? Function(String conversationId)? startWatch,
+    TResult? Function()? stopWatch,
+    TResult? Function(ChatMessageEntity message)? watchMessageArrived,
+    TResult? Function(ChatMessageEntity message)? watchMessageUpdated,
+    TResult? Function(ChatMessageEntity message)? watchMessageDeleted,
+    TResult? Function(String message)? watchMessageError,
+    TResult? Function()? loadConversationList,
+    TResult? Function(String filter)? setChatFilter,
+    TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
+    TResult? Function(String messageId)? loadMessageReads,
+    TResult? Function(String messageId)? markMessageRead,
+    TResult? Function(List<String> messageIds)? markMessagesReadBatch,
+    TResult? Function(String conversationId)? startWatchReads,
+    TResult? Function()? stopWatchReads,
+    TResult? Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult? Function(String pollMessageId, String optionId)? votePoll,
+    TResult? Function(String optionId)? unvotePoll,
+    TResult? Function(String eventMessageId, String status)? respondToEvent,
+    TResult? Function(String eventMessageId)? cancelEventRsvp,
+    TResult? Function(String conversationId, bool isTyping)? sendTyping,
+    TResult? Function(String conversationId)? startWatchTyping,
+    TResult? Function()? stopWatchTyping,
+    TResult? Function(String userId)? watchTypingArrived,
+    TResult? Function()? cleanupTyping,
+  }) {
+    return updateConversationLocally?.call(conversationId, lastMessageBody,
+        lastMessageAt, lastMessageSenderId, unreadCountDelta);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String conversationId, String? peerUserId, int? limit)?
+        initializeChat,
+    TResult Function(String conversationId, int? limit)? loadMessages,
+    TResult Function(String conversationId, int limit)? loadMoreMessages,
+    TResult Function(
+            String conversationId, String content, String? replyToMessageId)?
+        sendMessage,
+    TResult Function(String conversationId, String mediaUrl, String mediaType,
+            String? mimeType, String? fileName, int? fileSize, String? caption)?
+        sendMediaMessage,
+    TResult Function(String conversationId, List<String> filePaths,
+            String userId, String? caption)?
+        uploadAndSendImages,
+    TResult Function(String conversationId, String filePath, String userId,
+            String? caption)?
+        uploadAndSendVideo,
+    TResult Function(
+            String conversationId, List<String> filePaths, String userId)?
+        uploadAndSendDocuments,
+    TResult Function(String conversationId, String filePath, String userId,
+            bool isVoiceMessage)?
+        uploadAndSendAudio,
+    TResult Function(String conversationId, String question,
+            List<String> options, bool multipleChoice, int maxUserVotes)?
+        sendPollMessage,
+    TResult Function(
+            String conversationId,
+            String title,
+            String? description,
+            String? locationName,
+            String? address,
+            bool isOnline,
+            String? meetingUrl,
+            String? coverUrl,
+            DateTime startDate,
+            DateTime endDate)?
+        sendEventMessage,
+    TResult Function(String messageId, String newContent)? editMessage,
+    TResult Function(String messageId)? deleteMessage,
+    TResult Function(String conversationId, String? uptoMessageId)?
+        markConversationRead,
+    TResult Function()? clearInfo,
+    TResult Function(String conversationId)? startWatch,
+    TResult Function()? stopWatch,
+    TResult Function(ChatMessageEntity message)? watchMessageArrived,
+    TResult Function(ChatMessageEntity message)? watchMessageUpdated,
+    TResult Function(ChatMessageEntity message)? watchMessageDeleted,
+    TResult Function(String message)? watchMessageError,
+    TResult Function()? loadConversationList,
+    TResult Function(String filter)? setChatFilter,
+    TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
+    TResult Function(String messageId)? loadMessageReads,
+    TResult Function(String messageId)? markMessageRead,
+    TResult Function(List<String> messageIds)? markMessagesReadBatch,
+    TResult Function(String conversationId)? startWatchReads,
+    TResult Function()? stopWatchReads,
+    TResult Function(MessageReadEntity readEntity)? watchReadArrived,
+    TResult Function(String pollMessageId, String optionId)? votePoll,
+    TResult Function(String optionId)? unvotePoll,
+    TResult Function(String eventMessageId, String status)? respondToEvent,
+    TResult Function(String eventMessageId)? cancelEventRsvp,
+    TResult Function(String conversationId, bool isTyping)? sendTyping,
+    TResult Function(String conversationId)? startWatchTyping,
+    TResult Function()? stopWatchTyping,
+    TResult Function(String userId)? watchTypingArrived,
+    TResult Function()? cleanupTyping,
+    required TResult orElse(),
+  }) {
+    if (updateConversationLocally != null) {
+      return updateConversationLocally(conversationId, lastMessageBody,
+          lastMessageAt, lastMessageSenderId, unreadCountDelta);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitializeChatEvent value) initializeChat,
+    required TResult Function(LoadChatMessagesEvent value) loadMessages,
+    required TResult Function(LoadMoreChatMessagesEvent value) loadMoreMessages,
+    required TResult Function(SendChatMessageEvent value) sendMessage,
+    required TResult Function(SendMediaMessageEvent value) sendMediaMessage,
+    required TResult Function(UploadAndSendImagesEvent value)
+        uploadAndSendImages,
+    required TResult Function(UploadAndSendVideoEvent value) uploadAndSendVideo,
+    required TResult Function(UploadAndSendDocumentsEvent value)
+        uploadAndSendDocuments,
+    required TResult Function(UploadAndSendAudioEvent value) uploadAndSendAudio,
+    required TResult Function(SendPollMessageEvent value) sendPollMessage,
+    required TResult Function(SendEventMessageEvent value) sendEventMessage,
+    required TResult Function(EditChatMessageEvent value) editMessage,
+    required TResult Function(DeleteChatMessageEvent value) deleteMessage,
+    required TResult Function(MarkConversationReadEvent value)
+        markConversationRead,
+    required TResult Function(ClearChatMessagesInfoEvent value) clearInfo,
+    required TResult Function(StartWatchMessagesEvent value) startWatch,
+    required TResult Function(StopWatchMessagesEvent value) stopWatch,
+    required TResult Function(WatchMessageArrivedEvent value)
+        watchMessageArrived,
+    required TResult Function(WatchMessageUpdatedEvent value)
+        watchMessageUpdated,
+    required TResult Function(WatchMessageDeletedEvent value)
+        watchMessageDeleted,
+    required TResult Function(WatchMessageErrorEvent value) watchMessageError,
+    required TResult Function(LoadConversationListEvent value)
+        loadConversationList,
+    required TResult Function(SetChatFilterEvent value) setChatFilter,
+    required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
+    required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
+    required TResult Function(MarkMessageReadEvent value) markMessageRead,
+    required TResult Function(MarkMessagesReadBatchEvent value)
+        markMessagesReadBatch,
+    required TResult Function(StartWatchReadsEvent value) startWatchReads,
+    required TResult Function(StopWatchReadsEvent value) stopWatchReads,
+    required TResult Function(WatchReadArrivedEvent value) watchReadArrived,
+    required TResult Function(VotePollEvent value) votePoll,
+    required TResult Function(UnvotePollEvent value) unvotePoll,
+    required TResult Function(RespondToEventEvent value) respondToEvent,
+    required TResult Function(CancelEventRsvpEvent value) cancelEventRsvp,
+    required TResult Function(SendTypingEvent value) sendTyping,
+    required TResult Function(StartWatchTypingEvent value) startWatchTyping,
+    required TResult Function(StopWatchTypingEvent value) stopWatchTyping,
+    required TResult Function(WatchTypingArrivedEvent value) watchTypingArrived,
+    required TResult Function(CleanupTypingEvent value) cleanupTyping,
+  }) {
+    return updateConversationLocally(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeChatEvent value)? initializeChat,
+    TResult? Function(LoadChatMessagesEvent value)? loadMessages,
+    TResult? Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
+    TResult? Function(SendChatMessageEvent value)? sendMessage,
+    TResult? Function(SendMediaMessageEvent value)? sendMediaMessage,
+    TResult? Function(UploadAndSendImagesEvent value)? uploadAndSendImages,
+    TResult? Function(UploadAndSendVideoEvent value)? uploadAndSendVideo,
+    TResult? Function(UploadAndSendDocumentsEvent value)?
+        uploadAndSendDocuments,
+    TResult? Function(UploadAndSendAudioEvent value)? uploadAndSendAudio,
+    TResult? Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult? Function(SendEventMessageEvent value)? sendEventMessage,
+    TResult? Function(EditChatMessageEvent value)? editMessage,
+    TResult? Function(DeleteChatMessageEvent value)? deleteMessage,
+    TResult? Function(MarkConversationReadEvent value)? markConversationRead,
+    TResult? Function(ClearChatMessagesInfoEvent value)? clearInfo,
+    TResult? Function(StartWatchMessagesEvent value)? startWatch,
+    TResult? Function(StopWatchMessagesEvent value)? stopWatch,
+    TResult? Function(WatchMessageArrivedEvent value)? watchMessageArrived,
+    TResult? Function(WatchMessageUpdatedEvent value)? watchMessageUpdated,
+    TResult? Function(WatchMessageDeletedEvent value)? watchMessageDeleted,
+    TResult? Function(WatchMessageErrorEvent value)? watchMessageError,
+    TResult? Function(LoadConversationListEvent value)? loadConversationList,
+    TResult? Function(SetChatFilterEvent value)? setChatFilter,
+    TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
+    TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
+    TResult? Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
+    TResult? Function(StartWatchReadsEvent value)? startWatchReads,
+    TResult? Function(StopWatchReadsEvent value)? stopWatchReads,
+    TResult? Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult? Function(VotePollEvent value)? votePoll,
+    TResult? Function(UnvotePollEvent value)? unvotePoll,
+    TResult? Function(RespondToEventEvent value)? respondToEvent,
+    TResult? Function(CancelEventRsvpEvent value)? cancelEventRsvp,
+    TResult? Function(SendTypingEvent value)? sendTyping,
+    TResult? Function(StartWatchTypingEvent value)? startWatchTyping,
+    TResult? Function(StopWatchTypingEvent value)? stopWatchTyping,
+    TResult? Function(WatchTypingArrivedEvent value)? watchTypingArrived,
+    TResult? Function(CleanupTypingEvent value)? cleanupTyping,
+  }) {
+    return updateConversationLocally?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeChatEvent value)? initializeChat,
+    TResult Function(LoadChatMessagesEvent value)? loadMessages,
+    TResult Function(LoadMoreChatMessagesEvent value)? loadMoreMessages,
+    TResult Function(SendChatMessageEvent value)? sendMessage,
+    TResult Function(SendMediaMessageEvent value)? sendMediaMessage,
+    TResult Function(UploadAndSendImagesEvent value)? uploadAndSendImages,
+    TResult Function(UploadAndSendVideoEvent value)? uploadAndSendVideo,
+    TResult Function(UploadAndSendDocumentsEvent value)? uploadAndSendDocuments,
+    TResult Function(UploadAndSendAudioEvent value)? uploadAndSendAudio,
+    TResult Function(SendPollMessageEvent value)? sendPollMessage,
+    TResult Function(SendEventMessageEvent value)? sendEventMessage,
+    TResult Function(EditChatMessageEvent value)? editMessage,
+    TResult Function(DeleteChatMessageEvent value)? deleteMessage,
+    TResult Function(MarkConversationReadEvent value)? markConversationRead,
+    TResult Function(ClearChatMessagesInfoEvent value)? clearInfo,
+    TResult Function(StartWatchMessagesEvent value)? startWatch,
+    TResult Function(StopWatchMessagesEvent value)? stopWatch,
+    TResult Function(WatchMessageArrivedEvent value)? watchMessageArrived,
+    TResult Function(WatchMessageUpdatedEvent value)? watchMessageUpdated,
+    TResult Function(WatchMessageDeletedEvent value)? watchMessageDeleted,
+    TResult Function(WatchMessageErrorEvent value)? watchMessageError,
+    TResult Function(LoadConversationListEvent value)? loadConversationList,
+    TResult Function(SetChatFilterEvent value)? setChatFilter,
+    TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
+    TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
+    TResult Function(MarkMessageReadEvent value)? markMessageRead,
+    TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
+    TResult Function(StartWatchReadsEvent value)? startWatchReads,
+    TResult Function(StopWatchReadsEvent value)? stopWatchReads,
+    TResult Function(WatchReadArrivedEvent value)? watchReadArrived,
+    TResult Function(VotePollEvent value)? votePoll,
+    TResult Function(UnvotePollEvent value)? unvotePoll,
+    TResult Function(RespondToEventEvent value)? respondToEvent,
+    TResult Function(CancelEventRsvpEvent value)? cancelEventRsvp,
+    TResult Function(SendTypingEvent value)? sendTyping,
+    TResult Function(StartWatchTypingEvent value)? startWatchTyping,
+    TResult Function(StopWatchTypingEvent value)? stopWatchTyping,
+    TResult Function(WatchTypingArrivedEvent value)? watchTypingArrived,
+    TResult Function(CleanupTypingEvent value)? cleanupTyping,
+    required TResult orElse(),
+  }) {
+    if (updateConversationLocally != null) {
+      return updateConversationLocally(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdateConversationLocallyEvent implements ChatMessageEvent {
+  const factory UpdateConversationLocallyEvent(
+      {required final String conversationId,
+      final String? lastMessageBody,
+      final DateTime? lastMessageAt,
+      final String? lastMessageSenderId,
+      final int? unreadCountDelta}) = _$UpdateConversationLocallyEventImpl;
+
+  String get conversationId;
+  String? get lastMessageBody;
+  DateTime? get lastMessageAt;
+  String? get lastMessageSenderId;
+  int? get unreadCountDelta;
+
+  /// Create a copy of ChatMessageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UpdateConversationLocallyEventImplCopyWith<
+          _$UpdateConversationLocallyEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -12173,6 +14105,14 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -12247,6 +14187,14 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -12320,6 +14268,14 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -12377,6 +14333,10 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -12425,6 +14385,10 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -12471,6 +14435,10 @@ class _$LoadMessageReadsEventImpl implements LoadMessageReadsEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -12638,6 +14606,14 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -12712,6 +14688,14 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -12785,6 +14769,14 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -12842,6 +14834,10 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -12890,6 +14886,10 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -12936,6 +14936,10 @@ class _$MarkMessageReadEventImpl implements MarkMessageReadEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -13113,6 +15117,14 @@ class _$MarkMessagesReadBatchEventImpl implements MarkMessagesReadBatchEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -13187,6 +15199,14 @@ class _$MarkMessagesReadBatchEventImpl implements MarkMessagesReadBatchEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -13260,6 +15280,14 @@ class _$MarkMessagesReadBatchEventImpl implements MarkMessagesReadBatchEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -13317,6 +15345,10 @@ class _$MarkMessagesReadBatchEventImpl implements MarkMessagesReadBatchEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -13365,6 +15397,10 @@ class _$MarkMessagesReadBatchEventImpl implements MarkMessagesReadBatchEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -13411,6 +15447,10 @@ class _$MarkMessagesReadBatchEventImpl implements MarkMessagesReadBatchEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -13579,6 +15619,14 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -13653,6 +15701,14 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -13726,6 +15782,14 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -13783,6 +15847,10 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -13831,6 +15899,10 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -13877,6 +15949,10 @@ class _$StartWatchReadsEventImpl implements StartWatchReadsEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -14015,6 +16091,14 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -14089,6 +16173,14 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -14162,6 +16254,14 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -14219,6 +16319,10 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -14267,6 +16371,10 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -14313,6 +16421,10 @@ class _$StopWatchReadsEventImpl implements StopWatchReadsEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -14483,6 +16595,14 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -14557,6 +16677,14 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -14630,6 +16758,14 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -14687,6 +16823,10 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -14735,6 +16875,10 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -14781,6 +16925,10 @@ class _$WatchReadArrivedEventImpl implements WatchReadArrivedEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -14956,6 +17104,14 @@ class _$VotePollEventImpl implements VotePollEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -15030,6 +17186,14 @@ class _$VotePollEventImpl implements VotePollEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -15103,6 +17267,14 @@ class _$VotePollEventImpl implements VotePollEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -15160,6 +17332,10 @@ class _$VotePollEventImpl implements VotePollEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -15208,6 +17384,10 @@ class _$VotePollEventImpl implements VotePollEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -15254,6 +17434,10 @@ class _$VotePollEventImpl implements VotePollEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -15422,6 +17606,14 @@ class _$UnvotePollEventImpl implements UnvotePollEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -15496,6 +17688,14 @@ class _$UnvotePollEventImpl implements UnvotePollEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -15569,6 +17769,14 @@ class _$UnvotePollEventImpl implements UnvotePollEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -15626,6 +17834,10 @@ class _$UnvotePollEventImpl implements UnvotePollEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -15674,6 +17886,10 @@ class _$UnvotePollEventImpl implements UnvotePollEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -15720,6 +17936,10 @@ class _$UnvotePollEventImpl implements UnvotePollEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -15895,6 +18115,14 @@ class _$RespondToEventEventImpl implements RespondToEventEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -15969,6 +18197,14 @@ class _$RespondToEventEventImpl implements RespondToEventEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -16042,6 +18278,14 @@ class _$RespondToEventEventImpl implements RespondToEventEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -16099,6 +18343,10 @@ class _$RespondToEventEventImpl implements RespondToEventEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -16147,6 +18395,10 @@ class _$RespondToEventEventImpl implements RespondToEventEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -16193,6 +18445,10 @@ class _$RespondToEventEventImpl implements RespondToEventEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -16362,6 +18618,14 @@ class _$CancelEventRsvpEventImpl implements CancelEventRsvpEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -16436,6 +18700,14 @@ class _$CancelEventRsvpEventImpl implements CancelEventRsvpEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -16509,6 +18781,14 @@ class _$CancelEventRsvpEventImpl implements CancelEventRsvpEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -16566,6 +18846,10 @@ class _$CancelEventRsvpEventImpl implements CancelEventRsvpEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -16614,6 +18898,10 @@ class _$CancelEventRsvpEventImpl implements CancelEventRsvpEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -16660,6 +18948,10 @@ class _$CancelEventRsvpEventImpl implements CancelEventRsvpEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -16836,6 +19128,14 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -16910,6 +19210,14 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -16983,6 +19291,14 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -17040,6 +19356,10 @@ class _$SendTypingEventImpl implements SendTypingEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -17088,6 +19408,10 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -17134,6 +19458,10 @@ class _$SendTypingEventImpl implements SendTypingEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -17303,6 +19631,14 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -17377,6 +19713,14 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -17450,6 +19794,14 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -17507,6 +19859,10 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -17555,6 +19911,10 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -17601,6 +19961,10 @@ class _$StartWatchTypingEventImpl implements StartWatchTypingEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -17739,6 +20103,14 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -17813,6 +20185,14 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -17886,6 +20266,14 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -17943,6 +20331,10 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -17991,6 +20383,10 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -18037,6 +20433,10 @@ class _$StopWatchTypingEventImpl implements StopWatchTypingEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -18195,6 +20595,14 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -18269,6 +20677,14 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -18342,6 +20758,14 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -18399,6 +20823,10 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -18447,6 +20875,10 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -18493,6 +20925,10 @@ class _$WatchTypingArrivedEventImpl implements WatchTypingArrivedEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -18630,6 +21066,14 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     required TResult Function() loadConversationList,
     required TResult Function(String filter) setChatFilter,
     required TResult Function(String query) setSearchQuery,
+    required TResult Function() refreshConversationList,
+    required TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)
+        updateConversationLocally,
     required TResult Function(String messageId) loadMessageReads,
     required TResult Function(String messageId) markMessageRead,
     required TResult Function(List<String> messageIds) markMessagesReadBatch,
@@ -18704,6 +21148,14 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     TResult? Function()? loadConversationList,
     TResult? Function(String filter)? setChatFilter,
     TResult? Function(String query)? setSearchQuery,
+    TResult? Function()? refreshConversationList,
+    TResult? Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult? Function(String messageId)? loadMessageReads,
     TResult? Function(String messageId)? markMessageRead,
     TResult? Function(List<String> messageIds)? markMessagesReadBatch,
@@ -18777,6 +21229,14 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     TResult Function()? loadConversationList,
     TResult Function(String filter)? setChatFilter,
     TResult Function(String query)? setSearchQuery,
+    TResult Function()? refreshConversationList,
+    TResult Function(
+            String conversationId,
+            String? lastMessageBody,
+            DateTime? lastMessageAt,
+            String? lastMessageSenderId,
+            int? unreadCountDelta)?
+        updateConversationLocally,
     TResult Function(String messageId)? loadMessageReads,
     TResult Function(String messageId)? markMessageRead,
     TResult Function(List<String> messageIds)? markMessagesReadBatch,
@@ -18834,6 +21294,10 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
         loadConversationList,
     required TResult Function(SetChatFilterEvent value) setChatFilter,
     required TResult Function(SetSearchQueryEvent value) setSearchQuery,
+    required TResult Function(RefreshConversationListEvent value)
+        refreshConversationList,
+    required TResult Function(UpdateConversationLocallyEvent value)
+        updateConversationLocally,
     required TResult Function(LoadMessageReadsEvent value) loadMessageReads,
     required TResult Function(MarkMessageReadEvent value) markMessageRead,
     required TResult Function(MarkMessagesReadBatchEvent value)
@@ -18882,6 +21346,10 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     TResult? Function(LoadConversationListEvent value)? loadConversationList,
     TResult? Function(SetChatFilterEvent value)? setChatFilter,
     TResult? Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult? Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult? Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult? Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult? Function(MarkMessageReadEvent value)? markMessageRead,
     TResult? Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,
@@ -18928,6 +21396,10 @@ class _$CleanupTypingEventImpl implements CleanupTypingEvent {
     TResult Function(LoadConversationListEvent value)? loadConversationList,
     TResult Function(SetChatFilterEvent value)? setChatFilter,
     TResult Function(SetSearchQueryEvent value)? setSearchQuery,
+    TResult Function(RefreshConversationListEvent value)?
+        refreshConversationList,
+    TResult Function(UpdateConversationLocallyEvent value)?
+        updateConversationLocally,
     TResult Function(LoadMessageReadsEvent value)? loadMessageReads,
     TResult Function(MarkMessageReadEvent value)? markMessageRead,
     TResult Function(MarkMessagesReadBatchEvent value)? markMessagesReadBatch,

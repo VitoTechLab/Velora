@@ -164,38 +164,54 @@ class FormatUtils {
 
   /// Format time for chat list (Today, Yesterday, or date)
   static String formatChatListTime(DateTime dateTime) {
+    // Convert to local time if UTC
+    final localDateTime = dateTime.isUtc ? dateTime.toLocal() : dateTime;
     final now = DateTime.now();
-    final difference = now.difference(dateTime);
 
-    if (difference.inDays == 0) {
+    // Check if same day (comparing dates, not just difference)
+    final today = DateTime(now.year, now.month, now.day);
+    final messageDate =
+        DateTime(localDateTime.year, localDateTime.month, localDateTime.day);
+    final difference = today.difference(messageDate).inDays;
+
+    if (difference == 0) {
       // Today - show time
-      return '${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}';
-    } else if (difference.inDays == 1) {
+      return '${localDateTime.hour.toString().padLeft(2, '0')}:${localDateTime.minute.toString().padLeft(2, '0')}';
+    } else if (difference == 1) {
       // Yesterday
       return 'Yesterday';
-    } else if (difference.inDays < 7) {
+    } else if (difference < 7) {
       // This week - show weekday
       final weekday = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-      return weekday[dateTime.weekday - 1];
+      return weekday[localDateTime.weekday - 1];
     } else {
       // Older - show date
-      return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+      return '${localDateTime.day}/${localDateTime.month}/${localDateTime.year}';
     }
   }
 
   /// Format time for message timestamp (HH:mm)
   static String formatMessageTime(DateTime time) {
-    return '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
+    // Convert to local time if UTC
+    final localTime = time.isUtc ? time.toLocal() : time;
+    return '${localTime.hour.toString().padLeft(2, '0')}:${localTime.minute.toString().padLeft(2, '0')}';
   }
 
   /// Format date for message date separator
   static String formatDateSeparator(DateTime date) {
+    // Convert to local time if UTC
+    final localDate = date.isUtc ? date.toLocal() : date;
     final now = DateTime.now();
-    final difference = now.difference(date);
 
-    if (_isSameDay(date, now)) {
+    // Compare dates properly
+    final today = DateTime(now.year, now.month, now.day);
+    final messageDate =
+        DateTime(localDate.year, localDate.month, localDate.day);
+    final difference = today.difference(messageDate).inDays;
+
+    if (difference == 0) {
       return 'Today';
-    } else if (difference.inDays == 1) {
+    } else if (difference == 1) {
       return 'Yesterday';
     } else {
       final months = [
@@ -212,7 +228,7 @@ class FormatUtils {
         'November',
         'December',
       ];
-      return '${months[date.month - 1]} ${date.day}, ${date.year}';
+      return '${months[localDate.month - 1]} ${localDate.day}, ${localDate.year}';
     }
   }
 

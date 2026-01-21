@@ -484,15 +484,11 @@ class _CommentInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final t = AppLocalizations.of(context)!;
-    final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
 
     return BlocBuilder<FeedCommentBloc, FeedCommentState>(
       buildWhen: (prev, curr) => prev.isAdding != curr.isAdding,
       builder: (context, state) {
-        return AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          curve: Curves.easeOut,
-          padding: EdgeInsets.only(bottom: keyboardHeight),
+        return Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
