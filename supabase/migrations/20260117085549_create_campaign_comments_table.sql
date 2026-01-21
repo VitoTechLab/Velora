@@ -17,6 +17,11 @@ CREATE TABLE IF NOT EXISTS public.campaign_comments (
 -- ---------------------------------------------------------------------------
 ALTER TABLE public.campaign_comments ENABLE ROW LEVEL SECURITY;
 
+-- Drop existing policies to avoid conflicts
+DROP POLICY IF EXISTS "Public read comments" ON public.campaign_comments;
+DROP POLICY IF EXISTS "Authenticated users comment" ON public.campaign_comments;
+DROP POLICY IF EXISTS "Users delete own comments" ON public.campaign_comments;
+
 -- Everyone can read comments
 CREATE POLICY "Public read comments" ON public.campaign_comments
   FOR SELECT USING (true);

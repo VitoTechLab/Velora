@@ -49,6 +49,10 @@ CREATE POLICY "Campaign owner see donations" ON public.donations
   FOR SELECT TO authenticated 
   USING (EXISTS (SELECT 1 FROM public.campaigns c WHERE c.id = campaign_id AND c.user_id = auth.uid()));
 
+-- Grant permissions
+GRANT SELECT ON public.donations TO authenticated;
+GRANT INSERT ON public.donations TO anon, authenticated;
+
 -- 4. TRIGGERS (Donation Success -> Campaign Stats)
 -- ---------------------------------------------------------------------------
 CREATE OR REPLACE FUNCTION public.fn_on_donation_success_v2()
@@ -66,6 +70,10 @@ BEGIN
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- Drop triggers if they exist to avoid conflicts
+DROP TRIGGER IF EXISTS trg_on_donation_success_v2 ON public.donations;
+DROP TRIGGER IF EXISTS trg_on_donation_insert_success ON public.donations;
 
 CREATE TRIGGER trg_on_donation_success_v2
 AFTER UPDATE ON public.donations

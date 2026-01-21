@@ -17,6 +17,11 @@ CREATE TABLE IF NOT EXISTS public.campaign_updates (
 -- ---------------------------------------------------------------------------
 ALTER TABLE public.campaign_updates ENABLE ROW LEVEL SECURITY;
 
+-- Drop existing policies to avoid conflicts
+DROP POLICY IF EXISTS "Public can view campaign updates" ON public.campaign_updates;
+DROP POLICY IF EXISTS "Campaign owners can add updates" ON public.campaign_updates;
+DROP POLICY IF EXISTS "Campaign owners can delete updates" ON public.campaign_updates;
+
 -- Public can read all updates
 CREATE POLICY "Public can view campaign updates" ON public.campaign_updates
   FOR SELECT USING (true);

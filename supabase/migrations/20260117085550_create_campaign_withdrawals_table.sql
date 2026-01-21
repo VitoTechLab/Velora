@@ -28,6 +28,9 @@ CREATE TABLE IF NOT EXISTS public.campaign_withdrawals (
 -- ---------------------------------------------------------------------------
 ALTER TABLE public.campaign_withdrawals ENABLE ROW LEVEL SECURITY;
 
+-- Drop existing policy to avoid conflicts
+DROP POLICY IF EXISTS "Owners manage own withdrawals" ON public.campaign_withdrawals;
+
 -- Owners can manage (select, insert) their own withdrawals
 CREATE POLICY "Owners manage own withdrawals" ON public.campaign_withdrawals
   FOR ALL TO authenticated
@@ -68,6 +71,9 @@ BEGIN
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- Drop trigger if exists to avoid conflicts
+DROP TRIGGER IF EXISTS trg_withdrawal_auto_approve ON public.campaign_withdrawals;
 
 -- Trigger: Before Insert
 CREATE TRIGGER trg_withdrawal_auto_approve
