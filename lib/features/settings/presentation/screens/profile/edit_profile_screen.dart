@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:velora/core/services/biometric_service.dart';
 import 'package:velora/core/ui/app_messenger.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:velora/features/media/domain/repositories/media_repository.dart';
@@ -22,19 +23,60 @@ class EditProfileScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final t = AppLocalizations.of(context)!;
+    final biometricService = useMemoized(() => BiometricService());
+    final biometricVerified = useState(false);
 
     useEffect(
       () {
-        final authState = context.read<AuthBloc>().state;
-        if (authState.userId != null) {
-          context.read<ProfileBloc>().add(
-            LoadProfileEvent(userId: authState.userId!),
-          );
+        Future<void> checkAndVerifyBiometric() async {
+          final enabled = await biometricService.isBiometricEnabled();
+          final available = await biometricService.isBiometricAvailable();
+          
+          if (enabled && available) {
+            // Request biometric authentication
+            final authenticated = await biometricService.authenticate(
+              reason: 'Authenticate to edit your profile',
+            );
+            
+            if (!authenticated) {
+              // Failed authentication - go back
+              if (context.mounted) {
+                context.pop();
+                AppMessenger.showToast(
+                  message: 'Biometric authentication required',
+                  icon: Icons.fingerprint,
+                  isError: true,
+                );
+              }
+            } else {
+              biometricVerified.value = true;
+            }
+          } else {
+            biometricVerified.value = true;
+          }
+          
+          // Load profile after verification
+          final authState = context.read<AuthBloc>().state;
+          if (authState.userId != null) {
+            context.read<ProfileBloc>().add(
+              LoadProfileEvent(userId: authState.userId!),
+            );
+          }
         }
+        
+        checkAndVerifyBiometric();
         return null;
       },
       const [],
     );
+
+    if (!biometricVerified.value) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
 
     return BlocListener<ProfileBloc, ProfileState>(
       listener: (context, state) {

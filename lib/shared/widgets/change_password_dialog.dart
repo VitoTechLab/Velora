@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get_it/get_it.dart';
+import 'package:velora/core/services/biometric_service.dart';
 import 'package:velora/core/services/security_settings_service.dart';
 import 'package:velora/core/ui/app_messenger.dart';
 import 'package:velora/features/auth/domain/repositories/auth_repository.dart';
@@ -29,9 +30,55 @@ class ChangePasswordDialog extends HookWidget {
     final errorMessage = useState<String?>(null);
     final formKey = useMemoized(() => GlobalKey<FormState>());
     final authRepository = useMemoized(() => GetIt.instance<AuthRepository>());
+    final biometricService = useMemoized(() => BiometricService());
+    final useBiometric = useState(false);
+    final biometricVerified = useState(false);
+
+    // Check biometric status on mount
+    useEffect(() {
+      Future<void> checkBiometric() async {
+        final enabled = await biometricService.isBiometricEnabled();
+        final available = await biometricService.isBiometricAvailable();
+        useBiometric.value = enabled && available;
+      }
+      checkBiometric();
+      return null;
+    }, const []);
+
+    Future<void> handleBiometricAuth() async {
+      isLoading.value = true;
+      final authenticated = await biometricService.authenticate(
+        reason: 'Authenticate to change your password',
+      );
+      isLoading.value = false;
+
+      if (authenticated) {
+        biometricVerified.value = true;
+        AppMessenger.showToast(
+          message: 'Biometric verified successfully',
+          icon: Icons.check_circle_outline,
+        );
+      } else {
+        AppMessenger.showToast(
+          message: 'Biometric authentication failed',
+          icon: Icons.error_outline,
+          isError: true,
+        );
+      }
+    }
 
     Future<void> handleChangePassword() async {
       if (!formKey.currentState!.validate()) {
+        return;
+      }
+
+      // Check biometric verification if enabled
+      if (useBiometric.value && !biometricVerified.value) {
+        AppMessenger.showToast(
+          message: 'Please verify with biometric first',
+          icon: Icons.fingerprint,
+          isError: true,
+        );
         return;
       }
 
@@ -40,7 +87,7 @@ class ChangePasswordDialog extends HookWidget {
 
       // Update password via Supabase
       final result = await authRepository.updatePassword(
-        currentPassword: currentPasswordController.text,
+        currentPassword: useBiometric.value ? '' : currentPasswordController.text,
         newPassword: newPasswordController.text,
       );
 
@@ -95,37 +142,109 @@ class ChangePasswordDialog extends HookWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Enter your current password and choose a new one.',
+                useBiometric.value
+                    ? 'Verify with biometric and choose a new password.'
+                    : 'Enter your current password and choose a new one.',
                 style: textTheme.bodyMedium?.copyWith(
                   color: colorScheme.onSurfaceVariant,
                 ),
               ),
               const SizedBox(height: 24),
-              TextFormField(
-                controller: currentPasswordController,
-                obscureText: !currentPasswordVisible.value,
-                decoration: InputDecoration(
-                  labelText: 'Current Password',
-                  prefixIcon: const Icon(Icons.lock_outline),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      currentPasswordVisible.value
-                          ? Icons.visibility_off
-                          : Icons.visibility,
+              
+              // Biometric Verification Section
+              if (useBiometric.value) ...[
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: biometricVerified.value
+                        ? colorScheme.primaryContainer.withOpacity(0.3)
+                        : colorScheme.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: biometricVerified.value
+                          ? colorScheme.primary
+                          : colorScheme.outline.withOpacity(0.2),
                     ),
-                    onPressed: () =>
-                        currentPasswordVisible.value = !currentPasswordVisible.value,
                   ),
-                  border: const OutlineInputBorder(),
+                  child: Row(
+                    children: [
+                      Icon(
+                        biometricVerified.value
+                            ? Icons.check_circle
+                            : Icons.fingerprint,
+                        color: biometricVerified.value
+                            ? colorScheme.primary
+                            : colorScheme.onSurfaceVariant,
+                        size: 32,
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              biometricVerified.value
+                                  ? 'Verified'
+                                  : 'Biometric Verification',
+                              style: textTheme.titleSmall?.copyWith(
+                                color: biometricVerified.value
+                                    ? colorScheme.primary
+                                    : colorScheme.onSurface,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              biometricVerified.value
+                                  ? 'Identity confirmed'
+                                  : 'Tap to verify',
+                              style: textTheme.bodySmall?.copyWith(
+                                color: colorScheme.onSurfaceVariant,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      if (!biometricVerified.value)
+                        FilledButton.tonal(
+                          onPressed: isLoading.value ? null : handleBiometricAuth,
+                          child: const Text('Verify'),
+                        ),
+                    ],
+                  ),
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your current password';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16),
+                const SizedBox(height: 16),
+              ],
+              
+              // Current Password Field (only if not using biometric)
+              if (!useBiometric.value) ...[
+                TextFormField(
+                  controller: currentPasswordController,
+                  obscureText: !currentPasswordVisible.value,
+                  decoration: InputDecoration(
+                    labelText: 'Current Password',
+                    prefixIcon: const Icon(Icons.lock_outline),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        currentPasswordVisible.value
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                      ),
+                      onPressed: () =>
+                          currentPasswordVisible.value = !currentPasswordVisible.value,
+                    ),
+                    border: const OutlineInputBorder(),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your current password';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 16),
+              ],
+              
               TextFormField(
                 controller: newPasswordController,
                 obscureText: !newPasswordVisible.value,

@@ -1,26 +1,72 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
+import 'package:velora/core/services/biometric_service.dart';
+import 'package:velora/core/ui/app_messenger.dart';
 import 'package:velora/features/settings/presentation/widgets/settings_section_card.dart';
 import 'package:velora/features/settings/presentation/widgets/settings_tile.dart';
 import 'package:velora/l10n/app_localizations.dart';
 import 'package:velora/routes/app_router.dart';
 import 'package:velora/shared/widgets/under_development_dialog.dart';
 
-class WalletDashboardScreen extends StatefulWidget {
+class WalletDashboardScreen extends HookWidget {
   const WalletDashboardScreen({super.key});
-
-  @override
-  State<WalletDashboardScreen> createState() => _WalletDashboardScreenState();
-}
-
-class _WalletDashboardScreenState extends State<WalletDashboardScreen> {
-  bool _isBalanceHidden = false;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final t = AppLocalizations.of(context)!;
+    final isBalanceHidden = useState(false);
+    final biometricService = useMemoized(() => BiometricService());
+    final biometricVerified = useState(false);
+    final isLoading = useState(true);
+
+    useEffect(() {
+      Future<void> checkAndVerifyBiometric() async {
+        final enabled = await biometricService.isBiometricEnabled();
+        final available = await biometricService.isBiometricAvailable();
+        
+        if (enabled && available) {
+          // Request biometric authentication
+          final authenticated = await biometricService.authenticate(
+            reason: 'Authenticate to access your wallet',
+          );
+          
+          if (!authenticated) {
+            // Failed authentication - go back
+            if (context.mounted) {
+              context.pop();
+              AppMessenger.showToast(
+                message: 'Biometric authentication required',
+                icon: Icons.fingerprint,
+                isError: true,
+              );
+            }
+          } else {
+            biometricVerified.value = true;
+          }
+        } else {
+          biometricVerified.value = true;
+        }
+        
+        isLoading.value = false;
+      }
+      
+      checkAndVerifyBiometric();
+      return null;
+    }, const []);
+
+    if (isLoading.value || !biometricVerified.value) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(t.walletDashboardTitle),
+        ),
+        body: const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -69,22 +115,20 @@ class _WalletDashboardScreenState extends State<WalletDashboardScreen> {
                       ),
                       IconButton(
                         icon: Icon(
-                          _isBalanceHidden
+                          isBalanceHidden.value
                               ? Icons.visibility_off
                               : Icons.visibility,
                           color: colorScheme.onPrimaryContainer,
                         ),
                         onPressed: () {
-                          setState(() {
-                            _isBalanceHidden = !_isBalanceHidden;
-                          });
+                          isBalanceHidden.value = !isBalanceHidden.value;
                         },
                       ),
                     ],
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    _isBalanceHidden ? '••••••' : 'Rp 2.450.000',
+                    isBalanceHidden.value ? '••••••' : 'Rp 2.450.000',
                     style: theme.textTheme.headlineLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: colorScheme.onPrimaryContainer,

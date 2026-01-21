@@ -89,20 +89,9 @@ class _ProfileScreenContent extends HookWidget {
                   ),
                 ),
                 const SizedBox(width: 4),
-                const Icon(Icons.keyboard_arrow_down, size: 20),
               ],
             ),
             actions: [
-              IconButton(
-                icon: Badge(
-                  label: const Text('9+'),
-                  backgroundColor: Colors.red,
-                  child: const Icon(Icons.favorite_border),
-                ),
-                onPressed: () {
-                  // Note: Navigation to notifications will be implemented
-                },
-              ),
               IconButton(
                 icon: const Icon(Icons.menu),
                 onPressed: () {
