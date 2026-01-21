@@ -292,14 +292,13 @@ class ChatMediaWidget extends StatelessWidget {
                               );
                             },
                             child: Icon(
-                              isRead
-                                  ? Icons.done_all_rounded
-                                  : Icons.check_rounded,
+                              Icons.done_all_rounded, // Always double check
                               key: ValueKey(isRead),
                               size: 16,
                               color: isRead
-                                  ? Colors.lightBlueAccent.shade200
-                                  : Colors.grey.shade500,
+                                  ? Colors.lightBlueAccent
+                                      .shade200 // Blue when read
+                                  : Colors.grey.shade500, // Gray when not read
                             ),
                           ),
                         ],

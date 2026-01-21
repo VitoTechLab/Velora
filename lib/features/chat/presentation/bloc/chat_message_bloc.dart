@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:velora/core/errors/chat_failure.dart';
 import 'package:velora/core/utils/log_alias.dart';
+import 'package:velora/features/chat/domain/entities/chat_message_entity.dart';
 import 'package:velora/features/chat/domain/entities/message_read_entity.dart';
 import 'package:velora/features/chat/domain/usecases/cancel_event_rsvp_usecase.dart';
 import 'package:velora/features/chat/domain/usecases/delete_message_usecase.dart';
@@ -271,6 +272,9 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
         add(StartWatchMessagesEvent(conversationId: conversationId));
         add(StartWatchReadsEvent(conversationId: conversationId));
         add(StartWatchTypingEvent(conversationId: conversationId));
+
+        // Mark conversation as read when opening
+        add(MarkConversationReadEvent(conversationId: conversationId));
       },
     );
   }
@@ -413,7 +417,8 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     final tempMessage = ChatMessageEntity(
       id: tempId,
       conversationId: conversationId,
-      senderId: null, // Will be filled generally, or we can fetch current user if we have it in state/repo
+      senderId:
+          null, // Will be filled generally, or we can fetch current user if we have it in state/repo
       kind: 'text',
       body: trimmed,
       replyToMessageId: event.replyToMessageId,
@@ -462,7 +467,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
           }
           return m;
         }).toList();
-        
+
         emit(
           state.copyWith(
             isSending: false,
@@ -1045,6 +1050,8 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
       return;
     }
 
+    logi('$_logTag: Marking conversation $conversationId as read');
+
     emit(
       state.copyWith(isMarkingRead: true, markReadError: null, message: null),
     );
@@ -1056,11 +1063,14 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
 
     result.fold(
       (failure) {
+        loge('$_logTag: Failed to mark conversation as read', error: failure);
         emit(
           state.copyWith(isMarkingRead: false, markReadError: failure.message),
         );
       },
       (_) {
+        logi(
+            '$_logTag: Successfully marked conversation $conversationId as read');
         // Update conversation list locally to reset unread count
         final conversations = state.conversations;
         final index = conversations.indexWhere(
@@ -1463,6 +1473,19 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     Emitter<ChatMessageState> emit,
   ) async {
     final read = event.readEntity;
+
+    // Only process read receipts for messages in this conversation
+    final isMessageInConversation =
+        state.messages.any((m) => m.id == read.messageId);
+    if (!isMessageInConversation) {
+      logi(
+          '$_logTag: Ignoring read receipt for message ${read.messageId} - not in current conversation');
+      return;
+    }
+
+    logi(
+        '$_logTag: Processing read receipt for message ${read.messageId} from user ${read.userId}');
+
     final updatedReads = Map<String, List<MessageReadEntity>>.from(
       state.messageReads,
     );

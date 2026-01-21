@@ -13,6 +13,8 @@ class ChatListItem extends StatelessWidget {
   final int? unreadCount;
   final bool isGroup;
   final bool isTyping;
+  final bool isLastMessageFromMe;
+  final bool isLastMessageRead;
   final VoidCallback onTap;
 
   const ChatListItem({
@@ -28,6 +30,8 @@ class ChatListItem extends StatelessWidget {
     this.unreadCount,
     this.isGroup = false,
     this.isTyping = false,
+    this.isLastMessageFromMe = false,
+    this.isLastMessageRead = false,
     required this.onTap,
   });
 
@@ -212,13 +216,17 @@ class ChatListItem extends StatelessWidget {
   ) {
     return Row(
       children: [
-        if (isRead && !isMissedCall && messageType != 'call')
+        // Show checkmark only if last message is from me
+        if (isLastMessageFromMe && !isMissedCall && messageType != 'call')
           Padding(
             padding: const EdgeInsets.only(right: 6),
             child: Icon(
               Icons.done_all_rounded,
               size: 16,
-              color: Colors.lightBlueAccent.shade200,
+              // Blue if read by recipient, gray if not read yet
+              color: isLastMessageRead
+                  ? Colors.lightBlueAccent.shade200
+                  : Colors.grey.shade500,
             ),
           ),
         if (messageType == 'photo' || messageType == 'photos')

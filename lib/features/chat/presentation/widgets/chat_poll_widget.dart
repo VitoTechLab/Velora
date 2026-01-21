@@ -260,14 +260,14 @@ class ChatPollWidget extends StatelessWidget {
                                 );
                               },
                               child: Icon(
-                                isRead
-                                    ? Icons.done_all_rounded
-                                    : Icons.check_rounded,
+                                Icons.done_all_rounded, // Always double check
                                 key: ValueKey(isRead),
                                 size: 16,
                                 color: isRead
-                                    ? colorScheme.primary
-                                    : textColor.withValues(alpha: 0.5),
+                                    ? Colors.lightBlueAccent
+                                        .shade200 // Blue when read
+                                    : Colors
+                                        .grey.shade500, // Gray when not read
                               ),
                             ),
                           ],

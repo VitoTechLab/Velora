@@ -41,9 +41,8 @@ class ChatEventWidget extends StatelessWidget {
     final textTheme = theme.textTheme;
     final t = AppLocalizations.of(context)!;
 
-    final textColor = isSender
-        ? colorScheme.onPrimaryContainer
-        : colorScheme.onSurface;
+    final textColor =
+        isSender ? colorScheme.onPrimaryContainer : colorScheme.onSurface;
 
     final dateFormat = DateFormat.yMMMd(t.localeName);
     final timeFormat = DateFormat.jm(t.localeName);
@@ -60,7 +59,8 @@ class ChatEventWidget extends StatelessWidget {
             opacity: value,
             child: Transform.scale(
               scale: 0.95 + (0.05 * value),
-              alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
+              alignment:
+                  isSender ? Alignment.centerRight : Alignment.centerLeft,
               child: child,
             ),
           );
@@ -118,7 +118,8 @@ class ChatEventWidget extends StatelessWidget {
               children: [
                 // Event header badge
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
@@ -198,8 +199,10 @@ class ChatEventWidget extends StatelessWidget {
                               colorScheme.surface.withValues(alpha: 0.2),
                             ]
                           : [
-                              colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
-                              colorScheme.surfaceContainerHighest.withValues(alpha: 0.4),
+                              colorScheme.surfaceContainerHighest
+                                  .withValues(alpha: 0.6),
+                              colorScheme.surfaceContainerHighest
+                                  .withValues(alpha: 0.4),
                             ],
                     ),
                     borderRadius: BorderRadius.circular(16),
@@ -246,7 +249,8 @@ class ChatEventWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [
@@ -300,7 +304,8 @@ class ChatEventWidget extends StatelessWidget {
                             child: _ResponseButton(
                               label: t.chatEventResponseNo,
                               icon: Icons.cancel_rounded,
-                              isSelected: userResponse == EventResponse.notGoing,
+                              isSelected:
+                                  userResponse == EventResponse.notGoing,
                               count: notGoingCount,
                               colorScheme: colorScheme,
                               textTheme: textTheme,
@@ -317,7 +322,8 @@ class ChatEventWidget extends StatelessWidget {
                 // Sender summary
                 if (isSender)
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
@@ -357,7 +363,7 @@ class ChatEventWidget extends StatelessWidget {
                     ),
                   ),
                 const SizedBox(height: 12),
-                
+
                 // Time and read status
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -381,12 +387,13 @@ class ChatEventWidget extends StatelessWidget {
                           );
                         },
                         child: Icon(
-                          isRead ? Icons.done_all_rounded : Icons.check_rounded,
+                          Icons.done_all_rounded, // Always double check
                           key: ValueKey(isRead),
                           size: 16,
                           color: isRead
-                              ? colorScheme.primary
-                              : textColor.withValues(alpha: 0.5),
+                              ? Colors
+                                  .lightBlueAccent.shade200 // Blue when read
+                              : Colors.grey.shade500, // Gray when not read
                         ),
                       ),
                     ],
@@ -511,8 +518,10 @@ class _ResponseButton extends StatelessWidget {
                     )
                   : LinearGradient(
                       colors: [
-                        colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
-                        colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+                        colorScheme.surfaceContainerHighest
+                            .withValues(alpha: 0.5),
+                        colorScheme.surfaceContainerHighest
+                            .withValues(alpha: 0.3),
                       ],
                     ),
               border: Border.all(
@@ -558,7 +567,8 @@ class _ResponseButton extends StatelessWidget {
                 if (count > 0) ...[
                   const SizedBox(height: 4),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                     decoration: BoxDecoration(
                       color: isSelected
                           ? selectedColor.withValues(alpha: 0.2)
