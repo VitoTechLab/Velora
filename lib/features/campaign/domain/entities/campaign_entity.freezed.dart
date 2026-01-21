@@ -361,7 +361,7 @@ class __$$CampaignEntityImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CampaignEntityImpl implements _CampaignEntity {
+class _$CampaignEntityImpl extends _CampaignEntity {
   const _$CampaignEntityImpl(
       {required this.id,
       required this.userId,
@@ -383,7 +383,8 @@ class _$CampaignEntityImpl implements _CampaignEntity {
       this.organizerUsername,
       this.organizerAvatarUrl,
       this.categoryName,
-      this.categorySlug});
+      this.categorySlug})
+      : super._();
 
   @override
   final String id;
@@ -520,7 +521,7 @@ class _$CampaignEntityImpl implements _CampaignEntity {
           this, _$identity);
 }
 
-abstract class _CampaignEntity implements CampaignEntity {
+abstract class _CampaignEntity extends CampaignEntity {
   const factory _CampaignEntity(
       {required final String id,
       required final String userId,
@@ -543,6 +544,7 @@ abstract class _CampaignEntity implements CampaignEntity {
       final String? organizerAvatarUrl,
       final String? categoryName,
       final String? categorySlug}) = _$CampaignEntityImpl;
+  const _CampaignEntity._() : super._();
 
   @override
   String get id;

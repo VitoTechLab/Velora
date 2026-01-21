@@ -4,13 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velora/core/di/service_locator.dart';
 import 'package:velora/l10n/app_localizations.dart';
 import 'package:velora/features/campaign/presentation/screens/campaign_list_screen.dart';
-import 'package:velora/features/campaign/data/mock_campaigns.dart';
+import 'package:velora/features/campaign/presentation/bloc/campaign_bloc.dart';
+import 'package:velora/features/campaign/presentation/bloc/campaign_event.dart';
+import 'package:velora/features/campaign/presentation/bloc/campaign_state.dart';
 import 'package:velora/features/search/domain/entities/campaign_category.dart';
 import 'package:velora/features/search/presentation/bloc/search_bloc.dart';
 import 'package:velora/features/search/presentation/bloc/search_event.dart';
 import 'package:velora/features/search/presentation/bloc/search_state.dart';
 import 'package:velora/features/search/presentation/widgets/category_card.dart';
-import 'package:velora/features/search/presentation/widgets/discover_card.dart';
 import 'package:velora/features/search/presentation/widgets/search_user_card.dart';
 import 'package:velora/features/search/presentation/widgets/search_campaign_card.dart';
 
@@ -70,8 +71,14 @@ class SearchScreen extends HookWidget {
       );
     }
 
-    return BlocProvider(
-      create: (context) => getIt<SearchBloc>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => getIt<SearchBloc>()),
+        BlocProvider(
+          create: (context) =>
+              getIt<CampaignBloc>()..add(const CampaignEvent.loadCampaigns(limit: 10)),
+        ),
+      ],
       child: Builder(
         builder: (context) {
           final bloc = context.read<SearchBloc>();
@@ -162,42 +169,86 @@ class SearchScreen extends HookWidget {
                             ]),
                           );
                         }
-                        return SliverList(
-                          delegate: SliverChildListDelegate([
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(20, 24, 20, 16),
-                              child: Text(l10n?.searchDiscoverTitle ?? 'Discover something new', style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: colorScheme.onSurface)),
-                            ),
-                            SizedBox(
-                              height: 200,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                padding: const EdgeInsets.symmetric(horizontal: 20),
-                                itemCount: mockCampaigns.take(10).length,
-                                itemBuilder: (context, index) {
-                                  final campaign = mockCampaigns[index];
-                                  return DiscoverCard(title: campaign.title, imageUrl: '', onTap: () {});
-                                },
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(20, 32, 20, 16),
-                              child: Text(l10n?.searchBrowseAllTitle ?? 'Browse all', style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: colorScheme.onSurface)),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
-                              child: GridView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 12, mainAxisSpacing: 12, childAspectRatio: 1.5),
-                                itemCount: campaignCategories.length,
-                                itemBuilder: (context, index) {
-                                  final category = campaignCategories[index];
-                                  return CategoryCard(category: category, onTap: () => onCategoryTap(category));
-                                },
-                              ),
-                            ),
-                          ]),
+                        
+                        // Default content: Discover campaigns from real data
+                        return BlocBuilder<CampaignBloc, CampaignState>(
+                          builder: (context, campaignState) {
+                            return SliverList(
+                              delegate: SliverChildListDelegate([
+                                // Discover section with real campaigns
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(20, 24, 20, 16),
+                                  child: Text(
+                                    l10n?.searchDiscoverTitle ?? 'Discover something new',
+                                    style: theme.textTheme.titleLarge?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: colorScheme.onSurface,
+                                    ),
+                                  ),
+                                ),
+                                if (campaignState.isLoading)
+                                  const SizedBox(
+                                    height: 200,
+                                    child: Center(child: CircularProgressIndicator()),
+                                  )
+                                else if (campaignState.campaigns.isNotEmpty)
+                                  SizedBox(
+                                    height: 200,
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                                      itemCount: campaignState.campaigns.take(10).length,
+                                      itemBuilder: (context, index) {
+                                        final campaign = campaignState.campaigns[index];
+                                        return Container(
+                                          width: 280,
+                                          margin: const EdgeInsets.only(right: 16),
+                                          child: SearchCampaignCard(
+                                            campaign: campaign.toSearchResultModel(),
+                                            onTap: () {
+                                              // Navigate to campaign detail
+                                            },
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                
+                                // Browse all categories
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(20, 32, 20, 16),
+                                  child: Text(
+                                    l10n?.searchBrowseAllTitle ?? 'Browse all',
+                                    style: theme.textTheme.titleLarge?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: colorScheme.onSurface,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+                                  child: GridView.builder(
+                                    shrinkWrap: true,
+                                    physics: const NeverScrollableScrollPhysics(),
+                                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 12,
+                                      mainAxisSpacing: 12,
+                                      childAspectRatio: 1.5,
+                                    ),
+                                    itemCount: campaignCategories.length,
+                                    itemBuilder: (context, index) {
+                                      final category = campaignCategories[index];
+                                      return CategoryCard(
+                                        category: category,
+                                        onTap: () => onCategoryTap(category),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ]),
+                            );
+                          },
                         );
                       },
                     ),
