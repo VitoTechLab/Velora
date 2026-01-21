@@ -51,7 +51,7 @@ class CampaignRemoteDataSourceImpl implements CampaignRemoteDataSource {
         logi('Getting campaign by id: $id', tag: _logTag);
         final response = await _client.from(_campaigns).select('''
               *,
-              user_profiles!campaigns_user_id_fkey(username, avatar_url),
+              user_profiles(username, avatar_url),
               campaign_categories(name, slug)
             ''').eq('id', id).maybeSingle();
         if (response == null) return null;
@@ -88,7 +88,7 @@ class CampaignRemoteDataSourceImpl implements CampaignRemoteDataSource {
         logi('Getting all campaigns', tag: _logTag);
         var query = _client.from(_campaigns).select('''
               *,
-              user_profiles!campaigns_user_id_fkey(username, avatar_url),
+              user_profiles(username, avatar_url),
               campaign_categories(name, slug)
             ''').eq('status', 'active');
 
@@ -280,7 +280,7 @@ class CampaignRemoteDataSourceImpl implements CampaignRemoteDataSource {
             .from(_donations)
             .select('''
               *,
-              user_profiles!donations_user_id_fkey(username, display_name, avatar_url)
+              user_profiles(username, display_name, avatar_url)
             ''')
             .eq('campaign_id', campaignId)
             .eq('payment_status', 'success')

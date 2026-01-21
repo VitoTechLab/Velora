@@ -186,6 +186,7 @@ import 'package:velora/features/mention/presentation/bloc/mention_bloc.dart';
 // Search feature imports
 import 'package:velora/features/search/data/datasources/search_remote_datasource.dart';
 import 'package:velora/features/search/data/datasources/search_remote_datasource_impl.dart';
+import 'package:velora/features/search/presentation/bloc/search_bloc.dart';
 
 // Settings feature imports
 import 'package:velora/features/settings/presentation/bloc/settings_bloc.dart';
@@ -886,6 +887,11 @@ Future<void> configureDependencies() async {
       loadMediaAssets: getIt<LoadMediaAssetsUseCase>(),
       getFileFromAsset: getIt<GetFileFromAssetUseCase>(),
     ),
+  );
+
+  // Search feature - Bloc
+  getIt.registerFactory(
+    () => SearchBloc(searchDataSource: getIt<SearchRemoteDataSource>()),
   );
 
   // Settings feature - Bloc (global singleton)
