@@ -35,7 +35,7 @@ class WalletExportService {
   }) async {
     try {
       // Filter by date range if provided
-      var filteredTransactions = transactions;
+      var filteredTransactions = transactions.toList();
       if (startDate != null) {
         filteredTransactions = filteredTransactions
             .where((t) => t.createdAt.isAfter(startDate))
