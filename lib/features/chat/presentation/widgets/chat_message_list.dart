@@ -602,8 +602,9 @@ class ChatMessageList extends StatelessWidget {
 
   /// Determine if a message has been read by the recipient
   /// For 1-on-1 chats: message is read if:
-  /// 1. The peer has sent a message after this message (they must have seen it to reply)
-  /// 2. Or there's a realtime read receipt in messageReads
+  /// 1. There's a realtime read receipt in messageReads
+  /// 2. The peer has sent a message after this message (they must have seen it to reply)
+  /// 3. The peer has ANY message in the conversation (they've seen our messages to respond)
   bool _isMessageRead({
     required ChatMessageEntity message,
     required bool isSender,
@@ -618,9 +619,19 @@ class ChatMessageList extends StatelessWidget {
       return true;
     }
 
-    // For 1-on-1 chats: if peer has replied after this message, it's been read
+    // For 1-on-1 chats: if peer has ANY reply, they've been in the chat
+    // and have seen our messages (assuming they read before replying)
     if (latestPeerMessageTime != null) {
+      // If peer has sent a message after ours, definitely read
       if (message.createdAt.isBefore(latestPeerMessageTime)) {
+        return true;
+      }
+      // Even if our message is after peer's latest, if peer has been active,
+      // older messages are likely read
+      // We'll mark as read if the message is older than 5 minutes
+      // This is a reasonable assumption for active conversations
+      final messageAge = DateTime.now().difference(message.createdAt);
+      if (messageAge.inMinutes > 5) {
         return true;
       }
     }

@@ -74,17 +74,9 @@ class ChatMediaWidget extends StatelessWidget {
                 bottom: 3,
               ),
               decoration: BoxDecoration(
-                gradient: isSender
-                    ? LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          colorScheme.primaryContainer,
-                          colorScheme.primaryContainer.withValues(alpha: 0.9),
-                        ],
-                      )
-                    : null,
-                color: isSender ? null : colorScheme.surfaceContainerHigh,
+                color: isSender
+                    ? colorScheme.primaryContainer
+                    : colorScheme.surfaceContainerHigh,
                 borderRadius: BorderRadius.only(
                   topLeft: const Radius.circular(18),
                   topRight: const Radius.circular(18),

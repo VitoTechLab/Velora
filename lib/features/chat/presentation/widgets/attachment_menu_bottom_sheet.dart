@@ -445,23 +445,9 @@ class _AttachmentMenuBottomSheetState extends State<AttachmentMenuBottomSheet>
             position: _slideAnimation,
             child: Container(
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    colorScheme.surface,
-                    colorScheme.surfaceContainer,
-                  ],
-                ),
+                color: colorScheme.surface,
                 borderRadius:
                     const BorderRadius.vertical(top: Radius.circular(28)),
-                boxShadow: [
-                  BoxShadow(
-                    color: colorScheme.shadow.withValues(alpha: 0.1),
-                    blurRadius: 20,
-                    offset: const Offset(0, -4),
-                  ),
-                ],
               ),
               child: SafeArea(
                 top: false,
@@ -474,12 +460,8 @@ class _AttachmentMenuBottomSheetState extends State<AttachmentMenuBottomSheet>
                       width: 40,
                       height: 4,
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            colorScheme.primary.withValues(alpha: 0.3),
-                            colorScheme.secondary.withValues(alpha: 0.3),
-                          ],
-                        ),
+                        color:
+                            colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
@@ -752,37 +734,19 @@ class _AttachmentMenuItemState extends State<_AttachmentMenuItem>
                       width: 56,
                       height: 56,
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: widget.gradientColors
-                              .map((c) => c.withValues(alpha: 0.15))
-                              .toList(),
-                        ),
+                        color:
+                            widget.gradientColors.first.withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(
                           color: widget.gradientColors.first
                               .withValues(alpha: 0.2),
                           width: 1,
                         ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: widget.gradientColors.first
-                                .withValues(alpha: 0.2),
-                            blurRadius: 8,
-                            offset: const Offset(0, 2),
-                          ),
-                        ],
                       ),
-                      child: ShaderMask(
-                        shaderCallback: (bounds) => LinearGradient(
-                          colors: widget.gradientColors,
-                        ).createShader(bounds),
-                        child: Icon(
-                          widget.icon,
-                          color: Colors.white,
-                          size: 28,
-                        ),
+                      child: Icon(
+                        widget.icon,
+                        color: widget.gradientColors.first,
+                        size: 28,
                       ),
                     ),
                     const SizedBox(height: 8),

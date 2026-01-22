@@ -74,7 +74,7 @@ class ChatMessageItem extends StatelessWidget {
                     child: Text(
                       username!,
                       style: textTheme.labelSmall?.copyWith(
-                        color: Colors.tealAccent.shade400,
+                        color: colorScheme.primary,
                         fontWeight: FontWeight.w600,
                       ),
                     ),

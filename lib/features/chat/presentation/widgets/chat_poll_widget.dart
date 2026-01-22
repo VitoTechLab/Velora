@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
-/// Chat poll bubble with modern design
+/// Chat poll bubble with modern clean design
 ///
 /// Pure UI widget for poll messages.
 /// Avatar and user info should be handled by parent widget.
 ///
 /// Features:
-/// - Interactive poll options with gradient progress
-/// - Real-time vote percentage
-/// - Modern rounded corners with pointy style
-/// - Gradient backgrounds and icons
+/// - Clean minimal poll options
+/// - Smooth progress animations
+/// - Modern rounded corners
 /// - Entrance animation
 class ChatPollWidget extends StatelessWidget {
   final String question;
@@ -43,19 +42,21 @@ class ChatPollWidget extends StatelessWidget {
     final textTheme = theme.textTheme;
     final t = AppLocalizations.of(context)!;
 
-    // Pakai warna teks netral supaya selalu terbaca jelas
-    final textColor = colorScheme.onSurface;
+    final bubbleColor = isSender
+        ? colorScheme.primaryContainer
+        : colorScheme.surfaceContainerHigh;
+    final textColor =
+        isSender ? colorScheme.onPrimaryContainer : colorScheme.onSurface;
 
     return TweenAnimationBuilder<double>(
-      duration: const Duration(milliseconds: 400),
+      duration: const Duration(milliseconds: 350),
       tween: Tween(begin: 0.0, end: 1.0),
       curve: Curves.easeOutCubic,
       builder: (context, value, child) {
         return Opacity(
           opacity: value,
-          child: Transform.scale(
-            scale: 0.95 + (0.05 * value),
-            alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
+          child: Transform.translate(
+            offset: Offset(0, 8 * (1 - value)),
             child: child,
           ),
         );
@@ -65,218 +66,167 @@ class ChatPollWidget extends StatelessWidget {
         hint: t.chatPollSemanticsHint(totalVotes),
         child: Align(
           alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
-          child: ConstrainedBox(
+          child: Container(
             constraints: BoxConstraints(
-              maxWidth: MediaQuery.of(context).size.width * 0.75,
-              minWidth: 250,
+              maxWidth: MediaQuery.of(context).size.width * 0.78,
+              minWidth: 260,
             ),
-            child: Container(
-              margin: EdgeInsets.only(
-                left: isSender ? 40 : 8,
-                right: isSender ? 8 : 40,
-                top: 3,
-                bottom: 3,
+            margin: EdgeInsets.only(
+              left: isSender ? 48 : 8,
+              right: isSender ? 8 : 48,
+              top: 2,
+              bottom: 2,
+            ),
+            decoration: BoxDecoration(
+              color: bubbleColor,
+              borderRadius: BorderRadius.only(
+                topLeft: const Radius.circular(16),
+                topRight: const Radius.circular(16),
+                bottomLeft: Radius.circular(isSender ? 16 : 4),
+                bottomRight: Radius.circular(isSender ? 4 : 16),
               ),
-              padding: const EdgeInsets.all(14),
-              decoration: BoxDecoration(
-                // Lebih mirip kartu WhatsApp: background netral
-                gradient: isSender
-                    ? LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          colorScheme.primaryContainer.withValues(alpha: 0.95),
-                          colorScheme.primaryContainer.withValues(alpha: 0.85),
-                        ],
-                      )
-                    : null,
-                color: isSender ? null : colorScheme.surfaceContainerHigh,
-                borderRadius: BorderRadius.only(
-                  topLeft: const Radius.circular(18),
-                  topRight: const Radius.circular(18),
-                  bottomLeft: Radius.circular(isSender ? 18 : 4),
-                  bottomRight: Radius.circular(isSender ? 4 : 18),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.06),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
                 ),
-                border: Border.all(
-                  color: isSender
-                      ? colorScheme.primary.withValues(alpha: 0.15)
-                      : colorScheme.outline.withValues(alpha: 0.1),
-                  width: 1,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: isSender
-                        ? colorScheme.primary.withValues(alpha: 0.15)
-                        : Colors.black.withValues(alpha: 0.05),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                    spreadRadius: 0,
-                  ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // Poll header with gradient icon
-                  Row(
-                    children: [
-                      ShaderMask(
-                        shaderCallback: (bounds) => LinearGradient(
-                          colors: [
-                            colorScheme.primary,
-                            colorScheme.secondary,
-                          ],
-                        ).createShader(bounds),
-                        child: const Icon(
-                          Icons.poll_rounded,
-                          size: 20,
-                          color: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(width: 6),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 3,
-                        ),
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              colorScheme.primary.withValues(alpha: 0.15),
-                              colorScheme.secondary.withValues(alpha: 0.1),
-                            ],
-                          ),
-                          borderRadius: BorderRadius.circular(6),
-                          border: Border.all(
-                            color: colorScheme.primary.withValues(alpha: 0.2),
-                            width: 1,
-                          ),
-                        ),
-                        child: Text(
-                          t.chatPollLabel,
-                          style: textTheme.labelSmall?.copyWith(
-                            color: colorScheme.primary,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 0.5,
-                            fontSize: 11,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-
-                  // Poll question
-                  Text(
-                    question,
-                    style: textTheme.titleMedium?.copyWith(
-                      color: textColor,
-                      fontWeight: FontWeight.w600,
-                      height: 1.3,
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Poll header
+                Container(
+                  padding: const EdgeInsets.fromLTRB(14, 12, 14, 10),
+                  decoration: BoxDecoration(
+                    color: colorScheme.primary.withValues(alpha: 0.08),
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(16),
+                      topRight: Radius.circular(16),
                     ),
                   ),
-                  const SizedBox(height: 16),
-
-                  // Poll options
-                  ...options.asMap().entries.map((entry) {
-                    final index = entry.key;
-                    final option = entry.value;
-                    final percentage = totalVotes > 0
-                        ? (option.votes / totalVotes * 100).toStringAsFixed(0)
-                        : '0';
-
-                    return Padding(
-                      padding: EdgeInsets.only(
-                        bottom: index < options.length - 1 ? 12 : 0,
-                      ),
-                      child: _PollOptionItem(
-                        option: option,
-                        percentage: percentage,
-                        totalVotes: totalVotes,
-                        hasVoted: hasVoted,
-                        textColor: textColor,
-                        colorScheme: colorScheme,
-                        textTheme: textTheme,
-                        isSender: isSender,
-                        onTap: hasVoted || isSender
-                            ? null
-                            : () {
-                                // Handle vote with option id
-                                onVote?.call(option.id);
-                              },
-                        t: t,
-                      ),
-                    );
-                  }),
-                  const SizedBox(height: 12),
-
-                  // Footer: vote count + time + read receipt
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  child: Row(
                     children: [
+                      Container(
+                        padding: const EdgeInsets.all(6),
+                        decoration: BoxDecoration(
+                          color: colorScheme.primary.withValues(alpha: 0.15),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Icon(
+                          Icons.bar_chart_rounded,
+                          size: 16,
+                          color: colorScheme.primary,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Text(
+                        t.chatPollLabel,
+                        style: textTheme.labelMedium?.copyWith(
+                          color: colorScheme.primary,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0.3,
+                        ),
+                      ),
+                      const Spacer(),
                       Container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 8,
                           vertical: 3,
                         ),
                         decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              colorScheme.primary.withValues(alpha: 0.1),
-                              colorScheme.secondary.withValues(alpha: 0.05),
-                            ],
-                          ),
-                          borderRadius: BorderRadius.circular(6),
+                          color: colorScheme.primary.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
                           t.chatPollTotalVotes(totalVotes),
-                          style: textTheme.bodySmall?.copyWith(
-                            color: textColor.withValues(alpha: 0.7),
-                            fontSize: 11,
+                          style: textTheme.labelSmall?.copyWith(
+                            color: colorScheme.primary,
                             fontWeight: FontWeight.w600,
+                            fontSize: 11,
                           ),
                         ),
                       ),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            time,
-                            style: textTheme.bodySmall?.copyWith(
-                              color: textColor.withValues(alpha: 0.6),
-                              fontSize: 11,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          if (isSender) ...[
-                            const SizedBox(width: 4),
-                            AnimatedSwitcher(
-                              duration: const Duration(milliseconds: 300),
-                              transitionBuilder: (child, animation) {
-                                return ScaleTransition(
-                                  scale: animation,
-                                  child: child,
-                                );
-                              },
-                              child: Icon(
-                                Icons.done_all_rounded, // Always double check
-                                key: ValueKey(isRead),
-                                size: 16,
-                                color: isRead
-                                    ? Colors.lightBlueAccent
-                                        .shade200 // Blue when read
-                                    : Colors
-                                        .grey.shade500, // Gray when not read
-                              ),
-                            ),
-                          ],
-                        ],
-                      ),
                     ],
                   ),
-                ],
-              ),
+                ),
+
+                // Poll question
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(14, 12, 14, 14),
+                  child: Text(
+                    question,
+                    style: textTheme.titleSmall?.copyWith(
+                      color: textColor,
+                      fontWeight: FontWeight.w600,
+                      height: 1.35,
+                    ),
+                  ),
+                ),
+
+                // Poll options
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    children: options.asMap().entries.map((entry) {
+                      final index = entry.key;
+                      final option = entry.value;
+                      final percentage = totalVotes > 0
+                          ? (option.votes / totalVotes * 100).toStringAsFixed(0)
+                          : '0';
+
+                      return Padding(
+                        padding: EdgeInsets.only(
+                          bottom: index < options.length - 1 ? 8 : 0,
+                        ),
+                        child: _PollOptionItem(
+                          option: option,
+                          percentage: percentage,
+                          totalVotes: totalVotes,
+                          hasVoted: hasVoted,
+                          textColor: textColor,
+                          colorScheme: colorScheme,
+                          textTheme: textTheme,
+                          isSender: isSender,
+                          onTap: hasVoted || isSender
+                              ? null
+                              : () => onVote?.call(option.id),
+                          t: t,
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+
+                // Footer: time + read receipt
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(14, 12, 14, 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        time,
+                        style: textTheme.bodySmall?.copyWith(
+                          color: textColor.withValues(alpha: 0.5),
+                          fontSize: 11,
+                        ),
+                      ),
+                      if (isSender) ...[
+                        const SizedBox(width: 4),
+                        Icon(
+                          Icons.done_all_rounded,
+                          size: 16,
+                          color: isRead
+                              ? const Color(0xFF34B7F1)
+                              : textColor.withValues(alpha: 0.4),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
         ),
@@ -313,6 +263,7 @@ class _PollOptionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final showResults = hasVoted || isSender;
+    final progress = totalVotes > 0 ? option.votes / totalVotes : 0.0;
 
     return Semantics(
       button: onTap != null,
@@ -322,159 +273,106 @@ class _PollOptionItem extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           onTap: onTap,
-          borderRadius: BorderRadius.circular(12),
-          child: Ink(
+          borderRadius: BorderRadius.circular(10),
+          child: Container(
             decoration: BoxDecoration(
-              // Saat belum vote, opsi tampil seperti chip netral
               color: showResults
-                  ? Colors.transparent
-                  : colorScheme.surfaceContainerLowest,
-              gradient: null,
+                  ? colorScheme.surface.withValues(alpha: 0.5)
+                  : colorScheme.surface.withValues(alpha: 0.7),
+              borderRadius: BorderRadius.circular(10),
               border: Border.all(
-                color: showResults
-                    ? Colors.transparent
-                    : colorScheme.outline.withValues(alpha: 0.15),
-                width: 1,
+                color: option.isSelected && showResults
+                    ? colorScheme.primary.withValues(alpha: 0.5)
+                    : colorScheme.outline.withValues(alpha: 0.1),
+                width: option.isSelected && showResults ? 1.5 : 1,
               ),
-              borderRadius: BorderRadius.circular(12),
             ),
-            child: Stack(
-              children: [
-                // Progress bar with gradient
-                if (showResults)
-                  Positioned.fill(
-                    child: AnimatedFractionallySizedBox(
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.easeOutCubic,
-                      alignment: Alignment.centerLeft,
-                      widthFactor:
-                          totalVotes > 0 ? option.votes / totalVotes : 0,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                            colors: [
-                              colorScheme.primary.withValues(alpha: 0.25),
-                              colorScheme.secondary.withValues(alpha: 0.15),
-                            ],
-                          ),
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(
-                            color: colorScheme.primary.withValues(alpha: 0.2),
-                            width: 1,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(9),
+              child: Stack(
+                children: [
+                  // Progress bar
+                  if (showResults)
+                    Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 600),
+                          curve: Curves.easeOutCubic,
+                          width: MediaQuery.of(context).size.width *
+                              0.7 *
+                              progress,
+                          decoration: BoxDecoration(
+                            color: option.isSelected
+                                ? colorScheme.primary.withValues(alpha: 0.2)
+                                : colorScheme.primary.withValues(alpha: 0.08),
                           ),
                         ),
                       ),
                     ),
-                  ),
 
-                // Content
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-                  child: Row(
-                    children: [
-                      // Selected indicator with animation
-                      if (option.isSelected && showResults)
-                        Padding(
-                          padding: const EdgeInsets.only(right: 10),
-                          child: TweenAnimationBuilder<double>(
-                            duration: const Duration(milliseconds: 400),
-                            tween: Tween(begin: 0.0, end: 1.0),
-                            curve: Curves.elasticOut,
-                            builder: (context, value, child) {
-                              return Transform.scale(
-                                scale: value,
-                                child: child,
-                              );
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.all(2),
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    colorScheme.primary,
-                                    colorScheme.secondary,
-                                  ],
-                                ),
-                                shape: BoxShape.circle,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: colorScheme.primary
-                                        .withValues(alpha: 0.4),
-                                    blurRadius: 6,
-                                    spreadRadius: 1,
-                                  ),
-                                ],
-                              ),
-                              child: const Icon(
-                                Icons.check_circle_rounded,
-                                size: 18,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-
-                      // Option text
-                      Expanded(
-                        child: Text(
-                          option.text,
-                          style: textTheme.bodyMedium?.copyWith(
-                            color: textColor,
-                            fontWeight: option.isSelected && showResults
-                                ? FontWeight.w600
-                                : FontWeight.normal,
-                            height: 1.3,
-                          ),
-                        ),
-                      ),
-
-                      // Percentage with gradient badge
-                      if (showResults) ...[
-                        const SizedBox(width: 12),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 5,
-                          ),
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                colorScheme.primary.withValues(alpha: 0.2),
-                                colorScheme.secondary.withValues(alpha: 0.15),
-                              ],
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
-                              color: colorScheme.primary.withValues(alpha: 0.3),
-                              width: 1,
-                            ),
-                            boxShadow: [
-                              BoxShadow(
+                  // Content
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 11,
+                    ),
+                    child: Row(
+                      children: [
+                        // Radio/Check indicator
+                        if (!showResults)
+                          Container(
+                            width: 18,
+                            height: 18,
+                            margin: const EdgeInsets.only(right: 10),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
                                 color:
-                                    colorScheme.primary.withValues(alpha: 0.15),
-                                blurRadius: 4,
-                                offset: const Offset(0, 2),
+                                    colorScheme.primary.withValues(alpha: 0.5),
+                                width: 1.5,
                               ),
-                            ],
-                          ),
-                          child: Text(
-                            '$percentage%',
-                            style: textTheme.labelSmall?.copyWith(
+                            ),
+                          )
+                        else if (option.isSelected)
+                          Container(
+                            margin: const EdgeInsets.only(right: 10),
+                            child: Icon(
+                              Icons.check_circle_rounded,
+                              size: 20,
                               color: colorScheme.primary,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 11,
-                              letterSpacing: 0.3,
+                            ),
+                          ),
+
+                        // Option text
+                        Expanded(
+                          child: Text(
+                            option.text,
+                            style: textTheme.bodyMedium?.copyWith(
+                              color: textColor,
+                              fontWeight: option.isSelected && showResults
+                                  ? FontWeight.w600
+                                  : FontWeight.w400,
                             ),
                           ),
                         ),
+
+                        // Percentage
+                        if (showResults)
+                          Text(
+                            '$percentage%',
+                            style: textTheme.labelMedium?.copyWith(
+                              color: option.isSelected
+                                  ? colorScheme.primary
+                                  : textColor.withValues(alpha: 0.6),
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
                       ],
-                    ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

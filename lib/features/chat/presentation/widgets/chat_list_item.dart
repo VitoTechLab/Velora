@@ -108,21 +108,14 @@ class ChatListItem extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 8, vertical: 4),
                               decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    colorScheme.primary.withValues(alpha: 0.15),
-                                    colorScheme.secondary
-                                        .withValues(alpha: 0.1),
-                                  ],
-                                ),
+                                color: colorScheme.surfaceContainerHighest,
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Text(
                                 time,
                                 style: textTheme.labelSmall?.copyWith(
-                                  color: colorScheme.onSurface
-                                      .withValues(alpha: 0.7),
-                                  fontWeight: FontWeight.w600,
+                                  color: colorScheme.onSurfaceVariant,
+                                  fontWeight: FontWeight.w500,
                                   fontSize: 11,
                                 ),
                               ),

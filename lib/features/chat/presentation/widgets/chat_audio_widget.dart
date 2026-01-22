@@ -167,17 +167,7 @@ class _ChatAudioWidgetState extends State<ChatAudioWidget> {
         ),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          gradient: widget.isSender
-              ? LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    colorScheme.primaryContainer,
-                    colorScheme.primaryContainer.withValues(alpha: 0.9),
-                  ],
-                )
-              : null,
-          color: widget.isSender ? null : bubbleColor,
+          color: widget.isSender ? colorScheme.primaryContainer : bubbleColor,
           borderRadius: BorderRadius.only(
             topLeft: const Radius.circular(18),
             topRight: const Radius.circular(18),
@@ -213,25 +203,9 @@ class _ChatAudioWidgetState extends State<ChatAudioWidget> {
                   width: 48,
                   height: 48,
                   decoration: BoxDecoration(
-                    gradient: widget.isSender
-                        ? LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              colorScheme.onPrimaryContainer
-                                  .withValues(alpha: 0.25),
-                              colorScheme.onPrimaryContainer
-                                  .withValues(alpha: 0.15),
-                            ],
-                          )
-                        : LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              colorScheme.primary.withValues(alpha: 0.15),
-                              colorScheme.secondary.withValues(alpha: 0.1),
-                            ],
-                          ),
+                    color: widget.isSender
+                        ? colorScheme.onPrimaryContainer.withValues(alpha: 0.2)
+                        : colorScheme.primary.withValues(alpha: 0.12),
                     shape: BoxShape.circle,
                     border: Border.all(
                       color: widget.isSender

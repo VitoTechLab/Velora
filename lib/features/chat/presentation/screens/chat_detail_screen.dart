@@ -259,19 +259,7 @@ class _ChatDetailContentState extends State<_ChatDetailContent> {
         resizeToAvoidBottomInset: true,
         backgroundColor: widget.backgroundColor,
         appBar: AppBar(
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  colorScheme.surfaceContainerHighest,
-                  colorScheme.surfaceContainerHighest.withValues(alpha: 0.8),
-                ],
-              ),
-            ),
-          ),
-          backgroundColor: Colors.transparent,
+          backgroundColor: colorScheme.surface,
           elevation: 0,
           leading: Semantics(
             button: true,
@@ -299,23 +287,13 @@ class _ChatDetailContentState extends State<_ChatDetailContent> {
                       decoration: isOnline
                           ? BoxDecoration(
                               shape: BoxShape.circle,
-                              gradient: LinearGradient(
-                                colors: [
-                                  colorScheme.primary,
-                                  colorScheme.tertiary,
-                                ],
+                              border: Border.all(
+                                color: colorScheme.primary,
+                                width: 2,
                               ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: colorScheme.primary
-                                      .withValues(alpha: 0.3),
-                                  blurRadius: 8,
-                                  spreadRadius: 2,
-                                ),
-                              ],
                             )
                           : null,
-                      padding: isOnline ? const EdgeInsets.all(2) : null,
+                      padding: isOnline ? const EdgeInsets.all(1) : null,
                       child: CircleAvatar(
                         radius: 20,
                         backgroundImage: NetworkImage(widget.profileImageUrl),
@@ -407,42 +385,22 @@ class _ChatDetailContentState extends State<_ChatDetailContent> {
                         vertical: 10,
                       ),
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            colorScheme.surfaceContainerHighest,
-                            colorScheme.surfaceContainer,
-                          ],
-                        ),
+                        color: colorScheme.surfaceContainerHighest,
                         border: Border(
                           top: BorderSide(
-                            color: colorScheme.primary.withValues(alpha: 0.2),
+                            color: colorScheme.outline.withValues(alpha: 0.1),
                             width: 1,
                           ),
                         ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: colorScheme.shadow.withValues(alpha: 0.05),
-                            blurRadius: 8,
-                            offset: const Offset(0, -2),
-                          ),
-                        ],
                       ),
                       child: Row(
                         children: [
-                          ShaderMask(
-                            shaderCallback: (bounds) => LinearGradient(
-                              colors: [
-                                colorScheme.primary,
-                                colorScheme.secondary,
-                              ],
-                            ).createShader(bounds),
-                            child: const SizedBox(
-                              width: 18,
-                              height: 18,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2.5,
-                                color: Colors.white,
-                              ),
+                          SizedBox(
+                            width: 18,
+                            height: 18,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2.5,
+                              color: colorScheme.primary,
                             ),
                           ),
                           const SizedBox(width: 12),

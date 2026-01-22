@@ -150,14 +150,7 @@ class _VoiceRecorderBottomSheetState extends State<VoiceRecorderBottomSheet>
 
     return Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            colorScheme.surface.withValues(alpha: 0.98),
-            colorScheme.surfaceContainerHighest.withValues(alpha: 0.95),
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
+        color: colorScheme.surface,
         borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
         border: Border(
           top: BorderSide(
@@ -185,19 +178,8 @@ class _VoiceRecorderBottomSheetState extends State<VoiceRecorderBottomSheet>
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      colorScheme.primary.withValues(alpha: 0.3),
-                      colorScheme.secondary.withValues(alpha: 0.3),
-                    ],
-                  ),
+                  color: colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
                   borderRadius: BorderRadius.circular(2),
-                  boxShadow: [
-                    BoxShadow(
-                      color: colorScheme.primary.withValues(alpha: 0.2),
-                      blurRadius: 4,
-                    ),
-                  ],
                 ),
               ),
               const SizedBox(height: 24),

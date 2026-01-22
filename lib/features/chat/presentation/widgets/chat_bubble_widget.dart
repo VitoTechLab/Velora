@@ -68,17 +68,9 @@ class ChatBubbleWidget extends StatelessWidget {
               ),
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
               decoration: BoxDecoration(
-                gradient: isSender
-                    ? LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          colorScheme.primaryContainer,
-                          colorScheme.primaryContainer.withValues(alpha: 0.9),
-                        ],
-                      )
-                    : null,
-                color: isSender ? null : colorScheme.surfaceContainerHigh,
+                color: isSender
+                    ? colorScheme.primaryContainer
+                    : colorScheme.surfaceContainerHigh,
                 borderRadius: BorderRadius.only(
                   topLeft: const Radius.circular(18),
                   topRight: const Radius.circular(18),
@@ -150,7 +142,7 @@ class ChatBubbleWidget extends StatelessWidget {
                             color: isRead
                                 ? Colors
                                     .lightBlueAccent.shade200 // Blue when read
-                                : Colors.grey.shade500, // Gray when not read
+                                : colorScheme.outline, // Gray when not read
                           ),
                         ),
                       ],

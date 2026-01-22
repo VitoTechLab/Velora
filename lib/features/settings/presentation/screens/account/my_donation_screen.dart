@@ -58,10 +58,13 @@ class MyDonationScreen extends HookWidget {
             _ => donations, // Fallback
           };
 
-          final totalDonated =
-              donations.fold<double>(0, (sum, d) => sum + d.amountTotal).toInt();
-          final recurringCount = 0; // donations.where((d) => d.isRecurring).length;
-          final matchedAmount = 0; // donations.where((d) => d.isMatched).fold<double>(0, (sum, d) => sum + d.amountTotal).toInt();
+          final totalDonated = donations
+              .fold<double>(0, (sum, d) => sum + d.amountTotal)
+              .toInt();
+          final recurringCount =
+              0; // donations.where((d) => d.isRecurring).length;
+          final matchedAmount =
+              0; // donations.where((d) => d.isMatched).fold<double>(0, (sum, d) => sum + d.amountTotal).toInt();
 
           return Column(
             children: [
@@ -131,7 +134,7 @@ class MyDonationScreen extends HookWidget {
                           label: t.settingsAccountDonationsFilterRecurring,
                           selected: selectedFilter.value == 'recurring',
                           onSelected: () {
-                             // selectedFilter.value = 'recurring';
+                            // selectedFilter.value = 'recurring';
                           },
                         ),
                       ),
@@ -141,7 +144,7 @@ class MyDonationScreen extends HookWidget {
                           label: t.settingsAccountDonationsFilterMatched,
                           selected: selectedFilter.value == 'matched',
                           onSelected: () {
-                             // selectedFilter.value = 'matched';
+                            // selectedFilter.value = 'matched';
                           },
                         ),
                       ),
@@ -180,7 +183,8 @@ class MyDonationScreen extends HookWidget {
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(t.settingsAccountDonationsExportingToast),
+                          content:
+                              Text(t.settingsAccountDonationsExportingToast),
                         ),
                       );
                     },
@@ -222,9 +226,15 @@ class _DonationCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               color: colorScheme.primaryContainer,
-              image: donation.campaignImageUrl != null ? DecorationImage(image: NetworkImage(donation.campaignImageUrl!), fit: BoxFit.cover) : null,
+              image: donation.campaignImageUrl != null
+                  ? DecorationImage(
+                      image: NetworkImage(donation.campaignImageUrl!),
+                      fit: BoxFit.cover)
+                  : null,
             ),
-            child: donation.campaignImageUrl == null ? Icon(Icons.campaign, color: colorScheme.primary) : null,
+            child: donation.campaignImageUrl == null
+                ? Icon(Icons.campaign, color: colorScheme.primary)
+                : null,
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -325,6 +335,7 @@ class _StatusPill extends StatelessWidget {
     required this.label,
     required this.background,
     required this.foreground,
+    this.icon,
   });
 
   final String label;

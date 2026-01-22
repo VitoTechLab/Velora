@@ -167,28 +167,13 @@ class _ChatInputBarState extends State<ChatInputBar> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                colorScheme.surface.withValues(alpha: 0.95),
-                colorScheme.surfaceContainerHighest.withValues(alpha: 0.98),
-              ],
-            ),
+            color: colorScheme.surface,
             border: Border(
               top: BorderSide(
                 color: colorScheme.outline.withValues(alpha: 0.1),
                 width: 1,
               ),
             ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.08),
-                blurRadius: 12,
-                offset: const Offset(0, -4),
-                spreadRadius: 0,
-              ),
-            ],
           ),
           child: SafeArea(
             top: false,
@@ -199,28 +184,12 @@ class _ChatInputBarState extends State<ChatInputBar> {
                   child: Container(
                     constraints: const BoxConstraints(maxHeight: 120),
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          colorScheme.surface.withValues(alpha: 0.9),
-                          colorScheme.surfaceContainerHigh
-                              .withValues(alpha: 0.8),
-                        ],
-                      ),
+                      color: colorScheme.surfaceContainerHigh,
                       borderRadius: BorderRadius.circular(28),
                       border: Border.all(
                         color: colorScheme.outline.withValues(alpha: 0.15),
-                        width: 1.5,
+                        width: 1,
                       ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.05),
-                          blurRadius: 8,
-                          offset: const Offset(0, 2),
-                          spreadRadius: 0,
-                        ),
-                      ],
                     ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -273,18 +242,9 @@ class _ChatInputBarState extends State<ChatInputBar> {
                                   label: t.chatInputAttachLabel,
                                   hint: t.chatInputAttachHint,
                                   child: IconButton(
-                                    icon: ShaderMask(
-                                      shaderCallback: (bounds) =>
-                                          LinearGradient(
-                                        colors: [
-                                          colorScheme.primary,
-                                          colorScheme.tertiary,
-                                        ],
-                                      ).createShader(bounds),
-                                      child: Icon(
-                                        Icons.attach_file_rounded,
-                                        color: Colors.white,
-                                      ),
+                                    icon: Icon(
+                                      Icons.attach_file_rounded,
+                                      color: colorScheme.primary,
                                     ),
                                     onPressed: () {
                                       AttachmentMenuBottomSheet.show(
@@ -300,18 +260,9 @@ class _ChatInputBarState extends State<ChatInputBar> {
                                   label: t.chatInputCameraLabel,
                                   hint: t.chatInputCameraHint,
                                   child: IconButton(
-                                    icon: ShaderMask(
-                                      shaderCallback: (bounds) =>
-                                          LinearGradient(
-                                        colors: [
-                                          colorScheme.secondary,
-                                          colorScheme.primary,
-                                        ],
-                                      ).createShader(bounds),
-                                      child: Icon(
-                                        Icons.camera_alt_outlined,
-                                        color: Colors.white,
-                                      ),
+                                    icon: Icon(
+                                      Icons.camera_alt_outlined,
+                                      color: colorScheme.primary,
                                     ),
                                     onPressed: () {
                                       AttachmentActions.onCameraTap(
@@ -358,24 +309,8 @@ class _ChatInputBarState extends State<ChatInputBar> {
                               width: 46,
                               height: 46,
                               decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                  colors: [
-                                    colorScheme.primary,
-                                    colorScheme.secondary,
-                                  ],
-                                ),
+                                color: colorScheme.primary,
                                 shape: BoxShape.circle,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: colorScheme.primary
-                                        .withValues(alpha: 0.4),
-                                    blurRadius: 10,
-                                    offset: const Offset(0, 3),
-                                    spreadRadius: 0,
-                                  ),
-                                ],
                               ),
                               child: Icon(
                                 hasText
