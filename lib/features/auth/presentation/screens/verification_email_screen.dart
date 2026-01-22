@@ -4,7 +4,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lottie/lottie.dart';
 
 import 'package:velora/core/themes/color_material.dart';
 import 'package:velora/core/ui/app_messenger.dart';
@@ -183,20 +182,11 @@ class _VerificationEmailScreenState extends State<VerificationEmailScreen> {
                           _GlassCard(
                             child: Column(
                               children: [
-                                // Lottie Animation (OK here - waiting state)
-                                Semantics(
-                                  label: t.authAnimatedEmailLabel,
-                                  image: true,
-                                  child: ExcludeSemantics(
-                                    child: SizedBox(
-                                      width: 200,
-                                      height: 200,
-                                      child: Lottie.asset(
-                                        'assets/lottie/email.json',
-                                        fit: BoxFit.contain,
-                                      ),
-                                    ),
-                                  ),
+                                // Email Icon
+                                Icon(
+                                  Icons.mark_email_unread_outlined,
+                                  size: 120,
+                                  color: Theme.of(context).colorScheme.primary,
                                 ),
 
                                 const SizedBox(height: 32),
