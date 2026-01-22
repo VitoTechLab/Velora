@@ -99,6 +99,15 @@ class CampaignEvent with _$CampaignEvent {
     required String campaignId,
   }) = LoadWithdrawalsEvent;
 
+  // Transparency Data Events
+  const factory CampaignEvent.loadCampaignTransparencyData({
+    required String campaignId,
+  }) = LoadCampaignTransparencyDataEvent;
+
+  const factory CampaignEvent.loadCampaignUpdates({
+    required String campaignId,
+  }) = LoadCampaignUpdatesEvent;
+
   /// Load campaigns owned by current user (for My Campaigns screen)
   const factory CampaignEvent.loadUserCampaigns({
     required String userId,

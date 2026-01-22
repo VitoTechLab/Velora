@@ -10,7 +10,11 @@ import 'package:velora/features/campaign/data/models/donation_model.dart';
 import 'package:velora/features/campaign/data/models/withdrawal_model.dart';
 import 'package:velora/features/campaign/domain/entities/campaign_category_entity.dart';
 import 'package:velora/features/campaign/domain/entities/campaign_comment_entity.dart';
+import 'package:velora/features/campaign/domain/entities/campaign_document_entity.dart';
 import 'package:velora/features/campaign/domain/entities/campaign_entity.dart';
+import 'package:velora/features/campaign/domain/entities/campaign_fund_breakdown_entity.dart';
+import 'package:velora/features/campaign/domain/entities/campaign_milestone_entity.dart';
+import 'package:velora/features/campaign/domain/entities/campaign_proof_item_entity.dart';
 import 'package:velora/features/campaign/domain/entities/campaign_update_entity.dart';
 import 'package:velora/features/campaign/domain/entities/donation_entity.dart';
 import 'package:velora/features/campaign/domain/entities/withdrawal_entity.dart';
@@ -406,4 +410,69 @@ class CampaignRepositoryImpl implements CampaignRepository {
       return Left(CampaignFailure.fromException(e));
     }
   }
+
+  // ============================================
+  // TRANSPARENCY: DOCUMENTS
+  // ============================================
+  @override
+  Future<Either<Failure, List<CampaignDocumentEntity>>> getCampaignDocuments(
+      String campaignId) async {
+    try {
+      logi('getCampaignDocuments for: $campaignId', tag: _logTag);
+      final models = await remoteDataSource.getCampaignDocuments(campaignId);
+      return Right(models.map((m) => m.toEntity()).toList());
+    } catch (e) {
+      loge('getCampaignDocuments error', tag: _logTag, error: e);
+      return Left(CampaignFailure.fromException(e));
+    }
+  }
+
+  // ============================================
+  // TRANSPARENCY: MILESTONES
+  // ============================================
+  @override
+  Future<Either<Failure, List<CampaignMilestoneEntity>>> getCampaignMilestones(
+      String campaignId) async {
+    try {
+      logi('getCampaignMilestones for: $campaignId', tag: _logTag);
+      final models = await remoteDataSource.getCampaignMilestones(campaignId);
+      return Right(models.map((m) => m.toEntity()).toList());
+    } catch (e) {
+      loge('getCampaignMilestones error', tag: _logTag, error: e);
+      return Left(CampaignFailure.fromException(e));
+    }
+  }
+
+  // ============================================
+  // TRANSPARENCY: FUND BREAKDOWN
+  // ============================================
+  @override
+  Future<Either<Failure, List<CampaignFundBreakdownEntity>>>
+      getCampaignFundBreakdown(String campaignId) async {
+    try {
+      logi('getCampaignFundBreakdown for: $campaignId', tag: _logTag);
+      final models = await remoteDataSource.getCampaignFundBreakdown(campaignId);
+      return Right(models.map((m) => m.toEntity()).toList());
+    } catch (e) {
+      loge('getCampaignFundBreakdown error', tag: _logTag, error: e);
+      return Left(CampaignFailure.fromException(e));
+    }
+  }
+
+  // ============================================
+  // TRANSPARENCY: PROOF ITEMS
+  // ============================================
+  @override
+  Future<Either<Failure, List<CampaignProofItemEntity>>> getCampaignProofItems(
+      String campaignId) async {
+    try {
+      logi('getCampaignProofItems for: $campaignId', tag: _logTag);
+      final models = await remoteDataSource.getCampaignProofItems(campaignId);
+      return Right(models.map((m) => m.toEntity()).toList());
+    } catch (e) {
+      loge('getCampaignProofItems error', tag: _logTag, error: e);
+      return Left(CampaignFailure.fromException(e));
+    }
+  }
 }
+

@@ -22,7 +22,17 @@ import 'package:velora/features/campaign/domain/usecases/search_campaigns_usecas
 import 'package:velora/features/campaign/domain/usecases/update_campaign_status_usecase.dart';
 import 'package:velora/features/campaign/domain/usecases/update_campaign_usecase.dart';
 import 'package:velora/features/campaign/domain/usecases/update_donation_status_usecase.dart';
-
+import 'package:velora/features/campaign/domain/usecases/get_campaign_documents_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/get_campaign_milestones_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/get_campaign_fund_breakdown_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/get_campaign_proof_items_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/get_campaign_updates_usecase.dart';
+import 'package:dartz/dartz.dart';
+import 'package:velora/core/errors/failure.dart';
+import 'package:velora/features/campaign/domain/entities/campaign_document_entity.dart';
+import 'package:velora/features/campaign/domain/entities/campaign_milestone_entity.dart';
+import 'package:velora/features/campaign/domain/entities/campaign_fund_breakdown_entity.dart';
+import 'package:velora/features/campaign/domain/entities/campaign_proof_item_entity.dart';
 import 'campaign_event.dart';
 import 'campaign_state.dart';
 
@@ -48,6 +58,11 @@ class CampaignBloc extends Bloc<CampaignEvent, CampaignState> {
     required GetWithdrawalByIdUsecase getWithdrawalByIdUsecase,
     required GetCampaignsByUserUsecase getCampaignsByUserUsecase,
     required GetDonationsByUserUsecase getDonationsByUserUsecase,
+    required GetCampaignDocumentsUsecase getCampaignDocumentsUsecase,
+    required GetCampaignMilestonesUsecase getCampaignMilestonesUsecase,
+    required GetCampaignFundBreakdownUsecase getCampaignFundBreakdownUsecase,
+    required GetCampaignProofItemsUsecase getCampaignProofItemsUsecase,
+    required GetCampaignUpdatesUsecase getCampaignUpdatesUsecase,
   })  : _getAllCampaignsUsecase = getAllCampaignsUsecase,
         _searchCampaignsUsecase = searchCampaignsUsecase,
         _getCampaignByIdUsecase = getCampaignByIdUsecase,
@@ -68,6 +83,11 @@ class CampaignBloc extends Bloc<CampaignEvent, CampaignState> {
         _getWithdrawalByIdUsecase = getWithdrawalByIdUsecase,
         _getCampaignsByUserUsecase = getCampaignsByUserUsecase,
         _getDonationsByUserUsecase = getDonationsByUserUsecase,
+        _getCampaignDocumentsUsecase = getCampaignDocumentsUsecase,
+        _getCampaignMilestonesUsecase = getCampaignMilestonesUsecase,
+        _getCampaignFundBreakdownUsecase = getCampaignFundBreakdownUsecase,
+        _getCampaignProofItemsUsecase = getCampaignProofItemsUsecase,
+        _getCampaignUpdatesUsecase = getCampaignUpdatesUsecase,
         super(const CampaignState()) {
     on<LoadCampaignsEvent>(
       _onLoadCampaigns,
@@ -99,6 +119,8 @@ class CampaignBloc extends Bloc<CampaignEvent, CampaignState> {
     on<LoadUserDonationsEvent>(_onLoadUserDonations);
     on<UpdateCampaignBankDetailsEvent>(_onUpdateCampaignBankDetails);
     on<ProcessDonationEvent>(_onProcessDonation);
+    on<LoadCampaignTransparencyDataEvent>(_onLoadCampaignTransparencyData);
+    on<LoadCampaignUpdatesEvent>(_onLoadCampaignUpdates);
     on<ClearCampaignTransientEvent>(_onClearTransient);
   }
 
@@ -126,6 +148,11 @@ class CampaignBloc extends Bloc<CampaignEvent, CampaignState> {
   final GetWithdrawalByIdUsecase _getWithdrawalByIdUsecase;
   final GetCampaignsByUserUsecase _getCampaignsByUserUsecase;
   final GetDonationsByUserUsecase _getDonationsByUserUsecase;
+  final GetCampaignDocumentsUsecase _getCampaignDocumentsUsecase;
+  final GetCampaignMilestonesUsecase _getCampaignMilestonesUsecase;
+  final GetCampaignFundBreakdownUsecase _getCampaignFundBreakdownUsecase;
+  final GetCampaignProofItemsUsecase _getCampaignProofItemsUsecase;
+  final GetCampaignUpdatesUsecase _getCampaignUpdatesUsecase;
 
   int _validatedLimit(int limit) => limit.clamp(_minPageSize, _maxPageSize);
 
@@ -222,8 +249,12 @@ class CampaignBloc extends Bloc<CampaignEvent, CampaignState> {
   ) async {
     final query = event.query.trim();
     if (query.isEmpty) {
-      // Kosongkan hasil search tapi tidak ganggu list utama
-      emit(state.copyWith(message: null));
+      // Clear search results when query is empty
+      emit(state.copyWith(
+        searchResults: [],
+        isSearching: false,
+        errorSearch: null,
+      ));
       return;
     }
 
@@ -232,7 +263,7 @@ class CampaignBloc extends Bloc<CampaignEvent, CampaignState> {
         'Search campaigns q="$query" limit=$limit category=${event.categoryId}',
         tag: _logTag);
 
-    emit(state.copyWith(isLoadingCampaigns: true, errorCampaigns: null));
+    emit(state.copyWith(isSearching: true, errorSearch: null));
 
     final result = await _searchCampaignsUsecase(
       query,
@@ -244,17 +275,17 @@ class CampaignBloc extends Bloc<CampaignEvent, CampaignState> {
       (failure) {
         emit(
           state.copyWith(
-            isLoadingCampaigns: false,
-            errorCampaigns: failure.message,
+            isSearching: false,
+            errorSearch: failure.message,
           ),
         );
       },
       (campaigns) {
         emit(
           state.copyWith(
-            campaigns: campaigns,
-            isLoadingCampaigns: false,
-            errorCampaigns: null,
+            searchResults: campaigns,
+            isSearching: false,
+            errorSearch: null,
           ),
         );
       },
@@ -976,9 +1007,100 @@ class CampaignBloc extends Bloc<CampaignEvent, CampaignState> {
                 message: 'Donation successful! Thank you for your support.',
               ),
             );
+            // Refresh campaign to get updated amount_raised
+            add(CampaignEvent.getCampaignDetail(campaignId: approvedDonation.campaignId));
           },
         );
       },
+    );
+  }
+
+  // ======================== Transparency ========================
+  Future<void> _onLoadCampaignTransparencyData(
+    LoadCampaignTransparencyDataEvent event,
+    Emitter<CampaignState> emit,
+  ) async {
+    emit(state.copyWith(
+      isLoadingDocuments: true,
+      isLoadingMilestones: true,
+      isLoadingFundBreakdown: true,
+      isLoadingProofItems: true,
+    ));
+
+    final results = await Future.wait([
+      _getCampaignDocumentsUsecase(event.campaignId),
+      _getCampaignMilestonesUsecase(event.campaignId),
+      _getCampaignFundBreakdownUsecase(event.campaignId),
+      _getCampaignProofItemsUsecase(event.campaignId),
+    ]);
+
+    final documentsResult = results[0] as Either<Failure, List<CampaignDocumentEntity>>;
+    final milestonesResult = results[1] as Either<Failure, List<CampaignMilestoneEntity>>;
+    final breakdownResult = results[2] as Either<Failure, List<CampaignFundBreakdownEntity>>;
+    final proofResult = results[3] as Either<Failure, List<CampaignProofItemEntity>>;
+
+    List<CampaignDocumentEntity> documents = state.campaignDocuments;
+    String? errorDocuments;
+    documentsResult.fold(
+      (f) => errorDocuments = f.message,
+      (d) => documents = d,
+    );
+
+    List<CampaignMilestoneEntity> milestones = state.campaignMilestones;
+    String? errorMilestones;
+    milestonesResult.fold(
+      (f) => errorMilestones = f.message,
+      (d) => milestones = d,
+    );
+
+    List<CampaignFundBreakdownEntity> breakdown = state.campaignFundBreakdown;
+    String? errorFundBreakdown;
+    breakdownResult.fold(
+      (f) => errorFundBreakdown = f.message,
+      (d) => breakdown = d,
+    );
+
+    List<CampaignProofItemEntity> proofs = state.campaignProofItems;
+    String? errorProofItems;
+    proofResult.fold(
+      (f) => errorProofItems = f.message,
+      (d) => proofs = d,
+    );
+
+    emit(state.copyWith(
+      isLoadingDocuments: false,
+      isLoadingMilestones: false,
+      isLoadingFundBreakdown: false,
+      isLoadingProofItems: false,
+      campaignDocuments: documents,
+      errorDocuments: errorDocuments,
+      campaignMilestones: milestones,
+      errorMilestones: errorMilestones,
+      campaignFundBreakdown: breakdown,
+      errorFundBreakdown: errorFundBreakdown,
+      campaignProofItems: proofs,
+      errorProofItems: errorProofItems,
+    ));
+  }
+
+  // ======================== Updates ========================
+  Future<void> _onLoadCampaignUpdates(
+    LoadCampaignUpdatesEvent event,
+    Emitter<CampaignState> emit,
+  ) async {
+    emit(state.copyWith(isLoadingUpdates: true, errorUpdates: null));
+
+    final result = await _getCampaignUpdatesUsecase(event.campaignId);
+
+    result.fold(
+      (failure) => emit(state.copyWith(
+        isLoadingUpdates: false,
+        errorUpdates: failure.message,
+      )),
+      (updates) => emit(state.copyWith(
+        isLoadingUpdates: false,
+        campaignUpdates: updates,
+      )),
     );
   }
 

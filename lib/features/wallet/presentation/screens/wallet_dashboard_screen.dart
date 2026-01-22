@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:velora/core/services/biometric_service.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:velora/features/wallet/domain/entities/wallet_entity.dart';
 import 'package:velora/features/wallet/presentation/bloc/wallet_bloc.dart';
@@ -11,8 +12,17 @@ import 'package:velora/features/wallet/presentation/bloc/wallet_state.dart';
 import 'package:velora/l10n/app_localizations.dart';
 import 'package:velora/routes/app_router.dart';
 
+/// Session-level flag to remember if user already authenticated for wallet access
+/// This prevents re-prompting when navigating to child routes and back
+bool _walletSessionAuthenticated = false;
+
 class WalletDashboardScreen extends HookWidget {
   const WalletDashboardScreen({super.key});
+
+  /// Call this to reset the session authentication (e.g., on logout)
+  static void resetSessionAuth() {
+    _walletSessionAuthenticated = false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,18 +34,171 @@ class WalletDashboardScreen extends HookWidget {
     final userId = authState.userId;
     final isBalanceHidden = useState(false);
 
+    // Biometric authentication state
+    final biometricService = useMemoized(() => BiometricService());
+    // Initialize with session state - if already authenticated, skip the check
+    final isAuthenticated = useState(_walletSessionAuthenticated);
+    final isCheckingAuth = useState(!_walletSessionAuthenticated);
+    final authError = useState<String?>(null);
+
     final currencyFormat = NumberFormat.currency(
       locale: 'id_ID',
       symbol: 'Rp ',
       decimalDigits: 0,
     );
 
+    // Check and prompt for biometric authentication on mount
     useEffect(() {
-      if (userId != null) {
-        context.read<WalletBloc>().add(WalletEvent.loadWallets(userId: userId));
+      // Skip if already authenticated in this session
+      if (_walletSessionAuthenticated) {
+        if (userId != null) {
+          context.read<WalletBloc>().add(WalletEvent.loadWallets(userId: userId));
+        }
+        return null;
       }
+
+      Future<void> checkBiometricAuth() async {
+        try {
+          final status = await biometricService.getBiometricStatus();
+          
+          // If biometric is enabled, prompt for authentication
+          if (status.isFullySetup) {
+            final authenticated = await biometricService.authenticate(
+              reason: 'Authenticate to access your wallet',
+            );
+            
+            if (authenticated) {
+              _walletSessionAuthenticated = true;
+              isAuthenticated.value = true;
+              // Load wallets after successful authentication
+              if (userId != null) {
+                context.read<WalletBloc>().add(WalletEvent.loadWallets(userId: userId));
+              }
+            } else {
+              authError.value = 'Authentication failed. Please try again.';
+            }
+          } else {
+            // Biometric not enabled, allow access directly
+            _walletSessionAuthenticated = true;
+            isAuthenticated.value = true;
+            if (userId != null) {
+              context.read<WalletBloc>().add(WalletEvent.loadWallets(userId: userId));
+            }
+          }
+        } catch (e) {
+          // If biometric check fails, allow access (graceful degradation)
+          _walletSessionAuthenticated = true;
+          isAuthenticated.value = true;
+          if (userId != null) {
+            context.read<WalletBloc>().add(WalletEvent.loadWallets(userId: userId));
+          }
+        } finally {
+          isCheckingAuth.value = false;
+        }
+      }
+
+      checkBiometricAuth();
       return null;
     }, [userId]);
+
+    // Show loading while checking biometric
+    if (isCheckingAuth.value) {
+      return Scaffold(
+        appBar: AppBar(title: Text(t.walletDashboardTitle)),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.fingerprint,
+                size: 64,
+                color: colorScheme.primary,
+              ),
+              const SizedBox(height: 16),
+              const CircularProgressIndicator(),
+              const SizedBox(height: 16),
+              Text(
+                'Verifying identity...',
+                style: theme.textTheme.titleMedium,
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    // Show authentication failed screen
+    if (!isAuthenticated.value) {
+      return Scaffold(
+        appBar: AppBar(title: Text(t.walletDashboardTitle)),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(32),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(24),
+                  decoration: BoxDecoration(
+                    color: colorScheme.errorContainer,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Icons.lock_outline,
+                    size: 48,
+                    color: colorScheme.onErrorContainer,
+                  ),
+                ),
+                const SizedBox(height: 24),
+                Text(
+                  'Authentication Required',
+                  style: theme.textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  authError.value ?? 'Please authenticate to access your wallet',
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                    color: colorScheme.onSurfaceVariant,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 32),
+                FilledButton.icon(
+                  onPressed: () async {
+                    isCheckingAuth.value = true;
+                    authError.value = null;
+                    
+                    final authenticated = await biometricService.authenticate(
+                      reason: 'Authenticate to access your wallet',
+                    );
+                    
+                    if (authenticated) {
+                      _walletSessionAuthenticated = true;
+                      isAuthenticated.value = true;
+                      if (userId != null) {
+                        context.read<WalletBloc>().add(WalletEvent.loadWallets(userId: userId));
+                      }
+                    } else {
+                      authError.value = 'Authentication failed. Please try again.';
+                    }
+                    isCheckingAuth.value = false;
+                  },
+                  icon: const Icon(Icons.fingerprint),
+                  label: const Text('Try Again'),
+                ),
+                const SizedBox(height: 12),
+                TextButton(
+                  onPressed: () => context.pop(),
+                  child: const Text('Go Back'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -98,6 +261,11 @@ class WalletDashboardScreen extends HookWidget {
                           _showWithdrawDialog(context, state.mainWallet!),
                       onSetupBank: () =>
                           _showBankDetailsDialog(context, state.mainWallet!),
+                      onViewDetails: () => _showWalletDetails(context, state.mainWallet!),
+                      onViewWithdrawals: () => context.pushNamed(
+                        'walletWithdrawals',
+                        pathParameters: {'walletId': state.mainWallet!.id},
+                      ),
                     )
                   else
                     _CreateMainWalletCard(
@@ -153,7 +321,7 @@ class WalletDashboardScreen extends HookWidget {
                     ),
                   ] else
                     _EmptyCampaignWallets(
-                      onCreateCampaign: () => context.goNamed('myCampaigns'),
+                      onCreateCampaign: () => context.pushNamed('myCampaigns'),
                     ),
 
                   const SizedBox(height: 24),
@@ -162,7 +330,7 @@ class WalletDashboardScreen extends HookWidget {
                   _QuickActionsSection(
                     onDonationHistory: () =>
                         context.pushNamed(AppRouteName.settingsMyDonation),
-                    onMyCampaigns: () => context.goNamed('myCampaigns'),
+                    onMyCampaigns: () => context.pushNamed('myCampaigns'),
                   ),
                 ],
               ),
@@ -363,6 +531,8 @@ class _MainWalletCard extends StatelessWidget {
     required this.onTopUp,
     required this.onWithdraw,
     required this.onSetupBank,
+    required this.onViewDetails,
+    required this.onViewWithdrawals,
   });
 
   final WalletEntity wallet;
@@ -371,6 +541,8 @@ class _MainWalletCard extends StatelessWidget {
   final VoidCallback onTopUp;
   final VoidCallback onWithdraw;
   final VoidCallback onSetupBank;
+  final VoidCallback onViewDetails;
+  final VoidCallback onViewWithdrawals;
 
   @override
   Widget build(BuildContext context) {
@@ -477,6 +649,44 @@ class _MainWalletCard extends StatelessWidget {
                     side: BorderSide(
                       color: colorScheme.onPrimaryContainer.withValues(alpha: 0.5),
                     ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          // Quick action links
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton.icon(
+                onPressed: onViewDetails,
+                icon: Icon(
+                  Icons.receipt_long,
+                  size: 16,
+                  color: colorScheme.onPrimaryContainer.withValues(alpha: 0.8),
+                ),
+                label: Text(
+                  'Transaction History',
+                  style: TextStyle(
+                    color: colorScheme.onPrimaryContainer.withValues(alpha: 0.8),
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              TextButton.icon(
+                onPressed: onViewWithdrawals,
+                icon: Icon(
+                  Icons.history,
+                  size: 16,
+                  color: colorScheme.onPrimaryContainer.withValues(alpha: 0.8),
+                ),
+                label: Text(
+                  'Withdrawals',
+                  style: TextStyle(
+                    color: colorScheme.onPrimaryContainer.withValues(alpha: 0.8),
+                    fontSize: 12,
                   ),
                 ),
               ),

@@ -1,10 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 
 import '../../../../l10n/app_localizations.dart';
 import '../../../../routes/app_router.dart';
+import '../../domain/entities/campaign_detail_model.dart';
 import '../../domain/entities/campaign_entity.dart';
 import '../../domain/entities/campaign_model.dart';
 import '../../domain/entities/campaign_type.dart';
@@ -17,6 +21,7 @@ import '../widgets/campaign_chips.dart';
 import '../widgets/elegant_featured_carousel.dart';
 import '../widgets/campaign_category_section.dart';
 import '../widgets/campaign_empty_state.dart';
+import 'campaign_detail_screen.dart';
 import 'campaign_list_screen.dart';
 
 // ============================================================================
@@ -28,63 +33,41 @@ class CampaignScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final selectedType = useState(CampaignType.all);
+    // Filter: null = All, 'mine' = My Campaigns, otherwise categoryId
+    final selectedFilter = useState<String?>(null);
     final selectedSort = useState(SortOption.trending);
+    final searchQuery = useState<String>('');
+    final searchController = useTextEditingController();
+    final debouncer = useRef<Timer?>(null);
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final l10n = AppLocalizations.of(context);
 
+    final authState = context.read<AuthBloc>().state;
+    final currentUserId = authState.userId;
+
     useEffect(() {
-      context.read<CampaignBloc>().add(
-            const CampaignEvent.loadCampaigns(limit: 50),
-          );
-      return null;
+      final bloc = context.read<CampaignBloc>();
+      bloc.add(const CampaignEvent.loadCampaigns(limit: 50));
+      bloc.add(const CampaignEvent.loadCategories());
+      if (currentUserId != null) {
+        bloc.add(CampaignEvent.loadUserCampaigns(userId: currentUserId));
+      }
+      return () {
+        debouncer.value?.cancel();
+      };
     }, const []);
 
-    List<CampaignModel> applyFilters(
-      List<CampaignModel> source,
-      CampaignType type,
-      SortOption sort,
-    ) {
-      var filtered = List<CampaignModel>.from(source);
-
-      if (type != CampaignType.all) {
-        if (type == CampaignType.verified) {
-          filtered = filtered.where((c) => c.isVerified).toList();
-        } else {
-          filtered = filtered.where((c) => c.type == type).toList();
+    void onSearchChanged(String query) {
+      debouncer.value?.cancel();
+      debouncer.value = Timer(const Duration(milliseconds: 400), () {
+        searchQuery.value = query;
+        if (query.trim().isNotEmpty) {
+          context.read<CampaignBloc>().add(
+                CampaignEvent.searchCampaigns(query: query.trim(), limit: 20),
+              );
         }
-      }
-
-      switch (sort) {
-        case SortOption.newest:
-          filtered = filtered.reversed.toList();
-          break;
-        case SortOption.endingSoon:
-          filtered = filtered
-              .where(
-                (c) =>
-                    c.timeLeftLabel.contains('h') ||
-                    (int.tryParse(
-                              c.timeLeftLabel.replaceAll(RegExp(r'[^0-9]'), ''),
-                            ) ??
-                            100) <
-                        7,
-              )
-              .toList();
-          break;
-        case SortOption.mostFunded:
-          filtered = filtered.toList()
-            ..sort((a, b) => b.progressPercent.compareTo(a.progressPercent));
-          break;
-        case SortOption.verified:
-          filtered = filtered.where((c) => c.isVerified).toList();
-          break;
-        case SortOption.trending:
-          break;
-      }
-
-      return filtered;
+      });
     }
 
     CampaignModel mapEntityToModel(CampaignEntity entity) {
@@ -125,13 +108,103 @@ class CampaignScreen extends HookWidget {
       );
     }
 
+    List<CampaignModel> applyFilters(
+      List<CampaignEntity> allCampaigns,
+      List<CampaignEntity> userCampaigns,
+      String? filter,
+      SortOption sort,
+    ) {
+      List<CampaignEntity> source;
+
+      // Determine source based on filter
+      if (filter == 'mine') {
+        source = userCampaigns;
+      } else if (filter != null) {
+        // Filter by categoryId
+        source = allCampaigns.where((c) => c.categoryId == filter).toList();
+      } else {
+        source = allCampaigns;
+      }
+
+      var models = source.map(mapEntityToModel).toList();
+
+      // Apply sort
+      switch (sort) {
+        case SortOption.newest:
+          models = models.reversed.toList();
+          break;
+        case SortOption.endingSoon:
+          models = models
+              .where(
+                (c) =>
+                    c.timeLeftLabel.contains('h') ||
+                    (int.tryParse(
+                              c.timeLeftLabel.replaceAll(RegExp(r'[^0-9]'), ''),
+                            ) ??
+                            100) <
+                        7,
+              )
+              .toList();
+          break;
+        case SortOption.mostFunded:
+          models = models.toList()
+            ..sort((a, b) => b.progressPercent.compareTo(a.progressPercent));
+          break;
+        case SortOption.verified:
+          models = models.where((c) => c.isVerified).toList();
+          break;
+        case SortOption.trending:
+          break;
+      }
+
+      return models;
+    }
+
     Future<void> onRefresh(BuildContext context) async {
       final bloc = context.read<CampaignBloc>();
       bloc.add(const CampaignEvent.refreshCampaigns(limit: 50));
+      bloc.add(const CampaignEvent.loadCategories());
+      if (currentUserId != null) {
+        bloc.add(CampaignEvent.loadUserCampaigns(userId: currentUserId));
+      }
 
-      // Wait until refreshing is complete
       await bloc.stream.firstWhere(
         (state) => !state.isRefreshingCampaigns,
+      );
+    }
+
+    // Navigate to campaign detail
+    void onCampaignTap(BuildContext ctx, CampaignModel campaign, List<CampaignEntity> entities) {
+      // Find the original entity to get full data
+      final entity = entities.firstWhere(
+        (e) => e.id == campaign.id,
+        orElse: () => entities.first,
+      );
+
+      final detailModel = CampaignDetailModel(
+        id: campaign.id,
+        title: campaign.title,
+        creatorName: campaign.creatorName,
+        isVerified: campaign.isVerified,
+        type: campaign.type,
+        category: campaign.category,
+        raised: campaign.raised,
+        target: campaign.target,
+        timeLeftLabel: campaign.timeLeftLabel,
+        donorsCount: campaign.donorsCount,
+        updatesCount: campaign.updatesCount,
+        milestonesCount: campaign.milestonesCount,
+        commentsCount: 0,
+        description: entity.description,
+        coverImageUrl: entity.coverImageUrl,
+      );
+
+      Navigator.push(
+        ctx,
+        CampaignDetailScreen.route(
+          campaign: detailModel,
+          bloc: ctx.read<CampaignBloc>(),
+        ),
       );
     }
 
@@ -139,26 +212,44 @@ class CampaignScreen extends HookWidget {
       backgroundColor: colorScheme.surface,
       body: BlocBuilder<CampaignBloc, CampaignState>(
         builder: (context, state) {
-          final allModels = state.campaigns.map(mapEntityToModel).toList();
-          final filteredCampaigns = applyFilters(
-            allModels,
-            selectedType.value,
-            selectedSort.value,
-          );
+          // If actively searching, use search results; otherwise use regular campaigns
+          final isSearching = searchQuery.value.trim().isNotEmpty;
+          List<CampaignModel> campaignsToShow;
+
+          if (isSearching && state.searchResults.isNotEmpty) {
+            // Map search results to CampaignModel
+            campaignsToShow = state.searchResults
+                .map((e) => mapEntityToModel(e))
+                .toList();
+          } else {
+            campaignsToShow = applyFilters(
+              state.campaigns,
+              state.userCampaigns,
+              selectedFilter.value,
+              selectedSort.value,
+            );
+          }
 
           final featuredCampaigns =
-              filteredCampaigns.where((c) => c.isFeatured).toList();
+              campaignsToShow.where((c) => c.isFeatured).toList();
 
-          // Group campaigns by category
-          final emergencyCampaigns = filteredCampaigns
-              .where((c) => c.category == 'Emergency')
-              .toList();
-          final socialImpactCampaigns = filteredCampaigns
-              .where((c) => c.category == 'Social Impact')
-              .toList();
-          final technologyCampaigns = filteredCampaigns
-              .where((c) => c.category == 'Technology')
-              .toList();
+          // Group by category dynamically
+          final campaignsByCategory = <String, List<CampaignModel>>{};
+          final uncategorizedCampaigns = <CampaignModel>[];
+
+          for (final campaign in campaignsToShow) {
+            final catName = campaign.category;
+            if (catName.isNotEmpty && catName != 'General') {
+              campaignsByCategory.putIfAbsent(catName, () => []);
+              campaignsByCategory[catName]!.add(campaign);
+            } else {
+              uncategorizedCampaigns.add(campaign);
+            }
+          }
+
+          // If no category sections but campaigns exist, show all as "All Campaigns"
+          final showAllCampaignsSection = campaignsByCategory.isEmpty && 
+              (campaignsToShow.isNotEmpty || uncategorizedCampaigns.isNotEmpty);
 
           return RefreshIndicator(
             onRefresh: () => onRefresh(context),
@@ -199,24 +290,28 @@ class CampaignScreen extends HookWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      // Search Field with real functionality
                       Padding(
                         padding: const EdgeInsets.fromLTRB(20, 8, 20, 16),
                         child: CampaignSearchField(
-                          onTap: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Search campaigns...'),
-                                duration: Duration(seconds: 1),
-                              ),
-                            );
-                          },
+                          controller: searchController,
+                          onChanged: onSearchChanged,
                         ),
                       ),
+
+                      // Filter/Sort Chips
                       CampaignChips(
-                        selectedType: selectedType.value,
+                        selectedFilter: selectedFilter.value,
+                        categories: state.categories,
+                        isLoadingCategories: state.isLoadingCategories,
                         selectedSort: selectedSort.value,
-                        onTypeSelected: (type) {
-                          selectedType.value = type;
+                        onFilterSelected: (filter) {
+                          selectedFilter.value = filter;
+                          // Clear search when changing filters
+                          if (searchQuery.value.isNotEmpty) {
+                            searchController.clear();
+                            searchQuery.value = '';
+                          }
                         },
                         onSortSelected: (sort) {
                           selectedSort.value = sort;
@@ -224,8 +319,39 @@ class CampaignScreen extends HookWidget {
                       ),
                       const SizedBox(height: 16),
 
-                      // Featured Carousel
-                      if (featuredCampaigns.isNotEmpty) ...[
+                      // Show search results indicator
+                      if (isSearching) ...[
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.search,
+                                size: 16,
+                                color: colorScheme.primary,
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                'Search results for "${searchQuery.value}"',
+                                style: theme.textTheme.bodyMedium?.copyWith(
+                                  color: colorScheme.onSurfaceVariant,
+                                ),
+                              ),
+                              const Spacer(),
+                              Text(
+                                '${campaignsToShow.length} found',
+                                style: theme.textTheme.bodySmall?.copyWith(
+                                  color: colorScheme.primary,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+
+                      // Featured Carousel (only when not searching)
+                      if (!isSearching && featuredCampaigns.isNotEmpty) ...[
                         Padding(
                           padding: const EdgeInsets.only(
                             left: 20,
@@ -241,67 +367,92 @@ class CampaignScreen extends HookWidget {
                         ),
                         ElegantFeaturedCarousel(
                           campaigns: featuredCampaigns,
+                          onCampaignTap: (campaign) => onCampaignTap(
+                            context, campaign, state.campaigns,
+                          ),
                         ),
                       ],
 
-                      // Emergency Campaigns
-                      if (emergencyCampaigns.isNotEmpty)
-                        CampaignCategorySection(
-                          categoryName: l10n?.campaignEmergencyTitle ??
-                              'Emergency Fundraisers',
-                          campaigns: emergencyCampaigns,
+                      // Dynamic Category Sections
+                      ...campaignsByCategory.entries.map(
+                        (entry) => CampaignCategorySection(
+                          categoryName: entry.key,
+                          campaigns: entry.value,
+                          onCampaignTap: (campaign) => onCampaignTap(
+                            context, campaign, state.campaigns,
+                          ),
                           onSeeMore: () {
                             CampaignListScreen.show(
                               context,
-                              categoryName: l10n?.campaignEmergencyTitle ??
-                                  'Emergency Fundraisers',
-                              categoryFilter: 'Emergency',
+                              categoryName: entry.key,
+                              categoryFilter: entry.key,
                             );
                           },
                         ),
+                      ),
 
-                      // Social Impact Campaigns
-                      if (socialImpactCampaigns.isNotEmpty)
+                      if (showAllCampaignsSection) ...[
                         CampaignCategorySection(
-                          categoryName: l10n?.campaignSocialImpactTitle ??
-                              'Social Impact',
-                          campaigns: socialImpactCampaigns,
+                          categoryName: isSearching 
+                              ? 'Search Results' 
+                              : 'All Campaigns',
+                          campaigns: campaignsToShow,
+                          onCampaignTap: (campaign) => onCampaignTap(
+                            context, campaign, state.campaigns,
+                          ),
                           onSeeMore: () {
                             CampaignListScreen.show(
                               context,
-                              categoryName: l10n?.campaignSocialImpactTitle ??
-                                  'Social Impact',
-                              categoryFilter: 'Social Impact',
+                              categoryName: 'All Campaigns',
+                              categoryFilter: '', // Empty to show all
                             );
                           },
                         ),
+                      ],
 
-                      // Technology Campaigns
-                      if (technologyCampaigns.isNotEmpty)
+                      if (uncategorizedCampaigns.isNotEmpty && 
+                          !showAllCampaignsSection) ...[
                         CampaignCategorySection(
-                          categoryName:
-                              l10n?.campaignTechnologyTitle ?? 'Technology',
-                          campaigns: technologyCampaigns,
+                          categoryName: 'General',
+                          campaigns: uncategorizedCampaigns,
+                          onCampaignTap: (campaign) => onCampaignTap(
+                            context, campaign, state.campaigns,
+                          ),
                           onSeeMore: () {
                             CampaignListScreen.show(
                               context,
-                              categoryName:
-                                  l10n?.campaignTechnologyTitle ?? 'Technology',
-                              categoryFilter: 'Technology',
+                              categoryName: 'General',
+                              categoryFilter: 'General',
                             );
                           },
                         ),
+                      ],
 
                       const SizedBox(height: 24),
                     ],
                   ),
                 ),
-                if (filteredCampaigns.isEmpty && !state.isLoadingCampaigns)
+
+                // Loading indicator
+                if (state.isLoadingCampaigns || state.isSearching)
+                  const SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.all(32),
+                      child: Center(child: CircularProgressIndicator()),
+                    ),
+                  ),
+
+                // Empty state
+                if (campaignsToShow.isEmpty && 
+                    !state.isLoadingCampaigns && 
+                    !state.isSearching)
                   SliverFillRemaining(
                     child: CampaignEmptyState(
                       onRetry: () {
-                        selectedType.value = CampaignType.all;
+                        selectedFilter.value = null;
                         selectedSort.value = SortOption.trending;
+                        searchController.clear();
+                        searchQuery.value = '';
                         context.read<CampaignBloc>().add(
                               const CampaignEvent.loadCampaigns(
                                 limit: 50,

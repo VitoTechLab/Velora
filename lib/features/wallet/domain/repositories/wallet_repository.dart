@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:velora/core/errors/failure.dart';
 import 'package:velora/features/wallet/domain/entities/wallet_entity.dart';
 import 'package:velora/features/wallet/domain/entities/wallet_transaction_entity.dart';
+import 'package:velora/features/wallet/domain/entities/wallet_withdrawal_entity.dart';
 
 /// Repository interface for wallet operations
 abstract class WalletRepository {
@@ -60,6 +61,13 @@ abstract class WalletRepository {
   });
 
   /// Request withdrawal from wallet
+  ///
+  /// MOCK IMPLEMENTATION: This simulates a bank transfer that processes instantly.
+  /// In production, this would:
+  /// 1. Create a pending withdrawal request
+  /// 2. Submit to payment gateway
+  /// 3. Wait for webhook confirmation
+  /// 4. Update status to completed/failed
   Future<Either<Failure, WalletTransactionEntity>> requestWithdrawal({
     required String walletId,
     required double amount,
@@ -87,4 +95,18 @@ abstract class WalletRepository {
     int limit = 50,
     int offset = 0,
   });
+
+  // ============================================
+  // WITHDRAWALS
+  // ============================================
+
+  /// Get withdrawal history for a wallet
+  Future<Either<Failure, List<WalletWithdrawalEntity>>> getWalletWithdrawals(
+    String walletId,
+  );
+
+  /// Get a specific withdrawal by ID
+  Future<Either<Failure, WalletWithdrawalEntity?>> getWithdrawalById(
+    String withdrawalId,
+  );
 }

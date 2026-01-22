@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:velora/features/wallet/domain/entities/wallet_entity.dart';
 import 'package:velora/features/wallet/domain/entities/wallet_transaction_entity.dart';
@@ -65,6 +66,18 @@ class WalletDetailScreen extends HookWidget {
                             _BalanceCard(
                               wallet: wallet,
                               currencyFormat: currencyFormat,
+                            ),
+                            const SizedBox(height: 16),
+
+                            // Action Buttons
+                            _ActionButtonsRow(
+                              wallet: wallet,
+                              isExporting: state.isExporting,
+                              onWithdraw: () =>
+                                  _showWithdrawalDialog(context, wallet),
+                              onViewWithdrawals: () => context.push(
+                                  '/wallet/${wallet.id}/withdrawals'),
+                              onExport: () => _showExportDialog(context, wallet),
                             ),
                             const SizedBox(height: 24),
 
@@ -170,6 +183,338 @@ class WalletDetailScreen extends HookWidget {
             child: Text(t.settingsProfileFieldSave),
           ),
         ],
+      ),
+    );
+  }
+
+  void _showWithdrawalDialog(BuildContext context, WalletEntity wallet) {
+    final t = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final amountController = TextEditingController();
+    final currencyFormat = NumberFormat.currency(
+      locale: 'id_ID',
+      symbol: 'Rp ',
+      decimalDigits: 0,
+    );
+
+    // Check if bank details are configured
+    if (!wallet.hasBankDetails) {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          icon: Icon(Icons.warning_amber_rounded, color: colorScheme.error, size: 48),
+          title: const Text('Bank Details Required'),
+          content: const Text(
+            'Please configure your bank details before requesting a withdrawal.',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: Text(t.commonCancel),
+            ),
+            FilledButton(
+              onPressed: () {
+                Navigator.pop(ctx);
+                _showBankDetailsDialog(context, wallet);
+              },
+              child: const Text('Configure Now'),
+            ),
+          ],
+        ),
+      );
+      return;
+    }
+
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Request Withdrawal'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Available balance: ${currencyFormat.format(wallet.balance)}',
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: colorScheme.onSurfaceVariant,
+              ),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: amountController,
+              decoration: const InputDecoration(
+                labelText: 'Amount',
+                prefixText: 'Rp ',
+              ),
+              keyboardType: TextInputType.number,
+            ),
+            const SizedBox(height: 16),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: colorScheme.primaryContainer.withValues(alpha: 0.3),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.info_outline, 
+                    size: 20, 
+                    color: colorScheme.primary,
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      'Transfer to: ${wallet.bankName}\n${wallet.bankAccountNumber}',
+                      style: theme.textTheme.bodySmall,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: Text(t.commonCancel),
+          ),
+          FilledButton(
+            onPressed: () {
+              final amount = double.tryParse(
+                amountController.text.replaceAll(RegExp(r'[^\d.]'), ''),
+              );
+              if (amount != null && amount > 0 && amount <= wallet.balance) {
+                context.read<WalletBloc>().add(
+                      WalletEvent.requestWithdrawal(
+                        walletId: wallet.id,
+                        amount: amount,
+                      ),
+                    );
+                Navigator.pop(ctx);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: const Text('Withdrawal request submitted'),
+                    behavior: SnackBarBehavior.floating,
+                    action: SnackBarAction(
+                      label: 'View History',
+                      onPressed: () => context.push('/wallet/${wallet.id}/withdrawals'),
+                    ),
+                  ),
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      amount == null || amount <= 0
+                          ? 'Please enter a valid amount'
+                          : 'Amount exceeds available balance',
+                    ),
+                    backgroundColor: colorScheme.error,
+                    behavior: SnackBarBehavior.floating,
+                  ),
+                );
+              }
+            },
+            child: const Text('Request Withdrawal'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showExportDialog(BuildContext context, WalletEntity wallet) {
+    final t = AppLocalizations.of(context)!;
+    DateTime? startDate;
+    DateTime? endDate;
+
+    showDialog(
+      context: context,
+      builder: (ctx) => StatefulBuilder(
+        builder: (context, setState) => AlertDialog(
+          title: const Text('Export Transactions'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Export your transaction history to a CSV file.',
+              ),
+              const SizedBox(height: 16),
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(Icons.calendar_today),
+                title: const Text('Start Date'),
+                subtitle: Text(startDate != null
+                    ? DateFormat.yMMMd().format(startDate!)
+                    : 'Optional'),
+                onTap: () async {
+                  final date = await showDatePicker(
+                    context: context,
+                    initialDate: startDate ?? DateTime.now().subtract(const Duration(days: 30)),
+                    firstDate: DateTime(2020),
+                    lastDate: DateTime.now(),
+                  );
+                  if (date != null) {
+                    setState(() => startDate = date);
+                  }
+                },
+              ),
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(Icons.calendar_today),
+                title: const Text('End Date'),
+                subtitle: Text(endDate != null
+                    ? DateFormat.yMMMd().format(endDate!)
+                    : 'Optional'),
+                onTap: () async {
+                  final date = await showDatePicker(
+                    context: context,
+                    initialDate: endDate ?? DateTime.now(),
+                    firstDate: DateTime(2020),
+                    lastDate: DateTime.now(),
+                  );
+                  if (date != null) {
+                    setState(() => endDate = date);
+                  }
+                },
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: Text(t.commonCancel),
+            ),
+            FilledButton.icon(
+              onPressed: () {
+                context.read<WalletBloc>().add(
+                      WalletEvent.exportTransactions(
+                        walletId: wallet.id,
+                        startDate: startDate,
+                        endDate: endDate,
+                      ),
+                    );
+                Navigator.pop(ctx);
+              },
+              icon: const Icon(Icons.download, size: 18),
+              label: const Text('Export'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ActionButtonsRow extends StatelessWidget {
+  const _ActionButtonsRow({
+    required this.wallet,
+    required this.isExporting,
+    required this.onWithdraw,
+    required this.onViewWithdrawals,
+    required this.onExport,
+  });
+
+  final WalletEntity wallet;
+  final bool isExporting;
+  final VoidCallback onWithdraw;
+  final VoidCallback onViewWithdrawals;
+  final VoidCallback onExport;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        // Withdraw Button (only for campaign wallets with balance)
+        if (!wallet.isMainWallet && wallet.balance > 0)
+          Expanded(
+            child: _ActionButton(
+              icon: Icons.account_balance,
+              label: 'Withdraw',
+              onTap: onWithdraw,
+              isPrimary: true,
+            ),
+          ),
+        if (!wallet.isMainWallet && wallet.balance > 0)
+          const SizedBox(width: 8),
+        
+        // View Withdrawals Button
+        Expanded(
+          child: _ActionButton(
+            icon: Icons.history,
+            label: 'Withdrawals',
+            onTap: onViewWithdrawals,
+          ),
+        ),
+        const SizedBox(width: 8),
+
+        // Export Button
+        Expanded(
+          child: _ActionButton(
+            icon: isExporting ? Icons.hourglass_empty : Icons.download,
+            label: isExporting ? 'Exporting...' : 'Export',
+            onTap: isExporting ? null : onExport,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ActionButton extends StatelessWidget {
+  const _ActionButton({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+    this.isPrimary = false,
+  });
+
+  final IconData icon;
+  final String label;
+  final VoidCallback? onTap;
+  final bool isPrimary;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    return Material(
+      color: isPrimary
+          ? colorScheme.primaryContainer
+          : colorScheme.surfaceContainerLow,
+      borderRadius: BorderRadius.circular(12),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                icon,
+                size: 24,
+                color: isPrimary
+                    ? colorScheme.onPrimaryContainer
+                    : colorScheme.onSurfaceVariant,
+              ),
+              const SizedBox(height: 4),
+              Text(
+                label,
+                style: theme.textTheme.labelSmall?.copyWith(
+                  color: isPrimary
+                      ? colorScheme.onPrimaryContainer
+                      : colorScheme.onSurfaceVariant,
+                ),
+                textAlign: TextAlign.center,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

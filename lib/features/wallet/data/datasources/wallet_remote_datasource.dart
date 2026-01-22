@@ -1,5 +1,6 @@
 import 'package:velora/features/wallet/data/models/wallet_model.dart';
 import 'package:velora/features/wallet/data/models/wallet_transaction_model.dart';
+import 'package:velora/features/wallet/data/models/wallet_withdrawal_model.dart';
 
 /// Remote data source for wallet operations
 abstract class WalletRemoteDataSource {
@@ -68,5 +69,27 @@ abstract class WalletRemoteDataSource {
     String userId, {
     int limit = 50,
     int offset = 0,
+  });
+
+  // ============================================
+  // WITHDRAWALS
+  // ============================================
+
+  /// Get withdrawal history for a wallet
+  Future<List<WalletWithdrawalModel>> getWalletWithdrawals(String walletId);
+
+  /// Get a specific withdrawal by ID
+  Future<WalletWithdrawalModel?> getWithdrawalById(String withdrawalId);
+
+  /// Create a withdrawal record
+  Future<WalletWithdrawalModel> createWithdrawal(WalletWithdrawalModel withdrawal);
+
+  /// Update withdrawal status
+  Future<WalletWithdrawalModel> updateWithdrawalStatus({
+    required String withdrawalId,
+    required String status,
+    String? transferReference,
+    String? notes,
+    DateTime? processedAt,
   });
 }

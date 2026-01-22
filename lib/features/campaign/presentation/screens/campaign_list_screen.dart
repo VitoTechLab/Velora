@@ -107,9 +107,10 @@ class CampaignListScreen extends HookWidget {
         description: entity?.description,
         coverImageUrl: entity?.coverImageUrl,
       );
+      final bloc = context.read<CampaignBloc>();
       Navigator.push(
         context,
-        CampaignDetailScreen.route(campaign: detailModel),
+        CampaignDetailScreen.route(campaign: detailModel, bloc: bloc),
       );
     }
 

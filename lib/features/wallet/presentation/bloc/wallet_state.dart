@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:velora/features/wallet/domain/entities/wallet_entity.dart';
 import 'package:velora/features/wallet/domain/entities/wallet_transaction_entity.dart';
+import 'package:velora/features/wallet/domain/entities/wallet_withdrawal_entity.dart';
 
 part 'wallet_state.freezed.dart';
 
@@ -26,6 +27,12 @@ abstract class WalletState with _$WalletState {
     @Default(false) bool isLoadingTransactions,
     String? errorTransactions,
 
+    // Withdrawal history for selected wallet
+    @Default(<WalletWithdrawalEntity>[])
+    List<WalletWithdrawalEntity> withdrawals,
+    @Default(false) bool isLoadingWithdrawals,
+    String? errorWithdrawals,
+
     // Operation states
     @Default(false) bool isCreatingWallet,
     String? errorCreateWallet,
@@ -37,6 +44,9 @@ abstract class WalletState with _$WalletState {
     String? errorDonation,
     @Default(false) bool isProcessingWithdrawal,
     String? errorWithdrawal,
+
+    // Export state
+    @Default(false) bool isExporting,
 
     // Success messages
     String? message,
@@ -53,4 +63,8 @@ abstract class WalletState with _$WalletState {
 
   /// Get main wallet balance
   double get mainWalletBalance => mainWallet?.balance ?? 0.0;
+
+  /// Get pending withdrawals count
+  int get pendingWithdrawalsCount =>
+      withdrawals.where((w) => w.isPending).length;
 }

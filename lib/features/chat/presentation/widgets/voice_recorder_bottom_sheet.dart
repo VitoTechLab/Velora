@@ -395,7 +395,6 @@ class _VoiceRecorderBottomSheetState extends State<VoiceRecorderBottomSheet>
     required Color backgroundColor,
     required Color iconColor,
   }) {
-    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       children: [
         Container(
@@ -447,7 +446,6 @@ class _VoiceRecorderBottomSheetState extends State<VoiceRecorderBottomSheet>
     required Color backgroundColor,
     required Color iconColor,
   }) {
-    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       decoration: BoxDecoration(
         shape: BoxShape.circle,

@@ -56,6 +56,7 @@ import 'package:velora/features/settings/presentation/screens/security/two_facto
 import 'package:velora/features/settings/presentation/screens/settings_screen.dart';
 import 'package:velora/features/wallet/presentation/screens/wallet_dashboard_screen.dart';
 import 'package:velora/features/wallet/presentation/screens/wallet_detail_screen.dart';
+import 'package:velora/features/wallet/presentation/screens/withdrawal_history_screen.dart';
 import 'package:velora/features/campaign/presentation/screens/my_campaigns_screen.dart';
 import 'package:velora/features/campaign/presentation/screens/campaign_bank_settings_screen.dart';
 import 'package:velora/features/campaign/presentation/screens/campaign_earnings_detail_screen.dart';
@@ -496,14 +497,8 @@ class AppRouter {
                               builder: (context, state) =>
                                   const WalletDashboardScreen(),
                               routes: [
-                                GoRoute(
-                                  path: ':walletId',
-                                  name: AppRouteName.walletDetail,
-                                  builder: (context, state) =>
-                                      WalletDetailScreen(
-                                    walletId: state.pathParameters['walletId']!,
-                                  ),
-                                ),
+                                // IMPORTANT: Static routes MUST come before dynamic :walletId route
+                                // Otherwise "my-campaigns" would be matched as a walletId
                                 GoRoute(
                                   path: 'my-campaigns',
                                   name: 'myCampaigns',
@@ -535,6 +530,26 @@ class AppRouter {
                                           RequestWithdrawalScreen(
                                         campaignId:
                                             state.pathParameters['campaignId']!,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                // Dynamic route for wallet details - must come AFTER static routes
+                                GoRoute(
+                                  path: ':walletId',
+                                  name: AppRouteName.walletDetail,
+                                  builder: (context, state) =>
+                                      WalletDetailScreen(
+                                    walletId: state.pathParameters['walletId']!,
+                                  ),
+                                  routes: [
+                                    GoRoute(
+                                      path: 'withdrawals',
+                                      name: 'walletWithdrawals',
+                                      builder: (context, state) =>
+                                          WithdrawalHistoryScreen(
+                                        walletId:
+                                            state.pathParameters['walletId']!,
                                       ),
                                     ),
                                   ],

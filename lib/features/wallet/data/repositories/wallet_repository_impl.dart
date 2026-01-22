@@ -7,6 +7,7 @@ import 'package:velora/features/wallet/data/models/wallet_model.dart';
 import 'package:velora/features/wallet/data/models/wallet_transaction_model.dart';
 import 'package:velora/features/wallet/domain/entities/wallet_entity.dart';
 import 'package:velora/features/wallet/domain/entities/wallet_transaction_entity.dart';
+import 'package:velora/features/wallet/domain/entities/wallet_withdrawal_entity.dart';
 import 'package:velora/features/wallet/domain/repositories/wallet_repository.dart';
 
 class WalletRepositoryImpl implements WalletRepository {
@@ -404,6 +405,37 @@ class WalletRepositoryImpl implements WalletRepository {
       return Right(models.map((m) => m.toEntity()).toList());
     } catch (e) {
       loge('getUserTransactions error', tag: _logTag, error: e);
+      return Left(WalletFailure.fromException(e));
+    }
+  }
+
+  // ============================================
+  // WITHDRAWALS
+  // ============================================
+  @override
+  Future<Either<Failure, List<WalletWithdrawalEntity>>> getWalletWithdrawals(
+    String walletId,
+  ) async {
+    try {
+      logi('getWalletWithdrawals: $walletId', tag: _logTag);
+      final models = await _dataSource.getWalletWithdrawals(walletId);
+      return Right(models.map((m) => m.toEntity()).toList());
+    } catch (e) {
+      loge('getWalletWithdrawals error', tag: _logTag, error: e);
+      return Left(WalletFailure.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, WalletWithdrawalEntity?>> getWithdrawalById(
+    String withdrawalId,
+  ) async {
+    try {
+      logi('getWithdrawalById: $withdrawalId', tag: _logTag);
+      final model = await _dataSource.getWithdrawalById(withdrawalId);
+      return Right(model?.toEntity());
+    } catch (e) {
+      loge('getWithdrawalById error', tag: _logTag, error: e);
       return Left(WalletFailure.fromException(e));
     }
   }

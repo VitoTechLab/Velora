@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velora/core/di/service_locator.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import 'package:velora/features/campaign/presentation/bloc/campaign_bloc.dart';
+import 'package:velora/features/campaign/presentation/bloc/campaign_event.dart';
+import 'package:velora/features/campaign/presentation/bloc/campaign_state.dart';
 
 import 'package:velora/features/campaign/domain/entities/campaign_detail_model.dart';
 import 'package:velora/features/campaign/domain/entities/campaign_type.dart';
@@ -23,9 +28,16 @@ class CampaignDetailScreen extends HookWidget {
   const CampaignDetailScreen({super.key, required this.campaign});
 
   // Static route helper - requires campaign data
-  static Route<void> route({required CampaignDetailModel campaign}) {
+  // Static route helper - requires campaign data and BLoC
+  static Route<void> route({
+    required CampaignDetailModel campaign,
+    required CampaignBloc bloc,
+  }) {
     return MaterialPageRoute(
-      builder: (context) => CampaignDetailScreen(campaign: campaign),
+      builder: (context) => BlocProvider.value(
+        value: bloc,
+        child: CampaignDetailScreen(campaign: campaign),
+      ),
     );
   }
 
@@ -37,6 +49,8 @@ class CampaignDetailScreen extends HookWidget {
     final scrollController = useScrollController();
     final showTitle = useState(false);
 
+    final bloc = context.read<CampaignBloc>();
+
     useEffect(() {
       void listener() {
         if (scrollController.hasClients) {
@@ -45,8 +59,14 @@ class CampaignDetailScreen extends HookWidget {
       }
 
       scrollController.addListener(listener);
+      
+      // Fetch data for tabs
+      bloc.add(CampaignEvent.loadCampaignUpdates(campaignId: campaign.id));
+      bloc.add(CampaignEvent.loadComments(campaignId: campaign.id));
+      bloc.add(CampaignEvent.loadCampaignTransparencyData(campaignId: campaign.id));
+
       return () => scrollController.removeListener(listener);
-    }, [scrollController]);
+    }, [scrollController, campaign.id]);
 
     final isEquity = campaign.type == CampaignType.equity;
     final isDebt = campaign.type == CampaignType.debt;
@@ -95,8 +115,10 @@ class CampaignDetailScreen extends HookWidget {
 
     return Scaffold(
       backgroundColor: colorScheme.surface,
-      body: CustomScrollView(
-        controller: scrollController,
+      body: BlocBuilder<CampaignBloc, CampaignState>(
+        builder: (context, state) {
+          return CustomScrollView(
+            controller: scrollController,
         slivers: [
           // SliverAppBar with cover
           SliverAppBar(
@@ -223,14 +245,16 @@ class CampaignDetailScreen extends HookWidget {
             ),
           ],
 
-          // Progress Summary
+          // Progress Summary - Use updated values from selectedCampaign if available
           SliverToBoxAdapter(
             child: ProgressSummaryCard(
-              raised: campaign.raised,
-              target: campaign.target,
-              progressPercent: campaign.progressPercent,
+              raised: state.selectedCampaign?.amountRaised ?? campaign.raised,
+              target: state.selectedCampaign?.targetAmount ?? campaign.target,
+              progressPercent: state.selectedCampaign != null 
+                  ? (state.selectedCampaign!.amountRaised / state.selectedCampaign!.targetAmount * 100).clamp(0, 100)
+                  : campaign.progressPercent,
               timeLeftLabel: campaign.timeLeftLabel,
-              donorsCount: campaign.donorsCount,
+              donorsCount: state.selectedCampaign?.donorCount ?? campaign.donorsCount,
               updatesCount: campaign.updatesCount,
               milestonesCount: campaign.milestonesCount,
             ),
@@ -272,18 +296,21 @@ class CampaignDetailScreen extends HookWidget {
                   description: campaign.description,
                 ),
 
-                // Updates Tab - TODO: Fetch from Supabase
-                const UpdatesTabContent(updates: []),
+                // Updates Tab
+                UpdatesTabContent(updates: state.campaignUpdates),
 
-                // Discussion Tab - TODO: Fetch from Supabase
-                const DiscussionTabContent(comments: []),
+                // Discussion Tab
+                DiscussionTabContent(
+                  comments: state.comments,
+                  campaignId: campaign.id,
+                ),
 
-                // Transparency Tab - TODO: Fetch from Supabase
+                // Transparency Tab
                 TransparencyTabContent(
-                  fundBreakdown: const [],
-                  documents: const [],
-                  milestones: const [],
-                  proofItems: const [],
+                  fundBreakdown: state.campaignFundBreakdown,
+                  documents: state.campaignDocuments,
+                  milestones: state.campaignMilestones,
+                  proofItems: state.campaignProofItems,
                   showRiskDisclaimer: showRiskDisclaimer,
                   riskGrade: campaign.riskGrade,
                 ),
@@ -291,6 +318,8 @@ class CampaignDetailScreen extends HookWidget {
             ),
           ),
         ],
+      );
+        },
       ),
 
       // Floating CTA Button

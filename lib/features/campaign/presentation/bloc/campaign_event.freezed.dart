@@ -39,6 +39,8 @@ mixin _$CampaignEvent {
     required TResult Function(String parentId) loadCommentReplies,
     required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
     required TResult Function(String campaignId) loadWithdrawals,
+    required TResult Function(String campaignId) loadCampaignTransparencyData,
+    required TResult Function(String campaignId) loadCampaignUpdates,
     required TResult Function(String userId) loadUserCampaigns,
     required TResult Function(String userId, int limit) loadUserDonations,
     required TResult Function(String campaignId, String bankName,
@@ -70,6 +72,8 @@ mixin _$CampaignEvent {
     TResult? Function(String parentId)? loadCommentReplies,
     TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult? Function(String campaignId)? loadWithdrawals,
+    TResult? Function(String campaignId)? loadCampaignTransparencyData,
+    TResult? Function(String campaignId)? loadCampaignUpdates,
     TResult? Function(String userId)? loadUserCampaigns,
     TResult? Function(String userId, int limit)? loadUserDonations,
     TResult? Function(String campaignId, String bankName, String accountNumber,
@@ -101,6 +105,8 @@ mixin _$CampaignEvent {
     TResult Function(String parentId)? loadCommentReplies,
     TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult Function(String campaignId)? loadWithdrawals,
+    TResult Function(String campaignId)? loadCampaignTransparencyData,
+    TResult Function(String campaignId)? loadCampaignUpdates,
     TResult Function(String userId)? loadUserCampaigns,
     TResult Function(String userId, int limit)? loadUserDonations,
     TResult Function(String campaignId, String bankName, String accountNumber,
@@ -133,6 +139,10 @@ mixin _$CampaignEvent {
     required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
     required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
     required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(LoadCampaignTransparencyDataEvent value)
+        loadCampaignTransparencyData,
+    required TResult Function(LoadCampaignUpdatesEvent value)
+        loadCampaignUpdates,
     required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
     required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
     required TResult Function(UpdateCampaignBankDetailsEvent value)
@@ -160,6 +170,9 @@ mixin _$CampaignEvent {
     TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult? Function(UpdateCampaignBankDetailsEvent value)?
@@ -187,6 +200,9 @@ mixin _$CampaignEvent {
     TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult Function(UpdateCampaignBankDetailsEvent value)?
@@ -319,6 +335,8 @@ class _$LoadCampaignsEventImpl implements LoadCampaignsEvent {
     required TResult Function(String parentId) loadCommentReplies,
     required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
     required TResult Function(String campaignId) loadWithdrawals,
+    required TResult Function(String campaignId) loadCampaignTransparencyData,
+    required TResult Function(String campaignId) loadCampaignUpdates,
     required TResult Function(String userId) loadUserCampaigns,
     required TResult Function(String userId, int limit) loadUserDonations,
     required TResult Function(String campaignId, String bankName,
@@ -353,6 +371,8 @@ class _$LoadCampaignsEventImpl implements LoadCampaignsEvent {
     TResult? Function(String parentId)? loadCommentReplies,
     TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult? Function(String campaignId)? loadWithdrawals,
+    TResult? Function(String campaignId)? loadCampaignTransparencyData,
+    TResult? Function(String campaignId)? loadCampaignUpdates,
     TResult? Function(String userId)? loadUserCampaigns,
     TResult? Function(String userId, int limit)? loadUserDonations,
     TResult? Function(String campaignId, String bankName, String accountNumber,
@@ -387,6 +407,8 @@ class _$LoadCampaignsEventImpl implements LoadCampaignsEvent {
     TResult Function(String parentId)? loadCommentReplies,
     TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult Function(String campaignId)? loadWithdrawals,
+    TResult Function(String campaignId)? loadCampaignTransparencyData,
+    TResult Function(String campaignId)? loadCampaignUpdates,
     TResult Function(String userId)? loadUserCampaigns,
     TResult Function(String userId, int limit)? loadUserDonations,
     TResult Function(String campaignId, String bankName, String accountNumber,
@@ -425,6 +447,10 @@ class _$LoadCampaignsEventImpl implements LoadCampaignsEvent {
     required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
     required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
     required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(LoadCampaignTransparencyDataEvent value)
+        loadCampaignTransparencyData,
+    required TResult Function(LoadCampaignUpdatesEvent value)
+        loadCampaignUpdates,
     required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
     required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
     required TResult Function(UpdateCampaignBankDetailsEvent value)
@@ -455,6 +481,9 @@ class _$LoadCampaignsEventImpl implements LoadCampaignsEvent {
     TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult? Function(UpdateCampaignBankDetailsEvent value)?
@@ -485,6 +514,9 @@ class _$LoadCampaignsEventImpl implements LoadCampaignsEvent {
     TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult Function(UpdateCampaignBankDetailsEvent value)?
@@ -615,6 +647,8 @@ class _$RefreshCampaignsEventImpl implements RefreshCampaignsEvent {
     required TResult Function(String parentId) loadCommentReplies,
     required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
     required TResult Function(String campaignId) loadWithdrawals,
+    required TResult Function(String campaignId) loadCampaignTransparencyData,
+    required TResult Function(String campaignId) loadCampaignUpdates,
     required TResult Function(String userId) loadUserCampaigns,
     required TResult Function(String userId, int limit) loadUserDonations,
     required TResult Function(String campaignId, String bankName,
@@ -649,6 +683,8 @@ class _$RefreshCampaignsEventImpl implements RefreshCampaignsEvent {
     TResult? Function(String parentId)? loadCommentReplies,
     TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult? Function(String campaignId)? loadWithdrawals,
+    TResult? Function(String campaignId)? loadCampaignTransparencyData,
+    TResult? Function(String campaignId)? loadCampaignUpdates,
     TResult? Function(String userId)? loadUserCampaigns,
     TResult? Function(String userId, int limit)? loadUserDonations,
     TResult? Function(String campaignId, String bankName, String accountNumber,
@@ -683,6 +719,8 @@ class _$RefreshCampaignsEventImpl implements RefreshCampaignsEvent {
     TResult Function(String parentId)? loadCommentReplies,
     TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult Function(String campaignId)? loadWithdrawals,
+    TResult Function(String campaignId)? loadCampaignTransparencyData,
+    TResult Function(String campaignId)? loadCampaignUpdates,
     TResult Function(String userId)? loadUserCampaigns,
     TResult Function(String userId, int limit)? loadUserDonations,
     TResult Function(String campaignId, String bankName, String accountNumber,
@@ -721,6 +759,10 @@ class _$RefreshCampaignsEventImpl implements RefreshCampaignsEvent {
     required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
     required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
     required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(LoadCampaignTransparencyDataEvent value)
+        loadCampaignTransparencyData,
+    required TResult Function(LoadCampaignUpdatesEvent value)
+        loadCampaignUpdates,
     required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
     required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
     required TResult Function(UpdateCampaignBankDetailsEvent value)
@@ -751,6 +793,9 @@ class _$RefreshCampaignsEventImpl implements RefreshCampaignsEvent {
     TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult? Function(UpdateCampaignBankDetailsEvent value)?
@@ -781,6 +826,9 @@ class _$RefreshCampaignsEventImpl implements RefreshCampaignsEvent {
     TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult Function(UpdateCampaignBankDetailsEvent value)?
@@ -921,6 +969,8 @@ class _$SearchCampaignsEventImpl implements SearchCampaignsEvent {
     required TResult Function(String parentId) loadCommentReplies,
     required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
     required TResult Function(String campaignId) loadWithdrawals,
+    required TResult Function(String campaignId) loadCampaignTransparencyData,
+    required TResult Function(String campaignId) loadCampaignUpdates,
     required TResult Function(String userId) loadUserCampaigns,
     required TResult Function(String userId, int limit) loadUserDonations,
     required TResult Function(String campaignId, String bankName,
@@ -955,6 +1005,8 @@ class _$SearchCampaignsEventImpl implements SearchCampaignsEvent {
     TResult? Function(String parentId)? loadCommentReplies,
     TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult? Function(String campaignId)? loadWithdrawals,
+    TResult? Function(String campaignId)? loadCampaignTransparencyData,
+    TResult? Function(String campaignId)? loadCampaignUpdates,
     TResult? Function(String userId)? loadUserCampaigns,
     TResult? Function(String userId, int limit)? loadUserDonations,
     TResult? Function(String campaignId, String bankName, String accountNumber,
@@ -989,6 +1041,8 @@ class _$SearchCampaignsEventImpl implements SearchCampaignsEvent {
     TResult Function(String parentId)? loadCommentReplies,
     TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult Function(String campaignId)? loadWithdrawals,
+    TResult Function(String campaignId)? loadCampaignTransparencyData,
+    TResult Function(String campaignId)? loadCampaignUpdates,
     TResult Function(String userId)? loadUserCampaigns,
     TResult Function(String userId, int limit)? loadUserDonations,
     TResult Function(String campaignId, String bankName, String accountNumber,
@@ -1027,6 +1081,10 @@ class _$SearchCampaignsEventImpl implements SearchCampaignsEvent {
     required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
     required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
     required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(LoadCampaignTransparencyDataEvent value)
+        loadCampaignTransparencyData,
+    required TResult Function(LoadCampaignUpdatesEvent value)
+        loadCampaignUpdates,
     required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
     required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
     required TResult Function(UpdateCampaignBankDetailsEvent value)
@@ -1057,6 +1115,9 @@ class _$SearchCampaignsEventImpl implements SearchCampaignsEvent {
     TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult? Function(UpdateCampaignBankDetailsEvent value)?
@@ -1087,6 +1148,9 @@ class _$SearchCampaignsEventImpl implements SearchCampaignsEvent {
     TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult Function(UpdateCampaignBankDetailsEvent value)?
@@ -1212,6 +1276,8 @@ class _$GetCampaignDetailEventImpl implements GetCampaignDetailEvent {
     required TResult Function(String parentId) loadCommentReplies,
     required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
     required TResult Function(String campaignId) loadWithdrawals,
+    required TResult Function(String campaignId) loadCampaignTransparencyData,
+    required TResult Function(String campaignId) loadCampaignUpdates,
     required TResult Function(String userId) loadUserCampaigns,
     required TResult Function(String userId, int limit) loadUserDonations,
     required TResult Function(String campaignId, String bankName,
@@ -1246,6 +1312,8 @@ class _$GetCampaignDetailEventImpl implements GetCampaignDetailEvent {
     TResult? Function(String parentId)? loadCommentReplies,
     TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult? Function(String campaignId)? loadWithdrawals,
+    TResult? Function(String campaignId)? loadCampaignTransparencyData,
+    TResult? Function(String campaignId)? loadCampaignUpdates,
     TResult? Function(String userId)? loadUserCampaigns,
     TResult? Function(String userId, int limit)? loadUserDonations,
     TResult? Function(String campaignId, String bankName, String accountNumber,
@@ -1280,6 +1348,8 @@ class _$GetCampaignDetailEventImpl implements GetCampaignDetailEvent {
     TResult Function(String parentId)? loadCommentReplies,
     TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult Function(String campaignId)? loadWithdrawals,
+    TResult Function(String campaignId)? loadCampaignTransparencyData,
+    TResult Function(String campaignId)? loadCampaignUpdates,
     TResult Function(String userId)? loadUserCampaigns,
     TResult Function(String userId, int limit)? loadUserDonations,
     TResult Function(String campaignId, String bankName, String accountNumber,
@@ -1318,6 +1388,10 @@ class _$GetCampaignDetailEventImpl implements GetCampaignDetailEvent {
     required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
     required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
     required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(LoadCampaignTransparencyDataEvent value)
+        loadCampaignTransparencyData,
+    required TResult Function(LoadCampaignUpdatesEvent value)
+        loadCampaignUpdates,
     required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
     required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
     required TResult Function(UpdateCampaignBankDetailsEvent value)
@@ -1348,6 +1422,9 @@ class _$GetCampaignDetailEventImpl implements GetCampaignDetailEvent {
     TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult? Function(UpdateCampaignBankDetailsEvent value)?
@@ -1378,6 +1455,9 @@ class _$GetCampaignDetailEventImpl implements GetCampaignDetailEvent {
     TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult Function(UpdateCampaignBankDetailsEvent value)?
@@ -1509,6 +1589,8 @@ class _$CreateCampaignEventImpl implements CreateCampaignEvent {
     required TResult Function(String parentId) loadCommentReplies,
     required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
     required TResult Function(String campaignId) loadWithdrawals,
+    required TResult Function(String campaignId) loadCampaignTransparencyData,
+    required TResult Function(String campaignId) loadCampaignUpdates,
     required TResult Function(String userId) loadUserCampaigns,
     required TResult Function(String userId, int limit) loadUserDonations,
     required TResult Function(String campaignId, String bankName,
@@ -1543,6 +1625,8 @@ class _$CreateCampaignEventImpl implements CreateCampaignEvent {
     TResult? Function(String parentId)? loadCommentReplies,
     TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult? Function(String campaignId)? loadWithdrawals,
+    TResult? Function(String campaignId)? loadCampaignTransparencyData,
+    TResult? Function(String campaignId)? loadCampaignUpdates,
     TResult? Function(String userId)? loadUserCampaigns,
     TResult? Function(String userId, int limit)? loadUserDonations,
     TResult? Function(String campaignId, String bankName, String accountNumber,
@@ -1577,6 +1661,8 @@ class _$CreateCampaignEventImpl implements CreateCampaignEvent {
     TResult Function(String parentId)? loadCommentReplies,
     TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult Function(String campaignId)? loadWithdrawals,
+    TResult Function(String campaignId)? loadCampaignTransparencyData,
+    TResult Function(String campaignId)? loadCampaignUpdates,
     TResult Function(String userId)? loadUserCampaigns,
     TResult Function(String userId, int limit)? loadUserDonations,
     TResult Function(String campaignId, String bankName, String accountNumber,
@@ -1615,6 +1701,10 @@ class _$CreateCampaignEventImpl implements CreateCampaignEvent {
     required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
     required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
     required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(LoadCampaignTransparencyDataEvent value)
+        loadCampaignTransparencyData,
+    required TResult Function(LoadCampaignUpdatesEvent value)
+        loadCampaignUpdates,
     required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
     required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
     required TResult Function(UpdateCampaignBankDetailsEvent value)
@@ -1645,6 +1735,9 @@ class _$CreateCampaignEventImpl implements CreateCampaignEvent {
     TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult? Function(UpdateCampaignBankDetailsEvent value)?
@@ -1675,6 +1768,9 @@ class _$CreateCampaignEventImpl implements CreateCampaignEvent {
     TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult Function(UpdateCampaignBankDetailsEvent value)?
@@ -1806,6 +1902,8 @@ class _$UpdateCampaignEventImpl implements UpdateCampaignEvent {
     required TResult Function(String parentId) loadCommentReplies,
     required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
     required TResult Function(String campaignId) loadWithdrawals,
+    required TResult Function(String campaignId) loadCampaignTransparencyData,
+    required TResult Function(String campaignId) loadCampaignUpdates,
     required TResult Function(String userId) loadUserCampaigns,
     required TResult Function(String userId, int limit) loadUserDonations,
     required TResult Function(String campaignId, String bankName,
@@ -1840,6 +1938,8 @@ class _$UpdateCampaignEventImpl implements UpdateCampaignEvent {
     TResult? Function(String parentId)? loadCommentReplies,
     TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult? Function(String campaignId)? loadWithdrawals,
+    TResult? Function(String campaignId)? loadCampaignTransparencyData,
+    TResult? Function(String campaignId)? loadCampaignUpdates,
     TResult? Function(String userId)? loadUserCampaigns,
     TResult? Function(String userId, int limit)? loadUserDonations,
     TResult? Function(String campaignId, String bankName, String accountNumber,
@@ -1874,6 +1974,8 @@ class _$UpdateCampaignEventImpl implements UpdateCampaignEvent {
     TResult Function(String parentId)? loadCommentReplies,
     TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult Function(String campaignId)? loadWithdrawals,
+    TResult Function(String campaignId)? loadCampaignTransparencyData,
+    TResult Function(String campaignId)? loadCampaignUpdates,
     TResult Function(String userId)? loadUserCampaigns,
     TResult Function(String userId, int limit)? loadUserDonations,
     TResult Function(String campaignId, String bankName, String accountNumber,
@@ -1912,6 +2014,10 @@ class _$UpdateCampaignEventImpl implements UpdateCampaignEvent {
     required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
     required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
     required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(LoadCampaignTransparencyDataEvent value)
+        loadCampaignTransparencyData,
+    required TResult Function(LoadCampaignUpdatesEvent value)
+        loadCampaignUpdates,
     required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
     required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
     required TResult Function(UpdateCampaignBankDetailsEvent value)
@@ -1942,6 +2048,9 @@ class _$UpdateCampaignEventImpl implements UpdateCampaignEvent {
     TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult? Function(UpdateCampaignBankDetailsEvent value)?
@@ -1972,6 +2081,9 @@ class _$UpdateCampaignEventImpl implements UpdateCampaignEvent {
     TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult Function(UpdateCampaignBankDetailsEvent value)?
@@ -2091,6 +2203,8 @@ class _$DeleteCampaignEventImpl implements DeleteCampaignEvent {
     required TResult Function(String parentId) loadCommentReplies,
     required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
     required TResult Function(String campaignId) loadWithdrawals,
+    required TResult Function(String campaignId) loadCampaignTransparencyData,
+    required TResult Function(String campaignId) loadCampaignUpdates,
     required TResult Function(String userId) loadUserCampaigns,
     required TResult Function(String userId, int limit) loadUserDonations,
     required TResult Function(String campaignId, String bankName,
@@ -2125,6 +2239,8 @@ class _$DeleteCampaignEventImpl implements DeleteCampaignEvent {
     TResult? Function(String parentId)? loadCommentReplies,
     TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult? Function(String campaignId)? loadWithdrawals,
+    TResult? Function(String campaignId)? loadCampaignTransparencyData,
+    TResult? Function(String campaignId)? loadCampaignUpdates,
     TResult? Function(String userId)? loadUserCampaigns,
     TResult? Function(String userId, int limit)? loadUserDonations,
     TResult? Function(String campaignId, String bankName, String accountNumber,
@@ -2159,6 +2275,8 @@ class _$DeleteCampaignEventImpl implements DeleteCampaignEvent {
     TResult Function(String parentId)? loadCommentReplies,
     TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult Function(String campaignId)? loadWithdrawals,
+    TResult Function(String campaignId)? loadCampaignTransparencyData,
+    TResult Function(String campaignId)? loadCampaignUpdates,
     TResult Function(String userId)? loadUserCampaigns,
     TResult Function(String userId, int limit)? loadUserDonations,
     TResult Function(String campaignId, String bankName, String accountNumber,
@@ -2197,6 +2315,10 @@ class _$DeleteCampaignEventImpl implements DeleteCampaignEvent {
     required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
     required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
     required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(LoadCampaignTransparencyDataEvent value)
+        loadCampaignTransparencyData,
+    required TResult Function(LoadCampaignUpdatesEvent value)
+        loadCampaignUpdates,
     required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
     required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
     required TResult Function(UpdateCampaignBankDetailsEvent value)
@@ -2227,6 +2349,9 @@ class _$DeleteCampaignEventImpl implements DeleteCampaignEvent {
     TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult? Function(UpdateCampaignBankDetailsEvent value)?
@@ -2257,6 +2382,9 @@ class _$DeleteCampaignEventImpl implements DeleteCampaignEvent {
     TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult Function(UpdateCampaignBankDetailsEvent value)?
@@ -2387,6 +2515,8 @@ class _$UpdateCampaignStatusEventImpl implements UpdateCampaignStatusEvent {
     required TResult Function(String parentId) loadCommentReplies,
     required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
     required TResult Function(String campaignId) loadWithdrawals,
+    required TResult Function(String campaignId) loadCampaignTransparencyData,
+    required TResult Function(String campaignId) loadCampaignUpdates,
     required TResult Function(String userId) loadUserCampaigns,
     required TResult Function(String userId, int limit) loadUserDonations,
     required TResult Function(String campaignId, String bankName,
@@ -2421,6 +2551,8 @@ class _$UpdateCampaignStatusEventImpl implements UpdateCampaignStatusEvent {
     TResult? Function(String parentId)? loadCommentReplies,
     TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult? Function(String campaignId)? loadWithdrawals,
+    TResult? Function(String campaignId)? loadCampaignTransparencyData,
+    TResult? Function(String campaignId)? loadCampaignUpdates,
     TResult? Function(String userId)? loadUserCampaigns,
     TResult? Function(String userId, int limit)? loadUserDonations,
     TResult? Function(String campaignId, String bankName, String accountNumber,
@@ -2455,6 +2587,8 @@ class _$UpdateCampaignStatusEventImpl implements UpdateCampaignStatusEvent {
     TResult Function(String parentId)? loadCommentReplies,
     TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult Function(String campaignId)? loadWithdrawals,
+    TResult Function(String campaignId)? loadCampaignTransparencyData,
+    TResult Function(String campaignId)? loadCampaignUpdates,
     TResult Function(String userId)? loadUserCampaigns,
     TResult Function(String userId, int limit)? loadUserDonations,
     TResult Function(String campaignId, String bankName, String accountNumber,
@@ -2493,6 +2627,10 @@ class _$UpdateCampaignStatusEventImpl implements UpdateCampaignStatusEvent {
     required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
     required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
     required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(LoadCampaignTransparencyDataEvent value)
+        loadCampaignTransparencyData,
+    required TResult Function(LoadCampaignUpdatesEvent value)
+        loadCampaignUpdates,
     required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
     required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
     required TResult Function(UpdateCampaignBankDetailsEvent value)
@@ -2523,6 +2661,9 @@ class _$UpdateCampaignStatusEventImpl implements UpdateCampaignStatusEvent {
     TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult? Function(UpdateCampaignBankDetailsEvent value)?
@@ -2553,6 +2694,9 @@ class _$UpdateCampaignStatusEventImpl implements UpdateCampaignStatusEvent {
     TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult Function(UpdateCampaignBankDetailsEvent value)?
@@ -2646,6 +2790,8 @@ class _$LoadCategoriesEventImpl implements LoadCategoriesEvent {
     required TResult Function(String parentId) loadCommentReplies,
     required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
     required TResult Function(String campaignId) loadWithdrawals,
+    required TResult Function(String campaignId) loadCampaignTransparencyData,
+    required TResult Function(String campaignId) loadCampaignUpdates,
     required TResult Function(String userId) loadUserCampaigns,
     required TResult Function(String userId, int limit) loadUserDonations,
     required TResult Function(String campaignId, String bankName,
@@ -2680,6 +2826,8 @@ class _$LoadCategoriesEventImpl implements LoadCategoriesEvent {
     TResult? Function(String parentId)? loadCommentReplies,
     TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult? Function(String campaignId)? loadWithdrawals,
+    TResult? Function(String campaignId)? loadCampaignTransparencyData,
+    TResult? Function(String campaignId)? loadCampaignUpdates,
     TResult? Function(String userId)? loadUserCampaigns,
     TResult? Function(String userId, int limit)? loadUserDonations,
     TResult? Function(String campaignId, String bankName, String accountNumber,
@@ -2714,6 +2862,8 @@ class _$LoadCategoriesEventImpl implements LoadCategoriesEvent {
     TResult Function(String parentId)? loadCommentReplies,
     TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult Function(String campaignId)? loadWithdrawals,
+    TResult Function(String campaignId)? loadCampaignTransparencyData,
+    TResult Function(String campaignId)? loadCampaignUpdates,
     TResult Function(String userId)? loadUserCampaigns,
     TResult Function(String userId, int limit)? loadUserDonations,
     TResult Function(String campaignId, String bankName, String accountNumber,
@@ -2752,6 +2902,10 @@ class _$LoadCategoriesEventImpl implements LoadCategoriesEvent {
     required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
     required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
     required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(LoadCampaignTransparencyDataEvent value)
+        loadCampaignTransparencyData,
+    required TResult Function(LoadCampaignUpdatesEvent value)
+        loadCampaignUpdates,
     required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
     required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
     required TResult Function(UpdateCampaignBankDetailsEvent value)
@@ -2782,6 +2936,9 @@ class _$LoadCategoriesEventImpl implements LoadCategoriesEvent {
     TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult? Function(UpdateCampaignBankDetailsEvent value)?
@@ -2812,6 +2969,9 @@ class _$LoadCategoriesEventImpl implements LoadCategoriesEvent {
     TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult Function(UpdateCampaignBankDetailsEvent value)?
@@ -2931,6 +3091,8 @@ class _$LoadDonationsEventImpl implements LoadDonationsEvent {
     required TResult Function(String parentId) loadCommentReplies,
     required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
     required TResult Function(String campaignId) loadWithdrawals,
+    required TResult Function(String campaignId) loadCampaignTransparencyData,
+    required TResult Function(String campaignId) loadCampaignUpdates,
     required TResult Function(String userId) loadUserCampaigns,
     required TResult Function(String userId, int limit) loadUserDonations,
     required TResult Function(String campaignId, String bankName,
@@ -2965,6 +3127,8 @@ class _$LoadDonationsEventImpl implements LoadDonationsEvent {
     TResult? Function(String parentId)? loadCommentReplies,
     TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult? Function(String campaignId)? loadWithdrawals,
+    TResult? Function(String campaignId)? loadCampaignTransparencyData,
+    TResult? Function(String campaignId)? loadCampaignUpdates,
     TResult? Function(String userId)? loadUserCampaigns,
     TResult? Function(String userId, int limit)? loadUserDonations,
     TResult? Function(String campaignId, String bankName, String accountNumber,
@@ -2999,6 +3163,8 @@ class _$LoadDonationsEventImpl implements LoadDonationsEvent {
     TResult Function(String parentId)? loadCommentReplies,
     TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult Function(String campaignId)? loadWithdrawals,
+    TResult Function(String campaignId)? loadCampaignTransparencyData,
+    TResult Function(String campaignId)? loadCampaignUpdates,
     TResult Function(String userId)? loadUserCampaigns,
     TResult Function(String userId, int limit)? loadUserDonations,
     TResult Function(String campaignId, String bankName, String accountNumber,
@@ -3037,6 +3203,10 @@ class _$LoadDonationsEventImpl implements LoadDonationsEvent {
     required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
     required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
     required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(LoadCampaignTransparencyDataEvent value)
+        loadCampaignTransparencyData,
+    required TResult Function(LoadCampaignUpdatesEvent value)
+        loadCampaignUpdates,
     required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
     required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
     required TResult Function(UpdateCampaignBankDetailsEvent value)
@@ -3067,6 +3237,9 @@ class _$LoadDonationsEventImpl implements LoadDonationsEvent {
     TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult? Function(UpdateCampaignBankDetailsEvent value)?
@@ -3097,6 +3270,9 @@ class _$LoadDonationsEventImpl implements LoadDonationsEvent {
     TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult Function(UpdateCampaignBankDetailsEvent value)?
@@ -3230,6 +3406,8 @@ class _$CreateDonationEventImpl implements CreateDonationEvent {
     required TResult Function(String parentId) loadCommentReplies,
     required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
     required TResult Function(String campaignId) loadWithdrawals,
+    required TResult Function(String campaignId) loadCampaignTransparencyData,
+    required TResult Function(String campaignId) loadCampaignUpdates,
     required TResult Function(String userId) loadUserCampaigns,
     required TResult Function(String userId, int limit) loadUserDonations,
     required TResult Function(String campaignId, String bankName,
@@ -3264,6 +3442,8 @@ class _$CreateDonationEventImpl implements CreateDonationEvent {
     TResult? Function(String parentId)? loadCommentReplies,
     TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult? Function(String campaignId)? loadWithdrawals,
+    TResult? Function(String campaignId)? loadCampaignTransparencyData,
+    TResult? Function(String campaignId)? loadCampaignUpdates,
     TResult? Function(String userId)? loadUserCampaigns,
     TResult? Function(String userId, int limit)? loadUserDonations,
     TResult? Function(String campaignId, String bankName, String accountNumber,
@@ -3298,6 +3478,8 @@ class _$CreateDonationEventImpl implements CreateDonationEvent {
     TResult Function(String parentId)? loadCommentReplies,
     TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult Function(String campaignId)? loadWithdrawals,
+    TResult Function(String campaignId)? loadCampaignTransparencyData,
+    TResult Function(String campaignId)? loadCampaignUpdates,
     TResult Function(String userId)? loadUserCampaigns,
     TResult Function(String userId, int limit)? loadUserDonations,
     TResult Function(String campaignId, String bankName, String accountNumber,
@@ -3336,6 +3518,10 @@ class _$CreateDonationEventImpl implements CreateDonationEvent {
     required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
     required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
     required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(LoadCampaignTransparencyDataEvent value)
+        loadCampaignTransparencyData,
+    required TResult Function(LoadCampaignUpdatesEvent value)
+        loadCampaignUpdates,
     required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
     required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
     required TResult Function(UpdateCampaignBankDetailsEvent value)
@@ -3366,6 +3552,9 @@ class _$CreateDonationEventImpl implements CreateDonationEvent {
     TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult? Function(UpdateCampaignBankDetailsEvent value)?
@@ -3396,6 +3585,9 @@ class _$CreateDonationEventImpl implements CreateDonationEvent {
     TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult Function(UpdateCampaignBankDetailsEvent value)?
@@ -3526,6 +3718,8 @@ class _$LoadCommentsEventImpl implements LoadCommentsEvent {
     required TResult Function(String parentId) loadCommentReplies,
     required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
     required TResult Function(String campaignId) loadWithdrawals,
+    required TResult Function(String campaignId) loadCampaignTransparencyData,
+    required TResult Function(String campaignId) loadCampaignUpdates,
     required TResult Function(String userId) loadUserCampaigns,
     required TResult Function(String userId, int limit) loadUserDonations,
     required TResult Function(String campaignId, String bankName,
@@ -3560,6 +3754,8 @@ class _$LoadCommentsEventImpl implements LoadCommentsEvent {
     TResult? Function(String parentId)? loadCommentReplies,
     TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult? Function(String campaignId)? loadWithdrawals,
+    TResult? Function(String campaignId)? loadCampaignTransparencyData,
+    TResult? Function(String campaignId)? loadCampaignUpdates,
     TResult? Function(String userId)? loadUserCampaigns,
     TResult? Function(String userId, int limit)? loadUserDonations,
     TResult? Function(String campaignId, String bankName, String accountNumber,
@@ -3594,6 +3790,8 @@ class _$LoadCommentsEventImpl implements LoadCommentsEvent {
     TResult Function(String parentId)? loadCommentReplies,
     TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult Function(String campaignId)? loadWithdrawals,
+    TResult Function(String campaignId)? loadCampaignTransparencyData,
+    TResult Function(String campaignId)? loadCampaignUpdates,
     TResult Function(String userId)? loadUserCampaigns,
     TResult Function(String userId, int limit)? loadUserDonations,
     TResult Function(String campaignId, String bankName, String accountNumber,
@@ -3632,6 +3830,10 @@ class _$LoadCommentsEventImpl implements LoadCommentsEvent {
     required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
     required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
     required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(LoadCampaignTransparencyDataEvent value)
+        loadCampaignTransparencyData,
+    required TResult Function(LoadCampaignUpdatesEvent value)
+        loadCampaignUpdates,
     required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
     required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
     required TResult Function(UpdateCampaignBankDetailsEvent value)
@@ -3662,6 +3864,9 @@ class _$LoadCommentsEventImpl implements LoadCommentsEvent {
     TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult? Function(UpdateCampaignBankDetailsEvent value)?
@@ -3692,6 +3897,9 @@ class _$LoadCommentsEventImpl implements LoadCommentsEvent {
     TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult Function(UpdateCampaignBankDetailsEvent value)?
@@ -3824,6 +4032,8 @@ class _$AddCommentEventImpl implements AddCommentEvent {
     required TResult Function(String parentId) loadCommentReplies,
     required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
     required TResult Function(String campaignId) loadWithdrawals,
+    required TResult Function(String campaignId) loadCampaignTransparencyData,
+    required TResult Function(String campaignId) loadCampaignUpdates,
     required TResult Function(String userId) loadUserCampaigns,
     required TResult Function(String userId, int limit) loadUserDonations,
     required TResult Function(String campaignId, String bankName,
@@ -3858,6 +4068,8 @@ class _$AddCommentEventImpl implements AddCommentEvent {
     TResult? Function(String parentId)? loadCommentReplies,
     TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult? Function(String campaignId)? loadWithdrawals,
+    TResult? Function(String campaignId)? loadCampaignTransparencyData,
+    TResult? Function(String campaignId)? loadCampaignUpdates,
     TResult? Function(String userId)? loadUserCampaigns,
     TResult? Function(String userId, int limit)? loadUserDonations,
     TResult? Function(String campaignId, String bankName, String accountNumber,
@@ -3892,6 +4104,8 @@ class _$AddCommentEventImpl implements AddCommentEvent {
     TResult Function(String parentId)? loadCommentReplies,
     TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult Function(String campaignId)? loadWithdrawals,
+    TResult Function(String campaignId)? loadCampaignTransparencyData,
+    TResult Function(String campaignId)? loadCampaignUpdates,
     TResult Function(String userId)? loadUserCampaigns,
     TResult Function(String userId, int limit)? loadUserDonations,
     TResult Function(String campaignId, String bankName, String accountNumber,
@@ -3930,6 +4144,10 @@ class _$AddCommentEventImpl implements AddCommentEvent {
     required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
     required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
     required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(LoadCampaignTransparencyDataEvent value)
+        loadCampaignTransparencyData,
+    required TResult Function(LoadCampaignUpdatesEvent value)
+        loadCampaignUpdates,
     required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
     required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
     required TResult Function(UpdateCampaignBankDetailsEvent value)
@@ -3960,6 +4178,9 @@ class _$AddCommentEventImpl implements AddCommentEvent {
     TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult? Function(UpdateCampaignBankDetailsEvent value)?
@@ -3990,6 +4211,9 @@ class _$AddCommentEventImpl implements AddCommentEvent {
     TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult Function(UpdateCampaignBankDetailsEvent value)?
@@ -4119,6 +4343,8 @@ class _$DeleteCommentEventImpl implements DeleteCommentEvent {
     required TResult Function(String parentId) loadCommentReplies,
     required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
     required TResult Function(String campaignId) loadWithdrawals,
+    required TResult Function(String campaignId) loadCampaignTransparencyData,
+    required TResult Function(String campaignId) loadCampaignUpdates,
     required TResult Function(String userId) loadUserCampaigns,
     required TResult Function(String userId, int limit) loadUserDonations,
     required TResult Function(String campaignId, String bankName,
@@ -4153,6 +4379,8 @@ class _$DeleteCommentEventImpl implements DeleteCommentEvent {
     TResult? Function(String parentId)? loadCommentReplies,
     TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult? Function(String campaignId)? loadWithdrawals,
+    TResult? Function(String campaignId)? loadCampaignTransparencyData,
+    TResult? Function(String campaignId)? loadCampaignUpdates,
     TResult? Function(String userId)? loadUserCampaigns,
     TResult? Function(String userId, int limit)? loadUserDonations,
     TResult? Function(String campaignId, String bankName, String accountNumber,
@@ -4187,6 +4415,8 @@ class _$DeleteCommentEventImpl implements DeleteCommentEvent {
     TResult Function(String parentId)? loadCommentReplies,
     TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult Function(String campaignId)? loadWithdrawals,
+    TResult Function(String campaignId)? loadCampaignTransparencyData,
+    TResult Function(String campaignId)? loadCampaignUpdates,
     TResult Function(String userId)? loadUserCampaigns,
     TResult Function(String userId, int limit)? loadUserDonations,
     TResult Function(String campaignId, String bankName, String accountNumber,
@@ -4225,6 +4455,10 @@ class _$DeleteCommentEventImpl implements DeleteCommentEvent {
     required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
     required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
     required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(LoadCampaignTransparencyDataEvent value)
+        loadCampaignTransparencyData,
+    required TResult Function(LoadCampaignUpdatesEvent value)
+        loadCampaignUpdates,
     required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
     required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
     required TResult Function(UpdateCampaignBankDetailsEvent value)
@@ -4255,6 +4489,9 @@ class _$DeleteCommentEventImpl implements DeleteCommentEvent {
     TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult? Function(UpdateCampaignBankDetailsEvent value)?
@@ -4285,6 +4522,9 @@ class _$DeleteCommentEventImpl implements DeleteCommentEvent {
     TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult Function(UpdateCampaignBankDetailsEvent value)?
@@ -4408,6 +4648,8 @@ class _$LoadCommentRepliesEventImpl implements LoadCommentRepliesEvent {
     required TResult Function(String parentId) loadCommentReplies,
     required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
     required TResult Function(String campaignId) loadWithdrawals,
+    required TResult Function(String campaignId) loadCampaignTransparencyData,
+    required TResult Function(String campaignId) loadCampaignUpdates,
     required TResult Function(String userId) loadUserCampaigns,
     required TResult Function(String userId, int limit) loadUserDonations,
     required TResult Function(String campaignId, String bankName,
@@ -4442,6 +4684,8 @@ class _$LoadCommentRepliesEventImpl implements LoadCommentRepliesEvent {
     TResult? Function(String parentId)? loadCommentReplies,
     TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult? Function(String campaignId)? loadWithdrawals,
+    TResult? Function(String campaignId)? loadCampaignTransparencyData,
+    TResult? Function(String campaignId)? loadCampaignUpdates,
     TResult? Function(String userId)? loadUserCampaigns,
     TResult? Function(String userId, int limit)? loadUserDonations,
     TResult? Function(String campaignId, String bankName, String accountNumber,
@@ -4476,6 +4720,8 @@ class _$LoadCommentRepliesEventImpl implements LoadCommentRepliesEvent {
     TResult Function(String parentId)? loadCommentReplies,
     TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult Function(String campaignId)? loadWithdrawals,
+    TResult Function(String campaignId)? loadCampaignTransparencyData,
+    TResult Function(String campaignId)? loadCampaignUpdates,
     TResult Function(String userId)? loadUserCampaigns,
     TResult Function(String userId, int limit)? loadUserDonations,
     TResult Function(String campaignId, String bankName, String accountNumber,
@@ -4514,6 +4760,10 @@ class _$LoadCommentRepliesEventImpl implements LoadCommentRepliesEvent {
     required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
     required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
     required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(LoadCampaignTransparencyDataEvent value)
+        loadCampaignTransparencyData,
+    required TResult Function(LoadCampaignUpdatesEvent value)
+        loadCampaignUpdates,
     required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
     required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
     required TResult Function(UpdateCampaignBankDetailsEvent value)
@@ -4544,6 +4794,9 @@ class _$LoadCommentRepliesEventImpl implements LoadCommentRepliesEvent {
     TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult? Function(UpdateCampaignBankDetailsEvent value)?
@@ -4574,6 +4827,9 @@ class _$LoadCommentRepliesEventImpl implements LoadCommentRepliesEvent {
     TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult Function(UpdateCampaignBankDetailsEvent value)?
@@ -4707,6 +4963,8 @@ class _$RequestWithdrawalEventImpl implements RequestWithdrawalEvent {
     required TResult Function(String parentId) loadCommentReplies,
     required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
     required TResult Function(String campaignId) loadWithdrawals,
+    required TResult Function(String campaignId) loadCampaignTransparencyData,
+    required TResult Function(String campaignId) loadCampaignUpdates,
     required TResult Function(String userId) loadUserCampaigns,
     required TResult Function(String userId, int limit) loadUserDonations,
     required TResult Function(String campaignId, String bankName,
@@ -4741,6 +4999,8 @@ class _$RequestWithdrawalEventImpl implements RequestWithdrawalEvent {
     TResult? Function(String parentId)? loadCommentReplies,
     TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult? Function(String campaignId)? loadWithdrawals,
+    TResult? Function(String campaignId)? loadCampaignTransparencyData,
+    TResult? Function(String campaignId)? loadCampaignUpdates,
     TResult? Function(String userId)? loadUserCampaigns,
     TResult? Function(String userId, int limit)? loadUserDonations,
     TResult? Function(String campaignId, String bankName, String accountNumber,
@@ -4775,6 +5035,8 @@ class _$RequestWithdrawalEventImpl implements RequestWithdrawalEvent {
     TResult Function(String parentId)? loadCommentReplies,
     TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult Function(String campaignId)? loadWithdrawals,
+    TResult Function(String campaignId)? loadCampaignTransparencyData,
+    TResult Function(String campaignId)? loadCampaignUpdates,
     TResult Function(String userId)? loadUserCampaigns,
     TResult Function(String userId, int limit)? loadUserDonations,
     TResult Function(String campaignId, String bankName, String accountNumber,
@@ -4813,6 +5075,10 @@ class _$RequestWithdrawalEventImpl implements RequestWithdrawalEvent {
     required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
     required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
     required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(LoadCampaignTransparencyDataEvent value)
+        loadCampaignTransparencyData,
+    required TResult Function(LoadCampaignUpdatesEvent value)
+        loadCampaignUpdates,
     required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
     required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
     required TResult Function(UpdateCampaignBankDetailsEvent value)
@@ -4843,6 +5109,9 @@ class _$RequestWithdrawalEventImpl implements RequestWithdrawalEvent {
     TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult? Function(UpdateCampaignBankDetailsEvent value)?
@@ -4873,6 +5142,9 @@ class _$RequestWithdrawalEventImpl implements RequestWithdrawalEvent {
     TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult Function(UpdateCampaignBankDetailsEvent value)?
@@ -4994,6 +5266,8 @@ class _$LoadWithdrawalsEventImpl implements LoadWithdrawalsEvent {
     required TResult Function(String parentId) loadCommentReplies,
     required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
     required TResult Function(String campaignId) loadWithdrawals,
+    required TResult Function(String campaignId) loadCampaignTransparencyData,
+    required TResult Function(String campaignId) loadCampaignUpdates,
     required TResult Function(String userId) loadUserCampaigns,
     required TResult Function(String userId, int limit) loadUserDonations,
     required TResult Function(String campaignId, String bankName,
@@ -5028,6 +5302,8 @@ class _$LoadWithdrawalsEventImpl implements LoadWithdrawalsEvent {
     TResult? Function(String parentId)? loadCommentReplies,
     TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult? Function(String campaignId)? loadWithdrawals,
+    TResult? Function(String campaignId)? loadCampaignTransparencyData,
+    TResult? Function(String campaignId)? loadCampaignUpdates,
     TResult? Function(String userId)? loadUserCampaigns,
     TResult? Function(String userId, int limit)? loadUserDonations,
     TResult? Function(String campaignId, String bankName, String accountNumber,
@@ -5062,6 +5338,8 @@ class _$LoadWithdrawalsEventImpl implements LoadWithdrawalsEvent {
     TResult Function(String parentId)? loadCommentReplies,
     TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult Function(String campaignId)? loadWithdrawals,
+    TResult Function(String campaignId)? loadCampaignTransparencyData,
+    TResult Function(String campaignId)? loadCampaignUpdates,
     TResult Function(String userId)? loadUserCampaigns,
     TResult Function(String userId, int limit)? loadUserDonations,
     TResult Function(String campaignId, String bankName, String accountNumber,
@@ -5100,6 +5378,10 @@ class _$LoadWithdrawalsEventImpl implements LoadWithdrawalsEvent {
     required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
     required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
     required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(LoadCampaignTransparencyDataEvent value)
+        loadCampaignTransparencyData,
+    required TResult Function(LoadCampaignUpdatesEvent value)
+        loadCampaignUpdates,
     required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
     required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
     required TResult Function(UpdateCampaignBankDetailsEvent value)
@@ -5130,6 +5412,9 @@ class _$LoadWithdrawalsEventImpl implements LoadWithdrawalsEvent {
     TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult? Function(UpdateCampaignBankDetailsEvent value)?
@@ -5160,6 +5445,9 @@ class _$LoadWithdrawalsEventImpl implements LoadWithdrawalsEvent {
     TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult Function(UpdateCampaignBankDetailsEvent value)?
@@ -5185,6 +5473,617 @@ abstract class LoadWithdrawalsEvent implements CampaignEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadWithdrawalsEventImplCopyWith<_$LoadWithdrawalsEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoadCampaignTransparencyDataEventImplCopyWith<$Res> {
+  factory _$$LoadCampaignTransparencyDataEventImplCopyWith(
+          _$LoadCampaignTransparencyDataEventImpl value,
+          $Res Function(_$LoadCampaignTransparencyDataEventImpl) then) =
+      __$$LoadCampaignTransparencyDataEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String campaignId});
+}
+
+/// @nodoc
+class __$$LoadCampaignTransparencyDataEventImplCopyWithImpl<$Res>
+    extends _$CampaignEventCopyWithImpl<$Res,
+        _$LoadCampaignTransparencyDataEventImpl>
+    implements _$$LoadCampaignTransparencyDataEventImplCopyWith<$Res> {
+  __$$LoadCampaignTransparencyDataEventImplCopyWithImpl(
+      _$LoadCampaignTransparencyDataEventImpl _value,
+      $Res Function(_$LoadCampaignTransparencyDataEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CampaignEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? campaignId = null,
+  }) {
+    return _then(_$LoadCampaignTransparencyDataEventImpl(
+      campaignId: null == campaignId
+          ? _value.campaignId
+          : campaignId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$LoadCampaignTransparencyDataEventImpl
+    implements LoadCampaignTransparencyDataEvent {
+  const _$LoadCampaignTransparencyDataEventImpl({required this.campaignId});
+
+  @override
+  final String campaignId;
+
+  @override
+  String toString() {
+    return 'CampaignEvent.loadCampaignTransparencyData(campaignId: $campaignId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoadCampaignTransparencyDataEventImpl &&
+            (identical(other.campaignId, campaignId) ||
+                other.campaignId == campaignId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, campaignId);
+
+  /// Create a copy of CampaignEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadCampaignTransparencyDataEventImplCopyWith<
+          _$LoadCampaignTransparencyDataEventImpl>
+      get copyWith => __$$LoadCampaignTransparencyDataEventImplCopyWithImpl<
+          _$LoadCampaignTransparencyDataEventImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? categoryId, int limit) loadCampaigns,
+    required TResult Function(String? categoryId, int limit) refreshCampaigns,
+    required TResult Function(String query, String? categoryId, int limit)
+        searchCampaigns,
+    required TResult Function(String campaignId) getCampaignDetail,
+    required TResult Function(CampaignEntity campaign) createCampaign,
+    required TResult Function(CampaignEntity campaign) updateCampaign,
+    required TResult Function(String campaignId) deleteCampaign,
+    required TResult Function(String campaignId, String status)
+        updateCampaignStatus,
+    required TResult Function() loadCategories,
+    required TResult Function(String campaignId, int limit) loadDonations,
+    required TResult Function(DonationEntity donation) createDonation,
+    required TResult Function(String campaignId, bool includeReplies)
+        loadComments,
+    required TResult Function(CampaignCommentEntity comment) addComment,
+    required TResult Function(String campaignId, String commentId)
+        deleteComment,
+    required TResult Function(String parentId) loadCommentReplies,
+    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
+    required TResult Function(String campaignId) loadWithdrawals,
+    required TResult Function(String campaignId) loadCampaignTransparencyData,
+    required TResult Function(String campaignId) loadCampaignUpdates,
+    required TResult Function(String userId) loadUserCampaigns,
+    required TResult Function(String userId, int limit) loadUserDonations,
+    required TResult Function(String campaignId, String bankName,
+            String accountNumber, String accountHolder)
+        updateCampaignBankDetails,
+    required TResult Function(String campaignId, String userId, double amount,
+            String? message, bool isAnonymous)
+        processDonation,
+    required TResult Function() clearTransient,
+  }) {
+    return loadCampaignTransparencyData(campaignId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? categoryId, int limit)? loadCampaigns,
+    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
+    TResult? Function(String query, String? categoryId, int limit)?
+        searchCampaigns,
+    TResult? Function(String campaignId)? getCampaignDetail,
+    TResult? Function(CampaignEntity campaign)? createCampaign,
+    TResult? Function(CampaignEntity campaign)? updateCampaign,
+    TResult? Function(String campaignId)? deleteCampaign,
+    TResult? Function(String campaignId, String status)? updateCampaignStatus,
+    TResult? Function()? loadCategories,
+    TResult? Function(String campaignId, int limit)? loadDonations,
+    TResult? Function(DonationEntity donation)? createDonation,
+    TResult? Function(String campaignId, bool includeReplies)? loadComments,
+    TResult? Function(CampaignCommentEntity comment)? addComment,
+    TResult? Function(String campaignId, String commentId)? deleteComment,
+    TResult? Function(String parentId)? loadCommentReplies,
+    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
+    TResult? Function(String campaignId)? loadWithdrawals,
+    TResult? Function(String campaignId)? loadCampaignTransparencyData,
+    TResult? Function(String campaignId)? loadCampaignUpdates,
+    TResult? Function(String userId)? loadUserCampaigns,
+    TResult? Function(String userId, int limit)? loadUserDonations,
+    TResult? Function(String campaignId, String bankName, String accountNumber,
+            String accountHolder)?
+        updateCampaignBankDetails,
+    TResult? Function(String campaignId, String userId, double amount,
+            String? message, bool isAnonymous)?
+        processDonation,
+    TResult? Function()? clearTransient,
+  }) {
+    return loadCampaignTransparencyData?.call(campaignId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? categoryId, int limit)? loadCampaigns,
+    TResult Function(String? categoryId, int limit)? refreshCampaigns,
+    TResult Function(String query, String? categoryId, int limit)?
+        searchCampaigns,
+    TResult Function(String campaignId)? getCampaignDetail,
+    TResult Function(CampaignEntity campaign)? createCampaign,
+    TResult Function(CampaignEntity campaign)? updateCampaign,
+    TResult Function(String campaignId)? deleteCampaign,
+    TResult Function(String campaignId, String status)? updateCampaignStatus,
+    TResult Function()? loadCategories,
+    TResult Function(String campaignId, int limit)? loadDonations,
+    TResult Function(DonationEntity donation)? createDonation,
+    TResult Function(String campaignId, bool includeReplies)? loadComments,
+    TResult Function(CampaignCommentEntity comment)? addComment,
+    TResult Function(String campaignId, String commentId)? deleteComment,
+    TResult Function(String parentId)? loadCommentReplies,
+    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
+    TResult Function(String campaignId)? loadWithdrawals,
+    TResult Function(String campaignId)? loadCampaignTransparencyData,
+    TResult Function(String campaignId)? loadCampaignUpdates,
+    TResult Function(String userId)? loadUserCampaigns,
+    TResult Function(String userId, int limit)? loadUserDonations,
+    TResult Function(String campaignId, String bankName, String accountNumber,
+            String accountHolder)?
+        updateCampaignBankDetails,
+    TResult Function(String campaignId, String userId, double amount,
+            String? message, bool isAnonymous)?
+        processDonation,
+    TResult Function()? clearTransient,
+    required TResult orElse(),
+  }) {
+    if (loadCampaignTransparencyData != null) {
+      return loadCampaignTransparencyData(campaignId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
+    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
+    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
+    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
+    required TResult Function(CreateCampaignEvent value) createCampaign,
+    required TResult Function(UpdateCampaignEvent value) updateCampaign,
+    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
+    required TResult Function(UpdateCampaignStatusEvent value)
+        updateCampaignStatus,
+    required TResult Function(LoadCategoriesEvent value) loadCategories,
+    required TResult Function(LoadDonationsEvent value) loadDonations,
+    required TResult Function(CreateDonationEvent value) createDonation,
+    required TResult Function(LoadCommentsEvent value) loadComments,
+    required TResult Function(AddCommentEvent value) addComment,
+    required TResult Function(DeleteCommentEvent value) deleteComment,
+    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
+    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
+    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(LoadCampaignTransparencyDataEvent value)
+        loadCampaignTransparencyData,
+    required TResult Function(LoadCampaignUpdatesEvent value)
+        loadCampaignUpdates,
+    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
+    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
+    required TResult Function(UpdateCampaignBankDetailsEvent value)
+        updateCampaignBankDetails,
+    required TResult Function(ProcessDonationEvent value) processDonation,
+    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
+  }) {
+    return loadCampaignTransparencyData(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
+    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
+    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
+    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
+    TResult? Function(CreateCampaignEvent value)? createCampaign,
+    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
+    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
+    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
+    TResult? Function(LoadCategoriesEvent value)? loadCategories,
+    TResult? Function(LoadDonationsEvent value)? loadDonations,
+    TResult? Function(CreateDonationEvent value)? createDonation,
+    TResult? Function(LoadCommentsEvent value)? loadComments,
+    TResult? Function(AddCommentEvent value)? addComment,
+    TResult? Function(DeleteCommentEvent value)? deleteComment,
+    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
+    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
+    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
+    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
+    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
+    TResult? Function(UpdateCampaignBankDetailsEvent value)?
+        updateCampaignBankDetails,
+    TResult? Function(ProcessDonationEvent value)? processDonation,
+    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
+  }) {
+    return loadCampaignTransparencyData?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
+    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
+    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
+    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
+    TResult Function(CreateCampaignEvent value)? createCampaign,
+    TResult Function(UpdateCampaignEvent value)? updateCampaign,
+    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
+    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
+    TResult Function(LoadCategoriesEvent value)? loadCategories,
+    TResult Function(LoadDonationsEvent value)? loadDonations,
+    TResult Function(CreateDonationEvent value)? createDonation,
+    TResult Function(LoadCommentsEvent value)? loadComments,
+    TResult Function(AddCommentEvent value)? addComment,
+    TResult Function(DeleteCommentEvent value)? deleteComment,
+    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
+    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
+    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
+    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
+    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
+    TResult Function(UpdateCampaignBankDetailsEvent value)?
+        updateCampaignBankDetails,
+    TResult Function(ProcessDonationEvent value)? processDonation,
+    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
+    required TResult orElse(),
+  }) {
+    if (loadCampaignTransparencyData != null) {
+      return loadCampaignTransparencyData(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LoadCampaignTransparencyDataEvent implements CampaignEvent {
+  const factory LoadCampaignTransparencyDataEvent(
+          {required final String campaignId}) =
+      _$LoadCampaignTransparencyDataEventImpl;
+
+  String get campaignId;
+
+  /// Create a copy of CampaignEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LoadCampaignTransparencyDataEventImplCopyWith<
+          _$LoadCampaignTransparencyDataEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoadCampaignUpdatesEventImplCopyWith<$Res> {
+  factory _$$LoadCampaignUpdatesEventImplCopyWith(
+          _$LoadCampaignUpdatesEventImpl value,
+          $Res Function(_$LoadCampaignUpdatesEventImpl) then) =
+      __$$LoadCampaignUpdatesEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String campaignId});
+}
+
+/// @nodoc
+class __$$LoadCampaignUpdatesEventImplCopyWithImpl<$Res>
+    extends _$CampaignEventCopyWithImpl<$Res, _$LoadCampaignUpdatesEventImpl>
+    implements _$$LoadCampaignUpdatesEventImplCopyWith<$Res> {
+  __$$LoadCampaignUpdatesEventImplCopyWithImpl(
+      _$LoadCampaignUpdatesEventImpl _value,
+      $Res Function(_$LoadCampaignUpdatesEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CampaignEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? campaignId = null,
+  }) {
+    return _then(_$LoadCampaignUpdatesEventImpl(
+      campaignId: null == campaignId
+          ? _value.campaignId
+          : campaignId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$LoadCampaignUpdatesEventImpl implements LoadCampaignUpdatesEvent {
+  const _$LoadCampaignUpdatesEventImpl({required this.campaignId});
+
+  @override
+  final String campaignId;
+
+  @override
+  String toString() {
+    return 'CampaignEvent.loadCampaignUpdates(campaignId: $campaignId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoadCampaignUpdatesEventImpl &&
+            (identical(other.campaignId, campaignId) ||
+                other.campaignId == campaignId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, campaignId);
+
+  /// Create a copy of CampaignEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadCampaignUpdatesEventImplCopyWith<_$LoadCampaignUpdatesEventImpl>
+      get copyWith => __$$LoadCampaignUpdatesEventImplCopyWithImpl<
+          _$LoadCampaignUpdatesEventImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? categoryId, int limit) loadCampaigns,
+    required TResult Function(String? categoryId, int limit) refreshCampaigns,
+    required TResult Function(String query, String? categoryId, int limit)
+        searchCampaigns,
+    required TResult Function(String campaignId) getCampaignDetail,
+    required TResult Function(CampaignEntity campaign) createCampaign,
+    required TResult Function(CampaignEntity campaign) updateCampaign,
+    required TResult Function(String campaignId) deleteCampaign,
+    required TResult Function(String campaignId, String status)
+        updateCampaignStatus,
+    required TResult Function() loadCategories,
+    required TResult Function(String campaignId, int limit) loadDonations,
+    required TResult Function(DonationEntity donation) createDonation,
+    required TResult Function(String campaignId, bool includeReplies)
+        loadComments,
+    required TResult Function(CampaignCommentEntity comment) addComment,
+    required TResult Function(String campaignId, String commentId)
+        deleteComment,
+    required TResult Function(String parentId) loadCommentReplies,
+    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
+    required TResult Function(String campaignId) loadWithdrawals,
+    required TResult Function(String campaignId) loadCampaignTransparencyData,
+    required TResult Function(String campaignId) loadCampaignUpdates,
+    required TResult Function(String userId) loadUserCampaigns,
+    required TResult Function(String userId, int limit) loadUserDonations,
+    required TResult Function(String campaignId, String bankName,
+            String accountNumber, String accountHolder)
+        updateCampaignBankDetails,
+    required TResult Function(String campaignId, String userId, double amount,
+            String? message, bool isAnonymous)
+        processDonation,
+    required TResult Function() clearTransient,
+  }) {
+    return loadCampaignUpdates(campaignId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? categoryId, int limit)? loadCampaigns,
+    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
+    TResult? Function(String query, String? categoryId, int limit)?
+        searchCampaigns,
+    TResult? Function(String campaignId)? getCampaignDetail,
+    TResult? Function(CampaignEntity campaign)? createCampaign,
+    TResult? Function(CampaignEntity campaign)? updateCampaign,
+    TResult? Function(String campaignId)? deleteCampaign,
+    TResult? Function(String campaignId, String status)? updateCampaignStatus,
+    TResult? Function()? loadCategories,
+    TResult? Function(String campaignId, int limit)? loadDonations,
+    TResult? Function(DonationEntity donation)? createDonation,
+    TResult? Function(String campaignId, bool includeReplies)? loadComments,
+    TResult? Function(CampaignCommentEntity comment)? addComment,
+    TResult? Function(String campaignId, String commentId)? deleteComment,
+    TResult? Function(String parentId)? loadCommentReplies,
+    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
+    TResult? Function(String campaignId)? loadWithdrawals,
+    TResult? Function(String campaignId)? loadCampaignTransparencyData,
+    TResult? Function(String campaignId)? loadCampaignUpdates,
+    TResult? Function(String userId)? loadUserCampaigns,
+    TResult? Function(String userId, int limit)? loadUserDonations,
+    TResult? Function(String campaignId, String bankName, String accountNumber,
+            String accountHolder)?
+        updateCampaignBankDetails,
+    TResult? Function(String campaignId, String userId, double amount,
+            String? message, bool isAnonymous)?
+        processDonation,
+    TResult? Function()? clearTransient,
+  }) {
+    return loadCampaignUpdates?.call(campaignId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? categoryId, int limit)? loadCampaigns,
+    TResult Function(String? categoryId, int limit)? refreshCampaigns,
+    TResult Function(String query, String? categoryId, int limit)?
+        searchCampaigns,
+    TResult Function(String campaignId)? getCampaignDetail,
+    TResult Function(CampaignEntity campaign)? createCampaign,
+    TResult Function(CampaignEntity campaign)? updateCampaign,
+    TResult Function(String campaignId)? deleteCampaign,
+    TResult Function(String campaignId, String status)? updateCampaignStatus,
+    TResult Function()? loadCategories,
+    TResult Function(String campaignId, int limit)? loadDonations,
+    TResult Function(DonationEntity donation)? createDonation,
+    TResult Function(String campaignId, bool includeReplies)? loadComments,
+    TResult Function(CampaignCommentEntity comment)? addComment,
+    TResult Function(String campaignId, String commentId)? deleteComment,
+    TResult Function(String parentId)? loadCommentReplies,
+    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
+    TResult Function(String campaignId)? loadWithdrawals,
+    TResult Function(String campaignId)? loadCampaignTransparencyData,
+    TResult Function(String campaignId)? loadCampaignUpdates,
+    TResult Function(String userId)? loadUserCampaigns,
+    TResult Function(String userId, int limit)? loadUserDonations,
+    TResult Function(String campaignId, String bankName, String accountNumber,
+            String accountHolder)?
+        updateCampaignBankDetails,
+    TResult Function(String campaignId, String userId, double amount,
+            String? message, bool isAnonymous)?
+        processDonation,
+    TResult Function()? clearTransient,
+    required TResult orElse(),
+  }) {
+    if (loadCampaignUpdates != null) {
+      return loadCampaignUpdates(campaignId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
+    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
+    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
+    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
+    required TResult Function(CreateCampaignEvent value) createCampaign,
+    required TResult Function(UpdateCampaignEvent value) updateCampaign,
+    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
+    required TResult Function(UpdateCampaignStatusEvent value)
+        updateCampaignStatus,
+    required TResult Function(LoadCategoriesEvent value) loadCategories,
+    required TResult Function(LoadDonationsEvent value) loadDonations,
+    required TResult Function(CreateDonationEvent value) createDonation,
+    required TResult Function(LoadCommentsEvent value) loadComments,
+    required TResult Function(AddCommentEvent value) addComment,
+    required TResult Function(DeleteCommentEvent value) deleteComment,
+    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
+    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
+    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(LoadCampaignTransparencyDataEvent value)
+        loadCampaignTransparencyData,
+    required TResult Function(LoadCampaignUpdatesEvent value)
+        loadCampaignUpdates,
+    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
+    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
+    required TResult Function(UpdateCampaignBankDetailsEvent value)
+        updateCampaignBankDetails,
+    required TResult Function(ProcessDonationEvent value) processDonation,
+    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
+  }) {
+    return loadCampaignUpdates(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
+    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
+    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
+    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
+    TResult? Function(CreateCampaignEvent value)? createCampaign,
+    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
+    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
+    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
+    TResult? Function(LoadCategoriesEvent value)? loadCategories,
+    TResult? Function(LoadDonationsEvent value)? loadDonations,
+    TResult? Function(CreateDonationEvent value)? createDonation,
+    TResult? Function(LoadCommentsEvent value)? loadComments,
+    TResult? Function(AddCommentEvent value)? addComment,
+    TResult? Function(DeleteCommentEvent value)? deleteComment,
+    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
+    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
+    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
+    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
+    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
+    TResult? Function(UpdateCampaignBankDetailsEvent value)?
+        updateCampaignBankDetails,
+    TResult? Function(ProcessDonationEvent value)? processDonation,
+    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
+  }) {
+    return loadCampaignUpdates?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
+    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
+    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
+    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
+    TResult Function(CreateCampaignEvent value)? createCampaign,
+    TResult Function(UpdateCampaignEvent value)? updateCampaign,
+    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
+    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
+    TResult Function(LoadCategoriesEvent value)? loadCategories,
+    TResult Function(LoadDonationsEvent value)? loadDonations,
+    TResult Function(CreateDonationEvent value)? createDonation,
+    TResult Function(LoadCommentsEvent value)? loadComments,
+    TResult Function(AddCommentEvent value)? addComment,
+    TResult Function(DeleteCommentEvent value)? deleteComment,
+    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
+    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
+    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
+    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
+    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
+    TResult Function(UpdateCampaignBankDetailsEvent value)?
+        updateCampaignBankDetails,
+    TResult Function(ProcessDonationEvent value)? processDonation,
+    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
+    required TResult orElse(),
+  }) {
+    if (loadCampaignUpdates != null) {
+      return loadCampaignUpdates(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LoadCampaignUpdatesEvent implements CampaignEvent {
+  const factory LoadCampaignUpdatesEvent({required final String campaignId}) =
+      _$LoadCampaignUpdatesEventImpl;
+
+  String get campaignId;
+
+  /// Create a copy of CampaignEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LoadCampaignUpdatesEventImplCopyWith<_$LoadCampaignUpdatesEventImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -5280,6 +6179,8 @@ class _$LoadUserCampaignsEventImpl implements LoadUserCampaignsEvent {
     required TResult Function(String parentId) loadCommentReplies,
     required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
     required TResult Function(String campaignId) loadWithdrawals,
+    required TResult Function(String campaignId) loadCampaignTransparencyData,
+    required TResult Function(String campaignId) loadCampaignUpdates,
     required TResult Function(String userId) loadUserCampaigns,
     required TResult Function(String userId, int limit) loadUserDonations,
     required TResult Function(String campaignId, String bankName,
@@ -5314,6 +6215,8 @@ class _$LoadUserCampaignsEventImpl implements LoadUserCampaignsEvent {
     TResult? Function(String parentId)? loadCommentReplies,
     TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult? Function(String campaignId)? loadWithdrawals,
+    TResult? Function(String campaignId)? loadCampaignTransparencyData,
+    TResult? Function(String campaignId)? loadCampaignUpdates,
     TResult? Function(String userId)? loadUserCampaigns,
     TResult? Function(String userId, int limit)? loadUserDonations,
     TResult? Function(String campaignId, String bankName, String accountNumber,
@@ -5348,6 +6251,8 @@ class _$LoadUserCampaignsEventImpl implements LoadUserCampaignsEvent {
     TResult Function(String parentId)? loadCommentReplies,
     TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult Function(String campaignId)? loadWithdrawals,
+    TResult Function(String campaignId)? loadCampaignTransparencyData,
+    TResult Function(String campaignId)? loadCampaignUpdates,
     TResult Function(String userId)? loadUserCampaigns,
     TResult Function(String userId, int limit)? loadUserDonations,
     TResult Function(String campaignId, String bankName, String accountNumber,
@@ -5386,6 +6291,10 @@ class _$LoadUserCampaignsEventImpl implements LoadUserCampaignsEvent {
     required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
     required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
     required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(LoadCampaignTransparencyDataEvent value)
+        loadCampaignTransparencyData,
+    required TResult Function(LoadCampaignUpdatesEvent value)
+        loadCampaignUpdates,
     required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
     required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
     required TResult Function(UpdateCampaignBankDetailsEvent value)
@@ -5416,6 +6325,9 @@ class _$LoadUserCampaignsEventImpl implements LoadUserCampaignsEvent {
     TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult? Function(UpdateCampaignBankDetailsEvent value)?
@@ -5446,6 +6358,9 @@ class _$LoadUserCampaignsEventImpl implements LoadUserCampaignsEvent {
     TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult Function(UpdateCampaignBankDetailsEvent value)?
@@ -5575,6 +6490,8 @@ class _$LoadUserDonationsEventImpl implements LoadUserDonationsEvent {
     required TResult Function(String parentId) loadCommentReplies,
     required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
     required TResult Function(String campaignId) loadWithdrawals,
+    required TResult Function(String campaignId) loadCampaignTransparencyData,
+    required TResult Function(String campaignId) loadCampaignUpdates,
     required TResult Function(String userId) loadUserCampaigns,
     required TResult Function(String userId, int limit) loadUserDonations,
     required TResult Function(String campaignId, String bankName,
@@ -5609,6 +6526,8 @@ class _$LoadUserDonationsEventImpl implements LoadUserDonationsEvent {
     TResult? Function(String parentId)? loadCommentReplies,
     TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult? Function(String campaignId)? loadWithdrawals,
+    TResult? Function(String campaignId)? loadCampaignTransparencyData,
+    TResult? Function(String campaignId)? loadCampaignUpdates,
     TResult? Function(String userId)? loadUserCampaigns,
     TResult? Function(String userId, int limit)? loadUserDonations,
     TResult? Function(String campaignId, String bankName, String accountNumber,
@@ -5643,6 +6562,8 @@ class _$LoadUserDonationsEventImpl implements LoadUserDonationsEvent {
     TResult Function(String parentId)? loadCommentReplies,
     TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult Function(String campaignId)? loadWithdrawals,
+    TResult Function(String campaignId)? loadCampaignTransparencyData,
+    TResult Function(String campaignId)? loadCampaignUpdates,
     TResult Function(String userId)? loadUserCampaigns,
     TResult Function(String userId, int limit)? loadUserDonations,
     TResult Function(String campaignId, String bankName, String accountNumber,
@@ -5681,6 +6602,10 @@ class _$LoadUserDonationsEventImpl implements LoadUserDonationsEvent {
     required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
     required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
     required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(LoadCampaignTransparencyDataEvent value)
+        loadCampaignTransparencyData,
+    required TResult Function(LoadCampaignUpdatesEvent value)
+        loadCampaignUpdates,
     required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
     required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
     required TResult Function(UpdateCampaignBankDetailsEvent value)
@@ -5711,6 +6636,9 @@ class _$LoadUserDonationsEventImpl implements LoadUserDonationsEvent {
     TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult? Function(UpdateCampaignBankDetailsEvent value)?
@@ -5741,6 +6669,9 @@ class _$LoadUserDonationsEventImpl implements LoadUserDonationsEvent {
     TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult Function(UpdateCampaignBankDetailsEvent value)?
@@ -5903,6 +6834,8 @@ class _$UpdateCampaignBankDetailsEventImpl
     required TResult Function(String parentId) loadCommentReplies,
     required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
     required TResult Function(String campaignId) loadWithdrawals,
+    required TResult Function(String campaignId) loadCampaignTransparencyData,
+    required TResult Function(String campaignId) loadCampaignUpdates,
     required TResult Function(String userId) loadUserCampaigns,
     required TResult Function(String userId, int limit) loadUserDonations,
     required TResult Function(String campaignId, String bankName,
@@ -5938,6 +6871,8 @@ class _$UpdateCampaignBankDetailsEventImpl
     TResult? Function(String parentId)? loadCommentReplies,
     TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult? Function(String campaignId)? loadWithdrawals,
+    TResult? Function(String campaignId)? loadCampaignTransparencyData,
+    TResult? Function(String campaignId)? loadCampaignUpdates,
     TResult? Function(String userId)? loadUserCampaigns,
     TResult? Function(String userId, int limit)? loadUserDonations,
     TResult? Function(String campaignId, String bankName, String accountNumber,
@@ -5973,6 +6908,8 @@ class _$UpdateCampaignBankDetailsEventImpl
     TResult Function(String parentId)? loadCommentReplies,
     TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult Function(String campaignId)? loadWithdrawals,
+    TResult Function(String campaignId)? loadCampaignTransparencyData,
+    TResult Function(String campaignId)? loadCampaignUpdates,
     TResult Function(String userId)? loadUserCampaigns,
     TResult Function(String userId, int limit)? loadUserDonations,
     TResult Function(String campaignId, String bankName, String accountNumber,
@@ -6012,6 +6949,10 @@ class _$UpdateCampaignBankDetailsEventImpl
     required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
     required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
     required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(LoadCampaignTransparencyDataEvent value)
+        loadCampaignTransparencyData,
+    required TResult Function(LoadCampaignUpdatesEvent value)
+        loadCampaignUpdates,
     required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
     required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
     required TResult Function(UpdateCampaignBankDetailsEvent value)
@@ -6042,6 +6983,9 @@ class _$UpdateCampaignBankDetailsEventImpl
     TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult? Function(UpdateCampaignBankDetailsEvent value)?
@@ -6072,6 +7016,9 @@ class _$UpdateCampaignBankDetailsEventImpl
     TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult Function(UpdateCampaignBankDetailsEvent value)?
@@ -6245,6 +7192,8 @@ class _$ProcessDonationEventImpl implements ProcessDonationEvent {
     required TResult Function(String parentId) loadCommentReplies,
     required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
     required TResult Function(String campaignId) loadWithdrawals,
+    required TResult Function(String campaignId) loadCampaignTransparencyData,
+    required TResult Function(String campaignId) loadCampaignUpdates,
     required TResult Function(String userId) loadUserCampaigns,
     required TResult Function(String userId, int limit) loadUserDonations,
     required TResult Function(String campaignId, String bankName,
@@ -6279,6 +7228,8 @@ class _$ProcessDonationEventImpl implements ProcessDonationEvent {
     TResult? Function(String parentId)? loadCommentReplies,
     TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult? Function(String campaignId)? loadWithdrawals,
+    TResult? Function(String campaignId)? loadCampaignTransparencyData,
+    TResult? Function(String campaignId)? loadCampaignUpdates,
     TResult? Function(String userId)? loadUserCampaigns,
     TResult? Function(String userId, int limit)? loadUserDonations,
     TResult? Function(String campaignId, String bankName, String accountNumber,
@@ -6314,6 +7265,8 @@ class _$ProcessDonationEventImpl implements ProcessDonationEvent {
     TResult Function(String parentId)? loadCommentReplies,
     TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult Function(String campaignId)? loadWithdrawals,
+    TResult Function(String campaignId)? loadCampaignTransparencyData,
+    TResult Function(String campaignId)? loadCampaignUpdates,
     TResult Function(String userId)? loadUserCampaigns,
     TResult Function(String userId, int limit)? loadUserDonations,
     TResult Function(String campaignId, String bankName, String accountNumber,
@@ -6352,6 +7305,10 @@ class _$ProcessDonationEventImpl implements ProcessDonationEvent {
     required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
     required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
     required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(LoadCampaignTransparencyDataEvent value)
+        loadCampaignTransparencyData,
+    required TResult Function(LoadCampaignUpdatesEvent value)
+        loadCampaignUpdates,
     required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
     required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
     required TResult Function(UpdateCampaignBankDetailsEvent value)
@@ -6382,6 +7339,9 @@ class _$ProcessDonationEventImpl implements ProcessDonationEvent {
     TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult? Function(UpdateCampaignBankDetailsEvent value)?
@@ -6412,6 +7372,9 @@ class _$ProcessDonationEventImpl implements ProcessDonationEvent {
     TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult Function(UpdateCampaignBankDetailsEvent value)?
@@ -6513,6 +7476,8 @@ class _$ClearCampaignTransientEventImpl implements ClearCampaignTransientEvent {
     required TResult Function(String parentId) loadCommentReplies,
     required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
     required TResult Function(String campaignId) loadWithdrawals,
+    required TResult Function(String campaignId) loadCampaignTransparencyData,
+    required TResult Function(String campaignId) loadCampaignUpdates,
     required TResult Function(String userId) loadUserCampaigns,
     required TResult Function(String userId, int limit) loadUserDonations,
     required TResult Function(String campaignId, String bankName,
@@ -6547,6 +7512,8 @@ class _$ClearCampaignTransientEventImpl implements ClearCampaignTransientEvent {
     TResult? Function(String parentId)? loadCommentReplies,
     TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult? Function(String campaignId)? loadWithdrawals,
+    TResult? Function(String campaignId)? loadCampaignTransparencyData,
+    TResult? Function(String campaignId)? loadCampaignUpdates,
     TResult? Function(String userId)? loadUserCampaigns,
     TResult? Function(String userId, int limit)? loadUserDonations,
     TResult? Function(String campaignId, String bankName, String accountNumber,
@@ -6581,6 +7548,8 @@ class _$ClearCampaignTransientEventImpl implements ClearCampaignTransientEvent {
     TResult Function(String parentId)? loadCommentReplies,
     TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
     TResult Function(String campaignId)? loadWithdrawals,
+    TResult Function(String campaignId)? loadCampaignTransparencyData,
+    TResult Function(String campaignId)? loadCampaignUpdates,
     TResult Function(String userId)? loadUserCampaigns,
     TResult Function(String userId, int limit)? loadUserDonations,
     TResult Function(String campaignId, String bankName, String accountNumber,
@@ -6619,6 +7588,10 @@ class _$ClearCampaignTransientEventImpl implements ClearCampaignTransientEvent {
     required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
     required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
     required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(LoadCampaignTransparencyDataEvent value)
+        loadCampaignTransparencyData,
+    required TResult Function(LoadCampaignUpdatesEvent value)
+        loadCampaignUpdates,
     required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
     required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
     required TResult Function(UpdateCampaignBankDetailsEvent value)
@@ -6649,6 +7622,9 @@ class _$ClearCampaignTransientEventImpl implements ClearCampaignTransientEvent {
     TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult? Function(UpdateCampaignBankDetailsEvent value)?
@@ -6679,6 +7655,9 @@ class _$ClearCampaignTransientEventImpl implements ClearCampaignTransientEvent {
     TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
     TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(LoadCampaignTransparencyDataEvent value)?
+        loadCampaignTransparencyData,
+    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
     TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
     TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
     TResult Function(UpdateCampaignBankDetailsEvent value)?

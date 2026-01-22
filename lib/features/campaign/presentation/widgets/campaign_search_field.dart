@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 
 class CampaignSearchField extends StatelessWidget {
-  final VoidCallback onTap;
+  final TextEditingController? controller;
+  final ValueChanged<String>? onChanged;
+  final VoidCallback? onTap;
+  final bool enabled;
 
-  const CampaignSearchField({super.key, required this.onTap});
+  const CampaignSearchField({
+    super.key,
+    this.controller,
+    this.onChanged,
+    this.onTap,
+    this.enabled = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,53 +20,68 @@ class CampaignSearchField extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     final isDark = theme.brightness == Brightness.dark;
 
-    return Semantics(
-      button: true,
-      label: 'Search campaigns, creators, categories',
-      hint: 'Double tap to open search',
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          height: 52,
-          decoration: BoxDecoration(
-            color: isDark
-                ? colorScheme.surfaceContainerHighest
-                : colorScheme.surface,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: isDark
-                  ? colorScheme.outlineVariant.withValues(alpha: 0.3)
-                  : colorScheme.outline.withValues(alpha: 0.1),
-            ),
-            boxShadow: isDark
-                ? null
-                : [
-                    BoxShadow(
-                      color: colorScheme.shadow.withValues(alpha: 0.08),
-                      blurRadius: 16,
-                      offset: const Offset(0, 4),
-                    ),
-                    BoxShadow(
-                      color: colorScheme.shadow.withValues(alpha: 0.04),
-                      blurRadius: 8,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Row(
-            children: [
-              Icon(Icons.search, size: 20, color: colorScheme.onSurfaceVariant),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Text(
-                  'Search campaigns, creators, categories',
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
-                  ),
+    return Container(
+      height: 52,
+      decoration: BoxDecoration(
+        color: isDark
+            ? colorScheme.surfaceContainerHighest
+            : colorScheme.surface,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: isDark
+              ? colorScheme.outlineVariant.withValues(alpha: 0.3)
+              : colorScheme.outline.withValues(alpha: 0.1),
+        ),
+        boxShadow: isDark
+            ? null
+            : [
+                BoxShadow(
+                  color: colorScheme.shadow.withValues(alpha: 0.08),
+                  blurRadius: 16,
+                  offset: const Offset(0, 4),
                 ),
-              ),
-            ],
+                BoxShadow(
+                  color: colorScheme.shadow.withValues(alpha: 0.04),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+      ),
+      child: TextField(
+        controller: controller,
+        onChanged: onChanged,
+        onTap: onTap,
+        enabled: enabled,
+        style: theme.textTheme.bodyMedium?.copyWith(
+          color: colorScheme.onSurface,
+        ),
+        decoration: InputDecoration(
+          hintText: 'Search campaigns, creators, categories',
+          hintStyle: theme.textTheme.bodyMedium?.copyWith(
+            color: colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
+          ),
+          prefixIcon: Icon(
+            Icons.search,
+            size: 20,
+            color: colorScheme.onSurfaceVariant,
+          ),
+          suffixIcon: controller != null && controller!.text.isNotEmpty
+              ? IconButton(
+                  icon: Icon(
+                    Icons.clear,
+                    size: 18,
+                    color: colorScheme.onSurfaceVariant,
+                  ),
+                  onPressed: () {
+                    controller?.clear();
+                    onChanged?.call('');
+                  },
+                )
+              : null,
+          border: InputBorder.none,
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 14,
           ),
         ),
       ),

@@ -52,7 +52,7 @@ class OverviewTabContent extends StatelessWidget {
             icon: Icons.favorite_border,
             title: 'Why It Matters',
             description:
-                '450+ families will gain access to clean water within 5km of their homes, eliminating daily 3-hour water collection trips.',
+                'Your contribution helps make a real difference in the lives of those who need it most. Every donation counts.',
             colorScheme: colorScheme,
             theme: theme,
           ),
@@ -61,7 +61,7 @@ class OverviewTabContent extends StatelessWidget {
             icon: Icons.lightbulb_outline,
             title: 'What Funding Unlocks',
             description:
-                'Three permanent water wells with solar-powered pumps, community training programs, and 5-year maintenance guarantee.',
+                'Funds raised will be used to achieve the campaign goals and milestones outlined by the campaign creator.',
             colorScheme: colorScheme,
             theme: theme,
           ),
@@ -70,7 +70,7 @@ class OverviewTabContent extends StatelessWidget {
             icon: Icons.groups_outlined,
             title: 'Who Benefits',
             description:
-                'Rural communities in 3 villages: Kampung Harapan, Desa Sejahtera, and Kampung Baru. Priority given to families with children.',
+                'The beneficiaries of this campaign as specified by the creator. Check the transparency tab for more details.',
             colorScheme: colorScheme,
             theme: theme,
           ),

@@ -49,7 +49,10 @@ sealed class WalletEvent with _$WalletEvent {
     String? donationId,
   }) = ProcessDonationEvent;
 
-  /// Request withdrawal
+  /// Request withdrawal from wallet
+  ///
+  /// This uses MOCK bank transfer - withdrawal is processed instantly.
+  /// In production, this would go through a real payment gateway.
   const factory WalletEvent.requestWithdrawal({
     required String walletId,
     required double amount,
@@ -61,6 +64,18 @@ sealed class WalletEvent with _$WalletEvent {
     @Default(50) int limit,
     @Default(0) int offset,
   }) = LoadTransactionsEvent;
+
+  /// Load withdrawal history for a wallet
+  const factory WalletEvent.loadWithdrawals({
+    required String walletId,
+  }) = LoadWithdrawalsEvent;
+
+  /// Export transactions to CSV
+  const factory WalletEvent.exportTransactions({
+    required String walletId,
+    DateTime? startDate,
+    DateTime? endDate,
+  }) = ExportTransactionsEvent;
 
   /// Clear transient messages/errors
   const factory WalletEvent.clearTransient() = ClearWalletTransientEvent;

@@ -2,7 +2,11 @@ import 'package:dartz/dartz.dart';
 import 'package:velora/core/errors/failure.dart';
 import 'package:velora/features/campaign/domain/entities/campaign_category_entity.dart';
 import 'package:velora/features/campaign/domain/entities/campaign_comment_entity.dart';
+import 'package:velora/features/campaign/domain/entities/campaign_document_entity.dart';
 import 'package:velora/features/campaign/domain/entities/campaign_entity.dart';
+import 'package:velora/features/campaign/domain/entities/campaign_fund_breakdown_entity.dart';
+import 'package:velora/features/campaign/domain/entities/campaign_milestone_entity.dart';
+import 'package:velora/features/campaign/domain/entities/campaign_proof_item_entity.dart';
 import 'package:velora/features/campaign/domain/entities/campaign_update_entity.dart';
 import 'package:velora/features/campaign/domain/entities/donation_entity.dart';
 import 'package:velora/features/campaign/domain/entities/withdrawal_entity.dart';
@@ -83,4 +87,29 @@ abstract class CampaignRepository {
   Future<Either<Failure, List<WithdrawalEntity>>> getWithdrawalsByUser(
       String userId);
   Future<Either<Failure, WithdrawalEntity?>> getWithdrawalById(String id);
+
+  // ============================================
+  // TRANSPARENCY: DOCUMENTS
+  // ============================================
+  Future<Either<Failure, List<CampaignDocumentEntity>>> getCampaignDocuments(
+      String campaignId);
+
+  // ============================================
+  // TRANSPARENCY: MILESTONES
+  // ============================================
+  Future<Either<Failure, List<CampaignMilestoneEntity>>> getCampaignMilestones(
+      String campaignId);
+
+  // ============================================
+  // TRANSPARENCY: FUND BREAKDOWN
+  // ============================================
+  Future<Either<Failure, List<CampaignFundBreakdownEntity>>>
+      getCampaignFundBreakdown(String campaignId);
+
+  // ============================================
+  // TRANSPARENCY: PROOF ITEMS
+  // ============================================
+  Future<Either<Failure, List<CampaignProofItemEntity>>> getCampaignProofItems(
+      String campaignId);
 }
+

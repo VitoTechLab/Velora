@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velora/core/utils/log_alias.dart';
+import 'package:velora/features/wallet/data/services/wallet_export_service.dart';
 import 'package:velora/features/wallet/domain/entities/wallet_entity.dart';
 import 'package:velora/features/wallet/domain/usecases/confirm_topup_usecase.dart';
 import 'package:velora/features/wallet/domain/usecases/create_wallet_usecase.dart';
@@ -7,6 +8,7 @@ import 'package:velora/features/wallet/domain/usecases/get_main_wallet_usecase.d
 import 'package:velora/features/wallet/domain/usecases/get_user_wallets_usecase.dart';
 import 'package:velora/features/wallet/domain/usecases/get_wallet_by_id_usecase.dart';
 import 'package:velora/features/wallet/domain/usecases/get_wallet_transactions_usecase.dart';
+import 'package:velora/features/wallet/domain/usecases/get_wallet_withdrawals_usecase.dart';
 import 'package:velora/features/wallet/domain/usecases/initiate_topup_usecase.dart';
 import 'package:velora/features/wallet/domain/usecases/process_wallet_donation_usecase.dart';
 import 'package:velora/features/wallet/domain/usecases/request_withdrawal_usecase.dart';
@@ -26,6 +28,8 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
     required ProcessWalletDonationUsecase processWalletDonationUsecase,
     required RequestWithdrawalUsecase requestWithdrawalUsecase,
     required GetWalletTransactionsUsecase getWalletTransactionsUsecase,
+    required GetWalletWithdrawalsUsecase getWalletWithdrawalsUsecase,
+    WalletExportService? exportService,
   })  : _getUserWalletsUsecase = getUserWalletsUsecase,
         _getMainWalletUsecase = getMainWalletUsecase,
         _getWalletByIdUsecase = getWalletByIdUsecase,
@@ -36,6 +40,8 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
         _processWalletDonationUsecase = processWalletDonationUsecase,
         _requestWithdrawalUsecase = requestWithdrawalUsecase,
         _getWalletTransactionsUsecase = getWalletTransactionsUsecase,
+        _getWalletWithdrawalsUsecase = getWalletWithdrawalsUsecase,
+        _exportService = exportService ?? WalletExportService(),
         super(const WalletState()) {
     on<LoadWalletsEvent>(_onLoadWallets);
     on<LoadMainWalletEvent>(_onLoadMainWallet);
@@ -47,6 +53,8 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
     on<ProcessDonationEvent>(_onProcessDonation);
     on<RequestWalletWithdrawalEvent>(_onRequestWithdrawal);
     on<LoadTransactionsEvent>(_onLoadTransactions);
+    on<LoadWithdrawalsEvent>(_onLoadWithdrawals);
+    on<ExportTransactionsEvent>(_onExportTransactions);
     on<ClearWalletTransientEvent>(_onClearTransient);
   }
 
@@ -60,6 +68,8 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
   final ProcessWalletDonationUsecase _processWalletDonationUsecase;
   final RequestWithdrawalUsecase _requestWithdrawalUsecase;
   final GetWalletTransactionsUsecase _getWalletTransactionsUsecase;
+  final GetWalletWithdrawalsUsecase _getWalletWithdrawalsUsecase;
+  final WalletExportService _exportService;
 
   static const _logTag = 'WalletBloc';
 
@@ -465,6 +475,73 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
     );
   }
 
+  // ======================== Withdrawals ========================
+  Future<void> _onLoadWithdrawals(
+    LoadWithdrawalsEvent event,
+    Emitter<WalletState> emit,
+  ) async {
+    final walletId = event.walletId.trim();
+    if (walletId.isEmpty) return;
+
+    logi('Loading withdrawals for wallet: $walletId', tag: _logTag);
+
+    emit(state.copyWith(isLoadingWithdrawals: true, errorWithdrawals: null));
+
+    final result = await _getWalletWithdrawalsUsecase(walletId);
+
+    result.fold(
+      (failure) {
+        emit(state.copyWith(
+          isLoadingWithdrawals: false,
+          errorWithdrawals: failure.message,
+        ));
+      },
+      (withdrawals) {
+        emit(state.copyWith(
+          isLoadingWithdrawals: false,
+          withdrawals: withdrawals,
+        ));
+      },
+    );
+  }
+
+  // ======================== Export ========================
+  Future<void> _onExportTransactions(
+    ExportTransactionsEvent event,
+    Emitter<WalletState> emit,
+  ) async {
+    final walletId = event.walletId.trim();
+    if (walletId.isEmpty) return;
+
+    final wallet = state.selectedWallet ?? state.wallets
+        .where((w) => w.id == walletId)
+        .cast<WalletEntity?>()
+        .firstOrNull;
+
+    if (wallet == null) {
+      emit(state.copyWith(message: 'Wallet not found'));
+      return;
+    }
+
+    logi('Exporting transactions for wallet: $walletId', tag: _logTag);
+
+    emit(state.copyWith(isExporting: true));
+
+    final success = await _exportService.exportTransactionsToCSV(
+      transactions: state.transactions,
+      wallet: wallet,
+      startDate: event.startDate,
+      endDate: event.endDate,
+    );
+
+    emit(state.copyWith(
+      isExporting: false,
+      message: success
+          ? 'Transactions exported successfully'
+          : 'Failed to export transactions',
+    ));
+  }
+
   // ======================== Clear Transient ========================
   void _onClearTransient(
     ClearWalletTransientEvent event,
@@ -475,6 +552,7 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
       errorWallets: null,
       errorWallet: null,
       errorTransactions: null,
+      errorWithdrawals: null,
       errorCreateWallet: null,
       errorBankDetails: null,
       errorTopUp: null,

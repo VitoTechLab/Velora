@@ -7,12 +7,14 @@ class CampaignCategorySection extends StatelessWidget {
   final String categoryName;
   final List<CampaignModel> campaigns;
   final VoidCallback onSeeMore;
+  final void Function(CampaignModel campaign)? onCampaignTap;
 
   const CampaignCategorySection({
     super.key,
     required this.categoryName,
     required this.campaigns,
     required this.onSeeMore,
+    this.onCampaignTap,
   });
 
   @override
@@ -104,6 +106,7 @@ class CampaignCategorySection extends StatelessWidget {
         child: InkWell(
           onTap: () {
             // Navigate to campaign detail
+            onCampaignTap?.call(campaign);
           },
           borderRadius: BorderRadius.circular(16),
           child: Padding(

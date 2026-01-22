@@ -159,7 +159,6 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
         }
 
         final postAuthorId = postData['user_id'] as String;
-        final postAuthorUsername = postData['username'] as String?;
         final wasLiked = postData['is_liked'] as bool? ?? false;
         final mediaUrls = postData['media_urls'] as List<dynamic>?;
         final firstImageUrl = mediaUrls?.isNotEmpty == true 

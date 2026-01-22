@@ -4,6 +4,7 @@ import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/wallet/data/datasources/wallet_remote_datasource.dart';
 import 'package:velora/features/wallet/data/models/wallet_model.dart';
 import 'package:velora/features/wallet/data/models/wallet_transaction_model.dart';
+import 'package:velora/features/wallet/data/models/wallet_withdrawal_model.dart';
 
 class WalletRemoteDataSourceImpl implements WalletRemoteDataSource {
   WalletRemoteDataSourceImpl({required SupabaseClient supabaseClient})
@@ -15,6 +16,7 @@ class WalletRemoteDataSourceImpl implements WalletRemoteDataSource {
   // Table names
   static const _wallets = 'wallets';
   static const _transactions = 'wallet_transactions';
+  static const _withdrawals = 'wallet_withdrawals';
 
   // ============================================
   // WALLET CRUD
@@ -314,5 +316,109 @@ class WalletRemoteDataSourceImpl implements WalletRemoteDataSource {
       'campaign_title': campaigns?['title'],
       'campaign_cover_image_url': campaigns?['cover_image_url'],
     });
+  }
+
+  // ============================================
+  // WITHDRAWALS
+  // ============================================
+  @override
+  Future<List<WalletWithdrawalModel>> getWalletWithdrawals(String walletId) {
+    return guardSupabase(
+      () async {
+        logi('Getting withdrawals for wallet: $walletId', tag: _logTag);
+        final response = await _client
+            .from(_withdrawals)
+            .select()
+            .eq('wallet_id', walletId)
+            .order('created_at', ascending: false);
+        return (response as List)
+            .map((row) => WalletWithdrawalModel.fromJson(row))
+            .toList();
+      },
+      op: 'getWalletWithdrawals',
+      tag: _logTag,
+    );
+  }
+
+  @override
+  Future<WalletWithdrawalModel?> getWithdrawalById(String withdrawalId) {
+    return guardSupabase(
+      () async {
+        logi('Getting withdrawal by id: $withdrawalId', tag: _logTag);
+        final response = await _client
+            .from(_withdrawals)
+            .select()
+            .eq('id', withdrawalId)
+            .maybeSingle();
+        if (response == null) return null;
+        return WalletWithdrawalModel.fromJson(response);
+      },
+      op: 'getWithdrawalById',
+      tag: _logTag,
+    );
+  }
+
+  @override
+  Future<WalletWithdrawalModel> createWithdrawal(
+    WalletWithdrawalModel withdrawal,
+  ) {
+    return guardSupabase(
+      () async {
+        logi('Creating withdrawal for wallet: ${withdrawal.walletId}',
+            tag: _logTag);
+        final insertData = {
+          'wallet_id': withdrawal.walletId,
+          'user_id': withdrawal.userId,
+          'amount': withdrawal.amount,
+          'status': withdrawal.status,
+          'target_bank_name': withdrawal.targetBankName,
+          'target_account_number': withdrawal.targetAccountNumber,
+          'target_account_holder': withdrawal.targetAccountHolder,
+          if (withdrawal.transferReference != null)
+            'transfer_reference': withdrawal.transferReference,
+          if (withdrawal.notes != null) 'notes': withdrawal.notes,
+        };
+        final response = await _client
+            .from(_withdrawals)
+            .insert(insertData)
+            .select()
+            .single();
+        return WalletWithdrawalModel.fromJson(response);
+      },
+      op: 'createWithdrawal',
+      tag: _logTag,
+    );
+  }
+
+  @override
+  Future<WalletWithdrawalModel> updateWithdrawalStatus({
+    required String withdrawalId,
+    required String status,
+    String? transferReference,
+    String? notes,
+    DateTime? processedAt,
+  }) {
+    return guardSupabase(
+      () async {
+        logi('Updating withdrawal status: $withdrawalId -> $status',
+            tag: _logTag);
+        final updateData = <String, dynamic>{
+          'status': status,
+          if (transferReference != null) 'transfer_reference': transferReference,
+          if (notes != null) 'notes': notes,
+          if (processedAt != null)
+            'processed_at': processedAt.toIso8601String(),
+        };
+        final response = await _client
+            .from(_withdrawals)
+            .update(updateData)
+            .eq('id', withdrawalId)
+            .select()
+            .single();
+        return WalletWithdrawalModel.fromJson(response);
+      },
+      op: 'updateWithdrawalStatus',
+      tag: _logTag,
+    );
   }
 }

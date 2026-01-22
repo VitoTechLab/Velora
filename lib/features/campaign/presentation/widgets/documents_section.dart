@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../domain/entities/campaign_detail_model.dart';
+import '../../domain/entities/campaign_document_entity.dart';
 import 'status_chip.dart';
 
 class DocumentsSection extends StatelessWidget {
-  final List<DocumentModel> documents;
+  final List<CampaignDocumentEntity> documents;
 
   const DocumentsSection({super.key, required this.documents});
 
@@ -70,7 +70,7 @@ class DocumentsSection extends StatelessWidget {
 }
 
 class _DocumentCard extends StatelessWidget {
-  final DocumentModel document;
+  final CampaignDocumentEntity document;
   final ColorScheme colorScheme;
   final ThemeData theme;
 

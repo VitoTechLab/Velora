@@ -9,9 +9,11 @@ import 'package:velora/features/feed/domain/entities/feed_pagination_result.dart
 import 'package:velora/features/feed/domain/usecases/delete_post_usecase.dart';
 import 'package:velora/features/feed/domain/usecases/get_feed_usecase.dart';
 import 'package:velora/features/feed/domain/usecases/get_post_by_id_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/stop_watch_feed_usecase.dart';
 import 'package:velora/features/feed/domain/usecases/toggle_bookmark_post_usecase.dart';
 import 'package:velora/features/feed/domain/usecases/toggle_like_post_usecase.dart';
 import 'package:velora/features/feed/domain/usecases/update_post_usecase.dart';
+import 'package:velora/features/feed/domain/usecases/watch_feed_changes_usecase.dart';
 import 'package:velora/features/feed/presentation/bloc/feed_bloc.dart';
 import 'package:velora/features/feed/presentation/bloc/feed_event.dart';
 import 'package:velora/features/feed/presentation/bloc/feed_state.dart';
@@ -29,6 +31,10 @@ class _MockGetPostById extends Mock implements GetPostByIdUseCase {}
 class _MockUpdatePost extends Mock implements UpdatePostUseCase {}
 
 class _MockDeletePost extends Mock implements DeletePostUseCase {}
+
+class _MockWatchFeedChanges extends Mock implements WatchFeedChangesUseCase {}
+
+class _MockStopWatchFeed extends Mock implements StopWatchFeedUseCase {}
 
 void main() {
   setUpAll(() {
@@ -51,6 +57,8 @@ void main() {
   late _MockGetPostById getPostById;
   late _MockUpdatePost updatePost;
   late _MockDeletePost deletePost;
+  late _MockWatchFeedChanges watchFeedChanges;
+  late _MockStopWatchFeed stopWatchFeed;
 
   final post = FeedEntity(
     id: 'post-1',
@@ -69,6 +77,8 @@ void main() {
       getPostByIdUseCase: getPostById,
       updatePostUseCase: updatePost,
       deletePostUseCase: deletePost,
+      watchFeedChangesUseCase: watchFeedChanges,
+      stopWatchFeedUseCase: stopWatchFeed,
     );
   }
 
@@ -80,6 +90,8 @@ void main() {
     getPostById = _MockGetPostById();
     updatePost = _MockUpdatePost();
     deletePost = _MockDeletePost();
+    watchFeedChanges = _MockWatchFeedChanges();
+    stopWatchFeed = _MockStopWatchFeed();
   });
 
   group('LoadInitialFeedEvent', () {

@@ -31,6 +31,11 @@ mixin _$WalletState {
       throw _privateConstructorUsedError;
   bool get isLoadingTransactions => throw _privateConstructorUsedError;
   String? get errorTransactions =>
+      throw _privateConstructorUsedError; // Withdrawal history for selected wallet
+  List<WalletWithdrawalEntity> get withdrawals =>
+      throw _privateConstructorUsedError;
+  bool get isLoadingWithdrawals => throw _privateConstructorUsedError;
+  String? get errorWithdrawals =>
       throw _privateConstructorUsedError; // Operation states
   bool get isCreatingWallet => throw _privateConstructorUsedError;
   String? get errorCreateWallet => throw _privateConstructorUsedError;
@@ -42,6 +47,8 @@ mixin _$WalletState {
   String? get errorDonation => throw _privateConstructorUsedError;
   bool get isProcessingWithdrawal => throw _privateConstructorUsedError;
   String? get errorWithdrawal =>
+      throw _privateConstructorUsedError; // Export state
+  bool get isExporting =>
       throw _privateConstructorUsedError; // Success messages
   String? get message => throw _privateConstructorUsedError;
 
@@ -69,6 +76,9 @@ abstract class $WalletStateCopyWith<$Res> {
       List<WalletTransactionEntity> transactions,
       bool isLoadingTransactions,
       String? errorTransactions,
+      List<WalletWithdrawalEntity> withdrawals,
+      bool isLoadingWithdrawals,
+      String? errorWithdrawals,
       bool isCreatingWallet,
       String? errorCreateWallet,
       bool isUpdatingBankDetails,
@@ -79,6 +89,7 @@ abstract class $WalletStateCopyWith<$Res> {
       String? errorDonation,
       bool isProcessingWithdrawal,
       String? errorWithdrawal,
+      bool isExporting,
       String? message});
 
   $WalletEntityCopyWith<$Res>? get mainWallet;
@@ -110,6 +121,9 @@ class _$WalletStateCopyWithImpl<$Res, $Val extends WalletState>
     Object? transactions = null,
     Object? isLoadingTransactions = null,
     Object? errorTransactions = freezed,
+    Object? withdrawals = null,
+    Object? isLoadingWithdrawals = null,
+    Object? errorWithdrawals = freezed,
     Object? isCreatingWallet = null,
     Object? errorCreateWallet = freezed,
     Object? isUpdatingBankDetails = null,
@@ -120,6 +134,7 @@ class _$WalletStateCopyWithImpl<$Res, $Val extends WalletState>
     Object? errorDonation = freezed,
     Object? isProcessingWithdrawal = null,
     Object? errorWithdrawal = freezed,
+    Object? isExporting = null,
     Object? message = freezed,
   }) {
     return _then(_value.copyWith(
@@ -163,6 +178,18 @@ class _$WalletStateCopyWithImpl<$Res, $Val extends WalletState>
           ? _value.errorTransactions
           : errorTransactions // ignore: cast_nullable_to_non_nullable
               as String?,
+      withdrawals: null == withdrawals
+          ? _value.withdrawals
+          : withdrawals // ignore: cast_nullable_to_non_nullable
+              as List<WalletWithdrawalEntity>,
+      isLoadingWithdrawals: null == isLoadingWithdrawals
+          ? _value.isLoadingWithdrawals
+          : isLoadingWithdrawals // ignore: cast_nullable_to_non_nullable
+              as bool,
+      errorWithdrawals: freezed == errorWithdrawals
+          ? _value.errorWithdrawals
+          : errorWithdrawals // ignore: cast_nullable_to_non_nullable
+              as String?,
       isCreatingWallet: null == isCreatingWallet
           ? _value.isCreatingWallet
           : isCreatingWallet // ignore: cast_nullable_to_non_nullable
@@ -203,6 +230,10 @@ class _$WalletStateCopyWithImpl<$Res, $Val extends WalletState>
           ? _value.errorWithdrawal
           : errorWithdrawal // ignore: cast_nullable_to_non_nullable
               as String?,
+      isExporting: null == isExporting
+          ? _value.isExporting
+          : isExporting // ignore: cast_nullable_to_non_nullable
+              as bool,
       message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -258,6 +289,9 @@ abstract class _$$WalletStateImplCopyWith<$Res>
       List<WalletTransactionEntity> transactions,
       bool isLoadingTransactions,
       String? errorTransactions,
+      List<WalletWithdrawalEntity> withdrawals,
+      bool isLoadingWithdrawals,
+      String? errorWithdrawals,
       bool isCreatingWallet,
       String? errorCreateWallet,
       bool isUpdatingBankDetails,
@@ -268,6 +302,7 @@ abstract class _$$WalletStateImplCopyWith<$Res>
       String? errorDonation,
       bool isProcessingWithdrawal,
       String? errorWithdrawal,
+      bool isExporting,
       String? message});
 
   @override
@@ -299,6 +334,9 @@ class __$$WalletStateImplCopyWithImpl<$Res>
     Object? transactions = null,
     Object? isLoadingTransactions = null,
     Object? errorTransactions = freezed,
+    Object? withdrawals = null,
+    Object? isLoadingWithdrawals = null,
+    Object? errorWithdrawals = freezed,
     Object? isCreatingWallet = null,
     Object? errorCreateWallet = freezed,
     Object? isUpdatingBankDetails = null,
@@ -309,6 +347,7 @@ class __$$WalletStateImplCopyWithImpl<$Res>
     Object? errorDonation = freezed,
     Object? isProcessingWithdrawal = null,
     Object? errorWithdrawal = freezed,
+    Object? isExporting = null,
     Object? message = freezed,
   }) {
     return _then(_$WalletStateImpl(
@@ -352,6 +391,18 @@ class __$$WalletStateImplCopyWithImpl<$Res>
           ? _value.errorTransactions
           : errorTransactions // ignore: cast_nullable_to_non_nullable
               as String?,
+      withdrawals: null == withdrawals
+          ? _value._withdrawals
+          : withdrawals // ignore: cast_nullable_to_non_nullable
+              as List<WalletWithdrawalEntity>,
+      isLoadingWithdrawals: null == isLoadingWithdrawals
+          ? _value.isLoadingWithdrawals
+          : isLoadingWithdrawals // ignore: cast_nullable_to_non_nullable
+              as bool,
+      errorWithdrawals: freezed == errorWithdrawals
+          ? _value.errorWithdrawals
+          : errorWithdrawals // ignore: cast_nullable_to_non_nullable
+              as String?,
       isCreatingWallet: null == isCreatingWallet
           ? _value.isCreatingWallet
           : isCreatingWallet // ignore: cast_nullable_to_non_nullable
@@ -392,6 +443,10 @@ class __$$WalletStateImplCopyWithImpl<$Res>
           ? _value.errorWithdrawal
           : errorWithdrawal // ignore: cast_nullable_to_non_nullable
               as String?,
+      isExporting: null == isExporting
+          ? _value.isExporting
+          : isExporting // ignore: cast_nullable_to_non_nullable
+              as bool,
       message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -415,6 +470,10 @@ class _$WalletStateImpl extends _WalletState {
           const <WalletTransactionEntity>[],
       this.isLoadingTransactions = false,
       this.errorTransactions,
+      final List<WalletWithdrawalEntity> withdrawals =
+          const <WalletWithdrawalEntity>[],
+      this.isLoadingWithdrawals = false,
+      this.errorWithdrawals,
       this.isCreatingWallet = false,
       this.errorCreateWallet,
       this.isUpdatingBankDetails = false,
@@ -425,9 +484,11 @@ class _$WalletStateImpl extends _WalletState {
       this.errorDonation,
       this.isProcessingWithdrawal = false,
       this.errorWithdrawal,
+      this.isExporting = false,
       this.message})
       : _wallets = wallets,
         _transactions = transactions,
+        _withdrawals = withdrawals,
         super._();
 
 // All wallets for user
@@ -473,6 +534,22 @@ class _$WalletStateImpl extends _WalletState {
   final bool isLoadingTransactions;
   @override
   final String? errorTransactions;
+// Withdrawal history for selected wallet
+  final List<WalletWithdrawalEntity> _withdrawals;
+// Withdrawal history for selected wallet
+  @override
+  @JsonKey()
+  List<WalletWithdrawalEntity> get withdrawals {
+    if (_withdrawals is EqualUnmodifiableListView) return _withdrawals;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_withdrawals);
+  }
+
+  @override
+  @JsonKey()
+  final bool isLoadingWithdrawals;
+  @override
+  final String? errorWithdrawals;
 // Operation states
   @override
   @JsonKey()
@@ -499,13 +576,17 @@ class _$WalletStateImpl extends _WalletState {
   final bool isProcessingWithdrawal;
   @override
   final String? errorWithdrawal;
+// Export state
+  @override
+  @JsonKey()
+  final bool isExporting;
 // Success messages
   @override
   final String? message;
 
   @override
   String toString() {
-    return 'WalletState(wallets: $wallets, isLoadingWallets: $isLoadingWallets, errorWallets: $errorWallets, mainWallet: $mainWallet, selectedWallet: $selectedWallet, isLoadingWallet: $isLoadingWallet, errorWallet: $errorWallet, transactions: $transactions, isLoadingTransactions: $isLoadingTransactions, errorTransactions: $errorTransactions, isCreatingWallet: $isCreatingWallet, errorCreateWallet: $errorCreateWallet, isUpdatingBankDetails: $isUpdatingBankDetails, errorBankDetails: $errorBankDetails, isProcessingTopUp: $isProcessingTopUp, errorTopUp: $errorTopUp, isProcessingDonation: $isProcessingDonation, errorDonation: $errorDonation, isProcessingWithdrawal: $isProcessingWithdrawal, errorWithdrawal: $errorWithdrawal, message: $message)';
+    return 'WalletState(wallets: $wallets, isLoadingWallets: $isLoadingWallets, errorWallets: $errorWallets, mainWallet: $mainWallet, selectedWallet: $selectedWallet, isLoadingWallet: $isLoadingWallet, errorWallet: $errorWallet, transactions: $transactions, isLoadingTransactions: $isLoadingTransactions, errorTransactions: $errorTransactions, withdrawals: $withdrawals, isLoadingWithdrawals: $isLoadingWithdrawals, errorWithdrawals: $errorWithdrawals, isCreatingWallet: $isCreatingWallet, errorCreateWallet: $errorCreateWallet, isUpdatingBankDetails: $isUpdatingBankDetails, errorBankDetails: $errorBankDetails, isProcessingTopUp: $isProcessingTopUp, errorTopUp: $errorTopUp, isProcessingDonation: $isProcessingDonation, errorDonation: $errorDonation, isProcessingWithdrawal: $isProcessingWithdrawal, errorWithdrawal: $errorWithdrawal, isExporting: $isExporting, message: $message)';
   }
 
   @override
@@ -532,6 +613,12 @@ class _$WalletStateImpl extends _WalletState {
                 other.isLoadingTransactions == isLoadingTransactions) &&
             (identical(other.errorTransactions, errorTransactions) ||
                 other.errorTransactions == errorTransactions) &&
+            const DeepCollectionEquality()
+                .equals(other._withdrawals, _withdrawals) &&
+            (identical(other.isLoadingWithdrawals, isLoadingWithdrawals) ||
+                other.isLoadingWithdrawals == isLoadingWithdrawals) &&
+            (identical(other.errorWithdrawals, errorWithdrawals) ||
+                other.errorWithdrawals == errorWithdrawals) &&
             (identical(other.isCreatingWallet, isCreatingWallet) ||
                 other.isCreatingWallet == isCreatingWallet) &&
             (identical(other.errorCreateWallet, errorCreateWallet) ||
@@ -552,6 +639,8 @@ class _$WalletStateImpl extends _WalletState {
                 other.isProcessingWithdrawal == isProcessingWithdrawal) &&
             (identical(other.errorWithdrawal, errorWithdrawal) ||
                 other.errorWithdrawal == errorWithdrawal) &&
+            (identical(other.isExporting, isExporting) ||
+                other.isExporting == isExporting) &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -568,6 +657,9 @@ class _$WalletStateImpl extends _WalletState {
         const DeepCollectionEquality().hash(_transactions),
         isLoadingTransactions,
         errorTransactions,
+        const DeepCollectionEquality().hash(_withdrawals),
+        isLoadingWithdrawals,
+        errorWithdrawals,
         isCreatingWallet,
         errorCreateWallet,
         isUpdatingBankDetails,
@@ -578,6 +670,7 @@ class _$WalletStateImpl extends _WalletState {
         errorDonation,
         isProcessingWithdrawal,
         errorWithdrawal,
+        isExporting,
         message
       ]);
 
@@ -602,6 +695,9 @@ abstract class _WalletState extends WalletState {
       final List<WalletTransactionEntity> transactions,
       final bool isLoadingTransactions,
       final String? errorTransactions,
+      final List<WalletWithdrawalEntity> withdrawals,
+      final bool isLoadingWithdrawals,
+      final String? errorWithdrawals,
       final bool isCreatingWallet,
       final String? errorCreateWallet,
       final bool isUpdatingBankDetails,
@@ -612,6 +708,7 @@ abstract class _WalletState extends WalletState {
       final String? errorDonation,
       final bool isProcessingWithdrawal,
       final String? errorWithdrawal,
+      final bool isExporting,
       final String? message}) = _$WalletStateImpl;
   const _WalletState._() : super._();
 
@@ -636,7 +733,13 @@ abstract class _WalletState extends WalletState {
   @override
   bool get isLoadingTransactions;
   @override
-  String? get errorTransactions; // Operation states
+  String? get errorTransactions; // Withdrawal history for selected wallet
+  @override
+  List<WalletWithdrawalEntity> get withdrawals;
+  @override
+  bool get isLoadingWithdrawals;
+  @override
+  String? get errorWithdrawals; // Operation states
   @override
   bool get isCreatingWallet;
   @override
@@ -656,7 +759,9 @@ abstract class _WalletState extends WalletState {
   @override
   bool get isProcessingWithdrawal;
   @override
-  String? get errorWithdrawal; // Success messages
+  String? get errorWithdrawal; // Export state
+  @override
+  bool get isExporting; // Success messages
   @override
   String? get message;
 

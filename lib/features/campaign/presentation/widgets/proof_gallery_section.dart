@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../domain/entities/campaign_detail_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import '../../domain/entities/campaign_proof_item_entity.dart';
 
 class ProofGallerySection extends StatelessWidget {
-  final List<ProofItem> proofItems;
+  final List<CampaignProofItemEntity> proofItems;
 
   const ProofGallerySection({super.key, required this.proofItems});
 
@@ -62,7 +63,7 @@ class ProofGallerySection extends StatelessWidget {
 }
 
 class _ProofCard extends StatelessWidget {
-  final ProofItem item;
+  final CampaignProofItemEntity item;
   final ColorScheme colorScheme;
   final ThemeData theme;
 
@@ -92,25 +93,19 @@ class _ProofCard extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             // Gradient placeholder
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    colorScheme.primaryContainer,
-                    colorScheme.secondaryContainer,
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+            // Background Image or Gradient placeholder
+            if (item.mediaUrl.isNotEmpty)
+              CachedNetworkImage(
+                imageUrl: item.mediaUrl,
+                fit: BoxFit.cover,
+                placeholder: (context, url) => Container(
+                  color: colorScheme.surfaceContainerHigh,
+                  child: const Center(child: CircularProgressIndicator()),
                 ),
-              ),
-              child: Center(
-                child: Icon(
-                  Icons.photo_camera_outlined,
-                  size: 32,
-                  color: colorScheme.onPrimaryContainer.withValues(alpha: 0.5),
-                ),
-              ),
-            ),
+                errorWidget: (context, url, error) => _buildPlaceholder(colorScheme),
+              )
+            else
+              _buildPlaceholder(colorScheme),
             // Caption overlay
             Positioned(
               bottom: 0,
@@ -129,7 +124,7 @@ class _ProofCard extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  item.caption,
+                  item.caption ?? '',
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: Colors.white,
                     fontWeight: FontWeight.w600,
@@ -140,6 +135,28 @@ class _ProofCard extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPlaceholder(ColorScheme colorScheme) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            colorScheme.primaryContainer,
+            colorScheme.secondaryContainer,
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+      ),
+      child: Center(
+        child: Icon(
+          Icons.photo_camera_outlined,
+          size: 32,
+          color: colorScheme.onPrimaryContainer.withValues(alpha: 0.5),
         ),
       ),
     );

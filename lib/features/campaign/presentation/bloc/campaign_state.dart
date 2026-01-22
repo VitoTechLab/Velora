@@ -4,6 +4,11 @@ import 'package:velora/features/campaign/domain/entities/campaign_comment_entity
 import 'package:velora/features/campaign/domain/entities/campaign_entity.dart';
 import 'package:velora/features/campaign/domain/entities/donation_entity.dart';
 import 'package:velora/features/campaign/domain/entities/withdrawal_entity.dart';
+import 'package:velora/features/campaign/domain/entities/campaign_document_entity.dart';
+import 'package:velora/features/campaign/domain/entities/campaign_milestone_entity.dart';
+import 'package:velora/features/campaign/domain/entities/campaign_fund_breakdown_entity.dart';
+import 'package:velora/features/campaign/domain/entities/campaign_proof_item_entity.dart';
+import 'package:velora/features/campaign/domain/entities/campaign_update_entity.dart';
 
 part 'campaign_state.freezed.dart';
 
@@ -27,6 +32,11 @@ abstract class CampaignState with _$CampaignState {
     @Default(false) bool isLoadingCategories,
     String? errorCategories,
 
+    // Search results
+    @Default(<CampaignEntity>[]) List<CampaignEntity> searchResults,
+    @Default(false) bool isSearching,
+    String? errorSearch,
+
     // Donations for current campaign
     @Default(<DonationEntity>[]) List<DonationEntity> donations,
     @Default(false) bool isLoadingDonations,
@@ -41,6 +51,28 @@ abstract class CampaignState with _$CampaignState {
     @Default(<WithdrawalEntity>[]) List<WithdrawalEntity> withdrawals,
     @Default(false) bool isLoadingWithdrawals,
     String? errorWithdrawals,
+
+    // Transparency Data
+    @Default(<CampaignDocumentEntity>[]) List<CampaignDocumentEntity> campaignDocuments,
+    @Default(false) bool isLoadingDocuments,
+    String? errorDocuments,
+
+    @Default(<CampaignMilestoneEntity>[]) List<CampaignMilestoneEntity> campaignMilestones,
+    @Default(false) bool isLoadingMilestones,
+    String? errorMilestones,
+
+    @Default(<CampaignFundBreakdownEntity>[]) List<CampaignFundBreakdownEntity> campaignFundBreakdown,
+    @Default(false) bool isLoadingFundBreakdown,
+    String? errorFundBreakdown,
+
+    @Default(<CampaignProofItemEntity>[]) List<CampaignProofItemEntity> campaignProofItems,
+    @Default(false) bool isLoadingProofItems,
+    String? errorProofItems,
+
+    // Campaign Updates
+    @Default(<CampaignUpdateEntity>[]) List<CampaignUpdateEntity> campaignUpdates,
+    @Default(false) bool isLoadingUpdates,
+    String? errorUpdates,
 
     // User's own campaigns (for My Campaigns screen)
     @Default(<CampaignEntity>[]) List<CampaignEntity> userCampaigns,

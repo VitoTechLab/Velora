@@ -36,6 +36,10 @@ mixin _$WalletEvent {
     required TResult Function(String walletId, double amount) requestWithdrawal,
     required TResult Function(String walletId, int limit, int offset)
         loadTransactions,
+    required TResult Function(String walletId) loadWithdrawals,
+    required TResult Function(
+            String walletId, DateTime? startDate, DateTime? endDate)
+        exportTransactions,
     required TResult Function() clearTransient,
   }) =>
       throw _privateConstructorUsedError;
@@ -56,6 +60,9 @@ mixin _$WalletEvent {
         processDonation,
     TResult? Function(String walletId, double amount)? requestWithdrawal,
     TResult? Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult? Function(String walletId)? loadWithdrawals,
+    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
     TResult? Function()? clearTransient,
   }) =>
       throw _privateConstructorUsedError;
@@ -76,6 +83,9 @@ mixin _$WalletEvent {
         processDonation,
     TResult Function(String walletId, double amount)? requestWithdrawal,
     TResult Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult Function(String walletId)? loadWithdrawals,
+    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
     TResult Function()? clearTransient,
     required TResult orElse(),
   }) =>
@@ -93,6 +103,8 @@ mixin _$WalletEvent {
     required TResult Function(RequestWalletWithdrawalEvent value)
         requestWithdrawal,
     required TResult Function(LoadTransactionsEvent value) loadTransactions,
+    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(ExportTransactionsEvent value) exportTransactions,
     required TResult Function(ClearWalletTransientEvent value) clearTransient,
   }) =>
       throw _privateConstructorUsedError;
@@ -108,6 +120,8 @@ mixin _$WalletEvent {
     TResult? Function(ProcessDonationEvent value)? processDonation,
     TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
     TResult? Function(ClearWalletTransientEvent value)? clearTransient,
   }) =>
       throw _privateConstructorUsedError;
@@ -123,6 +137,8 @@ mixin _$WalletEvent {
     TResult Function(ProcessDonationEvent value)? processDonation,
     TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(ExportTransactionsEvent value)? exportTransactions,
     TResult Function(ClearWalletTransientEvent value)? clearTransient,
     required TResult orElse(),
   }) =>
@@ -237,6 +253,10 @@ class _$LoadWalletsEventImpl implements LoadWalletsEvent {
     required TResult Function(String walletId, double amount) requestWithdrawal,
     required TResult Function(String walletId, int limit, int offset)
         loadTransactions,
+    required TResult Function(String walletId) loadWithdrawals,
+    required TResult Function(
+            String walletId, DateTime? startDate, DateTime? endDate)
+        exportTransactions,
     required TResult Function() clearTransient,
   }) {
     return loadWallets(userId);
@@ -260,6 +280,9 @@ class _$LoadWalletsEventImpl implements LoadWalletsEvent {
         processDonation,
     TResult? Function(String walletId, double amount)? requestWithdrawal,
     TResult? Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult? Function(String walletId)? loadWithdrawals,
+    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
     TResult? Function()? clearTransient,
   }) {
     return loadWallets?.call(userId);
@@ -283,6 +306,9 @@ class _$LoadWalletsEventImpl implements LoadWalletsEvent {
         processDonation,
     TResult Function(String walletId, double amount)? requestWithdrawal,
     TResult Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult Function(String walletId)? loadWithdrawals,
+    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
     TResult Function()? clearTransient,
     required TResult orElse(),
   }) {
@@ -306,6 +332,8 @@ class _$LoadWalletsEventImpl implements LoadWalletsEvent {
     required TResult Function(RequestWalletWithdrawalEvent value)
         requestWithdrawal,
     required TResult Function(LoadTransactionsEvent value) loadTransactions,
+    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(ExportTransactionsEvent value) exportTransactions,
     required TResult Function(ClearWalletTransientEvent value) clearTransient,
   }) {
     return loadWallets(this);
@@ -324,6 +352,8 @@ class _$LoadWalletsEventImpl implements LoadWalletsEvent {
     TResult? Function(ProcessDonationEvent value)? processDonation,
     TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
     TResult? Function(ClearWalletTransientEvent value)? clearTransient,
   }) {
     return loadWallets?.call(this);
@@ -342,6 +372,8 @@ class _$LoadWalletsEventImpl implements LoadWalletsEvent {
     TResult Function(ProcessDonationEvent value)? processDonation,
     TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(ExportTransactionsEvent value)? exportTransactions,
     TResult Function(ClearWalletTransientEvent value)? clearTransient,
     required TResult orElse(),
   }) {
@@ -452,6 +484,10 @@ class _$LoadMainWalletEventImpl implements LoadMainWalletEvent {
     required TResult Function(String walletId, double amount) requestWithdrawal,
     required TResult Function(String walletId, int limit, int offset)
         loadTransactions,
+    required TResult Function(String walletId) loadWithdrawals,
+    required TResult Function(
+            String walletId, DateTime? startDate, DateTime? endDate)
+        exportTransactions,
     required TResult Function() clearTransient,
   }) {
     return loadMainWallet(userId);
@@ -475,6 +511,9 @@ class _$LoadMainWalletEventImpl implements LoadMainWalletEvent {
         processDonation,
     TResult? Function(String walletId, double amount)? requestWithdrawal,
     TResult? Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult? Function(String walletId)? loadWithdrawals,
+    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
     TResult? Function()? clearTransient,
   }) {
     return loadMainWallet?.call(userId);
@@ -498,6 +537,9 @@ class _$LoadMainWalletEventImpl implements LoadMainWalletEvent {
         processDonation,
     TResult Function(String walletId, double amount)? requestWithdrawal,
     TResult Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult Function(String walletId)? loadWithdrawals,
+    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
     TResult Function()? clearTransient,
     required TResult orElse(),
   }) {
@@ -521,6 +563,8 @@ class _$LoadMainWalletEventImpl implements LoadMainWalletEvent {
     required TResult Function(RequestWalletWithdrawalEvent value)
         requestWithdrawal,
     required TResult Function(LoadTransactionsEvent value) loadTransactions,
+    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(ExportTransactionsEvent value) exportTransactions,
     required TResult Function(ClearWalletTransientEvent value) clearTransient,
   }) {
     return loadMainWallet(this);
@@ -539,6 +583,8 @@ class _$LoadMainWalletEventImpl implements LoadMainWalletEvent {
     TResult? Function(ProcessDonationEvent value)? processDonation,
     TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
     TResult? Function(ClearWalletTransientEvent value)? clearTransient,
   }) {
     return loadMainWallet?.call(this);
@@ -557,6 +603,8 @@ class _$LoadMainWalletEventImpl implements LoadMainWalletEvent {
     TResult Function(ProcessDonationEvent value)? processDonation,
     TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(ExportTransactionsEvent value)? exportTransactions,
     TResult Function(ClearWalletTransientEvent value)? clearTransient,
     required TResult orElse(),
   }) {
@@ -668,6 +716,10 @@ class _$LoadWalletEventImpl implements LoadWalletEvent {
     required TResult Function(String walletId, double amount) requestWithdrawal,
     required TResult Function(String walletId, int limit, int offset)
         loadTransactions,
+    required TResult Function(String walletId) loadWithdrawals,
+    required TResult Function(
+            String walletId, DateTime? startDate, DateTime? endDate)
+        exportTransactions,
     required TResult Function() clearTransient,
   }) {
     return loadWallet(walletId);
@@ -691,6 +743,9 @@ class _$LoadWalletEventImpl implements LoadWalletEvent {
         processDonation,
     TResult? Function(String walletId, double amount)? requestWithdrawal,
     TResult? Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult? Function(String walletId)? loadWithdrawals,
+    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
     TResult? Function()? clearTransient,
   }) {
     return loadWallet?.call(walletId);
@@ -714,6 +769,9 @@ class _$LoadWalletEventImpl implements LoadWalletEvent {
         processDonation,
     TResult Function(String walletId, double amount)? requestWithdrawal,
     TResult Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult Function(String walletId)? loadWithdrawals,
+    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
     TResult Function()? clearTransient,
     required TResult orElse(),
   }) {
@@ -737,6 +795,8 @@ class _$LoadWalletEventImpl implements LoadWalletEvent {
     required TResult Function(RequestWalletWithdrawalEvent value)
         requestWithdrawal,
     required TResult Function(LoadTransactionsEvent value) loadTransactions,
+    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(ExportTransactionsEvent value) exportTransactions,
     required TResult Function(ClearWalletTransientEvent value) clearTransient,
   }) {
     return loadWallet(this);
@@ -755,6 +815,8 @@ class _$LoadWalletEventImpl implements LoadWalletEvent {
     TResult? Function(ProcessDonationEvent value)? processDonation,
     TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
     TResult? Function(ClearWalletTransientEvent value)? clearTransient,
   }) {
     return loadWallet?.call(this);
@@ -773,6 +835,8 @@ class _$LoadWalletEventImpl implements LoadWalletEvent {
     TResult Function(ProcessDonationEvent value)? processDonation,
     TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(ExportTransactionsEvent value)? exportTransactions,
     TResult Function(ClearWalletTransientEvent value)? clearTransient,
     required TResult orElse(),
   }) {
@@ -884,6 +948,10 @@ class _$CreateMainWalletEventImpl implements CreateMainWalletEvent {
     required TResult Function(String walletId, double amount) requestWithdrawal,
     required TResult Function(String walletId, int limit, int offset)
         loadTransactions,
+    required TResult Function(String walletId) loadWithdrawals,
+    required TResult Function(
+            String walletId, DateTime? startDate, DateTime? endDate)
+        exportTransactions,
     required TResult Function() clearTransient,
   }) {
     return createMainWallet(userId);
@@ -907,6 +975,9 @@ class _$CreateMainWalletEventImpl implements CreateMainWalletEvent {
         processDonation,
     TResult? Function(String walletId, double amount)? requestWithdrawal,
     TResult? Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult? Function(String walletId)? loadWithdrawals,
+    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
     TResult? Function()? clearTransient,
   }) {
     return createMainWallet?.call(userId);
@@ -930,6 +1001,9 @@ class _$CreateMainWalletEventImpl implements CreateMainWalletEvent {
         processDonation,
     TResult Function(String walletId, double amount)? requestWithdrawal,
     TResult Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult Function(String walletId)? loadWithdrawals,
+    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
     TResult Function()? clearTransient,
     required TResult orElse(),
   }) {
@@ -953,6 +1027,8 @@ class _$CreateMainWalletEventImpl implements CreateMainWalletEvent {
     required TResult Function(RequestWalletWithdrawalEvent value)
         requestWithdrawal,
     required TResult Function(LoadTransactionsEvent value) loadTransactions,
+    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(ExportTransactionsEvent value) exportTransactions,
     required TResult Function(ClearWalletTransientEvent value) clearTransient,
   }) {
     return createMainWallet(this);
@@ -971,6 +1047,8 @@ class _$CreateMainWalletEventImpl implements CreateMainWalletEvent {
     TResult? Function(ProcessDonationEvent value)? processDonation,
     TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
     TResult? Function(ClearWalletTransientEvent value)? clearTransient,
   }) {
     return createMainWallet?.call(this);
@@ -989,6 +1067,8 @@ class _$CreateMainWalletEventImpl implements CreateMainWalletEvent {
     TResult Function(ProcessDonationEvent value)? processDonation,
     TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(ExportTransactionsEvent value)? exportTransactions,
     TResult Function(ClearWalletTransientEvent value)? clearTransient,
     required TResult orElse(),
   }) {
@@ -1138,6 +1218,10 @@ class _$UpdateBankDetailsEventImpl implements UpdateBankDetailsEvent {
     required TResult Function(String walletId, double amount) requestWithdrawal,
     required TResult Function(String walletId, int limit, int offset)
         loadTransactions,
+    required TResult Function(String walletId) loadWithdrawals,
+    required TResult Function(
+            String walletId, DateTime? startDate, DateTime? endDate)
+        exportTransactions,
     required TResult Function() clearTransient,
   }) {
     return updateBankDetails(
@@ -1162,6 +1246,9 @@ class _$UpdateBankDetailsEventImpl implements UpdateBankDetailsEvent {
         processDonation,
     TResult? Function(String walletId, double amount)? requestWithdrawal,
     TResult? Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult? Function(String walletId)? loadWithdrawals,
+    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
     TResult? Function()? clearTransient,
   }) {
     return updateBankDetails?.call(
@@ -1186,6 +1273,9 @@ class _$UpdateBankDetailsEventImpl implements UpdateBankDetailsEvent {
         processDonation,
     TResult Function(String walletId, double amount)? requestWithdrawal,
     TResult Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult Function(String walletId)? loadWithdrawals,
+    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
     TResult Function()? clearTransient,
     required TResult orElse(),
   }) {
@@ -1210,6 +1300,8 @@ class _$UpdateBankDetailsEventImpl implements UpdateBankDetailsEvent {
     required TResult Function(RequestWalletWithdrawalEvent value)
         requestWithdrawal,
     required TResult Function(LoadTransactionsEvent value) loadTransactions,
+    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(ExportTransactionsEvent value) exportTransactions,
     required TResult Function(ClearWalletTransientEvent value) clearTransient,
   }) {
     return updateBankDetails(this);
@@ -1228,6 +1320,8 @@ class _$UpdateBankDetailsEventImpl implements UpdateBankDetailsEvent {
     TResult? Function(ProcessDonationEvent value)? processDonation,
     TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
     TResult? Function(ClearWalletTransientEvent value)? clearTransient,
   }) {
     return updateBankDetails?.call(this);
@@ -1246,6 +1340,8 @@ class _$UpdateBankDetailsEventImpl implements UpdateBankDetailsEvent {
     TResult Function(ProcessDonationEvent value)? processDonation,
     TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(ExportTransactionsEvent value)? exportTransactions,
     TResult Function(ClearWalletTransientEvent value)? clearTransient,
     required TResult orElse(),
   }) {
@@ -1381,6 +1477,10 @@ class _$InitiateTopUpEventImpl implements InitiateTopUpEvent {
     required TResult Function(String walletId, double amount) requestWithdrawal,
     required TResult Function(String walletId, int limit, int offset)
         loadTransactions,
+    required TResult Function(String walletId) loadWithdrawals,
+    required TResult Function(
+            String walletId, DateTime? startDate, DateTime? endDate)
+        exportTransactions,
     required TResult Function() clearTransient,
   }) {
     return initiateTopUp(walletId, amount, paymentMethod);
@@ -1404,6 +1504,9 @@ class _$InitiateTopUpEventImpl implements InitiateTopUpEvent {
         processDonation,
     TResult? Function(String walletId, double amount)? requestWithdrawal,
     TResult? Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult? Function(String walletId)? loadWithdrawals,
+    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
     TResult? Function()? clearTransient,
   }) {
     return initiateTopUp?.call(walletId, amount, paymentMethod);
@@ -1427,6 +1530,9 @@ class _$InitiateTopUpEventImpl implements InitiateTopUpEvent {
         processDonation,
     TResult Function(String walletId, double amount)? requestWithdrawal,
     TResult Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult Function(String walletId)? loadWithdrawals,
+    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
     TResult Function()? clearTransient,
     required TResult orElse(),
   }) {
@@ -1450,6 +1556,8 @@ class _$InitiateTopUpEventImpl implements InitiateTopUpEvent {
     required TResult Function(RequestWalletWithdrawalEvent value)
         requestWithdrawal,
     required TResult Function(LoadTransactionsEvent value) loadTransactions,
+    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(ExportTransactionsEvent value) exportTransactions,
     required TResult Function(ClearWalletTransientEvent value) clearTransient,
   }) {
     return initiateTopUp(this);
@@ -1468,6 +1576,8 @@ class _$InitiateTopUpEventImpl implements InitiateTopUpEvent {
     TResult? Function(ProcessDonationEvent value)? processDonation,
     TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
     TResult? Function(ClearWalletTransientEvent value)? clearTransient,
   }) {
     return initiateTopUp?.call(this);
@@ -1486,6 +1596,8 @@ class _$InitiateTopUpEventImpl implements InitiateTopUpEvent {
     TResult Function(ProcessDonationEvent value)? processDonation,
     TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(ExportTransactionsEvent value)? exportTransactions,
     TResult Function(ClearWalletTransientEvent value)? clearTransient,
     required TResult orElse(),
   }) {
@@ -1611,6 +1723,10 @@ class _$ConfirmTopUpEventImpl implements ConfirmTopUpEvent {
     required TResult Function(String walletId, double amount) requestWithdrawal,
     required TResult Function(String walletId, int limit, int offset)
         loadTransactions,
+    required TResult Function(String walletId) loadWithdrawals,
+    required TResult Function(
+            String walletId, DateTime? startDate, DateTime? endDate)
+        exportTransactions,
     required TResult Function() clearTransient,
   }) {
     return confirmTopUp(transactionId, paymentId);
@@ -1634,6 +1750,9 @@ class _$ConfirmTopUpEventImpl implements ConfirmTopUpEvent {
         processDonation,
     TResult? Function(String walletId, double amount)? requestWithdrawal,
     TResult? Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult? Function(String walletId)? loadWithdrawals,
+    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
     TResult? Function()? clearTransient,
   }) {
     return confirmTopUp?.call(transactionId, paymentId);
@@ -1657,6 +1776,9 @@ class _$ConfirmTopUpEventImpl implements ConfirmTopUpEvent {
         processDonation,
     TResult Function(String walletId, double amount)? requestWithdrawal,
     TResult Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult Function(String walletId)? loadWithdrawals,
+    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
     TResult Function()? clearTransient,
     required TResult orElse(),
   }) {
@@ -1680,6 +1802,8 @@ class _$ConfirmTopUpEventImpl implements ConfirmTopUpEvent {
     required TResult Function(RequestWalletWithdrawalEvent value)
         requestWithdrawal,
     required TResult Function(LoadTransactionsEvent value) loadTransactions,
+    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(ExportTransactionsEvent value) exportTransactions,
     required TResult Function(ClearWalletTransientEvent value) clearTransient,
   }) {
     return confirmTopUp(this);
@@ -1698,6 +1822,8 @@ class _$ConfirmTopUpEventImpl implements ConfirmTopUpEvent {
     TResult? Function(ProcessDonationEvent value)? processDonation,
     TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
     TResult? Function(ClearWalletTransientEvent value)? clearTransient,
   }) {
     return confirmTopUp?.call(this);
@@ -1716,6 +1842,8 @@ class _$ConfirmTopUpEventImpl implements ConfirmTopUpEvent {
     TResult Function(ProcessDonationEvent value)? processDonation,
     TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(ExportTransactionsEvent value)? exportTransactions,
     TResult Function(ClearWalletTransientEvent value)? clearTransient,
     required TResult orElse(),
   }) {
@@ -1865,6 +1993,10 @@ class _$ProcessDonationEventImpl implements ProcessDonationEvent {
     required TResult Function(String walletId, double amount) requestWithdrawal,
     required TResult Function(String walletId, int limit, int offset)
         loadTransactions,
+    required TResult Function(String walletId) loadWithdrawals,
+    required TResult Function(
+            String walletId, DateTime? startDate, DateTime? endDate)
+        exportTransactions,
     required TResult Function() clearTransient,
   }) {
     return processDonation(fromWalletId, toCampaignId, amount, donationId);
@@ -1888,6 +2020,9 @@ class _$ProcessDonationEventImpl implements ProcessDonationEvent {
         processDonation,
     TResult? Function(String walletId, double amount)? requestWithdrawal,
     TResult? Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult? Function(String walletId)? loadWithdrawals,
+    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
     TResult? Function()? clearTransient,
   }) {
     return processDonation?.call(
@@ -1912,6 +2047,9 @@ class _$ProcessDonationEventImpl implements ProcessDonationEvent {
         processDonation,
     TResult Function(String walletId, double amount)? requestWithdrawal,
     TResult Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult Function(String walletId)? loadWithdrawals,
+    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
     TResult Function()? clearTransient,
     required TResult orElse(),
   }) {
@@ -1935,6 +2073,8 @@ class _$ProcessDonationEventImpl implements ProcessDonationEvent {
     required TResult Function(RequestWalletWithdrawalEvent value)
         requestWithdrawal,
     required TResult Function(LoadTransactionsEvent value) loadTransactions,
+    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(ExportTransactionsEvent value) exportTransactions,
     required TResult Function(ClearWalletTransientEvent value) clearTransient,
   }) {
     return processDonation(this);
@@ -1953,6 +2093,8 @@ class _$ProcessDonationEventImpl implements ProcessDonationEvent {
     TResult? Function(ProcessDonationEvent value)? processDonation,
     TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
     TResult? Function(ClearWalletTransientEvent value)? clearTransient,
   }) {
     return processDonation?.call(this);
@@ -1971,6 +2113,8 @@ class _$ProcessDonationEventImpl implements ProcessDonationEvent {
     TResult Function(ProcessDonationEvent value)? processDonation,
     TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(ExportTransactionsEvent value)? exportTransactions,
     TResult Function(ClearWalletTransientEvent value)? clearTransient,
     required TResult orElse(),
   }) {
@@ -2101,6 +2245,10 @@ class _$RequestWalletWithdrawalEventImpl
     required TResult Function(String walletId, double amount) requestWithdrawal,
     required TResult Function(String walletId, int limit, int offset)
         loadTransactions,
+    required TResult Function(String walletId) loadWithdrawals,
+    required TResult Function(
+            String walletId, DateTime? startDate, DateTime? endDate)
+        exportTransactions,
     required TResult Function() clearTransient,
   }) {
     return requestWithdrawal(walletId, amount);
@@ -2124,6 +2272,9 @@ class _$RequestWalletWithdrawalEventImpl
         processDonation,
     TResult? Function(String walletId, double amount)? requestWithdrawal,
     TResult? Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult? Function(String walletId)? loadWithdrawals,
+    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
     TResult? Function()? clearTransient,
   }) {
     return requestWithdrawal?.call(walletId, amount);
@@ -2147,6 +2298,9 @@ class _$RequestWalletWithdrawalEventImpl
         processDonation,
     TResult Function(String walletId, double amount)? requestWithdrawal,
     TResult Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult Function(String walletId)? loadWithdrawals,
+    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
     TResult Function()? clearTransient,
     required TResult orElse(),
   }) {
@@ -2170,6 +2324,8 @@ class _$RequestWalletWithdrawalEventImpl
     required TResult Function(RequestWalletWithdrawalEvent value)
         requestWithdrawal,
     required TResult Function(LoadTransactionsEvent value) loadTransactions,
+    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(ExportTransactionsEvent value) exportTransactions,
     required TResult Function(ClearWalletTransientEvent value) clearTransient,
   }) {
     return requestWithdrawal(this);
@@ -2188,6 +2344,8 @@ class _$RequestWalletWithdrawalEventImpl
     TResult? Function(ProcessDonationEvent value)? processDonation,
     TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
     TResult? Function(ClearWalletTransientEvent value)? clearTransient,
   }) {
     return requestWithdrawal?.call(this);
@@ -2206,6 +2364,8 @@ class _$RequestWalletWithdrawalEventImpl
     TResult Function(ProcessDonationEvent value)? processDonation,
     TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(ExportTransactionsEvent value)? exportTransactions,
     TResult Function(ClearWalletTransientEvent value)? clearTransient,
     required TResult orElse(),
   }) {
@@ -2340,6 +2500,10 @@ class _$LoadTransactionsEventImpl implements LoadTransactionsEvent {
     required TResult Function(String walletId, double amount) requestWithdrawal,
     required TResult Function(String walletId, int limit, int offset)
         loadTransactions,
+    required TResult Function(String walletId) loadWithdrawals,
+    required TResult Function(
+            String walletId, DateTime? startDate, DateTime? endDate)
+        exportTransactions,
     required TResult Function() clearTransient,
   }) {
     return loadTransactions(walletId, limit, offset);
@@ -2363,6 +2527,9 @@ class _$LoadTransactionsEventImpl implements LoadTransactionsEvent {
         processDonation,
     TResult? Function(String walletId, double amount)? requestWithdrawal,
     TResult? Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult? Function(String walletId)? loadWithdrawals,
+    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
     TResult? Function()? clearTransient,
   }) {
     return loadTransactions?.call(walletId, limit, offset);
@@ -2386,6 +2553,9 @@ class _$LoadTransactionsEventImpl implements LoadTransactionsEvent {
         processDonation,
     TResult Function(String walletId, double amount)? requestWithdrawal,
     TResult Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult Function(String walletId)? loadWithdrawals,
+    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
     TResult Function()? clearTransient,
     required TResult orElse(),
   }) {
@@ -2409,6 +2579,8 @@ class _$LoadTransactionsEventImpl implements LoadTransactionsEvent {
     required TResult Function(RequestWalletWithdrawalEvent value)
         requestWithdrawal,
     required TResult Function(LoadTransactionsEvent value) loadTransactions,
+    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(ExportTransactionsEvent value) exportTransactions,
     required TResult Function(ClearWalletTransientEvent value) clearTransient,
   }) {
     return loadTransactions(this);
@@ -2427,6 +2599,8 @@ class _$LoadTransactionsEventImpl implements LoadTransactionsEvent {
     TResult? Function(ProcessDonationEvent value)? processDonation,
     TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
     TResult? Function(ClearWalletTransientEvent value)? clearTransient,
   }) {
     return loadTransactions?.call(this);
@@ -2445,6 +2619,8 @@ class _$LoadTransactionsEventImpl implements LoadTransactionsEvent {
     TResult Function(ProcessDonationEvent value)? processDonation,
     TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(ExportTransactionsEvent value)? exportTransactions,
     TResult Function(ClearWalletTransientEvent value)? clearTransient,
     required TResult orElse(),
   }) {
@@ -2469,6 +2645,495 @@ abstract class LoadTransactionsEvent implements WalletEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadTransactionsEventImplCopyWith<_$LoadTransactionsEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoadWithdrawalsEventImplCopyWith<$Res> {
+  factory _$$LoadWithdrawalsEventImplCopyWith(_$LoadWithdrawalsEventImpl value,
+          $Res Function(_$LoadWithdrawalsEventImpl) then) =
+      __$$LoadWithdrawalsEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String walletId});
+}
+
+/// @nodoc
+class __$$LoadWithdrawalsEventImplCopyWithImpl<$Res>
+    extends _$WalletEventCopyWithImpl<$Res, _$LoadWithdrawalsEventImpl>
+    implements _$$LoadWithdrawalsEventImplCopyWith<$Res> {
+  __$$LoadWithdrawalsEventImplCopyWithImpl(_$LoadWithdrawalsEventImpl _value,
+      $Res Function(_$LoadWithdrawalsEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of WalletEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? walletId = null,
+  }) {
+    return _then(_$LoadWithdrawalsEventImpl(
+      walletId: null == walletId
+          ? _value.walletId
+          : walletId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$LoadWithdrawalsEventImpl implements LoadWithdrawalsEvent {
+  const _$LoadWithdrawalsEventImpl({required this.walletId});
+
+  @override
+  final String walletId;
+
+  @override
+  String toString() {
+    return 'WalletEvent.loadWithdrawals(walletId: $walletId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoadWithdrawalsEventImpl &&
+            (identical(other.walletId, walletId) ||
+                other.walletId == walletId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, walletId);
+
+  /// Create a copy of WalletEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadWithdrawalsEventImplCopyWith<_$LoadWithdrawalsEventImpl>
+      get copyWith =>
+          __$$LoadWithdrawalsEventImplCopyWithImpl<_$LoadWithdrawalsEventImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId) loadWallets,
+    required TResult Function(String userId) loadMainWallet,
+    required TResult Function(String walletId) loadWallet,
+    required TResult Function(String userId) createMainWallet,
+    required TResult Function(String walletId, String bankName,
+            String bankAccountNumber, String bankAccountHolder)
+        updateBankDetails,
+    required TResult Function(
+            String walletId, double amount, String? paymentMethod)
+        initiateTopUp,
+    required TResult Function(String transactionId, String paymentId)
+        confirmTopUp,
+    required TResult Function(String fromWalletId, String toCampaignId,
+            double amount, String? donationId)
+        processDonation,
+    required TResult Function(String walletId, double amount) requestWithdrawal,
+    required TResult Function(String walletId, int limit, int offset)
+        loadTransactions,
+    required TResult Function(String walletId) loadWithdrawals,
+    required TResult Function(
+            String walletId, DateTime? startDate, DateTime? endDate)
+        exportTransactions,
+    required TResult Function() clearTransient,
+  }) {
+    return loadWithdrawals(walletId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId)? loadWallets,
+    TResult? Function(String userId)? loadMainWallet,
+    TResult? Function(String walletId)? loadWallet,
+    TResult? Function(String userId)? createMainWallet,
+    TResult? Function(String walletId, String bankName,
+            String bankAccountNumber, String bankAccountHolder)?
+        updateBankDetails,
+    TResult? Function(String walletId, double amount, String? paymentMethod)?
+        initiateTopUp,
+    TResult? Function(String transactionId, String paymentId)? confirmTopUp,
+    TResult? Function(String fromWalletId, String toCampaignId, double amount,
+            String? donationId)?
+        processDonation,
+    TResult? Function(String walletId, double amount)? requestWithdrawal,
+    TResult? Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult? Function(String walletId)? loadWithdrawals,
+    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
+    TResult? Function()? clearTransient,
+  }) {
+    return loadWithdrawals?.call(walletId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId)? loadWallets,
+    TResult Function(String userId)? loadMainWallet,
+    TResult Function(String walletId)? loadWallet,
+    TResult Function(String userId)? createMainWallet,
+    TResult Function(String walletId, String bankName, String bankAccountNumber,
+            String bankAccountHolder)?
+        updateBankDetails,
+    TResult Function(String walletId, double amount, String? paymentMethod)?
+        initiateTopUp,
+    TResult Function(String transactionId, String paymentId)? confirmTopUp,
+    TResult Function(String fromWalletId, String toCampaignId, double amount,
+            String? donationId)?
+        processDonation,
+    TResult Function(String walletId, double amount)? requestWithdrawal,
+    TResult Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult Function(String walletId)? loadWithdrawals,
+    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
+    TResult Function()? clearTransient,
+    required TResult orElse(),
+  }) {
+    if (loadWithdrawals != null) {
+      return loadWithdrawals(walletId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadWalletsEvent value) loadWallets,
+    required TResult Function(LoadMainWalletEvent value) loadMainWallet,
+    required TResult Function(LoadWalletEvent value) loadWallet,
+    required TResult Function(CreateMainWalletEvent value) createMainWallet,
+    required TResult Function(UpdateBankDetailsEvent value) updateBankDetails,
+    required TResult Function(InitiateTopUpEvent value) initiateTopUp,
+    required TResult Function(ConfirmTopUpEvent value) confirmTopUp,
+    required TResult Function(ProcessDonationEvent value) processDonation,
+    required TResult Function(RequestWalletWithdrawalEvent value)
+        requestWithdrawal,
+    required TResult Function(LoadTransactionsEvent value) loadTransactions,
+    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(ExportTransactionsEvent value) exportTransactions,
+    required TResult Function(ClearWalletTransientEvent value) clearTransient,
+  }) {
+    return loadWithdrawals(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadWalletsEvent value)? loadWallets,
+    TResult? Function(LoadMainWalletEvent value)? loadMainWallet,
+    TResult? Function(LoadWalletEvent value)? loadWallet,
+    TResult? Function(CreateMainWalletEvent value)? createMainWallet,
+    TResult? Function(UpdateBankDetailsEvent value)? updateBankDetails,
+    TResult? Function(InitiateTopUpEvent value)? initiateTopUp,
+    TResult? Function(ConfirmTopUpEvent value)? confirmTopUp,
+    TResult? Function(ProcessDonationEvent value)? processDonation,
+    TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
+    TResult? Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
+    TResult? Function(ClearWalletTransientEvent value)? clearTransient,
+  }) {
+    return loadWithdrawals?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadWalletsEvent value)? loadWallets,
+    TResult Function(LoadMainWalletEvent value)? loadMainWallet,
+    TResult Function(LoadWalletEvent value)? loadWallet,
+    TResult Function(CreateMainWalletEvent value)? createMainWallet,
+    TResult Function(UpdateBankDetailsEvent value)? updateBankDetails,
+    TResult Function(InitiateTopUpEvent value)? initiateTopUp,
+    TResult Function(ConfirmTopUpEvent value)? confirmTopUp,
+    TResult Function(ProcessDonationEvent value)? processDonation,
+    TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
+    TResult Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(ExportTransactionsEvent value)? exportTransactions,
+    TResult Function(ClearWalletTransientEvent value)? clearTransient,
+    required TResult orElse(),
+  }) {
+    if (loadWithdrawals != null) {
+      return loadWithdrawals(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LoadWithdrawalsEvent implements WalletEvent {
+  const factory LoadWithdrawalsEvent({required final String walletId}) =
+      _$LoadWithdrawalsEventImpl;
+
+  String get walletId;
+
+  /// Create a copy of WalletEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LoadWithdrawalsEventImplCopyWith<_$LoadWithdrawalsEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ExportTransactionsEventImplCopyWith<$Res> {
+  factory _$$ExportTransactionsEventImplCopyWith(
+          _$ExportTransactionsEventImpl value,
+          $Res Function(_$ExportTransactionsEventImpl) then) =
+      __$$ExportTransactionsEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String walletId, DateTime? startDate, DateTime? endDate});
+}
+
+/// @nodoc
+class __$$ExportTransactionsEventImplCopyWithImpl<$Res>
+    extends _$WalletEventCopyWithImpl<$Res, _$ExportTransactionsEventImpl>
+    implements _$$ExportTransactionsEventImplCopyWith<$Res> {
+  __$$ExportTransactionsEventImplCopyWithImpl(
+      _$ExportTransactionsEventImpl _value,
+      $Res Function(_$ExportTransactionsEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of WalletEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? walletId = null,
+    Object? startDate = freezed,
+    Object? endDate = freezed,
+  }) {
+    return _then(_$ExportTransactionsEventImpl(
+      walletId: null == walletId
+          ? _value.walletId
+          : walletId // ignore: cast_nullable_to_non_nullable
+              as String,
+      startDate: freezed == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      endDate: freezed == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ExportTransactionsEventImpl implements ExportTransactionsEvent {
+  const _$ExportTransactionsEventImpl(
+      {required this.walletId, this.startDate, this.endDate});
+
+  @override
+  final String walletId;
+  @override
+  final DateTime? startDate;
+  @override
+  final DateTime? endDate;
+
+  @override
+  String toString() {
+    return 'WalletEvent.exportTransactions(walletId: $walletId, startDate: $startDate, endDate: $endDate)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ExportTransactionsEventImpl &&
+            (identical(other.walletId, walletId) ||
+                other.walletId == walletId) &&
+            (identical(other.startDate, startDate) ||
+                other.startDate == startDate) &&
+            (identical(other.endDate, endDate) || other.endDate == endDate));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, walletId, startDate, endDate);
+
+  /// Create a copy of WalletEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ExportTransactionsEventImplCopyWith<_$ExportTransactionsEventImpl>
+      get copyWith => __$$ExportTransactionsEventImplCopyWithImpl<
+          _$ExportTransactionsEventImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId) loadWallets,
+    required TResult Function(String userId) loadMainWallet,
+    required TResult Function(String walletId) loadWallet,
+    required TResult Function(String userId) createMainWallet,
+    required TResult Function(String walletId, String bankName,
+            String bankAccountNumber, String bankAccountHolder)
+        updateBankDetails,
+    required TResult Function(
+            String walletId, double amount, String? paymentMethod)
+        initiateTopUp,
+    required TResult Function(String transactionId, String paymentId)
+        confirmTopUp,
+    required TResult Function(String fromWalletId, String toCampaignId,
+            double amount, String? donationId)
+        processDonation,
+    required TResult Function(String walletId, double amount) requestWithdrawal,
+    required TResult Function(String walletId, int limit, int offset)
+        loadTransactions,
+    required TResult Function(String walletId) loadWithdrawals,
+    required TResult Function(
+            String walletId, DateTime? startDate, DateTime? endDate)
+        exportTransactions,
+    required TResult Function() clearTransient,
+  }) {
+    return exportTransactions(walletId, startDate, endDate);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId)? loadWallets,
+    TResult? Function(String userId)? loadMainWallet,
+    TResult? Function(String walletId)? loadWallet,
+    TResult? Function(String userId)? createMainWallet,
+    TResult? Function(String walletId, String bankName,
+            String bankAccountNumber, String bankAccountHolder)?
+        updateBankDetails,
+    TResult? Function(String walletId, double amount, String? paymentMethod)?
+        initiateTopUp,
+    TResult? Function(String transactionId, String paymentId)? confirmTopUp,
+    TResult? Function(String fromWalletId, String toCampaignId, double amount,
+            String? donationId)?
+        processDonation,
+    TResult? Function(String walletId, double amount)? requestWithdrawal,
+    TResult? Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult? Function(String walletId)? loadWithdrawals,
+    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
+    TResult? Function()? clearTransient,
+  }) {
+    return exportTransactions?.call(walletId, startDate, endDate);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId)? loadWallets,
+    TResult Function(String userId)? loadMainWallet,
+    TResult Function(String walletId)? loadWallet,
+    TResult Function(String userId)? createMainWallet,
+    TResult Function(String walletId, String bankName, String bankAccountNumber,
+            String bankAccountHolder)?
+        updateBankDetails,
+    TResult Function(String walletId, double amount, String? paymentMethod)?
+        initiateTopUp,
+    TResult Function(String transactionId, String paymentId)? confirmTopUp,
+    TResult Function(String fromWalletId, String toCampaignId, double amount,
+            String? donationId)?
+        processDonation,
+    TResult Function(String walletId, double amount)? requestWithdrawal,
+    TResult Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult Function(String walletId)? loadWithdrawals,
+    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
+    TResult Function()? clearTransient,
+    required TResult orElse(),
+  }) {
+    if (exportTransactions != null) {
+      return exportTransactions(walletId, startDate, endDate);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadWalletsEvent value) loadWallets,
+    required TResult Function(LoadMainWalletEvent value) loadMainWallet,
+    required TResult Function(LoadWalletEvent value) loadWallet,
+    required TResult Function(CreateMainWalletEvent value) createMainWallet,
+    required TResult Function(UpdateBankDetailsEvent value) updateBankDetails,
+    required TResult Function(InitiateTopUpEvent value) initiateTopUp,
+    required TResult Function(ConfirmTopUpEvent value) confirmTopUp,
+    required TResult Function(ProcessDonationEvent value) processDonation,
+    required TResult Function(RequestWalletWithdrawalEvent value)
+        requestWithdrawal,
+    required TResult Function(LoadTransactionsEvent value) loadTransactions,
+    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(ExportTransactionsEvent value) exportTransactions,
+    required TResult Function(ClearWalletTransientEvent value) clearTransient,
+  }) {
+    return exportTransactions(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadWalletsEvent value)? loadWallets,
+    TResult? Function(LoadMainWalletEvent value)? loadMainWallet,
+    TResult? Function(LoadWalletEvent value)? loadWallet,
+    TResult? Function(CreateMainWalletEvent value)? createMainWallet,
+    TResult? Function(UpdateBankDetailsEvent value)? updateBankDetails,
+    TResult? Function(InitiateTopUpEvent value)? initiateTopUp,
+    TResult? Function(ConfirmTopUpEvent value)? confirmTopUp,
+    TResult? Function(ProcessDonationEvent value)? processDonation,
+    TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
+    TResult? Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
+    TResult? Function(ClearWalletTransientEvent value)? clearTransient,
+  }) {
+    return exportTransactions?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadWalletsEvent value)? loadWallets,
+    TResult Function(LoadMainWalletEvent value)? loadMainWallet,
+    TResult Function(LoadWalletEvent value)? loadWallet,
+    TResult Function(CreateMainWalletEvent value)? createMainWallet,
+    TResult Function(UpdateBankDetailsEvent value)? updateBankDetails,
+    TResult Function(InitiateTopUpEvent value)? initiateTopUp,
+    TResult Function(ConfirmTopUpEvent value)? confirmTopUp,
+    TResult Function(ProcessDonationEvent value)? processDonation,
+    TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
+    TResult Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(ExportTransactionsEvent value)? exportTransactions,
+    TResult Function(ClearWalletTransientEvent value)? clearTransient,
+    required TResult orElse(),
+  }) {
+    if (exportTransactions != null) {
+      return exportTransactions(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ExportTransactionsEvent implements WalletEvent {
+  const factory ExportTransactionsEvent(
+      {required final String walletId,
+      final DateTime? startDate,
+      final DateTime? endDate}) = _$ExportTransactionsEventImpl;
+
+  String get walletId;
+  DateTime? get startDate;
+  DateTime? get endDate;
+
+  /// Create a copy of WalletEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ExportTransactionsEventImplCopyWith<_$ExportTransactionsEventImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -2534,6 +3199,10 @@ class _$ClearWalletTransientEventImpl implements ClearWalletTransientEvent {
     required TResult Function(String walletId, double amount) requestWithdrawal,
     required TResult Function(String walletId, int limit, int offset)
         loadTransactions,
+    required TResult Function(String walletId) loadWithdrawals,
+    required TResult Function(
+            String walletId, DateTime? startDate, DateTime? endDate)
+        exportTransactions,
     required TResult Function() clearTransient,
   }) {
     return clearTransient();
@@ -2557,6 +3226,9 @@ class _$ClearWalletTransientEventImpl implements ClearWalletTransientEvent {
         processDonation,
     TResult? Function(String walletId, double amount)? requestWithdrawal,
     TResult? Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult? Function(String walletId)? loadWithdrawals,
+    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
     TResult? Function()? clearTransient,
   }) {
     return clearTransient?.call();
@@ -2580,6 +3252,9 @@ class _$ClearWalletTransientEventImpl implements ClearWalletTransientEvent {
         processDonation,
     TResult Function(String walletId, double amount)? requestWithdrawal,
     TResult Function(String walletId, int limit, int offset)? loadTransactions,
+    TResult Function(String walletId)? loadWithdrawals,
+    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
+        exportTransactions,
     TResult Function()? clearTransient,
     required TResult orElse(),
   }) {
@@ -2603,6 +3278,8 @@ class _$ClearWalletTransientEventImpl implements ClearWalletTransientEvent {
     required TResult Function(RequestWalletWithdrawalEvent value)
         requestWithdrawal,
     required TResult Function(LoadTransactionsEvent value) loadTransactions,
+    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
+    required TResult Function(ExportTransactionsEvent value) exportTransactions,
     required TResult Function(ClearWalletTransientEvent value) clearTransient,
   }) {
     return clearTransient(this);
@@ -2621,6 +3298,8 @@ class _$ClearWalletTransientEventImpl implements ClearWalletTransientEvent {
     TResult? Function(ProcessDonationEvent value)? processDonation,
     TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
     TResult? Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
     TResult? Function(ClearWalletTransientEvent value)? clearTransient,
   }) {
     return clearTransient?.call(this);
@@ -2639,6 +3318,8 @@ class _$ClearWalletTransientEventImpl implements ClearWalletTransientEvent {
     TResult Function(ProcessDonationEvent value)? processDonation,
     TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
     TResult Function(LoadTransactionsEvent value)? loadTransactions,
+    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
+    TResult Function(ExportTransactionsEvent value)? exportTransactions,
     TResult Function(ClearWalletTransientEvent value)? clearTransient,
     required TResult orElse(),
   }) {

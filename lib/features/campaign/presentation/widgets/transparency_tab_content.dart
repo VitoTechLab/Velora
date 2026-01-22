@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../domain/entities/campaign_detail_model.dart';
+import '../../domain/entities/campaign_document_entity.dart';
+import '../../domain/entities/campaign_milestone_entity.dart';
+import '../../domain/entities/campaign_fund_breakdown_entity.dart';
+import '../../domain/entities/campaign_proof_item_entity.dart';
 import 'fund_breakdown_section.dart';
 import 'documents_section.dart';
 import 'milestones_section.dart';
@@ -7,10 +10,10 @@ import 'proof_gallery_section.dart';
 import 'risk_disclaimer_section.dart';
 
 class TransparencyTabContent extends StatelessWidget {
-  final List<BreakdownItem> fundBreakdown;
-  final List<DocumentModel> documents;
-  final List<MilestoneModel> milestones;
-  final List<ProofItem> proofItems;
+  final List<CampaignFundBreakdownEntity> fundBreakdown;
+  final List<CampaignDocumentEntity> documents;
+  final List<CampaignMilestoneEntity> milestones;
+  final List<CampaignProofItemEntity> proofItems;
   final bool showRiskDisclaimer;
   final String? riskGrade;
 

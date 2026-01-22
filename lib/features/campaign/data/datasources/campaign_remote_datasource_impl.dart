@@ -4,7 +4,11 @@ import 'package:velora/core/utils/log_alias.dart';
 import 'package:velora/features/campaign/data/datasources/campaign_remote_datasource.dart';
 import 'package:velora/features/campaign/data/models/campaign_category_model.dart';
 import 'package:velora/features/campaign/data/models/campaign_comment_model.dart';
+import 'package:velora/features/campaign/data/models/campaign_document_model.dart';
+import 'package:velora/features/campaign/data/models/campaign_fund_breakdown_model.dart';
+import 'package:velora/features/campaign/data/models/campaign_milestone_model.dart';
 import 'package:velora/features/campaign/data/models/campaign_model.dart';
+import 'package:velora/features/campaign/data/models/campaign_proof_item_model.dart';
 import 'package:velora/features/campaign/data/models/campaign_update_model.dart';
 import 'package:velora/features/campaign/data/models/donation_model.dart';
 import 'package:velora/features/campaign/data/models/withdrawal_model.dart';
@@ -23,6 +27,11 @@ class CampaignRemoteDataSourceImpl implements CampaignRemoteDataSource {
   static const _updates = 'campaign_updates';
   static const _comments = 'campaign_comments';
   static const _withdrawals = 'campaign_withdrawals';
+  static const _documents = 'campaign_documents';
+  static const _milestones = 'campaign_milestones';
+  static const _fundBreakdown = 'campaign_fund_breakdown';
+  static const _proofItems = 'campaign_proof_items';
+
 
   // ============================================
   // CAMPAIGNS
@@ -49,13 +58,26 @@ class CampaignRemoteDataSourceImpl implements CampaignRemoteDataSource {
     return guardSupabase(
       () async {
         logi('Getting campaign by id: $id', tag: _logTag);
-        final response = await _client.from(_campaigns).select('''
-              *,
-              user_profiles(username, avatar_url),
-              campaign_categories(name, slug)
-            ''').eq('id', id).maybeSingle();
-        if (response == null) return null;
-        return _mapCampaignWithJoins(response);
+        // Use explicit FK hint for user_profiles join
+        // If FK doesn't exist, fall back to basic query
+        try {
+          final response = await _client.from(_campaigns).select('''
+                *,
+                user_profiles!campaigns_user_id_fkey_profiles(username, avatar_url),
+                campaign_categories(name, slug)
+              ''').eq('id', id).maybeSingle();
+          if (response == null) return null;
+          return _mapCampaignWithJoins(response);
+        } catch (e) {
+          // Fallback: query without user_profiles join
+          logi('Falling back to query without user_profiles join', tag: _logTag);
+          final response = await _client.from(_campaigns).select('''
+                *,
+                campaign_categories(name, slug)
+              ''').eq('id', id).maybeSingle();
+          if (response == null) return null;
+          return _mapCampaignWithJoins(response);
+        }
       },
       op: 'getCampaignById',
       tag: _logTag,
@@ -66,7 +88,8 @@ class CampaignRemoteDataSourceImpl implements CampaignRemoteDataSource {
   Future<List<CampaignModel>> getCampaignsByUser(String userId) {
     return guardSupabase(
       () async {
-        logi('Getting campaigns by user: $userId', tag: _logTag);
+        logi('Getting campaigns for user: $userId', tag: _logTag);
+        // Query without user_profiles join since we know the user
         final response = await _client.from(_campaigns).select('''
               *,
               campaign_categories(name, slug)
@@ -86,9 +109,9 @@ class CampaignRemoteDataSourceImpl implements CampaignRemoteDataSource {
     return guardSupabase(
       () async {
         logi('Getting all campaigns', tag: _logTag);
+        // Query without user_profiles join - FK relationship may not exist
         var query = _client.from(_campaigns).select('''
               *,
-              user_profiles(username, avatar_url),
               campaign_categories(name, slug)
             ''').eq('status', 'active');
 
@@ -593,4 +616,97 @@ class CampaignRemoteDataSourceImpl implements CampaignRemoteDataSource {
       'avatar_url': profile?['avatar_url'],
     });
   }
+
+  // ============================================
+  // TRANSPARENCY: DOCUMENTS
+  // ============================================
+  @override
+  Future<List<CampaignDocumentModel>> getCampaignDocuments(
+      String campaignId) async {
+    return guardSupabase(
+      () async {
+        logi('Getting documents for campaign: $campaignId', tag: _logTag);
+        final response = await _client
+            .from(_documents)
+            .select()
+            .eq('campaign_id', campaignId)
+            .order('created_at', ascending: false);
+        return (response as List)
+            .map((row) => CampaignDocumentModel.fromJson(row))
+            .toList();
+      },
+      op: 'getCampaignDocuments',
+      tag: _logTag,
+    );
+  }
+
+  // ============================================
+  // TRANSPARENCY: MILESTONES
+  // ============================================
+  @override
+  Future<List<CampaignMilestoneModel>> getCampaignMilestones(
+      String campaignId) async {
+    return guardSupabase(
+      () async {
+        logi('Getting milestones for campaign: $campaignId', tag: _logTag);
+        final response = await _client
+            .from(_milestones)
+            .select()
+            .eq('campaign_id', campaignId)
+            .order('sort_order', ascending: true);
+        return (response as List)
+            .map((row) => CampaignMilestoneModel.fromJson(row))
+            .toList();
+      },
+      op: 'getCampaignMilestones',
+      tag: _logTag,
+    );
+  }
+
+  // ============================================
+  // TRANSPARENCY: FUND BREAKDOWN
+  // ============================================
+  @override
+  Future<List<CampaignFundBreakdownModel>> getCampaignFundBreakdown(
+      String campaignId) async {
+    return guardSupabase(
+      () async {
+        logi('Getting fund breakdown for campaign: $campaignId', tag: _logTag);
+        final response = await _client
+            .from(_fundBreakdown)
+            .select()
+            .eq('campaign_id', campaignId)
+            .order('sort_order', ascending: true);
+        return (response as List)
+            .map((row) => CampaignFundBreakdownModel.fromJson(row))
+            .toList();
+      },
+      op: 'getCampaignFundBreakdown',
+      tag: _logTag,
+    );
+  }
+
+  // ============================================
+  // TRANSPARENCY: PROOF ITEMS
+  // ============================================
+  @override
+  Future<List<CampaignProofItemModel>> getCampaignProofItems(
+      String campaignId) async {
+    return guardSupabase(
+      () async {
+        logi('Getting proof items for campaign: $campaignId', tag: _logTag);
+        final response = await _client
+            .from(_proofItems)
+            .select()
+            .eq('campaign_id', campaignId)
+            .order('sort_order', ascending: true);
+        return (response as List)
+            .map((row) => CampaignProofItemModel.fromJson(row))
+            .toList();
+      },
+      op: 'getCampaignProofItems',
+      tag: _logTag,
+    );
+  }
 }
+

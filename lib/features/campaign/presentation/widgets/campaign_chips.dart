@@ -1,18 +1,39 @@
 import 'package:flutter/material.dart';
-import '../../domain/entities/campaign_type.dart';
+import '../../domain/entities/campaign_category_entity.dart';
 import '../../domain/entities/sort_option.dart';
 
+/// Unified campaign filter type:
+/// - null = All
+/// - 'mine' = My Campaigns
+/// - categoryId = Filter by category
+typedef CampaignFilter = String?;
+
 class CampaignChips extends StatelessWidget {
-  final CampaignType selectedType;
+  /// Currently selected filter (null = All, 'mine' = My Campaigns, otherwise categoryId)
+  final CampaignFilter selectedFilter;
+
+  /// List of categories fetched from backend
+  final List<CampaignCategoryEntity> categories;
+
+  /// Whether the categories are still loading
+  final bool isLoadingCategories;
+
+  /// Current sort option
   final SortOption selectedSort;
-  final ValueChanged<CampaignType> onTypeSelected;
+
+  /// Callback when a filter chip is selected
+  final ValueChanged<CampaignFilter> onFilterSelected;
+
+  /// Callback when sort option changes
   final ValueChanged<SortOption> onSortSelected;
 
   const CampaignChips({
     super.key,
-    required this.selectedType,
+    required this.selectedFilter,
+    required this.categories,
+    required this.isLoadingCategories,
     required this.selectedSort,
-    required this.onTypeSelected,
+    required this.onFilterSelected,
     required this.onSortSelected,
   });
 
@@ -24,17 +45,50 @@ class CampaignChips extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 20),
         children: [
-          ...CampaignType.values.map(
-            (type) => Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: _ChipButton(
-                label: _chipLabel(type),
-                isSelected: selectedType == type,
-                onTap: () => onTypeSelected(type),
-              ),
+          // "All" chip
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: _ChipButton(
+              label: 'All',
+              isSelected: selectedFilter == null,
+              onTap: () => onFilterSelected(null),
             ),
           ),
+          // "My Campaigns" chip
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: _ChipButton(
+              label: 'My Campaigns',
+              isSelected: selectedFilter == 'mine',
+              onTap: () => onFilterSelected('mine'),
+              icon: Icons.person_outline,
+            ),
+          ),
+          // Dynamic category chips from backend
+          if (isLoadingCategories)
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Center(
+                child: SizedBox(
+                  width: 16,
+                  height: 16,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                ),
+              ),
+            )
+          else
+            ...categories.map(
+              (cat) => Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: _ChipButton(
+                  label: cat.name,
+                  isSelected: selectedFilter == cat.id,
+                  onTap: () => onFilterSelected(cat.id),
+                ),
+              ),
+            ),
           const SizedBox(width: 8),
+          // Sort button
           _SortButton(
             selectedSort: selectedSort,
             onSortSelected: onSortSelected,
@@ -43,40 +97,19 @@ class CampaignChips extends StatelessWidget {
       ),
     );
   }
-
-  String _chipLabel(CampaignType type) {
-    switch (type) {
-      case CampaignType.all:
-        return 'All';
-      case CampaignType.donation:
-        return 'Donation';
-      case CampaignType.reward:
-        return 'Reward';
-      case CampaignType.debt:
-        return 'Debt/Lending';
-      case CampaignType.equity:
-        return 'Equity';
-      case CampaignType.emergency:
-        return 'Emergency';
-      case CampaignType.subscription:
-        return 'Subscription';
-      case CampaignType.nearby:
-        return 'Nearby';
-      case CampaignType.verified:
-        return 'Verified';
-    }
-  }
 }
 
 class _ChipButton extends StatelessWidget {
   final String label;
   final bool isSelected;
   final VoidCallback onTap;
+  final IconData? icon;
 
   const _ChipButton({
     required this.label,
     required this.isSelected,
     required this.onTap,
+    this.icon,
   });
 
   @override
@@ -106,14 +139,29 @@ class _ChipButton extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Text(
-            label,
-            style: theme.textTheme.labelLarge?.copyWith(
-              color: isSelected
-                  ? colorScheme.onPrimaryContainer
-                  : colorScheme.onSurface,
-              fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-            ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (icon != null) ...[
+                Icon(
+                  icon,
+                  size: 16,
+                  color: isSelected
+                      ? colorScheme.onPrimaryContainer
+                      : colorScheme.onSurface,
+                ),
+                const SizedBox(width: 4),
+              ],
+              Text(
+                label,
+                style: theme.textTheme.labelLarge?.copyWith(
+                  color: isSelected
+                      ? colorScheme.onPrimaryContainer
+                      : colorScheme.onSurface,
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                ),
+              ),
+            ],
           ),
         ),
       ),

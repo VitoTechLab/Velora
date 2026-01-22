@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../domain/entities/campaign_detail_model.dart';
+import 'package:intl/intl.dart';
+import '../../domain/entities/campaign_milestone_entity.dart';
 import 'status_chip.dart';
 
 class MilestonesSection extends StatelessWidget {
-  final List<MilestoneModel> milestones;
+  final List<CampaignMilestoneEntity> milestones;
 
   const MilestonesSection({super.key, required this.milestones});
 
@@ -73,7 +74,7 @@ class MilestonesSection extends StatelessWidget {
 }
 
 class _MilestoneItem extends StatelessWidget {
-  final MilestoneModel milestone;
+  final CampaignMilestoneEntity milestone;
   final bool isLast;
   final ColorScheme colorScheme;
   final ThemeData theme;
@@ -170,12 +171,13 @@ class _MilestoneItem extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 4),
-                Text(
-                  milestone.dueLabel,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color: colorScheme.onSurfaceVariant,
+                if (milestone.dueDate != null)
+                  Text(
+                    DateFormat.yMMMd().format(milestone.dueDate!),
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                    ),
                   ),
-                ),
                 const SizedBox(height: 8),
                 Container(
                   padding: const EdgeInsets.symmetric(
@@ -187,7 +189,7 @@ class _MilestoneItem extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
-                    'Rp ${_formatCurrency(milestone.amount)}',
+                    'Rp ${_formatCurrency(milestone.targetAmount)}',
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: colorScheme.primary,
                       fontWeight: FontWeight.bold,

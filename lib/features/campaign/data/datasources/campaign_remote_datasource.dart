@@ -1,6 +1,10 @@
 import 'package:velora/features/campaign/data/models/campaign_category_model.dart';
 import 'package:velora/features/campaign/data/models/campaign_comment_model.dart';
+import 'package:velora/features/campaign/data/models/campaign_document_model.dart';
+import 'package:velora/features/campaign/data/models/campaign_fund_breakdown_model.dart';
+import 'package:velora/features/campaign/data/models/campaign_milestone_model.dart';
 import 'package:velora/features/campaign/data/models/campaign_model.dart';
+import 'package:velora/features/campaign/data/models/campaign_proof_item_model.dart';
 import 'package:velora/features/campaign/data/models/campaign_update_model.dart';
 import 'package:velora/features/campaign/data/models/donation_model.dart';
 import 'package:velora/features/campaign/data/models/withdrawal_model.dart';
@@ -64,4 +68,26 @@ abstract class CampaignRemoteDataSource {
   Future<List<WithdrawalModel>> getWithdrawalsByCampaign(String campaignId);
   Future<List<WithdrawalModel>> getWithdrawalsByUser(String userId);
   Future<WithdrawalModel?> getWithdrawalById(String id);
+
+  // ============================================
+  // TRANSPARENCY: DOCUMENTS
+  // ============================================
+  Future<List<CampaignDocumentModel>> getCampaignDocuments(String campaignId);
+
+  // ============================================
+  // TRANSPARENCY: MILESTONES
+  // ============================================
+  Future<List<CampaignMilestoneModel>> getCampaignMilestones(String campaignId);
+
+  // ============================================
+  // TRANSPARENCY: FUND BREAKDOWN
+  // ============================================
+  Future<List<CampaignFundBreakdownModel>> getCampaignFundBreakdown(
+      String campaignId);
+
+  // ============================================
+  // TRANSPARENCY: PROOF ITEMS
+  // ============================================
+  Future<List<CampaignProofItemModel>> getCampaignProofItems(String campaignId);
 }
+

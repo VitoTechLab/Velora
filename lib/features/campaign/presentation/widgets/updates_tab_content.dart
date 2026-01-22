@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../domain/entities/campaign_detail_model.dart';
+import 'package:intl/intl.dart';
+import '../../domain/entities/campaign_update_entity.dart';
 
 class UpdatesTabContent extends StatelessWidget {
-  final List<UpdateModel> updates;
+  final List<CampaignUpdateEntity> updates;
 
   const UpdatesTabContent({super.key, required this.updates});
 
@@ -39,7 +40,7 @@ class UpdatesTabContent extends StatelessWidget {
 }
 
 class _UpdateCard extends StatelessWidget {
-  final UpdateModel update;
+  final CampaignUpdateEntity update;
   final ColorScheme colorScheme;
   final ThemeData theme;
 
@@ -84,7 +85,7 @@ class _UpdateCard extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  update.title,
+                  update.title ?? 'Campaign Update',
                   style: theme.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: colorScheme.onSurface,
@@ -97,14 +98,14 @@ class _UpdateCard extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            update.dateLabel,
+            DateFormat.yMMMd().format(update.createdAt),
             style: theme.textTheme.bodySmall?.copyWith(
               color: colorScheme.onSurfaceVariant,
             ),
           ),
           const SizedBox(height: 12),
           Text(
-            update.body,
+            update.updateText,
             style: theme.textTheme.bodyMedium?.copyWith(
               color: colorScheme.onSurface,
               height: 1.5,

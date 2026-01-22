@@ -140,6 +140,11 @@ import 'package:velora/features/campaign/domain/usecases/update_campaign_status_
 import 'package:velora/features/campaign/domain/usecases/update_campaign_usecase.dart';
 import 'package:velora/features/campaign/domain/usecases/update_donation_status_usecase.dart';
 import 'package:velora/features/campaign/presentation/bloc/campaign_bloc.dart';
+import 'package:velora/features/campaign/domain/usecases/get_campaign_documents_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/get_campaign_milestones_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/get_campaign_fund_breakdown_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/get_campaign_proof_items_usecase.dart';
+import 'package:velora/features/campaign/domain/usecases/get_campaign_updates_usecase.dart';
 
 // Wallet feature imports
 import 'package:velora/features/wallet/data/datasources/wallet_remote_datasource.dart';
@@ -152,6 +157,7 @@ import 'package:velora/features/wallet/domain/usecases/get_main_wallet_usecase.d
 import 'package:velora/features/wallet/domain/usecases/get_user_wallets_usecase.dart';
 import 'package:velora/features/wallet/domain/usecases/get_wallet_by_id_usecase.dart';
 import 'package:velora/features/wallet/domain/usecases/get_wallet_transactions_usecase.dart';
+import 'package:velora/features/wallet/domain/usecases/get_wallet_withdrawals_usecase.dart';
 import 'package:velora/features/wallet/domain/usecases/initiate_topup_usecase.dart';
 import 'package:velora/features/wallet/domain/usecases/process_wallet_donation_usecase.dart';
 import 'package:velora/features/wallet/domain/usecases/request_withdrawal_usecase.dart' as wallet;
@@ -707,6 +713,31 @@ Future<void> configureDependencies() async {
         repository: getIt<CampaignRepository>(),
       ),
     )
+    ..registerLazySingleton(
+      () => GetCampaignDocumentsUsecase(
+        repository: getIt<CampaignRepository>(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => GetCampaignMilestonesUsecase(
+        repository: getIt<CampaignRepository>(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => GetCampaignFundBreakdownUsecase(
+        repository: getIt<CampaignRepository>(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => GetCampaignProofItemsUsecase(
+        repository: getIt<CampaignRepository>(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => GetCampaignUpdatesUsecase(
+        repository: getIt<CampaignRepository>(),
+      ),
+    )
     // Wallet feature - Use cases
     ..registerLazySingleton(
       () => GetUserWalletsUsecase(repository: getIt<WalletRepository>()),
@@ -737,6 +768,9 @@ Future<void> configureDependencies() async {
     )
     ..registerLazySingleton(
       () => GetWalletTransactionsUsecase(repository: getIt<WalletRepository>()),
+    )
+    ..registerLazySingleton(
+      () => GetWalletWithdrawalsUsecase(getIt<WalletRepository>()),
     )
     // Social Relation feature - Use cases
     ..registerLazySingleton(() => FollowUser(getIt<SocialRelationRepository>()))
@@ -983,6 +1017,11 @@ Future<void> configureDependencies() async {
       getWithdrawalByIdUsecase: getIt<GetWithdrawalByIdUsecase>(),
       getCampaignsByUserUsecase: getIt<GetCampaignsByUserUsecase>(),
       getDonationsByUserUsecase: getIt<GetDonationsByUserUsecase>(),
+      getCampaignDocumentsUsecase: getIt<GetCampaignDocumentsUsecase>(),
+      getCampaignMilestonesUsecase: getIt<GetCampaignMilestonesUsecase>(),
+      getCampaignFundBreakdownUsecase: getIt<GetCampaignFundBreakdownUsecase>(),
+      getCampaignProofItemsUsecase: getIt<GetCampaignProofItemsUsecase>(),
+      getCampaignUpdatesUsecase: getIt<GetCampaignUpdatesUsecase>(),
     ),
   );
 
@@ -999,6 +1038,7 @@ Future<void> configureDependencies() async {
       processWalletDonationUsecase: getIt<ProcessWalletDonationUsecase>(),
       requestWithdrawalUsecase: getIt<wallet.RequestWithdrawalUsecase>(),
       getWalletTransactionsUsecase: getIt<GetWalletTransactionsUsecase>(),
+      getWalletWithdrawalsUsecase: getIt<GetWalletWithdrawalsUsecase>(),
     ),
   );
 

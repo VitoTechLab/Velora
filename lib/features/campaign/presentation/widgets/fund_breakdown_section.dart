@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../domain/entities/campaign_detail_model.dart';
+import '../../domain/entities/campaign_fund_breakdown_entity.dart';
 
 class FundBreakdownSection extends StatelessWidget {
-  final List<BreakdownItem> items;
+  final List<CampaignFundBreakdownEntity> items;
 
   const FundBreakdownSection({super.key, required this.items});
 
@@ -56,7 +56,7 @@ class FundBreakdownSection extends StatelessWidget {
                   colorScheme.secondaryContainer,
                 ];
                 return Expanded(
-                  flex: item.percent.toInt(),
+                  flex: item.percentage.toInt(),
                   child: Container(color: colors[index % colors.length]),
                 );
               }).toList(),
@@ -82,7 +82,7 @@ class FundBreakdownSection extends StatelessWidget {
 }
 
 class _BreakdownItem extends StatelessWidget {
-  final BreakdownItem item;
+  final CampaignFundBreakdownEntity item;
   final ColorScheme colorScheme;
   final ThemeData theme;
 
@@ -125,7 +125,7 @@ class _BreakdownItem extends StatelessWidget {
           ),
         ),
         Text(
-          '${item.percent.toInt()}%',
+          '${item.percentage.toInt()}%',
           style: theme.textTheme.bodyMedium?.copyWith(
             color: colorScheme.onSurfaceVariant,
             fontWeight: FontWeight.w600,

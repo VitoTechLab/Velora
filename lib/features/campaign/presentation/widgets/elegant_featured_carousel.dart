@@ -6,8 +6,13 @@ import '../../domain/entities/campaign_model.dart';
 
 class ElegantFeaturedCarousel extends StatefulWidget {
   final List<CampaignModel> campaigns;
+  final void Function(CampaignModel campaign)? onCampaignTap;
 
-  const ElegantFeaturedCarousel({super.key, required this.campaigns});
+  const ElegantFeaturedCarousel({
+    super.key,
+    required this.campaigns,
+    this.onCampaignTap,
+  });
 
   @override
   State<ElegantFeaturedCarousel> createState() =>
@@ -102,6 +107,7 @@ class _ElegantFeaturedCarouselState extends State<ElegantFeaturedCarousel> {
           child: InkWell(
             onTap: () {
               // Navigate to campaign detail
+              widget.onCampaignTap?.call(campaign);
             },
             child: Stack(
               children: [
