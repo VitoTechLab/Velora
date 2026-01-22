@@ -249,50 +249,36 @@ class ChatMessageList extends StatelessWidget {
                       messages[index + 1].createdAt,
                     );
 
-                return TweenAnimationBuilder<double>(
+                return Column(
                   key: ValueKey(message.id),
-                  duration: const Duration(milliseconds: 400),
-                  tween: Tween(begin: 0.0, end: 1.0),
-                  curve: Curves.easeOutCubic,
-                  builder: (context, value, child) {
-                    return Opacity(
-                      opacity: 0.5 + (0.5 * value),
-                      child: Transform.translate(
-                        offset: Offset(0, 20 * (1 - value)),
-                        child: child,
+                  children: [
+                    if (showDateSeparator)
+                      DateSeparatorWidget(
+                        date: _formatDate(message.createdAt),
                       ),
-                    );
-                  },
-                  child: Column(
-                    children: [
-                      if (showDateSeparator)
-                        DateSeparatorWidget(
-                          date: _formatDate(message.createdAt),
-                        ),
-                      if (isDeleted)
-                        ChatBubbleWidget(
-                          message: t.chatDetailMessageDeleted,
-                          time: _formatTime(message.createdAt),
-                          isSender: isSender,
-                          isRead: true,
-                        )
-                      else
-                        _buildMessageWidget(
-                          context: context,
+                    if (isDeleted)
+                      ChatBubbleWidget(
+                        message: t.chatDetailMessageDeleted,
+                        time: _formatTime(message.createdAt),
+                        isSender: isSender,
+                        isRead: true,
+                      )
+                    else
+                      _buildMessageWidget(
+                        context: context,
+                        message: message,
+                        isSender: isSender,
+                        t: t,
+                        // For 1-on-1: message is read if peer has replied after this message
+                        // or if realtime read receipt exists
+                        isRead: _isMessageRead(
                           message: message,
                           isSender: isSender,
-                          t: t,
-                          // For 1-on-1: message is read if peer has replied after this message
-                          // or if realtime read receipt exists
-                          isRead: _isMessageRead(
-                            message: message,
-                            isSender: isSender,
-                            latestPeerMessageTime: latestPeerMessageTime,
-                            messageReads: state.messageReads,
-                          ),
+                          latestPeerMessageTime: latestPeerMessageTime,
+                          messageReads: state.messageReads,
                         ),
-                    ],
-                  ),
+                      ),
+                  ],
                 );
               },
             ),

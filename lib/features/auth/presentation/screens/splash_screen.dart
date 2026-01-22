@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 
 /// Splash screen with animated logo and gradient background
 class SplashScreen extends StatefulWidget {
@@ -10,63 +9,40 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen>
-    with TickerProviderStateMixin {
-  late AnimationController _scaleController;
-  late AnimationController _fadeController;
-  late AnimationController _rotateController;
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
   late Animation<double> _scaleAnimation;
   late Animation<double> _fadeAnimation;
-  late Animation<double> _rotateAnimation;
 
   @override
   void initState() {
     super.initState();
 
-    // Scale animation for logo
-    _scaleController = AnimationController(
-      duration: const Duration(milliseconds: 1200),
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 1500),
       vsync: this,
     );
 
-    _scaleAnimation = CurvedAnimation(
-      parent: _scaleController,
-      curve: Curves.elasticOut,
+    _scaleAnimation = Tween<double>(begin: 0.5, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.0, 0.6, curve: Curves.elasticOut),
+      ),
     );
 
-    // Fade animation for text
-    _fadeController = AnimationController(
-      duration: const Duration(milliseconds: 800),
-      vsync: this,
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.3, 1.0, curve: Curves.easeIn),
+      ),
     );
 
-    _fadeAnimation = CurvedAnimation(
-      parent: _fadeController,
-      curve: Curves.easeIn,
-    );
-
-    // Rotate animation for decorative elements
-    _rotateController = AnimationController(
-      duration: const Duration(seconds: 3),
-      vsync: this,
-    )..repeat();
-
-    _rotateAnimation = Tween<double>(
-      begin: 0,
-      end: 2 * math.pi,
-    ).animate(_rotateController);
-
-    // Start animations
-    _scaleController.forward();
-    Future.delayed(const Duration(milliseconds: 400), () {
-      if (mounted) _fadeController.forward();
-    });
+    _controller.forward();
   }
 
   @override
   void dispose() {
-    _scaleController.dispose();
-    _fadeController.dispose();
-    _rotateController.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -77,6 +53,7 @@ class _SplashScreenState extends State<SplashScreen>
     final isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
+      backgroundColor: isDark ? const Color(0xFF1A1A2E) : colorScheme.surface,
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -91,70 +68,22 @@ class _SplashScreenState extends State<SplashScreen>
                     const Color(0xFF0F3460),
                   ]
                 : [
-                    colorScheme.primary.withValues(alpha: 0.1),
-                    colorScheme.secondary.withValues(alpha: 0.1),
-                    colorScheme.tertiary.withValues(alpha: 0.1),
+                    colorScheme.primary.withValues(alpha: 0.05),
+                    colorScheme.secondary.withValues(alpha: 0.08),
+                    colorScheme.tertiary.withValues(alpha: 0.05),
                   ],
           ),
         ),
-        child: Stack(
-          children: [
-            // Animated decorative circles
-            AnimatedBuilder(
-              animation: _rotateAnimation,
-              builder: (context, child) {
-                return Positioned(
-                  top: -100,
-                  right: -100,
-                  child: Transform.rotate(
-                    angle: _rotateAnimation.value,
-                    child: Container(
-                      width: 300,
-                      height: 300,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: colorScheme.primary.withValues(alpha: 0.1),
-                          width: 2,
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-            AnimatedBuilder(
-              animation: _rotateAnimation,
-              builder: (context, child) {
-                return Positioned(
-                  bottom: -80,
-                  left: -80,
-                  child: Transform.rotate(
-                    angle: -_rotateAnimation.value,
-                    child: Container(
-                      width: 250,
-                      height: 250,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: colorScheme.secondary.withValues(alpha: 0.1),
-                          width: 2,
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-
-            // Main content
-            Center(
-              child: Column(
+        child: Center(
+          child: AnimatedBuilder(
+            animation: _controller,
+            builder: (context, child) {
+              return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // Animated Logo
-                  ScaleTransition(
-                    scale: _scaleAnimation,
+                  Transform.scale(
+                    scale: _scaleAnimation.value,
                     child: Container(
                       width: 120,
                       height: 120,
@@ -176,20 +105,13 @@ class _SplashScreenState extends State<SplashScreen>
                           ),
                         ],
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'V',
                           style: TextStyle(
                             fontSize: 64,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
-                            shadows: [
-                              Shadow(
-                                color: Colors.black.withValues(alpha: 0.3),
-                                offset: const Offset(0, 2),
-                                blurRadius: 4,
-                              ),
-                            ],
                           ),
                         ),
                       ),
@@ -197,9 +119,9 @@ class _SplashScreenState extends State<SplashScreen>
                   ),
                   const SizedBox(height: 32),
 
-                  // Animated App Name
-                  FadeTransition(
-                    opacity: _fadeAnimation,
+                  // App Name - VELORA
+                  Opacity(
+                    opacity: _fadeAnimation.value,
                     child: Column(
                       children: [
                         Text(
@@ -224,11 +146,11 @@ class _SplashScreenState extends State<SplashScreen>
                   const SizedBox(height: 60),
 
                   // Loading indicator
-                  FadeTransition(
-                    opacity: _fadeAnimation,
+                  Opacity(
+                    opacity: _fadeAnimation.value,
                     child: SizedBox(
-                      width: 40,
-                      height: 40,
+                      width: 36,
+                      height: 36,
                       child: CircularProgressIndicator(
                         strokeWidth: 3,
                         valueColor: AlwaysStoppedAnimation<Color>(
@@ -238,28 +160,9 @@ class _SplashScreenState extends State<SplashScreen>
                     ),
                   ),
                 ],
-              ),
-            ),
-
-            // Bottom branding
-            Positioned(
-              bottom: 40,
-              left: 0,
-              right: 0,
-              child: FadeTransition(
-                opacity: _fadeAnimation,
-                child: Center(
-                  child: Text(
-                    'VitoTechLab © 2026',
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: colorScheme.onSurface.withValues(alpha: 0.4),
-                      letterSpacing: 1.5,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
+              );
+            },
+          ),
         ),
       ),
     );
