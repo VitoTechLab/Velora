@@ -232,7 +232,7 @@ class MyCampaignsScreen extends HookWidget {
                 return _CampaignCard(
                   campaign: campaign,
                   onTap: () => context.push(
-                    '/wallet/my-campaigns/${campaign.id}/earnings',
+                    '/profile/settings/wallet/my-campaigns/${campaign.id}/earnings',
                   ),
                   colorScheme: colorScheme,
                   theme: theme,

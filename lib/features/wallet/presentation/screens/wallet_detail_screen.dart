@@ -76,7 +76,7 @@ class WalletDetailScreen extends HookWidget {
                               onWithdraw: () =>
                                   _showWithdrawalDialog(context, wallet),
                               onViewWithdrawals: () => context.push(
-                                  '/wallet/${wallet.id}/withdrawals'),
+                                  '/profile/settings/wallet/${wallet.id}/withdrawals'),
                               onExport: () => _showExportDialog(context, wallet),
                             ),
                             const SizedBox(height: 24),
@@ -298,7 +298,7 @@ class WalletDetailScreen extends HookWidget {
                     behavior: SnackBarBehavior.floating,
                     action: SnackBarAction(
                       label: 'View History',
-                      onPressed: () => context.push('/wallet/${wallet.id}/withdrawals'),
+                      onPressed: () => context.push('/profile/settings/wallet/${wallet.id}/withdrawals'),
                     ),
                   ),
                 );
