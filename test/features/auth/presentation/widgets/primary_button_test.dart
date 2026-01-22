@@ -22,7 +22,17 @@ void main() {
     );
 
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
-    expect(find.text('Submit'), findsNothing);
+    // Text exists in widget tree but hidden with AnimatedOpacity(opacity: 0)
+    expect(find.text('Submit'), findsOneWidget);
+    
+    // Verify text is hidden (opacity = 0)
+    final opacity = tester.widget<AnimatedOpacity>(
+      find.ancestor(
+        of: find.text('Submit'),
+        matching: find.byType(AnimatedOpacity),
+      ),
+    );
+    expect(opacity.opacity, 0);
     
     await tester.tap(find.byType(ElevatedButton));
     expect(tapped, isFalse, reason: 'Button should be disabled while loading');
