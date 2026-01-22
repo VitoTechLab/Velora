@@ -325,7 +325,6 @@ class _StatusPill extends StatelessWidget {
     required this.label,
     required this.background,
     required this.foreground,
-    this.icon,
   });
 
   final String label;

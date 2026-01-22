@@ -28,6 +28,7 @@ import 'package:velora/features/post/presentation/bloc/campaign_post_bloc.dart';
 import 'package:velora/features/post/presentation/screens/create_campaign_post_screen.dart';
 import 'package:velora/features/profile/presentation/screens/profile_screen.dart';
 import 'package:velora/features/profile/presentation/screens/other_user_profile_screen.dart';
+import 'package:velora/features/profile/presentation/screens/user_posts_screen.dart';
 import 'package:velora/features/social_relation/presentation/screens/relation_detail_screen.dart';
 import 'package:velora/features/settings/domain/entities/user_preferences.dart';
 import 'package:velora/features/settings/presentation/screens/account/account_status_screen.dart';
@@ -72,516 +73,568 @@ class AppRouter {
     UserPreferences userPreferences,
     AuthBloc authBloc,
   ) : router = GoRouter(
-        navigatorKey: navigationService.navigatorKey,
-        initialLocation: AppRoutePath.home,
-        refreshListenable: GoRouterRefreshStream(authBloc.stream),
-        redirect: (context, state) {
-          final status = authBloc.state.status;
+          navigatorKey: navigationService.navigatorKey,
+          initialLocation: AppRoutePath.home,
+          refreshListenable: GoRouterRefreshStream(authBloc.stream),
+          redirect: (context, state) {
+            final status = authBloc.state.status;
 
-          final loggingIn = state.matchedLocation == AppRoutePath.signIn;
-          final signingUp = state.matchedLocation == AppRoutePath.signUp;
-          final resetting = state.matchedLocation == AppRoutePath.resetPassword;
-          final verifying =
-              state.matchedLocation == AppRoutePath.verificationEmail;
-          final onSplash = state.matchedLocation == AppRoutePath.splash;
+            final loggingIn = state.matchedLocation == AppRoutePath.signIn;
+            final signingUp = state.matchedLocation == AppRoutePath.signUp;
+            final resetting =
+                state.matchedLocation == AppRoutePath.resetPassword;
+            final verifying =
+                state.matchedLocation == AppRoutePath.verificationEmail;
+            final onSplash = state.matchedLocation == AppRoutePath.splash;
 
-          if (status == AuthStatusEntity.unknown) {
-            // Show splash screen while checking auth
-            if (!onSplash) {
-              return AppRoutePath.splash;
+            if (status == AuthStatusEntity.unknown) {
+              // Show splash screen while checking auth
+              if (!onSplash) {
+                return AppRoutePath.splash;
+              }
+              return null;
             }
-            return null;
-          }
 
-          if (status == AuthStatusEntity.unauthenticated) {
-            if (loggingIn || signingUp || resetting) return null;
-            return AppRoutePath.signIn;
-          }
-
-          if (status == AuthStatusEntity.emailUnverified) {
-            if (!verifying) {
-              return AppRoutePath.verificationEmail;
+            if (status == AuthStatusEntity.unauthenticated) {
+              if (loggingIn || signingUp || resetting) return null;
+              return AppRoutePath.signIn;
             }
-            return null;
-          }
 
-          if (status == AuthStatusEntity.authenticated) {
-            final isAuthRoute =
-                loggingIn || signingUp || resetting || verifying;
-            if (isAuthRoute) {
+            if (status == AuthStatusEntity.emailUnverified) {
+              if (!verifying) {
+                return AppRoutePath.verificationEmail;
+              }
+              return null;
+            }
+
+            if (status == AuthStatusEntity.authenticated) {
+              final isAuthRoute =
+                  loggingIn || signingUp || resetting || verifying;
+              if (isAuthRoute) {
+                return AppRoutePath.home;
+              }
+            }
+
+            if (state.matchedLocation == '/') {
               return AppRoutePath.home;
             }
-          }
 
-          if (state.matchedLocation == '/') {
-            return AppRoutePath.home;
-          }
-
-          return null;
-        },
-        routes: [
-          GoRoute(
-            path: AppRoutePath.splash,
-            name: AppRouteName.splash,
-            builder: (context, state) => const SplashScreen(),
-          ),
-          GoRoute(
-            path: AppRoutePath.signIn,
-            name: AppRouteName.signIn,
-            builder: (context, state) => const LoginScreen(),
-          ),
-          GoRoute(
-            path: AppRoutePath.signUp,
-            name: AppRouteName.signUp,
-            builder: (context, state) => const SignUpScreen(),
-          ),
-          GoRoute(
-            path: AppRoutePath.resetPassword,
-            name: AppRouteName.resetPassword,
-            builder: (context, state) => const ResetPasswordScreen(),
-          ),
-          GoRoute(
-            path: AppRoutePath.verificationEmail,
-            name: AppRouteName.verificationEmail,
-            builder: (context, state) => const VerificationEmailScreen(),
-          ),
-          GoRoute(
-            path: AppRoutePath.mediaGallery,
-            name: AppRouteName.mediaGallery,
-            parentNavigatorKey: navigationService.navigatorKey, // root
-            builder: (context, state) => const MediaGalleryScreen(),
-          ),
-          StatefulShellRoute(
-            builder: (context, state, navigationShell) =>
-                AppShell(navigationShell: navigationShell),
-            navigatorContainerBuilder: (context, navigationShell, children) =>
-                AdaptiveBranchContainer(
-                  navigationShell: navigationShell,
-                  userPreferences: userPreferences,
-                  children: children,
-                ),
-            branches: [
-              StatefulShellBranch(
-                navigatorKey: NavigationKeys.homeBranch,
-                routes: [
-                  GoRoute(
-                    path: AppRoutePath.home,
-                    name: AppRouteName.home,
-                    builder: (context, state) => const FeedScreen(),
-                    routes: [
-                      GoRoute(
-                        path: AppRouteSinglePath.notification,
-                        name: AppRouteName.notification,
-                        parentNavigatorKey:
-                            navigationService.navigatorKey, // root
-                        builder: (context, state) => const NotificationScreen(),
-                      ),
-                      GoRoute(
-                        path: AppRouteSinglePath.userProfile,
-                        name: AppRouteName.userProfile,
-                        parentNavigatorKey:
-                            navigationService.navigatorKey, // root
-                        builder: (context, state) {
-                          final userId = state.pathParameters['userId'];
-                          if (userId == null || userId.isEmpty) {
-                            return const Scaffold(
-                              body: Center(child: Text('User not found')),
-                            );
-                          }
-                          return OtherUserProfileScreen(userId: userId);
-                        },
-                      ),
-                      GoRoute(
-                        path: AppRouteSinglePath.relationDetail,
-                        name: AppRouteName.relationDetail,
-                        parentNavigatorKey:
-                            navigationService.navigatorKey, // root
-                        builder: (context, state) {
-                          final userId = state.pathParameters['userId'];
-                          final tabStr = state.uri.queryParameters['tab'];
-                          final initialTab = int.tryParse(tabStr ?? '0') ?? 0;
-                          
-                          if (userId == null || userId.isEmpty) {
-                            return const Scaffold(
-                              body: Center(child: Text('User not found')),
-                            );
-                          }
-                          return RelationDetailScreen(
-                            userId: userId,
-                            initialTab: initialTab,
-                          );
-                        },
-                      ),
-                      GoRoute(
-                        path: AppRouteSinglePath.postFeed,
-                        name: AppRouteName.postFeed,
-                        parentNavigatorKey:
-                            navigationService.navigatorKey, // root
-                        builder: (context, state) {
-                          final args = state.extra as CreatePostMediaArgs?;
-                          if (args == null) {
-                            // No media provided, redirect to gallery
-                            WidgetsBinding.instance.addPostFrameCallback((_) {
-                              if (context.mounted) {
-                                context.goNamed(AppRouteName.mediaGallery);
-                              }
-                            });
-                            return const SizedBox.shrink();
-                          }
-                          return PostFeedScreen(
-                            selectedMedia: args.selectedMedia,
-                          );
-                        },
-                        routes: [
-                          GoRoute(
-                            path: AppRouteSinglePath.moreOptions,
-                            name: AppRouteName.moreOptions,
-                            parentNavigatorKey:
-                                navigationService.navigatorKey, // root
-                            builder: (context, state) {
-                              final args = state.extra as MoreOptionPostArgs;
-                              return MoreOptionPostScreen(
-                                initialOptions: args.initialOptions,
-                              );
-                            },
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
+            return null;
+          },
+          routes: [
+            GoRoute(
+              path: AppRoutePath.splash,
+              name: AppRouteName.splash,
+              builder: (context, state) => const SplashScreen(),
+            ),
+            GoRoute(
+              path: AppRoutePath.signIn,
+              name: AppRouteName.signIn,
+              builder: (context, state) => const LoginScreen(),
+            ),
+            GoRoute(
+              path: AppRoutePath.signUp,
+              name: AppRouteName.signUp,
+              builder: (context, state) => const SignUpScreen(),
+            ),
+            GoRoute(
+              path: AppRoutePath.resetPassword,
+              name: AppRouteName.resetPassword,
+              builder: (context, state) => const ResetPasswordScreen(),
+            ),
+            GoRoute(
+              path: AppRoutePath.verificationEmail,
+              name: AppRouteName.verificationEmail,
+              builder: (context, state) => const VerificationEmailScreen(),
+            ),
+            GoRoute(
+              path: AppRoutePath.mediaGallery,
+              name: AppRouteName.mediaGallery,
+              parentNavigatorKey: navigationService.navigatorKey, // root
+              builder: (context, state) => const MediaGalleryScreen(),
+            ),
+            StatefulShellRoute(
+              builder: (context, state, navigationShell) =>
+                  AppShell(navigationShell: navigationShell),
+              navigatorContainerBuilder: (context, navigationShell, children) =>
+                  AdaptiveBranchContainer(
+                navigationShell: navigationShell,
+                userPreferences: userPreferences,
+                children: children,
               ),
-              StatefulShellBranch(
-                navigatorKey: NavigationKeys.campaignBranch,
-                routes: [
-                  GoRoute(
-                    path: AppRoutePath.campaign,
-                    name: AppRouteName.campaign,
-                    builder: (context, state) => const CampaignScreen(),
-                    routes: [
-                      GoRoute(
-                        path: AppRouteSinglePath.createCampaignPost,
-                        name: AppRouteName.createCampaignPost,
-                        parentNavigatorKey: navigationService.navigatorKey,
-                        builder: (context, state) => BlocProvider(
-                          create: (_) => getIt<CampaignPostBloc>(),
-                          child: const CreateCampaignPostScreen(),
+              branches: [
+                StatefulShellBranch(
+                  navigatorKey: NavigationKeys.homeBranch,
+                  routes: [
+                    GoRoute(
+                      path: AppRoutePath.home,
+                      name: AppRouteName.home,
+                      builder: (context, state) => const FeedScreen(),
+                      routes: [
+                        GoRoute(
+                          path: AppRouteSinglePath.notification,
+                          name: AppRouteName.notification,
+                          parentNavigatorKey:
+                              navigationService.navigatorKey, // root
+                          builder: (context, state) =>
+                              const NotificationScreen(),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              StatefulShellBranch(
-                navigatorKey: NavigationKeys.chatBranch,
-                routes: [
-                  GoRoute(
-                    path: AppRoutePath.chat,
-                    name: AppRouteName.chat,
-                    builder: (context, state) => const ChatScreen(),
-                    routes: [
-                      GoRoute(
-                        path: AppRouteSinglePath.chatDocumentPicker,
-                        name: AppRouteName.chatDocumentPicker,
-                        parentNavigatorKey: navigationService.navigatorKey,
-                        builder: (context, state) {
-                          final args = state.extra as ChatDocumentPickerArgs?;
-                          return ChatDocumentPickerScreen(
-                            maxDocuments: args?.maxDocuments ?? 10,
-                            allowedExtensions: args?.allowedExtensions,
-                          );
-                        },
-                      ),
-                      GoRoute(
-                        path: AppRouteSinglePath.searchFollowUser,
-                        name: AppRouteName.searchFollowUser,
-                        builder: (context, state) =>
-                            const UserSearchScreen(),
-                      ),
-                      GoRoute(
-                        path: AppRouteSinglePath.chatDetail,
-                        name: AppRouteName.chatDetail,
-                        parentNavigatorKey:
-                            navigationService.navigatorKey, // root
-                        builder: (context, state) {
-                          final args = state.extra as ChatDetailArgs?;
-                          if (args == null) {
-                            return const Scaffold(
-                              body: Center(
-                                child: Text('Invalid chat arguments'),
-                              ),
-                            );
-                          }
-                          return ChatDetailScreen(
-                            conversationId: args.conversationId,
-                            chatName: args.chatName,
-                            chatSubtitle: args.chatSubtitle,
-                            profileImageUrl: args.profileImageUrl,
-                            isGroup: args.isGroup,
-                            peerUserId: args.peerUserId,
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              // StatefulShellBranch(
-              //   navigatorKey: NavigationKeys.searchBranch,
-              //   routes: [
-              //     GoRoute(
-              //       path: AppRoutePath.search,
-              //       name: AppRouteName.search,
-              //       builder: (context, state) => const SearchScreen(),
-              //     ),
-              //   ],
-              // ),
-              
-              StatefulShellBranch(
-                navigatorKey: NavigationKeys.profileBranch,
-                routes: [
-                  GoRoute(
-                    path: AppRoutePath.profile,
-                    name: AppRouteName.profile,
-                    builder: (context, state) => const ProfileScreen(),
-                    routes: [
-                      GoRoute(
-                        path: AppRouteSinglePath.settings,
-                        name: AppRouteName.settings,
-                        parentNavigatorKey: navigationService.navigatorKey,
-                        builder: (context, state) => const SettingScreen(),
-                        routes: [
-                          GoRoute(
-                            path: AppRouteSinglePath.settingsProfiles,
-                            name: AppRouteName.settingsProfiles,
-                            parentNavigatorKey:
-                                navigationService.navigatorKey, // root
-                            builder: (context, state) =>
-                                const ProfilesListScreen(),
-                          ),
-                          GoRoute(
-                            path: AppRouteSinglePath.settingsProfileDetail,
-                            name: AppRouteName.settingsProfileDetail,
-                            parentNavigatorKey:
-                                navigationService.navigatorKey, // root
-                            builder: (context, state) =>
-                                const ProfileDetailScreen(),
-                          ),
-                          GoRoute(
-                            path: AppRouteSinglePath.settingsEditProfile,
-                            name: AppRouteName.settingsEditProfile,
-                            parentNavigatorKey:
-                                navigationService.navigatorKey, // root
-                            builder: (context, state) =>
-                                const EditProfileScreen(),
-                          ),
-                          GoRoute(
-                            path: AppRouteSinglePath.settingsActivity,
-                            name: AppRouteName.settingsActivity,
-                            parentNavigatorKey: navigationService.navigatorKey,
-                            builder: (context, state) => const ActivityScreen(),
-                          ),
-                          GoRoute(
-                            path: AppRouteSinglePath.settingsAdPreferences,
-                            name: AppRouteName.settingsAdPreferences,
-                            parentNavigatorKey: navigationService.navigatorKey,
-                            builder: (context, state) => const AdPreferencesScreen(),
-                          ),
-                          GoRoute(
-                            path: AppRouteSinglePath.settingsAccountStatus,
-                            name: AppRouteName.settingsAccountStatus,
-                            parentNavigatorKey: navigationService.navigatorKey,
-                            builder: (context, state) =>
-                                const AccountStatusScreen(),
-                          ),
-                          GoRoute(
-                            path: AppRouteSinglePath.settingsAccountType,
-                            name: AppRouteName.settingsAccountType,
-                            parentNavigatorKey: navigationService.navigatorKey,
-                            builder: (context, state) =>
-                                const AccountTypeScreen(),
-                          ),
-                          GoRoute(
-                            path: AppRouteSinglePath.settingsPasswordSecurity,
-                            name: AppRouteName.settingsPasswordSecurity,
-                            parentNavigatorKey: navigationService.navigatorKey,
-                            builder: (context, state) =>
-                                const PasswordSecurityScreen(),
-                            routes: [
-                              GoRoute(
-                                path: 'two-factor-setup',
-                                parentNavigatorKey: navigationService.navigatorKey,
-                                builder: (context, state) =>
-                                    const TwoFactorSetupScreen(),
-                              ),
-                              GoRoute(
-                                path: 'active-sessions',
-                                parentNavigatorKey: navigationService.navigatorKey,
-                                builder: (context, state) =>
-                                    const ActiveSessionsScreen(),
-                              ),
-                              GoRoute(
-                                path: 'trusted-contacts',
-                                parentNavigatorKey: navigationService.navigatorKey,
-                                builder: (context, state) =>
-                                    const TrustedContactsScreen(),
-                              ),
-                              GoRoute(
-                                path: 'recovery-codes',
-                                parentNavigatorKey: navigationService.navigatorKey,
-                                builder: (context, state) =>
-                                    const RecoveryCodesScreen(),
-                              ),
-                            ],
-                          ),
-                          GoRoute(
-                            path: AppRouteSinglePath.settingsPrivacy,
-                            name: AppRouteName.settingsPrivacy,
-                            parentNavigatorKey: navigationService.navigatorKey,
-                            builder: (context, state) => const PrivacyScreen(),
-                          ),
-                          GoRoute(
-                            path: AppRouteSinglePath.settingsMyDonation,
-                            name: AppRouteName.settingsMyDonation,
-                            parentNavigatorKey: navigationService.navigatorKey,
-                            builder: (context, state) =>
-                                const MyDonationScreen(),
-                          ),
-                          GoRoute(
-                            path: AppRouteSinglePath.settingsWalletDashboard,
-                            name: AppRouteName.settingsWalletDashboard,
-                            parentNavigatorKey: navigationService.navigatorKey,
-                            builder: (context, state) =>
-                                const WalletDashboardScreen(),
-                            routes: [
-                              GoRoute(
-                                path: ':walletId',
-                                name: AppRouteName.walletDetail,
-                                builder: (context, state) => WalletDetailScreen(
-                                  walletId: state.pathParameters['walletId']!,
-                                ),
-                              ),
-                              GoRoute(
-                                path: 'my-campaigns',
-                                name: 'myCampaigns',
-                                builder: (context, state) =>
-                                    const MyCampaignsScreen(),
-                                routes: [
-                                  GoRoute(
-                                    path: ':campaignId/bank-settings',
-                                    name: 'campaignBankSettings',
-                                    builder: (context, state) =>
-                                        CampaignBankSettingsScreen(
-                                      campaignId:
-                                          state.pathParameters['campaignId']!,
-                                    ),
-                                  ),
-                                  GoRoute(
-                                    path: ':campaignId/earnings',
-                                    name: 'campaignEarnings',
-                                    builder: (context, state) =>
-                                        CampaignEarningsDetailScreen(
-                                      campaignId:
-                                          state.pathParameters['campaignId']!,
-                                    ),
-                                  ),
-                                  GoRoute(
-                                    path: ':campaignId/withdraw',
-                                    name: 'requestWithdrawal',
-                                    builder: (context, state) =>
-                                        RequestWithdrawalScreen(
-                                      campaignId:
-                                          state.pathParameters['campaignId']!,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          GoRoute(
-                            path: AppRouteSinglePath.settingsNotificationDetail,
-                            name: AppRouteName.settingsNotificationDetail,
-                            parentNavigatorKey: navigationService.navigatorKey,
-                            builder: (context, state) =>
-                                const NotificationDetailScreen(),
-                          ),
-                          GoRoute(
-                            path: AppRouteSinglePath.settingsTheme,
-                            name: AppRouteName.settingsTheme,
-                            parentNavigatorKey: navigationService.navigatorKey,
-                            builder: (context, state) => const ThemeScreen(),
-                          ),
-                          GoRoute(
-                            path: AppRouteSinglePath.settingsLanguage,
-                            name: AppRouteName.settingsLanguage,
-                            parentNavigatorKey: navigationService.navigatorKey,
-                            builder: (context, state) => const LanguageScreen(),
-                          ),
-                          GoRoute(
-                            path: AppRouteSinglePath.settingsAccessibility,
-                            name: AppRouteName.settingsAccessibility,
-                            parentNavigatorKey: navigationService.navigatorKey,
-                            builder: (context, state) =>
-                                const AccessibilityScreen(),
-                          ),
-                          GoRoute(
-                            path: AppRouteSinglePath.settingsHelp,
-                            name: AppRouteName.settingsHelp,
-                            parentNavigatorKey: navigationService.navigatorKey,
-                            builder: (context, state) => const HelpScreen(),
-                          ),
-                          GoRoute(
-                            path: AppRouteSinglePath.settingsFaq,
-                            name: AppRouteName.settingsFaq,
-                            parentNavigatorKey: navigationService.navigatorKey,
-                            builder: (context, state) => const FaqScreen(),
-                          ),
-                          GoRoute(
-                            path: AppRouteSinglePath.settingsAbout,
-                            name: AppRouteName.settingsAbout,
-                            parentNavigatorKey: navigationService.navigatorKey,
-                            builder: (context, state) => const AboutScreen(),
-                          ),
-                          GoRoute(
-                            path: AppRouteSinglePath.settingsProfileFieldEdit,
-                            name: AppRouteName.settingsProfileFieldEdit,
-                            parentNavigatorKey: navigationService.navigatorKey,
-                            builder: (context, state) {
-                              final t = AppLocalizations.of(context)!;
-                              final args = state.extra as ProfileFieldEditArgs?;
-                              if (args == null) {
-                                return ProfileFieldEditScreen(
-                                  title:
-                                      t.settingsProfileFieldEditFallbackTitle,
-                                  label:
-                                      t.settingsProfileFieldEditFallbackLabel,
-                                  saveLabel: t.settingsProfileFieldSave,
-                                );
-                              }
-                              return ProfileFieldEditScreen(
-                                title: args.title,
-                                label: args.label,
-                                initialValue: args.initialValue,
-                                helperText: args.helperText,
-                                keyboardType: args.keyboardType,
-                                maxLines: args.maxLines,
-                                hintText: args.hintText,
-                                saveLabel:
-                                    args.saveLabel ??
-                                    t.settingsProfileFieldSave,
+                        GoRoute(
+                          path: AppRouteSinglePath.userProfile,
+                          name: AppRouteName.userProfile,
+                          parentNavigatorKey:
+                              navigationService.navigatorKey, // root
+                          builder: (context, state) {
+                            final userId = state.pathParameters['userId'];
+                            if (userId == null || userId.isEmpty) {
+                              return const Scaffold(
+                                body: Center(child: Text('User not found')),
                               );
-                            },
+                            }
+                            return OtherUserProfileScreen(userId: userId);
+                          },
+                        ),
+                        GoRoute(
+                          path: AppRouteSinglePath.relationDetail,
+                          name: AppRouteName.relationDetail,
+                          parentNavigatorKey:
+                              navigationService.navigatorKey, // root
+                          builder: (context, state) {
+                            final userId = state.pathParameters['userId'];
+                            final tabStr = state.uri.queryParameters['tab'];
+                            final initialTab = int.tryParse(tabStr ?? '0') ?? 0;
+
+                            if (userId == null || userId.isEmpty) {
+                              return const Scaffold(
+                                body: Center(child: Text('User not found')),
+                              );
+                            }
+                            return RelationDetailScreen(
+                              userId: userId,
+                              initialTab: initialTab,
+                            );
+                          },
+                        ),
+                        GoRoute(
+                          path: AppRouteSinglePath.userPosts,
+                          name: AppRouteName.userPosts,
+                          parentNavigatorKey:
+                              navigationService.navigatorKey, // root
+                          builder: (context, state) {
+                            final userId = state.pathParameters['userId'];
+                            final indexStr = state.uri.queryParameters['index'];
+                            final username =
+                                state.uri.queryParameters['username'];
+                            final initialIndex =
+                                int.tryParse(indexStr ?? '0') ?? 0;
+
+                            if (userId == null || userId.isEmpty) {
+                              return const Scaffold(
+                                body: Center(child: Text('User not found')),
+                              );
+                            }
+                            return UserPostsScreen(
+                              userId: userId,
+                              initialPostIndex: initialIndex,
+                              username: username,
+                            );
+                          },
+                        ),
+                        GoRoute(
+                          path: AppRouteSinglePath.postFeed,
+                          name: AppRouteName.postFeed,
+                          parentNavigatorKey:
+                              navigationService.navigatorKey, // root
+                          builder: (context, state) {
+                            final args = state.extra as CreatePostMediaArgs?;
+                            if (args == null) {
+                              // No media provided, redirect to gallery
+                              WidgetsBinding.instance.addPostFrameCallback((_) {
+                                if (context.mounted) {
+                                  context.goNamed(AppRouteName.mediaGallery);
+                                }
+                              });
+                              return const SizedBox.shrink();
+                            }
+                            return PostFeedScreen(
+                              selectedMedia: args.selectedMedia,
+                            );
+                          },
+                          routes: [
+                            GoRoute(
+                              path: AppRouteSinglePath.moreOptions,
+                              name: AppRouteName.moreOptions,
+                              parentNavigatorKey:
+                                  navigationService.navigatorKey, // root
+                              builder: (context, state) {
+                                final args = state.extra as MoreOptionPostArgs;
+                                return MoreOptionPostScreen(
+                                  initialOptions: args.initialOptions,
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                StatefulShellBranch(
+                  navigatorKey: NavigationKeys.campaignBranch,
+                  routes: [
+                    GoRoute(
+                      path: AppRoutePath.campaign,
+                      name: AppRouteName.campaign,
+                      builder: (context, state) => const CampaignScreen(),
+                      routes: [
+                        GoRoute(
+                          path: AppRouteSinglePath.createCampaignPost,
+                          name: AppRouteName.createCampaignPost,
+                          parentNavigatorKey: navigationService.navigatorKey,
+                          builder: (context, state) => BlocProvider(
+                            create: (_) => getIt<CampaignPostBloc>(),
+                            child: const CreateCampaignPostScreen(),
                           ),
-                        ],
-                      ),
-                 ],
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      );
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                StatefulShellBranch(
+                  navigatorKey: NavigationKeys.chatBranch,
+                  routes: [
+                    GoRoute(
+                      path: AppRoutePath.chat,
+                      name: AppRouteName.chat,
+                      builder: (context, state) => const ChatScreen(),
+                      routes: [
+                        GoRoute(
+                          path: AppRouteSinglePath.chatDocumentPicker,
+                          name: AppRouteName.chatDocumentPicker,
+                          parentNavigatorKey: navigationService.navigatorKey,
+                          builder: (context, state) {
+                            final args = state.extra as ChatDocumentPickerArgs?;
+                            return ChatDocumentPickerScreen(
+                              maxDocuments: args?.maxDocuments ?? 10,
+                              allowedExtensions: args?.allowedExtensions,
+                            );
+                          },
+                        ),
+                        GoRoute(
+                          path: AppRouteSinglePath.searchFollowUser,
+                          name: AppRouteName.searchFollowUser,
+                          builder: (context, state) => const UserSearchScreen(),
+                        ),
+                        GoRoute(
+                          path: AppRouteSinglePath.chatDetail,
+                          name: AppRouteName.chatDetail,
+                          parentNavigatorKey:
+                              navigationService.navigatorKey, // root
+                          builder: (context, state) {
+                            final args = state.extra as ChatDetailArgs?;
+                            if (args == null) {
+                              return const Scaffold(
+                                body: Center(
+                                  child: Text('Invalid chat arguments'),
+                                ),
+                              );
+                            }
+                            return ChatDetailScreen(
+                              conversationId: args.conversationId,
+                              chatName: args.chatName,
+                              chatSubtitle: args.chatSubtitle,
+                              profileImageUrl: args.profileImageUrl,
+                              isGroup: args.isGroup,
+                              peerUserId: args.peerUserId,
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                // StatefulShellBranch(
+                //   navigatorKey: NavigationKeys.searchBranch,
+                //   routes: [
+                //     GoRoute(
+                //       path: AppRoutePath.search,
+                //       name: AppRouteName.search,
+                //       builder: (context, state) => const SearchScreen(),
+                //     ),
+                //   ],
+                // ),
+
+                StatefulShellBranch(
+                  navigatorKey: NavigationKeys.profileBranch,
+                  routes: [
+                    GoRoute(
+                      path: AppRoutePath.profile,
+                      name: AppRouteName.profile,
+                      builder: (context, state) => const ProfileScreen(),
+                      routes: [
+                        GoRoute(
+                          path: AppRouteSinglePath.settings,
+                          name: AppRouteName.settings,
+                          parentNavigatorKey: navigationService.navigatorKey,
+                          builder: (context, state) => const SettingScreen(),
+                          routes: [
+                            GoRoute(
+                              path: AppRouteSinglePath.settingsProfiles,
+                              name: AppRouteName.settingsProfiles,
+                              parentNavigatorKey:
+                                  navigationService.navigatorKey, // root
+                              builder: (context, state) =>
+                                  const ProfilesListScreen(),
+                            ),
+                            GoRoute(
+                              path: AppRouteSinglePath.settingsProfileDetail,
+                              name: AppRouteName.settingsProfileDetail,
+                              parentNavigatorKey:
+                                  navigationService.navigatorKey, // root
+                              builder: (context, state) =>
+                                  const ProfileDetailScreen(),
+                            ),
+                            GoRoute(
+                              path: AppRouteSinglePath.settingsEditProfile,
+                              name: AppRouteName.settingsEditProfile,
+                              parentNavigatorKey:
+                                  navigationService.navigatorKey, // root
+                              builder: (context, state) =>
+                                  const EditProfileScreen(),
+                            ),
+                            GoRoute(
+                              path: AppRouteSinglePath.settingsActivity,
+                              name: AppRouteName.settingsActivity,
+                              parentNavigatorKey:
+                                  navigationService.navigatorKey,
+                              builder: (context, state) =>
+                                  const ActivityScreen(),
+                            ),
+                            GoRoute(
+                              path: AppRouteSinglePath.settingsAdPreferences,
+                              name: AppRouteName.settingsAdPreferences,
+                              parentNavigatorKey:
+                                  navigationService.navigatorKey,
+                              builder: (context, state) =>
+                                  const AdPreferencesScreen(),
+                            ),
+                            GoRoute(
+                              path: AppRouteSinglePath.settingsAccountStatus,
+                              name: AppRouteName.settingsAccountStatus,
+                              parentNavigatorKey:
+                                  navigationService.navigatorKey,
+                              builder: (context, state) =>
+                                  const AccountStatusScreen(),
+                            ),
+                            GoRoute(
+                              path: AppRouteSinglePath.settingsAccountType,
+                              name: AppRouteName.settingsAccountType,
+                              parentNavigatorKey:
+                                  navigationService.navigatorKey,
+                              builder: (context, state) =>
+                                  const AccountTypeScreen(),
+                            ),
+                            GoRoute(
+                              path: AppRouteSinglePath.settingsPasswordSecurity,
+                              name: AppRouteName.settingsPasswordSecurity,
+                              parentNavigatorKey:
+                                  navigationService.navigatorKey,
+                              builder: (context, state) =>
+                                  const PasswordSecurityScreen(),
+                              routes: [
+                                GoRoute(
+                                  path: 'two-factor-setup',
+                                  parentNavigatorKey:
+                                      navigationService.navigatorKey,
+                                  builder: (context, state) =>
+                                      const TwoFactorSetupScreen(),
+                                ),
+                                GoRoute(
+                                  path: 'active-sessions',
+                                  parentNavigatorKey:
+                                      navigationService.navigatorKey,
+                                  builder: (context, state) =>
+                                      const ActiveSessionsScreen(),
+                                ),
+                                GoRoute(
+                                  path: 'trusted-contacts',
+                                  parentNavigatorKey:
+                                      navigationService.navigatorKey,
+                                  builder: (context, state) =>
+                                      const TrustedContactsScreen(),
+                                ),
+                                GoRoute(
+                                  path: 'recovery-codes',
+                                  parentNavigatorKey:
+                                      navigationService.navigatorKey,
+                                  builder: (context, state) =>
+                                      const RecoveryCodesScreen(),
+                                ),
+                              ],
+                            ),
+                            GoRoute(
+                              path: AppRouteSinglePath.settingsPrivacy,
+                              name: AppRouteName.settingsPrivacy,
+                              parentNavigatorKey:
+                                  navigationService.navigatorKey,
+                              builder: (context, state) =>
+                                  const PrivacyScreen(),
+                            ),
+                            GoRoute(
+                              path: AppRouteSinglePath.settingsMyDonation,
+                              name: AppRouteName.settingsMyDonation,
+                              parentNavigatorKey:
+                                  navigationService.navigatorKey,
+                              builder: (context, state) =>
+                                  const MyDonationScreen(),
+                            ),
+                            GoRoute(
+                              path: AppRouteSinglePath.settingsWalletDashboard,
+                              name: AppRouteName.settingsWalletDashboard,
+                              parentNavigatorKey:
+                                  navigationService.navigatorKey,
+                              builder: (context, state) =>
+                                  const WalletDashboardScreen(),
+                              routes: [
+                                GoRoute(
+                                  path: ':walletId',
+                                  name: AppRouteName.walletDetail,
+                                  builder: (context, state) =>
+                                      WalletDetailScreen(
+                                    walletId: state.pathParameters['walletId']!,
+                                  ),
+                                ),
+                                GoRoute(
+                                  path: 'my-campaigns',
+                                  name: 'myCampaigns',
+                                  builder: (context, state) =>
+                                      const MyCampaignsScreen(),
+                                  routes: [
+                                    GoRoute(
+                                      path: ':campaignId/bank-settings',
+                                      name: 'campaignBankSettings',
+                                      builder: (context, state) =>
+                                          CampaignBankSettingsScreen(
+                                        campaignId:
+                                            state.pathParameters['campaignId']!,
+                                      ),
+                                    ),
+                                    GoRoute(
+                                      path: ':campaignId/earnings',
+                                      name: 'campaignEarnings',
+                                      builder: (context, state) =>
+                                          CampaignEarningsDetailScreen(
+                                        campaignId:
+                                            state.pathParameters['campaignId']!,
+                                      ),
+                                    ),
+                                    GoRoute(
+                                      path: ':campaignId/withdraw',
+                                      name: 'requestWithdrawal',
+                                      builder: (context, state) =>
+                                          RequestWithdrawalScreen(
+                                        campaignId:
+                                            state.pathParameters['campaignId']!,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            GoRoute(
+                              path:
+                                  AppRouteSinglePath.settingsNotificationDetail,
+                              name: AppRouteName.settingsNotificationDetail,
+                              parentNavigatorKey:
+                                  navigationService.navigatorKey,
+                              builder: (context, state) =>
+                                  const NotificationDetailScreen(),
+                            ),
+                            GoRoute(
+                              path: AppRouteSinglePath.settingsTheme,
+                              name: AppRouteName.settingsTheme,
+                              parentNavigatorKey:
+                                  navigationService.navigatorKey,
+                              builder: (context, state) => const ThemeScreen(),
+                            ),
+                            GoRoute(
+                              path: AppRouteSinglePath.settingsLanguage,
+                              name: AppRouteName.settingsLanguage,
+                              parentNavigatorKey:
+                                  navigationService.navigatorKey,
+                              builder: (context, state) =>
+                                  const LanguageScreen(),
+                            ),
+                            GoRoute(
+                              path: AppRouteSinglePath.settingsAccessibility,
+                              name: AppRouteName.settingsAccessibility,
+                              parentNavigatorKey:
+                                  navigationService.navigatorKey,
+                              builder: (context, state) =>
+                                  const AccessibilityScreen(),
+                            ),
+                            GoRoute(
+                              path: AppRouteSinglePath.settingsHelp,
+                              name: AppRouteName.settingsHelp,
+                              parentNavigatorKey:
+                                  navigationService.navigatorKey,
+                              builder: (context, state) => const HelpScreen(),
+                            ),
+                            GoRoute(
+                              path: AppRouteSinglePath.settingsFaq,
+                              name: AppRouteName.settingsFaq,
+                              parentNavigatorKey:
+                                  navigationService.navigatorKey,
+                              builder: (context, state) => const FaqScreen(),
+                            ),
+                            GoRoute(
+                              path: AppRouteSinglePath.settingsAbout,
+                              name: AppRouteName.settingsAbout,
+                              parentNavigatorKey:
+                                  navigationService.navigatorKey,
+                              builder: (context, state) => const AboutScreen(),
+                            ),
+                            GoRoute(
+                              path: AppRouteSinglePath.settingsProfileFieldEdit,
+                              name: AppRouteName.settingsProfileFieldEdit,
+                              parentNavigatorKey:
+                                  navigationService.navigatorKey,
+                              builder: (context, state) {
+                                final t = AppLocalizations.of(context)!;
+                                final args =
+                                    state.extra as ProfileFieldEditArgs?;
+                                if (args == null) {
+                                  return ProfileFieldEditScreen(
+                                    title:
+                                        t.settingsProfileFieldEditFallbackTitle,
+                                    label:
+                                        t.settingsProfileFieldEditFallbackLabel,
+                                    saveLabel: t.settingsProfileFieldSave,
+                                  );
+                                }
+                                return ProfileFieldEditScreen(
+                                  title: args.title,
+                                  label: args.label,
+                                  initialValue: args.initialValue,
+                                  helperText: args.helperText,
+                                  keyboardType: args.keyboardType,
+                                  maxLines: args.maxLines,
+                                  hintText: args.hintText,
+                                  saveLabel: args.saveLabel ??
+                                      t.settingsProfileFieldSave,
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        );
 
   final GoRouter router;
   final NavigationService navigationService;
@@ -597,6 +650,7 @@ class AppRouteName {
   static const userProfile = 'userProfile';
   static const otherUserProfile = 'otherUserProfile';
   static const relationDetail = 'relationDetail';
+  static const userPosts = 'userPosts';
   static const postFeed = 'postFeed';
   static const moreOptions = 'moreOptions';
   static const createCampaignPost = 'createCampaignPost';
@@ -679,6 +733,7 @@ class AppRouteSinglePath {
   static const notification = 'notification';
   static const userProfile = 'user/:userId';
   static const relationDetail = 'user/:userId/relations';
+  static const userPosts = 'user/:userId/posts';
   static const chatDetail = 'chat-detail';
   static const chatDocumentPicker = 'document-picker';
   static const postFeed = 'post-feed';

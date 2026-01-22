@@ -128,7 +128,7 @@ class CampaignBankSettingsScreen extends HookWidget {
                   ),
                   const SizedBox(height: 8),
                   DropdownButtonFormField<String>(
-                    value: _bankOptions.contains(bankNameController.text)
+                    initialValue: _bankOptions.contains(bankNameController.text)
                         ? bankNameController.text
                         : null,
                     decoration: InputDecoration(

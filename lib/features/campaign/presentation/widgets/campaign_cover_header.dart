@@ -17,7 +17,7 @@ class CampaignCoverHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    return Container(
+    return SizedBox(
       height: expandedHeight,
       child: Stack(
         children: [

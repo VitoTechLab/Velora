@@ -143,30 +143,44 @@ class _UserProfileContent extends HookWidget {
                                         ),
                                         const SizedBox(width: 24),
                                         Expanded(
-                                          child: BlocBuilder<FeedBloc, FeedState>(
+                                          child:
+                                              BlocBuilder<FeedBloc, FeedState>(
                                             builder: (context, feedState) {
                                               return ProfileStats(
-                                                postsCount: feedState.posts.length,
+                                                postsCount:
+                                                    feedState.posts.length,
                                                 followersCount:
-                                                    profile?.followersCount ?? 0,
+                                                    profile?.followersCount ??
+                                                        0,
                                                 followingCount:
-                                                    profile?.followingCount ?? 0,
+                                                    profile?.followingCount ??
+                                                        0,
                                                 onPostsTap: () {},
                                                 onFollowersTap: () {
                                                   if (profile != null) {
                                                     context.pushNamed(
-                                                      AppRouteName.relationDetail,
-                                                      pathParameters: {'userId': profile.id},
-                                                      queryParameters: {'tab': '0'},
+                                                      AppRouteName
+                                                          .relationDetail,
+                                                      pathParameters: {
+                                                        'userId': profile.id
+                                                      },
+                                                      queryParameters: {
+                                                        'tab': '0'
+                                                      },
                                                     );
                                                   }
                                                 },
                                                 onFollowingTap: () {
                                                   if (profile != null) {
                                                     context.pushNamed(
-                                                      AppRouteName.relationDetail,
-                                                      pathParameters: {'userId': profile.id},
-                                                      queryParameters: {'tab': '1'},
+                                                      AppRouteName
+                                                          .relationDetail,
+                                                      pathParameters: {
+                                                        'userId': profile.id
+                                                      },
+                                                      queryParameters: {
+                                                        'tab': '1'
+                                                      },
                                                     );
                                                   }
                                                 },
@@ -202,7 +216,8 @@ class _UserProfileContent extends HookWidget {
                                           const SizedBox(height: 4),
                                           Text(
                                             profile.bio!,
-                                            style: const TextStyle(fontSize: 14),
+                                            style:
+                                                const TextStyle(fontSize: 14),
                                             maxLines: 3,
                                             overflow: TextOverflow.ellipsis,
                                           ),
@@ -334,7 +349,30 @@ class _UserProfileContent extends HookWidget {
                                       .expand((p) => p.imageUrls)
                                       .toList(),
                                   onPostTap: (index) {
-                                    // Note: Navigation to post detail will be implemented
+                                    // Calculate the actual post index from image index
+                                    int postIndex = 0;
+                                    int imageCount = 0;
+                                    for (int i = 0;
+                                        i < feedState.posts.length;
+                                        i++) {
+                                      final postImageCount =
+                                          feedState.posts[i].imageUrls.length;
+                                      if (imageCount + postImageCount > index) {
+                                        postIndex = i;
+                                        break;
+                                      }
+                                      imageCount += postImageCount;
+                                    }
+
+                                    final targetUserId = profile?.id ?? userId;
+                                    context.pushNamed(
+                                      AppRouteName.userPosts,
+                                      pathParameters: {'userId': targetUserId},
+                                      queryParameters: {
+                                        'index': postIndex.toString(),
+                                        'username': profile?.username ?? '',
+                                      },
+                                    );
                                   },
                                 );
                               },

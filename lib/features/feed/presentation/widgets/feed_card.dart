@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:go_router/go_router.dart';
 import 'package:velora/core/ui/app_messenger.dart';
 import 'package:velora/core/utils/format_utils.dart';
+import 'package:velora/routes/app_router.dart';
 import 'package:velora/features/feed/domain/entities/feed_entity.dart';
 import 'package:velora/features/feed/presentation/bloc/feed_bloc.dart';
 import 'package:velora/features/feed/presentation/bloc/feed_event.dart';
@@ -211,18 +213,30 @@ class FeedCard extends HookWidget {
     final subtitle = post.campaignTitle;
     final hasSubtitle = subtitle != null && subtitle.isNotEmpty;
 
+    void navigateToUserProfile() {
+      if (!post.isMe) {
+        context.pushNamed(
+          AppRouteName.userProfile,
+          pathParameters: {'userId': post.userId},
+        );
+      }
+    }
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       child: Row(
         children: [
-          CircleAvatar(
-            radius: 18,
-            backgroundImage: post.photoUrl != null
-                ? CachedNetworkImageProvider(post.photoUrl!)
-                : null,
-            child: post.photoUrl == null
-                ? const Icon(Icons.person, size: 20)
-                : null,
+          GestureDetector(
+            onTap: navigateToUserProfile,
+            child: CircleAvatar(
+              radius: 18,
+              backgroundImage: post.photoUrl != null
+                  ? CachedNetworkImageProvider(post.photoUrl!)
+                  : null,
+              child: post.photoUrl == null
+                  ? const Icon(Icons.person, size: 20)
+                  : null,
+            ),
           ),
           const SizedBox(width: 10),
           Expanded(
@@ -235,13 +249,16 @@ class FeedCard extends HookWidget {
                 Row(
                   children: [
                     Flexible(
-                      child: Text(
-                        post.username ?? t.feedUnknownUser,
-                        style: textTheme.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14,
+                      child: GestureDetector(
+                        onTap: navigateToUserProfile,
+                        child: Text(
+                          post.username ?? t.feedUnknownUser,
+                          style: textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     const SizedBox(width: 4),
