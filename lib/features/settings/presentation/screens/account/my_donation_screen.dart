@@ -49,6 +49,36 @@ class MyDonationScreen extends HookWidget {
             return const Center(child: CircularProgressIndicator());
           }
 
+          if (state.errorUserDonations != null) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.error_outline, size: 48, color: Colors.red),
+                    const SizedBox(height: 16),
+                    Text(
+                      state.errorUserDonations!,
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 16),
+                    FilledButton.tonal(
+                      onPressed: () {
+                        if (userId != null) {
+                          context.read<CampaignBloc>().add(
+                                CampaignEvent.loadUserDonations(userId: userId),
+                              );
+                        }
+                      },
+                      child: const Text('Retry'),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
+
           final donations = state.userDonations.cast<DonationEntity>();
 
           final filteredDonations = switch (selectedFilter.value) {

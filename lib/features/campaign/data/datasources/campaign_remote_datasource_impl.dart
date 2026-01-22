@@ -328,7 +328,7 @@ class CampaignRemoteDataSourceImpl implements CampaignRemoteDataSource {
             .from(_donations)
             .select('''
               *,
-              campaigns(title, image_url)
+              campaigns(title, cover_image_url)
             ''')
             .eq('user_id', userId)
             .order('created_at', ascending: false)

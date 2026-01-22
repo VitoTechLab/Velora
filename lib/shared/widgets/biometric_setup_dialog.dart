@@ -89,22 +89,78 @@ class _BiometricSetupDialogState extends State<BiometricSetupDialog> {
     if (!_status!.isAvailable) {
       return AlertDialog(
         icon: Icon(
-          Icons.warning_amber_rounded,
-          color: colorScheme.error,
+          _status!.isSupported
+              ? Icons.fingerprint
+              : Icons.warning_amber_rounded,
+          color: _status!.isSupported ? colorScheme.primary : colorScheme.error,
           size: 48,
         ),
-        title: const Text('Biometric Not Available'),
-        content: Text(
-          _status!.isSupported
-              ? 'No biometric authentication is enrolled on this device. Please set up Face ID or Fingerprint in your device settings first.'
-              : 'This device does not support biometric authentication.',
-          textAlign: TextAlign.center,
+        title: Text(_status!.isSupported
+            ? 'Register Biometric First'
+            : 'Biometric Not Available'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              _status!.isSupported
+                  ? 'No fingerprint or face recognition is registered on this device. Please set up biometric authentication in your device settings first.'
+                  : 'This device does not support biometric authentication.',
+              textAlign: TextAlign.center,
+            ),
+            if (_status!.isSupported) ...[
+              const SizedBox(height: 16),
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: colorScheme.surfaceContainerHighest,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.info_outline,
+                      color: colorScheme.primary,
+                      size: 20,
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'Go to Settings → Security → Fingerprint to register your biometric.',
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('Close'),
+            child: const Text('Cancel'),
           ),
+          if (_status!.isSupported)
+            FilledButton.icon(
+              onPressed: () async {
+                final opened = await _biometricService.openSecuritySettings();
+                if (!opened && context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                          'Please open device Settings → Security to register your fingerprint'),
+                    ),
+                  );
+                }
+                if (context.mounted) {
+                  Navigator.of(context).pop(false);
+                }
+              },
+              icon: const Icon(Icons.settings),
+              label: const Text('Open Settings'),
+            ),
         ],
       );
     }

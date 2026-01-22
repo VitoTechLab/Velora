@@ -63,7 +63,7 @@ class CampaignEarningsDetailScreen extends HookWidget {
         actions: [
           IconButton(
             onPressed: () => context.push(
-              '/wallet/my-campaigns/$campaignId/bank-settings',
+              '/profile/settings/wallet/my-campaigns/$campaignId/bank-settings',
             ),
             icon: const Icon(Icons.settings_outlined),
             tooltip: 'Bank Settings',
@@ -86,7 +86,13 @@ class CampaignEarningsDetailScreen extends HookWidget {
           final withdrawals = state.withdrawals;
 
           // Calculate metrics based on selected time range
-          final metrics = _calculateMetrics(donations, selectedTimeRange.value);
+          // For "All time" (index 3), use campaign.amountRaised since donations list is limited
+          final metrics = _calculateMetrics(
+            donations, 
+            selectedTimeRange.value,
+            campaign.amountRaised,
+            campaign.donorCount,
+          );
 
           return RefreshIndicator(
             onRefresh: () async {
@@ -159,7 +165,7 @@ class CampaignEarningsDetailScreen extends HookWidget {
                                 colorScheme: colorScheme,
                                 theme: theme,
                                 onTap: () => context.push(
-                                  '/wallet/my-campaigns/$campaignId/withdraw',
+                                  '/profile/settings/wallet/my-campaigns/$campaignId/withdraw',
                                   extra: campaign,
                                 ),
                               ),
@@ -215,7 +221,14 @@ class CampaignEarningsDetailScreen extends HookWidget {
   ({double amount, int count}) _calculateMetrics(
     List<DonationEntity> donations,
     int rangeIndex,
+    double totalAmountRaised,
+    int totalDonorCount,
   ) {
+    // For "All time" (index 3), use campaign totals since donations list is limited
+    if (rangeIndex == 3) {
+      return (amount: totalAmountRaised, count: totalDonorCount);
+    }
+    
     if (donations.isEmpty) return (amount: 0.0, count: 0);
 
     final now = DateTime.now();
@@ -469,7 +482,7 @@ class _DonationsList extends StatelessWidget {
             CircleAvatar(
               backgroundColor: Theme.of(context).colorScheme.primaryContainer,
               child: Text(
-                isAnonymous ? 'A' : (donation.userId[0]).toUpperCase(),
+                isAnonymous ? 'A' : (donation.donorDisplayName ?? donation.donorUsername ?? 'U')[0].toUpperCase(),
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.onPrimaryContainer,
                   fontWeight: FontWeight.bold,
@@ -483,13 +496,19 @@ class _DonationsList extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text(
-                        isAnonymous ? 'Anonymous Donor' : 'User ${donation.userId}',
-                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                      Expanded(
+                        child: Text(
+                          isAnonymous 
+                              ? 'Anonymous Donor' 
+                              : (donation.donorDisplayName ?? donation.donorUsername ?? 'Unknown'),
+                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
-                      const Spacer(),
+                      const SizedBox(width: 8),
                       Text(
                         currencyFormat.format(donation.amountTotal),
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
