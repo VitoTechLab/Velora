@@ -502,12 +502,16 @@ class AppRouter {
                                 GoRoute(
                                   path: 'my-campaigns',
                                   name: 'myCampaigns',
+                                  parentNavigatorKey:
+                                      navigationService.navigatorKey,
                                   builder: (context, state) =>
                                       const MyCampaignsScreen(),
                                   routes: [
                                     GoRoute(
                                       path: ':campaignId/bank-settings',
                                       name: 'campaignBankSettings',
+                                      parentNavigatorKey:
+                                          navigationService.navigatorKey,
                                       builder: (context, state) =>
                                           CampaignBankSettingsScreen(
                                         campaignId:
@@ -517,6 +521,8 @@ class AppRouter {
                                     GoRoute(
                                       path: ':campaignId/earnings',
                                       name: 'campaignEarnings',
+                                      parentNavigatorKey:
+                                          navigationService.navigatorKey,
                                       builder: (context, state) =>
                                           CampaignEarningsDetailScreen(
                                         campaignId:
@@ -526,6 +532,8 @@ class AppRouter {
                                     GoRoute(
                                       path: ':campaignId/withdraw',
                                       name: 'requestWithdrawal',
+                                      parentNavigatorKey:
+                                          navigationService.navigatorKey,
                                       builder: (context, state) =>
                                           RequestWithdrawalScreen(
                                         campaignId:
@@ -538,6 +546,8 @@ class AppRouter {
                                 GoRoute(
                                   path: ':walletId',
                                   name: AppRouteName.walletDetail,
+                                  parentNavigatorKey:
+                                      navigationService.navigatorKey,
                                   builder: (context, state) =>
                                       WalletDetailScreen(
                                     walletId: state.pathParameters['walletId']!,
@@ -546,6 +556,8 @@ class AppRouter {
                                     GoRoute(
                                       path: 'withdrawals',
                                       name: 'walletWithdrawals',
+                                      parentNavigatorKey:
+                                          navigationService.navigatorKey,
                                       builder: (context, state) =>
                                           WithdrawalHistoryScreen(
                                         walletId:
