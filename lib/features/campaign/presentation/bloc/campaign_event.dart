@@ -7,7 +7,7 @@ import 'package:velora/features/campaign/domain/entities/withdrawal_entity.dart'
 part 'campaign_event.freezed.dart';
 
 @freezed
-class CampaignEvent with _$CampaignEvent {
+abstract class CampaignEvent with _$CampaignEvent {
   /// Load list of campaigns (homepage / discovery)
   const factory CampaignEvent.loadCampaigns({
     String? categoryId,

@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,7671 +9,1897 @@ part of 'campaign_event.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
 mixin _$CampaignEvent {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? categoryId, int limit) loadCampaigns,
-    required TResult Function(String? categoryId, int limit) refreshCampaigns,
-    required TResult Function(String query, String? categoryId, int limit)
-        searchCampaigns,
-    required TResult Function(String campaignId) getCampaignDetail,
-    required TResult Function(CampaignEntity campaign) createCampaign,
-    required TResult Function(CampaignEntity campaign) updateCampaign,
-    required TResult Function(String campaignId) deleteCampaign,
-    required TResult Function(String campaignId, String status)
-        updateCampaignStatus,
-    required TResult Function() loadCategories,
-    required TResult Function(String campaignId, int limit) loadDonations,
-    required TResult Function(DonationEntity donation) createDonation,
-    required TResult Function(String campaignId, bool includeReplies)
-        loadComments,
-    required TResult Function(CampaignCommentEntity comment) addComment,
-    required TResult Function(String campaignId, String commentId)
-        deleteComment,
-    required TResult Function(String parentId) loadCommentReplies,
-    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
-    required TResult Function(String campaignId) loadWithdrawals,
-    required TResult Function(String campaignId) loadCampaignTransparencyData,
-    required TResult Function(String campaignId) loadCampaignUpdates,
-    required TResult Function(String userId) loadUserCampaigns,
-    required TResult Function(String userId, int limit) loadUserDonations,
-    required TResult Function(String campaignId, String bankName,
-            String accountNumber, String accountHolder)
-        updateCampaignBankDetails,
-    required TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)
-        processDonation,
-    required TResult Function() clearTransient,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? categoryId, int limit)? loadCampaigns,
-    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult? Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult? Function(String campaignId)? getCampaignDetail,
-    TResult? Function(CampaignEntity campaign)? createCampaign,
-    TResult? Function(CampaignEntity campaign)? updateCampaign,
-    TResult? Function(String campaignId)? deleteCampaign,
-    TResult? Function(String campaignId, String status)? updateCampaignStatus,
-    TResult? Function()? loadCategories,
-    TResult? Function(String campaignId, int limit)? loadDonations,
-    TResult? Function(DonationEntity donation)? createDonation,
-    TResult? Function(String campaignId, bool includeReplies)? loadComments,
-    TResult? Function(CampaignCommentEntity comment)? addComment,
-    TResult? Function(String campaignId, String commentId)? deleteComment,
-    TResult? Function(String parentId)? loadCommentReplies,
-    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult? Function(String campaignId)? loadWithdrawals,
-    TResult? Function(String campaignId)? loadCampaignTransparencyData,
-    TResult? Function(String campaignId)? loadCampaignUpdates,
-    TResult? Function(String userId)? loadUserCampaigns,
-    TResult? Function(String userId, int limit)? loadUserDonations,
-    TResult? Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult? Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult? Function()? clearTransient,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? categoryId, int limit)? loadCampaigns,
-    TResult Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult Function(String campaignId)? getCampaignDetail,
-    TResult Function(CampaignEntity campaign)? createCampaign,
-    TResult Function(CampaignEntity campaign)? updateCampaign,
-    TResult Function(String campaignId)? deleteCampaign,
-    TResult Function(String campaignId, String status)? updateCampaignStatus,
-    TResult Function()? loadCategories,
-    TResult Function(String campaignId, int limit)? loadDonations,
-    TResult Function(DonationEntity donation)? createDonation,
-    TResult Function(String campaignId, bool includeReplies)? loadComments,
-    TResult Function(CampaignCommentEntity comment)? addComment,
-    TResult Function(String campaignId, String commentId)? deleteComment,
-    TResult Function(String parentId)? loadCommentReplies,
-    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult Function(String campaignId)? loadWithdrawals,
-    TResult Function(String campaignId)? loadCampaignTransparencyData,
-    TResult Function(String campaignId)? loadCampaignUpdates,
-    TResult Function(String userId)? loadUserCampaigns,
-    TResult Function(String userId, int limit)? loadUserDonations,
-    TResult Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
-    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
-    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
-    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
-    required TResult Function(CreateCampaignEvent value) createCampaign,
-    required TResult Function(UpdateCampaignEvent value) updateCampaign,
-    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
-    required TResult Function(UpdateCampaignStatusEvent value)
-        updateCampaignStatus,
-    required TResult Function(LoadCategoriesEvent value) loadCategories,
-    required TResult Function(LoadDonationsEvent value) loadDonations,
-    required TResult Function(CreateDonationEvent value) createDonation,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
-    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(LoadCampaignTransparencyDataEvent value)
-        loadCampaignTransparencyData,
-    required TResult Function(LoadCampaignUpdatesEvent value)
-        loadCampaignUpdates,
-    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
-    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
-    required TResult Function(UpdateCampaignBankDetailsEvent value)
-        updateCampaignBankDetails,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult? Function(CreateCampaignEvent value)? createCampaign,
-    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult? Function(LoadCategoriesEvent value)? loadCategories,
-    TResult? Function(LoadDonationsEvent value)? loadDonations,
-    TResult? Function(CreateDonationEvent value)? createDonation,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult? Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult Function(CreateCampaignEvent value)? createCampaign,
-    TResult Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult Function(LoadCategoriesEvent value)? loadCategories,
-    TResult Function(LoadDonationsEvent value)? loadDonations,
-    TResult Function(CreateDonationEvent value)? createDonation,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $CampaignEventCopyWith<$Res> {
-  factory $CampaignEventCopyWith(
-          CampaignEvent value, $Res Function(CampaignEvent) then) =
-      _$CampaignEventCopyWithImpl<$Res, CampaignEvent>;
-}
-
-/// @nodoc
-class _$CampaignEventCopyWithImpl<$Res, $Val extends CampaignEvent>
-    implements $CampaignEventCopyWith<$Res> {
-  _$CampaignEventCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-abstract class _$$LoadCampaignsEventImplCopyWith<$Res> {
-  factory _$$LoadCampaignsEventImplCopyWith(_$LoadCampaignsEventImpl value,
-          $Res Function(_$LoadCampaignsEventImpl) then) =
-      __$$LoadCampaignsEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String? categoryId, int limit});
-}
-
-/// @nodoc
-class __$$LoadCampaignsEventImplCopyWithImpl<$Res>
-    extends _$CampaignEventCopyWithImpl<$Res, _$LoadCampaignsEventImpl>
-    implements _$$LoadCampaignsEventImplCopyWith<$Res> {
-  __$$LoadCampaignsEventImplCopyWithImpl(_$LoadCampaignsEventImpl _value,
-      $Res Function(_$LoadCampaignsEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? categoryId = freezed,
-    Object? limit = null,
-  }) {
-    return _then(_$LoadCampaignsEventImpl(
-      categoryId: freezed == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      limit: null == limit
-          ? _value.limit
-          : limit // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$LoadCampaignsEventImpl implements LoadCampaignsEvent {
-  const _$LoadCampaignsEventImpl({this.categoryId, this.limit = 20});
-
-  @override
-  final String? categoryId;
-  @override
-  @JsonKey()
-  final int limit;
-
-  @override
-  String toString() {
-    return 'CampaignEvent.loadCampaigns(categoryId: $categoryId, limit: $limit)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadCampaignsEventImpl &&
-            (identical(other.categoryId, categoryId) ||
-                other.categoryId == categoryId) &&
-            (identical(other.limit, limit) || other.limit == limit));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, categoryId, limit);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadCampaignsEventImplCopyWith<_$LoadCampaignsEventImpl> get copyWith =>
-      __$$LoadCampaignsEventImplCopyWithImpl<_$LoadCampaignsEventImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? categoryId, int limit) loadCampaigns,
-    required TResult Function(String? categoryId, int limit) refreshCampaigns,
-    required TResult Function(String query, String? categoryId, int limit)
-        searchCampaigns,
-    required TResult Function(String campaignId) getCampaignDetail,
-    required TResult Function(CampaignEntity campaign) createCampaign,
-    required TResult Function(CampaignEntity campaign) updateCampaign,
-    required TResult Function(String campaignId) deleteCampaign,
-    required TResult Function(String campaignId, String status)
-        updateCampaignStatus,
-    required TResult Function() loadCategories,
-    required TResult Function(String campaignId, int limit) loadDonations,
-    required TResult Function(DonationEntity donation) createDonation,
-    required TResult Function(String campaignId, bool includeReplies)
-        loadComments,
-    required TResult Function(CampaignCommentEntity comment) addComment,
-    required TResult Function(String campaignId, String commentId)
-        deleteComment,
-    required TResult Function(String parentId) loadCommentReplies,
-    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
-    required TResult Function(String campaignId) loadWithdrawals,
-    required TResult Function(String campaignId) loadCampaignTransparencyData,
-    required TResult Function(String campaignId) loadCampaignUpdates,
-    required TResult Function(String userId) loadUserCampaigns,
-    required TResult Function(String userId, int limit) loadUserDonations,
-    required TResult Function(String campaignId, String bankName,
-            String accountNumber, String accountHolder)
-        updateCampaignBankDetails,
-    required TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)
-        processDonation,
-    required TResult Function() clearTransient,
-  }) {
-    return loadCampaigns(categoryId, limit);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? categoryId, int limit)? loadCampaigns,
-    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult? Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult? Function(String campaignId)? getCampaignDetail,
-    TResult? Function(CampaignEntity campaign)? createCampaign,
-    TResult? Function(CampaignEntity campaign)? updateCampaign,
-    TResult? Function(String campaignId)? deleteCampaign,
-    TResult? Function(String campaignId, String status)? updateCampaignStatus,
-    TResult? Function()? loadCategories,
-    TResult? Function(String campaignId, int limit)? loadDonations,
-    TResult? Function(DonationEntity donation)? createDonation,
-    TResult? Function(String campaignId, bool includeReplies)? loadComments,
-    TResult? Function(CampaignCommentEntity comment)? addComment,
-    TResult? Function(String campaignId, String commentId)? deleteComment,
-    TResult? Function(String parentId)? loadCommentReplies,
-    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult? Function(String campaignId)? loadWithdrawals,
-    TResult? Function(String campaignId)? loadCampaignTransparencyData,
-    TResult? Function(String campaignId)? loadCampaignUpdates,
-    TResult? Function(String userId)? loadUserCampaigns,
-    TResult? Function(String userId, int limit)? loadUserDonations,
-    TResult? Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult? Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult? Function()? clearTransient,
-  }) {
-    return loadCampaigns?.call(categoryId, limit);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? categoryId, int limit)? loadCampaigns,
-    TResult Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult Function(String campaignId)? getCampaignDetail,
-    TResult Function(CampaignEntity campaign)? createCampaign,
-    TResult Function(CampaignEntity campaign)? updateCampaign,
-    TResult Function(String campaignId)? deleteCampaign,
-    TResult Function(String campaignId, String status)? updateCampaignStatus,
-    TResult Function()? loadCategories,
-    TResult Function(String campaignId, int limit)? loadDonations,
-    TResult Function(DonationEntity donation)? createDonation,
-    TResult Function(String campaignId, bool includeReplies)? loadComments,
-    TResult Function(CampaignCommentEntity comment)? addComment,
-    TResult Function(String campaignId, String commentId)? deleteComment,
-    TResult Function(String parentId)? loadCommentReplies,
-    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult Function(String campaignId)? loadWithdrawals,
-    TResult Function(String campaignId)? loadCampaignTransparencyData,
-    TResult Function(String campaignId)? loadCampaignUpdates,
-    TResult Function(String userId)? loadUserCampaigns,
-    TResult Function(String userId, int limit)? loadUserDonations,
-    TResult Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadCampaigns != null) {
-      return loadCampaigns(categoryId, limit);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
-    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
-    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
-    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
-    required TResult Function(CreateCampaignEvent value) createCampaign,
-    required TResult Function(UpdateCampaignEvent value) updateCampaign,
-    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
-    required TResult Function(UpdateCampaignStatusEvent value)
-        updateCampaignStatus,
-    required TResult Function(LoadCategoriesEvent value) loadCategories,
-    required TResult Function(LoadDonationsEvent value) loadDonations,
-    required TResult Function(CreateDonationEvent value) createDonation,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
-    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(LoadCampaignTransparencyDataEvent value)
-        loadCampaignTransparencyData,
-    required TResult Function(LoadCampaignUpdatesEvent value)
-        loadCampaignUpdates,
-    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
-    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
-    required TResult Function(UpdateCampaignBankDetailsEvent value)
-        updateCampaignBankDetails,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
-  }) {
-    return loadCampaigns(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult? Function(CreateCampaignEvent value)? createCampaign,
-    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult? Function(LoadCategoriesEvent value)? loadCategories,
-    TResult? Function(LoadDonationsEvent value)? loadDonations,
-    TResult? Function(CreateDonationEvent value)? createDonation,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult? Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
-  }) {
-    return loadCampaigns?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult Function(CreateCampaignEvent value)? createCampaign,
-    TResult Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult Function(LoadCategoriesEvent value)? loadCategories,
-    TResult Function(LoadDonationsEvent value)? loadDonations,
-    TResult Function(CreateDonationEvent value)? createDonation,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadCampaigns != null) {
-      return loadCampaigns(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class LoadCampaignsEvent implements CampaignEvent {
-  const factory LoadCampaignsEvent(
-      {final String? categoryId, final int limit}) = _$LoadCampaignsEventImpl;
-
-  String? get categoryId;
-  int get limit;
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LoadCampaignsEventImplCopyWith<_$LoadCampaignsEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$RefreshCampaignsEventImplCopyWith<$Res> {
-  factory _$$RefreshCampaignsEventImplCopyWith(
-          _$RefreshCampaignsEventImpl value,
-          $Res Function(_$RefreshCampaignsEventImpl) then) =
-      __$$RefreshCampaignsEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String? categoryId, int limit});
-}
-
-/// @nodoc
-class __$$RefreshCampaignsEventImplCopyWithImpl<$Res>
-    extends _$CampaignEventCopyWithImpl<$Res, _$RefreshCampaignsEventImpl>
-    implements _$$RefreshCampaignsEventImplCopyWith<$Res> {
-  __$$RefreshCampaignsEventImplCopyWithImpl(_$RefreshCampaignsEventImpl _value,
-      $Res Function(_$RefreshCampaignsEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? categoryId = freezed,
-    Object? limit = null,
-  }) {
-    return _then(_$RefreshCampaignsEventImpl(
-      categoryId: freezed == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      limit: null == limit
-          ? _value.limit
-          : limit // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$RefreshCampaignsEventImpl implements RefreshCampaignsEvent {
-  const _$RefreshCampaignsEventImpl({this.categoryId, this.limit = 20});
-
-  @override
-  final String? categoryId;
-  @override
-  @JsonKey()
-  final int limit;
-
-  @override
-  String toString() {
-    return 'CampaignEvent.refreshCampaigns(categoryId: $categoryId, limit: $limit)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$RefreshCampaignsEventImpl &&
-            (identical(other.categoryId, categoryId) ||
-                other.categoryId == categoryId) &&
-            (identical(other.limit, limit) || other.limit == limit));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, categoryId, limit);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$RefreshCampaignsEventImplCopyWith<_$RefreshCampaignsEventImpl>
-      get copyWith => __$$RefreshCampaignsEventImplCopyWithImpl<
-          _$RefreshCampaignsEventImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? categoryId, int limit) loadCampaigns,
-    required TResult Function(String? categoryId, int limit) refreshCampaigns,
-    required TResult Function(String query, String? categoryId, int limit)
-        searchCampaigns,
-    required TResult Function(String campaignId) getCampaignDetail,
-    required TResult Function(CampaignEntity campaign) createCampaign,
-    required TResult Function(CampaignEntity campaign) updateCampaign,
-    required TResult Function(String campaignId) deleteCampaign,
-    required TResult Function(String campaignId, String status)
-        updateCampaignStatus,
-    required TResult Function() loadCategories,
-    required TResult Function(String campaignId, int limit) loadDonations,
-    required TResult Function(DonationEntity donation) createDonation,
-    required TResult Function(String campaignId, bool includeReplies)
-        loadComments,
-    required TResult Function(CampaignCommentEntity comment) addComment,
-    required TResult Function(String campaignId, String commentId)
-        deleteComment,
-    required TResult Function(String parentId) loadCommentReplies,
-    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
-    required TResult Function(String campaignId) loadWithdrawals,
-    required TResult Function(String campaignId) loadCampaignTransparencyData,
-    required TResult Function(String campaignId) loadCampaignUpdates,
-    required TResult Function(String userId) loadUserCampaigns,
-    required TResult Function(String userId, int limit) loadUserDonations,
-    required TResult Function(String campaignId, String bankName,
-            String accountNumber, String accountHolder)
-        updateCampaignBankDetails,
-    required TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)
-        processDonation,
-    required TResult Function() clearTransient,
-  }) {
-    return refreshCampaigns(categoryId, limit);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? categoryId, int limit)? loadCampaigns,
-    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult? Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult? Function(String campaignId)? getCampaignDetail,
-    TResult? Function(CampaignEntity campaign)? createCampaign,
-    TResult? Function(CampaignEntity campaign)? updateCampaign,
-    TResult? Function(String campaignId)? deleteCampaign,
-    TResult? Function(String campaignId, String status)? updateCampaignStatus,
-    TResult? Function()? loadCategories,
-    TResult? Function(String campaignId, int limit)? loadDonations,
-    TResult? Function(DonationEntity donation)? createDonation,
-    TResult? Function(String campaignId, bool includeReplies)? loadComments,
-    TResult? Function(CampaignCommentEntity comment)? addComment,
-    TResult? Function(String campaignId, String commentId)? deleteComment,
-    TResult? Function(String parentId)? loadCommentReplies,
-    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult? Function(String campaignId)? loadWithdrawals,
-    TResult? Function(String campaignId)? loadCampaignTransparencyData,
-    TResult? Function(String campaignId)? loadCampaignUpdates,
-    TResult? Function(String userId)? loadUserCampaigns,
-    TResult? Function(String userId, int limit)? loadUserDonations,
-    TResult? Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult? Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult? Function()? clearTransient,
-  }) {
-    return refreshCampaigns?.call(categoryId, limit);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? categoryId, int limit)? loadCampaigns,
-    TResult Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult Function(String campaignId)? getCampaignDetail,
-    TResult Function(CampaignEntity campaign)? createCampaign,
-    TResult Function(CampaignEntity campaign)? updateCampaign,
-    TResult Function(String campaignId)? deleteCampaign,
-    TResult Function(String campaignId, String status)? updateCampaignStatus,
-    TResult Function()? loadCategories,
-    TResult Function(String campaignId, int limit)? loadDonations,
-    TResult Function(DonationEntity donation)? createDonation,
-    TResult Function(String campaignId, bool includeReplies)? loadComments,
-    TResult Function(CampaignCommentEntity comment)? addComment,
-    TResult Function(String campaignId, String commentId)? deleteComment,
-    TResult Function(String parentId)? loadCommentReplies,
-    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult Function(String campaignId)? loadWithdrawals,
-    TResult Function(String campaignId)? loadCampaignTransparencyData,
-    TResult Function(String campaignId)? loadCampaignUpdates,
-    TResult Function(String userId)? loadUserCampaigns,
-    TResult Function(String userId, int limit)? loadUserDonations,
-    TResult Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (refreshCampaigns != null) {
-      return refreshCampaigns(categoryId, limit);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
-    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
-    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
-    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
-    required TResult Function(CreateCampaignEvent value) createCampaign,
-    required TResult Function(UpdateCampaignEvent value) updateCampaign,
-    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
-    required TResult Function(UpdateCampaignStatusEvent value)
-        updateCampaignStatus,
-    required TResult Function(LoadCategoriesEvent value) loadCategories,
-    required TResult Function(LoadDonationsEvent value) loadDonations,
-    required TResult Function(CreateDonationEvent value) createDonation,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
-    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(LoadCampaignTransparencyDataEvent value)
-        loadCampaignTransparencyData,
-    required TResult Function(LoadCampaignUpdatesEvent value)
-        loadCampaignUpdates,
-    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
-    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
-    required TResult Function(UpdateCampaignBankDetailsEvent value)
-        updateCampaignBankDetails,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
-  }) {
-    return refreshCampaigns(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult? Function(CreateCampaignEvent value)? createCampaign,
-    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult? Function(LoadCategoriesEvent value)? loadCategories,
-    TResult? Function(LoadDonationsEvent value)? loadDonations,
-    TResult? Function(CreateDonationEvent value)? createDonation,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult? Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
-  }) {
-    return refreshCampaigns?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult Function(CreateCampaignEvent value)? createCampaign,
-    TResult Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult Function(LoadCategoriesEvent value)? loadCategories,
-    TResult Function(LoadDonationsEvent value)? loadDonations,
-    TResult Function(CreateDonationEvent value)? createDonation,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (refreshCampaigns != null) {
-      return refreshCampaigns(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class RefreshCampaignsEvent implements CampaignEvent {
-  const factory RefreshCampaignsEvent(
-      {final String? categoryId,
-      final int limit}) = _$RefreshCampaignsEventImpl;
-
-  String? get categoryId;
-  int get limit;
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$RefreshCampaignsEventImplCopyWith<_$RefreshCampaignsEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$SearchCampaignsEventImplCopyWith<$Res> {
-  factory _$$SearchCampaignsEventImplCopyWith(_$SearchCampaignsEventImpl value,
-          $Res Function(_$SearchCampaignsEventImpl) then) =
-      __$$SearchCampaignsEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String query, String? categoryId, int limit});
-}
-
-/// @nodoc
-class __$$SearchCampaignsEventImplCopyWithImpl<$Res>
-    extends _$CampaignEventCopyWithImpl<$Res, _$SearchCampaignsEventImpl>
-    implements _$$SearchCampaignsEventImplCopyWith<$Res> {
-  __$$SearchCampaignsEventImplCopyWithImpl(_$SearchCampaignsEventImpl _value,
-      $Res Function(_$SearchCampaignsEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? query = null,
-    Object? categoryId = freezed,
-    Object? limit = null,
-  }) {
-    return _then(_$SearchCampaignsEventImpl(
-      query: null == query
-          ? _value.query
-          : query // ignore: cast_nullable_to_non_nullable
-              as String,
-      categoryId: freezed == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      limit: null == limit
-          ? _value.limit
-          : limit // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$SearchCampaignsEventImpl implements SearchCampaignsEvent {
-  const _$SearchCampaignsEventImpl(
-      {required this.query, this.categoryId, this.limit = 20});
-
-  @override
-  final String query;
-  @override
-  final String? categoryId;
-  @override
-  @JsonKey()
-  final int limit;
-
-  @override
-  String toString() {
-    return 'CampaignEvent.searchCampaigns(query: $query, categoryId: $categoryId, limit: $limit)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SearchCampaignsEventImpl &&
-            (identical(other.query, query) || other.query == query) &&
-            (identical(other.categoryId, categoryId) ||
-                other.categoryId == categoryId) &&
-            (identical(other.limit, limit) || other.limit == limit));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, query, categoryId, limit);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SearchCampaignsEventImplCopyWith<_$SearchCampaignsEventImpl>
-      get copyWith =>
-          __$$SearchCampaignsEventImplCopyWithImpl<_$SearchCampaignsEventImpl>(
-              this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? categoryId, int limit) loadCampaigns,
-    required TResult Function(String? categoryId, int limit) refreshCampaigns,
-    required TResult Function(String query, String? categoryId, int limit)
-        searchCampaigns,
-    required TResult Function(String campaignId) getCampaignDetail,
-    required TResult Function(CampaignEntity campaign) createCampaign,
-    required TResult Function(CampaignEntity campaign) updateCampaign,
-    required TResult Function(String campaignId) deleteCampaign,
-    required TResult Function(String campaignId, String status)
-        updateCampaignStatus,
-    required TResult Function() loadCategories,
-    required TResult Function(String campaignId, int limit) loadDonations,
-    required TResult Function(DonationEntity donation) createDonation,
-    required TResult Function(String campaignId, bool includeReplies)
-        loadComments,
-    required TResult Function(CampaignCommentEntity comment) addComment,
-    required TResult Function(String campaignId, String commentId)
-        deleteComment,
-    required TResult Function(String parentId) loadCommentReplies,
-    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
-    required TResult Function(String campaignId) loadWithdrawals,
-    required TResult Function(String campaignId) loadCampaignTransparencyData,
-    required TResult Function(String campaignId) loadCampaignUpdates,
-    required TResult Function(String userId) loadUserCampaigns,
-    required TResult Function(String userId, int limit) loadUserDonations,
-    required TResult Function(String campaignId, String bankName,
-            String accountNumber, String accountHolder)
-        updateCampaignBankDetails,
-    required TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)
-        processDonation,
-    required TResult Function() clearTransient,
-  }) {
-    return searchCampaigns(query, categoryId, limit);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? categoryId, int limit)? loadCampaigns,
-    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult? Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult? Function(String campaignId)? getCampaignDetail,
-    TResult? Function(CampaignEntity campaign)? createCampaign,
-    TResult? Function(CampaignEntity campaign)? updateCampaign,
-    TResult? Function(String campaignId)? deleteCampaign,
-    TResult? Function(String campaignId, String status)? updateCampaignStatus,
-    TResult? Function()? loadCategories,
-    TResult? Function(String campaignId, int limit)? loadDonations,
-    TResult? Function(DonationEntity donation)? createDonation,
-    TResult? Function(String campaignId, bool includeReplies)? loadComments,
-    TResult? Function(CampaignCommentEntity comment)? addComment,
-    TResult? Function(String campaignId, String commentId)? deleteComment,
-    TResult? Function(String parentId)? loadCommentReplies,
-    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult? Function(String campaignId)? loadWithdrawals,
-    TResult? Function(String campaignId)? loadCampaignTransparencyData,
-    TResult? Function(String campaignId)? loadCampaignUpdates,
-    TResult? Function(String userId)? loadUserCampaigns,
-    TResult? Function(String userId, int limit)? loadUserDonations,
-    TResult? Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult? Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult? Function()? clearTransient,
-  }) {
-    return searchCampaigns?.call(query, categoryId, limit);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? categoryId, int limit)? loadCampaigns,
-    TResult Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult Function(String campaignId)? getCampaignDetail,
-    TResult Function(CampaignEntity campaign)? createCampaign,
-    TResult Function(CampaignEntity campaign)? updateCampaign,
-    TResult Function(String campaignId)? deleteCampaign,
-    TResult Function(String campaignId, String status)? updateCampaignStatus,
-    TResult Function()? loadCategories,
-    TResult Function(String campaignId, int limit)? loadDonations,
-    TResult Function(DonationEntity donation)? createDonation,
-    TResult Function(String campaignId, bool includeReplies)? loadComments,
-    TResult Function(CampaignCommentEntity comment)? addComment,
-    TResult Function(String campaignId, String commentId)? deleteComment,
-    TResult Function(String parentId)? loadCommentReplies,
-    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult Function(String campaignId)? loadWithdrawals,
-    TResult Function(String campaignId)? loadCampaignTransparencyData,
-    TResult Function(String campaignId)? loadCampaignUpdates,
-    TResult Function(String userId)? loadUserCampaigns,
-    TResult Function(String userId, int limit)? loadUserDonations,
-    TResult Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (searchCampaigns != null) {
-      return searchCampaigns(query, categoryId, limit);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
-    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
-    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
-    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
-    required TResult Function(CreateCampaignEvent value) createCampaign,
-    required TResult Function(UpdateCampaignEvent value) updateCampaign,
-    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
-    required TResult Function(UpdateCampaignStatusEvent value)
-        updateCampaignStatus,
-    required TResult Function(LoadCategoriesEvent value) loadCategories,
-    required TResult Function(LoadDonationsEvent value) loadDonations,
-    required TResult Function(CreateDonationEvent value) createDonation,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
-    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(LoadCampaignTransparencyDataEvent value)
-        loadCampaignTransparencyData,
-    required TResult Function(LoadCampaignUpdatesEvent value)
-        loadCampaignUpdates,
-    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
-    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
-    required TResult Function(UpdateCampaignBankDetailsEvent value)
-        updateCampaignBankDetails,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
-  }) {
-    return searchCampaigns(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult? Function(CreateCampaignEvent value)? createCampaign,
-    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult? Function(LoadCategoriesEvent value)? loadCategories,
-    TResult? Function(LoadDonationsEvent value)? loadDonations,
-    TResult? Function(CreateDonationEvent value)? createDonation,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult? Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
-  }) {
-    return searchCampaigns?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult Function(CreateCampaignEvent value)? createCampaign,
-    TResult Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult Function(LoadCategoriesEvent value)? loadCategories,
-    TResult Function(LoadDonationsEvent value)? loadDonations,
-    TResult Function(CreateDonationEvent value)? createDonation,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (searchCampaigns != null) {
-      return searchCampaigns(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class SearchCampaignsEvent implements CampaignEvent {
-  const factory SearchCampaignsEvent(
-      {required final String query,
-      final String? categoryId,
-      final int limit}) = _$SearchCampaignsEventImpl;
-
-  String get query;
-  String? get categoryId;
-  int get limit;
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SearchCampaignsEventImplCopyWith<_$SearchCampaignsEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$GetCampaignDetailEventImplCopyWith<$Res> {
-  factory _$$GetCampaignDetailEventImplCopyWith(
-          _$GetCampaignDetailEventImpl value,
-          $Res Function(_$GetCampaignDetailEventImpl) then) =
-      __$$GetCampaignDetailEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String campaignId});
-}
-
-/// @nodoc
-class __$$GetCampaignDetailEventImplCopyWithImpl<$Res>
-    extends _$CampaignEventCopyWithImpl<$Res, _$GetCampaignDetailEventImpl>
-    implements _$$GetCampaignDetailEventImplCopyWith<$Res> {
-  __$$GetCampaignDetailEventImplCopyWithImpl(
-      _$GetCampaignDetailEventImpl _value,
-      $Res Function(_$GetCampaignDetailEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? campaignId = null,
-  }) {
-    return _then(_$GetCampaignDetailEventImpl(
-      campaignId: null == campaignId
-          ? _value.campaignId
-          : campaignId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$GetCampaignDetailEventImpl implements GetCampaignDetailEvent {
-  const _$GetCampaignDetailEventImpl({required this.campaignId});
-
-  @override
-  final String campaignId;
-
-  @override
-  String toString() {
-    return 'CampaignEvent.getCampaignDetail(campaignId: $campaignId)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$GetCampaignDetailEventImpl &&
-            (identical(other.campaignId, campaignId) ||
-                other.campaignId == campaignId));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, campaignId);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$GetCampaignDetailEventImplCopyWith<_$GetCampaignDetailEventImpl>
-      get copyWith => __$$GetCampaignDetailEventImplCopyWithImpl<
-          _$GetCampaignDetailEventImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? categoryId, int limit) loadCampaigns,
-    required TResult Function(String? categoryId, int limit) refreshCampaigns,
-    required TResult Function(String query, String? categoryId, int limit)
-        searchCampaigns,
-    required TResult Function(String campaignId) getCampaignDetail,
-    required TResult Function(CampaignEntity campaign) createCampaign,
-    required TResult Function(CampaignEntity campaign) updateCampaign,
-    required TResult Function(String campaignId) deleteCampaign,
-    required TResult Function(String campaignId, String status)
-        updateCampaignStatus,
-    required TResult Function() loadCategories,
-    required TResult Function(String campaignId, int limit) loadDonations,
-    required TResult Function(DonationEntity donation) createDonation,
-    required TResult Function(String campaignId, bool includeReplies)
-        loadComments,
-    required TResult Function(CampaignCommentEntity comment) addComment,
-    required TResult Function(String campaignId, String commentId)
-        deleteComment,
-    required TResult Function(String parentId) loadCommentReplies,
-    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
-    required TResult Function(String campaignId) loadWithdrawals,
-    required TResult Function(String campaignId) loadCampaignTransparencyData,
-    required TResult Function(String campaignId) loadCampaignUpdates,
-    required TResult Function(String userId) loadUserCampaigns,
-    required TResult Function(String userId, int limit) loadUserDonations,
-    required TResult Function(String campaignId, String bankName,
-            String accountNumber, String accountHolder)
-        updateCampaignBankDetails,
-    required TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)
-        processDonation,
-    required TResult Function() clearTransient,
-  }) {
-    return getCampaignDetail(campaignId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? categoryId, int limit)? loadCampaigns,
-    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult? Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult? Function(String campaignId)? getCampaignDetail,
-    TResult? Function(CampaignEntity campaign)? createCampaign,
-    TResult? Function(CampaignEntity campaign)? updateCampaign,
-    TResult? Function(String campaignId)? deleteCampaign,
-    TResult? Function(String campaignId, String status)? updateCampaignStatus,
-    TResult? Function()? loadCategories,
-    TResult? Function(String campaignId, int limit)? loadDonations,
-    TResult? Function(DonationEntity donation)? createDonation,
-    TResult? Function(String campaignId, bool includeReplies)? loadComments,
-    TResult? Function(CampaignCommentEntity comment)? addComment,
-    TResult? Function(String campaignId, String commentId)? deleteComment,
-    TResult? Function(String parentId)? loadCommentReplies,
-    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult? Function(String campaignId)? loadWithdrawals,
-    TResult? Function(String campaignId)? loadCampaignTransparencyData,
-    TResult? Function(String campaignId)? loadCampaignUpdates,
-    TResult? Function(String userId)? loadUserCampaigns,
-    TResult? Function(String userId, int limit)? loadUserDonations,
-    TResult? Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult? Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult? Function()? clearTransient,
-  }) {
-    return getCampaignDetail?.call(campaignId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? categoryId, int limit)? loadCampaigns,
-    TResult Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult Function(String campaignId)? getCampaignDetail,
-    TResult Function(CampaignEntity campaign)? createCampaign,
-    TResult Function(CampaignEntity campaign)? updateCampaign,
-    TResult Function(String campaignId)? deleteCampaign,
-    TResult Function(String campaignId, String status)? updateCampaignStatus,
-    TResult Function()? loadCategories,
-    TResult Function(String campaignId, int limit)? loadDonations,
-    TResult Function(DonationEntity donation)? createDonation,
-    TResult Function(String campaignId, bool includeReplies)? loadComments,
-    TResult Function(CampaignCommentEntity comment)? addComment,
-    TResult Function(String campaignId, String commentId)? deleteComment,
-    TResult Function(String parentId)? loadCommentReplies,
-    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult Function(String campaignId)? loadWithdrawals,
-    TResult Function(String campaignId)? loadCampaignTransparencyData,
-    TResult Function(String campaignId)? loadCampaignUpdates,
-    TResult Function(String userId)? loadUserCampaigns,
-    TResult Function(String userId, int limit)? loadUserDonations,
-    TResult Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (getCampaignDetail != null) {
-      return getCampaignDetail(campaignId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
-    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
-    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
-    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
-    required TResult Function(CreateCampaignEvent value) createCampaign,
-    required TResult Function(UpdateCampaignEvent value) updateCampaign,
-    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
-    required TResult Function(UpdateCampaignStatusEvent value)
-        updateCampaignStatus,
-    required TResult Function(LoadCategoriesEvent value) loadCategories,
-    required TResult Function(LoadDonationsEvent value) loadDonations,
-    required TResult Function(CreateDonationEvent value) createDonation,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
-    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(LoadCampaignTransparencyDataEvent value)
-        loadCampaignTransparencyData,
-    required TResult Function(LoadCampaignUpdatesEvent value)
-        loadCampaignUpdates,
-    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
-    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
-    required TResult Function(UpdateCampaignBankDetailsEvent value)
-        updateCampaignBankDetails,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
-  }) {
-    return getCampaignDetail(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult? Function(CreateCampaignEvent value)? createCampaign,
-    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult? Function(LoadCategoriesEvent value)? loadCategories,
-    TResult? Function(LoadDonationsEvent value)? loadDonations,
-    TResult? Function(CreateDonationEvent value)? createDonation,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult? Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
-  }) {
-    return getCampaignDetail?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult Function(CreateCampaignEvent value)? createCampaign,
-    TResult Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult Function(LoadCategoriesEvent value)? loadCategories,
-    TResult Function(LoadDonationsEvent value)? loadDonations,
-    TResult Function(CreateDonationEvent value)? createDonation,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (getCampaignDetail != null) {
-      return getCampaignDetail(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class GetCampaignDetailEvent implements CampaignEvent {
-  const factory GetCampaignDetailEvent({required final String campaignId}) =
-      _$GetCampaignDetailEventImpl;
-
-  String get campaignId;
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GetCampaignDetailEventImplCopyWith<_$GetCampaignDetailEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$CreateCampaignEventImplCopyWith<$Res> {
-  factory _$$CreateCampaignEventImplCopyWith(_$CreateCampaignEventImpl value,
-          $Res Function(_$CreateCampaignEventImpl) then) =
-      __$$CreateCampaignEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({CampaignEntity campaign});
-
-  $CampaignEntityCopyWith<$Res> get campaign;
-}
-
-/// @nodoc
-class __$$CreateCampaignEventImplCopyWithImpl<$Res>
-    extends _$CampaignEventCopyWithImpl<$Res, _$CreateCampaignEventImpl>
-    implements _$$CreateCampaignEventImplCopyWith<$Res> {
-  __$$CreateCampaignEventImplCopyWithImpl(_$CreateCampaignEventImpl _value,
-      $Res Function(_$CreateCampaignEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? campaign = null,
-  }) {
-    return _then(_$CreateCampaignEventImpl(
-      campaign: null == campaign
-          ? _value.campaign
-          : campaign // ignore: cast_nullable_to_non_nullable
-              as CampaignEntity,
-    ));
-  }
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $CampaignEntityCopyWith<$Res> get campaign {
-    return $CampaignEntityCopyWith<$Res>(_value.campaign, (value) {
-      return _then(_value.copyWith(campaign: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$CreateCampaignEventImpl implements CreateCampaignEvent {
-  const _$CreateCampaignEventImpl({required this.campaign});
-
-  @override
-  final CampaignEntity campaign;
-
-  @override
-  String toString() {
-    return 'CampaignEvent.createCampaign(campaign: $campaign)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CreateCampaignEventImpl &&
-            (identical(other.campaign, campaign) ||
-                other.campaign == campaign));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, campaign);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$CreateCampaignEventImplCopyWith<_$CreateCampaignEventImpl> get copyWith =>
-      __$$CreateCampaignEventImplCopyWithImpl<_$CreateCampaignEventImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? categoryId, int limit) loadCampaigns,
-    required TResult Function(String? categoryId, int limit) refreshCampaigns,
-    required TResult Function(String query, String? categoryId, int limit)
-        searchCampaigns,
-    required TResult Function(String campaignId) getCampaignDetail,
-    required TResult Function(CampaignEntity campaign) createCampaign,
-    required TResult Function(CampaignEntity campaign) updateCampaign,
-    required TResult Function(String campaignId) deleteCampaign,
-    required TResult Function(String campaignId, String status)
-        updateCampaignStatus,
-    required TResult Function() loadCategories,
-    required TResult Function(String campaignId, int limit) loadDonations,
-    required TResult Function(DonationEntity donation) createDonation,
-    required TResult Function(String campaignId, bool includeReplies)
-        loadComments,
-    required TResult Function(CampaignCommentEntity comment) addComment,
-    required TResult Function(String campaignId, String commentId)
-        deleteComment,
-    required TResult Function(String parentId) loadCommentReplies,
-    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
-    required TResult Function(String campaignId) loadWithdrawals,
-    required TResult Function(String campaignId) loadCampaignTransparencyData,
-    required TResult Function(String campaignId) loadCampaignUpdates,
-    required TResult Function(String userId) loadUserCampaigns,
-    required TResult Function(String userId, int limit) loadUserDonations,
-    required TResult Function(String campaignId, String bankName,
-            String accountNumber, String accountHolder)
-        updateCampaignBankDetails,
-    required TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)
-        processDonation,
-    required TResult Function() clearTransient,
-  }) {
-    return createCampaign(campaign);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? categoryId, int limit)? loadCampaigns,
-    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult? Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult? Function(String campaignId)? getCampaignDetail,
-    TResult? Function(CampaignEntity campaign)? createCampaign,
-    TResult? Function(CampaignEntity campaign)? updateCampaign,
-    TResult? Function(String campaignId)? deleteCampaign,
-    TResult? Function(String campaignId, String status)? updateCampaignStatus,
-    TResult? Function()? loadCategories,
-    TResult? Function(String campaignId, int limit)? loadDonations,
-    TResult? Function(DonationEntity donation)? createDonation,
-    TResult? Function(String campaignId, bool includeReplies)? loadComments,
-    TResult? Function(CampaignCommentEntity comment)? addComment,
-    TResult? Function(String campaignId, String commentId)? deleteComment,
-    TResult? Function(String parentId)? loadCommentReplies,
-    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult? Function(String campaignId)? loadWithdrawals,
-    TResult? Function(String campaignId)? loadCampaignTransparencyData,
-    TResult? Function(String campaignId)? loadCampaignUpdates,
-    TResult? Function(String userId)? loadUserCampaigns,
-    TResult? Function(String userId, int limit)? loadUserDonations,
-    TResult? Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult? Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult? Function()? clearTransient,
-  }) {
-    return createCampaign?.call(campaign);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? categoryId, int limit)? loadCampaigns,
-    TResult Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult Function(String campaignId)? getCampaignDetail,
-    TResult Function(CampaignEntity campaign)? createCampaign,
-    TResult Function(CampaignEntity campaign)? updateCampaign,
-    TResult Function(String campaignId)? deleteCampaign,
-    TResult Function(String campaignId, String status)? updateCampaignStatus,
-    TResult Function()? loadCategories,
-    TResult Function(String campaignId, int limit)? loadDonations,
-    TResult Function(DonationEntity donation)? createDonation,
-    TResult Function(String campaignId, bool includeReplies)? loadComments,
-    TResult Function(CampaignCommentEntity comment)? addComment,
-    TResult Function(String campaignId, String commentId)? deleteComment,
-    TResult Function(String parentId)? loadCommentReplies,
-    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult Function(String campaignId)? loadWithdrawals,
-    TResult Function(String campaignId)? loadCampaignTransparencyData,
-    TResult Function(String campaignId)? loadCampaignUpdates,
-    TResult Function(String userId)? loadUserCampaigns,
-    TResult Function(String userId, int limit)? loadUserDonations,
-    TResult Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (createCampaign != null) {
-      return createCampaign(campaign);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
-    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
-    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
-    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
-    required TResult Function(CreateCampaignEvent value) createCampaign,
-    required TResult Function(UpdateCampaignEvent value) updateCampaign,
-    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
-    required TResult Function(UpdateCampaignStatusEvent value)
-        updateCampaignStatus,
-    required TResult Function(LoadCategoriesEvent value) loadCategories,
-    required TResult Function(LoadDonationsEvent value) loadDonations,
-    required TResult Function(CreateDonationEvent value) createDonation,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
-    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(LoadCampaignTransparencyDataEvent value)
-        loadCampaignTransparencyData,
-    required TResult Function(LoadCampaignUpdatesEvent value)
-        loadCampaignUpdates,
-    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
-    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
-    required TResult Function(UpdateCampaignBankDetailsEvent value)
-        updateCampaignBankDetails,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
-  }) {
-    return createCampaign(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult? Function(CreateCampaignEvent value)? createCampaign,
-    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult? Function(LoadCategoriesEvent value)? loadCategories,
-    TResult? Function(LoadDonationsEvent value)? loadDonations,
-    TResult? Function(CreateDonationEvent value)? createDonation,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult? Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
-  }) {
-    return createCampaign?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult Function(CreateCampaignEvent value)? createCampaign,
-    TResult Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult Function(LoadCategoriesEvent value)? loadCategories,
-    TResult Function(LoadDonationsEvent value)? loadDonations,
-    TResult Function(CreateDonationEvent value)? createDonation,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (createCampaign != null) {
-      return createCampaign(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class CreateCampaignEvent implements CampaignEvent {
-  const factory CreateCampaignEvent({required final CampaignEntity campaign}) =
-      _$CreateCampaignEventImpl;
-
-  CampaignEntity get campaign;
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CreateCampaignEventImplCopyWith<_$CreateCampaignEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$UpdateCampaignEventImplCopyWith<$Res> {
-  factory _$$UpdateCampaignEventImplCopyWith(_$UpdateCampaignEventImpl value,
-          $Res Function(_$UpdateCampaignEventImpl) then) =
-      __$$UpdateCampaignEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({CampaignEntity campaign});
-
-  $CampaignEntityCopyWith<$Res> get campaign;
-}
-
-/// @nodoc
-class __$$UpdateCampaignEventImplCopyWithImpl<$Res>
-    extends _$CampaignEventCopyWithImpl<$Res, _$UpdateCampaignEventImpl>
-    implements _$$UpdateCampaignEventImplCopyWith<$Res> {
-  __$$UpdateCampaignEventImplCopyWithImpl(_$UpdateCampaignEventImpl _value,
-      $Res Function(_$UpdateCampaignEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? campaign = null,
-  }) {
-    return _then(_$UpdateCampaignEventImpl(
-      campaign: null == campaign
-          ? _value.campaign
-          : campaign // ignore: cast_nullable_to_non_nullable
-              as CampaignEntity,
-    ));
-  }
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $CampaignEntityCopyWith<$Res> get campaign {
-    return $CampaignEntityCopyWith<$Res>(_value.campaign, (value) {
-      return _then(_value.copyWith(campaign: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$UpdateCampaignEventImpl implements UpdateCampaignEvent {
-  const _$UpdateCampaignEventImpl({required this.campaign});
-
-  @override
-  final CampaignEntity campaign;
-
-  @override
-  String toString() {
-    return 'CampaignEvent.updateCampaign(campaign: $campaign)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UpdateCampaignEventImpl &&
-            (identical(other.campaign, campaign) ||
-                other.campaign == campaign));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, campaign);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UpdateCampaignEventImplCopyWith<_$UpdateCampaignEventImpl> get copyWith =>
-      __$$UpdateCampaignEventImplCopyWithImpl<_$UpdateCampaignEventImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? categoryId, int limit) loadCampaigns,
-    required TResult Function(String? categoryId, int limit) refreshCampaigns,
-    required TResult Function(String query, String? categoryId, int limit)
-        searchCampaigns,
-    required TResult Function(String campaignId) getCampaignDetail,
-    required TResult Function(CampaignEntity campaign) createCampaign,
-    required TResult Function(CampaignEntity campaign) updateCampaign,
-    required TResult Function(String campaignId) deleteCampaign,
-    required TResult Function(String campaignId, String status)
-        updateCampaignStatus,
-    required TResult Function() loadCategories,
-    required TResult Function(String campaignId, int limit) loadDonations,
-    required TResult Function(DonationEntity donation) createDonation,
-    required TResult Function(String campaignId, bool includeReplies)
-        loadComments,
-    required TResult Function(CampaignCommentEntity comment) addComment,
-    required TResult Function(String campaignId, String commentId)
-        deleteComment,
-    required TResult Function(String parentId) loadCommentReplies,
-    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
-    required TResult Function(String campaignId) loadWithdrawals,
-    required TResult Function(String campaignId) loadCampaignTransparencyData,
-    required TResult Function(String campaignId) loadCampaignUpdates,
-    required TResult Function(String userId) loadUserCampaigns,
-    required TResult Function(String userId, int limit) loadUserDonations,
-    required TResult Function(String campaignId, String bankName,
-            String accountNumber, String accountHolder)
-        updateCampaignBankDetails,
-    required TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)
-        processDonation,
-    required TResult Function() clearTransient,
-  }) {
-    return updateCampaign(campaign);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? categoryId, int limit)? loadCampaigns,
-    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult? Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult? Function(String campaignId)? getCampaignDetail,
-    TResult? Function(CampaignEntity campaign)? createCampaign,
-    TResult? Function(CampaignEntity campaign)? updateCampaign,
-    TResult? Function(String campaignId)? deleteCampaign,
-    TResult? Function(String campaignId, String status)? updateCampaignStatus,
-    TResult? Function()? loadCategories,
-    TResult? Function(String campaignId, int limit)? loadDonations,
-    TResult? Function(DonationEntity donation)? createDonation,
-    TResult? Function(String campaignId, bool includeReplies)? loadComments,
-    TResult? Function(CampaignCommentEntity comment)? addComment,
-    TResult? Function(String campaignId, String commentId)? deleteComment,
-    TResult? Function(String parentId)? loadCommentReplies,
-    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult? Function(String campaignId)? loadWithdrawals,
-    TResult? Function(String campaignId)? loadCampaignTransparencyData,
-    TResult? Function(String campaignId)? loadCampaignUpdates,
-    TResult? Function(String userId)? loadUserCampaigns,
-    TResult? Function(String userId, int limit)? loadUserDonations,
-    TResult? Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult? Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult? Function()? clearTransient,
-  }) {
-    return updateCampaign?.call(campaign);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? categoryId, int limit)? loadCampaigns,
-    TResult Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult Function(String campaignId)? getCampaignDetail,
-    TResult Function(CampaignEntity campaign)? createCampaign,
-    TResult Function(CampaignEntity campaign)? updateCampaign,
-    TResult Function(String campaignId)? deleteCampaign,
-    TResult Function(String campaignId, String status)? updateCampaignStatus,
-    TResult Function()? loadCategories,
-    TResult Function(String campaignId, int limit)? loadDonations,
-    TResult Function(DonationEntity donation)? createDonation,
-    TResult Function(String campaignId, bool includeReplies)? loadComments,
-    TResult Function(CampaignCommentEntity comment)? addComment,
-    TResult Function(String campaignId, String commentId)? deleteComment,
-    TResult Function(String parentId)? loadCommentReplies,
-    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult Function(String campaignId)? loadWithdrawals,
-    TResult Function(String campaignId)? loadCampaignTransparencyData,
-    TResult Function(String campaignId)? loadCampaignUpdates,
-    TResult Function(String userId)? loadUserCampaigns,
-    TResult Function(String userId, int limit)? loadUserDonations,
-    TResult Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (updateCampaign != null) {
-      return updateCampaign(campaign);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
-    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
-    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
-    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
-    required TResult Function(CreateCampaignEvent value) createCampaign,
-    required TResult Function(UpdateCampaignEvent value) updateCampaign,
-    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
-    required TResult Function(UpdateCampaignStatusEvent value)
-        updateCampaignStatus,
-    required TResult Function(LoadCategoriesEvent value) loadCategories,
-    required TResult Function(LoadDonationsEvent value) loadDonations,
-    required TResult Function(CreateDonationEvent value) createDonation,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
-    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(LoadCampaignTransparencyDataEvent value)
-        loadCampaignTransparencyData,
-    required TResult Function(LoadCampaignUpdatesEvent value)
-        loadCampaignUpdates,
-    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
-    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
-    required TResult Function(UpdateCampaignBankDetailsEvent value)
-        updateCampaignBankDetails,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
-  }) {
-    return updateCampaign(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult? Function(CreateCampaignEvent value)? createCampaign,
-    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult? Function(LoadCategoriesEvent value)? loadCategories,
-    TResult? Function(LoadDonationsEvent value)? loadDonations,
-    TResult? Function(CreateDonationEvent value)? createDonation,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult? Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
-  }) {
-    return updateCampaign?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult Function(CreateCampaignEvent value)? createCampaign,
-    TResult Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult Function(LoadCategoriesEvent value)? loadCategories,
-    TResult Function(LoadDonationsEvent value)? loadDonations,
-    TResult Function(CreateDonationEvent value)? createDonation,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (updateCampaign != null) {
-      return updateCampaign(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class UpdateCampaignEvent implements CampaignEvent {
-  const factory UpdateCampaignEvent({required final CampaignEntity campaign}) =
-      _$UpdateCampaignEventImpl;
-
-  CampaignEntity get campaign;
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UpdateCampaignEventImplCopyWith<_$UpdateCampaignEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$DeleteCampaignEventImplCopyWith<$Res> {
-  factory _$$DeleteCampaignEventImplCopyWith(_$DeleteCampaignEventImpl value,
-          $Res Function(_$DeleteCampaignEventImpl) then) =
-      __$$DeleteCampaignEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String campaignId});
-}
-
-/// @nodoc
-class __$$DeleteCampaignEventImplCopyWithImpl<$Res>
-    extends _$CampaignEventCopyWithImpl<$Res, _$DeleteCampaignEventImpl>
-    implements _$$DeleteCampaignEventImplCopyWith<$Res> {
-  __$$DeleteCampaignEventImplCopyWithImpl(_$DeleteCampaignEventImpl _value,
-      $Res Function(_$DeleteCampaignEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? campaignId = null,
-  }) {
-    return _then(_$DeleteCampaignEventImpl(
-      campaignId: null == campaignId
-          ? _value.campaignId
-          : campaignId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$DeleteCampaignEventImpl implements DeleteCampaignEvent {
-  const _$DeleteCampaignEventImpl({required this.campaignId});
-
-  @override
-  final String campaignId;
-
-  @override
-  String toString() {
-    return 'CampaignEvent.deleteCampaign(campaignId: $campaignId)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$DeleteCampaignEventImpl &&
-            (identical(other.campaignId, campaignId) ||
-                other.campaignId == campaignId));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, campaignId);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$DeleteCampaignEventImplCopyWith<_$DeleteCampaignEventImpl> get copyWith =>
-      __$$DeleteCampaignEventImplCopyWithImpl<_$DeleteCampaignEventImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? categoryId, int limit) loadCampaigns,
-    required TResult Function(String? categoryId, int limit) refreshCampaigns,
-    required TResult Function(String query, String? categoryId, int limit)
-        searchCampaigns,
-    required TResult Function(String campaignId) getCampaignDetail,
-    required TResult Function(CampaignEntity campaign) createCampaign,
-    required TResult Function(CampaignEntity campaign) updateCampaign,
-    required TResult Function(String campaignId) deleteCampaign,
-    required TResult Function(String campaignId, String status)
-        updateCampaignStatus,
-    required TResult Function() loadCategories,
-    required TResult Function(String campaignId, int limit) loadDonations,
-    required TResult Function(DonationEntity donation) createDonation,
-    required TResult Function(String campaignId, bool includeReplies)
-        loadComments,
-    required TResult Function(CampaignCommentEntity comment) addComment,
-    required TResult Function(String campaignId, String commentId)
-        deleteComment,
-    required TResult Function(String parentId) loadCommentReplies,
-    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
-    required TResult Function(String campaignId) loadWithdrawals,
-    required TResult Function(String campaignId) loadCampaignTransparencyData,
-    required TResult Function(String campaignId) loadCampaignUpdates,
-    required TResult Function(String userId) loadUserCampaigns,
-    required TResult Function(String userId, int limit) loadUserDonations,
-    required TResult Function(String campaignId, String bankName,
-            String accountNumber, String accountHolder)
-        updateCampaignBankDetails,
-    required TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)
-        processDonation,
-    required TResult Function() clearTransient,
-  }) {
-    return deleteCampaign(campaignId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? categoryId, int limit)? loadCampaigns,
-    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult? Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult? Function(String campaignId)? getCampaignDetail,
-    TResult? Function(CampaignEntity campaign)? createCampaign,
-    TResult? Function(CampaignEntity campaign)? updateCampaign,
-    TResult? Function(String campaignId)? deleteCampaign,
-    TResult? Function(String campaignId, String status)? updateCampaignStatus,
-    TResult? Function()? loadCategories,
-    TResult? Function(String campaignId, int limit)? loadDonations,
-    TResult? Function(DonationEntity donation)? createDonation,
-    TResult? Function(String campaignId, bool includeReplies)? loadComments,
-    TResult? Function(CampaignCommentEntity comment)? addComment,
-    TResult? Function(String campaignId, String commentId)? deleteComment,
-    TResult? Function(String parentId)? loadCommentReplies,
-    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult? Function(String campaignId)? loadWithdrawals,
-    TResult? Function(String campaignId)? loadCampaignTransparencyData,
-    TResult? Function(String campaignId)? loadCampaignUpdates,
-    TResult? Function(String userId)? loadUserCampaigns,
-    TResult? Function(String userId, int limit)? loadUserDonations,
-    TResult? Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult? Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult? Function()? clearTransient,
-  }) {
-    return deleteCampaign?.call(campaignId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? categoryId, int limit)? loadCampaigns,
-    TResult Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult Function(String campaignId)? getCampaignDetail,
-    TResult Function(CampaignEntity campaign)? createCampaign,
-    TResult Function(CampaignEntity campaign)? updateCampaign,
-    TResult Function(String campaignId)? deleteCampaign,
-    TResult Function(String campaignId, String status)? updateCampaignStatus,
-    TResult Function()? loadCategories,
-    TResult Function(String campaignId, int limit)? loadDonations,
-    TResult Function(DonationEntity donation)? createDonation,
-    TResult Function(String campaignId, bool includeReplies)? loadComments,
-    TResult Function(CampaignCommentEntity comment)? addComment,
-    TResult Function(String campaignId, String commentId)? deleteComment,
-    TResult Function(String parentId)? loadCommentReplies,
-    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult Function(String campaignId)? loadWithdrawals,
-    TResult Function(String campaignId)? loadCampaignTransparencyData,
-    TResult Function(String campaignId)? loadCampaignUpdates,
-    TResult Function(String userId)? loadUserCampaigns,
-    TResult Function(String userId, int limit)? loadUserDonations,
-    TResult Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (deleteCampaign != null) {
-      return deleteCampaign(campaignId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
-    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
-    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
-    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
-    required TResult Function(CreateCampaignEvent value) createCampaign,
-    required TResult Function(UpdateCampaignEvent value) updateCampaign,
-    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
-    required TResult Function(UpdateCampaignStatusEvent value)
-        updateCampaignStatus,
-    required TResult Function(LoadCategoriesEvent value) loadCategories,
-    required TResult Function(LoadDonationsEvent value) loadDonations,
-    required TResult Function(CreateDonationEvent value) createDonation,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
-    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(LoadCampaignTransparencyDataEvent value)
-        loadCampaignTransparencyData,
-    required TResult Function(LoadCampaignUpdatesEvent value)
-        loadCampaignUpdates,
-    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
-    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
-    required TResult Function(UpdateCampaignBankDetailsEvent value)
-        updateCampaignBankDetails,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
-  }) {
-    return deleteCampaign(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult? Function(CreateCampaignEvent value)? createCampaign,
-    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult? Function(LoadCategoriesEvent value)? loadCategories,
-    TResult? Function(LoadDonationsEvent value)? loadDonations,
-    TResult? Function(CreateDonationEvent value)? createDonation,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult? Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
-  }) {
-    return deleteCampaign?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult Function(CreateCampaignEvent value)? createCampaign,
-    TResult Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult Function(LoadCategoriesEvent value)? loadCategories,
-    TResult Function(LoadDonationsEvent value)? loadDonations,
-    TResult Function(CreateDonationEvent value)? createDonation,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (deleteCampaign != null) {
-      return deleteCampaign(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class DeleteCampaignEvent implements CampaignEvent {
-  const factory DeleteCampaignEvent({required final String campaignId}) =
-      _$DeleteCampaignEventImpl;
-
-  String get campaignId;
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DeleteCampaignEventImplCopyWith<_$DeleteCampaignEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$UpdateCampaignStatusEventImplCopyWith<$Res> {
-  factory _$$UpdateCampaignStatusEventImplCopyWith(
-          _$UpdateCampaignStatusEventImpl value,
-          $Res Function(_$UpdateCampaignStatusEventImpl) then) =
-      __$$UpdateCampaignStatusEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String campaignId, String status});
-}
-
-/// @nodoc
-class __$$UpdateCampaignStatusEventImplCopyWithImpl<$Res>
-    extends _$CampaignEventCopyWithImpl<$Res, _$UpdateCampaignStatusEventImpl>
-    implements _$$UpdateCampaignStatusEventImplCopyWith<$Res> {
-  __$$UpdateCampaignStatusEventImplCopyWithImpl(
-      _$UpdateCampaignStatusEventImpl _value,
-      $Res Function(_$UpdateCampaignStatusEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? campaignId = null,
-    Object? status = null,
-  }) {
-    return _then(_$UpdateCampaignStatusEventImpl(
-      campaignId: null == campaignId
-          ? _value.campaignId
-          : campaignId // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$UpdateCampaignStatusEventImpl implements UpdateCampaignStatusEvent {
-  const _$UpdateCampaignStatusEventImpl(
-      {required this.campaignId, required this.status});
-
-  @override
-  final String campaignId;
-  @override
-  final String status;
-
-  @override
-  String toString() {
-    return 'CampaignEvent.updateCampaignStatus(campaignId: $campaignId, status: $status)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UpdateCampaignStatusEventImpl &&
-            (identical(other.campaignId, campaignId) ||
-                other.campaignId == campaignId) &&
-            (identical(other.status, status) || other.status == status));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, campaignId, status);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UpdateCampaignStatusEventImplCopyWith<_$UpdateCampaignStatusEventImpl>
-      get copyWith => __$$UpdateCampaignStatusEventImplCopyWithImpl<
-          _$UpdateCampaignStatusEventImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? categoryId, int limit) loadCampaigns,
-    required TResult Function(String? categoryId, int limit) refreshCampaigns,
-    required TResult Function(String query, String? categoryId, int limit)
-        searchCampaigns,
-    required TResult Function(String campaignId) getCampaignDetail,
-    required TResult Function(CampaignEntity campaign) createCampaign,
-    required TResult Function(CampaignEntity campaign) updateCampaign,
-    required TResult Function(String campaignId) deleteCampaign,
-    required TResult Function(String campaignId, String status)
-        updateCampaignStatus,
-    required TResult Function() loadCategories,
-    required TResult Function(String campaignId, int limit) loadDonations,
-    required TResult Function(DonationEntity donation) createDonation,
-    required TResult Function(String campaignId, bool includeReplies)
-        loadComments,
-    required TResult Function(CampaignCommentEntity comment) addComment,
-    required TResult Function(String campaignId, String commentId)
-        deleteComment,
-    required TResult Function(String parentId) loadCommentReplies,
-    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
-    required TResult Function(String campaignId) loadWithdrawals,
-    required TResult Function(String campaignId) loadCampaignTransparencyData,
-    required TResult Function(String campaignId) loadCampaignUpdates,
-    required TResult Function(String userId) loadUserCampaigns,
-    required TResult Function(String userId, int limit) loadUserDonations,
-    required TResult Function(String campaignId, String bankName,
-            String accountNumber, String accountHolder)
-        updateCampaignBankDetails,
-    required TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)
-        processDonation,
-    required TResult Function() clearTransient,
-  }) {
-    return updateCampaignStatus(campaignId, status);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? categoryId, int limit)? loadCampaigns,
-    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult? Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult? Function(String campaignId)? getCampaignDetail,
-    TResult? Function(CampaignEntity campaign)? createCampaign,
-    TResult? Function(CampaignEntity campaign)? updateCampaign,
-    TResult? Function(String campaignId)? deleteCampaign,
-    TResult? Function(String campaignId, String status)? updateCampaignStatus,
-    TResult? Function()? loadCategories,
-    TResult? Function(String campaignId, int limit)? loadDonations,
-    TResult? Function(DonationEntity donation)? createDonation,
-    TResult? Function(String campaignId, bool includeReplies)? loadComments,
-    TResult? Function(CampaignCommentEntity comment)? addComment,
-    TResult? Function(String campaignId, String commentId)? deleteComment,
-    TResult? Function(String parentId)? loadCommentReplies,
-    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult? Function(String campaignId)? loadWithdrawals,
-    TResult? Function(String campaignId)? loadCampaignTransparencyData,
-    TResult? Function(String campaignId)? loadCampaignUpdates,
-    TResult? Function(String userId)? loadUserCampaigns,
-    TResult? Function(String userId, int limit)? loadUserDonations,
-    TResult? Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult? Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult? Function()? clearTransient,
-  }) {
-    return updateCampaignStatus?.call(campaignId, status);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? categoryId, int limit)? loadCampaigns,
-    TResult Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult Function(String campaignId)? getCampaignDetail,
-    TResult Function(CampaignEntity campaign)? createCampaign,
-    TResult Function(CampaignEntity campaign)? updateCampaign,
-    TResult Function(String campaignId)? deleteCampaign,
-    TResult Function(String campaignId, String status)? updateCampaignStatus,
-    TResult Function()? loadCategories,
-    TResult Function(String campaignId, int limit)? loadDonations,
-    TResult Function(DonationEntity donation)? createDonation,
-    TResult Function(String campaignId, bool includeReplies)? loadComments,
-    TResult Function(CampaignCommentEntity comment)? addComment,
-    TResult Function(String campaignId, String commentId)? deleteComment,
-    TResult Function(String parentId)? loadCommentReplies,
-    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult Function(String campaignId)? loadWithdrawals,
-    TResult Function(String campaignId)? loadCampaignTransparencyData,
-    TResult Function(String campaignId)? loadCampaignUpdates,
-    TResult Function(String userId)? loadUserCampaigns,
-    TResult Function(String userId, int limit)? loadUserDonations,
-    TResult Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (updateCampaignStatus != null) {
-      return updateCampaignStatus(campaignId, status);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
-    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
-    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
-    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
-    required TResult Function(CreateCampaignEvent value) createCampaign,
-    required TResult Function(UpdateCampaignEvent value) updateCampaign,
-    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
-    required TResult Function(UpdateCampaignStatusEvent value)
-        updateCampaignStatus,
-    required TResult Function(LoadCategoriesEvent value) loadCategories,
-    required TResult Function(LoadDonationsEvent value) loadDonations,
-    required TResult Function(CreateDonationEvent value) createDonation,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
-    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(LoadCampaignTransparencyDataEvent value)
-        loadCampaignTransparencyData,
-    required TResult Function(LoadCampaignUpdatesEvent value)
-        loadCampaignUpdates,
-    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
-    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
-    required TResult Function(UpdateCampaignBankDetailsEvent value)
-        updateCampaignBankDetails,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
-  }) {
-    return updateCampaignStatus(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult? Function(CreateCampaignEvent value)? createCampaign,
-    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult? Function(LoadCategoriesEvent value)? loadCategories,
-    TResult? Function(LoadDonationsEvent value)? loadDonations,
-    TResult? Function(CreateDonationEvent value)? createDonation,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult? Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
-  }) {
-    return updateCampaignStatus?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult Function(CreateCampaignEvent value)? createCampaign,
-    TResult Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult Function(LoadCategoriesEvent value)? loadCategories,
-    TResult Function(LoadDonationsEvent value)? loadDonations,
-    TResult Function(CreateDonationEvent value)? createDonation,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (updateCampaignStatus != null) {
-      return updateCampaignStatus(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class UpdateCampaignStatusEvent implements CampaignEvent {
-  const factory UpdateCampaignStatusEvent(
-      {required final String campaignId,
-      required final String status}) = _$UpdateCampaignStatusEventImpl;
-
-  String get campaignId;
-  String get status;
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UpdateCampaignStatusEventImplCopyWith<_$UpdateCampaignStatusEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$LoadCategoriesEventImplCopyWith<$Res> {
-  factory _$$LoadCategoriesEventImplCopyWith(_$LoadCategoriesEventImpl value,
-          $Res Function(_$LoadCategoriesEventImpl) then) =
-      __$$LoadCategoriesEventImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$LoadCategoriesEventImplCopyWithImpl<$Res>
-    extends _$CampaignEventCopyWithImpl<$Res, _$LoadCategoriesEventImpl>
-    implements _$$LoadCategoriesEventImplCopyWith<$Res> {
-  __$$LoadCategoriesEventImplCopyWithImpl(_$LoadCategoriesEventImpl _value,
-      $Res Function(_$LoadCategoriesEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$LoadCategoriesEventImpl implements LoadCategoriesEvent {
-  const _$LoadCategoriesEventImpl();
-
-  @override
-  String toString() {
-    return 'CampaignEvent.loadCategories()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadCategoriesEventImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? categoryId, int limit) loadCampaigns,
-    required TResult Function(String? categoryId, int limit) refreshCampaigns,
-    required TResult Function(String query, String? categoryId, int limit)
-        searchCampaigns,
-    required TResult Function(String campaignId) getCampaignDetail,
-    required TResult Function(CampaignEntity campaign) createCampaign,
-    required TResult Function(CampaignEntity campaign) updateCampaign,
-    required TResult Function(String campaignId) deleteCampaign,
-    required TResult Function(String campaignId, String status)
-        updateCampaignStatus,
-    required TResult Function() loadCategories,
-    required TResult Function(String campaignId, int limit) loadDonations,
-    required TResult Function(DonationEntity donation) createDonation,
-    required TResult Function(String campaignId, bool includeReplies)
-        loadComments,
-    required TResult Function(CampaignCommentEntity comment) addComment,
-    required TResult Function(String campaignId, String commentId)
-        deleteComment,
-    required TResult Function(String parentId) loadCommentReplies,
-    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
-    required TResult Function(String campaignId) loadWithdrawals,
-    required TResult Function(String campaignId) loadCampaignTransparencyData,
-    required TResult Function(String campaignId) loadCampaignUpdates,
-    required TResult Function(String userId) loadUserCampaigns,
-    required TResult Function(String userId, int limit) loadUserDonations,
-    required TResult Function(String campaignId, String bankName,
-            String accountNumber, String accountHolder)
-        updateCampaignBankDetails,
-    required TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)
-        processDonation,
-    required TResult Function() clearTransient,
-  }) {
-    return loadCategories();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? categoryId, int limit)? loadCampaigns,
-    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult? Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult? Function(String campaignId)? getCampaignDetail,
-    TResult? Function(CampaignEntity campaign)? createCampaign,
-    TResult? Function(CampaignEntity campaign)? updateCampaign,
-    TResult? Function(String campaignId)? deleteCampaign,
-    TResult? Function(String campaignId, String status)? updateCampaignStatus,
-    TResult? Function()? loadCategories,
-    TResult? Function(String campaignId, int limit)? loadDonations,
-    TResult? Function(DonationEntity donation)? createDonation,
-    TResult? Function(String campaignId, bool includeReplies)? loadComments,
-    TResult? Function(CampaignCommentEntity comment)? addComment,
-    TResult? Function(String campaignId, String commentId)? deleteComment,
-    TResult? Function(String parentId)? loadCommentReplies,
-    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult? Function(String campaignId)? loadWithdrawals,
-    TResult? Function(String campaignId)? loadCampaignTransparencyData,
-    TResult? Function(String campaignId)? loadCampaignUpdates,
-    TResult? Function(String userId)? loadUserCampaigns,
-    TResult? Function(String userId, int limit)? loadUserDonations,
-    TResult? Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult? Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult? Function()? clearTransient,
-  }) {
-    return loadCategories?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? categoryId, int limit)? loadCampaigns,
-    TResult Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult Function(String campaignId)? getCampaignDetail,
-    TResult Function(CampaignEntity campaign)? createCampaign,
-    TResult Function(CampaignEntity campaign)? updateCampaign,
-    TResult Function(String campaignId)? deleteCampaign,
-    TResult Function(String campaignId, String status)? updateCampaignStatus,
-    TResult Function()? loadCategories,
-    TResult Function(String campaignId, int limit)? loadDonations,
-    TResult Function(DonationEntity donation)? createDonation,
-    TResult Function(String campaignId, bool includeReplies)? loadComments,
-    TResult Function(CampaignCommentEntity comment)? addComment,
-    TResult Function(String campaignId, String commentId)? deleteComment,
-    TResult Function(String parentId)? loadCommentReplies,
-    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult Function(String campaignId)? loadWithdrawals,
-    TResult Function(String campaignId)? loadCampaignTransparencyData,
-    TResult Function(String campaignId)? loadCampaignUpdates,
-    TResult Function(String userId)? loadUserCampaigns,
-    TResult Function(String userId, int limit)? loadUserDonations,
-    TResult Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadCategories != null) {
-      return loadCategories();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
-    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
-    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
-    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
-    required TResult Function(CreateCampaignEvent value) createCampaign,
-    required TResult Function(UpdateCampaignEvent value) updateCampaign,
-    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
-    required TResult Function(UpdateCampaignStatusEvent value)
-        updateCampaignStatus,
-    required TResult Function(LoadCategoriesEvent value) loadCategories,
-    required TResult Function(LoadDonationsEvent value) loadDonations,
-    required TResult Function(CreateDonationEvent value) createDonation,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
-    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(LoadCampaignTransparencyDataEvent value)
-        loadCampaignTransparencyData,
-    required TResult Function(LoadCampaignUpdatesEvent value)
-        loadCampaignUpdates,
-    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
-    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
-    required TResult Function(UpdateCampaignBankDetailsEvent value)
-        updateCampaignBankDetails,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
-  }) {
-    return loadCategories(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult? Function(CreateCampaignEvent value)? createCampaign,
-    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult? Function(LoadCategoriesEvent value)? loadCategories,
-    TResult? Function(LoadDonationsEvent value)? loadDonations,
-    TResult? Function(CreateDonationEvent value)? createDonation,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult? Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
-  }) {
-    return loadCategories?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult Function(CreateCampaignEvent value)? createCampaign,
-    TResult Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult Function(LoadCategoriesEvent value)? loadCategories,
-    TResult Function(LoadDonationsEvent value)? loadDonations,
-    TResult Function(CreateDonationEvent value)? createDonation,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadCategories != null) {
-      return loadCategories(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class LoadCategoriesEvent implements CampaignEvent {
-  const factory LoadCategoriesEvent() = _$LoadCategoriesEventImpl;
-}
-
-/// @nodoc
-abstract class _$$LoadDonationsEventImplCopyWith<$Res> {
-  factory _$$LoadDonationsEventImplCopyWith(_$LoadDonationsEventImpl value,
-          $Res Function(_$LoadDonationsEventImpl) then) =
-      __$$LoadDonationsEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String campaignId, int limit});
-}
-
-/// @nodoc
-class __$$LoadDonationsEventImplCopyWithImpl<$Res>
-    extends _$CampaignEventCopyWithImpl<$Res, _$LoadDonationsEventImpl>
-    implements _$$LoadDonationsEventImplCopyWith<$Res> {
-  __$$LoadDonationsEventImplCopyWithImpl(_$LoadDonationsEventImpl _value,
-      $Res Function(_$LoadDonationsEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? campaignId = null,
-    Object? limit = null,
-  }) {
-    return _then(_$LoadDonationsEventImpl(
-      campaignId: null == campaignId
-          ? _value.campaignId
-          : campaignId // ignore: cast_nullable_to_non_nullable
-              as String,
-      limit: null == limit
-          ? _value.limit
-          : limit // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$LoadDonationsEventImpl implements LoadDonationsEvent {
-  const _$LoadDonationsEventImpl({required this.campaignId, this.limit = 50});
-
-  @override
-  final String campaignId;
-  @override
-  @JsonKey()
-  final int limit;
-
-  @override
-  String toString() {
-    return 'CampaignEvent.loadDonations(campaignId: $campaignId, limit: $limit)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadDonationsEventImpl &&
-            (identical(other.campaignId, campaignId) ||
-                other.campaignId == campaignId) &&
-            (identical(other.limit, limit) || other.limit == limit));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, campaignId, limit);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadDonationsEventImplCopyWith<_$LoadDonationsEventImpl> get copyWith =>
-      __$$LoadDonationsEventImplCopyWithImpl<_$LoadDonationsEventImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? categoryId, int limit) loadCampaigns,
-    required TResult Function(String? categoryId, int limit) refreshCampaigns,
-    required TResult Function(String query, String? categoryId, int limit)
-        searchCampaigns,
-    required TResult Function(String campaignId) getCampaignDetail,
-    required TResult Function(CampaignEntity campaign) createCampaign,
-    required TResult Function(CampaignEntity campaign) updateCampaign,
-    required TResult Function(String campaignId) deleteCampaign,
-    required TResult Function(String campaignId, String status)
-        updateCampaignStatus,
-    required TResult Function() loadCategories,
-    required TResult Function(String campaignId, int limit) loadDonations,
-    required TResult Function(DonationEntity donation) createDonation,
-    required TResult Function(String campaignId, bool includeReplies)
-        loadComments,
-    required TResult Function(CampaignCommentEntity comment) addComment,
-    required TResult Function(String campaignId, String commentId)
-        deleteComment,
-    required TResult Function(String parentId) loadCommentReplies,
-    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
-    required TResult Function(String campaignId) loadWithdrawals,
-    required TResult Function(String campaignId) loadCampaignTransparencyData,
-    required TResult Function(String campaignId) loadCampaignUpdates,
-    required TResult Function(String userId) loadUserCampaigns,
-    required TResult Function(String userId, int limit) loadUserDonations,
-    required TResult Function(String campaignId, String bankName,
-            String accountNumber, String accountHolder)
-        updateCampaignBankDetails,
-    required TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)
-        processDonation,
-    required TResult Function() clearTransient,
-  }) {
-    return loadDonations(campaignId, limit);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? categoryId, int limit)? loadCampaigns,
-    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult? Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult? Function(String campaignId)? getCampaignDetail,
-    TResult? Function(CampaignEntity campaign)? createCampaign,
-    TResult? Function(CampaignEntity campaign)? updateCampaign,
-    TResult? Function(String campaignId)? deleteCampaign,
-    TResult? Function(String campaignId, String status)? updateCampaignStatus,
-    TResult? Function()? loadCategories,
-    TResult? Function(String campaignId, int limit)? loadDonations,
-    TResult? Function(DonationEntity donation)? createDonation,
-    TResult? Function(String campaignId, bool includeReplies)? loadComments,
-    TResult? Function(CampaignCommentEntity comment)? addComment,
-    TResult? Function(String campaignId, String commentId)? deleteComment,
-    TResult? Function(String parentId)? loadCommentReplies,
-    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult? Function(String campaignId)? loadWithdrawals,
-    TResult? Function(String campaignId)? loadCampaignTransparencyData,
-    TResult? Function(String campaignId)? loadCampaignUpdates,
-    TResult? Function(String userId)? loadUserCampaigns,
-    TResult? Function(String userId, int limit)? loadUserDonations,
-    TResult? Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult? Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult? Function()? clearTransient,
-  }) {
-    return loadDonations?.call(campaignId, limit);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? categoryId, int limit)? loadCampaigns,
-    TResult Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult Function(String campaignId)? getCampaignDetail,
-    TResult Function(CampaignEntity campaign)? createCampaign,
-    TResult Function(CampaignEntity campaign)? updateCampaign,
-    TResult Function(String campaignId)? deleteCampaign,
-    TResult Function(String campaignId, String status)? updateCampaignStatus,
-    TResult Function()? loadCategories,
-    TResult Function(String campaignId, int limit)? loadDonations,
-    TResult Function(DonationEntity donation)? createDonation,
-    TResult Function(String campaignId, bool includeReplies)? loadComments,
-    TResult Function(CampaignCommentEntity comment)? addComment,
-    TResult Function(String campaignId, String commentId)? deleteComment,
-    TResult Function(String parentId)? loadCommentReplies,
-    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult Function(String campaignId)? loadWithdrawals,
-    TResult Function(String campaignId)? loadCampaignTransparencyData,
-    TResult Function(String campaignId)? loadCampaignUpdates,
-    TResult Function(String userId)? loadUserCampaigns,
-    TResult Function(String userId, int limit)? loadUserDonations,
-    TResult Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadDonations != null) {
-      return loadDonations(campaignId, limit);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
-    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
-    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
-    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
-    required TResult Function(CreateCampaignEvent value) createCampaign,
-    required TResult Function(UpdateCampaignEvent value) updateCampaign,
-    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
-    required TResult Function(UpdateCampaignStatusEvent value)
-        updateCampaignStatus,
-    required TResult Function(LoadCategoriesEvent value) loadCategories,
-    required TResult Function(LoadDonationsEvent value) loadDonations,
-    required TResult Function(CreateDonationEvent value) createDonation,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
-    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(LoadCampaignTransparencyDataEvent value)
-        loadCampaignTransparencyData,
-    required TResult Function(LoadCampaignUpdatesEvent value)
-        loadCampaignUpdates,
-    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
-    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
-    required TResult Function(UpdateCampaignBankDetailsEvent value)
-        updateCampaignBankDetails,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
-  }) {
-    return loadDonations(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult? Function(CreateCampaignEvent value)? createCampaign,
-    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult? Function(LoadCategoriesEvent value)? loadCategories,
-    TResult? Function(LoadDonationsEvent value)? loadDonations,
-    TResult? Function(CreateDonationEvent value)? createDonation,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult? Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
-  }) {
-    return loadDonations?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult Function(CreateCampaignEvent value)? createCampaign,
-    TResult Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult Function(LoadCategoriesEvent value)? loadCategories,
-    TResult Function(LoadDonationsEvent value)? loadDonations,
-    TResult Function(CreateDonationEvent value)? createDonation,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadDonations != null) {
-      return loadDonations(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class LoadDonationsEvent implements CampaignEvent {
-  const factory LoadDonationsEvent(
-      {required final String campaignId,
-      final int limit}) = _$LoadDonationsEventImpl;
-
-  String get campaignId;
-  int get limit;
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LoadDonationsEventImplCopyWith<_$LoadDonationsEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$CreateDonationEventImplCopyWith<$Res> {
-  factory _$$CreateDonationEventImplCopyWith(_$CreateDonationEventImpl value,
-          $Res Function(_$CreateDonationEventImpl) then) =
-      __$$CreateDonationEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({DonationEntity donation});
-
-  $DonationEntityCopyWith<$Res> get donation;
-}
-
-/// @nodoc
-class __$$CreateDonationEventImplCopyWithImpl<$Res>
-    extends _$CampaignEventCopyWithImpl<$Res, _$CreateDonationEventImpl>
-    implements _$$CreateDonationEventImplCopyWith<$Res> {
-  __$$CreateDonationEventImplCopyWithImpl(_$CreateDonationEventImpl _value,
-      $Res Function(_$CreateDonationEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? donation = null,
-  }) {
-    return _then(_$CreateDonationEventImpl(
-      donation: null == donation
-          ? _value.donation
-          : donation // ignore: cast_nullable_to_non_nullable
-              as DonationEntity,
-    ));
-  }
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $DonationEntityCopyWith<$Res> get donation {
-    return $DonationEntityCopyWith<$Res>(_value.donation, (value) {
-      return _then(_value.copyWith(donation: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$CreateDonationEventImpl implements CreateDonationEvent {
-  const _$CreateDonationEventImpl({required this.donation});
-
-  @override
-  final DonationEntity donation;
-
-  @override
-  String toString() {
-    return 'CampaignEvent.createDonation(donation: $donation)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CreateDonationEventImpl &&
-            (identical(other.donation, donation) ||
-                other.donation == donation));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, donation);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$CreateDonationEventImplCopyWith<_$CreateDonationEventImpl> get copyWith =>
-      __$$CreateDonationEventImplCopyWithImpl<_$CreateDonationEventImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? categoryId, int limit) loadCampaigns,
-    required TResult Function(String? categoryId, int limit) refreshCampaigns,
-    required TResult Function(String query, String? categoryId, int limit)
-        searchCampaigns,
-    required TResult Function(String campaignId) getCampaignDetail,
-    required TResult Function(CampaignEntity campaign) createCampaign,
-    required TResult Function(CampaignEntity campaign) updateCampaign,
-    required TResult Function(String campaignId) deleteCampaign,
-    required TResult Function(String campaignId, String status)
-        updateCampaignStatus,
-    required TResult Function() loadCategories,
-    required TResult Function(String campaignId, int limit) loadDonations,
-    required TResult Function(DonationEntity donation) createDonation,
-    required TResult Function(String campaignId, bool includeReplies)
-        loadComments,
-    required TResult Function(CampaignCommentEntity comment) addComment,
-    required TResult Function(String campaignId, String commentId)
-        deleteComment,
-    required TResult Function(String parentId) loadCommentReplies,
-    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
-    required TResult Function(String campaignId) loadWithdrawals,
-    required TResult Function(String campaignId) loadCampaignTransparencyData,
-    required TResult Function(String campaignId) loadCampaignUpdates,
-    required TResult Function(String userId) loadUserCampaigns,
-    required TResult Function(String userId, int limit) loadUserDonations,
-    required TResult Function(String campaignId, String bankName,
-            String accountNumber, String accountHolder)
-        updateCampaignBankDetails,
-    required TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)
-        processDonation,
-    required TResult Function() clearTransient,
-  }) {
-    return createDonation(donation);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? categoryId, int limit)? loadCampaigns,
-    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult? Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult? Function(String campaignId)? getCampaignDetail,
-    TResult? Function(CampaignEntity campaign)? createCampaign,
-    TResult? Function(CampaignEntity campaign)? updateCampaign,
-    TResult? Function(String campaignId)? deleteCampaign,
-    TResult? Function(String campaignId, String status)? updateCampaignStatus,
-    TResult? Function()? loadCategories,
-    TResult? Function(String campaignId, int limit)? loadDonations,
-    TResult? Function(DonationEntity donation)? createDonation,
-    TResult? Function(String campaignId, bool includeReplies)? loadComments,
-    TResult? Function(CampaignCommentEntity comment)? addComment,
-    TResult? Function(String campaignId, String commentId)? deleteComment,
-    TResult? Function(String parentId)? loadCommentReplies,
-    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult? Function(String campaignId)? loadWithdrawals,
-    TResult? Function(String campaignId)? loadCampaignTransparencyData,
-    TResult? Function(String campaignId)? loadCampaignUpdates,
-    TResult? Function(String userId)? loadUserCampaigns,
-    TResult? Function(String userId, int limit)? loadUserDonations,
-    TResult? Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult? Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult? Function()? clearTransient,
-  }) {
-    return createDonation?.call(donation);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? categoryId, int limit)? loadCampaigns,
-    TResult Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult Function(String campaignId)? getCampaignDetail,
-    TResult Function(CampaignEntity campaign)? createCampaign,
-    TResult Function(CampaignEntity campaign)? updateCampaign,
-    TResult Function(String campaignId)? deleteCampaign,
-    TResult Function(String campaignId, String status)? updateCampaignStatus,
-    TResult Function()? loadCategories,
-    TResult Function(String campaignId, int limit)? loadDonations,
-    TResult Function(DonationEntity donation)? createDonation,
-    TResult Function(String campaignId, bool includeReplies)? loadComments,
-    TResult Function(CampaignCommentEntity comment)? addComment,
-    TResult Function(String campaignId, String commentId)? deleteComment,
-    TResult Function(String parentId)? loadCommentReplies,
-    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult Function(String campaignId)? loadWithdrawals,
-    TResult Function(String campaignId)? loadCampaignTransparencyData,
-    TResult Function(String campaignId)? loadCampaignUpdates,
-    TResult Function(String userId)? loadUserCampaigns,
-    TResult Function(String userId, int limit)? loadUserDonations,
-    TResult Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (createDonation != null) {
-      return createDonation(donation);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
-    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
-    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
-    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
-    required TResult Function(CreateCampaignEvent value) createCampaign,
-    required TResult Function(UpdateCampaignEvent value) updateCampaign,
-    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
-    required TResult Function(UpdateCampaignStatusEvent value)
-        updateCampaignStatus,
-    required TResult Function(LoadCategoriesEvent value) loadCategories,
-    required TResult Function(LoadDonationsEvent value) loadDonations,
-    required TResult Function(CreateDonationEvent value) createDonation,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
-    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(LoadCampaignTransparencyDataEvent value)
-        loadCampaignTransparencyData,
-    required TResult Function(LoadCampaignUpdatesEvent value)
-        loadCampaignUpdates,
-    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
-    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
-    required TResult Function(UpdateCampaignBankDetailsEvent value)
-        updateCampaignBankDetails,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
-  }) {
-    return createDonation(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult? Function(CreateCampaignEvent value)? createCampaign,
-    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult? Function(LoadCategoriesEvent value)? loadCategories,
-    TResult? Function(LoadDonationsEvent value)? loadDonations,
-    TResult? Function(CreateDonationEvent value)? createDonation,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult? Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
-  }) {
-    return createDonation?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult Function(CreateCampaignEvent value)? createCampaign,
-    TResult Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult Function(LoadCategoriesEvent value)? loadCategories,
-    TResult Function(LoadDonationsEvent value)? loadDonations,
-    TResult Function(CreateDonationEvent value)? createDonation,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (createDonation != null) {
-      return createDonation(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class CreateDonationEvent implements CampaignEvent {
-  const factory CreateDonationEvent({required final DonationEntity donation}) =
-      _$CreateDonationEventImpl;
-
-  DonationEntity get donation;
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CreateDonationEventImplCopyWith<_$CreateDonationEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$LoadCommentsEventImplCopyWith<$Res> {
-  factory _$$LoadCommentsEventImplCopyWith(_$LoadCommentsEventImpl value,
-          $Res Function(_$LoadCommentsEventImpl) then) =
-      __$$LoadCommentsEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String campaignId, bool includeReplies});
-}
-
-/// @nodoc
-class __$$LoadCommentsEventImplCopyWithImpl<$Res>
-    extends _$CampaignEventCopyWithImpl<$Res, _$LoadCommentsEventImpl>
-    implements _$$LoadCommentsEventImplCopyWith<$Res> {
-  __$$LoadCommentsEventImplCopyWithImpl(_$LoadCommentsEventImpl _value,
-      $Res Function(_$LoadCommentsEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? campaignId = null,
-    Object? includeReplies = null,
-  }) {
-    return _then(_$LoadCommentsEventImpl(
-      campaignId: null == campaignId
-          ? _value.campaignId
-          : campaignId // ignore: cast_nullable_to_non_nullable
-              as String,
-      includeReplies: null == includeReplies
-          ? _value.includeReplies
-          : includeReplies // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$LoadCommentsEventImpl implements LoadCommentsEvent {
-  const _$LoadCommentsEventImpl(
-      {required this.campaignId, this.includeReplies = false});
-
-  @override
-  final String campaignId;
-  @override
-  @JsonKey()
-  final bool includeReplies;
-
-  @override
-  String toString() {
-    return 'CampaignEvent.loadComments(campaignId: $campaignId, includeReplies: $includeReplies)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadCommentsEventImpl &&
-            (identical(other.campaignId, campaignId) ||
-                other.campaignId == campaignId) &&
-            (identical(other.includeReplies, includeReplies) ||
-                other.includeReplies == includeReplies));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, campaignId, includeReplies);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadCommentsEventImplCopyWith<_$LoadCommentsEventImpl> get copyWith =>
-      __$$LoadCommentsEventImplCopyWithImpl<_$LoadCommentsEventImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? categoryId, int limit) loadCampaigns,
-    required TResult Function(String? categoryId, int limit) refreshCampaigns,
-    required TResult Function(String query, String? categoryId, int limit)
-        searchCampaigns,
-    required TResult Function(String campaignId) getCampaignDetail,
-    required TResult Function(CampaignEntity campaign) createCampaign,
-    required TResult Function(CampaignEntity campaign) updateCampaign,
-    required TResult Function(String campaignId) deleteCampaign,
-    required TResult Function(String campaignId, String status)
-        updateCampaignStatus,
-    required TResult Function() loadCategories,
-    required TResult Function(String campaignId, int limit) loadDonations,
-    required TResult Function(DonationEntity donation) createDonation,
-    required TResult Function(String campaignId, bool includeReplies)
-        loadComments,
-    required TResult Function(CampaignCommentEntity comment) addComment,
-    required TResult Function(String campaignId, String commentId)
-        deleteComment,
-    required TResult Function(String parentId) loadCommentReplies,
-    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
-    required TResult Function(String campaignId) loadWithdrawals,
-    required TResult Function(String campaignId) loadCampaignTransparencyData,
-    required TResult Function(String campaignId) loadCampaignUpdates,
-    required TResult Function(String userId) loadUserCampaigns,
-    required TResult Function(String userId, int limit) loadUserDonations,
-    required TResult Function(String campaignId, String bankName,
-            String accountNumber, String accountHolder)
-        updateCampaignBankDetails,
-    required TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)
-        processDonation,
-    required TResult Function() clearTransient,
-  }) {
-    return loadComments(campaignId, includeReplies);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? categoryId, int limit)? loadCampaigns,
-    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult? Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult? Function(String campaignId)? getCampaignDetail,
-    TResult? Function(CampaignEntity campaign)? createCampaign,
-    TResult? Function(CampaignEntity campaign)? updateCampaign,
-    TResult? Function(String campaignId)? deleteCampaign,
-    TResult? Function(String campaignId, String status)? updateCampaignStatus,
-    TResult? Function()? loadCategories,
-    TResult? Function(String campaignId, int limit)? loadDonations,
-    TResult? Function(DonationEntity donation)? createDonation,
-    TResult? Function(String campaignId, bool includeReplies)? loadComments,
-    TResult? Function(CampaignCommentEntity comment)? addComment,
-    TResult? Function(String campaignId, String commentId)? deleteComment,
-    TResult? Function(String parentId)? loadCommentReplies,
-    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult? Function(String campaignId)? loadWithdrawals,
-    TResult? Function(String campaignId)? loadCampaignTransparencyData,
-    TResult? Function(String campaignId)? loadCampaignUpdates,
-    TResult? Function(String userId)? loadUserCampaigns,
-    TResult? Function(String userId, int limit)? loadUserDonations,
-    TResult? Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult? Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult? Function()? clearTransient,
-  }) {
-    return loadComments?.call(campaignId, includeReplies);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? categoryId, int limit)? loadCampaigns,
-    TResult Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult Function(String campaignId)? getCampaignDetail,
-    TResult Function(CampaignEntity campaign)? createCampaign,
-    TResult Function(CampaignEntity campaign)? updateCampaign,
-    TResult Function(String campaignId)? deleteCampaign,
-    TResult Function(String campaignId, String status)? updateCampaignStatus,
-    TResult Function()? loadCategories,
-    TResult Function(String campaignId, int limit)? loadDonations,
-    TResult Function(DonationEntity donation)? createDonation,
-    TResult Function(String campaignId, bool includeReplies)? loadComments,
-    TResult Function(CampaignCommentEntity comment)? addComment,
-    TResult Function(String campaignId, String commentId)? deleteComment,
-    TResult Function(String parentId)? loadCommentReplies,
-    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult Function(String campaignId)? loadWithdrawals,
-    TResult Function(String campaignId)? loadCampaignTransparencyData,
-    TResult Function(String campaignId)? loadCampaignUpdates,
-    TResult Function(String userId)? loadUserCampaigns,
-    TResult Function(String userId, int limit)? loadUserDonations,
-    TResult Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadComments != null) {
-      return loadComments(campaignId, includeReplies);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
-    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
-    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
-    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
-    required TResult Function(CreateCampaignEvent value) createCampaign,
-    required TResult Function(UpdateCampaignEvent value) updateCampaign,
-    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
-    required TResult Function(UpdateCampaignStatusEvent value)
-        updateCampaignStatus,
-    required TResult Function(LoadCategoriesEvent value) loadCategories,
-    required TResult Function(LoadDonationsEvent value) loadDonations,
-    required TResult Function(CreateDonationEvent value) createDonation,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
-    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(LoadCampaignTransparencyDataEvent value)
-        loadCampaignTransparencyData,
-    required TResult Function(LoadCampaignUpdatesEvent value)
-        loadCampaignUpdates,
-    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
-    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
-    required TResult Function(UpdateCampaignBankDetailsEvent value)
-        updateCampaignBankDetails,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
-  }) {
-    return loadComments(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult? Function(CreateCampaignEvent value)? createCampaign,
-    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult? Function(LoadCategoriesEvent value)? loadCategories,
-    TResult? Function(LoadDonationsEvent value)? loadDonations,
-    TResult? Function(CreateDonationEvent value)? createDonation,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult? Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
-  }) {
-    return loadComments?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult Function(CreateCampaignEvent value)? createCampaign,
-    TResult Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult Function(LoadCategoriesEvent value)? loadCategories,
-    TResult Function(LoadDonationsEvent value)? loadDonations,
-    TResult Function(CreateDonationEvent value)? createDonation,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadComments != null) {
-      return loadComments(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class LoadCommentsEvent implements CampaignEvent {
-  const factory LoadCommentsEvent(
-      {required final String campaignId,
-      final bool includeReplies}) = _$LoadCommentsEventImpl;
-
-  String get campaignId;
-  bool get includeReplies;
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LoadCommentsEventImplCopyWith<_$LoadCommentsEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$AddCommentEventImplCopyWith<$Res> {
-  factory _$$AddCommentEventImplCopyWith(_$AddCommentEventImpl value,
-          $Res Function(_$AddCommentEventImpl) then) =
-      __$$AddCommentEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({CampaignCommentEntity comment});
-
-  $CampaignCommentEntityCopyWith<$Res> get comment;
-}
-
-/// @nodoc
-class __$$AddCommentEventImplCopyWithImpl<$Res>
-    extends _$CampaignEventCopyWithImpl<$Res, _$AddCommentEventImpl>
-    implements _$$AddCommentEventImplCopyWith<$Res> {
-  __$$AddCommentEventImplCopyWithImpl(
-      _$AddCommentEventImpl _value, $Res Function(_$AddCommentEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? comment = null,
-  }) {
-    return _then(_$AddCommentEventImpl(
-      comment: null == comment
-          ? _value.comment
-          : comment // ignore: cast_nullable_to_non_nullable
-              as CampaignCommentEntity,
-    ));
-  }
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $CampaignCommentEntityCopyWith<$Res> get comment {
-    return $CampaignCommentEntityCopyWith<$Res>(_value.comment, (value) {
-      return _then(_value.copyWith(comment: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$AddCommentEventImpl implements AddCommentEvent {
-  const _$AddCommentEventImpl({required this.comment});
-
-  @override
-  final CampaignCommentEntity comment;
-
-  @override
-  String toString() {
-    return 'CampaignEvent.addComment(comment: $comment)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AddCommentEventImpl &&
-            (identical(other.comment, comment) || other.comment == comment));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, comment);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AddCommentEventImplCopyWith<_$AddCommentEventImpl> get copyWith =>
-      __$$AddCommentEventImplCopyWithImpl<_$AddCommentEventImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? categoryId, int limit) loadCampaigns,
-    required TResult Function(String? categoryId, int limit) refreshCampaigns,
-    required TResult Function(String query, String? categoryId, int limit)
-        searchCampaigns,
-    required TResult Function(String campaignId) getCampaignDetail,
-    required TResult Function(CampaignEntity campaign) createCampaign,
-    required TResult Function(CampaignEntity campaign) updateCampaign,
-    required TResult Function(String campaignId) deleteCampaign,
-    required TResult Function(String campaignId, String status)
-        updateCampaignStatus,
-    required TResult Function() loadCategories,
-    required TResult Function(String campaignId, int limit) loadDonations,
-    required TResult Function(DonationEntity donation) createDonation,
-    required TResult Function(String campaignId, bool includeReplies)
-        loadComments,
-    required TResult Function(CampaignCommentEntity comment) addComment,
-    required TResult Function(String campaignId, String commentId)
-        deleteComment,
-    required TResult Function(String parentId) loadCommentReplies,
-    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
-    required TResult Function(String campaignId) loadWithdrawals,
-    required TResult Function(String campaignId) loadCampaignTransparencyData,
-    required TResult Function(String campaignId) loadCampaignUpdates,
-    required TResult Function(String userId) loadUserCampaigns,
-    required TResult Function(String userId, int limit) loadUserDonations,
-    required TResult Function(String campaignId, String bankName,
-            String accountNumber, String accountHolder)
-        updateCampaignBankDetails,
-    required TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)
-        processDonation,
-    required TResult Function() clearTransient,
-  }) {
-    return addComment(comment);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? categoryId, int limit)? loadCampaigns,
-    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult? Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult? Function(String campaignId)? getCampaignDetail,
-    TResult? Function(CampaignEntity campaign)? createCampaign,
-    TResult? Function(CampaignEntity campaign)? updateCampaign,
-    TResult? Function(String campaignId)? deleteCampaign,
-    TResult? Function(String campaignId, String status)? updateCampaignStatus,
-    TResult? Function()? loadCategories,
-    TResult? Function(String campaignId, int limit)? loadDonations,
-    TResult? Function(DonationEntity donation)? createDonation,
-    TResult? Function(String campaignId, bool includeReplies)? loadComments,
-    TResult? Function(CampaignCommentEntity comment)? addComment,
-    TResult? Function(String campaignId, String commentId)? deleteComment,
-    TResult? Function(String parentId)? loadCommentReplies,
-    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult? Function(String campaignId)? loadWithdrawals,
-    TResult? Function(String campaignId)? loadCampaignTransparencyData,
-    TResult? Function(String campaignId)? loadCampaignUpdates,
-    TResult? Function(String userId)? loadUserCampaigns,
-    TResult? Function(String userId, int limit)? loadUserDonations,
-    TResult? Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult? Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult? Function()? clearTransient,
-  }) {
-    return addComment?.call(comment);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? categoryId, int limit)? loadCampaigns,
-    TResult Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult Function(String campaignId)? getCampaignDetail,
-    TResult Function(CampaignEntity campaign)? createCampaign,
-    TResult Function(CampaignEntity campaign)? updateCampaign,
-    TResult Function(String campaignId)? deleteCampaign,
-    TResult Function(String campaignId, String status)? updateCampaignStatus,
-    TResult Function()? loadCategories,
-    TResult Function(String campaignId, int limit)? loadDonations,
-    TResult Function(DonationEntity donation)? createDonation,
-    TResult Function(String campaignId, bool includeReplies)? loadComments,
-    TResult Function(CampaignCommentEntity comment)? addComment,
-    TResult Function(String campaignId, String commentId)? deleteComment,
-    TResult Function(String parentId)? loadCommentReplies,
-    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult Function(String campaignId)? loadWithdrawals,
-    TResult Function(String campaignId)? loadCampaignTransparencyData,
-    TResult Function(String campaignId)? loadCampaignUpdates,
-    TResult Function(String userId)? loadUserCampaigns,
-    TResult Function(String userId, int limit)? loadUserDonations,
-    TResult Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (addComment != null) {
-      return addComment(comment);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
-    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
-    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
-    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
-    required TResult Function(CreateCampaignEvent value) createCampaign,
-    required TResult Function(UpdateCampaignEvent value) updateCampaign,
-    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
-    required TResult Function(UpdateCampaignStatusEvent value)
-        updateCampaignStatus,
-    required TResult Function(LoadCategoriesEvent value) loadCategories,
-    required TResult Function(LoadDonationsEvent value) loadDonations,
-    required TResult Function(CreateDonationEvent value) createDonation,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
-    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(LoadCampaignTransparencyDataEvent value)
-        loadCampaignTransparencyData,
-    required TResult Function(LoadCampaignUpdatesEvent value)
-        loadCampaignUpdates,
-    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
-    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
-    required TResult Function(UpdateCampaignBankDetailsEvent value)
-        updateCampaignBankDetails,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
-  }) {
-    return addComment(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult? Function(CreateCampaignEvent value)? createCampaign,
-    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult? Function(LoadCategoriesEvent value)? loadCategories,
-    TResult? Function(LoadDonationsEvent value)? loadDonations,
-    TResult? Function(CreateDonationEvent value)? createDonation,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult? Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
-  }) {
-    return addComment?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult Function(CreateCampaignEvent value)? createCampaign,
-    TResult Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult Function(LoadCategoriesEvent value)? loadCategories,
-    TResult Function(LoadDonationsEvent value)? loadDonations,
-    TResult Function(CreateDonationEvent value)? createDonation,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (addComment != null) {
-      return addComment(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class AddCommentEvent implements CampaignEvent {
-  const factory AddCommentEvent(
-      {required final CampaignCommentEntity comment}) = _$AddCommentEventImpl;
-
-  CampaignCommentEntity get comment;
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AddCommentEventImplCopyWith<_$AddCommentEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$DeleteCommentEventImplCopyWith<$Res> {
-  factory _$$DeleteCommentEventImplCopyWith(_$DeleteCommentEventImpl value,
-          $Res Function(_$DeleteCommentEventImpl) then) =
-      __$$DeleteCommentEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String campaignId, String commentId});
-}
-
-/// @nodoc
-class __$$DeleteCommentEventImplCopyWithImpl<$Res>
-    extends _$CampaignEventCopyWithImpl<$Res, _$DeleteCommentEventImpl>
-    implements _$$DeleteCommentEventImplCopyWith<$Res> {
-  __$$DeleteCommentEventImplCopyWithImpl(_$DeleteCommentEventImpl _value,
-      $Res Function(_$DeleteCommentEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? campaignId = null,
-    Object? commentId = null,
-  }) {
-    return _then(_$DeleteCommentEventImpl(
-      campaignId: null == campaignId
-          ? _value.campaignId
-          : campaignId // ignore: cast_nullable_to_non_nullable
-              as String,
-      commentId: null == commentId
-          ? _value.commentId
-          : commentId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$DeleteCommentEventImpl implements DeleteCommentEvent {
-  const _$DeleteCommentEventImpl(
-      {required this.campaignId, required this.commentId});
-
-  @override
-  final String campaignId;
-  @override
-  final String commentId;
-
-  @override
-  String toString() {
-    return 'CampaignEvent.deleteComment(campaignId: $campaignId, commentId: $commentId)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$DeleteCommentEventImpl &&
-            (identical(other.campaignId, campaignId) ||
-                other.campaignId == campaignId) &&
-            (identical(other.commentId, commentId) ||
-                other.commentId == commentId));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, campaignId, commentId);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$DeleteCommentEventImplCopyWith<_$DeleteCommentEventImpl> get copyWith =>
-      __$$DeleteCommentEventImplCopyWithImpl<_$DeleteCommentEventImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? categoryId, int limit) loadCampaigns,
-    required TResult Function(String? categoryId, int limit) refreshCampaigns,
-    required TResult Function(String query, String? categoryId, int limit)
-        searchCampaigns,
-    required TResult Function(String campaignId) getCampaignDetail,
-    required TResult Function(CampaignEntity campaign) createCampaign,
-    required TResult Function(CampaignEntity campaign) updateCampaign,
-    required TResult Function(String campaignId) deleteCampaign,
-    required TResult Function(String campaignId, String status)
-        updateCampaignStatus,
-    required TResult Function() loadCategories,
-    required TResult Function(String campaignId, int limit) loadDonations,
-    required TResult Function(DonationEntity donation) createDonation,
-    required TResult Function(String campaignId, bool includeReplies)
-        loadComments,
-    required TResult Function(CampaignCommentEntity comment) addComment,
-    required TResult Function(String campaignId, String commentId)
-        deleteComment,
-    required TResult Function(String parentId) loadCommentReplies,
-    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
-    required TResult Function(String campaignId) loadWithdrawals,
-    required TResult Function(String campaignId) loadCampaignTransparencyData,
-    required TResult Function(String campaignId) loadCampaignUpdates,
-    required TResult Function(String userId) loadUserCampaigns,
-    required TResult Function(String userId, int limit) loadUserDonations,
-    required TResult Function(String campaignId, String bankName,
-            String accountNumber, String accountHolder)
-        updateCampaignBankDetails,
-    required TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)
-        processDonation,
-    required TResult Function() clearTransient,
-  }) {
-    return deleteComment(campaignId, commentId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? categoryId, int limit)? loadCampaigns,
-    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult? Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult? Function(String campaignId)? getCampaignDetail,
-    TResult? Function(CampaignEntity campaign)? createCampaign,
-    TResult? Function(CampaignEntity campaign)? updateCampaign,
-    TResult? Function(String campaignId)? deleteCampaign,
-    TResult? Function(String campaignId, String status)? updateCampaignStatus,
-    TResult? Function()? loadCategories,
-    TResult? Function(String campaignId, int limit)? loadDonations,
-    TResult? Function(DonationEntity donation)? createDonation,
-    TResult? Function(String campaignId, bool includeReplies)? loadComments,
-    TResult? Function(CampaignCommentEntity comment)? addComment,
-    TResult? Function(String campaignId, String commentId)? deleteComment,
-    TResult? Function(String parentId)? loadCommentReplies,
-    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult? Function(String campaignId)? loadWithdrawals,
-    TResult? Function(String campaignId)? loadCampaignTransparencyData,
-    TResult? Function(String campaignId)? loadCampaignUpdates,
-    TResult? Function(String userId)? loadUserCampaigns,
-    TResult? Function(String userId, int limit)? loadUserDonations,
-    TResult? Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult? Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult? Function()? clearTransient,
-  }) {
-    return deleteComment?.call(campaignId, commentId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? categoryId, int limit)? loadCampaigns,
-    TResult Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult Function(String campaignId)? getCampaignDetail,
-    TResult Function(CampaignEntity campaign)? createCampaign,
-    TResult Function(CampaignEntity campaign)? updateCampaign,
-    TResult Function(String campaignId)? deleteCampaign,
-    TResult Function(String campaignId, String status)? updateCampaignStatus,
-    TResult Function()? loadCategories,
-    TResult Function(String campaignId, int limit)? loadDonations,
-    TResult Function(DonationEntity donation)? createDonation,
-    TResult Function(String campaignId, bool includeReplies)? loadComments,
-    TResult Function(CampaignCommentEntity comment)? addComment,
-    TResult Function(String campaignId, String commentId)? deleteComment,
-    TResult Function(String parentId)? loadCommentReplies,
-    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult Function(String campaignId)? loadWithdrawals,
-    TResult Function(String campaignId)? loadCampaignTransparencyData,
-    TResult Function(String campaignId)? loadCampaignUpdates,
-    TResult Function(String userId)? loadUserCampaigns,
-    TResult Function(String userId, int limit)? loadUserDonations,
-    TResult Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (deleteComment != null) {
-      return deleteComment(campaignId, commentId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
-    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
-    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
-    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
-    required TResult Function(CreateCampaignEvent value) createCampaign,
-    required TResult Function(UpdateCampaignEvent value) updateCampaign,
-    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
-    required TResult Function(UpdateCampaignStatusEvent value)
-        updateCampaignStatus,
-    required TResult Function(LoadCategoriesEvent value) loadCategories,
-    required TResult Function(LoadDonationsEvent value) loadDonations,
-    required TResult Function(CreateDonationEvent value) createDonation,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
-    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(LoadCampaignTransparencyDataEvent value)
-        loadCampaignTransparencyData,
-    required TResult Function(LoadCampaignUpdatesEvent value)
-        loadCampaignUpdates,
-    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
-    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
-    required TResult Function(UpdateCampaignBankDetailsEvent value)
-        updateCampaignBankDetails,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
-  }) {
-    return deleteComment(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult? Function(CreateCampaignEvent value)? createCampaign,
-    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult? Function(LoadCategoriesEvent value)? loadCategories,
-    TResult? Function(LoadDonationsEvent value)? loadDonations,
-    TResult? Function(CreateDonationEvent value)? createDonation,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult? Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
-  }) {
-    return deleteComment?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult Function(CreateCampaignEvent value)? createCampaign,
-    TResult Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult Function(LoadCategoriesEvent value)? loadCategories,
-    TResult Function(LoadDonationsEvent value)? loadDonations,
-    TResult Function(CreateDonationEvent value)? createDonation,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (deleteComment != null) {
-      return deleteComment(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class DeleteCommentEvent implements CampaignEvent {
-  const factory DeleteCommentEvent(
-      {required final String campaignId,
-      required final String commentId}) = _$DeleteCommentEventImpl;
-
-  String get campaignId;
-  String get commentId;
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DeleteCommentEventImplCopyWith<_$DeleteCommentEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$LoadCommentRepliesEventImplCopyWith<$Res> {
-  factory _$$LoadCommentRepliesEventImplCopyWith(
-          _$LoadCommentRepliesEventImpl value,
-          $Res Function(_$LoadCommentRepliesEventImpl) then) =
-      __$$LoadCommentRepliesEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String parentId});
-}
-
-/// @nodoc
-class __$$LoadCommentRepliesEventImplCopyWithImpl<$Res>
-    extends _$CampaignEventCopyWithImpl<$Res, _$LoadCommentRepliesEventImpl>
-    implements _$$LoadCommentRepliesEventImplCopyWith<$Res> {
-  __$$LoadCommentRepliesEventImplCopyWithImpl(
-      _$LoadCommentRepliesEventImpl _value,
-      $Res Function(_$LoadCommentRepliesEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? parentId = null,
-  }) {
-    return _then(_$LoadCommentRepliesEventImpl(
-      parentId: null == parentId
-          ? _value.parentId
-          : parentId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$LoadCommentRepliesEventImpl implements LoadCommentRepliesEvent {
-  const _$LoadCommentRepliesEventImpl({required this.parentId});
-
-  @override
-  final String parentId;
-
-  @override
-  String toString() {
-    return 'CampaignEvent.loadCommentReplies(parentId: $parentId)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadCommentRepliesEventImpl &&
-            (identical(other.parentId, parentId) ||
-                other.parentId == parentId));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, parentId);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadCommentRepliesEventImplCopyWith<_$LoadCommentRepliesEventImpl>
-      get copyWith => __$$LoadCommentRepliesEventImplCopyWithImpl<
-          _$LoadCommentRepliesEventImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? categoryId, int limit) loadCampaigns,
-    required TResult Function(String? categoryId, int limit) refreshCampaigns,
-    required TResult Function(String query, String? categoryId, int limit)
-        searchCampaigns,
-    required TResult Function(String campaignId) getCampaignDetail,
-    required TResult Function(CampaignEntity campaign) createCampaign,
-    required TResult Function(CampaignEntity campaign) updateCampaign,
-    required TResult Function(String campaignId) deleteCampaign,
-    required TResult Function(String campaignId, String status)
-        updateCampaignStatus,
-    required TResult Function() loadCategories,
-    required TResult Function(String campaignId, int limit) loadDonations,
-    required TResult Function(DonationEntity donation) createDonation,
-    required TResult Function(String campaignId, bool includeReplies)
-        loadComments,
-    required TResult Function(CampaignCommentEntity comment) addComment,
-    required TResult Function(String campaignId, String commentId)
-        deleteComment,
-    required TResult Function(String parentId) loadCommentReplies,
-    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
-    required TResult Function(String campaignId) loadWithdrawals,
-    required TResult Function(String campaignId) loadCampaignTransparencyData,
-    required TResult Function(String campaignId) loadCampaignUpdates,
-    required TResult Function(String userId) loadUserCampaigns,
-    required TResult Function(String userId, int limit) loadUserDonations,
-    required TResult Function(String campaignId, String bankName,
-            String accountNumber, String accountHolder)
-        updateCampaignBankDetails,
-    required TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)
-        processDonation,
-    required TResult Function() clearTransient,
-  }) {
-    return loadCommentReplies(parentId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? categoryId, int limit)? loadCampaigns,
-    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult? Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult? Function(String campaignId)? getCampaignDetail,
-    TResult? Function(CampaignEntity campaign)? createCampaign,
-    TResult? Function(CampaignEntity campaign)? updateCampaign,
-    TResult? Function(String campaignId)? deleteCampaign,
-    TResult? Function(String campaignId, String status)? updateCampaignStatus,
-    TResult? Function()? loadCategories,
-    TResult? Function(String campaignId, int limit)? loadDonations,
-    TResult? Function(DonationEntity donation)? createDonation,
-    TResult? Function(String campaignId, bool includeReplies)? loadComments,
-    TResult? Function(CampaignCommentEntity comment)? addComment,
-    TResult? Function(String campaignId, String commentId)? deleteComment,
-    TResult? Function(String parentId)? loadCommentReplies,
-    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult? Function(String campaignId)? loadWithdrawals,
-    TResult? Function(String campaignId)? loadCampaignTransparencyData,
-    TResult? Function(String campaignId)? loadCampaignUpdates,
-    TResult? Function(String userId)? loadUserCampaigns,
-    TResult? Function(String userId, int limit)? loadUserDonations,
-    TResult? Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult? Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult? Function()? clearTransient,
-  }) {
-    return loadCommentReplies?.call(parentId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? categoryId, int limit)? loadCampaigns,
-    TResult Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult Function(String campaignId)? getCampaignDetail,
-    TResult Function(CampaignEntity campaign)? createCampaign,
-    TResult Function(CampaignEntity campaign)? updateCampaign,
-    TResult Function(String campaignId)? deleteCampaign,
-    TResult Function(String campaignId, String status)? updateCampaignStatus,
-    TResult Function()? loadCategories,
-    TResult Function(String campaignId, int limit)? loadDonations,
-    TResult Function(DonationEntity donation)? createDonation,
-    TResult Function(String campaignId, bool includeReplies)? loadComments,
-    TResult Function(CampaignCommentEntity comment)? addComment,
-    TResult Function(String campaignId, String commentId)? deleteComment,
-    TResult Function(String parentId)? loadCommentReplies,
-    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult Function(String campaignId)? loadWithdrawals,
-    TResult Function(String campaignId)? loadCampaignTransparencyData,
-    TResult Function(String campaignId)? loadCampaignUpdates,
-    TResult Function(String userId)? loadUserCampaigns,
-    TResult Function(String userId, int limit)? loadUserDonations,
-    TResult Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadCommentReplies != null) {
-      return loadCommentReplies(parentId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
-    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
-    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
-    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
-    required TResult Function(CreateCampaignEvent value) createCampaign,
-    required TResult Function(UpdateCampaignEvent value) updateCampaign,
-    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
-    required TResult Function(UpdateCampaignStatusEvent value)
-        updateCampaignStatus,
-    required TResult Function(LoadCategoriesEvent value) loadCategories,
-    required TResult Function(LoadDonationsEvent value) loadDonations,
-    required TResult Function(CreateDonationEvent value) createDonation,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
-    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(LoadCampaignTransparencyDataEvent value)
-        loadCampaignTransparencyData,
-    required TResult Function(LoadCampaignUpdatesEvent value)
-        loadCampaignUpdates,
-    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
-    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
-    required TResult Function(UpdateCampaignBankDetailsEvent value)
-        updateCampaignBankDetails,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
-  }) {
-    return loadCommentReplies(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult? Function(CreateCampaignEvent value)? createCampaign,
-    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult? Function(LoadCategoriesEvent value)? loadCategories,
-    TResult? Function(LoadDonationsEvent value)? loadDonations,
-    TResult? Function(CreateDonationEvent value)? createDonation,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult? Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
-  }) {
-    return loadCommentReplies?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult Function(CreateCampaignEvent value)? createCampaign,
-    TResult Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult Function(LoadCategoriesEvent value)? loadCategories,
-    TResult Function(LoadDonationsEvent value)? loadDonations,
-    TResult Function(CreateDonationEvent value)? createDonation,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadCommentReplies != null) {
-      return loadCommentReplies(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class LoadCommentRepliesEvent implements CampaignEvent {
-  const factory LoadCommentRepliesEvent({required final String parentId}) =
-      _$LoadCommentRepliesEventImpl;
-
-  String get parentId;
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LoadCommentRepliesEventImplCopyWith<_$LoadCommentRepliesEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$RequestWithdrawalEventImplCopyWith<$Res> {
-  factory _$$RequestWithdrawalEventImplCopyWith(
-          _$RequestWithdrawalEventImpl value,
-          $Res Function(_$RequestWithdrawalEventImpl) then) =
-      __$$RequestWithdrawalEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({WithdrawalEntity withdrawal});
-
-  $WithdrawalEntityCopyWith<$Res> get withdrawal;
-}
-
-/// @nodoc
-class __$$RequestWithdrawalEventImplCopyWithImpl<$Res>
-    extends _$CampaignEventCopyWithImpl<$Res, _$RequestWithdrawalEventImpl>
-    implements _$$RequestWithdrawalEventImplCopyWith<$Res> {
-  __$$RequestWithdrawalEventImplCopyWithImpl(
-      _$RequestWithdrawalEventImpl _value,
-      $Res Function(_$RequestWithdrawalEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? withdrawal = null,
-  }) {
-    return _then(_$RequestWithdrawalEventImpl(
-      withdrawal: null == withdrawal
-          ? _value.withdrawal
-          : withdrawal // ignore: cast_nullable_to_non_nullable
-              as WithdrawalEntity,
-    ));
-  }
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $WithdrawalEntityCopyWith<$Res> get withdrawal {
-    return $WithdrawalEntityCopyWith<$Res>(_value.withdrawal, (value) {
-      return _then(_value.copyWith(withdrawal: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$RequestWithdrawalEventImpl implements RequestWithdrawalEvent {
-  const _$RequestWithdrawalEventImpl({required this.withdrawal});
-
-  @override
-  final WithdrawalEntity withdrawal;
-
-  @override
-  String toString() {
-    return 'CampaignEvent.requestWithdrawal(withdrawal: $withdrawal)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$RequestWithdrawalEventImpl &&
-            (identical(other.withdrawal, withdrawal) ||
-                other.withdrawal == withdrawal));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, withdrawal);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$RequestWithdrawalEventImplCopyWith<_$RequestWithdrawalEventImpl>
-      get copyWith => __$$RequestWithdrawalEventImplCopyWithImpl<
-          _$RequestWithdrawalEventImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? categoryId, int limit) loadCampaigns,
-    required TResult Function(String? categoryId, int limit) refreshCampaigns,
-    required TResult Function(String query, String? categoryId, int limit)
-        searchCampaigns,
-    required TResult Function(String campaignId) getCampaignDetail,
-    required TResult Function(CampaignEntity campaign) createCampaign,
-    required TResult Function(CampaignEntity campaign) updateCampaign,
-    required TResult Function(String campaignId) deleteCampaign,
-    required TResult Function(String campaignId, String status)
-        updateCampaignStatus,
-    required TResult Function() loadCategories,
-    required TResult Function(String campaignId, int limit) loadDonations,
-    required TResult Function(DonationEntity donation) createDonation,
-    required TResult Function(String campaignId, bool includeReplies)
-        loadComments,
-    required TResult Function(CampaignCommentEntity comment) addComment,
-    required TResult Function(String campaignId, String commentId)
-        deleteComment,
-    required TResult Function(String parentId) loadCommentReplies,
-    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
-    required TResult Function(String campaignId) loadWithdrawals,
-    required TResult Function(String campaignId) loadCampaignTransparencyData,
-    required TResult Function(String campaignId) loadCampaignUpdates,
-    required TResult Function(String userId) loadUserCampaigns,
-    required TResult Function(String userId, int limit) loadUserDonations,
-    required TResult Function(String campaignId, String bankName,
-            String accountNumber, String accountHolder)
-        updateCampaignBankDetails,
-    required TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)
-        processDonation,
-    required TResult Function() clearTransient,
-  }) {
-    return requestWithdrawal(withdrawal);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? categoryId, int limit)? loadCampaigns,
-    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult? Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult? Function(String campaignId)? getCampaignDetail,
-    TResult? Function(CampaignEntity campaign)? createCampaign,
-    TResult? Function(CampaignEntity campaign)? updateCampaign,
-    TResult? Function(String campaignId)? deleteCampaign,
-    TResult? Function(String campaignId, String status)? updateCampaignStatus,
-    TResult? Function()? loadCategories,
-    TResult? Function(String campaignId, int limit)? loadDonations,
-    TResult? Function(DonationEntity donation)? createDonation,
-    TResult? Function(String campaignId, bool includeReplies)? loadComments,
-    TResult? Function(CampaignCommentEntity comment)? addComment,
-    TResult? Function(String campaignId, String commentId)? deleteComment,
-    TResult? Function(String parentId)? loadCommentReplies,
-    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult? Function(String campaignId)? loadWithdrawals,
-    TResult? Function(String campaignId)? loadCampaignTransparencyData,
-    TResult? Function(String campaignId)? loadCampaignUpdates,
-    TResult? Function(String userId)? loadUserCampaigns,
-    TResult? Function(String userId, int limit)? loadUserDonations,
-    TResult? Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult? Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult? Function()? clearTransient,
-  }) {
-    return requestWithdrawal?.call(withdrawal);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? categoryId, int limit)? loadCampaigns,
-    TResult Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult Function(String campaignId)? getCampaignDetail,
-    TResult Function(CampaignEntity campaign)? createCampaign,
-    TResult Function(CampaignEntity campaign)? updateCampaign,
-    TResult Function(String campaignId)? deleteCampaign,
-    TResult Function(String campaignId, String status)? updateCampaignStatus,
-    TResult Function()? loadCategories,
-    TResult Function(String campaignId, int limit)? loadDonations,
-    TResult Function(DonationEntity donation)? createDonation,
-    TResult Function(String campaignId, bool includeReplies)? loadComments,
-    TResult Function(CampaignCommentEntity comment)? addComment,
-    TResult Function(String campaignId, String commentId)? deleteComment,
-    TResult Function(String parentId)? loadCommentReplies,
-    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult Function(String campaignId)? loadWithdrawals,
-    TResult Function(String campaignId)? loadCampaignTransparencyData,
-    TResult Function(String campaignId)? loadCampaignUpdates,
-    TResult Function(String userId)? loadUserCampaigns,
-    TResult Function(String userId, int limit)? loadUserDonations,
-    TResult Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (requestWithdrawal != null) {
-      return requestWithdrawal(withdrawal);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
-    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
-    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
-    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
-    required TResult Function(CreateCampaignEvent value) createCampaign,
-    required TResult Function(UpdateCampaignEvent value) updateCampaign,
-    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
-    required TResult Function(UpdateCampaignStatusEvent value)
-        updateCampaignStatus,
-    required TResult Function(LoadCategoriesEvent value) loadCategories,
-    required TResult Function(LoadDonationsEvent value) loadDonations,
-    required TResult Function(CreateDonationEvent value) createDonation,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
-    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(LoadCampaignTransparencyDataEvent value)
-        loadCampaignTransparencyData,
-    required TResult Function(LoadCampaignUpdatesEvent value)
-        loadCampaignUpdates,
-    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
-    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
-    required TResult Function(UpdateCampaignBankDetailsEvent value)
-        updateCampaignBankDetails,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
-  }) {
-    return requestWithdrawal(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult? Function(CreateCampaignEvent value)? createCampaign,
-    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult? Function(LoadCategoriesEvent value)? loadCategories,
-    TResult? Function(LoadDonationsEvent value)? loadDonations,
-    TResult? Function(CreateDonationEvent value)? createDonation,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult? Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
-  }) {
-    return requestWithdrawal?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult Function(CreateCampaignEvent value)? createCampaign,
-    TResult Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult Function(LoadCategoriesEvent value)? loadCategories,
-    TResult Function(LoadDonationsEvent value)? loadDonations,
-    TResult Function(CreateDonationEvent value)? createDonation,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (requestWithdrawal != null) {
-      return requestWithdrawal(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class RequestWithdrawalEvent implements CampaignEvent {
-  const factory RequestWithdrawalEvent(
-          {required final WithdrawalEntity withdrawal}) =
-      _$RequestWithdrawalEventImpl;
-
-  WithdrawalEntity get withdrawal;
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$RequestWithdrawalEventImplCopyWith<_$RequestWithdrawalEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$LoadWithdrawalsEventImplCopyWith<$Res> {
-  factory _$$LoadWithdrawalsEventImplCopyWith(_$LoadWithdrawalsEventImpl value,
-          $Res Function(_$LoadWithdrawalsEventImpl) then) =
-      __$$LoadWithdrawalsEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String campaignId});
-}
-
-/// @nodoc
-class __$$LoadWithdrawalsEventImplCopyWithImpl<$Res>
-    extends _$CampaignEventCopyWithImpl<$Res, _$LoadWithdrawalsEventImpl>
-    implements _$$LoadWithdrawalsEventImplCopyWith<$Res> {
-  __$$LoadWithdrawalsEventImplCopyWithImpl(_$LoadWithdrawalsEventImpl _value,
-      $Res Function(_$LoadWithdrawalsEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? campaignId = null,
-  }) {
-    return _then(_$LoadWithdrawalsEventImpl(
-      campaignId: null == campaignId
-          ? _value.campaignId
-          : campaignId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$LoadWithdrawalsEventImpl implements LoadWithdrawalsEvent {
-  const _$LoadWithdrawalsEventImpl({required this.campaignId});
-
-  @override
-  final String campaignId;
-
-  @override
-  String toString() {
-    return 'CampaignEvent.loadWithdrawals(campaignId: $campaignId)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadWithdrawalsEventImpl &&
-            (identical(other.campaignId, campaignId) ||
-                other.campaignId == campaignId));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, campaignId);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadWithdrawalsEventImplCopyWith<_$LoadWithdrawalsEventImpl>
-      get copyWith =>
-          __$$LoadWithdrawalsEventImplCopyWithImpl<_$LoadWithdrawalsEventImpl>(
-              this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? categoryId, int limit) loadCampaigns,
-    required TResult Function(String? categoryId, int limit) refreshCampaigns,
-    required TResult Function(String query, String? categoryId, int limit)
-        searchCampaigns,
-    required TResult Function(String campaignId) getCampaignDetail,
-    required TResult Function(CampaignEntity campaign) createCampaign,
-    required TResult Function(CampaignEntity campaign) updateCampaign,
-    required TResult Function(String campaignId) deleteCampaign,
-    required TResult Function(String campaignId, String status)
-        updateCampaignStatus,
-    required TResult Function() loadCategories,
-    required TResult Function(String campaignId, int limit) loadDonations,
-    required TResult Function(DonationEntity donation) createDonation,
-    required TResult Function(String campaignId, bool includeReplies)
-        loadComments,
-    required TResult Function(CampaignCommentEntity comment) addComment,
-    required TResult Function(String campaignId, String commentId)
-        deleteComment,
-    required TResult Function(String parentId) loadCommentReplies,
-    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
-    required TResult Function(String campaignId) loadWithdrawals,
-    required TResult Function(String campaignId) loadCampaignTransparencyData,
-    required TResult Function(String campaignId) loadCampaignUpdates,
-    required TResult Function(String userId) loadUserCampaigns,
-    required TResult Function(String userId, int limit) loadUserDonations,
-    required TResult Function(String campaignId, String bankName,
-            String accountNumber, String accountHolder)
-        updateCampaignBankDetails,
-    required TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)
-        processDonation,
-    required TResult Function() clearTransient,
-  }) {
-    return loadWithdrawals(campaignId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? categoryId, int limit)? loadCampaigns,
-    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult? Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult? Function(String campaignId)? getCampaignDetail,
-    TResult? Function(CampaignEntity campaign)? createCampaign,
-    TResult? Function(CampaignEntity campaign)? updateCampaign,
-    TResult? Function(String campaignId)? deleteCampaign,
-    TResult? Function(String campaignId, String status)? updateCampaignStatus,
-    TResult? Function()? loadCategories,
-    TResult? Function(String campaignId, int limit)? loadDonations,
-    TResult? Function(DonationEntity donation)? createDonation,
-    TResult? Function(String campaignId, bool includeReplies)? loadComments,
-    TResult? Function(CampaignCommentEntity comment)? addComment,
-    TResult? Function(String campaignId, String commentId)? deleteComment,
-    TResult? Function(String parentId)? loadCommentReplies,
-    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult? Function(String campaignId)? loadWithdrawals,
-    TResult? Function(String campaignId)? loadCampaignTransparencyData,
-    TResult? Function(String campaignId)? loadCampaignUpdates,
-    TResult? Function(String userId)? loadUserCampaigns,
-    TResult? Function(String userId, int limit)? loadUserDonations,
-    TResult? Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult? Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult? Function()? clearTransient,
-  }) {
-    return loadWithdrawals?.call(campaignId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? categoryId, int limit)? loadCampaigns,
-    TResult Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult Function(String campaignId)? getCampaignDetail,
-    TResult Function(CampaignEntity campaign)? createCampaign,
-    TResult Function(CampaignEntity campaign)? updateCampaign,
-    TResult Function(String campaignId)? deleteCampaign,
-    TResult Function(String campaignId, String status)? updateCampaignStatus,
-    TResult Function()? loadCategories,
-    TResult Function(String campaignId, int limit)? loadDonations,
-    TResult Function(DonationEntity donation)? createDonation,
-    TResult Function(String campaignId, bool includeReplies)? loadComments,
-    TResult Function(CampaignCommentEntity comment)? addComment,
-    TResult Function(String campaignId, String commentId)? deleteComment,
-    TResult Function(String parentId)? loadCommentReplies,
-    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult Function(String campaignId)? loadWithdrawals,
-    TResult Function(String campaignId)? loadCampaignTransparencyData,
-    TResult Function(String campaignId)? loadCampaignUpdates,
-    TResult Function(String userId)? loadUserCampaigns,
-    TResult Function(String userId, int limit)? loadUserDonations,
-    TResult Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadWithdrawals != null) {
-      return loadWithdrawals(campaignId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
-    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
-    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
-    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
-    required TResult Function(CreateCampaignEvent value) createCampaign,
-    required TResult Function(UpdateCampaignEvent value) updateCampaign,
-    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
-    required TResult Function(UpdateCampaignStatusEvent value)
-        updateCampaignStatus,
-    required TResult Function(LoadCategoriesEvent value) loadCategories,
-    required TResult Function(LoadDonationsEvent value) loadDonations,
-    required TResult Function(CreateDonationEvent value) createDonation,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
-    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(LoadCampaignTransparencyDataEvent value)
-        loadCampaignTransparencyData,
-    required TResult Function(LoadCampaignUpdatesEvent value)
-        loadCampaignUpdates,
-    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
-    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
-    required TResult Function(UpdateCampaignBankDetailsEvent value)
-        updateCampaignBankDetails,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
-  }) {
-    return loadWithdrawals(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult? Function(CreateCampaignEvent value)? createCampaign,
-    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult? Function(LoadCategoriesEvent value)? loadCategories,
-    TResult? Function(LoadDonationsEvent value)? loadDonations,
-    TResult? Function(CreateDonationEvent value)? createDonation,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult? Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
-  }) {
-    return loadWithdrawals?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult Function(CreateCampaignEvent value)? createCampaign,
-    TResult Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult Function(LoadCategoriesEvent value)? loadCategories,
-    TResult Function(LoadDonationsEvent value)? loadDonations,
-    TResult Function(CreateDonationEvent value)? createDonation,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadWithdrawals != null) {
-      return loadWithdrawals(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class LoadWithdrawalsEvent implements CampaignEvent {
-  const factory LoadWithdrawalsEvent({required final String campaignId}) =
-      _$LoadWithdrawalsEventImpl;
-
-  String get campaignId;
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LoadWithdrawalsEventImplCopyWith<_$LoadWithdrawalsEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$LoadCampaignTransparencyDataEventImplCopyWith<$Res> {
-  factory _$$LoadCampaignTransparencyDataEventImplCopyWith(
-          _$LoadCampaignTransparencyDataEventImpl value,
-          $Res Function(_$LoadCampaignTransparencyDataEventImpl) then) =
-      __$$LoadCampaignTransparencyDataEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String campaignId});
-}
-
-/// @nodoc
-class __$$LoadCampaignTransparencyDataEventImplCopyWithImpl<$Res>
-    extends _$CampaignEventCopyWithImpl<$Res,
-        _$LoadCampaignTransparencyDataEventImpl>
-    implements _$$LoadCampaignTransparencyDataEventImplCopyWith<$Res> {
-  __$$LoadCampaignTransparencyDataEventImplCopyWithImpl(
-      _$LoadCampaignTransparencyDataEventImpl _value,
-      $Res Function(_$LoadCampaignTransparencyDataEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? campaignId = null,
-  }) {
-    return _then(_$LoadCampaignTransparencyDataEventImpl(
-      campaignId: null == campaignId
-          ? _value.campaignId
-          : campaignId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$LoadCampaignTransparencyDataEventImpl
-    implements LoadCampaignTransparencyDataEvent {
-  const _$LoadCampaignTransparencyDataEventImpl({required this.campaignId});
-
-  @override
-  final String campaignId;
-
-  @override
-  String toString() {
-    return 'CampaignEvent.loadCampaignTransparencyData(campaignId: $campaignId)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadCampaignTransparencyDataEventImpl &&
-            (identical(other.campaignId, campaignId) ||
-                other.campaignId == campaignId));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, campaignId);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadCampaignTransparencyDataEventImplCopyWith<
-          _$LoadCampaignTransparencyDataEventImpl>
-      get copyWith => __$$LoadCampaignTransparencyDataEventImplCopyWithImpl<
-          _$LoadCampaignTransparencyDataEventImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? categoryId, int limit) loadCampaigns,
-    required TResult Function(String? categoryId, int limit) refreshCampaigns,
-    required TResult Function(String query, String? categoryId, int limit)
-        searchCampaigns,
-    required TResult Function(String campaignId) getCampaignDetail,
-    required TResult Function(CampaignEntity campaign) createCampaign,
-    required TResult Function(CampaignEntity campaign) updateCampaign,
-    required TResult Function(String campaignId) deleteCampaign,
-    required TResult Function(String campaignId, String status)
-        updateCampaignStatus,
-    required TResult Function() loadCategories,
-    required TResult Function(String campaignId, int limit) loadDonations,
-    required TResult Function(DonationEntity donation) createDonation,
-    required TResult Function(String campaignId, bool includeReplies)
-        loadComments,
-    required TResult Function(CampaignCommentEntity comment) addComment,
-    required TResult Function(String campaignId, String commentId)
-        deleteComment,
-    required TResult Function(String parentId) loadCommentReplies,
-    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
-    required TResult Function(String campaignId) loadWithdrawals,
-    required TResult Function(String campaignId) loadCampaignTransparencyData,
-    required TResult Function(String campaignId) loadCampaignUpdates,
-    required TResult Function(String userId) loadUserCampaigns,
-    required TResult Function(String userId, int limit) loadUserDonations,
-    required TResult Function(String campaignId, String bankName,
-            String accountNumber, String accountHolder)
-        updateCampaignBankDetails,
-    required TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)
-        processDonation,
-    required TResult Function() clearTransient,
-  }) {
-    return loadCampaignTransparencyData(campaignId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? categoryId, int limit)? loadCampaigns,
-    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult? Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult? Function(String campaignId)? getCampaignDetail,
-    TResult? Function(CampaignEntity campaign)? createCampaign,
-    TResult? Function(CampaignEntity campaign)? updateCampaign,
-    TResult? Function(String campaignId)? deleteCampaign,
-    TResult? Function(String campaignId, String status)? updateCampaignStatus,
-    TResult? Function()? loadCategories,
-    TResult? Function(String campaignId, int limit)? loadDonations,
-    TResult? Function(DonationEntity donation)? createDonation,
-    TResult? Function(String campaignId, bool includeReplies)? loadComments,
-    TResult? Function(CampaignCommentEntity comment)? addComment,
-    TResult? Function(String campaignId, String commentId)? deleteComment,
-    TResult? Function(String parentId)? loadCommentReplies,
-    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult? Function(String campaignId)? loadWithdrawals,
-    TResult? Function(String campaignId)? loadCampaignTransparencyData,
-    TResult? Function(String campaignId)? loadCampaignUpdates,
-    TResult? Function(String userId)? loadUserCampaigns,
-    TResult? Function(String userId, int limit)? loadUserDonations,
-    TResult? Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult? Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult? Function()? clearTransient,
-  }) {
-    return loadCampaignTransparencyData?.call(campaignId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? categoryId, int limit)? loadCampaigns,
-    TResult Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult Function(String campaignId)? getCampaignDetail,
-    TResult Function(CampaignEntity campaign)? createCampaign,
-    TResult Function(CampaignEntity campaign)? updateCampaign,
-    TResult Function(String campaignId)? deleteCampaign,
-    TResult Function(String campaignId, String status)? updateCampaignStatus,
-    TResult Function()? loadCategories,
-    TResult Function(String campaignId, int limit)? loadDonations,
-    TResult Function(DonationEntity donation)? createDonation,
-    TResult Function(String campaignId, bool includeReplies)? loadComments,
-    TResult Function(CampaignCommentEntity comment)? addComment,
-    TResult Function(String campaignId, String commentId)? deleteComment,
-    TResult Function(String parentId)? loadCommentReplies,
-    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult Function(String campaignId)? loadWithdrawals,
-    TResult Function(String campaignId)? loadCampaignTransparencyData,
-    TResult Function(String campaignId)? loadCampaignUpdates,
-    TResult Function(String userId)? loadUserCampaigns,
-    TResult Function(String userId, int limit)? loadUserDonations,
-    TResult Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadCampaignTransparencyData != null) {
-      return loadCampaignTransparencyData(campaignId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
-    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
-    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
-    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
-    required TResult Function(CreateCampaignEvent value) createCampaign,
-    required TResult Function(UpdateCampaignEvent value) updateCampaign,
-    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
-    required TResult Function(UpdateCampaignStatusEvent value)
-        updateCampaignStatus,
-    required TResult Function(LoadCategoriesEvent value) loadCategories,
-    required TResult Function(LoadDonationsEvent value) loadDonations,
-    required TResult Function(CreateDonationEvent value) createDonation,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
-    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(LoadCampaignTransparencyDataEvent value)
-        loadCampaignTransparencyData,
-    required TResult Function(LoadCampaignUpdatesEvent value)
-        loadCampaignUpdates,
-    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
-    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
-    required TResult Function(UpdateCampaignBankDetailsEvent value)
-        updateCampaignBankDetails,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
-  }) {
-    return loadCampaignTransparencyData(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult? Function(CreateCampaignEvent value)? createCampaign,
-    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult? Function(LoadCategoriesEvent value)? loadCategories,
-    TResult? Function(LoadDonationsEvent value)? loadDonations,
-    TResult? Function(CreateDonationEvent value)? createDonation,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult? Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
-  }) {
-    return loadCampaignTransparencyData?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult Function(CreateCampaignEvent value)? createCampaign,
-    TResult Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult Function(LoadCategoriesEvent value)? loadCategories,
-    TResult Function(LoadDonationsEvent value)? loadDonations,
-    TResult Function(CreateDonationEvent value)? createDonation,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadCampaignTransparencyData != null) {
-      return loadCampaignTransparencyData(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class LoadCampaignTransparencyDataEvent implements CampaignEvent {
-  const factory LoadCampaignTransparencyDataEvent(
-          {required final String campaignId}) =
-      _$LoadCampaignTransparencyDataEventImpl;
-
-  String get campaignId;
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LoadCampaignTransparencyDataEventImplCopyWith<
-          _$LoadCampaignTransparencyDataEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$LoadCampaignUpdatesEventImplCopyWith<$Res> {
-  factory _$$LoadCampaignUpdatesEventImplCopyWith(
-          _$LoadCampaignUpdatesEventImpl value,
-          $Res Function(_$LoadCampaignUpdatesEventImpl) then) =
-      __$$LoadCampaignUpdatesEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String campaignId});
-}
-
-/// @nodoc
-class __$$LoadCampaignUpdatesEventImplCopyWithImpl<$Res>
-    extends _$CampaignEventCopyWithImpl<$Res, _$LoadCampaignUpdatesEventImpl>
-    implements _$$LoadCampaignUpdatesEventImplCopyWith<$Res> {
-  __$$LoadCampaignUpdatesEventImplCopyWithImpl(
-      _$LoadCampaignUpdatesEventImpl _value,
-      $Res Function(_$LoadCampaignUpdatesEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? campaignId = null,
-  }) {
-    return _then(_$LoadCampaignUpdatesEventImpl(
-      campaignId: null == campaignId
-          ? _value.campaignId
-          : campaignId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$LoadCampaignUpdatesEventImpl implements LoadCampaignUpdatesEvent {
-  const _$LoadCampaignUpdatesEventImpl({required this.campaignId});
-
-  @override
-  final String campaignId;
-
-  @override
-  String toString() {
-    return 'CampaignEvent.loadCampaignUpdates(campaignId: $campaignId)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadCampaignUpdatesEventImpl &&
-            (identical(other.campaignId, campaignId) ||
-                other.campaignId == campaignId));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, campaignId);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadCampaignUpdatesEventImplCopyWith<_$LoadCampaignUpdatesEventImpl>
-      get copyWith => __$$LoadCampaignUpdatesEventImplCopyWithImpl<
-          _$LoadCampaignUpdatesEventImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? categoryId, int limit) loadCampaigns,
-    required TResult Function(String? categoryId, int limit) refreshCampaigns,
-    required TResult Function(String query, String? categoryId, int limit)
-        searchCampaigns,
-    required TResult Function(String campaignId) getCampaignDetail,
-    required TResult Function(CampaignEntity campaign) createCampaign,
-    required TResult Function(CampaignEntity campaign) updateCampaign,
-    required TResult Function(String campaignId) deleteCampaign,
-    required TResult Function(String campaignId, String status)
-        updateCampaignStatus,
-    required TResult Function() loadCategories,
-    required TResult Function(String campaignId, int limit) loadDonations,
-    required TResult Function(DonationEntity donation) createDonation,
-    required TResult Function(String campaignId, bool includeReplies)
-        loadComments,
-    required TResult Function(CampaignCommentEntity comment) addComment,
-    required TResult Function(String campaignId, String commentId)
-        deleteComment,
-    required TResult Function(String parentId) loadCommentReplies,
-    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
-    required TResult Function(String campaignId) loadWithdrawals,
-    required TResult Function(String campaignId) loadCampaignTransparencyData,
-    required TResult Function(String campaignId) loadCampaignUpdates,
-    required TResult Function(String userId) loadUserCampaigns,
-    required TResult Function(String userId, int limit) loadUserDonations,
-    required TResult Function(String campaignId, String bankName,
-            String accountNumber, String accountHolder)
-        updateCampaignBankDetails,
-    required TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)
-        processDonation,
-    required TResult Function() clearTransient,
-  }) {
-    return loadCampaignUpdates(campaignId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? categoryId, int limit)? loadCampaigns,
-    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult? Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult? Function(String campaignId)? getCampaignDetail,
-    TResult? Function(CampaignEntity campaign)? createCampaign,
-    TResult? Function(CampaignEntity campaign)? updateCampaign,
-    TResult? Function(String campaignId)? deleteCampaign,
-    TResult? Function(String campaignId, String status)? updateCampaignStatus,
-    TResult? Function()? loadCategories,
-    TResult? Function(String campaignId, int limit)? loadDonations,
-    TResult? Function(DonationEntity donation)? createDonation,
-    TResult? Function(String campaignId, bool includeReplies)? loadComments,
-    TResult? Function(CampaignCommentEntity comment)? addComment,
-    TResult? Function(String campaignId, String commentId)? deleteComment,
-    TResult? Function(String parentId)? loadCommentReplies,
-    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult? Function(String campaignId)? loadWithdrawals,
-    TResult? Function(String campaignId)? loadCampaignTransparencyData,
-    TResult? Function(String campaignId)? loadCampaignUpdates,
-    TResult? Function(String userId)? loadUserCampaigns,
-    TResult? Function(String userId, int limit)? loadUserDonations,
-    TResult? Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult? Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult? Function()? clearTransient,
-  }) {
-    return loadCampaignUpdates?.call(campaignId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? categoryId, int limit)? loadCampaigns,
-    TResult Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult Function(String campaignId)? getCampaignDetail,
-    TResult Function(CampaignEntity campaign)? createCampaign,
-    TResult Function(CampaignEntity campaign)? updateCampaign,
-    TResult Function(String campaignId)? deleteCampaign,
-    TResult Function(String campaignId, String status)? updateCampaignStatus,
-    TResult Function()? loadCategories,
-    TResult Function(String campaignId, int limit)? loadDonations,
-    TResult Function(DonationEntity donation)? createDonation,
-    TResult Function(String campaignId, bool includeReplies)? loadComments,
-    TResult Function(CampaignCommentEntity comment)? addComment,
-    TResult Function(String campaignId, String commentId)? deleteComment,
-    TResult Function(String parentId)? loadCommentReplies,
-    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult Function(String campaignId)? loadWithdrawals,
-    TResult Function(String campaignId)? loadCampaignTransparencyData,
-    TResult Function(String campaignId)? loadCampaignUpdates,
-    TResult Function(String userId)? loadUserCampaigns,
-    TResult Function(String userId, int limit)? loadUserDonations,
-    TResult Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadCampaignUpdates != null) {
-      return loadCampaignUpdates(campaignId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
-    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
-    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
-    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
-    required TResult Function(CreateCampaignEvent value) createCampaign,
-    required TResult Function(UpdateCampaignEvent value) updateCampaign,
-    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
-    required TResult Function(UpdateCampaignStatusEvent value)
-        updateCampaignStatus,
-    required TResult Function(LoadCategoriesEvent value) loadCategories,
-    required TResult Function(LoadDonationsEvent value) loadDonations,
-    required TResult Function(CreateDonationEvent value) createDonation,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
-    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(LoadCampaignTransparencyDataEvent value)
-        loadCampaignTransparencyData,
-    required TResult Function(LoadCampaignUpdatesEvent value)
-        loadCampaignUpdates,
-    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
-    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
-    required TResult Function(UpdateCampaignBankDetailsEvent value)
-        updateCampaignBankDetails,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
-  }) {
-    return loadCampaignUpdates(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult? Function(CreateCampaignEvent value)? createCampaign,
-    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult? Function(LoadCategoriesEvent value)? loadCategories,
-    TResult? Function(LoadDonationsEvent value)? loadDonations,
-    TResult? Function(CreateDonationEvent value)? createDonation,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult? Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
-  }) {
-    return loadCampaignUpdates?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult Function(CreateCampaignEvent value)? createCampaign,
-    TResult Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult Function(LoadCategoriesEvent value)? loadCategories,
-    TResult Function(LoadDonationsEvent value)? loadDonations,
-    TResult Function(CreateDonationEvent value)? createDonation,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadCampaignUpdates != null) {
-      return loadCampaignUpdates(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class LoadCampaignUpdatesEvent implements CampaignEvent {
-  const factory LoadCampaignUpdatesEvent({required final String campaignId}) =
-      _$LoadCampaignUpdatesEventImpl;
-
-  String get campaignId;
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LoadCampaignUpdatesEventImplCopyWith<_$LoadCampaignUpdatesEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$LoadUserCampaignsEventImplCopyWith<$Res> {
-  factory _$$LoadUserCampaignsEventImplCopyWith(
-          _$LoadUserCampaignsEventImpl value,
-          $Res Function(_$LoadUserCampaignsEventImpl) then) =
-      __$$LoadUserCampaignsEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String userId});
-}
-
-/// @nodoc
-class __$$LoadUserCampaignsEventImplCopyWithImpl<$Res>
-    extends _$CampaignEventCopyWithImpl<$Res, _$LoadUserCampaignsEventImpl>
-    implements _$$LoadUserCampaignsEventImplCopyWith<$Res> {
-  __$$LoadUserCampaignsEventImplCopyWithImpl(
-      _$LoadUserCampaignsEventImpl _value,
-      $Res Function(_$LoadUserCampaignsEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? userId = null,
-  }) {
-    return _then(_$LoadUserCampaignsEventImpl(
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$LoadUserCampaignsEventImpl implements LoadUserCampaignsEvent {
-  const _$LoadUserCampaignsEventImpl({required this.userId});
-
-  @override
-  final String userId;
-
-  @override
-  String toString() {
-    return 'CampaignEvent.loadUserCampaigns(userId: $userId)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadUserCampaignsEventImpl &&
-            (identical(other.userId, userId) || other.userId == userId));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, userId);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadUserCampaignsEventImplCopyWith<_$LoadUserCampaignsEventImpl>
-      get copyWith => __$$LoadUserCampaignsEventImplCopyWithImpl<
-          _$LoadUserCampaignsEventImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? categoryId, int limit) loadCampaigns,
-    required TResult Function(String? categoryId, int limit) refreshCampaigns,
-    required TResult Function(String query, String? categoryId, int limit)
-        searchCampaigns,
-    required TResult Function(String campaignId) getCampaignDetail,
-    required TResult Function(CampaignEntity campaign) createCampaign,
-    required TResult Function(CampaignEntity campaign) updateCampaign,
-    required TResult Function(String campaignId) deleteCampaign,
-    required TResult Function(String campaignId, String status)
-        updateCampaignStatus,
-    required TResult Function() loadCategories,
-    required TResult Function(String campaignId, int limit) loadDonations,
-    required TResult Function(DonationEntity donation) createDonation,
-    required TResult Function(String campaignId, bool includeReplies)
-        loadComments,
-    required TResult Function(CampaignCommentEntity comment) addComment,
-    required TResult Function(String campaignId, String commentId)
-        deleteComment,
-    required TResult Function(String parentId) loadCommentReplies,
-    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
-    required TResult Function(String campaignId) loadWithdrawals,
-    required TResult Function(String campaignId) loadCampaignTransparencyData,
-    required TResult Function(String campaignId) loadCampaignUpdates,
-    required TResult Function(String userId) loadUserCampaigns,
-    required TResult Function(String userId, int limit) loadUserDonations,
-    required TResult Function(String campaignId, String bankName,
-            String accountNumber, String accountHolder)
-        updateCampaignBankDetails,
-    required TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)
-        processDonation,
-    required TResult Function() clearTransient,
-  }) {
-    return loadUserCampaigns(userId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? categoryId, int limit)? loadCampaigns,
-    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult? Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult? Function(String campaignId)? getCampaignDetail,
-    TResult? Function(CampaignEntity campaign)? createCampaign,
-    TResult? Function(CampaignEntity campaign)? updateCampaign,
-    TResult? Function(String campaignId)? deleteCampaign,
-    TResult? Function(String campaignId, String status)? updateCampaignStatus,
-    TResult? Function()? loadCategories,
-    TResult? Function(String campaignId, int limit)? loadDonations,
-    TResult? Function(DonationEntity donation)? createDonation,
-    TResult? Function(String campaignId, bool includeReplies)? loadComments,
-    TResult? Function(CampaignCommentEntity comment)? addComment,
-    TResult? Function(String campaignId, String commentId)? deleteComment,
-    TResult? Function(String parentId)? loadCommentReplies,
-    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult? Function(String campaignId)? loadWithdrawals,
-    TResult? Function(String campaignId)? loadCampaignTransparencyData,
-    TResult? Function(String campaignId)? loadCampaignUpdates,
-    TResult? Function(String userId)? loadUserCampaigns,
-    TResult? Function(String userId, int limit)? loadUserDonations,
-    TResult? Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult? Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult? Function()? clearTransient,
-  }) {
-    return loadUserCampaigns?.call(userId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? categoryId, int limit)? loadCampaigns,
-    TResult Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult Function(String campaignId)? getCampaignDetail,
-    TResult Function(CampaignEntity campaign)? createCampaign,
-    TResult Function(CampaignEntity campaign)? updateCampaign,
-    TResult Function(String campaignId)? deleteCampaign,
-    TResult Function(String campaignId, String status)? updateCampaignStatus,
-    TResult Function()? loadCategories,
-    TResult Function(String campaignId, int limit)? loadDonations,
-    TResult Function(DonationEntity donation)? createDonation,
-    TResult Function(String campaignId, bool includeReplies)? loadComments,
-    TResult Function(CampaignCommentEntity comment)? addComment,
-    TResult Function(String campaignId, String commentId)? deleteComment,
-    TResult Function(String parentId)? loadCommentReplies,
-    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult Function(String campaignId)? loadWithdrawals,
-    TResult Function(String campaignId)? loadCampaignTransparencyData,
-    TResult Function(String campaignId)? loadCampaignUpdates,
-    TResult Function(String userId)? loadUserCampaigns,
-    TResult Function(String userId, int limit)? loadUserDonations,
-    TResult Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadUserCampaigns != null) {
-      return loadUserCampaigns(userId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
-    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
-    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
-    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
-    required TResult Function(CreateCampaignEvent value) createCampaign,
-    required TResult Function(UpdateCampaignEvent value) updateCampaign,
-    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
-    required TResult Function(UpdateCampaignStatusEvent value)
-        updateCampaignStatus,
-    required TResult Function(LoadCategoriesEvent value) loadCategories,
-    required TResult Function(LoadDonationsEvent value) loadDonations,
-    required TResult Function(CreateDonationEvent value) createDonation,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
-    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(LoadCampaignTransparencyDataEvent value)
-        loadCampaignTransparencyData,
-    required TResult Function(LoadCampaignUpdatesEvent value)
-        loadCampaignUpdates,
-    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
-    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
-    required TResult Function(UpdateCampaignBankDetailsEvent value)
-        updateCampaignBankDetails,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
-  }) {
-    return loadUserCampaigns(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult? Function(CreateCampaignEvent value)? createCampaign,
-    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult? Function(LoadCategoriesEvent value)? loadCategories,
-    TResult? Function(LoadDonationsEvent value)? loadDonations,
-    TResult? Function(CreateDonationEvent value)? createDonation,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult? Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
-  }) {
-    return loadUserCampaigns?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult Function(CreateCampaignEvent value)? createCampaign,
-    TResult Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult Function(LoadCategoriesEvent value)? loadCategories,
-    TResult Function(LoadDonationsEvent value)? loadDonations,
-    TResult Function(CreateDonationEvent value)? createDonation,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadUserCampaigns != null) {
-      return loadUserCampaigns(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class LoadUserCampaignsEvent implements CampaignEvent {
-  const factory LoadUserCampaignsEvent({required final String userId}) =
-      _$LoadUserCampaignsEventImpl;
-
-  String get userId;
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LoadUserCampaignsEventImplCopyWith<_$LoadUserCampaignsEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$LoadUserDonationsEventImplCopyWith<$Res> {
-  factory _$$LoadUserDonationsEventImplCopyWith(
-          _$LoadUserDonationsEventImpl value,
-          $Res Function(_$LoadUserDonationsEventImpl) then) =
-      __$$LoadUserDonationsEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String userId, int limit});
-}
-
-/// @nodoc
-class __$$LoadUserDonationsEventImplCopyWithImpl<$Res>
-    extends _$CampaignEventCopyWithImpl<$Res, _$LoadUserDonationsEventImpl>
-    implements _$$LoadUserDonationsEventImplCopyWith<$Res> {
-  __$$LoadUserDonationsEventImplCopyWithImpl(
-      _$LoadUserDonationsEventImpl _value,
-      $Res Function(_$LoadUserDonationsEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? userId = null,
-    Object? limit = null,
-  }) {
-    return _then(_$LoadUserDonationsEventImpl(
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-      limit: null == limit
-          ? _value.limit
-          : limit // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$LoadUserDonationsEventImpl implements LoadUserDonationsEvent {
-  const _$LoadUserDonationsEventImpl({required this.userId, this.limit = 50});
-
-  @override
-  final String userId;
-  @override
-  @JsonKey()
-  final int limit;
-
-  @override
-  String toString() {
-    return 'CampaignEvent.loadUserDonations(userId: $userId, limit: $limit)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadUserDonationsEventImpl &&
-            (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.limit, limit) || other.limit == limit));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, userId, limit);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadUserDonationsEventImplCopyWith<_$LoadUserDonationsEventImpl>
-      get copyWith => __$$LoadUserDonationsEventImplCopyWithImpl<
-          _$LoadUserDonationsEventImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? categoryId, int limit) loadCampaigns,
-    required TResult Function(String? categoryId, int limit) refreshCampaigns,
-    required TResult Function(String query, String? categoryId, int limit)
-        searchCampaigns,
-    required TResult Function(String campaignId) getCampaignDetail,
-    required TResult Function(CampaignEntity campaign) createCampaign,
-    required TResult Function(CampaignEntity campaign) updateCampaign,
-    required TResult Function(String campaignId) deleteCampaign,
-    required TResult Function(String campaignId, String status)
-        updateCampaignStatus,
-    required TResult Function() loadCategories,
-    required TResult Function(String campaignId, int limit) loadDonations,
-    required TResult Function(DonationEntity donation) createDonation,
-    required TResult Function(String campaignId, bool includeReplies)
-        loadComments,
-    required TResult Function(CampaignCommentEntity comment) addComment,
-    required TResult Function(String campaignId, String commentId)
-        deleteComment,
-    required TResult Function(String parentId) loadCommentReplies,
-    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
-    required TResult Function(String campaignId) loadWithdrawals,
-    required TResult Function(String campaignId) loadCampaignTransparencyData,
-    required TResult Function(String campaignId) loadCampaignUpdates,
-    required TResult Function(String userId) loadUserCampaigns,
-    required TResult Function(String userId, int limit) loadUserDonations,
-    required TResult Function(String campaignId, String bankName,
-            String accountNumber, String accountHolder)
-        updateCampaignBankDetails,
-    required TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)
-        processDonation,
-    required TResult Function() clearTransient,
-  }) {
-    return loadUserDonations(userId, limit);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? categoryId, int limit)? loadCampaigns,
-    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult? Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult? Function(String campaignId)? getCampaignDetail,
-    TResult? Function(CampaignEntity campaign)? createCampaign,
-    TResult? Function(CampaignEntity campaign)? updateCampaign,
-    TResult? Function(String campaignId)? deleteCampaign,
-    TResult? Function(String campaignId, String status)? updateCampaignStatus,
-    TResult? Function()? loadCategories,
-    TResult? Function(String campaignId, int limit)? loadDonations,
-    TResult? Function(DonationEntity donation)? createDonation,
-    TResult? Function(String campaignId, bool includeReplies)? loadComments,
-    TResult? Function(CampaignCommentEntity comment)? addComment,
-    TResult? Function(String campaignId, String commentId)? deleteComment,
-    TResult? Function(String parentId)? loadCommentReplies,
-    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult? Function(String campaignId)? loadWithdrawals,
-    TResult? Function(String campaignId)? loadCampaignTransparencyData,
-    TResult? Function(String campaignId)? loadCampaignUpdates,
-    TResult? Function(String userId)? loadUserCampaigns,
-    TResult? Function(String userId, int limit)? loadUserDonations,
-    TResult? Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult? Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult? Function()? clearTransient,
-  }) {
-    return loadUserDonations?.call(userId, limit);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? categoryId, int limit)? loadCampaigns,
-    TResult Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult Function(String campaignId)? getCampaignDetail,
-    TResult Function(CampaignEntity campaign)? createCampaign,
-    TResult Function(CampaignEntity campaign)? updateCampaign,
-    TResult Function(String campaignId)? deleteCampaign,
-    TResult Function(String campaignId, String status)? updateCampaignStatus,
-    TResult Function()? loadCategories,
-    TResult Function(String campaignId, int limit)? loadDonations,
-    TResult Function(DonationEntity donation)? createDonation,
-    TResult Function(String campaignId, bool includeReplies)? loadComments,
-    TResult Function(CampaignCommentEntity comment)? addComment,
-    TResult Function(String campaignId, String commentId)? deleteComment,
-    TResult Function(String parentId)? loadCommentReplies,
-    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult Function(String campaignId)? loadWithdrawals,
-    TResult Function(String campaignId)? loadCampaignTransparencyData,
-    TResult Function(String campaignId)? loadCampaignUpdates,
-    TResult Function(String userId)? loadUserCampaigns,
-    TResult Function(String userId, int limit)? loadUserDonations,
-    TResult Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadUserDonations != null) {
-      return loadUserDonations(userId, limit);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
-    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
-    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
-    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
-    required TResult Function(CreateCampaignEvent value) createCampaign,
-    required TResult Function(UpdateCampaignEvent value) updateCampaign,
-    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
-    required TResult Function(UpdateCampaignStatusEvent value)
-        updateCampaignStatus,
-    required TResult Function(LoadCategoriesEvent value) loadCategories,
-    required TResult Function(LoadDonationsEvent value) loadDonations,
-    required TResult Function(CreateDonationEvent value) createDonation,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
-    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(LoadCampaignTransparencyDataEvent value)
-        loadCampaignTransparencyData,
-    required TResult Function(LoadCampaignUpdatesEvent value)
-        loadCampaignUpdates,
-    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
-    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
-    required TResult Function(UpdateCampaignBankDetailsEvent value)
-        updateCampaignBankDetails,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
-  }) {
-    return loadUserDonations(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult? Function(CreateCampaignEvent value)? createCampaign,
-    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult? Function(LoadCategoriesEvent value)? loadCategories,
-    TResult? Function(LoadDonationsEvent value)? loadDonations,
-    TResult? Function(CreateDonationEvent value)? createDonation,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult? Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
-  }) {
-    return loadUserDonations?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult Function(CreateCampaignEvent value)? createCampaign,
-    TResult Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult Function(LoadCategoriesEvent value)? loadCategories,
-    TResult Function(LoadDonationsEvent value)? loadDonations,
-    TResult Function(CreateDonationEvent value)? createDonation,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadUserDonations != null) {
-      return loadUserDonations(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class LoadUserDonationsEvent implements CampaignEvent {
-  const factory LoadUserDonationsEvent(
-      {required final String userId,
-      final int limit}) = _$LoadUserDonationsEventImpl;
-
-  String get userId;
-  int get limit;
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LoadUserDonationsEventImplCopyWith<_$LoadUserDonationsEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$UpdateCampaignBankDetailsEventImplCopyWith<$Res> {
-  factory _$$UpdateCampaignBankDetailsEventImplCopyWith(
-          _$UpdateCampaignBankDetailsEventImpl value,
-          $Res Function(_$UpdateCampaignBankDetailsEventImpl) then) =
-      __$$UpdateCampaignBankDetailsEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {String campaignId,
-      String bankName,
-      String accountNumber,
-      String accountHolder});
-}
-
-/// @nodoc
-class __$$UpdateCampaignBankDetailsEventImplCopyWithImpl<$Res>
-    extends _$CampaignEventCopyWithImpl<$Res,
-        _$UpdateCampaignBankDetailsEventImpl>
-    implements _$$UpdateCampaignBankDetailsEventImplCopyWith<$Res> {
-  __$$UpdateCampaignBankDetailsEventImplCopyWithImpl(
-      _$UpdateCampaignBankDetailsEventImpl _value,
-      $Res Function(_$UpdateCampaignBankDetailsEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? campaignId = null,
-    Object? bankName = null,
-    Object? accountNumber = null,
-    Object? accountHolder = null,
-  }) {
-    return _then(_$UpdateCampaignBankDetailsEventImpl(
-      campaignId: null == campaignId
-          ? _value.campaignId
-          : campaignId // ignore: cast_nullable_to_non_nullable
-              as String,
-      bankName: null == bankName
-          ? _value.bankName
-          : bankName // ignore: cast_nullable_to_non_nullable
-              as String,
-      accountNumber: null == accountNumber
-          ? _value.accountNumber
-          : accountNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      accountHolder: null == accountHolder
-          ? _value.accountHolder
-          : accountHolder // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$UpdateCampaignBankDetailsEventImpl
-    implements UpdateCampaignBankDetailsEvent {
-  const _$UpdateCampaignBankDetailsEventImpl(
-      {required this.campaignId,
-      required this.bankName,
-      required this.accountNumber,
-      required this.accountHolder});
-
-  @override
-  final String campaignId;
-  @override
-  final String bankName;
-  @override
-  final String accountNumber;
-  @override
-  final String accountHolder;
-
-  @override
-  String toString() {
-    return 'CampaignEvent.updateCampaignBankDetails(campaignId: $campaignId, bankName: $bankName, accountNumber: $accountNumber, accountHolder: $accountHolder)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UpdateCampaignBankDetailsEventImpl &&
-            (identical(other.campaignId, campaignId) ||
-                other.campaignId == campaignId) &&
-            (identical(other.bankName, bankName) ||
-                other.bankName == bankName) &&
-            (identical(other.accountNumber, accountNumber) ||
-                other.accountNumber == accountNumber) &&
-            (identical(other.accountHolder, accountHolder) ||
-                other.accountHolder == accountHolder));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, campaignId, bankName, accountNumber, accountHolder);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UpdateCampaignBankDetailsEventImplCopyWith<
-          _$UpdateCampaignBankDetailsEventImpl>
-      get copyWith => __$$UpdateCampaignBankDetailsEventImplCopyWithImpl<
-          _$UpdateCampaignBankDetailsEventImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? categoryId, int limit) loadCampaigns,
-    required TResult Function(String? categoryId, int limit) refreshCampaigns,
-    required TResult Function(String query, String? categoryId, int limit)
-        searchCampaigns,
-    required TResult Function(String campaignId) getCampaignDetail,
-    required TResult Function(CampaignEntity campaign) createCampaign,
-    required TResult Function(CampaignEntity campaign) updateCampaign,
-    required TResult Function(String campaignId) deleteCampaign,
-    required TResult Function(String campaignId, String status)
-        updateCampaignStatus,
-    required TResult Function() loadCategories,
-    required TResult Function(String campaignId, int limit) loadDonations,
-    required TResult Function(DonationEntity donation) createDonation,
-    required TResult Function(String campaignId, bool includeReplies)
-        loadComments,
-    required TResult Function(CampaignCommentEntity comment) addComment,
-    required TResult Function(String campaignId, String commentId)
-        deleteComment,
-    required TResult Function(String parentId) loadCommentReplies,
-    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
-    required TResult Function(String campaignId) loadWithdrawals,
-    required TResult Function(String campaignId) loadCampaignTransparencyData,
-    required TResult Function(String campaignId) loadCampaignUpdates,
-    required TResult Function(String userId) loadUserCampaigns,
-    required TResult Function(String userId, int limit) loadUserDonations,
-    required TResult Function(String campaignId, String bankName,
-            String accountNumber, String accountHolder)
-        updateCampaignBankDetails,
-    required TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)
-        processDonation,
-    required TResult Function() clearTransient,
-  }) {
-    return updateCampaignBankDetails(
-        campaignId, bankName, accountNumber, accountHolder);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? categoryId, int limit)? loadCampaigns,
-    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult? Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult? Function(String campaignId)? getCampaignDetail,
-    TResult? Function(CampaignEntity campaign)? createCampaign,
-    TResult? Function(CampaignEntity campaign)? updateCampaign,
-    TResult? Function(String campaignId)? deleteCampaign,
-    TResult? Function(String campaignId, String status)? updateCampaignStatus,
-    TResult? Function()? loadCategories,
-    TResult? Function(String campaignId, int limit)? loadDonations,
-    TResult? Function(DonationEntity donation)? createDonation,
-    TResult? Function(String campaignId, bool includeReplies)? loadComments,
-    TResult? Function(CampaignCommentEntity comment)? addComment,
-    TResult? Function(String campaignId, String commentId)? deleteComment,
-    TResult? Function(String parentId)? loadCommentReplies,
-    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult? Function(String campaignId)? loadWithdrawals,
-    TResult? Function(String campaignId)? loadCampaignTransparencyData,
-    TResult? Function(String campaignId)? loadCampaignUpdates,
-    TResult? Function(String userId)? loadUserCampaigns,
-    TResult? Function(String userId, int limit)? loadUserDonations,
-    TResult? Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult? Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult? Function()? clearTransient,
-  }) {
-    return updateCampaignBankDetails?.call(
-        campaignId, bankName, accountNumber, accountHolder);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? categoryId, int limit)? loadCampaigns,
-    TResult Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult Function(String campaignId)? getCampaignDetail,
-    TResult Function(CampaignEntity campaign)? createCampaign,
-    TResult Function(CampaignEntity campaign)? updateCampaign,
-    TResult Function(String campaignId)? deleteCampaign,
-    TResult Function(String campaignId, String status)? updateCampaignStatus,
-    TResult Function()? loadCategories,
-    TResult Function(String campaignId, int limit)? loadDonations,
-    TResult Function(DonationEntity donation)? createDonation,
-    TResult Function(String campaignId, bool includeReplies)? loadComments,
-    TResult Function(CampaignCommentEntity comment)? addComment,
-    TResult Function(String campaignId, String commentId)? deleteComment,
-    TResult Function(String parentId)? loadCommentReplies,
-    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult Function(String campaignId)? loadWithdrawals,
-    TResult Function(String campaignId)? loadCampaignTransparencyData,
-    TResult Function(String campaignId)? loadCampaignUpdates,
-    TResult Function(String userId)? loadUserCampaigns,
-    TResult Function(String userId, int limit)? loadUserDonations,
-    TResult Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (updateCampaignBankDetails != null) {
-      return updateCampaignBankDetails(
-          campaignId, bankName, accountNumber, accountHolder);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
-    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
-    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
-    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
-    required TResult Function(CreateCampaignEvent value) createCampaign,
-    required TResult Function(UpdateCampaignEvent value) updateCampaign,
-    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
-    required TResult Function(UpdateCampaignStatusEvent value)
-        updateCampaignStatus,
-    required TResult Function(LoadCategoriesEvent value) loadCategories,
-    required TResult Function(LoadDonationsEvent value) loadDonations,
-    required TResult Function(CreateDonationEvent value) createDonation,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
-    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(LoadCampaignTransparencyDataEvent value)
-        loadCampaignTransparencyData,
-    required TResult Function(LoadCampaignUpdatesEvent value)
-        loadCampaignUpdates,
-    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
-    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
-    required TResult Function(UpdateCampaignBankDetailsEvent value)
-        updateCampaignBankDetails,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
-  }) {
-    return updateCampaignBankDetails(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult? Function(CreateCampaignEvent value)? createCampaign,
-    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult? Function(LoadCategoriesEvent value)? loadCategories,
-    TResult? Function(LoadDonationsEvent value)? loadDonations,
-    TResult? Function(CreateDonationEvent value)? createDonation,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult? Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
-  }) {
-    return updateCampaignBankDetails?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult Function(CreateCampaignEvent value)? createCampaign,
-    TResult Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult Function(LoadCategoriesEvent value)? loadCategories,
-    TResult Function(LoadDonationsEvent value)? loadDonations,
-    TResult Function(CreateDonationEvent value)? createDonation,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (updateCampaignBankDetails != null) {
-      return updateCampaignBankDetails(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class UpdateCampaignBankDetailsEvent implements CampaignEvent {
-  const factory UpdateCampaignBankDetailsEvent(
-          {required final String campaignId,
-          required final String bankName,
-          required final String accountNumber,
-          required final String accountHolder}) =
-      _$UpdateCampaignBankDetailsEventImpl;
-
-  String get campaignId;
-  String get bankName;
-  String get accountNumber;
-  String get accountHolder;
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UpdateCampaignBankDetailsEventImplCopyWith<
-          _$UpdateCampaignBankDetailsEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$ProcessDonationEventImplCopyWith<$Res> {
-  factory _$$ProcessDonationEventImplCopyWith(_$ProcessDonationEventImpl value,
-          $Res Function(_$ProcessDonationEventImpl) then) =
-      __$$ProcessDonationEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {String campaignId,
-      String userId,
-      double amount,
-      String? message,
-      bool isAnonymous});
-}
-
-/// @nodoc
-class __$$ProcessDonationEventImplCopyWithImpl<$Res>
-    extends _$CampaignEventCopyWithImpl<$Res, _$ProcessDonationEventImpl>
-    implements _$$ProcessDonationEventImplCopyWith<$Res> {
-  __$$ProcessDonationEventImplCopyWithImpl(_$ProcessDonationEventImpl _value,
-      $Res Function(_$ProcessDonationEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? campaignId = null,
-    Object? userId = null,
-    Object? amount = null,
-    Object? message = freezed,
-    Object? isAnonymous = null,
-  }) {
-    return _then(_$ProcessDonationEventImpl(
-      campaignId: null == campaignId
-          ? _value.campaignId
-          : campaignId // ignore: cast_nullable_to_non_nullable
-              as String,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-      amount: null == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as double,
-      message: freezed == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isAnonymous: null == isAnonymous
-          ? _value.isAnonymous
-          : isAnonymous // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$ProcessDonationEventImpl implements ProcessDonationEvent {
-  const _$ProcessDonationEventImpl(
-      {required this.campaignId,
-      required this.userId,
-      required this.amount,
-      this.message,
-      this.isAnonymous = false});
-
-  @override
-  final String campaignId;
-  @override
-  final String userId;
-  @override
-  final double amount;
-  @override
-  final String? message;
-  @override
-  @JsonKey()
-  final bool isAnonymous;
-
-  @override
-  String toString() {
-    return 'CampaignEvent.processDonation(campaignId: $campaignId, userId: $userId, amount: $amount, message: $message, isAnonymous: $isAnonymous)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ProcessDonationEventImpl &&
-            (identical(other.campaignId, campaignId) ||
-                other.campaignId == campaignId) &&
-            (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.amount, amount) || other.amount == amount) &&
-            (identical(other.message, message) || other.message == message) &&
-            (identical(other.isAnonymous, isAnonymous) ||
-                other.isAnonymous == isAnonymous));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, campaignId, userId, amount, message, isAnonymous);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ProcessDonationEventImplCopyWith<_$ProcessDonationEventImpl>
-      get copyWith =>
-          __$$ProcessDonationEventImplCopyWithImpl<_$ProcessDonationEventImpl>(
-              this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? categoryId, int limit) loadCampaigns,
-    required TResult Function(String? categoryId, int limit) refreshCampaigns,
-    required TResult Function(String query, String? categoryId, int limit)
-        searchCampaigns,
-    required TResult Function(String campaignId) getCampaignDetail,
-    required TResult Function(CampaignEntity campaign) createCampaign,
-    required TResult Function(CampaignEntity campaign) updateCampaign,
-    required TResult Function(String campaignId) deleteCampaign,
-    required TResult Function(String campaignId, String status)
-        updateCampaignStatus,
-    required TResult Function() loadCategories,
-    required TResult Function(String campaignId, int limit) loadDonations,
-    required TResult Function(DonationEntity donation) createDonation,
-    required TResult Function(String campaignId, bool includeReplies)
-        loadComments,
-    required TResult Function(CampaignCommentEntity comment) addComment,
-    required TResult Function(String campaignId, String commentId)
-        deleteComment,
-    required TResult Function(String parentId) loadCommentReplies,
-    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
-    required TResult Function(String campaignId) loadWithdrawals,
-    required TResult Function(String campaignId) loadCampaignTransparencyData,
-    required TResult Function(String campaignId) loadCampaignUpdates,
-    required TResult Function(String userId) loadUserCampaigns,
-    required TResult Function(String userId, int limit) loadUserDonations,
-    required TResult Function(String campaignId, String bankName,
-            String accountNumber, String accountHolder)
-        updateCampaignBankDetails,
-    required TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)
-        processDonation,
-    required TResult Function() clearTransient,
-  }) {
-    return processDonation(campaignId, userId, amount, message, isAnonymous);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? categoryId, int limit)? loadCampaigns,
-    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult? Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult? Function(String campaignId)? getCampaignDetail,
-    TResult? Function(CampaignEntity campaign)? createCampaign,
-    TResult? Function(CampaignEntity campaign)? updateCampaign,
-    TResult? Function(String campaignId)? deleteCampaign,
-    TResult? Function(String campaignId, String status)? updateCampaignStatus,
-    TResult? Function()? loadCategories,
-    TResult? Function(String campaignId, int limit)? loadDonations,
-    TResult? Function(DonationEntity donation)? createDonation,
-    TResult? Function(String campaignId, bool includeReplies)? loadComments,
-    TResult? Function(CampaignCommentEntity comment)? addComment,
-    TResult? Function(String campaignId, String commentId)? deleteComment,
-    TResult? Function(String parentId)? loadCommentReplies,
-    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult? Function(String campaignId)? loadWithdrawals,
-    TResult? Function(String campaignId)? loadCampaignTransparencyData,
-    TResult? Function(String campaignId)? loadCampaignUpdates,
-    TResult? Function(String userId)? loadUserCampaigns,
-    TResult? Function(String userId, int limit)? loadUserDonations,
-    TResult? Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult? Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult? Function()? clearTransient,
-  }) {
-    return processDonation?.call(
-        campaignId, userId, amount, message, isAnonymous);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? categoryId, int limit)? loadCampaigns,
-    TResult Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult Function(String campaignId)? getCampaignDetail,
-    TResult Function(CampaignEntity campaign)? createCampaign,
-    TResult Function(CampaignEntity campaign)? updateCampaign,
-    TResult Function(String campaignId)? deleteCampaign,
-    TResult Function(String campaignId, String status)? updateCampaignStatus,
-    TResult Function()? loadCategories,
-    TResult Function(String campaignId, int limit)? loadDonations,
-    TResult Function(DonationEntity donation)? createDonation,
-    TResult Function(String campaignId, bool includeReplies)? loadComments,
-    TResult Function(CampaignCommentEntity comment)? addComment,
-    TResult Function(String campaignId, String commentId)? deleteComment,
-    TResult Function(String parentId)? loadCommentReplies,
-    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult Function(String campaignId)? loadWithdrawals,
-    TResult Function(String campaignId)? loadCampaignTransparencyData,
-    TResult Function(String campaignId)? loadCampaignUpdates,
-    TResult Function(String userId)? loadUserCampaigns,
-    TResult Function(String userId, int limit)? loadUserDonations,
-    TResult Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (processDonation != null) {
-      return processDonation(campaignId, userId, amount, message, isAnonymous);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
-    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
-    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
-    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
-    required TResult Function(CreateCampaignEvent value) createCampaign,
-    required TResult Function(UpdateCampaignEvent value) updateCampaign,
-    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
-    required TResult Function(UpdateCampaignStatusEvent value)
-        updateCampaignStatus,
-    required TResult Function(LoadCategoriesEvent value) loadCategories,
-    required TResult Function(LoadDonationsEvent value) loadDonations,
-    required TResult Function(CreateDonationEvent value) createDonation,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
-    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(LoadCampaignTransparencyDataEvent value)
-        loadCampaignTransparencyData,
-    required TResult Function(LoadCampaignUpdatesEvent value)
-        loadCampaignUpdates,
-    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
-    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
-    required TResult Function(UpdateCampaignBankDetailsEvent value)
-        updateCampaignBankDetails,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
-  }) {
-    return processDonation(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult? Function(CreateCampaignEvent value)? createCampaign,
-    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult? Function(LoadCategoriesEvent value)? loadCategories,
-    TResult? Function(LoadDonationsEvent value)? loadDonations,
-    TResult? Function(CreateDonationEvent value)? createDonation,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult? Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
-  }) {
-    return processDonation?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult Function(CreateCampaignEvent value)? createCampaign,
-    TResult Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult Function(LoadCategoriesEvent value)? loadCategories,
-    TResult Function(LoadDonationsEvent value)? loadDonations,
-    TResult Function(CreateDonationEvent value)? createDonation,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (processDonation != null) {
-      return processDonation(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class ProcessDonationEvent implements CampaignEvent {
-  const factory ProcessDonationEvent(
-      {required final String campaignId,
-      required final String userId,
-      required final double amount,
-      final String? message,
-      final bool isAnonymous}) = _$ProcessDonationEventImpl;
-
-  String get campaignId;
-  String get userId;
-  double get amount;
-  String? get message;
-  bool get isAnonymous;
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ProcessDonationEventImplCopyWith<_$ProcessDonationEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$ClearCampaignTransientEventImplCopyWith<$Res> {
-  factory _$$ClearCampaignTransientEventImplCopyWith(
-          _$ClearCampaignTransientEventImpl value,
-          $Res Function(_$ClearCampaignTransientEventImpl) then) =
-      __$$ClearCampaignTransientEventImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$ClearCampaignTransientEventImplCopyWithImpl<$Res>
-    extends _$CampaignEventCopyWithImpl<$Res, _$ClearCampaignTransientEventImpl>
-    implements _$$ClearCampaignTransientEventImplCopyWith<$Res> {
-  __$$ClearCampaignTransientEventImplCopyWithImpl(
-      _$ClearCampaignTransientEventImpl _value,
-      $Res Function(_$ClearCampaignTransientEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CampaignEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$ClearCampaignTransientEventImpl implements ClearCampaignTransientEvent {
-  const _$ClearCampaignTransientEventImpl();
-
-  @override
-  String toString() {
-    return 'CampaignEvent.clearTransient()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ClearCampaignTransientEventImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? categoryId, int limit) loadCampaigns,
-    required TResult Function(String? categoryId, int limit) refreshCampaigns,
-    required TResult Function(String query, String? categoryId, int limit)
-        searchCampaigns,
-    required TResult Function(String campaignId) getCampaignDetail,
-    required TResult Function(CampaignEntity campaign) createCampaign,
-    required TResult Function(CampaignEntity campaign) updateCampaign,
-    required TResult Function(String campaignId) deleteCampaign,
-    required TResult Function(String campaignId, String status)
-        updateCampaignStatus,
-    required TResult Function() loadCategories,
-    required TResult Function(String campaignId, int limit) loadDonations,
-    required TResult Function(DonationEntity donation) createDonation,
-    required TResult Function(String campaignId, bool includeReplies)
-        loadComments,
-    required TResult Function(CampaignCommentEntity comment) addComment,
-    required TResult Function(String campaignId, String commentId)
-        deleteComment,
-    required TResult Function(String parentId) loadCommentReplies,
-    required TResult Function(WithdrawalEntity withdrawal) requestWithdrawal,
-    required TResult Function(String campaignId) loadWithdrawals,
-    required TResult Function(String campaignId) loadCampaignTransparencyData,
-    required TResult Function(String campaignId) loadCampaignUpdates,
-    required TResult Function(String userId) loadUserCampaigns,
-    required TResult Function(String userId, int limit) loadUserDonations,
-    required TResult Function(String campaignId, String bankName,
-            String accountNumber, String accountHolder)
-        updateCampaignBankDetails,
-    required TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)
-        processDonation,
-    required TResult Function() clearTransient,
-  }) {
-    return clearTransient();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? categoryId, int limit)? loadCampaigns,
-    TResult? Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult? Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult? Function(String campaignId)? getCampaignDetail,
-    TResult? Function(CampaignEntity campaign)? createCampaign,
-    TResult? Function(CampaignEntity campaign)? updateCampaign,
-    TResult? Function(String campaignId)? deleteCampaign,
-    TResult? Function(String campaignId, String status)? updateCampaignStatus,
-    TResult? Function()? loadCategories,
-    TResult? Function(String campaignId, int limit)? loadDonations,
-    TResult? Function(DonationEntity donation)? createDonation,
-    TResult? Function(String campaignId, bool includeReplies)? loadComments,
-    TResult? Function(CampaignCommentEntity comment)? addComment,
-    TResult? Function(String campaignId, String commentId)? deleteComment,
-    TResult? Function(String parentId)? loadCommentReplies,
-    TResult? Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult? Function(String campaignId)? loadWithdrawals,
-    TResult? Function(String campaignId)? loadCampaignTransparencyData,
-    TResult? Function(String campaignId)? loadCampaignUpdates,
-    TResult? Function(String userId)? loadUserCampaigns,
-    TResult? Function(String userId, int limit)? loadUserDonations,
-    TResult? Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult? Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult? Function()? clearTransient,
-  }) {
-    return clearTransient?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? categoryId, int limit)? loadCampaigns,
-    TResult Function(String? categoryId, int limit)? refreshCampaigns,
-    TResult Function(String query, String? categoryId, int limit)?
-        searchCampaigns,
-    TResult Function(String campaignId)? getCampaignDetail,
-    TResult Function(CampaignEntity campaign)? createCampaign,
-    TResult Function(CampaignEntity campaign)? updateCampaign,
-    TResult Function(String campaignId)? deleteCampaign,
-    TResult Function(String campaignId, String status)? updateCampaignStatus,
-    TResult Function()? loadCategories,
-    TResult Function(String campaignId, int limit)? loadDonations,
-    TResult Function(DonationEntity donation)? createDonation,
-    TResult Function(String campaignId, bool includeReplies)? loadComments,
-    TResult Function(CampaignCommentEntity comment)? addComment,
-    TResult Function(String campaignId, String commentId)? deleteComment,
-    TResult Function(String parentId)? loadCommentReplies,
-    TResult Function(WithdrawalEntity withdrawal)? requestWithdrawal,
-    TResult Function(String campaignId)? loadWithdrawals,
-    TResult Function(String campaignId)? loadCampaignTransparencyData,
-    TResult Function(String campaignId)? loadCampaignUpdates,
-    TResult Function(String userId)? loadUserCampaigns,
-    TResult Function(String userId, int limit)? loadUserDonations,
-    TResult Function(String campaignId, String bankName, String accountNumber,
-            String accountHolder)?
-        updateCampaignBankDetails,
-    TResult Function(String campaignId, String userId, double amount,
-            String? message, bool isAnonymous)?
-        processDonation,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (clearTransient != null) {
-      return clearTransient();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadCampaignsEvent value) loadCampaigns,
-    required TResult Function(RefreshCampaignsEvent value) refreshCampaigns,
-    required TResult Function(SearchCampaignsEvent value) searchCampaigns,
-    required TResult Function(GetCampaignDetailEvent value) getCampaignDetail,
-    required TResult Function(CreateCampaignEvent value) createCampaign,
-    required TResult Function(UpdateCampaignEvent value) updateCampaign,
-    required TResult Function(DeleteCampaignEvent value) deleteCampaign,
-    required TResult Function(UpdateCampaignStatusEvent value)
-        updateCampaignStatus,
-    required TResult Function(LoadCategoriesEvent value) loadCategories,
-    required TResult Function(LoadDonationsEvent value) loadDonations,
-    required TResult Function(CreateDonationEvent value) createDonation,
-    required TResult Function(LoadCommentsEvent value) loadComments,
-    required TResult Function(AddCommentEvent value) addComment,
-    required TResult Function(DeleteCommentEvent value) deleteComment,
-    required TResult Function(LoadCommentRepliesEvent value) loadCommentReplies,
-    required TResult Function(RequestWithdrawalEvent value) requestWithdrawal,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(LoadCampaignTransparencyDataEvent value)
-        loadCampaignTransparencyData,
-    required TResult Function(LoadCampaignUpdatesEvent value)
-        loadCampaignUpdates,
-    required TResult Function(LoadUserCampaignsEvent value) loadUserCampaigns,
-    required TResult Function(LoadUserDonationsEvent value) loadUserDonations,
-    required TResult Function(UpdateCampaignBankDetailsEvent value)
-        updateCampaignBankDetails,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(ClearCampaignTransientEvent value) clearTransient,
-  }) {
-    return clearTransient(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult? Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult? Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult? Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult? Function(CreateCampaignEvent value)? createCampaign,
-    TResult? Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult? Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult? Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult? Function(LoadCategoriesEvent value)? loadCategories,
-    TResult? Function(LoadDonationsEvent value)? loadDonations,
-    TResult? Function(CreateDonationEvent value)? createDonation,
-    TResult? Function(LoadCommentsEvent value)? loadComments,
-    TResult? Function(AddCommentEvent value)? addComment,
-    TResult? Function(DeleteCommentEvent value)? deleteComment,
-    TResult? Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult? Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult? Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult? Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult? Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult? Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(ClearCampaignTransientEvent value)? clearTransient,
-  }) {
-    return clearTransient?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadCampaignsEvent value)? loadCampaigns,
-    TResult Function(RefreshCampaignsEvent value)? refreshCampaigns,
-    TResult Function(SearchCampaignsEvent value)? searchCampaigns,
-    TResult Function(GetCampaignDetailEvent value)? getCampaignDetail,
-    TResult Function(CreateCampaignEvent value)? createCampaign,
-    TResult Function(UpdateCampaignEvent value)? updateCampaign,
-    TResult Function(DeleteCampaignEvent value)? deleteCampaign,
-    TResult Function(UpdateCampaignStatusEvent value)? updateCampaignStatus,
-    TResult Function(LoadCategoriesEvent value)? loadCategories,
-    TResult Function(LoadDonationsEvent value)? loadDonations,
-    TResult Function(CreateDonationEvent value)? createDonation,
-    TResult Function(LoadCommentsEvent value)? loadComments,
-    TResult Function(AddCommentEvent value)? addComment,
-    TResult Function(DeleteCommentEvent value)? deleteComment,
-    TResult Function(LoadCommentRepliesEvent value)? loadCommentReplies,
-    TResult Function(RequestWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(LoadCampaignTransparencyDataEvent value)?
-        loadCampaignTransparencyData,
-    TResult Function(LoadCampaignUpdatesEvent value)? loadCampaignUpdates,
-    TResult Function(LoadUserCampaignsEvent value)? loadUserCampaigns,
-    TResult Function(LoadUserDonationsEvent value)? loadUserDonations,
-    TResult Function(UpdateCampaignBankDetailsEvent value)?
-        updateCampaignBankDetails,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(ClearCampaignTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (clearTransient != null) {
-      return clearTransient(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class ClearCampaignTransientEvent implements CampaignEvent {
-  const factory ClearCampaignTransientEvent() =
-      _$ClearCampaignTransientEventImpl;
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CampaignEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'CampaignEvent()';
+}
+
+
+}
+
+/// @nodoc
+class $CampaignEventCopyWith<$Res>  {
+$CampaignEventCopyWith(CampaignEvent _, $Res Function(CampaignEvent) __);
+}
+
+
+/// Adds pattern-matching-related methods to [CampaignEvent].
+extension CampaignEventPatterns on CampaignEvent {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LoadCampaignsEvent value)?  loadCampaigns,TResult Function( RefreshCampaignsEvent value)?  refreshCampaigns,TResult Function( SearchCampaignsEvent value)?  searchCampaigns,TResult Function( GetCampaignDetailEvent value)?  getCampaignDetail,TResult Function( CreateCampaignEvent value)?  createCampaign,TResult Function( UpdateCampaignEvent value)?  updateCampaign,TResult Function( DeleteCampaignEvent value)?  deleteCampaign,TResult Function( UpdateCampaignStatusEvent value)?  updateCampaignStatus,TResult Function( LoadCategoriesEvent value)?  loadCategories,TResult Function( LoadDonationsEvent value)?  loadDonations,TResult Function( CreateDonationEvent value)?  createDonation,TResult Function( LoadCommentsEvent value)?  loadComments,TResult Function( AddCommentEvent value)?  addComment,TResult Function( DeleteCommentEvent value)?  deleteComment,TResult Function( LoadCommentRepliesEvent value)?  loadCommentReplies,TResult Function( RequestWithdrawalEvent value)?  requestWithdrawal,TResult Function( LoadWithdrawalsEvent value)?  loadWithdrawals,TResult Function( LoadCampaignTransparencyDataEvent value)?  loadCampaignTransparencyData,TResult Function( LoadCampaignUpdatesEvent value)?  loadCampaignUpdates,TResult Function( LoadUserCampaignsEvent value)?  loadUserCampaigns,TResult Function( LoadUserDonationsEvent value)?  loadUserDonations,TResult Function( UpdateCampaignBankDetailsEvent value)?  updateCampaignBankDetails,TResult Function( ProcessDonationEvent value)?  processDonation,TResult Function( ClearCampaignTransientEvent value)?  clearTransient,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case LoadCampaignsEvent() when loadCampaigns != null:
+return loadCampaigns(_that);case RefreshCampaignsEvent() when refreshCampaigns != null:
+return refreshCampaigns(_that);case SearchCampaignsEvent() when searchCampaigns != null:
+return searchCampaigns(_that);case GetCampaignDetailEvent() when getCampaignDetail != null:
+return getCampaignDetail(_that);case CreateCampaignEvent() when createCampaign != null:
+return createCampaign(_that);case UpdateCampaignEvent() when updateCampaign != null:
+return updateCampaign(_that);case DeleteCampaignEvent() when deleteCampaign != null:
+return deleteCampaign(_that);case UpdateCampaignStatusEvent() when updateCampaignStatus != null:
+return updateCampaignStatus(_that);case LoadCategoriesEvent() when loadCategories != null:
+return loadCategories(_that);case LoadDonationsEvent() when loadDonations != null:
+return loadDonations(_that);case CreateDonationEvent() when createDonation != null:
+return createDonation(_that);case LoadCommentsEvent() when loadComments != null:
+return loadComments(_that);case AddCommentEvent() when addComment != null:
+return addComment(_that);case DeleteCommentEvent() when deleteComment != null:
+return deleteComment(_that);case LoadCommentRepliesEvent() when loadCommentReplies != null:
+return loadCommentReplies(_that);case RequestWithdrawalEvent() when requestWithdrawal != null:
+return requestWithdrawal(_that);case LoadWithdrawalsEvent() when loadWithdrawals != null:
+return loadWithdrawals(_that);case LoadCampaignTransparencyDataEvent() when loadCampaignTransparencyData != null:
+return loadCampaignTransparencyData(_that);case LoadCampaignUpdatesEvent() when loadCampaignUpdates != null:
+return loadCampaignUpdates(_that);case LoadUserCampaignsEvent() when loadUserCampaigns != null:
+return loadUserCampaigns(_that);case LoadUserDonationsEvent() when loadUserDonations != null:
+return loadUserDonations(_that);case UpdateCampaignBankDetailsEvent() when updateCampaignBankDetails != null:
+return updateCampaignBankDetails(_that);case ProcessDonationEvent() when processDonation != null:
+return processDonation(_that);case ClearCampaignTransientEvent() when clearTransient != null:
+return clearTransient(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LoadCampaignsEvent value)  loadCampaigns,required TResult Function( RefreshCampaignsEvent value)  refreshCampaigns,required TResult Function( SearchCampaignsEvent value)  searchCampaigns,required TResult Function( GetCampaignDetailEvent value)  getCampaignDetail,required TResult Function( CreateCampaignEvent value)  createCampaign,required TResult Function( UpdateCampaignEvent value)  updateCampaign,required TResult Function( DeleteCampaignEvent value)  deleteCampaign,required TResult Function( UpdateCampaignStatusEvent value)  updateCampaignStatus,required TResult Function( LoadCategoriesEvent value)  loadCategories,required TResult Function( LoadDonationsEvent value)  loadDonations,required TResult Function( CreateDonationEvent value)  createDonation,required TResult Function( LoadCommentsEvent value)  loadComments,required TResult Function( AddCommentEvent value)  addComment,required TResult Function( DeleteCommentEvent value)  deleteComment,required TResult Function( LoadCommentRepliesEvent value)  loadCommentReplies,required TResult Function( RequestWithdrawalEvent value)  requestWithdrawal,required TResult Function( LoadWithdrawalsEvent value)  loadWithdrawals,required TResult Function( LoadCampaignTransparencyDataEvent value)  loadCampaignTransparencyData,required TResult Function( LoadCampaignUpdatesEvent value)  loadCampaignUpdates,required TResult Function( LoadUserCampaignsEvent value)  loadUserCampaigns,required TResult Function( LoadUserDonationsEvent value)  loadUserDonations,required TResult Function( UpdateCampaignBankDetailsEvent value)  updateCampaignBankDetails,required TResult Function( ProcessDonationEvent value)  processDonation,required TResult Function( ClearCampaignTransientEvent value)  clearTransient,}){
+final _that = this;
+switch (_that) {
+case LoadCampaignsEvent():
+return loadCampaigns(_that);case RefreshCampaignsEvent():
+return refreshCampaigns(_that);case SearchCampaignsEvent():
+return searchCampaigns(_that);case GetCampaignDetailEvent():
+return getCampaignDetail(_that);case CreateCampaignEvent():
+return createCampaign(_that);case UpdateCampaignEvent():
+return updateCampaign(_that);case DeleteCampaignEvent():
+return deleteCampaign(_that);case UpdateCampaignStatusEvent():
+return updateCampaignStatus(_that);case LoadCategoriesEvent():
+return loadCategories(_that);case LoadDonationsEvent():
+return loadDonations(_that);case CreateDonationEvent():
+return createDonation(_that);case LoadCommentsEvent():
+return loadComments(_that);case AddCommentEvent():
+return addComment(_that);case DeleteCommentEvent():
+return deleteComment(_that);case LoadCommentRepliesEvent():
+return loadCommentReplies(_that);case RequestWithdrawalEvent():
+return requestWithdrawal(_that);case LoadWithdrawalsEvent():
+return loadWithdrawals(_that);case LoadCampaignTransparencyDataEvent():
+return loadCampaignTransparencyData(_that);case LoadCampaignUpdatesEvent():
+return loadCampaignUpdates(_that);case LoadUserCampaignsEvent():
+return loadUserCampaigns(_that);case LoadUserDonationsEvent():
+return loadUserDonations(_that);case UpdateCampaignBankDetailsEvent():
+return updateCampaignBankDetails(_that);case ProcessDonationEvent():
+return processDonation(_that);case ClearCampaignTransientEvent():
+return clearTransient(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LoadCampaignsEvent value)?  loadCampaigns,TResult? Function( RefreshCampaignsEvent value)?  refreshCampaigns,TResult? Function( SearchCampaignsEvent value)?  searchCampaigns,TResult? Function( GetCampaignDetailEvent value)?  getCampaignDetail,TResult? Function( CreateCampaignEvent value)?  createCampaign,TResult? Function( UpdateCampaignEvent value)?  updateCampaign,TResult? Function( DeleteCampaignEvent value)?  deleteCampaign,TResult? Function( UpdateCampaignStatusEvent value)?  updateCampaignStatus,TResult? Function( LoadCategoriesEvent value)?  loadCategories,TResult? Function( LoadDonationsEvent value)?  loadDonations,TResult? Function( CreateDonationEvent value)?  createDonation,TResult? Function( LoadCommentsEvent value)?  loadComments,TResult? Function( AddCommentEvent value)?  addComment,TResult? Function( DeleteCommentEvent value)?  deleteComment,TResult? Function( LoadCommentRepliesEvent value)?  loadCommentReplies,TResult? Function( RequestWithdrawalEvent value)?  requestWithdrawal,TResult? Function( LoadWithdrawalsEvent value)?  loadWithdrawals,TResult? Function( LoadCampaignTransparencyDataEvent value)?  loadCampaignTransparencyData,TResult? Function( LoadCampaignUpdatesEvent value)?  loadCampaignUpdates,TResult? Function( LoadUserCampaignsEvent value)?  loadUserCampaigns,TResult? Function( LoadUserDonationsEvent value)?  loadUserDonations,TResult? Function( UpdateCampaignBankDetailsEvent value)?  updateCampaignBankDetails,TResult? Function( ProcessDonationEvent value)?  processDonation,TResult? Function( ClearCampaignTransientEvent value)?  clearTransient,}){
+final _that = this;
+switch (_that) {
+case LoadCampaignsEvent() when loadCampaigns != null:
+return loadCampaigns(_that);case RefreshCampaignsEvent() when refreshCampaigns != null:
+return refreshCampaigns(_that);case SearchCampaignsEvent() when searchCampaigns != null:
+return searchCampaigns(_that);case GetCampaignDetailEvent() when getCampaignDetail != null:
+return getCampaignDetail(_that);case CreateCampaignEvent() when createCampaign != null:
+return createCampaign(_that);case UpdateCampaignEvent() when updateCampaign != null:
+return updateCampaign(_that);case DeleteCampaignEvent() when deleteCampaign != null:
+return deleteCampaign(_that);case UpdateCampaignStatusEvent() when updateCampaignStatus != null:
+return updateCampaignStatus(_that);case LoadCategoriesEvent() when loadCategories != null:
+return loadCategories(_that);case LoadDonationsEvent() when loadDonations != null:
+return loadDonations(_that);case CreateDonationEvent() when createDonation != null:
+return createDonation(_that);case LoadCommentsEvent() when loadComments != null:
+return loadComments(_that);case AddCommentEvent() when addComment != null:
+return addComment(_that);case DeleteCommentEvent() when deleteComment != null:
+return deleteComment(_that);case LoadCommentRepliesEvent() when loadCommentReplies != null:
+return loadCommentReplies(_that);case RequestWithdrawalEvent() when requestWithdrawal != null:
+return requestWithdrawal(_that);case LoadWithdrawalsEvent() when loadWithdrawals != null:
+return loadWithdrawals(_that);case LoadCampaignTransparencyDataEvent() when loadCampaignTransparencyData != null:
+return loadCampaignTransparencyData(_that);case LoadCampaignUpdatesEvent() when loadCampaignUpdates != null:
+return loadCampaignUpdates(_that);case LoadUserCampaignsEvent() when loadUserCampaigns != null:
+return loadUserCampaigns(_that);case LoadUserDonationsEvent() when loadUserDonations != null:
+return loadUserDonations(_that);case UpdateCampaignBankDetailsEvent() when updateCampaignBankDetails != null:
+return updateCampaignBankDetails(_that);case ProcessDonationEvent() when processDonation != null:
+return processDonation(_that);case ClearCampaignTransientEvent() when clearTransient != null:
+return clearTransient(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String? categoryId,  int limit)?  loadCampaigns,TResult Function( String? categoryId,  int limit)?  refreshCampaigns,TResult Function( String query,  String? categoryId,  int limit)?  searchCampaigns,TResult Function( String campaignId)?  getCampaignDetail,TResult Function( CampaignEntity campaign)?  createCampaign,TResult Function( CampaignEntity campaign)?  updateCampaign,TResult Function( String campaignId)?  deleteCampaign,TResult Function( String campaignId,  String status)?  updateCampaignStatus,TResult Function()?  loadCategories,TResult Function( String campaignId,  int limit)?  loadDonations,TResult Function( DonationEntity donation)?  createDonation,TResult Function( String campaignId,  bool includeReplies)?  loadComments,TResult Function( CampaignCommentEntity comment)?  addComment,TResult Function( String campaignId,  String commentId)?  deleteComment,TResult Function( String parentId)?  loadCommentReplies,TResult Function( WithdrawalEntity withdrawal)?  requestWithdrawal,TResult Function( String campaignId)?  loadWithdrawals,TResult Function( String campaignId)?  loadCampaignTransparencyData,TResult Function( String campaignId)?  loadCampaignUpdates,TResult Function( String userId)?  loadUserCampaigns,TResult Function( String userId,  int limit)?  loadUserDonations,TResult Function( String campaignId,  String bankName,  String accountNumber,  String accountHolder)?  updateCampaignBankDetails,TResult Function( String campaignId,  String userId,  double amount,  String? message,  bool isAnonymous)?  processDonation,TResult Function()?  clearTransient,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case LoadCampaignsEvent() when loadCampaigns != null:
+return loadCampaigns(_that.categoryId,_that.limit);case RefreshCampaignsEvent() when refreshCampaigns != null:
+return refreshCampaigns(_that.categoryId,_that.limit);case SearchCampaignsEvent() when searchCampaigns != null:
+return searchCampaigns(_that.query,_that.categoryId,_that.limit);case GetCampaignDetailEvent() when getCampaignDetail != null:
+return getCampaignDetail(_that.campaignId);case CreateCampaignEvent() when createCampaign != null:
+return createCampaign(_that.campaign);case UpdateCampaignEvent() when updateCampaign != null:
+return updateCampaign(_that.campaign);case DeleteCampaignEvent() when deleteCampaign != null:
+return deleteCampaign(_that.campaignId);case UpdateCampaignStatusEvent() when updateCampaignStatus != null:
+return updateCampaignStatus(_that.campaignId,_that.status);case LoadCategoriesEvent() when loadCategories != null:
+return loadCategories();case LoadDonationsEvent() when loadDonations != null:
+return loadDonations(_that.campaignId,_that.limit);case CreateDonationEvent() when createDonation != null:
+return createDonation(_that.donation);case LoadCommentsEvent() when loadComments != null:
+return loadComments(_that.campaignId,_that.includeReplies);case AddCommentEvent() when addComment != null:
+return addComment(_that.comment);case DeleteCommentEvent() when deleteComment != null:
+return deleteComment(_that.campaignId,_that.commentId);case LoadCommentRepliesEvent() when loadCommentReplies != null:
+return loadCommentReplies(_that.parentId);case RequestWithdrawalEvent() when requestWithdrawal != null:
+return requestWithdrawal(_that.withdrawal);case LoadWithdrawalsEvent() when loadWithdrawals != null:
+return loadWithdrawals(_that.campaignId);case LoadCampaignTransparencyDataEvent() when loadCampaignTransparencyData != null:
+return loadCampaignTransparencyData(_that.campaignId);case LoadCampaignUpdatesEvent() when loadCampaignUpdates != null:
+return loadCampaignUpdates(_that.campaignId);case LoadUserCampaignsEvent() when loadUserCampaigns != null:
+return loadUserCampaigns(_that.userId);case LoadUserDonationsEvent() when loadUserDonations != null:
+return loadUserDonations(_that.userId,_that.limit);case UpdateCampaignBankDetailsEvent() when updateCampaignBankDetails != null:
+return updateCampaignBankDetails(_that.campaignId,_that.bankName,_that.accountNumber,_that.accountHolder);case ProcessDonationEvent() when processDonation != null:
+return processDonation(_that.campaignId,_that.userId,_that.amount,_that.message,_that.isAnonymous);case ClearCampaignTransientEvent() when clearTransient != null:
+return clearTransient();case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String? categoryId,  int limit)  loadCampaigns,required TResult Function( String? categoryId,  int limit)  refreshCampaigns,required TResult Function( String query,  String? categoryId,  int limit)  searchCampaigns,required TResult Function( String campaignId)  getCampaignDetail,required TResult Function( CampaignEntity campaign)  createCampaign,required TResult Function( CampaignEntity campaign)  updateCampaign,required TResult Function( String campaignId)  deleteCampaign,required TResult Function( String campaignId,  String status)  updateCampaignStatus,required TResult Function()  loadCategories,required TResult Function( String campaignId,  int limit)  loadDonations,required TResult Function( DonationEntity donation)  createDonation,required TResult Function( String campaignId,  bool includeReplies)  loadComments,required TResult Function( CampaignCommentEntity comment)  addComment,required TResult Function( String campaignId,  String commentId)  deleteComment,required TResult Function( String parentId)  loadCommentReplies,required TResult Function( WithdrawalEntity withdrawal)  requestWithdrawal,required TResult Function( String campaignId)  loadWithdrawals,required TResult Function( String campaignId)  loadCampaignTransparencyData,required TResult Function( String campaignId)  loadCampaignUpdates,required TResult Function( String userId)  loadUserCampaigns,required TResult Function( String userId,  int limit)  loadUserDonations,required TResult Function( String campaignId,  String bankName,  String accountNumber,  String accountHolder)  updateCampaignBankDetails,required TResult Function( String campaignId,  String userId,  double amount,  String? message,  bool isAnonymous)  processDonation,required TResult Function()  clearTransient,}) {final _that = this;
+switch (_that) {
+case LoadCampaignsEvent():
+return loadCampaigns(_that.categoryId,_that.limit);case RefreshCampaignsEvent():
+return refreshCampaigns(_that.categoryId,_that.limit);case SearchCampaignsEvent():
+return searchCampaigns(_that.query,_that.categoryId,_that.limit);case GetCampaignDetailEvent():
+return getCampaignDetail(_that.campaignId);case CreateCampaignEvent():
+return createCampaign(_that.campaign);case UpdateCampaignEvent():
+return updateCampaign(_that.campaign);case DeleteCampaignEvent():
+return deleteCampaign(_that.campaignId);case UpdateCampaignStatusEvent():
+return updateCampaignStatus(_that.campaignId,_that.status);case LoadCategoriesEvent():
+return loadCategories();case LoadDonationsEvent():
+return loadDonations(_that.campaignId,_that.limit);case CreateDonationEvent():
+return createDonation(_that.donation);case LoadCommentsEvent():
+return loadComments(_that.campaignId,_that.includeReplies);case AddCommentEvent():
+return addComment(_that.comment);case DeleteCommentEvent():
+return deleteComment(_that.campaignId,_that.commentId);case LoadCommentRepliesEvent():
+return loadCommentReplies(_that.parentId);case RequestWithdrawalEvent():
+return requestWithdrawal(_that.withdrawal);case LoadWithdrawalsEvent():
+return loadWithdrawals(_that.campaignId);case LoadCampaignTransparencyDataEvent():
+return loadCampaignTransparencyData(_that.campaignId);case LoadCampaignUpdatesEvent():
+return loadCampaignUpdates(_that.campaignId);case LoadUserCampaignsEvent():
+return loadUserCampaigns(_that.userId);case LoadUserDonationsEvent():
+return loadUserDonations(_that.userId,_that.limit);case UpdateCampaignBankDetailsEvent():
+return updateCampaignBankDetails(_that.campaignId,_that.bankName,_that.accountNumber,_that.accountHolder);case ProcessDonationEvent():
+return processDonation(_that.campaignId,_that.userId,_that.amount,_that.message,_that.isAnonymous);case ClearCampaignTransientEvent():
+return clearTransient();case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String? categoryId,  int limit)?  loadCampaigns,TResult? Function( String? categoryId,  int limit)?  refreshCampaigns,TResult? Function( String query,  String? categoryId,  int limit)?  searchCampaigns,TResult? Function( String campaignId)?  getCampaignDetail,TResult? Function( CampaignEntity campaign)?  createCampaign,TResult? Function( CampaignEntity campaign)?  updateCampaign,TResult? Function( String campaignId)?  deleteCampaign,TResult? Function( String campaignId,  String status)?  updateCampaignStatus,TResult? Function()?  loadCategories,TResult? Function( String campaignId,  int limit)?  loadDonations,TResult? Function( DonationEntity donation)?  createDonation,TResult? Function( String campaignId,  bool includeReplies)?  loadComments,TResult? Function( CampaignCommentEntity comment)?  addComment,TResult? Function( String campaignId,  String commentId)?  deleteComment,TResult? Function( String parentId)?  loadCommentReplies,TResult? Function( WithdrawalEntity withdrawal)?  requestWithdrawal,TResult? Function( String campaignId)?  loadWithdrawals,TResult? Function( String campaignId)?  loadCampaignTransparencyData,TResult? Function( String campaignId)?  loadCampaignUpdates,TResult? Function( String userId)?  loadUserCampaigns,TResult? Function( String userId,  int limit)?  loadUserDonations,TResult? Function( String campaignId,  String bankName,  String accountNumber,  String accountHolder)?  updateCampaignBankDetails,TResult? Function( String campaignId,  String userId,  double amount,  String? message,  bool isAnonymous)?  processDonation,TResult? Function()?  clearTransient,}) {final _that = this;
+switch (_that) {
+case LoadCampaignsEvent() when loadCampaigns != null:
+return loadCampaigns(_that.categoryId,_that.limit);case RefreshCampaignsEvent() when refreshCampaigns != null:
+return refreshCampaigns(_that.categoryId,_that.limit);case SearchCampaignsEvent() when searchCampaigns != null:
+return searchCampaigns(_that.query,_that.categoryId,_that.limit);case GetCampaignDetailEvent() when getCampaignDetail != null:
+return getCampaignDetail(_that.campaignId);case CreateCampaignEvent() when createCampaign != null:
+return createCampaign(_that.campaign);case UpdateCampaignEvent() when updateCampaign != null:
+return updateCampaign(_that.campaign);case DeleteCampaignEvent() when deleteCampaign != null:
+return deleteCampaign(_that.campaignId);case UpdateCampaignStatusEvent() when updateCampaignStatus != null:
+return updateCampaignStatus(_that.campaignId,_that.status);case LoadCategoriesEvent() when loadCategories != null:
+return loadCategories();case LoadDonationsEvent() when loadDonations != null:
+return loadDonations(_that.campaignId,_that.limit);case CreateDonationEvent() when createDonation != null:
+return createDonation(_that.donation);case LoadCommentsEvent() when loadComments != null:
+return loadComments(_that.campaignId,_that.includeReplies);case AddCommentEvent() when addComment != null:
+return addComment(_that.comment);case DeleteCommentEvent() when deleteComment != null:
+return deleteComment(_that.campaignId,_that.commentId);case LoadCommentRepliesEvent() when loadCommentReplies != null:
+return loadCommentReplies(_that.parentId);case RequestWithdrawalEvent() when requestWithdrawal != null:
+return requestWithdrawal(_that.withdrawal);case LoadWithdrawalsEvent() when loadWithdrawals != null:
+return loadWithdrawals(_that.campaignId);case LoadCampaignTransparencyDataEvent() when loadCampaignTransparencyData != null:
+return loadCampaignTransparencyData(_that.campaignId);case LoadCampaignUpdatesEvent() when loadCampaignUpdates != null:
+return loadCampaignUpdates(_that.campaignId);case LoadUserCampaignsEvent() when loadUserCampaigns != null:
+return loadUserCampaigns(_that.userId);case LoadUserDonationsEvent() when loadUserDonations != null:
+return loadUserDonations(_that.userId,_that.limit);case UpdateCampaignBankDetailsEvent() when updateCampaignBankDetails != null:
+return updateCampaignBankDetails(_that.campaignId,_that.bankName,_that.accountNumber,_that.accountHolder);case ProcessDonationEvent() when processDonation != null:
+return processDonation(_that.campaignId,_that.userId,_that.amount,_that.message,_that.isAnonymous);case ClearCampaignTransientEvent() when clearTransient != null:
+return clearTransient();case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class LoadCampaignsEvent implements CampaignEvent {
+  const LoadCampaignsEvent({this.categoryId, this.limit = 20});
+  
+
+ final  String? categoryId;
+@JsonKey() final  int limit;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LoadCampaignsEventCopyWith<LoadCampaignsEvent> get copyWith => _$LoadCampaignsEventCopyWithImpl<LoadCampaignsEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadCampaignsEvent&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.limit, limit) || other.limit == limit));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,categoryId,limit);
+
+@override
+String toString() {
+  return 'CampaignEvent.loadCampaigns(categoryId: $categoryId, limit: $limit)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $LoadCampaignsEventCopyWith<$Res> implements $CampaignEventCopyWith<$Res> {
+  factory $LoadCampaignsEventCopyWith(LoadCampaignsEvent value, $Res Function(LoadCampaignsEvent) _then) = _$LoadCampaignsEventCopyWithImpl;
+@useResult
+$Res call({
+ String? categoryId, int limit
+});
+
+
+
+
+}
+/// @nodoc
+class _$LoadCampaignsEventCopyWithImpl<$Res>
+    implements $LoadCampaignsEventCopyWith<$Res> {
+  _$LoadCampaignsEventCopyWithImpl(this._self, this._then);
+
+  final LoadCampaignsEvent _self;
+  final $Res Function(LoadCampaignsEvent) _then;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? categoryId = freezed,Object? limit = null,}) {
+  return _then(LoadCampaignsEvent(
+categoryId: freezed == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
+as String?,limit: null == limit ? _self.limit : limit // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class RefreshCampaignsEvent implements CampaignEvent {
+  const RefreshCampaignsEvent({this.categoryId, this.limit = 20});
+  
+
+ final  String? categoryId;
+@JsonKey() final  int limit;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$RefreshCampaignsEventCopyWith<RefreshCampaignsEvent> get copyWith => _$RefreshCampaignsEventCopyWithImpl<RefreshCampaignsEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RefreshCampaignsEvent&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.limit, limit) || other.limit == limit));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,categoryId,limit);
+
+@override
+String toString() {
+  return 'CampaignEvent.refreshCampaigns(categoryId: $categoryId, limit: $limit)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $RefreshCampaignsEventCopyWith<$Res> implements $CampaignEventCopyWith<$Res> {
+  factory $RefreshCampaignsEventCopyWith(RefreshCampaignsEvent value, $Res Function(RefreshCampaignsEvent) _then) = _$RefreshCampaignsEventCopyWithImpl;
+@useResult
+$Res call({
+ String? categoryId, int limit
+});
+
+
+
+
+}
+/// @nodoc
+class _$RefreshCampaignsEventCopyWithImpl<$Res>
+    implements $RefreshCampaignsEventCopyWith<$Res> {
+  _$RefreshCampaignsEventCopyWithImpl(this._self, this._then);
+
+  final RefreshCampaignsEvent _self;
+  final $Res Function(RefreshCampaignsEvent) _then;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? categoryId = freezed,Object? limit = null,}) {
+  return _then(RefreshCampaignsEvent(
+categoryId: freezed == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
+as String?,limit: null == limit ? _self.limit : limit // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class SearchCampaignsEvent implements CampaignEvent {
+  const SearchCampaignsEvent({required this.query, this.categoryId, this.limit = 20});
+  
+
+ final  String query;
+ final  String? categoryId;
+@JsonKey() final  int limit;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SearchCampaignsEventCopyWith<SearchCampaignsEvent> get copyWith => _$SearchCampaignsEventCopyWithImpl<SearchCampaignsEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchCampaignsEvent&&(identical(other.query, query) || other.query == query)&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.limit, limit) || other.limit == limit));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,query,categoryId,limit);
+
+@override
+String toString() {
+  return 'CampaignEvent.searchCampaigns(query: $query, categoryId: $categoryId, limit: $limit)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SearchCampaignsEventCopyWith<$Res> implements $CampaignEventCopyWith<$Res> {
+  factory $SearchCampaignsEventCopyWith(SearchCampaignsEvent value, $Res Function(SearchCampaignsEvent) _then) = _$SearchCampaignsEventCopyWithImpl;
+@useResult
+$Res call({
+ String query, String? categoryId, int limit
+});
+
+
+
+
+}
+/// @nodoc
+class _$SearchCampaignsEventCopyWithImpl<$Res>
+    implements $SearchCampaignsEventCopyWith<$Res> {
+  _$SearchCampaignsEventCopyWithImpl(this._self, this._then);
+
+  final SearchCampaignsEvent _self;
+  final $Res Function(SearchCampaignsEvent) _then;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? query = null,Object? categoryId = freezed,Object? limit = null,}) {
+  return _then(SearchCampaignsEvent(
+query: null == query ? _self.query : query // ignore: cast_nullable_to_non_nullable
+as String,categoryId: freezed == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
+as String?,limit: null == limit ? _self.limit : limit // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class GetCampaignDetailEvent implements CampaignEvent {
+  const GetCampaignDetailEvent({required this.campaignId});
+  
+
+ final  String campaignId;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$GetCampaignDetailEventCopyWith<GetCampaignDetailEvent> get copyWith => _$GetCampaignDetailEventCopyWithImpl<GetCampaignDetailEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetCampaignDetailEvent&&(identical(other.campaignId, campaignId) || other.campaignId == campaignId));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,campaignId);
+
+@override
+String toString() {
+  return 'CampaignEvent.getCampaignDetail(campaignId: $campaignId)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $GetCampaignDetailEventCopyWith<$Res> implements $CampaignEventCopyWith<$Res> {
+  factory $GetCampaignDetailEventCopyWith(GetCampaignDetailEvent value, $Res Function(GetCampaignDetailEvent) _then) = _$GetCampaignDetailEventCopyWithImpl;
+@useResult
+$Res call({
+ String campaignId
+});
+
+
+
+
+}
+/// @nodoc
+class _$GetCampaignDetailEventCopyWithImpl<$Res>
+    implements $GetCampaignDetailEventCopyWith<$Res> {
+  _$GetCampaignDetailEventCopyWithImpl(this._self, this._then);
+
+  final GetCampaignDetailEvent _self;
+  final $Res Function(GetCampaignDetailEvent) _then;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? campaignId = null,}) {
+  return _then(GetCampaignDetailEvent(
+campaignId: null == campaignId ? _self.campaignId : campaignId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class CreateCampaignEvent implements CampaignEvent {
+  const CreateCampaignEvent({required this.campaign});
+  
+
+ final  CampaignEntity campaign;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CreateCampaignEventCopyWith<CreateCampaignEvent> get copyWith => _$CreateCampaignEventCopyWithImpl<CreateCampaignEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreateCampaignEvent&&(identical(other.campaign, campaign) || other.campaign == campaign));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,campaign);
+
+@override
+String toString() {
+  return 'CampaignEvent.createCampaign(campaign: $campaign)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $CreateCampaignEventCopyWith<$Res> implements $CampaignEventCopyWith<$Res> {
+  factory $CreateCampaignEventCopyWith(CreateCampaignEvent value, $Res Function(CreateCampaignEvent) _then) = _$CreateCampaignEventCopyWithImpl;
+@useResult
+$Res call({
+ CampaignEntity campaign
+});
+
+
+$CampaignEntityCopyWith<$Res> get campaign;
+
+}
+/// @nodoc
+class _$CreateCampaignEventCopyWithImpl<$Res>
+    implements $CreateCampaignEventCopyWith<$Res> {
+  _$CreateCampaignEventCopyWithImpl(this._self, this._then);
+
+  final CreateCampaignEvent _self;
+  final $Res Function(CreateCampaignEvent) _then;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? campaign = null,}) {
+  return _then(CreateCampaignEvent(
+campaign: null == campaign ? _self.campaign : campaign // ignore: cast_nullable_to_non_nullable
+as CampaignEntity,
+  ));
+}
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$CampaignEntityCopyWith<$Res> get campaign {
+  
+  return $CampaignEntityCopyWith<$Res>(_self.campaign, (value) {
+    return _then(_self.copyWith(campaign: value));
+  });
+}
+}
+
+/// @nodoc
+
+
+class UpdateCampaignEvent implements CampaignEvent {
+  const UpdateCampaignEvent({required this.campaign});
+  
+
+ final  CampaignEntity campaign;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UpdateCampaignEventCopyWith<UpdateCampaignEvent> get copyWith => _$UpdateCampaignEventCopyWithImpl<UpdateCampaignEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateCampaignEvent&&(identical(other.campaign, campaign) || other.campaign == campaign));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,campaign);
+
+@override
+String toString() {
+  return 'CampaignEvent.updateCampaign(campaign: $campaign)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $UpdateCampaignEventCopyWith<$Res> implements $CampaignEventCopyWith<$Res> {
+  factory $UpdateCampaignEventCopyWith(UpdateCampaignEvent value, $Res Function(UpdateCampaignEvent) _then) = _$UpdateCampaignEventCopyWithImpl;
+@useResult
+$Res call({
+ CampaignEntity campaign
+});
+
+
+$CampaignEntityCopyWith<$Res> get campaign;
+
+}
+/// @nodoc
+class _$UpdateCampaignEventCopyWithImpl<$Res>
+    implements $UpdateCampaignEventCopyWith<$Res> {
+  _$UpdateCampaignEventCopyWithImpl(this._self, this._then);
+
+  final UpdateCampaignEvent _self;
+  final $Res Function(UpdateCampaignEvent) _then;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? campaign = null,}) {
+  return _then(UpdateCampaignEvent(
+campaign: null == campaign ? _self.campaign : campaign // ignore: cast_nullable_to_non_nullable
+as CampaignEntity,
+  ));
+}
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$CampaignEntityCopyWith<$Res> get campaign {
+  
+  return $CampaignEntityCopyWith<$Res>(_self.campaign, (value) {
+    return _then(_self.copyWith(campaign: value));
+  });
+}
+}
+
+/// @nodoc
+
+
+class DeleteCampaignEvent implements CampaignEvent {
+  const DeleteCampaignEvent({required this.campaignId});
+  
+
+ final  String campaignId;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$DeleteCampaignEventCopyWith<DeleteCampaignEvent> get copyWith => _$DeleteCampaignEventCopyWithImpl<DeleteCampaignEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DeleteCampaignEvent&&(identical(other.campaignId, campaignId) || other.campaignId == campaignId));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,campaignId);
+
+@override
+String toString() {
+  return 'CampaignEvent.deleteCampaign(campaignId: $campaignId)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $DeleteCampaignEventCopyWith<$Res> implements $CampaignEventCopyWith<$Res> {
+  factory $DeleteCampaignEventCopyWith(DeleteCampaignEvent value, $Res Function(DeleteCampaignEvent) _then) = _$DeleteCampaignEventCopyWithImpl;
+@useResult
+$Res call({
+ String campaignId
+});
+
+
+
+
+}
+/// @nodoc
+class _$DeleteCampaignEventCopyWithImpl<$Res>
+    implements $DeleteCampaignEventCopyWith<$Res> {
+  _$DeleteCampaignEventCopyWithImpl(this._self, this._then);
+
+  final DeleteCampaignEvent _self;
+  final $Res Function(DeleteCampaignEvent) _then;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? campaignId = null,}) {
+  return _then(DeleteCampaignEvent(
+campaignId: null == campaignId ? _self.campaignId : campaignId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class UpdateCampaignStatusEvent implements CampaignEvent {
+  const UpdateCampaignStatusEvent({required this.campaignId, required this.status});
+  
+
+ final  String campaignId;
+ final  String status;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UpdateCampaignStatusEventCopyWith<UpdateCampaignStatusEvent> get copyWith => _$UpdateCampaignStatusEventCopyWithImpl<UpdateCampaignStatusEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateCampaignStatusEvent&&(identical(other.campaignId, campaignId) || other.campaignId == campaignId)&&(identical(other.status, status) || other.status == status));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,campaignId,status);
+
+@override
+String toString() {
+  return 'CampaignEvent.updateCampaignStatus(campaignId: $campaignId, status: $status)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $UpdateCampaignStatusEventCopyWith<$Res> implements $CampaignEventCopyWith<$Res> {
+  factory $UpdateCampaignStatusEventCopyWith(UpdateCampaignStatusEvent value, $Res Function(UpdateCampaignStatusEvent) _then) = _$UpdateCampaignStatusEventCopyWithImpl;
+@useResult
+$Res call({
+ String campaignId, String status
+});
+
+
+
+
+}
+/// @nodoc
+class _$UpdateCampaignStatusEventCopyWithImpl<$Res>
+    implements $UpdateCampaignStatusEventCopyWith<$Res> {
+  _$UpdateCampaignStatusEventCopyWithImpl(this._self, this._then);
+
+  final UpdateCampaignStatusEvent _self;
+  final $Res Function(UpdateCampaignStatusEvent) _then;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? campaignId = null,Object? status = null,}) {
+  return _then(UpdateCampaignStatusEvent(
+campaignId: null == campaignId ? _self.campaignId : campaignId // ignore: cast_nullable_to_non_nullable
+as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class LoadCategoriesEvent implements CampaignEvent {
+  const LoadCategoriesEvent();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadCategoriesEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'CampaignEvent.loadCategories()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class LoadDonationsEvent implements CampaignEvent {
+  const LoadDonationsEvent({required this.campaignId, this.limit = 50});
+  
+
+ final  String campaignId;
+@JsonKey() final  int limit;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LoadDonationsEventCopyWith<LoadDonationsEvent> get copyWith => _$LoadDonationsEventCopyWithImpl<LoadDonationsEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadDonationsEvent&&(identical(other.campaignId, campaignId) || other.campaignId == campaignId)&&(identical(other.limit, limit) || other.limit == limit));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,campaignId,limit);
+
+@override
+String toString() {
+  return 'CampaignEvent.loadDonations(campaignId: $campaignId, limit: $limit)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $LoadDonationsEventCopyWith<$Res> implements $CampaignEventCopyWith<$Res> {
+  factory $LoadDonationsEventCopyWith(LoadDonationsEvent value, $Res Function(LoadDonationsEvent) _then) = _$LoadDonationsEventCopyWithImpl;
+@useResult
+$Res call({
+ String campaignId, int limit
+});
+
+
+
+
+}
+/// @nodoc
+class _$LoadDonationsEventCopyWithImpl<$Res>
+    implements $LoadDonationsEventCopyWith<$Res> {
+  _$LoadDonationsEventCopyWithImpl(this._self, this._then);
+
+  final LoadDonationsEvent _self;
+  final $Res Function(LoadDonationsEvent) _then;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? campaignId = null,Object? limit = null,}) {
+  return _then(LoadDonationsEvent(
+campaignId: null == campaignId ? _self.campaignId : campaignId // ignore: cast_nullable_to_non_nullable
+as String,limit: null == limit ? _self.limit : limit // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class CreateDonationEvent implements CampaignEvent {
+  const CreateDonationEvent({required this.donation});
+  
+
+ final  DonationEntity donation;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CreateDonationEventCopyWith<CreateDonationEvent> get copyWith => _$CreateDonationEventCopyWithImpl<CreateDonationEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreateDonationEvent&&(identical(other.donation, donation) || other.donation == donation));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,donation);
+
+@override
+String toString() {
+  return 'CampaignEvent.createDonation(donation: $donation)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $CreateDonationEventCopyWith<$Res> implements $CampaignEventCopyWith<$Res> {
+  factory $CreateDonationEventCopyWith(CreateDonationEvent value, $Res Function(CreateDonationEvent) _then) = _$CreateDonationEventCopyWithImpl;
+@useResult
+$Res call({
+ DonationEntity donation
+});
+
+
+$DonationEntityCopyWith<$Res> get donation;
+
+}
+/// @nodoc
+class _$CreateDonationEventCopyWithImpl<$Res>
+    implements $CreateDonationEventCopyWith<$Res> {
+  _$CreateDonationEventCopyWithImpl(this._self, this._then);
+
+  final CreateDonationEvent _self;
+  final $Res Function(CreateDonationEvent) _then;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? donation = null,}) {
+  return _then(CreateDonationEvent(
+donation: null == donation ? _self.donation : donation // ignore: cast_nullable_to_non_nullable
+as DonationEntity,
+  ));
+}
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DonationEntityCopyWith<$Res> get donation {
+  
+  return $DonationEntityCopyWith<$Res>(_self.donation, (value) {
+    return _then(_self.copyWith(donation: value));
+  });
+}
+}
+
+/// @nodoc
+
+
+class LoadCommentsEvent implements CampaignEvent {
+  const LoadCommentsEvent({required this.campaignId, this.includeReplies = false});
+  
+
+ final  String campaignId;
+@JsonKey() final  bool includeReplies;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LoadCommentsEventCopyWith<LoadCommentsEvent> get copyWith => _$LoadCommentsEventCopyWithImpl<LoadCommentsEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadCommentsEvent&&(identical(other.campaignId, campaignId) || other.campaignId == campaignId)&&(identical(other.includeReplies, includeReplies) || other.includeReplies == includeReplies));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,campaignId,includeReplies);
+
+@override
+String toString() {
+  return 'CampaignEvent.loadComments(campaignId: $campaignId, includeReplies: $includeReplies)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $LoadCommentsEventCopyWith<$Res> implements $CampaignEventCopyWith<$Res> {
+  factory $LoadCommentsEventCopyWith(LoadCommentsEvent value, $Res Function(LoadCommentsEvent) _then) = _$LoadCommentsEventCopyWithImpl;
+@useResult
+$Res call({
+ String campaignId, bool includeReplies
+});
+
+
+
+
+}
+/// @nodoc
+class _$LoadCommentsEventCopyWithImpl<$Res>
+    implements $LoadCommentsEventCopyWith<$Res> {
+  _$LoadCommentsEventCopyWithImpl(this._self, this._then);
+
+  final LoadCommentsEvent _self;
+  final $Res Function(LoadCommentsEvent) _then;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? campaignId = null,Object? includeReplies = null,}) {
+  return _then(LoadCommentsEvent(
+campaignId: null == campaignId ? _self.campaignId : campaignId // ignore: cast_nullable_to_non_nullable
+as String,includeReplies: null == includeReplies ? _self.includeReplies : includeReplies // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class AddCommentEvent implements CampaignEvent {
+  const AddCommentEvent({required this.comment});
+  
+
+ final  CampaignCommentEntity comment;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$AddCommentEventCopyWith<AddCommentEvent> get copyWith => _$AddCommentEventCopyWithImpl<AddCommentEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddCommentEvent&&(identical(other.comment, comment) || other.comment == comment));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,comment);
+
+@override
+String toString() {
+  return 'CampaignEvent.addComment(comment: $comment)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $AddCommentEventCopyWith<$Res> implements $CampaignEventCopyWith<$Res> {
+  factory $AddCommentEventCopyWith(AddCommentEvent value, $Res Function(AddCommentEvent) _then) = _$AddCommentEventCopyWithImpl;
+@useResult
+$Res call({
+ CampaignCommentEntity comment
+});
+
+
+$CampaignCommentEntityCopyWith<$Res> get comment;
+
+}
+/// @nodoc
+class _$AddCommentEventCopyWithImpl<$Res>
+    implements $AddCommentEventCopyWith<$Res> {
+  _$AddCommentEventCopyWithImpl(this._self, this._then);
+
+  final AddCommentEvent _self;
+  final $Res Function(AddCommentEvent) _then;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? comment = null,}) {
+  return _then(AddCommentEvent(
+comment: null == comment ? _self.comment : comment // ignore: cast_nullable_to_non_nullable
+as CampaignCommentEntity,
+  ));
+}
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$CampaignCommentEntityCopyWith<$Res> get comment {
+  
+  return $CampaignCommentEntityCopyWith<$Res>(_self.comment, (value) {
+    return _then(_self.copyWith(comment: value));
+  });
+}
+}
+
+/// @nodoc
+
+
+class DeleteCommentEvent implements CampaignEvent {
+  const DeleteCommentEvent({required this.campaignId, required this.commentId});
+  
+
+ final  String campaignId;
+ final  String commentId;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$DeleteCommentEventCopyWith<DeleteCommentEvent> get copyWith => _$DeleteCommentEventCopyWithImpl<DeleteCommentEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DeleteCommentEvent&&(identical(other.campaignId, campaignId) || other.campaignId == campaignId)&&(identical(other.commentId, commentId) || other.commentId == commentId));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,campaignId,commentId);
+
+@override
+String toString() {
+  return 'CampaignEvent.deleteComment(campaignId: $campaignId, commentId: $commentId)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $DeleteCommentEventCopyWith<$Res> implements $CampaignEventCopyWith<$Res> {
+  factory $DeleteCommentEventCopyWith(DeleteCommentEvent value, $Res Function(DeleteCommentEvent) _then) = _$DeleteCommentEventCopyWithImpl;
+@useResult
+$Res call({
+ String campaignId, String commentId
+});
+
+
+
+
+}
+/// @nodoc
+class _$DeleteCommentEventCopyWithImpl<$Res>
+    implements $DeleteCommentEventCopyWith<$Res> {
+  _$DeleteCommentEventCopyWithImpl(this._self, this._then);
+
+  final DeleteCommentEvent _self;
+  final $Res Function(DeleteCommentEvent) _then;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? campaignId = null,Object? commentId = null,}) {
+  return _then(DeleteCommentEvent(
+campaignId: null == campaignId ? _self.campaignId : campaignId // ignore: cast_nullable_to_non_nullable
+as String,commentId: null == commentId ? _self.commentId : commentId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class LoadCommentRepliesEvent implements CampaignEvent {
+  const LoadCommentRepliesEvent({required this.parentId});
+  
+
+ final  String parentId;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LoadCommentRepliesEventCopyWith<LoadCommentRepliesEvent> get copyWith => _$LoadCommentRepliesEventCopyWithImpl<LoadCommentRepliesEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadCommentRepliesEvent&&(identical(other.parentId, parentId) || other.parentId == parentId));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,parentId);
+
+@override
+String toString() {
+  return 'CampaignEvent.loadCommentReplies(parentId: $parentId)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $LoadCommentRepliesEventCopyWith<$Res> implements $CampaignEventCopyWith<$Res> {
+  factory $LoadCommentRepliesEventCopyWith(LoadCommentRepliesEvent value, $Res Function(LoadCommentRepliesEvent) _then) = _$LoadCommentRepliesEventCopyWithImpl;
+@useResult
+$Res call({
+ String parentId
+});
+
+
+
+
+}
+/// @nodoc
+class _$LoadCommentRepliesEventCopyWithImpl<$Res>
+    implements $LoadCommentRepliesEventCopyWith<$Res> {
+  _$LoadCommentRepliesEventCopyWithImpl(this._self, this._then);
+
+  final LoadCommentRepliesEvent _self;
+  final $Res Function(LoadCommentRepliesEvent) _then;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? parentId = null,}) {
+  return _then(LoadCommentRepliesEvent(
+parentId: null == parentId ? _self.parentId : parentId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class RequestWithdrawalEvent implements CampaignEvent {
+  const RequestWithdrawalEvent({required this.withdrawal});
+  
+
+ final  WithdrawalEntity withdrawal;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$RequestWithdrawalEventCopyWith<RequestWithdrawalEvent> get copyWith => _$RequestWithdrawalEventCopyWithImpl<RequestWithdrawalEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestWithdrawalEvent&&(identical(other.withdrawal, withdrawal) || other.withdrawal == withdrawal));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,withdrawal);
+
+@override
+String toString() {
+  return 'CampaignEvent.requestWithdrawal(withdrawal: $withdrawal)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $RequestWithdrawalEventCopyWith<$Res> implements $CampaignEventCopyWith<$Res> {
+  factory $RequestWithdrawalEventCopyWith(RequestWithdrawalEvent value, $Res Function(RequestWithdrawalEvent) _then) = _$RequestWithdrawalEventCopyWithImpl;
+@useResult
+$Res call({
+ WithdrawalEntity withdrawal
+});
+
+
+$WithdrawalEntityCopyWith<$Res> get withdrawal;
+
+}
+/// @nodoc
+class _$RequestWithdrawalEventCopyWithImpl<$Res>
+    implements $RequestWithdrawalEventCopyWith<$Res> {
+  _$RequestWithdrawalEventCopyWithImpl(this._self, this._then);
+
+  final RequestWithdrawalEvent _self;
+  final $Res Function(RequestWithdrawalEvent) _then;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? withdrawal = null,}) {
+  return _then(RequestWithdrawalEvent(
+withdrawal: null == withdrawal ? _self.withdrawal : withdrawal // ignore: cast_nullable_to_non_nullable
+as WithdrawalEntity,
+  ));
+}
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$WithdrawalEntityCopyWith<$Res> get withdrawal {
+  
+  return $WithdrawalEntityCopyWith<$Res>(_self.withdrawal, (value) {
+    return _then(_self.copyWith(withdrawal: value));
+  });
+}
+}
+
+/// @nodoc
+
+
+class LoadWithdrawalsEvent implements CampaignEvent {
+  const LoadWithdrawalsEvent({required this.campaignId});
+  
+
+ final  String campaignId;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LoadWithdrawalsEventCopyWith<LoadWithdrawalsEvent> get copyWith => _$LoadWithdrawalsEventCopyWithImpl<LoadWithdrawalsEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadWithdrawalsEvent&&(identical(other.campaignId, campaignId) || other.campaignId == campaignId));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,campaignId);
+
+@override
+String toString() {
+  return 'CampaignEvent.loadWithdrawals(campaignId: $campaignId)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $LoadWithdrawalsEventCopyWith<$Res> implements $CampaignEventCopyWith<$Res> {
+  factory $LoadWithdrawalsEventCopyWith(LoadWithdrawalsEvent value, $Res Function(LoadWithdrawalsEvent) _then) = _$LoadWithdrawalsEventCopyWithImpl;
+@useResult
+$Res call({
+ String campaignId
+});
+
+
+
+
+}
+/// @nodoc
+class _$LoadWithdrawalsEventCopyWithImpl<$Res>
+    implements $LoadWithdrawalsEventCopyWith<$Res> {
+  _$LoadWithdrawalsEventCopyWithImpl(this._self, this._then);
+
+  final LoadWithdrawalsEvent _self;
+  final $Res Function(LoadWithdrawalsEvent) _then;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? campaignId = null,}) {
+  return _then(LoadWithdrawalsEvent(
+campaignId: null == campaignId ? _self.campaignId : campaignId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class LoadCampaignTransparencyDataEvent implements CampaignEvent {
+  const LoadCampaignTransparencyDataEvent({required this.campaignId});
+  
+
+ final  String campaignId;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LoadCampaignTransparencyDataEventCopyWith<LoadCampaignTransparencyDataEvent> get copyWith => _$LoadCampaignTransparencyDataEventCopyWithImpl<LoadCampaignTransparencyDataEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadCampaignTransparencyDataEvent&&(identical(other.campaignId, campaignId) || other.campaignId == campaignId));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,campaignId);
+
+@override
+String toString() {
+  return 'CampaignEvent.loadCampaignTransparencyData(campaignId: $campaignId)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $LoadCampaignTransparencyDataEventCopyWith<$Res> implements $CampaignEventCopyWith<$Res> {
+  factory $LoadCampaignTransparencyDataEventCopyWith(LoadCampaignTransparencyDataEvent value, $Res Function(LoadCampaignTransparencyDataEvent) _then) = _$LoadCampaignTransparencyDataEventCopyWithImpl;
+@useResult
+$Res call({
+ String campaignId
+});
+
+
+
+
+}
+/// @nodoc
+class _$LoadCampaignTransparencyDataEventCopyWithImpl<$Res>
+    implements $LoadCampaignTransparencyDataEventCopyWith<$Res> {
+  _$LoadCampaignTransparencyDataEventCopyWithImpl(this._self, this._then);
+
+  final LoadCampaignTransparencyDataEvent _self;
+  final $Res Function(LoadCampaignTransparencyDataEvent) _then;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? campaignId = null,}) {
+  return _then(LoadCampaignTransparencyDataEvent(
+campaignId: null == campaignId ? _self.campaignId : campaignId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class LoadCampaignUpdatesEvent implements CampaignEvent {
+  const LoadCampaignUpdatesEvent({required this.campaignId});
+  
+
+ final  String campaignId;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LoadCampaignUpdatesEventCopyWith<LoadCampaignUpdatesEvent> get copyWith => _$LoadCampaignUpdatesEventCopyWithImpl<LoadCampaignUpdatesEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadCampaignUpdatesEvent&&(identical(other.campaignId, campaignId) || other.campaignId == campaignId));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,campaignId);
+
+@override
+String toString() {
+  return 'CampaignEvent.loadCampaignUpdates(campaignId: $campaignId)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $LoadCampaignUpdatesEventCopyWith<$Res> implements $CampaignEventCopyWith<$Res> {
+  factory $LoadCampaignUpdatesEventCopyWith(LoadCampaignUpdatesEvent value, $Res Function(LoadCampaignUpdatesEvent) _then) = _$LoadCampaignUpdatesEventCopyWithImpl;
+@useResult
+$Res call({
+ String campaignId
+});
+
+
+
+
+}
+/// @nodoc
+class _$LoadCampaignUpdatesEventCopyWithImpl<$Res>
+    implements $LoadCampaignUpdatesEventCopyWith<$Res> {
+  _$LoadCampaignUpdatesEventCopyWithImpl(this._self, this._then);
+
+  final LoadCampaignUpdatesEvent _self;
+  final $Res Function(LoadCampaignUpdatesEvent) _then;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? campaignId = null,}) {
+  return _then(LoadCampaignUpdatesEvent(
+campaignId: null == campaignId ? _self.campaignId : campaignId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class LoadUserCampaignsEvent implements CampaignEvent {
+  const LoadUserCampaignsEvent({required this.userId});
+  
+
+ final  String userId;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LoadUserCampaignsEventCopyWith<LoadUserCampaignsEvent> get copyWith => _$LoadUserCampaignsEventCopyWithImpl<LoadUserCampaignsEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadUserCampaignsEvent&&(identical(other.userId, userId) || other.userId == userId));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,userId);
+
+@override
+String toString() {
+  return 'CampaignEvent.loadUserCampaigns(userId: $userId)';
+}
+
+
 }
+
+/// @nodoc
+abstract mixin class $LoadUserCampaignsEventCopyWith<$Res> implements $CampaignEventCopyWith<$Res> {
+  factory $LoadUserCampaignsEventCopyWith(LoadUserCampaignsEvent value, $Res Function(LoadUserCampaignsEvent) _then) = _$LoadUserCampaignsEventCopyWithImpl;
+@useResult
+$Res call({
+ String userId
+});
+
+
+
+
+}
+/// @nodoc
+class _$LoadUserCampaignsEventCopyWithImpl<$Res>
+    implements $LoadUserCampaignsEventCopyWith<$Res> {
+  _$LoadUserCampaignsEventCopyWithImpl(this._self, this._then);
+
+  final LoadUserCampaignsEvent _self;
+  final $Res Function(LoadUserCampaignsEvent) _then;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? userId = null,}) {
+  return _then(LoadUserCampaignsEvent(
+userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class LoadUserDonationsEvent implements CampaignEvent {
+  const LoadUserDonationsEvent({required this.userId, this.limit = 50});
+  
+
+ final  String userId;
+@JsonKey() final  int limit;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LoadUserDonationsEventCopyWith<LoadUserDonationsEvent> get copyWith => _$LoadUserDonationsEventCopyWithImpl<LoadUserDonationsEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadUserDonationsEvent&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.limit, limit) || other.limit == limit));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,userId,limit);
+
+@override
+String toString() {
+  return 'CampaignEvent.loadUserDonations(userId: $userId, limit: $limit)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $LoadUserDonationsEventCopyWith<$Res> implements $CampaignEventCopyWith<$Res> {
+  factory $LoadUserDonationsEventCopyWith(LoadUserDonationsEvent value, $Res Function(LoadUserDonationsEvent) _then) = _$LoadUserDonationsEventCopyWithImpl;
+@useResult
+$Res call({
+ String userId, int limit
+});
+
+
+
+
+}
+/// @nodoc
+class _$LoadUserDonationsEventCopyWithImpl<$Res>
+    implements $LoadUserDonationsEventCopyWith<$Res> {
+  _$LoadUserDonationsEventCopyWithImpl(this._self, this._then);
+
+  final LoadUserDonationsEvent _self;
+  final $Res Function(LoadUserDonationsEvent) _then;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? userId = null,Object? limit = null,}) {
+  return _then(LoadUserDonationsEvent(
+userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,limit: null == limit ? _self.limit : limit // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class UpdateCampaignBankDetailsEvent implements CampaignEvent {
+  const UpdateCampaignBankDetailsEvent({required this.campaignId, required this.bankName, required this.accountNumber, required this.accountHolder});
+  
+
+ final  String campaignId;
+ final  String bankName;
+ final  String accountNumber;
+ final  String accountHolder;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UpdateCampaignBankDetailsEventCopyWith<UpdateCampaignBankDetailsEvent> get copyWith => _$UpdateCampaignBankDetailsEventCopyWithImpl<UpdateCampaignBankDetailsEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateCampaignBankDetailsEvent&&(identical(other.campaignId, campaignId) || other.campaignId == campaignId)&&(identical(other.bankName, bankName) || other.bankName == bankName)&&(identical(other.accountNumber, accountNumber) || other.accountNumber == accountNumber)&&(identical(other.accountHolder, accountHolder) || other.accountHolder == accountHolder));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,campaignId,bankName,accountNumber,accountHolder);
+
+@override
+String toString() {
+  return 'CampaignEvent.updateCampaignBankDetails(campaignId: $campaignId, bankName: $bankName, accountNumber: $accountNumber, accountHolder: $accountHolder)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $UpdateCampaignBankDetailsEventCopyWith<$Res> implements $CampaignEventCopyWith<$Res> {
+  factory $UpdateCampaignBankDetailsEventCopyWith(UpdateCampaignBankDetailsEvent value, $Res Function(UpdateCampaignBankDetailsEvent) _then) = _$UpdateCampaignBankDetailsEventCopyWithImpl;
+@useResult
+$Res call({
+ String campaignId, String bankName, String accountNumber, String accountHolder
+});
+
+
+
+
+}
+/// @nodoc
+class _$UpdateCampaignBankDetailsEventCopyWithImpl<$Res>
+    implements $UpdateCampaignBankDetailsEventCopyWith<$Res> {
+  _$UpdateCampaignBankDetailsEventCopyWithImpl(this._self, this._then);
+
+  final UpdateCampaignBankDetailsEvent _self;
+  final $Res Function(UpdateCampaignBankDetailsEvent) _then;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? campaignId = null,Object? bankName = null,Object? accountNumber = null,Object? accountHolder = null,}) {
+  return _then(UpdateCampaignBankDetailsEvent(
+campaignId: null == campaignId ? _self.campaignId : campaignId // ignore: cast_nullable_to_non_nullable
+as String,bankName: null == bankName ? _self.bankName : bankName // ignore: cast_nullable_to_non_nullable
+as String,accountNumber: null == accountNumber ? _self.accountNumber : accountNumber // ignore: cast_nullable_to_non_nullable
+as String,accountHolder: null == accountHolder ? _self.accountHolder : accountHolder // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class ProcessDonationEvent implements CampaignEvent {
+  const ProcessDonationEvent({required this.campaignId, required this.userId, required this.amount, this.message, this.isAnonymous = false});
+  
+
+ final  String campaignId;
+ final  String userId;
+ final  double amount;
+ final  String? message;
+@JsonKey() final  bool isAnonymous;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ProcessDonationEventCopyWith<ProcessDonationEvent> get copyWith => _$ProcessDonationEventCopyWithImpl<ProcessDonationEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProcessDonationEvent&&(identical(other.campaignId, campaignId) || other.campaignId == campaignId)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.message, message) || other.message == message)&&(identical(other.isAnonymous, isAnonymous) || other.isAnonymous == isAnonymous));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,campaignId,userId,amount,message,isAnonymous);
+
+@override
+String toString() {
+  return 'CampaignEvent.processDonation(campaignId: $campaignId, userId: $userId, amount: $amount, message: $message, isAnonymous: $isAnonymous)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ProcessDonationEventCopyWith<$Res> implements $CampaignEventCopyWith<$Res> {
+  factory $ProcessDonationEventCopyWith(ProcessDonationEvent value, $Res Function(ProcessDonationEvent) _then) = _$ProcessDonationEventCopyWithImpl;
+@useResult
+$Res call({
+ String campaignId, String userId, double amount, String? message, bool isAnonymous
+});
+
+
+
+
+}
+/// @nodoc
+class _$ProcessDonationEventCopyWithImpl<$Res>
+    implements $ProcessDonationEventCopyWith<$Res> {
+  _$ProcessDonationEventCopyWithImpl(this._self, this._then);
+
+  final ProcessDonationEvent _self;
+  final $Res Function(ProcessDonationEvent) _then;
+
+/// Create a copy of CampaignEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? campaignId = null,Object? userId = null,Object? amount = null,Object? message = freezed,Object? isAnonymous = null,}) {
+  return _then(ProcessDonationEvent(
+campaignId: null == campaignId ? _self.campaignId : campaignId // ignore: cast_nullable_to_non_nullable
+as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
+as double,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String?,isAnonymous: null == isAnonymous ? _self.isAnonymous : isAnonymous // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class ClearCampaignTransientEvent implements CampaignEvent {
+  const ClearCampaignTransientEvent();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ClearCampaignTransientEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'CampaignEvent.clearTransient()';
+}
+
+
+}
+
+
+
+
+// dart format on
