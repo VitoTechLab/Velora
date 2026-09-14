@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,543 +9,324 @@ part of 'notification_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-NotificationModel _$NotificationModelFromJson(Map<String, dynamic> json) {
-  return _NotificationModel.fromJson(json);
-}
 
 /// @nodoc
 mixin _$NotificationModel {
-  @JsonKey(name: 'id')
-  String get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'user_id')
-  String? get userId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'actor_id')
-  String? get actorId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'type')
-  String get type => throw _privateConstructorUsedError;
-  @JsonKey(name: 'target_id')
-  String? get targetId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'target_type')
-  String? get targetType => throw _privateConstructorUsedError;
-  @JsonKey(name: 'group_key')
-  String? get groupKey => throw _privateConstructorUsedError;
-  @JsonKey(name: 'group_count')
-  int get groupCount => throw _privateConstructorUsedError;
-  @JsonKey(name: 'is_read')
-  bool get isRead => throw _privateConstructorUsedError;
-  @UtcDateTimeConverter()
-  @JsonKey(name: 'created_at')
-  DateTime get createdAt => throw _privateConstructorUsedError;
-  @UtcDateTimeConverter()
-  @JsonKey(name: 'updated_at')
-  DateTime? get updatedAt =>
-      throw _privateConstructorUsedError; // Actor info (from joined profile - matches SQL: actor_username, actor_avatar_url)
-  @JsonKey(name: 'actor_username')
-  String? get actorUsername => throw _privateConstructorUsedError;
-  @JsonKey(name: 'actor_avatar_url')
-  String? get actorAvatarUrl =>
-      throw _privateConstructorUsedError; // Metadata for rich notification content (thumbnail, preview, title, etc.)
-  @JsonKey(name: 'metadata')
-  Map<String, dynamic> get metadata =>
-      throw _privateConstructorUsedError; // Follow relationship - whether current user follows the actor
-  @JsonKey(name: 'is_following_actor')
-  bool get isFollowingActor => throw _privateConstructorUsedError;
+
+@JsonKey(name: 'id') String get id;@JsonKey(name: 'user_id') String? get userId;@JsonKey(name: 'actor_id') String? get actorId;@JsonKey(name: 'type') String get type;@JsonKey(name: 'target_id') String? get targetId;@JsonKey(name: 'target_type') String? get targetType;@JsonKey(name: 'group_key') String? get groupKey;@JsonKey(name: 'group_count') int get groupCount;@JsonKey(name: 'is_read') bool get isRead;@UtcDateTimeConverter()@JsonKey(name: 'created_at') DateTime get createdAt;@UtcDateTimeConverter()@JsonKey(name: 'updated_at') DateTime? get updatedAt;// Actor info (from joined profile - matches SQL: actor_username, actor_avatar_url)
+@JsonKey(name: 'actor_username') String? get actorUsername;@JsonKey(name: 'actor_avatar_url') String? get actorAvatarUrl;// Metadata for rich notification content (thumbnail, preview, title, etc.)
+@JsonKey(name: 'metadata') Map<String, dynamic> get metadata;// Follow relationship - whether current user follows the actor
+@JsonKey(name: 'is_following_actor') bool get isFollowingActor;
+/// Create a copy of NotificationModel
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$NotificationModelCopyWith<NotificationModel> get copyWith => _$NotificationModelCopyWithImpl<NotificationModel>(this as NotificationModel, _$identity);
 
   /// Serializes this NotificationModel to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson();
 
-  /// Create a copy of NotificationModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $NotificationModelCopyWith<NotificationModel> get copyWith =>
-      throw _privateConstructorUsedError;
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NotificationModel&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.actorId, actorId) || other.actorId == actorId)&&(identical(other.type, type) || other.type == type)&&(identical(other.targetId, targetId) || other.targetId == targetId)&&(identical(other.targetType, targetType) || other.targetType == targetType)&&(identical(other.groupKey, groupKey) || other.groupKey == groupKey)&&(identical(other.groupCount, groupCount) || other.groupCount == groupCount)&&(identical(other.isRead, isRead) || other.isRead == isRead)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.actorUsername, actorUsername) || other.actorUsername == actorUsername)&&(identical(other.actorAvatarUrl, actorAvatarUrl) || other.actorAvatarUrl == actorAvatarUrl)&&const DeepCollectionEquality().equals(other.metadata, metadata)&&(identical(other.isFollowingActor, isFollowingActor) || other.isFollowingActor == isFollowingActor));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,userId,actorId,type,targetId,targetType,groupKey,groupCount,isRead,createdAt,updatedAt,actorUsername,actorAvatarUrl,const DeepCollectionEquality().hash(metadata),isFollowingActor);
+
+@override
+String toString() {
+  return 'NotificationModel(id: $id, userId: $userId, actorId: $actorId, type: $type, targetId: $targetId, targetType: $targetType, groupKey: $groupKey, groupCount: $groupCount, isRead: $isRead, createdAt: $createdAt, updatedAt: $updatedAt, actorUsername: $actorUsername, actorAvatarUrl: $actorAvatarUrl, metadata: $metadata, isFollowingActor: $isFollowingActor)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $NotificationModelCopyWith<$Res> {
-  factory $NotificationModelCopyWith(
-          NotificationModel value, $Res Function(NotificationModel) then) =
-      _$NotificationModelCopyWithImpl<$Res, NotificationModel>;
-  @useResult
-  $Res call(
-      {@JsonKey(name: 'id') String id,
-      @JsonKey(name: 'user_id') String? userId,
-      @JsonKey(name: 'actor_id') String? actorId,
-      @JsonKey(name: 'type') String type,
-      @JsonKey(name: 'target_id') String? targetId,
-      @JsonKey(name: 'target_type') String? targetType,
-      @JsonKey(name: 'group_key') String? groupKey,
-      @JsonKey(name: 'group_count') int groupCount,
-      @JsonKey(name: 'is_read') bool isRead,
-      @UtcDateTimeConverter() @JsonKey(name: 'created_at') DateTime createdAt,
-      @UtcDateTimeConverter() @JsonKey(name: 'updated_at') DateTime? updatedAt,
-      @JsonKey(name: 'actor_username') String? actorUsername,
-      @JsonKey(name: 'actor_avatar_url') String? actorAvatarUrl,
-      @JsonKey(name: 'metadata') Map<String, dynamic> metadata,
-      @JsonKey(name: 'is_following_actor') bool isFollowingActor});
-}
+abstract mixin class $NotificationModelCopyWith<$Res>  {
+  factory $NotificationModelCopyWith(NotificationModel value, $Res Function(NotificationModel) _then) = _$NotificationModelCopyWithImpl;
+@useResult
+$Res call({
+@JsonKey(name: 'id') String id,@JsonKey(name: 'user_id') String? userId,@JsonKey(name: 'actor_id') String? actorId,@JsonKey(name: 'type') String type,@JsonKey(name: 'target_id') String? targetId,@JsonKey(name: 'target_type') String? targetType,@JsonKey(name: 'group_key') String? groupKey,@JsonKey(name: 'group_count') int groupCount,@JsonKey(name: 'is_read') bool isRead,@UtcDateTimeConverter()@JsonKey(name: 'created_at') DateTime createdAt,@UtcDateTimeConverter()@JsonKey(name: 'updated_at') DateTime? updatedAt,@JsonKey(name: 'actor_username') String? actorUsername,@JsonKey(name: 'actor_avatar_url') String? actorAvatarUrl,@JsonKey(name: 'metadata') Map<String, dynamic> metadata,@JsonKey(name: 'is_following_actor') bool isFollowingActor
+});
 
+
+
+
+}
 /// @nodoc
-class _$NotificationModelCopyWithImpl<$Res, $Val extends NotificationModel>
+class _$NotificationModelCopyWithImpl<$Res>
     implements $NotificationModelCopyWith<$Res> {
-  _$NotificationModelCopyWithImpl(this._value, this._then);
+  _$NotificationModelCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final NotificationModel _self;
+  final $Res Function(NotificationModel) _then;
 
-  /// Create a copy of NotificationModel
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? userId = freezed,
-    Object? actorId = freezed,
-    Object? type = null,
-    Object? targetId = freezed,
-    Object? targetType = freezed,
-    Object? groupKey = freezed,
-    Object? groupCount = null,
-    Object? isRead = null,
-    Object? createdAt = null,
-    Object? updatedAt = freezed,
-    Object? actorUsername = freezed,
-    Object? actorAvatarUrl = freezed,
-    Object? metadata = null,
-    Object? isFollowingActor = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      userId: freezed == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      actorId: freezed == actorId
-          ? _value.actorId
-          : actorId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      targetId: freezed == targetId
-          ? _value.targetId
-          : targetId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      targetType: freezed == targetType
-          ? _value.targetType
-          : targetType // ignore: cast_nullable_to_non_nullable
-              as String?,
-      groupKey: freezed == groupKey
-          ? _value.groupKey
-          : groupKey // ignore: cast_nullable_to_non_nullable
-              as String?,
-      groupCount: null == groupCount
-          ? _value.groupCount
-          : groupCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      isRead: null == isRead
-          ? _value.isRead
-          : isRead // ignore: cast_nullable_to_non_nullable
-              as bool,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      actorUsername: freezed == actorUsername
-          ? _value.actorUsername
-          : actorUsername // ignore: cast_nullable_to_non_nullable
-              as String?,
-      actorAvatarUrl: freezed == actorAvatarUrl
-          ? _value.actorAvatarUrl
-          : actorAvatarUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      metadata: null == metadata
-          ? _value.metadata
-          : metadata // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-      isFollowingActor: null == isFollowingActor
-          ? _value.isFollowingActor
-          : isFollowingActor // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
-  }
+/// Create a copy of NotificationModel
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? userId = freezed,Object? actorId = freezed,Object? type = null,Object? targetId = freezed,Object? targetType = freezed,Object? groupKey = freezed,Object? groupCount = null,Object? isRead = null,Object? createdAt = null,Object? updatedAt = freezed,Object? actorUsername = freezed,Object? actorAvatarUrl = freezed,Object? metadata = null,Object? isFollowingActor = null,}) {
+  return _then(_self.copyWith(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,userId: freezed == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String?,actorId: freezed == actorId ? _self.actorId : actorId // ignore: cast_nullable_to_non_nullable
+as String?,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as String,targetId: freezed == targetId ? _self.targetId : targetId // ignore: cast_nullable_to_non_nullable
+as String?,targetType: freezed == targetType ? _self.targetType : targetType // ignore: cast_nullable_to_non_nullable
+as String?,groupKey: freezed == groupKey ? _self.groupKey : groupKey // ignore: cast_nullable_to_non_nullable
+as String?,groupCount: null == groupCount ? _self.groupCount : groupCount // ignore: cast_nullable_to_non_nullable
+as int,isRead: null == isRead ? _self.isRead : isRead // ignore: cast_nullable_to_non_nullable
+as bool,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,actorUsername: freezed == actorUsername ? _self.actorUsername : actorUsername // ignore: cast_nullable_to_non_nullable
+as String?,actorAvatarUrl: freezed == actorAvatarUrl ? _self.actorAvatarUrl : actorAvatarUrl // ignore: cast_nullable_to_non_nullable
+as String?,metadata: null == metadata ? _self.metadata : metadata // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>,isFollowingActor: null == isFollowingActor ? _self.isFollowingActor : isFollowingActor // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
 
-/// @nodoc
-abstract class _$$NotificationModelImplCopyWith<$Res>
-    implements $NotificationModelCopyWith<$Res> {
-  factory _$$NotificationModelImplCopyWith(_$NotificationModelImpl value,
-          $Res Function(_$NotificationModelImpl) then) =
-      __$$NotificationModelImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {@JsonKey(name: 'id') String id,
-      @JsonKey(name: 'user_id') String? userId,
-      @JsonKey(name: 'actor_id') String? actorId,
-      @JsonKey(name: 'type') String type,
-      @JsonKey(name: 'target_id') String? targetId,
-      @JsonKey(name: 'target_type') String? targetType,
-      @JsonKey(name: 'group_key') String? groupKey,
-      @JsonKey(name: 'group_count') int groupCount,
-      @JsonKey(name: 'is_read') bool isRead,
-      @UtcDateTimeConverter() @JsonKey(name: 'created_at') DateTime createdAt,
-      @UtcDateTimeConverter() @JsonKey(name: 'updated_at') DateTime? updatedAt,
-      @JsonKey(name: 'actor_username') String? actorUsername,
-      @JsonKey(name: 'actor_avatar_url') String? actorAvatarUrl,
-      @JsonKey(name: 'metadata') Map<String, dynamic> metadata,
-      @JsonKey(name: 'is_following_actor') bool isFollowingActor});
 }
 
-/// @nodoc
-class __$$NotificationModelImplCopyWithImpl<$Res>
-    extends _$NotificationModelCopyWithImpl<$Res, _$NotificationModelImpl>
-    implements _$$NotificationModelImplCopyWith<$Res> {
-  __$$NotificationModelImplCopyWithImpl(_$NotificationModelImpl _value,
-      $Res Function(_$NotificationModelImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of NotificationModel
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? userId = freezed,
-    Object? actorId = freezed,
-    Object? type = null,
-    Object? targetId = freezed,
-    Object? targetType = freezed,
-    Object? groupKey = freezed,
-    Object? groupCount = null,
-    Object? isRead = null,
-    Object? createdAt = null,
-    Object? updatedAt = freezed,
-    Object? actorUsername = freezed,
-    Object? actorAvatarUrl = freezed,
-    Object? metadata = null,
-    Object? isFollowingActor = null,
-  }) {
-    return _then(_$NotificationModelImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      userId: freezed == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      actorId: freezed == actorId
-          ? _value.actorId
-          : actorId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      targetId: freezed == targetId
-          ? _value.targetId
-          : targetId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      targetType: freezed == targetType
-          ? _value.targetType
-          : targetType // ignore: cast_nullable_to_non_nullable
-              as String?,
-      groupKey: freezed == groupKey
-          ? _value.groupKey
-          : groupKey // ignore: cast_nullable_to_non_nullable
-              as String?,
-      groupCount: null == groupCount
-          ? _value.groupCount
-          : groupCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      isRead: null == isRead
-          ? _value.isRead
-          : isRead // ignore: cast_nullable_to_non_nullable
-              as bool,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      actorUsername: freezed == actorUsername
-          ? _value.actorUsername
-          : actorUsername // ignore: cast_nullable_to_non_nullable
-              as String?,
-      actorAvatarUrl: freezed == actorAvatarUrl
-          ? _value.actorAvatarUrl
-          : actorAvatarUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      metadata: null == metadata
-          ? _value._metadata
-          : metadata // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-      isFollowingActor: null == isFollowingActor
-          ? _value.isFollowingActor
-          : isFollowingActor // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
+/// Adds pattern-matching-related methods to [NotificationModel].
+extension NotificationModelPatterns on NotificationModel {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _NotificationModel value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _NotificationModel() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _NotificationModel value)  $default,){
+final _that = this;
+switch (_that) {
+case _NotificationModel():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _NotificationModel value)?  $default,){
+final _that = this;
+switch (_that) {
+case _NotificationModel() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String id, @JsonKey(name: 'user_id')  String? userId, @JsonKey(name: 'actor_id')  String? actorId, @JsonKey(name: 'type')  String type, @JsonKey(name: 'target_id')  String? targetId, @JsonKey(name: 'target_type')  String? targetType, @JsonKey(name: 'group_key')  String? groupKey, @JsonKey(name: 'group_count')  int groupCount, @JsonKey(name: 'is_read')  bool isRead, @UtcDateTimeConverter()@JsonKey(name: 'created_at')  DateTime createdAt, @UtcDateTimeConverter()@JsonKey(name: 'updated_at')  DateTime? updatedAt, @JsonKey(name: 'actor_username')  String? actorUsername, @JsonKey(name: 'actor_avatar_url')  String? actorAvatarUrl, @JsonKey(name: 'metadata')  Map<String, dynamic> metadata, @JsonKey(name: 'is_following_actor')  bool isFollowingActor)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _NotificationModel() when $default != null:
+return $default(_that.id,_that.userId,_that.actorId,_that.type,_that.targetId,_that.targetType,_that.groupKey,_that.groupCount,_that.isRead,_that.createdAt,_that.updatedAt,_that.actorUsername,_that.actorAvatarUrl,_that.metadata,_that.isFollowingActor);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String id, @JsonKey(name: 'user_id')  String? userId, @JsonKey(name: 'actor_id')  String? actorId, @JsonKey(name: 'type')  String type, @JsonKey(name: 'target_id')  String? targetId, @JsonKey(name: 'target_type')  String? targetType, @JsonKey(name: 'group_key')  String? groupKey, @JsonKey(name: 'group_count')  int groupCount, @JsonKey(name: 'is_read')  bool isRead, @UtcDateTimeConverter()@JsonKey(name: 'created_at')  DateTime createdAt, @UtcDateTimeConverter()@JsonKey(name: 'updated_at')  DateTime? updatedAt, @JsonKey(name: 'actor_username')  String? actorUsername, @JsonKey(name: 'actor_avatar_url')  String? actorAvatarUrl, @JsonKey(name: 'metadata')  Map<String, dynamic> metadata, @JsonKey(name: 'is_following_actor')  bool isFollowingActor)  $default,) {final _that = this;
+switch (_that) {
+case _NotificationModel():
+return $default(_that.id,_that.userId,_that.actorId,_that.type,_that.targetId,_that.targetType,_that.groupKey,_that.groupCount,_that.isRead,_that.createdAt,_that.updatedAt,_that.actorUsername,_that.actorAvatarUrl,_that.metadata,_that.isFollowingActor);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'id')  String id, @JsonKey(name: 'user_id')  String? userId, @JsonKey(name: 'actor_id')  String? actorId, @JsonKey(name: 'type')  String type, @JsonKey(name: 'target_id')  String? targetId, @JsonKey(name: 'target_type')  String? targetType, @JsonKey(name: 'group_key')  String? groupKey, @JsonKey(name: 'group_count')  int groupCount, @JsonKey(name: 'is_read')  bool isRead, @UtcDateTimeConverter()@JsonKey(name: 'created_at')  DateTime createdAt, @UtcDateTimeConverter()@JsonKey(name: 'updated_at')  DateTime? updatedAt, @JsonKey(name: 'actor_username')  String? actorUsername, @JsonKey(name: 'actor_avatar_url')  String? actorAvatarUrl, @JsonKey(name: 'metadata')  Map<String, dynamic> metadata, @JsonKey(name: 'is_following_actor')  bool isFollowingActor)?  $default,) {final _that = this;
+switch (_that) {
+case _NotificationModel() when $default != null:
+return $default(_that.id,_that.userId,_that.actorId,_that.type,_that.targetId,_that.targetType,_that.groupKey,_that.groupCount,_that.isRead,_that.createdAt,_that.updatedAt,_that.actorUsername,_that.actorAvatarUrl,_that.metadata,_that.isFollowingActor);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$NotificationModelImpl extends _NotificationModel {
-  const _$NotificationModelImpl(
-      {@JsonKey(name: 'id') required this.id,
-      @JsonKey(name: 'user_id') this.userId,
-      @JsonKey(name: 'actor_id') this.actorId,
-      @JsonKey(name: 'type') required this.type,
-      @JsonKey(name: 'target_id') this.targetId,
-      @JsonKey(name: 'target_type') this.targetType,
-      @JsonKey(name: 'group_key') this.groupKey,
-      @JsonKey(name: 'group_count') this.groupCount = 1,
-      @JsonKey(name: 'is_read') this.isRead = false,
-      @UtcDateTimeConverter()
-      @JsonKey(name: 'created_at')
-      required this.createdAt,
-      @UtcDateTimeConverter() @JsonKey(name: 'updated_at') this.updatedAt,
-      @JsonKey(name: 'actor_username') this.actorUsername,
-      @JsonKey(name: 'actor_avatar_url') this.actorAvatarUrl,
-      @JsonKey(name: 'metadata') final Map<String, dynamic> metadata = const {},
-      @JsonKey(name: 'is_following_actor') this.isFollowingActor = false})
-      : _metadata = metadata,
-        super._();
 
-  factory _$NotificationModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$NotificationModelImplFromJson(json);
+class _NotificationModel extends NotificationModel {
+  const _NotificationModel({@JsonKey(name: 'id') required this.id, @JsonKey(name: 'user_id') this.userId, @JsonKey(name: 'actor_id') this.actorId, @JsonKey(name: 'type') required this.type, @JsonKey(name: 'target_id') this.targetId, @JsonKey(name: 'target_type') this.targetType, @JsonKey(name: 'group_key') this.groupKey, @JsonKey(name: 'group_count') this.groupCount = 1, @JsonKey(name: 'is_read') this.isRead = false, @UtcDateTimeConverter()@JsonKey(name: 'created_at') required this.createdAt, @UtcDateTimeConverter()@JsonKey(name: 'updated_at') this.updatedAt, @JsonKey(name: 'actor_username') this.actorUsername, @JsonKey(name: 'actor_avatar_url') this.actorAvatarUrl, @JsonKey(name: 'metadata') final  Map<String, dynamic> metadata = const {}, @JsonKey(name: 'is_following_actor') this.isFollowingActor = false}): _metadata = metadata,super._();
+  factory _NotificationModel.fromJson(Map<String, dynamic> json) => _$NotificationModelFromJson(json);
 
-  @override
-  @JsonKey(name: 'id')
-  final String id;
-  @override
-  @JsonKey(name: 'user_id')
-  final String? userId;
-  @override
-  @JsonKey(name: 'actor_id')
-  final String? actorId;
-  @override
-  @JsonKey(name: 'type')
-  final String type;
-  @override
-  @JsonKey(name: 'target_id')
-  final String? targetId;
-  @override
-  @JsonKey(name: 'target_type')
-  final String? targetType;
-  @override
-  @JsonKey(name: 'group_key')
-  final String? groupKey;
-  @override
-  @JsonKey(name: 'group_count')
-  final int groupCount;
-  @override
-  @JsonKey(name: 'is_read')
-  final bool isRead;
-  @override
-  @UtcDateTimeConverter()
-  @JsonKey(name: 'created_at')
-  final DateTime createdAt;
-  @override
-  @UtcDateTimeConverter()
-  @JsonKey(name: 'updated_at')
-  final DateTime? updatedAt;
+@override@JsonKey(name: 'id') final  String id;
+@override@JsonKey(name: 'user_id') final  String? userId;
+@override@JsonKey(name: 'actor_id') final  String? actorId;
+@override@JsonKey(name: 'type') final  String type;
+@override@JsonKey(name: 'target_id') final  String? targetId;
+@override@JsonKey(name: 'target_type') final  String? targetType;
+@override@JsonKey(name: 'group_key') final  String? groupKey;
+@override@JsonKey(name: 'group_count') final  int groupCount;
+@override@JsonKey(name: 'is_read') final  bool isRead;
+@override@UtcDateTimeConverter()@JsonKey(name: 'created_at') final  DateTime createdAt;
+@override@UtcDateTimeConverter()@JsonKey(name: 'updated_at') final  DateTime? updatedAt;
 // Actor info (from joined profile - matches SQL: actor_username, actor_avatar_url)
-  @override
-  @JsonKey(name: 'actor_username')
-  final String? actorUsername;
-  @override
-  @JsonKey(name: 'actor_avatar_url')
-  final String? actorAvatarUrl;
+@override@JsonKey(name: 'actor_username') final  String? actorUsername;
+@override@JsonKey(name: 'actor_avatar_url') final  String? actorAvatarUrl;
 // Metadata for rich notification content (thumbnail, preview, title, etc.)
-  final Map<String, dynamic> _metadata;
+ final  Map<String, dynamic> _metadata;
 // Metadata for rich notification content (thumbnail, preview, title, etc.)
-  @override
-  @JsonKey(name: 'metadata')
-  Map<String, dynamic> get metadata {
-    if (_metadata is EqualUnmodifiableMapView) return _metadata;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_metadata);
-  }
+@override@JsonKey(name: 'metadata') Map<String, dynamic> get metadata {
+  if (_metadata is EqualUnmodifiableMapView) return _metadata;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(_metadata);
+}
 
 // Follow relationship - whether current user follows the actor
-  @override
-  @JsonKey(name: 'is_following_actor')
-  final bool isFollowingActor;
+@override@JsonKey(name: 'is_following_actor') final  bool isFollowingActor;
 
-  @override
-  String toString() {
-    return 'NotificationModel(id: $id, userId: $userId, actorId: $actorId, type: $type, targetId: $targetId, targetType: $targetType, groupKey: $groupKey, groupCount: $groupCount, isRead: $isRead, createdAt: $createdAt, updatedAt: $updatedAt, actorUsername: $actorUsername, actorAvatarUrl: $actorAvatarUrl, metadata: $metadata, isFollowingActor: $isFollowingActor)';
-  }
+/// Create a copy of NotificationModel
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$NotificationModelCopyWith<_NotificationModel> get copyWith => __$NotificationModelCopyWithImpl<_NotificationModel>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$NotificationModelImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.actorId, actorId) || other.actorId == actorId) &&
-            (identical(other.type, type) || other.type == type) &&
-            (identical(other.targetId, targetId) ||
-                other.targetId == targetId) &&
-            (identical(other.targetType, targetType) ||
-                other.targetType == targetType) &&
-            (identical(other.groupKey, groupKey) ||
-                other.groupKey == groupKey) &&
-            (identical(other.groupCount, groupCount) ||
-                other.groupCount == groupCount) &&
-            (identical(other.isRead, isRead) || other.isRead == isRead) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt) &&
-            (identical(other.actorUsername, actorUsername) ||
-                other.actorUsername == actorUsername) &&
-            (identical(other.actorAvatarUrl, actorAvatarUrl) ||
-                other.actorAvatarUrl == actorAvatarUrl) &&
-            const DeepCollectionEquality().equals(other._metadata, _metadata) &&
-            (identical(other.isFollowingActor, isFollowingActor) ||
-                other.isFollowingActor == isFollowingActor));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      userId,
-      actorId,
-      type,
-      targetId,
-      targetType,
-      groupKey,
-      groupCount,
-      isRead,
-      createdAt,
-      updatedAt,
-      actorUsername,
-      actorAvatarUrl,
-      const DeepCollectionEquality().hash(_metadata),
-      isFollowingActor);
-
-  /// Create a copy of NotificationModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$NotificationModelImplCopyWith<_$NotificationModelImpl> get copyWith =>
-      __$$NotificationModelImplCopyWithImpl<_$NotificationModelImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$NotificationModelImplToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$NotificationModelToJson(this, );
 }
 
-abstract class _NotificationModel extends NotificationModel {
-  const factory _NotificationModel(
-          {@JsonKey(name: 'id') required final String id,
-          @JsonKey(name: 'user_id') final String? userId,
-          @JsonKey(name: 'actor_id') final String? actorId,
-          @JsonKey(name: 'type') required final String type,
-          @JsonKey(name: 'target_id') final String? targetId,
-          @JsonKey(name: 'target_type') final String? targetType,
-          @JsonKey(name: 'group_key') final String? groupKey,
-          @JsonKey(name: 'group_count') final int groupCount,
-          @JsonKey(name: 'is_read') final bool isRead,
-          @UtcDateTimeConverter()
-          @JsonKey(name: 'created_at')
-          required final DateTime createdAt,
-          @UtcDateTimeConverter()
-          @JsonKey(name: 'updated_at')
-          final DateTime? updatedAt,
-          @JsonKey(name: 'actor_username') final String? actorUsername,
-          @JsonKey(name: 'actor_avatar_url') final String? actorAvatarUrl,
-          @JsonKey(name: 'metadata') final Map<String, dynamic> metadata,
-          @JsonKey(name: 'is_following_actor') final bool isFollowingActor}) =
-      _$NotificationModelImpl;
-  const _NotificationModel._() : super._();
-
-  factory _NotificationModel.fromJson(Map<String, dynamic> json) =
-      _$NotificationModelImpl.fromJson;
-
-  @override
-  @JsonKey(name: 'id')
-  String get id;
-  @override
-  @JsonKey(name: 'user_id')
-  String? get userId;
-  @override
-  @JsonKey(name: 'actor_id')
-  String? get actorId;
-  @override
-  @JsonKey(name: 'type')
-  String get type;
-  @override
-  @JsonKey(name: 'target_id')
-  String? get targetId;
-  @override
-  @JsonKey(name: 'target_type')
-  String? get targetType;
-  @override
-  @JsonKey(name: 'group_key')
-  String? get groupKey;
-  @override
-  @JsonKey(name: 'group_count')
-  int get groupCount;
-  @override
-  @JsonKey(name: 'is_read')
-  bool get isRead;
-  @override
-  @UtcDateTimeConverter()
-  @JsonKey(name: 'created_at')
-  DateTime get createdAt;
-  @override
-  @UtcDateTimeConverter()
-  @JsonKey(name: 'updated_at')
-  DateTime?
-      get updatedAt; // Actor info (from joined profile - matches SQL: actor_username, actor_avatar_url)
-  @override
-  @JsonKey(name: 'actor_username')
-  String? get actorUsername;
-  @override
-  @JsonKey(name: 'actor_avatar_url')
-  String?
-      get actorAvatarUrl; // Metadata for rich notification content (thumbnail, preview, title, etc.)
-  @override
-  @JsonKey(name: 'metadata')
-  Map<String, dynamic>
-      get metadata; // Follow relationship - whether current user follows the actor
-  @override
-  @JsonKey(name: 'is_following_actor')
-  bool get isFollowingActor;
-
-  /// Create a copy of NotificationModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$NotificationModelImplCopyWith<_$NotificationModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NotificationModel&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.actorId, actorId) || other.actorId == actorId)&&(identical(other.type, type) || other.type == type)&&(identical(other.targetId, targetId) || other.targetId == targetId)&&(identical(other.targetType, targetType) || other.targetType == targetType)&&(identical(other.groupKey, groupKey) || other.groupKey == groupKey)&&(identical(other.groupCount, groupCount) || other.groupCount == groupCount)&&(identical(other.isRead, isRead) || other.isRead == isRead)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.actorUsername, actorUsername) || other.actorUsername == actorUsername)&&(identical(other.actorAvatarUrl, actorAvatarUrl) || other.actorAvatarUrl == actorAvatarUrl)&&const DeepCollectionEquality().equals(other._metadata, _metadata)&&(identical(other.isFollowingActor, isFollowingActor) || other.isFollowingActor == isFollowingActor));
 }
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,userId,actorId,type,targetId,targetType,groupKey,groupCount,isRead,createdAt,updatedAt,actorUsername,actorAvatarUrl,const DeepCollectionEquality().hash(_metadata),isFollowingActor);
+
+@override
+String toString() {
+  return 'NotificationModel(id: $id, userId: $userId, actorId: $actorId, type: $type, targetId: $targetId, targetType: $targetType, groupKey: $groupKey, groupCount: $groupCount, isRead: $isRead, createdAt: $createdAt, updatedAt: $updatedAt, actorUsername: $actorUsername, actorAvatarUrl: $actorAvatarUrl, metadata: $metadata, isFollowingActor: $isFollowingActor)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$NotificationModelCopyWith<$Res> implements $NotificationModelCopyWith<$Res> {
+  factory _$NotificationModelCopyWith(_NotificationModel value, $Res Function(_NotificationModel) _then) = __$NotificationModelCopyWithImpl;
+@override @useResult
+$Res call({
+@JsonKey(name: 'id') String id,@JsonKey(name: 'user_id') String? userId,@JsonKey(name: 'actor_id') String? actorId,@JsonKey(name: 'type') String type,@JsonKey(name: 'target_id') String? targetId,@JsonKey(name: 'target_type') String? targetType,@JsonKey(name: 'group_key') String? groupKey,@JsonKey(name: 'group_count') int groupCount,@JsonKey(name: 'is_read') bool isRead,@UtcDateTimeConverter()@JsonKey(name: 'created_at') DateTime createdAt,@UtcDateTimeConverter()@JsonKey(name: 'updated_at') DateTime? updatedAt,@JsonKey(name: 'actor_username') String? actorUsername,@JsonKey(name: 'actor_avatar_url') String? actorAvatarUrl,@JsonKey(name: 'metadata') Map<String, dynamic> metadata,@JsonKey(name: 'is_following_actor') bool isFollowingActor
+});
+
+
+
+
+}
+/// @nodoc
+class __$NotificationModelCopyWithImpl<$Res>
+    implements _$NotificationModelCopyWith<$Res> {
+  __$NotificationModelCopyWithImpl(this._self, this._then);
+
+  final _NotificationModel _self;
+  final $Res Function(_NotificationModel) _then;
+
+/// Create a copy of NotificationModel
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? userId = freezed,Object? actorId = freezed,Object? type = null,Object? targetId = freezed,Object? targetType = freezed,Object? groupKey = freezed,Object? groupCount = null,Object? isRead = null,Object? createdAt = null,Object? updatedAt = freezed,Object? actorUsername = freezed,Object? actorAvatarUrl = freezed,Object? metadata = null,Object? isFollowingActor = null,}) {
+  return _then(_NotificationModel(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,userId: freezed == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String?,actorId: freezed == actorId ? _self.actorId : actorId // ignore: cast_nullable_to_non_nullable
+as String?,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as String,targetId: freezed == targetId ? _self.targetId : targetId // ignore: cast_nullable_to_non_nullable
+as String?,targetType: freezed == targetType ? _self.targetType : targetType // ignore: cast_nullable_to_non_nullable
+as String?,groupKey: freezed == groupKey ? _self.groupKey : groupKey // ignore: cast_nullable_to_non_nullable
+as String?,groupCount: null == groupCount ? _self.groupCount : groupCount // ignore: cast_nullable_to_non_nullable
+as int,isRead: null == isRead ? _self.isRead : isRead // ignore: cast_nullable_to_non_nullable
+as bool,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,actorUsername: freezed == actorUsername ? _self.actorUsername : actorUsername // ignore: cast_nullable_to_non_nullable
+as String?,actorAvatarUrl: freezed == actorAvatarUrl ? _self.actorAvatarUrl : actorAvatarUrl // ignore: cast_nullable_to_non_nullable
+as String?,metadata: null == metadata ? _self._metadata : metadata // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>,isFollowingActor: null == isFollowingActor ? _self.isFollowingActor : isFollowingActor // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
+
+// dart format on

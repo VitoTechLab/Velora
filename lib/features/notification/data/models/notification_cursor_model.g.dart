@@ -6,16 +6,16 @@ part of 'notification_cursor_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$NotificationCursorModelImpl _$$NotificationCursorModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$NotificationCursorModelImpl(
-      createdAt: const UtcDateTimeConverter().fromJson(json['created_at']),
-      id: json['id'] as String,
-    );
+_NotificationCursorModel _$NotificationCursorModelFromJson(
+  Map<String, dynamic> json,
+) => _NotificationCursorModel(
+  createdAt: const UtcDateTimeConverter().fromJson(json['created_at']),
+  id: json['id'] as String,
+);
 
-Map<String, dynamic> _$$NotificationCursorModelImplToJson(
-        _$NotificationCursorModelImpl instance) =>
-    <String, dynamic>{
-      'created_at': const UtcDateTimeConverter().toJson(instance.createdAt),
-      'id': instance.id,
-    };
+Map<String, dynamic> _$NotificationCursorModelToJson(
+  _NotificationCursorModel instance,
+) => <String, dynamic>{
+  'created_at': const UtcDateTimeConverter().toJson(instance.createdAt),
+  'id': instance.id,
+};

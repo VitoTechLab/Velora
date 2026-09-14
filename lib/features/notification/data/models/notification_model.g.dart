@@ -6,9 +6,8 @@ part of 'notification_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$NotificationModelImpl _$$NotificationModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$NotificationModelImpl(
+_NotificationModel _$NotificationModelFromJson(Map<String, dynamic> json) =>
+    _NotificationModel(
       id: json['id'] as String,
       userId: json['user_id'] as String?,
       actorId: json['actor_id'] as String?,
@@ -26,8 +25,7 @@ _$NotificationModelImpl _$$NotificationModelImplFromJson(
       isFollowingActor: json['is_following_actor'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$NotificationModelImplToJson(
-        _$NotificationModelImpl instance) =>
+Map<String, dynamic> _$NotificationModelToJson(_NotificationModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'user_id': instance.userId,
@@ -40,7 +38,9 @@ Map<String, dynamic> _$$NotificationModelImplToJson(
       'is_read': instance.isRead,
       'created_at': const UtcDateTimeConverter().toJson(instance.createdAt),
       'updated_at': _$JsonConverterToJson<Object?, DateTime>(
-          instance.updatedAt, const UtcDateTimeConverter().toJson),
+        instance.updatedAt,
+        const UtcDateTimeConverter().toJson,
+      ),
       'actor_username': instance.actorUsername,
       'actor_avatar_url': instance.actorAvatarUrl,
       'metadata': instance.metadata,
@@ -50,5 +50,4 @@ Map<String, dynamic> _$$NotificationModelImplToJson(
 Json? _$JsonConverterToJson<Json, Value>(
   Value? value,
   Json? Function(Value value) toJson,
-) =>
-    value == null ? null : toJson(value);
+) => value == null ? null : toJson(value);
