@@ -30,14 +30,7 @@ class DiscoverCard extends StatelessWidget {
               // Gradient background as placeholder
               Container(
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      theme.colorScheme.primaryContainer,
-                      theme.colorScheme.tertiaryContainer,
-                    ],
-                  ),
+                  color: theme.colorScheme.primaryContainer,
                 ),
               ),
 

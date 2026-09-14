@@ -1,3 +1,5 @@
+import 'package:velora/features/campaign/presentation/widgets/campaign_card.dart'
+    show formatCurrency;
 import 'package:flutter/material.dart';
 import 'package:velora/features/search/data/models/search_campaign_result_model.dart';
 
@@ -23,9 +25,9 @@ class SearchCampaignCard extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-          color: colorScheme.surfaceContainerHighest,
+          color: colorScheme.surface,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
@@ -129,8 +131,7 @@ class SearchCampaignCard extends StatelessWidget {
                           child: LinearProgressIndicator(
                             value: progress,
                             minHeight: 4,
-                            backgroundColor:
-                                colorScheme.surfaceContainerHigh,
+                            backgroundColor: colorScheme.surfaceContainerHigh,
                             valueColor: AlwaysStoppedAnimation<Color>(
                               colorScheme.primary,
                             ),
@@ -138,7 +139,7 @@ class SearchCampaignCard extends StatelessWidget {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          '${(progress * 100).toStringAsFixed(0)}% funded',
+                          'Rp ${formatCurrency(campaign.amountRaised)} / Rp ${formatCurrency(campaign.targetAmount)}',
                           style: theme.textTheme.labelSmall?.copyWith(
                             color: colorScheme.onSurfaceVariant,
                             fontWeight: FontWeight.w500,
