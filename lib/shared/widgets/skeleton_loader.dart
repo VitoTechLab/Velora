@@ -20,7 +20,13 @@ class SkeletonBox extends HookWidget {
   Widget build(BuildContext context) {
     final controller = useAnimationController(
       duration: const Duration(milliseconds: 1500),
-    )..repeat();
+    );
+    final reduceMotion = MediaQuery.disableAnimationsOf(context);
+    final colors = Theme.of(context).colorScheme;
+    useEffect(() {
+      if (reduceMotion) { controller.stop(); } else { controller.repeat(); }
+      return null;
+    }, [controller, reduceMotion]);
 
     final animation = useAnimation(
       Tween<double>(
@@ -38,7 +44,7 @@ class SkeletonBox extends HookWidget {
         gradient: LinearGradient(
           begin: Alignment(animation - 1, 0),
           end: Alignment(animation, 0),
-          colors: [Colors.grey[300]!, Colors.grey[200]!, Colors.grey[300]!],
+          colors: [colors.surfaceContainerHighest, colors.surfaceContainerLow, colors.surfaceContainerHighest],
           stops: const [0.0, 0.5, 1.0],
         ),
       ),

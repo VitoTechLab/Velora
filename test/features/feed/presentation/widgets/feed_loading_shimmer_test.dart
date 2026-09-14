@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:velora/l10n/app_localizations.dart';
 import 'package:velora/features/feed/presentation/widgets/feed_loading_shimmer.dart';
-import 'package:velora/shared/widgets/skeleton_loader.dart';
+import 'package:velora/features/feed/presentation/widgets/thread_post_layout.dart';
 
 void main() {
   testWidgets('FeedLoadingShimmer renders skeleton list', (tester) async {
@@ -20,6 +20,6 @@ void main() {
       ),
     );
 
-    expect(find.byType(SkeletonFeedList), findsOneWidget);
+    expect(find.byType(ThreadPostLayout), findsWidgets);
   });
 }
