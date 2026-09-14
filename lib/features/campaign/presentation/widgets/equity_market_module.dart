@@ -35,26 +35,12 @@ class EquityMarketModule extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            colorScheme.primaryContainer.withValues(alpha: 0.3),
-            colorScheme.secondaryContainer.withValues(alpha: 0.2),
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(20),
+        color: colorScheme.primaryContainer.withValues(alpha: 0.3),
+        borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: colorScheme.primary.withValues(alpha: 0.3),
           width: 1.5,
         ),
-        boxShadow: [
-          BoxShadow(
-            color: colorScheme.primary.withValues(alpha: 0.1),
-            blurRadius: 20,
-            offset: const Offset(0, 8),
-          ),
-        ],
       ),
       child: Column(
         children: [
@@ -184,8 +170,8 @@ class EquityMarketModule extends StatelessWidget {
             decoration: BoxDecoration(
               color: colorScheme.primary,
               borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(20),
-                bottomRight: Radius.circular(20),
+                bottomLeft: Radius.circular(16),
+                bottomRight: Radius.circular(16),
               ),
             ),
             child: Material(
@@ -193,8 +179,8 @@ class EquityMarketModule extends StatelessWidget {
               child: InkWell(
                 onTap: onInvestTap,
                 borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
+                  bottomLeft: Radius.circular(16),
+                  bottomRight: Radius.circular(16),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),

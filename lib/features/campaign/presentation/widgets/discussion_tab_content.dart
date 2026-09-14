@@ -107,12 +107,14 @@ class _DiscussionTabContentState extends State<DiscussionTabContent> {
                   decoration: InputDecoration(
                     hintText: 'Write a comment...',
                     hintStyle: theme.textTheme.bodyMedium?.copyWith(
-                      color: colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
+                      color: colorScheme.onSurfaceVariant.withValues(
+                        alpha: 0.6,
+                      ),
                     ),
                     filled: true,
                     fillColor: colorScheme.surfaceContainerHighest,
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(24),
+                      borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide.none,
                     ),
                     contentPadding: const EdgeInsets.symmetric(

@@ -92,7 +92,9 @@ class DonateBottomSheet extends HookWidget {
             ),
           );
           // Clear the message
-          context.read<CampaignBloc>().add(const CampaignEvent.clearTransient());
+          context.read<CampaignBloc>().add(
+            const CampaignEvent.clearTransient(),
+          );
         } else if (!state.isPerformingDonation && state.errorDonation != null) {
           // Error - show error message
           ScaffoldMessenger.of(context).showSnackBar(
@@ -102,13 +104,15 @@ class DonateBottomSheet extends HookWidget {
               backgroundColor: colorScheme.error,
             ),
           );
-          context.read<CampaignBloc>().add(const CampaignEvent.clearTransient());
+          context.read<CampaignBloc>().add(
+            const CampaignEvent.clearTransient(),
+          );
         }
       },
       child: Container(
         decoration: BoxDecoration(
           color: colorScheme.surface,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
         ),
         child: SafeArea(
           child: Padding(
@@ -144,10 +148,11 @@ class DonateBottomSheet extends HookWidget {
                                   currentStep.value == 0
                                       ? 'Donate'
                                       : 'Bank Transfer',
-                                  style: theme.textTheme.headlineSmall?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: colorScheme.onSurface,
-                                  ),
+                                  style: theme.textTheme.headlineSmall
+                                      ?.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                        color: colorScheme.onSurface,
+                                      ),
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
@@ -165,7 +170,8 @@ class DonateBottomSheet extends HookWidget {
                             onPressed: () => Navigator.pop(context),
                             icon: const Icon(Icons.close),
                             style: IconButton.styleFrom(
-                              backgroundColor: colorScheme.surfaceContainerHighest,
+                              backgroundColor:
+                                  colorScheme.surfaceContainerHighest,
                             ),
                           ),
                         ],
@@ -226,14 +232,16 @@ class DonateBottomSheet extends HookWidget {
                       // Action buttons
                       BlocBuilder<CampaignBloc, CampaignState>(
                         buildWhen: (prev, curr) =>
-                            prev.isPerformingDonation != curr.isPerformingDonation,
+                            prev.isPerformingDonation !=
+                            curr.isPerformingDonation,
                         builder: (context, state) {
                           if (currentStep.value == 0) {
                             return SizedBox(
                               width: double.infinity,
                               height: 56,
                               child: FilledButton(
-                                onPressed: getAmount() != null && getAmount()! > 0
+                                onPressed:
+                                    getAmount() != null && getAmount()! > 0
                                     ? () => currentStep.value = 1
                                     : null,
                                 style: FilledButton.styleFrom(
@@ -261,16 +269,20 @@ class DonateBottomSheet extends HookWidget {
                                         : () {
                                             // **MOCK**: Process donation with auto-approval
                                             context.read<CampaignBloc>().add(
-                                                  CampaignEvent.processDonation(
-                                                    campaignId: campaignId,
-                                                    userId: userId,
-                                                    amount: getAmount()!,
-                                                    message: messageController.text.trim().isEmpty
-                                                        ? null
-                                                        : messageController.text.trim(),
-                                                    isAnonymous: isAnonymous.value,
-                                                  ),
-                                                );
+                                              CampaignEvent.processDonation(
+                                                campaignId: campaignId,
+                                                userId: userId,
+                                                amount: getAmount()!,
+                                                message:
+                                                    messageController.text
+                                                        .trim()
+                                                        .isEmpty
+                                                    ? null
+                                                    : messageController.text
+                                                          .trim(),
+                                                isAnonymous: isAnonymous.value,
+                                              ),
+                                            );
                                           },
                                     style: FilledButton.styleFrom(
                                       shape: RoundedRectangleBorder(
@@ -288,9 +300,10 @@ class DonateBottomSheet extends HookWidget {
                                           )
                                         : Text(
                                             'I Have Transferred',
-                                            style: theme.textTheme.titleMedium?.copyWith(
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                            style: theme.textTheme.titleMedium
+                                                ?.copyWith(
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                           ),
                                   ),
                                 ),
@@ -411,9 +424,7 @@ class _AmountStep extends StatelessWidget {
           decoration: InputDecoration(
             labelText: 'Amount',
             prefixText: 'Rp ',
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
           ),
           style: theme.textTheme.headlineSmall?.copyWith(
             fontWeight: FontWeight.bold,
@@ -444,9 +455,7 @@ class _AmountStep extends StatelessWidget {
           decoration: InputDecoration(
             labelText: 'Add a message (optional)',
             hintText: 'Your words of encouragement...',
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
           ),
         ),
         const SizedBox(height: 12),
@@ -455,10 +464,7 @@ class _AmountStep extends StatelessWidget {
         SwitchListTile.adaptive(
           value: isAnonymous.value,
           onChanged: (value) => isAnonymous.value = value,
-          title: Text(
-            'Donate anonymously',
-            style: theme.textTheme.bodyMedium,
-          ),
+          title: Text('Donate anonymously', style: theme.textTheme.bodyMedium),
           subtitle: Text(
             'Your name will be hidden from the campaign page',
             style: theme.textTheme.bodySmall?.copyWith(
@@ -569,11 +575,7 @@ class _TransferStep extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Icon(
-                Icons.info_outline,
-                size: 20,
-                color: colorScheme.tertiary,
-              ),
+              Icon(Icons.info_outline, size: 20, color: colorScheme.tertiary),
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
@@ -645,11 +647,7 @@ class _BankDetailRow extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Icon(
-                    Icons.copy,
-                    size: 18,
-                    color: colorScheme.primary,
-                  ),
+                  child: Icon(Icons.copy, size: 18, color: colorScheme.primary),
                 ),
               ],
             ],

@@ -45,7 +45,7 @@ class InvestBottomSheet extends HookWidget {
     return Container(
       decoration: BoxDecoration(
         color: colorScheme.surface,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
       ),
       child: SafeArea(
         child: Padding(
