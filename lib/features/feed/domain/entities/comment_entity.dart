@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'comment_entity.freezed.dart';
 
 @freezed
-class CommentEntity with _$CommentEntity {
+abstract class CommentEntity with _$CommentEntity {
   const factory CommentEntity({
     required String id,
     required String postId,

@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'feed_entity.freezed.dart';
 
 @freezed
-class FeedEntity with _$FeedEntity {
+abstract class FeedEntity with _$FeedEntity {
   const FeedEntity._();
 
   const factory FeedEntity({
