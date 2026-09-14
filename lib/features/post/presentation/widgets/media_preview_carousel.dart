@@ -51,21 +51,14 @@ class MediaPreviewCarousel extends HookWidget {
         height: 300,
         decoration: BoxDecoration(
           color: colorScheme.surface,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color: colorScheme.outlineVariant.withValues(alpha: 0.3),
             width: 1.5,
           ),
-          boxShadow: [
-            BoxShadow(
-              color: colorScheme.shadow.withValues(alpha: 0.12),
-              blurRadius: 20,
-              offset: const Offset(0, 8),
-            ),
-          ],
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(12),
           child: Stack(
             children: [
               // Image carousel
@@ -111,8 +104,9 @@ class MediaPreviewCarousel extends HookWidget {
                           boxShadow: currentPage.value == index
                               ? [
                                   BoxShadow(
-                                    color: colorScheme.primary
-                                        .withValues(alpha: 0.3),
+                                    color: colorScheme.primary.withValues(
+                                      alpha: 0.3,
+                                    ),
                                     blurRadius: 8,
                                     offset: const Offset(0, 2),
                                   ),
@@ -135,20 +129,8 @@ class MediaPreviewCarousel extends HookWidget {
                     hint: t.postMediaRemoveHint(currentPage.value + 1),
                     child: Container(
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            colorScheme.error,
-                            colorScheme.error.withValues(alpha: 0.85),
-                          ],
-                        ),
+                        color: colorScheme.error,
                         shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: colorScheme.error.withValues(alpha: 0.3),
-                            blurRadius: 8,
-                            offset: const Offset(0, 2),
-                          ),
-                        ],
                       ),
                       child: Material(
                         color: Colors.transparent,
@@ -179,24 +161,12 @@ class MediaPreviewCarousel extends HookWidget {
                     vertical: 7,
                   ),
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        colorScheme.primary,
-                        colorScheme.secondary,
-                      ],
-                    ),
+                    color: colorScheme.primary,
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
                       color: colorScheme.onPrimary.withValues(alpha: 0.2),
                       width: 1,
                     ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: colorScheme.primary.withValues(alpha: 0.4),
-                        blurRadius: 12,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
                   ),
                   child: Text(
                     '${currentPage.value + 1}/${mediaFiles.length}',

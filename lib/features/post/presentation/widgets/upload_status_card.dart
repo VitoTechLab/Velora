@@ -44,14 +44,14 @@ class UploadStatusCard extends StatelessWidget {
             final caption = PostDraftService.getCaption();
 
             context.read<PostBloc>().add(
-                  CreatePostEvent(
-                    userId: userId,
-                    content: caption,
-                    mediaUrls: [...imageUrls, ...videoUrls],
-                    allowComments: true,
-                    allowShare: true,
-                  ),
-                );
+              CreatePostEvent(
+                userId: userId,
+                content: caption,
+                mediaUrls: [...imageUrls, ...videoUrls],
+                allowComments: true,
+                allowShare: true,
+              ),
+            );
           },
           failure: (errorMessage) {
             AppMessenger.showToast(
@@ -69,8 +69,8 @@ class UploadStatusCard extends StatelessWidget {
           if (postState.createdPost != null) {
             // Add post to feed immediately (auto-add without refresh)
             context.read<FeedBloc>().add(
-                  FeedEvent.addNewPost(postState.createdPost!),
-                );
+              FeedEvent.addNewPost(postState.createdPost!),
+            );
 
             // Clear draft
             PostDraftService.clear();
@@ -99,26 +99,12 @@ class UploadStatusCard extends StatelessWidget {
           margin: const EdgeInsets.all(16),
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
-                colorScheme.surfaceContainer.withValues(alpha: 0.3),
-              ],
-            ),
+            color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
               color: colorScheme.outline.withValues(alpha: 0.2),
               width: 1,
             ),
-            boxShadow: [
-              BoxShadow(
-                color: colorScheme.shadow.withValues(alpha: 0.1),
-                blurRadius: 16,
-                offset: const Offset(0, 4),
-              ),
-            ],
           ),
           child: BlocBuilder<MediaUploadBloc, MediaUploadState>(
             builder: (context, uploadState) {
@@ -172,20 +158,8 @@ class UploadStatusCard extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                colorScheme.primaryContainer.withValues(alpha: 0.4),
-                colorScheme.secondaryContainer.withValues(alpha: 0.3),
-              ],
-            ),
+            color: colorScheme.primaryContainer.withValues(alpha: 0.4),
             shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: colorScheme.primary.withValues(alpha: 0.1),
-                blurRadius: 8,
-                spreadRadius: 1,
-              ),
-            ],
           ),
           child: SizedBox(
             width: 24,
@@ -221,20 +195,8 @@ class UploadStatusCard extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                colorScheme.tertiary.withValues(alpha: 0.2),
-                colorScheme.tertiary.withValues(alpha: 0.1),
-              ],
-            ),
+            color: colorScheme.tertiary.withValues(alpha: 0.2),
             shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: colorScheme.tertiary.withValues(alpha: 0.2),
-                blurRadius: 8,
-                spreadRadius: 1,
-              ),
-            ],
           ),
           child: Icon(
             Icons.check_circle_rounded,
@@ -267,26 +229,10 @@ class UploadStatusCard extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                colorScheme.error.withValues(alpha: 0.2),
-                colorScheme.error.withValues(alpha: 0.1),
-              ],
-            ),
+            color: colorScheme.error.withValues(alpha: 0.2),
             shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: colorScheme.error.withValues(alpha: 0.2),
-                blurRadius: 8,
-                spreadRadius: 1,
-              ),
-            ],
           ),
-          child: Icon(
-            Icons.error_rounded,
-            color: colorScheme.error,
-            size: 24,
-          ),
+          child: Icon(Icons.error_rounded, color: colorScheme.error, size: 24),
         ),
         const SizedBox(width: 16),
         Expanded(
