@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:velora/core/errors/failure.dart';
-import 'package:velora/features/profile/data/models/user_profile_model.dart';
-import 'package:velora/features/profile/data/models/update_profile_model.dart';
+import 'package:velora/features/profile/domain/entities/update_profile_params.dart';
+import 'package:velora/features/profile/domain/entities/user_profile_entity.dart';
 import 'package:velora/features/profile/domain/repositories/profile_repository.dart';
 
 class UpdateProfileUseCase {
@@ -9,9 +9,9 @@ class UpdateProfileUseCase {
 
   UpdateProfileUseCase(this.repository);
 
-  Future<Either<Failure, UserProfileModel>> call(
-    UpdateProfileModel updateModel,
+  Future<Either<Failure, UserProfileEntity>> call(
+    UpdateProfileParams updateParams,
   ) {
-    return repository.updateProfile(updateModel);
+    return repository.updateProfile(updateParams);
   }
 }
