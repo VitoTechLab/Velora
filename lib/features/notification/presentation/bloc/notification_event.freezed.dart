@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,2448 +9,788 @@ part of 'notification_event.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
 mixin _$NotificationEvent {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int limit) loadInitial,
-    required TResult Function(int limit) loadMore,
-    required TResult Function() refresh,
-    required TResult Function() markAllAsRead,
-    required TResult Function(String notificationId) markAsRead,
-    required TResult Function(String notificationId) delete,
-    required TResult Function() loadUnreadCount,
-    required TResult Function() startWatching,
-    required TResult Function() stopWatching,
-    required TResult Function() newNotificationReceived,
-    required TResult Function() clearTransient,
-    required TResult Function(String notificationId, String actorId)
-        toggleFollowActor,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int limit)? loadInitial,
-    TResult? Function(int limit)? loadMore,
-    TResult? Function()? refresh,
-    TResult? Function()? markAllAsRead,
-    TResult? Function(String notificationId)? markAsRead,
-    TResult? Function(String notificationId)? delete,
-    TResult? Function()? loadUnreadCount,
-    TResult? Function()? startWatching,
-    TResult? Function()? stopWatching,
-    TResult? Function()? newNotificationReceived,
-    TResult? Function()? clearTransient,
-    TResult? Function(String notificationId, String actorId)? toggleFollowActor,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int limit)? loadInitial,
-    TResult Function(int limit)? loadMore,
-    TResult Function()? refresh,
-    TResult Function()? markAllAsRead,
-    TResult Function(String notificationId)? markAsRead,
-    TResult Function(String notificationId)? delete,
-    TResult Function()? loadUnreadCount,
-    TResult Function()? startWatching,
-    TResult Function()? stopWatching,
-    TResult Function()? newNotificationReceived,
-    TResult Function()? clearTransient,
-    TResult Function(String notificationId, String actorId)? toggleFollowActor,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadInitialNotificationsEvent value) loadInitial,
-    required TResult Function(LoadMoreNotificationsEvent value) loadMore,
-    required TResult Function(RefreshNotificationsEvent value) refresh,
-    required TResult Function(MarkAllNotificationsReadEvent value)
-        markAllAsRead,
-    required TResult Function(MarkNotificationReadEvent value) markAsRead,
-    required TResult Function(DeleteNotificationEvent value) delete,
-    required TResult Function(LoadUnreadCountEvent value) loadUnreadCount,
-    required TResult Function(StartWatchingNotificationsEvent value)
-        startWatching,
-    required TResult Function(StopWatchingNotificationsEvent value)
-        stopWatching,
-    required TResult Function(NewNotificationReceivedEvent value)
-        newNotificationReceived,
-    required TResult Function(ClearTransientEvent value) clearTransient,
-    required TResult Function(ToggleFollowActorEvent value) toggleFollowActor,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadInitialNotificationsEvent value)? loadInitial,
-    TResult? Function(LoadMoreNotificationsEvent value)? loadMore,
-    TResult? Function(RefreshNotificationsEvent value)? refresh,
-    TResult? Function(MarkAllNotificationsReadEvent value)? markAllAsRead,
-    TResult? Function(MarkNotificationReadEvent value)? markAsRead,
-    TResult? Function(DeleteNotificationEvent value)? delete,
-    TResult? Function(LoadUnreadCountEvent value)? loadUnreadCount,
-    TResult? Function(StartWatchingNotificationsEvent value)? startWatching,
-    TResult? Function(StopWatchingNotificationsEvent value)? stopWatching,
-    TResult? Function(NewNotificationReceivedEvent value)?
-        newNotificationReceived,
-    TResult? Function(ClearTransientEvent value)? clearTransient,
-    TResult? Function(ToggleFollowActorEvent value)? toggleFollowActor,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadInitialNotificationsEvent value)? loadInitial,
-    TResult Function(LoadMoreNotificationsEvent value)? loadMore,
-    TResult Function(RefreshNotificationsEvent value)? refresh,
-    TResult Function(MarkAllNotificationsReadEvent value)? markAllAsRead,
-    TResult Function(MarkNotificationReadEvent value)? markAsRead,
-    TResult Function(DeleteNotificationEvent value)? delete,
-    TResult Function(LoadUnreadCountEvent value)? loadUnreadCount,
-    TResult Function(StartWatchingNotificationsEvent value)? startWatching,
-    TResult Function(StopWatchingNotificationsEvent value)? stopWatching,
-    TResult Function(NewNotificationReceivedEvent value)?
-        newNotificationReceived,
-    TResult Function(ClearTransientEvent value)? clearTransient,
-    TResult Function(ToggleFollowActorEvent value)? toggleFollowActor,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NotificationEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'NotificationEvent()';
+}
+
+
 }
 
 /// @nodoc
-abstract class $NotificationEventCopyWith<$Res> {
-  factory $NotificationEventCopyWith(
-          NotificationEvent value, $Res Function(NotificationEvent) then) =
-      _$NotificationEventCopyWithImpl<$Res, NotificationEvent>;
+class $NotificationEventCopyWith<$Res>  {
+$NotificationEventCopyWith(NotificationEvent _, $Res Function(NotificationEvent) __);
 }
 
-/// @nodoc
-class _$NotificationEventCopyWithImpl<$Res, $Val extends NotificationEvent>
-    implements $NotificationEventCopyWith<$Res> {
-  _$NotificationEventCopyWithImpl(this._value, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+/// Adds pattern-matching-related methods to [NotificationEvent].
+extension NotificationEventPatterns on NotificationEvent {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  /// Create a copy of NotificationEvent
-  /// with the given fields replaced by the non-null parameter values.
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LoadInitialNotificationsEvent value)?  loadInitial,TResult Function( LoadMoreNotificationsEvent value)?  loadMore,TResult Function( RefreshNotificationsEvent value)?  refresh,TResult Function( MarkAllNotificationsReadEvent value)?  markAllAsRead,TResult Function( MarkNotificationReadEvent value)?  markAsRead,TResult Function( DeleteNotificationEvent value)?  delete,TResult Function( LoadUnreadCountEvent value)?  loadUnreadCount,TResult Function( StartWatchingNotificationsEvent value)?  startWatching,TResult Function( StopWatchingNotificationsEvent value)?  stopWatching,TResult Function( NewNotificationReceivedEvent value)?  newNotificationReceived,TResult Function( ClearTransientEvent value)?  clearTransient,TResult Function( ToggleFollowActorEvent value)?  toggleFollowActor,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case LoadInitialNotificationsEvent() when loadInitial != null:
+return loadInitial(_that);case LoadMoreNotificationsEvent() when loadMore != null:
+return loadMore(_that);case RefreshNotificationsEvent() when refresh != null:
+return refresh(_that);case MarkAllNotificationsReadEvent() when markAllAsRead != null:
+return markAllAsRead(_that);case MarkNotificationReadEvent() when markAsRead != null:
+return markAsRead(_that);case DeleteNotificationEvent() when delete != null:
+return delete(_that);case LoadUnreadCountEvent() when loadUnreadCount != null:
+return loadUnreadCount(_that);case StartWatchingNotificationsEvent() when startWatching != null:
+return startWatching(_that);case StopWatchingNotificationsEvent() when stopWatching != null:
+return stopWatching(_that);case NewNotificationReceivedEvent() when newNotificationReceived != null:
+return newNotificationReceived(_that);case ClearTransientEvent() when clearTransient != null:
+return clearTransient(_that);case ToggleFollowActorEvent() when toggleFollowActor != null:
+return toggleFollowActor(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LoadInitialNotificationsEvent value)  loadInitial,required TResult Function( LoadMoreNotificationsEvent value)  loadMore,required TResult Function( RefreshNotificationsEvent value)  refresh,required TResult Function( MarkAllNotificationsReadEvent value)  markAllAsRead,required TResult Function( MarkNotificationReadEvent value)  markAsRead,required TResult Function( DeleteNotificationEvent value)  delete,required TResult Function( LoadUnreadCountEvent value)  loadUnreadCount,required TResult Function( StartWatchingNotificationsEvent value)  startWatching,required TResult Function( StopWatchingNotificationsEvent value)  stopWatching,required TResult Function( NewNotificationReceivedEvent value)  newNotificationReceived,required TResult Function( ClearTransientEvent value)  clearTransient,required TResult Function( ToggleFollowActorEvent value)  toggleFollowActor,}){
+final _that = this;
+switch (_that) {
+case LoadInitialNotificationsEvent():
+return loadInitial(_that);case LoadMoreNotificationsEvent():
+return loadMore(_that);case RefreshNotificationsEvent():
+return refresh(_that);case MarkAllNotificationsReadEvent():
+return markAllAsRead(_that);case MarkNotificationReadEvent():
+return markAsRead(_that);case DeleteNotificationEvent():
+return delete(_that);case LoadUnreadCountEvent():
+return loadUnreadCount(_that);case StartWatchingNotificationsEvent():
+return startWatching(_that);case StopWatchingNotificationsEvent():
+return stopWatching(_that);case NewNotificationReceivedEvent():
+return newNotificationReceived(_that);case ClearTransientEvent():
+return clearTransient(_that);case ToggleFollowActorEvent():
+return toggleFollowActor(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LoadInitialNotificationsEvent value)?  loadInitial,TResult? Function( LoadMoreNotificationsEvent value)?  loadMore,TResult? Function( RefreshNotificationsEvent value)?  refresh,TResult? Function( MarkAllNotificationsReadEvent value)?  markAllAsRead,TResult? Function( MarkNotificationReadEvent value)?  markAsRead,TResult? Function( DeleteNotificationEvent value)?  delete,TResult? Function( LoadUnreadCountEvent value)?  loadUnreadCount,TResult? Function( StartWatchingNotificationsEvent value)?  startWatching,TResult? Function( StopWatchingNotificationsEvent value)?  stopWatching,TResult? Function( NewNotificationReceivedEvent value)?  newNotificationReceived,TResult? Function( ClearTransientEvent value)?  clearTransient,TResult? Function( ToggleFollowActorEvent value)?  toggleFollowActor,}){
+final _that = this;
+switch (_that) {
+case LoadInitialNotificationsEvent() when loadInitial != null:
+return loadInitial(_that);case LoadMoreNotificationsEvent() when loadMore != null:
+return loadMore(_that);case RefreshNotificationsEvent() when refresh != null:
+return refresh(_that);case MarkAllNotificationsReadEvent() when markAllAsRead != null:
+return markAllAsRead(_that);case MarkNotificationReadEvent() when markAsRead != null:
+return markAsRead(_that);case DeleteNotificationEvent() when delete != null:
+return delete(_that);case LoadUnreadCountEvent() when loadUnreadCount != null:
+return loadUnreadCount(_that);case StartWatchingNotificationsEvent() when startWatching != null:
+return startWatching(_that);case StopWatchingNotificationsEvent() when stopWatching != null:
+return stopWatching(_that);case NewNotificationReceivedEvent() when newNotificationReceived != null:
+return newNotificationReceived(_that);case ClearTransientEvent() when clearTransient != null:
+return clearTransient(_that);case ToggleFollowActorEvent() when toggleFollowActor != null:
+return toggleFollowActor(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int limit)?  loadInitial,TResult Function( int limit)?  loadMore,TResult Function()?  refresh,TResult Function()?  markAllAsRead,TResult Function( String notificationId)?  markAsRead,TResult Function( String notificationId)?  delete,TResult Function()?  loadUnreadCount,TResult Function()?  startWatching,TResult Function()?  stopWatching,TResult Function()?  newNotificationReceived,TResult Function()?  clearTransient,TResult Function( String notificationId,  String actorId)?  toggleFollowActor,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case LoadInitialNotificationsEvent() when loadInitial != null:
+return loadInitial(_that.limit);case LoadMoreNotificationsEvent() when loadMore != null:
+return loadMore(_that.limit);case RefreshNotificationsEvent() when refresh != null:
+return refresh();case MarkAllNotificationsReadEvent() when markAllAsRead != null:
+return markAllAsRead();case MarkNotificationReadEvent() when markAsRead != null:
+return markAsRead(_that.notificationId);case DeleteNotificationEvent() when delete != null:
+return delete(_that.notificationId);case LoadUnreadCountEvent() when loadUnreadCount != null:
+return loadUnreadCount();case StartWatchingNotificationsEvent() when startWatching != null:
+return startWatching();case StopWatchingNotificationsEvent() when stopWatching != null:
+return stopWatching();case NewNotificationReceivedEvent() when newNotificationReceived != null:
+return newNotificationReceived();case ClearTransientEvent() when clearTransient != null:
+return clearTransient();case ToggleFollowActorEvent() when toggleFollowActor != null:
+return toggleFollowActor(_that.notificationId,_that.actorId);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int limit)  loadInitial,required TResult Function( int limit)  loadMore,required TResult Function()  refresh,required TResult Function()  markAllAsRead,required TResult Function( String notificationId)  markAsRead,required TResult Function( String notificationId)  delete,required TResult Function()  loadUnreadCount,required TResult Function()  startWatching,required TResult Function()  stopWatching,required TResult Function()  newNotificationReceived,required TResult Function()  clearTransient,required TResult Function( String notificationId,  String actorId)  toggleFollowActor,}) {final _that = this;
+switch (_that) {
+case LoadInitialNotificationsEvent():
+return loadInitial(_that.limit);case LoadMoreNotificationsEvent():
+return loadMore(_that.limit);case RefreshNotificationsEvent():
+return refresh();case MarkAllNotificationsReadEvent():
+return markAllAsRead();case MarkNotificationReadEvent():
+return markAsRead(_that.notificationId);case DeleteNotificationEvent():
+return delete(_that.notificationId);case LoadUnreadCountEvent():
+return loadUnreadCount();case StartWatchingNotificationsEvent():
+return startWatching();case StopWatchingNotificationsEvent():
+return stopWatching();case NewNotificationReceivedEvent():
+return newNotificationReceived();case ClearTransientEvent():
+return clearTransient();case ToggleFollowActorEvent():
+return toggleFollowActor(_that.notificationId,_that.actorId);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int limit)?  loadInitial,TResult? Function( int limit)?  loadMore,TResult? Function()?  refresh,TResult? Function()?  markAllAsRead,TResult? Function( String notificationId)?  markAsRead,TResult? Function( String notificationId)?  delete,TResult? Function()?  loadUnreadCount,TResult? Function()?  startWatching,TResult? Function()?  stopWatching,TResult? Function()?  newNotificationReceived,TResult? Function()?  clearTransient,TResult? Function( String notificationId,  String actorId)?  toggleFollowActor,}) {final _that = this;
+switch (_that) {
+case LoadInitialNotificationsEvent() when loadInitial != null:
+return loadInitial(_that.limit);case LoadMoreNotificationsEvent() when loadMore != null:
+return loadMore(_that.limit);case RefreshNotificationsEvent() when refresh != null:
+return refresh();case MarkAllNotificationsReadEvent() when markAllAsRead != null:
+return markAllAsRead();case MarkNotificationReadEvent() when markAsRead != null:
+return markAsRead(_that.notificationId);case DeleteNotificationEvent() when delete != null:
+return delete(_that.notificationId);case LoadUnreadCountEvent() when loadUnreadCount != null:
+return loadUnreadCount();case StartWatchingNotificationsEvent() when startWatching != null:
+return startWatching();case StopWatchingNotificationsEvent() when stopWatching != null:
+return stopWatching();case NewNotificationReceivedEvent() when newNotificationReceived != null:
+return newNotificationReceived();case ClearTransientEvent() when clearTransient != null:
+return clearTransient();case ToggleFollowActorEvent() when toggleFollowActor != null:
+return toggleFollowActor(_that.notificationId,_that.actorId);case _:
+  return null;
+
+}
 }
 
-/// @nodoc
-abstract class _$$LoadInitialNotificationsEventImplCopyWith<$Res> {
-  factory _$$LoadInitialNotificationsEventImplCopyWith(
-          _$LoadInitialNotificationsEventImpl value,
-          $Res Function(_$LoadInitialNotificationsEventImpl) then) =
-      __$$LoadInitialNotificationsEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({int limit});
-}
-
-/// @nodoc
-class __$$LoadInitialNotificationsEventImplCopyWithImpl<$Res>
-    extends _$NotificationEventCopyWithImpl<$Res,
-        _$LoadInitialNotificationsEventImpl>
-    implements _$$LoadInitialNotificationsEventImplCopyWith<$Res> {
-  __$$LoadInitialNotificationsEventImplCopyWithImpl(
-      _$LoadInitialNotificationsEventImpl _value,
-      $Res Function(_$LoadInitialNotificationsEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of NotificationEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? limit = null,
-  }) {
-    return _then(_$LoadInitialNotificationsEventImpl(
-      limit: null == limit
-          ? _value.limit
-          : limit // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$LoadInitialNotificationsEventImpl
-    implements LoadInitialNotificationsEvent {
-  const _$LoadInitialNotificationsEventImpl({this.limit = 20});
-
-  @override
-  @JsonKey()
-  final int limit;
-
-  @override
-  String toString() {
-    return 'NotificationEvent.loadInitial(limit: $limit)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadInitialNotificationsEventImpl &&
-            (identical(other.limit, limit) || other.limit == limit));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, limit);
-
-  /// Create a copy of NotificationEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadInitialNotificationsEventImplCopyWith<
-          _$LoadInitialNotificationsEventImpl>
-      get copyWith => __$$LoadInitialNotificationsEventImplCopyWithImpl<
-          _$LoadInitialNotificationsEventImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int limit) loadInitial,
-    required TResult Function(int limit) loadMore,
-    required TResult Function() refresh,
-    required TResult Function() markAllAsRead,
-    required TResult Function(String notificationId) markAsRead,
-    required TResult Function(String notificationId) delete,
-    required TResult Function() loadUnreadCount,
-    required TResult Function() startWatching,
-    required TResult Function() stopWatching,
-    required TResult Function() newNotificationReceived,
-    required TResult Function() clearTransient,
-    required TResult Function(String notificationId, String actorId)
-        toggleFollowActor,
-  }) {
-    return loadInitial(limit);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int limit)? loadInitial,
-    TResult? Function(int limit)? loadMore,
-    TResult? Function()? refresh,
-    TResult? Function()? markAllAsRead,
-    TResult? Function(String notificationId)? markAsRead,
-    TResult? Function(String notificationId)? delete,
-    TResult? Function()? loadUnreadCount,
-    TResult? Function()? startWatching,
-    TResult? Function()? stopWatching,
-    TResult? Function()? newNotificationReceived,
-    TResult? Function()? clearTransient,
-    TResult? Function(String notificationId, String actorId)? toggleFollowActor,
-  }) {
-    return loadInitial?.call(limit);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int limit)? loadInitial,
-    TResult Function(int limit)? loadMore,
-    TResult Function()? refresh,
-    TResult Function()? markAllAsRead,
-    TResult Function(String notificationId)? markAsRead,
-    TResult Function(String notificationId)? delete,
-    TResult Function()? loadUnreadCount,
-    TResult Function()? startWatching,
-    TResult Function()? stopWatching,
-    TResult Function()? newNotificationReceived,
-    TResult Function()? clearTransient,
-    TResult Function(String notificationId, String actorId)? toggleFollowActor,
-    required TResult orElse(),
-  }) {
-    if (loadInitial != null) {
-      return loadInitial(limit);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadInitialNotificationsEvent value) loadInitial,
-    required TResult Function(LoadMoreNotificationsEvent value) loadMore,
-    required TResult Function(RefreshNotificationsEvent value) refresh,
-    required TResult Function(MarkAllNotificationsReadEvent value)
-        markAllAsRead,
-    required TResult Function(MarkNotificationReadEvent value) markAsRead,
-    required TResult Function(DeleteNotificationEvent value) delete,
-    required TResult Function(LoadUnreadCountEvent value) loadUnreadCount,
-    required TResult Function(StartWatchingNotificationsEvent value)
-        startWatching,
-    required TResult Function(StopWatchingNotificationsEvent value)
-        stopWatching,
-    required TResult Function(NewNotificationReceivedEvent value)
-        newNotificationReceived,
-    required TResult Function(ClearTransientEvent value) clearTransient,
-    required TResult Function(ToggleFollowActorEvent value) toggleFollowActor,
-  }) {
-    return loadInitial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadInitialNotificationsEvent value)? loadInitial,
-    TResult? Function(LoadMoreNotificationsEvent value)? loadMore,
-    TResult? Function(RefreshNotificationsEvent value)? refresh,
-    TResult? Function(MarkAllNotificationsReadEvent value)? markAllAsRead,
-    TResult? Function(MarkNotificationReadEvent value)? markAsRead,
-    TResult? Function(DeleteNotificationEvent value)? delete,
-    TResult? Function(LoadUnreadCountEvent value)? loadUnreadCount,
-    TResult? Function(StartWatchingNotificationsEvent value)? startWatching,
-    TResult? Function(StopWatchingNotificationsEvent value)? stopWatching,
-    TResult? Function(NewNotificationReceivedEvent value)?
-        newNotificationReceived,
-    TResult? Function(ClearTransientEvent value)? clearTransient,
-    TResult? Function(ToggleFollowActorEvent value)? toggleFollowActor,
-  }) {
-    return loadInitial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadInitialNotificationsEvent value)? loadInitial,
-    TResult Function(LoadMoreNotificationsEvent value)? loadMore,
-    TResult Function(RefreshNotificationsEvent value)? refresh,
-    TResult Function(MarkAllNotificationsReadEvent value)? markAllAsRead,
-    TResult Function(MarkNotificationReadEvent value)? markAsRead,
-    TResult Function(DeleteNotificationEvent value)? delete,
-    TResult Function(LoadUnreadCountEvent value)? loadUnreadCount,
-    TResult Function(StartWatchingNotificationsEvent value)? startWatching,
-    TResult Function(StopWatchingNotificationsEvent value)? stopWatching,
-    TResult Function(NewNotificationReceivedEvent value)?
-        newNotificationReceived,
-    TResult Function(ClearTransientEvent value)? clearTransient,
-    TResult Function(ToggleFollowActorEvent value)? toggleFollowActor,
-    required TResult orElse(),
-  }) {
-    if (loadInitial != null) {
-      return loadInitial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class LoadInitialNotificationsEvent implements NotificationEvent {
-  const factory LoadInitialNotificationsEvent({final int limit}) =
-      _$LoadInitialNotificationsEventImpl;
-
-  int get limit;
-
-  /// Create a copy of NotificationEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LoadInitialNotificationsEventImplCopyWith<
-          _$LoadInitialNotificationsEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$LoadMoreNotificationsEventImplCopyWith<$Res> {
-  factory _$$LoadMoreNotificationsEventImplCopyWith(
-          _$LoadMoreNotificationsEventImpl value,
-          $Res Function(_$LoadMoreNotificationsEventImpl) then) =
-      __$$LoadMoreNotificationsEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({int limit});
-}
-
-/// @nodoc
-class __$$LoadMoreNotificationsEventImplCopyWithImpl<$Res>
-    extends _$NotificationEventCopyWithImpl<$Res,
-        _$LoadMoreNotificationsEventImpl>
-    implements _$$LoadMoreNotificationsEventImplCopyWith<$Res> {
-  __$$LoadMoreNotificationsEventImplCopyWithImpl(
-      _$LoadMoreNotificationsEventImpl _value,
-      $Res Function(_$LoadMoreNotificationsEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of NotificationEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? limit = null,
-  }) {
-    return _then(_$LoadMoreNotificationsEventImpl(
-      limit: null == limit
-          ? _value.limit
-          : limit // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$LoadMoreNotificationsEventImpl implements LoadMoreNotificationsEvent {
-  const _$LoadMoreNotificationsEventImpl({this.limit = 20});
 
-  @override
-  @JsonKey()
-  final int limit;
+class LoadInitialNotificationsEvent implements NotificationEvent {
+  const LoadInitialNotificationsEvent({this.limit = 20});
+  
 
-  @override
-  String toString() {
-    return 'NotificationEvent.loadMore(limit: $limit)';
-  }
+@JsonKey() final  int limit;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadMoreNotificationsEventImpl &&
-            (identical(other.limit, limit) || other.limit == limit));
-  }
+/// Create a copy of NotificationEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LoadInitialNotificationsEventCopyWith<LoadInitialNotificationsEvent> get copyWith => _$LoadInitialNotificationsEventCopyWithImpl<LoadInitialNotificationsEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, limit);
 
-  /// Create a copy of NotificationEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadMoreNotificationsEventImplCopyWith<_$LoadMoreNotificationsEventImpl>
-      get copyWith => __$$LoadMoreNotificationsEventImplCopyWithImpl<
-          _$LoadMoreNotificationsEventImpl>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int limit) loadInitial,
-    required TResult Function(int limit) loadMore,
-    required TResult Function() refresh,
-    required TResult Function() markAllAsRead,
-    required TResult Function(String notificationId) markAsRead,
-    required TResult Function(String notificationId) delete,
-    required TResult Function() loadUnreadCount,
-    required TResult Function() startWatching,
-    required TResult Function() stopWatching,
-    required TResult Function() newNotificationReceived,
-    required TResult Function() clearTransient,
-    required TResult Function(String notificationId, String actorId)
-        toggleFollowActor,
-  }) {
-    return loadMore(limit);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int limit)? loadInitial,
-    TResult? Function(int limit)? loadMore,
-    TResult? Function()? refresh,
-    TResult? Function()? markAllAsRead,
-    TResult? Function(String notificationId)? markAsRead,
-    TResult? Function(String notificationId)? delete,
-    TResult? Function()? loadUnreadCount,
-    TResult? Function()? startWatching,
-    TResult? Function()? stopWatching,
-    TResult? Function()? newNotificationReceived,
-    TResult? Function()? clearTransient,
-    TResult? Function(String notificationId, String actorId)? toggleFollowActor,
-  }) {
-    return loadMore?.call(limit);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int limit)? loadInitial,
-    TResult Function(int limit)? loadMore,
-    TResult Function()? refresh,
-    TResult Function()? markAllAsRead,
-    TResult Function(String notificationId)? markAsRead,
-    TResult Function(String notificationId)? delete,
-    TResult Function()? loadUnreadCount,
-    TResult Function()? startWatching,
-    TResult Function()? stopWatching,
-    TResult Function()? newNotificationReceived,
-    TResult Function()? clearTransient,
-    TResult Function(String notificationId, String actorId)? toggleFollowActor,
-    required TResult orElse(),
-  }) {
-    if (loadMore != null) {
-      return loadMore(limit);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadInitialNotificationsEvent value) loadInitial,
-    required TResult Function(LoadMoreNotificationsEvent value) loadMore,
-    required TResult Function(RefreshNotificationsEvent value) refresh,
-    required TResult Function(MarkAllNotificationsReadEvent value)
-        markAllAsRead,
-    required TResult Function(MarkNotificationReadEvent value) markAsRead,
-    required TResult Function(DeleteNotificationEvent value) delete,
-    required TResult Function(LoadUnreadCountEvent value) loadUnreadCount,
-    required TResult Function(StartWatchingNotificationsEvent value)
-        startWatching,
-    required TResult Function(StopWatchingNotificationsEvent value)
-        stopWatching,
-    required TResult Function(NewNotificationReceivedEvent value)
-        newNotificationReceived,
-    required TResult Function(ClearTransientEvent value) clearTransient,
-    required TResult Function(ToggleFollowActorEvent value) toggleFollowActor,
-  }) {
-    return loadMore(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadInitialNotificationsEvent value)? loadInitial,
-    TResult? Function(LoadMoreNotificationsEvent value)? loadMore,
-    TResult? Function(RefreshNotificationsEvent value)? refresh,
-    TResult? Function(MarkAllNotificationsReadEvent value)? markAllAsRead,
-    TResult? Function(MarkNotificationReadEvent value)? markAsRead,
-    TResult? Function(DeleteNotificationEvent value)? delete,
-    TResult? Function(LoadUnreadCountEvent value)? loadUnreadCount,
-    TResult? Function(StartWatchingNotificationsEvent value)? startWatching,
-    TResult? Function(StopWatchingNotificationsEvent value)? stopWatching,
-    TResult? Function(NewNotificationReceivedEvent value)?
-        newNotificationReceived,
-    TResult? Function(ClearTransientEvent value)? clearTransient,
-    TResult? Function(ToggleFollowActorEvent value)? toggleFollowActor,
-  }) {
-    return loadMore?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadInitialNotificationsEvent value)? loadInitial,
-    TResult Function(LoadMoreNotificationsEvent value)? loadMore,
-    TResult Function(RefreshNotificationsEvent value)? refresh,
-    TResult Function(MarkAllNotificationsReadEvent value)? markAllAsRead,
-    TResult Function(MarkNotificationReadEvent value)? markAsRead,
-    TResult Function(DeleteNotificationEvent value)? delete,
-    TResult Function(LoadUnreadCountEvent value)? loadUnreadCount,
-    TResult Function(StartWatchingNotificationsEvent value)? startWatching,
-    TResult Function(StopWatchingNotificationsEvent value)? stopWatching,
-    TResult Function(NewNotificationReceivedEvent value)?
-        newNotificationReceived,
-    TResult Function(ClearTransientEvent value)? clearTransient,
-    TResult Function(ToggleFollowActorEvent value)? toggleFollowActor,
-    required TResult orElse(),
-  }) {
-    if (loadMore != null) {
-      return loadMore(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadInitialNotificationsEvent&&(identical(other.limit, limit) || other.limit == limit));
 }
 
-abstract class LoadMoreNotificationsEvent implements NotificationEvent {
-  const factory LoadMoreNotificationsEvent({final int limit}) =
-      _$LoadMoreNotificationsEventImpl;
 
-  int get limit;
+@override
+int get hashCode => Object.hash(runtimeType,limit);
 
-  /// Create a copy of NotificationEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LoadMoreNotificationsEventImplCopyWith<_$LoadMoreNotificationsEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'NotificationEvent.loadInitial(limit: $limit)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$RefreshNotificationsEventImplCopyWith<$Res> {
-  factory _$$RefreshNotificationsEventImplCopyWith(
-          _$RefreshNotificationsEventImpl value,
-          $Res Function(_$RefreshNotificationsEventImpl) then) =
-      __$$RefreshNotificationsEventImplCopyWithImpl<$Res>;
+abstract mixin class $LoadInitialNotificationsEventCopyWith<$Res> implements $NotificationEventCopyWith<$Res> {
+  factory $LoadInitialNotificationsEventCopyWith(LoadInitialNotificationsEvent value, $Res Function(LoadInitialNotificationsEvent) _then) = _$LoadInitialNotificationsEventCopyWithImpl;
+@useResult
+$Res call({
+ int limit
+});
+
+
+
+
+}
+/// @nodoc
+class _$LoadInitialNotificationsEventCopyWithImpl<$Res>
+    implements $LoadInitialNotificationsEventCopyWith<$Res> {
+  _$LoadInitialNotificationsEventCopyWithImpl(this._self, this._then);
+
+  final LoadInitialNotificationsEvent _self;
+  final $Res Function(LoadInitialNotificationsEvent) _then;
+
+/// Create a copy of NotificationEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? limit = null,}) {
+  return _then(LoadInitialNotificationsEvent(
+limit: null == limit ? _self.limit : limit // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
 }
 
-/// @nodoc
-class __$$RefreshNotificationsEventImplCopyWithImpl<$Res>
-    extends _$NotificationEventCopyWithImpl<$Res,
-        _$RefreshNotificationsEventImpl>
-    implements _$$RefreshNotificationsEventImplCopyWith<$Res> {
-  __$$RefreshNotificationsEventImplCopyWithImpl(
-      _$RefreshNotificationsEventImpl _value,
-      $Res Function(_$RefreshNotificationsEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of NotificationEvent
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$RefreshNotificationsEventImpl implements RefreshNotificationsEvent {
-  const _$RefreshNotificationsEventImpl();
 
-  @override
-  String toString() {
-    return 'NotificationEvent.refresh()';
-  }
+class LoadMoreNotificationsEvent implements NotificationEvent {
+  const LoadMoreNotificationsEvent({this.limit = 20});
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$RefreshNotificationsEventImpl);
-  }
+@JsonKey() final  int limit;
 
-  @override
-  int get hashCode => runtimeType.hashCode;
+/// Create a copy of NotificationEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LoadMoreNotificationsEventCopyWith<LoadMoreNotificationsEvent> get copyWith => _$LoadMoreNotificationsEventCopyWithImpl<LoadMoreNotificationsEvent>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int limit) loadInitial,
-    required TResult Function(int limit) loadMore,
-    required TResult Function() refresh,
-    required TResult Function() markAllAsRead,
-    required TResult Function(String notificationId) markAsRead,
-    required TResult Function(String notificationId) delete,
-    required TResult Function() loadUnreadCount,
-    required TResult Function() startWatching,
-    required TResult Function() stopWatching,
-    required TResult Function() newNotificationReceived,
-    required TResult Function() clearTransient,
-    required TResult Function(String notificationId, String actorId)
-        toggleFollowActor,
-  }) {
-    return refresh();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int limit)? loadInitial,
-    TResult? Function(int limit)? loadMore,
-    TResult? Function()? refresh,
-    TResult? Function()? markAllAsRead,
-    TResult? Function(String notificationId)? markAsRead,
-    TResult? Function(String notificationId)? delete,
-    TResult? Function()? loadUnreadCount,
-    TResult? Function()? startWatching,
-    TResult? Function()? stopWatching,
-    TResult? Function()? newNotificationReceived,
-    TResult? Function()? clearTransient,
-    TResult? Function(String notificationId, String actorId)? toggleFollowActor,
-  }) {
-    return refresh?.call();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int limit)? loadInitial,
-    TResult Function(int limit)? loadMore,
-    TResult Function()? refresh,
-    TResult Function()? markAllAsRead,
-    TResult Function(String notificationId)? markAsRead,
-    TResult Function(String notificationId)? delete,
-    TResult Function()? loadUnreadCount,
-    TResult Function()? startWatching,
-    TResult Function()? stopWatching,
-    TResult Function()? newNotificationReceived,
-    TResult Function()? clearTransient,
-    TResult Function(String notificationId, String actorId)? toggleFollowActor,
-    required TResult orElse(),
-  }) {
-    if (refresh != null) {
-      return refresh();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadInitialNotificationsEvent value) loadInitial,
-    required TResult Function(LoadMoreNotificationsEvent value) loadMore,
-    required TResult Function(RefreshNotificationsEvent value) refresh,
-    required TResult Function(MarkAllNotificationsReadEvent value)
-        markAllAsRead,
-    required TResult Function(MarkNotificationReadEvent value) markAsRead,
-    required TResult Function(DeleteNotificationEvent value) delete,
-    required TResult Function(LoadUnreadCountEvent value) loadUnreadCount,
-    required TResult Function(StartWatchingNotificationsEvent value)
-        startWatching,
-    required TResult Function(StopWatchingNotificationsEvent value)
-        stopWatching,
-    required TResult Function(NewNotificationReceivedEvent value)
-        newNotificationReceived,
-    required TResult Function(ClearTransientEvent value) clearTransient,
-    required TResult Function(ToggleFollowActorEvent value) toggleFollowActor,
-  }) {
-    return refresh(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadInitialNotificationsEvent value)? loadInitial,
-    TResult? Function(LoadMoreNotificationsEvent value)? loadMore,
-    TResult? Function(RefreshNotificationsEvent value)? refresh,
-    TResult? Function(MarkAllNotificationsReadEvent value)? markAllAsRead,
-    TResult? Function(MarkNotificationReadEvent value)? markAsRead,
-    TResult? Function(DeleteNotificationEvent value)? delete,
-    TResult? Function(LoadUnreadCountEvent value)? loadUnreadCount,
-    TResult? Function(StartWatchingNotificationsEvent value)? startWatching,
-    TResult? Function(StopWatchingNotificationsEvent value)? stopWatching,
-    TResult? Function(NewNotificationReceivedEvent value)?
-        newNotificationReceived,
-    TResult? Function(ClearTransientEvent value)? clearTransient,
-    TResult? Function(ToggleFollowActorEvent value)? toggleFollowActor,
-  }) {
-    return refresh?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadInitialNotificationsEvent value)? loadInitial,
-    TResult Function(LoadMoreNotificationsEvent value)? loadMore,
-    TResult Function(RefreshNotificationsEvent value)? refresh,
-    TResult Function(MarkAllNotificationsReadEvent value)? markAllAsRead,
-    TResult Function(MarkNotificationReadEvent value)? markAsRead,
-    TResult Function(DeleteNotificationEvent value)? delete,
-    TResult Function(LoadUnreadCountEvent value)? loadUnreadCount,
-    TResult Function(StartWatchingNotificationsEvent value)? startWatching,
-    TResult Function(StopWatchingNotificationsEvent value)? stopWatching,
-    TResult Function(NewNotificationReceivedEvent value)?
-        newNotificationReceived,
-    TResult Function(ClearTransientEvent value)? clearTransient,
-    TResult Function(ToggleFollowActorEvent value)? toggleFollowActor,
-    required TResult orElse(),
-  }) {
-    if (refresh != null) {
-      return refresh(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadMoreNotificationsEvent&&(identical(other.limit, limit) || other.limit == limit));
 }
 
-abstract class RefreshNotificationsEvent implements NotificationEvent {
-  const factory RefreshNotificationsEvent() = _$RefreshNotificationsEventImpl;
+
+@override
+int get hashCode => Object.hash(runtimeType,limit);
+
+@override
+String toString() {
+  return 'NotificationEvent.loadMore(limit: $limit)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$MarkAllNotificationsReadEventImplCopyWith<$Res> {
-  factory _$$MarkAllNotificationsReadEventImplCopyWith(
-          _$MarkAllNotificationsReadEventImpl value,
-          $Res Function(_$MarkAllNotificationsReadEventImpl) then) =
-      __$$MarkAllNotificationsReadEventImplCopyWithImpl<$Res>;
+abstract mixin class $LoadMoreNotificationsEventCopyWith<$Res> implements $NotificationEventCopyWith<$Res> {
+  factory $LoadMoreNotificationsEventCopyWith(LoadMoreNotificationsEvent value, $Res Function(LoadMoreNotificationsEvent) _then) = _$LoadMoreNotificationsEventCopyWithImpl;
+@useResult
+$Res call({
+ int limit
+});
+
+
+
+
+}
+/// @nodoc
+class _$LoadMoreNotificationsEventCopyWithImpl<$Res>
+    implements $LoadMoreNotificationsEventCopyWith<$Res> {
+  _$LoadMoreNotificationsEventCopyWithImpl(this._self, this._then);
+
+  final LoadMoreNotificationsEvent _self;
+  final $Res Function(LoadMoreNotificationsEvent) _then;
+
+/// Create a copy of NotificationEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? limit = null,}) {
+  return _then(LoadMoreNotificationsEvent(
+limit: null == limit ? _self.limit : limit // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
 }
 
-/// @nodoc
-class __$$MarkAllNotificationsReadEventImplCopyWithImpl<$Res>
-    extends _$NotificationEventCopyWithImpl<$Res,
-        _$MarkAllNotificationsReadEventImpl>
-    implements _$$MarkAllNotificationsReadEventImplCopyWith<$Res> {
-  __$$MarkAllNotificationsReadEventImplCopyWithImpl(
-      _$MarkAllNotificationsReadEventImpl _value,
-      $Res Function(_$MarkAllNotificationsReadEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of NotificationEvent
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$MarkAllNotificationsReadEventImpl
-    implements MarkAllNotificationsReadEvent {
-  const _$MarkAllNotificationsReadEventImpl();
 
-  @override
-  String toString() {
-    return 'NotificationEvent.markAllAsRead()';
-  }
+class RefreshNotificationsEvent implements NotificationEvent {
+  const RefreshNotificationsEvent();
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$MarkAllNotificationsReadEventImpl);
-  }
 
-  @override
-  int get hashCode => runtimeType.hashCode;
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int limit) loadInitial,
-    required TResult Function(int limit) loadMore,
-    required TResult Function() refresh,
-    required TResult Function() markAllAsRead,
-    required TResult Function(String notificationId) markAsRead,
-    required TResult Function(String notificationId) delete,
-    required TResult Function() loadUnreadCount,
-    required TResult Function() startWatching,
-    required TResult Function() stopWatching,
-    required TResult Function() newNotificationReceived,
-    required TResult Function() clearTransient,
-    required TResult Function(String notificationId, String actorId)
-        toggleFollowActor,
-  }) {
-    return markAllAsRead();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int limit)? loadInitial,
-    TResult? Function(int limit)? loadMore,
-    TResult? Function()? refresh,
-    TResult? Function()? markAllAsRead,
-    TResult? Function(String notificationId)? markAsRead,
-    TResult? Function(String notificationId)? delete,
-    TResult? Function()? loadUnreadCount,
-    TResult? Function()? startWatching,
-    TResult? Function()? stopWatching,
-    TResult? Function()? newNotificationReceived,
-    TResult? Function()? clearTransient,
-    TResult? Function(String notificationId, String actorId)? toggleFollowActor,
-  }) {
-    return markAllAsRead?.call();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int limit)? loadInitial,
-    TResult Function(int limit)? loadMore,
-    TResult Function()? refresh,
-    TResult Function()? markAllAsRead,
-    TResult Function(String notificationId)? markAsRead,
-    TResult Function(String notificationId)? delete,
-    TResult Function()? loadUnreadCount,
-    TResult Function()? startWatching,
-    TResult Function()? stopWatching,
-    TResult Function()? newNotificationReceived,
-    TResult Function()? clearTransient,
-    TResult Function(String notificationId, String actorId)? toggleFollowActor,
-    required TResult orElse(),
-  }) {
-    if (markAllAsRead != null) {
-      return markAllAsRead();
-    }
-    return orElse();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadInitialNotificationsEvent value) loadInitial,
-    required TResult Function(LoadMoreNotificationsEvent value) loadMore,
-    required TResult Function(RefreshNotificationsEvent value) refresh,
-    required TResult Function(MarkAllNotificationsReadEvent value)
-        markAllAsRead,
-    required TResult Function(MarkNotificationReadEvent value) markAsRead,
-    required TResult Function(DeleteNotificationEvent value) delete,
-    required TResult Function(LoadUnreadCountEvent value) loadUnreadCount,
-    required TResult Function(StartWatchingNotificationsEvent value)
-        startWatching,
-    required TResult Function(StopWatchingNotificationsEvent value)
-        stopWatching,
-    required TResult Function(NewNotificationReceivedEvent value)
-        newNotificationReceived,
-    required TResult Function(ClearTransientEvent value) clearTransient,
-    required TResult Function(ToggleFollowActorEvent value) toggleFollowActor,
-  }) {
-    return markAllAsRead(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadInitialNotificationsEvent value)? loadInitial,
-    TResult? Function(LoadMoreNotificationsEvent value)? loadMore,
-    TResult? Function(RefreshNotificationsEvent value)? refresh,
-    TResult? Function(MarkAllNotificationsReadEvent value)? markAllAsRead,
-    TResult? Function(MarkNotificationReadEvent value)? markAsRead,
-    TResult? Function(DeleteNotificationEvent value)? delete,
-    TResult? Function(LoadUnreadCountEvent value)? loadUnreadCount,
-    TResult? Function(StartWatchingNotificationsEvent value)? startWatching,
-    TResult? Function(StopWatchingNotificationsEvent value)? stopWatching,
-    TResult? Function(NewNotificationReceivedEvent value)?
-        newNotificationReceived,
-    TResult? Function(ClearTransientEvent value)? clearTransient,
-    TResult? Function(ToggleFollowActorEvent value)? toggleFollowActor,
-  }) {
-    return markAllAsRead?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadInitialNotificationsEvent value)? loadInitial,
-    TResult Function(LoadMoreNotificationsEvent value)? loadMore,
-    TResult Function(RefreshNotificationsEvent value)? refresh,
-    TResult Function(MarkAllNotificationsReadEvent value)? markAllAsRead,
-    TResult Function(MarkNotificationReadEvent value)? markAsRead,
-    TResult Function(DeleteNotificationEvent value)? delete,
-    TResult Function(LoadUnreadCountEvent value)? loadUnreadCount,
-    TResult Function(StartWatchingNotificationsEvent value)? startWatching,
-    TResult Function(StopWatchingNotificationsEvent value)? stopWatching,
-    TResult Function(NewNotificationReceivedEvent value)?
-        newNotificationReceived,
-    TResult Function(ClearTransientEvent value)? clearTransient,
-    TResult Function(ToggleFollowActorEvent value)? toggleFollowActor,
-    required TResult orElse(),
-  }) {
-    if (markAllAsRead != null) {
-      return markAllAsRead(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RefreshNotificationsEvent);
 }
 
-abstract class MarkAllNotificationsReadEvent implements NotificationEvent {
-  const factory MarkAllNotificationsReadEvent() =
-      _$MarkAllNotificationsReadEventImpl;
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'NotificationEvent.refresh()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class MarkAllNotificationsReadEvent implements NotificationEvent {
+  const MarkAllNotificationsReadEvent();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MarkAllNotificationsReadEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'NotificationEvent.markAllAsRead()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class MarkNotificationReadEvent implements NotificationEvent {
+  const MarkNotificationReadEvent(this.notificationId);
+  
+
+ final  String notificationId;
+
+/// Create a copy of NotificationEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$MarkNotificationReadEventCopyWith<MarkNotificationReadEvent> get copyWith => _$MarkNotificationReadEventCopyWithImpl<MarkNotificationReadEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MarkNotificationReadEvent&&(identical(other.notificationId, notificationId) || other.notificationId == notificationId));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,notificationId);
+
+@override
+String toString() {
+  return 'NotificationEvent.markAsRead(notificationId: $notificationId)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$MarkNotificationReadEventImplCopyWith<$Res> {
-  factory _$$MarkNotificationReadEventImplCopyWith(
-          _$MarkNotificationReadEventImpl value,
-          $Res Function(_$MarkNotificationReadEventImpl) then) =
-      __$$MarkNotificationReadEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String notificationId});
+abstract mixin class $MarkNotificationReadEventCopyWith<$Res> implements $NotificationEventCopyWith<$Res> {
+  factory $MarkNotificationReadEventCopyWith(MarkNotificationReadEvent value, $Res Function(MarkNotificationReadEvent) _then) = _$MarkNotificationReadEventCopyWithImpl;
+@useResult
+$Res call({
+ String notificationId
+});
+
+
+
+
+}
+/// @nodoc
+class _$MarkNotificationReadEventCopyWithImpl<$Res>
+    implements $MarkNotificationReadEventCopyWith<$Res> {
+  _$MarkNotificationReadEventCopyWithImpl(this._self, this._then);
+
+  final MarkNotificationReadEvent _self;
+  final $Res Function(MarkNotificationReadEvent) _then;
+
+/// Create a copy of NotificationEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? notificationId = null,}) {
+  return _then(MarkNotificationReadEvent(
+null == notificationId ? _self.notificationId : notificationId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-class __$$MarkNotificationReadEventImplCopyWithImpl<$Res>
-    extends _$NotificationEventCopyWithImpl<$Res,
-        _$MarkNotificationReadEventImpl>
-    implements _$$MarkNotificationReadEventImplCopyWith<$Res> {
-  __$$MarkNotificationReadEventImplCopyWithImpl(
-      _$MarkNotificationReadEventImpl _value,
-      $Res Function(_$MarkNotificationReadEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of NotificationEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? notificationId = null,
-  }) {
-    return _then(_$MarkNotificationReadEventImpl(
-      null == notificationId
-          ? _value.notificationId
-          : notificationId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$MarkNotificationReadEventImpl implements MarkNotificationReadEvent {
-  const _$MarkNotificationReadEventImpl(this.notificationId);
 
-  @override
-  final String notificationId;
+class DeleteNotificationEvent implements NotificationEvent {
+  const DeleteNotificationEvent(this.notificationId);
+  
 
-  @override
-  String toString() {
-    return 'NotificationEvent.markAsRead(notificationId: $notificationId)';
-  }
+ final  String notificationId;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$MarkNotificationReadEventImpl &&
-            (identical(other.notificationId, notificationId) ||
-                other.notificationId == notificationId));
-  }
+/// Create a copy of NotificationEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$DeleteNotificationEventCopyWith<DeleteNotificationEvent> get copyWith => _$DeleteNotificationEventCopyWithImpl<DeleteNotificationEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, notificationId);
 
-  /// Create a copy of NotificationEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$MarkNotificationReadEventImplCopyWith<_$MarkNotificationReadEventImpl>
-      get copyWith => __$$MarkNotificationReadEventImplCopyWithImpl<
-          _$MarkNotificationReadEventImpl>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int limit) loadInitial,
-    required TResult Function(int limit) loadMore,
-    required TResult Function() refresh,
-    required TResult Function() markAllAsRead,
-    required TResult Function(String notificationId) markAsRead,
-    required TResult Function(String notificationId) delete,
-    required TResult Function() loadUnreadCount,
-    required TResult Function() startWatching,
-    required TResult Function() stopWatching,
-    required TResult Function() newNotificationReceived,
-    required TResult Function() clearTransient,
-    required TResult Function(String notificationId, String actorId)
-        toggleFollowActor,
-  }) {
-    return markAsRead(notificationId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int limit)? loadInitial,
-    TResult? Function(int limit)? loadMore,
-    TResult? Function()? refresh,
-    TResult? Function()? markAllAsRead,
-    TResult? Function(String notificationId)? markAsRead,
-    TResult? Function(String notificationId)? delete,
-    TResult? Function()? loadUnreadCount,
-    TResult? Function()? startWatching,
-    TResult? Function()? stopWatching,
-    TResult? Function()? newNotificationReceived,
-    TResult? Function()? clearTransient,
-    TResult? Function(String notificationId, String actorId)? toggleFollowActor,
-  }) {
-    return markAsRead?.call(notificationId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int limit)? loadInitial,
-    TResult Function(int limit)? loadMore,
-    TResult Function()? refresh,
-    TResult Function()? markAllAsRead,
-    TResult Function(String notificationId)? markAsRead,
-    TResult Function(String notificationId)? delete,
-    TResult Function()? loadUnreadCount,
-    TResult Function()? startWatching,
-    TResult Function()? stopWatching,
-    TResult Function()? newNotificationReceived,
-    TResult Function()? clearTransient,
-    TResult Function(String notificationId, String actorId)? toggleFollowActor,
-    required TResult orElse(),
-  }) {
-    if (markAsRead != null) {
-      return markAsRead(notificationId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadInitialNotificationsEvent value) loadInitial,
-    required TResult Function(LoadMoreNotificationsEvent value) loadMore,
-    required TResult Function(RefreshNotificationsEvent value) refresh,
-    required TResult Function(MarkAllNotificationsReadEvent value)
-        markAllAsRead,
-    required TResult Function(MarkNotificationReadEvent value) markAsRead,
-    required TResult Function(DeleteNotificationEvent value) delete,
-    required TResult Function(LoadUnreadCountEvent value) loadUnreadCount,
-    required TResult Function(StartWatchingNotificationsEvent value)
-        startWatching,
-    required TResult Function(StopWatchingNotificationsEvent value)
-        stopWatching,
-    required TResult Function(NewNotificationReceivedEvent value)
-        newNotificationReceived,
-    required TResult Function(ClearTransientEvent value) clearTransient,
-    required TResult Function(ToggleFollowActorEvent value) toggleFollowActor,
-  }) {
-    return markAsRead(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadInitialNotificationsEvent value)? loadInitial,
-    TResult? Function(LoadMoreNotificationsEvent value)? loadMore,
-    TResult? Function(RefreshNotificationsEvent value)? refresh,
-    TResult? Function(MarkAllNotificationsReadEvent value)? markAllAsRead,
-    TResult? Function(MarkNotificationReadEvent value)? markAsRead,
-    TResult? Function(DeleteNotificationEvent value)? delete,
-    TResult? Function(LoadUnreadCountEvent value)? loadUnreadCount,
-    TResult? Function(StartWatchingNotificationsEvent value)? startWatching,
-    TResult? Function(StopWatchingNotificationsEvent value)? stopWatching,
-    TResult? Function(NewNotificationReceivedEvent value)?
-        newNotificationReceived,
-    TResult? Function(ClearTransientEvent value)? clearTransient,
-    TResult? Function(ToggleFollowActorEvent value)? toggleFollowActor,
-  }) {
-    return markAsRead?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadInitialNotificationsEvent value)? loadInitial,
-    TResult Function(LoadMoreNotificationsEvent value)? loadMore,
-    TResult Function(RefreshNotificationsEvent value)? refresh,
-    TResult Function(MarkAllNotificationsReadEvent value)? markAllAsRead,
-    TResult Function(MarkNotificationReadEvent value)? markAsRead,
-    TResult Function(DeleteNotificationEvent value)? delete,
-    TResult Function(LoadUnreadCountEvent value)? loadUnreadCount,
-    TResult Function(StartWatchingNotificationsEvent value)? startWatching,
-    TResult Function(StopWatchingNotificationsEvent value)? stopWatching,
-    TResult Function(NewNotificationReceivedEvent value)?
-        newNotificationReceived,
-    TResult Function(ClearTransientEvent value)? clearTransient,
-    TResult Function(ToggleFollowActorEvent value)? toggleFollowActor,
-    required TResult orElse(),
-  }) {
-    if (markAsRead != null) {
-      return markAsRead(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DeleteNotificationEvent&&(identical(other.notificationId, notificationId) || other.notificationId == notificationId));
 }
 
-abstract class MarkNotificationReadEvent implements NotificationEvent {
-  const factory MarkNotificationReadEvent(final String notificationId) =
-      _$MarkNotificationReadEventImpl;
 
-  String get notificationId;
+@override
+int get hashCode => Object.hash(runtimeType,notificationId);
 
-  /// Create a copy of NotificationEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MarkNotificationReadEventImplCopyWith<_$MarkNotificationReadEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'NotificationEvent.delete(notificationId: $notificationId)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$DeleteNotificationEventImplCopyWith<$Res> {
-  factory _$$DeleteNotificationEventImplCopyWith(
-          _$DeleteNotificationEventImpl value,
-          $Res Function(_$DeleteNotificationEventImpl) then) =
-      __$$DeleteNotificationEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String notificationId});
+abstract mixin class $DeleteNotificationEventCopyWith<$Res> implements $NotificationEventCopyWith<$Res> {
+  factory $DeleteNotificationEventCopyWith(DeleteNotificationEvent value, $Res Function(DeleteNotificationEvent) _then) = _$DeleteNotificationEventCopyWithImpl;
+@useResult
+$Res call({
+ String notificationId
+});
+
+
+
+
+}
+/// @nodoc
+class _$DeleteNotificationEventCopyWithImpl<$Res>
+    implements $DeleteNotificationEventCopyWith<$Res> {
+  _$DeleteNotificationEventCopyWithImpl(this._self, this._then);
+
+  final DeleteNotificationEvent _self;
+  final $Res Function(DeleteNotificationEvent) _then;
+
+/// Create a copy of NotificationEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? notificationId = null,}) {
+  return _then(DeleteNotificationEvent(
+null == notificationId ? _self.notificationId : notificationId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-class __$$DeleteNotificationEventImplCopyWithImpl<$Res>
-    extends _$NotificationEventCopyWithImpl<$Res, _$DeleteNotificationEventImpl>
-    implements _$$DeleteNotificationEventImplCopyWith<$Res> {
-  __$$DeleteNotificationEventImplCopyWithImpl(
-      _$DeleteNotificationEventImpl _value,
-      $Res Function(_$DeleteNotificationEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of NotificationEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? notificationId = null,
-  }) {
-    return _then(_$DeleteNotificationEventImpl(
-      null == notificationId
-          ? _value.notificationId
-          : notificationId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$DeleteNotificationEventImpl implements DeleteNotificationEvent {
-  const _$DeleteNotificationEventImpl(this.notificationId);
 
-  @override
-  final String notificationId;
+class LoadUnreadCountEvent implements NotificationEvent {
+  const LoadUnreadCountEvent();
+  
 
-  @override
-  String toString() {
-    return 'NotificationEvent.delete(notificationId: $notificationId)';
-  }
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$DeleteNotificationEventImpl &&
-            (identical(other.notificationId, notificationId) ||
-                other.notificationId == notificationId));
-  }
 
-  @override
-  int get hashCode => Object.hash(runtimeType, notificationId);
 
-  /// Create a copy of NotificationEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$DeleteNotificationEventImplCopyWith<_$DeleteNotificationEventImpl>
-      get copyWith => __$$DeleteNotificationEventImplCopyWithImpl<
-          _$DeleteNotificationEventImpl>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int limit) loadInitial,
-    required TResult Function(int limit) loadMore,
-    required TResult Function() refresh,
-    required TResult Function() markAllAsRead,
-    required TResult Function(String notificationId) markAsRead,
-    required TResult Function(String notificationId) delete,
-    required TResult Function() loadUnreadCount,
-    required TResult Function() startWatching,
-    required TResult Function() stopWatching,
-    required TResult Function() newNotificationReceived,
-    required TResult Function() clearTransient,
-    required TResult Function(String notificationId, String actorId)
-        toggleFollowActor,
-  }) {
-    return delete(notificationId);
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int limit)? loadInitial,
-    TResult? Function(int limit)? loadMore,
-    TResult? Function()? refresh,
-    TResult? Function()? markAllAsRead,
-    TResult? Function(String notificationId)? markAsRead,
-    TResult? Function(String notificationId)? delete,
-    TResult? Function()? loadUnreadCount,
-    TResult? Function()? startWatching,
-    TResult? Function()? stopWatching,
-    TResult? Function()? newNotificationReceived,
-    TResult? Function()? clearTransient,
-    TResult? Function(String notificationId, String actorId)? toggleFollowActor,
-  }) {
-    return delete?.call(notificationId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int limit)? loadInitial,
-    TResult Function(int limit)? loadMore,
-    TResult Function()? refresh,
-    TResult Function()? markAllAsRead,
-    TResult Function(String notificationId)? markAsRead,
-    TResult Function(String notificationId)? delete,
-    TResult Function()? loadUnreadCount,
-    TResult Function()? startWatching,
-    TResult Function()? stopWatching,
-    TResult Function()? newNotificationReceived,
-    TResult Function()? clearTransient,
-    TResult Function(String notificationId, String actorId)? toggleFollowActor,
-    required TResult orElse(),
-  }) {
-    if (delete != null) {
-      return delete(notificationId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadInitialNotificationsEvent value) loadInitial,
-    required TResult Function(LoadMoreNotificationsEvent value) loadMore,
-    required TResult Function(RefreshNotificationsEvent value) refresh,
-    required TResult Function(MarkAllNotificationsReadEvent value)
-        markAllAsRead,
-    required TResult Function(MarkNotificationReadEvent value) markAsRead,
-    required TResult Function(DeleteNotificationEvent value) delete,
-    required TResult Function(LoadUnreadCountEvent value) loadUnreadCount,
-    required TResult Function(StartWatchingNotificationsEvent value)
-        startWatching,
-    required TResult Function(StopWatchingNotificationsEvent value)
-        stopWatching,
-    required TResult Function(NewNotificationReceivedEvent value)
-        newNotificationReceived,
-    required TResult Function(ClearTransientEvent value) clearTransient,
-    required TResult Function(ToggleFollowActorEvent value) toggleFollowActor,
-  }) {
-    return delete(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadInitialNotificationsEvent value)? loadInitial,
-    TResult? Function(LoadMoreNotificationsEvent value)? loadMore,
-    TResult? Function(RefreshNotificationsEvent value)? refresh,
-    TResult? Function(MarkAllNotificationsReadEvent value)? markAllAsRead,
-    TResult? Function(MarkNotificationReadEvent value)? markAsRead,
-    TResult? Function(DeleteNotificationEvent value)? delete,
-    TResult? Function(LoadUnreadCountEvent value)? loadUnreadCount,
-    TResult? Function(StartWatchingNotificationsEvent value)? startWatching,
-    TResult? Function(StopWatchingNotificationsEvent value)? stopWatching,
-    TResult? Function(NewNotificationReceivedEvent value)?
-        newNotificationReceived,
-    TResult? Function(ClearTransientEvent value)? clearTransient,
-    TResult? Function(ToggleFollowActorEvent value)? toggleFollowActor,
-  }) {
-    return delete?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadInitialNotificationsEvent value)? loadInitial,
-    TResult Function(LoadMoreNotificationsEvent value)? loadMore,
-    TResult Function(RefreshNotificationsEvent value)? refresh,
-    TResult Function(MarkAllNotificationsReadEvent value)? markAllAsRead,
-    TResult Function(MarkNotificationReadEvent value)? markAsRead,
-    TResult Function(DeleteNotificationEvent value)? delete,
-    TResult Function(LoadUnreadCountEvent value)? loadUnreadCount,
-    TResult Function(StartWatchingNotificationsEvent value)? startWatching,
-    TResult Function(StopWatchingNotificationsEvent value)? stopWatching,
-    TResult Function(NewNotificationReceivedEvent value)?
-        newNotificationReceived,
-    TResult Function(ClearTransientEvent value)? clearTransient,
-    TResult Function(ToggleFollowActorEvent value)? toggleFollowActor,
-    required TResult orElse(),
-  }) {
-    if (delete != null) {
-      return delete(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadUnreadCountEvent);
 }
 
-abstract class DeleteNotificationEvent implements NotificationEvent {
-  const factory DeleteNotificationEvent(final String notificationId) =
-      _$DeleteNotificationEventImpl;
 
-  String get notificationId;
+@override
+int get hashCode => runtimeType.hashCode;
 
-  /// Create a copy of NotificationEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DeleteNotificationEventImplCopyWith<_$DeleteNotificationEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'NotificationEvent.loadUnreadCount()';
 }
 
-/// @nodoc
-abstract class _$$LoadUnreadCountEventImplCopyWith<$Res> {
-  factory _$$LoadUnreadCountEventImplCopyWith(_$LoadUnreadCountEventImpl value,
-          $Res Function(_$LoadUnreadCountEventImpl) then) =
-      __$$LoadUnreadCountEventImplCopyWithImpl<$Res>;
+
 }
 
-/// @nodoc
-class __$$LoadUnreadCountEventImplCopyWithImpl<$Res>
-    extends _$NotificationEventCopyWithImpl<$Res, _$LoadUnreadCountEventImpl>
-    implements _$$LoadUnreadCountEventImplCopyWith<$Res> {
-  __$$LoadUnreadCountEventImplCopyWithImpl(_$LoadUnreadCountEventImpl _value,
-      $Res Function(_$LoadUnreadCountEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of NotificationEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
+
 
 /// @nodoc
 
-class _$LoadUnreadCountEventImpl implements LoadUnreadCountEvent {
-  const _$LoadUnreadCountEventImpl();
 
-  @override
-  String toString() {
-    return 'NotificationEvent.loadUnreadCount()';
-  }
+class StartWatchingNotificationsEvent implements NotificationEvent {
+  const StartWatchingNotificationsEvent();
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadUnreadCountEventImpl);
-  }
 
-  @override
-  int get hashCode => runtimeType.hashCode;
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int limit) loadInitial,
-    required TResult Function(int limit) loadMore,
-    required TResult Function() refresh,
-    required TResult Function() markAllAsRead,
-    required TResult Function(String notificationId) markAsRead,
-    required TResult Function(String notificationId) delete,
-    required TResult Function() loadUnreadCount,
-    required TResult Function() startWatching,
-    required TResult Function() stopWatching,
-    required TResult Function() newNotificationReceived,
-    required TResult Function() clearTransient,
-    required TResult Function(String notificationId, String actorId)
-        toggleFollowActor,
-  }) {
-    return loadUnreadCount();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int limit)? loadInitial,
-    TResult? Function(int limit)? loadMore,
-    TResult? Function()? refresh,
-    TResult? Function()? markAllAsRead,
-    TResult? Function(String notificationId)? markAsRead,
-    TResult? Function(String notificationId)? delete,
-    TResult? Function()? loadUnreadCount,
-    TResult? Function()? startWatching,
-    TResult? Function()? stopWatching,
-    TResult? Function()? newNotificationReceived,
-    TResult? Function()? clearTransient,
-    TResult? Function(String notificationId, String actorId)? toggleFollowActor,
-  }) {
-    return loadUnreadCount?.call();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int limit)? loadInitial,
-    TResult Function(int limit)? loadMore,
-    TResult Function()? refresh,
-    TResult Function()? markAllAsRead,
-    TResult Function(String notificationId)? markAsRead,
-    TResult Function(String notificationId)? delete,
-    TResult Function()? loadUnreadCount,
-    TResult Function()? startWatching,
-    TResult Function()? stopWatching,
-    TResult Function()? newNotificationReceived,
-    TResult Function()? clearTransient,
-    TResult Function(String notificationId, String actorId)? toggleFollowActor,
-    required TResult orElse(),
-  }) {
-    if (loadUnreadCount != null) {
-      return loadUnreadCount();
-    }
-    return orElse();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadInitialNotificationsEvent value) loadInitial,
-    required TResult Function(LoadMoreNotificationsEvent value) loadMore,
-    required TResult Function(RefreshNotificationsEvent value) refresh,
-    required TResult Function(MarkAllNotificationsReadEvent value)
-        markAllAsRead,
-    required TResult Function(MarkNotificationReadEvent value) markAsRead,
-    required TResult Function(DeleteNotificationEvent value) delete,
-    required TResult Function(LoadUnreadCountEvent value) loadUnreadCount,
-    required TResult Function(StartWatchingNotificationsEvent value)
-        startWatching,
-    required TResult Function(StopWatchingNotificationsEvent value)
-        stopWatching,
-    required TResult Function(NewNotificationReceivedEvent value)
-        newNotificationReceived,
-    required TResult Function(ClearTransientEvent value) clearTransient,
-    required TResult Function(ToggleFollowActorEvent value) toggleFollowActor,
-  }) {
-    return loadUnreadCount(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadInitialNotificationsEvent value)? loadInitial,
-    TResult? Function(LoadMoreNotificationsEvent value)? loadMore,
-    TResult? Function(RefreshNotificationsEvent value)? refresh,
-    TResult? Function(MarkAllNotificationsReadEvent value)? markAllAsRead,
-    TResult? Function(MarkNotificationReadEvent value)? markAsRead,
-    TResult? Function(DeleteNotificationEvent value)? delete,
-    TResult? Function(LoadUnreadCountEvent value)? loadUnreadCount,
-    TResult? Function(StartWatchingNotificationsEvent value)? startWatching,
-    TResult? Function(StopWatchingNotificationsEvent value)? stopWatching,
-    TResult? Function(NewNotificationReceivedEvent value)?
-        newNotificationReceived,
-    TResult? Function(ClearTransientEvent value)? clearTransient,
-    TResult? Function(ToggleFollowActorEvent value)? toggleFollowActor,
-  }) {
-    return loadUnreadCount?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadInitialNotificationsEvent value)? loadInitial,
-    TResult Function(LoadMoreNotificationsEvent value)? loadMore,
-    TResult Function(RefreshNotificationsEvent value)? refresh,
-    TResult Function(MarkAllNotificationsReadEvent value)? markAllAsRead,
-    TResult Function(MarkNotificationReadEvent value)? markAsRead,
-    TResult Function(DeleteNotificationEvent value)? delete,
-    TResult Function(LoadUnreadCountEvent value)? loadUnreadCount,
-    TResult Function(StartWatchingNotificationsEvent value)? startWatching,
-    TResult Function(StopWatchingNotificationsEvent value)? stopWatching,
-    TResult Function(NewNotificationReceivedEvent value)?
-        newNotificationReceived,
-    TResult Function(ClearTransientEvent value)? clearTransient,
-    TResult Function(ToggleFollowActorEvent value)? toggleFollowActor,
-    required TResult orElse(),
-  }) {
-    if (loadUnreadCount != null) {
-      return loadUnreadCount(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StartWatchingNotificationsEvent);
 }
 
-abstract class LoadUnreadCountEvent implements NotificationEvent {
-  const factory LoadUnreadCountEvent() = _$LoadUnreadCountEventImpl;
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'NotificationEvent.startWatching()';
 }
 
-/// @nodoc
-abstract class _$$StartWatchingNotificationsEventImplCopyWith<$Res> {
-  factory _$$StartWatchingNotificationsEventImplCopyWith(
-          _$StartWatchingNotificationsEventImpl value,
-          $Res Function(_$StartWatchingNotificationsEventImpl) then) =
-      __$$StartWatchingNotificationsEventImplCopyWithImpl<$Res>;
+
 }
 
-/// @nodoc
-class __$$StartWatchingNotificationsEventImplCopyWithImpl<$Res>
-    extends _$NotificationEventCopyWithImpl<$Res,
-        _$StartWatchingNotificationsEventImpl>
-    implements _$$StartWatchingNotificationsEventImplCopyWith<$Res> {
-  __$$StartWatchingNotificationsEventImplCopyWithImpl(
-      _$StartWatchingNotificationsEventImpl _value,
-      $Res Function(_$StartWatchingNotificationsEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of NotificationEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
+
 
 /// @nodoc
 
-class _$StartWatchingNotificationsEventImpl
-    implements StartWatchingNotificationsEvent {
-  const _$StartWatchingNotificationsEventImpl();
 
-  @override
-  String toString() {
-    return 'NotificationEvent.startWatching()';
-  }
+class StopWatchingNotificationsEvent implements NotificationEvent {
+  const StopWatchingNotificationsEvent();
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$StartWatchingNotificationsEventImpl);
-  }
 
-  @override
-  int get hashCode => runtimeType.hashCode;
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int limit) loadInitial,
-    required TResult Function(int limit) loadMore,
-    required TResult Function() refresh,
-    required TResult Function() markAllAsRead,
-    required TResult Function(String notificationId) markAsRead,
-    required TResult Function(String notificationId) delete,
-    required TResult Function() loadUnreadCount,
-    required TResult Function() startWatching,
-    required TResult Function() stopWatching,
-    required TResult Function() newNotificationReceived,
-    required TResult Function() clearTransient,
-    required TResult Function(String notificationId, String actorId)
-        toggleFollowActor,
-  }) {
-    return startWatching();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int limit)? loadInitial,
-    TResult? Function(int limit)? loadMore,
-    TResult? Function()? refresh,
-    TResult? Function()? markAllAsRead,
-    TResult? Function(String notificationId)? markAsRead,
-    TResult? Function(String notificationId)? delete,
-    TResult? Function()? loadUnreadCount,
-    TResult? Function()? startWatching,
-    TResult? Function()? stopWatching,
-    TResult? Function()? newNotificationReceived,
-    TResult? Function()? clearTransient,
-    TResult? Function(String notificationId, String actorId)? toggleFollowActor,
-  }) {
-    return startWatching?.call();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int limit)? loadInitial,
-    TResult Function(int limit)? loadMore,
-    TResult Function()? refresh,
-    TResult Function()? markAllAsRead,
-    TResult Function(String notificationId)? markAsRead,
-    TResult Function(String notificationId)? delete,
-    TResult Function()? loadUnreadCount,
-    TResult Function()? startWatching,
-    TResult Function()? stopWatching,
-    TResult Function()? newNotificationReceived,
-    TResult Function()? clearTransient,
-    TResult Function(String notificationId, String actorId)? toggleFollowActor,
-    required TResult orElse(),
-  }) {
-    if (startWatching != null) {
-      return startWatching();
-    }
-    return orElse();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadInitialNotificationsEvent value) loadInitial,
-    required TResult Function(LoadMoreNotificationsEvent value) loadMore,
-    required TResult Function(RefreshNotificationsEvent value) refresh,
-    required TResult Function(MarkAllNotificationsReadEvent value)
-        markAllAsRead,
-    required TResult Function(MarkNotificationReadEvent value) markAsRead,
-    required TResult Function(DeleteNotificationEvent value) delete,
-    required TResult Function(LoadUnreadCountEvent value) loadUnreadCount,
-    required TResult Function(StartWatchingNotificationsEvent value)
-        startWatching,
-    required TResult Function(StopWatchingNotificationsEvent value)
-        stopWatching,
-    required TResult Function(NewNotificationReceivedEvent value)
-        newNotificationReceived,
-    required TResult Function(ClearTransientEvent value) clearTransient,
-    required TResult Function(ToggleFollowActorEvent value) toggleFollowActor,
-  }) {
-    return startWatching(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadInitialNotificationsEvent value)? loadInitial,
-    TResult? Function(LoadMoreNotificationsEvent value)? loadMore,
-    TResult? Function(RefreshNotificationsEvent value)? refresh,
-    TResult? Function(MarkAllNotificationsReadEvent value)? markAllAsRead,
-    TResult? Function(MarkNotificationReadEvent value)? markAsRead,
-    TResult? Function(DeleteNotificationEvent value)? delete,
-    TResult? Function(LoadUnreadCountEvent value)? loadUnreadCount,
-    TResult? Function(StartWatchingNotificationsEvent value)? startWatching,
-    TResult? Function(StopWatchingNotificationsEvent value)? stopWatching,
-    TResult? Function(NewNotificationReceivedEvent value)?
-        newNotificationReceived,
-    TResult? Function(ClearTransientEvent value)? clearTransient,
-    TResult? Function(ToggleFollowActorEvent value)? toggleFollowActor,
-  }) {
-    return startWatching?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadInitialNotificationsEvent value)? loadInitial,
-    TResult Function(LoadMoreNotificationsEvent value)? loadMore,
-    TResult Function(RefreshNotificationsEvent value)? refresh,
-    TResult Function(MarkAllNotificationsReadEvent value)? markAllAsRead,
-    TResult Function(MarkNotificationReadEvent value)? markAsRead,
-    TResult Function(DeleteNotificationEvent value)? delete,
-    TResult Function(LoadUnreadCountEvent value)? loadUnreadCount,
-    TResult Function(StartWatchingNotificationsEvent value)? startWatching,
-    TResult Function(StopWatchingNotificationsEvent value)? stopWatching,
-    TResult Function(NewNotificationReceivedEvent value)?
-        newNotificationReceived,
-    TResult Function(ClearTransientEvent value)? clearTransient,
-    TResult Function(ToggleFollowActorEvent value)? toggleFollowActor,
-    required TResult orElse(),
-  }) {
-    if (startWatching != null) {
-      return startWatching(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StopWatchingNotificationsEvent);
 }
 
-abstract class StartWatchingNotificationsEvent implements NotificationEvent {
-  const factory StartWatchingNotificationsEvent() =
-      _$StartWatchingNotificationsEventImpl;
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'NotificationEvent.stopWatching()';
 }
 
-/// @nodoc
-abstract class _$$StopWatchingNotificationsEventImplCopyWith<$Res> {
-  factory _$$StopWatchingNotificationsEventImplCopyWith(
-          _$StopWatchingNotificationsEventImpl value,
-          $Res Function(_$StopWatchingNotificationsEventImpl) then) =
-      __$$StopWatchingNotificationsEventImplCopyWithImpl<$Res>;
+
 }
 
-/// @nodoc
-class __$$StopWatchingNotificationsEventImplCopyWithImpl<$Res>
-    extends _$NotificationEventCopyWithImpl<$Res,
-        _$StopWatchingNotificationsEventImpl>
-    implements _$$StopWatchingNotificationsEventImplCopyWith<$Res> {
-  __$$StopWatchingNotificationsEventImplCopyWithImpl(
-      _$StopWatchingNotificationsEventImpl _value,
-      $Res Function(_$StopWatchingNotificationsEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of NotificationEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
+
 
 /// @nodoc
 
-class _$StopWatchingNotificationsEventImpl
-    implements StopWatchingNotificationsEvent {
-  const _$StopWatchingNotificationsEventImpl();
 
-  @override
-  String toString() {
-    return 'NotificationEvent.stopWatching()';
-  }
+class NewNotificationReceivedEvent implements NotificationEvent {
+  const NewNotificationReceivedEvent();
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$StopWatchingNotificationsEventImpl);
-  }
 
-  @override
-  int get hashCode => runtimeType.hashCode;
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int limit) loadInitial,
-    required TResult Function(int limit) loadMore,
-    required TResult Function() refresh,
-    required TResult Function() markAllAsRead,
-    required TResult Function(String notificationId) markAsRead,
-    required TResult Function(String notificationId) delete,
-    required TResult Function() loadUnreadCount,
-    required TResult Function() startWatching,
-    required TResult Function() stopWatching,
-    required TResult Function() newNotificationReceived,
-    required TResult Function() clearTransient,
-    required TResult Function(String notificationId, String actorId)
-        toggleFollowActor,
-  }) {
-    return stopWatching();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int limit)? loadInitial,
-    TResult? Function(int limit)? loadMore,
-    TResult? Function()? refresh,
-    TResult? Function()? markAllAsRead,
-    TResult? Function(String notificationId)? markAsRead,
-    TResult? Function(String notificationId)? delete,
-    TResult? Function()? loadUnreadCount,
-    TResult? Function()? startWatching,
-    TResult? Function()? stopWatching,
-    TResult? Function()? newNotificationReceived,
-    TResult? Function()? clearTransient,
-    TResult? Function(String notificationId, String actorId)? toggleFollowActor,
-  }) {
-    return stopWatching?.call();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int limit)? loadInitial,
-    TResult Function(int limit)? loadMore,
-    TResult Function()? refresh,
-    TResult Function()? markAllAsRead,
-    TResult Function(String notificationId)? markAsRead,
-    TResult Function(String notificationId)? delete,
-    TResult Function()? loadUnreadCount,
-    TResult Function()? startWatching,
-    TResult Function()? stopWatching,
-    TResult Function()? newNotificationReceived,
-    TResult Function()? clearTransient,
-    TResult Function(String notificationId, String actorId)? toggleFollowActor,
-    required TResult orElse(),
-  }) {
-    if (stopWatching != null) {
-      return stopWatching();
-    }
-    return orElse();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadInitialNotificationsEvent value) loadInitial,
-    required TResult Function(LoadMoreNotificationsEvent value) loadMore,
-    required TResult Function(RefreshNotificationsEvent value) refresh,
-    required TResult Function(MarkAllNotificationsReadEvent value)
-        markAllAsRead,
-    required TResult Function(MarkNotificationReadEvent value) markAsRead,
-    required TResult Function(DeleteNotificationEvent value) delete,
-    required TResult Function(LoadUnreadCountEvent value) loadUnreadCount,
-    required TResult Function(StartWatchingNotificationsEvent value)
-        startWatching,
-    required TResult Function(StopWatchingNotificationsEvent value)
-        stopWatching,
-    required TResult Function(NewNotificationReceivedEvent value)
-        newNotificationReceived,
-    required TResult Function(ClearTransientEvent value) clearTransient,
-    required TResult Function(ToggleFollowActorEvent value) toggleFollowActor,
-  }) {
-    return stopWatching(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadInitialNotificationsEvent value)? loadInitial,
-    TResult? Function(LoadMoreNotificationsEvent value)? loadMore,
-    TResult? Function(RefreshNotificationsEvent value)? refresh,
-    TResult? Function(MarkAllNotificationsReadEvent value)? markAllAsRead,
-    TResult? Function(MarkNotificationReadEvent value)? markAsRead,
-    TResult? Function(DeleteNotificationEvent value)? delete,
-    TResult? Function(LoadUnreadCountEvent value)? loadUnreadCount,
-    TResult? Function(StartWatchingNotificationsEvent value)? startWatching,
-    TResult? Function(StopWatchingNotificationsEvent value)? stopWatching,
-    TResult? Function(NewNotificationReceivedEvent value)?
-        newNotificationReceived,
-    TResult? Function(ClearTransientEvent value)? clearTransient,
-    TResult? Function(ToggleFollowActorEvent value)? toggleFollowActor,
-  }) {
-    return stopWatching?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadInitialNotificationsEvent value)? loadInitial,
-    TResult Function(LoadMoreNotificationsEvent value)? loadMore,
-    TResult Function(RefreshNotificationsEvent value)? refresh,
-    TResult Function(MarkAllNotificationsReadEvent value)? markAllAsRead,
-    TResult Function(MarkNotificationReadEvent value)? markAsRead,
-    TResult Function(DeleteNotificationEvent value)? delete,
-    TResult Function(LoadUnreadCountEvent value)? loadUnreadCount,
-    TResult Function(StartWatchingNotificationsEvent value)? startWatching,
-    TResult Function(StopWatchingNotificationsEvent value)? stopWatching,
-    TResult Function(NewNotificationReceivedEvent value)?
-        newNotificationReceived,
-    TResult Function(ClearTransientEvent value)? clearTransient,
-    TResult Function(ToggleFollowActorEvent value)? toggleFollowActor,
-    required TResult orElse(),
-  }) {
-    if (stopWatching != null) {
-      return stopWatching(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NewNotificationReceivedEvent);
 }
 
-abstract class StopWatchingNotificationsEvent implements NotificationEvent {
-  const factory StopWatchingNotificationsEvent() =
-      _$StopWatchingNotificationsEventImpl;
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'NotificationEvent.newNotificationReceived()';
 }
 
-/// @nodoc
-abstract class _$$NewNotificationReceivedEventImplCopyWith<$Res> {
-  factory _$$NewNotificationReceivedEventImplCopyWith(
-          _$NewNotificationReceivedEventImpl value,
-          $Res Function(_$NewNotificationReceivedEventImpl) then) =
-      __$$NewNotificationReceivedEventImplCopyWithImpl<$Res>;
+
 }
 
-/// @nodoc
-class __$$NewNotificationReceivedEventImplCopyWithImpl<$Res>
-    extends _$NotificationEventCopyWithImpl<$Res,
-        _$NewNotificationReceivedEventImpl>
-    implements _$$NewNotificationReceivedEventImplCopyWith<$Res> {
-  __$$NewNotificationReceivedEventImplCopyWithImpl(
-      _$NewNotificationReceivedEventImpl _value,
-      $Res Function(_$NewNotificationReceivedEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of NotificationEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
+
 
 /// @nodoc
 
-class _$NewNotificationReceivedEventImpl
-    implements NewNotificationReceivedEvent {
-  const _$NewNotificationReceivedEventImpl();
 
-  @override
-  String toString() {
-    return 'NotificationEvent.newNotificationReceived()';
-  }
+class ClearTransientEvent implements NotificationEvent {
+  const ClearTransientEvent();
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$NewNotificationReceivedEventImpl);
-  }
 
-  @override
-  int get hashCode => runtimeType.hashCode;
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int limit) loadInitial,
-    required TResult Function(int limit) loadMore,
-    required TResult Function() refresh,
-    required TResult Function() markAllAsRead,
-    required TResult Function(String notificationId) markAsRead,
-    required TResult Function(String notificationId) delete,
-    required TResult Function() loadUnreadCount,
-    required TResult Function() startWatching,
-    required TResult Function() stopWatching,
-    required TResult Function() newNotificationReceived,
-    required TResult Function() clearTransient,
-    required TResult Function(String notificationId, String actorId)
-        toggleFollowActor,
-  }) {
-    return newNotificationReceived();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int limit)? loadInitial,
-    TResult? Function(int limit)? loadMore,
-    TResult? Function()? refresh,
-    TResult? Function()? markAllAsRead,
-    TResult? Function(String notificationId)? markAsRead,
-    TResult? Function(String notificationId)? delete,
-    TResult? Function()? loadUnreadCount,
-    TResult? Function()? startWatching,
-    TResult? Function()? stopWatching,
-    TResult? Function()? newNotificationReceived,
-    TResult? Function()? clearTransient,
-    TResult? Function(String notificationId, String actorId)? toggleFollowActor,
-  }) {
-    return newNotificationReceived?.call();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int limit)? loadInitial,
-    TResult Function(int limit)? loadMore,
-    TResult Function()? refresh,
-    TResult Function()? markAllAsRead,
-    TResult Function(String notificationId)? markAsRead,
-    TResult Function(String notificationId)? delete,
-    TResult Function()? loadUnreadCount,
-    TResult Function()? startWatching,
-    TResult Function()? stopWatching,
-    TResult Function()? newNotificationReceived,
-    TResult Function()? clearTransient,
-    TResult Function(String notificationId, String actorId)? toggleFollowActor,
-    required TResult orElse(),
-  }) {
-    if (newNotificationReceived != null) {
-      return newNotificationReceived();
-    }
-    return orElse();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadInitialNotificationsEvent value) loadInitial,
-    required TResult Function(LoadMoreNotificationsEvent value) loadMore,
-    required TResult Function(RefreshNotificationsEvent value) refresh,
-    required TResult Function(MarkAllNotificationsReadEvent value)
-        markAllAsRead,
-    required TResult Function(MarkNotificationReadEvent value) markAsRead,
-    required TResult Function(DeleteNotificationEvent value) delete,
-    required TResult Function(LoadUnreadCountEvent value) loadUnreadCount,
-    required TResult Function(StartWatchingNotificationsEvent value)
-        startWatching,
-    required TResult Function(StopWatchingNotificationsEvent value)
-        stopWatching,
-    required TResult Function(NewNotificationReceivedEvent value)
-        newNotificationReceived,
-    required TResult Function(ClearTransientEvent value) clearTransient,
-    required TResult Function(ToggleFollowActorEvent value) toggleFollowActor,
-  }) {
-    return newNotificationReceived(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadInitialNotificationsEvent value)? loadInitial,
-    TResult? Function(LoadMoreNotificationsEvent value)? loadMore,
-    TResult? Function(RefreshNotificationsEvent value)? refresh,
-    TResult? Function(MarkAllNotificationsReadEvent value)? markAllAsRead,
-    TResult? Function(MarkNotificationReadEvent value)? markAsRead,
-    TResult? Function(DeleteNotificationEvent value)? delete,
-    TResult? Function(LoadUnreadCountEvent value)? loadUnreadCount,
-    TResult? Function(StartWatchingNotificationsEvent value)? startWatching,
-    TResult? Function(StopWatchingNotificationsEvent value)? stopWatching,
-    TResult? Function(NewNotificationReceivedEvent value)?
-        newNotificationReceived,
-    TResult? Function(ClearTransientEvent value)? clearTransient,
-    TResult? Function(ToggleFollowActorEvent value)? toggleFollowActor,
-  }) {
-    return newNotificationReceived?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadInitialNotificationsEvent value)? loadInitial,
-    TResult Function(LoadMoreNotificationsEvent value)? loadMore,
-    TResult Function(RefreshNotificationsEvent value)? refresh,
-    TResult Function(MarkAllNotificationsReadEvent value)? markAllAsRead,
-    TResult Function(MarkNotificationReadEvent value)? markAsRead,
-    TResult Function(DeleteNotificationEvent value)? delete,
-    TResult Function(LoadUnreadCountEvent value)? loadUnreadCount,
-    TResult Function(StartWatchingNotificationsEvent value)? startWatching,
-    TResult Function(StopWatchingNotificationsEvent value)? stopWatching,
-    TResult Function(NewNotificationReceivedEvent value)?
-        newNotificationReceived,
-    TResult Function(ClearTransientEvent value)? clearTransient,
-    TResult Function(ToggleFollowActorEvent value)? toggleFollowActor,
-    required TResult orElse(),
-  }) {
-    if (newNotificationReceived != null) {
-      return newNotificationReceived(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ClearTransientEvent);
 }
 
-abstract class NewNotificationReceivedEvent implements NotificationEvent {
-  const factory NewNotificationReceivedEvent() =
-      _$NewNotificationReceivedEventImpl;
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'NotificationEvent.clearTransient()';
 }
 
-/// @nodoc
-abstract class _$$ClearTransientEventImplCopyWith<$Res> {
-  factory _$$ClearTransientEventImplCopyWith(_$ClearTransientEventImpl value,
-          $Res Function(_$ClearTransientEventImpl) then) =
-      __$$ClearTransientEventImplCopyWithImpl<$Res>;
+
 }
 
-/// @nodoc
-class __$$ClearTransientEventImplCopyWithImpl<$Res>
-    extends _$NotificationEventCopyWithImpl<$Res, _$ClearTransientEventImpl>
-    implements _$$ClearTransientEventImplCopyWith<$Res> {
-  __$$ClearTransientEventImplCopyWithImpl(_$ClearTransientEventImpl _value,
-      $Res Function(_$ClearTransientEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of NotificationEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
+
 
 /// @nodoc
 
-class _$ClearTransientEventImpl implements ClearTransientEvent {
-  const _$ClearTransientEventImpl();
 
-  @override
-  String toString() {
-    return 'NotificationEvent.clearTransient()';
-  }
+class ToggleFollowActorEvent implements NotificationEvent {
+  const ToggleFollowActorEvent({required this.notificationId, required this.actorId});
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ClearTransientEventImpl);
-  }
+ final  String notificationId;
+ final  String actorId;
 
-  @override
-  int get hashCode => runtimeType.hashCode;
+/// Create a copy of NotificationEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ToggleFollowActorEventCopyWith<ToggleFollowActorEvent> get copyWith => _$ToggleFollowActorEventCopyWithImpl<ToggleFollowActorEvent>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int limit) loadInitial,
-    required TResult Function(int limit) loadMore,
-    required TResult Function() refresh,
-    required TResult Function() markAllAsRead,
-    required TResult Function(String notificationId) markAsRead,
-    required TResult Function(String notificationId) delete,
-    required TResult Function() loadUnreadCount,
-    required TResult Function() startWatching,
-    required TResult Function() stopWatching,
-    required TResult Function() newNotificationReceived,
-    required TResult Function() clearTransient,
-    required TResult Function(String notificationId, String actorId)
-        toggleFollowActor,
-  }) {
-    return clearTransient();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int limit)? loadInitial,
-    TResult? Function(int limit)? loadMore,
-    TResult? Function()? refresh,
-    TResult? Function()? markAllAsRead,
-    TResult? Function(String notificationId)? markAsRead,
-    TResult? Function(String notificationId)? delete,
-    TResult? Function()? loadUnreadCount,
-    TResult? Function()? startWatching,
-    TResult? Function()? stopWatching,
-    TResult? Function()? newNotificationReceived,
-    TResult? Function()? clearTransient,
-    TResult? Function(String notificationId, String actorId)? toggleFollowActor,
-  }) {
-    return clearTransient?.call();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int limit)? loadInitial,
-    TResult Function(int limit)? loadMore,
-    TResult Function()? refresh,
-    TResult Function()? markAllAsRead,
-    TResult Function(String notificationId)? markAsRead,
-    TResult Function(String notificationId)? delete,
-    TResult Function()? loadUnreadCount,
-    TResult Function()? startWatching,
-    TResult Function()? stopWatching,
-    TResult Function()? newNotificationReceived,
-    TResult Function()? clearTransient,
-    TResult Function(String notificationId, String actorId)? toggleFollowActor,
-    required TResult orElse(),
-  }) {
-    if (clearTransient != null) {
-      return clearTransient();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadInitialNotificationsEvent value) loadInitial,
-    required TResult Function(LoadMoreNotificationsEvent value) loadMore,
-    required TResult Function(RefreshNotificationsEvent value) refresh,
-    required TResult Function(MarkAllNotificationsReadEvent value)
-        markAllAsRead,
-    required TResult Function(MarkNotificationReadEvent value) markAsRead,
-    required TResult Function(DeleteNotificationEvent value) delete,
-    required TResult Function(LoadUnreadCountEvent value) loadUnreadCount,
-    required TResult Function(StartWatchingNotificationsEvent value)
-        startWatching,
-    required TResult Function(StopWatchingNotificationsEvent value)
-        stopWatching,
-    required TResult Function(NewNotificationReceivedEvent value)
-        newNotificationReceived,
-    required TResult Function(ClearTransientEvent value) clearTransient,
-    required TResult Function(ToggleFollowActorEvent value) toggleFollowActor,
-  }) {
-    return clearTransient(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadInitialNotificationsEvent value)? loadInitial,
-    TResult? Function(LoadMoreNotificationsEvent value)? loadMore,
-    TResult? Function(RefreshNotificationsEvent value)? refresh,
-    TResult? Function(MarkAllNotificationsReadEvent value)? markAllAsRead,
-    TResult? Function(MarkNotificationReadEvent value)? markAsRead,
-    TResult? Function(DeleteNotificationEvent value)? delete,
-    TResult? Function(LoadUnreadCountEvent value)? loadUnreadCount,
-    TResult? Function(StartWatchingNotificationsEvent value)? startWatching,
-    TResult? Function(StopWatchingNotificationsEvent value)? stopWatching,
-    TResult? Function(NewNotificationReceivedEvent value)?
-        newNotificationReceived,
-    TResult? Function(ClearTransientEvent value)? clearTransient,
-    TResult? Function(ToggleFollowActorEvent value)? toggleFollowActor,
-  }) {
-    return clearTransient?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadInitialNotificationsEvent value)? loadInitial,
-    TResult Function(LoadMoreNotificationsEvent value)? loadMore,
-    TResult Function(RefreshNotificationsEvent value)? refresh,
-    TResult Function(MarkAllNotificationsReadEvent value)? markAllAsRead,
-    TResult Function(MarkNotificationReadEvent value)? markAsRead,
-    TResult Function(DeleteNotificationEvent value)? delete,
-    TResult Function(LoadUnreadCountEvent value)? loadUnreadCount,
-    TResult Function(StartWatchingNotificationsEvent value)? startWatching,
-    TResult Function(StopWatchingNotificationsEvent value)? stopWatching,
-    TResult Function(NewNotificationReceivedEvent value)?
-        newNotificationReceived,
-    TResult Function(ClearTransientEvent value)? clearTransient,
-    TResult Function(ToggleFollowActorEvent value)? toggleFollowActor,
-    required TResult orElse(),
-  }) {
-    if (clearTransient != null) {
-      return clearTransient(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ToggleFollowActorEvent&&(identical(other.notificationId, notificationId) || other.notificationId == notificationId)&&(identical(other.actorId, actorId) || other.actorId == actorId));
 }
 
-abstract class ClearTransientEvent implements NotificationEvent {
-  const factory ClearTransientEvent() = _$ClearTransientEventImpl;
+
+@override
+int get hashCode => Object.hash(runtimeType,notificationId,actorId);
+
+@override
+String toString() {
+  return 'NotificationEvent.toggleFollowActor(notificationId: $notificationId, actorId: $actorId)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$ToggleFollowActorEventImplCopyWith<$Res> {
-  factory _$$ToggleFollowActorEventImplCopyWith(
-          _$ToggleFollowActorEventImpl value,
-          $Res Function(_$ToggleFollowActorEventImpl) then) =
-      __$$ToggleFollowActorEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String notificationId, String actorId});
-}
+abstract mixin class $ToggleFollowActorEventCopyWith<$Res> implements $NotificationEventCopyWith<$Res> {
+  factory $ToggleFollowActorEventCopyWith(ToggleFollowActorEvent value, $Res Function(ToggleFollowActorEvent) _then) = _$ToggleFollowActorEventCopyWithImpl;
+@useResult
+$Res call({
+ String notificationId, String actorId
+});
 
+
+
+
+}
 /// @nodoc
-class __$$ToggleFollowActorEventImplCopyWithImpl<$Res>
-    extends _$NotificationEventCopyWithImpl<$Res, _$ToggleFollowActorEventImpl>
-    implements _$$ToggleFollowActorEventImplCopyWith<$Res> {
-  __$$ToggleFollowActorEventImplCopyWithImpl(
-      _$ToggleFollowActorEventImpl _value,
-      $Res Function(_$ToggleFollowActorEventImpl) _then)
-      : super(_value, _then);
+class _$ToggleFollowActorEventCopyWithImpl<$Res>
+    implements $ToggleFollowActorEventCopyWith<$Res> {
+  _$ToggleFollowActorEventCopyWithImpl(this._self, this._then);
 
-  /// Create a copy of NotificationEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? notificationId = null,
-    Object? actorId = null,
-  }) {
-    return _then(_$ToggleFollowActorEventImpl(
-      notificationId: null == notificationId
-          ? _value.notificationId
-          : notificationId // ignore: cast_nullable_to_non_nullable
-              as String,
-      actorId: null == actorId
-          ? _value.actorId
-          : actorId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
+  final ToggleFollowActorEvent _self;
+  final $Res Function(ToggleFollowActorEvent) _then;
+
+/// Create a copy of NotificationEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? notificationId = null,Object? actorId = null,}) {
+  return _then(ToggleFollowActorEvent(
+notificationId: null == notificationId ? _self.notificationId : notificationId // ignore: cast_nullable_to_non_nullable
+as String,actorId: null == actorId ? _self.actorId : actorId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
 
-class _$ToggleFollowActorEventImpl implements ToggleFollowActorEvent {
-  const _$ToggleFollowActorEventImpl(
-      {required this.notificationId, required this.actorId});
-
-  @override
-  final String notificationId;
-  @override
-  final String actorId;
-
-  @override
-  String toString() {
-    return 'NotificationEvent.toggleFollowActor(notificationId: $notificationId, actorId: $actorId)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ToggleFollowActorEventImpl &&
-            (identical(other.notificationId, notificationId) ||
-                other.notificationId == notificationId) &&
-            (identical(other.actorId, actorId) || other.actorId == actorId));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, notificationId, actorId);
-
-  /// Create a copy of NotificationEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ToggleFollowActorEventImplCopyWith<_$ToggleFollowActorEventImpl>
-      get copyWith => __$$ToggleFollowActorEventImplCopyWithImpl<
-          _$ToggleFollowActorEventImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int limit) loadInitial,
-    required TResult Function(int limit) loadMore,
-    required TResult Function() refresh,
-    required TResult Function() markAllAsRead,
-    required TResult Function(String notificationId) markAsRead,
-    required TResult Function(String notificationId) delete,
-    required TResult Function() loadUnreadCount,
-    required TResult Function() startWatching,
-    required TResult Function() stopWatching,
-    required TResult Function() newNotificationReceived,
-    required TResult Function() clearTransient,
-    required TResult Function(String notificationId, String actorId)
-        toggleFollowActor,
-  }) {
-    return toggleFollowActor(notificationId, actorId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int limit)? loadInitial,
-    TResult? Function(int limit)? loadMore,
-    TResult? Function()? refresh,
-    TResult? Function()? markAllAsRead,
-    TResult? Function(String notificationId)? markAsRead,
-    TResult? Function(String notificationId)? delete,
-    TResult? Function()? loadUnreadCount,
-    TResult? Function()? startWatching,
-    TResult? Function()? stopWatching,
-    TResult? Function()? newNotificationReceived,
-    TResult? Function()? clearTransient,
-    TResult? Function(String notificationId, String actorId)? toggleFollowActor,
-  }) {
-    return toggleFollowActor?.call(notificationId, actorId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int limit)? loadInitial,
-    TResult Function(int limit)? loadMore,
-    TResult Function()? refresh,
-    TResult Function()? markAllAsRead,
-    TResult Function(String notificationId)? markAsRead,
-    TResult Function(String notificationId)? delete,
-    TResult Function()? loadUnreadCount,
-    TResult Function()? startWatching,
-    TResult Function()? stopWatching,
-    TResult Function()? newNotificationReceived,
-    TResult Function()? clearTransient,
-    TResult Function(String notificationId, String actorId)? toggleFollowActor,
-    required TResult orElse(),
-  }) {
-    if (toggleFollowActor != null) {
-      return toggleFollowActor(notificationId, actorId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadInitialNotificationsEvent value) loadInitial,
-    required TResult Function(LoadMoreNotificationsEvent value) loadMore,
-    required TResult Function(RefreshNotificationsEvent value) refresh,
-    required TResult Function(MarkAllNotificationsReadEvent value)
-        markAllAsRead,
-    required TResult Function(MarkNotificationReadEvent value) markAsRead,
-    required TResult Function(DeleteNotificationEvent value) delete,
-    required TResult Function(LoadUnreadCountEvent value) loadUnreadCount,
-    required TResult Function(StartWatchingNotificationsEvent value)
-        startWatching,
-    required TResult Function(StopWatchingNotificationsEvent value)
-        stopWatching,
-    required TResult Function(NewNotificationReceivedEvent value)
-        newNotificationReceived,
-    required TResult Function(ClearTransientEvent value) clearTransient,
-    required TResult Function(ToggleFollowActorEvent value) toggleFollowActor,
-  }) {
-    return toggleFollowActor(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadInitialNotificationsEvent value)? loadInitial,
-    TResult? Function(LoadMoreNotificationsEvent value)? loadMore,
-    TResult? Function(RefreshNotificationsEvent value)? refresh,
-    TResult? Function(MarkAllNotificationsReadEvent value)? markAllAsRead,
-    TResult? Function(MarkNotificationReadEvent value)? markAsRead,
-    TResult? Function(DeleteNotificationEvent value)? delete,
-    TResult? Function(LoadUnreadCountEvent value)? loadUnreadCount,
-    TResult? Function(StartWatchingNotificationsEvent value)? startWatching,
-    TResult? Function(StopWatchingNotificationsEvent value)? stopWatching,
-    TResult? Function(NewNotificationReceivedEvent value)?
-        newNotificationReceived,
-    TResult? Function(ClearTransientEvent value)? clearTransient,
-    TResult? Function(ToggleFollowActorEvent value)? toggleFollowActor,
-  }) {
-    return toggleFollowActor?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadInitialNotificationsEvent value)? loadInitial,
-    TResult Function(LoadMoreNotificationsEvent value)? loadMore,
-    TResult Function(RefreshNotificationsEvent value)? refresh,
-    TResult Function(MarkAllNotificationsReadEvent value)? markAllAsRead,
-    TResult Function(MarkNotificationReadEvent value)? markAsRead,
-    TResult Function(DeleteNotificationEvent value)? delete,
-    TResult Function(LoadUnreadCountEvent value)? loadUnreadCount,
-    TResult Function(StartWatchingNotificationsEvent value)? startWatching,
-    TResult Function(StopWatchingNotificationsEvent value)? stopWatching,
-    TResult Function(NewNotificationReceivedEvent value)?
-        newNotificationReceived,
-    TResult Function(ClearTransientEvent value)? clearTransient,
-    TResult Function(ToggleFollowActorEvent value)? toggleFollowActor,
-    required TResult orElse(),
-  }) {
-    if (toggleFollowActor != null) {
-      return toggleFollowActor(this);
-    }
-    return orElse();
-  }
 }
 
-abstract class ToggleFollowActorEvent implements NotificationEvent {
-  const factory ToggleFollowActorEvent(
-      {required final String notificationId,
-      required final String actorId}) = _$ToggleFollowActorEventImpl;
-
-  String get notificationId;
-  String get actorId;
-
-  /// Create a copy of NotificationEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ToggleFollowActorEventImplCopyWith<_$ToggleFollowActorEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
+// dart format on

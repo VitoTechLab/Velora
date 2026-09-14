@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'notification_event.freezed.dart';
 
 @freezed
-class NotificationEvent with _$NotificationEvent {
+abstract class NotificationEvent with _$NotificationEvent {
   /// Load initial notifications (first page)
   const factory NotificationEvent.loadInitial({
     @Default(20) int limit,
