@@ -1,16 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:velora/features/chat/presentation/widgets/attachment_menu_bottom_sheet.dart';
-import 'package:velora/features/chat/presentation/widgets/mention_suggestions_overlay.dart';
 import 'package:velora/features/chat/presentation/helpers/mention_helper.dart';
 import 'package:velora/features/chat/domain/entities/user_search_entity.dart';
+import 'package:velora/features/chat/presentation/widgets/atoms/chat_icon_button.dart';
+import 'package:velora/features/chat/presentation/widgets/molecules/mention_suggestions_overlay.dart';
+import 'package:velora/features/chat/presentation/widgets/organisms/attachment_menu_bottom_sheet.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
-/// Optimized ChatInputBar widget with mention support
-/// Uses ValueListenableBuilder to prevent unnecessary rebuilds
-/// Only rebuilds send button when text state changes
-/// Supports @mentions with user suggestions
 class ChatInputBar extends StatefulWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
@@ -38,7 +35,6 @@ class _ChatInputBarState extends State<ChatInputBar> {
   bool _isTyping = false;
   static const _typingDebounceDuration = Duration(milliseconds: 1500);
 
-  // Mention state
   String? _mentionQuery;
   Timer? _mentionDebounceTimer;
   static const _mentionDebounceDuration = Duration(milliseconds: 300);
@@ -47,7 +43,6 @@ class _ChatInputBarState extends State<ChatInputBar> {
   void dispose() {
     _typingDebounceTimer?.cancel();
     _mentionDebounceTimer?.cancel();
-    // Send stop typing when leaving
     if (_isTyping) {
       widget.onTyping?.call(false);
     }
@@ -58,12 +53,10 @@ class _ChatInputBarState extends State<ChatInputBar> {
     final hasText = text.trim().isNotEmpty;
 
     if (hasText && !_isTyping) {
-      // Start typing
       _isTyping = true;
       widget.onTyping?.call(true);
     }
 
-    // Reset debounce timer
     _typingDebounceTimer?.cancel();
     _typingDebounceTimer = Timer(_typingDebounceDuration, () {
       if (_isTyping) {
@@ -72,7 +65,6 @@ class _ChatInputBarState extends State<ChatInputBar> {
       }
     });
 
-    // Check for mention
     _checkMention();
   }
 
@@ -119,7 +111,6 @@ class _ChatInputBarState extends State<ChatInputBar> {
       _mentionQuery = null;
     });
 
-    // Return focus to input
     widget.focusNode.requestFocus();
   }
 
@@ -134,7 +125,6 @@ class _ChatInputBarState extends State<ChatInputBar> {
   void _handleSend() {
     final message = widget.controller.text.trim();
     if (message.isNotEmpty) {
-      // Stop typing indicator before sending
       _typingDebounceTimer?.cancel();
       if (_isTyping) {
         _isTyping = false;
@@ -154,7 +144,6 @@ class _ChatInputBarState extends State<ChatInputBar> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        // Mention suggestions overlay
         if (_mentionQuery != null)
           MentionSuggestionsOverlay(
             query: _mentionQuery!,
@@ -163,14 +152,13 @@ class _ChatInputBarState extends State<ChatInputBar> {
             onDismiss: _dismissMention,
           ),
 
-        // Input bar
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           decoration: BoxDecoration(
-            color: colorScheme.surface,
+            color: colorScheme.surface.withValues(alpha: 0.96),
             border: Border(
               top: BorderSide(
-                color: colorScheme.outline.withValues(alpha: 0.1),
+                color: colorScheme.outlineVariant.withValues(alpha: 0.28),
                 width: 1,
               ),
             ),
@@ -184,10 +172,12 @@ class _ChatInputBarState extends State<ChatInputBar> {
                   child: Container(
                     constraints: const BoxConstraints(maxHeight: 120),
                     decoration: BoxDecoration(
-                      color: colorScheme.surfaceContainerHigh,
-                      borderRadius: BorderRadius.circular(28),
+                      color: colorScheme.surfaceContainerLow.withValues(
+                        alpha: 0.94,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: colorScheme.outline.withValues(alpha: 0.15),
+                        color: colorScheme.primary.withValues(alpha: 0.14),
                         width: 1,
                       ),
                     ),
@@ -224,54 +214,39 @@ class _ChatInputBarState extends State<ChatInputBar> {
                             ),
                           ),
                         ),
-                        // Use ValueListenableBuilder to only rebuild this part
                         ValueListenableBuilder<TextEditingValue>(
                           valueListenable: widget.controller,
                           builder: (context, value, child) {
                             final hasText = value.text.trim().isNotEmpty;
                             if (hasText) {
-                              // Show nothing when typing
                               return const SizedBox.shrink();
                             }
-                            // Show attach and camera buttons when empty
                             return Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Semantics(
-                                  button: true,
-                                  label: t.chatInputAttachLabel,
-                                  hint: t.chatInputAttachHint,
-                                  child: IconButton(
-                                    icon: Icon(
-                                      Icons.attach_file_rounded,
-                                      color: colorScheme.primary,
-                                    ),
-                                    onPressed: () {
-                                      AttachmentMenuBottomSheet.show(
-                                        context,
-                                        conversationId: widget.conversationId,
-                                      );
-                                    },
-                                    tooltip: t.chatInputAttachTooltip,
-                                  ),
+                                ChatIconButton(
+                                  icon: Icons.attach_file_rounded,
+                                  tooltip: t.chatInputAttachTooltip,
+                                  size: 36,
+                                  onPressed: () {
+                                    AttachmentMenuBottomSheet.show(
+                                      context,
+                                      conversationId: widget.conversationId,
+                                    );
+                                  },
                                 ),
-                                Semantics(
-                                  button: true,
-                                  label: t.chatInputCameraLabel,
-                                  hint: t.chatInputCameraHint,
-                                  child: IconButton(
-                                    icon: Icon(
-                                      Icons.camera_alt_outlined,
-                                      color: colorScheme.primary,
-                                    ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 6),
+                                  child: ChatIconButton(
+                                    icon: Icons.camera_alt_outlined,
+                                    tooltip: t.chatInputCameraTooltip,
+                                    size: 36,
                                     onPressed: () {
                                       AttachmentActions.onCameraTap(
                                         context,
                                         widget.conversationId,
                                       );
                                     },
-                                    tooltip: t.chatInputCameraTooltip,
-                                    padding: const EdgeInsets.only(right: 8),
                                   ),
                                 ),
                               ],
@@ -283,7 +258,6 @@ class _ChatInputBarState extends State<ChatInputBar> {
                   ),
                 ),
                 const SizedBox(width: 8),
-                // Use ValueListenableBuilder for send/voice button
                 ValueListenableBuilder<TextEditingValue>(
                   valueListenable: widget.controller,
                   builder: (context, value, child) {
@@ -293,33 +267,39 @@ class _ChatInputBarState extends State<ChatInputBar> {
                       label: hasText
                           ? t.chatInputSendLabel
                           : t.chatInputVoiceLabel,
-                      hint:
-                          hasText ? t.chatInputSendHint : t.chatInputVoiceHint,
+                      hint: hasText
+                          ? t.chatInputSendHint
+                          : t.chatInputVoiceHint,
                       child: AnimatedScale(
                         scale: hasText ? 1.0 : 0.95,
                         duration: const Duration(milliseconds: 200),
                         curve: Curves.easeOutBack,
-                        child: Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            onTap:
-                                hasText ? _handleSend : widget.onVoicePressed,
-                            borderRadius: BorderRadius.circular(23),
-                            child: Container(
-                              width: 46,
-                              height: 46,
-                              decoration: BoxDecoration(
-                                color: colorScheme.primary,
-                                shape: BoxShape.circle,
+                        child: AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 220),
+                          switchInCurve: Curves.easeOutBack,
+                          switchOutCurve: Curves.easeInCubic,
+                          transitionBuilder: (child, animation) {
+                            return FadeTransition(
+                              opacity: animation,
+                              child: ScaleTransition(
+                                scale: animation,
+                                child: child,
                               ),
-                              child: Icon(
-                                hasText
-                                    ? Icons.send_rounded
-                                    : Icons.mic_rounded,
-                                color: colorScheme.onPrimary,
-                                size: 22,
-                              ),
-                            ),
+                            );
+                          },
+                          child: ChatIconButton(
+                            key: ValueKey(hasText ? 'send' : 'voice'),
+                            icon: hasText
+                                ? Icons.send_rounded
+                                : Icons.mic_rounded,
+                            tooltip: hasText
+                                ? t.chatInputSendLabel
+                                : t.chatInputVoiceLabel,
+                            emphasized: true,
+                            size: 46,
+                            onPressed: hasText
+                                ? _handleSend
+                                : widget.onVoicePressed,
                           ),
                         ),
                       ),

@@ -11,9 +11,8 @@ import 'package:velora/features/chat/presentation/bloc/chat_message_bloc.dart';
 import 'package:velora/features/chat/presentation/bloc/chat_message_event.dart';
 import 'package:velora/features/chat/presentation/dialogs/create_event_dialog.dart';
 import 'package:velora/features/chat/presentation/dialogs/create_poll_dialog.dart';
-import 'package:velora/features/chat/presentation/screens/chat_gallery_picker_screen.dart';
-import 'package:velora/features/chat/presentation/screens/media_preview_screen.dart';
-import 'package:velora/features/media/data/datasources/local/media_local_datasource.dart';
+import 'package:velora/features/media/domain/usecases/pick_single_audio_file_usecase.dart';
+import 'package:velora/features/media/presentation/screens/media_screens.dart';
 import 'package:velora/features/navigation/models/chat_document_picker_args.dart';
 import 'package:velora/l10n/app_localizations.dart';
 import 'package:velora/routes/app_router.dart';
@@ -41,7 +40,7 @@ class AttachmentActions {
       return;
     }
 
-    final selectedFiles = await ChatGalleryPickerScreen.show(
+    final selectedFiles = await MediaGalleryPickerScreen.show(
       context,
       maxImages: 10,
       allowVideo: true,
@@ -57,13 +56,13 @@ class AttachmentActions {
 
       if (result != null && context.mounted) {
         context.read<ChatMessageBloc>().add(
-              ChatMessageEvent.uploadAndSendImages(
-                conversationId: conversationId,
-                filePaths: result.files.map((f) => f.path).toList(),
-                userId: userId,
-                caption: result.caption,
-              ),
-            );
+          ChatMessageEvent.uploadAndSendImages(
+            conversationId: conversationId,
+            filePaths: result.files.map((f) => f.path).toList(),
+            userId: userId,
+            caption: result.caption,
+          ),
+        );
       }
     }
   }
@@ -129,13 +128,13 @@ class AttachmentActions {
 
           if (result != null && context.mounted) {
             context.read<ChatMessageBloc>().add(
-                  ChatMessageEvent.uploadAndSendImages(
-                    conversationId: conversationId,
-                    filePaths: result.files.map((f) => f.path).toList(),
-                    userId: userId,
-                    caption: result.caption,
-                  ),
-                );
+              ChatMessageEvent.uploadAndSendImages(
+                conversationId: conversationId,
+                filePaths: result.files.map((f) => f.path).toList(),
+                userId: userId,
+                caption: result.caption,
+              ),
+            );
           }
         }
       } else if (choice == 'video') {
@@ -156,13 +155,13 @@ class AttachmentActions {
 
           if (result != null && context.mounted) {
             context.read<ChatMessageBloc>().add(
-                  ChatMessageEvent.uploadAndSendVideo(
-                    conversationId: conversationId,
-                    filePath: result.files.first.path,
-                    userId: userId,
-                    caption: result.caption,
-                  ),
-                );
+              ChatMessageEvent.uploadAndSendVideo(
+                conversationId: conversationId,
+                filePath: result.files.first.path,
+                userId: userId,
+                caption: result.caption,
+              ),
+            );
           }
         }
       }
@@ -201,8 +200,9 @@ class AttachmentActions {
         ),
       );
     } catch (e) {
+      final t = AppLocalizations.of(context)!;
       AppMessenger.showToast(
-        message: 'Failed to create poll: $e',
+        message: t.commonError,
         icon: Icons.error_outline,
         isError: true,
       );
@@ -243,8 +243,9 @@ class AttachmentActions {
         ),
       );
     } catch (e) {
+      final t = AppLocalizations.of(context)!;
       AppMessenger.showToast(
-        message: 'Failed to create event: $e',
+        message: t.commonError,
         icon: Icons.error_outline,
         isError: true,
       );
@@ -269,21 +270,19 @@ class AttachmentActions {
 
     final selectedFiles = await context.pushNamed<List<File>>(
       AppRouteName.chatDocumentPicker,
-      extra: ChatDocumentPickerArgs(
-        maxDocuments: 10,
-      ),
+      extra: ChatDocumentPickerArgs(maxDocuments: 10),
     );
 
     if (selectedFiles == null || selectedFiles.isEmpty) return;
 
     if (context.mounted) {
       context.read<ChatMessageBloc>().add(
-            ChatMessageEvent.uploadAndSendDocuments(
-              conversationId: conversationId,
-              filePaths: selectedFiles.map((f) => f.path).toList(),
-              userId: userId,
-            ),
-          );
+        ChatMessageEvent.uploadAndSendDocuments(
+          conversationId: conversationId,
+          filePaths: selectedFiles.map((f) => f.path).toList(),
+          userId: userId,
+        ),
+      );
     }
   }
 
@@ -304,20 +303,20 @@ class AttachmentActions {
     }
 
     try {
-      final localDataSource = getIt<MediaLocalDataSource>();
-      final file = await localDataSource.pickSingleAudioFile();
+      final result = await getIt<PickSingleAudioFileUseCase>()();
+      final file = result.fold((_) => null, (pickedFile) => pickedFile);
 
       if (file == null) return;
 
       if (context.mounted) {
         context.read<ChatMessageBloc>().add(
-              ChatMessageEvent.uploadAndSendAudio(
-                conversationId: conversationId,
-                filePath: file.path,
-                userId: userId,
-                isVoiceMessage: false,
-              ),
-            );
+          ChatMessageEvent.uploadAndSendAudio(
+            conversationId: conversationId,
+            filePath: file.path,
+            userId: userId,
+            isVoiceMessage: false,
+          ),
+        );
       }
     } catch (e) {
       AppMessenger.showToast(
@@ -356,10 +355,7 @@ class AttachmentActions {
 class AttachmentMenuBottomSheet extends StatefulWidget {
   final String conversationId;
 
-  const AttachmentMenuBottomSheet({
-    super.key,
-    required this.conversationId,
-  });
+  const AttachmentMenuBottomSheet({super.key, required this.conversationId});
 
   static Future<void> show(
     BuildContext context, {
@@ -380,9 +376,7 @@ class AttachmentMenuBottomSheet extends StatefulWidget {
       barrierColor: Colors.black.withValues(alpha: 0.5),
       builder: (bottomSheetContext) => BlocProvider.value(
         value: chatBloc,
-        child: AttachmentMenuBottomSheet(
-          conversationId: conversationId,
-        ),
+        child: AttachmentMenuBottomSheet(conversationId: conversationId),
       ),
     );
   }
@@ -411,13 +405,13 @@ class _AttachmentMenuBottomSheetState extends State<AttachmentMenuBottomSheet>
       curve: Curves.easeOutCubic,
     );
 
-    _slideAnimation = Tween<Offset>(
-      begin: const Offset(0, 0.1),
-      end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeOutCubic,
-    ));
+    _slideAnimation =
+        Tween<Offset>(begin: const Offset(0, 0.1), end: Offset.zero).animate(
+          CurvedAnimation(
+            parent: _animationController,
+            curve: Curves.easeOutCubic,
+          ),
+        );
 
     _animationController.forward();
   }
@@ -446,8 +440,12 @@ class _AttachmentMenuBottomSheetState extends State<AttachmentMenuBottomSheet>
             child: Container(
               decoration: BoxDecoration(
                 color: colorScheme.surface,
-                borderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(28)),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(16),
+                ),
+                border: Border.all(
+                  color: colorScheme.outlineVariant.withValues(alpha: 0.28),
+                ),
               ),
               child: SafeArea(
                 top: false,
@@ -460,8 +458,9 @@ class _AttachmentMenuBottomSheetState extends State<AttachmentMenuBottomSheet>
                       width: 40,
                       height: 4,
                       decoration: BoxDecoration(
-                        color:
-                            colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
+                        color: colorScheme.onSurfaceVariant.withValues(
+                          alpha: 0.4,
+                        ),
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
@@ -470,6 +469,18 @@ class _AttachmentMenuBottomSheetState extends State<AttachmentMenuBottomSheet>
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Column(
                         children: [
+                          Row(
+                            children: [
+                              Text(
+                                t.chatInputAttachLabel,
+                                style: theme.textTheme.titleMedium?.copyWith(
+                                  color: colorScheme.onSurface,
+                                  fontWeight: FontWeight.w800,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 18),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
@@ -541,9 +552,8 @@ class _AttachmentMenuBottomSheetState extends State<AttachmentMenuBottomSheet>
                                 icon: Icons.description_outlined,
                                 label: t.chatAttachmentDocument,
                                 gradientColors: [
-                                  const Color(0xFF7C4DFF),
-                                  const Color(0xFF7C4DFF)
-                                      .withValues(alpha: 0.7),
+                                  colorScheme.primary,
+                                  colorScheme.primary.withValues(alpha: 0.7),
                                 ],
                                 onTap: () {
                                   Navigator.pop(context);
@@ -558,9 +568,8 @@ class _AttachmentMenuBottomSheetState extends State<AttachmentMenuBottomSheet>
                                 icon: Icons.headset_outlined,
                                 label: t.chatAttachmentAudio,
                                 gradientColors: [
-                                  const Color(0xFFFF6F00),
-                                  const Color(0xFFFF6F00)
-                                      .withValues(alpha: 0.7),
+                                  colorScheme.tertiary,
+                                  colorScheme.tertiary.withValues(alpha: 0.7),
                                 ],
                                 onTap: () {
                                   Navigator.pop(context);
@@ -575,9 +584,8 @@ class _AttachmentMenuBottomSheetState extends State<AttachmentMenuBottomSheet>
                                 icon: Icons.poll_outlined,
                                 label: t.chatAttachmentPoll,
                                 gradientColors: [
-                                  const Color(0xFFFFB300),
-                                  const Color(0xFFFFB300)
-                                      .withValues(alpha: 0.7),
+                                  colorScheme.secondary,
+                                  colorScheme.secondary.withValues(alpha: 0.7),
                                 ],
                                 onTap: () {
                                   Navigator.pop(context);
@@ -675,19 +683,15 @@ class _AttachmentMenuItemState extends State<_AttachmentMenuItem>
       duration: const Duration(milliseconds: 300),
     );
 
-    _scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Curves.elasticOut,
-      ),
-    );
+    _scaleAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.elasticOut));
 
-    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Curves.easeOut,
-      ),
-    );
+    _fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
 
     Future.delayed(Duration(milliseconds: widget.delay), () {
       if (mounted) _controller.forward();
@@ -734,12 +738,14 @@ class _AttachmentMenuItemState extends State<_AttachmentMenuItem>
                       width: 56,
                       height: 56,
                       decoration: BoxDecoration(
-                        color:
-                            widget.gradientColors.first.withValues(alpha: 0.12),
+                        color: widget.gradientColors.first.withValues(
+                          alpha: 0.12,
+                        ),
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(
-                          color: widget.gradientColors.first
-                              .withValues(alpha: 0.2),
+                          color: widget.gradientColors.first.withValues(
+                            alpha: 0.2,
+                          ),
                           width: 1,
                         ),
                       ),

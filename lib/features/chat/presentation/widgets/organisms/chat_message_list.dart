@@ -9,14 +9,16 @@ import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:velora/features/chat/domain/entities/chat_message_entity.dart';
 import 'package:velora/features/chat/domain/entities/message_read_entity.dart';
 import 'package:velora/features/chat/domain/entities/message_status.dart';
-import 'package:velora/features/chat/presentation/widgets/chat_audio_widget.dart';
-import 'package:velora/features/chat/presentation/widgets/chat_bubble_widget.dart';
-import 'package:velora/features/chat/presentation/widgets/chat_event_widget.dart';
-import 'package:velora/features/chat/presentation/widgets/chat_file_message_widget.dart';
-import 'package:velora/features/chat/presentation/widgets/chat_media_widget.dart';
-import 'package:velora/features/chat/presentation/widgets/chat_message_item.dart';
-import 'package:velora/features/chat/presentation/widgets/chat_poll_widget.dart';
-import 'package:velora/features/chat/presentation/widgets/date_separator_widget.dart';
+import 'package:velora/features/chat/presentation/widgets/atoms/chat_skeleton_tile.dart';
+import 'package:velora/features/chat/presentation/widgets/atoms/chat_state_view.dart';
+import 'package:velora/features/chat/presentation/widgets/atoms/date_separator_widget.dart';
+import 'package:velora/features/chat/presentation/widgets/molecules/chat_audio_widget.dart';
+import 'package:velora/features/chat/presentation/widgets/molecules/chat_bubble_widget.dart';
+import 'package:velora/features/chat/presentation/widgets/molecules/chat_event_widget.dart';
+import 'package:velora/features/chat/presentation/widgets/molecules/chat_file_message_widget.dart';
+import 'package:velora/features/chat/presentation/widgets/molecules/chat_media_widget.dart';
+import 'package:velora/features/chat/presentation/widgets/molecules/chat_message_item.dart';
+import 'package:velora/features/chat/presentation/widgets/molecules/chat_poll_widget.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
 class ChatMessageList extends StatelessWidget {
@@ -39,152 +41,43 @@ class ChatMessageList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    final textTheme = theme.textTheme;
     final t = AppLocalizations.of(context)!;
 
     return BlocBuilder<ChatMessageBloc, ChatMessageState>(
       builder: (context, state) {
         if (state.isLoading && state.messages.isEmpty) {
-          return const Center(
-            child: CircularProgressIndicator(),
+          return ListView.builder(
+            reverse: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: 8,
+            itemBuilder: (context, index) => const ChatSkeletonTile(),
           );
         }
 
         if (state.errorMessage != null && state.messages.isEmpty) {
-          return TweenAnimationBuilder<double>(
-            duration: const Duration(milliseconds: 400),
-            tween: Tween(begin: 0.0, end: 1.0),
-            builder: (context, value, child) {
-              return Opacity(
-                opacity: value,
-                child: Transform.translate(
-                  offset: Offset(0, 20 * (1 - value)),
-                  child: child,
-                ),
-              );
+          return ChatStateView(
+            icon: Icons.cloud_off_rounded,
+            title: t.commonError,
+            message: state.errorMessage!,
+            actionLabel: t.commonRetry,
+            isError: true,
+            onAction: () {
+              context.read<ChatMessageBloc>().add(
+                    InitializeChatEvent(
+                      conversationId: state.conversationId ?? '',
+                      peerUserId: peerUserId,
+                      limit: 50,
+                    ),
+                  );
             },
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color:
-                            colorScheme.errorContainer.withValues(alpha: 0.3),
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: colorScheme.error.withValues(alpha: 0.3),
-                          width: 2,
-                        ),
-                      ),
-                      child: Icon(
-                        Icons.cloud_off_rounded,
-                        size: 56,
-                        color: colorScheme.error,
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    Text(
-                      t.commonError,
-                      style: textTheme.titleMedium?.copyWith(
-                        color: colorScheme.error,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    Text(
-                      state.errorMessage!,
-                      style: textTheme.bodyMedium?.copyWith(
-                        color: colorScheme.onSurfaceVariant,
-                      ),
-                      textAlign: TextAlign.center,
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 24),
-                    FilledButton.icon(
-                      onPressed: () {
-                        context.read<ChatMessageBloc>().add(
-                              InitializeChatEvent(
-                                conversationId: state.conversationId ?? '',
-                                peerUserId: peerUserId,
-                                limit: 50,
-                              ),
-                            );
-                      },
-                      icon: const Icon(Icons.refresh_rounded),
-                      label: Text(t.commonRetry),
-                      style: FilledButton.styleFrom(
-                        backgroundColor: colorScheme.error,
-                        foregroundColor: colorScheme.onError,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 24,
-                          vertical: 12,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
           );
         }
 
         if (state.messages.isEmpty) {
-          return TweenAnimationBuilder<double>(
-            duration: const Duration(milliseconds: 600),
-            tween: Tween(begin: 0.0, end: 1.0),
-            curve: Curves.easeOutCubic,
-            builder: (context, value, child) {
-              return Opacity(
-                opacity: value,
-                child: Transform.scale(
-                  scale: 0.8 + (0.2 * value),
-                  child: child,
-                ),
-              );
-            },
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ShaderMask(
-                    shaderCallback: (bounds) => LinearGradient(
-                      colors: [
-                        colorScheme.primary.withValues(alpha: 0.5),
-                        colorScheme.secondary.withValues(alpha: 0.5),
-                      ],
-                    ).createShader(bounds),
-                    child: Icon(
-                      Icons.chat_bubble_outline,
-                      size: 80,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  Text(
-                    t.chatDetailNoMessages,
-                    style: textTheme.titleLarge?.copyWith(
-                      color: colorScheme.onSurfaceVariant,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    t.chatDetailNoMessagesHint,
-                    style: textTheme.bodyMedium?.copyWith(
-                      color: colorScheme.outline,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
+          return ChatStateView(
+            icon: Icons.mode_comment_outlined,
+            title: t.chatDetailNoMessages,
+            message: t.chatDetailNoMessagesHint,
           );
         }
 
@@ -366,7 +259,7 @@ class ChatMessageList extends StatelessWidget {
         final attachment =
             message.attachments.isNotEmpty ? message.attachments.first : null;
         final fileUrl = attachment?.effectiveUrl ?? '';
-        final fileName = attachment?.filename ?? 'Document';
+        final fileName = attachment?.filename ?? t.chatAttachmentDocument;
         final fileSize = attachment?.sizeBytes;
         messageWidget = ChatFileMessageWidget(
           fileUrl: fileUrl,
@@ -381,7 +274,7 @@ class ChatMessageList extends StatelessWidget {
         final poll = message.poll;
         if (poll == null) {
           messageWidget = ChatBubbleWidget(
-            message: 'Poll data unavailable',
+            message: t.commonError,
             time: time,
             isSender: isSender,
           );
@@ -429,7 +322,7 @@ class ChatMessageList extends StatelessWidget {
         final event = message.event;
         if (event == null) {
           messageWidget = ChatBubbleWidget(
-            message: 'Event data unavailable',
+            message: t.commonError,
             time: time,
             isSender: isSender,
           );
