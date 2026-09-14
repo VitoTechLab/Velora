@@ -10,22 +10,19 @@ import 'package:velora/features/navigation/models/chat_detail_args.dart';
 import 'package:velora/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:velora/features/profile/presentation/bloc/profile_event.dart';
 import 'package:velora/features/profile/presentation/bloc/profile_state.dart';
-import 'package:velora/features/profile/presentation/widgets/profile_header.dart';
-import 'package:velora/features/profile/presentation/widgets/profile_stats.dart';
-import 'package:velora/features/profile/presentation/widgets/profile_actions.dart';
-import 'package:velora/features/profile/presentation/widgets/profile_tabs.dart';
-import 'package:velora/features/profile/presentation/widgets/profile_grid.dart';
+import 'package:velora/features/profile/presentation/widgets/organisms/profile_impact_body.dart';
 import 'package:velora/routes/app_router.dart';
 
-/// Screen for displaying other user's profile (not the current logged-in user)
 class OtherUserProfileScreen extends StatelessWidget {
-  final String userId;
+  const OtherUserProfileScreen({
+    super.key,
+    required this.userId,
+  });
 
-  const OtherUserProfileScreen({super.key, required this.userId});
+  final String userId;
 
   @override
   Widget build(BuildContext context) {
-    // Create isolated FeedBloc instance for this user's posts
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -37,368 +34,85 @@ class OtherUserProfileScreen extends StatelessWidget {
             ..add(FeedEvent.loadInitialFeed(limit: 20, userId: userId)),
         ),
       ],
-      child: _UserProfileContent(userId: userId),
+      child: _OtherUserProfileContent(userId: userId),
     );
   }
 }
 
-class _UserProfileContent extends HookWidget {
-  final String userId;
+class _OtherUserProfileContent extends HookWidget {
+  const _OtherUserProfileContent({required this.userId});
 
-  const _UserProfileContent({required this.userId});
+  final String userId;
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
     final tabController = useTabController(initialLength: 4);
+
+    Future<void> refresh() async {
+      context.read<ProfileBloc>().add(LoadProfileEvent(userId: userId));
+      context.read<FeedBloc>().add(
+            FeedEvent.loadInitialFeed(limit: 20, userId: userId),
+          );
+    }
 
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, profileState) {
-        final profile = profileState.profile;
+        return BlocBuilder<FeedBloc, FeedState>(
+          builder: (context, feedState) {
+            final profile = profileState.profile;
+            final reports = feedState.posts;
 
-        return Scaffold(
-          backgroundColor: colorScheme.surface,
-          appBar: AppBar(
-            backgroundColor: colorScheme.surface,
-            elevation: 0,
-            leading: const BackButton(),
-            title: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                if (profile?.isPrivate == true)
-                  const Icon(Icons.lock_outline, size: 16),
-                const SizedBox(width: 4),
-                Text(
-                  profile?.username ?? '...',
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
-            ),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.more_vert),
-                onPressed: () {
-                  // Note: User options menu (report, block) will be implemented when moderation feature is ready
-                },
-              ),
-            ],
-          ),
-          body: profileState.isLoading
-              ? const Center(child: CircularProgressIndicator())
-              : profileState.error != null
-                  ? Center(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            Icons.error_outline,
-                            size: 64,
-                            color: colorScheme.error,
-                          ),
-                          const SizedBox(height: 16),
-                          Text(
-                            profileState.error!,
-                            style: theme.textTheme.bodyLarge?.copyWith(
-                              color: colorScheme.error,
+            return ProfileImpactBody(
+              tabController: tabController,
+              profile: profile,
+              reports: reports,
+              isMe: false,
+              isFollowing: profileState.isFollowing,
+              isFollowRequestPending: profileState.isFollowRequestPending,
+              isLoading:
+                  profileState.isLoading || feedState.isLoadingInitial,
+              error: profileState.error ?? feedState.errorFeed,
+              onRefresh: refresh,
+              onCreateReport: null,
+              onEditProfile: null,
+              onSettings: null,
+              onFollowToggle: profile == null
+                  ? null
+                  : () {
+                      context.read<ProfileBloc>().add(
+                            ToggleFollowEvent(
+                              targetUserId: profile.id,
+                              isPrivate: profile.isPrivate,
                             ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      ),
-                    )
-                  : RefreshIndicator(
-                      onRefresh: () async {
-                        final targetUserId = profile?.id ?? userId;
-                        context.read<ProfileBloc>().add(
-                              LoadProfileEvent(userId: targetUserId),
-                            );
-                        context.read<FeedBloc>().add(
-                              FeedEvent.loadInitialFeed(
-                                  limit: 20, userId: targetUserId),
-                            );
-                      },
-                      child: NestedScrollView(
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        headerSliverBuilder: (context, innerBoxIsScrolled) {
-                          return [
-                            SliverToBoxAdapter(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(height: 16),
-                                  // Profile Header Section
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 16,
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        ProfileHeader(
-                                          imageUrl: profile?.avatarUrl,
-                                          showAddButton: false,
-                                        ),
-                                        const SizedBox(width: 24),
-                                        Expanded(
-                                          child:
-                                              BlocBuilder<FeedBloc, FeedState>(
-                                            builder: (context, feedState) {
-                                              return ProfileStats(
-                                                postsCount:
-                                                    feedState.posts.length,
-                                                followersCount:
-                                                    profile?.followersCount ??
-                                                        0,
-                                                followingCount:
-                                                    profile?.followingCount ??
-                                                        0,
-                                                onPostsTap: () {},
-                                                onFollowersTap: () {
-                                                  if (profile != null) {
-                                                    context.pushNamed(
-                                                      AppRouteName
-                                                          .relationDetail,
-                                                      pathParameters: {
-                                                        'userId': profile.id
-                                                      },
-                                                      queryParameters: {
-                                                        'tab': '0'
-                                                      },
-                                                    );
-                                                  }
-                                                },
-                                                onFollowingTap: () {
-                                                  if (profile != null) {
-                                                    context.pushNamed(
-                                                      AppRouteName
-                                                          .relationDetail,
-                                                      pathParameters: {
-                                                        'userId': profile.id
-                                                      },
-                                                      queryParameters: {
-                                                        'tab': '1'
-                                                      },
-                                                    );
-                                                  }
-                                                },
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(height: 12),
-
-                                  // Profile Info Section
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 16,
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        if (profile?.fullName?.isNotEmpty ==
-                                            true)
-                                          Text(
-                                            profile!.fullName!,
-                                            style: const TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        if (profile?.bio != null &&
-                                            profile!.bio!.isNotEmpty) ...[
-                                          const SizedBox(height: 4),
-                                          Text(
-                                            profile.bio!,
-                                            style:
-                                                const TextStyle(fontSize: 14),
-                                            maxLines: 3,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ],
-                                        const SizedBox(height: 4),
-                                        Row(
-                                          children: [
-                                            const Icon(
-                                              Icons.alternate_email,
-                                              size: 14,
-                                            ),
-                                            const SizedBox(width: 4),
-                                            Text(
-                                              profile?.username ?? '',
-                                              style: const TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(height: 12),
-
-                                  // Action Buttons Section (Follow/Message)
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 16,
-                                    ),
-                                    child: ProfileActions(
-                                      isMe: false,
-                                      isFollowing: profileState.isFollowing,
-                                      isFollowRequestPending:
-                                          profileState.isFollowRequestPending,
-                                      onEditProfile: () {},
-                                      onFollowToggle: () {
-                                        if (profile != null) {
-                                          context.read<ProfileBloc>().add(
-                                                ToggleFollowEvent(
-                                                  targetUserId: profile.id,
-                                                  isPrivate: profile.isPrivate,
-                                                ),
-                                              );
-                                        }
-                                      },
-                                      onShareProfile: () {
-                                        // Note: Profile sharing will be implemented when share feature is ready
-                                      },
-                                      onAddFriend: () {
-                                        // Note: Add friend functionality will be implemented when friend system is ready
-                                      },
-                                      onMessagePressed: () {
-                                        if (profile != null) {
-                                          context.pushNamed(
-                                            AppRouteName.chatDetail,
-                                            extra: ChatDetailArgs(
-                                              conversationId: '',
-                                              chatName: profile.fullName ??
-                                                  profile.username,
-                                              chatSubtitle:
-                                                  '@${profile.username}',
-                                              profileImageUrl:
-                                                  profile.avatarUrl ?? '',
-                                              isGroup: false,
-                                              peerUserId: profile.id,
-                                            ),
-                                          );
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                  const SizedBox(height: 16),
-
-                                  // Tabs Section
-                                  ProfileTabs(controller: tabController),
-                                ],
-                              ),
-                            ),
-                          ];
-                        },
-                        body: TabBarView(
-                          controller: tabController,
-                          children: [
-                            // Posts Grid Tab
-                            BlocBuilder<FeedBloc, FeedState>(
-                              builder: (context, feedState) {
-                                if (feedState.isLoadingInitial) {
-                                  return const Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                }
-                                if (feedState.posts.isEmpty) {
-                                  return CustomScrollView(
-                                    physics:
-                                        const AlwaysScrollableScrollPhysics(),
-                                    slivers: [
-                                      SliverFillRemaining(
-                                        child: Center(
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Icon(
-                                                Icons.photo_library_outlined,
-                                                size: 64,
-                                                color: colorScheme
-                                                    .onSurfaceVariant,
-                                              ),
-                                              const SizedBox(height: 16),
-                                              Text(
-                                                'No posts yet',
-                                                style: theme
-                                                    .textTheme.titleMedium
-                                                    ?.copyWith(
-                                                  color: colorScheme
-                                                      .onSurfaceVariant,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                }
-                                return ProfileGrid(
-                                  posts: feedState.posts
-                                      .expand((p) => p.imageUrls)
-                                      .toList(),
-                                  onPostTap: (index) {
-                                    // Calculate the actual post index from image index
-                                    int postIndex = 0;
-                                    int imageCount = 0;
-                                    for (int i = 0;
-                                        i < feedState.posts.length;
-                                        i++) {
-                                      final postImageCount =
-                                          feedState.posts[i].imageUrls.length;
-                                      if (imageCount + postImageCount > index) {
-                                        postIndex = i;
-                                        break;
-                                      }
-                                      imageCount += postImageCount;
-                                    }
-
-                                    final targetUserId = profile?.id ?? userId;
-                                    context.pushNamed(
-                                      AppRouteName.userPosts,
-                                      pathParameters: {'userId': targetUserId},
-                                      queryParameters: {
-                                        'index': postIndex.toString(),
-                                        'username': profile?.username ?? '',
-                                      },
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-
-                            // Reels Tab (placeholder)
-                            const Center(
-                              child: Icon(
-                                Icons.video_collection_outlined,
-                                size: 64,
-                              ),
-                            ),
-
-                            // Tagged Tab (placeholder)
-                            const Center(
-                              child: Icon(Icons.person_pin_outlined, size: 64),
-                            ),
-
-                            // Saved Tab (placeholder)
-                            const Center(
-                              child: Icon(Icons.bookmark_outline, size: 64),
-                            ),
-                          ],
+                          );
+                    },
+              onMessage: profile == null
+                  ? null
+                  : () {
+                      context.pushNamed(
+                        AppRouteName.chatDetail,
+                        extra: ChatDetailArgs(
+                          conversationId: '',
+                          chatName: profile.fullName ?? profile.username,
+                          chatSubtitle: '@${profile.username}',
+                          profileImageUrl: profile.avatarUrl ?? '',
+                          isGroup: false,
+                          peerUserId: profile.id,
                         ),
-                      ),
-                    ),
+                      );
+                    },
+              onReportTap: (index) {
+                context.pushNamed(
+                  AppRouteName.userPosts,
+                  pathParameters: {'userId': profile?.id ?? userId},
+                  queryParameters: {
+                    'index': index.toString(),
+                    'username': profile?.username ?? '',
+                  },
+                );
+              },
+            );
+          },
         );
       },
     );

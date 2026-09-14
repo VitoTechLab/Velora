@@ -10,8 +10,6 @@ import 'package:velora/features/feed/presentation/widgets/feed_card.dart';
 import 'package:velora/features/feed/presentation/widgets/feed_loading_shimmer.dart';
 import 'package:velora/features/social_relation/presentation/bloc/social_relation_bloc.dart';
 
-/// Screen for displaying user's posts in a scrollable list
-/// Scrolls to the initial post index when opened
 class UserPostsScreen extends StatelessWidget {
   final String userId;
   final int initialPostIndex;
@@ -70,7 +68,7 @@ class _UserPostsContent extends HookWidget {
         elevation: 0,
         leading: const BackButton(),
         title: Text(
-          username != null ? 'Posts' : 'Posts',
+          username != null ? 'Impact updates' : 'Updates',
           style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
@@ -81,13 +79,10 @@ class _UserPostsContent extends HookWidget {
         listenWhen: (previous, current) =>
             previous.isLoadingInitial && !current.isLoadingInitial,
         listener: (context, state) {
-          // Scroll to initial post after loading completes
           if (!hasScrolledToInitial.value && state.posts.isNotEmpty) {
             hasScrolledToInitial.value = true;
             WidgetsBinding.instance.addPostFrameCallback((_) {
               if (scrollController.hasClients && initialPostIndex > 0) {
-                // Estimate the position based on post index
-                // Each FeedCard has approximate height
                 final estimatedPosition = initialPostIndex * 500.0;
                 scrollController.animateTo(
                   estimatedPosition.clamp(
@@ -112,13 +107,13 @@ class _UserPostsContent extends HookWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(
-                    Icons.photo_library_outlined,
+                    Icons.assignment_outlined,
                     size: 64,
                     color: colorScheme.onSurfaceVariant,
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'No posts yet',
+                    'No impact updates yet',
                     style: theme.textTheme.titleMedium?.copyWith(
                       color: colorScheme.onSurfaceVariant,
                     ),
@@ -141,7 +136,6 @@ class _UserPostsContent extends HookWidget {
               ),
               itemCount: state.posts.length + (state.isLoadingMore ? 1 : 0),
               itemBuilder: (context, index) {
-                // Show loading indicator at the end
                 if (index == state.posts.length) {
                   return const Padding(
                     padding: EdgeInsets.symmetric(vertical: 24.0),
@@ -157,9 +151,6 @@ class _UserPostsContent extends HookWidget {
                   child: FeedCard(
                     key: ValueKey('user_post_${post.id}'),
                     post: post,
-                    onTap: () {
-                      // Optional: Navigate to post detail
-                    },
                     onCommentTap: () {
                       CommentScreen.show(context, post);
                     },
