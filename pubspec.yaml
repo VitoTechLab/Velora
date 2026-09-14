@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.5.0 <4.0.0"
+  sdk: ">=3.8.0 <4.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -65,9 +65,9 @@ dependencies:
   geocoding: ^3.0.0
   permission_handler: ^12.0.0+1
   local_auth: ^2.3.0
-  google_mlkit_translation: ^0.13.0
-  google_mlkit_language_id: ^0.13.0
-  flutter_dotenv: ^6.0.0
+  google_mlkit_translation: ^0.13.1
+  google_mlkit_language_id: ^0.13.1
+  flutter_dotenv: ^6.0.1
 
   # Maps
   # latlong2: ^0.9.1
@@ -84,9 +84,9 @@ dependencies:
   photo_view: ^0.15.0
   photo_manager: ^3.7.1
   photo_manager_image_provider: ^2.2.0
-  file_picker: ^10.1.9
-  audioplayers: ^6.4.0
-  record: ^6.1.2
+  file_picker: ^11.0.2
+  audioplayers: ^6.7.1
+  record: ^7.1.0
 
   # UI / Animations / Widgets
   google_fonts: ^6.2.1
@@ -131,7 +131,7 @@ dependencies:
   csv: ^6.0.0
 
   # Code Generation (Annotations)
-  freezed_annotation: ^2.4.4
+  freezed_annotation: ^3.0.0
   json_annotation: ^4.9.0
 
   # Logger
@@ -157,9 +157,13 @@ dev_dependencies:
 
   # Code Generation
   build_runner: ^2.4.12
-  freezed: ^2.5.7
+  freezed: ^3.0.4
   json_serializable: ^6.9.5
   drift_dev: ^2.24.0
+
+
+dependency_overrides:
+  analyzer: 8.3.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -209,19 +213,21 @@ flutter:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/logo.png"
+  remove_alpha_ios: true
+  background_color_ios: "#FFFFFF"
+  image_path: "assets/images/logo-velora.png"
   min_sdk_android: 21
-  adaptive_icon_background: "#1A1A2E"
-  adaptive_icon_foreground: "assets/images/logo.png"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/images/logo-velora.png"
   web:
     generate: true
-    image_path: "assets/images/logo.png"
-    background_color: "#1A1A2E"
-    theme_color: "#1A1A2E"
+    image_path: "assets/images/logo-velora.png"
+    background_color: "#FFFFFF"
+    theme_color: "#FFFFFF"
   windows:
     generate: true
-    image_path: "assets/images/logo.png"
+    image_path: "assets/images/logo-velora.png"
     icon_size: 48
   macos:
     generate: true
-    image_path: "assets/images/logo.png"
+    image_path: "assets/images/logo-velora.png"
