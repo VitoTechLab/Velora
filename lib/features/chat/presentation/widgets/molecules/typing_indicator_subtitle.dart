@@ -45,8 +45,11 @@ class TypingIndicatorSubtitle extends StatelessWidget {
           );
         }
 
-        return BlocSelector<UserPresenceBloc, UserPresenceState,
-            ({bool isOnline, DateTime? lastSeen})>(
+        return BlocSelector<
+          UserPresenceBloc,
+          UserPresenceState,
+          ({bool isOnline, DateTime? lastSeen})
+        >(
           selector: (state) => (
             isOnline: state.onlineUsers[peerUserId] ?? false,
             lastSeen: state.lastSeen[peerUserId],
@@ -62,13 +65,6 @@ class TypingIndicatorSubtitle extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: colorScheme.tertiary,
                       shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: colorScheme.tertiary.withValues(alpha: 0.5),
-                          blurRadius: 4,
-                          spreadRadius: 1,
-                        ),
-                      ],
                     ),
                   ),
                   const SizedBox(width: 6),
@@ -192,8 +188,10 @@ class _TypingDotsAnimationState extends State<_TypingDotsAnimation>
           children: List.generate(3, (index) {
             final delay = index * 0.2;
             final value = (_controller.value - delay).clamp(0.0, 1.0);
-            final opacity =
-                (value < 0.5 ? value * 2 : (1 - value) * 2).clamp(0.3, 1.0);
+            final opacity = (value < 0.5 ? value * 2 : (1 - value) * 2).clamp(
+              0.3,
+              1.0,
+            );
             return Padding(
               padding: const EdgeInsets.only(right: 2),
               child: Opacity(

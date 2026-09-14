@@ -28,8 +28,9 @@ class MentionSuggestionsOverlay extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     return BlocProvider(
-      create: (_) => getIt<SearchUserBloc>()
-        ..add(SearchUserEvent.searchQueryChanged(query)),
+      create: (_) =>
+          getIt<SearchUserBloc>()
+            ..add(SearchUserEvent.searchQueryChanged(query)),
       child: BlocBuilder<SearchUserBloc, SearchUserState>(
         builder: (context, state) {
           if (state.isLoading) {
@@ -60,16 +61,7 @@ class MentionSuggestionsOverlay extends StatelessWidget {
       decoration: BoxDecoration(
         color: colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: colorScheme.outline.withValues(alpha: 0.2),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
-            blurRadius: 8,
-            offset: const Offset(0, -2),
-          ),
-        ],
+        border: Border.all(color: colorScheme.outline.withValues(alpha: 0.2)),
       ),
       child: Center(
         child: SizedBox(
@@ -94,9 +86,7 @@ class MentionSuggestionsOverlay extends StatelessWidget {
       decoration: BoxDecoration(
         color: colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: colorScheme.outline.withValues(alpha: 0.2),
-        ),
+        border: Border.all(color: colorScheme.outline.withValues(alpha: 0.2)),
       ),
       child: Row(
         children: [
@@ -133,17 +123,11 @@ class MentionSuggestionsOverlay extends StatelessWidget {
       decoration: BoxDecoration(
         color: colorScheme.errorContainer.withValues(alpha: 0.3),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: colorScheme.error.withValues(alpha: 0.3),
-        ),
+        border: Border.all(color: colorScheme.error.withValues(alpha: 0.3)),
       ),
       child: Row(
         children: [
-          Icon(
-            Icons.error_outline,
-            size: 20,
-            color: colorScheme.error,
-          ),
+          Icon(Icons.error_outline, size: 20, color: colorScheme.error),
           const SizedBox(width: 12),
           Expanded(
             child: Text(
@@ -171,16 +155,7 @@ class MentionSuggestionsOverlay extends StatelessWidget {
       decoration: BoxDecoration(
         color: colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: colorScheme.outline.withValues(alpha: 0.2),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
-            blurRadius: 8,
-            offset: const Offset(0, -2),
-          ),
-        ],
+        border: Border.all(color: colorScheme.outline.withValues(alpha: 0.2)),
       ),
       child: ListView.separated(
         shrinkWrap: true,
@@ -237,16 +212,16 @@ class MentionSuggestionsOverlay extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                           ...[
-                          const SizedBox(height: 2),
-                          Text(
-                            user.username,
-                            style: theme.textTheme.bodySmall?.copyWith(
-                              color: colorScheme.onSurfaceVariant,
+                            const SizedBox(height: 2),
+                            Text(
+                              user.username,
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                color: colorScheme.onSurfaceVariant,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
+                          ],
                         ],
                       ),
                     ),
