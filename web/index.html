@@ -31,26 +31,19 @@
 
   <title>velora</title>
   <link rel="manifest" href="manifest.json">
+  <style>
+    html,
+    body {
+      min-height: 100%;
+      margin: 0;
+      background:
+        radial-gradient(circle at 20% 18%, rgba(99, 102, 241, 0.22), transparent 34%),
+        radial-gradient(circle at 82% 12%, rgba(34, 211, 238, 0.18), transparent 30%),
+        linear-gradient(135deg, #f8fbff 0%, #eef4ff 48%, #f7fbff 100%);
+    }
+  </style>
 </head>
 <body>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js"></script>
-
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyDKfDUdU1PF6mhSmm1ht-NDQgUHCT9hVW8",
-      authDomain: "velora-vlab.firebaseapp.com",
-      projectId: "velora-vlab",
-      storageBucket: "velora-vlab.firebasestorage.app",
-      messagingSenderId: "292141038283",
-      appId: "1:292141038283:web:6768e7008d206e2130b94e",
-      measurementId: "G-05786E0JX9"
-    };
-    firebase.initializeApp(firebaseConfig);
-  </script>
-
   <script src="flutter_bootstrap.js" async></script>
-  <script src="firebase-messaging-sw.js"></script>
 </body>
 </html>
