@@ -42,7 +42,7 @@ class _ShimmerNotificationItem extends StatelessWidget {
             height: 48,
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(24),
+              borderRadius: BorderRadius.circular(12),
             ),
           ),
           const SizedBox(width: 12),

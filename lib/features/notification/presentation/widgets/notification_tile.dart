@@ -92,10 +92,7 @@ class NotificationTile extends StatelessWidget {
             child: notification.actorPhotoUrl == null
                 ? ShaderMask(
                     shaderCallback: (bounds) => LinearGradient(
-                      colors: [
-                        colorScheme.primary,
-                        colorScheme.secondary,
-                      ],
+                      colors: [colorScheme.primary, colorScheme.secondary],
                     ).createShader(bounds),
                     child: Icon(
                       _getNotificationIcon(),
@@ -115,26 +112,9 @@ class NotificationTile extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(4),
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    _getNotificationTypeColor(colorScheme),
-                    _getNotificationTypeColor(colorScheme)
-                        .withValues(alpha: 0.8),
-                  ],
-                ),
+                color: _getNotificationTypeColor(colorScheme),
                 shape: BoxShape.circle,
-                border: Border.all(
-                  color: colorScheme.surface,
-                  width: 2,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: _getNotificationTypeColor(colorScheme)
-                        .withValues(alpha: 0.4),
-                    blurRadius: 6,
-                    spreadRadius: 1,
-                  ),
-                ],
+                border: Border.all(color: colorScheme.surface, width: 2),
               ),
               child: Icon(
                 _getNotificationIcon(),
@@ -223,20 +203,8 @@ class NotificationTile extends StatelessWidget {
         width: 8,
         height: 8,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              colorScheme.primary,
-              colorScheme.secondary,
-            ],
-          ),
+          color: colorScheme.primary,
           shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: colorScheme.primary.withValues(alpha: 0.5),
-              blurRadius: 6,
-              spreadRadius: 1,
-            ),
-          ],
         ),
       );
     }
@@ -267,16 +235,9 @@ class NotificationTile extends StatelessWidget {
     if (notification.isFollowingActor) {
       return Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              colorScheme.surfaceContainerHighest.withValues(alpha: 0.8),
-              colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
-            ],
-          ),
+          color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.8),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: colorScheme.outline.withValues(alpha: 0.3),
-          ),
+          border: Border.all(color: colorScheme.outline.withValues(alpha: 0.3)),
         ),
         child: Material(
           color: Colors.transparent,
@@ -302,20 +263,8 @@ class NotificationTile extends StatelessWidget {
     // Not following - show "Follow back" with gradient
     return Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            colorScheme.primary,
-            colorScheme.secondary,
-          ],
-        ),
+        color: colorScheme.primary,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: colorScheme.primary.withValues(alpha: 0.3),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
-          ),
-        ],
       ),
       child: Material(
         color: Colors.transparent,

@@ -3,11 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:velora/features/notification/domain/entities/notification_entity.dart';
 
 class FollowRequestsCard extends StatelessWidget {
-  const FollowRequestsCard({
-    super.key,
-    required this.requests,
-    this.onTap,
-  });
+  const FollowRequestsCard({super.key, required this.requests, this.onTap});
 
   final List<NotificationEntity> requests;
   final VoidCallback? onTap;
@@ -30,32 +26,17 @@ class FollowRequestsCard extends StatelessWidget {
       builder: (context, value, child) {
         return Transform.scale(
           scale: 0.95 + (0.05 * value),
-          child: Opacity(
-            opacity: value,
-            child: child,
-          ),
+          child: Opacity(opacity: value, child: child),
         );
       },
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              colorScheme.primaryContainer.withValues(alpha: 0.3),
-              colorScheme.secondaryContainer.withValues(alpha: 0.3),
-            ],
-          ),
+          color: colorScheme.primaryContainer.withValues(alpha: 0.3),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
             color: colorScheme.outline.withValues(alpha: 0.15),
           ),
-          boxShadow: [
-            BoxShadow(
-              color: colorScheme.primary.withValues(alpha: 0.1),
-              blurRadius: 12,
-              offset: const Offset(0, 4),
-            ),
-          ],
         ),
         child: Material(
           color: Colors.transparent,
@@ -79,20 +60,7 @@ class FollowRequestsCard extends StatelessWidget {
                           child: Container(
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              gradient: LinearGradient(
-                                colors: [
-                                  colorScheme.primary.withValues(alpha: 0.6),
-                                  colorScheme.secondary.withValues(alpha: 0.6),
-                                ],
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: colorScheme.primary
-                                      .withValues(alpha: 0.3),
-                                  blurRadius: 6,
-                                  spreadRadius: 1,
-                                ),
-                              ],
+                              color: colorScheme.primary.withValues(alpha: 0.6),
                             ),
                             padding: const EdgeInsets.all(2),
                             child: Container(
@@ -109,17 +77,18 @@ class FollowRequestsCard extends StatelessWidget {
                                     colorScheme.surfaceContainerHighest,
                                 backgroundImage: request.actorPhotoUrl != null
                                     ? CachedNetworkImageProvider(
-                                        request.actorPhotoUrl!)
+                                        request.actorPhotoUrl!,
+                                      )
                                     : null,
                                 child: request.actorPhotoUrl == null
                                     ? ShaderMask(
                                         shaderCallback: (bounds) =>
                                             LinearGradient(
-                                          colors: [
-                                            colorScheme.primary,
-                                            colorScheme.secondary,
-                                          ],
-                                        ).createShader(bounds),
+                                              colors: [
+                                                colorScheme.primary,
+                                                colorScheme.secondary,
+                                              ],
+                                            ).createShader(bounds),
                                         child: const Icon(
                                           Icons.person,
                                           color: Colors.white,
@@ -168,29 +137,13 @@ class FollowRequestsCard extends StatelessWidget {
                           height: 8,
                           margin: const EdgeInsets.only(right: 8),
                           decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                colorScheme.primary,
-                                colorScheme.secondary,
-                              ],
-                            ),
+                            color: colorScheme.primary,
                             shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color:
-                                    colorScheme.primary.withValues(alpha: 0.5),
-                                blurRadius: 6,
-                                spreadRadius: 1,
-                              ),
-                            ],
                           ),
                         ),
                       ShaderMask(
                         shaderCallback: (bounds) => LinearGradient(
-                          colors: [
-                            colorScheme.primary,
-                            colorScheme.secondary,
-                          ],
+                          colors: [colorScheme.primary, colorScheme.secondary],
                         ).createShader(bounds),
                         child: const Icon(
                           Icons.chevron_right,
