@@ -6,9 +6,8 @@ part of 'campaign_update_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$CampaignUpdateModelImpl _$$CampaignUpdateModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$CampaignUpdateModelImpl(
+_CampaignUpdateModel _$CampaignUpdateModelFromJson(Map<String, dynamic> json) =>
+    _CampaignUpdateModel(
       id: json['id'] as String,
       campaignId: json['campaign_id'] as String,
       title: json['title'] as String?,
@@ -17,13 +16,13 @@ _$CampaignUpdateModelImpl _$$CampaignUpdateModelImplFromJson(
       createdAt: DateTime.parse(json['created_at'] as String),
     );
 
-Map<String, dynamic> _$$CampaignUpdateModelImplToJson(
-        _$CampaignUpdateModelImpl instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'campaign_id': instance.campaignId,
-      'title': instance.title,
-      'update_text': instance.updateText,
-      'image_url': instance.imageUrl,
-      'created_at': instance.createdAt.toIso8601String(),
-    };
+Map<String, dynamic> _$CampaignUpdateModelToJson(
+  _CampaignUpdateModel instance,
+) => <String, dynamic>{
+  'id': instance.id,
+  'campaign_id': instance.campaignId,
+  'title': instance.title,
+  'update_text': instance.updateText,
+  'image_url': instance.imageUrl,
+  'created_at': instance.createdAt.toIso8601String(),
+};

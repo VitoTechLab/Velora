@@ -6,9 +6,8 @@ part of 'withdrawal_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$WithdrawalModelImpl _$$WithdrawalModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$WithdrawalModelImpl(
+_WithdrawalModel _$WithdrawalModelFromJson(Map<String, dynamic> json) =>
+    _WithdrawalModel(
       id: json['id'] as String,
       campaignId: json['campaign_id'] as String,
       userId: json['user_id'] as String,
@@ -25,8 +24,7 @@ _$WithdrawalModelImpl _$$WithdrawalModelImplFromJson(
           : DateTime.parse(json['processed_at'] as String),
     );
 
-Map<String, dynamic> _$$WithdrawalModelImplToJson(
-        _$WithdrawalModelImpl instance) =>
+Map<String, dynamic> _$WithdrawalModelToJson(_WithdrawalModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'campaign_id': instance.campaignId,

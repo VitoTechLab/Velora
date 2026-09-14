@@ -6,8 +6,8 @@ part of 'donation_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$DonationModelImpl _$$DonationModelImplFromJson(Map<String, dynamic> json) =>
-    _$DonationModelImpl(
+_DonationModel _$DonationModelFromJson(Map<String, dynamic> json) =>
+    _DonationModel(
       id: json['id'] as String,
       campaignId: json['campaign_id'] as String,
       userId: json['user_id'] as String,
@@ -29,7 +29,7 @@ _$DonationModelImpl _$$DonationModelImplFromJson(Map<String, dynamic> json) =>
           _readCampaignImageUrl(json, 'campaign_image_url') as String?,
     );
 
-Map<String, dynamic> _$$DonationModelImplToJson(_$DonationModelImpl instance) =>
+Map<String, dynamic> _$DonationModelToJson(_DonationModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'campaign_id': instance.campaignId,
