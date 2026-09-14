@@ -6,9 +6,8 @@ part of 'event_content_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$EventPayloadModelImpl _$$EventPayloadModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$EventPayloadModelImpl(
+_EventPayloadModel _$EventPayloadModelFromJson(Map<String, dynamic> json) =>
+    _EventPayloadModel(
       messageId: json['message_id'] as String,
       title: json['title'] as String,
       description: json['description'] as String?,
@@ -25,8 +24,7 @@ _$EventPayloadModelImpl _$$EventPayloadModelImplFromJson(
       userResponse: json['user_response'] as String?,
     );
 
-Map<String, dynamic> _$$EventPayloadModelImplToJson(
-        _$EventPayloadModelImpl instance) =>
+Map<String, dynamic> _$EventPayloadModelToJson(_EventPayloadModel instance) =>
     <String, dynamic>{
       'message_id': instance.messageId,
       'title': instance.title,

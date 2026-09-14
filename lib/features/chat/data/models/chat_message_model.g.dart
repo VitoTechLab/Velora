@@ -6,9 +6,8 @@ part of 'chat_message_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ChatMessageModelImpl _$$ChatMessageModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ChatMessageModelImpl(
+_ChatMessageModel _$ChatMessageModelFromJson(Map<String, dynamic> json) =>
+    _ChatMessageModel(
       id: json['id'] as String,
       conversationId: json['conversation_id'] as String,
       senderId: json['sender_id'] as String?,
@@ -23,20 +22,24 @@ _$ChatMessageModelImpl _$$ChatMessageModelImplFromJson(
       pollPayload: json['message_poll_payload'] == null
           ? null
           : PollPayloadModel.fromJson(
-              json['message_poll_payload'] as Map<String, dynamic>),
+              json['message_poll_payload'] as Map<String, dynamic>,
+            ),
       eventPayload: json['message_event_payload'] == null
           ? null
           : EventPayloadModel.fromJson(
-              json['message_event_payload'] as Map<String, dynamic>),
-      attachments: (json['message_attachments'] as List<dynamic>?)
-              ?.map((e) =>
-                  MessageAttachmentModel.fromJson(e as Map<String, dynamic>))
+              json['message_event_payload'] as Map<String, dynamic>,
+            ),
+      attachments:
+          (json['message_attachments'] as List<dynamic>?)
+              ?.map(
+                (e) =>
+                    MessageAttachmentModel.fromJson(e as Map<String, dynamic>),
+              )
               .toList() ??
           const [],
     );
 
-Map<String, dynamic> _$$ChatMessageModelImplToJson(
-        _$ChatMessageModelImpl instance) =>
+Map<String, dynamic> _$ChatMessageModelToJson(_ChatMessageModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'conversation_id': instance.conversationId,
@@ -45,9 +48,13 @@ Map<String, dynamic> _$$ChatMessageModelImplToJson(
       'body': instance.body,
       'reply_to_message_id': instance.replyToMessageId,
       'edited_at': _$JsonConverterToJson<Object?, DateTime>(
-          instance.editedAt, const UtcDateTimeConverter().toJson),
+        instance.editedAt,
+        const UtcDateTimeConverter().toJson,
+      ),
       'deleted_at': _$JsonConverterToJson<Object?, DateTime>(
-          instance.deletedAt, const UtcDateTimeConverter().toJson),
+        instance.deletedAt,
+        const UtcDateTimeConverter().toJson,
+      ),
       'deleted_by': instance.deletedBy,
       'created_at': const UtcDateTimeConverter().toJson(instance.createdAt),
       'updated_at': const UtcDateTimeConverter().toJson(instance.updatedAt),
@@ -59,5 +66,4 @@ Map<String, dynamic> _$$ChatMessageModelImplToJson(
 Json? _$JsonConverterToJson<Json, Value>(
   Value? value,
   Json? Function(Value value) toJson,
-) =>
-    value == null ? null : toJson(value);
+) => value == null ? null : toJson(value);

@@ -7,7 +7,7 @@ part 'event_content_model.g.dart';
 
 /// Model for message_event_payload table + v_event_with_rsvp view
 @freezed
-class EventPayloadModel with _$EventPayloadModel {
+abstract class EventPayloadModel with _$EventPayloadModel {
   const factory EventPayloadModel({
     /// From message_event_payload table
     @JsonKey(name: 'message_id') required String messageId,

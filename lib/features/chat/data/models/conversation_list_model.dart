@@ -30,8 +30,19 @@ abstract class ConversationListModel with _$ConversationListModel {
     @JsonKey(name: 'unread_count') @Default(0) int unreadCount,
   }) = _ConversationListModel;
 
-  factory ConversationListModel.fromJson(Map<String, dynamic> json) =>
-      _$ConversationListModelFromJson(json);
+  factory ConversationListModel.fromJson(Map<String, dynamic> json) {
+    final normalized = Map<String, dynamic>.from(json);
+    final kind = normalized['last_message_kind'] ??
+        normalized['last_message_type'] ??
+        normalized['kind'];
+
+    normalized['last_message_body'] = _normalizeLastMessageBody(
+      normalized['last_message_body'],
+      kind,
+    );
+
+    return _$ConversationListModelFromJson(normalized);
+  }
 
   ConversationListEntity toEntity() => ConversationListEntity(
         conversationId: conversationId,
@@ -44,4 +55,29 @@ abstract class ConversationListModel with _$ConversationListModel {
         lastMessageSenderId: lastMessageSenderId,
         unreadCount: unreadCount,
       );
+
+  static String? _normalizeLastMessageBody(
+    Object? body,
+    Object? kind,
+  ) {
+    switch (kind?.toString().trim().toLowerCase()) {
+      case 'image':
+      case 'media':
+        return 'Photo';
+      case 'video':
+        return 'Video';
+      case 'audio':
+        return 'Audio';
+      case 'file':
+      case 'document':
+        return 'Document';
+      case 'poll':
+        return 'Poll';
+      case 'event':
+        return 'Event';
+      default:
+        final text = body?.toString().trim();
+        return text == null || text.isEmpty ? null : text;
+    }
+  }
 }
