@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 import 'package:velora/core/ui/app_messenger.dart';
 import 'package:velora/features/media/domain/entities/gallery_media_asset_entity.dart';
 import 'package:velora/features/media/presentation/bloc/media_gallery_bloc.dart';
-import 'package:velora/features/media/presentation/widgets/media_skeleton_tile.dart';
+import 'package:velora/features/media/presentation/widgets/atoms/media_skeleton_tile.dart';
+import 'package:velora/features/media/presentation/widgets/molecules/media_gallery_tile.dart';
 import 'package:velora/features/navigation/models/create_post_media_args.dart';
+import 'package:velora/l10n/app_localizations.dart';
 import 'package:velora/routes/app_router.dart';
 
 class MediaGalleryScreen extends HookWidget {
@@ -19,6 +20,7 @@ class MediaGalleryScreen extends HookWidget {
   Widget build(BuildContext context) {
     final scrollController = useScrollController();
     final mediaGalleryBloc = context.read<MediaGalleryBloc>();
+    final t = AppLocalizations.of(context)!;
 
     useEffect(() {
       mediaGalleryBloc.add(const MediaGalleryEvent.requestPermission());
@@ -44,7 +46,7 @@ class MediaGalleryScreen extends HookWidget {
 
       if (selectedMedia.isEmpty) {
         AppMessenger.showToast(
-          message: 'Please select at least one image',
+          message: t.chatGallerySelectAtLeastOne,
           icon: Icons.info_outline,
           duration: const Duration(seconds: 2),
         );
@@ -60,7 +62,7 @@ class MediaGalleryScreen extends HookWidget {
 
       if (files.isEmpty) {
         AppMessenger.showToast(
-          message: 'Unable to load the selected images. Please try again.',
+          message: t.chatGalleryUnableToLoad,
           icon: Icons.error_outline,
           isError: true,
           duration: const Duration(seconds: 3),
@@ -70,7 +72,7 @@ class MediaGalleryScreen extends HookWidget {
 
       if (files.length != selectedCount) {
         AppMessenger.showToast(
-          message: 'Some images could not be accessed. Please re-select them.',
+          message: t.chatGallerySomeImagesNotAccessed,
           icon: Icons.error_outline,
           isError: true,
           duration: const Duration(seconds: 3),
@@ -93,14 +95,7 @@ class MediaGalleryScreen extends HookWidget {
         elevation: 0,
         flexibleSpace: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                colorScheme.surface,
-                colorScheme.surfaceContainerLowest,
-              ],
-            ),
+            color: colorScheme.surface,
             border: Border(
               bottom: BorderSide(
                 color: colorScheme.outlineVariant.withValues(alpha: 0.3),
@@ -114,7 +109,7 @@ class MediaGalleryScreen extends HookWidget {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
-          'Select Photos',
+          t.chatGallerySelectPhotos,
           style: TextStyle(
             color: colorScheme.onSurface,
             fontSize: 18,
@@ -133,21 +128,10 @@ class MediaGalleryScreen extends HookWidget {
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            colorScheme.primaryContainer.withValues(alpha: 0.3),
-                            colorScheme.secondaryContainer
-                                .withValues(alpha: 0.2),
-                          ],
+                        color: colorScheme.primaryContainer.withValues(
+                          alpha: 0.3,
                         ),
                         shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: colorScheme.primary.withValues(alpha: 0.1),
-                            blurRadius: 8,
-                            spreadRadius: 1,
-                          ),
-                        ],
                       ),
                       child: SizedBox(
                         width: 20,
@@ -172,7 +156,7 @@ class MediaGalleryScreen extends HookWidget {
                             colorScheme.primary.withValues(alpha: 0.85),
                           ],
                         ),
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(12),
                   boxShadow: state.selectedMedia.isEmpty
                       ? null
                       : [
@@ -187,18 +171,19 @@ class MediaGalleryScreen extends HookWidget {
                   color: Colors.transparent,
                   child: InkWell(
                     onTap: state.selectedMedia.isEmpty ? null : onNextPressed,
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(12),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 20,
                         vertical: 8,
                       ),
                       child: Text(
-                        'Next',
+                        t.postCreateAppBarNext,
                         style: TextStyle(
                           color: state.selectedMedia.isEmpty
-                              ? colorScheme.onSurfaceVariant
-                                  .withValues(alpha: 0.4)
+                              ? colorScheme.onSurfaceVariant.withValues(
+                                  alpha: 0.4,
+                                )
                               : colorScheme.onPrimary,
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
@@ -258,21 +243,14 @@ class MediaGalleryScreen extends HookWidget {
       height: 280,
       margin: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: colorScheme.outlineVariant.withValues(alpha: 0.3),
           width: 1.5,
         ),
-        boxShadow: [
-          BoxShadow(
-            color: colorScheme.shadow.withValues(alpha: 0.12),
-            blurRadius: 20,
-            offset: const Offset(0, 8),
-          ),
-        ],
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(12),
         child: PageView.builder(
           itemCount: selectedMedia.length,
           itemBuilder: (context, index) {
@@ -285,22 +263,18 @@ class MediaGalleryScreen extends HookWidget {
                   asset.assetEntity,
                   fit: BoxFit.cover,
                   isOriginal: false,
-                  thumbnailSize: const ThumbnailSize.square(600),
+                  thumbnailSize: const ThumbnailSize(600, 600),
                   errorBuilder: (context, error, stackTrace) {
                     return Container(
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            colorScheme.surfaceContainerHighest,
-                            colorScheme.surfaceContainer,
-                          ],
-                        ),
+                        color: colorScheme.surfaceContainerHighest,
                       ),
                       child: Center(
                         child: Icon(
                           Icons.broken_image,
-                          color: colorScheme.onSurfaceVariant
-                              .withValues(alpha: 0.5),
+                          color: colorScheme.onSurfaceVariant.withValues(
+                            alpha: 0.5,
+                          ),
                           size: 48,
                         ),
                       ),
@@ -316,14 +290,7 @@ class MediaGalleryScreen extends HookWidget {
                   child: Container(
                     height: 100,
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                        colors: [
-                          colorScheme.surface.withValues(alpha: 0.85),
-                          Colors.transparent,
-                        ],
-                      ),
+                      color: colorScheme.surface.withValues(alpha: 0.85),
                     ),
                   ),
                 ),
@@ -334,28 +301,16 @@ class MediaGalleryScreen extends HookWidget {
                   right: 12,
                   child: Container(
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          colorScheme.error,
-                          colorScheme.error.withValues(alpha: 0.85),
-                        ],
-                      ),
+                      color: colorScheme.error,
                       shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: colorScheme.error.withValues(alpha: 0.3),
-                          blurRadius: 8,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
                     ),
                     child: Material(
                       color: Colors.transparent,
                       child: InkWell(
                         onTap: () {
                           context.read<MediaGalleryBloc>().add(
-                                MediaGalleryEvent.toggleSelection(asset),
-                              );
+                            MediaGalleryEvent.toggleSelection(asset),
+                          );
                         },
                         customBorder: const CircleBorder(),
                         child: Padding(
@@ -381,24 +336,12 @@ class MediaGalleryScreen extends HookWidget {
                       vertical: 7,
                     ),
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          colorScheme.primary,
-                          colorScheme.secondary,
-                        ],
-                      ),
-                      borderRadius: BorderRadius.circular(20),
+                      color: colorScheme.primary,
+                      borderRadius: BorderRadius.circular(12),
                       border: Border.all(
                         color: colorScheme.onPrimary.withValues(alpha: 0.2),
                         width: 1,
                       ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: colorScheme.primary.withValues(alpha: 0.4),
-                          blurRadius: 12,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
                     ),
                     child: Text(
                       '${index + 1} of ${selectedMedia.length}',
@@ -429,17 +372,20 @@ class MediaGalleryScreen extends HookWidget {
       return _mediaGallerySkeletonView();
     }
 
-    return MasonryGridView.count(
+    return GridView.builder(
       controller: controller,
-      crossAxisCount: 3,
-      mainAxisSpacing: 4,
-      crossAxisSpacing: 4,
       padding: const EdgeInsets.all(4),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        mainAxisSpacing: 4,
+        crossAxisSpacing: 4,
+        childAspectRatio: 1,
+      ),
       itemCount: state.mediaList.length + (state.isLoadingMore ? 9 : 0),
       itemBuilder: (context, index) {
         // Show skeleton tiles saat load more
         if (index >= state.mediaList.length) {
-          return const MediaSkeletonTile();
+          return const AspectRatio(aspectRatio: 1, child: MediaSkeletonTile());
         }
 
         final asset = state.mediaList[index];
@@ -448,104 +394,18 @@ class MediaGalleryScreen extends HookWidget {
             ? state.selectedMedia.indexWhere((a) => a.id == asset.id) + 1
             : 0;
 
-        return _buildMediaItem(context, asset, isSelected, selectionNumber);
-      },
-    );
-  }
-
-  Widget _buildMediaItem(
-    BuildContext context,
-    GalleryMediaAsset asset,
-    bool isSelected,
-    int selectionNumber,
-  ) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final aspect = asset.aspectRatio;
-
-    return GestureDetector(
-      onTap: () {
-        context.read<MediaGalleryBloc>().add(
+        return MediaGalleryTile(
+          asset: asset,
+          isSelected: isSelected,
+          selectionNumber: selectionNumber,
+          isDisabled: false,
+          onTap: () {
+            context.read<MediaGalleryBloc>().add(
               MediaGalleryEvent.toggleSelection(asset),
             );
+          },
+        );
       },
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 250),
-        curve: Curves.easeOut,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(
-            color: isSelected ? colorScheme.primary : Colors.transparent,
-            width: 2.5,
-          ),
-          boxShadow: isSelected
-              ? [
-                  BoxShadow(
-                    color: colorScheme.primary.withValues(alpha: 0.3),
-                    blurRadius: 12,
-                    spreadRadius: 1,
-                  ),
-                ]
-              : null,
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(6),
-          child: AspectRatio(
-            aspectRatio: aspect,
-            child: Stack(
-              children: [
-                // pakai Positioned.fill supaya cover
-                Positioned.fill(
-                  child: AssetEntityImage(
-                    asset.assetEntity,
-                    fit: BoxFit.cover,
-                    isOriginal: false,
-                    thumbnailSize: const ThumbnailSize.square(300),
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              colorScheme.surfaceContainerHighest,
-                              colorScheme.surfaceContainer,
-                            ],
-                          ),
-                        ),
-                        child: Center(
-                          child: Icon(
-                            Icons.broken_image,
-                            color: colorScheme.onSurfaceVariant
-                                .withValues(alpha: 0.5),
-                            size: 20,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-
-                if (isSelected)
-                  Positioned.fill(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            colorScheme.primary.withValues(alpha: 0.25),
-                            colorScheme.secondary.withValues(alpha: 0.15),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-
-                if (isSelected)
-                  Positioned(top: 8, right: 8, child: _badge(selectionNumber)),
-              ],
-            ),
-          ),
-        ),
-      ),
     );
   }
 
@@ -554,55 +414,17 @@ class MediaGalleryScreen extends HookWidget {
     return controller.position.extentAfter < 800;
   }
 
-  Widget _badge(int n) {
-    return Builder(
-      builder: (context) {
-        final colorScheme = Theme.of(context).colorScheme;
-        return Container(
-          width: 32,
-          height: 32,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                colorScheme.primary,
-                colorScheme.secondary,
-              ],
-            ),
-            shape: BoxShape.circle,
-            border: Border.all(
-              color: colorScheme.onPrimary.withValues(alpha: 0.3),
-              width: 1.5,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: colorScheme.primary.withValues(alpha: 0.4),
-                blurRadius: 8,
-                offset: const Offset(0, 2),
-              ),
-            ],
-          ),
-          child: Center(
-            child: Text(
-              '$n',
-              style: TextStyle(
-                color: colorScheme.onPrimary,
-                fontWeight: FontWeight.w900,
-                fontSize: 13,
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _mediaGallerySkeletonView() => MasonryGridView.count(
-        crossAxisCount: 3,
-        mainAxisSpacing: 4,
-        crossAxisSpacing: 4,
-        padding: const EdgeInsets.all(4),
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: 21,
-        itemBuilder: (_, __) => const MediaSkeletonTile(),
-      );
+  Widget _mediaGallerySkeletonView() => GridView.builder(
+    padding: const EdgeInsets.all(4),
+    physics: const NeverScrollableScrollPhysics(),
+    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 3,
+      mainAxisSpacing: 4,
+      crossAxisSpacing: 4,
+      childAspectRatio: 1,
+    ),
+    itemCount: 21,
+    itemBuilder: (_, __) =>
+        const AspectRatio(aspectRatio: 1, child: MediaSkeletonTile()),
+  );
 }
