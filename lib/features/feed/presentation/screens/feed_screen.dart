@@ -46,7 +46,8 @@ class FeedScreen extends HookWidget {
       if (currentScroll >= maxScroll - FeedLayoutConstants.loadMoreThreshold) {
         final bloc = context.read<FeedBloc>();
         final state = bloc.state;
-        final canLoadMore = !state.isLoadingMore &&
+        final canLoadMore =
+            !state.isLoadingMore &&
             !state.isLoadingInitial &&
             !state.isRefreshing &&
             state.hasMore &&
@@ -85,8 +86,8 @@ class FeedScreen extends HookWidget {
     // Load unread count once on mount
     useEffect(() {
       context.read<NotificationBloc>().add(
-            const NotificationEvent.loadUnreadCount(),
-          );
+        const NotificationEvent.loadUnreadCount(),
+      );
       return null;
     }, const []);
 
@@ -99,23 +100,22 @@ class FeedScreen extends HookWidget {
         elevation: 0,
         shadowColor: Colors.transparent,
         surfaceTintColor: Colors.transparent,
-        leading: IconButton(
-          onPressed: () {
-            context.pushNamed(AppRouteName.mediaGallery);
-          },
-          icon: Icon(
-            Icons.add_box_outlined,
-            size: 28,
-            color: Theme.of(context).colorScheme.onSurface,
-          ),
-        ),
+        automaticallyImplyLeading: false,
+        centerTitle: false,
         title: Text(
           'Velora',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.w700,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700),
         ),
         actions: [
+          IconButton(
+            tooltip: Localizations.localeOf(context).languageCode == 'id'
+                ? 'Cari'
+                : 'Search',
+            onPressed: () => context.pushNamed(AppRouteName.search),
+            icon: const Icon(Icons.search),
+          ),
           BlocBuilder<NotificationBloc, NotificationState>(
             buildWhen: (previous, current) =>
                 previous.unreadCount != current.unreadCount,
@@ -213,6 +213,7 @@ class FeedScreen extends HookWidget {
                   child: CustomScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     slivers: [
+                      const SliverToBoxAdapter(child: _FeedComposer()),
                       // Upload status card even when empty
                       if (showUploadStatus.value)
                         SliverToBoxAdapter(
@@ -238,6 +239,7 @@ class FeedScreen extends HookWidget {
                   ),
                   controller: scrollController,
                   slivers: [
+                    const SliverToBoxAdapter(child: _FeedComposer()),
                     // Upload status card at the top
                     if (showUploadStatus.value)
                       SliverToBoxAdapter(
@@ -254,9 +256,9 @@ class FeedScreen extends HookWidget {
                         (context, index) {
                           final postIndex =
                               FeedAdPositionCalculator.getPostIndex(
-                            index,
-                            posts.length,
-                          );
+                                index,
+                                posts.length,
+                              );
 
                           // Show loading indicator at the end
                           if (postIndex == -2 && state.isLoadingMore) {
@@ -274,16 +276,6 @@ class FeedScreen extends HookWidget {
                                         .surfaceContainerHighest
                                         .withValues(alpha: 0.5),
                                     borderRadius: BorderRadius.circular(16),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .shadow
-                                            .withValues(alpha: 0.05),
-                                        blurRadius: 8,
-                                        offset: const Offset(0, 2),
-                                      ),
-                                    ],
                                   ),
                                   child: SizedBox(
                                     width: 32,
@@ -335,9 +327,9 @@ class FeedScreen extends HookWidget {
                         semanticIndexCallback: (widget, localIndex) {
                           final postIndex =
                               FeedAdPositionCalculator.getPostIndex(
-                            localIndex,
-                            posts.length,
-                          );
+                                localIndex,
+                                posts.length,
+                              );
                           return postIndex < 0 ? null : postIndex;
                         },
                       ),
@@ -349,6 +341,34 @@ class FeedScreen extends HookWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _FeedComposer extends StatelessWidget {
+  const _FeedComposer();
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final id = Localizations.localeOf(context).languageCode == 'id';
+    return Column(
+      children: [
+        ListTile(
+          onTap: () => context.pushNamed(AppRouteName.mediaGallery),
+          title: Text(
+            id ? 'Bagikan cerita...' : 'Share a story...',
+            style: theme.textTheme.bodyLarge?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
+          ),
+          trailing: IconButton(
+            tooltip: id ? 'Tambahkan media' : 'Add media',
+            onPressed: () => context.pushNamed(AppRouteName.mediaGallery),
+            icon: const Icon(Icons.add_photo_alternate_outlined),
+          ),
+        ),
+        const Divider(height: 1),
+      ],
     );
   }
 }

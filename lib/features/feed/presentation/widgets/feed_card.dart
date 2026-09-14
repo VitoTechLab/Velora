@@ -1,3 +1,4 @@
+import 'thread_post_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -66,8 +67,9 @@ class FeedCard extends HookWidget {
     void handleLikeToggle() {
       isLiked.value = !isLiked.value;
       if (likesCount.value != null) {
-        likesCount.value =
-            isLiked.value ? likesCount.value! + 1 : likesCount.value! - 1;
+        likesCount.value = isLiked.value
+            ? likesCount.value! + 1
+            : likesCount.value! - 1;
       }
 
       context.read<FeedBloc>().add(FeedEvent.toggleLikePost(post.id));
@@ -156,43 +158,68 @@ class FeedCard extends HookWidget {
         button: onTap != null,
         label: t.feedPostSemantics(author, summary, timeAgo),
         hint: onTap != null ? t.feedOpenPostHint : null,
-        child: ExcludeSemantics(
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            padding: const EdgeInsets.only(bottom: 16),
-            decoration: BoxDecoration(
-              color: colorScheme.surface,
+        child: Semantics(
+          explicitChildNodes: true,
+          child: ThreadPostLayout(
+            hasReplies: post.commentsCount > 0,
+            avatar: Semantics(
+              button: !post.isMe,
+              label: author,
+              child: InkWell(
+                onTap: post.isMe
+                    ? null
+                    : () => context.pushNamed(
+                        AppRouteName.userProfile,
+                        pathParameters: {'userId': post.userId},
+                      ),
+                child: SizedBox.square(
+                  dimension: 48,
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: CircleAvatar(
+                      radius: 20,
+                      backgroundColor: colorScheme.surfaceContainerHighest,
+                      backgroundImage: post.photoUrl?.isNotEmpty == true
+                          ? CachedNetworkImageProvider(post.photoUrl!)
+                          : null,
+                      child: post.photoUrl?.isNotEmpty == true
+                          ? null
+                          : Icon(
+                              Icons.person_outline,
+                              color: colorScheme.onSurfaceVariant,
+                            ),
+                    ),
+                  ),
+                ),
+              ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildHeader(
-                  context,
-                  textTheme,
-                  colorScheme,
-                  t,
-                  isFollowing.value,
-                  hasFollowRequest.value,
-                  handleFollowToggle,
-                ),
-                if (post.imageUrls.isNotEmpty)
-                  _buildImageStrip(context, colorScheme, t),
-                _buildActionBar(
-                  context,
-                  colorScheme,
-                  textTheme,
-                  isLiked.value,
-                  likesCount.value,
-                  isBookmarked.value,
-                  handleLikeToggle,
-                  handleBookmarkToggle,
-                  onCommentTap ?? onTap,
-                  t,
-                ),
-                _buildContent(context, textTheme, t),
-                if (post.campaignId != null)
-                  _buildCampaignCard(context, colorScheme, textTheme, t),
-              ],
+            header: _buildHeader(
+              context,
+              textTheme,
+              colorScheme,
+              t,
+              isFollowing.value,
+              hasFollowRequest.value,
+              handleFollowToggle,
+            ),
+            content: _buildContent(context, textTheme, t),
+            campaign: post.campaignId != null
+                ? _buildCampaignCard(context, colorScheme, textTheme, t)
+                : null,
+            media: post.imageUrls.isNotEmpty
+                ? _buildImageStrip(context, colorScheme, t)
+                : null,
+            actions: _buildActionBar(
+              context,
+              colorScheme,
+              textTheme,
+              isLiked.value,
+              likesCount.value,
+              isBookmarked.value,
+              handleLikeToggle,
+              handleBookmarkToggle,
+              onCommentTap ?? onTap,
+              t,
             ),
           ),
         ),
@@ -209,148 +236,56 @@ class FeedCard extends HookWidget {
     bool hasFollowRequest,
     VoidCallback onFollowToggle,
   ) {
-    // Subtitle untuk sound/music (bisa dari campaign atau music attribute)
-    final subtitle = post.campaignTitle;
-    final hasSubtitle = subtitle != null && subtitle.isNotEmpty;
-
-    void navigateToUserProfile() {
-      if (!post.isMe) {
-        context.pushNamed(
-          AppRouteName.userProfile,
-          pathParameters: {'userId': post.userId},
-        );
-      }
-    }
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      child: Row(
-        children: [
-          GestureDetector(
-            onTap: navigateToUserProfile,
-            child: CircleAvatar(
-              radius: 18,
-              backgroundImage: post.photoUrl != null
-                  ? CachedNetworkImageProvider(post.photoUrl!)
-                  : null,
-              child: post.photoUrl == null
-                  ? const Icon(Icons.person, size: 20)
-                  : null,
-            ),
-          ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: hasSubtitle
-                  ? MainAxisAlignment.center
-                  : MainAxisAlignment.center,
-              children: [
-                Row(
-                  children: [
-                    Flexible(
-                      child: GestureDetector(
-                        onTap: navigateToUserProfile,
-                        child: Text(
-                          post.username ?? t.feedUnknownUser,
-                          style: textTheme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 4),
-                    Text(
-                      '• ${FormatUtils.formatTimeAgo(post.createdAt, context: context)}',
-                      style: textTheme.bodySmall?.copyWith(
-                        color: colorScheme.onSurfaceVariant,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
-                ),
-                if (hasSubtitle) ...[
-                  const SizedBox(height: 2),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.music_note,
-                        size: 12,
-                        color: colorScheme.onSurfaceVariant,
-                      ),
-                      const SizedBox(width: 4),
-                      Flexible(
-                        child: Text(
-                          subtitle,
-                          style: textTheme.bodySmall?.copyWith(
-                            color: colorScheme.onSurfaceVariant,
-                            fontSize: 12,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
+    final id = Localizations.localeOf(context).languageCode == 'id';
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: InkWell(
+            onTap: post.isMe
+                ? null
+                : () => context.pushNamed(
+                    AppRouteName.userProfile,
+                    pathParameters: {'userId': post.userId},
                   ),
-                ],
-              ],
-            ),
-          ),
-          // Follow button - only show when not own post, not following, and no pending request
-          if (!post.isMe && !isFollowing && !hasFollowRequest) ...[
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    colorScheme.primary,
-                    colorScheme.primary.withValues(alpha: 0.85),
-                  ],
-                ),
-                borderRadius: BorderRadius.circular(8),
-                boxShadow: [
-                  BoxShadow(
-                    color: colorScheme.primary.withValues(alpha: 0.3),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 2, bottom: 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    post.username ?? t.feedUnknownUser,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  Text(
+                    FormatUtils.formatTimeAgo(post.createdAt, context: context),
+                    style: textTheme.bodySmall?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                    ),
                   ),
                 ],
               ),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: onFollowToggle,
-                  borderRadius: BorderRadius.circular(8),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
-                    ),
-                    child: Text(
-                      'Follow',
-                      style: textTheme.labelMedium?.copyWith(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 13,
-                        color: colorScheme.onPrimary,
-                        letterSpacing: 0.2,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
             ),
-            const SizedBox(width: 8),
-          ],
-          IconButton(
-            icon: const Icon(Icons.more_vert, size: 20),
-            onPressed: () {
-              // Show options menu
-            },
-            padding: EdgeInsets.zero,
-            constraints: const BoxConstraints(),
           ),
-        ],
-      ),
+        ),
+        if (!post.isMe && !isFollowing && !hasFollowRequest)
+          TextButton(
+            onPressed: onFollowToggle,
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+            ),
+            child: Text(id ? 'Ikuti' : 'Follow'),
+          ),
+        IconButton(
+          tooltip: id ? 'Opsi posting' : 'Post options',
+          icon: const Icon(Icons.more_horiz, size: 20),
+          onPressed: () {},
+        ),
+      ],
     );
   }
 
@@ -362,19 +297,8 @@ class FeedCard extends HookWidget {
     if (post.content.isEmpty) return const SizedBox.shrink();
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(12, 6, 12, 4),
-      child: RichText(
-        text: TextSpan(
-          style: textTheme.bodyMedium?.copyWith(fontSize: 14),
-          children: [
-            TextSpan(
-              text: '${post.username ?? t.feedUnknownUser} ',
-              style: const TextStyle(fontWeight: FontWeight.w600),
-            ),
-            TextSpan(text: post.content),
-          ],
-        ),
-      ),
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Text(post.content, style: textTheme.bodyLarge),
     );
   }
 
@@ -389,21 +313,14 @@ class FeedCard extends HookWidget {
         label: t.feedPostImageLabel,
         child: ExcludeSemantics(
           child: AspectRatio(
-            aspectRatio: 1.0,
+            aspectRatio: 4 / 3,
             child: CachedNetworkImage(
               imageUrl: post.imageUrls.first,
               fit: BoxFit.cover,
               width: double.infinity,
               placeholder: (context, url) => Container(
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      colorScheme.surfaceContainerHighest,
-                      colorScheme.surfaceContainerHigh,
-                    ],
-                  ),
+                  color: colorScheme.surfaceContainerHighest,
                 ),
                 child: Center(
                   child: CircularProgressIndicator(
@@ -423,7 +340,7 @@ class FeedCard extends HookWidget {
     }
 
     return AspectRatio(
-      aspectRatio: 1.0,
+      aspectRatio: 4 / 3,
       child: PageView.builder(
         itemCount: post.imageUrls.length,
         itemBuilder: (context, index) {
@@ -460,24 +377,12 @@ class FeedCard extends HookWidget {
                           vertical: 5,
                         ),
                         decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              Colors.black.withValues(alpha: 0.75),
-                              Colors.black.withValues(alpha: 0.65),
-                            ],
-                          ),
+                          color: Colors.black.withValues(alpha: 0.75),
                           borderRadius: BorderRadius.circular(14),
                           border: Border.all(
                             color: Colors.white.withValues(alpha: 0.15),
                             width: 0.5,
                           ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withValues(alpha: 0.3),
-                              blurRadius: 8,
-                              offset: const Offset(0, 2),
-                            ),
-                          ],
                         ),
                         child: Text(
                           '${index + 1}/${post.imageUrls.length}',
@@ -517,9 +422,7 @@ class FeedCard extends HookWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => Scaffold(
-                    appBar: AppBar(
-                      title: const Text('Campaign Detail'),
-                    ),
+                    appBar: AppBar(title: const Text('Campaign Detail')),
                     body: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -543,52 +446,28 @@ class FeedCard extends HookWidget {
             }
           },
           child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  colorScheme.primary.withValues(alpha: 0.12),
-                  colorScheme.primary.withValues(alpha: 0.06),
-                ],
-              ),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                color: colorScheme.primary.withValues(alpha: 0.25),
-                width: 1.5,
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: colorScheme.primary.withValues(alpha: 0.08),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
+              color: colorScheme.surfaceContainerLow,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: colorScheme.outlineVariant),
             ),
             child: Row(
               children: [
-                Container(
-                  padding: const EdgeInsets.all(6),
-                  decoration: BoxDecoration(
-                    color: colorScheme.primary.withValues(alpha: 0.15),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Icon(
-                    Icons.campaign,
-                    color: colorScheme.primary,
-                    size: 18,
-                  ),
+                Icon(
+                  Icons.volunteer_activism_outlined,
+                  color: colorScheme.onSurfaceVariant,
+                  size: 20,
                 ),
                 const SizedBox(width: 10),
                 Expanded(
                   child: Text(
                     campaignTitle,
-                    style: textTheme.bodySmall?.copyWith(
-                      fontWeight: FontWeight.w700,
-                      color: colorScheme.primary,
-                      fontSize: 13,
+                    style: textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: colorScheme.onSurface,
+                      fontSize: 14,
                       letterSpacing: 0.1,
                     ),
                   ),
@@ -619,8 +498,9 @@ class FeedCard extends HookWidget {
     AppLocalizations t,
   ) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      child: Row(
+      padding: EdgeInsets.zero,
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           _ActionItem(
             icon: isLiked ? Icons.favorite : Icons.favorite_border,
@@ -632,7 +512,7 @@ class FeedCard extends HookWidget {
             semanticsHint: isLiked ? t.feedUnlikeHint : t.feedLikeHint,
             isToggled: isLiked,
           ),
-          const SizedBox(width: 12),
+          const SizedBox(width: 4),
           _ActionItem(
             icon: Icons.mode_comment_outlined,
             count: post.commentsCount,
@@ -642,7 +522,7 @@ class FeedCard extends HookWidget {
             semanticsLabel: t.feedViewCommentsLabel,
             semanticsHint: t.feedViewCommentsHint,
           ),
-          const SizedBox(width: 12),
+          const SizedBox(width: 4),
           _ActionItem(
             icon: Icons.send_outlined,
             count: null,
@@ -658,7 +538,6 @@ class FeedCard extends HookWidget {
             semanticsLabel: t.feedShareLabel,
             semanticsHint: t.feedShareHint,
           ),
-          const Spacer(),
           Semantics(
             button: true,
             toggled: isBookmarked,
@@ -670,10 +549,10 @@ class FeedCard extends HookWidget {
                 onTap: onBookmarkToggle,
                 borderRadius: BorderRadius.circular(8),
                 child: Padding(
-                  padding: const EdgeInsets.all(6.0),
+                  padding: const EdgeInsets.all(12.0),
                   child: Icon(
                     isBookmarked ? Icons.bookmark : Icons.bookmark_border,
-                    size: 26,
+                    size: 24,
                     color: colorScheme.onSurface,
                   ),
                 ),
@@ -722,11 +601,11 @@ class _ActionItem extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             onTap: onTap,
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: BorderRadius.circular(12),
             splashColor: baseColor.withValues(alpha: 0.1),
             highlightColor: baseColor.withValues(alpha: 0.05),
             child: Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -735,7 +614,7 @@ class _ActionItem extends StatelessWidget {
                     duration: const Duration(milliseconds: 200),
                     child: Icon(
                       icon,
-                      size: 27,
+                      size: 24,
                       color: baseColor,
                       shadows: isToggled
                           ? [
