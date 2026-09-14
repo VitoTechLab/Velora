@@ -466,9 +466,7 @@ class ChatRepositoryImpl implements ChatRepository {
       await for (final model in remoteDataSource.watchTypingIndicators(
         conversationId: conversationId,
       )) {
-        if (model.isTyping) {
-          yield model.userId;
-        }
+        yield model.isTyping ? model.userId : '-${model.userId}';
       }
     } catch (e) {
       // Silent fail untuk typing indicator

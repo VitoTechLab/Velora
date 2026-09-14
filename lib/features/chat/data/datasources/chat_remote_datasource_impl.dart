@@ -64,9 +64,9 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
               *,
               message_poll_payload(
                 *,
-                poll_options(*)
+                poll_options:v_poll_options_with_votes(*)
               ),
-              message_event_payload(*),
+              message_event_payload:v_event_with_rsvp(*),
               message_attachments(*)
             ''').eq('conversation_id', conversationId);
 
@@ -134,7 +134,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
             .from(SupabaseTables.messages)
             .insert(payload)
             .select(
-                '*, message_poll_payload(*, poll_options(*)), message_event_payload(*)')
+                '*, message_poll_payload(*, poll_options:v_poll_options_with_votes(*)), message_event_payload:v_event_with_rsvp(*), message_attachments(*)')
             .single();
 
         return ChatMessageModel.fromJson(response);
@@ -219,7 +219,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
         final response = await _client
             .from(SupabaseTables.messages)
             .select(
-                '*, message_poll_payload(*, poll_options(*)), message_event_payload(*), message_attachments(*)')
+                '*, message_poll_payload(*, poll_options:v_poll_options_with_votes(*)), message_event_payload:v_event_with_rsvp(*), message_attachments(*)')
             .eq('id', messageId)
             .single();
 
@@ -284,9 +284,10 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
               *,
               message_poll_payload(
                 *,
-                poll_options(*)
+                poll_options:v_poll_options_with_votes(*)
               ),
-              message_event_payload(*)
+              message_event_payload:v_event_with_rsvp(*),
+              message_attachments(*)
             ''').eq('id', messageId).single();
 
         return ChatMessageModel.fromJson(fullMsg);

@@ -1188,40 +1188,51 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     );
     emit(state.copyWith(messages: [incoming, ...state.messages]));
 
-    // Update conversation list locally for real-time sync
-    // Only if we have the conversation in our list
+    // Update conversation list locally for real-time sync.
     if (state.conversationId != null) {
-      // Determine message preview text
-      String messagePreview;
-      switch (incoming.kind) {
-        case 'image':
-          messagePreview = '📷 Photo';
-        case 'video':
-          messagePreview = '🎬 Video';
-        case 'audio':
-          messagePreview = '🎵 Audio';
-        case 'document':
-          messagePreview = '📎 Document';
-        case 'poll':
-          messagePreview = '📊 Poll';
-        case 'event':
-          messagePreview = '📅 Event';
-        default:
-          messagePreview = incoming.body ?? '';
-      }
-
-      // Check if message is from current user
+      final messagePreview = _conversationPreviewFor(incoming);
       final currentUserId = Supabase.instance.client.auth.currentUser?.id;
       final isFromMe = incoming.senderId == currentUserId;
+      final isCurrentConversation =
+          state.conversationId == incoming.conversationId;
 
       add(UpdateConversationLocallyEvent(
-        conversationId: state.conversationId!,
+        conversationId: incoming.conversationId,
         lastMessageBody: messagePreview,
         lastMessageAt: incoming.createdAt,
         lastMessageSenderId: incoming.senderId,
-        // Increment unread only if message is not from current user
-        unreadCountDelta: isFromMe ? 0 : 1,
+        unreadCountDelta: isFromMe || isCurrentConversation ? 0 : 1,
       ));
+
+      if (!isFromMe && isCurrentConversation) {
+        add(
+          MarkConversationReadEvent(
+            conversationId: incoming.conversationId,
+            uptoMessageId: incoming.id,
+          ),
+        );
+      }
+    }
+  }
+
+  String _conversationPreviewFor(ChatMessageEntity message) {
+    switch (message.kind.toLowerCase()) {
+      case 'image':
+      case 'media':
+        return 'Photo';
+      case 'video':
+        return 'Video';
+      case 'audio':
+        return 'Audio';
+      case 'file':
+      case 'document':
+        return 'Document';
+      case 'poll':
+        return 'Poll';
+      case 'event':
+        return 'Event';
+      default:
+        return message.body ?? '';
     }
   }
 
@@ -1571,7 +1582,11 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     Emitter<ChatMessageState> emit,
   ) async {
     final updatedTyping = Map<String, DateTime>.from(state.typingUsers);
-    updatedTyping[event.userId] = DateTime.now();
+    if (event.userId.startsWith('-')) {
+      updatedTyping.remove(event.userId.substring(1));
+    } else {
+      updatedTyping[event.userId] = DateTime.now();
+    }
     emit(state.copyWith(typingUsers: updatedTyping));
   }
 
