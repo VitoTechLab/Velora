@@ -4,7 +4,7 @@ import 'package:velora/features/profile/data/models/update_profile_model.dart';
 part 'profile_event.freezed.dart';
 
 @freezed
-class ProfileEvent with _$ProfileEvent {
+abstract class ProfileEvent with _$ProfileEvent {
   const factory ProfileEvent.loadProfile({required String userId}) =
       LoadProfileEvent;
 

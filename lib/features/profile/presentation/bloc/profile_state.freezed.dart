@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,267 +9,278 @@ part of 'profile_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
 mixin _$ProfileState {
-  bool get isLoading => throw _privateConstructorUsedError;
-  UserProfileModel? get profile => throw _privateConstructorUsedError;
-  String? get error => throw _privateConstructorUsedError;
-  bool get isFollowing => throw _privateConstructorUsedError;
-  bool get isBlocked => throw _privateConstructorUsedError;
-  bool get isFollowRequestPending => throw _privateConstructorUsedError;
 
-  /// Create a copy of ProfileState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $ProfileStateCopyWith<ProfileState> get copyWith =>
-      throw _privateConstructorUsedError;
+ bool get isLoading; UserProfileEntity? get profile; String? get error; bool get isFollowing; bool get isBlocked; bool get isFollowRequestPending;
+/// Create a copy of ProfileState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ProfileStateCopyWith<ProfileState> get copyWith => _$ProfileStateCopyWithImpl<ProfileState>(this as ProfileState, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.profile, profile) || other.profile == profile)&&(identical(other.error, error) || other.error == error)&&(identical(other.isFollowing, isFollowing) || other.isFollowing == isFollowing)&&(identical(other.isBlocked, isBlocked) || other.isBlocked == isBlocked)&&(identical(other.isFollowRequestPending, isFollowRequestPending) || other.isFollowRequestPending == isFollowRequestPending));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,isLoading,profile,error,isFollowing,isBlocked,isFollowRequestPending);
+
+@override
+String toString() {
+  return 'ProfileState(isLoading: $isLoading, profile: $profile, error: $error, isFollowing: $isFollowing, isBlocked: $isBlocked, isFollowRequestPending: $isFollowRequestPending)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $ProfileStateCopyWith<$Res> {
-  factory $ProfileStateCopyWith(
-          ProfileState value, $Res Function(ProfileState) then) =
-      _$ProfileStateCopyWithImpl<$Res, ProfileState>;
-  @useResult
-  $Res call(
-      {bool isLoading,
-      UserProfileModel? profile,
-      String? error,
-      bool isFollowing,
-      bool isBlocked,
-      bool isFollowRequestPending});
+abstract mixin class $ProfileStateCopyWith<$Res>  {
+  factory $ProfileStateCopyWith(ProfileState value, $Res Function(ProfileState) _then) = _$ProfileStateCopyWithImpl;
+@useResult
+$Res call({
+ bool isLoading, UserProfileEntity? profile, String? error, bool isFollowing, bool isBlocked, bool isFollowRequestPending
+});
 
-  $UserProfileModelCopyWith<$Res>? get profile;
+
+
+
 }
-
 /// @nodoc
-class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
+class _$ProfileStateCopyWithImpl<$Res>
     implements $ProfileStateCopyWith<$Res> {
-  _$ProfileStateCopyWithImpl(this._value, this._then);
+  _$ProfileStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final ProfileState _self;
+  final $Res Function(ProfileState) _then;
 
-  /// Create a copy of ProfileState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isLoading = null,
-    Object? profile = freezed,
-    Object? error = freezed,
-    Object? isFollowing = null,
-    Object? isBlocked = null,
-    Object? isFollowRequestPending = null,
-  }) {
-    return _then(_value.copyWith(
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      profile: freezed == profile
-          ? _value.profile
-          : profile // ignore: cast_nullable_to_non_nullable
-              as UserProfileModel?,
-      error: freezed == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isFollowing: null == isFollowing
-          ? _value.isFollowing
-          : isFollowing // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isBlocked: null == isBlocked
-          ? _value.isBlocked
-          : isBlocked // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isFollowRequestPending: null == isFollowRequestPending
-          ? _value.isFollowRequestPending
-          : isFollowRequestPending // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
-  }
+/// Create a copy of ProfileState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? profile = freezed,Object? error = freezed,Object? isFollowing = null,Object? isBlocked = null,Object? isFollowRequestPending = null,}) {
+  return _then(_self.copyWith(
+isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as bool,profile: freezed == profile ? _self.profile : profile // ignore: cast_nullable_to_non_nullable
+as UserProfileEntity?,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as String?,isFollowing: null == isFollowing ? _self.isFollowing : isFollowing // ignore: cast_nullable_to_non_nullable
+as bool,isBlocked: null == isBlocked ? _self.isBlocked : isBlocked // ignore: cast_nullable_to_non_nullable
+as bool,isFollowRequestPending: null == isFollowRequestPending ? _self.isFollowRequestPending : isFollowRequestPending // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
 
-  /// Create a copy of ProfileState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $UserProfileModelCopyWith<$Res>? get profile {
-    if (_value.profile == null) {
-      return null;
-    }
+}
 
-    return $UserProfileModelCopyWith<$Res>(_value.profile!, (value) {
-      return _then(_value.copyWith(profile: value) as $Val);
-    });
-  }
+
+/// Adds pattern-matching-related methods to [ProfileState].
+extension ProfileStatePatterns on ProfileState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ProfileState value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _ProfileState() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ProfileState value)  $default,){
+final _that = this;
+switch (_that) {
+case _ProfileState():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ProfileState value)?  $default,){
+final _that = this;
+switch (_that) {
+case _ProfileState() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoading,  UserProfileEntity? profile,  String? error,  bool isFollowing,  bool isBlocked,  bool isFollowRequestPending)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _ProfileState() when $default != null:
+return $default(_that.isLoading,_that.profile,_that.error,_that.isFollowing,_that.isBlocked,_that.isFollowRequestPending);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoading,  UserProfileEntity? profile,  String? error,  bool isFollowing,  bool isBlocked,  bool isFollowRequestPending)  $default,) {final _that = this;
+switch (_that) {
+case _ProfileState():
+return $default(_that.isLoading,_that.profile,_that.error,_that.isFollowing,_that.isBlocked,_that.isFollowRequestPending);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoading,  UserProfileEntity? profile,  String? error,  bool isFollowing,  bool isBlocked,  bool isFollowRequestPending)?  $default,) {final _that = this;
+switch (_that) {
+case _ProfileState() when $default != null:
+return $default(_that.isLoading,_that.profile,_that.error,_that.isFollowing,_that.isBlocked,_that.isFollowRequestPending);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
-abstract class _$$ProfileStateImplCopyWith<$Res>
-    implements $ProfileStateCopyWith<$Res> {
-  factory _$$ProfileStateImplCopyWith(
-          _$ProfileStateImpl value, $Res Function(_$ProfileStateImpl) then) =
-      __$$ProfileStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {bool isLoading,
-      UserProfileModel? profile,
-      String? error,
-      bool isFollowing,
-      bool isBlocked,
-      bool isFollowRequestPending});
 
-  @override
-  $UserProfileModelCopyWith<$Res>? get profile;
+
+class _ProfileState implements ProfileState {
+  const _ProfileState({this.isLoading = false, this.profile, this.error, this.isFollowing = false, this.isBlocked = false, this.isFollowRequestPending = false});
+  
+
+@override@JsonKey() final  bool isLoading;
+@override final  UserProfileEntity? profile;
+@override final  String? error;
+@override@JsonKey() final  bool isFollowing;
+@override@JsonKey() final  bool isBlocked;
+@override@JsonKey() final  bool isFollowRequestPending;
+
+/// Create a copy of ProfileState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ProfileStateCopyWith<_ProfileState> get copyWith => __$ProfileStateCopyWithImpl<_ProfileState>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.profile, profile) || other.profile == profile)&&(identical(other.error, error) || other.error == error)&&(identical(other.isFollowing, isFollowing) || other.isFollowing == isFollowing)&&(identical(other.isBlocked, isBlocked) || other.isBlocked == isBlocked)&&(identical(other.isFollowRequestPending, isFollowRequestPending) || other.isFollowRequestPending == isFollowRequestPending));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,isLoading,profile,error,isFollowing,isBlocked,isFollowRequestPending);
+
+@override
+String toString() {
+  return 'ProfileState(isLoading: $isLoading, profile: $profile, error: $error, isFollowing: $isFollowing, isBlocked: $isBlocked, isFollowRequestPending: $isFollowRequestPending)';
+}
+
+
 }
 
 /// @nodoc
-class __$$ProfileStateImplCopyWithImpl<$Res>
-    extends _$ProfileStateCopyWithImpl<$Res, _$ProfileStateImpl>
-    implements _$$ProfileStateImplCopyWith<$Res> {
-  __$$ProfileStateImplCopyWithImpl(
-      _$ProfileStateImpl _value, $Res Function(_$ProfileStateImpl) _then)
-      : super(_value, _then);
+abstract mixin class _$ProfileStateCopyWith<$Res> implements $ProfileStateCopyWith<$Res> {
+  factory _$ProfileStateCopyWith(_ProfileState value, $Res Function(_ProfileState) _then) = __$ProfileStateCopyWithImpl;
+@override @useResult
+$Res call({
+ bool isLoading, UserProfileEntity? profile, String? error, bool isFollowing, bool isBlocked, bool isFollowRequestPending
+});
 
-  /// Create a copy of ProfileState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isLoading = null,
-    Object? profile = freezed,
-    Object? error = freezed,
-    Object? isFollowing = null,
-    Object? isBlocked = null,
-    Object? isFollowRequestPending = null,
-  }) {
-    return _then(_$ProfileStateImpl(
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      profile: freezed == profile
-          ? _value.profile
-          : profile // ignore: cast_nullable_to_non_nullable
-              as UserProfileModel?,
-      error: freezed == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isFollowing: null == isFollowing
-          ? _value.isFollowing
-          : isFollowing // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isBlocked: null == isBlocked
-          ? _value.isBlocked
-          : isBlocked // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isFollowRequestPending: null == isFollowRequestPending
-          ? _value.isFollowRequestPending
-          : isFollowRequestPending // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
+
+
+
 }
-
 /// @nodoc
+class __$ProfileStateCopyWithImpl<$Res>
+    implements _$ProfileStateCopyWith<$Res> {
+  __$ProfileStateCopyWithImpl(this._self, this._then);
 
-class _$ProfileStateImpl implements _ProfileState {
-  const _$ProfileStateImpl(
-      {this.isLoading = false,
-      this.profile,
-      this.error,
-      this.isFollowing = false,
-      this.isBlocked = false,
-      this.isFollowRequestPending = false});
+  final _ProfileState _self;
+  final $Res Function(_ProfileState) _then;
 
-  @override
-  @JsonKey()
-  final bool isLoading;
-  @override
-  final UserProfileModel? profile;
-  @override
-  final String? error;
-  @override
-  @JsonKey()
-  final bool isFollowing;
-  @override
-  @JsonKey()
-  final bool isBlocked;
-  @override
-  @JsonKey()
-  final bool isFollowRequestPending;
-
-  @override
-  String toString() {
-    return 'ProfileState(isLoading: $isLoading, profile: $profile, error: $error, isFollowing: $isFollowing, isBlocked: $isBlocked, isFollowRequestPending: $isFollowRequestPending)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ProfileStateImpl &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
-            (identical(other.profile, profile) || other.profile == profile) &&
-            (identical(other.error, error) || other.error == error) &&
-            (identical(other.isFollowing, isFollowing) ||
-                other.isFollowing == isFollowing) &&
-            (identical(other.isBlocked, isBlocked) ||
-                other.isBlocked == isBlocked) &&
-            (identical(other.isFollowRequestPending, isFollowRequestPending) ||
-                other.isFollowRequestPending == isFollowRequestPending));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, isLoading, profile, error,
-      isFollowing, isBlocked, isFollowRequestPending);
-
-  /// Create a copy of ProfileState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ProfileStateImplCopyWith<_$ProfileStateImpl> get copyWith =>
-      __$$ProfileStateImplCopyWithImpl<_$ProfileStateImpl>(this, _$identity);
+/// Create a copy of ProfileState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? profile = freezed,Object? error = freezed,Object? isFollowing = null,Object? isBlocked = null,Object? isFollowRequestPending = null,}) {
+  return _then(_ProfileState(
+isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as bool,profile: freezed == profile ? _self.profile : profile // ignore: cast_nullable_to_non_nullable
+as UserProfileEntity?,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as String?,isFollowing: null == isFollowing ? _self.isFollowing : isFollowing // ignore: cast_nullable_to_non_nullable
+as bool,isBlocked: null == isBlocked ? _self.isBlocked : isBlocked // ignore: cast_nullable_to_non_nullable
+as bool,isFollowRequestPending: null == isFollowRequestPending ? _self.isFollowRequestPending : isFollowRequestPending // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
 
-abstract class _ProfileState implements ProfileState {
-  const factory _ProfileState(
-      {final bool isLoading,
-      final UserProfileModel? profile,
-      final String? error,
-      final bool isFollowing,
-      final bool isBlocked,
-      final bool isFollowRequestPending}) = _$ProfileStateImpl;
 
-  @override
-  bool get isLoading;
-  @override
-  UserProfileModel? get profile;
-  @override
-  String? get error;
-  @override
-  bool get isFollowing;
-  @override
-  bool get isBlocked;
-  @override
-  bool get isFollowRequestPending;
-
-  /// Create a copy of ProfileState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ProfileStateImplCopyWith<_$ProfileStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
+
+// dart format on

@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:velora/features/profile/data/models/user_profile_model.dart';
+import 'package:velora/features/profile/domain/entities/user_profile_entity.dart';
 
 part 'profile_state.freezed.dart';
 
@@ -7,7 +7,7 @@ part 'profile_state.freezed.dart';
 abstract class ProfileState with _$ProfileState {
   const factory ProfileState({
     @Default(false) bool isLoading,
-    UserProfileModel? profile,
+    UserProfileEntity? profile,
     String? error,
     @Default(false) bool isFollowing,
     @Default(false) bool isBlocked,
