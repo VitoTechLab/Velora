@@ -15,7 +15,9 @@ class ProofGallerySection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
+        Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
+          runSpacing: 4,
           children: [
             Icon(
               Icons.photo_library_outlined,
@@ -77,16 +79,7 @@ class _ProofCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 160,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: colorScheme.shadow.withValues(alpha: 0.08),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12),
         child: Stack(
@@ -102,7 +95,8 @@ class _ProofCard extends StatelessWidget {
                   color: colorScheme.surfaceContainerHigh,
                   child: const Center(child: CircularProgressIndicator()),
                 ),
-                errorWidget: (context, url, error) => _buildPlaceholder(colorScheme),
+                errorWidget: (context, url, error) =>
+                    _buildPlaceholder(colorScheme),
               )
             else
               _buildPlaceholder(colorScheme),
@@ -113,16 +107,7 @@ class _ProofCard extends StatelessWidget {
               right: 0,
               child: Container(
                 padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.transparent,
-                      Colors.black.withValues(alpha: 0.7),
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
-                ),
+                decoration: BoxDecoration(color: Colors.transparent),
                 child: Text(
                   item.caption ?? '',
                   style: theme.textTheme.bodySmall?.copyWith(
@@ -142,16 +127,7 @@ class _ProofCard extends StatelessWidget {
 
   Widget _buildPlaceholder(ColorScheme colorScheme) {
     return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            colorScheme.primaryContainer,
-            colorScheme.secondaryContainer,
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-      ),
+      decoration: BoxDecoration(color: colorScheme.primaryContainer),
       child: Center(
         child: Icon(
           Icons.photo_camera_outlined,

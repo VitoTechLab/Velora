@@ -29,101 +29,42 @@ class TransparencyTabContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Trust Dashboard Header
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  colorScheme.primaryContainer.withValues(alpha: 0.5),
-                  colorScheme.secondaryContainer.withValues(alpha: 0.3),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: colorScheme.primary.withValues(alpha: 0.3),
-              ),
-            ),
-            child: Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: colorScheme.primary,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Icon(
-                    Icons.verified_user,
-                    color: colorScheme.onPrimary,
-                    size: 24,
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Trust Dashboard',
-                        style: theme.textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: colorScheme.onSurface,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        'Complete transparency on fund usage and project progress',
-                        style: theme.textTheme.bodySmall?.copyWith(
-                          color: colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 32),
-
           // 1. Fund Usage Breakdown
           FundBreakdownSection(items: fundBreakdown),
-          const SizedBox(height: 32),
+          const SizedBox(height: 24),
 
           Divider(color: colorScheme.outlineVariant.withValues(alpha: 0.5)),
-          const SizedBox(height: 32),
+          const SizedBox(height: 24),
 
           // 2. Documents
           DocumentsSection(documents: documents),
-          const SizedBox(height: 32),
+          const SizedBox(height: 24),
 
           Divider(color: colorScheme.outlineVariant.withValues(alpha: 0.5)),
-          const SizedBox(height: 32),
+          const SizedBox(height: 24),
 
           // 3. Milestones & Tranches
           MilestonesSection(milestones: milestones),
-          const SizedBox(height: 32),
+          const SizedBox(height: 24),
 
           Divider(color: colorScheme.outlineVariant.withValues(alpha: 0.5)),
-          const SizedBox(height: 32),
+          const SizedBox(height: 24),
 
           // 4. Proof Updates
           ProofGallerySection(proofItems: proofItems),
-          const SizedBox(height: 32),
+          const SizedBox(height: 24),
 
           // 5. Risk & Disclaimer (for equity/debt)
           if (showRiskDisclaimer && riskGrade != null) ...[
             Divider(color: colorScheme.outlineVariant.withValues(alpha: 0.5)),
-            const SizedBox(height: 32),
+            const SizedBox(height: 24),
             RiskDisclaimerSection(riskGrade: riskGrade!),
           ],
         ],

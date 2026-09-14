@@ -15,7 +15,9 @@ class DocumentsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
+        Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
+          runSpacing: 4,
           children: [
             Icon(
               Icons.description_outlined,
@@ -34,7 +36,7 @@ class DocumentsSection extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         Text(
-          'All legal and financial documents verified by third-party auditors',
+          'Supporting documents and their verification status',
           style: theme.textTheme.bodySmall?.copyWith(
             color: colorScheme.onSurfaceVariant,
           ),

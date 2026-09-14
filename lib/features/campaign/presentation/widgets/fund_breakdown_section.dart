@@ -14,7 +14,9 @@ class FundBreakdownSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
+        Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
+          runSpacing: 4,
           children: [
             Icon(Icons.pie_chart_outline, color: colorScheme.primary, size: 24),
             const SizedBox(width: 8),
@@ -32,16 +34,7 @@ class FundBreakdownSection extends StatelessWidget {
         // Segmented bar visualization
         Container(
           height: 24,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            boxShadow: [
-              BoxShadow(
-                color: colorScheme.shadow.withValues(alpha: 0.08),
-                blurRadius: 8,
-                offset: const Offset(0, 2),
-              ),
-            ],
-          ),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Row(

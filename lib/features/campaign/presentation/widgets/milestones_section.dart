@@ -16,7 +16,9 @@ class MilestonesSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
+        Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
+          runSpacing: 4,
           children: [
             Icon(Icons.flag_outlined, color: colorScheme.primary, size: 24),
             const SizedBox(width: 8),
