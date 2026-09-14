@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,191 +15,86 @@ class AdaptiveNavigationScaffold extends StatelessWidget {
     required this.currentIndex,
     required this.onDestinationSelected,
   });
-
   final Widget body;
   final List<NavigationTab> tabs;
   final int currentIndex;
   final ValueChanged<int> onDestinationSelected;
-
-  // Modern elegant icon sizes - smaller and refined
-  static const double _mobileIconSize = 24;
-  static const double _railIconSize = 24;
-  // Optimal stroke weight for clarity
-  static const double _iconStrokeWeight = 400;
-  // Spacing and padding
-  static const double _navBarHeight = 72;
-  static const double _railWidth = 80;
-
-  bool get _isIOS => defaultTargetPlatform == TargetPlatform.iOS;
+  Widget _icon(NavigationTab tab, bool selected) {
+    if (tab.id == AppRouteName.profile)
+      return _ProfileNavigationAvatar(selected: selected, size: 24);
+    final ios = defaultTargetPlatform == TargetPlatform.iOS;
+    return Icon(
+      ios
+          ? (selected ? tab.cupertinoActiveIcon : tab.cupertinoIcon)
+          : (selected ? tab.activeIcon : tab.icon),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
-    final useRail = size.width >= 1000;
-
-    if (useRail) {
+    final colors = Theme.of(context).colorScheme;
+    if (MediaQuery.sizeOf(context).width >= 1000) {
       return Scaffold(
         body: Row(
           children: [
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Theme.of(context).colorScheme.surface,
-                    Theme.of(context)
-                        .colorScheme
-                        .surfaceContainerHighest
-                        .withValues(alpha: 0.5),
-                  ],
-                ),
-              ),
-              child: SafeArea(child: _buildNavigationRail(context)),
+            NavigationRail(
+              selectedIndex: currentIndex,
+              onDestinationSelected: onDestinationSelected,
+              backgroundColor: colors.surface,
+              indicatorColor: Colors.transparent,
+              selectedIconTheme: IconThemeData(color: colors.primary),
+              labelType: NavigationRailLabelType.all,
+              destinations: tabs
+                  .map(
+                    (tab) => NavigationRailDestination(
+                      icon: _icon(tab, false),
+                      selectedIcon: _icon(tab, true),
+                      label: Text(tab.label),
+                    ),
+                  )
+                  .toList(),
             ),
-            Container(
-              width: 1,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Theme.of(context)
-                        .colorScheme
-                        .outline
-                        .withValues(alpha: 0.1),
-                    Theme.of(context)
-                        .colorScheme
-                        .outline
-                        .withValues(alpha: 0.05),
-                  ],
-                ),
-              ),
-            ),
+            VerticalDivider(width: 1, color: colors.outlineVariant),
             Expanded(child: SafeArea(child: body)),
           ],
         ),
       );
     }
-
     return Scaffold(
-      body: SafeArea(child: body),
-      bottomNavigationBar: _isIOS
-          ? _buildCupertinoTabBar(context)
-          : _buildMaterialNavigationBar(context),
-    );
-  }
-
-  Widget _buildNavigationRail(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return NavigationRail(
-      selectedIndex: currentIndex,
-      onDestinationSelected: onDestinationSelected,
-      labelType: NavigationRailLabelType.none,
-      groupAlignment: 0,
-      minWidth: _railWidth,
-      backgroundColor: Colors.transparent,
-      indicatorColor: colorScheme.primaryContainer.withValues(alpha: 0.3),
-      indicatorShape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      destinations: tabs
-          .asMap()
-          .entries
-          .map(
-            (entry) => NavigationRailDestination(
-              icon: _buildNavIcon(context, entry.value, entry.key, false,
-                  size: _railIconSize),
-              selectedIcon: _buildNavIcon(context, entry.value, entry.key, true,
-                  size: _railIconSize),
-              label: Text(entry.value.label),
-              padding: const EdgeInsets.symmetric(vertical: 8),
-            ),
-          )
-          .toList(),
-    );
-  }
-
-  Widget _buildMaterialNavigationBar(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return NavigationBar(
-      selectedIndex: currentIndex,
-      onDestinationSelected: onDestinationSelected,
-      height: _navBarHeight,
-      labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
-      backgroundColor: colorScheme.surface,
-      elevation: 0,
-      surfaceTintColor: Colors.transparent,
-      shadowColor: Colors.transparent,
-      indicatorColor: Colors.transparent,
-      overlayColor: WidgetStateProperty.all(Colors.transparent),
-      destinations: tabs
-          .asMap()
-          .entries
-          .map(
-            (entry) => NavigationDestination(
-              icon: _buildNavIcon(context, entry.value, entry.key, false,
-                  size: _mobileIconSize),
-              selectedIcon: _buildNavIcon(context, entry.value, entry.key, true,
-                  size: _mobileIconSize),
-              label: entry.value.label,
-            ),
-          )
-          .toList(),
-    );
-  }
-
-  Widget _buildCupertinoTabBar(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return CupertinoTabBar(
-      currentIndex: currentIndex,
-      onTap: onDestinationSelected,
-      iconSize: _mobileIconSize,
-      backgroundColor: colorScheme.surface,
-      border: Border(
-        top: BorderSide(
-          color: colorScheme.outline.withValues(alpha: 0.1),
-          width: 0.5,
+      body: SafeArea(bottom: false, child: body),
+      bottomNavigationBar: DecoratedBox(
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(color: colors.outlineVariant, width: .75),
+          ),
+        ),
+        child: NavigationBar(
+          selectedIndex: currentIndex,
+          onDestinationSelected: onDestinationSelected,
+          destinations: tabs
+              .map(
+                (tab) => NavigationDestination(
+                  icon: _icon(tab, false),
+                  selectedIcon: _icon(tab, true),
+                  label: tab.label,
+                  tooltip: tab.label,
+                ),
+              )
+              .toList(),
         ),
       ),
-      height: _navBarHeight,
-      items: tabs
-          .asMap()
-          .entries
-          .map(
-            (entry) => BottomNavigationBarItem(
-              icon: _buildNavIcon(context, entry.value, entry.key, false),
-              activeIcon: _buildNavIcon(context, entry.value, entry.key, true),
-              label: '',
-            ),
-          )
-          .toList(),
     );
   }
+}
 
-  /// Build navigation icon - shows avatar for profile tab, regular icon otherwise
-  Widget _buildNavIcon(
-    BuildContext context,
-    NavigationTab tab,
-    int index,
-    bool selected, {
-    double size = _mobileIconSize,
-  }) {
-    // Check if this is the profile tab
-    if (tab.id == AppRouteName.profile) {
-      return _buildProfileAvatar(context, selected, size: size);
-    }
+class _ProfileNavigationAvatar extends StatelessWidget {
+  const _ProfileNavigationAvatar({required this.selected, required this.size});
 
-    // Regular icon for other tabs
-    return _buildIconForTab(context, tab, selected, size: size);
-  }
+  final bool selected;
+  final double size;
 
-  /// Build profile avatar from ProfileBloc state
-  Widget _buildProfileAvatar(BuildContext context, bool selected,
-      {double size = _mobileIconSize}) {
+  @override
+  Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
     return BlocBuilder<ProfileBloc, ProfileState>(
@@ -208,28 +102,20 @@ class AdaptiveNavigationScaffold extends StatelessWidget {
           previous.profile?.avatarUrl != current.profile?.avatarUrl,
       builder: (context, state) {
         final avatarUrl = state.profile?.avatarUrl;
-        final avatarRenderSize = size - 6; // Space for gradient border
+        final renderSize = selected ? size - 4 : size;
 
         return Container(
           width: size,
           height: size,
-          padding: selected ? const EdgeInsets.all(2) : null,
+          padding: selected ? const EdgeInsets.all(2) : EdgeInsets.zero,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            gradient: selected
-                ? LinearGradient(
-                    colors: [
-                      colorScheme.primary,
-                      colorScheme.secondary,
-                    ],
-                  )
-                : null,
+            color: selected ? colorScheme.primary : Colors.transparent,
             boxShadow: selected
                 ? [
                     BoxShadow(
-                      color: colorScheme.primary.withValues(alpha: 0.3),
-                      blurRadius: 8,
-                      spreadRadius: 1,
+                      color: colorScheme.primary.withValues(alpha: 0.28),
+                      blurRadius: 12,
                     ),
                   ]
                 : null,
@@ -238,26 +124,21 @@ class AdaptiveNavigationScaffold extends StatelessWidget {
             child: avatarUrl != null && avatarUrl.isNotEmpty
                 ? CachedNetworkImage(
                     imageUrl: avatarUrl,
-                    width: avatarRenderSize,
-                    height: avatarRenderSize,
+                    width: renderSize,
+                    height: renderSize,
                     fit: BoxFit.cover,
-                    placeholder: (context, url) => _buildDefaultAvatar(
-                      colorScheme,
-                      avatarRenderSize,
-                    ),
-                    errorWidget: (context, url, error) => _buildDefaultAvatar(
-                      colorScheme,
-                      avatarRenderSize,
-                    ),
+                    placeholder: (context, url) =>
+                        _buildDefaultAvatar(colorScheme, renderSize),
+                    errorWidget: (context, url, error) =>
+                        _buildDefaultAvatar(colorScheme, renderSize),
                   )
-                : _buildDefaultAvatar(colorScheme, avatarRenderSize),
+                : _buildDefaultAvatar(colorScheme, renderSize),
           ),
         );
       },
     );
   }
 
-  /// Default avatar icon when no image available
   Widget _buildDefaultAvatar(ColorScheme colorScheme, double size) {
     return Container(
       width: size,
@@ -268,34 +149,9 @@ class AdaptiveNavigationScaffold extends StatelessWidget {
       ),
       child: Icon(
         Icons.person_rounded,
-        size: size * 0.6,
+        size: size * 0.62,
         color: colorScheme.onSurfaceVariant,
       ),
-    );
-  }
-
-  Widget _buildIconForTab(
-    BuildContext context,
-    NavigationTab tab,
-    bool selected, {
-    double size = _mobileIconSize,
-  }) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final isCupertino = _isIOS;
-
-    final icon = Icon(
-      isCupertino
-          ? (selected ? tab.cupertinoActiveIcon : tab.cupertinoIcon)
-          : (selected ? tab.activeIcon : tab.icon),
-      size: size,
-      color: selected ? colorScheme.primary : colorScheme.onSurfaceVariant,
-      weight: _iconStrokeWeight,
-      fill: selected ? 1.0 : 0.0,
-    );
-
-    return Padding(
-      padding: const EdgeInsets.all(12),
-      child: icon,
     );
   }
 }
