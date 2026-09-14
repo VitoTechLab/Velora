@@ -1,258 +1,151 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:intl/intl.dart';
 import '../../domain/entities/campaign_model.dart';
 import '../../domain/entities/campaign_type.dart';
-import 'verified_badge.dart';
-import 'category_pill.dart';
-import 'progress_bar.dart';
 
-String formatCurrency(double amount) {
-  if (amount >= 1000000000) {
-    return '${(amount / 1000000000).toStringAsFixed(1)}B';
-  } else if (amount >= 1000000) {
-    return '${(amount / 1000000).toStringAsFixed(1)}M';
-  } else if (amount >= 1000) {
-    return '${(amount / 1000).toStringAsFixed(0)}K';
-  }
-  return amount.toStringAsFixed(0);
-}
+String formatCurrency(double amount) =>
+    NumberFormat.decimalPattern('id_ID').format(amount);
 
+/// A shared story-first card. Compact previews retain the funding goal and owner.
 class CampaignCard extends StatelessWidget {
   final CampaignModel campaign;
   final VoidCallback? onTap;
-
-  const CampaignCard({super.key, required this.campaign, this.onTap});
+  final bool compact;
+  const CampaignCard({
+    super.key,
+    required this.campaign,
+    this.onTap,
+    this.compact = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
-    return Semantics(
-      button: true,
-      label:
-          'Campaign ${campaign.title} by ${campaign.creatorName}, ${campaign.progressPercent.toStringAsFixed(0)}% funded, ${campaign.timeLeftLabel} remaining',
+    final colors = theme.colorScheme;
+    final id = Localizations.localeOf(context).languageCode == 'id';
+    final progress = campaign.target > 0
+        ? (campaign.raised / campaign.target).clamp(0.0, 1.0)
+        : 0.0;
+    final metadata = theme.textTheme.bodySmall?.copyWith(
+      color: colors.onSurfaceVariant,
+    );
+    Widget visual() => ClipRRect(
+      borderRadius: BorderRadius.circular(compact ? 8 : 12),
+      child: AspectRatio(
+        aspectRatio: compact ? 1 : 16 / 9,
+        child: ColoredBox(
+          color: colors.surfaceContainerLow,
+          child: campaign.imageUrl?.isNotEmpty == true
+              ? CachedNetworkImage(
+                  imageUrl: campaign.imageUrl!,
+                  fit: BoxFit.cover,
+                  placeholder: (_, _) => const SizedBox.expand(),
+                  errorWidget: (_, _, _) => Icon(
+                    Icons.image_outlined,
+                    color: colors.onSurfaceVariant,
+                  ),
+                )
+              : Icon(Icons.image_outlined, color: colors.onSurfaceVariant),
+        ),
+      ),
+    );
+    final details = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          campaign.category,
+          style: metadata,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        const SizedBox(height: 4),
+        Text(
+          campaign.title,
+          maxLines: compact ? 2 : 3,
+          overflow: TextOverflow.ellipsis,
+          style:
+              (compact
+                      ? theme.textTheme.titleMedium
+                      : theme.textTheme.titleLarge)
+                  ?.copyWith(fontWeight: FontWeight.w700),
+        ),
+        const SizedBox(height: 8),
+        Row(
+          children: [
+            Flexible(
+              child: Text(
+                campaign.creatorName,
+                style: metadata,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            if (campaign.isVerified) ...[
+              const SizedBox(width: 4),
+              Icon(Icons.verified, size: 14, color: colors.primary),
+            ],
+          ],
+        ),
+        const SizedBox(height: 12),
+        Semantics(
+          label: id ? 'Progres pendanaan' : 'Funding progress',
+          value: '${(progress * 100).round()}%',
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: LinearProgressIndicator(value: progress, minHeight: 6),
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          'Rp ${formatCurrency(campaign.raised)}',
+          style: theme.textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        Text(
+          '${id ? 'dari' : 'of'} Rp ${formatCurrency(campaign.target)} ${id ? 'target' : 'goal'}',
+          style: metadata,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          '${campaign.type == CampaignType.equity ? '${campaign.investorsCount ?? 0} ${id ? 'investor' : 'investors'}' : '${campaign.donorsCount} ${id ? 'donatur' : 'supporters'}'} · ${campaign.timeLeftLabel}',
+          style: metadata,
+        ),
+        if (campaign.type == CampaignType.equity &&
+            campaign.equityChangePct != null)
+          Text(
+            '${campaign.equityChangePct!.toStringAsFixed(1)}% equity',
+            style: metadata,
+          ),
+        if (!compact &&
+            (campaign.updatesCount > 0 || campaign.milestonesCount > 0))
+          Text(
+            '${campaign.updatesCount} ${id ? 'kabar' : 'updates'} · ${campaign.milestonesCount} ${id ? 'pencapaian' : 'milestones'}',
+            style: metadata,
+          ),
+      ],
+    );
+    return Material(
+      color: colors.surface,
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(16),
-        child: Container(
-          decoration: BoxDecoration(
-            color: colorScheme.surfaceContainerLow,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: colorScheme.shadow.withValues(alpha: 0.08),
-                blurRadius: 12,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                height: 140,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(16),
-                  ),
-                ),
-                clipBehavior: Clip.antiAlias,
-                child: Stack(
-                  children: [
-                    // Background image or gradient fallback
-                    Positioned.fill(
-                      child: campaign.imageUrl != null
-                          ? CachedNetworkImage(
-                              imageUrl: campaign.imageUrl!,
-                              fit: BoxFit.cover,
-                              placeholder: (context, url) => Container(
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      colorScheme.secondaryContainer
-                                          .withValues(alpha: 0.8),
-                                      colorScheme.tertiaryContainer
-                                          .withValues(alpha: 0.6),
-                                    ],
-                                    begin: Alignment.topLeft,
-                                    end: Alignment.bottomRight,
-                                  ),
-                                ),
-                                child: Center(
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 2,
-                                    color: colorScheme.primary,
-                                  ),
-                                ),
-                              ),
-                              errorWidget: (context, url, error) => Container(
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      colorScheme.secondaryContainer
-                                          .withValues(alpha: 0.8),
-                                      colorScheme.tertiaryContainer
-                                          .withValues(alpha: 0.6),
-                                    ],
-                                    begin: Alignment.topLeft,
-                                    end: Alignment.bottomRight,
-                                  ),
-                                ),
-                                child: Icon(
-                                  Icons.campaign_outlined,
-                                  size: 48,
-                                  color: colorScheme.onSecondaryContainer,
-                                ),
-                              ),
-                            )
-                          : Container(
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    colorScheme.secondaryContainer
-                                        .withValues(alpha: 0.8),
-                                    colorScheme.tertiaryContainer
-                                        .withValues(alpha: 0.6),
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                              ),
-                              child: Icon(
-                                Icons.campaign_outlined,
-                                size: 48,
-                                color: colorScheme.onSecondaryContainer,
-                              ),
-                            ),
-                    ),
-                    Positioned(
-                      top: 12,
-                      left: 12,
-                      child: CategoryPill(category: campaign.category),
-                    ),
-                    Positioned(
-                      top: 12,
-                      right: 12,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 6,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.black.withValues(alpha: 0.6),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Text(
-                          campaign.timeLeftLabel,
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 11,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
+        borderRadius: BorderRadius.circular(12),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          child: compact
+              ? Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      campaign.title,
-                      style: theme.textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: colorScheme.onSurface,
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 8),
-                    Row(
-                      children: [
-                        CircleAvatar(
-                          radius: 12,
-                          backgroundColor: colorScheme.primaryContainer,
-                          child: Icon(
-                            Icons.person,
-                            size: 14,
-                            color: colorScheme.onPrimaryContainer,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            campaign.creatorName,
-                            style: theme.textTheme.bodySmall?.copyWith(
-                              color: colorScheme.onSurfaceVariant,
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        if (campaign.isVerified) const VerifiedBadge(),
-                      ],
-                    ),
-                    const SizedBox(height: 12),
-                    ProgressBar(progress: campaign.progressPercent / 100),
-                    const SizedBox(height: 8),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            'Rp ${formatCurrency(campaign.raised)} / Rp ${formatCurrency(campaign.target)}',
-                            style: theme.textTheme.bodySmall?.copyWith(
-                              color: colorScheme.onSurfaceVariant,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 12),
-                    if (campaign.type == CampaignType.equity)
-                      Text(
-                        '👥 ${campaign.investorsCount} investors · ${campaign.equityChangePct! > 0 ? '+' : ''}${campaign.equityChangePct!.toStringAsFixed(1)}% (equity)',
-                        style: theme.textTheme.bodySmall?.copyWith(
-                          color: colorScheme.onSurfaceVariant,
-                          fontSize: 11,
-                        ),
-                      )
-                    else
-                      Text(
-                        '⚡ ${campaign.donorsCount} donors · ${campaign.updatesCount} updates · ${campaign.milestonesCount} milestones',
-                        style: theme.textTheme.bodySmall?.copyWith(
-                          color: colorScheme.onSurfaceVariant,
-                          fontSize: 11,
-                        ),
-                      ),
-                    const SizedBox(height: 12),
-                    SizedBox(
-                      width: double.infinity,
-                      child: FilledButton(
-                        onPressed: () {},
-                        style: FilledButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        child: Text(
-                          campaign.ctaLabel,
-                          style: theme.textTheme.labelLarge?.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
+                    SizedBox(width: 80, child: visual()),
+                    const SizedBox(width: 12),
+                    Expanded(child: details),
                   ],
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [visual(), const SizedBox(height: 12), details],
                 ),
-              ),
-            ],
-          ),
         ),
       ),
     );
