@@ -6,8 +6,8 @@ part of 'campaign_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$CampaignModelImpl _$$CampaignModelImplFromJson(Map<String, dynamic> json) =>
-    _$CampaignModelImpl(
+_CampaignModel _$CampaignModelFromJson(Map<String, dynamic> json) =>
+    _CampaignModel(
       id: json['id'] as String,
       userId: json['user_id'] as String,
       categoryId: json['category_id'] as String?,
@@ -40,7 +40,7 @@ _$CampaignModelImpl _$$CampaignModelImplFromJson(Map<String, dynamic> json) =>
       withdrawalAccountHolder: json['withdrawal_account_holder'] as String?,
     );
 
-Map<String, dynamic> _$$CampaignModelImplToJson(_$CampaignModelImpl instance) =>
+Map<String, dynamic> _$CampaignModelToJson(_CampaignModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'user_id': instance.userId,
