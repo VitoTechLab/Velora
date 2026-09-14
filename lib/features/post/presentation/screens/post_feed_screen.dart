@@ -109,14 +109,7 @@ class PostFeedScreen extends HookWidget {
         elevation: 0,
         flexibleSpace: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                colorScheme.surface,
-                colorScheme.surfaceContainerLowest,
-              ],
-            ),
+            color: colorScheme.surface,
             border: Border(
               bottom: BorderSide(
                 color: colorScheme.outlineVariant.withValues(alpha: 0.3),
@@ -142,10 +135,7 @@ class PostFeedScreen extends HookWidget {
         ),
         title: ShaderMask(
           shaderCallback: (bounds) => LinearGradient(
-            colors: [
-              colorScheme.primary,
-              colorScheme.secondary,
-            ],
+            colors: [colorScheme.primary, colorScheme.secondary],
           ).createShader(bounds),
           child: Text(
             t.postCreateTitle,
@@ -258,27 +248,13 @@ class PostFeedScreen extends HookWidget {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    colorScheme.surface,
-                    colorScheme.surfaceContainerLowest,
-                  ],
-                ),
+                color: colorScheme.surface,
                 border: Border(
                   top: BorderSide(
                     color: colorScheme.outlineVariant.withValues(alpha: 0.3),
                     width: 1,
                   ),
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    color: colorScheme.shadow.withValues(alpha: 0.1),
-                    blurRadius: 12,
-                    offset: const Offset(0, -2),
-                  ),
-                ],
               ),
               child: Semantics(
                 button: true,
@@ -287,20 +263,8 @@ class PostFeedScreen extends HookWidget {
                 child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        colorScheme.primary,
-                        colorScheme.primary.withValues(alpha: 0.85),
-                      ],
-                    ),
+                    color: colorScheme.primary,
                     borderRadius: BorderRadius.circular(16),
-                    boxShadow: [
-                      BoxShadow(
-                        color: colorScheme.primary.withValues(alpha: 0.35),
-                        blurRadius: 16,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
                   ),
                   child: Material(
                     color: Colors.transparent,
@@ -381,19 +345,12 @@ class PostFeedScreen extends HookWidget {
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          colorScheme.primaryContainer.withValues(alpha: 0.4),
-                          colorScheme.secondaryContainer.withValues(alpha: 0.3),
-                        ],
+                      color: colorScheme.primaryContainer.withValues(
+                        alpha: 0.4,
                       ),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Icon(
-                      icon,
-                      size: 20,
-                      color: colorScheme.primary,
-                    ),
+                    child: Icon(icon, size: 20, color: colorScheme.primary),
                   ),
                   const SizedBox(width: 14),
                   Expanded(
@@ -406,14 +363,13 @@ class PostFeedScreen extends HookWidget {
                       ),
                     ),
                   ),
-                  if (trailing != null) ...[
-                    const SizedBox(width: 8),
-                    trailing,
-                  ],
+                  if (trailing != null) ...[const SizedBox(width: 8), trailing],
                   if (trailing == null)
                     Icon(
                       Icons.chevron_right,
-                      color: colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+                      color: colorScheme.onSurfaceVariant.withValues(
+                        alpha: 0.5,
+                      ),
                       size: 20,
                     ),
                 ],

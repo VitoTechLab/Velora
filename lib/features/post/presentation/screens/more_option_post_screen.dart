@@ -16,14 +16,11 @@ class MoreOptionPostScreen extends HookWidget {
     final allowComments = useState(initialOptions.allowComments);
     final allowShare = useState(initialOptions.allowShare);
 
-    useEffect(
-      () {
-        allowComments.value = initialOptions.allowComments;
-        allowShare.value = initialOptions.allowShare;
-        return null;
-      },
-      [initialOptions.allowComments, initialOptions.allowShare],
-    );
+    useEffect(() {
+      allowComments.value = initialOptions.allowComments;
+      allowShare.value = initialOptions.allowShare;
+      return null;
+    }, [initialOptions.allowComments, initialOptions.allowShare]);
 
     void onBackPressed() {
       final result = MoreOptionData(
@@ -46,14 +43,7 @@ class MoreOptionPostScreen extends HookWidget {
         elevation: 0,
         flexibleSpace: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                colorScheme.surface,
-                colorScheme.surfaceContainerLowest,
-              ],
-            ),
+            color: colorScheme.surface,
             border: Border(
               bottom: BorderSide(
                 color: colorScheme.outlineVariant.withValues(alpha: 0.3),
@@ -79,10 +69,7 @@ class MoreOptionPostScreen extends HookWidget {
         ),
         title: ShaderMask(
           shaderCallback: (bounds) => LinearGradient(
-            colors: [
-              colorScheme.primary,
-              colorScheme.secondary,
-            ],
+            colors: [colorScheme.primary, colorScheme.secondary],
           ).createShader(bounds),
           child: Text(
             t.postMoreOptionsTitle,
@@ -102,12 +89,7 @@ class MoreOptionPostScreen extends HookWidget {
             margin: const EdgeInsets.all(16),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  colorScheme.primaryContainer.withValues(alpha: 0.2),
-                  colorScheme.secondaryContainer.withValues(alpha: 0.1),
-                ],
-              ),
+              color: colorScheme.primaryContainer.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 color: colorScheme.outline.withValues(alpha: 0.2),
@@ -119,12 +101,7 @@ class MoreOptionPostScreen extends HookWidget {
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        colorScheme.primary.withValues(alpha: 0.2),
-                        colorScheme.secondary.withValues(alpha: 0.15),
-                      ],
-                    ),
+                    color: colorScheme.primary.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Icon(
@@ -153,7 +130,8 @@ class MoreOptionPostScreen extends HookWidget {
             icon: Icons.chat_bubble_outline,
             title: t.postMoreOptionsTurnOffCommentsTitle,
             subtitle: t.postMoreOptionsTurnOffCommentsSubtitle,
-            value: !allowComments.value, // Inverted: "Turn off" = !allowComments
+            value:
+                !allowComments.value, // Inverted: "Turn off" = !allowComments
             onChanged: (value) {
               allowComments.value = !value;
             },
@@ -212,15 +190,6 @@ class MoreOptionPostScreen extends HookWidget {
                 : colorScheme.outline.withValues(alpha: 0.2),
             width: 1.5,
           ),
-          boxShadow: [
-            BoxShadow(
-              color: value
-                  ? colorScheme.primary.withValues(alpha: 0.08)
-                  : colorScheme.shadow.withValues(alpha: 0.05),
-              blurRadius: value ? 12 : 8,
-              offset: const Offset(0, 2),
-            ),
-          ],
         ),
         child: Row(
           children: [
@@ -228,26 +197,10 @@ class MoreOptionPostScreen extends HookWidget {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    colorScheme.primaryContainer.withValues(alpha: 0.4),
-                    colorScheme.secondaryContainer.withValues(alpha: 0.3),
-                  ],
-                ),
+                color: colorScheme.primaryContainer.withValues(alpha: 0.4),
                 borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: colorScheme.primary.withValues(alpha: 0.1),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
               ),
-              child: Icon(
-                icon,
-                size: 24,
-                color: colorScheme.primary,
-              ),
+              child: Icon(icon, size: 24, color: colorScheme.primary),
             ),
             const SizedBox(width: 16),
 
@@ -283,10 +236,7 @@ class MoreOptionPostScreen extends HookWidget {
             const SizedBox(width: 16),
 
             // Modern toggle switch
-            ModernToggleSwitch(
-              value: value,
-              onChanged: onChanged,
-            ),
+            ModernToggleSwitch(value: value, onChanged: onChanged),
           ],
         ),
       ),
