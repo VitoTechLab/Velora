@@ -136,14 +136,14 @@ class MediaLocalDataSourceImpl implements MediaLocalDataSource {
       return null;
     }
   }
-
+   
   @override
   Future<List<File>> pickDocuments({
     bool allowMultiple = true,
     List<String>? allowedExtensions,
   }) async {
     try {
-      final result = await FilePicker.platform.pickFiles(
+      final result = await FilePicker.pickFiles(
         type: FileType.custom,
         allowedExtensions: allowedExtensions ?? _defaultDocumentExtensions,
         allowMultiple: allowMultiple,
@@ -198,7 +198,7 @@ class MediaLocalDataSourceImpl implements MediaLocalDataSource {
     List<String>? allowedExtensions,
   }) async {
     try {
-      final result = await FilePicker.platform.pickFiles(
+      final result = await FilePicker.pickFiles(
         type: FileType.custom,
         allowedExtensions: allowedExtensions ?? _defaultAudioExtensions,
         allowMultiple: allowMultiple,
