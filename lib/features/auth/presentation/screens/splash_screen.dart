@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
-/// Splash screen with animated logo and gradient background
+import 'package:velora/features/auth/presentation/widgets/atoms/auth_animated_background.dart';
+import 'package:velora/features/auth/presentation/widgets/atoms/auth_brand_mark.dart';
+import 'package:velora/features/auth/presentation/widgets/atoms/auth_impact_halo.dart';
+import 'package:velora/l10n/app_localizations.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -10,23 +14,23 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _scaleAnimation;
-  late Animation<double> _fadeAnimation;
+  late final AnimationController _controller;
+  late final Animation<double> _scaleAnimation;
+  late final Animation<double> _fadeAnimation;
 
   @override
   void initState() {
     super.initState();
 
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 1500),
+      duration: const Duration(milliseconds: 500),
       vsync: this,
     );
 
-    _scaleAnimation = Tween<double>(begin: 0.5, end: 1.0).animate(
+    _scaleAnimation = Tween<double>(begin: 0.96, end: 1.0).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: const Interval(0.0, 0.6, curve: Curves.elasticOut),
+        curve: const Interval(0.0, 0.6, curve: Curves.easeOutCubic),
       ),
     );
 
@@ -50,120 +54,81 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final isDark = theme.brightness == Brightness.dark;
+    final t = AppLocalizations.of(context)!;
 
     return Scaffold(
-      backgroundColor: isDark ? const Color(0xFF1A1A2E) : colorScheme.surface,
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: isDark
-                ? [
-                    const Color(0xFF1A1A2E),
-                    const Color(0xFF16213E),
-                    const Color(0xFF0F3460),
-                  ]
-                : [
-                    colorScheme.primary.withValues(alpha: 0.05),
-                    colorScheme.secondary.withValues(alpha: 0.08),
-                    colorScheme.tertiary.withValues(alpha: 0.05),
-                  ],
-          ),
-        ),
-        child: Center(
-          child: AnimatedBuilder(
-            animation: _controller,
-            builder: (context, child) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Animated Logo
-                  Transform.scale(
-                    scale: _scaleAnimation.value,
-                    child: Container(
-                      width: 120,
-                      height: 120,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            colorScheme.primary,
-                            colorScheme.secondary,
+      body: Stack(
+        children: [
+          const Positioned.fill(child: AuthAnimatedBackground()),
+          Center(
+            child: AnimatedBuilder(
+              animation: _controller,
+              builder: (context, child) {
+                return Semantics(
+                  container: true,
+                  label: t.appTitle,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Transform.scale(
+                        scale: MediaQuery.disableAnimationsOf(context)
+                            ? 1
+                            : _scaleAnimation.value,
+                        child: const AuthImpactHalo(
+                          size: 168,
+                          child: AuthBrandMark(
+                            size: 116,
+                            borderRadius: 30,
+                            iconSize: 54,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      Opacity(
+                        opacity: MediaQuery.disableAnimationsOf(context)
+                            ? 1
+                            : _fadeAnimation.value,
+                        child: Column(
+                          children: [
+                            Text(
+                              t.appTitle,
+                              style: theme.textTheme.headlineMedium?.copyWith(
+                                color: colorScheme.onSurface,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              t.authSplashTagline,
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                color: colorScheme.onSurfaceVariant,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                           ],
                         ),
-                        borderRadius: BorderRadius.circular(30),
-                        boxShadow: [
-                          BoxShadow(
-                            color: colorScheme.primary.withValues(alpha: 0.3),
-                            blurRadius: 30,
-                            spreadRadius: 5,
-                          ),
-                        ],
                       ),
-                      child: const Center(
-                        child: Text(
-                          'V',
-                          style: TextStyle(
-                            fontSize: 64,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                      const SizedBox(height: 32),
+                      Opacity(
+                        opacity: MediaQuery.disableAnimationsOf(context)
+                            ? 1
+                            : _fadeAnimation.value,
+                        child: SizedBox(
+                          width: 34,
+                          height: 34,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 3,
+                            color: colorScheme.primary,
                           ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                  const SizedBox(height: 32),
-
-                  // App Name - VELORA
-                  Opacity(
-                    opacity: _fadeAnimation.value,
-                    child: Column(
-                      children: [
-                        Text(
-                          'VELORA',
-                          style: theme.textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 8,
-                            color: colorScheme.onSurface,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'Share Your Moments',
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            color: colorScheme.onSurface.withValues(alpha: 0.6),
-                            letterSpacing: 2,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 60),
-
-                  // Loading indicator
-                  Opacity(
-                    opacity: _fadeAnimation.value,
-                    child: SizedBox(
-                      width: 36,
-                      height: 36,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 3,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          colorScheme.primary,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            },
+                );
+              },
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

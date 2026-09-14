@@ -4,20 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:velora/features/auth/domain/entities/auth_status_entity.dart';
-import 'package:velora/features/auth/presentation/screens/auth_screens.dart';
+import 'package:velora/features/auth/presentation/screens/login_screen.dart';
+import 'package:velora/features/auth/presentation/screens/reset_password_screen.dart';
+import 'package:velora/features/auth/presentation/screens/signup_screen.dart';
+import 'package:velora/features/auth/presentation/screens/splash_screen.dart';
+import 'package:velora/features/auth/presentation/screens/verification_email_screen.dart';
 import 'package:velora/features/campaign/presentation/screens/campaign_screen.dart';
 import 'package:velora/features/chat/presentation/screens/chat_detail_screen.dart';
-import 'package:velora/features/chat/presentation/screens/chat_document_picker_screen.dart';
 import 'package:velora/features/chat/presentation/screens/chat_screen.dart';
 import 'package:velora/features/chat/presentation/screens/user_search_screen.dart';
-import 'package:velora/features/media/presentation/screens/media_gallery_screen.dart';
+import 'package:velora/features/media/presentation/screens/media_screens.dart';
 import 'package:velora/features/navigation/models/chat_detail_args.dart';
 import 'package:velora/features/navigation/models/chat_document_picker_args.dart';
 import 'package:velora/features/navigation/models/create_post_media_args.dart';
 import 'package:velora/features/navigation/models/more_option_post_args.dart';
 import 'package:velora/features/navigation/models/profile_field_edit_args.dart';
 import 'package:velora/features/navigation/navigation_keys.dart';
-import 'package:velora/features/navigation/presentation/pages/app_shell.dart';
+import 'package:velora/features/navigation/presentation/screens/app_shell.dart';
 import 'package:velora/features/navigation/presentation/widgets/adaptive_branch_container.dart';
 import 'package:velora/features/navigation/services/navigation_service.dart';
 import 'package:velora/features/post/presentation/screens/post_feed_screen.dart';
@@ -75,7 +78,7 @@ class AppRouter {
     AuthBloc authBloc,
   ) : router = GoRouter(
           navigatorKey: navigationService.navigatorKey,
-          initialLocation: AppRoutePath.home,
+          initialLocation: AppRoutePath.splash,
           refreshListenable: GoRouterRefreshStream(authBloc.stream),
           redirect: (context, state) {
             final status = authBloc.state.status;
@@ -110,7 +113,7 @@ class AppRouter {
 
             if (status == AuthStatusEntity.authenticated) {
               final isAuthRoute =
-                  loggingIn || signingUp || resetting || verifying;
+                  onSplash || loggingIn || signingUp || resetting || verifying;
               if (isAuthRoute) {
                 return AppRoutePath.home;
               }
@@ -315,7 +318,7 @@ class AppRouter {
                           parentNavigatorKey: navigationService.navigatorKey,
                           builder: (context, state) {
                             final args = state.extra as ChatDocumentPickerArgs?;
-                            return ChatDocumentPickerScreen(
+                            return MediaDocumentPickerScreen(
                               maxDocuments: args?.maxDocuments ?? 10,
                               allowedExtensions: args?.allowedExtensions,
                             );
