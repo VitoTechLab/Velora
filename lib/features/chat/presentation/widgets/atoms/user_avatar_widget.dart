@@ -78,22 +78,22 @@ class _UserAvatarWidgetState extends State<UserAvatarWidget>
       child: widget.avatarUrl == null || widget.avatarUrl!.isEmpty
           ? ShaderMask(
               shaderCallback: (bounds) => LinearGradient(
-                colors: [
-                  colorScheme.primary,
-                  colorScheme.secondary,
-                ],
+                colors: [colorScheme.primary, colorScheme.secondary],
               ).createShader(bounds),
               child: Text(
                 widget.username.isNotEmpty
                     ? widget.username[0].toUpperCase()
                     : '?',
-                style: (widget.radius > 24
-                        ? textTheme.titleLarge
-                        : widget.radius > 20
+                style:
+                    (widget.radius > 24
+                            ? textTheme.titleLarge
+                            : widget.radius > 20
                             ? textTheme.titleMedium
                             : textTheme.titleSmall)
-                    ?.copyWith(
-                        color: Colors.white, fontWeight: FontWeight.w600),
+                        ?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
               ),
             )
           : null,
@@ -103,21 +103,7 @@ class _UserAvatarWidgetState extends State<UserAvatarWidget>
       avatar = Container(
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          gradient: LinearGradient(
-            colors: [
-              colorScheme.primary,
-              colorScheme.secondary,
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: colorScheme.primary.withValues(alpha: 0.3),
-              blurRadius: 8,
-              spreadRadius: 1,
-            ),
-          ],
+          color: colorScheme.primary,
         ),
         padding: const EdgeInsets.all(2.5),
         child: avatar,
@@ -133,10 +119,7 @@ class _UserAvatarWidgetState extends State<UserAvatarWidget>
           builder: (context, value, child) {
             return Transform.scale(
               scale: 0.9 + (0.1 * value),
-              child: Opacity(
-                opacity: value,
-                child: child,
-              ),
+              child: Opacity(opacity: value, child: child),
             );
           },
           child: avatar,
@@ -153,24 +136,10 @@ class _UserAvatarWidgetState extends State<UserAvatarWidget>
                   height: widget.radius * 0.35,
                   decoration: BoxDecoration(
                     gradient: const LinearGradient(
-                      colors: [
-                        Color(0xFF00E676),
-                        Color(0xFF00C853),
-                      ],
+                      colors: [Color(0xFF00E676), Color(0xFF00C853)],
                     ),
                     shape: BoxShape.circle,
-                    border: Border.all(
-                      color: colorScheme.surface,
-                      width: 2.5,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color(0xFF00E676)
-                            .withValues(alpha: 0.4 * _pulseAnimation.value),
-                        blurRadius: 8 * _pulseAnimation.value,
-                        spreadRadius: 2 * _pulseAnimation.value,
-                      ),
-                    ],
+                    border: Border.all(color: colorScheme.surface, width: 2.5),
                   ),
                 );
               },

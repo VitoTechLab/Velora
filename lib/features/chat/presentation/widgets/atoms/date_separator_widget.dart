@@ -20,8 +20,11 @@ class DateSeparatorWidget extends StatelessWidget {
           margin: const EdgeInsets.symmetric(vertical: 12),
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
-            color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.8),
-            borderRadius: BorderRadius.circular(8),
+            color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.64),
+            borderRadius: BorderRadius.circular(999),
+            border: Border.all(
+              color: colorScheme.outlineVariant.withValues(alpha: 0.34),
+            ),
           ),
           child: Text(
             date,
