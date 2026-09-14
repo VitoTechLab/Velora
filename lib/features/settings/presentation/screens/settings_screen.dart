@@ -88,7 +88,8 @@ class SettingScreen extends StatelessWidget {
                     BlocBuilder<ProfileBloc, ProfileState>(
                       builder: (context, profileState) {
                         final profile = profileState.profile;
-                        final profileSubtitle = profile?.username ??
+                        final profileSubtitle =
+                            profile?.username ??
                             profile?.email ??
                             t.settingsConnectedSubtitle;
 
@@ -230,7 +231,7 @@ class SettingScreen extends StatelessWidget {
                       margin: const EdgeInsets.symmetric(horizontal: 4),
                       decoration: BoxDecoration(
                         color: theme.colorScheme.surface,
-                        borderRadius: BorderRadius.circular(28),
+                        borderRadius: BorderRadius.circular(12),
                       ),
                       child: ListTile(
                         contentPadding: const EdgeInsets.symmetric(
@@ -264,8 +265,8 @@ class SettingScreen extends StatelessWidget {
                         ),
                         onTap: () {
                           context.read<AuthBloc>().add(
-                                const AuthEvent.signOut(),
-                              );
+                            const AuthEvent.signOut(),
+                          );
                         },
                       ),
                     ),
@@ -298,8 +299,8 @@ class _AccountHeroCardState extends State<_AccountHeroCard> {
     final authState = context.read<AuthBloc>().state;
     if (authState.userId != null) {
       context.read<ProfileBloc>().add(
-            LoadProfileEvent(userId: authState.userId!),
-          );
+        LoadProfileEvent(userId: authState.userId!),
+      );
     }
   }
 
@@ -317,15 +318,8 @@ class _AccountHeroCardState extends State<_AccountHeroCard> {
           child: Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  colorScheme.primary.withValues(alpha: 0.2),
-                  colorScheme.secondary.withValues(alpha: 0.08),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(28),
+              color: colorScheme.primary.withValues(alpha: 0.2),
+              borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 color: colorScheme.primary.withValues(alpha: 0.2),
               ),
@@ -337,12 +331,14 @@ class _AccountHeroCardState extends State<_AccountHeroCard> {
                   children: [
                     CircleAvatar(
                       radius: 36,
-                      backgroundImage: profile?.avatarUrl != null &&
+                      backgroundImage:
+                          profile?.avatarUrl != null &&
                               profile!.avatarUrl!.isNotEmpty
                           ? NetworkImage(profile.avatarUrl!)
                           : null,
                       backgroundColor: colorScheme.primaryContainer,
-                      child: profile?.avatarUrl == null ||
+                      child:
+                          profile?.avatarUrl == null ||
                               profile!.avatarUrl!.isEmpty
                           ? Icon(
                               Icons.person,
@@ -385,15 +381,14 @@ class _AccountHeroCardState extends State<_AccountHeroCard> {
                 ),
                 const SizedBox(height: 20),
                 InkWell(
-                  onTap: () => context.pushNamed(
-                    AppRouteName.settingsAccountType,
-                  ),
-                  borderRadius: BorderRadius.circular(20),
+                  onTap: () =>
+                      context.pushNamed(AppRouteName.settingsAccountType),
+                  borderRadius: BorderRadius.circular(12),
                   child: Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                       color: colorScheme.surface.withValues(alpha: 0.8),
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(12),
                     ),
                     child: Row(
                       children: [

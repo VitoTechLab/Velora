@@ -65,7 +65,7 @@ class ProfileFieldEditScreen extends HookWidget {
               labelText: label,
               hintText: hintText,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(18),
+                borderRadius: BorderRadius.circular(12),
               ),
             ),
           ),

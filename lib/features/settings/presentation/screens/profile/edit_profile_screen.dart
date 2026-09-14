@@ -26,56 +26,49 @@ class EditProfileScreen extends HookWidget {
     final biometricService = useMemoized(() => BiometricService());
     final biometricVerified = useState(false);
 
-    useEffect(
-      () {
-        Future<void> checkAndVerifyBiometric() async {
-          final enabled = await biometricService.isBiometricEnabled();
-          final available = await biometricService.isBiometricAvailable();
-          
-          if (enabled && available) {
-            // Request biometric authentication
-            final authenticated = await biometricService.authenticate(
-              reason: 'Authenticate to edit your profile',
-            );
-            
-            if (!authenticated) {
-              // Failed authentication - go back
-              if (context.mounted) {
-                context.pop();
-                AppMessenger.showToast(
-                  message: 'Biometric authentication required',
-                  icon: Icons.fingerprint,
-                  isError: true,
-                );
-              }
-            } else {
-              biometricVerified.value = true;
+    useEffect(() {
+      Future<void> checkAndVerifyBiometric() async {
+        final enabled = await biometricService.isBiometricEnabled();
+        final available = await biometricService.isBiometricAvailable();
+
+        if (enabled && available) {
+          // Request biometric authentication
+          final authenticated = await biometricService.authenticate(
+            reason: 'Authenticate to edit your profile',
+          );
+
+          if (!authenticated) {
+            // Failed authentication - go back
+            if (context.mounted) {
+              context.pop();
+              AppMessenger.showToast(
+                message: 'Biometric authentication required',
+                icon: Icons.fingerprint,
+                isError: true,
+              );
             }
           } else {
             biometricVerified.value = true;
           }
-          
-          // Load profile after verification
-          final authState = context.read<AuthBloc>().state;
-          if (authState.userId != null) {
-            context.read<ProfileBloc>().add(
-              LoadProfileEvent(userId: authState.userId!),
-            );
-          }
+        } else {
+          biometricVerified.value = true;
         }
-        
-        checkAndVerifyBiometric();
-        return null;
-      },
-      const [],
-    );
+
+        // Load profile after verification
+        final authState = context.read<AuthBloc>().state;
+        if (authState.userId != null) {
+          context.read<ProfileBloc>().add(
+            LoadProfileEvent(userId: authState.userId!),
+          );
+        }
+      }
+
+      checkAndVerifyBiometric();
+      return null;
+    }, const []);
 
     if (!biometricVerified.value) {
-      return const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     return BlocListener<ProfileBloc, ProfileState>(
@@ -149,30 +142,28 @@ class EditProfileScreen extends HookWidget {
 
 class _EditProfileForm extends HookWidget {
   const _EditProfileForm({required this.profile});
-  
+
   final dynamic profile;
 
   @override
   Widget build(BuildContext context) {
     final t = AppLocalizations.of(context)!;
     final formKey = useMemoized(() => GlobalKey<FormState>());
-    
+
     final usernameController = useTextEditingController(
       text: profile.username ?? '',
     );
     final fullNameController = useTextEditingController(
       text: profile.fullName ?? '',
     );
-    final bioController = useTextEditingController(
-      text: profile.bio ?? '',
-    );
+    final bioController = useTextEditingController(text: profile.bio ?? '');
     final websiteController = useTextEditingController(
       text: profile.websiteUrl ?? '',
     );
     final locationController = useTextEditingController(
       text: profile.location ?? '',
     );
-    
+
     final selectedAvatar = useState<File?>(null);
     final isUploading = useState(false);
     final uploadedAvatarUrl = useState<String?>(null);
@@ -180,12 +171,12 @@ class _EditProfileForm extends HookWidget {
     Future<void> pickImage() async {
       try {
         final picker = ImagePicker();
-        
+
         // Show bottom sheet to choose source
         final source = await showModalBottomSheet<ImageSource>(
           context: context,
           shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
           ),
           builder: (context) => SafeArea(
             child: Padding(
@@ -217,7 +208,7 @@ class _EditProfileForm extends HookWidget {
           maxHeight: 1024,
           imageQuality: 85,
         );
-        
+
         if (image != null) {
           selectedAvatar.value = File(image.path);
         }
@@ -318,7 +309,7 @@ class _EditProfileForm extends HookWidget {
       }
 
       if (!context.mounted) return;
-      
+
       // Dispatch update event
       context.read<ProfileBloc>().add(
         UpdateProfileEvent(updateModel: updateModel),
@@ -341,7 +332,7 @@ class _EditProfileForm extends HookWidget {
         message: t.settingsProfileEditProfileUpdated,
         icon: Icons.check_circle_outline,
       );
-      
+
       // Clear selected avatar after successful save
       selectedAvatar.value = null;
 
@@ -356,7 +347,7 @@ class _EditProfileForm extends HookWidget {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         final isLoading = state.isLoading || isUploading.value;
-        
+
         return SingleChildScrollView(
           padding: const EdgeInsets.all(16),
           child: Form(
@@ -374,7 +365,9 @@ class _EditProfileForm extends HookWidget {
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(
-                                color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.primary.withValues(alpha: 0.2),
                                 width: 3,
                               ),
                             ),
@@ -382,15 +375,27 @@ class _EditProfileForm extends HookWidget {
                               radius: 60,
                               backgroundImage: selectedAvatar.value != null
                                   ? FileImage(selectedAvatar.value!)
-                                  : (uploadedAvatarUrl.value ?? profile.avatarUrl) != null
-                                      ? NetworkImage(uploadedAvatarUrl.value ?? profile.avatarUrl!)
-                                      : null as ImageProvider?,
-                              child: (selectedAvatar.value == null &&
+                                  : (uploadedAvatarUrl.value ??
+                                            profile.avatarUrl) !=
+                                        null
+                                  ? NetworkImage(
+                                      uploadedAvatarUrl.value ??
+                                          profile.avatarUrl!,
+                                    )
+                                  : null as ImageProvider?,
+                              child:
+                                  (selectedAvatar.value == null &&
                                       uploadedAvatarUrl.value == null &&
                                       profile.avatarUrl == null)
                                   ? Text(
-                                      profile.fullName?.substring(0, 1).toUpperCase() ?? 'U',
-                                      style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                                      profile.fullName
+                                              ?.substring(0, 1)
+                                              .toUpperCase() ??
+                                          'U',
+                                      style: const TextStyle(
+                                        fontSize: 40,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     )
                                   : null,
                             ),
@@ -417,7 +422,9 @@ class _EditProfileForm extends HookWidget {
                               shape: const CircleBorder(),
                               child: CircleAvatar(
                                 radius: 22,
-                                backgroundColor: Theme.of(context).colorScheme.primary,
+                                backgroundColor: Theme.of(
+                                  context,
+                                ).colorScheme.primary,
                                 child: IconButton(
                                   icon: const Icon(Icons.camera_alt, size: 20),
                                   onPressed: isLoading ? null : pickImage,
@@ -450,7 +457,10 @@ class _EditProfileForm extends HookWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     filled: true,
-                    fillColor: Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.3),
+                    fillColor: Theme.of(context)
+                        .colorScheme
+                        .surfaceContainerHighest
+                        .withValues(alpha: 0.3),
                     suffixIcon: const Icon(Icons.lock_outline),
                     helperText: 'Email tidak dapat diubah',
                   ),
@@ -588,7 +598,10 @@ class _EditProfileForm extends HookWidget {
                         )
                       : Text(
                           t.settingsProfileEditSaveChanges,
-                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                 ),
                 const SizedBox(height: 16),

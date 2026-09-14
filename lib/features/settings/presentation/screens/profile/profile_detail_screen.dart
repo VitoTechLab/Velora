@@ -30,18 +30,15 @@ class ProfileDetailScreen extends HookWidget {
     final accountType = useState('personal');
 
     // Load profile on mount
-    useEffect(
-      () {
-        final authState = context.read<AuthBloc>().state;
-        if (authState.userId != null) {
-          context.read<ProfileBloc>().add(
-                LoadProfileEvent(userId: authState.userId!),
-              );
-        }
-        return null;
-      },
-      const [],
-    );
+    useEffect(() {
+      final authState = context.read<AuthBloc>().state;
+      if (authState.userId != null) {
+        context.read<ProfileBloc>().add(
+          LoadProfileEvent(userId: authState.userId!),
+        );
+      }
+      return null;
+    }, const []);
 
     // Get current profile state
     final profileState = context.watch<ProfileBloc>().state;
@@ -49,21 +46,18 @@ class ProfileDetailScreen extends HookWidget {
     final isLoading = profileState.isLoading;
 
     // Update hooks when profile changes
-    useEffect(
-      () {
-        if (profile != null) {
-          bio.value = profile.bio ?? '';
-        }
-        return null;
-      },
-      [profile?.id],
-    );
+    useEffect(() {
+      if (profile != null) {
+        bio.value = profile.bio ?? '';
+      }
+      return null;
+    }, [profile?.id]);
 
     void showPhotoOptions() {
       showModalBottomSheet<void>(
         context: context,
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
         ),
         builder: (context) {
           final sheetTheme = Theme.of(context);
@@ -154,140 +148,134 @@ class ProfileDetailScreen extends HookWidget {
       child: isLoading
           ? const Center(child: CircularProgressIndicator())
           : ListView(
-                  padding: const EdgeInsets.only(bottom: 24),
-                  children: [
-                    const SizedBox(height: 12),
-                    EdgeToEdgeSection(
-                      child: Column(
-                        children: [
-                          Center(
-                            child: _ProfileAvatar(
-                              avatarUrl: profile?.avatarUrl,
-                              onEdit: showPhotoOptions,
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          FilledButton.tonal(
-                            onPressed: () {
-                              context.pushNamed(AppRouteName.settingsEditProfile);
-                            },
-                            child: Text(t.settingsProfileEditTitle),
-                          ),
-                        ],
+              padding: const EdgeInsets.only(bottom: 24),
+              children: [
+                const SizedBox(height: 12),
+                EdgeToEdgeSection(
+                  child: Column(
+                    children: [
+                      Center(
+                        child: _ProfileAvatar(
+                          avatarUrl: profile?.avatarUrl,
+                          onEdit: showPhotoOptions,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      FilledButton.tonal(
+                        onPressed: () {
+                          context.pushNamed(AppRouteName.settingsEditProfile);
+                        },
+                        child: Text(t.settingsProfileEditTitle),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 2),
+                _ProfileTileGroup(
+                  title: t.settingsProfileInfoSectionTitle,
+                  tiles: [
+                    if (profile?.fullName != null)
+                      SettingsTileData(
+                        title: t.settingsProfileFieldName,
+                        subtitle: profile!.fullName!,
+                        icon: Icons.person_outline,
+                        iconColor: colorScheme.primary,
+                        onTap: () {},
+                      ),
+                    SettingsTileData(
+                      title: t.settingsProfileFieldUsername,
+                      subtitle: '@${profile?.username ?? '...'}',
+                      icon: Icons.alternate_email,
+                      iconColor: colorScheme.secondary,
+                      onTap: () {},
+                    ),
+                    SettingsTileData(
+                      title: t.settingsProfileFieldBio,
+                      subtitle: bio.value,
+                      icon: Icons.info_outline,
+                      iconColor: colorScheme.tertiary,
+                      onTap: () => openEditor(
+                        fieldLabel: t.settingsProfileFieldBio,
+                        field: bio,
+                        helper: t.settingsProfileFieldBioHelper,
+                        maxLines: 3,
                       ),
                     ),
-                    const SizedBox(height: 2),
-                    _ProfileTileGroup(
-                      title: t.settingsProfileInfoSectionTitle,
-                      tiles: [
-                        if (profile?.fullName != null)
-                          SettingsTileData(
-                            title: t.settingsProfileFieldName,
-                            subtitle: profile!.fullName!,
-                            icon: Icons.person_outline,
-                            iconColor: colorScheme.primary,
-                            onTap: () {},
-                          ),
-                        SettingsTileData(
-                          title: t.settingsProfileFieldUsername,
-                          subtitle: '@${profile?.username ?? '...'}',
-                          icon: Icons.alternate_email,
-                          iconColor: colorScheme.secondary,
-                          onTap: () {},
-                        ),
-                        SettingsTileData(
-                          title: t.settingsProfileFieldBio,
-                          subtitle: bio.value,
-                          icon: Icons.info_outline,
-                          iconColor: colorScheme.tertiary,
-                          onTap: () => openEditor(
-                            fieldLabel: t.settingsProfileFieldBio,
-                            field: bio,
-                            helper: t.settingsProfileFieldBioHelper,
-                            maxLines: 3,
-                          ),
-                        ),
-                        SettingsTileData(
-                          title: t.settingsProfileFieldWebsite,
-                          subtitle: website.value,
-                          icon: Icons.link,
-                          iconColor: colorScheme.primary,
-                          onTap: () => openEditor(
-                            fieldLabel: t.settingsProfileFieldWebsite,
-                            field: website,
-                            helper: t.settingsProfileFieldWebsiteHelper,
-                            keyboardType: TextInputType.url,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 2),
-                    _ProfileTileGroup(
-                      title: t.settingsProfileAccountSectionTitle,
-                      tiles: [
-                        SettingsTileData(
-                          title: t.settingsTileAccountStatusTitle,
-                          subtitle: t.settingsTileAccountStatusSubtitle,
-                          icon: Icons.verified_user_outlined,
-                          iconColor: colorScheme.primary,
-                          onTap: () => context.pushNamed(
-                            AppRouteName.settingsAccountStatus,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 2),
-                    EdgeToEdgeSection(
-                      title: t.settingsProfileAccountTypeTitle,
-                      subtitle: t.settingsProfileAccountTypeSubtitle,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SegmentedButton<String>(
-                            segments: [
-                              ButtonSegment(
-                                value: 'personal',
-                                label:
-                                    Text(t.settingsProfileAccountTypePersonal),
-                                icon: const Icon(Icons.person),
-                              ),
-                              ButtonSegment(
-                                value: 'organization',
-                                label: Text(
-                                  t.settingsProfileAccountTypeOrganization,
-                                ),
-                                icon: const Icon(Icons.business_center),
-                              ),
-                            ],
-                            selected: {accountType.value},
-                            onSelectionChanged: (selection) {
-                              accountType.value = selection.first;
-                            },
-                          ),
-                          const SizedBox(height: 12),
-                          Text(
-                            accountType.value == 'personal'
-                                ? t.settingsProfileAccountTypePersonalDescription
-                                : t
-                                    .settingsProfileAccountTypeOrganizationDescription,
-                            style: theme.textTheme.bodySmall?.copyWith(
-                              color: colorScheme.onSurfaceVariant,
-                            ),
-                          ),
-                        ],
+                    SettingsTileData(
+                      title: t.settingsProfileFieldWebsite,
+                      subtitle: website.value,
+                      icon: Icons.link,
+                      iconColor: colorScheme.primary,
+                      onTap: () => openEditor(
+                        fieldLabel: t.settingsProfileFieldWebsite,
+                        field: website,
+                        helper: t.settingsProfileFieldWebsiteHelper,
+                        keyboardType: TextInputType.url,
                       ),
                     ),
                   ],
                 ),
-        );
+                const SizedBox(height: 2),
+                _ProfileTileGroup(
+                  title: t.settingsProfileAccountSectionTitle,
+                  tiles: [
+                    SettingsTileData(
+                      title: t.settingsTileAccountStatusTitle,
+                      subtitle: t.settingsTileAccountStatusSubtitle,
+                      icon: Icons.verified_user_outlined,
+                      iconColor: colorScheme.primary,
+                      onTap: () =>
+                          context.pushNamed(AppRouteName.settingsAccountStatus),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 2),
+                EdgeToEdgeSection(
+                  title: t.settingsProfileAccountTypeTitle,
+                  subtitle: t.settingsProfileAccountTypeSubtitle,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SegmentedButton<String>(
+                        segments: [
+                          ButtonSegment(
+                            value: 'personal',
+                            label: Text(t.settingsProfileAccountTypePersonal),
+                            icon: const Icon(Icons.person),
+                          ),
+                          ButtonSegment(
+                            value: 'organization',
+                            label: Text(
+                              t.settingsProfileAccountTypeOrganization,
+                            ),
+                            icon: const Icon(Icons.business_center),
+                          ),
+                        ],
+                        selected: {accountType.value},
+                        onSelectionChanged: (selection) {
+                          accountType.value = selection.first;
+                        },
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
+                        accountType.value == 'personal'
+                            ? t.settingsProfileAccountTypePersonalDescription
+                            : t.settingsProfileAccountTypeOrganizationDescription,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+    );
   }
 }
 
 class _ProfileTileGroup extends StatelessWidget {
-  const _ProfileTileGroup({
-    required this.title,
-    required this.tiles,
-  });
+  const _ProfileTileGroup({required this.title, required this.tiles});
 
   final String title;
   final List<SettingsTileData> tiles;
@@ -329,7 +317,7 @@ class _ProfileTileGroup extends StatelessWidget {
 //         Container(
 //           height: 180,
 //           decoration: BoxDecoration(
-//             borderRadius: BorderRadius.circular(24),
+//             borderRadius: BorderRadius.circular(12),
 //             image: hasCoverPhoto
 //                 ? const DecorationImage(
 //                     image: NetworkImage('https://via.placeholder.com/800x300'),
@@ -393,8 +381,7 @@ class _ProfileAvatar extends StatelessWidget {
         CircleAvatar(
           radius: 64,
           backgroundColor: colorScheme.primaryContainer,
-          backgroundImage:
-              hasPhoto ? NetworkImage(avatarUrl!) : null,
+          backgroundImage: hasPhoto ? NetworkImage(avatarUrl!) : null,
           child: hasPhoto
               ? null
               : Icon(
