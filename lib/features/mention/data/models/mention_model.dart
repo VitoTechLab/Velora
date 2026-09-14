@@ -5,7 +5,7 @@ part 'mention_model.freezed.dart';
 part 'mention_model.g.dart';
 
 @freezed
-class MentionModel with _$MentionModel {
+abstract class MentionModel with _$MentionModel {
   const MentionModel._();
 
   const factory MentionModel({

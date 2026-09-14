@@ -6,8 +6,8 @@ part of 'mention_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$MentionModelImpl _$$MentionModelImplFromJson(Map<String, dynamic> json) =>
-    _$MentionModelImpl(
+_MentionModel _$MentionModelFromJson(Map<String, dynamic> json) =>
+    _MentionModel(
       id: json['id'] as String,
       userId: json['user_id'] as String,
       createdBy: json['created_by'] as String,
@@ -17,7 +17,7 @@ _$MentionModelImpl _$$MentionModelImplFromJson(Map<String, dynamic> json) =>
       creatorProfile: json['creator_profile'] as Map<String, dynamic>?,
     );
 
-Map<String, dynamic> _$$MentionModelImplToJson(_$MentionModelImpl instance) =>
+Map<String, dynamic> _$MentionModelToJson(_MentionModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'user_id': instance.userId,
