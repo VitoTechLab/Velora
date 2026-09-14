@@ -1,11 +1,14 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:velora/features/profile/domain/entities/update_profile_params.dart';
 import 'package:velora/features/profile/domain/entities/user_gender.dart';
 
 part 'update_profile_model.freezed.dart';
 
 /// Model for updating user profile fields
 @freezed
-abstract class UpdateProfileModel with _$UpdateProfileModel {
+abstract class UpdateProfileModel
+    with _$UpdateProfileModel
+    implements UpdateProfileParams {
   const UpdateProfileModel._();
 
   const factory UpdateProfileModel({
@@ -48,8 +51,10 @@ abstract class UpdateProfileModel with _$UpdateProfileModel {
   }
 
   /// Check if there are any fields to update
+  @override
   bool get isEmpty => toJson().isEmpty;
 
   /// Check if has any fields to update
+  @override
   bool get hasUpdates => !isEmpty;
 }
