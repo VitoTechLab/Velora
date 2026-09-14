@@ -6,9 +6,8 @@ part of 'feed_pagination_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$FeedPaginationModelImpl _$$FeedPaginationModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$FeedPaginationModelImpl(
+_FeedPaginationModel _$FeedPaginationModelFromJson(Map<String, dynamic> json) =>
+    _FeedPaginationModel(
       posts: (json['posts'] as List<dynamic>)
           .map((e) => FeedModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -16,10 +15,10 @@ _$FeedPaginationModelImpl _$$FeedPaginationModelImplFromJson(
       nextCursor: _cursorFromJson(json['nextCursor']),
     );
 
-Map<String, dynamic> _$$FeedPaginationModelImplToJson(
-        _$FeedPaginationModelImpl instance) =>
-    <String, dynamic>{
-      'posts': instance.posts,
-      'hasMore': instance.hasMore,
-      'nextCursor': _cursorToJson(instance.nextCursor),
-    };
+Map<String, dynamic> _$FeedPaginationModelToJson(
+  _FeedPaginationModel instance,
+) => <String, dynamic>{
+  'posts': instance.posts,
+  'hasMore': instance.hasMore,
+  'nextCursor': _cursorToJson(instance.nextCursor),
+};

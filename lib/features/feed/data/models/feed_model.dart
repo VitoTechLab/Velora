@@ -6,7 +6,7 @@ part 'feed_model.freezed.dart';
 part 'feed_model.g.dart';
 
 @freezed
-class FeedModel with _$FeedModel {
+abstract class FeedModel with _$FeedModel {
   const FeedModel._();
 
   const factory FeedModel({

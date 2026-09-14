@@ -6,9 +6,8 @@ part of 'update_feed_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$UpdateFeedModelImpl _$$UpdateFeedModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$UpdateFeedModelImpl(
+_UpdateFeedModel _$UpdateFeedModelFromJson(Map<String, dynamic> json) =>
+    _UpdateFeedModel(
       content: json['caption'] as String?,
       mediaUrls: const StringListConverter().fromJson(json['media_urls']),
       location: json['location'] as Map<String, dynamic>?,
@@ -21,32 +20,30 @@ _$UpdateFeedModelImpl _$$UpdateFeedModelImplFromJson(
       campaignTitle: json['campaign_title'] as String?,
     );
 
-Map<String, dynamic> _$$UpdateFeedModelImplToJson(
-        _$UpdateFeedModelImpl instance) =>
+Map<String, dynamic> _$UpdateFeedModelToJson(_UpdateFeedModel instance) =>
     <String, dynamic>{
-      if (instance.content case final value?) 'caption': value,
-      if (_$JsonConverterToJson<Object?, List<String>>(
-              instance.mediaUrls, const StringListConverter().toJson)
-          case final value?)
-        'media_urls': value,
-      if (instance.location case final value?) 'location': value,
-      if (_$JsonConverterToJson<Object?, List<String>>(
-              instance.tags, const StringListConverter().toJson)
-          case final value?)
-        'tags': value,
-      if (_$JsonConverterToJson<Object?, List<String>>(
-              instance.mentionIds, const StringListConverter().toJson)
-          case final value?)
-        'mention_ids': value,
-      if (instance.allowComments case final value?) 'allow_comments': value,
-      if (instance.allowShare case final value?) 'allow_share': value,
-      if (instance.isActive case final value?) 'is_active': value,
-      if (instance.campaignId case final value?) 'campaign_id': value,
-      if (instance.campaignTitle case final value?) 'campaign_title': value,
+      'caption': ?instance.content,
+      'media_urls': ?_$JsonConverterToJson<Object?, List<String>>(
+        instance.mediaUrls,
+        const StringListConverter().toJson,
+      ),
+      'location': ?instance.location,
+      'tags': ?_$JsonConverterToJson<Object?, List<String>>(
+        instance.tags,
+        const StringListConverter().toJson,
+      ),
+      'mention_ids': ?_$JsonConverterToJson<Object?, List<String>>(
+        instance.mentionIds,
+        const StringListConverter().toJson,
+      ),
+      'allow_comments': ?instance.allowComments,
+      'allow_share': ?instance.allowShare,
+      'is_active': ?instance.isActive,
+      'campaign_id': ?instance.campaignId,
+      'campaign_title': ?instance.campaignTitle,
     };
 
 Json? _$JsonConverterToJson<Json, Value>(
   Value? value,
   Json? Function(Value value) toJson,
-) =>
-    value == null ? null : toJson(value);
+) => value == null ? null : toJson(value);
