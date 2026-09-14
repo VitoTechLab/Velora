@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,218 +9,275 @@ part of 'message_read_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-MessageReadModel _$MessageReadModelFromJson(Map<String, dynamic> json) {
-  return _MessageReadModel.fromJson(json);
-}
 
 /// @nodoc
 mixin _$MessageReadModel {
-  @JsonKey(name: 'message_id')
-  String get messageId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'user_id')
-  String get userId => throw _privateConstructorUsedError;
-  @UtcDateTimeConverter()
-  @JsonKey(name: 'read_at')
-  DateTime get readAt => throw _privateConstructorUsedError;
+
+@JsonKey(name: 'message_id') String get messageId;@JsonKey(name: 'user_id') String get userId;@UtcDateTimeConverter()@JsonKey(name: 'read_at') DateTime get readAt;
+/// Create a copy of MessageReadModel
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$MessageReadModelCopyWith<MessageReadModel> get copyWith => _$MessageReadModelCopyWithImpl<MessageReadModel>(this as MessageReadModel, _$identity);
 
   /// Serializes this MessageReadModel to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson();
 
-  /// Create a copy of MessageReadModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $MessageReadModelCopyWith<MessageReadModel> get copyWith =>
-      throw _privateConstructorUsedError;
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MessageReadModel&&(identical(other.messageId, messageId) || other.messageId == messageId)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.readAt, readAt) || other.readAt == readAt));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,messageId,userId,readAt);
+
+@override
+String toString() {
+  return 'MessageReadModel(messageId: $messageId, userId: $userId, readAt: $readAt)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $MessageReadModelCopyWith<$Res> {
-  factory $MessageReadModelCopyWith(
-          MessageReadModel value, $Res Function(MessageReadModel) then) =
-      _$MessageReadModelCopyWithImpl<$Res, MessageReadModel>;
-  @useResult
-  $Res call(
-      {@JsonKey(name: 'message_id') String messageId,
-      @JsonKey(name: 'user_id') String userId,
-      @UtcDateTimeConverter() @JsonKey(name: 'read_at') DateTime readAt});
-}
+abstract mixin class $MessageReadModelCopyWith<$Res>  {
+  factory $MessageReadModelCopyWith(MessageReadModel value, $Res Function(MessageReadModel) _then) = _$MessageReadModelCopyWithImpl;
+@useResult
+$Res call({
+@JsonKey(name: 'message_id') String messageId,@JsonKey(name: 'user_id') String userId,@UtcDateTimeConverter()@JsonKey(name: 'read_at') DateTime readAt
+});
 
+
+
+
+}
 /// @nodoc
-class _$MessageReadModelCopyWithImpl<$Res, $Val extends MessageReadModel>
+class _$MessageReadModelCopyWithImpl<$Res>
     implements $MessageReadModelCopyWith<$Res> {
-  _$MessageReadModelCopyWithImpl(this._value, this._then);
+  _$MessageReadModelCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final MessageReadModel _self;
+  final $Res Function(MessageReadModel) _then;
 
-  /// Create a copy of MessageReadModel
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? messageId = null,
-    Object? userId = null,
-    Object? readAt = null,
-  }) {
-    return _then(_value.copyWith(
-      messageId: null == messageId
-          ? _value.messageId
-          : messageId // ignore: cast_nullable_to_non_nullable
-              as String,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-      readAt: null == readAt
-          ? _value.readAt
-          : readAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-    ) as $Val);
-  }
+/// Create a copy of MessageReadModel
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? messageId = null,Object? userId = null,Object? readAt = null,}) {
+  return _then(_self.copyWith(
+messageId: null == messageId ? _self.messageId : messageId // ignore: cast_nullable_to_non_nullable
+as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,readAt: null == readAt ? _self.readAt : readAt // ignore: cast_nullable_to_non_nullable
+as DateTime,
+  ));
 }
 
-/// @nodoc
-abstract class _$$MessageReadModelImplCopyWith<$Res>
-    implements $MessageReadModelCopyWith<$Res> {
-  factory _$$MessageReadModelImplCopyWith(_$MessageReadModelImpl value,
-          $Res Function(_$MessageReadModelImpl) then) =
-      __$$MessageReadModelImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {@JsonKey(name: 'message_id') String messageId,
-      @JsonKey(name: 'user_id') String userId,
-      @UtcDateTimeConverter() @JsonKey(name: 'read_at') DateTime readAt});
 }
 
-/// @nodoc
-class __$$MessageReadModelImplCopyWithImpl<$Res>
-    extends _$MessageReadModelCopyWithImpl<$Res, _$MessageReadModelImpl>
-    implements _$$MessageReadModelImplCopyWith<$Res> {
-  __$$MessageReadModelImplCopyWithImpl(_$MessageReadModelImpl _value,
-      $Res Function(_$MessageReadModelImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of MessageReadModel
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? messageId = null,
-    Object? userId = null,
-    Object? readAt = null,
-  }) {
-    return _then(_$MessageReadModelImpl(
-      messageId: null == messageId
-          ? _value.messageId
-          : messageId // ignore: cast_nullable_to_non_nullable
-              as String,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-      readAt: null == readAt
-          ? _value.readAt
-          : readAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-    ));
-  }
+/// Adds pattern-matching-related methods to [MessageReadModel].
+extension MessageReadModelPatterns on MessageReadModel {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _MessageReadModel value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _MessageReadModel() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _MessageReadModel value)  $default,){
+final _that = this;
+switch (_that) {
+case _MessageReadModel():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _MessageReadModel value)?  $default,){
+final _that = this;
+switch (_that) {
+case _MessageReadModel() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'message_id')  String messageId, @JsonKey(name: 'user_id')  String userId, @UtcDateTimeConverter()@JsonKey(name: 'read_at')  DateTime readAt)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _MessageReadModel() when $default != null:
+return $default(_that.messageId,_that.userId,_that.readAt);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'message_id')  String messageId, @JsonKey(name: 'user_id')  String userId, @UtcDateTimeConverter()@JsonKey(name: 'read_at')  DateTime readAt)  $default,) {final _that = this;
+switch (_that) {
+case _MessageReadModel():
+return $default(_that.messageId,_that.userId,_that.readAt);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'message_id')  String messageId, @JsonKey(name: 'user_id')  String userId, @UtcDateTimeConverter()@JsonKey(name: 'read_at')  DateTime readAt)?  $default,) {final _that = this;
+switch (_that) {
+case _MessageReadModel() when $default != null:
+return $default(_that.messageId,_that.userId,_that.readAt);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$MessageReadModelImpl extends _MessageReadModel {
-  const _$MessageReadModelImpl(
-      {@JsonKey(name: 'message_id') required this.messageId,
-      @JsonKey(name: 'user_id') required this.userId,
-      @UtcDateTimeConverter() @JsonKey(name: 'read_at') required this.readAt})
-      : super._();
 
-  factory _$MessageReadModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$MessageReadModelImplFromJson(json);
+class _MessageReadModel extends MessageReadModel {
+  const _MessageReadModel({@JsonKey(name: 'message_id') required this.messageId, @JsonKey(name: 'user_id') required this.userId, @UtcDateTimeConverter()@JsonKey(name: 'read_at') required this.readAt}): super._();
+  factory _MessageReadModel.fromJson(Map<String, dynamic> json) => _$MessageReadModelFromJson(json);
 
-  @override
-  @JsonKey(name: 'message_id')
-  final String messageId;
-  @override
-  @JsonKey(name: 'user_id')
-  final String userId;
-  @override
-  @UtcDateTimeConverter()
-  @JsonKey(name: 'read_at')
-  final DateTime readAt;
+@override@JsonKey(name: 'message_id') final  String messageId;
+@override@JsonKey(name: 'user_id') final  String userId;
+@override@UtcDateTimeConverter()@JsonKey(name: 'read_at') final  DateTime readAt;
 
-  @override
-  String toString() {
-    return 'MessageReadModel(messageId: $messageId, userId: $userId, readAt: $readAt)';
-  }
+/// Create a copy of MessageReadModel
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$MessageReadModelCopyWith<_MessageReadModel> get copyWith => __$MessageReadModelCopyWithImpl<_MessageReadModel>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$MessageReadModelImpl &&
-            (identical(other.messageId, messageId) ||
-                other.messageId == messageId) &&
-            (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.readAt, readAt) || other.readAt == readAt));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, messageId, userId, readAt);
-
-  /// Create a copy of MessageReadModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$MessageReadModelImplCopyWith<_$MessageReadModelImpl> get copyWith =>
-      __$$MessageReadModelImplCopyWithImpl<_$MessageReadModelImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$MessageReadModelImplToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$MessageReadModelToJson(this, );
 }
 
-abstract class _MessageReadModel extends MessageReadModel {
-  const factory _MessageReadModel(
-      {@JsonKey(name: 'message_id') required final String messageId,
-      @JsonKey(name: 'user_id') required final String userId,
-      @UtcDateTimeConverter()
-      @JsonKey(name: 'read_at')
-      required final DateTime readAt}) = _$MessageReadModelImpl;
-  const _MessageReadModel._() : super._();
-
-  factory _MessageReadModel.fromJson(Map<String, dynamic> json) =
-      _$MessageReadModelImpl.fromJson;
-
-  @override
-  @JsonKey(name: 'message_id')
-  String get messageId;
-  @override
-  @JsonKey(name: 'user_id')
-  String get userId;
-  @override
-  @UtcDateTimeConverter()
-  @JsonKey(name: 'read_at')
-  DateTime get readAt;
-
-  /// Create a copy of MessageReadModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MessageReadModelImplCopyWith<_$MessageReadModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MessageReadModel&&(identical(other.messageId, messageId) || other.messageId == messageId)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.readAt, readAt) || other.readAt == readAt));
 }
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,messageId,userId,readAt);
+
+@override
+String toString() {
+  return 'MessageReadModel(messageId: $messageId, userId: $userId, readAt: $readAt)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$MessageReadModelCopyWith<$Res> implements $MessageReadModelCopyWith<$Res> {
+  factory _$MessageReadModelCopyWith(_MessageReadModel value, $Res Function(_MessageReadModel) _then) = __$MessageReadModelCopyWithImpl;
+@override @useResult
+$Res call({
+@JsonKey(name: 'message_id') String messageId,@JsonKey(name: 'user_id') String userId,@UtcDateTimeConverter()@JsonKey(name: 'read_at') DateTime readAt
+});
+
+
+
+
+}
+/// @nodoc
+class __$MessageReadModelCopyWithImpl<$Res>
+    implements _$MessageReadModelCopyWith<$Res> {
+  __$MessageReadModelCopyWithImpl(this._self, this._then);
+
+  final _MessageReadModel _self;
+  final $Res Function(_MessageReadModel) _then;
+
+/// Create a copy of MessageReadModel
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? messageId = null,Object? userId = null,Object? readAt = null,}) {
+  return _then(_MessageReadModel(
+messageId: null == messageId ? _self.messageId : messageId // ignore: cast_nullable_to_non_nullable
+as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,readAt: null == readAt ? _self.readAt : readAt // ignore: cast_nullable_to_non_nullable
+as DateTime,
+  ));
+}
+
+
+}
+
+// dart format on
