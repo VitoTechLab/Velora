@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,5232 +9,1472 @@ part of 'settings_event.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
 mixin _$SettingsEvent {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loadSettings,
-    required TResult Function(String languageCode, String? region)
-        updateLanguage,
-    required TResult Function(String mode) updateThemeMode,
-    required TResult Function(bool enabled) toggleDynamicColor,
-    required TResult Function(String palette) updateColorPalette,
-    required TResult Function(double radius) updateCornerRadius,
-    required TResult Function(double size) updateFontSize,
-    required TResult Function(String family) updateFontFamily,
-    required TResult Function(String alignment) updateTextAlignment,
-    required TResult Function(double spacing) updateLineSpacing,
-    required TResult Function(bool enabled) toggleHighContrast,
-    required TResult Function(bool enabled) toggleMotionReduced,
-    required TResult Function(bool enabled) togglePauseAllNotifications,
-    required TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)
-        updateSleepMode,
-    required TResult Function(String type, bool enabled) toggleNotification,
-    required TResult Function(String frequency) updateSummaryFrequency,
-    required TResult Function(bool enabled) toggleEmailNotifications,
-    required TResult Function(bool enabled) toggleSmsNotifications,
-    required TResult Function() clearMessages,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadSettings,
-    TResult? Function(String languageCode, String? region)? updateLanguage,
-    TResult? Function(String mode)? updateThemeMode,
-    TResult? Function(bool enabled)? toggleDynamicColor,
-    TResult? Function(String palette)? updateColorPalette,
-    TResult? Function(double radius)? updateCornerRadius,
-    TResult? Function(double size)? updateFontSize,
-    TResult? Function(String family)? updateFontFamily,
-    TResult? Function(String alignment)? updateTextAlignment,
-    TResult? Function(double spacing)? updateLineSpacing,
-    TResult? Function(bool enabled)? toggleHighContrast,
-    TResult? Function(bool enabled)? toggleMotionReduced,
-    TResult? Function(bool enabled)? togglePauseAllNotifications,
-    TResult? Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult? Function(String type, bool enabled)? toggleNotification,
-    TResult? Function(String frequency)? updateSummaryFrequency,
-    TResult? Function(bool enabled)? toggleEmailNotifications,
-    TResult? Function(bool enabled)? toggleSmsNotifications,
-    TResult? Function()? clearMessages,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadSettings,
-    TResult Function(String languageCode, String? region)? updateLanguage,
-    TResult Function(String mode)? updateThemeMode,
-    TResult Function(bool enabled)? toggleDynamicColor,
-    TResult Function(String palette)? updateColorPalette,
-    TResult Function(double radius)? updateCornerRadius,
-    TResult Function(double size)? updateFontSize,
-    TResult Function(String family)? updateFontFamily,
-    TResult Function(String alignment)? updateTextAlignment,
-    TResult Function(double spacing)? updateLineSpacing,
-    TResult Function(bool enabled)? toggleHighContrast,
-    TResult Function(bool enabled)? toggleMotionReduced,
-    TResult Function(bool enabled)? togglePauseAllNotifications,
-    TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult Function(String type, bool enabled)? toggleNotification,
-    TResult Function(String frequency)? updateSummaryFrequency,
-    TResult Function(bool enabled)? toggleEmailNotifications,
-    TResult Function(bool enabled)? toggleSmsNotifications,
-    TResult Function()? clearMessages,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadSettingsEvent value) loadSettings,
-    required TResult Function(UpdateLanguageEvent value) updateLanguage,
-    required TResult Function(UpdateThemeModeEvent value) updateThemeMode,
-    required TResult Function(ToggleDynamicColorEvent value) toggleDynamicColor,
-    required TResult Function(UpdateColorPaletteEvent value) updateColorPalette,
-    required TResult Function(UpdateCornerRadiusEvent value) updateCornerRadius,
-    required TResult Function(UpdateFontSizeEvent value) updateFontSize,
-    required TResult Function(UpdateFontFamilyEvent value) updateFontFamily,
-    required TResult Function(UpdateTextAlignmentEvent value)
-        updateTextAlignment,
-    required TResult Function(UpdateLineSpacingEvent value) updateLineSpacing,
-    required TResult Function(ToggleHighContrastEvent value) toggleHighContrast,
-    required TResult Function(ToggleMotionReducedEvent value)
-        toggleMotionReduced,
-    required TResult Function(TogglePauseAllNotificationsEvent value)
-        togglePauseAllNotifications,
-    required TResult Function(UpdateSleepModeEvent value) updateSleepMode,
-    required TResult Function(ToggleNotificationEvent value) toggleNotification,
-    required TResult Function(UpdateSummaryFrequencyEvent value)
-        updateSummaryFrequency,
-    required TResult Function(ToggleEmailNotificationsEvent value)
-        toggleEmailNotifications,
-    required TResult Function(ToggleSmsNotificationsEvent value)
-        toggleSmsNotifications,
-    required TResult Function(ClearSettingsMessagesEvent value) clearMessages,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadSettingsEvent value)? loadSettings,
-    TResult? Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult? Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult? Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult? Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult? Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult? Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult? Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult? Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult? Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult? Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult? Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult? Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult? Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult? Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult? Function(UpdateSummaryFrequencyEvent value)?
-        updateSummaryFrequency,
-    TResult? Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult? Function(ToggleSmsNotificationsEvent value)?
-        toggleSmsNotifications,
-    TResult? Function(ClearSettingsMessagesEvent value)? clearMessages,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadSettingsEvent value)? loadSettings,
-    TResult Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult Function(UpdateSummaryFrequencyEvent value)? updateSummaryFrequency,
-    TResult Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult Function(ToggleSmsNotificationsEvent value)? toggleSmsNotifications,
-    TResult Function(ClearSettingsMessagesEvent value)? clearMessages,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SettingsEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'SettingsEvent()';
+}
+
+
 }
 
 /// @nodoc
-abstract class $SettingsEventCopyWith<$Res> {
-  factory $SettingsEventCopyWith(
-          SettingsEvent value, $Res Function(SettingsEvent) then) =
-      _$SettingsEventCopyWithImpl<$Res, SettingsEvent>;
+class $SettingsEventCopyWith<$Res>  {
+$SettingsEventCopyWith(SettingsEvent _, $Res Function(SettingsEvent) __);
 }
 
-/// @nodoc
-class _$SettingsEventCopyWithImpl<$Res, $Val extends SettingsEvent>
-    implements $SettingsEventCopyWith<$Res> {
-  _$SettingsEventCopyWithImpl(this._value, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+/// Adds pattern-matching-related methods to [SettingsEvent].
+extension SettingsEventPatterns on SettingsEvent {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LoadSettingsEvent value)?  loadSettings,TResult Function( UpdateLanguageEvent value)?  updateLanguage,TResult Function( UpdateThemeModeEvent value)?  updateThemeMode,TResult Function( ToggleDynamicColorEvent value)?  toggleDynamicColor,TResult Function( UpdateColorPaletteEvent value)?  updateColorPalette,TResult Function( UpdateCornerRadiusEvent value)?  updateCornerRadius,TResult Function( UpdateFontSizeEvent value)?  updateFontSize,TResult Function( UpdateFontFamilyEvent value)?  updateFontFamily,TResult Function( UpdateTextAlignmentEvent value)?  updateTextAlignment,TResult Function( UpdateLineSpacingEvent value)?  updateLineSpacing,TResult Function( ToggleHighContrastEvent value)?  toggleHighContrast,TResult Function( ToggleMotionReducedEvent value)?  toggleMotionReduced,TResult Function( TogglePauseAllNotificationsEvent value)?  togglePauseAllNotifications,TResult Function( UpdateSleepModeEvent value)?  updateSleepMode,TResult Function( ToggleNotificationEvent value)?  toggleNotification,TResult Function( UpdateSummaryFrequencyEvent value)?  updateSummaryFrequency,TResult Function( ToggleEmailNotificationsEvent value)?  toggleEmailNotifications,TResult Function( ToggleSmsNotificationsEvent value)?  toggleSmsNotifications,TResult Function( ClearSettingsMessagesEvent value)?  clearMessages,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case LoadSettingsEvent() when loadSettings != null:
+return loadSettings(_that);case UpdateLanguageEvent() when updateLanguage != null:
+return updateLanguage(_that);case UpdateThemeModeEvent() when updateThemeMode != null:
+return updateThemeMode(_that);case ToggleDynamicColorEvent() when toggleDynamicColor != null:
+return toggleDynamicColor(_that);case UpdateColorPaletteEvent() when updateColorPalette != null:
+return updateColorPalette(_that);case UpdateCornerRadiusEvent() when updateCornerRadius != null:
+return updateCornerRadius(_that);case UpdateFontSizeEvent() when updateFontSize != null:
+return updateFontSize(_that);case UpdateFontFamilyEvent() when updateFontFamily != null:
+return updateFontFamily(_that);case UpdateTextAlignmentEvent() when updateTextAlignment != null:
+return updateTextAlignment(_that);case UpdateLineSpacingEvent() when updateLineSpacing != null:
+return updateLineSpacing(_that);case ToggleHighContrastEvent() when toggleHighContrast != null:
+return toggleHighContrast(_that);case ToggleMotionReducedEvent() when toggleMotionReduced != null:
+return toggleMotionReduced(_that);case TogglePauseAllNotificationsEvent() when togglePauseAllNotifications != null:
+return togglePauseAllNotifications(_that);case UpdateSleepModeEvent() when updateSleepMode != null:
+return updateSleepMode(_that);case ToggleNotificationEvent() when toggleNotification != null:
+return toggleNotification(_that);case UpdateSummaryFrequencyEvent() when updateSummaryFrequency != null:
+return updateSummaryFrequency(_that);case ToggleEmailNotificationsEvent() when toggleEmailNotifications != null:
+return toggleEmailNotifications(_that);case ToggleSmsNotificationsEvent() when toggleSmsNotifications != null:
+return toggleSmsNotifications(_that);case ClearSettingsMessagesEvent() when clearMessages != null:
+return clearMessages(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LoadSettingsEvent value)  loadSettings,required TResult Function( UpdateLanguageEvent value)  updateLanguage,required TResult Function( UpdateThemeModeEvent value)  updateThemeMode,required TResult Function( ToggleDynamicColorEvent value)  toggleDynamicColor,required TResult Function( UpdateColorPaletteEvent value)  updateColorPalette,required TResult Function( UpdateCornerRadiusEvent value)  updateCornerRadius,required TResult Function( UpdateFontSizeEvent value)  updateFontSize,required TResult Function( UpdateFontFamilyEvent value)  updateFontFamily,required TResult Function( UpdateTextAlignmentEvent value)  updateTextAlignment,required TResult Function( UpdateLineSpacingEvent value)  updateLineSpacing,required TResult Function( ToggleHighContrastEvent value)  toggleHighContrast,required TResult Function( ToggleMotionReducedEvent value)  toggleMotionReduced,required TResult Function( TogglePauseAllNotificationsEvent value)  togglePauseAllNotifications,required TResult Function( UpdateSleepModeEvent value)  updateSleepMode,required TResult Function( ToggleNotificationEvent value)  toggleNotification,required TResult Function( UpdateSummaryFrequencyEvent value)  updateSummaryFrequency,required TResult Function( ToggleEmailNotificationsEvent value)  toggleEmailNotifications,required TResult Function( ToggleSmsNotificationsEvent value)  toggleSmsNotifications,required TResult Function( ClearSettingsMessagesEvent value)  clearMessages,}){
+final _that = this;
+switch (_that) {
+case LoadSettingsEvent():
+return loadSettings(_that);case UpdateLanguageEvent():
+return updateLanguage(_that);case UpdateThemeModeEvent():
+return updateThemeMode(_that);case ToggleDynamicColorEvent():
+return toggleDynamicColor(_that);case UpdateColorPaletteEvent():
+return updateColorPalette(_that);case UpdateCornerRadiusEvent():
+return updateCornerRadius(_that);case UpdateFontSizeEvent():
+return updateFontSize(_that);case UpdateFontFamilyEvent():
+return updateFontFamily(_that);case UpdateTextAlignmentEvent():
+return updateTextAlignment(_that);case UpdateLineSpacingEvent():
+return updateLineSpacing(_that);case ToggleHighContrastEvent():
+return toggleHighContrast(_that);case ToggleMotionReducedEvent():
+return toggleMotionReduced(_that);case TogglePauseAllNotificationsEvent():
+return togglePauseAllNotifications(_that);case UpdateSleepModeEvent():
+return updateSleepMode(_that);case ToggleNotificationEvent():
+return toggleNotification(_that);case UpdateSummaryFrequencyEvent():
+return updateSummaryFrequency(_that);case ToggleEmailNotificationsEvent():
+return toggleEmailNotifications(_that);case ToggleSmsNotificationsEvent():
+return toggleSmsNotifications(_that);case ClearSettingsMessagesEvent():
+return clearMessages(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LoadSettingsEvent value)?  loadSettings,TResult? Function( UpdateLanguageEvent value)?  updateLanguage,TResult? Function( UpdateThemeModeEvent value)?  updateThemeMode,TResult? Function( ToggleDynamicColorEvent value)?  toggleDynamicColor,TResult? Function( UpdateColorPaletteEvent value)?  updateColorPalette,TResult? Function( UpdateCornerRadiusEvent value)?  updateCornerRadius,TResult? Function( UpdateFontSizeEvent value)?  updateFontSize,TResult? Function( UpdateFontFamilyEvent value)?  updateFontFamily,TResult? Function( UpdateTextAlignmentEvent value)?  updateTextAlignment,TResult? Function( UpdateLineSpacingEvent value)?  updateLineSpacing,TResult? Function( ToggleHighContrastEvent value)?  toggleHighContrast,TResult? Function( ToggleMotionReducedEvent value)?  toggleMotionReduced,TResult? Function( TogglePauseAllNotificationsEvent value)?  togglePauseAllNotifications,TResult? Function( UpdateSleepModeEvent value)?  updateSleepMode,TResult? Function( ToggleNotificationEvent value)?  toggleNotification,TResult? Function( UpdateSummaryFrequencyEvent value)?  updateSummaryFrequency,TResult? Function( ToggleEmailNotificationsEvent value)?  toggleEmailNotifications,TResult? Function( ToggleSmsNotificationsEvent value)?  toggleSmsNotifications,TResult? Function( ClearSettingsMessagesEvent value)?  clearMessages,}){
+final _that = this;
+switch (_that) {
+case LoadSettingsEvent() when loadSettings != null:
+return loadSettings(_that);case UpdateLanguageEvent() when updateLanguage != null:
+return updateLanguage(_that);case UpdateThemeModeEvent() when updateThemeMode != null:
+return updateThemeMode(_that);case ToggleDynamicColorEvent() when toggleDynamicColor != null:
+return toggleDynamicColor(_that);case UpdateColorPaletteEvent() when updateColorPalette != null:
+return updateColorPalette(_that);case UpdateCornerRadiusEvent() when updateCornerRadius != null:
+return updateCornerRadius(_that);case UpdateFontSizeEvent() when updateFontSize != null:
+return updateFontSize(_that);case UpdateFontFamilyEvent() when updateFontFamily != null:
+return updateFontFamily(_that);case UpdateTextAlignmentEvent() when updateTextAlignment != null:
+return updateTextAlignment(_that);case UpdateLineSpacingEvent() when updateLineSpacing != null:
+return updateLineSpacing(_that);case ToggleHighContrastEvent() when toggleHighContrast != null:
+return toggleHighContrast(_that);case ToggleMotionReducedEvent() when toggleMotionReduced != null:
+return toggleMotionReduced(_that);case TogglePauseAllNotificationsEvent() when togglePauseAllNotifications != null:
+return togglePauseAllNotifications(_that);case UpdateSleepModeEvent() when updateSleepMode != null:
+return updateSleepMode(_that);case ToggleNotificationEvent() when toggleNotification != null:
+return toggleNotification(_that);case UpdateSummaryFrequencyEvent() when updateSummaryFrequency != null:
+return updateSummaryFrequency(_that);case ToggleEmailNotificationsEvent() when toggleEmailNotifications != null:
+return toggleEmailNotifications(_that);case ToggleSmsNotificationsEvent() when toggleSmsNotifications != null:
+return toggleSmsNotifications(_that);case ClearSettingsMessagesEvent() when clearMessages != null:
+return clearMessages(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadSettings,TResult Function( String languageCode,  String? region)?  updateLanguage,TResult Function( String mode)?  updateThemeMode,TResult Function( bool enabled)?  toggleDynamicColor,TResult Function( String palette)?  updateColorPalette,TResult Function( double radius)?  updateCornerRadius,TResult Function( double size)?  updateFontSize,TResult Function( String family)?  updateFontFamily,TResult Function( String alignment)?  updateTextAlignment,TResult Function( double spacing)?  updateLineSpacing,TResult Function( bool enabled)?  toggleHighContrast,TResult Function( bool enabled)?  toggleMotionReduced,TResult Function( bool enabled)?  togglePauseAllNotifications,TResult Function( bool enabled,  int? startHour,  int? startMinute,  int? endHour,  int? endMinute)?  updateSleepMode,TResult Function( String type,  bool enabled)?  toggleNotification,TResult Function( String frequency)?  updateSummaryFrequency,TResult Function( bool enabled)?  toggleEmailNotifications,TResult Function( bool enabled)?  toggleSmsNotifications,TResult Function()?  clearMessages,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case LoadSettingsEvent() when loadSettings != null:
+return loadSettings();case UpdateLanguageEvent() when updateLanguage != null:
+return updateLanguage(_that.languageCode,_that.region);case UpdateThemeModeEvent() when updateThemeMode != null:
+return updateThemeMode(_that.mode);case ToggleDynamicColorEvent() when toggleDynamicColor != null:
+return toggleDynamicColor(_that.enabled);case UpdateColorPaletteEvent() when updateColorPalette != null:
+return updateColorPalette(_that.palette);case UpdateCornerRadiusEvent() when updateCornerRadius != null:
+return updateCornerRadius(_that.radius);case UpdateFontSizeEvent() when updateFontSize != null:
+return updateFontSize(_that.size);case UpdateFontFamilyEvent() when updateFontFamily != null:
+return updateFontFamily(_that.family);case UpdateTextAlignmentEvent() when updateTextAlignment != null:
+return updateTextAlignment(_that.alignment);case UpdateLineSpacingEvent() when updateLineSpacing != null:
+return updateLineSpacing(_that.spacing);case ToggleHighContrastEvent() when toggleHighContrast != null:
+return toggleHighContrast(_that.enabled);case ToggleMotionReducedEvent() when toggleMotionReduced != null:
+return toggleMotionReduced(_that.enabled);case TogglePauseAllNotificationsEvent() when togglePauseAllNotifications != null:
+return togglePauseAllNotifications(_that.enabled);case UpdateSleepModeEvent() when updateSleepMode != null:
+return updateSleepMode(_that.enabled,_that.startHour,_that.startMinute,_that.endHour,_that.endMinute);case ToggleNotificationEvent() when toggleNotification != null:
+return toggleNotification(_that.type,_that.enabled);case UpdateSummaryFrequencyEvent() when updateSummaryFrequency != null:
+return updateSummaryFrequency(_that.frequency);case ToggleEmailNotificationsEvent() when toggleEmailNotifications != null:
+return toggleEmailNotifications(_that.enabled);case ToggleSmsNotificationsEvent() when toggleSmsNotifications != null:
+return toggleSmsNotifications(_that.enabled);case ClearSettingsMessagesEvent() when clearMessages != null:
+return clearMessages();case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadSettings,required TResult Function( String languageCode,  String? region)  updateLanguage,required TResult Function( String mode)  updateThemeMode,required TResult Function( bool enabled)  toggleDynamicColor,required TResult Function( String palette)  updateColorPalette,required TResult Function( double radius)  updateCornerRadius,required TResult Function( double size)  updateFontSize,required TResult Function( String family)  updateFontFamily,required TResult Function( String alignment)  updateTextAlignment,required TResult Function( double spacing)  updateLineSpacing,required TResult Function( bool enabled)  toggleHighContrast,required TResult Function( bool enabled)  toggleMotionReduced,required TResult Function( bool enabled)  togglePauseAllNotifications,required TResult Function( bool enabled,  int? startHour,  int? startMinute,  int? endHour,  int? endMinute)  updateSleepMode,required TResult Function( String type,  bool enabled)  toggleNotification,required TResult Function( String frequency)  updateSummaryFrequency,required TResult Function( bool enabled)  toggleEmailNotifications,required TResult Function( bool enabled)  toggleSmsNotifications,required TResult Function()  clearMessages,}) {final _that = this;
+switch (_that) {
+case LoadSettingsEvent():
+return loadSettings();case UpdateLanguageEvent():
+return updateLanguage(_that.languageCode,_that.region);case UpdateThemeModeEvent():
+return updateThemeMode(_that.mode);case ToggleDynamicColorEvent():
+return toggleDynamicColor(_that.enabled);case UpdateColorPaletteEvent():
+return updateColorPalette(_that.palette);case UpdateCornerRadiusEvent():
+return updateCornerRadius(_that.radius);case UpdateFontSizeEvent():
+return updateFontSize(_that.size);case UpdateFontFamilyEvent():
+return updateFontFamily(_that.family);case UpdateTextAlignmentEvent():
+return updateTextAlignment(_that.alignment);case UpdateLineSpacingEvent():
+return updateLineSpacing(_that.spacing);case ToggleHighContrastEvent():
+return toggleHighContrast(_that.enabled);case ToggleMotionReducedEvent():
+return toggleMotionReduced(_that.enabled);case TogglePauseAllNotificationsEvent():
+return togglePauseAllNotifications(_that.enabled);case UpdateSleepModeEvent():
+return updateSleepMode(_that.enabled,_that.startHour,_that.startMinute,_that.endHour,_that.endMinute);case ToggleNotificationEvent():
+return toggleNotification(_that.type,_that.enabled);case UpdateSummaryFrequencyEvent():
+return updateSummaryFrequency(_that.frequency);case ToggleEmailNotificationsEvent():
+return toggleEmailNotifications(_that.enabled);case ToggleSmsNotificationsEvent():
+return toggleSmsNotifications(_that.enabled);case ClearSettingsMessagesEvent():
+return clearMessages();case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadSettings,TResult? Function( String languageCode,  String? region)?  updateLanguage,TResult? Function( String mode)?  updateThemeMode,TResult? Function( bool enabled)?  toggleDynamicColor,TResult? Function( String palette)?  updateColorPalette,TResult? Function( double radius)?  updateCornerRadius,TResult? Function( double size)?  updateFontSize,TResult? Function( String family)?  updateFontFamily,TResult? Function( String alignment)?  updateTextAlignment,TResult? Function( double spacing)?  updateLineSpacing,TResult? Function( bool enabled)?  toggleHighContrast,TResult? Function( bool enabled)?  toggleMotionReduced,TResult? Function( bool enabled)?  togglePauseAllNotifications,TResult? Function( bool enabled,  int? startHour,  int? startMinute,  int? endHour,  int? endMinute)?  updateSleepMode,TResult? Function( String type,  bool enabled)?  toggleNotification,TResult? Function( String frequency)?  updateSummaryFrequency,TResult? Function( bool enabled)?  toggleEmailNotifications,TResult? Function( bool enabled)?  toggleSmsNotifications,TResult? Function()?  clearMessages,}) {final _that = this;
+switch (_that) {
+case LoadSettingsEvent() when loadSettings != null:
+return loadSettings();case UpdateLanguageEvent() when updateLanguage != null:
+return updateLanguage(_that.languageCode,_that.region);case UpdateThemeModeEvent() when updateThemeMode != null:
+return updateThemeMode(_that.mode);case ToggleDynamicColorEvent() when toggleDynamicColor != null:
+return toggleDynamicColor(_that.enabled);case UpdateColorPaletteEvent() when updateColorPalette != null:
+return updateColorPalette(_that.palette);case UpdateCornerRadiusEvent() when updateCornerRadius != null:
+return updateCornerRadius(_that.radius);case UpdateFontSizeEvent() when updateFontSize != null:
+return updateFontSize(_that.size);case UpdateFontFamilyEvent() when updateFontFamily != null:
+return updateFontFamily(_that.family);case UpdateTextAlignmentEvent() when updateTextAlignment != null:
+return updateTextAlignment(_that.alignment);case UpdateLineSpacingEvent() when updateLineSpacing != null:
+return updateLineSpacing(_that.spacing);case ToggleHighContrastEvent() when toggleHighContrast != null:
+return toggleHighContrast(_that.enabled);case ToggleMotionReducedEvent() when toggleMotionReduced != null:
+return toggleMotionReduced(_that.enabled);case TogglePauseAllNotificationsEvent() when togglePauseAllNotifications != null:
+return togglePauseAllNotifications(_that.enabled);case UpdateSleepModeEvent() when updateSleepMode != null:
+return updateSleepMode(_that.enabled,_that.startHour,_that.startMinute,_that.endHour,_that.endMinute);case ToggleNotificationEvent() when toggleNotification != null:
+return toggleNotification(_that.type,_that.enabled);case UpdateSummaryFrequencyEvent() when updateSummaryFrequency != null:
+return updateSummaryFrequency(_that.frequency);case ToggleEmailNotificationsEvent() when toggleEmailNotifications != null:
+return toggleEmailNotifications(_that.enabled);case ToggleSmsNotificationsEvent() when toggleSmsNotifications != null:
+return toggleSmsNotifications(_that.enabled);case ClearSettingsMessagesEvent() when clearMessages != null:
+return clearMessages();case _:
+  return null;
+
+}
 }
 
-/// @nodoc
-abstract class _$$LoadSettingsEventImplCopyWith<$Res> {
-  factory _$$LoadSettingsEventImplCopyWith(_$LoadSettingsEventImpl value,
-          $Res Function(_$LoadSettingsEventImpl) then) =
-      __$$LoadSettingsEventImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$LoadSettingsEventImplCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res, _$LoadSettingsEventImpl>
-    implements _$$LoadSettingsEventImplCopyWith<$Res> {
-  __$$LoadSettingsEventImplCopyWithImpl(_$LoadSettingsEventImpl _value,
-      $Res Function(_$LoadSettingsEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$LoadSettingsEventImpl implements LoadSettingsEvent {
-  const _$LoadSettingsEventImpl();
-
-  @override
-  String toString() {
-    return 'SettingsEvent.loadSettings()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadSettingsEventImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loadSettings,
-    required TResult Function(String languageCode, String? region)
-        updateLanguage,
-    required TResult Function(String mode) updateThemeMode,
-    required TResult Function(bool enabled) toggleDynamicColor,
-    required TResult Function(String palette) updateColorPalette,
-    required TResult Function(double radius) updateCornerRadius,
-    required TResult Function(double size) updateFontSize,
-    required TResult Function(String family) updateFontFamily,
-    required TResult Function(String alignment) updateTextAlignment,
-    required TResult Function(double spacing) updateLineSpacing,
-    required TResult Function(bool enabled) toggleHighContrast,
-    required TResult Function(bool enabled) toggleMotionReduced,
-    required TResult Function(bool enabled) togglePauseAllNotifications,
-    required TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)
-        updateSleepMode,
-    required TResult Function(String type, bool enabled) toggleNotification,
-    required TResult Function(String frequency) updateSummaryFrequency,
-    required TResult Function(bool enabled) toggleEmailNotifications,
-    required TResult Function(bool enabled) toggleSmsNotifications,
-    required TResult Function() clearMessages,
-  }) {
-    return loadSettings();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadSettings,
-    TResult? Function(String languageCode, String? region)? updateLanguage,
-    TResult? Function(String mode)? updateThemeMode,
-    TResult? Function(bool enabled)? toggleDynamicColor,
-    TResult? Function(String palette)? updateColorPalette,
-    TResult? Function(double radius)? updateCornerRadius,
-    TResult? Function(double size)? updateFontSize,
-    TResult? Function(String family)? updateFontFamily,
-    TResult? Function(String alignment)? updateTextAlignment,
-    TResult? Function(double spacing)? updateLineSpacing,
-    TResult? Function(bool enabled)? toggleHighContrast,
-    TResult? Function(bool enabled)? toggleMotionReduced,
-    TResult? Function(bool enabled)? togglePauseAllNotifications,
-    TResult? Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult? Function(String type, bool enabled)? toggleNotification,
-    TResult? Function(String frequency)? updateSummaryFrequency,
-    TResult? Function(bool enabled)? toggleEmailNotifications,
-    TResult? Function(bool enabled)? toggleSmsNotifications,
-    TResult? Function()? clearMessages,
-  }) {
-    return loadSettings?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadSettings,
-    TResult Function(String languageCode, String? region)? updateLanguage,
-    TResult Function(String mode)? updateThemeMode,
-    TResult Function(bool enabled)? toggleDynamicColor,
-    TResult Function(String palette)? updateColorPalette,
-    TResult Function(double radius)? updateCornerRadius,
-    TResult Function(double size)? updateFontSize,
-    TResult Function(String family)? updateFontFamily,
-    TResult Function(String alignment)? updateTextAlignment,
-    TResult Function(double spacing)? updateLineSpacing,
-    TResult Function(bool enabled)? toggleHighContrast,
-    TResult Function(bool enabled)? toggleMotionReduced,
-    TResult Function(bool enabled)? togglePauseAllNotifications,
-    TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult Function(String type, bool enabled)? toggleNotification,
-    TResult Function(String frequency)? updateSummaryFrequency,
-    TResult Function(bool enabled)? toggleEmailNotifications,
-    TResult Function(bool enabled)? toggleSmsNotifications,
-    TResult Function()? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (loadSettings != null) {
-      return loadSettings();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadSettingsEvent value) loadSettings,
-    required TResult Function(UpdateLanguageEvent value) updateLanguage,
-    required TResult Function(UpdateThemeModeEvent value) updateThemeMode,
-    required TResult Function(ToggleDynamicColorEvent value) toggleDynamicColor,
-    required TResult Function(UpdateColorPaletteEvent value) updateColorPalette,
-    required TResult Function(UpdateCornerRadiusEvent value) updateCornerRadius,
-    required TResult Function(UpdateFontSizeEvent value) updateFontSize,
-    required TResult Function(UpdateFontFamilyEvent value) updateFontFamily,
-    required TResult Function(UpdateTextAlignmentEvent value)
-        updateTextAlignment,
-    required TResult Function(UpdateLineSpacingEvent value) updateLineSpacing,
-    required TResult Function(ToggleHighContrastEvent value) toggleHighContrast,
-    required TResult Function(ToggleMotionReducedEvent value)
-        toggleMotionReduced,
-    required TResult Function(TogglePauseAllNotificationsEvent value)
-        togglePauseAllNotifications,
-    required TResult Function(UpdateSleepModeEvent value) updateSleepMode,
-    required TResult Function(ToggleNotificationEvent value) toggleNotification,
-    required TResult Function(UpdateSummaryFrequencyEvent value)
-        updateSummaryFrequency,
-    required TResult Function(ToggleEmailNotificationsEvent value)
-        toggleEmailNotifications,
-    required TResult Function(ToggleSmsNotificationsEvent value)
-        toggleSmsNotifications,
-    required TResult Function(ClearSettingsMessagesEvent value) clearMessages,
-  }) {
-    return loadSettings(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadSettingsEvent value)? loadSettings,
-    TResult? Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult? Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult? Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult? Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult? Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult? Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult? Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult? Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult? Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult? Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult? Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult? Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult? Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult? Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult? Function(UpdateSummaryFrequencyEvent value)?
-        updateSummaryFrequency,
-    TResult? Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult? Function(ToggleSmsNotificationsEvent value)?
-        toggleSmsNotifications,
-    TResult? Function(ClearSettingsMessagesEvent value)? clearMessages,
-  }) {
-    return loadSettings?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadSettingsEvent value)? loadSettings,
-    TResult Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult Function(UpdateSummaryFrequencyEvent value)? updateSummaryFrequency,
-    TResult Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult Function(ToggleSmsNotificationsEvent value)? toggleSmsNotifications,
-    TResult Function(ClearSettingsMessagesEvent value)? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (loadSettings != null) {
-      return loadSettings(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class LoadSettingsEvent implements SettingsEvent {
-  const factory LoadSettingsEvent() = _$LoadSettingsEventImpl;
-}
-
-/// @nodoc
-abstract class _$$UpdateLanguageEventImplCopyWith<$Res> {
-  factory _$$UpdateLanguageEventImplCopyWith(_$UpdateLanguageEventImpl value,
-          $Res Function(_$UpdateLanguageEventImpl) then) =
-      __$$UpdateLanguageEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String languageCode, String? region});
-}
-
-/// @nodoc
-class __$$UpdateLanguageEventImplCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res, _$UpdateLanguageEventImpl>
-    implements _$$UpdateLanguageEventImplCopyWith<$Res> {
-  __$$UpdateLanguageEventImplCopyWithImpl(_$UpdateLanguageEventImpl _value,
-      $Res Function(_$UpdateLanguageEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? languageCode = null,
-    Object? region = freezed,
-  }) {
-    return _then(_$UpdateLanguageEventImpl(
-      languageCode: null == languageCode
-          ? _value.languageCode
-          : languageCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      region: freezed == region
-          ? _value.region
-          : region // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$UpdateLanguageEventImpl implements UpdateLanguageEvent {
-  const _$UpdateLanguageEventImpl({required this.languageCode, this.region});
 
-  @override
-  final String languageCode;
-  @override
-  final String? region;
+class LoadSettingsEvent implements SettingsEvent {
+  const LoadSettingsEvent();
+  
 
-  @override
-  String toString() {
-    return 'SettingsEvent.updateLanguage(languageCode: $languageCode, region: $region)';
-  }
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UpdateLanguageEventImpl &&
-            (identical(other.languageCode, languageCode) ||
-                other.languageCode == languageCode) &&
-            (identical(other.region, region) || other.region == region));
-  }
 
-  @override
-  int get hashCode => Object.hash(runtimeType, languageCode, region);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UpdateLanguageEventImplCopyWith<_$UpdateLanguageEventImpl> get copyWith =>
-      __$$UpdateLanguageEventImplCopyWithImpl<_$UpdateLanguageEventImpl>(
-          this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loadSettings,
-    required TResult Function(String languageCode, String? region)
-        updateLanguage,
-    required TResult Function(String mode) updateThemeMode,
-    required TResult Function(bool enabled) toggleDynamicColor,
-    required TResult Function(String palette) updateColorPalette,
-    required TResult Function(double radius) updateCornerRadius,
-    required TResult Function(double size) updateFontSize,
-    required TResult Function(String family) updateFontFamily,
-    required TResult Function(String alignment) updateTextAlignment,
-    required TResult Function(double spacing) updateLineSpacing,
-    required TResult Function(bool enabled) toggleHighContrast,
-    required TResult Function(bool enabled) toggleMotionReduced,
-    required TResult Function(bool enabled) togglePauseAllNotifications,
-    required TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)
-        updateSleepMode,
-    required TResult Function(String type, bool enabled) toggleNotification,
-    required TResult Function(String frequency) updateSummaryFrequency,
-    required TResult Function(bool enabled) toggleEmailNotifications,
-    required TResult Function(bool enabled) toggleSmsNotifications,
-    required TResult Function() clearMessages,
-  }) {
-    return updateLanguage(languageCode, region);
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadSettings,
-    TResult? Function(String languageCode, String? region)? updateLanguage,
-    TResult? Function(String mode)? updateThemeMode,
-    TResult? Function(bool enabled)? toggleDynamicColor,
-    TResult? Function(String palette)? updateColorPalette,
-    TResult? Function(double radius)? updateCornerRadius,
-    TResult? Function(double size)? updateFontSize,
-    TResult? Function(String family)? updateFontFamily,
-    TResult? Function(String alignment)? updateTextAlignment,
-    TResult? Function(double spacing)? updateLineSpacing,
-    TResult? Function(bool enabled)? toggleHighContrast,
-    TResult? Function(bool enabled)? toggleMotionReduced,
-    TResult? Function(bool enabled)? togglePauseAllNotifications,
-    TResult? Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult? Function(String type, bool enabled)? toggleNotification,
-    TResult? Function(String frequency)? updateSummaryFrequency,
-    TResult? Function(bool enabled)? toggleEmailNotifications,
-    TResult? Function(bool enabled)? toggleSmsNotifications,
-    TResult? Function()? clearMessages,
-  }) {
-    return updateLanguage?.call(languageCode, region);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadSettings,
-    TResult Function(String languageCode, String? region)? updateLanguage,
-    TResult Function(String mode)? updateThemeMode,
-    TResult Function(bool enabled)? toggleDynamicColor,
-    TResult Function(String palette)? updateColorPalette,
-    TResult Function(double radius)? updateCornerRadius,
-    TResult Function(double size)? updateFontSize,
-    TResult Function(String family)? updateFontFamily,
-    TResult Function(String alignment)? updateTextAlignment,
-    TResult Function(double spacing)? updateLineSpacing,
-    TResult Function(bool enabled)? toggleHighContrast,
-    TResult Function(bool enabled)? toggleMotionReduced,
-    TResult Function(bool enabled)? togglePauseAllNotifications,
-    TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult Function(String type, bool enabled)? toggleNotification,
-    TResult Function(String frequency)? updateSummaryFrequency,
-    TResult Function(bool enabled)? toggleEmailNotifications,
-    TResult Function(bool enabled)? toggleSmsNotifications,
-    TResult Function()? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (updateLanguage != null) {
-      return updateLanguage(languageCode, region);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadSettingsEvent value) loadSettings,
-    required TResult Function(UpdateLanguageEvent value) updateLanguage,
-    required TResult Function(UpdateThemeModeEvent value) updateThemeMode,
-    required TResult Function(ToggleDynamicColorEvent value) toggleDynamicColor,
-    required TResult Function(UpdateColorPaletteEvent value) updateColorPalette,
-    required TResult Function(UpdateCornerRadiusEvent value) updateCornerRadius,
-    required TResult Function(UpdateFontSizeEvent value) updateFontSize,
-    required TResult Function(UpdateFontFamilyEvent value) updateFontFamily,
-    required TResult Function(UpdateTextAlignmentEvent value)
-        updateTextAlignment,
-    required TResult Function(UpdateLineSpacingEvent value) updateLineSpacing,
-    required TResult Function(ToggleHighContrastEvent value) toggleHighContrast,
-    required TResult Function(ToggleMotionReducedEvent value)
-        toggleMotionReduced,
-    required TResult Function(TogglePauseAllNotificationsEvent value)
-        togglePauseAllNotifications,
-    required TResult Function(UpdateSleepModeEvent value) updateSleepMode,
-    required TResult Function(ToggleNotificationEvent value) toggleNotification,
-    required TResult Function(UpdateSummaryFrequencyEvent value)
-        updateSummaryFrequency,
-    required TResult Function(ToggleEmailNotificationsEvent value)
-        toggleEmailNotifications,
-    required TResult Function(ToggleSmsNotificationsEvent value)
-        toggleSmsNotifications,
-    required TResult Function(ClearSettingsMessagesEvent value) clearMessages,
-  }) {
-    return updateLanguage(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadSettingsEvent value)? loadSettings,
-    TResult? Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult? Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult? Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult? Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult? Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult? Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult? Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult? Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult? Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult? Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult? Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult? Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult? Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult? Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult? Function(UpdateSummaryFrequencyEvent value)?
-        updateSummaryFrequency,
-    TResult? Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult? Function(ToggleSmsNotificationsEvent value)?
-        toggleSmsNotifications,
-    TResult? Function(ClearSettingsMessagesEvent value)? clearMessages,
-  }) {
-    return updateLanguage?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadSettingsEvent value)? loadSettings,
-    TResult Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult Function(UpdateSummaryFrequencyEvent value)? updateSummaryFrequency,
-    TResult Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult Function(ToggleSmsNotificationsEvent value)? toggleSmsNotifications,
-    TResult Function(ClearSettingsMessagesEvent value)? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (updateLanguage != null) {
-      return updateLanguage(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadSettingsEvent);
 }
 
-abstract class UpdateLanguageEvent implements SettingsEvent {
-  const factory UpdateLanguageEvent(
-      {required final String languageCode,
-      final String? region}) = _$UpdateLanguageEventImpl;
 
-  String get languageCode;
-  String? get region;
+@override
+int get hashCode => runtimeType.hashCode;
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UpdateLanguageEventImplCopyWith<_$UpdateLanguageEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'SettingsEvent.loadSettings()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class UpdateLanguageEvent implements SettingsEvent {
+  const UpdateLanguageEvent({required this.languageCode, this.region});
+  
+
+ final  String languageCode;
+ final  String? region;
+
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UpdateLanguageEventCopyWith<UpdateLanguageEvent> get copyWith => _$UpdateLanguageEventCopyWithImpl<UpdateLanguageEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateLanguageEvent&&(identical(other.languageCode, languageCode) || other.languageCode == languageCode)&&(identical(other.region, region) || other.region == region));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,languageCode,region);
+
+@override
+String toString() {
+  return 'SettingsEvent.updateLanguage(languageCode: $languageCode, region: $region)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$UpdateThemeModeEventImplCopyWith<$Res> {
-  factory _$$UpdateThemeModeEventImplCopyWith(_$UpdateThemeModeEventImpl value,
-          $Res Function(_$UpdateThemeModeEventImpl) then) =
-      __$$UpdateThemeModeEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String mode});
+abstract mixin class $UpdateLanguageEventCopyWith<$Res> implements $SettingsEventCopyWith<$Res> {
+  factory $UpdateLanguageEventCopyWith(UpdateLanguageEvent value, $Res Function(UpdateLanguageEvent) _then) = _$UpdateLanguageEventCopyWithImpl;
+@useResult
+$Res call({
+ String languageCode, String? region
+});
+
+
+
+
+}
+/// @nodoc
+class _$UpdateLanguageEventCopyWithImpl<$Res>
+    implements $UpdateLanguageEventCopyWith<$Res> {
+  _$UpdateLanguageEventCopyWithImpl(this._self, this._then);
+
+  final UpdateLanguageEvent _self;
+  final $Res Function(UpdateLanguageEvent) _then;
+
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? languageCode = null,Object? region = freezed,}) {
+  return _then(UpdateLanguageEvent(
+languageCode: null == languageCode ? _self.languageCode : languageCode // ignore: cast_nullable_to_non_nullable
+as String,region: freezed == region ? _self.region : region // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
 }
 
-/// @nodoc
-class __$$UpdateThemeModeEventImplCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res, _$UpdateThemeModeEventImpl>
-    implements _$$UpdateThemeModeEventImplCopyWith<$Res> {
-  __$$UpdateThemeModeEventImplCopyWithImpl(_$UpdateThemeModeEventImpl _value,
-      $Res Function(_$UpdateThemeModeEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? mode = null,
-  }) {
-    return _then(_$UpdateThemeModeEventImpl(
-      null == mode
-          ? _value.mode
-          : mode // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$UpdateThemeModeEventImpl implements UpdateThemeModeEvent {
-  const _$UpdateThemeModeEventImpl(this.mode);
 
-  @override
-  final String mode;
+class UpdateThemeModeEvent implements SettingsEvent {
+  const UpdateThemeModeEvent(this.mode);
+  
 
-  @override
-  String toString() {
-    return 'SettingsEvent.updateThemeMode(mode: $mode)';
-  }
+ final  String mode;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UpdateThemeModeEventImpl &&
-            (identical(other.mode, mode) || other.mode == mode));
-  }
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UpdateThemeModeEventCopyWith<UpdateThemeModeEvent> get copyWith => _$UpdateThemeModeEventCopyWithImpl<UpdateThemeModeEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, mode);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UpdateThemeModeEventImplCopyWith<_$UpdateThemeModeEventImpl>
-      get copyWith =>
-          __$$UpdateThemeModeEventImplCopyWithImpl<_$UpdateThemeModeEventImpl>(
-              this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loadSettings,
-    required TResult Function(String languageCode, String? region)
-        updateLanguage,
-    required TResult Function(String mode) updateThemeMode,
-    required TResult Function(bool enabled) toggleDynamicColor,
-    required TResult Function(String palette) updateColorPalette,
-    required TResult Function(double radius) updateCornerRadius,
-    required TResult Function(double size) updateFontSize,
-    required TResult Function(String family) updateFontFamily,
-    required TResult Function(String alignment) updateTextAlignment,
-    required TResult Function(double spacing) updateLineSpacing,
-    required TResult Function(bool enabled) toggleHighContrast,
-    required TResult Function(bool enabled) toggleMotionReduced,
-    required TResult Function(bool enabled) togglePauseAllNotifications,
-    required TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)
-        updateSleepMode,
-    required TResult Function(String type, bool enabled) toggleNotification,
-    required TResult Function(String frequency) updateSummaryFrequency,
-    required TResult Function(bool enabled) toggleEmailNotifications,
-    required TResult Function(bool enabled) toggleSmsNotifications,
-    required TResult Function() clearMessages,
-  }) {
-    return updateThemeMode(mode);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadSettings,
-    TResult? Function(String languageCode, String? region)? updateLanguage,
-    TResult? Function(String mode)? updateThemeMode,
-    TResult? Function(bool enabled)? toggleDynamicColor,
-    TResult? Function(String palette)? updateColorPalette,
-    TResult? Function(double radius)? updateCornerRadius,
-    TResult? Function(double size)? updateFontSize,
-    TResult? Function(String family)? updateFontFamily,
-    TResult? Function(String alignment)? updateTextAlignment,
-    TResult? Function(double spacing)? updateLineSpacing,
-    TResult? Function(bool enabled)? toggleHighContrast,
-    TResult? Function(bool enabled)? toggleMotionReduced,
-    TResult? Function(bool enabled)? togglePauseAllNotifications,
-    TResult? Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult? Function(String type, bool enabled)? toggleNotification,
-    TResult? Function(String frequency)? updateSummaryFrequency,
-    TResult? Function(bool enabled)? toggleEmailNotifications,
-    TResult? Function(bool enabled)? toggleSmsNotifications,
-    TResult? Function()? clearMessages,
-  }) {
-    return updateThemeMode?.call(mode);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadSettings,
-    TResult Function(String languageCode, String? region)? updateLanguage,
-    TResult Function(String mode)? updateThemeMode,
-    TResult Function(bool enabled)? toggleDynamicColor,
-    TResult Function(String palette)? updateColorPalette,
-    TResult Function(double radius)? updateCornerRadius,
-    TResult Function(double size)? updateFontSize,
-    TResult Function(String family)? updateFontFamily,
-    TResult Function(String alignment)? updateTextAlignment,
-    TResult Function(double spacing)? updateLineSpacing,
-    TResult Function(bool enabled)? toggleHighContrast,
-    TResult Function(bool enabled)? toggleMotionReduced,
-    TResult Function(bool enabled)? togglePauseAllNotifications,
-    TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult Function(String type, bool enabled)? toggleNotification,
-    TResult Function(String frequency)? updateSummaryFrequency,
-    TResult Function(bool enabled)? toggleEmailNotifications,
-    TResult Function(bool enabled)? toggleSmsNotifications,
-    TResult Function()? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (updateThemeMode != null) {
-      return updateThemeMode(mode);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadSettingsEvent value) loadSettings,
-    required TResult Function(UpdateLanguageEvent value) updateLanguage,
-    required TResult Function(UpdateThemeModeEvent value) updateThemeMode,
-    required TResult Function(ToggleDynamicColorEvent value) toggleDynamicColor,
-    required TResult Function(UpdateColorPaletteEvent value) updateColorPalette,
-    required TResult Function(UpdateCornerRadiusEvent value) updateCornerRadius,
-    required TResult Function(UpdateFontSizeEvent value) updateFontSize,
-    required TResult Function(UpdateFontFamilyEvent value) updateFontFamily,
-    required TResult Function(UpdateTextAlignmentEvent value)
-        updateTextAlignment,
-    required TResult Function(UpdateLineSpacingEvent value) updateLineSpacing,
-    required TResult Function(ToggleHighContrastEvent value) toggleHighContrast,
-    required TResult Function(ToggleMotionReducedEvent value)
-        toggleMotionReduced,
-    required TResult Function(TogglePauseAllNotificationsEvent value)
-        togglePauseAllNotifications,
-    required TResult Function(UpdateSleepModeEvent value) updateSleepMode,
-    required TResult Function(ToggleNotificationEvent value) toggleNotification,
-    required TResult Function(UpdateSummaryFrequencyEvent value)
-        updateSummaryFrequency,
-    required TResult Function(ToggleEmailNotificationsEvent value)
-        toggleEmailNotifications,
-    required TResult Function(ToggleSmsNotificationsEvent value)
-        toggleSmsNotifications,
-    required TResult Function(ClearSettingsMessagesEvent value) clearMessages,
-  }) {
-    return updateThemeMode(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadSettingsEvent value)? loadSettings,
-    TResult? Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult? Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult? Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult? Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult? Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult? Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult? Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult? Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult? Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult? Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult? Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult? Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult? Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult? Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult? Function(UpdateSummaryFrequencyEvent value)?
-        updateSummaryFrequency,
-    TResult? Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult? Function(ToggleSmsNotificationsEvent value)?
-        toggleSmsNotifications,
-    TResult? Function(ClearSettingsMessagesEvent value)? clearMessages,
-  }) {
-    return updateThemeMode?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadSettingsEvent value)? loadSettings,
-    TResult Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult Function(UpdateSummaryFrequencyEvent value)? updateSummaryFrequency,
-    TResult Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult Function(ToggleSmsNotificationsEvent value)? toggleSmsNotifications,
-    TResult Function(ClearSettingsMessagesEvent value)? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (updateThemeMode != null) {
-      return updateThemeMode(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateThemeModeEvent&&(identical(other.mode, mode) || other.mode == mode));
 }
 
-abstract class UpdateThemeModeEvent implements SettingsEvent {
-  const factory UpdateThemeModeEvent(final String mode) =
-      _$UpdateThemeModeEventImpl;
 
-  String get mode;
+@override
+int get hashCode => Object.hash(runtimeType,mode);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UpdateThemeModeEventImplCopyWith<_$UpdateThemeModeEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'SettingsEvent.updateThemeMode(mode: $mode)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$ToggleDynamicColorEventImplCopyWith<$Res> {
-  factory _$$ToggleDynamicColorEventImplCopyWith(
-          _$ToggleDynamicColorEventImpl value,
-          $Res Function(_$ToggleDynamicColorEventImpl) then) =
-      __$$ToggleDynamicColorEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool enabled});
+abstract mixin class $UpdateThemeModeEventCopyWith<$Res> implements $SettingsEventCopyWith<$Res> {
+  factory $UpdateThemeModeEventCopyWith(UpdateThemeModeEvent value, $Res Function(UpdateThemeModeEvent) _then) = _$UpdateThemeModeEventCopyWithImpl;
+@useResult
+$Res call({
+ String mode
+});
+
+
+
+
+}
+/// @nodoc
+class _$UpdateThemeModeEventCopyWithImpl<$Res>
+    implements $UpdateThemeModeEventCopyWith<$Res> {
+  _$UpdateThemeModeEventCopyWithImpl(this._self, this._then);
+
+  final UpdateThemeModeEvent _self;
+  final $Res Function(UpdateThemeModeEvent) _then;
+
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? mode = null,}) {
+  return _then(UpdateThemeModeEvent(
+null == mode ? _self.mode : mode // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-class __$$ToggleDynamicColorEventImplCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res, _$ToggleDynamicColorEventImpl>
-    implements _$$ToggleDynamicColorEventImplCopyWith<$Res> {
-  __$$ToggleDynamicColorEventImplCopyWithImpl(
-      _$ToggleDynamicColorEventImpl _value,
-      $Res Function(_$ToggleDynamicColorEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? enabled = null,
-  }) {
-    return _then(_$ToggleDynamicColorEventImpl(
-      null == enabled
-          ? _value.enabled
-          : enabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$ToggleDynamicColorEventImpl implements ToggleDynamicColorEvent {
-  const _$ToggleDynamicColorEventImpl(this.enabled);
 
-  @override
-  final bool enabled;
+class ToggleDynamicColorEvent implements SettingsEvent {
+  const ToggleDynamicColorEvent(this.enabled);
+  
 
-  @override
-  String toString() {
-    return 'SettingsEvent.toggleDynamicColor(enabled: $enabled)';
-  }
+ final  bool enabled;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ToggleDynamicColorEventImpl &&
-            (identical(other.enabled, enabled) || other.enabled == enabled));
-  }
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ToggleDynamicColorEventCopyWith<ToggleDynamicColorEvent> get copyWith => _$ToggleDynamicColorEventCopyWithImpl<ToggleDynamicColorEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, enabled);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ToggleDynamicColorEventImplCopyWith<_$ToggleDynamicColorEventImpl>
-      get copyWith => __$$ToggleDynamicColorEventImplCopyWithImpl<
-          _$ToggleDynamicColorEventImpl>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loadSettings,
-    required TResult Function(String languageCode, String? region)
-        updateLanguage,
-    required TResult Function(String mode) updateThemeMode,
-    required TResult Function(bool enabled) toggleDynamicColor,
-    required TResult Function(String palette) updateColorPalette,
-    required TResult Function(double radius) updateCornerRadius,
-    required TResult Function(double size) updateFontSize,
-    required TResult Function(String family) updateFontFamily,
-    required TResult Function(String alignment) updateTextAlignment,
-    required TResult Function(double spacing) updateLineSpacing,
-    required TResult Function(bool enabled) toggleHighContrast,
-    required TResult Function(bool enabled) toggleMotionReduced,
-    required TResult Function(bool enabled) togglePauseAllNotifications,
-    required TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)
-        updateSleepMode,
-    required TResult Function(String type, bool enabled) toggleNotification,
-    required TResult Function(String frequency) updateSummaryFrequency,
-    required TResult Function(bool enabled) toggleEmailNotifications,
-    required TResult Function(bool enabled) toggleSmsNotifications,
-    required TResult Function() clearMessages,
-  }) {
-    return toggleDynamicColor(enabled);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadSettings,
-    TResult? Function(String languageCode, String? region)? updateLanguage,
-    TResult? Function(String mode)? updateThemeMode,
-    TResult? Function(bool enabled)? toggleDynamicColor,
-    TResult? Function(String palette)? updateColorPalette,
-    TResult? Function(double radius)? updateCornerRadius,
-    TResult? Function(double size)? updateFontSize,
-    TResult? Function(String family)? updateFontFamily,
-    TResult? Function(String alignment)? updateTextAlignment,
-    TResult? Function(double spacing)? updateLineSpacing,
-    TResult? Function(bool enabled)? toggleHighContrast,
-    TResult? Function(bool enabled)? toggleMotionReduced,
-    TResult? Function(bool enabled)? togglePauseAllNotifications,
-    TResult? Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult? Function(String type, bool enabled)? toggleNotification,
-    TResult? Function(String frequency)? updateSummaryFrequency,
-    TResult? Function(bool enabled)? toggleEmailNotifications,
-    TResult? Function(bool enabled)? toggleSmsNotifications,
-    TResult? Function()? clearMessages,
-  }) {
-    return toggleDynamicColor?.call(enabled);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadSettings,
-    TResult Function(String languageCode, String? region)? updateLanguage,
-    TResult Function(String mode)? updateThemeMode,
-    TResult Function(bool enabled)? toggleDynamicColor,
-    TResult Function(String palette)? updateColorPalette,
-    TResult Function(double radius)? updateCornerRadius,
-    TResult Function(double size)? updateFontSize,
-    TResult Function(String family)? updateFontFamily,
-    TResult Function(String alignment)? updateTextAlignment,
-    TResult Function(double spacing)? updateLineSpacing,
-    TResult Function(bool enabled)? toggleHighContrast,
-    TResult Function(bool enabled)? toggleMotionReduced,
-    TResult Function(bool enabled)? togglePauseAllNotifications,
-    TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult Function(String type, bool enabled)? toggleNotification,
-    TResult Function(String frequency)? updateSummaryFrequency,
-    TResult Function(bool enabled)? toggleEmailNotifications,
-    TResult Function(bool enabled)? toggleSmsNotifications,
-    TResult Function()? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (toggleDynamicColor != null) {
-      return toggleDynamicColor(enabled);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadSettingsEvent value) loadSettings,
-    required TResult Function(UpdateLanguageEvent value) updateLanguage,
-    required TResult Function(UpdateThemeModeEvent value) updateThemeMode,
-    required TResult Function(ToggleDynamicColorEvent value) toggleDynamicColor,
-    required TResult Function(UpdateColorPaletteEvent value) updateColorPalette,
-    required TResult Function(UpdateCornerRadiusEvent value) updateCornerRadius,
-    required TResult Function(UpdateFontSizeEvent value) updateFontSize,
-    required TResult Function(UpdateFontFamilyEvent value) updateFontFamily,
-    required TResult Function(UpdateTextAlignmentEvent value)
-        updateTextAlignment,
-    required TResult Function(UpdateLineSpacingEvent value) updateLineSpacing,
-    required TResult Function(ToggleHighContrastEvent value) toggleHighContrast,
-    required TResult Function(ToggleMotionReducedEvent value)
-        toggleMotionReduced,
-    required TResult Function(TogglePauseAllNotificationsEvent value)
-        togglePauseAllNotifications,
-    required TResult Function(UpdateSleepModeEvent value) updateSleepMode,
-    required TResult Function(ToggleNotificationEvent value) toggleNotification,
-    required TResult Function(UpdateSummaryFrequencyEvent value)
-        updateSummaryFrequency,
-    required TResult Function(ToggleEmailNotificationsEvent value)
-        toggleEmailNotifications,
-    required TResult Function(ToggleSmsNotificationsEvent value)
-        toggleSmsNotifications,
-    required TResult Function(ClearSettingsMessagesEvent value) clearMessages,
-  }) {
-    return toggleDynamicColor(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadSettingsEvent value)? loadSettings,
-    TResult? Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult? Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult? Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult? Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult? Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult? Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult? Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult? Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult? Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult? Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult? Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult? Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult? Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult? Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult? Function(UpdateSummaryFrequencyEvent value)?
-        updateSummaryFrequency,
-    TResult? Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult? Function(ToggleSmsNotificationsEvent value)?
-        toggleSmsNotifications,
-    TResult? Function(ClearSettingsMessagesEvent value)? clearMessages,
-  }) {
-    return toggleDynamicColor?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadSettingsEvent value)? loadSettings,
-    TResult Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult Function(UpdateSummaryFrequencyEvent value)? updateSummaryFrequency,
-    TResult Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult Function(ToggleSmsNotificationsEvent value)? toggleSmsNotifications,
-    TResult Function(ClearSettingsMessagesEvent value)? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (toggleDynamicColor != null) {
-      return toggleDynamicColor(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ToggleDynamicColorEvent&&(identical(other.enabled, enabled) || other.enabled == enabled));
 }
 
-abstract class ToggleDynamicColorEvent implements SettingsEvent {
-  const factory ToggleDynamicColorEvent(final bool enabled) =
-      _$ToggleDynamicColorEventImpl;
 
-  bool get enabled;
+@override
+int get hashCode => Object.hash(runtimeType,enabled);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ToggleDynamicColorEventImplCopyWith<_$ToggleDynamicColorEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'SettingsEvent.toggleDynamicColor(enabled: $enabled)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$UpdateColorPaletteEventImplCopyWith<$Res> {
-  factory _$$UpdateColorPaletteEventImplCopyWith(
-          _$UpdateColorPaletteEventImpl value,
-          $Res Function(_$UpdateColorPaletteEventImpl) then) =
-      __$$UpdateColorPaletteEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String palette});
+abstract mixin class $ToggleDynamicColorEventCopyWith<$Res> implements $SettingsEventCopyWith<$Res> {
+  factory $ToggleDynamicColorEventCopyWith(ToggleDynamicColorEvent value, $Res Function(ToggleDynamicColorEvent) _then) = _$ToggleDynamicColorEventCopyWithImpl;
+@useResult
+$Res call({
+ bool enabled
+});
+
+
+
+
+}
+/// @nodoc
+class _$ToggleDynamicColorEventCopyWithImpl<$Res>
+    implements $ToggleDynamicColorEventCopyWith<$Res> {
+  _$ToggleDynamicColorEventCopyWithImpl(this._self, this._then);
+
+  final ToggleDynamicColorEvent _self;
+  final $Res Function(ToggleDynamicColorEvent) _then;
+
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? enabled = null,}) {
+  return _then(ToggleDynamicColorEvent(
+null == enabled ? _self.enabled : enabled // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
 
-/// @nodoc
-class __$$UpdateColorPaletteEventImplCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res, _$UpdateColorPaletteEventImpl>
-    implements _$$UpdateColorPaletteEventImplCopyWith<$Res> {
-  __$$UpdateColorPaletteEventImplCopyWithImpl(
-      _$UpdateColorPaletteEventImpl _value,
-      $Res Function(_$UpdateColorPaletteEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? palette = null,
-  }) {
-    return _then(_$UpdateColorPaletteEventImpl(
-      null == palette
-          ? _value.palette
-          : palette // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$UpdateColorPaletteEventImpl implements UpdateColorPaletteEvent {
-  const _$UpdateColorPaletteEventImpl(this.palette);
 
-  @override
-  final String palette;
+class UpdateColorPaletteEvent implements SettingsEvent {
+  const UpdateColorPaletteEvent(this.palette);
+  
 
-  @override
-  String toString() {
-    return 'SettingsEvent.updateColorPalette(palette: $palette)';
-  }
+ final  String palette;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UpdateColorPaletteEventImpl &&
-            (identical(other.palette, palette) || other.palette == palette));
-  }
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UpdateColorPaletteEventCopyWith<UpdateColorPaletteEvent> get copyWith => _$UpdateColorPaletteEventCopyWithImpl<UpdateColorPaletteEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, palette);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UpdateColorPaletteEventImplCopyWith<_$UpdateColorPaletteEventImpl>
-      get copyWith => __$$UpdateColorPaletteEventImplCopyWithImpl<
-          _$UpdateColorPaletteEventImpl>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loadSettings,
-    required TResult Function(String languageCode, String? region)
-        updateLanguage,
-    required TResult Function(String mode) updateThemeMode,
-    required TResult Function(bool enabled) toggleDynamicColor,
-    required TResult Function(String palette) updateColorPalette,
-    required TResult Function(double radius) updateCornerRadius,
-    required TResult Function(double size) updateFontSize,
-    required TResult Function(String family) updateFontFamily,
-    required TResult Function(String alignment) updateTextAlignment,
-    required TResult Function(double spacing) updateLineSpacing,
-    required TResult Function(bool enabled) toggleHighContrast,
-    required TResult Function(bool enabled) toggleMotionReduced,
-    required TResult Function(bool enabled) togglePauseAllNotifications,
-    required TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)
-        updateSleepMode,
-    required TResult Function(String type, bool enabled) toggleNotification,
-    required TResult Function(String frequency) updateSummaryFrequency,
-    required TResult Function(bool enabled) toggleEmailNotifications,
-    required TResult Function(bool enabled) toggleSmsNotifications,
-    required TResult Function() clearMessages,
-  }) {
-    return updateColorPalette(palette);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadSettings,
-    TResult? Function(String languageCode, String? region)? updateLanguage,
-    TResult? Function(String mode)? updateThemeMode,
-    TResult? Function(bool enabled)? toggleDynamicColor,
-    TResult? Function(String palette)? updateColorPalette,
-    TResult? Function(double radius)? updateCornerRadius,
-    TResult? Function(double size)? updateFontSize,
-    TResult? Function(String family)? updateFontFamily,
-    TResult? Function(String alignment)? updateTextAlignment,
-    TResult? Function(double spacing)? updateLineSpacing,
-    TResult? Function(bool enabled)? toggleHighContrast,
-    TResult? Function(bool enabled)? toggleMotionReduced,
-    TResult? Function(bool enabled)? togglePauseAllNotifications,
-    TResult? Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult? Function(String type, bool enabled)? toggleNotification,
-    TResult? Function(String frequency)? updateSummaryFrequency,
-    TResult? Function(bool enabled)? toggleEmailNotifications,
-    TResult? Function(bool enabled)? toggleSmsNotifications,
-    TResult? Function()? clearMessages,
-  }) {
-    return updateColorPalette?.call(palette);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadSettings,
-    TResult Function(String languageCode, String? region)? updateLanguage,
-    TResult Function(String mode)? updateThemeMode,
-    TResult Function(bool enabled)? toggleDynamicColor,
-    TResult Function(String palette)? updateColorPalette,
-    TResult Function(double radius)? updateCornerRadius,
-    TResult Function(double size)? updateFontSize,
-    TResult Function(String family)? updateFontFamily,
-    TResult Function(String alignment)? updateTextAlignment,
-    TResult Function(double spacing)? updateLineSpacing,
-    TResult Function(bool enabled)? toggleHighContrast,
-    TResult Function(bool enabled)? toggleMotionReduced,
-    TResult Function(bool enabled)? togglePauseAllNotifications,
-    TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult Function(String type, bool enabled)? toggleNotification,
-    TResult Function(String frequency)? updateSummaryFrequency,
-    TResult Function(bool enabled)? toggleEmailNotifications,
-    TResult Function(bool enabled)? toggleSmsNotifications,
-    TResult Function()? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (updateColorPalette != null) {
-      return updateColorPalette(palette);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadSettingsEvent value) loadSettings,
-    required TResult Function(UpdateLanguageEvent value) updateLanguage,
-    required TResult Function(UpdateThemeModeEvent value) updateThemeMode,
-    required TResult Function(ToggleDynamicColorEvent value) toggleDynamicColor,
-    required TResult Function(UpdateColorPaletteEvent value) updateColorPalette,
-    required TResult Function(UpdateCornerRadiusEvent value) updateCornerRadius,
-    required TResult Function(UpdateFontSizeEvent value) updateFontSize,
-    required TResult Function(UpdateFontFamilyEvent value) updateFontFamily,
-    required TResult Function(UpdateTextAlignmentEvent value)
-        updateTextAlignment,
-    required TResult Function(UpdateLineSpacingEvent value) updateLineSpacing,
-    required TResult Function(ToggleHighContrastEvent value) toggleHighContrast,
-    required TResult Function(ToggleMotionReducedEvent value)
-        toggleMotionReduced,
-    required TResult Function(TogglePauseAllNotificationsEvent value)
-        togglePauseAllNotifications,
-    required TResult Function(UpdateSleepModeEvent value) updateSleepMode,
-    required TResult Function(ToggleNotificationEvent value) toggleNotification,
-    required TResult Function(UpdateSummaryFrequencyEvent value)
-        updateSummaryFrequency,
-    required TResult Function(ToggleEmailNotificationsEvent value)
-        toggleEmailNotifications,
-    required TResult Function(ToggleSmsNotificationsEvent value)
-        toggleSmsNotifications,
-    required TResult Function(ClearSettingsMessagesEvent value) clearMessages,
-  }) {
-    return updateColorPalette(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadSettingsEvent value)? loadSettings,
-    TResult? Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult? Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult? Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult? Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult? Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult? Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult? Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult? Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult? Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult? Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult? Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult? Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult? Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult? Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult? Function(UpdateSummaryFrequencyEvent value)?
-        updateSummaryFrequency,
-    TResult? Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult? Function(ToggleSmsNotificationsEvent value)?
-        toggleSmsNotifications,
-    TResult? Function(ClearSettingsMessagesEvent value)? clearMessages,
-  }) {
-    return updateColorPalette?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadSettingsEvent value)? loadSettings,
-    TResult Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult Function(UpdateSummaryFrequencyEvent value)? updateSummaryFrequency,
-    TResult Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult Function(ToggleSmsNotificationsEvent value)? toggleSmsNotifications,
-    TResult Function(ClearSettingsMessagesEvent value)? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (updateColorPalette != null) {
-      return updateColorPalette(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateColorPaletteEvent&&(identical(other.palette, palette) || other.palette == palette));
 }
 
-abstract class UpdateColorPaletteEvent implements SettingsEvent {
-  const factory UpdateColorPaletteEvent(final String palette) =
-      _$UpdateColorPaletteEventImpl;
 
-  String get palette;
+@override
+int get hashCode => Object.hash(runtimeType,palette);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UpdateColorPaletteEventImplCopyWith<_$UpdateColorPaletteEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'SettingsEvent.updateColorPalette(palette: $palette)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$UpdateCornerRadiusEventImplCopyWith<$Res> {
-  factory _$$UpdateCornerRadiusEventImplCopyWith(
-          _$UpdateCornerRadiusEventImpl value,
-          $Res Function(_$UpdateCornerRadiusEventImpl) then) =
-      __$$UpdateCornerRadiusEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({double radius});
+abstract mixin class $UpdateColorPaletteEventCopyWith<$Res> implements $SettingsEventCopyWith<$Res> {
+  factory $UpdateColorPaletteEventCopyWith(UpdateColorPaletteEvent value, $Res Function(UpdateColorPaletteEvent) _then) = _$UpdateColorPaletteEventCopyWithImpl;
+@useResult
+$Res call({
+ String palette
+});
+
+
+
+
+}
+/// @nodoc
+class _$UpdateColorPaletteEventCopyWithImpl<$Res>
+    implements $UpdateColorPaletteEventCopyWith<$Res> {
+  _$UpdateColorPaletteEventCopyWithImpl(this._self, this._then);
+
+  final UpdateColorPaletteEvent _self;
+  final $Res Function(UpdateColorPaletteEvent) _then;
+
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? palette = null,}) {
+  return _then(UpdateColorPaletteEvent(
+null == palette ? _self.palette : palette // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-class __$$UpdateCornerRadiusEventImplCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res, _$UpdateCornerRadiusEventImpl>
-    implements _$$UpdateCornerRadiusEventImplCopyWith<$Res> {
-  __$$UpdateCornerRadiusEventImplCopyWithImpl(
-      _$UpdateCornerRadiusEventImpl _value,
-      $Res Function(_$UpdateCornerRadiusEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? radius = null,
-  }) {
-    return _then(_$UpdateCornerRadiusEventImpl(
-      null == radius
-          ? _value.radius
-          : radius // ignore: cast_nullable_to_non_nullable
-              as double,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$UpdateCornerRadiusEventImpl implements UpdateCornerRadiusEvent {
-  const _$UpdateCornerRadiusEventImpl(this.radius);
 
-  @override
-  final double radius;
+class UpdateCornerRadiusEvent implements SettingsEvent {
+  const UpdateCornerRadiusEvent(this.radius);
+  
 
-  @override
-  String toString() {
-    return 'SettingsEvent.updateCornerRadius(radius: $radius)';
-  }
+ final  double radius;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UpdateCornerRadiusEventImpl &&
-            (identical(other.radius, radius) || other.radius == radius));
-  }
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UpdateCornerRadiusEventCopyWith<UpdateCornerRadiusEvent> get copyWith => _$UpdateCornerRadiusEventCopyWithImpl<UpdateCornerRadiusEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, radius);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UpdateCornerRadiusEventImplCopyWith<_$UpdateCornerRadiusEventImpl>
-      get copyWith => __$$UpdateCornerRadiusEventImplCopyWithImpl<
-          _$UpdateCornerRadiusEventImpl>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loadSettings,
-    required TResult Function(String languageCode, String? region)
-        updateLanguage,
-    required TResult Function(String mode) updateThemeMode,
-    required TResult Function(bool enabled) toggleDynamicColor,
-    required TResult Function(String palette) updateColorPalette,
-    required TResult Function(double radius) updateCornerRadius,
-    required TResult Function(double size) updateFontSize,
-    required TResult Function(String family) updateFontFamily,
-    required TResult Function(String alignment) updateTextAlignment,
-    required TResult Function(double spacing) updateLineSpacing,
-    required TResult Function(bool enabled) toggleHighContrast,
-    required TResult Function(bool enabled) toggleMotionReduced,
-    required TResult Function(bool enabled) togglePauseAllNotifications,
-    required TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)
-        updateSleepMode,
-    required TResult Function(String type, bool enabled) toggleNotification,
-    required TResult Function(String frequency) updateSummaryFrequency,
-    required TResult Function(bool enabled) toggleEmailNotifications,
-    required TResult Function(bool enabled) toggleSmsNotifications,
-    required TResult Function() clearMessages,
-  }) {
-    return updateCornerRadius(radius);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadSettings,
-    TResult? Function(String languageCode, String? region)? updateLanguage,
-    TResult? Function(String mode)? updateThemeMode,
-    TResult? Function(bool enabled)? toggleDynamicColor,
-    TResult? Function(String palette)? updateColorPalette,
-    TResult? Function(double radius)? updateCornerRadius,
-    TResult? Function(double size)? updateFontSize,
-    TResult? Function(String family)? updateFontFamily,
-    TResult? Function(String alignment)? updateTextAlignment,
-    TResult? Function(double spacing)? updateLineSpacing,
-    TResult? Function(bool enabled)? toggleHighContrast,
-    TResult? Function(bool enabled)? toggleMotionReduced,
-    TResult? Function(bool enabled)? togglePauseAllNotifications,
-    TResult? Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult? Function(String type, bool enabled)? toggleNotification,
-    TResult? Function(String frequency)? updateSummaryFrequency,
-    TResult? Function(bool enabled)? toggleEmailNotifications,
-    TResult? Function(bool enabled)? toggleSmsNotifications,
-    TResult? Function()? clearMessages,
-  }) {
-    return updateCornerRadius?.call(radius);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadSettings,
-    TResult Function(String languageCode, String? region)? updateLanguage,
-    TResult Function(String mode)? updateThemeMode,
-    TResult Function(bool enabled)? toggleDynamicColor,
-    TResult Function(String palette)? updateColorPalette,
-    TResult Function(double radius)? updateCornerRadius,
-    TResult Function(double size)? updateFontSize,
-    TResult Function(String family)? updateFontFamily,
-    TResult Function(String alignment)? updateTextAlignment,
-    TResult Function(double spacing)? updateLineSpacing,
-    TResult Function(bool enabled)? toggleHighContrast,
-    TResult Function(bool enabled)? toggleMotionReduced,
-    TResult Function(bool enabled)? togglePauseAllNotifications,
-    TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult Function(String type, bool enabled)? toggleNotification,
-    TResult Function(String frequency)? updateSummaryFrequency,
-    TResult Function(bool enabled)? toggleEmailNotifications,
-    TResult Function(bool enabled)? toggleSmsNotifications,
-    TResult Function()? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (updateCornerRadius != null) {
-      return updateCornerRadius(radius);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadSettingsEvent value) loadSettings,
-    required TResult Function(UpdateLanguageEvent value) updateLanguage,
-    required TResult Function(UpdateThemeModeEvent value) updateThemeMode,
-    required TResult Function(ToggleDynamicColorEvent value) toggleDynamicColor,
-    required TResult Function(UpdateColorPaletteEvent value) updateColorPalette,
-    required TResult Function(UpdateCornerRadiusEvent value) updateCornerRadius,
-    required TResult Function(UpdateFontSizeEvent value) updateFontSize,
-    required TResult Function(UpdateFontFamilyEvent value) updateFontFamily,
-    required TResult Function(UpdateTextAlignmentEvent value)
-        updateTextAlignment,
-    required TResult Function(UpdateLineSpacingEvent value) updateLineSpacing,
-    required TResult Function(ToggleHighContrastEvent value) toggleHighContrast,
-    required TResult Function(ToggleMotionReducedEvent value)
-        toggleMotionReduced,
-    required TResult Function(TogglePauseAllNotificationsEvent value)
-        togglePauseAllNotifications,
-    required TResult Function(UpdateSleepModeEvent value) updateSleepMode,
-    required TResult Function(ToggleNotificationEvent value) toggleNotification,
-    required TResult Function(UpdateSummaryFrequencyEvent value)
-        updateSummaryFrequency,
-    required TResult Function(ToggleEmailNotificationsEvent value)
-        toggleEmailNotifications,
-    required TResult Function(ToggleSmsNotificationsEvent value)
-        toggleSmsNotifications,
-    required TResult Function(ClearSettingsMessagesEvent value) clearMessages,
-  }) {
-    return updateCornerRadius(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadSettingsEvent value)? loadSettings,
-    TResult? Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult? Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult? Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult? Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult? Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult? Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult? Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult? Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult? Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult? Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult? Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult? Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult? Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult? Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult? Function(UpdateSummaryFrequencyEvent value)?
-        updateSummaryFrequency,
-    TResult? Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult? Function(ToggleSmsNotificationsEvent value)?
-        toggleSmsNotifications,
-    TResult? Function(ClearSettingsMessagesEvent value)? clearMessages,
-  }) {
-    return updateCornerRadius?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadSettingsEvent value)? loadSettings,
-    TResult Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult Function(UpdateSummaryFrequencyEvent value)? updateSummaryFrequency,
-    TResult Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult Function(ToggleSmsNotificationsEvent value)? toggleSmsNotifications,
-    TResult Function(ClearSettingsMessagesEvent value)? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (updateCornerRadius != null) {
-      return updateCornerRadius(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateCornerRadiusEvent&&(identical(other.radius, radius) || other.radius == radius));
 }
 
-abstract class UpdateCornerRadiusEvent implements SettingsEvent {
-  const factory UpdateCornerRadiusEvent(final double radius) =
-      _$UpdateCornerRadiusEventImpl;
 
-  double get radius;
+@override
+int get hashCode => Object.hash(runtimeType,radius);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UpdateCornerRadiusEventImplCopyWith<_$UpdateCornerRadiusEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'SettingsEvent.updateCornerRadius(radius: $radius)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$UpdateFontSizeEventImplCopyWith<$Res> {
-  factory _$$UpdateFontSizeEventImplCopyWith(_$UpdateFontSizeEventImpl value,
-          $Res Function(_$UpdateFontSizeEventImpl) then) =
-      __$$UpdateFontSizeEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({double size});
+abstract mixin class $UpdateCornerRadiusEventCopyWith<$Res> implements $SettingsEventCopyWith<$Res> {
+  factory $UpdateCornerRadiusEventCopyWith(UpdateCornerRadiusEvent value, $Res Function(UpdateCornerRadiusEvent) _then) = _$UpdateCornerRadiusEventCopyWithImpl;
+@useResult
+$Res call({
+ double radius
+});
+
+
+
+
+}
+/// @nodoc
+class _$UpdateCornerRadiusEventCopyWithImpl<$Res>
+    implements $UpdateCornerRadiusEventCopyWith<$Res> {
+  _$UpdateCornerRadiusEventCopyWithImpl(this._self, this._then);
+
+  final UpdateCornerRadiusEvent _self;
+  final $Res Function(UpdateCornerRadiusEvent) _then;
+
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? radius = null,}) {
+  return _then(UpdateCornerRadiusEvent(
+null == radius ? _self.radius : radius // ignore: cast_nullable_to_non_nullable
+as double,
+  ));
 }
 
-/// @nodoc
-class __$$UpdateFontSizeEventImplCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res, _$UpdateFontSizeEventImpl>
-    implements _$$UpdateFontSizeEventImplCopyWith<$Res> {
-  __$$UpdateFontSizeEventImplCopyWithImpl(_$UpdateFontSizeEventImpl _value,
-      $Res Function(_$UpdateFontSizeEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? size = null,
-  }) {
-    return _then(_$UpdateFontSizeEventImpl(
-      null == size
-          ? _value.size
-          : size // ignore: cast_nullable_to_non_nullable
-              as double,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$UpdateFontSizeEventImpl implements UpdateFontSizeEvent {
-  const _$UpdateFontSizeEventImpl(this.size);
 
-  @override
-  final double size;
+class UpdateFontSizeEvent implements SettingsEvent {
+  const UpdateFontSizeEvent(this.size);
+  
 
-  @override
-  String toString() {
-    return 'SettingsEvent.updateFontSize(size: $size)';
-  }
+ final  double size;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UpdateFontSizeEventImpl &&
-            (identical(other.size, size) || other.size == size));
-  }
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UpdateFontSizeEventCopyWith<UpdateFontSizeEvent> get copyWith => _$UpdateFontSizeEventCopyWithImpl<UpdateFontSizeEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, size);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UpdateFontSizeEventImplCopyWith<_$UpdateFontSizeEventImpl> get copyWith =>
-      __$$UpdateFontSizeEventImplCopyWithImpl<_$UpdateFontSizeEventImpl>(
-          this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loadSettings,
-    required TResult Function(String languageCode, String? region)
-        updateLanguage,
-    required TResult Function(String mode) updateThemeMode,
-    required TResult Function(bool enabled) toggleDynamicColor,
-    required TResult Function(String palette) updateColorPalette,
-    required TResult Function(double radius) updateCornerRadius,
-    required TResult Function(double size) updateFontSize,
-    required TResult Function(String family) updateFontFamily,
-    required TResult Function(String alignment) updateTextAlignment,
-    required TResult Function(double spacing) updateLineSpacing,
-    required TResult Function(bool enabled) toggleHighContrast,
-    required TResult Function(bool enabled) toggleMotionReduced,
-    required TResult Function(bool enabled) togglePauseAllNotifications,
-    required TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)
-        updateSleepMode,
-    required TResult Function(String type, bool enabled) toggleNotification,
-    required TResult Function(String frequency) updateSummaryFrequency,
-    required TResult Function(bool enabled) toggleEmailNotifications,
-    required TResult Function(bool enabled) toggleSmsNotifications,
-    required TResult Function() clearMessages,
-  }) {
-    return updateFontSize(size);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadSettings,
-    TResult? Function(String languageCode, String? region)? updateLanguage,
-    TResult? Function(String mode)? updateThemeMode,
-    TResult? Function(bool enabled)? toggleDynamicColor,
-    TResult? Function(String palette)? updateColorPalette,
-    TResult? Function(double radius)? updateCornerRadius,
-    TResult? Function(double size)? updateFontSize,
-    TResult? Function(String family)? updateFontFamily,
-    TResult? Function(String alignment)? updateTextAlignment,
-    TResult? Function(double spacing)? updateLineSpacing,
-    TResult? Function(bool enabled)? toggleHighContrast,
-    TResult? Function(bool enabled)? toggleMotionReduced,
-    TResult? Function(bool enabled)? togglePauseAllNotifications,
-    TResult? Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult? Function(String type, bool enabled)? toggleNotification,
-    TResult? Function(String frequency)? updateSummaryFrequency,
-    TResult? Function(bool enabled)? toggleEmailNotifications,
-    TResult? Function(bool enabled)? toggleSmsNotifications,
-    TResult? Function()? clearMessages,
-  }) {
-    return updateFontSize?.call(size);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadSettings,
-    TResult Function(String languageCode, String? region)? updateLanguage,
-    TResult Function(String mode)? updateThemeMode,
-    TResult Function(bool enabled)? toggleDynamicColor,
-    TResult Function(String palette)? updateColorPalette,
-    TResult Function(double radius)? updateCornerRadius,
-    TResult Function(double size)? updateFontSize,
-    TResult Function(String family)? updateFontFamily,
-    TResult Function(String alignment)? updateTextAlignment,
-    TResult Function(double spacing)? updateLineSpacing,
-    TResult Function(bool enabled)? toggleHighContrast,
-    TResult Function(bool enabled)? toggleMotionReduced,
-    TResult Function(bool enabled)? togglePauseAllNotifications,
-    TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult Function(String type, bool enabled)? toggleNotification,
-    TResult Function(String frequency)? updateSummaryFrequency,
-    TResult Function(bool enabled)? toggleEmailNotifications,
-    TResult Function(bool enabled)? toggleSmsNotifications,
-    TResult Function()? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (updateFontSize != null) {
-      return updateFontSize(size);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadSettingsEvent value) loadSettings,
-    required TResult Function(UpdateLanguageEvent value) updateLanguage,
-    required TResult Function(UpdateThemeModeEvent value) updateThemeMode,
-    required TResult Function(ToggleDynamicColorEvent value) toggleDynamicColor,
-    required TResult Function(UpdateColorPaletteEvent value) updateColorPalette,
-    required TResult Function(UpdateCornerRadiusEvent value) updateCornerRadius,
-    required TResult Function(UpdateFontSizeEvent value) updateFontSize,
-    required TResult Function(UpdateFontFamilyEvent value) updateFontFamily,
-    required TResult Function(UpdateTextAlignmentEvent value)
-        updateTextAlignment,
-    required TResult Function(UpdateLineSpacingEvent value) updateLineSpacing,
-    required TResult Function(ToggleHighContrastEvent value) toggleHighContrast,
-    required TResult Function(ToggleMotionReducedEvent value)
-        toggleMotionReduced,
-    required TResult Function(TogglePauseAllNotificationsEvent value)
-        togglePauseAllNotifications,
-    required TResult Function(UpdateSleepModeEvent value) updateSleepMode,
-    required TResult Function(ToggleNotificationEvent value) toggleNotification,
-    required TResult Function(UpdateSummaryFrequencyEvent value)
-        updateSummaryFrequency,
-    required TResult Function(ToggleEmailNotificationsEvent value)
-        toggleEmailNotifications,
-    required TResult Function(ToggleSmsNotificationsEvent value)
-        toggleSmsNotifications,
-    required TResult Function(ClearSettingsMessagesEvent value) clearMessages,
-  }) {
-    return updateFontSize(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadSettingsEvent value)? loadSettings,
-    TResult? Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult? Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult? Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult? Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult? Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult? Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult? Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult? Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult? Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult? Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult? Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult? Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult? Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult? Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult? Function(UpdateSummaryFrequencyEvent value)?
-        updateSummaryFrequency,
-    TResult? Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult? Function(ToggleSmsNotificationsEvent value)?
-        toggleSmsNotifications,
-    TResult? Function(ClearSettingsMessagesEvent value)? clearMessages,
-  }) {
-    return updateFontSize?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadSettingsEvent value)? loadSettings,
-    TResult Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult Function(UpdateSummaryFrequencyEvent value)? updateSummaryFrequency,
-    TResult Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult Function(ToggleSmsNotificationsEvent value)? toggleSmsNotifications,
-    TResult Function(ClearSettingsMessagesEvent value)? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (updateFontSize != null) {
-      return updateFontSize(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateFontSizeEvent&&(identical(other.size, size) || other.size == size));
 }
 
-abstract class UpdateFontSizeEvent implements SettingsEvent {
-  const factory UpdateFontSizeEvent(final double size) =
-      _$UpdateFontSizeEventImpl;
 
-  double get size;
+@override
+int get hashCode => Object.hash(runtimeType,size);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UpdateFontSizeEventImplCopyWith<_$UpdateFontSizeEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'SettingsEvent.updateFontSize(size: $size)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$UpdateFontFamilyEventImplCopyWith<$Res> {
-  factory _$$UpdateFontFamilyEventImplCopyWith(
-          _$UpdateFontFamilyEventImpl value,
-          $Res Function(_$UpdateFontFamilyEventImpl) then) =
-      __$$UpdateFontFamilyEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String family});
+abstract mixin class $UpdateFontSizeEventCopyWith<$Res> implements $SettingsEventCopyWith<$Res> {
+  factory $UpdateFontSizeEventCopyWith(UpdateFontSizeEvent value, $Res Function(UpdateFontSizeEvent) _then) = _$UpdateFontSizeEventCopyWithImpl;
+@useResult
+$Res call({
+ double size
+});
+
+
+
+
+}
+/// @nodoc
+class _$UpdateFontSizeEventCopyWithImpl<$Res>
+    implements $UpdateFontSizeEventCopyWith<$Res> {
+  _$UpdateFontSizeEventCopyWithImpl(this._self, this._then);
+
+  final UpdateFontSizeEvent _self;
+  final $Res Function(UpdateFontSizeEvent) _then;
+
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? size = null,}) {
+  return _then(UpdateFontSizeEvent(
+null == size ? _self.size : size // ignore: cast_nullable_to_non_nullable
+as double,
+  ));
 }
 
-/// @nodoc
-class __$$UpdateFontFamilyEventImplCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res, _$UpdateFontFamilyEventImpl>
-    implements _$$UpdateFontFamilyEventImplCopyWith<$Res> {
-  __$$UpdateFontFamilyEventImplCopyWithImpl(_$UpdateFontFamilyEventImpl _value,
-      $Res Function(_$UpdateFontFamilyEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? family = null,
-  }) {
-    return _then(_$UpdateFontFamilyEventImpl(
-      null == family
-          ? _value.family
-          : family // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$UpdateFontFamilyEventImpl implements UpdateFontFamilyEvent {
-  const _$UpdateFontFamilyEventImpl(this.family);
 
-  @override
-  final String family;
+class UpdateFontFamilyEvent implements SettingsEvent {
+  const UpdateFontFamilyEvent(this.family);
+  
 
-  @override
-  String toString() {
-    return 'SettingsEvent.updateFontFamily(family: $family)';
-  }
+ final  String family;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UpdateFontFamilyEventImpl &&
-            (identical(other.family, family) || other.family == family));
-  }
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UpdateFontFamilyEventCopyWith<UpdateFontFamilyEvent> get copyWith => _$UpdateFontFamilyEventCopyWithImpl<UpdateFontFamilyEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, family);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UpdateFontFamilyEventImplCopyWith<_$UpdateFontFamilyEventImpl>
-      get copyWith => __$$UpdateFontFamilyEventImplCopyWithImpl<
-          _$UpdateFontFamilyEventImpl>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loadSettings,
-    required TResult Function(String languageCode, String? region)
-        updateLanguage,
-    required TResult Function(String mode) updateThemeMode,
-    required TResult Function(bool enabled) toggleDynamicColor,
-    required TResult Function(String palette) updateColorPalette,
-    required TResult Function(double radius) updateCornerRadius,
-    required TResult Function(double size) updateFontSize,
-    required TResult Function(String family) updateFontFamily,
-    required TResult Function(String alignment) updateTextAlignment,
-    required TResult Function(double spacing) updateLineSpacing,
-    required TResult Function(bool enabled) toggleHighContrast,
-    required TResult Function(bool enabled) toggleMotionReduced,
-    required TResult Function(bool enabled) togglePauseAllNotifications,
-    required TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)
-        updateSleepMode,
-    required TResult Function(String type, bool enabled) toggleNotification,
-    required TResult Function(String frequency) updateSummaryFrequency,
-    required TResult Function(bool enabled) toggleEmailNotifications,
-    required TResult Function(bool enabled) toggleSmsNotifications,
-    required TResult Function() clearMessages,
-  }) {
-    return updateFontFamily(family);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadSettings,
-    TResult? Function(String languageCode, String? region)? updateLanguage,
-    TResult? Function(String mode)? updateThemeMode,
-    TResult? Function(bool enabled)? toggleDynamicColor,
-    TResult? Function(String palette)? updateColorPalette,
-    TResult? Function(double radius)? updateCornerRadius,
-    TResult? Function(double size)? updateFontSize,
-    TResult? Function(String family)? updateFontFamily,
-    TResult? Function(String alignment)? updateTextAlignment,
-    TResult? Function(double spacing)? updateLineSpacing,
-    TResult? Function(bool enabled)? toggleHighContrast,
-    TResult? Function(bool enabled)? toggleMotionReduced,
-    TResult? Function(bool enabled)? togglePauseAllNotifications,
-    TResult? Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult? Function(String type, bool enabled)? toggleNotification,
-    TResult? Function(String frequency)? updateSummaryFrequency,
-    TResult? Function(bool enabled)? toggleEmailNotifications,
-    TResult? Function(bool enabled)? toggleSmsNotifications,
-    TResult? Function()? clearMessages,
-  }) {
-    return updateFontFamily?.call(family);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadSettings,
-    TResult Function(String languageCode, String? region)? updateLanguage,
-    TResult Function(String mode)? updateThemeMode,
-    TResult Function(bool enabled)? toggleDynamicColor,
-    TResult Function(String palette)? updateColorPalette,
-    TResult Function(double radius)? updateCornerRadius,
-    TResult Function(double size)? updateFontSize,
-    TResult Function(String family)? updateFontFamily,
-    TResult Function(String alignment)? updateTextAlignment,
-    TResult Function(double spacing)? updateLineSpacing,
-    TResult Function(bool enabled)? toggleHighContrast,
-    TResult Function(bool enabled)? toggleMotionReduced,
-    TResult Function(bool enabled)? togglePauseAllNotifications,
-    TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult Function(String type, bool enabled)? toggleNotification,
-    TResult Function(String frequency)? updateSummaryFrequency,
-    TResult Function(bool enabled)? toggleEmailNotifications,
-    TResult Function(bool enabled)? toggleSmsNotifications,
-    TResult Function()? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (updateFontFamily != null) {
-      return updateFontFamily(family);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadSettingsEvent value) loadSettings,
-    required TResult Function(UpdateLanguageEvent value) updateLanguage,
-    required TResult Function(UpdateThemeModeEvent value) updateThemeMode,
-    required TResult Function(ToggleDynamicColorEvent value) toggleDynamicColor,
-    required TResult Function(UpdateColorPaletteEvent value) updateColorPalette,
-    required TResult Function(UpdateCornerRadiusEvent value) updateCornerRadius,
-    required TResult Function(UpdateFontSizeEvent value) updateFontSize,
-    required TResult Function(UpdateFontFamilyEvent value) updateFontFamily,
-    required TResult Function(UpdateTextAlignmentEvent value)
-        updateTextAlignment,
-    required TResult Function(UpdateLineSpacingEvent value) updateLineSpacing,
-    required TResult Function(ToggleHighContrastEvent value) toggleHighContrast,
-    required TResult Function(ToggleMotionReducedEvent value)
-        toggleMotionReduced,
-    required TResult Function(TogglePauseAllNotificationsEvent value)
-        togglePauseAllNotifications,
-    required TResult Function(UpdateSleepModeEvent value) updateSleepMode,
-    required TResult Function(ToggleNotificationEvent value) toggleNotification,
-    required TResult Function(UpdateSummaryFrequencyEvent value)
-        updateSummaryFrequency,
-    required TResult Function(ToggleEmailNotificationsEvent value)
-        toggleEmailNotifications,
-    required TResult Function(ToggleSmsNotificationsEvent value)
-        toggleSmsNotifications,
-    required TResult Function(ClearSettingsMessagesEvent value) clearMessages,
-  }) {
-    return updateFontFamily(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadSettingsEvent value)? loadSettings,
-    TResult? Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult? Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult? Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult? Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult? Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult? Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult? Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult? Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult? Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult? Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult? Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult? Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult? Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult? Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult? Function(UpdateSummaryFrequencyEvent value)?
-        updateSummaryFrequency,
-    TResult? Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult? Function(ToggleSmsNotificationsEvent value)?
-        toggleSmsNotifications,
-    TResult? Function(ClearSettingsMessagesEvent value)? clearMessages,
-  }) {
-    return updateFontFamily?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadSettingsEvent value)? loadSettings,
-    TResult Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult Function(UpdateSummaryFrequencyEvent value)? updateSummaryFrequency,
-    TResult Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult Function(ToggleSmsNotificationsEvent value)? toggleSmsNotifications,
-    TResult Function(ClearSettingsMessagesEvent value)? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (updateFontFamily != null) {
-      return updateFontFamily(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateFontFamilyEvent&&(identical(other.family, family) || other.family == family));
 }
 
-abstract class UpdateFontFamilyEvent implements SettingsEvent {
-  const factory UpdateFontFamilyEvent(final String family) =
-      _$UpdateFontFamilyEventImpl;
 
-  String get family;
+@override
+int get hashCode => Object.hash(runtimeType,family);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UpdateFontFamilyEventImplCopyWith<_$UpdateFontFamilyEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'SettingsEvent.updateFontFamily(family: $family)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$UpdateTextAlignmentEventImplCopyWith<$Res> {
-  factory _$$UpdateTextAlignmentEventImplCopyWith(
-          _$UpdateTextAlignmentEventImpl value,
-          $Res Function(_$UpdateTextAlignmentEventImpl) then) =
-      __$$UpdateTextAlignmentEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String alignment});
+abstract mixin class $UpdateFontFamilyEventCopyWith<$Res> implements $SettingsEventCopyWith<$Res> {
+  factory $UpdateFontFamilyEventCopyWith(UpdateFontFamilyEvent value, $Res Function(UpdateFontFamilyEvent) _then) = _$UpdateFontFamilyEventCopyWithImpl;
+@useResult
+$Res call({
+ String family
+});
+
+
+
+
+}
+/// @nodoc
+class _$UpdateFontFamilyEventCopyWithImpl<$Res>
+    implements $UpdateFontFamilyEventCopyWith<$Res> {
+  _$UpdateFontFamilyEventCopyWithImpl(this._self, this._then);
+
+  final UpdateFontFamilyEvent _self;
+  final $Res Function(UpdateFontFamilyEvent) _then;
+
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? family = null,}) {
+  return _then(UpdateFontFamilyEvent(
+null == family ? _self.family : family // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-class __$$UpdateTextAlignmentEventImplCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res, _$UpdateTextAlignmentEventImpl>
-    implements _$$UpdateTextAlignmentEventImplCopyWith<$Res> {
-  __$$UpdateTextAlignmentEventImplCopyWithImpl(
-      _$UpdateTextAlignmentEventImpl _value,
-      $Res Function(_$UpdateTextAlignmentEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? alignment = null,
-  }) {
-    return _then(_$UpdateTextAlignmentEventImpl(
-      null == alignment
-          ? _value.alignment
-          : alignment // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$UpdateTextAlignmentEventImpl implements UpdateTextAlignmentEvent {
-  const _$UpdateTextAlignmentEventImpl(this.alignment);
 
-  @override
-  final String alignment;
+class UpdateTextAlignmentEvent implements SettingsEvent {
+  const UpdateTextAlignmentEvent(this.alignment);
+  
 
-  @override
-  String toString() {
-    return 'SettingsEvent.updateTextAlignment(alignment: $alignment)';
-  }
+ final  String alignment;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UpdateTextAlignmentEventImpl &&
-            (identical(other.alignment, alignment) ||
-                other.alignment == alignment));
-  }
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UpdateTextAlignmentEventCopyWith<UpdateTextAlignmentEvent> get copyWith => _$UpdateTextAlignmentEventCopyWithImpl<UpdateTextAlignmentEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, alignment);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UpdateTextAlignmentEventImplCopyWith<_$UpdateTextAlignmentEventImpl>
-      get copyWith => __$$UpdateTextAlignmentEventImplCopyWithImpl<
-          _$UpdateTextAlignmentEventImpl>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loadSettings,
-    required TResult Function(String languageCode, String? region)
-        updateLanguage,
-    required TResult Function(String mode) updateThemeMode,
-    required TResult Function(bool enabled) toggleDynamicColor,
-    required TResult Function(String palette) updateColorPalette,
-    required TResult Function(double radius) updateCornerRadius,
-    required TResult Function(double size) updateFontSize,
-    required TResult Function(String family) updateFontFamily,
-    required TResult Function(String alignment) updateTextAlignment,
-    required TResult Function(double spacing) updateLineSpacing,
-    required TResult Function(bool enabled) toggleHighContrast,
-    required TResult Function(bool enabled) toggleMotionReduced,
-    required TResult Function(bool enabled) togglePauseAllNotifications,
-    required TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)
-        updateSleepMode,
-    required TResult Function(String type, bool enabled) toggleNotification,
-    required TResult Function(String frequency) updateSummaryFrequency,
-    required TResult Function(bool enabled) toggleEmailNotifications,
-    required TResult Function(bool enabled) toggleSmsNotifications,
-    required TResult Function() clearMessages,
-  }) {
-    return updateTextAlignment(alignment);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadSettings,
-    TResult? Function(String languageCode, String? region)? updateLanguage,
-    TResult? Function(String mode)? updateThemeMode,
-    TResult? Function(bool enabled)? toggleDynamicColor,
-    TResult? Function(String palette)? updateColorPalette,
-    TResult? Function(double radius)? updateCornerRadius,
-    TResult? Function(double size)? updateFontSize,
-    TResult? Function(String family)? updateFontFamily,
-    TResult? Function(String alignment)? updateTextAlignment,
-    TResult? Function(double spacing)? updateLineSpacing,
-    TResult? Function(bool enabled)? toggleHighContrast,
-    TResult? Function(bool enabled)? toggleMotionReduced,
-    TResult? Function(bool enabled)? togglePauseAllNotifications,
-    TResult? Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult? Function(String type, bool enabled)? toggleNotification,
-    TResult? Function(String frequency)? updateSummaryFrequency,
-    TResult? Function(bool enabled)? toggleEmailNotifications,
-    TResult? Function(bool enabled)? toggleSmsNotifications,
-    TResult? Function()? clearMessages,
-  }) {
-    return updateTextAlignment?.call(alignment);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadSettings,
-    TResult Function(String languageCode, String? region)? updateLanguage,
-    TResult Function(String mode)? updateThemeMode,
-    TResult Function(bool enabled)? toggleDynamicColor,
-    TResult Function(String palette)? updateColorPalette,
-    TResult Function(double radius)? updateCornerRadius,
-    TResult Function(double size)? updateFontSize,
-    TResult Function(String family)? updateFontFamily,
-    TResult Function(String alignment)? updateTextAlignment,
-    TResult Function(double spacing)? updateLineSpacing,
-    TResult Function(bool enabled)? toggleHighContrast,
-    TResult Function(bool enabled)? toggleMotionReduced,
-    TResult Function(bool enabled)? togglePauseAllNotifications,
-    TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult Function(String type, bool enabled)? toggleNotification,
-    TResult Function(String frequency)? updateSummaryFrequency,
-    TResult Function(bool enabled)? toggleEmailNotifications,
-    TResult Function(bool enabled)? toggleSmsNotifications,
-    TResult Function()? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (updateTextAlignment != null) {
-      return updateTextAlignment(alignment);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadSettingsEvent value) loadSettings,
-    required TResult Function(UpdateLanguageEvent value) updateLanguage,
-    required TResult Function(UpdateThemeModeEvent value) updateThemeMode,
-    required TResult Function(ToggleDynamicColorEvent value) toggleDynamicColor,
-    required TResult Function(UpdateColorPaletteEvent value) updateColorPalette,
-    required TResult Function(UpdateCornerRadiusEvent value) updateCornerRadius,
-    required TResult Function(UpdateFontSizeEvent value) updateFontSize,
-    required TResult Function(UpdateFontFamilyEvent value) updateFontFamily,
-    required TResult Function(UpdateTextAlignmentEvent value)
-        updateTextAlignment,
-    required TResult Function(UpdateLineSpacingEvent value) updateLineSpacing,
-    required TResult Function(ToggleHighContrastEvent value) toggleHighContrast,
-    required TResult Function(ToggleMotionReducedEvent value)
-        toggleMotionReduced,
-    required TResult Function(TogglePauseAllNotificationsEvent value)
-        togglePauseAllNotifications,
-    required TResult Function(UpdateSleepModeEvent value) updateSleepMode,
-    required TResult Function(ToggleNotificationEvent value) toggleNotification,
-    required TResult Function(UpdateSummaryFrequencyEvent value)
-        updateSummaryFrequency,
-    required TResult Function(ToggleEmailNotificationsEvent value)
-        toggleEmailNotifications,
-    required TResult Function(ToggleSmsNotificationsEvent value)
-        toggleSmsNotifications,
-    required TResult Function(ClearSettingsMessagesEvent value) clearMessages,
-  }) {
-    return updateTextAlignment(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadSettingsEvent value)? loadSettings,
-    TResult? Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult? Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult? Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult? Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult? Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult? Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult? Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult? Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult? Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult? Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult? Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult? Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult? Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult? Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult? Function(UpdateSummaryFrequencyEvent value)?
-        updateSummaryFrequency,
-    TResult? Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult? Function(ToggleSmsNotificationsEvent value)?
-        toggleSmsNotifications,
-    TResult? Function(ClearSettingsMessagesEvent value)? clearMessages,
-  }) {
-    return updateTextAlignment?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadSettingsEvent value)? loadSettings,
-    TResult Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult Function(UpdateSummaryFrequencyEvent value)? updateSummaryFrequency,
-    TResult Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult Function(ToggleSmsNotificationsEvent value)? toggleSmsNotifications,
-    TResult Function(ClearSettingsMessagesEvent value)? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (updateTextAlignment != null) {
-      return updateTextAlignment(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateTextAlignmentEvent&&(identical(other.alignment, alignment) || other.alignment == alignment));
 }
 
-abstract class UpdateTextAlignmentEvent implements SettingsEvent {
-  const factory UpdateTextAlignmentEvent(final String alignment) =
-      _$UpdateTextAlignmentEventImpl;
 
-  String get alignment;
+@override
+int get hashCode => Object.hash(runtimeType,alignment);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UpdateTextAlignmentEventImplCopyWith<_$UpdateTextAlignmentEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'SettingsEvent.updateTextAlignment(alignment: $alignment)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$UpdateLineSpacingEventImplCopyWith<$Res> {
-  factory _$$UpdateLineSpacingEventImplCopyWith(
-          _$UpdateLineSpacingEventImpl value,
-          $Res Function(_$UpdateLineSpacingEventImpl) then) =
-      __$$UpdateLineSpacingEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({double spacing});
+abstract mixin class $UpdateTextAlignmentEventCopyWith<$Res> implements $SettingsEventCopyWith<$Res> {
+  factory $UpdateTextAlignmentEventCopyWith(UpdateTextAlignmentEvent value, $Res Function(UpdateTextAlignmentEvent) _then) = _$UpdateTextAlignmentEventCopyWithImpl;
+@useResult
+$Res call({
+ String alignment
+});
+
+
+
+
+}
+/// @nodoc
+class _$UpdateTextAlignmentEventCopyWithImpl<$Res>
+    implements $UpdateTextAlignmentEventCopyWith<$Res> {
+  _$UpdateTextAlignmentEventCopyWithImpl(this._self, this._then);
+
+  final UpdateTextAlignmentEvent _self;
+  final $Res Function(UpdateTextAlignmentEvent) _then;
+
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? alignment = null,}) {
+  return _then(UpdateTextAlignmentEvent(
+null == alignment ? _self.alignment : alignment // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-class __$$UpdateLineSpacingEventImplCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res, _$UpdateLineSpacingEventImpl>
-    implements _$$UpdateLineSpacingEventImplCopyWith<$Res> {
-  __$$UpdateLineSpacingEventImplCopyWithImpl(
-      _$UpdateLineSpacingEventImpl _value,
-      $Res Function(_$UpdateLineSpacingEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? spacing = null,
-  }) {
-    return _then(_$UpdateLineSpacingEventImpl(
-      null == spacing
-          ? _value.spacing
-          : spacing // ignore: cast_nullable_to_non_nullable
-              as double,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$UpdateLineSpacingEventImpl implements UpdateLineSpacingEvent {
-  const _$UpdateLineSpacingEventImpl(this.spacing);
 
-  @override
-  final double spacing;
+class UpdateLineSpacingEvent implements SettingsEvent {
+  const UpdateLineSpacingEvent(this.spacing);
+  
 
-  @override
-  String toString() {
-    return 'SettingsEvent.updateLineSpacing(spacing: $spacing)';
-  }
+ final  double spacing;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UpdateLineSpacingEventImpl &&
-            (identical(other.spacing, spacing) || other.spacing == spacing));
-  }
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UpdateLineSpacingEventCopyWith<UpdateLineSpacingEvent> get copyWith => _$UpdateLineSpacingEventCopyWithImpl<UpdateLineSpacingEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, spacing);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UpdateLineSpacingEventImplCopyWith<_$UpdateLineSpacingEventImpl>
-      get copyWith => __$$UpdateLineSpacingEventImplCopyWithImpl<
-          _$UpdateLineSpacingEventImpl>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loadSettings,
-    required TResult Function(String languageCode, String? region)
-        updateLanguage,
-    required TResult Function(String mode) updateThemeMode,
-    required TResult Function(bool enabled) toggleDynamicColor,
-    required TResult Function(String palette) updateColorPalette,
-    required TResult Function(double radius) updateCornerRadius,
-    required TResult Function(double size) updateFontSize,
-    required TResult Function(String family) updateFontFamily,
-    required TResult Function(String alignment) updateTextAlignment,
-    required TResult Function(double spacing) updateLineSpacing,
-    required TResult Function(bool enabled) toggleHighContrast,
-    required TResult Function(bool enabled) toggleMotionReduced,
-    required TResult Function(bool enabled) togglePauseAllNotifications,
-    required TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)
-        updateSleepMode,
-    required TResult Function(String type, bool enabled) toggleNotification,
-    required TResult Function(String frequency) updateSummaryFrequency,
-    required TResult Function(bool enabled) toggleEmailNotifications,
-    required TResult Function(bool enabled) toggleSmsNotifications,
-    required TResult Function() clearMessages,
-  }) {
-    return updateLineSpacing(spacing);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadSettings,
-    TResult? Function(String languageCode, String? region)? updateLanguage,
-    TResult? Function(String mode)? updateThemeMode,
-    TResult? Function(bool enabled)? toggleDynamicColor,
-    TResult? Function(String palette)? updateColorPalette,
-    TResult? Function(double radius)? updateCornerRadius,
-    TResult? Function(double size)? updateFontSize,
-    TResult? Function(String family)? updateFontFamily,
-    TResult? Function(String alignment)? updateTextAlignment,
-    TResult? Function(double spacing)? updateLineSpacing,
-    TResult? Function(bool enabled)? toggleHighContrast,
-    TResult? Function(bool enabled)? toggleMotionReduced,
-    TResult? Function(bool enabled)? togglePauseAllNotifications,
-    TResult? Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult? Function(String type, bool enabled)? toggleNotification,
-    TResult? Function(String frequency)? updateSummaryFrequency,
-    TResult? Function(bool enabled)? toggleEmailNotifications,
-    TResult? Function(bool enabled)? toggleSmsNotifications,
-    TResult? Function()? clearMessages,
-  }) {
-    return updateLineSpacing?.call(spacing);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadSettings,
-    TResult Function(String languageCode, String? region)? updateLanguage,
-    TResult Function(String mode)? updateThemeMode,
-    TResult Function(bool enabled)? toggleDynamicColor,
-    TResult Function(String palette)? updateColorPalette,
-    TResult Function(double radius)? updateCornerRadius,
-    TResult Function(double size)? updateFontSize,
-    TResult Function(String family)? updateFontFamily,
-    TResult Function(String alignment)? updateTextAlignment,
-    TResult Function(double spacing)? updateLineSpacing,
-    TResult Function(bool enabled)? toggleHighContrast,
-    TResult Function(bool enabled)? toggleMotionReduced,
-    TResult Function(bool enabled)? togglePauseAllNotifications,
-    TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult Function(String type, bool enabled)? toggleNotification,
-    TResult Function(String frequency)? updateSummaryFrequency,
-    TResult Function(bool enabled)? toggleEmailNotifications,
-    TResult Function(bool enabled)? toggleSmsNotifications,
-    TResult Function()? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (updateLineSpacing != null) {
-      return updateLineSpacing(spacing);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadSettingsEvent value) loadSettings,
-    required TResult Function(UpdateLanguageEvent value) updateLanguage,
-    required TResult Function(UpdateThemeModeEvent value) updateThemeMode,
-    required TResult Function(ToggleDynamicColorEvent value) toggleDynamicColor,
-    required TResult Function(UpdateColorPaletteEvent value) updateColorPalette,
-    required TResult Function(UpdateCornerRadiusEvent value) updateCornerRadius,
-    required TResult Function(UpdateFontSizeEvent value) updateFontSize,
-    required TResult Function(UpdateFontFamilyEvent value) updateFontFamily,
-    required TResult Function(UpdateTextAlignmentEvent value)
-        updateTextAlignment,
-    required TResult Function(UpdateLineSpacingEvent value) updateLineSpacing,
-    required TResult Function(ToggleHighContrastEvent value) toggleHighContrast,
-    required TResult Function(ToggleMotionReducedEvent value)
-        toggleMotionReduced,
-    required TResult Function(TogglePauseAllNotificationsEvent value)
-        togglePauseAllNotifications,
-    required TResult Function(UpdateSleepModeEvent value) updateSleepMode,
-    required TResult Function(ToggleNotificationEvent value) toggleNotification,
-    required TResult Function(UpdateSummaryFrequencyEvent value)
-        updateSummaryFrequency,
-    required TResult Function(ToggleEmailNotificationsEvent value)
-        toggleEmailNotifications,
-    required TResult Function(ToggleSmsNotificationsEvent value)
-        toggleSmsNotifications,
-    required TResult Function(ClearSettingsMessagesEvent value) clearMessages,
-  }) {
-    return updateLineSpacing(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadSettingsEvent value)? loadSettings,
-    TResult? Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult? Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult? Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult? Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult? Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult? Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult? Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult? Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult? Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult? Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult? Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult? Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult? Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult? Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult? Function(UpdateSummaryFrequencyEvent value)?
-        updateSummaryFrequency,
-    TResult? Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult? Function(ToggleSmsNotificationsEvent value)?
-        toggleSmsNotifications,
-    TResult? Function(ClearSettingsMessagesEvent value)? clearMessages,
-  }) {
-    return updateLineSpacing?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadSettingsEvent value)? loadSettings,
-    TResult Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult Function(UpdateSummaryFrequencyEvent value)? updateSummaryFrequency,
-    TResult Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult Function(ToggleSmsNotificationsEvent value)? toggleSmsNotifications,
-    TResult Function(ClearSettingsMessagesEvent value)? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (updateLineSpacing != null) {
-      return updateLineSpacing(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateLineSpacingEvent&&(identical(other.spacing, spacing) || other.spacing == spacing));
 }
 
-abstract class UpdateLineSpacingEvent implements SettingsEvent {
-  const factory UpdateLineSpacingEvent(final double spacing) =
-      _$UpdateLineSpacingEventImpl;
 
-  double get spacing;
+@override
+int get hashCode => Object.hash(runtimeType,spacing);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UpdateLineSpacingEventImplCopyWith<_$UpdateLineSpacingEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'SettingsEvent.updateLineSpacing(spacing: $spacing)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$ToggleHighContrastEventImplCopyWith<$Res> {
-  factory _$$ToggleHighContrastEventImplCopyWith(
-          _$ToggleHighContrastEventImpl value,
-          $Res Function(_$ToggleHighContrastEventImpl) then) =
-      __$$ToggleHighContrastEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool enabled});
+abstract mixin class $UpdateLineSpacingEventCopyWith<$Res> implements $SettingsEventCopyWith<$Res> {
+  factory $UpdateLineSpacingEventCopyWith(UpdateLineSpacingEvent value, $Res Function(UpdateLineSpacingEvent) _then) = _$UpdateLineSpacingEventCopyWithImpl;
+@useResult
+$Res call({
+ double spacing
+});
+
+
+
+
+}
+/// @nodoc
+class _$UpdateLineSpacingEventCopyWithImpl<$Res>
+    implements $UpdateLineSpacingEventCopyWith<$Res> {
+  _$UpdateLineSpacingEventCopyWithImpl(this._self, this._then);
+
+  final UpdateLineSpacingEvent _self;
+  final $Res Function(UpdateLineSpacingEvent) _then;
+
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? spacing = null,}) {
+  return _then(UpdateLineSpacingEvent(
+null == spacing ? _self.spacing : spacing // ignore: cast_nullable_to_non_nullable
+as double,
+  ));
 }
 
-/// @nodoc
-class __$$ToggleHighContrastEventImplCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res, _$ToggleHighContrastEventImpl>
-    implements _$$ToggleHighContrastEventImplCopyWith<$Res> {
-  __$$ToggleHighContrastEventImplCopyWithImpl(
-      _$ToggleHighContrastEventImpl _value,
-      $Res Function(_$ToggleHighContrastEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? enabled = null,
-  }) {
-    return _then(_$ToggleHighContrastEventImpl(
-      null == enabled
-          ? _value.enabled
-          : enabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$ToggleHighContrastEventImpl implements ToggleHighContrastEvent {
-  const _$ToggleHighContrastEventImpl(this.enabled);
 
-  @override
-  final bool enabled;
+class ToggleHighContrastEvent implements SettingsEvent {
+  const ToggleHighContrastEvent(this.enabled);
+  
 
-  @override
-  String toString() {
-    return 'SettingsEvent.toggleHighContrast(enabled: $enabled)';
-  }
+ final  bool enabled;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ToggleHighContrastEventImpl &&
-            (identical(other.enabled, enabled) || other.enabled == enabled));
-  }
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ToggleHighContrastEventCopyWith<ToggleHighContrastEvent> get copyWith => _$ToggleHighContrastEventCopyWithImpl<ToggleHighContrastEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, enabled);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ToggleHighContrastEventImplCopyWith<_$ToggleHighContrastEventImpl>
-      get copyWith => __$$ToggleHighContrastEventImplCopyWithImpl<
-          _$ToggleHighContrastEventImpl>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loadSettings,
-    required TResult Function(String languageCode, String? region)
-        updateLanguage,
-    required TResult Function(String mode) updateThemeMode,
-    required TResult Function(bool enabled) toggleDynamicColor,
-    required TResult Function(String palette) updateColorPalette,
-    required TResult Function(double radius) updateCornerRadius,
-    required TResult Function(double size) updateFontSize,
-    required TResult Function(String family) updateFontFamily,
-    required TResult Function(String alignment) updateTextAlignment,
-    required TResult Function(double spacing) updateLineSpacing,
-    required TResult Function(bool enabled) toggleHighContrast,
-    required TResult Function(bool enabled) toggleMotionReduced,
-    required TResult Function(bool enabled) togglePauseAllNotifications,
-    required TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)
-        updateSleepMode,
-    required TResult Function(String type, bool enabled) toggleNotification,
-    required TResult Function(String frequency) updateSummaryFrequency,
-    required TResult Function(bool enabled) toggleEmailNotifications,
-    required TResult Function(bool enabled) toggleSmsNotifications,
-    required TResult Function() clearMessages,
-  }) {
-    return toggleHighContrast(enabled);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadSettings,
-    TResult? Function(String languageCode, String? region)? updateLanguage,
-    TResult? Function(String mode)? updateThemeMode,
-    TResult? Function(bool enabled)? toggleDynamicColor,
-    TResult? Function(String palette)? updateColorPalette,
-    TResult? Function(double radius)? updateCornerRadius,
-    TResult? Function(double size)? updateFontSize,
-    TResult? Function(String family)? updateFontFamily,
-    TResult? Function(String alignment)? updateTextAlignment,
-    TResult? Function(double spacing)? updateLineSpacing,
-    TResult? Function(bool enabled)? toggleHighContrast,
-    TResult? Function(bool enabled)? toggleMotionReduced,
-    TResult? Function(bool enabled)? togglePauseAllNotifications,
-    TResult? Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult? Function(String type, bool enabled)? toggleNotification,
-    TResult? Function(String frequency)? updateSummaryFrequency,
-    TResult? Function(bool enabled)? toggleEmailNotifications,
-    TResult? Function(bool enabled)? toggleSmsNotifications,
-    TResult? Function()? clearMessages,
-  }) {
-    return toggleHighContrast?.call(enabled);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadSettings,
-    TResult Function(String languageCode, String? region)? updateLanguage,
-    TResult Function(String mode)? updateThemeMode,
-    TResult Function(bool enabled)? toggleDynamicColor,
-    TResult Function(String palette)? updateColorPalette,
-    TResult Function(double radius)? updateCornerRadius,
-    TResult Function(double size)? updateFontSize,
-    TResult Function(String family)? updateFontFamily,
-    TResult Function(String alignment)? updateTextAlignment,
-    TResult Function(double spacing)? updateLineSpacing,
-    TResult Function(bool enabled)? toggleHighContrast,
-    TResult Function(bool enabled)? toggleMotionReduced,
-    TResult Function(bool enabled)? togglePauseAllNotifications,
-    TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult Function(String type, bool enabled)? toggleNotification,
-    TResult Function(String frequency)? updateSummaryFrequency,
-    TResult Function(bool enabled)? toggleEmailNotifications,
-    TResult Function(bool enabled)? toggleSmsNotifications,
-    TResult Function()? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (toggleHighContrast != null) {
-      return toggleHighContrast(enabled);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadSettingsEvent value) loadSettings,
-    required TResult Function(UpdateLanguageEvent value) updateLanguage,
-    required TResult Function(UpdateThemeModeEvent value) updateThemeMode,
-    required TResult Function(ToggleDynamicColorEvent value) toggleDynamicColor,
-    required TResult Function(UpdateColorPaletteEvent value) updateColorPalette,
-    required TResult Function(UpdateCornerRadiusEvent value) updateCornerRadius,
-    required TResult Function(UpdateFontSizeEvent value) updateFontSize,
-    required TResult Function(UpdateFontFamilyEvent value) updateFontFamily,
-    required TResult Function(UpdateTextAlignmentEvent value)
-        updateTextAlignment,
-    required TResult Function(UpdateLineSpacingEvent value) updateLineSpacing,
-    required TResult Function(ToggleHighContrastEvent value) toggleHighContrast,
-    required TResult Function(ToggleMotionReducedEvent value)
-        toggleMotionReduced,
-    required TResult Function(TogglePauseAllNotificationsEvent value)
-        togglePauseAllNotifications,
-    required TResult Function(UpdateSleepModeEvent value) updateSleepMode,
-    required TResult Function(ToggleNotificationEvent value) toggleNotification,
-    required TResult Function(UpdateSummaryFrequencyEvent value)
-        updateSummaryFrequency,
-    required TResult Function(ToggleEmailNotificationsEvent value)
-        toggleEmailNotifications,
-    required TResult Function(ToggleSmsNotificationsEvent value)
-        toggleSmsNotifications,
-    required TResult Function(ClearSettingsMessagesEvent value) clearMessages,
-  }) {
-    return toggleHighContrast(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadSettingsEvent value)? loadSettings,
-    TResult? Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult? Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult? Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult? Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult? Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult? Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult? Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult? Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult? Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult? Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult? Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult? Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult? Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult? Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult? Function(UpdateSummaryFrequencyEvent value)?
-        updateSummaryFrequency,
-    TResult? Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult? Function(ToggleSmsNotificationsEvent value)?
-        toggleSmsNotifications,
-    TResult? Function(ClearSettingsMessagesEvent value)? clearMessages,
-  }) {
-    return toggleHighContrast?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadSettingsEvent value)? loadSettings,
-    TResult Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult Function(UpdateSummaryFrequencyEvent value)? updateSummaryFrequency,
-    TResult Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult Function(ToggleSmsNotificationsEvent value)? toggleSmsNotifications,
-    TResult Function(ClearSettingsMessagesEvent value)? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (toggleHighContrast != null) {
-      return toggleHighContrast(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ToggleHighContrastEvent&&(identical(other.enabled, enabled) || other.enabled == enabled));
 }
 
-abstract class ToggleHighContrastEvent implements SettingsEvent {
-  const factory ToggleHighContrastEvent(final bool enabled) =
-      _$ToggleHighContrastEventImpl;
 
-  bool get enabled;
+@override
+int get hashCode => Object.hash(runtimeType,enabled);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ToggleHighContrastEventImplCopyWith<_$ToggleHighContrastEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'SettingsEvent.toggleHighContrast(enabled: $enabled)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$ToggleMotionReducedEventImplCopyWith<$Res> {
-  factory _$$ToggleMotionReducedEventImplCopyWith(
-          _$ToggleMotionReducedEventImpl value,
-          $Res Function(_$ToggleMotionReducedEventImpl) then) =
-      __$$ToggleMotionReducedEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool enabled});
+abstract mixin class $ToggleHighContrastEventCopyWith<$Res> implements $SettingsEventCopyWith<$Res> {
+  factory $ToggleHighContrastEventCopyWith(ToggleHighContrastEvent value, $Res Function(ToggleHighContrastEvent) _then) = _$ToggleHighContrastEventCopyWithImpl;
+@useResult
+$Res call({
+ bool enabled
+});
+
+
+
+
+}
+/// @nodoc
+class _$ToggleHighContrastEventCopyWithImpl<$Res>
+    implements $ToggleHighContrastEventCopyWith<$Res> {
+  _$ToggleHighContrastEventCopyWithImpl(this._self, this._then);
+
+  final ToggleHighContrastEvent _self;
+  final $Res Function(ToggleHighContrastEvent) _then;
+
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? enabled = null,}) {
+  return _then(ToggleHighContrastEvent(
+null == enabled ? _self.enabled : enabled // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
 
-/// @nodoc
-class __$$ToggleMotionReducedEventImplCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res, _$ToggleMotionReducedEventImpl>
-    implements _$$ToggleMotionReducedEventImplCopyWith<$Res> {
-  __$$ToggleMotionReducedEventImplCopyWithImpl(
-      _$ToggleMotionReducedEventImpl _value,
-      $Res Function(_$ToggleMotionReducedEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? enabled = null,
-  }) {
-    return _then(_$ToggleMotionReducedEventImpl(
-      null == enabled
-          ? _value.enabled
-          : enabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$ToggleMotionReducedEventImpl implements ToggleMotionReducedEvent {
-  const _$ToggleMotionReducedEventImpl(this.enabled);
 
-  @override
-  final bool enabled;
+class ToggleMotionReducedEvent implements SettingsEvent {
+  const ToggleMotionReducedEvent(this.enabled);
+  
 
-  @override
-  String toString() {
-    return 'SettingsEvent.toggleMotionReduced(enabled: $enabled)';
-  }
+ final  bool enabled;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ToggleMotionReducedEventImpl &&
-            (identical(other.enabled, enabled) || other.enabled == enabled));
-  }
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ToggleMotionReducedEventCopyWith<ToggleMotionReducedEvent> get copyWith => _$ToggleMotionReducedEventCopyWithImpl<ToggleMotionReducedEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, enabled);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ToggleMotionReducedEventImplCopyWith<_$ToggleMotionReducedEventImpl>
-      get copyWith => __$$ToggleMotionReducedEventImplCopyWithImpl<
-          _$ToggleMotionReducedEventImpl>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loadSettings,
-    required TResult Function(String languageCode, String? region)
-        updateLanguage,
-    required TResult Function(String mode) updateThemeMode,
-    required TResult Function(bool enabled) toggleDynamicColor,
-    required TResult Function(String palette) updateColorPalette,
-    required TResult Function(double radius) updateCornerRadius,
-    required TResult Function(double size) updateFontSize,
-    required TResult Function(String family) updateFontFamily,
-    required TResult Function(String alignment) updateTextAlignment,
-    required TResult Function(double spacing) updateLineSpacing,
-    required TResult Function(bool enabled) toggleHighContrast,
-    required TResult Function(bool enabled) toggleMotionReduced,
-    required TResult Function(bool enabled) togglePauseAllNotifications,
-    required TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)
-        updateSleepMode,
-    required TResult Function(String type, bool enabled) toggleNotification,
-    required TResult Function(String frequency) updateSummaryFrequency,
-    required TResult Function(bool enabled) toggleEmailNotifications,
-    required TResult Function(bool enabled) toggleSmsNotifications,
-    required TResult Function() clearMessages,
-  }) {
-    return toggleMotionReduced(enabled);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadSettings,
-    TResult? Function(String languageCode, String? region)? updateLanguage,
-    TResult? Function(String mode)? updateThemeMode,
-    TResult? Function(bool enabled)? toggleDynamicColor,
-    TResult? Function(String palette)? updateColorPalette,
-    TResult? Function(double radius)? updateCornerRadius,
-    TResult? Function(double size)? updateFontSize,
-    TResult? Function(String family)? updateFontFamily,
-    TResult? Function(String alignment)? updateTextAlignment,
-    TResult? Function(double spacing)? updateLineSpacing,
-    TResult? Function(bool enabled)? toggleHighContrast,
-    TResult? Function(bool enabled)? toggleMotionReduced,
-    TResult? Function(bool enabled)? togglePauseAllNotifications,
-    TResult? Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult? Function(String type, bool enabled)? toggleNotification,
-    TResult? Function(String frequency)? updateSummaryFrequency,
-    TResult? Function(bool enabled)? toggleEmailNotifications,
-    TResult? Function(bool enabled)? toggleSmsNotifications,
-    TResult? Function()? clearMessages,
-  }) {
-    return toggleMotionReduced?.call(enabled);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadSettings,
-    TResult Function(String languageCode, String? region)? updateLanguage,
-    TResult Function(String mode)? updateThemeMode,
-    TResult Function(bool enabled)? toggleDynamicColor,
-    TResult Function(String palette)? updateColorPalette,
-    TResult Function(double radius)? updateCornerRadius,
-    TResult Function(double size)? updateFontSize,
-    TResult Function(String family)? updateFontFamily,
-    TResult Function(String alignment)? updateTextAlignment,
-    TResult Function(double spacing)? updateLineSpacing,
-    TResult Function(bool enabled)? toggleHighContrast,
-    TResult Function(bool enabled)? toggleMotionReduced,
-    TResult Function(bool enabled)? togglePauseAllNotifications,
-    TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult Function(String type, bool enabled)? toggleNotification,
-    TResult Function(String frequency)? updateSummaryFrequency,
-    TResult Function(bool enabled)? toggleEmailNotifications,
-    TResult Function(bool enabled)? toggleSmsNotifications,
-    TResult Function()? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (toggleMotionReduced != null) {
-      return toggleMotionReduced(enabled);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadSettingsEvent value) loadSettings,
-    required TResult Function(UpdateLanguageEvent value) updateLanguage,
-    required TResult Function(UpdateThemeModeEvent value) updateThemeMode,
-    required TResult Function(ToggleDynamicColorEvent value) toggleDynamicColor,
-    required TResult Function(UpdateColorPaletteEvent value) updateColorPalette,
-    required TResult Function(UpdateCornerRadiusEvent value) updateCornerRadius,
-    required TResult Function(UpdateFontSizeEvent value) updateFontSize,
-    required TResult Function(UpdateFontFamilyEvent value) updateFontFamily,
-    required TResult Function(UpdateTextAlignmentEvent value)
-        updateTextAlignment,
-    required TResult Function(UpdateLineSpacingEvent value) updateLineSpacing,
-    required TResult Function(ToggleHighContrastEvent value) toggleHighContrast,
-    required TResult Function(ToggleMotionReducedEvent value)
-        toggleMotionReduced,
-    required TResult Function(TogglePauseAllNotificationsEvent value)
-        togglePauseAllNotifications,
-    required TResult Function(UpdateSleepModeEvent value) updateSleepMode,
-    required TResult Function(ToggleNotificationEvent value) toggleNotification,
-    required TResult Function(UpdateSummaryFrequencyEvent value)
-        updateSummaryFrequency,
-    required TResult Function(ToggleEmailNotificationsEvent value)
-        toggleEmailNotifications,
-    required TResult Function(ToggleSmsNotificationsEvent value)
-        toggleSmsNotifications,
-    required TResult Function(ClearSettingsMessagesEvent value) clearMessages,
-  }) {
-    return toggleMotionReduced(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadSettingsEvent value)? loadSettings,
-    TResult? Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult? Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult? Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult? Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult? Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult? Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult? Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult? Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult? Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult? Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult? Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult? Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult? Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult? Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult? Function(UpdateSummaryFrequencyEvent value)?
-        updateSummaryFrequency,
-    TResult? Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult? Function(ToggleSmsNotificationsEvent value)?
-        toggleSmsNotifications,
-    TResult? Function(ClearSettingsMessagesEvent value)? clearMessages,
-  }) {
-    return toggleMotionReduced?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadSettingsEvent value)? loadSettings,
-    TResult Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult Function(UpdateSummaryFrequencyEvent value)? updateSummaryFrequency,
-    TResult Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult Function(ToggleSmsNotificationsEvent value)? toggleSmsNotifications,
-    TResult Function(ClearSettingsMessagesEvent value)? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (toggleMotionReduced != null) {
-      return toggleMotionReduced(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ToggleMotionReducedEvent&&(identical(other.enabled, enabled) || other.enabled == enabled));
 }
 
-abstract class ToggleMotionReducedEvent implements SettingsEvent {
-  const factory ToggleMotionReducedEvent(final bool enabled) =
-      _$ToggleMotionReducedEventImpl;
 
-  bool get enabled;
+@override
+int get hashCode => Object.hash(runtimeType,enabled);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ToggleMotionReducedEventImplCopyWith<_$ToggleMotionReducedEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'SettingsEvent.toggleMotionReduced(enabled: $enabled)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$TogglePauseAllNotificationsEventImplCopyWith<$Res> {
-  factory _$$TogglePauseAllNotificationsEventImplCopyWith(
-          _$TogglePauseAllNotificationsEventImpl value,
-          $Res Function(_$TogglePauseAllNotificationsEventImpl) then) =
-      __$$TogglePauseAllNotificationsEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool enabled});
+abstract mixin class $ToggleMotionReducedEventCopyWith<$Res> implements $SettingsEventCopyWith<$Res> {
+  factory $ToggleMotionReducedEventCopyWith(ToggleMotionReducedEvent value, $Res Function(ToggleMotionReducedEvent) _then) = _$ToggleMotionReducedEventCopyWithImpl;
+@useResult
+$Res call({
+ bool enabled
+});
+
+
+
+
+}
+/// @nodoc
+class _$ToggleMotionReducedEventCopyWithImpl<$Res>
+    implements $ToggleMotionReducedEventCopyWith<$Res> {
+  _$ToggleMotionReducedEventCopyWithImpl(this._self, this._then);
+
+  final ToggleMotionReducedEvent _self;
+  final $Res Function(ToggleMotionReducedEvent) _then;
+
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? enabled = null,}) {
+  return _then(ToggleMotionReducedEvent(
+null == enabled ? _self.enabled : enabled // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
 
-/// @nodoc
-class __$$TogglePauseAllNotificationsEventImplCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res,
-        _$TogglePauseAllNotificationsEventImpl>
-    implements _$$TogglePauseAllNotificationsEventImplCopyWith<$Res> {
-  __$$TogglePauseAllNotificationsEventImplCopyWithImpl(
-      _$TogglePauseAllNotificationsEventImpl _value,
-      $Res Function(_$TogglePauseAllNotificationsEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? enabled = null,
-  }) {
-    return _then(_$TogglePauseAllNotificationsEventImpl(
-      null == enabled
-          ? _value.enabled
-          : enabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$TogglePauseAllNotificationsEventImpl
-    implements TogglePauseAllNotificationsEvent {
-  const _$TogglePauseAllNotificationsEventImpl(this.enabled);
 
-  @override
-  final bool enabled;
+class TogglePauseAllNotificationsEvent implements SettingsEvent {
+  const TogglePauseAllNotificationsEvent(this.enabled);
+  
 
-  @override
-  String toString() {
-    return 'SettingsEvent.togglePauseAllNotifications(enabled: $enabled)';
-  }
+ final  bool enabled;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TogglePauseAllNotificationsEventImpl &&
-            (identical(other.enabled, enabled) || other.enabled == enabled));
-  }
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$TogglePauseAllNotificationsEventCopyWith<TogglePauseAllNotificationsEvent> get copyWith => _$TogglePauseAllNotificationsEventCopyWithImpl<TogglePauseAllNotificationsEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, enabled);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$TogglePauseAllNotificationsEventImplCopyWith<
-          _$TogglePauseAllNotificationsEventImpl>
-      get copyWith => __$$TogglePauseAllNotificationsEventImplCopyWithImpl<
-          _$TogglePauseAllNotificationsEventImpl>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loadSettings,
-    required TResult Function(String languageCode, String? region)
-        updateLanguage,
-    required TResult Function(String mode) updateThemeMode,
-    required TResult Function(bool enabled) toggleDynamicColor,
-    required TResult Function(String palette) updateColorPalette,
-    required TResult Function(double radius) updateCornerRadius,
-    required TResult Function(double size) updateFontSize,
-    required TResult Function(String family) updateFontFamily,
-    required TResult Function(String alignment) updateTextAlignment,
-    required TResult Function(double spacing) updateLineSpacing,
-    required TResult Function(bool enabled) toggleHighContrast,
-    required TResult Function(bool enabled) toggleMotionReduced,
-    required TResult Function(bool enabled) togglePauseAllNotifications,
-    required TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)
-        updateSleepMode,
-    required TResult Function(String type, bool enabled) toggleNotification,
-    required TResult Function(String frequency) updateSummaryFrequency,
-    required TResult Function(bool enabled) toggleEmailNotifications,
-    required TResult Function(bool enabled) toggleSmsNotifications,
-    required TResult Function() clearMessages,
-  }) {
-    return togglePauseAllNotifications(enabled);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadSettings,
-    TResult? Function(String languageCode, String? region)? updateLanguage,
-    TResult? Function(String mode)? updateThemeMode,
-    TResult? Function(bool enabled)? toggleDynamicColor,
-    TResult? Function(String palette)? updateColorPalette,
-    TResult? Function(double radius)? updateCornerRadius,
-    TResult? Function(double size)? updateFontSize,
-    TResult? Function(String family)? updateFontFamily,
-    TResult? Function(String alignment)? updateTextAlignment,
-    TResult? Function(double spacing)? updateLineSpacing,
-    TResult? Function(bool enabled)? toggleHighContrast,
-    TResult? Function(bool enabled)? toggleMotionReduced,
-    TResult? Function(bool enabled)? togglePauseAllNotifications,
-    TResult? Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult? Function(String type, bool enabled)? toggleNotification,
-    TResult? Function(String frequency)? updateSummaryFrequency,
-    TResult? Function(bool enabled)? toggleEmailNotifications,
-    TResult? Function(bool enabled)? toggleSmsNotifications,
-    TResult? Function()? clearMessages,
-  }) {
-    return togglePauseAllNotifications?.call(enabled);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadSettings,
-    TResult Function(String languageCode, String? region)? updateLanguage,
-    TResult Function(String mode)? updateThemeMode,
-    TResult Function(bool enabled)? toggleDynamicColor,
-    TResult Function(String palette)? updateColorPalette,
-    TResult Function(double radius)? updateCornerRadius,
-    TResult Function(double size)? updateFontSize,
-    TResult Function(String family)? updateFontFamily,
-    TResult Function(String alignment)? updateTextAlignment,
-    TResult Function(double spacing)? updateLineSpacing,
-    TResult Function(bool enabled)? toggleHighContrast,
-    TResult Function(bool enabled)? toggleMotionReduced,
-    TResult Function(bool enabled)? togglePauseAllNotifications,
-    TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult Function(String type, bool enabled)? toggleNotification,
-    TResult Function(String frequency)? updateSummaryFrequency,
-    TResult Function(bool enabled)? toggleEmailNotifications,
-    TResult Function(bool enabled)? toggleSmsNotifications,
-    TResult Function()? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (togglePauseAllNotifications != null) {
-      return togglePauseAllNotifications(enabled);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadSettingsEvent value) loadSettings,
-    required TResult Function(UpdateLanguageEvent value) updateLanguage,
-    required TResult Function(UpdateThemeModeEvent value) updateThemeMode,
-    required TResult Function(ToggleDynamicColorEvent value) toggleDynamicColor,
-    required TResult Function(UpdateColorPaletteEvent value) updateColorPalette,
-    required TResult Function(UpdateCornerRadiusEvent value) updateCornerRadius,
-    required TResult Function(UpdateFontSizeEvent value) updateFontSize,
-    required TResult Function(UpdateFontFamilyEvent value) updateFontFamily,
-    required TResult Function(UpdateTextAlignmentEvent value)
-        updateTextAlignment,
-    required TResult Function(UpdateLineSpacingEvent value) updateLineSpacing,
-    required TResult Function(ToggleHighContrastEvent value) toggleHighContrast,
-    required TResult Function(ToggleMotionReducedEvent value)
-        toggleMotionReduced,
-    required TResult Function(TogglePauseAllNotificationsEvent value)
-        togglePauseAllNotifications,
-    required TResult Function(UpdateSleepModeEvent value) updateSleepMode,
-    required TResult Function(ToggleNotificationEvent value) toggleNotification,
-    required TResult Function(UpdateSummaryFrequencyEvent value)
-        updateSummaryFrequency,
-    required TResult Function(ToggleEmailNotificationsEvent value)
-        toggleEmailNotifications,
-    required TResult Function(ToggleSmsNotificationsEvent value)
-        toggleSmsNotifications,
-    required TResult Function(ClearSettingsMessagesEvent value) clearMessages,
-  }) {
-    return togglePauseAllNotifications(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadSettingsEvent value)? loadSettings,
-    TResult? Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult? Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult? Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult? Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult? Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult? Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult? Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult? Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult? Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult? Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult? Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult? Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult? Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult? Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult? Function(UpdateSummaryFrequencyEvent value)?
-        updateSummaryFrequency,
-    TResult? Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult? Function(ToggleSmsNotificationsEvent value)?
-        toggleSmsNotifications,
-    TResult? Function(ClearSettingsMessagesEvent value)? clearMessages,
-  }) {
-    return togglePauseAllNotifications?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadSettingsEvent value)? loadSettings,
-    TResult Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult Function(UpdateSummaryFrequencyEvent value)? updateSummaryFrequency,
-    TResult Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult Function(ToggleSmsNotificationsEvent value)? toggleSmsNotifications,
-    TResult Function(ClearSettingsMessagesEvent value)? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (togglePauseAllNotifications != null) {
-      return togglePauseAllNotifications(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TogglePauseAllNotificationsEvent&&(identical(other.enabled, enabled) || other.enabled == enabled));
 }
 
-abstract class TogglePauseAllNotificationsEvent implements SettingsEvent {
-  const factory TogglePauseAllNotificationsEvent(final bool enabled) =
-      _$TogglePauseAllNotificationsEventImpl;
 
-  bool get enabled;
+@override
+int get hashCode => Object.hash(runtimeType,enabled);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TogglePauseAllNotificationsEventImplCopyWith<
-          _$TogglePauseAllNotificationsEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'SettingsEvent.togglePauseAllNotifications(enabled: $enabled)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$UpdateSleepModeEventImplCopyWith<$Res> {
-  factory _$$UpdateSleepModeEventImplCopyWith(_$UpdateSleepModeEventImpl value,
-          $Res Function(_$UpdateSleepModeEventImpl) then) =
-      __$$UpdateSleepModeEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {bool enabled,
-      int? startHour,
-      int? startMinute,
-      int? endHour,
-      int? endMinute});
+abstract mixin class $TogglePauseAllNotificationsEventCopyWith<$Res> implements $SettingsEventCopyWith<$Res> {
+  factory $TogglePauseAllNotificationsEventCopyWith(TogglePauseAllNotificationsEvent value, $Res Function(TogglePauseAllNotificationsEvent) _then) = _$TogglePauseAllNotificationsEventCopyWithImpl;
+@useResult
+$Res call({
+ bool enabled
+});
+
+
+
+
+}
+/// @nodoc
+class _$TogglePauseAllNotificationsEventCopyWithImpl<$Res>
+    implements $TogglePauseAllNotificationsEventCopyWith<$Res> {
+  _$TogglePauseAllNotificationsEventCopyWithImpl(this._self, this._then);
+
+  final TogglePauseAllNotificationsEvent _self;
+  final $Res Function(TogglePauseAllNotificationsEvent) _then;
+
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? enabled = null,}) {
+  return _then(TogglePauseAllNotificationsEvent(
+null == enabled ? _self.enabled : enabled // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
 
-/// @nodoc
-class __$$UpdateSleepModeEventImplCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res, _$UpdateSleepModeEventImpl>
-    implements _$$UpdateSleepModeEventImplCopyWith<$Res> {
-  __$$UpdateSleepModeEventImplCopyWithImpl(_$UpdateSleepModeEventImpl _value,
-      $Res Function(_$UpdateSleepModeEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? enabled = null,
-    Object? startHour = freezed,
-    Object? startMinute = freezed,
-    Object? endHour = freezed,
-    Object? endMinute = freezed,
-  }) {
-    return _then(_$UpdateSleepModeEventImpl(
-      enabled: null == enabled
-          ? _value.enabled
-          : enabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      startHour: freezed == startHour
-          ? _value.startHour
-          : startHour // ignore: cast_nullable_to_non_nullable
-              as int?,
-      startMinute: freezed == startMinute
-          ? _value.startMinute
-          : startMinute // ignore: cast_nullable_to_non_nullable
-              as int?,
-      endHour: freezed == endHour
-          ? _value.endHour
-          : endHour // ignore: cast_nullable_to_non_nullable
-              as int?,
-      endMinute: freezed == endMinute
-          ? _value.endMinute
-          : endMinute // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$UpdateSleepModeEventImpl implements UpdateSleepModeEvent {
-  const _$UpdateSleepModeEventImpl(
-      {required this.enabled,
-      this.startHour,
-      this.startMinute,
-      this.endHour,
-      this.endMinute});
 
-  @override
-  final bool enabled;
-  @override
-  final int? startHour;
-  @override
-  final int? startMinute;
-  @override
-  final int? endHour;
-  @override
-  final int? endMinute;
+class UpdateSleepModeEvent implements SettingsEvent {
+  const UpdateSleepModeEvent({required this.enabled, this.startHour, this.startMinute, this.endHour, this.endMinute});
+  
 
-  @override
-  String toString() {
-    return 'SettingsEvent.updateSleepMode(enabled: $enabled, startHour: $startHour, startMinute: $startMinute, endHour: $endHour, endMinute: $endMinute)';
-  }
+ final  bool enabled;
+ final  int? startHour;
+ final  int? startMinute;
+ final  int? endHour;
+ final  int? endMinute;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UpdateSleepModeEventImpl &&
-            (identical(other.enabled, enabled) || other.enabled == enabled) &&
-            (identical(other.startHour, startHour) ||
-                other.startHour == startHour) &&
-            (identical(other.startMinute, startMinute) ||
-                other.startMinute == startMinute) &&
-            (identical(other.endHour, endHour) || other.endHour == endHour) &&
-            (identical(other.endMinute, endMinute) ||
-                other.endMinute == endMinute));
-  }
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UpdateSleepModeEventCopyWith<UpdateSleepModeEvent> get copyWith => _$UpdateSleepModeEventCopyWithImpl<UpdateSleepModeEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, enabled, startHour, startMinute, endHour, endMinute);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UpdateSleepModeEventImplCopyWith<_$UpdateSleepModeEventImpl>
-      get copyWith =>
-          __$$UpdateSleepModeEventImplCopyWithImpl<_$UpdateSleepModeEventImpl>(
-              this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loadSettings,
-    required TResult Function(String languageCode, String? region)
-        updateLanguage,
-    required TResult Function(String mode) updateThemeMode,
-    required TResult Function(bool enabled) toggleDynamicColor,
-    required TResult Function(String palette) updateColorPalette,
-    required TResult Function(double radius) updateCornerRadius,
-    required TResult Function(double size) updateFontSize,
-    required TResult Function(String family) updateFontFamily,
-    required TResult Function(String alignment) updateTextAlignment,
-    required TResult Function(double spacing) updateLineSpacing,
-    required TResult Function(bool enabled) toggleHighContrast,
-    required TResult Function(bool enabled) toggleMotionReduced,
-    required TResult Function(bool enabled) togglePauseAllNotifications,
-    required TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)
-        updateSleepMode,
-    required TResult Function(String type, bool enabled) toggleNotification,
-    required TResult Function(String frequency) updateSummaryFrequency,
-    required TResult Function(bool enabled) toggleEmailNotifications,
-    required TResult Function(bool enabled) toggleSmsNotifications,
-    required TResult Function() clearMessages,
-  }) {
-    return updateSleepMode(enabled, startHour, startMinute, endHour, endMinute);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadSettings,
-    TResult? Function(String languageCode, String? region)? updateLanguage,
-    TResult? Function(String mode)? updateThemeMode,
-    TResult? Function(bool enabled)? toggleDynamicColor,
-    TResult? Function(String palette)? updateColorPalette,
-    TResult? Function(double radius)? updateCornerRadius,
-    TResult? Function(double size)? updateFontSize,
-    TResult? Function(String family)? updateFontFamily,
-    TResult? Function(String alignment)? updateTextAlignment,
-    TResult? Function(double spacing)? updateLineSpacing,
-    TResult? Function(bool enabled)? toggleHighContrast,
-    TResult? Function(bool enabled)? toggleMotionReduced,
-    TResult? Function(bool enabled)? togglePauseAllNotifications,
-    TResult? Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult? Function(String type, bool enabled)? toggleNotification,
-    TResult? Function(String frequency)? updateSummaryFrequency,
-    TResult? Function(bool enabled)? toggleEmailNotifications,
-    TResult? Function(bool enabled)? toggleSmsNotifications,
-    TResult? Function()? clearMessages,
-  }) {
-    return updateSleepMode?.call(
-        enabled, startHour, startMinute, endHour, endMinute);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadSettings,
-    TResult Function(String languageCode, String? region)? updateLanguage,
-    TResult Function(String mode)? updateThemeMode,
-    TResult Function(bool enabled)? toggleDynamicColor,
-    TResult Function(String palette)? updateColorPalette,
-    TResult Function(double radius)? updateCornerRadius,
-    TResult Function(double size)? updateFontSize,
-    TResult Function(String family)? updateFontFamily,
-    TResult Function(String alignment)? updateTextAlignment,
-    TResult Function(double spacing)? updateLineSpacing,
-    TResult Function(bool enabled)? toggleHighContrast,
-    TResult Function(bool enabled)? toggleMotionReduced,
-    TResult Function(bool enabled)? togglePauseAllNotifications,
-    TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult Function(String type, bool enabled)? toggleNotification,
-    TResult Function(String frequency)? updateSummaryFrequency,
-    TResult Function(bool enabled)? toggleEmailNotifications,
-    TResult Function(bool enabled)? toggleSmsNotifications,
-    TResult Function()? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (updateSleepMode != null) {
-      return updateSleepMode(
-          enabled, startHour, startMinute, endHour, endMinute);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadSettingsEvent value) loadSettings,
-    required TResult Function(UpdateLanguageEvent value) updateLanguage,
-    required TResult Function(UpdateThemeModeEvent value) updateThemeMode,
-    required TResult Function(ToggleDynamicColorEvent value) toggleDynamicColor,
-    required TResult Function(UpdateColorPaletteEvent value) updateColorPalette,
-    required TResult Function(UpdateCornerRadiusEvent value) updateCornerRadius,
-    required TResult Function(UpdateFontSizeEvent value) updateFontSize,
-    required TResult Function(UpdateFontFamilyEvent value) updateFontFamily,
-    required TResult Function(UpdateTextAlignmentEvent value)
-        updateTextAlignment,
-    required TResult Function(UpdateLineSpacingEvent value) updateLineSpacing,
-    required TResult Function(ToggleHighContrastEvent value) toggleHighContrast,
-    required TResult Function(ToggleMotionReducedEvent value)
-        toggleMotionReduced,
-    required TResult Function(TogglePauseAllNotificationsEvent value)
-        togglePauseAllNotifications,
-    required TResult Function(UpdateSleepModeEvent value) updateSleepMode,
-    required TResult Function(ToggleNotificationEvent value) toggleNotification,
-    required TResult Function(UpdateSummaryFrequencyEvent value)
-        updateSummaryFrequency,
-    required TResult Function(ToggleEmailNotificationsEvent value)
-        toggleEmailNotifications,
-    required TResult Function(ToggleSmsNotificationsEvent value)
-        toggleSmsNotifications,
-    required TResult Function(ClearSettingsMessagesEvent value) clearMessages,
-  }) {
-    return updateSleepMode(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadSettingsEvent value)? loadSettings,
-    TResult? Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult? Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult? Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult? Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult? Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult? Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult? Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult? Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult? Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult? Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult? Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult? Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult? Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult? Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult? Function(UpdateSummaryFrequencyEvent value)?
-        updateSummaryFrequency,
-    TResult? Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult? Function(ToggleSmsNotificationsEvent value)?
-        toggleSmsNotifications,
-    TResult? Function(ClearSettingsMessagesEvent value)? clearMessages,
-  }) {
-    return updateSleepMode?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadSettingsEvent value)? loadSettings,
-    TResult Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult Function(UpdateSummaryFrequencyEvent value)? updateSummaryFrequency,
-    TResult Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult Function(ToggleSmsNotificationsEvent value)? toggleSmsNotifications,
-    TResult Function(ClearSettingsMessagesEvent value)? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (updateSleepMode != null) {
-      return updateSleepMode(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateSleepModeEvent&&(identical(other.enabled, enabled) || other.enabled == enabled)&&(identical(other.startHour, startHour) || other.startHour == startHour)&&(identical(other.startMinute, startMinute) || other.startMinute == startMinute)&&(identical(other.endHour, endHour) || other.endHour == endHour)&&(identical(other.endMinute, endMinute) || other.endMinute == endMinute));
 }
 
-abstract class UpdateSleepModeEvent implements SettingsEvent {
-  const factory UpdateSleepModeEvent(
-      {required final bool enabled,
-      final int? startHour,
-      final int? startMinute,
-      final int? endHour,
-      final int? endMinute}) = _$UpdateSleepModeEventImpl;
 
-  bool get enabled;
-  int? get startHour;
-  int? get startMinute;
-  int? get endHour;
-  int? get endMinute;
+@override
+int get hashCode => Object.hash(runtimeType,enabled,startHour,startMinute,endHour,endMinute);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UpdateSleepModeEventImplCopyWith<_$UpdateSleepModeEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'SettingsEvent.updateSleepMode(enabled: $enabled, startHour: $startHour, startMinute: $startMinute, endHour: $endHour, endMinute: $endMinute)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$ToggleNotificationEventImplCopyWith<$Res> {
-  factory _$$ToggleNotificationEventImplCopyWith(
-          _$ToggleNotificationEventImpl value,
-          $Res Function(_$ToggleNotificationEventImpl) then) =
-      __$$ToggleNotificationEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String type, bool enabled});
+abstract mixin class $UpdateSleepModeEventCopyWith<$Res> implements $SettingsEventCopyWith<$Res> {
+  factory $UpdateSleepModeEventCopyWith(UpdateSleepModeEvent value, $Res Function(UpdateSleepModeEvent) _then) = _$UpdateSleepModeEventCopyWithImpl;
+@useResult
+$Res call({
+ bool enabled, int? startHour, int? startMinute, int? endHour, int? endMinute
+});
+
+
+
+
+}
+/// @nodoc
+class _$UpdateSleepModeEventCopyWithImpl<$Res>
+    implements $UpdateSleepModeEventCopyWith<$Res> {
+  _$UpdateSleepModeEventCopyWithImpl(this._self, this._then);
+
+  final UpdateSleepModeEvent _self;
+  final $Res Function(UpdateSleepModeEvent) _then;
+
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? enabled = null,Object? startHour = freezed,Object? startMinute = freezed,Object? endHour = freezed,Object? endMinute = freezed,}) {
+  return _then(UpdateSleepModeEvent(
+enabled: null == enabled ? _self.enabled : enabled // ignore: cast_nullable_to_non_nullable
+as bool,startHour: freezed == startHour ? _self.startHour : startHour // ignore: cast_nullable_to_non_nullable
+as int?,startMinute: freezed == startMinute ? _self.startMinute : startMinute // ignore: cast_nullable_to_non_nullable
+as int?,endHour: freezed == endHour ? _self.endHour : endHour // ignore: cast_nullable_to_non_nullable
+as int?,endMinute: freezed == endMinute ? _self.endMinute : endMinute // ignore: cast_nullable_to_non_nullable
+as int?,
+  ));
 }
 
-/// @nodoc
-class __$$ToggleNotificationEventImplCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res, _$ToggleNotificationEventImpl>
-    implements _$$ToggleNotificationEventImplCopyWith<$Res> {
-  __$$ToggleNotificationEventImplCopyWithImpl(
-      _$ToggleNotificationEventImpl _value,
-      $Res Function(_$ToggleNotificationEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? type = null,
-    Object? enabled = null,
-  }) {
-    return _then(_$ToggleNotificationEventImpl(
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      enabled: null == enabled
-          ? _value.enabled
-          : enabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$ToggleNotificationEventImpl implements ToggleNotificationEvent {
-  const _$ToggleNotificationEventImpl(
-      {required this.type, required this.enabled});
 
-  @override
-  final String type;
-  @override
-  final bool enabled;
+class ToggleNotificationEvent implements SettingsEvent {
+  const ToggleNotificationEvent({required this.type, required this.enabled});
+  
 
-  @override
-  String toString() {
-    return 'SettingsEvent.toggleNotification(type: $type, enabled: $enabled)';
-  }
+ final  String type;
+ final  bool enabled;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ToggleNotificationEventImpl &&
-            (identical(other.type, type) || other.type == type) &&
-            (identical(other.enabled, enabled) || other.enabled == enabled));
-  }
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ToggleNotificationEventCopyWith<ToggleNotificationEvent> get copyWith => _$ToggleNotificationEventCopyWithImpl<ToggleNotificationEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, type, enabled);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ToggleNotificationEventImplCopyWith<_$ToggleNotificationEventImpl>
-      get copyWith => __$$ToggleNotificationEventImplCopyWithImpl<
-          _$ToggleNotificationEventImpl>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loadSettings,
-    required TResult Function(String languageCode, String? region)
-        updateLanguage,
-    required TResult Function(String mode) updateThemeMode,
-    required TResult Function(bool enabled) toggleDynamicColor,
-    required TResult Function(String palette) updateColorPalette,
-    required TResult Function(double radius) updateCornerRadius,
-    required TResult Function(double size) updateFontSize,
-    required TResult Function(String family) updateFontFamily,
-    required TResult Function(String alignment) updateTextAlignment,
-    required TResult Function(double spacing) updateLineSpacing,
-    required TResult Function(bool enabled) toggleHighContrast,
-    required TResult Function(bool enabled) toggleMotionReduced,
-    required TResult Function(bool enabled) togglePauseAllNotifications,
-    required TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)
-        updateSleepMode,
-    required TResult Function(String type, bool enabled) toggleNotification,
-    required TResult Function(String frequency) updateSummaryFrequency,
-    required TResult Function(bool enabled) toggleEmailNotifications,
-    required TResult Function(bool enabled) toggleSmsNotifications,
-    required TResult Function() clearMessages,
-  }) {
-    return toggleNotification(type, enabled);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadSettings,
-    TResult? Function(String languageCode, String? region)? updateLanguage,
-    TResult? Function(String mode)? updateThemeMode,
-    TResult? Function(bool enabled)? toggleDynamicColor,
-    TResult? Function(String palette)? updateColorPalette,
-    TResult? Function(double radius)? updateCornerRadius,
-    TResult? Function(double size)? updateFontSize,
-    TResult? Function(String family)? updateFontFamily,
-    TResult? Function(String alignment)? updateTextAlignment,
-    TResult? Function(double spacing)? updateLineSpacing,
-    TResult? Function(bool enabled)? toggleHighContrast,
-    TResult? Function(bool enabled)? toggleMotionReduced,
-    TResult? Function(bool enabled)? togglePauseAllNotifications,
-    TResult? Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult? Function(String type, bool enabled)? toggleNotification,
-    TResult? Function(String frequency)? updateSummaryFrequency,
-    TResult? Function(bool enabled)? toggleEmailNotifications,
-    TResult? Function(bool enabled)? toggleSmsNotifications,
-    TResult? Function()? clearMessages,
-  }) {
-    return toggleNotification?.call(type, enabled);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadSettings,
-    TResult Function(String languageCode, String? region)? updateLanguage,
-    TResult Function(String mode)? updateThemeMode,
-    TResult Function(bool enabled)? toggleDynamicColor,
-    TResult Function(String palette)? updateColorPalette,
-    TResult Function(double radius)? updateCornerRadius,
-    TResult Function(double size)? updateFontSize,
-    TResult Function(String family)? updateFontFamily,
-    TResult Function(String alignment)? updateTextAlignment,
-    TResult Function(double spacing)? updateLineSpacing,
-    TResult Function(bool enabled)? toggleHighContrast,
-    TResult Function(bool enabled)? toggleMotionReduced,
-    TResult Function(bool enabled)? togglePauseAllNotifications,
-    TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult Function(String type, bool enabled)? toggleNotification,
-    TResult Function(String frequency)? updateSummaryFrequency,
-    TResult Function(bool enabled)? toggleEmailNotifications,
-    TResult Function(bool enabled)? toggleSmsNotifications,
-    TResult Function()? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (toggleNotification != null) {
-      return toggleNotification(type, enabled);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadSettingsEvent value) loadSettings,
-    required TResult Function(UpdateLanguageEvent value) updateLanguage,
-    required TResult Function(UpdateThemeModeEvent value) updateThemeMode,
-    required TResult Function(ToggleDynamicColorEvent value) toggleDynamicColor,
-    required TResult Function(UpdateColorPaletteEvent value) updateColorPalette,
-    required TResult Function(UpdateCornerRadiusEvent value) updateCornerRadius,
-    required TResult Function(UpdateFontSizeEvent value) updateFontSize,
-    required TResult Function(UpdateFontFamilyEvent value) updateFontFamily,
-    required TResult Function(UpdateTextAlignmentEvent value)
-        updateTextAlignment,
-    required TResult Function(UpdateLineSpacingEvent value) updateLineSpacing,
-    required TResult Function(ToggleHighContrastEvent value) toggleHighContrast,
-    required TResult Function(ToggleMotionReducedEvent value)
-        toggleMotionReduced,
-    required TResult Function(TogglePauseAllNotificationsEvent value)
-        togglePauseAllNotifications,
-    required TResult Function(UpdateSleepModeEvent value) updateSleepMode,
-    required TResult Function(ToggleNotificationEvent value) toggleNotification,
-    required TResult Function(UpdateSummaryFrequencyEvent value)
-        updateSummaryFrequency,
-    required TResult Function(ToggleEmailNotificationsEvent value)
-        toggleEmailNotifications,
-    required TResult Function(ToggleSmsNotificationsEvent value)
-        toggleSmsNotifications,
-    required TResult Function(ClearSettingsMessagesEvent value) clearMessages,
-  }) {
-    return toggleNotification(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadSettingsEvent value)? loadSettings,
-    TResult? Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult? Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult? Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult? Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult? Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult? Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult? Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult? Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult? Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult? Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult? Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult? Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult? Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult? Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult? Function(UpdateSummaryFrequencyEvent value)?
-        updateSummaryFrequency,
-    TResult? Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult? Function(ToggleSmsNotificationsEvent value)?
-        toggleSmsNotifications,
-    TResult? Function(ClearSettingsMessagesEvent value)? clearMessages,
-  }) {
-    return toggleNotification?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadSettingsEvent value)? loadSettings,
-    TResult Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult Function(UpdateSummaryFrequencyEvent value)? updateSummaryFrequency,
-    TResult Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult Function(ToggleSmsNotificationsEvent value)? toggleSmsNotifications,
-    TResult Function(ClearSettingsMessagesEvent value)? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (toggleNotification != null) {
-      return toggleNotification(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ToggleNotificationEvent&&(identical(other.type, type) || other.type == type)&&(identical(other.enabled, enabled) || other.enabled == enabled));
 }
 
-abstract class ToggleNotificationEvent implements SettingsEvent {
-  const factory ToggleNotificationEvent(
-      {required final String type,
-      required final bool enabled}) = _$ToggleNotificationEventImpl;
 
-  String get type;
-  bool get enabled;
+@override
+int get hashCode => Object.hash(runtimeType,type,enabled);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ToggleNotificationEventImplCopyWith<_$ToggleNotificationEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'SettingsEvent.toggleNotification(type: $type, enabled: $enabled)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$UpdateSummaryFrequencyEventImplCopyWith<$Res> {
-  factory _$$UpdateSummaryFrequencyEventImplCopyWith(
-          _$UpdateSummaryFrequencyEventImpl value,
-          $Res Function(_$UpdateSummaryFrequencyEventImpl) then) =
-      __$$UpdateSummaryFrequencyEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String frequency});
+abstract mixin class $ToggleNotificationEventCopyWith<$Res> implements $SettingsEventCopyWith<$Res> {
+  factory $ToggleNotificationEventCopyWith(ToggleNotificationEvent value, $Res Function(ToggleNotificationEvent) _then) = _$ToggleNotificationEventCopyWithImpl;
+@useResult
+$Res call({
+ String type, bool enabled
+});
+
+
+
+
+}
+/// @nodoc
+class _$ToggleNotificationEventCopyWithImpl<$Res>
+    implements $ToggleNotificationEventCopyWith<$Res> {
+  _$ToggleNotificationEventCopyWithImpl(this._self, this._then);
+
+  final ToggleNotificationEvent _self;
+  final $Res Function(ToggleNotificationEvent) _then;
+
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? type = null,Object? enabled = null,}) {
+  return _then(ToggleNotificationEvent(
+type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as String,enabled: null == enabled ? _self.enabled : enabled // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
 
-/// @nodoc
-class __$$UpdateSummaryFrequencyEventImplCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res, _$UpdateSummaryFrequencyEventImpl>
-    implements _$$UpdateSummaryFrequencyEventImplCopyWith<$Res> {
-  __$$UpdateSummaryFrequencyEventImplCopyWithImpl(
-      _$UpdateSummaryFrequencyEventImpl _value,
-      $Res Function(_$UpdateSummaryFrequencyEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? frequency = null,
-  }) {
-    return _then(_$UpdateSummaryFrequencyEventImpl(
-      null == frequency
-          ? _value.frequency
-          : frequency // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$UpdateSummaryFrequencyEventImpl implements UpdateSummaryFrequencyEvent {
-  const _$UpdateSummaryFrequencyEventImpl(this.frequency);
 
-  @override
-  final String frequency;
+class UpdateSummaryFrequencyEvent implements SettingsEvent {
+  const UpdateSummaryFrequencyEvent(this.frequency);
+  
 
-  @override
-  String toString() {
-    return 'SettingsEvent.updateSummaryFrequency(frequency: $frequency)';
-  }
+ final  String frequency;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UpdateSummaryFrequencyEventImpl &&
-            (identical(other.frequency, frequency) ||
-                other.frequency == frequency));
-  }
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UpdateSummaryFrequencyEventCopyWith<UpdateSummaryFrequencyEvent> get copyWith => _$UpdateSummaryFrequencyEventCopyWithImpl<UpdateSummaryFrequencyEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, frequency);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UpdateSummaryFrequencyEventImplCopyWith<_$UpdateSummaryFrequencyEventImpl>
-      get copyWith => __$$UpdateSummaryFrequencyEventImplCopyWithImpl<
-          _$UpdateSummaryFrequencyEventImpl>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loadSettings,
-    required TResult Function(String languageCode, String? region)
-        updateLanguage,
-    required TResult Function(String mode) updateThemeMode,
-    required TResult Function(bool enabled) toggleDynamicColor,
-    required TResult Function(String palette) updateColorPalette,
-    required TResult Function(double radius) updateCornerRadius,
-    required TResult Function(double size) updateFontSize,
-    required TResult Function(String family) updateFontFamily,
-    required TResult Function(String alignment) updateTextAlignment,
-    required TResult Function(double spacing) updateLineSpacing,
-    required TResult Function(bool enabled) toggleHighContrast,
-    required TResult Function(bool enabled) toggleMotionReduced,
-    required TResult Function(bool enabled) togglePauseAllNotifications,
-    required TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)
-        updateSleepMode,
-    required TResult Function(String type, bool enabled) toggleNotification,
-    required TResult Function(String frequency) updateSummaryFrequency,
-    required TResult Function(bool enabled) toggleEmailNotifications,
-    required TResult Function(bool enabled) toggleSmsNotifications,
-    required TResult Function() clearMessages,
-  }) {
-    return updateSummaryFrequency(frequency);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadSettings,
-    TResult? Function(String languageCode, String? region)? updateLanguage,
-    TResult? Function(String mode)? updateThemeMode,
-    TResult? Function(bool enabled)? toggleDynamicColor,
-    TResult? Function(String palette)? updateColorPalette,
-    TResult? Function(double radius)? updateCornerRadius,
-    TResult? Function(double size)? updateFontSize,
-    TResult? Function(String family)? updateFontFamily,
-    TResult? Function(String alignment)? updateTextAlignment,
-    TResult? Function(double spacing)? updateLineSpacing,
-    TResult? Function(bool enabled)? toggleHighContrast,
-    TResult? Function(bool enabled)? toggleMotionReduced,
-    TResult? Function(bool enabled)? togglePauseAllNotifications,
-    TResult? Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult? Function(String type, bool enabled)? toggleNotification,
-    TResult? Function(String frequency)? updateSummaryFrequency,
-    TResult? Function(bool enabled)? toggleEmailNotifications,
-    TResult? Function(bool enabled)? toggleSmsNotifications,
-    TResult? Function()? clearMessages,
-  }) {
-    return updateSummaryFrequency?.call(frequency);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadSettings,
-    TResult Function(String languageCode, String? region)? updateLanguage,
-    TResult Function(String mode)? updateThemeMode,
-    TResult Function(bool enabled)? toggleDynamicColor,
-    TResult Function(String palette)? updateColorPalette,
-    TResult Function(double radius)? updateCornerRadius,
-    TResult Function(double size)? updateFontSize,
-    TResult Function(String family)? updateFontFamily,
-    TResult Function(String alignment)? updateTextAlignment,
-    TResult Function(double spacing)? updateLineSpacing,
-    TResult Function(bool enabled)? toggleHighContrast,
-    TResult Function(bool enabled)? toggleMotionReduced,
-    TResult Function(bool enabled)? togglePauseAllNotifications,
-    TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult Function(String type, bool enabled)? toggleNotification,
-    TResult Function(String frequency)? updateSummaryFrequency,
-    TResult Function(bool enabled)? toggleEmailNotifications,
-    TResult Function(bool enabled)? toggleSmsNotifications,
-    TResult Function()? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (updateSummaryFrequency != null) {
-      return updateSummaryFrequency(frequency);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadSettingsEvent value) loadSettings,
-    required TResult Function(UpdateLanguageEvent value) updateLanguage,
-    required TResult Function(UpdateThemeModeEvent value) updateThemeMode,
-    required TResult Function(ToggleDynamicColorEvent value) toggleDynamicColor,
-    required TResult Function(UpdateColorPaletteEvent value) updateColorPalette,
-    required TResult Function(UpdateCornerRadiusEvent value) updateCornerRadius,
-    required TResult Function(UpdateFontSizeEvent value) updateFontSize,
-    required TResult Function(UpdateFontFamilyEvent value) updateFontFamily,
-    required TResult Function(UpdateTextAlignmentEvent value)
-        updateTextAlignment,
-    required TResult Function(UpdateLineSpacingEvent value) updateLineSpacing,
-    required TResult Function(ToggleHighContrastEvent value) toggleHighContrast,
-    required TResult Function(ToggleMotionReducedEvent value)
-        toggleMotionReduced,
-    required TResult Function(TogglePauseAllNotificationsEvent value)
-        togglePauseAllNotifications,
-    required TResult Function(UpdateSleepModeEvent value) updateSleepMode,
-    required TResult Function(ToggleNotificationEvent value) toggleNotification,
-    required TResult Function(UpdateSummaryFrequencyEvent value)
-        updateSummaryFrequency,
-    required TResult Function(ToggleEmailNotificationsEvent value)
-        toggleEmailNotifications,
-    required TResult Function(ToggleSmsNotificationsEvent value)
-        toggleSmsNotifications,
-    required TResult Function(ClearSettingsMessagesEvent value) clearMessages,
-  }) {
-    return updateSummaryFrequency(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadSettingsEvent value)? loadSettings,
-    TResult? Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult? Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult? Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult? Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult? Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult? Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult? Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult? Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult? Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult? Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult? Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult? Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult? Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult? Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult? Function(UpdateSummaryFrequencyEvent value)?
-        updateSummaryFrequency,
-    TResult? Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult? Function(ToggleSmsNotificationsEvent value)?
-        toggleSmsNotifications,
-    TResult? Function(ClearSettingsMessagesEvent value)? clearMessages,
-  }) {
-    return updateSummaryFrequency?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadSettingsEvent value)? loadSettings,
-    TResult Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult Function(UpdateSummaryFrequencyEvent value)? updateSummaryFrequency,
-    TResult Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult Function(ToggleSmsNotificationsEvent value)? toggleSmsNotifications,
-    TResult Function(ClearSettingsMessagesEvent value)? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (updateSummaryFrequency != null) {
-      return updateSummaryFrequency(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateSummaryFrequencyEvent&&(identical(other.frequency, frequency) || other.frequency == frequency));
 }
 
-abstract class UpdateSummaryFrequencyEvent implements SettingsEvent {
-  const factory UpdateSummaryFrequencyEvent(final String frequency) =
-      _$UpdateSummaryFrequencyEventImpl;
 
-  String get frequency;
+@override
+int get hashCode => Object.hash(runtimeType,frequency);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UpdateSummaryFrequencyEventImplCopyWith<_$UpdateSummaryFrequencyEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'SettingsEvent.updateSummaryFrequency(frequency: $frequency)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$ToggleEmailNotificationsEventImplCopyWith<$Res> {
-  factory _$$ToggleEmailNotificationsEventImplCopyWith(
-          _$ToggleEmailNotificationsEventImpl value,
-          $Res Function(_$ToggleEmailNotificationsEventImpl) then) =
-      __$$ToggleEmailNotificationsEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool enabled});
+abstract mixin class $UpdateSummaryFrequencyEventCopyWith<$Res> implements $SettingsEventCopyWith<$Res> {
+  factory $UpdateSummaryFrequencyEventCopyWith(UpdateSummaryFrequencyEvent value, $Res Function(UpdateSummaryFrequencyEvent) _then) = _$UpdateSummaryFrequencyEventCopyWithImpl;
+@useResult
+$Res call({
+ String frequency
+});
+
+
+
+
+}
+/// @nodoc
+class _$UpdateSummaryFrequencyEventCopyWithImpl<$Res>
+    implements $UpdateSummaryFrequencyEventCopyWith<$Res> {
+  _$UpdateSummaryFrequencyEventCopyWithImpl(this._self, this._then);
+
+  final UpdateSummaryFrequencyEvent _self;
+  final $Res Function(UpdateSummaryFrequencyEvent) _then;
+
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? frequency = null,}) {
+  return _then(UpdateSummaryFrequencyEvent(
+null == frequency ? _self.frequency : frequency // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-class __$$ToggleEmailNotificationsEventImplCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res,
-        _$ToggleEmailNotificationsEventImpl>
-    implements _$$ToggleEmailNotificationsEventImplCopyWith<$Res> {
-  __$$ToggleEmailNotificationsEventImplCopyWithImpl(
-      _$ToggleEmailNotificationsEventImpl _value,
-      $Res Function(_$ToggleEmailNotificationsEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? enabled = null,
-  }) {
-    return _then(_$ToggleEmailNotificationsEventImpl(
-      null == enabled
-          ? _value.enabled
-          : enabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$ToggleEmailNotificationsEventImpl
-    implements ToggleEmailNotificationsEvent {
-  const _$ToggleEmailNotificationsEventImpl(this.enabled);
 
-  @override
-  final bool enabled;
+class ToggleEmailNotificationsEvent implements SettingsEvent {
+  const ToggleEmailNotificationsEvent(this.enabled);
+  
 
-  @override
-  String toString() {
-    return 'SettingsEvent.toggleEmailNotifications(enabled: $enabled)';
-  }
+ final  bool enabled;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ToggleEmailNotificationsEventImpl &&
-            (identical(other.enabled, enabled) || other.enabled == enabled));
-  }
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ToggleEmailNotificationsEventCopyWith<ToggleEmailNotificationsEvent> get copyWith => _$ToggleEmailNotificationsEventCopyWithImpl<ToggleEmailNotificationsEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, enabled);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ToggleEmailNotificationsEventImplCopyWith<
-          _$ToggleEmailNotificationsEventImpl>
-      get copyWith => __$$ToggleEmailNotificationsEventImplCopyWithImpl<
-          _$ToggleEmailNotificationsEventImpl>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loadSettings,
-    required TResult Function(String languageCode, String? region)
-        updateLanguage,
-    required TResult Function(String mode) updateThemeMode,
-    required TResult Function(bool enabled) toggleDynamicColor,
-    required TResult Function(String palette) updateColorPalette,
-    required TResult Function(double radius) updateCornerRadius,
-    required TResult Function(double size) updateFontSize,
-    required TResult Function(String family) updateFontFamily,
-    required TResult Function(String alignment) updateTextAlignment,
-    required TResult Function(double spacing) updateLineSpacing,
-    required TResult Function(bool enabled) toggleHighContrast,
-    required TResult Function(bool enabled) toggleMotionReduced,
-    required TResult Function(bool enabled) togglePauseAllNotifications,
-    required TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)
-        updateSleepMode,
-    required TResult Function(String type, bool enabled) toggleNotification,
-    required TResult Function(String frequency) updateSummaryFrequency,
-    required TResult Function(bool enabled) toggleEmailNotifications,
-    required TResult Function(bool enabled) toggleSmsNotifications,
-    required TResult Function() clearMessages,
-  }) {
-    return toggleEmailNotifications(enabled);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadSettings,
-    TResult? Function(String languageCode, String? region)? updateLanguage,
-    TResult? Function(String mode)? updateThemeMode,
-    TResult? Function(bool enabled)? toggleDynamicColor,
-    TResult? Function(String palette)? updateColorPalette,
-    TResult? Function(double radius)? updateCornerRadius,
-    TResult? Function(double size)? updateFontSize,
-    TResult? Function(String family)? updateFontFamily,
-    TResult? Function(String alignment)? updateTextAlignment,
-    TResult? Function(double spacing)? updateLineSpacing,
-    TResult? Function(bool enabled)? toggleHighContrast,
-    TResult? Function(bool enabled)? toggleMotionReduced,
-    TResult? Function(bool enabled)? togglePauseAllNotifications,
-    TResult? Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult? Function(String type, bool enabled)? toggleNotification,
-    TResult? Function(String frequency)? updateSummaryFrequency,
-    TResult? Function(bool enabled)? toggleEmailNotifications,
-    TResult? Function(bool enabled)? toggleSmsNotifications,
-    TResult? Function()? clearMessages,
-  }) {
-    return toggleEmailNotifications?.call(enabled);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadSettings,
-    TResult Function(String languageCode, String? region)? updateLanguage,
-    TResult Function(String mode)? updateThemeMode,
-    TResult Function(bool enabled)? toggleDynamicColor,
-    TResult Function(String palette)? updateColorPalette,
-    TResult Function(double radius)? updateCornerRadius,
-    TResult Function(double size)? updateFontSize,
-    TResult Function(String family)? updateFontFamily,
-    TResult Function(String alignment)? updateTextAlignment,
-    TResult Function(double spacing)? updateLineSpacing,
-    TResult Function(bool enabled)? toggleHighContrast,
-    TResult Function(bool enabled)? toggleMotionReduced,
-    TResult Function(bool enabled)? togglePauseAllNotifications,
-    TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult Function(String type, bool enabled)? toggleNotification,
-    TResult Function(String frequency)? updateSummaryFrequency,
-    TResult Function(bool enabled)? toggleEmailNotifications,
-    TResult Function(bool enabled)? toggleSmsNotifications,
-    TResult Function()? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (toggleEmailNotifications != null) {
-      return toggleEmailNotifications(enabled);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadSettingsEvent value) loadSettings,
-    required TResult Function(UpdateLanguageEvent value) updateLanguage,
-    required TResult Function(UpdateThemeModeEvent value) updateThemeMode,
-    required TResult Function(ToggleDynamicColorEvent value) toggleDynamicColor,
-    required TResult Function(UpdateColorPaletteEvent value) updateColorPalette,
-    required TResult Function(UpdateCornerRadiusEvent value) updateCornerRadius,
-    required TResult Function(UpdateFontSizeEvent value) updateFontSize,
-    required TResult Function(UpdateFontFamilyEvent value) updateFontFamily,
-    required TResult Function(UpdateTextAlignmentEvent value)
-        updateTextAlignment,
-    required TResult Function(UpdateLineSpacingEvent value) updateLineSpacing,
-    required TResult Function(ToggleHighContrastEvent value) toggleHighContrast,
-    required TResult Function(ToggleMotionReducedEvent value)
-        toggleMotionReduced,
-    required TResult Function(TogglePauseAllNotificationsEvent value)
-        togglePauseAllNotifications,
-    required TResult Function(UpdateSleepModeEvent value) updateSleepMode,
-    required TResult Function(ToggleNotificationEvent value) toggleNotification,
-    required TResult Function(UpdateSummaryFrequencyEvent value)
-        updateSummaryFrequency,
-    required TResult Function(ToggleEmailNotificationsEvent value)
-        toggleEmailNotifications,
-    required TResult Function(ToggleSmsNotificationsEvent value)
-        toggleSmsNotifications,
-    required TResult Function(ClearSettingsMessagesEvent value) clearMessages,
-  }) {
-    return toggleEmailNotifications(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadSettingsEvent value)? loadSettings,
-    TResult? Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult? Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult? Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult? Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult? Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult? Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult? Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult? Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult? Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult? Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult? Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult? Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult? Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult? Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult? Function(UpdateSummaryFrequencyEvent value)?
-        updateSummaryFrequency,
-    TResult? Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult? Function(ToggleSmsNotificationsEvent value)?
-        toggleSmsNotifications,
-    TResult? Function(ClearSettingsMessagesEvent value)? clearMessages,
-  }) {
-    return toggleEmailNotifications?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadSettingsEvent value)? loadSettings,
-    TResult Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult Function(UpdateSummaryFrequencyEvent value)? updateSummaryFrequency,
-    TResult Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult Function(ToggleSmsNotificationsEvent value)? toggleSmsNotifications,
-    TResult Function(ClearSettingsMessagesEvent value)? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (toggleEmailNotifications != null) {
-      return toggleEmailNotifications(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ToggleEmailNotificationsEvent&&(identical(other.enabled, enabled) || other.enabled == enabled));
 }
 
-abstract class ToggleEmailNotificationsEvent implements SettingsEvent {
-  const factory ToggleEmailNotificationsEvent(final bool enabled) =
-      _$ToggleEmailNotificationsEventImpl;
 
-  bool get enabled;
+@override
+int get hashCode => Object.hash(runtimeType,enabled);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ToggleEmailNotificationsEventImplCopyWith<
-          _$ToggleEmailNotificationsEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'SettingsEvent.toggleEmailNotifications(enabled: $enabled)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$ToggleSmsNotificationsEventImplCopyWith<$Res> {
-  factory _$$ToggleSmsNotificationsEventImplCopyWith(
-          _$ToggleSmsNotificationsEventImpl value,
-          $Res Function(_$ToggleSmsNotificationsEventImpl) then) =
-      __$$ToggleSmsNotificationsEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool enabled});
+abstract mixin class $ToggleEmailNotificationsEventCopyWith<$Res> implements $SettingsEventCopyWith<$Res> {
+  factory $ToggleEmailNotificationsEventCopyWith(ToggleEmailNotificationsEvent value, $Res Function(ToggleEmailNotificationsEvent) _then) = _$ToggleEmailNotificationsEventCopyWithImpl;
+@useResult
+$Res call({
+ bool enabled
+});
+
+
+
+
+}
+/// @nodoc
+class _$ToggleEmailNotificationsEventCopyWithImpl<$Res>
+    implements $ToggleEmailNotificationsEventCopyWith<$Res> {
+  _$ToggleEmailNotificationsEventCopyWithImpl(this._self, this._then);
+
+  final ToggleEmailNotificationsEvent _self;
+  final $Res Function(ToggleEmailNotificationsEvent) _then;
+
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? enabled = null,}) {
+  return _then(ToggleEmailNotificationsEvent(
+null == enabled ? _self.enabled : enabled // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
 
-/// @nodoc
-class __$$ToggleSmsNotificationsEventImplCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res, _$ToggleSmsNotificationsEventImpl>
-    implements _$$ToggleSmsNotificationsEventImplCopyWith<$Res> {
-  __$$ToggleSmsNotificationsEventImplCopyWithImpl(
-      _$ToggleSmsNotificationsEventImpl _value,
-      $Res Function(_$ToggleSmsNotificationsEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? enabled = null,
-  }) {
-    return _then(_$ToggleSmsNotificationsEventImpl(
-      null == enabled
-          ? _value.enabled
-          : enabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$ToggleSmsNotificationsEventImpl implements ToggleSmsNotificationsEvent {
-  const _$ToggleSmsNotificationsEventImpl(this.enabled);
 
-  @override
-  final bool enabled;
+class ToggleSmsNotificationsEvent implements SettingsEvent {
+  const ToggleSmsNotificationsEvent(this.enabled);
+  
 
-  @override
-  String toString() {
-    return 'SettingsEvent.toggleSmsNotifications(enabled: $enabled)';
-  }
+ final  bool enabled;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ToggleSmsNotificationsEventImpl &&
-            (identical(other.enabled, enabled) || other.enabled == enabled));
-  }
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ToggleSmsNotificationsEventCopyWith<ToggleSmsNotificationsEvent> get copyWith => _$ToggleSmsNotificationsEventCopyWithImpl<ToggleSmsNotificationsEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, enabled);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ToggleSmsNotificationsEventImplCopyWith<_$ToggleSmsNotificationsEventImpl>
-      get copyWith => __$$ToggleSmsNotificationsEventImplCopyWithImpl<
-          _$ToggleSmsNotificationsEventImpl>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loadSettings,
-    required TResult Function(String languageCode, String? region)
-        updateLanguage,
-    required TResult Function(String mode) updateThemeMode,
-    required TResult Function(bool enabled) toggleDynamicColor,
-    required TResult Function(String palette) updateColorPalette,
-    required TResult Function(double radius) updateCornerRadius,
-    required TResult Function(double size) updateFontSize,
-    required TResult Function(String family) updateFontFamily,
-    required TResult Function(String alignment) updateTextAlignment,
-    required TResult Function(double spacing) updateLineSpacing,
-    required TResult Function(bool enabled) toggleHighContrast,
-    required TResult Function(bool enabled) toggleMotionReduced,
-    required TResult Function(bool enabled) togglePauseAllNotifications,
-    required TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)
-        updateSleepMode,
-    required TResult Function(String type, bool enabled) toggleNotification,
-    required TResult Function(String frequency) updateSummaryFrequency,
-    required TResult Function(bool enabled) toggleEmailNotifications,
-    required TResult Function(bool enabled) toggleSmsNotifications,
-    required TResult Function() clearMessages,
-  }) {
-    return toggleSmsNotifications(enabled);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadSettings,
-    TResult? Function(String languageCode, String? region)? updateLanguage,
-    TResult? Function(String mode)? updateThemeMode,
-    TResult? Function(bool enabled)? toggleDynamicColor,
-    TResult? Function(String palette)? updateColorPalette,
-    TResult? Function(double radius)? updateCornerRadius,
-    TResult? Function(double size)? updateFontSize,
-    TResult? Function(String family)? updateFontFamily,
-    TResult? Function(String alignment)? updateTextAlignment,
-    TResult? Function(double spacing)? updateLineSpacing,
-    TResult? Function(bool enabled)? toggleHighContrast,
-    TResult? Function(bool enabled)? toggleMotionReduced,
-    TResult? Function(bool enabled)? togglePauseAllNotifications,
-    TResult? Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult? Function(String type, bool enabled)? toggleNotification,
-    TResult? Function(String frequency)? updateSummaryFrequency,
-    TResult? Function(bool enabled)? toggleEmailNotifications,
-    TResult? Function(bool enabled)? toggleSmsNotifications,
-    TResult? Function()? clearMessages,
-  }) {
-    return toggleSmsNotifications?.call(enabled);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadSettings,
-    TResult Function(String languageCode, String? region)? updateLanguage,
-    TResult Function(String mode)? updateThemeMode,
-    TResult Function(bool enabled)? toggleDynamicColor,
-    TResult Function(String palette)? updateColorPalette,
-    TResult Function(double radius)? updateCornerRadius,
-    TResult Function(double size)? updateFontSize,
-    TResult Function(String family)? updateFontFamily,
-    TResult Function(String alignment)? updateTextAlignment,
-    TResult Function(double spacing)? updateLineSpacing,
-    TResult Function(bool enabled)? toggleHighContrast,
-    TResult Function(bool enabled)? toggleMotionReduced,
-    TResult Function(bool enabled)? togglePauseAllNotifications,
-    TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult Function(String type, bool enabled)? toggleNotification,
-    TResult Function(String frequency)? updateSummaryFrequency,
-    TResult Function(bool enabled)? toggleEmailNotifications,
-    TResult Function(bool enabled)? toggleSmsNotifications,
-    TResult Function()? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (toggleSmsNotifications != null) {
-      return toggleSmsNotifications(enabled);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadSettingsEvent value) loadSettings,
-    required TResult Function(UpdateLanguageEvent value) updateLanguage,
-    required TResult Function(UpdateThemeModeEvent value) updateThemeMode,
-    required TResult Function(ToggleDynamicColorEvent value) toggleDynamicColor,
-    required TResult Function(UpdateColorPaletteEvent value) updateColorPalette,
-    required TResult Function(UpdateCornerRadiusEvent value) updateCornerRadius,
-    required TResult Function(UpdateFontSizeEvent value) updateFontSize,
-    required TResult Function(UpdateFontFamilyEvent value) updateFontFamily,
-    required TResult Function(UpdateTextAlignmentEvent value)
-        updateTextAlignment,
-    required TResult Function(UpdateLineSpacingEvent value) updateLineSpacing,
-    required TResult Function(ToggleHighContrastEvent value) toggleHighContrast,
-    required TResult Function(ToggleMotionReducedEvent value)
-        toggleMotionReduced,
-    required TResult Function(TogglePauseAllNotificationsEvent value)
-        togglePauseAllNotifications,
-    required TResult Function(UpdateSleepModeEvent value) updateSleepMode,
-    required TResult Function(ToggleNotificationEvent value) toggleNotification,
-    required TResult Function(UpdateSummaryFrequencyEvent value)
-        updateSummaryFrequency,
-    required TResult Function(ToggleEmailNotificationsEvent value)
-        toggleEmailNotifications,
-    required TResult Function(ToggleSmsNotificationsEvent value)
-        toggleSmsNotifications,
-    required TResult Function(ClearSettingsMessagesEvent value) clearMessages,
-  }) {
-    return toggleSmsNotifications(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadSettingsEvent value)? loadSettings,
-    TResult? Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult? Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult? Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult? Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult? Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult? Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult? Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult? Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult? Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult? Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult? Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult? Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult? Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult? Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult? Function(UpdateSummaryFrequencyEvent value)?
-        updateSummaryFrequency,
-    TResult? Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult? Function(ToggleSmsNotificationsEvent value)?
-        toggleSmsNotifications,
-    TResult? Function(ClearSettingsMessagesEvent value)? clearMessages,
-  }) {
-    return toggleSmsNotifications?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadSettingsEvent value)? loadSettings,
-    TResult Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult Function(UpdateSummaryFrequencyEvent value)? updateSummaryFrequency,
-    TResult Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult Function(ToggleSmsNotificationsEvent value)? toggleSmsNotifications,
-    TResult Function(ClearSettingsMessagesEvent value)? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (toggleSmsNotifications != null) {
-      return toggleSmsNotifications(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ToggleSmsNotificationsEvent&&(identical(other.enabled, enabled) || other.enabled == enabled));
 }
 
-abstract class ToggleSmsNotificationsEvent implements SettingsEvent {
-  const factory ToggleSmsNotificationsEvent(final bool enabled) =
-      _$ToggleSmsNotificationsEventImpl;
 
-  bool get enabled;
+@override
+int get hashCode => Object.hash(runtimeType,enabled);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ToggleSmsNotificationsEventImplCopyWith<_$ToggleSmsNotificationsEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'SettingsEvent.toggleSmsNotifications(enabled: $enabled)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$ClearSettingsMessagesEventImplCopyWith<$Res> {
-  factory _$$ClearSettingsMessagesEventImplCopyWith(
-          _$ClearSettingsMessagesEventImpl value,
-          $Res Function(_$ClearSettingsMessagesEventImpl) then) =
-      __$$ClearSettingsMessagesEventImplCopyWithImpl<$Res>;
+abstract mixin class $ToggleSmsNotificationsEventCopyWith<$Res> implements $SettingsEventCopyWith<$Res> {
+  factory $ToggleSmsNotificationsEventCopyWith(ToggleSmsNotificationsEvent value, $Res Function(ToggleSmsNotificationsEvent) _then) = _$ToggleSmsNotificationsEventCopyWithImpl;
+@useResult
+$Res call({
+ bool enabled
+});
+
+
+
+
+}
+/// @nodoc
+class _$ToggleSmsNotificationsEventCopyWithImpl<$Res>
+    implements $ToggleSmsNotificationsEventCopyWith<$Res> {
+  _$ToggleSmsNotificationsEventCopyWithImpl(this._self, this._then);
+
+  final ToggleSmsNotificationsEvent _self;
+  final $Res Function(ToggleSmsNotificationsEvent) _then;
+
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? enabled = null,}) {
+  return _then(ToggleSmsNotificationsEvent(
+null == enabled ? _self.enabled : enabled // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
 
-/// @nodoc
-class __$$ClearSettingsMessagesEventImplCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res, _$ClearSettingsMessagesEventImpl>
-    implements _$$ClearSettingsMessagesEventImplCopyWith<$Res> {
-  __$$ClearSettingsMessagesEventImplCopyWithImpl(
-      _$ClearSettingsMessagesEventImpl _value,
-      $Res Function(_$ClearSettingsMessagesEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$ClearSettingsMessagesEventImpl implements ClearSettingsMessagesEvent {
-  const _$ClearSettingsMessagesEventImpl();
 
-  @override
-  String toString() {
-    return 'SettingsEvent.clearMessages()';
-  }
+class ClearSettingsMessagesEvent implements SettingsEvent {
+  const ClearSettingsMessagesEvent();
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ClearSettingsMessagesEventImpl);
-  }
 
-  @override
-  int get hashCode => runtimeType.hashCode;
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loadSettings,
-    required TResult Function(String languageCode, String? region)
-        updateLanguage,
-    required TResult Function(String mode) updateThemeMode,
-    required TResult Function(bool enabled) toggleDynamicColor,
-    required TResult Function(String palette) updateColorPalette,
-    required TResult Function(double radius) updateCornerRadius,
-    required TResult Function(double size) updateFontSize,
-    required TResult Function(String family) updateFontFamily,
-    required TResult Function(String alignment) updateTextAlignment,
-    required TResult Function(double spacing) updateLineSpacing,
-    required TResult Function(bool enabled) toggleHighContrast,
-    required TResult Function(bool enabled) toggleMotionReduced,
-    required TResult Function(bool enabled) togglePauseAllNotifications,
-    required TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)
-        updateSleepMode,
-    required TResult Function(String type, bool enabled) toggleNotification,
-    required TResult Function(String frequency) updateSummaryFrequency,
-    required TResult Function(bool enabled) toggleEmailNotifications,
-    required TResult Function(bool enabled) toggleSmsNotifications,
-    required TResult Function() clearMessages,
-  }) {
-    return clearMessages();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadSettings,
-    TResult? Function(String languageCode, String? region)? updateLanguage,
-    TResult? Function(String mode)? updateThemeMode,
-    TResult? Function(bool enabled)? toggleDynamicColor,
-    TResult? Function(String palette)? updateColorPalette,
-    TResult? Function(double radius)? updateCornerRadius,
-    TResult? Function(double size)? updateFontSize,
-    TResult? Function(String family)? updateFontFamily,
-    TResult? Function(String alignment)? updateTextAlignment,
-    TResult? Function(double spacing)? updateLineSpacing,
-    TResult? Function(bool enabled)? toggleHighContrast,
-    TResult? Function(bool enabled)? toggleMotionReduced,
-    TResult? Function(bool enabled)? togglePauseAllNotifications,
-    TResult? Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult? Function(String type, bool enabled)? toggleNotification,
-    TResult? Function(String frequency)? updateSummaryFrequency,
-    TResult? Function(bool enabled)? toggleEmailNotifications,
-    TResult? Function(bool enabled)? toggleSmsNotifications,
-    TResult? Function()? clearMessages,
-  }) {
-    return clearMessages?.call();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadSettings,
-    TResult Function(String languageCode, String? region)? updateLanguage,
-    TResult Function(String mode)? updateThemeMode,
-    TResult Function(bool enabled)? toggleDynamicColor,
-    TResult Function(String palette)? updateColorPalette,
-    TResult Function(double radius)? updateCornerRadius,
-    TResult Function(double size)? updateFontSize,
-    TResult Function(String family)? updateFontFamily,
-    TResult Function(String alignment)? updateTextAlignment,
-    TResult Function(double spacing)? updateLineSpacing,
-    TResult Function(bool enabled)? toggleHighContrast,
-    TResult Function(bool enabled)? toggleMotionReduced,
-    TResult Function(bool enabled)? togglePauseAllNotifications,
-    TResult Function(bool enabled, int? startHour, int? startMinute,
-            int? endHour, int? endMinute)?
-        updateSleepMode,
-    TResult Function(String type, bool enabled)? toggleNotification,
-    TResult Function(String frequency)? updateSummaryFrequency,
-    TResult Function(bool enabled)? toggleEmailNotifications,
-    TResult Function(bool enabled)? toggleSmsNotifications,
-    TResult Function()? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (clearMessages != null) {
-      return clearMessages();
-    }
-    return orElse();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadSettingsEvent value) loadSettings,
-    required TResult Function(UpdateLanguageEvent value) updateLanguage,
-    required TResult Function(UpdateThemeModeEvent value) updateThemeMode,
-    required TResult Function(ToggleDynamicColorEvent value) toggleDynamicColor,
-    required TResult Function(UpdateColorPaletteEvent value) updateColorPalette,
-    required TResult Function(UpdateCornerRadiusEvent value) updateCornerRadius,
-    required TResult Function(UpdateFontSizeEvent value) updateFontSize,
-    required TResult Function(UpdateFontFamilyEvent value) updateFontFamily,
-    required TResult Function(UpdateTextAlignmentEvent value)
-        updateTextAlignment,
-    required TResult Function(UpdateLineSpacingEvent value) updateLineSpacing,
-    required TResult Function(ToggleHighContrastEvent value) toggleHighContrast,
-    required TResult Function(ToggleMotionReducedEvent value)
-        toggleMotionReduced,
-    required TResult Function(TogglePauseAllNotificationsEvent value)
-        togglePauseAllNotifications,
-    required TResult Function(UpdateSleepModeEvent value) updateSleepMode,
-    required TResult Function(ToggleNotificationEvent value) toggleNotification,
-    required TResult Function(UpdateSummaryFrequencyEvent value)
-        updateSummaryFrequency,
-    required TResult Function(ToggleEmailNotificationsEvent value)
-        toggleEmailNotifications,
-    required TResult Function(ToggleSmsNotificationsEvent value)
-        toggleSmsNotifications,
-    required TResult Function(ClearSettingsMessagesEvent value) clearMessages,
-  }) {
-    return clearMessages(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadSettingsEvent value)? loadSettings,
-    TResult? Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult? Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult? Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult? Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult? Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult? Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult? Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult? Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult? Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult? Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult? Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult? Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult? Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult? Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult? Function(UpdateSummaryFrequencyEvent value)?
-        updateSummaryFrequency,
-    TResult? Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult? Function(ToggleSmsNotificationsEvent value)?
-        toggleSmsNotifications,
-    TResult? Function(ClearSettingsMessagesEvent value)? clearMessages,
-  }) {
-    return clearMessages?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadSettingsEvent value)? loadSettings,
-    TResult Function(UpdateLanguageEvent value)? updateLanguage,
-    TResult Function(UpdateThemeModeEvent value)? updateThemeMode,
-    TResult Function(ToggleDynamicColorEvent value)? toggleDynamicColor,
-    TResult Function(UpdateColorPaletteEvent value)? updateColorPalette,
-    TResult Function(UpdateCornerRadiusEvent value)? updateCornerRadius,
-    TResult Function(UpdateFontSizeEvent value)? updateFontSize,
-    TResult Function(UpdateFontFamilyEvent value)? updateFontFamily,
-    TResult Function(UpdateTextAlignmentEvent value)? updateTextAlignment,
-    TResult Function(UpdateLineSpacingEvent value)? updateLineSpacing,
-    TResult Function(ToggleHighContrastEvent value)? toggleHighContrast,
-    TResult Function(ToggleMotionReducedEvent value)? toggleMotionReduced,
-    TResult Function(TogglePauseAllNotificationsEvent value)?
-        togglePauseAllNotifications,
-    TResult Function(UpdateSleepModeEvent value)? updateSleepMode,
-    TResult Function(ToggleNotificationEvent value)? toggleNotification,
-    TResult Function(UpdateSummaryFrequencyEvent value)? updateSummaryFrequency,
-    TResult Function(ToggleEmailNotificationsEvent value)?
-        toggleEmailNotifications,
-    TResult Function(ToggleSmsNotificationsEvent value)? toggleSmsNotifications,
-    TResult Function(ClearSettingsMessagesEvent value)? clearMessages,
-    required TResult orElse(),
-  }) {
-    if (clearMessages != null) {
-      return clearMessages(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ClearSettingsMessagesEvent);
 }
 
-abstract class ClearSettingsMessagesEvent implements SettingsEvent {
-  const factory ClearSettingsMessagesEvent() = _$ClearSettingsMessagesEventImpl;
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'SettingsEvent.clearMessages()';
 }
+
+
+}
+
+
+
+
+// dart format on
