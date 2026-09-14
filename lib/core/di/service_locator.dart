@@ -26,6 +26,7 @@ import 'package:velora/features/auth/domain/usecases/sign_in_usecase.dart';
 import 'package:velora/features/auth/domain/usecases/sign_out_usecase.dart';
 import 'package:velora/features/auth/domain/usecases/sign_up_usecase.dart';
 import 'package:velora/features/auth/domain/usecases/reset_password_usecase.dart';
+import 'package:velora/features/auth/domain/usecases/resend_verification_email_usecase.dart';
 import 'package:velora/features/auth/presentation/bloc/auth_bloc.dart';
 
 // Feed feature imports
@@ -76,10 +77,14 @@ import 'package:velora/features/media/presentation/bloc/media_upload_bloc.dart';
 import 'package:velora/features/media/data/datasources/local/media_local_datasource.dart';
 import 'package:velora/features/media/data/datasources/local/media_local_datasource_impl.dart';
 import 'package:velora/features/media/data/repositories/media_gallery_repository_impl.dart';
+import 'package:velora/features/media/data/repositories/media_picker_repository_impl.dart';
 import 'package:velora/features/media/domain/repositories/media_gallery_repository.dart';
+import 'package:velora/features/media/domain/repositories/media_picker_repository.dart';
 import 'package:velora/features/media/domain/usecases/request_media_permission_usecase.dart';
 import 'package:velora/features/media/domain/usecases/load_media_assets_usecase.dart';
 import 'package:velora/features/media/domain/usecases/get_file_from_asset_usecase.dart';
+import 'package:velora/features/media/domain/usecases/pick_documents_usecase.dart';
+import 'package:velora/features/media/domain/usecases/pick_single_audio_file_usecase.dart';
 import 'package:velora/features/media/presentation/bloc/media_gallery_bloc.dart';
 
 // Chat feature imports
@@ -415,6 +420,12 @@ Future<void> configureDependencies() async {
     ),
   );
 
+  getIt.registerLazySingleton<MediaPickerRepository>(
+    () => MediaPickerRepositoryImpl(
+      localDataSource: getIt<MediaLocalDataSource>(),
+    ),
+  );
+
   // Chat feature - Repositories
   getIt.registerLazySingleton<ChatRepository>(
     () => ChatRepositoryImpl(remoteDataSource: getIt<ChatRemoteDataSource>()),
@@ -564,6 +575,16 @@ Future<void> configureDependencies() async {
       () =>
           GetFileFromAssetUseCase(repository: getIt<MediaGalleryRepository>()),
     )
+    ..registerLazySingleton(
+      () => PickSingleAudioFileUseCase(
+        repository: getIt<MediaPickerRepository>(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => PickDocumentsUseCase(
+        repository: getIt<MediaPickerRepository>(),
+      ),
+    )
     // Auth feature - Use cases
     ..registerLazySingleton(
         () => SignUpUseCase(repository: getIt<AuthRepository>()))
@@ -571,6 +592,9 @@ Future<void> configureDependencies() async {
         () => SignInUseCase(repository: getIt<AuthRepository>()))
     ..registerLazySingleton(
         () => ResetPasswordUseCase(repository: getIt<AuthRepository>()))
+    ..registerLazySingleton(
+      () => ResendVerificationEmailUseCase(repository: getIt<AuthRepository>()),
+    )
     ..registerLazySingleton(
         () => SignOutUseCase(repository: getIt<AuthRepository>()))
     ..registerLazySingleton(
@@ -1086,6 +1110,8 @@ Future<void> configureDependencies() async {
         signInUseCase: getIt<SignInUseCase>(),
         signInWithGoogleUseCase: getIt<SignInWithGoogleUseCase>(),
         resetPasswordUseCase: getIt<ResetPasswordUseCase>(),
+        resendVerificationEmailUseCase:
+            getIt<ResendVerificationEmailUseCase>(),
         signOutUseCase: getIt<SignOutUseCase>(),
         watchAuthSnapshotUseCase: getIt<WatchAuthSnapshotUseCase>(),
       ),
