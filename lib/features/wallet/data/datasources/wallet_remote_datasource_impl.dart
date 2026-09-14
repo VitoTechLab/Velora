@@ -28,7 +28,7 @@ class WalletRemoteDataSourceImpl implements WalletRemoteDataSource {
         logi('Getting wallets for user: $userId', tag: _logTag);
         final response = await _client.from(_wallets).select('''
               *,
-              campaigns(title, cover_image_url)
+              campaigns(title, cover_image_url, current_balance)
             ''').eq('user_id', userId).order('type').order('created_at');
 
         return (response as List)
@@ -66,7 +66,7 @@ class WalletRemoteDataSourceImpl implements WalletRemoteDataSource {
         logi('Getting wallet by id: $walletId', tag: _logTag);
         final response = await _client.from(_wallets).select('''
               *,
-              campaigns(title, cover_image_url)
+              campaigns(title, cover_image_url, current_balance)
             ''').eq('id', walletId).maybeSingle();
         if (response == null) return null;
         return _mapWalletWithJoins(response);
@@ -83,7 +83,7 @@ class WalletRemoteDataSourceImpl implements WalletRemoteDataSource {
         logi('Getting wallet for campaign: $campaignId', tag: _logTag);
         final response = await _client.from(_wallets).select('''
               *,
-              campaigns(title, cover_image_url)
+              campaigns(title, cover_image_url, current_balance)
             ''').eq('campaign_id', campaignId).maybeSingle();
         if (response == null) return null;
         return _mapWalletWithJoins(response);
@@ -311,8 +311,15 @@ class WalletRemoteDataSourceImpl implements WalletRemoteDataSource {
   // ============================================
   WalletModel _mapWalletWithJoins(Map<String, dynamic> row) {
     final campaigns = row['campaigns'] as Map<String, dynamic>?;
+    // For campaign wallets, use the campaign's current_balance instead of wallet.balance
+    // since donations update the campaign balance directly
+    final isCampaignWallet = row['type'] == 'campaign' && campaigns != null;
+    final balance = isCampaignWallet
+        ? (campaigns['current_balance'] as num?)?.toDouble() ?? 0.0
+        : (row['balance'] as num?)?.toDouble() ?? 0.0;
     return WalletModel.fromJson({
       ...row,
+      'balance': balance,
       'campaign_title': campaigns?['title'],
       'campaign_cover_image_url': campaigns?['cover_image_url'],
     });

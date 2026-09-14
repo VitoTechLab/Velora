@@ -95,11 +95,14 @@ class RequestWithdrawalScreen extends HookWidget {
           }
         },
         builder: (context, state) {
-          // Find campaign
-          final campaign = state.userCampaigns.cast<CampaignEntity?>().firstWhere(
-                (c) => c?.id == campaignId,
-                orElse: () => state.selectedCampaign,
-              );
+          // Find campaign - prefer selectedCampaign since it's freshly loaded
+          // with getCampaignDetail and will have the latest bank details
+          final campaign = state.selectedCampaign?.id == campaignId
+              ? state.selectedCampaign
+              : state.userCampaigns.cast<CampaignEntity?>().firstWhere(
+                    (c) => c?.id == campaignId,
+                    orElse: () => state.selectedCampaign,
+                  );
 
           if (campaign == null) {
             return const Center(child: CircularProgressIndicator());
@@ -186,7 +189,7 @@ class RequestWithdrawalScreen extends HookWidget {
                       colorScheme: colorScheme,
                       theme: theme,
                       onEdit: () => context.push(
-                        '/wallet/my-campaigns/$campaignId/bank-settings',
+                        '/profile/settings/wallet/my-campaigns/$campaignId/bank-settings',
                       ),
                     )
                   else
@@ -194,7 +197,7 @@ class RequestWithdrawalScreen extends HookWidget {
                       colorScheme: colorScheme,
                       theme: theme,
                       onAdd: () => context.push(
-                        '/wallet/my-campaigns/$campaignId/bank-settings',
+                        '/profile/settings/wallet/my-campaigns/$campaignId/bank-settings',
                       ),
                     ),
 

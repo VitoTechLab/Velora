@@ -739,7 +739,7 @@ class CampaignBloc extends Bloc<CampaignEvent, CampaignState> {
           state.copyWith(
             isRequestingWithdrawal: false,
             withdrawals: updated,
-            message: 'Withdrawal requested',
+            message: 'Withdrawal processed successfully',
           ),
         );
       },

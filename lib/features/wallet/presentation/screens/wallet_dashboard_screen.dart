@@ -40,6 +40,8 @@ class WalletDashboardScreen extends HookWidget {
     final isAuthenticated = useState(_walletSessionAuthenticated);
     final isCheckingAuth = useState(!_walletSessionAuthenticated);
     final authError = useState<String?>(null);
+    final biometricNotEnrolled =
+        useState(false); // Track if biometric is not enrolled on device
 
     final currencyFormat = NumberFormat.currency(
       locale: 'id_ID',
@@ -52,9 +54,7 @@ class WalletDashboardScreen extends HookWidget {
       // Skip if already authenticated in this session
       if (_walletSessionAuthenticated) {
         if (userId != null) {
-          context.read<WalletBloc>().add(
-            WalletEvent.loadWallets(userId: userId),
-          );
+          context.read<WalletBloc>().add(WalletEvent.loadWallets(userId: userId));
         }
         return null;
       }
@@ -62,21 +62,19 @@ class WalletDashboardScreen extends HookWidget {
       Future<void> checkBiometricAuth() async {
         try {
           final status = await biometricService.getBiometricStatus();
-
+          
           // If biometric is enabled, prompt for authentication
           if (status.isFullySetup) {
             final authenticated = await biometricService.authenticate(
               reason: 'Authenticate to access your wallet',
             );
-
+            
             if (authenticated) {
               _walletSessionAuthenticated = true;
               isAuthenticated.value = true;
               // Load wallets after successful authentication
               if (userId != null) {
-                context.read<WalletBloc>().add(
-                  WalletEvent.loadWallets(userId: userId),
-                );
+                context.read<WalletBloc>().add(WalletEvent.loadWallets(userId: userId));
               }
             } else {
               authError.value = 'Authentication failed. Please try again.';
@@ -86,9 +84,7 @@ class WalletDashboardScreen extends HookWidget {
             _walletSessionAuthenticated = true;
             isAuthenticated.value = true;
             if (userId != null) {
-              context.read<WalletBloc>().add(
-                WalletEvent.loadWallets(userId: userId),
-              );
+              context.read<WalletBloc>().add(WalletEvent.loadWallets(userId: userId));
             }
           }
         } catch (e) {
@@ -96,9 +92,7 @@ class WalletDashboardScreen extends HookWidget {
           _walletSessionAuthenticated = true;
           isAuthenticated.value = true;
           if (userId != null) {
-            context.read<WalletBloc>().add(
-              WalletEvent.loadWallets(userId: userId),
-            );
+            context.read<WalletBloc>().add(WalletEvent.loadWallets(userId: userId));
           }
         } finally {
           isCheckingAuth.value = false;
@@ -141,18 +135,26 @@ class WalletDashboardScreen extends HookWidget {
                 Container(
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
-                    color: colorScheme.errorContainer,
+                    color: biometricNotEnrolled.value
+                        ? colorScheme.primaryContainer
+                        : colorScheme.errorContainer,
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
-                    Icons.lock_outline,
+                    biometricNotEnrolled.value
+                        ? Icons.fingerprint
+                        : Icons.lock_outline,
                     size: 48,
-                    color: colorScheme.onErrorContainer,
+                    color: biometricNotEnrolled.value
+                        ? colorScheme.onPrimaryContainer
+                        : colorScheme.onErrorContainer,
                   ),
                 ),
                 const SizedBox(height: 24),
                 Text(
-                  'Authentication Required',
+                  biometricNotEnrolled.value
+                      ? 'Register Fingerprint'
+                      : 'Authentication Required',
                   style: theme.textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -166,27 +168,53 @@ class WalletDashboardScreen extends HookWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
+                if (biometricNotEnrolled.value) ...[
+                  const SizedBox(height: 16),
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: colorScheme.surfaceContainerHighest,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.info_outline,
+                          color: colorScheme.primary,
+                          size: 20,
+                        ),
+                        const SizedBox(width: 8),
+                        Flexible(
+                          child: Text(
+                            'Go to Settings → Security → Fingerprint',
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: colorScheme.onSurfaceVariant,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
                 const SizedBox(height: 32),
                 FilledButton.icon(
                   onPressed: () async {
                     isCheckingAuth.value = true;
                     authError.value = null;
-
+                    
                     final authenticated = await biometricService.authenticate(
                       reason: 'Authenticate to access your wallet',
                     );
-
+                    
                     if (authenticated) {
                       _walletSessionAuthenticated = true;
                       isAuthenticated.value = true;
                       if (userId != null) {
-                        context.read<WalletBloc>().add(
-                          WalletEvent.loadWallets(userId: userId),
-                        );
+                        context.read<WalletBloc>().add(WalletEvent.loadWallets(userId: userId));
                       }
                     } else {
-                      authError.value =
-                          'Authentication failed. Please try again.';
+                      authError.value = 'Authentication failed. Please try again.';
                     }
                     isCheckingAuth.value = false;
                   },
@@ -644,9 +672,7 @@ class _MainWalletCard extends StatelessWidget {
                   style: OutlinedButton.styleFrom(
                     foregroundColor: colorScheme.onPrimaryContainer,
                     side: BorderSide(
-                      color: colorScheme.onPrimaryContainer.withValues(
-                        alpha: 0.5,
-                      ),
+                      color: colorScheme.onPrimaryContainer.withValues(alpha: 0.5),
                     ),
                   ),
                 ),
@@ -668,9 +694,7 @@ class _MainWalletCard extends StatelessWidget {
                 label: Text(
                   'Transaction History',
                   style: TextStyle(
-                    color: colorScheme.onPrimaryContainer.withValues(
-                      alpha: 0.8,
-                    ),
+                    color: colorScheme.onPrimaryContainer.withValues(alpha: 0.8),
                     fontSize: 12,
                   ),
                 ),
@@ -686,9 +710,7 @@ class _MainWalletCard extends StatelessWidget {
                 label: Text(
                   'Withdrawals',
                   style: TextStyle(
-                    color: colorScheme.onPrimaryContainer.withValues(
-                      alpha: 0.8,
-                    ),
+                    color: colorScheme.onPrimaryContainer.withValues(alpha: 0.8),
                     fontSize: 12,
                   ),
                 ),
@@ -794,9 +816,7 @@ class _CampaignWalletCard extends StatelessWidget {
                       color: colorScheme.primaryContainer,
                       image: wallet.campaignCoverImageUrl != null
                           ? DecorationImage(
-                              image: NetworkImage(
-                                wallet.campaignCoverImageUrl!,
-                              ),
+                              image: NetworkImage(wallet.campaignCoverImageUrl!),
                               fit: BoxFit.cover,
                             )
                           : null,
@@ -858,11 +878,19 @@ class _CampaignWalletCard extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: Text(
-                        '${wallet.bankName} - ****${wallet.bankAccountNumber?.substring((wallet.bankAccountNumber?.length ?? 4) - 4)}',
-                        style: theme.textTheme.bodySmall?.copyWith(
-                          color: colorScheme.onSurfaceVariant,
-                        ),
+                      child: Builder(
+                        builder: (context) {
+                          final accountNum = wallet.bankAccountNumber ?? '';
+                          final maskedNum = accountNum.length > 4
+                              ? '****${accountNum.substring(accountNum.length - 4)}'
+                              : accountNum;
+                          return Text(
+                            '${wallet.bankName} - $maskedNum',
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: colorScheme.onSurfaceVariant,
+                            ),
+                          );
+                        },
                       ),
                     ),
                     TextButton(

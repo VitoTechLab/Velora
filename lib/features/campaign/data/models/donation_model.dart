@@ -109,7 +109,7 @@ Object? _readCampaignTitle(Map json, String key) {
 
 Object? _readCampaignImageUrl(Map json, String key) {
   if (json['campaigns'] is Map) {
-    return json['campaigns']['image_url'];
+    return json['campaigns']['cover_image_url'];
   }
   return json['campaign_image_url']; // Fallback
 }

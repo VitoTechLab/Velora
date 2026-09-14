@@ -1,12 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Service to handle biometric authentication
 /// Stores biometric settings in local storage
 class BiometricService {
   final LocalAuthentication _localAuth = LocalAuthentication();
-  
+
   static const String _biometricEnabledKey = 'biometric_enabled';
   static const String _biometricSetupDateKey = 'biometric_setup_date';
 
@@ -164,6 +167,24 @@ class BiometricService {
       availableBiometrics: availableBiometrics,
       setupDate: setupDate,
     );
+  }
+
+  /// Open device security settings to allow user to enroll biometrics
+  /// Returns true if settings were opened successfully
+  Future<bool> openSecuritySettings() async {
+    try {
+      if (Platform.isAndroid) {
+        // On Android, open app settings which has security options
+        // For biometric enrollment, user needs to go to device settings
+        return await openAppSettings();
+      } else if (Platform.isIOS) {
+        // On iOS, open app settings (user needs to navigate to Face ID/Touch ID)
+        return await openAppSettings();
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
   }
 }
 
