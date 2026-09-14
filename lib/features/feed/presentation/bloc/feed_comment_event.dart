@@ -5,7 +5,7 @@ part 'feed_comment_event.freezed.dart';
 
 /// Events for feed comment BLoC.
 @freezed
-class FeedCommentEvent with _$FeedCommentEvent {
+abstract class FeedCommentEvent with _$FeedCommentEvent {
   /// Load initial root comments (no replies).
   const factory FeedCommentEvent.loadFeedComments({
     required String postId,

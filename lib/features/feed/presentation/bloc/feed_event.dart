@@ -5,7 +5,7 @@ part 'feed_event.freezed.dart';
 
 /// Events for feed BLoC.
 @freezed
-class FeedEvent with _$FeedEvent {
+abstract class FeedEvent with _$FeedEvent {
   /// Load initial feed (first page).
   const factory FeedEvent.loadInitialFeed({
     @Default(20) int limit,
