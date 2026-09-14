@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,499 +9,556 @@ part of 'poll_content_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
 mixin _$PollPayloadEntity {
-  String get messageId => throw _privateConstructorUsedError;
-  String get question => throw _privateConstructorUsedError;
-  bool get multipleChoice => throw _privateConstructorUsedError;
-  int get maxUserVotes => throw _privateConstructorUsedError;
-  DateTime? get closesAt => throw _privateConstructorUsedError;
-  List<PollOptionEntity> get options => throw _privateConstructorUsedError;
 
-  /// Create a copy of PollPayloadEntity
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $PollPayloadEntityCopyWith<PollPayloadEntity> get copyWith =>
-      throw _privateConstructorUsedError;
+ String get messageId; String get question; bool get multipleChoice; int get maxUserVotes; DateTime? get closesAt; List<PollOptionEntity> get options;
+/// Create a copy of PollPayloadEntity
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$PollPayloadEntityCopyWith<PollPayloadEntity> get copyWith => _$PollPayloadEntityCopyWithImpl<PollPayloadEntity>(this as PollPayloadEntity, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PollPayloadEntity&&(identical(other.messageId, messageId) || other.messageId == messageId)&&(identical(other.question, question) || other.question == question)&&(identical(other.multipleChoice, multipleChoice) || other.multipleChoice == multipleChoice)&&(identical(other.maxUserVotes, maxUserVotes) || other.maxUserVotes == maxUserVotes)&&(identical(other.closesAt, closesAt) || other.closesAt == closesAt)&&const DeepCollectionEquality().equals(other.options, options));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,messageId,question,multipleChoice,maxUserVotes,closesAt,const DeepCollectionEquality().hash(options));
+
+@override
+String toString() {
+  return 'PollPayloadEntity(messageId: $messageId, question: $question, multipleChoice: $multipleChoice, maxUserVotes: $maxUserVotes, closesAt: $closesAt, options: $options)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $PollPayloadEntityCopyWith<$Res> {
-  factory $PollPayloadEntityCopyWith(
-          PollPayloadEntity value, $Res Function(PollPayloadEntity) then) =
-      _$PollPayloadEntityCopyWithImpl<$Res, PollPayloadEntity>;
-  @useResult
-  $Res call(
-      {String messageId,
-      String question,
-      bool multipleChoice,
-      int maxUserVotes,
-      DateTime? closesAt,
-      List<PollOptionEntity> options});
-}
+abstract mixin class $PollPayloadEntityCopyWith<$Res>  {
+  factory $PollPayloadEntityCopyWith(PollPayloadEntity value, $Res Function(PollPayloadEntity) _then) = _$PollPayloadEntityCopyWithImpl;
+@useResult
+$Res call({
+ String messageId, String question, bool multipleChoice, int maxUserVotes, DateTime? closesAt, List<PollOptionEntity> options
+});
 
+
+
+
+}
 /// @nodoc
-class _$PollPayloadEntityCopyWithImpl<$Res, $Val extends PollPayloadEntity>
+class _$PollPayloadEntityCopyWithImpl<$Res>
     implements $PollPayloadEntityCopyWith<$Res> {
-  _$PollPayloadEntityCopyWithImpl(this._value, this._then);
+  _$PollPayloadEntityCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final PollPayloadEntity _self;
+  final $Res Function(PollPayloadEntity) _then;
 
-  /// Create a copy of PollPayloadEntity
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? messageId = null,
-    Object? question = null,
-    Object? multipleChoice = null,
-    Object? maxUserVotes = null,
-    Object? closesAt = freezed,
-    Object? options = null,
-  }) {
-    return _then(_value.copyWith(
-      messageId: null == messageId
-          ? _value.messageId
-          : messageId // ignore: cast_nullable_to_non_nullable
-              as String,
-      question: null == question
-          ? _value.question
-          : question // ignore: cast_nullable_to_non_nullable
-              as String,
-      multipleChoice: null == multipleChoice
-          ? _value.multipleChoice
-          : multipleChoice // ignore: cast_nullable_to_non_nullable
-              as bool,
-      maxUserVotes: null == maxUserVotes
-          ? _value.maxUserVotes
-          : maxUserVotes // ignore: cast_nullable_to_non_nullable
-              as int,
-      closesAt: freezed == closesAt
-          ? _value.closesAt
-          : closesAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      options: null == options
-          ? _value.options
-          : options // ignore: cast_nullable_to_non_nullable
-              as List<PollOptionEntity>,
-    ) as $Val);
-  }
+/// Create a copy of PollPayloadEntity
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? messageId = null,Object? question = null,Object? multipleChoice = null,Object? maxUserVotes = null,Object? closesAt = freezed,Object? options = null,}) {
+  return _then(_self.copyWith(
+messageId: null == messageId ? _self.messageId : messageId // ignore: cast_nullable_to_non_nullable
+as String,question: null == question ? _self.question : question // ignore: cast_nullable_to_non_nullable
+as String,multipleChoice: null == multipleChoice ? _self.multipleChoice : multipleChoice // ignore: cast_nullable_to_non_nullable
+as bool,maxUserVotes: null == maxUserVotes ? _self.maxUserVotes : maxUserVotes // ignore: cast_nullable_to_non_nullable
+as int,closesAt: freezed == closesAt ? _self.closesAt : closesAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,options: null == options ? _self.options : options // ignore: cast_nullable_to_non_nullable
+as List<PollOptionEntity>,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [PollPayloadEntity].
+extension PollPayloadEntityPatterns on PollPayloadEntity {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _PollPayloadEntity value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _PollPayloadEntity() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _PollPayloadEntity value)  $default,){
+final _that = this;
+switch (_that) {
+case _PollPayloadEntity():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _PollPayloadEntity value)?  $default,){
+final _that = this;
+switch (_that) {
+case _PollPayloadEntity() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String messageId,  String question,  bool multipleChoice,  int maxUserVotes,  DateTime? closesAt,  List<PollOptionEntity> options)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _PollPayloadEntity() when $default != null:
+return $default(_that.messageId,_that.question,_that.multipleChoice,_that.maxUserVotes,_that.closesAt,_that.options);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String messageId,  String question,  bool multipleChoice,  int maxUserVotes,  DateTime? closesAt,  List<PollOptionEntity> options)  $default,) {final _that = this;
+switch (_that) {
+case _PollPayloadEntity():
+return $default(_that.messageId,_that.question,_that.multipleChoice,_that.maxUserVotes,_that.closesAt,_that.options);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String messageId,  String question,  bool multipleChoice,  int maxUserVotes,  DateTime? closesAt,  List<PollOptionEntity> options)?  $default,) {final _that = this;
+switch (_that) {
+case _PollPayloadEntity() when $default != null:
+return $default(_that.messageId,_that.question,_that.multipleChoice,_that.maxUserVotes,_that.closesAt,_that.options);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
-abstract class _$$PollPayloadEntityImplCopyWith<$Res>
-    implements $PollPayloadEntityCopyWith<$Res> {
-  factory _$$PollPayloadEntityImplCopyWith(_$PollPayloadEntityImpl value,
-          $Res Function(_$PollPayloadEntityImpl) then) =
-      __$$PollPayloadEntityImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String messageId,
-      String question,
-      bool multipleChoice,
-      int maxUserVotes,
-      DateTime? closesAt,
-      List<PollOptionEntity> options});
+
+
+class _PollPayloadEntity implements PollPayloadEntity {
+  const _PollPayloadEntity({required this.messageId, required this.question, this.multipleChoice = false, this.maxUserVotes = 1, this.closesAt, final  List<PollOptionEntity> options = const []}): _options = options;
+  
+
+@override final  String messageId;
+@override final  String question;
+@override@JsonKey() final  bool multipleChoice;
+@override@JsonKey() final  int maxUserVotes;
+@override final  DateTime? closesAt;
+ final  List<PollOptionEntity> _options;
+@override@JsonKey() List<PollOptionEntity> get options {
+  if (_options is EqualUnmodifiableListView) return _options;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_options);
+}
+
+
+/// Create a copy of PollPayloadEntity
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$PollPayloadEntityCopyWith<_PollPayloadEntity> get copyWith => __$PollPayloadEntityCopyWithImpl<_PollPayloadEntity>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PollPayloadEntity&&(identical(other.messageId, messageId) || other.messageId == messageId)&&(identical(other.question, question) || other.question == question)&&(identical(other.multipleChoice, multipleChoice) || other.multipleChoice == multipleChoice)&&(identical(other.maxUserVotes, maxUserVotes) || other.maxUserVotes == maxUserVotes)&&(identical(other.closesAt, closesAt) || other.closesAt == closesAt)&&const DeepCollectionEquality().equals(other._options, _options));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,messageId,question,multipleChoice,maxUserVotes,closesAt,const DeepCollectionEquality().hash(_options));
+
+@override
+String toString() {
+  return 'PollPayloadEntity(messageId: $messageId, question: $question, multipleChoice: $multipleChoice, maxUserVotes: $maxUserVotes, closesAt: $closesAt, options: $options)';
+}
+
+
 }
 
 /// @nodoc
-class __$$PollPayloadEntityImplCopyWithImpl<$Res>
-    extends _$PollPayloadEntityCopyWithImpl<$Res, _$PollPayloadEntityImpl>
-    implements _$$PollPayloadEntityImplCopyWith<$Res> {
-  __$$PollPayloadEntityImplCopyWithImpl(_$PollPayloadEntityImpl _value,
-      $Res Function(_$PollPayloadEntityImpl) _then)
-      : super(_value, _then);
+abstract mixin class _$PollPayloadEntityCopyWith<$Res> implements $PollPayloadEntityCopyWith<$Res> {
+  factory _$PollPayloadEntityCopyWith(_PollPayloadEntity value, $Res Function(_PollPayloadEntity) _then) = __$PollPayloadEntityCopyWithImpl;
+@override @useResult
+$Res call({
+ String messageId, String question, bool multipleChoice, int maxUserVotes, DateTime? closesAt, List<PollOptionEntity> options
+});
 
-  /// Create a copy of PollPayloadEntity
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? messageId = null,
-    Object? question = null,
-    Object? multipleChoice = null,
-    Object? maxUserVotes = null,
-    Object? closesAt = freezed,
-    Object? options = null,
-  }) {
-    return _then(_$PollPayloadEntityImpl(
-      messageId: null == messageId
-          ? _value.messageId
-          : messageId // ignore: cast_nullable_to_non_nullable
-              as String,
-      question: null == question
-          ? _value.question
-          : question // ignore: cast_nullable_to_non_nullable
-              as String,
-      multipleChoice: null == multipleChoice
-          ? _value.multipleChoice
-          : multipleChoice // ignore: cast_nullable_to_non_nullable
-              as bool,
-      maxUserVotes: null == maxUserVotes
-          ? _value.maxUserVotes
-          : maxUserVotes // ignore: cast_nullable_to_non_nullable
-              as int,
-      closesAt: freezed == closesAt
-          ? _value.closesAt
-          : closesAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      options: null == options
-          ? _value._options
-          : options // ignore: cast_nullable_to_non_nullable
-              as List<PollOptionEntity>,
-    ));
-  }
+
+
+
 }
-
 /// @nodoc
+class __$PollPayloadEntityCopyWithImpl<$Res>
+    implements _$PollPayloadEntityCopyWith<$Res> {
+  __$PollPayloadEntityCopyWithImpl(this._self, this._then);
 
-class _$PollPayloadEntityImpl implements _PollPayloadEntity {
-  const _$PollPayloadEntityImpl(
-      {required this.messageId,
-      required this.question,
-      this.multipleChoice = false,
-      this.maxUserVotes = 1,
-      this.closesAt,
-      final List<PollOptionEntity> options = const []})
-      : _options = options;
+  final _PollPayloadEntity _self;
+  final $Res Function(_PollPayloadEntity) _then;
 
-  @override
-  final String messageId;
-  @override
-  final String question;
-  @override
-  @JsonKey()
-  final bool multipleChoice;
-  @override
-  @JsonKey()
-  final int maxUserVotes;
-  @override
-  final DateTime? closesAt;
-  final List<PollOptionEntity> _options;
-  @override
-  @JsonKey()
-  List<PollOptionEntity> get options {
-    if (_options is EqualUnmodifiableListView) return _options;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_options);
-  }
-
-  @override
-  String toString() {
-    return 'PollPayloadEntity(messageId: $messageId, question: $question, multipleChoice: $multipleChoice, maxUserVotes: $maxUserVotes, closesAt: $closesAt, options: $options)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$PollPayloadEntityImpl &&
-            (identical(other.messageId, messageId) ||
-                other.messageId == messageId) &&
-            (identical(other.question, question) ||
-                other.question == question) &&
-            (identical(other.multipleChoice, multipleChoice) ||
-                other.multipleChoice == multipleChoice) &&
-            (identical(other.maxUserVotes, maxUserVotes) ||
-                other.maxUserVotes == maxUserVotes) &&
-            (identical(other.closesAt, closesAt) ||
-                other.closesAt == closesAt) &&
-            const DeepCollectionEquality().equals(other._options, _options));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      messageId,
-      question,
-      multipleChoice,
-      maxUserVotes,
-      closesAt,
-      const DeepCollectionEquality().hash(_options));
-
-  /// Create a copy of PollPayloadEntity
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$PollPayloadEntityImplCopyWith<_$PollPayloadEntityImpl> get copyWith =>
-      __$$PollPayloadEntityImplCopyWithImpl<_$PollPayloadEntityImpl>(
-          this, _$identity);
+/// Create a copy of PollPayloadEntity
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? messageId = null,Object? question = null,Object? multipleChoice = null,Object? maxUserVotes = null,Object? closesAt = freezed,Object? options = null,}) {
+  return _then(_PollPayloadEntity(
+messageId: null == messageId ? _self.messageId : messageId // ignore: cast_nullable_to_non_nullable
+as String,question: null == question ? _self.question : question // ignore: cast_nullable_to_non_nullable
+as String,multipleChoice: null == multipleChoice ? _self.multipleChoice : multipleChoice // ignore: cast_nullable_to_non_nullable
+as bool,maxUserVotes: null == maxUserVotes ? _self.maxUserVotes : maxUserVotes // ignore: cast_nullable_to_non_nullable
+as int,closesAt: freezed == closesAt ? _self.closesAt : closesAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,options: null == options ? _self._options : options // ignore: cast_nullable_to_non_nullable
+as List<PollOptionEntity>,
+  ));
 }
 
-abstract class _PollPayloadEntity implements PollPayloadEntity {
-  const factory _PollPayloadEntity(
-      {required final String messageId,
-      required final String question,
-      final bool multipleChoice,
-      final int maxUserVotes,
-      final DateTime? closesAt,
-      final List<PollOptionEntity> options}) = _$PollPayloadEntityImpl;
 
-  @override
-  String get messageId;
-  @override
-  String get question;
-  @override
-  bool get multipleChoice;
-  @override
-  int get maxUserVotes;
-  @override
-  DateTime? get closesAt;
-  @override
-  List<PollOptionEntity> get options;
-
-  /// Create a copy of PollPayloadEntity
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PollPayloadEntityImplCopyWith<_$PollPayloadEntityImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 mixin _$PollOptionEntity {
-  String get id => throw _privateConstructorUsedError;
-  String get pollMessageId => throw _privateConstructorUsedError;
-  String get text => throw _privateConstructorUsedError;
-  int get position => throw _privateConstructorUsedError;
-  int get voteCount => throw _privateConstructorUsedError;
-  bool get isSelected => throw _privateConstructorUsedError;
 
-  /// Create a copy of PollOptionEntity
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $PollOptionEntityCopyWith<PollOptionEntity> get copyWith =>
-      throw _privateConstructorUsedError;
+ String get id; String get pollMessageId; String get text; int get position; int get voteCount; bool get isSelected;
+/// Create a copy of PollOptionEntity
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$PollOptionEntityCopyWith<PollOptionEntity> get copyWith => _$PollOptionEntityCopyWithImpl<PollOptionEntity>(this as PollOptionEntity, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PollOptionEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.pollMessageId, pollMessageId) || other.pollMessageId == pollMessageId)&&(identical(other.text, text) || other.text == text)&&(identical(other.position, position) || other.position == position)&&(identical(other.voteCount, voteCount) || other.voteCount == voteCount)&&(identical(other.isSelected, isSelected) || other.isSelected == isSelected));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,id,pollMessageId,text,position,voteCount,isSelected);
+
+@override
+String toString() {
+  return 'PollOptionEntity(id: $id, pollMessageId: $pollMessageId, text: $text, position: $position, voteCount: $voteCount, isSelected: $isSelected)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $PollOptionEntityCopyWith<$Res> {
-  factory $PollOptionEntityCopyWith(
-          PollOptionEntity value, $Res Function(PollOptionEntity) then) =
-      _$PollOptionEntityCopyWithImpl<$Res, PollOptionEntity>;
-  @useResult
-  $Res call(
-      {String id,
-      String pollMessageId,
-      String text,
-      int position,
-      int voteCount,
-      bool isSelected});
-}
+abstract mixin class $PollOptionEntityCopyWith<$Res>  {
+  factory $PollOptionEntityCopyWith(PollOptionEntity value, $Res Function(PollOptionEntity) _then) = _$PollOptionEntityCopyWithImpl;
+@useResult
+$Res call({
+ String id, String pollMessageId, String text, int position, int voteCount, bool isSelected
+});
 
+
+
+
+}
 /// @nodoc
-class _$PollOptionEntityCopyWithImpl<$Res, $Val extends PollOptionEntity>
+class _$PollOptionEntityCopyWithImpl<$Res>
     implements $PollOptionEntityCopyWith<$Res> {
-  _$PollOptionEntityCopyWithImpl(this._value, this._then);
+  _$PollOptionEntityCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final PollOptionEntity _self;
+  final $Res Function(PollOptionEntity) _then;
 
-  /// Create a copy of PollOptionEntity
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? pollMessageId = null,
-    Object? text = null,
-    Object? position = null,
-    Object? voteCount = null,
-    Object? isSelected = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      pollMessageId: null == pollMessageId
-          ? _value.pollMessageId
-          : pollMessageId // ignore: cast_nullable_to_non_nullable
-              as String,
-      text: null == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as String,
-      position: null == position
-          ? _value.position
-          : position // ignore: cast_nullable_to_non_nullable
-              as int,
-      voteCount: null == voteCount
-          ? _value.voteCount
-          : voteCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      isSelected: null == isSelected
-          ? _value.isSelected
-          : isSelected // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
-  }
+/// Create a copy of PollOptionEntity
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? pollMessageId = null,Object? text = null,Object? position = null,Object? voteCount = null,Object? isSelected = null,}) {
+  return _then(_self.copyWith(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,pollMessageId: null == pollMessageId ? _self.pollMessageId : pollMessageId // ignore: cast_nullable_to_non_nullable
+as String,text: null == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
+as String,position: null == position ? _self.position : position // ignore: cast_nullable_to_non_nullable
+as int,voteCount: null == voteCount ? _self.voteCount : voteCount // ignore: cast_nullable_to_non_nullable
+as int,isSelected: null == isSelected ? _self.isSelected : isSelected // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [PollOptionEntity].
+extension PollOptionEntityPatterns on PollOptionEntity {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _PollOptionEntity value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _PollOptionEntity() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _PollOptionEntity value)  $default,){
+final _that = this;
+switch (_that) {
+case _PollOptionEntity():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _PollOptionEntity value)?  $default,){
+final _that = this;
+switch (_that) {
+case _PollOptionEntity() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String pollMessageId,  String text,  int position,  int voteCount,  bool isSelected)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _PollOptionEntity() when $default != null:
+return $default(_that.id,_that.pollMessageId,_that.text,_that.position,_that.voteCount,_that.isSelected);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String pollMessageId,  String text,  int position,  int voteCount,  bool isSelected)  $default,) {final _that = this;
+switch (_that) {
+case _PollOptionEntity():
+return $default(_that.id,_that.pollMessageId,_that.text,_that.position,_that.voteCount,_that.isSelected);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String pollMessageId,  String text,  int position,  int voteCount,  bool isSelected)?  $default,) {final _that = this;
+switch (_that) {
+case _PollOptionEntity() when $default != null:
+return $default(_that.id,_that.pollMessageId,_that.text,_that.position,_that.voteCount,_that.isSelected);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
-abstract class _$$PollOptionEntityImplCopyWith<$Res>
-    implements $PollOptionEntityCopyWith<$Res> {
-  factory _$$PollOptionEntityImplCopyWith(_$PollOptionEntityImpl value,
-          $Res Function(_$PollOptionEntityImpl) then) =
-      __$$PollOptionEntityImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      String pollMessageId,
-      String text,
-      int position,
-      int voteCount,
-      bool isSelected});
+
+
+class _PollOptionEntity implements PollOptionEntity {
+  const _PollOptionEntity({required this.id, required this.pollMessageId, required this.text, required this.position, required this.voteCount, required this.isSelected});
+  
+
+@override final  String id;
+@override final  String pollMessageId;
+@override final  String text;
+@override final  int position;
+@override final  int voteCount;
+@override final  bool isSelected;
+
+/// Create a copy of PollOptionEntity
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$PollOptionEntityCopyWith<_PollOptionEntity> get copyWith => __$PollOptionEntityCopyWithImpl<_PollOptionEntity>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PollOptionEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.pollMessageId, pollMessageId) || other.pollMessageId == pollMessageId)&&(identical(other.text, text) || other.text == text)&&(identical(other.position, position) || other.position == position)&&(identical(other.voteCount, voteCount) || other.voteCount == voteCount)&&(identical(other.isSelected, isSelected) || other.isSelected == isSelected));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,id,pollMessageId,text,position,voteCount,isSelected);
+
+@override
+String toString() {
+  return 'PollOptionEntity(id: $id, pollMessageId: $pollMessageId, text: $text, position: $position, voteCount: $voteCount, isSelected: $isSelected)';
+}
+
+
 }
 
 /// @nodoc
-class __$$PollOptionEntityImplCopyWithImpl<$Res>
-    extends _$PollOptionEntityCopyWithImpl<$Res, _$PollOptionEntityImpl>
-    implements _$$PollOptionEntityImplCopyWith<$Res> {
-  __$$PollOptionEntityImplCopyWithImpl(_$PollOptionEntityImpl _value,
-      $Res Function(_$PollOptionEntityImpl) _then)
-      : super(_value, _then);
+abstract mixin class _$PollOptionEntityCopyWith<$Res> implements $PollOptionEntityCopyWith<$Res> {
+  factory _$PollOptionEntityCopyWith(_PollOptionEntity value, $Res Function(_PollOptionEntity) _then) = __$PollOptionEntityCopyWithImpl;
+@override @useResult
+$Res call({
+ String id, String pollMessageId, String text, int position, int voteCount, bool isSelected
+});
 
-  /// Create a copy of PollOptionEntity
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? pollMessageId = null,
-    Object? text = null,
-    Object? position = null,
-    Object? voteCount = null,
-    Object? isSelected = null,
-  }) {
-    return _then(_$PollOptionEntityImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      pollMessageId: null == pollMessageId
-          ? _value.pollMessageId
-          : pollMessageId // ignore: cast_nullable_to_non_nullable
-              as String,
-      text: null == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as String,
-      position: null == position
-          ? _value.position
-          : position // ignore: cast_nullable_to_non_nullable
-              as int,
-      voteCount: null == voteCount
-          ? _value.voteCount
-          : voteCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      isSelected: null == isSelected
-          ? _value.isSelected
-          : isSelected // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
+
+
+
 }
-
 /// @nodoc
+class __$PollOptionEntityCopyWithImpl<$Res>
+    implements _$PollOptionEntityCopyWith<$Res> {
+  __$PollOptionEntityCopyWithImpl(this._self, this._then);
 
-class _$PollOptionEntityImpl implements _PollOptionEntity {
-  const _$PollOptionEntityImpl(
-      {required this.id,
-      required this.pollMessageId,
-      required this.text,
-      required this.position,
-      required this.voteCount,
-      required this.isSelected});
+  final _PollOptionEntity _self;
+  final $Res Function(_PollOptionEntity) _then;
 
-  @override
-  final String id;
-  @override
-  final String pollMessageId;
-  @override
-  final String text;
-  @override
-  final int position;
-  @override
-  final int voteCount;
-  @override
-  final bool isSelected;
-
-  @override
-  String toString() {
-    return 'PollOptionEntity(id: $id, pollMessageId: $pollMessageId, text: $text, position: $position, voteCount: $voteCount, isSelected: $isSelected)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$PollOptionEntityImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.pollMessageId, pollMessageId) ||
-                other.pollMessageId == pollMessageId) &&
-            (identical(other.text, text) || other.text == text) &&
-            (identical(other.position, position) ||
-                other.position == position) &&
-            (identical(other.voteCount, voteCount) ||
-                other.voteCount == voteCount) &&
-            (identical(other.isSelected, isSelected) ||
-                other.isSelected == isSelected));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, id, pollMessageId, text, position, voteCount, isSelected);
-
-  /// Create a copy of PollOptionEntity
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$PollOptionEntityImplCopyWith<_$PollOptionEntityImpl> get copyWith =>
-      __$$PollOptionEntityImplCopyWithImpl<_$PollOptionEntityImpl>(
-          this, _$identity);
+/// Create a copy of PollOptionEntity
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? pollMessageId = null,Object? text = null,Object? position = null,Object? voteCount = null,Object? isSelected = null,}) {
+  return _then(_PollOptionEntity(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,pollMessageId: null == pollMessageId ? _self.pollMessageId : pollMessageId // ignore: cast_nullable_to_non_nullable
+as String,text: null == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
+as String,position: null == position ? _self.position : position // ignore: cast_nullable_to_non_nullable
+as int,voteCount: null == voteCount ? _self.voteCount : voteCount // ignore: cast_nullable_to_non_nullable
+as int,isSelected: null == isSelected ? _self.isSelected : isSelected // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
 
-abstract class _PollOptionEntity implements PollOptionEntity {
-  const factory _PollOptionEntity(
-      {required final String id,
-      required final String pollMessageId,
-      required final String text,
-      required final int position,
-      required final int voteCount,
-      required final bool isSelected}) = _$PollOptionEntityImpl;
 
-  @override
-  String get id;
-  @override
-  String get pollMessageId;
-  @override
-  String get text;
-  @override
-  int get position;
-  @override
-  int get voteCount;
-  @override
-  bool get isSelected;
-
-  /// Create a copy of PollOptionEntity
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PollOptionEntityImplCopyWith<_$PollOptionEntityImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
+
+// dart format on

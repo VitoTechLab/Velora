@@ -4,7 +4,7 @@ part 'poll_content_entity.freezed.dart';
 
 /// Entity for poll payload from message_poll_payload table
 @freezed
-class PollPayloadEntity with _$PollPayloadEntity {
+abstract class PollPayloadEntity with _$PollPayloadEntity {
   const factory PollPayloadEntity({
     required String messageId,
     required String question,
@@ -16,7 +16,7 @@ class PollPayloadEntity with _$PollPayloadEntity {
 }
 
 @freezed
-class PollOptionEntity with _$PollOptionEntity {
+abstract class PollOptionEntity with _$PollOptionEntity {
   const factory PollOptionEntity({
     required String id,
     required String pollMessageId,
