@@ -12,6 +12,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get appTitle => 'Velora';
 
   @override
+  String get authSplashTagline => 'Social impact starts here';
+
+  @override
   String get authSignInFormLabel => '登录表单';
 
   @override
@@ -22,6 +25,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get authSignInSubtitle => '登录以继续';
+
+  @override
+  String get authSecureAccessText => 'Secure access to your Velora account';
 
   @override
   String get fieldEmailLabel => '电子邮件';
@@ -39,7 +45,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get authForgotPasswordHint => '忘记密码。前往重置密码页面';
 
   @override
+  String get authRememberMe => 'Remember me';
+
+  @override
   String get authSignInButton => '登录';
+
+  @override
+  String get authSigningIn => 'Signing in...';
 
   @override
   String get authDividerText => '或使用以下方式继续';
@@ -57,6 +69,10 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get authAgreeTermsError => '请先同意服务条款和隐私政策';
+
+  @override
+  String get authInvalidFormMessage =>
+      'Please complete the highlighted fields before continuing.';
 
   @override
   String get authGoogleUnavailable => 'Google 登录尚不可用。';
@@ -87,6 +103,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get authCreateAccountButton => '创建账户';
+
+  @override
+  String get authCreatingAccount => 'Creating account...';
 
   @override
   String get authAlreadyHaveAccount => '已经有账号？';
@@ -122,6 +141,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get authSendResetLink => '发送重置链接';
 
   @override
+  String get authSendingResetLink => 'Sending reset link...';
+
+  @override
   String get authRememberPasswordLabel => '想起密码？返回登录';
 
   @override
@@ -149,10 +171,28 @@ class AppLocalizationsZh extends AppLocalizations {
   String get authVerifiedCta => '我已完成邮箱验证';
 
   @override
+  String get authCheckingVerification => 'Checking verification...';
+
+  @override
   String get authResendVerificationLabel => '重新发送验证邮件';
 
   @override
+  String get authResendingVerification => 'Resending email...';
+
+  @override
   String get authVerificationEmailResent => '验证邮件已重新发送';
+
+  @override
+  String get authVerificationNotYet =>
+      'Email not yet verified. Please check your inbox.';
+
+  @override
+  String get authVerificationSignInAgain =>
+      'Please sign in again to check verification status.';
+
+  @override
+  String get authVerificationEmailRequired =>
+      'We need your email before resending verification.';
 
   @override
   String get authWrongEmail => '邮箱不正确？退出';

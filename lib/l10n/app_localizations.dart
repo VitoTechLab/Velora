@@ -66,7 +66,7 @@ import 'app_localizations_zh.dart';
 /// property.
 abstract class AppLocalizations {
   AppLocalizations(String locale)
-      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -89,11 +89,11 @@ abstract class AppLocalizations {
   /// of delegates is preferred or required.
   static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
       <LocalizationsDelegate<dynamic>>[
-    delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-  ];
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
@@ -101,7 +101,7 @@ abstract class AppLocalizations {
     Locale('id'),
     Locale('ja'),
     Locale('ko'),
-    Locale('zh')
+    Locale('zh'),
   ];
 
   /// No description provided for @appTitle.
@@ -109,6 +109,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Velora'**
   String get appTitle;
+
+  /// No description provided for @authSplashTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Social impact starts here'**
+  String get authSplashTagline;
 
   /// No description provided for @authSignInFormLabel.
   ///
@@ -133,6 +139,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sign in to continue'**
   String get authSignInSubtitle;
+
+  /// No description provided for @authSecureAccessText.
+  ///
+  /// In en, this message translates to:
+  /// **'Secure access to your Velora account'**
+  String get authSecureAccessText;
 
   /// No description provided for @fieldEmailLabel.
   ///
@@ -164,11 +176,23 @@ abstract class AppLocalizations {
   /// **'Forgot password. Navigate to reset password screen'**
   String get authForgotPasswordHint;
 
+  /// No description provided for @authRememberMe.
+  ///
+  /// In en, this message translates to:
+  /// **'Remember me'**
+  String get authRememberMe;
+
   /// No description provided for @authSignInButton.
   ///
   /// In en, this message translates to:
   /// **'Sign In'**
   String get authSignInButton;
+
+  /// No description provided for @authSigningIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Signing in...'**
+  String get authSigningIn;
 
   /// No description provided for @authDividerText.
   ///
@@ -199,6 +223,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please agree to Terms & Privacy Policy'**
   String get authAgreeTermsError;
+
+  /// No description provided for @authInvalidFormMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please complete the highlighted fields before continuing.'**
+  String get authInvalidFormMessage;
 
   /// No description provided for @authGoogleUnavailable.
   ///
@@ -259,6 +289,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Create Account'**
   String get authCreateAccountButton;
+
+  /// No description provided for @authCreatingAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Creating account...'**
+  String get authCreatingAccount;
 
   /// No description provided for @authAlreadyHaveAccount.
   ///
@@ -326,6 +362,12 @@ abstract class AppLocalizations {
   /// **'Send reset link'**
   String get authSendResetLink;
 
+  /// No description provided for @authSendingResetLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Sending reset link...'**
+  String get authSendingResetLink;
+
   /// No description provided for @authRememberPasswordLabel.
   ///
   /// In en, this message translates to:
@@ -380,17 +422,47 @@ abstract class AppLocalizations {
   /// **'I\'ve verified my email'**
   String get authVerifiedCta;
 
+  /// No description provided for @authCheckingVerification.
+  ///
+  /// In en, this message translates to:
+  /// **'Checking verification...'**
+  String get authCheckingVerification;
+
   /// No description provided for @authResendVerificationLabel.
   ///
   /// In en, this message translates to:
   /// **'Resend verification email'**
   String get authResendVerificationLabel;
 
+  /// No description provided for @authResendingVerification.
+  ///
+  /// In en, this message translates to:
+  /// **'Resending email...'**
+  String get authResendingVerification;
+
   /// No description provided for @authVerificationEmailResent.
   ///
   /// In en, this message translates to:
   /// **'Verification email resent'**
   String get authVerificationEmailResent;
+
+  /// No description provided for @authVerificationNotYet.
+  ///
+  /// In en, this message translates to:
+  /// **'Email not yet verified. Please check your inbox.'**
+  String get authVerificationNotYet;
+
+  /// No description provided for @authVerificationSignInAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Please sign in again to check verification status.'**
+  String get authVerificationSignInAgain;
+
+  /// No description provided for @authVerificationEmailRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'We need your email before resending verification.'**
+  String get authVerificationEmailRequired;
 
   /// No description provided for @authWrongEmail.
   ///
@@ -5442,8 +5514,9 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   }
 
   throw FlutterError(
-      'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-      'an issue with the localizations generation tool. Please file an issue '
-      'on GitHub with a reproducible sample app and the gen-l10n configuration '
-      'that was used.');
+    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+    'an issue with the localizations generation tool. Please file an issue '
+    'on GitHub with a reproducible sample app and the gen-l10n configuration '
+    'that was used.',
+  );
 }

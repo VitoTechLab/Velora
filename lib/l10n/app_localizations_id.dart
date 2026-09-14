@@ -12,6 +12,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get appTitle => 'Velora';
 
   @override
+  String get authSplashTagline => 'Aksi sosial dimulai di sini';
+
+  @override
   String get authSignInFormLabel => 'Form masuk';
 
   @override
@@ -22,6 +25,9 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get authSignInSubtitle => 'Masuk untuk melanjutkan';
+
+  @override
+  String get authSecureAccessText => 'Akses aman ke akun Velora Anda';
 
   @override
   String get fieldEmailLabel => 'Email';
@@ -40,7 +46,13 @@ class AppLocalizationsId extends AppLocalizations {
       'Lupa kata sandi. Masuk ke layar atur ulang kata sandi';
 
   @override
+  String get authRememberMe => 'Ingat saya';
+
+  @override
   String get authSignInButton => 'Masuk';
+
+  @override
+  String get authSigningIn => 'Sedang masuk...';
 
   @override
   String get authDividerText => 'atau lanjutkan dengan';
@@ -59,6 +71,10 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get authAgreeTermsError =>
       'Setujui Ketentuan & Kebijakan Privasi terlebih dahulu';
+
+  @override
+  String get authInvalidFormMessage =>
+      'Lengkapi kolom yang ditandai sebelum melanjutkan.';
 
   @override
   String get authGoogleUnavailable => 'Masuk Google belum tersedia.';
@@ -90,6 +106,9 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get authCreateAccountButton => 'Buat Akun';
+
+  @override
+  String get authCreatingAccount => 'Membuat akun...';
 
   @override
   String get authAlreadyHaveAccount => 'Sudah punya akun?';
@@ -126,6 +145,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get authSendResetLink => 'Kirim tautan reset';
 
   @override
+  String get authSendingResetLink => 'Mengirim tautan reset...';
+
+  @override
   String get authRememberPasswordLabel =>
       'Ingat kata sandi? Kembali ke halaman masuk';
 
@@ -155,10 +177,28 @@ class AppLocalizationsId extends AppLocalizations {
   String get authVerifiedCta => 'Saya sudah verifikasi email';
 
   @override
+  String get authCheckingVerification => 'Memeriksa verifikasi...';
+
+  @override
   String get authResendVerificationLabel => 'Kirim ulang email verifikasi';
 
   @override
+  String get authResendingVerification => 'Mengirim ulang email...';
+
+  @override
   String get authVerificationEmailResent => 'Email verifikasi dikirim ulang';
+
+  @override
+  String get authVerificationNotYet =>
+      'Email belum terverifikasi. Periksa kotak masuk Anda.';
+
+  @override
+  String get authVerificationSignInAgain =>
+      'Silakan masuk lagi untuk memeriksa status verifikasi.';
+
+  @override
+  String get authVerificationEmailRequired =>
+      'Kami membutuhkan email Anda sebelum mengirim ulang verifikasi.';
 
   @override
   String get authWrongEmail => 'Email salah? Keluar';

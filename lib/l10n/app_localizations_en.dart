@@ -12,6 +12,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Velora';
 
   @override
+  String get authSplashTagline => 'Social impact starts here';
+
+  @override
   String get authSignInFormLabel => 'Sign in form';
 
   @override
@@ -22,6 +25,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get authSignInSubtitle => 'Sign in to continue';
+
+  @override
+  String get authSecureAccessText => 'Secure access to your Velora account';
 
   @override
   String get fieldEmailLabel => 'Email';
@@ -40,7 +46,13 @@ class AppLocalizationsEn extends AppLocalizations {
       'Forgot password. Navigate to reset password screen';
 
   @override
+  String get authRememberMe => 'Remember me';
+
+  @override
   String get authSignInButton => 'Sign In';
+
+  @override
+  String get authSigningIn => 'Signing in...';
 
   @override
   String get authDividerText => 'or continue with';
@@ -58,6 +70,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get authAgreeTermsError => 'Please agree to Terms & Privacy Policy';
+
+  @override
+  String get authInvalidFormMessage =>
+      'Please complete the highlighted fields before continuing.';
 
   @override
   String get authGoogleUnavailable => 'Google sign-in is not available yet.';
@@ -89,6 +105,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get authCreateAccountButton => 'Create Account';
+
+  @override
+  String get authCreatingAccount => 'Creating account...';
 
   @override
   String get authAlreadyHaveAccount => 'Already have an account?';
@@ -125,6 +144,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authSendResetLink => 'Send reset link';
 
   @override
+  String get authSendingResetLink => 'Sending reset link...';
+
+  @override
   String get authRememberPasswordLabel =>
       'Remember password? Go back to sign in';
 
@@ -154,10 +176,28 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authVerifiedCta => 'I\'ve verified my email';
 
   @override
+  String get authCheckingVerification => 'Checking verification...';
+
+  @override
   String get authResendVerificationLabel => 'Resend verification email';
 
   @override
+  String get authResendingVerification => 'Resending email...';
+
+  @override
   String get authVerificationEmailResent => 'Verification email resent';
+
+  @override
+  String get authVerificationNotYet =>
+      'Email not yet verified. Please check your inbox.';
+
+  @override
+  String get authVerificationSignInAgain =>
+      'Please sign in again to check verification status.';
+
+  @override
+  String get authVerificationEmailRequired =>
+      'We need your email before resending verification.';
 
   @override
   String get authWrongEmail => 'Wrong email? Sign out';

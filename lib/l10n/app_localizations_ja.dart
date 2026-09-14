@@ -12,6 +12,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get appTitle => 'Velora';
 
   @override
+  String get authSplashTagline => 'Social impact starts here';
+
+  @override
   String get authSignInFormLabel => 'ログインフォーム';
 
   @override
@@ -22,6 +25,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get authSignInSubtitle => '続行するにはログインしてください';
+
+  @override
+  String get authSecureAccessText => 'Secure access to your Velora account';
 
   @override
   String get fieldEmailLabel => 'メールアドレス';
@@ -39,7 +45,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get authForgotPasswordHint => 'パスワードを忘れた場合。パスワード再設定画面へ移動';
 
   @override
+  String get authRememberMe => 'Remember me';
+
+  @override
   String get authSignInButton => 'ログイン';
+
+  @override
+  String get authSigningIn => 'Signing in...';
 
   @override
   String get authDividerText => 'または次の方法で続行';
@@ -57,6 +69,10 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get authAgreeTermsError => 'まず利用規約とプライバシーポリシーに同意してください';
+
+  @override
+  String get authInvalidFormMessage =>
+      'Please complete the highlighted fields before continuing.';
 
   @override
   String get authGoogleUnavailable => 'Google ログインはまだ利用できません。';
@@ -87,6 +103,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get authCreateAccountButton => 'アカウントを作成';
+
+  @override
+  String get authCreatingAccount => 'Creating account...';
 
   @override
   String get authAlreadyHaveAccount => 'すでにアカウントをお持ちですか？';
@@ -123,6 +142,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get authSendResetLink => '再設定リンクを送信';
 
   @override
+  String get authSendingResetLink => 'Sending reset link...';
+
+  @override
   String get authRememberPasswordLabel => 'パスワードを思い出しましたか？ログインへ戻る';
 
   @override
@@ -151,10 +173,28 @@ class AppLocalizationsJa extends AppLocalizations {
   String get authVerifiedCta => 'メールを確認しました';
 
   @override
+  String get authCheckingVerification => 'Checking verification...';
+
+  @override
   String get authResendVerificationLabel => '確認メールを再送';
 
   @override
+  String get authResendingVerification => 'Resending email...';
+
+  @override
   String get authVerificationEmailResent => '確認メールを再送信しました';
+
+  @override
+  String get authVerificationNotYet =>
+      'Email not yet verified. Please check your inbox.';
+
+  @override
+  String get authVerificationSignInAgain =>
+      'Please sign in again to check verification status.';
+
+  @override
+  String get authVerificationEmailRequired =>
+      'We need your email before resending verification.';
 
   @override
   String get authWrongEmail => 'メールが違いますか？サインアウト';

@@ -12,6 +12,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get appTitle => 'Velora';
 
   @override
+  String get authSplashTagline => 'Social impact starts here';
+
+  @override
   String get authSignInFormLabel => '로그인 양식';
 
   @override
@@ -22,6 +25,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get authSignInSubtitle => '계속하려면 로그인하세요';
+
+  @override
+  String get authSecureAccessText => 'Secure access to your Velora account';
 
   @override
   String get fieldEmailLabel => '이메일';
@@ -39,7 +45,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get authForgotPasswordHint => '비밀번호를 잊음. 비밀번호 재설정 화면으로 이동';
 
   @override
+  String get authRememberMe => 'Remember me';
+
+  @override
   String get authSignInButton => '로그인';
+
+  @override
+  String get authSigningIn => 'Signing in...';
 
   @override
   String get authDividerText => '또는 다음으로 계속';
@@ -57,6 +69,10 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get authAgreeTermsError => '이용약관과 개인정보처리방침에 동의해주세요';
+
+  @override
+  String get authInvalidFormMessage =>
+      'Please complete the highlighted fields before continuing.';
 
   @override
   String get authGoogleUnavailable => '구글 로그인이 아직 지원되지 않습니다.';
@@ -87,6 +103,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get authCreateAccountButton => '계정 만들기';
+
+  @override
+  String get authCreatingAccount => 'Creating account...';
 
   @override
   String get authAlreadyHaveAccount => '이미 계정이 있나요?';
@@ -123,6 +142,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get authSendResetLink => '재설정 링크 보내기';
 
   @override
+  String get authSendingResetLink => 'Sending reset link...';
+
+  @override
   String get authRememberPasswordLabel => '비밀번호가 기억나나요? 로그인으로 돌아가기';
 
   @override
@@ -151,10 +173,28 @@ class AppLocalizationsKo extends AppLocalizations {
   String get authVerifiedCta => '이메일을 인증했습니다';
 
   @override
+  String get authCheckingVerification => 'Checking verification...';
+
+  @override
   String get authResendVerificationLabel => '인증 메일 다시 보내기';
 
   @override
+  String get authResendingVerification => 'Resending email...';
+
+  @override
   String get authVerificationEmailResent => '인증 메일을 다시 보냈습니다';
+
+  @override
+  String get authVerificationNotYet =>
+      'Email not yet verified. Please check your inbox.';
+
+  @override
+  String get authVerificationSignInAgain =>
+      'Please sign in again to check verification status.';
+
+  @override
+  String get authVerificationEmailRequired =>
+      'We need your email before resending verification.';
 
   @override
   String get authWrongEmail => '이메일이 잘못되었나요? 로그아웃';
