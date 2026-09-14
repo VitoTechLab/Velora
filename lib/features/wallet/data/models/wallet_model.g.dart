@@ -6,25 +6,24 @@ part of 'wallet_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$WalletModelImpl _$$WalletModelImplFromJson(Map<String, dynamic> json) =>
-    _$WalletModelImpl(
-      id: json['id'] as String,
-      userId: json['user_id'] as String,
-      type: json['type'] as String,
-      balance: (json['balance'] as num?)?.toDouble() ?? 0,
-      campaignId: json['campaign_id'] as String?,
-      bankName: json['bank_name'] as String?,
-      bankAccountNumber: json['bank_account_number'] as String?,
-      bankAccountHolder: json['bank_account_holder'] as String?,
-      createdAt: DateTime.parse(json['created_at'] as String),
-      updatedAt: json['updated_at'] == null
-          ? null
-          : DateTime.parse(json['updated_at'] as String),
-      campaignTitle: json['campaign_title'] as String?,
-      campaignCoverImageUrl: json['campaign_cover_image_url'] as String?,
-    );
+_WalletModel _$WalletModelFromJson(Map<String, dynamic> json) => _WalletModel(
+  id: json['id'] as String,
+  userId: json['user_id'] as String,
+  type: json['type'] as String,
+  balance: (json['balance'] as num?)?.toDouble() ?? 0,
+  campaignId: json['campaign_id'] as String?,
+  bankName: json['bank_name'] as String?,
+  bankAccountNumber: json['bank_account_number'] as String?,
+  bankAccountHolder: json['bank_account_holder'] as String?,
+  createdAt: DateTime.parse(json['created_at'] as String),
+  updatedAt: json['updated_at'] == null
+      ? null
+      : DateTime.parse(json['updated_at'] as String),
+  campaignTitle: json['campaign_title'] as String?,
+  campaignCoverImageUrl: json['campaign_cover_image_url'] as String?,
+);
 
-Map<String, dynamic> _$$WalletModelImplToJson(_$WalletModelImpl instance) =>
+Map<String, dynamic> _$WalletModelToJson(_WalletModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'user_id': instance.userId,
