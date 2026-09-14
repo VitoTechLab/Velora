@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:velora/core/themes/color_cupertino.dart';
+import 'material_theme.dart';
 
 CupertinoThemeData buildCupertinoTheme(Brightness brightness) {
   final bool isLight = brightness == Brightness.light;
 
   return CupertinoThemeData(
     brightness: brightness,
-    primaryColor: CupertinoColorsCustom.primaryYellow,
+    primaryColor: buildTheme(brightness).colorScheme.primary,
     scaffoldBackgroundColor: isLight
         ? CupertinoColorsCustom.lightBackground
         : CupertinoColorsCustom.darkBackground,
@@ -39,7 +40,7 @@ CupertinoThemeData buildCupertinoTheme(Brightness brightness) {
       ),
       actionTextStyle: TextStyle(
         fontSize: 16,
-        color: CupertinoColorsCustom.primaryYellow,
+        color: buildTheme(brightness).colorScheme.primary,
       ),
     ),
   );

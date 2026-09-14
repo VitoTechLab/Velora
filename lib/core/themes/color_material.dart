@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class MaterialColorsCustom {
   /// Neon/Vibrant palette - Primary brand colors for modern dark UI
-  static const Color neonViolet = Color(0xFF6366F1);
+  static const Color neonViolet = Color(0xFF7134BD);
   static const Color neonPurple = Color(0xFF8B5CF6);
   static const Color neonMagenta = Color(0xFFA855F7);
   static const Color neonIndigo = Color(0xFF818CF8);
   static const Color neonLavender = Color(0xFFC084FC);
   static const Color neonCyan = Color(0xFF06B6D4);
-  static const Color neonTeal = Color(0xFF22D3EE);
+  static const Color neonTeal = Color(0xFF087E78);
   static const Color neonRose = Color(0xFFEC4899);
   static const Color neonPink = Color(0xFFF472B6);
   static const Color neonLightPurple = Color(0xFFA78BFA);
@@ -23,13 +23,22 @@ class MaterialColorsCustom {
   /// Brand colors for general UI
   static const Color brandBlue = Color(0xFF4AA3F2);
   static const Color brandSky = Color(0xFFBBDDF6);
-  static const Color brandRed = Color(0xFFEB6A64);
+  static const Color brandRed = Color(0xFFB3261E);
   static const Color brandCoral = Color(0xFFFF8A63);
   static const Color black = Color(0xFF0B1A24);
   static const Color white = Colors.white;
 
+  // Social crowdfunding accents
+  static const Color trustGreen = Color(0xFF16A34A);
+  static const Color trustMint = Color(0xFF7DD3C7);
+  static const Color donationAmber = Color(0xFFF59E0B);
+  static const Color communityCoral = Color(0xFFFF6B6B);
+  static const Color impactBlue = Color(0xFF2563EB);
+  static const Color midnightTeal = Color(0xFF073B4C);
+  static const Color midnightPlum = Color(0xFF311B4F);
+
   // Neutral palette
-  static const Color mist = Color(0xFFF5F7FA);
+  static const Color mist = Color(0xFFF7F9F8);
   static const Color slate = Color(0xFF5A6B7B);
   static const Color deepNavy = Color(0xFF0C1826);
   static const Color dusk = Color(0xFF152534);
