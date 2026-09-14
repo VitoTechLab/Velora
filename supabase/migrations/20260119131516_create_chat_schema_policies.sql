@@ -379,6 +379,14 @@ SELECT
         ORDER BY m.created_at DESC
         LIMIT 1
     ) AS last_message_body,
+    (
+        SELECT m.kind
+        FROM messages m
+        WHERE m.conversation_id = c.id
+        AND m.deleted_at IS NULL
+        ORDER BY m.created_at DESC
+        LIMIT 1
+    ) AS last_message_kind,
     -- Timestamp & Count
     c.last_message_at,
     (
@@ -613,6 +621,7 @@ RETURNS TABLE (
     other_user_full_name TEXT,
     other_user_avatar_url TEXT,
     last_message_body TEXT,
+    last_message_kind TEXT,
     last_message_at TIMESTAMPTZ,
     last_message_sender_id UUID,
     unread_count INT
@@ -631,6 +640,7 @@ BEGIN
         v.other_user_full_name,
         v.other_user_avatar_url,
         v.last_message_body,
+        v.last_message_kind,
         v.last_message_at,
         v.last_message_sender_id,
         v.unread_count
