@@ -5,7 +5,7 @@ import 'package:velora/features/chat/domain/entities/message_read_entity.dart';
 part 'chat_message_event.freezed.dart';
 
 @freezed
-class ChatMessageEvent with _$ChatMessageEvent {
+abstract class ChatMessageEvent with _$ChatMessageEvent {
   // =========================================================
   // CHAT INITIALIZATION
   // =========================================================

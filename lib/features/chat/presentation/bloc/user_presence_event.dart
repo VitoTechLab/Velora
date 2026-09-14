@@ -6,7 +6,7 @@ import 'package:velora/features/chat/domain/entities/user_presence_entity.dart';
 part 'user_presence_event.freezed.dart';
 
 @freezed
-class UserPresenceEvent with _$UserPresenceEvent {
+abstract class UserPresenceEvent with _$UserPresenceEvent {
   const factory UserPresenceEvent.started() = Started;
   const factory UserPresenceEvent.heartbeatTick() = HeartbeatTick;
   const factory UserPresenceEvent.connectivityChanged(bool isOnline) =

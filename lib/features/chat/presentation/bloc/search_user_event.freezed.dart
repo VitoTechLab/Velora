@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,446 +9,308 @@ part of 'search_user_event.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
 mixin _$SearchUserEvent {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String query) searchQueryChanged,
-    required TResult Function() clearSearch,
-    required TResult Function() loadFollowedUsers,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String query)? searchQueryChanged,
-    TResult? Function()? clearSearch,
-    TResult? Function()? loadFollowedUsers,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String query)? searchQueryChanged,
-    TResult Function()? clearSearch,
-    TResult Function()? loadFollowedUsers,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(SearchQueryChanged value) searchQueryChanged,
-    required TResult Function(ClearSearch value) clearSearch,
-    required TResult Function(LoadFollowedUsers value) loadFollowedUsers,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SearchQueryChanged value)? searchQueryChanged,
-    TResult? Function(ClearSearch value)? clearSearch,
-    TResult? Function(LoadFollowedUsers value)? loadFollowedUsers,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(SearchQueryChanged value)? searchQueryChanged,
-    TResult Function(ClearSearch value)? clearSearch,
-    TResult Function(LoadFollowedUsers value)? loadFollowedUsers,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchUserEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'SearchUserEvent()';
+}
+
+
 }
 
 /// @nodoc
-abstract class $SearchUserEventCopyWith<$Res> {
-  factory $SearchUserEventCopyWith(
-          SearchUserEvent value, $Res Function(SearchUserEvent) then) =
-      _$SearchUserEventCopyWithImpl<$Res, SearchUserEvent>;
+class $SearchUserEventCopyWith<$Res>  {
+$SearchUserEventCopyWith(SearchUserEvent _, $Res Function(SearchUserEvent) __);
 }
 
-/// @nodoc
-class _$SearchUserEventCopyWithImpl<$Res, $Val extends SearchUserEvent>
-    implements $SearchUserEventCopyWith<$Res> {
-  _$SearchUserEventCopyWithImpl(this._value, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+/// Adds pattern-matching-related methods to [SearchUserEvent].
+extension SearchUserEventPatterns on SearchUserEvent {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  /// Create a copy of SearchUserEvent
-  /// with the given fields replaced by the non-null parameter values.
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( SearchQueryChanged value)?  searchQueryChanged,TResult Function( ClearSearch value)?  clearSearch,TResult Function( LoadFollowedUsers value)?  loadFollowedUsers,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case SearchQueryChanged() when searchQueryChanged != null:
+return searchQueryChanged(_that);case ClearSearch() when clearSearch != null:
+return clearSearch(_that);case LoadFollowedUsers() when loadFollowedUsers != null:
+return loadFollowedUsers(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( SearchQueryChanged value)  searchQueryChanged,required TResult Function( ClearSearch value)  clearSearch,required TResult Function( LoadFollowedUsers value)  loadFollowedUsers,}){
+final _that = this;
+switch (_that) {
+case SearchQueryChanged():
+return searchQueryChanged(_that);case ClearSearch():
+return clearSearch(_that);case LoadFollowedUsers():
+return loadFollowedUsers(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( SearchQueryChanged value)?  searchQueryChanged,TResult? Function( ClearSearch value)?  clearSearch,TResult? Function( LoadFollowedUsers value)?  loadFollowedUsers,}){
+final _that = this;
+switch (_that) {
+case SearchQueryChanged() when searchQueryChanged != null:
+return searchQueryChanged(_that);case ClearSearch() when clearSearch != null:
+return clearSearch(_that);case LoadFollowedUsers() when loadFollowedUsers != null:
+return loadFollowedUsers(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String query)?  searchQueryChanged,TResult Function()?  clearSearch,TResult Function()?  loadFollowedUsers,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case SearchQueryChanged() when searchQueryChanged != null:
+return searchQueryChanged(_that.query);case ClearSearch() when clearSearch != null:
+return clearSearch();case LoadFollowedUsers() when loadFollowedUsers != null:
+return loadFollowedUsers();case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String query)  searchQueryChanged,required TResult Function()  clearSearch,required TResult Function()  loadFollowedUsers,}) {final _that = this;
+switch (_that) {
+case SearchQueryChanged():
+return searchQueryChanged(_that.query);case ClearSearch():
+return clearSearch();case LoadFollowedUsers():
+return loadFollowedUsers();case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String query)?  searchQueryChanged,TResult? Function()?  clearSearch,TResult? Function()?  loadFollowedUsers,}) {final _that = this;
+switch (_that) {
+case SearchQueryChanged() when searchQueryChanged != null:
+return searchQueryChanged(_that.query);case ClearSearch() when clearSearch != null:
+return clearSearch();case LoadFollowedUsers() when loadFollowedUsers != null:
+return loadFollowedUsers();case _:
+  return null;
+
+}
 }
 
-/// @nodoc
-abstract class _$$SearchQueryChangedImplCopyWith<$Res> {
-  factory _$$SearchQueryChangedImplCopyWith(_$SearchQueryChangedImpl value,
-          $Res Function(_$SearchQueryChangedImpl) then) =
-      __$$SearchQueryChangedImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String query});
-}
-
-/// @nodoc
-class __$$SearchQueryChangedImplCopyWithImpl<$Res>
-    extends _$SearchUserEventCopyWithImpl<$Res, _$SearchQueryChangedImpl>
-    implements _$$SearchQueryChangedImplCopyWith<$Res> {
-  __$$SearchQueryChangedImplCopyWithImpl(_$SearchQueryChangedImpl _value,
-      $Res Function(_$SearchQueryChangedImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SearchUserEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? query = null,
-  }) {
-    return _then(_$SearchQueryChangedImpl(
-      null == query
-          ? _value.query
-          : query // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$SearchQueryChangedImpl implements SearchQueryChanged {
-  const _$SearchQueryChangedImpl(this.query);
-
-  @override
-  final String query;
-
-  @override
-  String toString() {
-    return 'SearchUserEvent.searchQueryChanged(query: $query)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SearchQueryChangedImpl &&
-            (identical(other.query, query) || other.query == query));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, query);
-
-  /// Create a copy of SearchUserEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SearchQueryChangedImplCopyWith<_$SearchQueryChangedImpl> get copyWith =>
-      __$$SearchQueryChangedImplCopyWithImpl<_$SearchQueryChangedImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String query) searchQueryChanged,
-    required TResult Function() clearSearch,
-    required TResult Function() loadFollowedUsers,
-  }) {
-    return searchQueryChanged(query);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String query)? searchQueryChanged,
-    TResult? Function()? clearSearch,
-    TResult? Function()? loadFollowedUsers,
-  }) {
-    return searchQueryChanged?.call(query);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String query)? searchQueryChanged,
-    TResult Function()? clearSearch,
-    TResult Function()? loadFollowedUsers,
-    required TResult orElse(),
-  }) {
-    if (searchQueryChanged != null) {
-      return searchQueryChanged(query);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(SearchQueryChanged value) searchQueryChanged,
-    required TResult Function(ClearSearch value) clearSearch,
-    required TResult Function(LoadFollowedUsers value) loadFollowedUsers,
-  }) {
-    return searchQueryChanged(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SearchQueryChanged value)? searchQueryChanged,
-    TResult? Function(ClearSearch value)? clearSearch,
-    TResult? Function(LoadFollowedUsers value)? loadFollowedUsers,
-  }) {
-    return searchQueryChanged?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(SearchQueryChanged value)? searchQueryChanged,
-    TResult Function(ClearSearch value)? clearSearch,
-    TResult Function(LoadFollowedUsers value)? loadFollowedUsers,
-    required TResult orElse(),
-  }) {
-    if (searchQueryChanged != null) {
-      return searchQueryChanged(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class SearchQueryChanged implements SearchUserEvent {
-  const factory SearchQueryChanged(final String query) =
-      _$SearchQueryChangedImpl;
-
-  String get query;
-
-  /// Create a copy of SearchUserEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SearchQueryChangedImplCopyWith<_$SearchQueryChangedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$ClearSearchImplCopyWith<$Res> {
-  factory _$$ClearSearchImplCopyWith(
-          _$ClearSearchImpl value, $Res Function(_$ClearSearchImpl) then) =
-      __$$ClearSearchImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$ClearSearchImplCopyWithImpl<$Res>
-    extends _$SearchUserEventCopyWithImpl<$Res, _$ClearSearchImpl>
-    implements _$$ClearSearchImplCopyWith<$Res> {
-  __$$ClearSearchImplCopyWithImpl(
-      _$ClearSearchImpl _value, $Res Function(_$ClearSearchImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SearchUserEvent
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$ClearSearchImpl implements ClearSearch {
-  const _$ClearSearchImpl();
 
-  @override
-  String toString() {
-    return 'SearchUserEvent.clearSearch()';
-  }
+class SearchQueryChanged implements SearchUserEvent {
+  const SearchQueryChanged(this.query);
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ClearSearchImpl);
-  }
+ final  String query;
 
-  @override
-  int get hashCode => runtimeType.hashCode;
+/// Create a copy of SearchUserEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SearchQueryChangedCopyWith<SearchQueryChanged> get copyWith => _$SearchQueryChangedCopyWithImpl<SearchQueryChanged>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String query) searchQueryChanged,
-    required TResult Function() clearSearch,
-    required TResult Function() loadFollowedUsers,
-  }) {
-    return clearSearch();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String query)? searchQueryChanged,
-    TResult? Function()? clearSearch,
-    TResult? Function()? loadFollowedUsers,
-  }) {
-    return clearSearch?.call();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String query)? searchQueryChanged,
-    TResult Function()? clearSearch,
-    TResult Function()? loadFollowedUsers,
-    required TResult orElse(),
-  }) {
-    if (clearSearch != null) {
-      return clearSearch();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(SearchQueryChanged value) searchQueryChanged,
-    required TResult Function(ClearSearch value) clearSearch,
-    required TResult Function(LoadFollowedUsers value) loadFollowedUsers,
-  }) {
-    return clearSearch(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SearchQueryChanged value)? searchQueryChanged,
-    TResult? Function(ClearSearch value)? clearSearch,
-    TResult? Function(LoadFollowedUsers value)? loadFollowedUsers,
-  }) {
-    return clearSearch?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(SearchQueryChanged value)? searchQueryChanged,
-    TResult Function(ClearSearch value)? clearSearch,
-    TResult Function(LoadFollowedUsers value)? loadFollowedUsers,
-    required TResult orElse(),
-  }) {
-    if (clearSearch != null) {
-      return clearSearch(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchQueryChanged&&(identical(other.query, query) || other.query == query));
 }
 
-abstract class ClearSearch implements SearchUserEvent {
-  const factory ClearSearch() = _$ClearSearchImpl;
+
+@override
+int get hashCode => Object.hash(runtimeType,query);
+
+@override
+String toString() {
+  return 'SearchUserEvent.searchQueryChanged(query: $query)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$LoadFollowedUsersImplCopyWith<$Res> {
-  factory _$$LoadFollowedUsersImplCopyWith(_$LoadFollowedUsersImpl value,
-          $Res Function(_$LoadFollowedUsersImpl) then) =
-      __$$LoadFollowedUsersImplCopyWithImpl<$Res>;
+abstract mixin class $SearchQueryChangedCopyWith<$Res> implements $SearchUserEventCopyWith<$Res> {
+  factory $SearchQueryChangedCopyWith(SearchQueryChanged value, $Res Function(SearchQueryChanged) _then) = _$SearchQueryChangedCopyWithImpl;
+@useResult
+$Res call({
+ String query
+});
+
+
+
+
+}
+/// @nodoc
+class _$SearchQueryChangedCopyWithImpl<$Res>
+    implements $SearchQueryChangedCopyWith<$Res> {
+  _$SearchQueryChangedCopyWithImpl(this._self, this._then);
+
+  final SearchQueryChanged _self;
+  final $Res Function(SearchQueryChanged) _then;
+
+/// Create a copy of SearchUserEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? query = null,}) {
+  return _then(SearchQueryChanged(
+null == query ? _self.query : query // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-class __$$LoadFollowedUsersImplCopyWithImpl<$Res>
-    extends _$SearchUserEventCopyWithImpl<$Res, _$LoadFollowedUsersImpl>
-    implements _$$LoadFollowedUsersImplCopyWith<$Res> {
-  __$$LoadFollowedUsersImplCopyWithImpl(_$LoadFollowedUsersImpl _value,
-      $Res Function(_$LoadFollowedUsersImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of SearchUserEvent
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$LoadFollowedUsersImpl implements LoadFollowedUsers {
-  const _$LoadFollowedUsersImpl();
 
-  @override
-  String toString() {
-    return 'SearchUserEvent.loadFollowedUsers()';
-  }
+class ClearSearch implements SearchUserEvent {
+  const ClearSearch();
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadFollowedUsersImpl);
-  }
 
-  @override
-  int get hashCode => runtimeType.hashCode;
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String query) searchQueryChanged,
-    required TResult Function() clearSearch,
-    required TResult Function() loadFollowedUsers,
-  }) {
-    return loadFollowedUsers();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String query)? searchQueryChanged,
-    TResult? Function()? clearSearch,
-    TResult? Function()? loadFollowedUsers,
-  }) {
-    return loadFollowedUsers?.call();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String query)? searchQueryChanged,
-    TResult Function()? clearSearch,
-    TResult Function()? loadFollowedUsers,
-    required TResult orElse(),
-  }) {
-    if (loadFollowedUsers != null) {
-      return loadFollowedUsers();
-    }
-    return orElse();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(SearchQueryChanged value) searchQueryChanged,
-    required TResult Function(ClearSearch value) clearSearch,
-    required TResult Function(LoadFollowedUsers value) loadFollowedUsers,
-  }) {
-    return loadFollowedUsers(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SearchQueryChanged value)? searchQueryChanged,
-    TResult? Function(ClearSearch value)? clearSearch,
-    TResult? Function(LoadFollowedUsers value)? loadFollowedUsers,
-  }) {
-    return loadFollowedUsers?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(SearchQueryChanged value)? searchQueryChanged,
-    TResult Function(ClearSearch value)? clearSearch,
-    TResult Function(LoadFollowedUsers value)? loadFollowedUsers,
-    required TResult orElse(),
-  }) {
-    if (loadFollowedUsers != null) {
-      return loadFollowedUsers(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ClearSearch);
 }
 
-abstract class LoadFollowedUsers implements SearchUserEvent {
-  const factory LoadFollowedUsers() = _$LoadFollowedUsersImpl;
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'SearchUserEvent.clearSearch()';
 }
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class LoadFollowedUsers implements SearchUserEvent {
+  const LoadFollowedUsers();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadFollowedUsers);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'SearchUserEvent.loadFollowedUsers()';
+}
+
+
+}
+
+
+
+
+// dart format on
