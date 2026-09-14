@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:velora/features/media/data/services/voice_recorder.dart';
+import 'package:velora/features/media/presentation/services/voice_recorder_service.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
 /// Bottom sheet widget for recording voice messages
@@ -151,20 +151,13 @@ class _VoiceRecorderBottomSheetState extends State<VoiceRecorderBottomSheet>
     return Container(
       decoration: BoxDecoration(
         color: colorScheme.surface,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
         border: Border(
           top: BorderSide(
             color: colorScheme.outline.withValues(alpha: 0.15),
             width: 1,
           ),
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.15),
-            blurRadius: 20,
-            offset: const Offset(0, -4),
-          ),
-        ],
       ),
       child: SafeArea(
         top: false,
@@ -199,11 +192,7 @@ class _VoiceRecorderBottomSheetState extends State<VoiceRecorderBottomSheet>
                 const SizedBox(height: 16),
                 Text(t.voiceRecorderCheckingPermission),
               ] else if (!_hasPermission) ...[
-                Icon(
-                  Icons.mic_off,
-                  size: 64,
-                  color: colorScheme.error,
-                ),
+                Icon(Icons.mic_off, size: 64, color: colorScheme.error),
                 const SizedBox(height: 16),
                 Text(
                   t.voiceRecorderNoPermission,
@@ -223,11 +212,13 @@ class _VoiceRecorderBottomSheetState extends State<VoiceRecorderBottomSheet>
                   animation: _pulseAnimation,
                   builder: (context, child) {
                     return Container(
-                      width: 120 *
+                      width:
+                          120 *
                           (_isRecording && !_isPaused
                               ? _pulseAnimation.value
                               : 1.0),
-                      height: 120 *
+                      height:
+                          120 *
                           (_isRecording && !_isPaused
                               ? _pulseAnimation.value
                               : 1.0),
@@ -246,23 +237,6 @@ class _VoiceRecorderBottomSheetState extends State<VoiceRecorderBottomSheet>
                                   Colors.transparent,
                                 ],
                         ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: (_isRecording
-                                    ? colorScheme.error
-                                    : colorScheme.primary)
-                                .withValues(
-                                    alpha: 0.3 *
-                                        (_isRecording && !_isPaused
-                                            ? _pulseAnimation.value
-                                            : 1.0)),
-                            blurRadius: 20 *
-                                (_isRecording && !_isPaused
-                                    ? _pulseAnimation.value
-                                    : 1.0),
-                            spreadRadius: 5,
-                          ),
-                        ],
                       ),
                       child: Center(
                         child: Container(
@@ -283,16 +257,6 @@ class _VoiceRecorderBottomSheetState extends State<VoiceRecorderBottomSheet>
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                             ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: (_isRecording
-                                        ? colorScheme.error
-                                        : colorScheme.primary)
-                                    .withValues(alpha: 0.4),
-                                blurRadius: 12,
-                                offset: const Offset(0, 4),
-                              ),
-                            ],
                           ),
                           child: Icon(
                             _isRecording
@@ -322,8 +286,8 @@ class _VoiceRecorderBottomSheetState extends State<VoiceRecorderBottomSheet>
                 Text(
                   _isRecording
                       ? (_isPaused
-                          ? t.voiceRecorderPaused
-                          : t.voiceRecorderRecording)
+                            ? t.voiceRecorderPaused
+                            : t.voiceRecorderRecording)
                       : t.voiceRecorderTapToStart,
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: colorScheme.onSurfaceVariant,
@@ -370,8 +334,9 @@ class _VoiceRecorderBottomSheetState extends State<VoiceRecorderBottomSheet>
                         label: _isPaused
                             ? t.voiceRecorderResume
                             : t.voiceRecorderPause,
-                        onPressed:
-                            _isPaused ? _resumeRecording : _pauseRecording,
+                        onPressed: _isPaused
+                            ? _resumeRecording
+                            : _pauseRecording,
                         backgroundColor: colorScheme.secondaryContainer,
                         iconColor: colorScheme.onSecondaryContainer,
                       )
@@ -400,21 +365,7 @@ class _VoiceRecorderBottomSheetState extends State<VoiceRecorderBottomSheet>
         Container(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            gradient: LinearGradient(
-              colors: [
-                backgroundColor,
-                backgroundColor.withValues(alpha: 0.8),
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: backgroundColor.withValues(alpha: 0.3),
-                blurRadius: 8,
-                offset: const Offset(0, 4),
-              ),
-            ],
+            color: backgroundColor,
           ),
           child: Material(
             color: Colors.transparent,
@@ -432,10 +383,7 @@ class _VoiceRecorderBottomSheetState extends State<VoiceRecorderBottomSheet>
           ),
         ),
         const SizedBox(height: 8),
-        Text(
-          label,
-          style: Theme.of(context).textTheme.labelSmall,
-        ),
+        Text(label, style: Theme.of(context).textTheme.labelSmall),
       ],
     );
   }
@@ -447,25 +395,7 @@ class _VoiceRecorderBottomSheetState extends State<VoiceRecorderBottomSheet>
     required Color iconColor,
   }) {
     return Container(
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: LinearGradient(
-          colors: [
-            backgroundColor,
-            backgroundColor.withValues(alpha: 0.8),
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: backgroundColor.withValues(alpha: 0.4),
-            blurRadius: 12,
-            offset: const Offset(0, 6),
-            spreadRadius: 2,
-          ),
-        ],
-      ),
+      decoration: BoxDecoration(shape: BoxShape.circle, color: backgroundColor),
       child: Material(
         color: Colors.transparent,
         shape: const CircleBorder(),
