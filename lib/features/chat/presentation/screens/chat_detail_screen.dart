@@ -12,10 +12,7 @@ import 'package:velora/features/chat/presentation/bloc/chat_message_state.dart';
 import 'package:velora/features/chat/presentation/bloc/user_presence_bloc.dart';
 import 'package:velora/features/chat/presentation/bloc/user_presence_event.dart';
 import 'package:velora/features/chat/presentation/bloc/user_presence_state.dart';
-import 'package:velora/features/chat/presentation/widgets/chat_input_bar.dart';
-import 'package:velora/features/chat/presentation/widgets/chat_message_list.dart';
-import 'package:velora/features/chat/presentation/widgets/typing_indicator_subtitle.dart';
-import 'package:velora/features/chat/presentation/widgets/voice_recorder_bottom_sheet.dart';
+import 'package:velora/features/chat/presentation/widgets/chat_widgets.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
 class ChatDetailScreen extends HookWidget {
@@ -62,8 +59,8 @@ class ChatDetailScreen extends HookWidget {
     useEffect(() {
       if (!isGroup && peerUserId != null) {
         context.read<UserPresenceBloc>().add(
-              UserPresenceEvent.fetchLastSeen([peerUserId!]),
-            );
+          UserPresenceEvent.fetchLastSeen([peerUserId!]),
+        );
       }
       return null;
     }, [peerUserId]);
@@ -76,11 +73,13 @@ class ChatDetailScreen extends HookWidget {
 
     return BlocProvider(
       create: (context) => getIt<ChatMessageBloc>()
-        ..add(InitializeChatEvent(
-          conversationId: conversationId,
-          peerUserId: peerUserId,
-          limit: 50,
-        )),
+        ..add(
+          InitializeChatEvent(
+            conversationId: conversationId,
+            peerUserId: peerUserId,
+            limit: 50,
+          ),
+        ),
       child: _ChatDetailContent(
         conversationId: conversationId,
         chatName: chatName,
@@ -173,13 +172,13 @@ class _ChatDetailContentState extends State<_ChatDetailContent> {
     // Dispatch event to Bloc to handle upload and send
     if (mounted) {
       context.read<ChatMessageBloc>().add(
-            ChatMessageEvent.uploadAndSendAudio(
-              conversationId: widget.conversationId,
-              filePath: recordedFilePath,
-              userId: userId,
-              isVoiceMessage: true,
-            ),
-          );
+        ChatMessageEvent.uploadAndSendAudio(
+          conversationId: widget.conversationId,
+          filePath: recordedFilePath,
+          userId: userId,
+          isVoiceMessage: true,
+        ),
+      );
     }
 
     // Clean up temp file after a delay (let upload finish first)
@@ -207,9 +206,7 @@ class _ChatDetailContentState extends State<_ChatDetailContent> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    final textTheme = theme.textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
     final t = AppLocalizations.of(context)!;
 
     return BlocListener<ChatMessageBloc, ChatMessageState>(
@@ -258,205 +255,96 @@ class _ChatDetailContentState extends State<_ChatDetailContent> {
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         backgroundColor: widget.backgroundColor,
-        appBar: AppBar(
-          backgroundColor: colorScheme.surface,
-          elevation: 0,
-          leading: Semantics(
-            button: true,
-            label: t.chatDetailBackLabel,
-            child: IconButton(
-              icon: Icon(Icons.arrow_back, color: colorScheme.onSurface),
-              onPressed: () => Navigator.pop(context),
-              tooltip: t.commonGoBack,
-            ),
-          ),
-          title: Semantics(
-            header: true,
-            label: t.chatDetailTitleLabel(widget.chatName),
-            child: Row(
-              children: [
-                // Modern avatar with gradient border for online status
-                BlocBuilder<UserPresenceBloc, UserPresenceState>(
-                  builder: (context, presenceState) {
-                    final isOnline = !widget.isGroup &&
-                            widget.peerUserId != null
-                        ? presenceState.onlineUsers[widget.peerUserId] ?? false
-                        : false;
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(72),
+          child: BlocBuilder<UserPresenceBloc, UserPresenceState>(
+            builder: (context, presenceState) {
+              final isOnline = !widget.isGroup && widget.peerUserId != null
+                  ? presenceState.onlineUsers[widget.peerUserId] ?? false
+                  : false;
 
-                    return Container(
-                      decoration: isOnline
-                          ? BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: colorScheme.primary,
-                                width: 2,
-                              ),
-                            )
-                          : null,
-                      padding: isOnline ? const EdgeInsets.all(1) : null,
-                      child: CircleAvatar(
-                        radius: 20,
-                        backgroundImage: NetworkImage(widget.profileImageUrl),
-                        backgroundColor: colorScheme.surfaceContainerHighest,
-                      ),
-                    );
-                  },
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.chatName,
-                        style: textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: colorScheme.onSurface,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      // Only rebuild presence text when presence state changes
-                      if (!widget.isGroup && widget.peerUserId != null)
-                        TypingIndicatorSubtitle(
+              return Semantics(
+                header: true,
+                label: t.chatDetailTitleLabel(widget.chatName),
+                child: ChatRoomHeader(
+                  title: widget.chatName,
+                  subtitle: widget.chatSubtitle,
+                  subtitleWidget: !widget.isGroup && widget.peerUserId != null
+                      ? TypingIndicatorSubtitle(
                           peerUserId: widget.peerUserId!,
                           chatSubtitle: widget.chatSubtitle,
                         )
-                      else
-                        Text(
-                          widget.chatSubtitle,
-                          style: textTheme.bodySmall?.copyWith(
-                            color: colorScheme.onSurfaceVariant,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                    ],
+                      : null,
+                  avatarUrl: widget.profileImageUrl,
+                  isGroup: widget.isGroup,
+                  isOnline: isOnline,
+                  onBack: () => Navigator.pop(context),
+                  optionsTooltip: t.chatDetailMenuTooltip,
+                  onInfo: () {},
+                ),
+              );
+            },
+          ),
+        ),
+        body: SafeArea(
+          child: Container(
+            decoration: BoxDecoration(
+              color: colorScheme.surfaceContainerLowest.withValues(alpha: 0.58),
+            ),
+            child: Column(
+              children: [
+                Expanded(
+                  child: ChatMessageList(
+                    scrollController: widget.scrollController,
+                    fadeAnimation: widget.fadeAnimation,
+                    isGroup: widget.isGroup,
+                    peerUserId: widget.peerUserId,
+                    peerDisplayName: widget.chatName,
+                    peerAvatarUrl: widget.profileImageUrl,
                   ),
+                ),
+                BlocBuilder<ChatMessageBloc, ChatMessageState>(
+                  builder: (context, state) {
+                    if (!state.isUploadingMedia) return const SizedBox.shrink();
+
+                    return const ChatUploadProgress(label: 'Uploading...');
+                  },
+                ),
+                BlocBuilder<ChatMessageBloc, ChatMessageState>(
+                  builder: (context, state) {
+                    final conversationId =
+                        state.conversationId ?? widget.conversationId;
+                    return ChatInputBar(
+                      conversationId: conversationId,
+                      controller: widget.messageController,
+                      focusNode: widget.focusNode,
+                      onSendMessage: (message) {
+                        if (message.trim().isNotEmpty) {
+                          context.read<ChatMessageBloc>().add(
+                            SendChatMessageEvent(
+                              conversationId: conversationId,
+                              content: message,
+                            ),
+                          );
+                          widget.messageController.clear();
+                        }
+                      },
+                      onTyping: (isTyping) {
+                        if (conversationId.isNotEmpty) {
+                          context.read<ChatMessageBloc>().add(
+                            SendTypingEvent(
+                              conversationId: conversationId,
+                              isTyping: isTyping,
+                            ),
+                          );
+                        }
+                      },
+                      onVoicePressed: _handleVoicePressed,
+                    );
+                  },
                 ),
               ],
             ),
-          ),
-          actions: [
-            Semantics(
-              button: true,
-              label: t.chatDetailOptionsLabel,
-              child: IconButton(
-                icon: Icon(Icons.more_vert, color: colorScheme.onSurface),
-                onPressed: () {},
-                tooltip: t.chatDetailMenuTooltip,
-              ),
-            ),
-          ],
-        ),
-        body: SafeArea(
-          child: Column(
-            children: [
-              Expanded(
-                child: ChatMessageList(
-                  scrollController: widget.scrollController,
-                  fadeAnimation: widget.fadeAnimation,
-                  isGroup: widget.isGroup,
-                  peerUserId: widget.peerUserId,
-                  peerDisplayName: widget.chatName,
-                  peerAvatarUrl: widget.profileImageUrl,
-                ),
-              ),
-              // Upload progress indicator
-              BlocBuilder<ChatMessageBloc, ChatMessageState>(
-                builder: (context, state) {
-                  if (!state.isUploadingMedia) return const SizedBox.shrink();
-
-                  return TweenAnimationBuilder<double>(
-                    duration: const Duration(milliseconds: 300),
-                    tween: Tween(begin: 0.0, end: 1.0),
-                    builder: (context, value, child) {
-                      return Opacity(
-                        opacity: value,
-                        child: Transform.translate(
-                          offset: Offset(0, 20 * (1 - value)),
-                          child: child,
-                        ),
-                      );
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 10,
-                      ),
-                      decoration: BoxDecoration(
-                        color: colorScheme.surfaceContainerHighest,
-                        border: Border(
-                          top: BorderSide(
-                            color: colorScheme.outline.withValues(alpha: 0.1),
-                            width: 1,
-                          ),
-                        ),
-                      ),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 18,
-                            height: 18,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2.5,
-                              color: colorScheme.primary,
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Text(
-                            'Uploading...',
-                            style: textTheme.bodySmall?.copyWith(
-                              color: colorScheme.onSurface,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          const Spacer(),
-                          Icon(
-                            Icons.cloud_upload_outlined,
-                            size: 18,
-                            color: colorScheme.primary.withValues(alpha: 0.7),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-              BlocBuilder<ChatMessageBloc, ChatMessageState>(
-                builder: (context, state) {
-                  final conversationId =
-                      state.conversationId ?? widget.conversationId;
-                  return ChatInputBar(
-                    conversationId: conversationId,
-                    controller: widget.messageController,
-                    focusNode: widget.focusNode,
-                    onSendMessage: (message) {
-                      if (message.trim().isNotEmpty) {
-                        context.read<ChatMessageBloc>().add(
-                              SendChatMessageEvent(
-                                conversationId: conversationId,
-                                content: message,
-                              ),
-                            );
-                        widget.messageController.clear();
-                      }
-                    },
-                    onTyping: (isTyping) {
-                      if (conversationId.isNotEmpty) {
-                        context.read<ChatMessageBloc>().add(
-                              SendTypingEvent(
-                                conversationId: conversationId,
-                                isTyping: isTyping,
-                              ),
-                            );
-                      }
-                    },
-                    onVoicePressed: _handleVoicePressed,
-                  );
-                },
-              ),
-            ],
           ),
         ),
       ),
