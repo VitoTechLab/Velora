@@ -329,12 +329,13 @@ class _StatPill extends StatelessWidget {
   }
 }
 
+// ignore: unused_element
 class _StatusPill extends StatelessWidget {
   const _StatusPill({
     required this.label,
     required this.background,
     required this.foreground,
-    this.icon,
+    required this.icon,
   });
 
   final String label;

@@ -31,12 +31,8 @@ class AboutScreen extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(28),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [colorScheme.primary, colorScheme.secondary],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: BorderRadius.circular(28),
+                  color: colorScheme.primary,
+                  borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
                   children: [
@@ -45,7 +41,7 @@ class AboutScreen extends StatelessWidget {
                       height: 96,
                       decoration: BoxDecoration(
                         color: colorScheme.onPrimary.withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(24),
+                        borderRadius: BorderRadius.circular(12),
                       ),
                       child: Icon(
                         Icons.volunteer_activism,
@@ -76,7 +72,7 @@ class AboutScreen extends StatelessWidget {
                       ),
                       decoration: BoxDecoration(
                         color: colorScheme.onPrimary.withValues(alpha: 0.2),
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
                         t.settingsHelpAboutVersion,
@@ -404,7 +400,7 @@ class _SocialButton extends StatelessWidget {
       button: true,
       label: label,
       child: InkWell(
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(12),
         onTap: () {},
         child: Column(
           children: [

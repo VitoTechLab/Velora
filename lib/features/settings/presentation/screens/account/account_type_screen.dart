@@ -12,9 +12,7 @@ class AccountTypeScreen extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(t.accountTypeScreenTitle),
-      ),
+      appBar: AppBar(title: Text(t.accountTypeScreenTitle)),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16),
@@ -26,15 +24,8 @@ class AccountTypeScreen extends StatelessWidget {
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      colorScheme.primary.withValues(alpha: 0.15),
-                      colorScheme.secondary.withValues(alpha: 0.08),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: BorderRadius.circular(20),
+                  color: colorScheme.primary.withValues(alpha: 0.15),
+                  borderRadius: BorderRadius.circular(12),
                   border: Border.all(
                     color: colorScheme.primary.withValues(alpha: 0.3),
                   ),
@@ -114,7 +105,7 @@ class AccountTypeScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: colorScheme.surfaceContainerHighest,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -290,12 +281,7 @@ class _CompactBenefitItem extends StatelessWidget {
         children: [
           Icon(icon, color: colorScheme.secondary, size: 20),
           const SizedBox(width: 8),
-          Expanded(
-            child: Text(
-              text,
-              style: theme.textTheme.bodyMedium,
-            ),
-          ),
+          Expanded(child: Text(text, style: theme.textTheme.bodyMedium)),
         ],
       ),
     );
@@ -306,10 +292,7 @@ class _VerificationContent extends StatefulWidget {
   final ThemeData theme;
   final AppLocalizations t;
 
-  const _VerificationContent({
-    required this.theme,
-    required this.t,
-  });
+  const _VerificationContent({required this.theme, required this.t});
 
   @override
   State<_VerificationContent> createState() => _VerificationContentState();
