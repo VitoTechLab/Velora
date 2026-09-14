@@ -29,15 +29,7 @@ class CampaignCoverHeader extends StatelessWidget {
                     fit: BoxFit.cover,
                     placeholder: (context, url) => Container(
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            colorScheme.primary.withValues(alpha: 0.8),
-                            colorScheme.secondary.withValues(alpha: 0.6),
-                            colorScheme.tertiary.withValues(alpha: 0.5),
-                          ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
+                        color: colorScheme.primary.withValues(alpha: 0.8),
                       ),
                       child: Center(
                         child: CircularProgressIndicator(
@@ -48,15 +40,7 @@ class CampaignCoverHeader extends StatelessWidget {
                     ),
                     errorWidget: (context, url, error) => Container(
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            colorScheme.primary.withValues(alpha: 0.8),
-                            colorScheme.secondary.withValues(alpha: 0.6),
-                            colorScheme.tertiary.withValues(alpha: 0.5),
-                          ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
+                        color: colorScheme.primary.withValues(alpha: 0.8),
                       ),
                       child: Icon(
                         Icons.campaign_outlined,
@@ -67,15 +51,7 @@ class CampaignCoverHeader extends StatelessWidget {
                   )
                 : Container(
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          colorScheme.primary.withValues(alpha: 0.8),
-                          colorScheme.secondary.withValues(alpha: 0.6),
-                          colorScheme.tertiary.withValues(alpha: 0.5),
-                        ],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
+                      color: colorScheme.primary.withValues(alpha: 0.8),
                     ),
                     child: Icon(
                       Icons.campaign_outlined,
@@ -88,15 +64,7 @@ class CampaignCoverHeader extends StatelessWidget {
           Positioned.fill(
             child: Container(
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Colors.black.withValues(alpha: 0.3),
-                    Colors.transparent,
-                    Colors.black.withValues(alpha: 0.5),
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
+                color: Colors.black.withValues(alpha: 0.3),
               ),
             ),
           ),

@@ -59,11 +59,13 @@ class CampaignDetailScreen extends HookWidget {
       }
 
       scrollController.addListener(listener);
-      
+
       // Fetch data for tabs
       bloc.add(CampaignEvent.loadCampaignUpdates(campaignId: campaign.id));
       bloc.add(CampaignEvent.loadComments(campaignId: campaign.id));
-      bloc.add(CampaignEvent.loadCampaignTransparencyData(campaignId: campaign.id));
+      bloc.add(
+        CampaignEvent.loadCampaignTransparencyData(campaignId: campaign.id),
+      );
 
       return () => scrollController.removeListener(listener);
     }, [scrollController, campaign.id]);
@@ -85,7 +87,7 @@ class CampaignDetailScreen extends HookWidget {
         // Donation flow with Bank Transfer gateway
         final supabase = getIt<SupabaseClient>();
         final userId = supabase.auth.currentUser?.id;
-        
+
         if (userId == null) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -95,7 +97,7 @@ class CampaignDetailScreen extends HookWidget {
           );
           return;
         }
-        
+
         DonateBottomSheet.show(
           context,
           campaignId: campaign.id,
@@ -119,222 +121,220 @@ class CampaignDetailScreen extends HookWidget {
         builder: (context, state) {
           return CustomScrollView(
             controller: scrollController,
-        slivers: [
-          // SliverAppBar with cover
-          SliverAppBar(
-            expandedHeight: 280,
-            pinned: true,
-            backgroundColor: colorScheme.surface,
-            leading: IconButton(
-              onPressed: () => Navigator.pop(context),
-              icon: Icon(Icons.arrow_back),
-              style: IconButton.styleFrom(
-                backgroundColor: Colors.black.withValues(alpha: 0.5),
-                foregroundColor: Colors.white,
-              ),
-            ),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Share (mock)'),
-                      duration: Duration(seconds: 1),
-                    ),
-                  );
-                },
-                icon: Icon(Icons.share_outlined),
-                style: IconButton.styleFrom(
-                  backgroundColor: Colors.black.withValues(alpha: 0.5),
-                  foregroundColor: Colors.white,
+            slivers: [
+              // SliverAppBar with cover
+              SliverAppBar(
+                expandedHeight: 280,
+                pinned: true,
+                backgroundColor: colorScheme.surface,
+                leading: IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: Icon(Icons.arrow_back),
+                  style: IconButton.styleFrom(
+                    backgroundColor: Colors.black.withValues(alpha: 0.5),
+                    foregroundColor: Colors.white,
+                  ),
                 ),
-              ),
-              IconButton(
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Bookmark (mock)'),
-                      duration: Duration(seconds: 1),
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Share (mock)'),
+                          duration: Duration(seconds: 1),
+                        ),
+                      );
+                    },
+                    icon: Icon(Icons.share_outlined),
+                    style: IconButton.styleFrom(
+                      backgroundColor: Colors.black.withValues(alpha: 0.5),
+                      foregroundColor: Colors.white,
                     ),
-                  );
-                },
-                icon: Icon(Icons.bookmark_border),
-                style: IconButton.styleFrom(
-                  backgroundColor: Colors.black.withValues(alpha: 0.5),
-                  foregroundColor: Colors.white,
-                ),
-              ),
-              IconButton(
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('More options (mock)'),
-                      duration: Duration(seconds: 1),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Bookmark (mock)'),
+                          duration: Duration(seconds: 1),
+                        ),
+                      );
+                    },
+                    icon: Icon(Icons.bookmark_border),
+                    style: IconButton.styleFrom(
+                      backgroundColor: Colors.black.withValues(alpha: 0.5),
+                      foregroundColor: Colors.white,
                     ),
-                  );
-                },
-                icon: Icon(Icons.more_vert),
-                style: IconButton.styleFrom(
-                  backgroundColor: Colors.black.withValues(alpha: 0.5),
-                  foregroundColor: Colors.white,
-                ),
-              ),
-              const SizedBox(width: 8),
-            ],
-            flexibleSpace: FlexibleSpaceBar(
-              titlePadding: EdgeInsets.zero,
-              centerTitle: false,
-              title: AnimatedOpacity(
-                opacity: showTitle.value ? 1 : 0,
-                duration: const Duration(milliseconds: 200),
-                child: Container(
-                  padding: const EdgeInsets.fromLTRB(56, 0, 56, 16),
-                  child: Text(
-                    campaign.title,
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      color: colorScheme.onSurface,
-                      fontWeight: FontWeight.bold,
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('More options (mock)'),
+                          duration: Duration(seconds: 1),
+                        ),
+                      );
+                    },
+                    icon: Icon(Icons.more_vert),
+                    style: IconButton.styleFrom(
+                      backgroundColor: Colors.black.withValues(alpha: 0.5),
+                      foregroundColor: Colors.white,
                     ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(width: 8),
+                ],
+                flexibleSpace: FlexibleSpaceBar(
+                  titlePadding: EdgeInsets.zero,
+                  centerTitle: false,
+                  title: AnimatedOpacity(
+                    opacity: showTitle.value ? 1 : 0,
+                    duration: const Duration(milliseconds: 200),
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(56, 0, 56, 16),
+                      child: Text(
+                        campaign.title,
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          color: colorScheme.onSurface,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ),
+                  background: CampaignCoverHeader(
+                    category: campaign.category,
+                    imageUrl: campaign.coverImageUrl,
                   ),
                 ),
               ),
-              background: CampaignCoverHeader(
-                category: campaign.category,
-                imageUrl: campaign.coverImageUrl,
-              ),
-            ),
-          ),
 
-          // Creator Row
-          SliverToBoxAdapter(
-            child: CreatorRowHeader(
-              creatorName: campaign.creatorName,
-              isVerified: campaign.isVerified,
-              category: campaign.category,
-            ),
-          ),
-
-          // Title
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 20, 16, 8),
-              child: Text(
-                campaign.title,
-                style: theme.textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: colorScheme.onSurface,
-                  height: 1.2,
+              // Title
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 20, 16, 8),
+                  child: Text(
+                    campaign.title,
+                    style: theme.textTheme.headlineMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.onSurface,
+                      height: 1.2,
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
 
-          // Equity Market Module (only for equity type)
-          if (isEquity) ...[
-            SliverToBoxAdapter(
-              child: EquityMarketModule(
-                unitPrice: campaign.unitPrice!,
-                minBuyUnits: campaign.minBuyUnits!,
-                riskGrade: campaign.riskGrade!,
-                investorsCount: campaign.donorsCount,
-                equityChangePct: campaign.equityChangePct,
-                onInvestTap: handleCTAPress,
+              // Creator Row
+              SliverToBoxAdapter(
+                child: CreatorRowHeader(
+                  creatorName: campaign.creatorName,
+                  isVerified: campaign.isVerified,
+                  category: campaign.category,
+                ),
               ),
-            ),
-          ],
 
-          // Progress Summary - Use updated values from selectedCampaign if available
-          SliverToBoxAdapter(
-            child: ProgressSummaryCard(
-              raised: state.selectedCampaign?.amountRaised ?? campaign.raised,
-              target: state.selectedCampaign?.targetAmount ?? campaign.target,
-              progressPercent: state.selectedCampaign != null 
-                  ? (state.selectedCampaign!.amountRaised / state.selectedCampaign!.targetAmount * 100).clamp(0, 100)
-                  : campaign.progressPercent,
-              timeLeftLabel: campaign.timeLeftLabel,
-              donorsCount: state.selectedCampaign?.donorCount ?? campaign.donorsCount,
-              updatesCount: campaign.updatesCount,
-              milestonesCount: campaign.milestonesCount,
-            ),
-          ),
-
-          // TabBar
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: _SliverTabBarDelegate(
-              TabBar(
-                controller: tabController,
-                labelColor: colorScheme.primary,
-                unselectedLabelColor: colorScheme.onSurfaceVariant,
-                indicatorColor: colorScheme.primary,
-                indicatorWeight: 3,
-                indicatorSize: TabBarIndicatorSize.label,
-                labelStyle: theme.textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-                unselectedLabelStyle: theme.textTheme.titleSmall,
-                tabs: const [
-                  Tab(text: 'Overview'),
-                  Tab(text: 'Updates'),
-                  Tab(text: 'Discussion'),
-                  Tab(text: 'Transparency'),
-                ],
-              ),
-            ),
-          ),
-
-          // TabBarView Content
-          SliverFillRemaining(
-            child: TabBarView(
-              controller: tabController,
-              children: [
-                // Overview Tab
-                OverviewTabContent(
-                  campaignType: campaign.type.name,
-                  description: campaign.description,
-                ),
-
-                // Updates Tab
-                UpdatesTabContent(updates: state.campaignUpdates),
-
-                // Discussion Tab
-                DiscussionTabContent(
-                  comments: state.comments,
-                  campaignId: campaign.id,
-                ),
-
-                // Transparency Tab
-                TransparencyTabContent(
-                  fundBreakdown: state.campaignFundBreakdown,
-                  documents: state.campaignDocuments,
-                  milestones: state.campaignMilestones,
-                  proofItems: state.campaignProofItems,
-                  showRiskDisclaimer: showRiskDisclaimer,
-                  riskGrade: campaign.riskGrade,
+              // Equity Market Module (only for equity type)
+              if (isEquity) ...[
+                SliverToBoxAdapter(
+                  child: EquityMarketModule(
+                    unitPrice: campaign.unitPrice!,
+                    minBuyUnits: campaign.minBuyUnits!,
+                    riskGrade: campaign.riskGrade!,
+                    investorsCount: campaign.donorsCount,
+                    equityChangePct: campaign.equityChangePct,
+                    onInvestTap: handleCTAPress,
+                  ),
                 ),
               ],
-            ),
-          ),
-        ],
-      );
+
+              // Progress Summary - Use updated values from selectedCampaign if available
+              SliverToBoxAdapter(
+                child: ProgressSummaryCard(
+                  raised:
+                      state.selectedCampaign?.amountRaised ?? campaign.raised,
+                  target:
+                      state.selectedCampaign?.targetAmount ?? campaign.target,
+                  progressPercent: state.selectedCampaign != null
+                      ? (state.selectedCampaign!.amountRaised /
+                                state.selectedCampaign!.targetAmount *
+                                100)
+                            .clamp(0, 100)
+                      : campaign.progressPercent,
+                  timeLeftLabel: campaign.timeLeftLabel,
+                  donorsCount:
+                      state.selectedCampaign?.donorCount ??
+                      campaign.donorsCount,
+                  updatesCount: campaign.updatesCount,
+                  milestonesCount: campaign.milestonesCount,
+                ),
+              ),
+
+              // TabBar
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: _SliverTabBarDelegate(
+                  TabBar(
+                    controller: tabController,
+                    labelColor: colorScheme.primary,
+                    unselectedLabelColor: colorScheme.onSurfaceVariant,
+                    indicatorColor: colorScheme.primary,
+                    indicatorWeight: 3,
+                    indicatorSize: TabBarIndicatorSize.label,
+                    labelStyle: theme.textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                    unselectedLabelStyle: theme.textTheme.titleSmall,
+                    tabs: const [
+                      Tab(text: 'Overview'),
+                      Tab(text: 'Updates'),
+                      Tab(text: 'Discussion'),
+                      Tab(text: 'Transparency'),
+                    ],
+                  ),
+                ),
+              ),
+
+              // TabBarView Content
+              SliverFillRemaining(
+                child: TabBarView(
+                  controller: tabController,
+                  children: [
+                    // Overview Tab
+                    OverviewTabContent(
+                      campaignType: campaign.type.name,
+                      description: campaign.description,
+                    ),
+
+                    // Updates Tab
+                    UpdatesTabContent(updates: state.campaignUpdates),
+
+                    // Discussion Tab
+                    DiscussionTabContent(
+                      comments: state.comments,
+                      campaignId: campaign.id,
+                    ),
+
+                    // Transparency Tab
+                    TransparencyTabContent(
+                      fundBreakdown: state.campaignFundBreakdown,
+                      documents: state.campaignDocuments,
+                      milestones: state.campaignMilestones,
+                      proofItems: state.campaignProofItems,
+                      showRiskDisclaimer: showRiskDisclaimer,
+                      riskGrade: campaign.riskGrade,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
         },
       ),
 
       // Floating CTA Button
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: colorScheme.surface,
-          boxShadow: [
-            BoxShadow(
-              color: colorScheme.shadow.withValues(alpha: 0.1),
-              blurRadius: 16,
-              offset: const Offset(0, -4),
-            ),
-          ],
-        ),
+        decoration: BoxDecoration(color: colorScheme.surface),
         child: SafeArea(
           child: PrimaryCTAButton(
             label: campaign.ctaLabel,
