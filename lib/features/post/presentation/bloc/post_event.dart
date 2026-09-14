@@ -4,7 +4,7 @@ import 'package:velora/features/post/domain/entities/post_feed_entity.dart';
 part 'post_event.freezed.dart';
 
 @freezed
-class PostEvent with _$PostEvent {
+abstract class PostEvent with _$PostEvent {
   const factory PostEvent.createPost({
     required String userId,
     required String content,

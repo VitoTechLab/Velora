@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,222 +9,296 @@ part of 'post_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
 mixin _$PostState {
-  FeedEntity? get createdPost => throw _privateConstructorUsedError;
-  bool get isCreatingPost => throw _privateConstructorUsedError;
-  String? get errorCreatePost => throw _privateConstructorUsedError;
-  String? get message => throw _privateConstructorUsedError;
 
-  /// Create a copy of PostState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $PostStateCopyWith<PostState> get copyWith =>
-      throw _privateConstructorUsedError;
+ FeedEntity? get createdPost; bool get isCreatingPost; String? get errorCreatePost; String? get message;
+/// Create a copy of PostState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$PostStateCopyWith<PostState> get copyWith => _$PostStateCopyWithImpl<PostState>(this as PostState, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PostState&&(identical(other.createdPost, createdPost) || other.createdPost == createdPost)&&(identical(other.isCreatingPost, isCreatingPost) || other.isCreatingPost == isCreatingPost)&&(identical(other.errorCreatePost, errorCreatePost) || other.errorCreatePost == errorCreatePost)&&(identical(other.message, message) || other.message == message));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,createdPost,isCreatingPost,errorCreatePost,message);
+
+@override
+String toString() {
+  return 'PostState(createdPost: $createdPost, isCreatingPost: $isCreatingPost, errorCreatePost: $errorCreatePost, message: $message)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $PostStateCopyWith<$Res> {
-  factory $PostStateCopyWith(PostState value, $Res Function(PostState) then) =
-      _$PostStateCopyWithImpl<$Res, PostState>;
-  @useResult
-  $Res call(
-      {FeedEntity? createdPost,
-      bool isCreatingPost,
-      String? errorCreatePost,
-      String? message});
+abstract mixin class $PostStateCopyWith<$Res>  {
+  factory $PostStateCopyWith(PostState value, $Res Function(PostState) _then) = _$PostStateCopyWithImpl;
+@useResult
+$Res call({
+ FeedEntity? createdPost, bool isCreatingPost, String? errorCreatePost, String? message
+});
 
-  $FeedEntityCopyWith<$Res>? get createdPost;
+
+$FeedEntityCopyWith<$Res>? get createdPost;
+
 }
-
 /// @nodoc
-class _$PostStateCopyWithImpl<$Res, $Val extends PostState>
+class _$PostStateCopyWithImpl<$Res>
     implements $PostStateCopyWith<$Res> {
-  _$PostStateCopyWithImpl(this._value, this._then);
+  _$PostStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final PostState _self;
+  final $Res Function(PostState) _then;
 
-  /// Create a copy of PostState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? createdPost = freezed,
-    Object? isCreatingPost = null,
-    Object? errorCreatePost = freezed,
-    Object? message = freezed,
-  }) {
-    return _then(_value.copyWith(
-      createdPost: freezed == createdPost
-          ? _value.createdPost
-          : createdPost // ignore: cast_nullable_to_non_nullable
-              as FeedEntity?,
-      isCreatingPost: null == isCreatingPost
-          ? _value.isCreatingPost
-          : isCreatingPost // ignore: cast_nullable_to_non_nullable
-              as bool,
-      errorCreatePost: freezed == errorCreatePost
-          ? _value.errorCreatePost
-          : errorCreatePost // ignore: cast_nullable_to_non_nullable
-              as String?,
-      message: freezed == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+/// Create a copy of PostState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? createdPost = freezed,Object? isCreatingPost = null,Object? errorCreatePost = freezed,Object? message = freezed,}) {
+  return _then(_self.copyWith(
+createdPost: freezed == createdPost ? _self.createdPost : createdPost // ignore: cast_nullable_to_non_nullable
+as FeedEntity?,isCreatingPost: null == isCreatingPost ? _self.isCreatingPost : isCreatingPost // ignore: cast_nullable_to_non_nullable
+as bool,errorCreatePost: freezed == errorCreatePost ? _self.errorCreatePost : errorCreatePost // ignore: cast_nullable_to_non_nullable
+as String?,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+/// Create a copy of PostState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FeedEntityCopyWith<$Res>? get createdPost {
+    if (_self.createdPost == null) {
+    return null;
   }
 
-  /// Create a copy of PostState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $FeedEntityCopyWith<$Res>? get createdPost {
-    if (_value.createdPost == null) {
-      return null;
-    }
+  return $FeedEntityCopyWith<$Res>(_self.createdPost!, (value) {
+    return _then(_self.copyWith(createdPost: value));
+  });
+}
+}
 
-    return $FeedEntityCopyWith<$Res>(_value.createdPost!, (value) {
-      return _then(_value.copyWith(createdPost: value) as $Val);
-    });
-  }
+
+/// Adds pattern-matching-related methods to [PostState].
+extension PostStatePatterns on PostState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _PostState value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _PostState() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _PostState value)  $default,){
+final _that = this;
+switch (_that) {
+case _PostState():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _PostState value)?  $default,){
+final _that = this;
+switch (_that) {
+case _PostState() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( FeedEntity? createdPost,  bool isCreatingPost,  String? errorCreatePost,  String? message)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _PostState() when $default != null:
+return $default(_that.createdPost,_that.isCreatingPost,_that.errorCreatePost,_that.message);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( FeedEntity? createdPost,  bool isCreatingPost,  String? errorCreatePost,  String? message)  $default,) {final _that = this;
+switch (_that) {
+case _PostState():
+return $default(_that.createdPost,_that.isCreatingPost,_that.errorCreatePost,_that.message);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( FeedEntity? createdPost,  bool isCreatingPost,  String? errorCreatePost,  String? message)?  $default,) {final _that = this;
+switch (_that) {
+case _PostState() when $default != null:
+return $default(_that.createdPost,_that.isCreatingPost,_that.errorCreatePost,_that.message);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
-abstract class _$$PostStateImplCopyWith<$Res>
-    implements $PostStateCopyWith<$Res> {
-  factory _$$PostStateImplCopyWith(
-          _$PostStateImpl value, $Res Function(_$PostStateImpl) then) =
-      __$$PostStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {FeedEntity? createdPost,
-      bool isCreatingPost,
-      String? errorCreatePost,
-      String? message});
 
-  @override
-  $FeedEntityCopyWith<$Res>? get createdPost;
+
+class _PostState implements PostState {
+  const _PostState({this.createdPost, this.isCreatingPost = false, this.errorCreatePost, this.message});
+  
+
+@override final  FeedEntity? createdPost;
+@override@JsonKey() final  bool isCreatingPost;
+@override final  String? errorCreatePost;
+@override final  String? message;
+
+/// Create a copy of PostState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$PostStateCopyWith<_PostState> get copyWith => __$PostStateCopyWithImpl<_PostState>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PostState&&(identical(other.createdPost, createdPost) || other.createdPost == createdPost)&&(identical(other.isCreatingPost, isCreatingPost) || other.isCreatingPost == isCreatingPost)&&(identical(other.errorCreatePost, errorCreatePost) || other.errorCreatePost == errorCreatePost)&&(identical(other.message, message) || other.message == message));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,createdPost,isCreatingPost,errorCreatePost,message);
+
+@override
+String toString() {
+  return 'PostState(createdPost: $createdPost, isCreatingPost: $isCreatingPost, errorCreatePost: $errorCreatePost, message: $message)';
+}
+
+
 }
 
 /// @nodoc
-class __$$PostStateImplCopyWithImpl<$Res>
-    extends _$PostStateCopyWithImpl<$Res, _$PostStateImpl>
-    implements _$$PostStateImplCopyWith<$Res> {
-  __$$PostStateImplCopyWithImpl(
-      _$PostStateImpl _value, $Res Function(_$PostStateImpl) _then)
-      : super(_value, _then);
+abstract mixin class _$PostStateCopyWith<$Res> implements $PostStateCopyWith<$Res> {
+  factory _$PostStateCopyWith(_PostState value, $Res Function(_PostState) _then) = __$PostStateCopyWithImpl;
+@override @useResult
+$Res call({
+ FeedEntity? createdPost, bool isCreatingPost, String? errorCreatePost, String? message
+});
 
-  /// Create a copy of PostState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? createdPost = freezed,
-    Object? isCreatingPost = null,
-    Object? errorCreatePost = freezed,
-    Object? message = freezed,
-  }) {
-    return _then(_$PostStateImpl(
-      createdPost: freezed == createdPost
-          ? _value.createdPost
-          : createdPost // ignore: cast_nullable_to_non_nullable
-              as FeedEntity?,
-      isCreatingPost: null == isCreatingPost
-          ? _value.isCreatingPost
-          : isCreatingPost // ignore: cast_nullable_to_non_nullable
-              as bool,
-      errorCreatePost: freezed == errorCreatePost
-          ? _value.errorCreatePost
-          : errorCreatePost // ignore: cast_nullable_to_non_nullable
-              as String?,
-      message: freezed == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
+
+@override $FeedEntityCopyWith<$Res>? get createdPost;
+
 }
-
 /// @nodoc
+class __$PostStateCopyWithImpl<$Res>
+    implements _$PostStateCopyWith<$Res> {
+  __$PostStateCopyWithImpl(this._self, this._then);
 
-class _$PostStateImpl implements _PostState {
-  const _$PostStateImpl(
-      {this.createdPost,
-      this.isCreatingPost = false,
-      this.errorCreatePost,
-      this.message});
+  final _PostState _self;
+  final $Res Function(_PostState) _then;
 
-  @override
-  final FeedEntity? createdPost;
-  @override
-  @JsonKey()
-  final bool isCreatingPost;
-  @override
-  final String? errorCreatePost;
-  @override
-  final String? message;
-
-  @override
-  String toString() {
-    return 'PostState(createdPost: $createdPost, isCreatingPost: $isCreatingPost, errorCreatePost: $errorCreatePost, message: $message)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$PostStateImpl &&
-            (identical(other.createdPost, createdPost) ||
-                other.createdPost == createdPost) &&
-            (identical(other.isCreatingPost, isCreatingPost) ||
-                other.isCreatingPost == isCreatingPost) &&
-            (identical(other.errorCreatePost, errorCreatePost) ||
-                other.errorCreatePost == errorCreatePost) &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, createdPost, isCreatingPost, errorCreatePost, message);
-
-  /// Create a copy of PostState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$PostStateImplCopyWith<_$PostStateImpl> get copyWith =>
-      __$$PostStateImplCopyWithImpl<_$PostStateImpl>(this, _$identity);
+/// Create a copy of PostState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? createdPost = freezed,Object? isCreatingPost = null,Object? errorCreatePost = freezed,Object? message = freezed,}) {
+  return _then(_PostState(
+createdPost: freezed == createdPost ? _self.createdPost : createdPost // ignore: cast_nullable_to_non_nullable
+as FeedEntity?,isCreatingPost: null == isCreatingPost ? _self.isCreatingPost : isCreatingPost // ignore: cast_nullable_to_non_nullable
+as bool,errorCreatePost: freezed == errorCreatePost ? _self.errorCreatePost : errorCreatePost // ignore: cast_nullable_to_non_nullable
+as String?,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
 }
 
-abstract class _PostState implements PostState {
-  const factory _PostState(
-      {final FeedEntity? createdPost,
-      final bool isCreatingPost,
-      final String? errorCreatePost,
-      final String? message}) = _$PostStateImpl;
+/// Create a copy of PostState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$FeedEntityCopyWith<$Res>? get createdPost {
+    if (_self.createdPost == null) {
+    return null;
+  }
 
-  @override
-  FeedEntity? get createdPost;
-  @override
-  bool get isCreatingPost;
-  @override
-  String? get errorCreatePost;
-  @override
-  String? get message;
-
-  /// Create a copy of PostState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PostStateImplCopyWith<_$PostStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  return $FeedEntityCopyWith<$Res>(_self.createdPost!, (value) {
+    return _then(_self.copyWith(createdPost: value));
+  });
 }
+}
+
+// dart format on
