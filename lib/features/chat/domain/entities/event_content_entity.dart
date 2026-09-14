@@ -4,7 +4,7 @@ part 'event_content_entity.freezed.dart';
 
 /// Entity for event payload from message_event_payload table + v_event_with_rsvp view
 @freezed
-class EventPayloadEntity with _$EventPayloadEntity {
+abstract class EventPayloadEntity with _$EventPayloadEntity {
   const factory EventPayloadEntity({
     required String messageId,
     required String title,
