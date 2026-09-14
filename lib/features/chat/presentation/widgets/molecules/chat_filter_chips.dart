@@ -56,13 +56,13 @@ class ChatFilterChips extends StatelessWidget {
                   color: Colors.transparent,
                   child: InkWell(
                     onTap: () => onFilterSelected(filter),
-                    borderRadius: BorderRadius.circular(24),
+                    borderRadius: BorderRadius.circular(12),
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.easeOutCubic,
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 10,
+                        horizontal: 16,
+                        vertical: 8,
                       ),
                       decoration: BoxDecoration(
                         gradient: isSelected
@@ -70,35 +70,38 @@ class ChatFilterChips extends StatelessWidget {
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
                                 colors: [
-                                  colorScheme.primaryContainer,
-                                  colorScheme.primaryContainer
-                                      .withValues(alpha: 0.8),
+                                  colorScheme.primary.withValues(alpha: 0.16),
+                                  colorScheme.tertiary.withValues(alpha: 0.12),
                                 ],
                               )
                             : LinearGradient(
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
                                 colors: [
+                                  colorScheme.surfaceContainerLow.withValues(
+                                    alpha: 0.76,
+                                  ),
                                   colorScheme.surfaceContainerHighest
-                                      .withValues(alpha: 0.6),
-                                  colorScheme.surfaceContainerHighest
-                                      .withValues(alpha: 0.4),
+                                      .withValues(alpha: 0.48),
                                 ],
                               ),
-                        borderRadius: BorderRadius.circular(24),
+                        borderRadius: BorderRadius.circular(12),
                         border: Border.all(
                           color: isSelected
-                              ? colorScheme.primary.withValues(alpha: 0.3)
-                              : colorScheme.outline.withValues(alpha: 0.2),
-                          width: 1.5,
+                              ? colorScheme.primary.withValues(alpha: 0.28)
+                              : colorScheme.outlineVariant.withValues(
+                                  alpha: 0.35,
+                                ),
+                          width: 1,
                         ),
                         boxShadow: isSelected
                             ? [
                                 BoxShadow(
-                                  color: colorScheme.primary
-                                      .withValues(alpha: 0.2),
-                                  blurRadius: 8,
-                                  offset: const Offset(0, 2),
+                                  color: colorScheme.primary.withValues(
+                                    alpha: 0.12,
+                                  ),
+                                  blurRadius: 14,
+                                  offset: const Offset(0, 8),
                                   spreadRadius: 0,
                                 ),
                               ]
@@ -113,25 +116,15 @@ class ChatFilterChips extends StatelessWidget {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          if (isSelected)
-                            Padding(
-                              padding: const EdgeInsets.only(right: 6),
-                              child: Icon(
-                                Icons.check_circle,
-                                size: 16,
-                                color: colorScheme.primary,
-                              ),
-                            ),
                           Text(
                             label,
                             style: textTheme.bodyMedium?.copyWith(
                               color: isSelected
-                                  ? colorScheme.onPrimaryContainer
+                                  ? colorScheme.primary
                                   : colorScheme.onSurface,
                               fontWeight: isSelected
-                                  ? FontWeight.w700
+                                  ? FontWeight.w800
                                   : FontWeight.w600,
-                              letterSpacing: 0.3,
                             ),
                           ),
                         ],
