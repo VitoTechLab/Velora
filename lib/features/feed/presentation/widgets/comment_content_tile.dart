@@ -59,9 +59,7 @@ class CommentContentTile extends HookWidget {
     final actionFontSize = isReply ? 12.0 : 13.0;
 
     return Padding(
-      padding: EdgeInsets.only(
-        top: isReply ? 12.0 : 0.0,
-      ),
+      padding: EdgeInsets.only(top: isReply ? 12.0 : 0.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -71,22 +69,8 @@ class CommentContentTile extends HookWidget {
           // Avatar with gradient
           Container(
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  colorScheme.primaryContainer.withValues(alpha: 0.3),
-                  colorScheme.secondaryContainer.withValues(alpha: 0.2),
-                ],
-              ),
+              color: colorScheme.primaryContainer.withValues(alpha: 0.3),
               shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: colorScheme.shadow.withValues(alpha: 0.08),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
             ),
             child: CircleAvatar(
               radius: avatarRadius,
@@ -151,10 +135,7 @@ class CommentContentTile extends HookWidget {
 
 /// User info row with username and timestamp
 class _UserInfoRow extends StatelessWidget {
-  const _UserInfoRow({
-    required this.username,
-    required this.createdAt,
-  });
+  const _UserInfoRow({required this.username, required this.createdAt});
 
   final String username;
   final DateTime createdAt;
@@ -337,14 +318,7 @@ class _ViewRepliesToggle extends StatelessWidget {
                 Container(
                   width: 32,
                   height: 1.5,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        colorScheme.outlineVariant,
-                        colorScheme.outlineVariant.withValues(alpha: 0.3),
-                      ],
-                    ),
-                  ),
+                  decoration: BoxDecoration(color: colorScheme.outlineVariant),
                 ),
                 const SizedBox(width: 12),
                 Text(
@@ -438,8 +412,9 @@ class _LikeButton extends StatelessWidget {
             child: Text(
               likesCount.toString(),
               style: textTheme.bodySmall?.copyWith(
-                color:
-                    isLiked ? colorScheme.error : colorScheme.onSurfaceVariant,
+                color: isLiked
+                    ? colorScheme.error
+                    : colorScheme.onSurfaceVariant,
                 fontSize: 11,
                 fontWeight: isLiked ? FontWeight.w600 : FontWeight.normal,
               ),

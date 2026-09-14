@@ -93,12 +93,12 @@ class _CommentSheetContent extends HookWidget {
       }
 
       context.read<FeedCommentBloc>().add(
-            AddFeedCommentEvent(
-              postId: post.id,
-              content: content,
-              parentCommentId: targetParentId,
-            ),
-          );
+        AddFeedCommentEvent(
+          postId: post.id,
+          content: content,
+          parentCommentId: targetParentId,
+        ),
+      );
 
       commentController.clear();
       replyingTo.value = null;
@@ -106,8 +106,8 @@ class _CommentSheetContent extends HookWidget {
 
     void handleLikeComment(CommentEntity comment) {
       context.read<FeedCommentBloc>().add(
-            ToggleFeedCommentLikeEvent(comment.id),
-          );
+        ToggleFeedCommentLikeEvent(comment.id),
+      );
     }
 
     return BlocListener<FeedCommentBloc, FeedCommentState>(
@@ -164,12 +164,12 @@ class _CommentSheetContent extends HookWidget {
         duration: const Duration(seconds: 2),
       );
       context.read<FeedCommentBloc>().add(
-            const ClearFeedCommentMessagesEvent(),
-          );
+        const ClearFeedCommentMessagesEvent(),
+      );
     } else if (state.message != null) {
       context.read<FeedCommentBloc>().add(
-            const ClearFeedCommentMessagesEvent(),
-          );
+        const ClearFeedCommentMessagesEvent(),
+      );
     }
   }
 }
@@ -184,7 +184,8 @@ void _useScrollPagination({
     void onScroll() {
       if (!scrollController.hasClients) return;
 
-      final isNearBottom = scrollController.position.pixels >=
+      final isNearBottom =
+          scrollController.position.pixels >=
           scrollController.position.maxScrollExtent - 200;
 
       if (isNearBottom) {
@@ -234,20 +235,8 @@ class _CommentsList extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                colorScheme.primaryContainer.withValues(alpha: 0.3),
-                colorScheme.secondaryContainer.withValues(alpha: 0.2),
-              ],
-            ),
+            color: colorScheme.primaryContainer.withValues(alpha: 0.3),
             shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: colorScheme.primary.withValues(alpha: 0.1),
-                blurRadius: 16,
-                spreadRadius: 2,
-              ),
-            ],
           ),
           child: SizedBox(
             width: 40,
@@ -278,31 +267,19 @@ class _CommentsList extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Theme.of(context)
-                      .colorScheme
-                      .surfaceContainerHighest
-                      .withValues(alpha: 0.5),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
                   borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .shadow
-                          .withValues(alpha: 0.05),
-                      blurRadius: 8,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
                 ),
                 child: SizedBox(
                   width: 28,
                   height: 28,
                   child: CircularProgressIndicator(
                     strokeWidth: 2.5,
-                    color: Theme.of(context)
-                        .colorScheme
-                        .primary
-                        .withValues(alpha: 0.8),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.primary.withValues(alpha: 0.8),
                   ),
                 ),
               ),
@@ -342,38 +319,18 @@ class _EmptyCommentsView extends StatelessWidget {
               final clampedValue = value.clamp(0.0, 1.0);
               return Transform.scale(
                 scale: clampedValue,
-                child: Opacity(
-                  opacity: clampedValue,
-                  child: child,
-                ),
+                child: Opacity(opacity: clampedValue, child: child),
               );
             },
             child: Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    colorScheme.primaryContainer.withValues(alpha: 0.3),
-                    colorScheme.secondaryContainer.withValues(alpha: 0.2),
-                  ],
-                ),
+                color: colorScheme.primaryContainer.withValues(alpha: 0.3),
                 shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: colorScheme.primary.withValues(alpha: 0.1),
-                    blurRadius: 20,
-                    spreadRadius: 3,
-                  ),
-                ],
               ),
               child: ShaderMask(
                 shaderCallback: (bounds) => LinearGradient(
-                  colors: [
-                    colorScheme.primary,
-                    colorScheme.secondary,
-                  ],
+                  colors: [colorScheme.primary, colorScheme.secondary],
                 ).createShader(bounds),
                 child: Icon(
                   Icons.comment_outlined,
@@ -490,27 +447,13 @@ class _CommentInputField extends StatelessWidget {
       builder: (context, state) {
         return Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                colorScheme.surface,
-                colorScheme.surfaceContainerLowest,
-              ],
-            ),
+            color: colorScheme.surface,
             border: Border(
               top: BorderSide(
                 color: colorScheme.outlineVariant.withValues(alpha: 0.5),
                 width: 1,
               ),
             ),
-            boxShadow: [
-              BoxShadow(
-                color: colorScheme.shadow.withValues(alpha: 0.08),
-                blurRadius: 12,
-                offset: const Offset(0, -2),
-              ),
-            ],
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -524,8 +467,10 @@ class _CommentInputField extends StatelessWidget {
 
               // Input row
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 12,
+                ),
                 child: Row(
                   children: [
                     // Avatar
@@ -554,10 +499,7 @@ class _CommentInputField extends StatelessWidget {
                     const SizedBox(width: 8),
 
                     // Send button
-                    _SendButton(
-                      isLoading: state.isAdding,
-                      onSend: onSend,
-                    ),
+                    _SendButton(isLoading: state.isAdding, onSend: onSend),
                   ],
                 ),
               ),
@@ -570,10 +512,7 @@ class _CommentInputField extends StatelessWidget {
 }
 
 class _ReplyBanner extends StatelessWidget {
-  const _ReplyBanner({
-    required this.username,
-    required this.onCancel,
-  });
+  const _ReplyBanner({required this.username, required this.onCancel});
 
   final String username;
   final VoidCallback onCancel;
@@ -587,12 +526,7 @@ class _ReplyBanner extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            colorScheme.primaryContainer.withValues(alpha: 0.15),
-            colorScheme.secondaryContainer.withValues(alpha: 0.1),
-          ],
-        ),
+        color: colorScheme.primaryContainer.withValues(alpha: 0.15),
         border: Border(
           bottom: BorderSide(
             color: colorScheme.primary.withValues(alpha: 0.2),
@@ -630,7 +564,7 @@ class _ReplyBanner extends StatelessWidget {
             color: Colors.transparent,
             child: InkWell(
               onTap: onCancel,
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(12),
               child: Padding(
                 padding: const EdgeInsets.all(4),
                 child: Icon(
@@ -673,14 +607,7 @@ class _InputTextField extends StatelessWidget {
           color: colorScheme.outline.withValues(alpha: 0.3),
           width: 1.5,
         ),
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-            color: colorScheme.shadow.withValues(alpha: 0.05),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        borderRadius: BorderRadius.circular(12),
       ),
       child: TextField(
         controller: controller,
@@ -698,10 +625,7 @@ class _InputTextField extends StatelessWidget {
           contentPadding: EdgeInsets.zero,
           isDense: true,
         ),
-        style: textTheme.bodyMedium?.copyWith(
-          fontSize: 14,
-          letterSpacing: 0.1,
-        ),
+        style: textTheme.bodyMedium?.copyWith(fontSize: 14, letterSpacing: 0.1),
         maxLines: 3,
         minLines: 1,
         textCapitalization: TextCapitalization.sentences,
@@ -712,10 +636,7 @@ class _InputTextField extends StatelessWidget {
 }
 
 class _SendButton extends StatelessWidget {
-  const _SendButton({
-    required this.isLoading,
-    required this.onSend,
-  });
+  const _SendButton({required this.isLoading, required this.onSend});
 
   final bool isLoading;
   final VoidCallback onSend;
@@ -742,20 +663,8 @@ class _SendButton extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            colorScheme.primary,
-            colorScheme.primary.withValues(alpha: 0.85),
-          ],
-        ),
+        color: colorScheme.primary,
         shape: BoxShape.circle,
-        boxShadow: [
-          BoxShadow(
-            color: colorScheme.primary.withValues(alpha: 0.3),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
       ),
       child: Material(
         color: Colors.transparent,
