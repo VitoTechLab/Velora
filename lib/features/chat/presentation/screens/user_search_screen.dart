@@ -8,7 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:velora/features/chat/presentation/bloc/search_user_bloc.dart';
 import 'package:velora/features/chat/presentation/bloc/search_user_event.dart';
 import 'package:velora/features/chat/presentation/bloc/search_user_state.dart';
-import 'package:velora/features/chat/presentation/widgets/user_avatar_widget.dart';
+import 'package:velora/features/chat/presentation/widgets/chat_widgets.dart';
 import 'package:velora/features/navigation/models/chat_detail_args.dart';
 import 'package:velora/routes/app_router.dart';
 
@@ -39,25 +39,16 @@ class UserSearchScreen extends HookWidget {
     }, [animationController]);
 
     return BlocProvider(
-      create: (context) => getIt<SearchUserBloc>()
-        ..add(const SearchUserEvent.loadFollowedUsers()),
+      create: (context) =>
+          getIt<SearchUserBloc>()
+            ..add(const SearchUserEvent.loadFollowedUsers()),
       child: Builder(
         builder: (context) {
           return Scaffold(
             backgroundColor: colorScheme.surface,
             appBar: AppBar(
               flexibleSpace: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      colorScheme.surface,
-                      colorScheme.surfaceContainerHighest
-                          .withValues(alpha: 0.3),
-                    ],
-                  ),
-                ),
+                decoration: BoxDecoration(color: colorScheme.surface),
               ),
               backgroundColor: Colors.transparent,
               elevation: 0,
@@ -68,62 +59,41 @@ class UserSearchScreen extends HookWidget {
                   shape: BoxShape.circle,
                 ),
                 child: IconButton(
-                  icon: Icon(Icons.arrow_back,
-                      color: colorScheme.onSurface, size: 20),
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: colorScheme.onSurface,
+                    size: 20,
+                  ),
                   onPressed: () => Navigator.pop(context),
                   padding: EdgeInsets.zero,
                 ),
               ),
               title: Container(
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      colorScheme.surfaceContainerHighest,
-                      colorScheme.surfaceContainerHighest
-                          .withValues(alpha: 0.8),
-                    ],
-                  ),
-                  borderRadius: BorderRadius.circular(24),
+                  color: colorScheme.surfaceContainerHighest,
+                  borderRadius: BorderRadius.circular(12),
                   border: Border.all(
                     color: colorScheme.primary.withValues(alpha: 0.15),
                     width: 1,
                   ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: colorScheme.shadow.withValues(alpha: 0.05),
-                      blurRadius: 8,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
                 ),
                 child: TextField(
                   controller: searchController,
                   autofocus: true,
-                  style: TextStyle(
-                    color: colorScheme.onSurface,
-                    fontSize: 15,
-                  ),
+                  style: TextStyle(color: colorScheme.onSurface, fontSize: 15),
                   decoration: InputDecoration(
                     hintText: 'Search or ask Meta AI',
                     hintStyle: TextStyle(
-                      color:
-                          colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
+                      color: colorScheme.onSurfaceVariant.withValues(
+                        alpha: 0.6,
+                      ),
                       fontSize: 15,
                     ),
                     prefixIcon: ShaderMask(
                       shaderCallback: (bounds) => LinearGradient(
-                        colors: [
-                          colorScheme.primary,
-                          colorScheme.secondary,
-                        ],
+                        colors: [colorScheme.primary, colorScheme.secondary],
                       ).createShader(bounds),
-                      child: Icon(
-                        Icons.search,
-                        color: Colors.white,
-                        size: 20,
-                      ),
+                      child: Icon(Icons.search, color: Colors.white, size: 20),
                     ),
                     border: InputBorder.none,
                     contentPadding: const EdgeInsets.symmetric(
@@ -134,15 +104,15 @@ class UserSearchScreen extends HookWidget {
                   onSubmitted: (value) {
                     if (value.isNotEmpty) {
                       context.read<SearchUserBloc>().add(
-                            SearchUserEvent.searchQueryChanged(value),
-                          );
+                        SearchUserEvent.searchQueryChanged(value),
+                      );
                     }
                   },
                   onChanged: (value) {
                     if (value.isEmpty) {
                       context.read<SearchUserBloc>().add(
-                            const SearchUserEvent.clearSearch(),
-                          );
+                        const SearchUserEvent.clearSearch(),
+                      );
                     }
                   },
                 ),
@@ -151,20 +121,8 @@ class UserSearchScreen extends HookWidget {
                 Container(
                   margin: const EdgeInsets.only(right: 8),
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        colorScheme.primary,
-                        colorScheme.secondary,
-                      ],
-                    ),
+                    color: colorScheme.primary,
                     borderRadius: BorderRadius.circular(12),
-                    boxShadow: [
-                      BoxShadow(
-                        color: colorScheme.primary.withValues(alpha: 0.3),
-                        blurRadius: 8,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
                   ),
                   child: Material(
                     color: Colors.transparent,
@@ -172,10 +130,10 @@ class UserSearchScreen extends HookWidget {
                       onTap: () {
                         if (searchController.text.isNotEmpty) {
                           context.read<SearchUserBloc>().add(
-                                SearchUserEvent.searchQueryChanged(
-                                  searchController.text,
-                                ),
-                              );
+                            SearchUserEvent.searchQueryChanged(
+                              searchController.text,
+                            ),
+                          );
                         }
                       },
                       borderRadius: BorderRadius.circular(12),
@@ -213,7 +171,9 @@ class UserSearchScreen extends HookWidget {
   }
 
   static Widget _buildSearchResults(
-      BuildContext context, SearchUserState state) {
+    BuildContext context,
+    SearchUserState state,
+  ) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
@@ -221,14 +181,9 @@ class UserSearchScreen extends HookWidget {
       return Center(
         child: ShaderMask(
           shaderCallback: (bounds) => LinearGradient(
-            colors: [
-              colorScheme.primary,
-              colorScheme.secondary,
-            ],
+            colors: [colorScheme.primary, colorScheme.secondary],
           ).createShader(bounds),
-          child: const CircularProgressIndicator(
-            color: Colors.white,
-          ),
+          child: const CircularProgressIndicator(color: Colors.white),
         ),
       );
     }
@@ -246,8 +201,11 @@ class UserSearchScreen extends HookWidget {
                   color: colorScheme.error.withValues(alpha: 0.1),
                   shape: BoxShape.circle,
                 ),
-                child: Icon(Icons.error_outline,
-                    size: 64, color: colorScheme.error),
+                child: Icon(
+                  Icons.error_outline,
+                  size: 64,
+                  color: colorScheme.error,
+                ),
               ),
               const SizedBox(height: 24),
               Text(
@@ -278,11 +236,7 @@ class UserSearchScreen extends HookWidget {
                     colorScheme.secondary.withValues(alpha: 0.5),
                   ],
                 ).createShader(bounds),
-                child: Icon(
-                  Icons.person_search,
-                  size: 80,
-                  color: Colors.white,
-                ),
+                child: Icon(Icons.person_search, size: 80, color: Colors.white),
               ),
               const SizedBox(height: 24),
               Text(
@@ -322,14 +276,9 @@ class UserSearchScreen extends HookWidget {
       return Center(
         child: ShaderMask(
           shaderCallback: (bounds) => LinearGradient(
-            colors: [
-              colorScheme.primary,
-              colorScheme.secondary,
-            ],
+            colors: [colorScheme.primary, colorScheme.secondary],
           ).createShader(bounds),
-          child: const CircularProgressIndicator(
-            color: Colors.white,
-          ),
+          child: const CircularProgressIndicator(color: Colors.white),
         ),
       );
     }
@@ -357,13 +306,8 @@ class UserSearchScreen extends HookWidget {
               margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
-                    colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
-                  ],
+                color: colorScheme.surfaceContainerHighest.withValues(
+                  alpha: 0.5,
                 ),
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
@@ -378,10 +322,7 @@ class UserSearchScreen extends HookWidget {
                     children: [
                       ShaderMask(
                         shaderCallback: (bounds) => LinearGradient(
-                          colors: [
-                            colorScheme.primary,
-                            colorScheme.secondary,
-                          ],
+                          colors: [colorScheme.primary, colorScheme.secondary],
                         ).createShader(bounds),
                         child: Icon(
                           Icons.history,
@@ -434,8 +375,9 @@ class UserSearchScreen extends HookWidget {
                       Icon(
                         Icons.access_time,
                         size: 48,
-                        color:
-                            colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+                        color: colorScheme.onSurfaceVariant.withValues(
+                          alpha: 0.5,
+                        ),
                       ),
                       const SizedBox(height: 12),
                       Text(
@@ -479,15 +421,7 @@ class UserSearchScreen extends HookWidget {
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             height: 1,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Colors.transparent,
-                  colorScheme.outline.withValues(alpha: 0.2),
-                  Colors.transparent,
-                ],
-              ),
-            ),
+            decoration: BoxDecoration(color: Colors.transparent),
           ),
 
           // More Suggestions Section with modern design
@@ -508,13 +442,8 @@ class UserSearchScreen extends HookWidget {
               margin: const EdgeInsets.all(16),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
-                    colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
-                  ],
+                color: colorScheme.surfaceContainerHighest.withValues(
+                  alpha: 0.5,
                 ),
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
@@ -529,10 +458,7 @@ class UserSearchScreen extends HookWidget {
                     children: [
                       ShaderMask(
                         shaderCallback: (bounds) => LinearGradient(
-                          colors: [
-                            colorScheme.primary,
-                            colorScheme.tertiary,
-                          ],
+                          colors: [colorScheme.primary, colorScheme.tertiary],
                         ).createShader(bounds),
                         child: Icon(
                           Icons.people_outline,
@@ -585,8 +511,9 @@ class UserSearchScreen extends HookWidget {
                       Icon(
                         Icons.person_add_outlined,
                         size: 48,
-                        color:
-                            colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+                        color: colorScheme.onSurfaceVariant.withValues(
+                          alpha: 0.5,
+                        ),
                       ),
                       const SizedBox(height: 12),
                       Text(
@@ -645,7 +572,8 @@ class UserSearchScreen extends HookWidget {
                   conversationId: '',
                   chatName: user.username,
                   chatSubtitle: user.bio ?? '',
-                  profileImageUrl: user.avatarUrl ??
+                  profileImageUrl:
+                      user.avatarUrl ??
                       'https://i.pravatar.cc/150?u=${user.userId}',
                   isGroup: false,
                   peerUserId: user.userId,
@@ -662,19 +590,7 @@ class UserSearchScreen extends HookWidget {
                   Container(
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      gradient: LinearGradient(
-                        colors: [
-                          colorScheme.primary.withValues(alpha: 0.3),
-                          colorScheme.secondary.withValues(alpha: 0.3),
-                        ],
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: colorScheme.primary.withValues(alpha: 0.2),
-                          blurRadius: 8,
-                          spreadRadius: 2,
-                        ),
-                      ],
+                      color: colorScheme.primary.withValues(alpha: 0.3),
                     ),
                     padding: const EdgeInsets.all(2),
                     child: UserAvatarWidget(
@@ -704,7 +620,9 @@ class UserSearchScreen extends HookWidget {
   }
 
   static Widget _buildUserListTile(
-      BuildContext context, UserSearchEntity user) {
+    BuildContext context,
+    UserSearchEntity user,
+  ) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
@@ -727,7 +645,8 @@ class UserSearchScreen extends HookWidget {
                 conversationId: '',
                 chatName: user.username,
                 chatSubtitle: user.bio ?? '',
-                profileImageUrl: user.avatarUrl ??
+                profileImageUrl:
+                    user.avatarUrl ??
                     'https://i.pravatar.cc/150?u=${user.userId}',
                 isGroup: false,
                 peerUserId: user.userId,
@@ -740,16 +659,7 @@ class UserSearchScreen extends HookWidget {
             child: Row(
               children: [
                 Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: colorScheme.primary.withValues(alpha: 0.15),
-                        blurRadius: 8,
-                        spreadRadius: 1,
-                      ),
-                    ],
-                  ),
+                  decoration: BoxDecoration(shape: BoxShape.circle),
                   child: UserAvatarWidget(
                     avatarUrl: user.avatarUrl,
                     username: user.username,
