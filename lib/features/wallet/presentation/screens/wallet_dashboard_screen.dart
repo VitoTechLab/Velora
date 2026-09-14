@@ -52,7 +52,9 @@ class WalletDashboardScreen extends HookWidget {
       // Skip if already authenticated in this session
       if (_walletSessionAuthenticated) {
         if (userId != null) {
-          context.read<WalletBloc>().add(WalletEvent.loadWallets(userId: userId));
+          context.read<WalletBloc>().add(
+            WalletEvent.loadWallets(userId: userId),
+          );
         }
         return null;
       }
@@ -60,19 +62,21 @@ class WalletDashboardScreen extends HookWidget {
       Future<void> checkBiometricAuth() async {
         try {
           final status = await biometricService.getBiometricStatus();
-          
+
           // If biometric is enabled, prompt for authentication
           if (status.isFullySetup) {
             final authenticated = await biometricService.authenticate(
               reason: 'Authenticate to access your wallet',
             );
-            
+
             if (authenticated) {
               _walletSessionAuthenticated = true;
               isAuthenticated.value = true;
               // Load wallets after successful authentication
               if (userId != null) {
-                context.read<WalletBloc>().add(WalletEvent.loadWallets(userId: userId));
+                context.read<WalletBloc>().add(
+                  WalletEvent.loadWallets(userId: userId),
+                );
               }
             } else {
               authError.value = 'Authentication failed. Please try again.';
@@ -82,7 +86,9 @@ class WalletDashboardScreen extends HookWidget {
             _walletSessionAuthenticated = true;
             isAuthenticated.value = true;
             if (userId != null) {
-              context.read<WalletBloc>().add(WalletEvent.loadWallets(userId: userId));
+              context.read<WalletBloc>().add(
+                WalletEvent.loadWallets(userId: userId),
+              );
             }
           }
         } catch (e) {
@@ -90,7 +96,9 @@ class WalletDashboardScreen extends HookWidget {
           _walletSessionAuthenticated = true;
           isAuthenticated.value = true;
           if (userId != null) {
-            context.read<WalletBloc>().add(WalletEvent.loadWallets(userId: userId));
+            context.read<WalletBloc>().add(
+              WalletEvent.loadWallets(userId: userId),
+            );
           }
         } finally {
           isCheckingAuth.value = false;
@@ -109,18 +117,11 @@ class WalletDashboardScreen extends HookWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                Icons.fingerprint,
-                size: 64,
-                color: colorScheme.primary,
-              ),
+              Icon(Icons.fingerprint, size: 64, color: colorScheme.primary),
               const SizedBox(height: 16),
               const CircularProgressIndicator(),
               const SizedBox(height: 16),
-              Text(
-                'Verifying identity...',
-                style: theme.textTheme.titleMedium,
-              ),
+              Text('Verifying identity...', style: theme.textTheme.titleMedium),
             ],
           ),
         ),
@@ -158,7 +159,8 @@ class WalletDashboardScreen extends HookWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  authError.value ?? 'Please authenticate to access your wallet',
+                  authError.value ??
+                      'Please authenticate to access your wallet',
                   style: theme.textTheme.bodyLarge?.copyWith(
                     color: colorScheme.onSurfaceVariant,
                   ),
@@ -169,19 +171,22 @@ class WalletDashboardScreen extends HookWidget {
                   onPressed: () async {
                     isCheckingAuth.value = true;
                     authError.value = null;
-                    
+
                     final authenticated = await biometricService.authenticate(
                       reason: 'Authenticate to access your wallet',
                     );
-                    
+
                     if (authenticated) {
                       _walletSessionAuthenticated = true;
                       isAuthenticated.value = true;
                       if (userId != null) {
-                        context.read<WalletBloc>().add(WalletEvent.loadWallets(userId: userId));
+                        context.read<WalletBloc>().add(
+                          WalletEvent.loadWallets(userId: userId),
+                        );
                       }
                     } else {
-                      authError.value = 'Authentication failed. Please try again.';
+                      authError.value =
+                          'Authentication failed. Please try again.';
                     }
                     isCheckingAuth.value = false;
                   },
@@ -216,9 +221,9 @@ class WalletDashboardScreen extends HookWidget {
       body: BlocConsumer<WalletBloc, WalletState>(
         listener: (context, state) {
           if (state.message != null) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.message!)),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(state.message!)));
             context.read<WalletBloc>().add(const WalletEvent.clearTransient());
           }
           if (state.errorWallets != null) {
@@ -239,9 +244,9 @@ class WalletDashboardScreen extends HookWidget {
           return RefreshIndicator(
             onRefresh: () async {
               if (userId != null) {
-                context
-                    .read<WalletBloc>()
-                    .add(WalletEvent.loadWallets(userId: userId));
+                context.read<WalletBloc>().add(
+                  WalletEvent.loadWallets(userId: userId),
+                );
               }
             },
             child: SingleChildScrollView(
@@ -256,12 +261,14 @@ class WalletDashboardScreen extends HookWidget {
                       wallet: state.mainWallet!,
                       isBalanceHidden: isBalanceHidden.value,
                       currencyFormat: currencyFormat,
-                      onTopUp: () => _showTopUpDialog(context, state.mainWallet!),
+                      onTopUp: () =>
+                          _showTopUpDialog(context, state.mainWallet!),
                       onWithdraw: () =>
                           _showWithdrawDialog(context, state.mainWallet!),
                       onSetupBank: () =>
                           _showBankDetailsDialog(context, state.mainWallet!),
-                      onViewDetails: () => _showWalletDetails(context, state.mainWallet!),
+                      onViewDetails: () =>
+                          _showWalletDetails(context, state.mainWallet!),
                       onViewWithdrawals: () => context.pushNamed(
                         'walletWithdrawals',
                         pathParameters: {'walletId': state.mainWallet!.id},
@@ -272,8 +279,8 @@ class WalletDashboardScreen extends HookWidget {
                       onTap: () {
                         if (userId != null) {
                           context.read<WalletBloc>().add(
-                                WalletEvent.createMainWallet(userId: userId),
-                              );
+                            WalletEvent.createMainWallet(userId: userId),
+                          );
                         }
                       },
                     ),
@@ -367,11 +374,11 @@ class WalletDashboardScreen extends HookWidget {
               final amount = double.tryParse(controller.text) ?? 0;
               if (amount > 0) {
                 context.read<WalletBloc>().add(
-                      WalletEvent.initiateTopUp(
-                        walletId: wallet.id,
-                        amount: amount,
-                      ),
-                    );
+                  WalletEvent.initiateTopUp(
+                    walletId: wallet.id,
+                    amount: amount,
+                  ),
+                );
                 Navigator.pop(ctx);
               }
             },
@@ -434,11 +441,11 @@ class WalletDashboardScreen extends HookWidget {
               final amount = double.tryParse(controller.text) ?? 0;
               if (amount > 0 && amount <= wallet.balance) {
                 context.read<WalletBloc>().add(
-                      WalletEvent.requestWithdrawal(
-                        walletId: wallet.id,
-                        amount: amount,
-                      ),
-                    );
+                  WalletEvent.requestWithdrawal(
+                    walletId: wallet.id,
+                    amount: amount,
+                  ),
+                );
                 Navigator.pop(ctx);
               }
             },
@@ -451,10 +458,12 @@ class WalletDashboardScreen extends HookWidget {
 
   void _showBankDetailsDialog(BuildContext context, WalletEntity wallet) {
     final bankNameController = TextEditingController(text: wallet.bankName);
-    final accountNumberController =
-        TextEditingController(text: wallet.bankAccountNumber);
-    final accountHolderController =
-        TextEditingController(text: wallet.bankAccountHolder);
+    final accountNumberController = TextEditingController(
+      text: wallet.bankAccountNumber,
+    );
+    final accountHolderController = TextEditingController(
+      text: wallet.bankAccountHolder,
+    );
     final t = AppLocalizations.of(context)!;
 
     showDialog(
@@ -471,15 +480,17 @@ class WalletDashboardScreen extends HookWidget {
             const SizedBox(height: 8),
             TextField(
               controller: accountNumberController,
-              decoration:
-                  InputDecoration(labelText: t.walletDashboardAccountNumber),
+              decoration: InputDecoration(
+                labelText: t.walletDashboardAccountNumber,
+              ),
               keyboardType: TextInputType.number,
             ),
             const SizedBox(height: 8),
             TextField(
               controller: accountHolderController,
-              decoration:
-                  InputDecoration(labelText: t.walletDashboardAccountHolder),
+              decoration: InputDecoration(
+                labelText: t.walletDashboardAccountHolder,
+              ),
             ),
           ],
         ),
@@ -494,13 +505,13 @@ class WalletDashboardScreen extends HookWidget {
                   accountNumberController.text.isNotEmpty &&
                   accountHolderController.text.isNotEmpty) {
                 context.read<WalletBloc>().add(
-                      WalletEvent.updateBankDetails(
-                        walletId: wallet.id,
-                        bankName: bankNameController.text,
-                        bankAccountNumber: accountNumberController.text,
-                        bankAccountHolder: accountHolderController.text,
-                      ),
-                    );
+                  WalletEvent.updateBankDetails(
+                    walletId: wallet.id,
+                    bankName: bankNameController.text,
+                    bankAccountNumber: accountNumberController.text,
+                    bankAccountHolder: accountHolderController.text,
+                  ),
+                );
                 Navigator.pop(ctx);
               }
             },
@@ -554,22 +565,8 @@ class _MainWalletCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            colorScheme.primaryContainer,
-            colorScheme.secondaryContainer,
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-            color: colorScheme.shadow.withValues(alpha: 0.1),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        color: colorScheme.primaryContainer,
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -647,7 +644,9 @@ class _MainWalletCard extends StatelessWidget {
                   style: OutlinedButton.styleFrom(
                     foregroundColor: colorScheme.onPrimaryContainer,
                     side: BorderSide(
-                      color: colorScheme.onPrimaryContainer.withValues(alpha: 0.5),
+                      color: colorScheme.onPrimaryContainer.withValues(
+                        alpha: 0.5,
+                      ),
                     ),
                   ),
                 ),
@@ -669,7 +668,9 @@ class _MainWalletCard extends StatelessWidget {
                 label: Text(
                   'Transaction History',
                   style: TextStyle(
-                    color: colorScheme.onPrimaryContainer.withValues(alpha: 0.8),
+                    color: colorScheme.onPrimaryContainer.withValues(
+                      alpha: 0.8,
+                    ),
                     fontSize: 12,
                   ),
                 ),
@@ -685,7 +686,9 @@ class _MainWalletCard extends StatelessWidget {
                 label: Text(
                   'Withdrawals',
                   style: TextStyle(
-                    color: colorScheme.onPrimaryContainer.withValues(alpha: 0.8),
+                    color: colorScheme.onPrimaryContainer.withValues(
+                      alpha: 0.8,
+                    ),
                     fontSize: 12,
                   ),
                 ),
@@ -714,7 +717,7 @@ class _CreateMainWalletCard extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: colorScheme.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: colorScheme.outlineVariant,
           style: BorderStyle.solid,
@@ -791,7 +794,9 @@ class _CampaignWalletCard extends StatelessWidget {
                       color: colorScheme.primaryContainer,
                       image: wallet.campaignCoverImageUrl != null
                           ? DecorationImage(
-                              image: NetworkImage(wallet.campaignCoverImageUrl!),
+                              image: NetworkImage(
+                                wallet.campaignCoverImageUrl!,
+                              ),
                               fit: BoxFit.cover,
                             )
                           : null,

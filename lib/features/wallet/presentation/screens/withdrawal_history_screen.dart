@@ -24,9 +24,9 @@ class WithdrawalHistoryScreen extends HookWidget {
     );
 
     useEffect(() {
-      context
-          .read<WalletBloc>()
-          .add(WalletEvent.loadWithdrawals(walletId: walletId));
+      context.read<WalletBloc>().add(
+        WalletEvent.loadWithdrawals(walletId: walletId),
+      );
       return null;
     }, [walletId]);
 
@@ -36,9 +36,9 @@ class WithdrawalHistoryScreen extends HookWidget {
         actions: [
           IconButton(
             onPressed: () {
-              context
-                  .read<WalletBloc>()
-                  .add(WalletEvent.loadWithdrawals(walletId: walletId));
+              context.read<WalletBloc>().add(
+                WalletEvent.loadWithdrawals(walletId: walletId),
+              );
             },
             icon: const Icon(Icons.refresh),
             tooltip: 'Refresh',
@@ -56,11 +56,7 @@ class WithdrawalHistoryScreen extends HookWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
-                    Icons.error_outline,
-                    size: 64,
-                    color: colorScheme.error,
-                  ),
+                  Icon(Icons.error_outline, size: 64, color: colorScheme.error),
                   const SizedBox(height: 16),
                   Text(
                     'Failed to load withdrawals',
@@ -78,7 +74,8 @@ class WithdrawalHistoryScreen extends HookWidget {
                   FilledButton.icon(
                     onPressed: () {
                       context.read<WalletBloc>().add(
-                          WalletEvent.loadWithdrawals(walletId: walletId));
+                        WalletEvent.loadWithdrawals(walletId: walletId),
+                      );
                     },
                     icon: const Icon(Icons.refresh),
                     label: const Text('Retry'),
@@ -94,9 +91,9 @@ class WithdrawalHistoryScreen extends HookWidget {
 
           return RefreshIndicator(
             onRefresh: () async {
-              context
-                  .read<WalletBloc>()
-                  .add(WalletEvent.loadWithdrawals(walletId: walletId));
+              context.read<WalletBloc>().add(
+                WalletEvent.loadWithdrawals(walletId: walletId),
+              );
             },
             child: ListView.separated(
               padding: const EdgeInsets.all(16),
@@ -197,11 +194,13 @@ class _WithdrawalCard extends StatelessWidget {
                   ),
                   // Status Badge
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
                     decoration: BoxDecoration(
                       color: statusInfo.backgroundColor,
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(12),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -262,8 +261,9 @@ class _WithdrawalCard extends StatelessWidget {
                 _InfoRow(
                   icon: Icons.check_circle_outline,
                   label: 'Processed',
-                  value:
-                      DateFormat.yMMMd().add_jm().format(withdrawal.processedAt!),
+                  value: DateFormat.yMMMd().add_jm().format(
+                    withdrawal.processedAt!,
+                  ),
                 ),
               ],
 
@@ -291,38 +291,40 @@ class _WithdrawalCard extends StatelessWidget {
   }
 
   _StatusInfo _getStatusInfo(
-      WalletWithdrawalStatus status, ColorScheme colorScheme) {
+    WalletWithdrawalStatus status,
+    ColorScheme colorScheme,
+  ) {
     return switch (status) {
       WalletWithdrawalStatus.pending => _StatusInfo(
-          label: 'Pending',
-          icon: Icons.schedule,
-          backgroundColor: Colors.orange.withValues(alpha: 0.15),
-          textColor: Colors.orange.shade700,
-        ),
+        label: 'Pending',
+        icon: Icons.schedule,
+        backgroundColor: Colors.orange.withValues(alpha: 0.15),
+        textColor: Colors.orange.shade700,
+      ),
       WalletWithdrawalStatus.processing => _StatusInfo(
-          label: 'Processing',
-          icon: Icons.sync,
-          backgroundColor: Colors.blue.withValues(alpha: 0.15),
-          textColor: Colors.blue.shade700,
-        ),
+        label: 'Processing',
+        icon: Icons.sync,
+        backgroundColor: Colors.blue.withValues(alpha: 0.15),
+        textColor: Colors.blue.shade700,
+      ),
       WalletWithdrawalStatus.completed => _StatusInfo(
-          label: 'Completed',
-          icon: Icons.check_circle,
-          backgroundColor: Colors.green.withValues(alpha: 0.15),
-          textColor: Colors.green.shade700,
-        ),
+        label: 'Completed',
+        icon: Icons.check_circle,
+        backgroundColor: Colors.green.withValues(alpha: 0.15),
+        textColor: Colors.green.shade700,
+      ),
       WalletWithdrawalStatus.failed => _StatusInfo(
-          label: 'Failed',
-          icon: Icons.error,
-          backgroundColor: colorScheme.errorContainer,
-          textColor: colorScheme.onErrorContainer,
-        ),
+        label: 'Failed',
+        icon: Icons.error,
+        backgroundColor: colorScheme.errorContainer,
+        textColor: colorScheme.onErrorContainer,
+      ),
       WalletWithdrawalStatus.cancelled => _StatusInfo(
-          label: 'Cancelled',
-          icon: Icons.cancel,
-          backgroundColor: colorScheme.surfaceContainerHighest,
-          textColor: colorScheme.onSurfaceVariant,
-        ),
+        label: 'Cancelled',
+        icon: Icons.cancel,
+        backgroundColor: colorScheme.surfaceContainerHighest,
+        textColor: colorScheme.onSurfaceVariant,
+      ),
     };
   }
 
@@ -335,7 +337,7 @@ class _WithdrawalCard extends StatelessWidget {
       context: context,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
       builder: (ctx) => DraggableScrollableSheet(
         initialChildSize: 0.6,
@@ -397,10 +399,12 @@ class _WithdrawalCard extends StatelessWidget {
                     const SizedBox(height: 12),
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 6),
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
                       decoration: BoxDecoration(
                         color: statusInfo.backgroundColor,
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(12),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -434,10 +438,7 @@ class _WithdrawalCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 12),
-              _DetailTile(
-                label: 'Bank Name',
-                value: withdrawal.targetBankName,
-              ),
+              _DetailTile(label: 'Bank Name', value: withdrawal.targetBankName),
               _DetailTile(
                 label: 'Account Number',
                 value: withdrawal.targetAccountNumber,
@@ -461,18 +462,17 @@ class _WithdrawalCard extends StatelessWidget {
               const SizedBox(height: 12),
               _DetailTile(
                 label: 'Requested At',
-                value:
-                    DateFormat.yMMMd().add_jm().format(withdrawal.createdAt),
+                value: DateFormat.yMMMd().add_jm().format(withdrawal.createdAt),
               ),
               if (withdrawal.processedAt != null)
                 _DetailTile(
                   label: 'Processed At',
-                  value:
-                      DateFormat.yMMMd().add_jm().format(withdrawal.processedAt!),
+                  value: DateFormat.yMMMd().add_jm().format(
+                    withdrawal.processedAt!,
+                  ),
                 ),
 
-              if (withdrawal.notes != null &&
-                  withdrawal.notes!.isNotEmpty) ...[
+              if (withdrawal.notes != null && withdrawal.notes!.isNotEmpty) ...[
                 const SizedBox(height: 24),
                 Text(
                   'Notes',
@@ -481,10 +481,7 @@ class _WithdrawalCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                Text(
-                  withdrawal.notes!,
-                  style: theme.textTheme.bodyMedium,
-                ),
+                Text(withdrawal.notes!, style: theme.textTheme.bodyMedium),
               ],
 
               const SizedBox(height: 32),
@@ -536,14 +533,10 @@ class _WithdrawalCard extends StatelessWidget {
               Navigator.pop(ctx);
               // TODO: Implement cancel withdrawal event
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Withdrawal cancelled'),
-                ),
+                const SnackBar(content: Text('Withdrawal cancelled')),
               );
             },
-            style: FilledButton.styleFrom(
-              backgroundColor: colorScheme.error,
-            ),
+            style: FilledButton.styleFrom(backgroundColor: colorScheme.error),
             child: const Text('Yes, Cancel'),
           ),
         ],
@@ -570,11 +563,7 @@ class _InfoRow extends StatelessWidget {
 
     return Row(
       children: [
-        Icon(
-          icon,
-          size: 16,
-          color: colorScheme.onSurfaceVariant,
-        ),
+        Icon(icon, size: 16, color: colorScheme.onSurfaceVariant),
         const SizedBox(width: 8),
         Text(
           '$label: ',
@@ -597,10 +586,7 @@ class _InfoRow extends StatelessWidget {
 }
 
 class _DetailTile extends StatelessWidget {
-  const _DetailTile({
-    required this.label,
-    required this.value,
-  });
+  const _DetailTile({required this.label, required this.value});
 
   final String label;
   final String value;

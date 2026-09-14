@@ -27,10 +27,12 @@ class WalletDetailScreen extends HookWidget {
     );
 
     useEffect(() {
-      context.read<WalletBloc>().add(WalletEvent.loadWallet(walletId: walletId));
-      context
-          .read<WalletBloc>()
-          .add(WalletEvent.loadTransactions(walletId: walletId));
+      context.read<WalletBloc>().add(
+        WalletEvent.loadWallet(walletId: walletId),
+      );
+      context.read<WalletBloc>().add(
+        WalletEvent.loadTransactions(walletId: walletId),
+      );
       return null;
     }, [walletId]);
 
@@ -40,86 +42,89 @@ class WalletDetailScreen extends HookWidget {
 
         return Scaffold(
           appBar: AppBar(
-            title: Text(wallet?.isMainWallet == true
-                ? t.walletDashboardMainWallet
-                : wallet?.campaignTitle ?? 'Wallet'),
+            title: Text(
+              wallet?.isMainWallet == true
+                  ? t.walletDashboardMainWallet
+                  : wallet?.campaignTitle ?? 'Wallet',
+            ),
           ),
           body: state.isLoadingWallet
               ? const Center(child: CircularProgressIndicator())
               : wallet == null
-                  ? Center(child: Text(t.walletDashboardNoMainWallet))
-                  : RefreshIndicator(
-                      onRefresh: () async {
-                        context
-                            .read<WalletBloc>()
-                            .add(WalletEvent.loadWallet(walletId: walletId));
-                        context.read<WalletBloc>().add(
-                            WalletEvent.loadTransactions(walletId: walletId));
-                      },
-                      child: SingleChildScrollView(
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        padding: const EdgeInsets.all(16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Balance Card
-                            _BalanceCard(
-                              wallet: wallet,
-                              currencyFormat: currencyFormat,
-                            ),
-                            const SizedBox(height: 16),
-
-                            // Action Buttons
-                            _ActionButtonsRow(
-                              wallet: wallet,
-                              isExporting: state.isExporting,
-                              onWithdraw: () =>
-                                  _showWithdrawalDialog(context, wallet),
-                              onViewWithdrawals: () => context.push(
-                                  '/profile/settings/wallet/${wallet.id}/withdrawals'),
-                              onExport: () => _showExportDialog(context, wallet),
-                            ),
-                            const SizedBox(height: 24),
-
-                            // Bank Details Section
-                            _BankDetailsSection(
-                              wallet: wallet,
-                              onEdit: () =>
-                                  _showBankDetailsDialog(context, wallet),
-                            ),
-                            const SizedBox(height: 24),
-
-                            // Transaction History
-                            Text(
-                              t.walletDashboardRecentActivity,
-                              style: theme.textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 12),
-                            if (state.isLoadingTransactions)
-                              const Center(child: CircularProgressIndicator())
-                            else if (state.transactions.isEmpty)
-                              _EmptyTransactions()
-                            else
-                              ListView.separated(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: state.transactions.length,
-                                separatorBuilder: (_, __) =>
-                                    const Divider(height: 1),
-                                itemBuilder: (context, index) {
-                                  final tx = state.transactions[index];
-                                  return _TransactionTile(
-                                    transaction: tx,
-                                    currencyFormat: currencyFormat,
-                                  );
-                                },
-                              ),
-                          ],
+              ? Center(child: Text(t.walletDashboardNoMainWallet))
+              : RefreshIndicator(
+                  onRefresh: () async {
+                    context.read<WalletBloc>().add(
+                      WalletEvent.loadWallet(walletId: walletId),
+                    );
+                    context.read<WalletBloc>().add(
+                      WalletEvent.loadTransactions(walletId: walletId),
+                    );
+                  },
+                  child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Balance Card
+                        _BalanceCard(
+                          wallet: wallet,
+                          currencyFormat: currencyFormat,
                         ),
-                      ),
+                        const SizedBox(height: 16),
+
+                        // Action Buttons
+                        _ActionButtonsRow(
+                          wallet: wallet,
+                          isExporting: state.isExporting,
+                          onWithdraw: () =>
+                              _showWithdrawalDialog(context, wallet),
+                          onViewWithdrawals: () => context.push(
+                            '/profile/settings/wallet/${wallet.id}/withdrawals',
+                          ),
+                          onExport: () => _showExportDialog(context, wallet),
+                        ),
+                        const SizedBox(height: 24),
+
+                        // Bank Details Section
+                        _BankDetailsSection(
+                          wallet: wallet,
+                          onEdit: () => _showBankDetailsDialog(context, wallet),
+                        ),
+                        const SizedBox(height: 24),
+
+                        // Transaction History
+                        Text(
+                          t.walletDashboardRecentActivity,
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        if (state.isLoadingTransactions)
+                          const Center(child: CircularProgressIndicator())
+                        else if (state.transactions.isEmpty)
+                          _EmptyTransactions()
+                        else
+                          ListView.separated(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: state.transactions.length,
+                            separatorBuilder: (_, __) =>
+                                const Divider(height: 1),
+                            itemBuilder: (context, index) {
+                              final tx = state.transactions[index];
+                              return _TransactionTile(
+                                transaction: tx,
+                                currencyFormat: currencyFormat,
+                              );
+                            },
+                          ),
+                      ],
                     ),
+                  ),
+                ),
         );
       },
     );
@@ -127,10 +132,12 @@ class WalletDetailScreen extends HookWidget {
 
   void _showBankDetailsDialog(BuildContext context, WalletEntity wallet) {
     final bankNameController = TextEditingController(text: wallet.bankName);
-    final accountNumberController =
-        TextEditingController(text: wallet.bankAccountNumber);
-    final accountHolderController =
-        TextEditingController(text: wallet.bankAccountHolder);
+    final accountNumberController = TextEditingController(
+      text: wallet.bankAccountNumber,
+    );
+    final accountHolderController = TextEditingController(
+      text: wallet.bankAccountHolder,
+    );
     final t = AppLocalizations.of(context)!;
 
     showDialog(
@@ -147,15 +154,17 @@ class WalletDetailScreen extends HookWidget {
             const SizedBox(height: 8),
             TextField(
               controller: accountNumberController,
-              decoration:
-                  InputDecoration(labelText: t.walletDashboardAccountNumber),
+              decoration: InputDecoration(
+                labelText: t.walletDashboardAccountNumber,
+              ),
               keyboardType: TextInputType.number,
             ),
             const SizedBox(height: 8),
             TextField(
               controller: accountHolderController,
-              decoration:
-                  InputDecoration(labelText: t.walletDashboardAccountHolder),
+              decoration: InputDecoration(
+                labelText: t.walletDashboardAccountHolder,
+              ),
             ),
           ],
         ),
@@ -170,13 +179,13 @@ class WalletDetailScreen extends HookWidget {
                   accountNumberController.text.isNotEmpty &&
                   accountHolderController.text.isNotEmpty) {
                 context.read<WalletBloc>().add(
-                      WalletEvent.updateBankDetails(
-                        walletId: wallet.id,
-                        bankName: bankNameController.text,
-                        bankAccountNumber: accountNumberController.text,
-                        bankAccountHolder: accountHolderController.text,
-                      ),
-                    );
+                  WalletEvent.updateBankDetails(
+                    walletId: wallet.id,
+                    bankName: bankNameController.text,
+                    bankAccountNumber: accountNumberController.text,
+                    bankAccountHolder: accountHolderController.text,
+                  ),
+                );
                 Navigator.pop(ctx);
               }
             },
@@ -203,7 +212,11 @@ class WalletDetailScreen extends HookWidget {
       showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-          icon: Icon(Icons.warning_amber_rounded, color: colorScheme.error, size: 48),
+          icon: Icon(
+            Icons.warning_amber_rounded,
+            color: colorScheme.error,
+            size: 48,
+          ),
           title: const Text('Bank Details Required'),
           content: const Text(
             'Please configure your bank details before requesting a withdrawal.',
@@ -258,8 +271,9 @@ class WalletDetailScreen extends HookWidget {
               ),
               child: Row(
                 children: [
-                  Icon(Icons.info_outline, 
-                    size: 20, 
+                  Icon(
+                    Icons.info_outline,
+                    size: 20,
                     color: colorScheme.primary,
                   ),
                   const SizedBox(width: 8),
@@ -286,11 +300,11 @@ class WalletDetailScreen extends HookWidget {
               );
               if (amount != null && amount > 0 && amount <= wallet.balance) {
                 context.read<WalletBloc>().add(
-                      WalletEvent.requestWithdrawal(
-                        walletId: wallet.id,
-                        amount: amount,
-                      ),
-                    );
+                  WalletEvent.requestWithdrawal(
+                    walletId: wallet.id,
+                    amount: amount,
+                  ),
+                );
                 Navigator.pop(ctx);
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
@@ -298,7 +312,9 @@ class WalletDetailScreen extends HookWidget {
                     behavior: SnackBarBehavior.floating,
                     action: SnackBarAction(
                       label: 'View History',
-                      onPressed: () => context.push('/profile/settings/wallet/${wallet.id}/withdrawals'),
+                      onPressed: () => context.push(
+                        '/profile/settings/wallet/${wallet.id}/withdrawals',
+                      ),
                     ),
                   ),
                 );
@@ -337,21 +353,23 @@ class WalletDetailScreen extends HookWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Export your transaction history to a CSV file.',
-              ),
+              const Text('Export your transaction history to a CSV file.'),
               const SizedBox(height: 16),
               ListTile(
                 contentPadding: EdgeInsets.zero,
                 leading: const Icon(Icons.calendar_today),
                 title: const Text('Start Date'),
-                subtitle: Text(startDate != null
-                    ? DateFormat.yMMMd().format(startDate!)
-                    : 'Optional'),
+                subtitle: Text(
+                  startDate != null
+                      ? DateFormat.yMMMd().format(startDate!)
+                      : 'Optional',
+                ),
                 onTap: () async {
                   final date = await showDatePicker(
                     context: context,
-                    initialDate: startDate ?? DateTime.now().subtract(const Duration(days: 30)),
+                    initialDate:
+                        startDate ??
+                        DateTime.now().subtract(const Duration(days: 30)),
                     firstDate: DateTime(2020),
                     lastDate: DateTime.now(),
                   );
@@ -364,9 +382,11 @@ class WalletDetailScreen extends HookWidget {
                 contentPadding: EdgeInsets.zero,
                 leading: const Icon(Icons.calendar_today),
                 title: const Text('End Date'),
-                subtitle: Text(endDate != null
-                    ? DateFormat.yMMMd().format(endDate!)
-                    : 'Optional'),
+                subtitle: Text(
+                  endDate != null
+                      ? DateFormat.yMMMd().format(endDate!)
+                      : 'Optional',
+                ),
                 onTap: () async {
                   final date = await showDatePicker(
                     context: context,
@@ -389,12 +409,12 @@ class WalletDetailScreen extends HookWidget {
             FilledButton.icon(
               onPressed: () {
                 context.read<WalletBloc>().add(
-                      WalletEvent.exportTransactions(
-                        walletId: wallet.id,
-                        startDate: startDate,
-                        endDate: endDate,
-                      ),
-                    );
+                  WalletEvent.exportTransactions(
+                    walletId: wallet.id,
+                    startDate: startDate,
+                    endDate: endDate,
+                  ),
+                );
                 Navigator.pop(ctx);
               },
               icon: const Icon(Icons.download, size: 18),
@@ -438,7 +458,7 @@ class _ActionButtonsRow extends StatelessWidget {
           ),
         if (!wallet.isMainWallet && wallet.balance > 0)
           const SizedBox(width: 8),
-        
+
         // View Withdrawals Button
         Expanded(
           child: _ActionButton(
@@ -521,10 +541,7 @@ class _ActionButton extends StatelessWidget {
 }
 
 class _BalanceCard extends StatelessWidget {
-  const _BalanceCard({
-    required this.wallet,
-    required this.currencyFormat,
-  });
+  const _BalanceCard({required this.wallet, required this.currencyFormat});
 
   final WalletEntity wallet;
   final NumberFormat currencyFormat;
@@ -546,7 +563,7 @@ class _BalanceCard extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -592,10 +609,7 @@ class _BalanceCard extends StatelessWidget {
 }
 
 class _BankDetailsSection extends StatelessWidget {
-  const _BankDetailsSection({
-    required this.wallet,
-    required this.onEdit,
-  });
+  const _BankDetailsSection({required this.wallet, required this.onEdit});
 
   final WalletEntity wallet;
   final VoidCallback onEdit;
@@ -633,20 +647,28 @@ class _BankDetailsSection extends StatelessWidget {
             ),
             const Divider(),
             if (wallet.hasBankDetails) ...[
-              _DetailRow(label: t.walletDashboardBankName, value: wallet.bankName!),
               _DetailRow(
-                  label: t.walletDashboardAccountNumber,
-                  value: wallet.bankAccountNumber!),
+                label: t.walletDashboardBankName,
+                value: wallet.bankName!,
+              ),
               _DetailRow(
-                  label: t.walletDashboardAccountHolder,
-                  value: wallet.bankAccountHolder!),
+                label: t.walletDashboardAccountNumber,
+                value: wallet.bankAccountNumber!,
+              ),
+              _DetailRow(
+                label: t.walletDashboardAccountHolder,
+                value: wallet.bankAccountHolder!,
+              ),
             ] else
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: Row(
                   children: [
-                    Icon(Icons.warning_amber_rounded,
-                        color: colorScheme.error, size: 20),
+                    Icon(
+                      Icons.warning_amber_rounded,
+                      color: colorScheme.error,
+                      size: 20,
+                    ),
                     const SizedBox(width: 8),
                     Text(
                       'Bank details not configured',
@@ -744,7 +766,9 @@ class _TransactionTile extends StatelessWidget {
         width: 40,
         height: 40,
         decoration: BoxDecoration(
-          color: (isPositive ? Colors.green : Colors.red).withValues(alpha: 0.1),
+          color: (isPositive ? Colors.green : Colors.red).withValues(
+            alpha: 0.1,
+          ),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Icon(
