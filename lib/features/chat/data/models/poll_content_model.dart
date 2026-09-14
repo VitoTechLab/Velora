@@ -7,7 +7,7 @@ part 'poll_content_model.g.dart';
 
 /// Model for message_poll_payload table
 @freezed
-class PollPayloadModel with _$PollPayloadModel {
+abstract class PollPayloadModel with _$PollPayloadModel {
   const factory PollPayloadModel({
     @JsonKey(name: 'message_id') required String messageId,
     @JsonKey(name: 'question') required String question,
@@ -24,7 +24,7 @@ class PollPayloadModel with _$PollPayloadModel {
 }
 
 @freezed
-class PollOptionModel with _$PollOptionModel {
+abstract class PollOptionModel with _$PollOptionModel {
   const factory PollOptionModel({
     @JsonKey(name: 'id') required String id,
     @JsonKey(name: 'poll_message_id') required String pollMessageId,

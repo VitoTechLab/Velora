@@ -6,16 +6,14 @@ part of 'user_presence_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$UserPresenceModelImpl _$$UserPresenceModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$UserPresenceModelImpl(
+_UserPresenceModel _$UserPresenceModelFromJson(Map<String, dynamic> json) =>
+    _UserPresenceModel(
       userId: json['user_id'] as String,
       lastSeenAt: DateTime.parse(json['last_seen_at'] as String),
       isOnline: json['is_online'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$UserPresenceModelImplToJson(
-        _$UserPresenceModelImpl instance) =>
+Map<String, dynamic> _$UserPresenceModelToJson(_UserPresenceModel instance) =>
     <String, dynamic>{
       'user_id': instance.userId,
       'last_seen_at': instance.lastSeenAt.toIso8601String(),

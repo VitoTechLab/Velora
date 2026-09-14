@@ -6,36 +6,35 @@ part of 'poll_content_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PollPayloadModelImpl _$$PollPayloadModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$PollPayloadModelImpl(
+_PollPayloadModel _$PollPayloadModelFromJson(Map<String, dynamic> json) =>
+    _PollPayloadModel(
       messageId: json['message_id'] as String,
       question: json['question'] as String,
       multipleChoice: json['multiple_choice'] as bool? ?? false,
       maxUserVotes: (json['max_user_votes'] as num?)?.toInt() ?? 1,
-      closesAt:
-          const NullableUtcDateTimeConverter().fromJson(json['closes_at']),
-      options: (json['poll_options'] as List<dynamic>?)
+      closesAt: const NullableUtcDateTimeConverter().fromJson(
+        json['closes_at'],
+      ),
+      options:
+          (json['poll_options'] as List<dynamic>?)
               ?.map((e) => PollOptionModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
     );
 
-Map<String, dynamic> _$$PollPayloadModelImplToJson(
-        _$PollPayloadModelImpl instance) =>
-    <String, dynamic>{
-      'message_id': instance.messageId,
-      'question': instance.question,
-      'multiple_choice': instance.multipleChoice,
-      'max_user_votes': instance.maxUserVotes,
-      'closes_at':
-          const NullableUtcDateTimeConverter().toJson(instance.closesAt),
-      'poll_options': instance.options,
-    };
+Map<String, dynamic> _$PollPayloadModelToJson(
+  _PollPayloadModel instance,
+) => <String, dynamic>{
+  'message_id': instance.messageId,
+  'question': instance.question,
+  'multiple_choice': instance.multipleChoice,
+  'max_user_votes': instance.maxUserVotes,
+  'closes_at': const NullableUtcDateTimeConverter().toJson(instance.closesAt),
+  'poll_options': instance.options,
+};
 
-_$PollOptionModelImpl _$$PollOptionModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$PollOptionModelImpl(
+_PollOptionModel _$PollOptionModelFromJson(Map<String, dynamic> json) =>
+    _PollOptionModel(
       id: json['id'] as String,
       pollMessageId: json['poll_message_id'] as String,
       text: json['text'] as String,
@@ -44,8 +43,7 @@ _$PollOptionModelImpl _$$PollOptionModelImplFromJson(
       isSelected: json['is_selected'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$PollOptionModelImplToJson(
-        _$PollOptionModelImpl instance) =>
+Map<String, dynamic> _$PollOptionModelToJson(_PollOptionModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'poll_message_id': instance.pollMessageId,
