@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,284 +9,284 @@ part of 'media_asset_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
 mixin _$MediaAsset {
-  String get publicId => throw _privateConstructorUsedError;
-  String get secureUrl => throw _privateConstructorUsedError;
-  String get resourceType => throw _privateConstructorUsedError;
-  String get format => throw _privateConstructorUsedError;
-  int get bytes => throw _privateConstructorUsedError;
-  int get width => throw _privateConstructorUsedError;
-  int get height => throw _privateConstructorUsedError;
-  double? get duration => throw _privateConstructorUsedError;
 
-  /// Create a copy of MediaAsset
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $MediaAssetCopyWith<MediaAsset> get copyWith =>
-      throw _privateConstructorUsedError;
+ String get publicId; String get secureUrl; String get resourceType; String get format; int get bytes; int get width; int get height; double? get duration;
+/// Create a copy of MediaAsset
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$MediaAssetCopyWith<MediaAsset> get copyWith => _$MediaAssetCopyWithImpl<MediaAsset>(this as MediaAsset, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaAsset&&(identical(other.publicId, publicId) || other.publicId == publicId)&&(identical(other.secureUrl, secureUrl) || other.secureUrl == secureUrl)&&(identical(other.resourceType, resourceType) || other.resourceType == resourceType)&&(identical(other.format, format) || other.format == format)&&(identical(other.bytes, bytes) || other.bytes == bytes)&&(identical(other.width, width) || other.width == width)&&(identical(other.height, height) || other.height == height)&&(identical(other.duration, duration) || other.duration == duration));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,publicId,secureUrl,resourceType,format,bytes,width,height,duration);
+
+@override
+String toString() {
+  return 'MediaAsset(publicId: $publicId, secureUrl: $secureUrl, resourceType: $resourceType, format: $format, bytes: $bytes, width: $width, height: $height, duration: $duration)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $MediaAssetCopyWith<$Res> {
-  factory $MediaAssetCopyWith(
-          MediaAsset value, $Res Function(MediaAsset) then) =
-      _$MediaAssetCopyWithImpl<$Res, MediaAsset>;
-  @useResult
-  $Res call(
-      {String publicId,
-      String secureUrl,
-      String resourceType,
-      String format,
-      int bytes,
-      int width,
-      int height,
-      double? duration});
-}
+abstract mixin class $MediaAssetCopyWith<$Res>  {
+  factory $MediaAssetCopyWith(MediaAsset value, $Res Function(MediaAsset) _then) = _$MediaAssetCopyWithImpl;
+@useResult
+$Res call({
+ String publicId, String secureUrl, String resourceType, String format, int bytes, int width, int height, double? duration
+});
 
+
+
+
+}
 /// @nodoc
-class _$MediaAssetCopyWithImpl<$Res, $Val extends MediaAsset>
+class _$MediaAssetCopyWithImpl<$Res>
     implements $MediaAssetCopyWith<$Res> {
-  _$MediaAssetCopyWithImpl(this._value, this._then);
+  _$MediaAssetCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final MediaAsset _self;
+  final $Res Function(MediaAsset) _then;
 
-  /// Create a copy of MediaAsset
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? publicId = null,
-    Object? secureUrl = null,
-    Object? resourceType = null,
-    Object? format = null,
-    Object? bytes = null,
-    Object? width = null,
-    Object? height = null,
-    Object? duration = freezed,
-  }) {
-    return _then(_value.copyWith(
-      publicId: null == publicId
-          ? _value.publicId
-          : publicId // ignore: cast_nullable_to_non_nullable
-              as String,
-      secureUrl: null == secureUrl
-          ? _value.secureUrl
-          : secureUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      resourceType: null == resourceType
-          ? _value.resourceType
-          : resourceType // ignore: cast_nullable_to_non_nullable
-              as String,
-      format: null == format
-          ? _value.format
-          : format // ignore: cast_nullable_to_non_nullable
-              as String,
-      bytes: null == bytes
-          ? _value.bytes
-          : bytes // ignore: cast_nullable_to_non_nullable
-              as int,
-      width: null == width
-          ? _value.width
-          : width // ignore: cast_nullable_to_non_nullable
-              as int,
-      height: null == height
-          ? _value.height
-          : height // ignore: cast_nullable_to_non_nullable
-              as int,
-      duration: freezed == duration
-          ? _value.duration
-          : duration // ignore: cast_nullable_to_non_nullable
-              as double?,
-    ) as $Val);
-  }
+/// Create a copy of MediaAsset
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? publicId = null,Object? secureUrl = null,Object? resourceType = null,Object? format = null,Object? bytes = null,Object? width = null,Object? height = null,Object? duration = freezed,}) {
+  return _then(_self.copyWith(
+publicId: null == publicId ? _self.publicId : publicId // ignore: cast_nullable_to_non_nullable
+as String,secureUrl: null == secureUrl ? _self.secureUrl : secureUrl // ignore: cast_nullable_to_non_nullable
+as String,resourceType: null == resourceType ? _self.resourceType : resourceType // ignore: cast_nullable_to_non_nullable
+as String,format: null == format ? _self.format : format // ignore: cast_nullable_to_non_nullable
+as String,bytes: null == bytes ? _self.bytes : bytes // ignore: cast_nullable_to_non_nullable
+as int,width: null == width ? _self.width : width // ignore: cast_nullable_to_non_nullable
+as int,height: null == height ? _self.height : height // ignore: cast_nullable_to_non_nullable
+as int,duration: freezed == duration ? _self.duration : duration // ignore: cast_nullable_to_non_nullable
+as double?,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [MediaAsset].
+extension MediaAssetPatterns on MediaAsset {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _MediaAsset value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _MediaAsset() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _MediaAsset value)  $default,){
+final _that = this;
+switch (_that) {
+case _MediaAsset():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _MediaAsset value)?  $default,){
+final _that = this;
+switch (_that) {
+case _MediaAsset() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String publicId,  String secureUrl,  String resourceType,  String format,  int bytes,  int width,  int height,  double? duration)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _MediaAsset() when $default != null:
+return $default(_that.publicId,_that.secureUrl,_that.resourceType,_that.format,_that.bytes,_that.width,_that.height,_that.duration);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String publicId,  String secureUrl,  String resourceType,  String format,  int bytes,  int width,  int height,  double? duration)  $default,) {final _that = this;
+switch (_that) {
+case _MediaAsset():
+return $default(_that.publicId,_that.secureUrl,_that.resourceType,_that.format,_that.bytes,_that.width,_that.height,_that.duration);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String publicId,  String secureUrl,  String resourceType,  String format,  int bytes,  int width,  int height,  double? duration)?  $default,) {final _that = this;
+switch (_that) {
+case _MediaAsset() when $default != null:
+return $default(_that.publicId,_that.secureUrl,_that.resourceType,_that.format,_that.bytes,_that.width,_that.height,_that.duration);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
-abstract class _$$MediaAssetImplCopyWith<$Res>
-    implements $MediaAssetCopyWith<$Res> {
-  factory _$$MediaAssetImplCopyWith(
-          _$MediaAssetImpl value, $Res Function(_$MediaAssetImpl) then) =
-      __$$MediaAssetImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String publicId,
-      String secureUrl,
-      String resourceType,
-      String format,
-      int bytes,
-      int width,
-      int height,
-      double? duration});
+
+
+class _MediaAsset implements MediaAsset {
+  const _MediaAsset({required this.publicId, required this.secureUrl, required this.resourceType, required this.format, required this.bytes, required this.width, required this.height, this.duration});
+  
+
+@override final  String publicId;
+@override final  String secureUrl;
+@override final  String resourceType;
+@override final  String format;
+@override final  int bytes;
+@override final  int width;
+@override final  int height;
+@override final  double? duration;
+
+/// Create a copy of MediaAsset
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$MediaAssetCopyWith<_MediaAsset> get copyWith => __$MediaAssetCopyWithImpl<_MediaAsset>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MediaAsset&&(identical(other.publicId, publicId) || other.publicId == publicId)&&(identical(other.secureUrl, secureUrl) || other.secureUrl == secureUrl)&&(identical(other.resourceType, resourceType) || other.resourceType == resourceType)&&(identical(other.format, format) || other.format == format)&&(identical(other.bytes, bytes) || other.bytes == bytes)&&(identical(other.width, width) || other.width == width)&&(identical(other.height, height) || other.height == height)&&(identical(other.duration, duration) || other.duration == duration));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,publicId,secureUrl,resourceType,format,bytes,width,height,duration);
+
+@override
+String toString() {
+  return 'MediaAsset(publicId: $publicId, secureUrl: $secureUrl, resourceType: $resourceType, format: $format, bytes: $bytes, width: $width, height: $height, duration: $duration)';
+}
+
+
 }
 
 /// @nodoc
-class __$$MediaAssetImplCopyWithImpl<$Res>
-    extends _$MediaAssetCopyWithImpl<$Res, _$MediaAssetImpl>
-    implements _$$MediaAssetImplCopyWith<$Res> {
-  __$$MediaAssetImplCopyWithImpl(
-      _$MediaAssetImpl _value, $Res Function(_$MediaAssetImpl) _then)
-      : super(_value, _then);
+abstract mixin class _$MediaAssetCopyWith<$Res> implements $MediaAssetCopyWith<$Res> {
+  factory _$MediaAssetCopyWith(_MediaAsset value, $Res Function(_MediaAsset) _then) = __$MediaAssetCopyWithImpl;
+@override @useResult
+$Res call({
+ String publicId, String secureUrl, String resourceType, String format, int bytes, int width, int height, double? duration
+});
 
-  /// Create a copy of MediaAsset
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? publicId = null,
-    Object? secureUrl = null,
-    Object? resourceType = null,
-    Object? format = null,
-    Object? bytes = null,
-    Object? width = null,
-    Object? height = null,
-    Object? duration = freezed,
-  }) {
-    return _then(_$MediaAssetImpl(
-      publicId: null == publicId
-          ? _value.publicId
-          : publicId // ignore: cast_nullable_to_non_nullable
-              as String,
-      secureUrl: null == secureUrl
-          ? _value.secureUrl
-          : secureUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      resourceType: null == resourceType
-          ? _value.resourceType
-          : resourceType // ignore: cast_nullable_to_non_nullable
-              as String,
-      format: null == format
-          ? _value.format
-          : format // ignore: cast_nullable_to_non_nullable
-              as String,
-      bytes: null == bytes
-          ? _value.bytes
-          : bytes // ignore: cast_nullable_to_non_nullable
-              as int,
-      width: null == width
-          ? _value.width
-          : width // ignore: cast_nullable_to_non_nullable
-              as int,
-      height: null == height
-          ? _value.height
-          : height // ignore: cast_nullable_to_non_nullable
-              as int,
-      duration: freezed == duration
-          ? _value.duration
-          : duration // ignore: cast_nullable_to_non_nullable
-              as double?,
-    ));
-  }
+
+
+
 }
-
 /// @nodoc
+class __$MediaAssetCopyWithImpl<$Res>
+    implements _$MediaAssetCopyWith<$Res> {
+  __$MediaAssetCopyWithImpl(this._self, this._then);
 
-class _$MediaAssetImpl implements _MediaAsset {
-  const _$MediaAssetImpl(
-      {required this.publicId,
-      required this.secureUrl,
-      required this.resourceType,
-      required this.format,
-      required this.bytes,
-      required this.width,
-      required this.height,
-      this.duration});
+  final _MediaAsset _self;
+  final $Res Function(_MediaAsset) _then;
 
-  @override
-  final String publicId;
-  @override
-  final String secureUrl;
-  @override
-  final String resourceType;
-  @override
-  final String format;
-  @override
-  final int bytes;
-  @override
-  final int width;
-  @override
-  final int height;
-  @override
-  final double? duration;
-
-  @override
-  String toString() {
-    return 'MediaAsset(publicId: $publicId, secureUrl: $secureUrl, resourceType: $resourceType, format: $format, bytes: $bytes, width: $width, height: $height, duration: $duration)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$MediaAssetImpl &&
-            (identical(other.publicId, publicId) ||
-                other.publicId == publicId) &&
-            (identical(other.secureUrl, secureUrl) ||
-                other.secureUrl == secureUrl) &&
-            (identical(other.resourceType, resourceType) ||
-                other.resourceType == resourceType) &&
-            (identical(other.format, format) || other.format == format) &&
-            (identical(other.bytes, bytes) || other.bytes == bytes) &&
-            (identical(other.width, width) || other.width == width) &&
-            (identical(other.height, height) || other.height == height) &&
-            (identical(other.duration, duration) ||
-                other.duration == duration));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, publicId, secureUrl,
-      resourceType, format, bytes, width, height, duration);
-
-  /// Create a copy of MediaAsset
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$MediaAssetImplCopyWith<_$MediaAssetImpl> get copyWith =>
-      __$$MediaAssetImplCopyWithImpl<_$MediaAssetImpl>(this, _$identity);
+/// Create a copy of MediaAsset
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? publicId = null,Object? secureUrl = null,Object? resourceType = null,Object? format = null,Object? bytes = null,Object? width = null,Object? height = null,Object? duration = freezed,}) {
+  return _then(_MediaAsset(
+publicId: null == publicId ? _self.publicId : publicId // ignore: cast_nullable_to_non_nullable
+as String,secureUrl: null == secureUrl ? _self.secureUrl : secureUrl // ignore: cast_nullable_to_non_nullable
+as String,resourceType: null == resourceType ? _self.resourceType : resourceType // ignore: cast_nullable_to_non_nullable
+as String,format: null == format ? _self.format : format // ignore: cast_nullable_to_non_nullable
+as String,bytes: null == bytes ? _self.bytes : bytes // ignore: cast_nullable_to_non_nullable
+as int,width: null == width ? _self.width : width // ignore: cast_nullable_to_non_nullable
+as int,height: null == height ? _self.height : height // ignore: cast_nullable_to_non_nullable
+as int,duration: freezed == duration ? _self.duration : duration // ignore: cast_nullable_to_non_nullable
+as double?,
+  ));
 }
 
-abstract class _MediaAsset implements MediaAsset {
-  const factory _MediaAsset(
-      {required final String publicId,
-      required final String secureUrl,
-      required final String resourceType,
-      required final String format,
-      required final int bytes,
-      required final int width,
-      required final int height,
-      final double? duration}) = _$MediaAssetImpl;
 
-  @override
-  String get publicId;
-  @override
-  String get secureUrl;
-  @override
-  String get resourceType;
-  @override
-  String get format;
-  @override
-  int get bytes;
-  @override
-  int get width;
-  @override
-  int get height;
-  @override
-  double? get duration;
-
-  /// Create a copy of MediaAsset
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MediaAssetImplCopyWith<_$MediaAssetImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
+
+// dart format on
