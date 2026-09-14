@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'social_relation_event.freezed.dart';
 
 @freezed
-class SocialRelationEvent with _$SocialRelationEvent {
+abstract class SocialRelationEvent with _$SocialRelationEvent {
   // ========== FOLLOW EVENTS ==========
 
   const factory SocialRelationEvent.followUser(String targetUserId) =
