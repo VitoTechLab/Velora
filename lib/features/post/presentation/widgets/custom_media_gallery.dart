@@ -66,29 +66,10 @@ class CustomMediaGallery extends HookWidget {
             child: Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Theme.of(context)
-                        .colorScheme
-                        .primaryContainer
-                        .withValues(alpha: 0.3),
-                    Theme.of(context)
-                        .colorScheme
-                        .secondaryContainer
-                        .withValues(alpha: 0.2),
-                  ],
-                ),
+                color: Theme.of(
+                  context,
+                ).colorScheme.primaryContainer.withValues(alpha: 0.3),
                 shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .primary
-                        .withValues(alpha: 0.1),
-                    blurRadius: 16,
-                    spreadRadius: 2,
-                  ),
-                ],
               ),
               child: SizedBox(
                 width: 40,
@@ -210,14 +191,7 @@ class _MediaThumbnail extends HookWidget {
                   if (isSelected)
                     Container(
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            colorScheme.primary.withValues(alpha: 0.25),
-                            colorScheme.secondary.withValues(alpha: 0.15),
-                          ],
-                        ),
+                        color: colorScheme.primary.withValues(alpha: 0.25),
                       ),
                     ),
                   if (isSelected)
@@ -228,24 +202,12 @@ class _MediaThumbnail extends HookWidget {
                         width: 28,
                         height: 28,
                         decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              colorScheme.primary,
-                              colorScheme.secondary,
-                            ],
-                          ),
+                          color: colorScheme.primary,
                           shape: BoxShape.circle,
                           border: Border.all(
                             color: colorScheme.onPrimary.withValues(alpha: 0.3),
                             width: 1.5,
                           ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: colorScheme.primary.withValues(alpha: 0.4),
-                              blurRadius: 8,
-                              offset: const Offset(0, 2),
-                            ),
-                          ],
                         ),
                         child: Center(
                           child: Text(
@@ -292,39 +254,19 @@ class _EmptyGalleryPlaceholder extends StatelessWidget {
             builder: (context, value, child) {
               return Transform.scale(
                 scale: value,
-                child: Opacity(
-                  opacity: value,
-                  child: child,
-                ),
+                child: Opacity(opacity: value, child: child),
               );
             },
             child: Container(
               width: 120,
               height: 120,
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    colorScheme.primaryContainer.withValues(alpha: 0.3),
-                    colorScheme.secondaryContainer.withValues(alpha: 0.2),
-                  ],
-                ),
+                color: colorScheme.primaryContainer.withValues(alpha: 0.3),
                 shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: colorScheme.primary.withValues(alpha: 0.1),
-                    blurRadius: 20,
-                    spreadRadius: 3,
-                  ),
-                ],
               ),
               child: ShaderMask(
                 shaderCallback: (bounds) => LinearGradient(
-                  colors: [
-                    colorScheme.primary,
-                    colorScheme.secondary,
-                  ],
+                  colors: [colorScheme.primary, colorScheme.secondary],
                 ).createShader(bounds),
                 child: Icon(
                   Icons.photo_library_outlined,
@@ -355,29 +297,19 @@ class _EmptyGalleryPlaceholder extends StatelessWidget {
           const SizedBox(height: 24),
           Container(
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  colorScheme.primary,
-                  colorScheme.primary.withValues(alpha: 0.85),
-                ],
-              ),
-              borderRadius: BorderRadius.circular(24),
-              boxShadow: [
-                BoxShadow(
-                  color: colorScheme.primary.withValues(alpha: 0.3),
-                  blurRadius: 12,
-                  offset: const Offset(0, 4),
-                ),
-              ],
+              color: colorScheme.primary,
+              borderRadius: BorderRadius.circular(12),
             ),
             child: Material(
               color: Colors.transparent,
               child: InkWell(
                 onTap: onSelectImages,
-                borderRadius: BorderRadius.circular(24),
+                borderRadius: BorderRadius.circular(12),
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 14,
+                  ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [

@@ -22,27 +22,13 @@ class CreatePostAppBar extends StatelessWidget {
     return Container(
       height: 56,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            theme.colorScheme.surface,
-            theme.colorScheme.surfaceContainerLowest,
-          ],
-        ),
+        color: theme.colorScheme.surface,
         border: Border(
           bottom: BorderSide(
             color: theme.colorScheme.outlineVariant.withValues(alpha: 0.3),
             width: 1,
           ),
         ),
-        boxShadow: [
-          BoxShadow(
-            color: theme.colorScheme.shadow.withValues(alpha: 0.08),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4),
@@ -52,8 +38,9 @@ class CreatePostAppBar extends StatelessWidget {
             Container(
               margin: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: theme.colorScheme.surfaceContainerHighest
-                    .withValues(alpha: 0.5),
+                color: theme.colorScheme.surfaceContainerHighest.withValues(
+                  alpha: 0.5,
+                ),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Material(
@@ -143,7 +130,7 @@ class _NextButton extends StatelessWidget {
                 )
               : null,
           color: isEnabled ? null : colorScheme.surfaceContainerHighest,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(12),
           boxShadow: isEnabled
               ? [
                   BoxShadow(
@@ -158,7 +145,7 @@ class _NextButton extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             onTap: onPressed,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(12),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
               child: Text(

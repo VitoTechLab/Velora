@@ -20,27 +20,13 @@ class ContextualToolbar extends StatelessWidget {
     final t = AppLocalizations.of(context)!;
     return Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            colorScheme.surface,
-            colorScheme.surfaceContainerLowest,
-          ],
-        ),
+        color: colorScheme.surface,
         border: Border(
           top: BorderSide(
             color: colorScheme.outlineVariant.withValues(alpha: 0.3),
             width: 1,
           ),
         ),
-        boxShadow: [
-          BoxShadow(
-            color: colorScheme.shadow.withValues(alpha: 0.1),
-            blurRadius: 12,
-            offset: const Offset(0, -4),
-          ),
-        ],
       ),
       child: SafeArea(
         top: false,
@@ -101,26 +87,10 @@ class _ToolbarAction extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      colorScheme.primaryContainer.withValues(alpha: 0.4),
-                      colorScheme.secondaryContainer.withValues(alpha: 0.3),
-                    ],
-                  ),
+                  color: colorScheme.primaryContainer.withValues(alpha: 0.4),
                   borderRadius: BorderRadius.circular(14),
-                  boxShadow: [
-                    BoxShadow(
-                      color: colorScheme.primary.withValues(alpha: 0.1),
-                      blurRadius: 8,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
                 ),
-                child: Icon(
-                  icon,
-                  size: 24,
-                  color: colorScheme.primary,
-                ),
+                child: Icon(icon, size: 24, color: colorScheme.primary),
               ),
               const SizedBox(height: 8),
               Text(
