@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,3327 +9,1084 @@ part of 'wallet_event.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
 mixin _$WalletEvent {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String userId) loadWallets,
-    required TResult Function(String userId) loadMainWallet,
-    required TResult Function(String walletId) loadWallet,
-    required TResult Function(String userId) createMainWallet,
-    required TResult Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)
-        updateBankDetails,
-    required TResult Function(
-            String walletId, double amount, String? paymentMethod)
-        initiateTopUp,
-    required TResult Function(String transactionId, String paymentId)
-        confirmTopUp,
-    required TResult Function(String fromWalletId, String toCampaignId,
-            double amount, String? donationId)
-        processDonation,
-    required TResult Function(String walletId, double amount) requestWithdrawal,
-    required TResult Function(String walletId, int limit, int offset)
-        loadTransactions,
-    required TResult Function(String walletId) loadWithdrawals,
-    required TResult Function(
-            String walletId, DateTime? startDate, DateTime? endDate)
-        exportTransactions,
-    required TResult Function() clearTransient,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId)? loadWallets,
-    TResult? Function(String userId)? loadMainWallet,
-    TResult? Function(String walletId)? loadWallet,
-    TResult? Function(String userId)? createMainWallet,
-    TResult? Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)?
-        updateBankDetails,
-    TResult? Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult? Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult? Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult? Function(String walletId, double amount)? requestWithdrawal,
-    TResult? Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult? Function(String walletId)? loadWithdrawals,
-    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult? Function()? clearTransient,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? loadWallets,
-    TResult Function(String userId)? loadMainWallet,
-    TResult Function(String walletId)? loadWallet,
-    TResult Function(String userId)? createMainWallet,
-    TResult Function(String walletId, String bankName, String bankAccountNumber,
-            String bankAccountHolder)?
-        updateBankDetails,
-    TResult Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult Function(String walletId, double amount)? requestWithdrawal,
-    TResult Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult Function(String walletId)? loadWithdrawals,
-    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadWalletsEvent value) loadWallets,
-    required TResult Function(LoadMainWalletEvent value) loadMainWallet,
-    required TResult Function(LoadWalletEvent value) loadWallet,
-    required TResult Function(CreateMainWalletEvent value) createMainWallet,
-    required TResult Function(UpdateBankDetailsEvent value) updateBankDetails,
-    required TResult Function(InitiateTopUpEvent value) initiateTopUp,
-    required TResult Function(ConfirmTopUpEvent value) confirmTopUp,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(RequestWalletWithdrawalEvent value)
-        requestWithdrawal,
-    required TResult Function(LoadTransactionsEvent value) loadTransactions,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(ExportTransactionsEvent value) exportTransactions,
-    required TResult Function(ClearWalletTransientEvent value) clearTransient,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadWalletsEvent value)? loadWallets,
-    TResult? Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult? Function(LoadWalletEvent value)? loadWallet,
-    TResult? Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult? Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult? Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult? Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult? Function(ClearWalletTransientEvent value)? clearTransient,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadWalletsEvent value)? loadWallets,
-    TResult Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult Function(LoadWalletEvent value)? loadWallet,
-    TResult Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult Function(ClearWalletTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WalletEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'WalletEvent()';
+}
+
+
 }
 
 /// @nodoc
-abstract class $WalletEventCopyWith<$Res> {
-  factory $WalletEventCopyWith(
-          WalletEvent value, $Res Function(WalletEvent) then) =
-      _$WalletEventCopyWithImpl<$Res, WalletEvent>;
+class $WalletEventCopyWith<$Res>  {
+$WalletEventCopyWith(WalletEvent _, $Res Function(WalletEvent) __);
 }
 
-/// @nodoc
-class _$WalletEventCopyWithImpl<$Res, $Val extends WalletEvent>
-    implements $WalletEventCopyWith<$Res> {
-  _$WalletEventCopyWithImpl(this._value, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+/// Adds pattern-matching-related methods to [WalletEvent].
+extension WalletEventPatterns on WalletEvent {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LoadWalletsEvent value)?  loadWallets,TResult Function( LoadMainWalletEvent value)?  loadMainWallet,TResult Function( LoadWalletEvent value)?  loadWallet,TResult Function( CreateMainWalletEvent value)?  createMainWallet,TResult Function( UpdateBankDetailsEvent value)?  updateBankDetails,TResult Function( InitiateTopUpEvent value)?  initiateTopUp,TResult Function( ConfirmTopUpEvent value)?  confirmTopUp,TResult Function( ProcessDonationEvent value)?  processDonation,TResult Function( RequestWalletWithdrawalEvent value)?  requestWithdrawal,TResult Function( LoadTransactionsEvent value)?  loadTransactions,TResult Function( LoadWithdrawalsEvent value)?  loadWithdrawals,TResult Function( ExportTransactionsEvent value)?  exportTransactions,TResult Function( ClearWalletTransientEvent value)?  clearTransient,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case LoadWalletsEvent() when loadWallets != null:
+return loadWallets(_that);case LoadMainWalletEvent() when loadMainWallet != null:
+return loadMainWallet(_that);case LoadWalletEvent() when loadWallet != null:
+return loadWallet(_that);case CreateMainWalletEvent() when createMainWallet != null:
+return createMainWallet(_that);case UpdateBankDetailsEvent() when updateBankDetails != null:
+return updateBankDetails(_that);case InitiateTopUpEvent() when initiateTopUp != null:
+return initiateTopUp(_that);case ConfirmTopUpEvent() when confirmTopUp != null:
+return confirmTopUp(_that);case ProcessDonationEvent() when processDonation != null:
+return processDonation(_that);case RequestWalletWithdrawalEvent() when requestWithdrawal != null:
+return requestWithdrawal(_that);case LoadTransactionsEvent() when loadTransactions != null:
+return loadTransactions(_that);case LoadWithdrawalsEvent() when loadWithdrawals != null:
+return loadWithdrawals(_that);case ExportTransactionsEvent() when exportTransactions != null:
+return exportTransactions(_that);case ClearWalletTransientEvent() when clearTransient != null:
+return clearTransient(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LoadWalletsEvent value)  loadWallets,required TResult Function( LoadMainWalletEvent value)  loadMainWallet,required TResult Function( LoadWalletEvent value)  loadWallet,required TResult Function( CreateMainWalletEvent value)  createMainWallet,required TResult Function( UpdateBankDetailsEvent value)  updateBankDetails,required TResult Function( InitiateTopUpEvent value)  initiateTopUp,required TResult Function( ConfirmTopUpEvent value)  confirmTopUp,required TResult Function( ProcessDonationEvent value)  processDonation,required TResult Function( RequestWalletWithdrawalEvent value)  requestWithdrawal,required TResult Function( LoadTransactionsEvent value)  loadTransactions,required TResult Function( LoadWithdrawalsEvent value)  loadWithdrawals,required TResult Function( ExportTransactionsEvent value)  exportTransactions,required TResult Function( ClearWalletTransientEvent value)  clearTransient,}){
+final _that = this;
+switch (_that) {
+case LoadWalletsEvent():
+return loadWallets(_that);case LoadMainWalletEvent():
+return loadMainWallet(_that);case LoadWalletEvent():
+return loadWallet(_that);case CreateMainWalletEvent():
+return createMainWallet(_that);case UpdateBankDetailsEvent():
+return updateBankDetails(_that);case InitiateTopUpEvent():
+return initiateTopUp(_that);case ConfirmTopUpEvent():
+return confirmTopUp(_that);case ProcessDonationEvent():
+return processDonation(_that);case RequestWalletWithdrawalEvent():
+return requestWithdrawal(_that);case LoadTransactionsEvent():
+return loadTransactions(_that);case LoadWithdrawalsEvent():
+return loadWithdrawals(_that);case ExportTransactionsEvent():
+return exportTransactions(_that);case ClearWalletTransientEvent():
+return clearTransient(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LoadWalletsEvent value)?  loadWallets,TResult? Function( LoadMainWalletEvent value)?  loadMainWallet,TResult? Function( LoadWalletEvent value)?  loadWallet,TResult? Function( CreateMainWalletEvent value)?  createMainWallet,TResult? Function( UpdateBankDetailsEvent value)?  updateBankDetails,TResult? Function( InitiateTopUpEvent value)?  initiateTopUp,TResult? Function( ConfirmTopUpEvent value)?  confirmTopUp,TResult? Function( ProcessDonationEvent value)?  processDonation,TResult? Function( RequestWalletWithdrawalEvent value)?  requestWithdrawal,TResult? Function( LoadTransactionsEvent value)?  loadTransactions,TResult? Function( LoadWithdrawalsEvent value)?  loadWithdrawals,TResult? Function( ExportTransactionsEvent value)?  exportTransactions,TResult? Function( ClearWalletTransientEvent value)?  clearTransient,}){
+final _that = this;
+switch (_that) {
+case LoadWalletsEvent() when loadWallets != null:
+return loadWallets(_that);case LoadMainWalletEvent() when loadMainWallet != null:
+return loadMainWallet(_that);case LoadWalletEvent() when loadWallet != null:
+return loadWallet(_that);case CreateMainWalletEvent() when createMainWallet != null:
+return createMainWallet(_that);case UpdateBankDetailsEvent() when updateBankDetails != null:
+return updateBankDetails(_that);case InitiateTopUpEvent() when initiateTopUp != null:
+return initiateTopUp(_that);case ConfirmTopUpEvent() when confirmTopUp != null:
+return confirmTopUp(_that);case ProcessDonationEvent() when processDonation != null:
+return processDonation(_that);case RequestWalletWithdrawalEvent() when requestWithdrawal != null:
+return requestWithdrawal(_that);case LoadTransactionsEvent() when loadTransactions != null:
+return loadTransactions(_that);case LoadWithdrawalsEvent() when loadWithdrawals != null:
+return loadWithdrawals(_that);case ExportTransactionsEvent() when exportTransactions != null:
+return exportTransactions(_that);case ClearWalletTransientEvent() when clearTransient != null:
+return clearTransient(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String userId)?  loadWallets,TResult Function( String userId)?  loadMainWallet,TResult Function( String walletId)?  loadWallet,TResult Function( String userId)?  createMainWallet,TResult Function( String walletId,  String bankName,  String bankAccountNumber,  String bankAccountHolder)?  updateBankDetails,TResult Function( String walletId,  double amount,  String? paymentMethod)?  initiateTopUp,TResult Function( String transactionId,  String paymentId)?  confirmTopUp,TResult Function( String fromWalletId,  String toCampaignId,  double amount,  String? donationId)?  processDonation,TResult Function( String walletId,  double amount)?  requestWithdrawal,TResult Function( String walletId,  int limit,  int offset)?  loadTransactions,TResult Function( String walletId)?  loadWithdrawals,TResult Function( String walletId,  DateTime? startDate,  DateTime? endDate)?  exportTransactions,TResult Function()?  clearTransient,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case LoadWalletsEvent() when loadWallets != null:
+return loadWallets(_that.userId);case LoadMainWalletEvent() when loadMainWallet != null:
+return loadMainWallet(_that.userId);case LoadWalletEvent() when loadWallet != null:
+return loadWallet(_that.walletId);case CreateMainWalletEvent() when createMainWallet != null:
+return createMainWallet(_that.userId);case UpdateBankDetailsEvent() when updateBankDetails != null:
+return updateBankDetails(_that.walletId,_that.bankName,_that.bankAccountNumber,_that.bankAccountHolder);case InitiateTopUpEvent() when initiateTopUp != null:
+return initiateTopUp(_that.walletId,_that.amount,_that.paymentMethod);case ConfirmTopUpEvent() when confirmTopUp != null:
+return confirmTopUp(_that.transactionId,_that.paymentId);case ProcessDonationEvent() when processDonation != null:
+return processDonation(_that.fromWalletId,_that.toCampaignId,_that.amount,_that.donationId);case RequestWalletWithdrawalEvent() when requestWithdrawal != null:
+return requestWithdrawal(_that.walletId,_that.amount);case LoadTransactionsEvent() when loadTransactions != null:
+return loadTransactions(_that.walletId,_that.limit,_that.offset);case LoadWithdrawalsEvent() when loadWithdrawals != null:
+return loadWithdrawals(_that.walletId);case ExportTransactionsEvent() when exportTransactions != null:
+return exportTransactions(_that.walletId,_that.startDate,_that.endDate);case ClearWalletTransientEvent() when clearTransient != null:
+return clearTransient();case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String userId)  loadWallets,required TResult Function( String userId)  loadMainWallet,required TResult Function( String walletId)  loadWallet,required TResult Function( String userId)  createMainWallet,required TResult Function( String walletId,  String bankName,  String bankAccountNumber,  String bankAccountHolder)  updateBankDetails,required TResult Function( String walletId,  double amount,  String? paymentMethod)  initiateTopUp,required TResult Function( String transactionId,  String paymentId)  confirmTopUp,required TResult Function( String fromWalletId,  String toCampaignId,  double amount,  String? donationId)  processDonation,required TResult Function( String walletId,  double amount)  requestWithdrawal,required TResult Function( String walletId,  int limit,  int offset)  loadTransactions,required TResult Function( String walletId)  loadWithdrawals,required TResult Function( String walletId,  DateTime? startDate,  DateTime? endDate)  exportTransactions,required TResult Function()  clearTransient,}) {final _that = this;
+switch (_that) {
+case LoadWalletsEvent():
+return loadWallets(_that.userId);case LoadMainWalletEvent():
+return loadMainWallet(_that.userId);case LoadWalletEvent():
+return loadWallet(_that.walletId);case CreateMainWalletEvent():
+return createMainWallet(_that.userId);case UpdateBankDetailsEvent():
+return updateBankDetails(_that.walletId,_that.bankName,_that.bankAccountNumber,_that.bankAccountHolder);case InitiateTopUpEvent():
+return initiateTopUp(_that.walletId,_that.amount,_that.paymentMethod);case ConfirmTopUpEvent():
+return confirmTopUp(_that.transactionId,_that.paymentId);case ProcessDonationEvent():
+return processDonation(_that.fromWalletId,_that.toCampaignId,_that.amount,_that.donationId);case RequestWalletWithdrawalEvent():
+return requestWithdrawal(_that.walletId,_that.amount);case LoadTransactionsEvent():
+return loadTransactions(_that.walletId,_that.limit,_that.offset);case LoadWithdrawalsEvent():
+return loadWithdrawals(_that.walletId);case ExportTransactionsEvent():
+return exportTransactions(_that.walletId,_that.startDate,_that.endDate);case ClearWalletTransientEvent():
+return clearTransient();}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String userId)?  loadWallets,TResult? Function( String userId)?  loadMainWallet,TResult? Function( String walletId)?  loadWallet,TResult? Function( String userId)?  createMainWallet,TResult? Function( String walletId,  String bankName,  String bankAccountNumber,  String bankAccountHolder)?  updateBankDetails,TResult? Function( String walletId,  double amount,  String? paymentMethod)?  initiateTopUp,TResult? Function( String transactionId,  String paymentId)?  confirmTopUp,TResult? Function( String fromWalletId,  String toCampaignId,  double amount,  String? donationId)?  processDonation,TResult? Function( String walletId,  double amount)?  requestWithdrawal,TResult? Function( String walletId,  int limit,  int offset)?  loadTransactions,TResult? Function( String walletId)?  loadWithdrawals,TResult? Function( String walletId,  DateTime? startDate,  DateTime? endDate)?  exportTransactions,TResult? Function()?  clearTransient,}) {final _that = this;
+switch (_that) {
+case LoadWalletsEvent() when loadWallets != null:
+return loadWallets(_that.userId);case LoadMainWalletEvent() when loadMainWallet != null:
+return loadMainWallet(_that.userId);case LoadWalletEvent() when loadWallet != null:
+return loadWallet(_that.walletId);case CreateMainWalletEvent() when createMainWallet != null:
+return createMainWallet(_that.userId);case UpdateBankDetailsEvent() when updateBankDetails != null:
+return updateBankDetails(_that.walletId,_that.bankName,_that.bankAccountNumber,_that.bankAccountHolder);case InitiateTopUpEvent() when initiateTopUp != null:
+return initiateTopUp(_that.walletId,_that.amount,_that.paymentMethod);case ConfirmTopUpEvent() when confirmTopUp != null:
+return confirmTopUp(_that.transactionId,_that.paymentId);case ProcessDonationEvent() when processDonation != null:
+return processDonation(_that.fromWalletId,_that.toCampaignId,_that.amount,_that.donationId);case RequestWalletWithdrawalEvent() when requestWithdrawal != null:
+return requestWithdrawal(_that.walletId,_that.amount);case LoadTransactionsEvent() when loadTransactions != null:
+return loadTransactions(_that.walletId,_that.limit,_that.offset);case LoadWithdrawalsEvent() when loadWithdrawals != null:
+return loadWithdrawals(_that.walletId);case ExportTransactionsEvent() when exportTransactions != null:
+return exportTransactions(_that.walletId,_that.startDate,_that.endDate);case ClearWalletTransientEvent() when clearTransient != null:
+return clearTransient();case _:
+  return null;
+
+}
 }
 
-/// @nodoc
-abstract class _$$LoadWalletsEventImplCopyWith<$Res> {
-  factory _$$LoadWalletsEventImplCopyWith(_$LoadWalletsEventImpl value,
-          $Res Function(_$LoadWalletsEventImpl) then) =
-      __$$LoadWalletsEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String userId});
-}
-
-/// @nodoc
-class __$$LoadWalletsEventImplCopyWithImpl<$Res>
-    extends _$WalletEventCopyWithImpl<$Res, _$LoadWalletsEventImpl>
-    implements _$$LoadWalletsEventImplCopyWith<$Res> {
-  __$$LoadWalletsEventImplCopyWithImpl(_$LoadWalletsEventImpl _value,
-      $Res Function(_$LoadWalletsEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? userId = null,
-  }) {
-    return _then(_$LoadWalletsEventImpl(
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$LoadWalletsEventImpl implements LoadWalletsEvent {
-  const _$LoadWalletsEventImpl({required this.userId});
-
-  @override
-  final String userId;
-
-  @override
-  String toString() {
-    return 'WalletEvent.loadWallets(userId: $userId)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadWalletsEventImpl &&
-            (identical(other.userId, userId) || other.userId == userId));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, userId);
-
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadWalletsEventImplCopyWith<_$LoadWalletsEventImpl> get copyWith =>
-      __$$LoadWalletsEventImplCopyWithImpl<_$LoadWalletsEventImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String userId) loadWallets,
-    required TResult Function(String userId) loadMainWallet,
-    required TResult Function(String walletId) loadWallet,
-    required TResult Function(String userId) createMainWallet,
-    required TResult Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)
-        updateBankDetails,
-    required TResult Function(
-            String walletId, double amount, String? paymentMethod)
-        initiateTopUp,
-    required TResult Function(String transactionId, String paymentId)
-        confirmTopUp,
-    required TResult Function(String fromWalletId, String toCampaignId,
-            double amount, String? donationId)
-        processDonation,
-    required TResult Function(String walletId, double amount) requestWithdrawal,
-    required TResult Function(String walletId, int limit, int offset)
-        loadTransactions,
-    required TResult Function(String walletId) loadWithdrawals,
-    required TResult Function(
-            String walletId, DateTime? startDate, DateTime? endDate)
-        exportTransactions,
-    required TResult Function() clearTransient,
-  }) {
-    return loadWallets(userId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId)? loadWallets,
-    TResult? Function(String userId)? loadMainWallet,
-    TResult? Function(String walletId)? loadWallet,
-    TResult? Function(String userId)? createMainWallet,
-    TResult? Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)?
-        updateBankDetails,
-    TResult? Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult? Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult? Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult? Function(String walletId, double amount)? requestWithdrawal,
-    TResult? Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult? Function(String walletId)? loadWithdrawals,
-    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult? Function()? clearTransient,
-  }) {
-    return loadWallets?.call(userId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? loadWallets,
-    TResult Function(String userId)? loadMainWallet,
-    TResult Function(String walletId)? loadWallet,
-    TResult Function(String userId)? createMainWallet,
-    TResult Function(String walletId, String bankName, String bankAccountNumber,
-            String bankAccountHolder)?
-        updateBankDetails,
-    TResult Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult Function(String walletId, double amount)? requestWithdrawal,
-    TResult Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult Function(String walletId)? loadWithdrawals,
-    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadWallets != null) {
-      return loadWallets(userId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadWalletsEvent value) loadWallets,
-    required TResult Function(LoadMainWalletEvent value) loadMainWallet,
-    required TResult Function(LoadWalletEvent value) loadWallet,
-    required TResult Function(CreateMainWalletEvent value) createMainWallet,
-    required TResult Function(UpdateBankDetailsEvent value) updateBankDetails,
-    required TResult Function(InitiateTopUpEvent value) initiateTopUp,
-    required TResult Function(ConfirmTopUpEvent value) confirmTopUp,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(RequestWalletWithdrawalEvent value)
-        requestWithdrawal,
-    required TResult Function(LoadTransactionsEvent value) loadTransactions,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(ExportTransactionsEvent value) exportTransactions,
-    required TResult Function(ClearWalletTransientEvent value) clearTransient,
-  }) {
-    return loadWallets(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadWalletsEvent value)? loadWallets,
-    TResult? Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult? Function(LoadWalletEvent value)? loadWallet,
-    TResult? Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult? Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult? Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult? Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult? Function(ClearWalletTransientEvent value)? clearTransient,
-  }) {
-    return loadWallets?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadWalletsEvent value)? loadWallets,
-    TResult Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult Function(LoadWalletEvent value)? loadWallet,
-    TResult Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult Function(ClearWalletTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadWallets != null) {
-      return loadWallets(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class LoadWalletsEvent implements WalletEvent {
-  const factory LoadWalletsEvent({required final String userId}) =
-      _$LoadWalletsEventImpl;
-
-  String get userId;
-
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LoadWalletsEventImplCopyWith<_$LoadWalletsEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$LoadMainWalletEventImplCopyWith<$Res> {
-  factory _$$LoadMainWalletEventImplCopyWith(_$LoadMainWalletEventImpl value,
-          $Res Function(_$LoadMainWalletEventImpl) then) =
-      __$$LoadMainWalletEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String userId});
-}
-
-/// @nodoc
-class __$$LoadMainWalletEventImplCopyWithImpl<$Res>
-    extends _$WalletEventCopyWithImpl<$Res, _$LoadMainWalletEventImpl>
-    implements _$$LoadMainWalletEventImplCopyWith<$Res> {
-  __$$LoadMainWalletEventImplCopyWithImpl(_$LoadMainWalletEventImpl _value,
-      $Res Function(_$LoadMainWalletEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? userId = null,
-  }) {
-    return _then(_$LoadMainWalletEventImpl(
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$LoadMainWalletEventImpl implements LoadMainWalletEvent {
-  const _$LoadMainWalletEventImpl({required this.userId});
 
-  @override
-  final String userId;
+class LoadWalletsEvent implements WalletEvent {
+  const LoadWalletsEvent({required this.userId});
+  
 
-  @override
-  String toString() {
-    return 'WalletEvent.loadMainWallet(userId: $userId)';
-  }
+ final  String userId;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadMainWalletEventImpl &&
-            (identical(other.userId, userId) || other.userId == userId));
-  }
+/// Create a copy of WalletEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LoadWalletsEventCopyWith<LoadWalletsEvent> get copyWith => _$LoadWalletsEventCopyWithImpl<LoadWalletsEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, userId);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadMainWalletEventImplCopyWith<_$LoadMainWalletEventImpl> get copyWith =>
-      __$$LoadMainWalletEventImplCopyWithImpl<_$LoadMainWalletEventImpl>(
-          this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String userId) loadWallets,
-    required TResult Function(String userId) loadMainWallet,
-    required TResult Function(String walletId) loadWallet,
-    required TResult Function(String userId) createMainWallet,
-    required TResult Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)
-        updateBankDetails,
-    required TResult Function(
-            String walletId, double amount, String? paymentMethod)
-        initiateTopUp,
-    required TResult Function(String transactionId, String paymentId)
-        confirmTopUp,
-    required TResult Function(String fromWalletId, String toCampaignId,
-            double amount, String? donationId)
-        processDonation,
-    required TResult Function(String walletId, double amount) requestWithdrawal,
-    required TResult Function(String walletId, int limit, int offset)
-        loadTransactions,
-    required TResult Function(String walletId) loadWithdrawals,
-    required TResult Function(
-            String walletId, DateTime? startDate, DateTime? endDate)
-        exportTransactions,
-    required TResult Function() clearTransient,
-  }) {
-    return loadMainWallet(userId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId)? loadWallets,
-    TResult? Function(String userId)? loadMainWallet,
-    TResult? Function(String walletId)? loadWallet,
-    TResult? Function(String userId)? createMainWallet,
-    TResult? Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)?
-        updateBankDetails,
-    TResult? Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult? Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult? Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult? Function(String walletId, double amount)? requestWithdrawal,
-    TResult? Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult? Function(String walletId)? loadWithdrawals,
-    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult? Function()? clearTransient,
-  }) {
-    return loadMainWallet?.call(userId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? loadWallets,
-    TResult Function(String userId)? loadMainWallet,
-    TResult Function(String walletId)? loadWallet,
-    TResult Function(String userId)? createMainWallet,
-    TResult Function(String walletId, String bankName, String bankAccountNumber,
-            String bankAccountHolder)?
-        updateBankDetails,
-    TResult Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult Function(String walletId, double amount)? requestWithdrawal,
-    TResult Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult Function(String walletId)? loadWithdrawals,
-    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadMainWallet != null) {
-      return loadMainWallet(userId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadWalletsEvent value) loadWallets,
-    required TResult Function(LoadMainWalletEvent value) loadMainWallet,
-    required TResult Function(LoadWalletEvent value) loadWallet,
-    required TResult Function(CreateMainWalletEvent value) createMainWallet,
-    required TResult Function(UpdateBankDetailsEvent value) updateBankDetails,
-    required TResult Function(InitiateTopUpEvent value) initiateTopUp,
-    required TResult Function(ConfirmTopUpEvent value) confirmTopUp,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(RequestWalletWithdrawalEvent value)
-        requestWithdrawal,
-    required TResult Function(LoadTransactionsEvent value) loadTransactions,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(ExportTransactionsEvent value) exportTransactions,
-    required TResult Function(ClearWalletTransientEvent value) clearTransient,
-  }) {
-    return loadMainWallet(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadWalletsEvent value)? loadWallets,
-    TResult? Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult? Function(LoadWalletEvent value)? loadWallet,
-    TResult? Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult? Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult? Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult? Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult? Function(ClearWalletTransientEvent value)? clearTransient,
-  }) {
-    return loadMainWallet?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadWalletsEvent value)? loadWallets,
-    TResult Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult Function(LoadWalletEvent value)? loadWallet,
-    TResult Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult Function(ClearWalletTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadMainWallet != null) {
-      return loadMainWallet(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadWalletsEvent&&(identical(other.userId, userId) || other.userId == userId));
 }
 
-abstract class LoadMainWalletEvent implements WalletEvent {
-  const factory LoadMainWalletEvent({required final String userId}) =
-      _$LoadMainWalletEventImpl;
 
-  String get userId;
+@override
+int get hashCode => Object.hash(runtimeType,userId);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LoadMainWalletEventImplCopyWith<_$LoadMainWalletEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'WalletEvent.loadWallets(userId: $userId)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$LoadWalletEventImplCopyWith<$Res> {
-  factory _$$LoadWalletEventImplCopyWith(_$LoadWalletEventImpl value,
-          $Res Function(_$LoadWalletEventImpl) then) =
-      __$$LoadWalletEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String walletId});
+abstract mixin class $LoadWalletsEventCopyWith<$Res> implements $WalletEventCopyWith<$Res> {
+  factory $LoadWalletsEventCopyWith(LoadWalletsEvent value, $Res Function(LoadWalletsEvent) _then) = _$LoadWalletsEventCopyWithImpl;
+@useResult
+$Res call({
+ String userId
+});
+
+
+
+
+}
+/// @nodoc
+class _$LoadWalletsEventCopyWithImpl<$Res>
+    implements $LoadWalletsEventCopyWith<$Res> {
+  _$LoadWalletsEventCopyWithImpl(this._self, this._then);
+
+  final LoadWalletsEvent _self;
+  final $Res Function(LoadWalletsEvent) _then;
+
+/// Create a copy of WalletEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? userId = null,}) {
+  return _then(LoadWalletsEvent(
+userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-class __$$LoadWalletEventImplCopyWithImpl<$Res>
-    extends _$WalletEventCopyWithImpl<$Res, _$LoadWalletEventImpl>
-    implements _$$LoadWalletEventImplCopyWith<$Res> {
-  __$$LoadWalletEventImplCopyWithImpl(
-      _$LoadWalletEventImpl _value, $Res Function(_$LoadWalletEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? walletId = null,
-  }) {
-    return _then(_$LoadWalletEventImpl(
-      walletId: null == walletId
-          ? _value.walletId
-          : walletId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$LoadWalletEventImpl implements LoadWalletEvent {
-  const _$LoadWalletEventImpl({required this.walletId});
 
-  @override
-  final String walletId;
+class LoadMainWalletEvent implements WalletEvent {
+  const LoadMainWalletEvent({required this.userId});
+  
 
-  @override
-  String toString() {
-    return 'WalletEvent.loadWallet(walletId: $walletId)';
-  }
+ final  String userId;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadWalletEventImpl &&
-            (identical(other.walletId, walletId) ||
-                other.walletId == walletId));
-  }
+/// Create a copy of WalletEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LoadMainWalletEventCopyWith<LoadMainWalletEvent> get copyWith => _$LoadMainWalletEventCopyWithImpl<LoadMainWalletEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, walletId);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadWalletEventImplCopyWith<_$LoadWalletEventImpl> get copyWith =>
-      __$$LoadWalletEventImplCopyWithImpl<_$LoadWalletEventImpl>(
-          this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String userId) loadWallets,
-    required TResult Function(String userId) loadMainWallet,
-    required TResult Function(String walletId) loadWallet,
-    required TResult Function(String userId) createMainWallet,
-    required TResult Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)
-        updateBankDetails,
-    required TResult Function(
-            String walletId, double amount, String? paymentMethod)
-        initiateTopUp,
-    required TResult Function(String transactionId, String paymentId)
-        confirmTopUp,
-    required TResult Function(String fromWalletId, String toCampaignId,
-            double amount, String? donationId)
-        processDonation,
-    required TResult Function(String walletId, double amount) requestWithdrawal,
-    required TResult Function(String walletId, int limit, int offset)
-        loadTransactions,
-    required TResult Function(String walletId) loadWithdrawals,
-    required TResult Function(
-            String walletId, DateTime? startDate, DateTime? endDate)
-        exportTransactions,
-    required TResult Function() clearTransient,
-  }) {
-    return loadWallet(walletId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId)? loadWallets,
-    TResult? Function(String userId)? loadMainWallet,
-    TResult? Function(String walletId)? loadWallet,
-    TResult? Function(String userId)? createMainWallet,
-    TResult? Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)?
-        updateBankDetails,
-    TResult? Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult? Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult? Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult? Function(String walletId, double amount)? requestWithdrawal,
-    TResult? Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult? Function(String walletId)? loadWithdrawals,
-    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult? Function()? clearTransient,
-  }) {
-    return loadWallet?.call(walletId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? loadWallets,
-    TResult Function(String userId)? loadMainWallet,
-    TResult Function(String walletId)? loadWallet,
-    TResult Function(String userId)? createMainWallet,
-    TResult Function(String walletId, String bankName, String bankAccountNumber,
-            String bankAccountHolder)?
-        updateBankDetails,
-    TResult Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult Function(String walletId, double amount)? requestWithdrawal,
-    TResult Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult Function(String walletId)? loadWithdrawals,
-    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadWallet != null) {
-      return loadWallet(walletId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadWalletsEvent value) loadWallets,
-    required TResult Function(LoadMainWalletEvent value) loadMainWallet,
-    required TResult Function(LoadWalletEvent value) loadWallet,
-    required TResult Function(CreateMainWalletEvent value) createMainWallet,
-    required TResult Function(UpdateBankDetailsEvent value) updateBankDetails,
-    required TResult Function(InitiateTopUpEvent value) initiateTopUp,
-    required TResult Function(ConfirmTopUpEvent value) confirmTopUp,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(RequestWalletWithdrawalEvent value)
-        requestWithdrawal,
-    required TResult Function(LoadTransactionsEvent value) loadTransactions,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(ExportTransactionsEvent value) exportTransactions,
-    required TResult Function(ClearWalletTransientEvent value) clearTransient,
-  }) {
-    return loadWallet(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadWalletsEvent value)? loadWallets,
-    TResult? Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult? Function(LoadWalletEvent value)? loadWallet,
-    TResult? Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult? Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult? Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult? Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult? Function(ClearWalletTransientEvent value)? clearTransient,
-  }) {
-    return loadWallet?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadWalletsEvent value)? loadWallets,
-    TResult Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult Function(LoadWalletEvent value)? loadWallet,
-    TResult Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult Function(ClearWalletTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadWallet != null) {
-      return loadWallet(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadMainWalletEvent&&(identical(other.userId, userId) || other.userId == userId));
 }
 
-abstract class LoadWalletEvent implements WalletEvent {
-  const factory LoadWalletEvent({required final String walletId}) =
-      _$LoadWalletEventImpl;
 
-  String get walletId;
+@override
+int get hashCode => Object.hash(runtimeType,userId);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LoadWalletEventImplCopyWith<_$LoadWalletEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'WalletEvent.loadMainWallet(userId: $userId)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$CreateMainWalletEventImplCopyWith<$Res> {
-  factory _$$CreateMainWalletEventImplCopyWith(
-          _$CreateMainWalletEventImpl value,
-          $Res Function(_$CreateMainWalletEventImpl) then) =
-      __$$CreateMainWalletEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String userId});
+abstract mixin class $LoadMainWalletEventCopyWith<$Res> implements $WalletEventCopyWith<$Res> {
+  factory $LoadMainWalletEventCopyWith(LoadMainWalletEvent value, $Res Function(LoadMainWalletEvent) _then) = _$LoadMainWalletEventCopyWithImpl;
+@useResult
+$Res call({
+ String userId
+});
+
+
+
+
+}
+/// @nodoc
+class _$LoadMainWalletEventCopyWithImpl<$Res>
+    implements $LoadMainWalletEventCopyWith<$Res> {
+  _$LoadMainWalletEventCopyWithImpl(this._self, this._then);
+
+  final LoadMainWalletEvent _self;
+  final $Res Function(LoadMainWalletEvent) _then;
+
+/// Create a copy of WalletEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? userId = null,}) {
+  return _then(LoadMainWalletEvent(
+userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-class __$$CreateMainWalletEventImplCopyWithImpl<$Res>
-    extends _$WalletEventCopyWithImpl<$Res, _$CreateMainWalletEventImpl>
-    implements _$$CreateMainWalletEventImplCopyWith<$Res> {
-  __$$CreateMainWalletEventImplCopyWithImpl(_$CreateMainWalletEventImpl _value,
-      $Res Function(_$CreateMainWalletEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? userId = null,
-  }) {
-    return _then(_$CreateMainWalletEventImpl(
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$CreateMainWalletEventImpl implements CreateMainWalletEvent {
-  const _$CreateMainWalletEventImpl({required this.userId});
 
-  @override
-  final String userId;
+class LoadWalletEvent implements WalletEvent {
+  const LoadWalletEvent({required this.walletId});
+  
 
-  @override
-  String toString() {
-    return 'WalletEvent.createMainWallet(userId: $userId)';
-  }
+ final  String walletId;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CreateMainWalletEventImpl &&
-            (identical(other.userId, userId) || other.userId == userId));
-  }
+/// Create a copy of WalletEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LoadWalletEventCopyWith<LoadWalletEvent> get copyWith => _$LoadWalletEventCopyWithImpl<LoadWalletEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, userId);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$CreateMainWalletEventImplCopyWith<_$CreateMainWalletEventImpl>
-      get copyWith => __$$CreateMainWalletEventImplCopyWithImpl<
-          _$CreateMainWalletEventImpl>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String userId) loadWallets,
-    required TResult Function(String userId) loadMainWallet,
-    required TResult Function(String walletId) loadWallet,
-    required TResult Function(String userId) createMainWallet,
-    required TResult Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)
-        updateBankDetails,
-    required TResult Function(
-            String walletId, double amount, String? paymentMethod)
-        initiateTopUp,
-    required TResult Function(String transactionId, String paymentId)
-        confirmTopUp,
-    required TResult Function(String fromWalletId, String toCampaignId,
-            double amount, String? donationId)
-        processDonation,
-    required TResult Function(String walletId, double amount) requestWithdrawal,
-    required TResult Function(String walletId, int limit, int offset)
-        loadTransactions,
-    required TResult Function(String walletId) loadWithdrawals,
-    required TResult Function(
-            String walletId, DateTime? startDate, DateTime? endDate)
-        exportTransactions,
-    required TResult Function() clearTransient,
-  }) {
-    return createMainWallet(userId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId)? loadWallets,
-    TResult? Function(String userId)? loadMainWallet,
-    TResult? Function(String walletId)? loadWallet,
-    TResult? Function(String userId)? createMainWallet,
-    TResult? Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)?
-        updateBankDetails,
-    TResult? Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult? Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult? Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult? Function(String walletId, double amount)? requestWithdrawal,
-    TResult? Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult? Function(String walletId)? loadWithdrawals,
-    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult? Function()? clearTransient,
-  }) {
-    return createMainWallet?.call(userId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? loadWallets,
-    TResult Function(String userId)? loadMainWallet,
-    TResult Function(String walletId)? loadWallet,
-    TResult Function(String userId)? createMainWallet,
-    TResult Function(String walletId, String bankName, String bankAccountNumber,
-            String bankAccountHolder)?
-        updateBankDetails,
-    TResult Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult Function(String walletId, double amount)? requestWithdrawal,
-    TResult Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult Function(String walletId)? loadWithdrawals,
-    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (createMainWallet != null) {
-      return createMainWallet(userId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadWalletsEvent value) loadWallets,
-    required TResult Function(LoadMainWalletEvent value) loadMainWallet,
-    required TResult Function(LoadWalletEvent value) loadWallet,
-    required TResult Function(CreateMainWalletEvent value) createMainWallet,
-    required TResult Function(UpdateBankDetailsEvent value) updateBankDetails,
-    required TResult Function(InitiateTopUpEvent value) initiateTopUp,
-    required TResult Function(ConfirmTopUpEvent value) confirmTopUp,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(RequestWalletWithdrawalEvent value)
-        requestWithdrawal,
-    required TResult Function(LoadTransactionsEvent value) loadTransactions,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(ExportTransactionsEvent value) exportTransactions,
-    required TResult Function(ClearWalletTransientEvent value) clearTransient,
-  }) {
-    return createMainWallet(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadWalletsEvent value)? loadWallets,
-    TResult? Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult? Function(LoadWalletEvent value)? loadWallet,
-    TResult? Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult? Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult? Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult? Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult? Function(ClearWalletTransientEvent value)? clearTransient,
-  }) {
-    return createMainWallet?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadWalletsEvent value)? loadWallets,
-    TResult Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult Function(LoadWalletEvent value)? loadWallet,
-    TResult Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult Function(ClearWalletTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (createMainWallet != null) {
-      return createMainWallet(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadWalletEvent&&(identical(other.walletId, walletId) || other.walletId == walletId));
 }
 
-abstract class CreateMainWalletEvent implements WalletEvent {
-  const factory CreateMainWalletEvent({required final String userId}) =
-      _$CreateMainWalletEventImpl;
 
-  String get userId;
+@override
+int get hashCode => Object.hash(runtimeType,walletId);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CreateMainWalletEventImplCopyWith<_$CreateMainWalletEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'WalletEvent.loadWallet(walletId: $walletId)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$UpdateBankDetailsEventImplCopyWith<$Res> {
-  factory _$$UpdateBankDetailsEventImplCopyWith(
-          _$UpdateBankDetailsEventImpl value,
-          $Res Function(_$UpdateBankDetailsEventImpl) then) =
-      __$$UpdateBankDetailsEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {String walletId,
-      String bankName,
-      String bankAccountNumber,
-      String bankAccountHolder});
+abstract mixin class $LoadWalletEventCopyWith<$Res> implements $WalletEventCopyWith<$Res> {
+  factory $LoadWalletEventCopyWith(LoadWalletEvent value, $Res Function(LoadWalletEvent) _then) = _$LoadWalletEventCopyWithImpl;
+@useResult
+$Res call({
+ String walletId
+});
+
+
+
+
+}
+/// @nodoc
+class _$LoadWalletEventCopyWithImpl<$Res>
+    implements $LoadWalletEventCopyWith<$Res> {
+  _$LoadWalletEventCopyWithImpl(this._self, this._then);
+
+  final LoadWalletEvent _self;
+  final $Res Function(LoadWalletEvent) _then;
+
+/// Create a copy of WalletEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? walletId = null,}) {
+  return _then(LoadWalletEvent(
+walletId: null == walletId ? _self.walletId : walletId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-class __$$UpdateBankDetailsEventImplCopyWithImpl<$Res>
-    extends _$WalletEventCopyWithImpl<$Res, _$UpdateBankDetailsEventImpl>
-    implements _$$UpdateBankDetailsEventImplCopyWith<$Res> {
-  __$$UpdateBankDetailsEventImplCopyWithImpl(
-      _$UpdateBankDetailsEventImpl _value,
-      $Res Function(_$UpdateBankDetailsEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? walletId = null,
-    Object? bankName = null,
-    Object? bankAccountNumber = null,
-    Object? bankAccountHolder = null,
-  }) {
-    return _then(_$UpdateBankDetailsEventImpl(
-      walletId: null == walletId
-          ? _value.walletId
-          : walletId // ignore: cast_nullable_to_non_nullable
-              as String,
-      bankName: null == bankName
-          ? _value.bankName
-          : bankName // ignore: cast_nullable_to_non_nullable
-              as String,
-      bankAccountNumber: null == bankAccountNumber
-          ? _value.bankAccountNumber
-          : bankAccountNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      bankAccountHolder: null == bankAccountHolder
-          ? _value.bankAccountHolder
-          : bankAccountHolder // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$UpdateBankDetailsEventImpl implements UpdateBankDetailsEvent {
-  const _$UpdateBankDetailsEventImpl(
-      {required this.walletId,
-      required this.bankName,
-      required this.bankAccountNumber,
-      required this.bankAccountHolder});
 
-  @override
-  final String walletId;
-  @override
-  final String bankName;
-  @override
-  final String bankAccountNumber;
-  @override
-  final String bankAccountHolder;
+class CreateMainWalletEvent implements WalletEvent {
+  const CreateMainWalletEvent({required this.userId});
+  
 
-  @override
-  String toString() {
-    return 'WalletEvent.updateBankDetails(walletId: $walletId, bankName: $bankName, bankAccountNumber: $bankAccountNumber, bankAccountHolder: $bankAccountHolder)';
-  }
+ final  String userId;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UpdateBankDetailsEventImpl &&
-            (identical(other.walletId, walletId) ||
-                other.walletId == walletId) &&
-            (identical(other.bankName, bankName) ||
-                other.bankName == bankName) &&
-            (identical(other.bankAccountNumber, bankAccountNumber) ||
-                other.bankAccountNumber == bankAccountNumber) &&
-            (identical(other.bankAccountHolder, bankAccountHolder) ||
-                other.bankAccountHolder == bankAccountHolder));
-  }
+/// Create a copy of WalletEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CreateMainWalletEventCopyWith<CreateMainWalletEvent> get copyWith => _$CreateMainWalletEventCopyWithImpl<CreateMainWalletEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, walletId, bankName, bankAccountNumber, bankAccountHolder);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UpdateBankDetailsEventImplCopyWith<_$UpdateBankDetailsEventImpl>
-      get copyWith => __$$UpdateBankDetailsEventImplCopyWithImpl<
-          _$UpdateBankDetailsEventImpl>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String userId) loadWallets,
-    required TResult Function(String userId) loadMainWallet,
-    required TResult Function(String walletId) loadWallet,
-    required TResult Function(String userId) createMainWallet,
-    required TResult Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)
-        updateBankDetails,
-    required TResult Function(
-            String walletId, double amount, String? paymentMethod)
-        initiateTopUp,
-    required TResult Function(String transactionId, String paymentId)
-        confirmTopUp,
-    required TResult Function(String fromWalletId, String toCampaignId,
-            double amount, String? donationId)
-        processDonation,
-    required TResult Function(String walletId, double amount) requestWithdrawal,
-    required TResult Function(String walletId, int limit, int offset)
-        loadTransactions,
-    required TResult Function(String walletId) loadWithdrawals,
-    required TResult Function(
-            String walletId, DateTime? startDate, DateTime? endDate)
-        exportTransactions,
-    required TResult Function() clearTransient,
-  }) {
-    return updateBankDetails(
-        walletId, bankName, bankAccountNumber, bankAccountHolder);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId)? loadWallets,
-    TResult? Function(String userId)? loadMainWallet,
-    TResult? Function(String walletId)? loadWallet,
-    TResult? Function(String userId)? createMainWallet,
-    TResult? Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)?
-        updateBankDetails,
-    TResult? Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult? Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult? Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult? Function(String walletId, double amount)? requestWithdrawal,
-    TResult? Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult? Function(String walletId)? loadWithdrawals,
-    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult? Function()? clearTransient,
-  }) {
-    return updateBankDetails?.call(
-        walletId, bankName, bankAccountNumber, bankAccountHolder);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? loadWallets,
-    TResult Function(String userId)? loadMainWallet,
-    TResult Function(String walletId)? loadWallet,
-    TResult Function(String userId)? createMainWallet,
-    TResult Function(String walletId, String bankName, String bankAccountNumber,
-            String bankAccountHolder)?
-        updateBankDetails,
-    TResult Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult Function(String walletId, double amount)? requestWithdrawal,
-    TResult Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult Function(String walletId)? loadWithdrawals,
-    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (updateBankDetails != null) {
-      return updateBankDetails(
-          walletId, bankName, bankAccountNumber, bankAccountHolder);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadWalletsEvent value) loadWallets,
-    required TResult Function(LoadMainWalletEvent value) loadMainWallet,
-    required TResult Function(LoadWalletEvent value) loadWallet,
-    required TResult Function(CreateMainWalletEvent value) createMainWallet,
-    required TResult Function(UpdateBankDetailsEvent value) updateBankDetails,
-    required TResult Function(InitiateTopUpEvent value) initiateTopUp,
-    required TResult Function(ConfirmTopUpEvent value) confirmTopUp,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(RequestWalletWithdrawalEvent value)
-        requestWithdrawal,
-    required TResult Function(LoadTransactionsEvent value) loadTransactions,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(ExportTransactionsEvent value) exportTransactions,
-    required TResult Function(ClearWalletTransientEvent value) clearTransient,
-  }) {
-    return updateBankDetails(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadWalletsEvent value)? loadWallets,
-    TResult? Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult? Function(LoadWalletEvent value)? loadWallet,
-    TResult? Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult? Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult? Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult? Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult? Function(ClearWalletTransientEvent value)? clearTransient,
-  }) {
-    return updateBankDetails?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadWalletsEvent value)? loadWallets,
-    TResult Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult Function(LoadWalletEvent value)? loadWallet,
-    TResult Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult Function(ClearWalletTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (updateBankDetails != null) {
-      return updateBankDetails(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreateMainWalletEvent&&(identical(other.userId, userId) || other.userId == userId));
 }
 
-abstract class UpdateBankDetailsEvent implements WalletEvent {
-  const factory UpdateBankDetailsEvent(
-      {required final String walletId,
-      required final String bankName,
-      required final String bankAccountNumber,
-      required final String bankAccountHolder}) = _$UpdateBankDetailsEventImpl;
 
-  String get walletId;
-  String get bankName;
-  String get bankAccountNumber;
-  String get bankAccountHolder;
+@override
+int get hashCode => Object.hash(runtimeType,userId);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UpdateBankDetailsEventImplCopyWith<_$UpdateBankDetailsEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'WalletEvent.createMainWallet(userId: $userId)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$InitiateTopUpEventImplCopyWith<$Res> {
-  factory _$$InitiateTopUpEventImplCopyWith(_$InitiateTopUpEventImpl value,
-          $Res Function(_$InitiateTopUpEventImpl) then) =
-      __$$InitiateTopUpEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String walletId, double amount, String? paymentMethod});
+abstract mixin class $CreateMainWalletEventCopyWith<$Res> implements $WalletEventCopyWith<$Res> {
+  factory $CreateMainWalletEventCopyWith(CreateMainWalletEvent value, $Res Function(CreateMainWalletEvent) _then) = _$CreateMainWalletEventCopyWithImpl;
+@useResult
+$Res call({
+ String userId
+});
+
+
+
+
+}
+/// @nodoc
+class _$CreateMainWalletEventCopyWithImpl<$Res>
+    implements $CreateMainWalletEventCopyWith<$Res> {
+  _$CreateMainWalletEventCopyWithImpl(this._self, this._then);
+
+  final CreateMainWalletEvent _self;
+  final $Res Function(CreateMainWalletEvent) _then;
+
+/// Create a copy of WalletEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? userId = null,}) {
+  return _then(CreateMainWalletEvent(
+userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-class __$$InitiateTopUpEventImplCopyWithImpl<$Res>
-    extends _$WalletEventCopyWithImpl<$Res, _$InitiateTopUpEventImpl>
-    implements _$$InitiateTopUpEventImplCopyWith<$Res> {
-  __$$InitiateTopUpEventImplCopyWithImpl(_$InitiateTopUpEventImpl _value,
-      $Res Function(_$InitiateTopUpEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? walletId = null,
-    Object? amount = null,
-    Object? paymentMethod = freezed,
-  }) {
-    return _then(_$InitiateTopUpEventImpl(
-      walletId: null == walletId
-          ? _value.walletId
-          : walletId // ignore: cast_nullable_to_non_nullable
-              as String,
-      amount: null == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as double,
-      paymentMethod: freezed == paymentMethod
-          ? _value.paymentMethod
-          : paymentMethod // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$InitiateTopUpEventImpl implements InitiateTopUpEvent {
-  const _$InitiateTopUpEventImpl(
-      {required this.walletId, required this.amount, this.paymentMethod});
 
-  @override
-  final String walletId;
-  @override
-  final double amount;
-  @override
-  final String? paymentMethod;
+class UpdateBankDetailsEvent implements WalletEvent {
+  const UpdateBankDetailsEvent({required this.walletId, required this.bankName, required this.bankAccountNumber, required this.bankAccountHolder});
+  
 
-  @override
-  String toString() {
-    return 'WalletEvent.initiateTopUp(walletId: $walletId, amount: $amount, paymentMethod: $paymentMethod)';
-  }
+ final  String walletId;
+ final  String bankName;
+ final  String bankAccountNumber;
+ final  String bankAccountHolder;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$InitiateTopUpEventImpl &&
-            (identical(other.walletId, walletId) ||
-                other.walletId == walletId) &&
-            (identical(other.amount, amount) || other.amount == amount) &&
-            (identical(other.paymentMethod, paymentMethod) ||
-                other.paymentMethod == paymentMethod));
-  }
+/// Create a copy of WalletEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UpdateBankDetailsEventCopyWith<UpdateBankDetailsEvent> get copyWith => _$UpdateBankDetailsEventCopyWithImpl<UpdateBankDetailsEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, walletId, amount, paymentMethod);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$InitiateTopUpEventImplCopyWith<_$InitiateTopUpEventImpl> get copyWith =>
-      __$$InitiateTopUpEventImplCopyWithImpl<_$InitiateTopUpEventImpl>(
-          this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String userId) loadWallets,
-    required TResult Function(String userId) loadMainWallet,
-    required TResult Function(String walletId) loadWallet,
-    required TResult Function(String userId) createMainWallet,
-    required TResult Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)
-        updateBankDetails,
-    required TResult Function(
-            String walletId, double amount, String? paymentMethod)
-        initiateTopUp,
-    required TResult Function(String transactionId, String paymentId)
-        confirmTopUp,
-    required TResult Function(String fromWalletId, String toCampaignId,
-            double amount, String? donationId)
-        processDonation,
-    required TResult Function(String walletId, double amount) requestWithdrawal,
-    required TResult Function(String walletId, int limit, int offset)
-        loadTransactions,
-    required TResult Function(String walletId) loadWithdrawals,
-    required TResult Function(
-            String walletId, DateTime? startDate, DateTime? endDate)
-        exportTransactions,
-    required TResult Function() clearTransient,
-  }) {
-    return initiateTopUp(walletId, amount, paymentMethod);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId)? loadWallets,
-    TResult? Function(String userId)? loadMainWallet,
-    TResult? Function(String walletId)? loadWallet,
-    TResult? Function(String userId)? createMainWallet,
-    TResult? Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)?
-        updateBankDetails,
-    TResult? Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult? Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult? Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult? Function(String walletId, double amount)? requestWithdrawal,
-    TResult? Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult? Function(String walletId)? loadWithdrawals,
-    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult? Function()? clearTransient,
-  }) {
-    return initiateTopUp?.call(walletId, amount, paymentMethod);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? loadWallets,
-    TResult Function(String userId)? loadMainWallet,
-    TResult Function(String walletId)? loadWallet,
-    TResult Function(String userId)? createMainWallet,
-    TResult Function(String walletId, String bankName, String bankAccountNumber,
-            String bankAccountHolder)?
-        updateBankDetails,
-    TResult Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult Function(String walletId, double amount)? requestWithdrawal,
-    TResult Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult Function(String walletId)? loadWithdrawals,
-    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (initiateTopUp != null) {
-      return initiateTopUp(walletId, amount, paymentMethod);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadWalletsEvent value) loadWallets,
-    required TResult Function(LoadMainWalletEvent value) loadMainWallet,
-    required TResult Function(LoadWalletEvent value) loadWallet,
-    required TResult Function(CreateMainWalletEvent value) createMainWallet,
-    required TResult Function(UpdateBankDetailsEvent value) updateBankDetails,
-    required TResult Function(InitiateTopUpEvent value) initiateTopUp,
-    required TResult Function(ConfirmTopUpEvent value) confirmTopUp,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(RequestWalletWithdrawalEvent value)
-        requestWithdrawal,
-    required TResult Function(LoadTransactionsEvent value) loadTransactions,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(ExportTransactionsEvent value) exportTransactions,
-    required TResult Function(ClearWalletTransientEvent value) clearTransient,
-  }) {
-    return initiateTopUp(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadWalletsEvent value)? loadWallets,
-    TResult? Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult? Function(LoadWalletEvent value)? loadWallet,
-    TResult? Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult? Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult? Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult? Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult? Function(ClearWalletTransientEvent value)? clearTransient,
-  }) {
-    return initiateTopUp?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadWalletsEvent value)? loadWallets,
-    TResult Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult Function(LoadWalletEvent value)? loadWallet,
-    TResult Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult Function(ClearWalletTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (initiateTopUp != null) {
-      return initiateTopUp(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateBankDetailsEvent&&(identical(other.walletId, walletId) || other.walletId == walletId)&&(identical(other.bankName, bankName) || other.bankName == bankName)&&(identical(other.bankAccountNumber, bankAccountNumber) || other.bankAccountNumber == bankAccountNumber)&&(identical(other.bankAccountHolder, bankAccountHolder) || other.bankAccountHolder == bankAccountHolder));
 }
 
-abstract class InitiateTopUpEvent implements WalletEvent {
-  const factory InitiateTopUpEvent(
-      {required final String walletId,
-      required final double amount,
-      final String? paymentMethod}) = _$InitiateTopUpEventImpl;
 
-  String get walletId;
-  double get amount;
-  String? get paymentMethod;
+@override
+int get hashCode => Object.hash(runtimeType,walletId,bankName,bankAccountNumber,bankAccountHolder);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$InitiateTopUpEventImplCopyWith<_$InitiateTopUpEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'WalletEvent.updateBankDetails(walletId: $walletId, bankName: $bankName, bankAccountNumber: $bankAccountNumber, bankAccountHolder: $bankAccountHolder)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$ConfirmTopUpEventImplCopyWith<$Res> {
-  factory _$$ConfirmTopUpEventImplCopyWith(_$ConfirmTopUpEventImpl value,
-          $Res Function(_$ConfirmTopUpEventImpl) then) =
-      __$$ConfirmTopUpEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String transactionId, String paymentId});
+abstract mixin class $UpdateBankDetailsEventCopyWith<$Res> implements $WalletEventCopyWith<$Res> {
+  factory $UpdateBankDetailsEventCopyWith(UpdateBankDetailsEvent value, $Res Function(UpdateBankDetailsEvent) _then) = _$UpdateBankDetailsEventCopyWithImpl;
+@useResult
+$Res call({
+ String walletId, String bankName, String bankAccountNumber, String bankAccountHolder
+});
+
+
+
+
+}
+/// @nodoc
+class _$UpdateBankDetailsEventCopyWithImpl<$Res>
+    implements $UpdateBankDetailsEventCopyWith<$Res> {
+  _$UpdateBankDetailsEventCopyWithImpl(this._self, this._then);
+
+  final UpdateBankDetailsEvent _self;
+  final $Res Function(UpdateBankDetailsEvent) _then;
+
+/// Create a copy of WalletEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? walletId = null,Object? bankName = null,Object? bankAccountNumber = null,Object? bankAccountHolder = null,}) {
+  return _then(UpdateBankDetailsEvent(
+walletId: null == walletId ? _self.walletId : walletId // ignore: cast_nullable_to_non_nullable
+as String,bankName: null == bankName ? _self.bankName : bankName // ignore: cast_nullable_to_non_nullable
+as String,bankAccountNumber: null == bankAccountNumber ? _self.bankAccountNumber : bankAccountNumber // ignore: cast_nullable_to_non_nullable
+as String,bankAccountHolder: null == bankAccountHolder ? _self.bankAccountHolder : bankAccountHolder // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-class __$$ConfirmTopUpEventImplCopyWithImpl<$Res>
-    extends _$WalletEventCopyWithImpl<$Res, _$ConfirmTopUpEventImpl>
-    implements _$$ConfirmTopUpEventImplCopyWith<$Res> {
-  __$$ConfirmTopUpEventImplCopyWithImpl(_$ConfirmTopUpEventImpl _value,
-      $Res Function(_$ConfirmTopUpEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? transactionId = null,
-    Object? paymentId = null,
-  }) {
-    return _then(_$ConfirmTopUpEventImpl(
-      transactionId: null == transactionId
-          ? _value.transactionId
-          : transactionId // ignore: cast_nullable_to_non_nullable
-              as String,
-      paymentId: null == paymentId
-          ? _value.paymentId
-          : paymentId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$ConfirmTopUpEventImpl implements ConfirmTopUpEvent {
-  const _$ConfirmTopUpEventImpl(
-      {required this.transactionId, required this.paymentId});
 
-  @override
-  final String transactionId;
-  @override
-  final String paymentId;
+class InitiateTopUpEvent implements WalletEvent {
+  const InitiateTopUpEvent({required this.walletId, required this.amount, this.paymentMethod});
+  
 
-  @override
-  String toString() {
-    return 'WalletEvent.confirmTopUp(transactionId: $transactionId, paymentId: $paymentId)';
-  }
+ final  String walletId;
+ final  double amount;
+ final  String? paymentMethod;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ConfirmTopUpEventImpl &&
-            (identical(other.transactionId, transactionId) ||
-                other.transactionId == transactionId) &&
-            (identical(other.paymentId, paymentId) ||
-                other.paymentId == paymentId));
-  }
+/// Create a copy of WalletEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$InitiateTopUpEventCopyWith<InitiateTopUpEvent> get copyWith => _$InitiateTopUpEventCopyWithImpl<InitiateTopUpEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, transactionId, paymentId);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ConfirmTopUpEventImplCopyWith<_$ConfirmTopUpEventImpl> get copyWith =>
-      __$$ConfirmTopUpEventImplCopyWithImpl<_$ConfirmTopUpEventImpl>(
-          this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String userId) loadWallets,
-    required TResult Function(String userId) loadMainWallet,
-    required TResult Function(String walletId) loadWallet,
-    required TResult Function(String userId) createMainWallet,
-    required TResult Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)
-        updateBankDetails,
-    required TResult Function(
-            String walletId, double amount, String? paymentMethod)
-        initiateTopUp,
-    required TResult Function(String transactionId, String paymentId)
-        confirmTopUp,
-    required TResult Function(String fromWalletId, String toCampaignId,
-            double amount, String? donationId)
-        processDonation,
-    required TResult Function(String walletId, double amount) requestWithdrawal,
-    required TResult Function(String walletId, int limit, int offset)
-        loadTransactions,
-    required TResult Function(String walletId) loadWithdrawals,
-    required TResult Function(
-            String walletId, DateTime? startDate, DateTime? endDate)
-        exportTransactions,
-    required TResult Function() clearTransient,
-  }) {
-    return confirmTopUp(transactionId, paymentId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId)? loadWallets,
-    TResult? Function(String userId)? loadMainWallet,
-    TResult? Function(String walletId)? loadWallet,
-    TResult? Function(String userId)? createMainWallet,
-    TResult? Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)?
-        updateBankDetails,
-    TResult? Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult? Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult? Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult? Function(String walletId, double amount)? requestWithdrawal,
-    TResult? Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult? Function(String walletId)? loadWithdrawals,
-    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult? Function()? clearTransient,
-  }) {
-    return confirmTopUp?.call(transactionId, paymentId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? loadWallets,
-    TResult Function(String userId)? loadMainWallet,
-    TResult Function(String walletId)? loadWallet,
-    TResult Function(String userId)? createMainWallet,
-    TResult Function(String walletId, String bankName, String bankAccountNumber,
-            String bankAccountHolder)?
-        updateBankDetails,
-    TResult Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult Function(String walletId, double amount)? requestWithdrawal,
-    TResult Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult Function(String walletId)? loadWithdrawals,
-    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (confirmTopUp != null) {
-      return confirmTopUp(transactionId, paymentId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadWalletsEvent value) loadWallets,
-    required TResult Function(LoadMainWalletEvent value) loadMainWallet,
-    required TResult Function(LoadWalletEvent value) loadWallet,
-    required TResult Function(CreateMainWalletEvent value) createMainWallet,
-    required TResult Function(UpdateBankDetailsEvent value) updateBankDetails,
-    required TResult Function(InitiateTopUpEvent value) initiateTopUp,
-    required TResult Function(ConfirmTopUpEvent value) confirmTopUp,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(RequestWalletWithdrawalEvent value)
-        requestWithdrawal,
-    required TResult Function(LoadTransactionsEvent value) loadTransactions,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(ExportTransactionsEvent value) exportTransactions,
-    required TResult Function(ClearWalletTransientEvent value) clearTransient,
-  }) {
-    return confirmTopUp(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadWalletsEvent value)? loadWallets,
-    TResult? Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult? Function(LoadWalletEvent value)? loadWallet,
-    TResult? Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult? Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult? Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult? Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult? Function(ClearWalletTransientEvent value)? clearTransient,
-  }) {
-    return confirmTopUp?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadWalletsEvent value)? loadWallets,
-    TResult Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult Function(LoadWalletEvent value)? loadWallet,
-    TResult Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult Function(ClearWalletTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (confirmTopUp != null) {
-      return confirmTopUp(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is InitiateTopUpEvent&&(identical(other.walletId, walletId) || other.walletId == walletId)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.paymentMethod, paymentMethod) || other.paymentMethod == paymentMethod));
 }
 
-abstract class ConfirmTopUpEvent implements WalletEvent {
-  const factory ConfirmTopUpEvent(
-      {required final String transactionId,
-      required final String paymentId}) = _$ConfirmTopUpEventImpl;
 
-  String get transactionId;
-  String get paymentId;
+@override
+int get hashCode => Object.hash(runtimeType,walletId,amount,paymentMethod);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ConfirmTopUpEventImplCopyWith<_$ConfirmTopUpEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'WalletEvent.initiateTopUp(walletId: $walletId, amount: $amount, paymentMethod: $paymentMethod)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$ProcessDonationEventImplCopyWith<$Res> {
-  factory _$$ProcessDonationEventImplCopyWith(_$ProcessDonationEventImpl value,
-          $Res Function(_$ProcessDonationEventImpl) then) =
-      __$$ProcessDonationEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {String fromWalletId,
-      String toCampaignId,
-      double amount,
-      String? donationId});
+abstract mixin class $InitiateTopUpEventCopyWith<$Res> implements $WalletEventCopyWith<$Res> {
+  factory $InitiateTopUpEventCopyWith(InitiateTopUpEvent value, $Res Function(InitiateTopUpEvent) _then) = _$InitiateTopUpEventCopyWithImpl;
+@useResult
+$Res call({
+ String walletId, double amount, String? paymentMethod
+});
+
+
+
+
+}
+/// @nodoc
+class _$InitiateTopUpEventCopyWithImpl<$Res>
+    implements $InitiateTopUpEventCopyWith<$Res> {
+  _$InitiateTopUpEventCopyWithImpl(this._self, this._then);
+
+  final InitiateTopUpEvent _self;
+  final $Res Function(InitiateTopUpEvent) _then;
+
+/// Create a copy of WalletEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? walletId = null,Object? amount = null,Object? paymentMethod = freezed,}) {
+  return _then(InitiateTopUpEvent(
+walletId: null == walletId ? _self.walletId : walletId // ignore: cast_nullable_to_non_nullable
+as String,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
+as double,paymentMethod: freezed == paymentMethod ? _self.paymentMethod : paymentMethod // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
 }
 
-/// @nodoc
-class __$$ProcessDonationEventImplCopyWithImpl<$Res>
-    extends _$WalletEventCopyWithImpl<$Res, _$ProcessDonationEventImpl>
-    implements _$$ProcessDonationEventImplCopyWith<$Res> {
-  __$$ProcessDonationEventImplCopyWithImpl(_$ProcessDonationEventImpl _value,
-      $Res Function(_$ProcessDonationEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? fromWalletId = null,
-    Object? toCampaignId = null,
-    Object? amount = null,
-    Object? donationId = freezed,
-  }) {
-    return _then(_$ProcessDonationEventImpl(
-      fromWalletId: null == fromWalletId
-          ? _value.fromWalletId
-          : fromWalletId // ignore: cast_nullable_to_non_nullable
-              as String,
-      toCampaignId: null == toCampaignId
-          ? _value.toCampaignId
-          : toCampaignId // ignore: cast_nullable_to_non_nullable
-              as String,
-      amount: null == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as double,
-      donationId: freezed == donationId
-          ? _value.donationId
-          : donationId // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$ProcessDonationEventImpl implements ProcessDonationEvent {
-  const _$ProcessDonationEventImpl(
-      {required this.fromWalletId,
-      required this.toCampaignId,
-      required this.amount,
-      this.donationId});
 
-  @override
-  final String fromWalletId;
-  @override
-  final String toCampaignId;
-  @override
-  final double amount;
-  @override
-  final String? donationId;
+class ConfirmTopUpEvent implements WalletEvent {
+  const ConfirmTopUpEvent({required this.transactionId, required this.paymentId});
+  
 
-  @override
-  String toString() {
-    return 'WalletEvent.processDonation(fromWalletId: $fromWalletId, toCampaignId: $toCampaignId, amount: $amount, donationId: $donationId)';
-  }
+ final  String transactionId;
+ final  String paymentId;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ProcessDonationEventImpl &&
-            (identical(other.fromWalletId, fromWalletId) ||
-                other.fromWalletId == fromWalletId) &&
-            (identical(other.toCampaignId, toCampaignId) ||
-                other.toCampaignId == toCampaignId) &&
-            (identical(other.amount, amount) || other.amount == amount) &&
-            (identical(other.donationId, donationId) ||
-                other.donationId == donationId));
-  }
+/// Create a copy of WalletEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ConfirmTopUpEventCopyWith<ConfirmTopUpEvent> get copyWith => _$ConfirmTopUpEventCopyWithImpl<ConfirmTopUpEvent>(this, _$identity);
 
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, fromWalletId, toCampaignId, amount, donationId);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ProcessDonationEventImplCopyWith<_$ProcessDonationEventImpl>
-      get copyWith =>
-          __$$ProcessDonationEventImplCopyWithImpl<_$ProcessDonationEventImpl>(
-              this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String userId) loadWallets,
-    required TResult Function(String userId) loadMainWallet,
-    required TResult Function(String walletId) loadWallet,
-    required TResult Function(String userId) createMainWallet,
-    required TResult Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)
-        updateBankDetails,
-    required TResult Function(
-            String walletId, double amount, String? paymentMethod)
-        initiateTopUp,
-    required TResult Function(String transactionId, String paymentId)
-        confirmTopUp,
-    required TResult Function(String fromWalletId, String toCampaignId,
-            double amount, String? donationId)
-        processDonation,
-    required TResult Function(String walletId, double amount) requestWithdrawal,
-    required TResult Function(String walletId, int limit, int offset)
-        loadTransactions,
-    required TResult Function(String walletId) loadWithdrawals,
-    required TResult Function(
-            String walletId, DateTime? startDate, DateTime? endDate)
-        exportTransactions,
-    required TResult Function() clearTransient,
-  }) {
-    return processDonation(fromWalletId, toCampaignId, amount, donationId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId)? loadWallets,
-    TResult? Function(String userId)? loadMainWallet,
-    TResult? Function(String walletId)? loadWallet,
-    TResult? Function(String userId)? createMainWallet,
-    TResult? Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)?
-        updateBankDetails,
-    TResult? Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult? Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult? Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult? Function(String walletId, double amount)? requestWithdrawal,
-    TResult? Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult? Function(String walletId)? loadWithdrawals,
-    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult? Function()? clearTransient,
-  }) {
-    return processDonation?.call(
-        fromWalletId, toCampaignId, amount, donationId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? loadWallets,
-    TResult Function(String userId)? loadMainWallet,
-    TResult Function(String walletId)? loadWallet,
-    TResult Function(String userId)? createMainWallet,
-    TResult Function(String walletId, String bankName, String bankAccountNumber,
-            String bankAccountHolder)?
-        updateBankDetails,
-    TResult Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult Function(String walletId, double amount)? requestWithdrawal,
-    TResult Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult Function(String walletId)? loadWithdrawals,
-    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (processDonation != null) {
-      return processDonation(fromWalletId, toCampaignId, amount, donationId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadWalletsEvent value) loadWallets,
-    required TResult Function(LoadMainWalletEvent value) loadMainWallet,
-    required TResult Function(LoadWalletEvent value) loadWallet,
-    required TResult Function(CreateMainWalletEvent value) createMainWallet,
-    required TResult Function(UpdateBankDetailsEvent value) updateBankDetails,
-    required TResult Function(InitiateTopUpEvent value) initiateTopUp,
-    required TResult Function(ConfirmTopUpEvent value) confirmTopUp,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(RequestWalletWithdrawalEvent value)
-        requestWithdrawal,
-    required TResult Function(LoadTransactionsEvent value) loadTransactions,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(ExportTransactionsEvent value) exportTransactions,
-    required TResult Function(ClearWalletTransientEvent value) clearTransient,
-  }) {
-    return processDonation(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadWalletsEvent value)? loadWallets,
-    TResult? Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult? Function(LoadWalletEvent value)? loadWallet,
-    TResult? Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult? Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult? Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult? Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult? Function(ClearWalletTransientEvent value)? clearTransient,
-  }) {
-    return processDonation?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadWalletsEvent value)? loadWallets,
-    TResult Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult Function(LoadWalletEvent value)? loadWallet,
-    TResult Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult Function(ClearWalletTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (processDonation != null) {
-      return processDonation(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ConfirmTopUpEvent&&(identical(other.transactionId, transactionId) || other.transactionId == transactionId)&&(identical(other.paymentId, paymentId) || other.paymentId == paymentId));
 }
 
-abstract class ProcessDonationEvent implements WalletEvent {
-  const factory ProcessDonationEvent(
-      {required final String fromWalletId,
-      required final String toCampaignId,
-      required final double amount,
-      final String? donationId}) = _$ProcessDonationEventImpl;
 
-  String get fromWalletId;
-  String get toCampaignId;
-  double get amount;
-  String? get donationId;
+@override
+int get hashCode => Object.hash(runtimeType,transactionId,paymentId);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ProcessDonationEventImplCopyWith<_$ProcessDonationEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'WalletEvent.confirmTopUp(transactionId: $transactionId, paymentId: $paymentId)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$RequestWalletWithdrawalEventImplCopyWith<$Res> {
-  factory _$$RequestWalletWithdrawalEventImplCopyWith(
-          _$RequestWalletWithdrawalEventImpl value,
-          $Res Function(_$RequestWalletWithdrawalEventImpl) then) =
-      __$$RequestWalletWithdrawalEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String walletId, double amount});
+abstract mixin class $ConfirmTopUpEventCopyWith<$Res> implements $WalletEventCopyWith<$Res> {
+  factory $ConfirmTopUpEventCopyWith(ConfirmTopUpEvent value, $Res Function(ConfirmTopUpEvent) _then) = _$ConfirmTopUpEventCopyWithImpl;
+@useResult
+$Res call({
+ String transactionId, String paymentId
+});
+
+
+
+
+}
+/// @nodoc
+class _$ConfirmTopUpEventCopyWithImpl<$Res>
+    implements $ConfirmTopUpEventCopyWith<$Res> {
+  _$ConfirmTopUpEventCopyWithImpl(this._self, this._then);
+
+  final ConfirmTopUpEvent _self;
+  final $Res Function(ConfirmTopUpEvent) _then;
+
+/// Create a copy of WalletEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? transactionId = null,Object? paymentId = null,}) {
+  return _then(ConfirmTopUpEvent(
+transactionId: null == transactionId ? _self.transactionId : transactionId // ignore: cast_nullable_to_non_nullable
+as String,paymentId: null == paymentId ? _self.paymentId : paymentId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-class __$$RequestWalletWithdrawalEventImplCopyWithImpl<$Res>
-    extends _$WalletEventCopyWithImpl<$Res, _$RequestWalletWithdrawalEventImpl>
-    implements _$$RequestWalletWithdrawalEventImplCopyWith<$Res> {
-  __$$RequestWalletWithdrawalEventImplCopyWithImpl(
-      _$RequestWalletWithdrawalEventImpl _value,
-      $Res Function(_$RequestWalletWithdrawalEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? walletId = null,
-    Object? amount = null,
-  }) {
-    return _then(_$RequestWalletWithdrawalEventImpl(
-      walletId: null == walletId
-          ? _value.walletId
-          : walletId // ignore: cast_nullable_to_non_nullable
-              as String,
-      amount: null == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as double,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$RequestWalletWithdrawalEventImpl
-    implements RequestWalletWithdrawalEvent {
-  const _$RequestWalletWithdrawalEventImpl(
-      {required this.walletId, required this.amount});
 
-  @override
-  final String walletId;
-  @override
-  final double amount;
+class ProcessDonationEvent implements WalletEvent {
+  const ProcessDonationEvent({required this.fromWalletId, required this.toCampaignId, required this.amount, this.donationId});
+  
 
-  @override
-  String toString() {
-    return 'WalletEvent.requestWithdrawal(walletId: $walletId, amount: $amount)';
-  }
+ final  String fromWalletId;
+ final  String toCampaignId;
+ final  double amount;
+ final  String? donationId;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$RequestWalletWithdrawalEventImpl &&
-            (identical(other.walletId, walletId) ||
-                other.walletId == walletId) &&
-            (identical(other.amount, amount) || other.amount == amount));
-  }
+/// Create a copy of WalletEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ProcessDonationEventCopyWith<ProcessDonationEvent> get copyWith => _$ProcessDonationEventCopyWithImpl<ProcessDonationEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, walletId, amount);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$RequestWalletWithdrawalEventImplCopyWith<
-          _$RequestWalletWithdrawalEventImpl>
-      get copyWith => __$$RequestWalletWithdrawalEventImplCopyWithImpl<
-          _$RequestWalletWithdrawalEventImpl>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String userId) loadWallets,
-    required TResult Function(String userId) loadMainWallet,
-    required TResult Function(String walletId) loadWallet,
-    required TResult Function(String userId) createMainWallet,
-    required TResult Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)
-        updateBankDetails,
-    required TResult Function(
-            String walletId, double amount, String? paymentMethod)
-        initiateTopUp,
-    required TResult Function(String transactionId, String paymentId)
-        confirmTopUp,
-    required TResult Function(String fromWalletId, String toCampaignId,
-            double amount, String? donationId)
-        processDonation,
-    required TResult Function(String walletId, double amount) requestWithdrawal,
-    required TResult Function(String walletId, int limit, int offset)
-        loadTransactions,
-    required TResult Function(String walletId) loadWithdrawals,
-    required TResult Function(
-            String walletId, DateTime? startDate, DateTime? endDate)
-        exportTransactions,
-    required TResult Function() clearTransient,
-  }) {
-    return requestWithdrawal(walletId, amount);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId)? loadWallets,
-    TResult? Function(String userId)? loadMainWallet,
-    TResult? Function(String walletId)? loadWallet,
-    TResult? Function(String userId)? createMainWallet,
-    TResult? Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)?
-        updateBankDetails,
-    TResult? Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult? Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult? Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult? Function(String walletId, double amount)? requestWithdrawal,
-    TResult? Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult? Function(String walletId)? loadWithdrawals,
-    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult? Function()? clearTransient,
-  }) {
-    return requestWithdrawal?.call(walletId, amount);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? loadWallets,
-    TResult Function(String userId)? loadMainWallet,
-    TResult Function(String walletId)? loadWallet,
-    TResult Function(String userId)? createMainWallet,
-    TResult Function(String walletId, String bankName, String bankAccountNumber,
-            String bankAccountHolder)?
-        updateBankDetails,
-    TResult Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult Function(String walletId, double amount)? requestWithdrawal,
-    TResult Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult Function(String walletId)? loadWithdrawals,
-    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (requestWithdrawal != null) {
-      return requestWithdrawal(walletId, amount);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadWalletsEvent value) loadWallets,
-    required TResult Function(LoadMainWalletEvent value) loadMainWallet,
-    required TResult Function(LoadWalletEvent value) loadWallet,
-    required TResult Function(CreateMainWalletEvent value) createMainWallet,
-    required TResult Function(UpdateBankDetailsEvent value) updateBankDetails,
-    required TResult Function(InitiateTopUpEvent value) initiateTopUp,
-    required TResult Function(ConfirmTopUpEvent value) confirmTopUp,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(RequestWalletWithdrawalEvent value)
-        requestWithdrawal,
-    required TResult Function(LoadTransactionsEvent value) loadTransactions,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(ExportTransactionsEvent value) exportTransactions,
-    required TResult Function(ClearWalletTransientEvent value) clearTransient,
-  }) {
-    return requestWithdrawal(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadWalletsEvent value)? loadWallets,
-    TResult? Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult? Function(LoadWalletEvent value)? loadWallet,
-    TResult? Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult? Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult? Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult? Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult? Function(ClearWalletTransientEvent value)? clearTransient,
-  }) {
-    return requestWithdrawal?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadWalletsEvent value)? loadWallets,
-    TResult Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult Function(LoadWalletEvent value)? loadWallet,
-    TResult Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult Function(ClearWalletTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (requestWithdrawal != null) {
-      return requestWithdrawal(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProcessDonationEvent&&(identical(other.fromWalletId, fromWalletId) || other.fromWalletId == fromWalletId)&&(identical(other.toCampaignId, toCampaignId) || other.toCampaignId == toCampaignId)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.donationId, donationId) || other.donationId == donationId));
 }
 
-abstract class RequestWalletWithdrawalEvent implements WalletEvent {
-  const factory RequestWalletWithdrawalEvent(
-      {required final String walletId,
-      required final double amount}) = _$RequestWalletWithdrawalEventImpl;
 
-  String get walletId;
-  double get amount;
+@override
+int get hashCode => Object.hash(runtimeType,fromWalletId,toCampaignId,amount,donationId);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$RequestWalletWithdrawalEventImplCopyWith<
-          _$RequestWalletWithdrawalEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'WalletEvent.processDonation(fromWalletId: $fromWalletId, toCampaignId: $toCampaignId, amount: $amount, donationId: $donationId)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$LoadTransactionsEventImplCopyWith<$Res> {
-  factory _$$LoadTransactionsEventImplCopyWith(
-          _$LoadTransactionsEventImpl value,
-          $Res Function(_$LoadTransactionsEventImpl) then) =
-      __$$LoadTransactionsEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String walletId, int limit, int offset});
+abstract mixin class $ProcessDonationEventCopyWith<$Res> implements $WalletEventCopyWith<$Res> {
+  factory $ProcessDonationEventCopyWith(ProcessDonationEvent value, $Res Function(ProcessDonationEvent) _then) = _$ProcessDonationEventCopyWithImpl;
+@useResult
+$Res call({
+ String fromWalletId, String toCampaignId, double amount, String? donationId
+});
+
+
+
+
+}
+/// @nodoc
+class _$ProcessDonationEventCopyWithImpl<$Res>
+    implements $ProcessDonationEventCopyWith<$Res> {
+  _$ProcessDonationEventCopyWithImpl(this._self, this._then);
+
+  final ProcessDonationEvent _self;
+  final $Res Function(ProcessDonationEvent) _then;
+
+/// Create a copy of WalletEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? fromWalletId = null,Object? toCampaignId = null,Object? amount = null,Object? donationId = freezed,}) {
+  return _then(ProcessDonationEvent(
+fromWalletId: null == fromWalletId ? _self.fromWalletId : fromWalletId // ignore: cast_nullable_to_non_nullable
+as String,toCampaignId: null == toCampaignId ? _self.toCampaignId : toCampaignId // ignore: cast_nullable_to_non_nullable
+as String,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
+as double,donationId: freezed == donationId ? _self.donationId : donationId // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
 }
 
-/// @nodoc
-class __$$LoadTransactionsEventImplCopyWithImpl<$Res>
-    extends _$WalletEventCopyWithImpl<$Res, _$LoadTransactionsEventImpl>
-    implements _$$LoadTransactionsEventImplCopyWith<$Res> {
-  __$$LoadTransactionsEventImplCopyWithImpl(_$LoadTransactionsEventImpl _value,
-      $Res Function(_$LoadTransactionsEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? walletId = null,
-    Object? limit = null,
-    Object? offset = null,
-  }) {
-    return _then(_$LoadTransactionsEventImpl(
-      walletId: null == walletId
-          ? _value.walletId
-          : walletId // ignore: cast_nullable_to_non_nullable
-              as String,
-      limit: null == limit
-          ? _value.limit
-          : limit // ignore: cast_nullable_to_non_nullable
-              as int,
-      offset: null == offset
-          ? _value.offset
-          : offset // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$LoadTransactionsEventImpl implements LoadTransactionsEvent {
-  const _$LoadTransactionsEventImpl(
-      {required this.walletId, this.limit = 50, this.offset = 0});
 
-  @override
-  final String walletId;
-  @override
-  @JsonKey()
-  final int limit;
-  @override
-  @JsonKey()
-  final int offset;
+class RequestWalletWithdrawalEvent implements WalletEvent {
+  const RequestWalletWithdrawalEvent({required this.walletId, required this.amount});
+  
 
-  @override
-  String toString() {
-    return 'WalletEvent.loadTransactions(walletId: $walletId, limit: $limit, offset: $offset)';
-  }
+ final  String walletId;
+ final  double amount;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadTransactionsEventImpl &&
-            (identical(other.walletId, walletId) ||
-                other.walletId == walletId) &&
-            (identical(other.limit, limit) || other.limit == limit) &&
-            (identical(other.offset, offset) || other.offset == offset));
-  }
+/// Create a copy of WalletEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$RequestWalletWithdrawalEventCopyWith<RequestWalletWithdrawalEvent> get copyWith => _$RequestWalletWithdrawalEventCopyWithImpl<RequestWalletWithdrawalEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, walletId, limit, offset);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadTransactionsEventImplCopyWith<_$LoadTransactionsEventImpl>
-      get copyWith => __$$LoadTransactionsEventImplCopyWithImpl<
-          _$LoadTransactionsEventImpl>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String userId) loadWallets,
-    required TResult Function(String userId) loadMainWallet,
-    required TResult Function(String walletId) loadWallet,
-    required TResult Function(String userId) createMainWallet,
-    required TResult Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)
-        updateBankDetails,
-    required TResult Function(
-            String walletId, double amount, String? paymentMethod)
-        initiateTopUp,
-    required TResult Function(String transactionId, String paymentId)
-        confirmTopUp,
-    required TResult Function(String fromWalletId, String toCampaignId,
-            double amount, String? donationId)
-        processDonation,
-    required TResult Function(String walletId, double amount) requestWithdrawal,
-    required TResult Function(String walletId, int limit, int offset)
-        loadTransactions,
-    required TResult Function(String walletId) loadWithdrawals,
-    required TResult Function(
-            String walletId, DateTime? startDate, DateTime? endDate)
-        exportTransactions,
-    required TResult Function() clearTransient,
-  }) {
-    return loadTransactions(walletId, limit, offset);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId)? loadWallets,
-    TResult? Function(String userId)? loadMainWallet,
-    TResult? Function(String walletId)? loadWallet,
-    TResult? Function(String userId)? createMainWallet,
-    TResult? Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)?
-        updateBankDetails,
-    TResult? Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult? Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult? Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult? Function(String walletId, double amount)? requestWithdrawal,
-    TResult? Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult? Function(String walletId)? loadWithdrawals,
-    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult? Function()? clearTransient,
-  }) {
-    return loadTransactions?.call(walletId, limit, offset);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? loadWallets,
-    TResult Function(String userId)? loadMainWallet,
-    TResult Function(String walletId)? loadWallet,
-    TResult Function(String userId)? createMainWallet,
-    TResult Function(String walletId, String bankName, String bankAccountNumber,
-            String bankAccountHolder)?
-        updateBankDetails,
-    TResult Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult Function(String walletId, double amount)? requestWithdrawal,
-    TResult Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult Function(String walletId)? loadWithdrawals,
-    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadTransactions != null) {
-      return loadTransactions(walletId, limit, offset);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadWalletsEvent value) loadWallets,
-    required TResult Function(LoadMainWalletEvent value) loadMainWallet,
-    required TResult Function(LoadWalletEvent value) loadWallet,
-    required TResult Function(CreateMainWalletEvent value) createMainWallet,
-    required TResult Function(UpdateBankDetailsEvent value) updateBankDetails,
-    required TResult Function(InitiateTopUpEvent value) initiateTopUp,
-    required TResult Function(ConfirmTopUpEvent value) confirmTopUp,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(RequestWalletWithdrawalEvent value)
-        requestWithdrawal,
-    required TResult Function(LoadTransactionsEvent value) loadTransactions,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(ExportTransactionsEvent value) exportTransactions,
-    required TResult Function(ClearWalletTransientEvent value) clearTransient,
-  }) {
-    return loadTransactions(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadWalletsEvent value)? loadWallets,
-    TResult? Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult? Function(LoadWalletEvent value)? loadWallet,
-    TResult? Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult? Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult? Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult? Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult? Function(ClearWalletTransientEvent value)? clearTransient,
-  }) {
-    return loadTransactions?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadWalletsEvent value)? loadWallets,
-    TResult Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult Function(LoadWalletEvent value)? loadWallet,
-    TResult Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult Function(ClearWalletTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadTransactions != null) {
-      return loadTransactions(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestWalletWithdrawalEvent&&(identical(other.walletId, walletId) || other.walletId == walletId)&&(identical(other.amount, amount) || other.amount == amount));
 }
 
-abstract class LoadTransactionsEvent implements WalletEvent {
-  const factory LoadTransactionsEvent(
-      {required final String walletId,
-      final int limit,
-      final int offset}) = _$LoadTransactionsEventImpl;
 
-  String get walletId;
-  int get limit;
-  int get offset;
+@override
+int get hashCode => Object.hash(runtimeType,walletId,amount);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LoadTransactionsEventImplCopyWith<_$LoadTransactionsEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'WalletEvent.requestWithdrawal(walletId: $walletId, amount: $amount)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$LoadWithdrawalsEventImplCopyWith<$Res> {
-  factory _$$LoadWithdrawalsEventImplCopyWith(_$LoadWithdrawalsEventImpl value,
-          $Res Function(_$LoadWithdrawalsEventImpl) then) =
-      __$$LoadWithdrawalsEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String walletId});
+abstract mixin class $RequestWalletWithdrawalEventCopyWith<$Res> implements $WalletEventCopyWith<$Res> {
+  factory $RequestWalletWithdrawalEventCopyWith(RequestWalletWithdrawalEvent value, $Res Function(RequestWalletWithdrawalEvent) _then) = _$RequestWalletWithdrawalEventCopyWithImpl;
+@useResult
+$Res call({
+ String walletId, double amount
+});
+
+
+
+
+}
+/// @nodoc
+class _$RequestWalletWithdrawalEventCopyWithImpl<$Res>
+    implements $RequestWalletWithdrawalEventCopyWith<$Res> {
+  _$RequestWalletWithdrawalEventCopyWithImpl(this._self, this._then);
+
+  final RequestWalletWithdrawalEvent _self;
+  final $Res Function(RequestWalletWithdrawalEvent) _then;
+
+/// Create a copy of WalletEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? walletId = null,Object? amount = null,}) {
+  return _then(RequestWalletWithdrawalEvent(
+walletId: null == walletId ? _self.walletId : walletId // ignore: cast_nullable_to_non_nullable
+as String,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
+as double,
+  ));
 }
 
-/// @nodoc
-class __$$LoadWithdrawalsEventImplCopyWithImpl<$Res>
-    extends _$WalletEventCopyWithImpl<$Res, _$LoadWithdrawalsEventImpl>
-    implements _$$LoadWithdrawalsEventImplCopyWith<$Res> {
-  __$$LoadWithdrawalsEventImplCopyWithImpl(_$LoadWithdrawalsEventImpl _value,
-      $Res Function(_$LoadWithdrawalsEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? walletId = null,
-  }) {
-    return _then(_$LoadWithdrawalsEventImpl(
-      walletId: null == walletId
-          ? _value.walletId
-          : walletId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$LoadWithdrawalsEventImpl implements LoadWithdrawalsEvent {
-  const _$LoadWithdrawalsEventImpl({required this.walletId});
 
-  @override
-  final String walletId;
+class LoadTransactionsEvent implements WalletEvent {
+  const LoadTransactionsEvent({required this.walletId, this.limit = 50, this.offset = 0});
+  
 
-  @override
-  String toString() {
-    return 'WalletEvent.loadWithdrawals(walletId: $walletId)';
-  }
+ final  String walletId;
+@JsonKey() final  int limit;
+@JsonKey() final  int offset;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadWithdrawalsEventImpl &&
-            (identical(other.walletId, walletId) ||
-                other.walletId == walletId));
-  }
+/// Create a copy of WalletEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LoadTransactionsEventCopyWith<LoadTransactionsEvent> get copyWith => _$LoadTransactionsEventCopyWithImpl<LoadTransactionsEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, walletId);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadWithdrawalsEventImplCopyWith<_$LoadWithdrawalsEventImpl>
-      get copyWith =>
-          __$$LoadWithdrawalsEventImplCopyWithImpl<_$LoadWithdrawalsEventImpl>(
-              this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String userId) loadWallets,
-    required TResult Function(String userId) loadMainWallet,
-    required TResult Function(String walletId) loadWallet,
-    required TResult Function(String userId) createMainWallet,
-    required TResult Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)
-        updateBankDetails,
-    required TResult Function(
-            String walletId, double amount, String? paymentMethod)
-        initiateTopUp,
-    required TResult Function(String transactionId, String paymentId)
-        confirmTopUp,
-    required TResult Function(String fromWalletId, String toCampaignId,
-            double amount, String? donationId)
-        processDonation,
-    required TResult Function(String walletId, double amount) requestWithdrawal,
-    required TResult Function(String walletId, int limit, int offset)
-        loadTransactions,
-    required TResult Function(String walletId) loadWithdrawals,
-    required TResult Function(
-            String walletId, DateTime? startDate, DateTime? endDate)
-        exportTransactions,
-    required TResult Function() clearTransient,
-  }) {
-    return loadWithdrawals(walletId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId)? loadWallets,
-    TResult? Function(String userId)? loadMainWallet,
-    TResult? Function(String walletId)? loadWallet,
-    TResult? Function(String userId)? createMainWallet,
-    TResult? Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)?
-        updateBankDetails,
-    TResult? Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult? Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult? Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult? Function(String walletId, double amount)? requestWithdrawal,
-    TResult? Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult? Function(String walletId)? loadWithdrawals,
-    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult? Function()? clearTransient,
-  }) {
-    return loadWithdrawals?.call(walletId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? loadWallets,
-    TResult Function(String userId)? loadMainWallet,
-    TResult Function(String walletId)? loadWallet,
-    TResult Function(String userId)? createMainWallet,
-    TResult Function(String walletId, String bankName, String bankAccountNumber,
-            String bankAccountHolder)?
-        updateBankDetails,
-    TResult Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult Function(String walletId, double amount)? requestWithdrawal,
-    TResult Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult Function(String walletId)? loadWithdrawals,
-    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadWithdrawals != null) {
-      return loadWithdrawals(walletId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadWalletsEvent value) loadWallets,
-    required TResult Function(LoadMainWalletEvent value) loadMainWallet,
-    required TResult Function(LoadWalletEvent value) loadWallet,
-    required TResult Function(CreateMainWalletEvent value) createMainWallet,
-    required TResult Function(UpdateBankDetailsEvent value) updateBankDetails,
-    required TResult Function(InitiateTopUpEvent value) initiateTopUp,
-    required TResult Function(ConfirmTopUpEvent value) confirmTopUp,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(RequestWalletWithdrawalEvent value)
-        requestWithdrawal,
-    required TResult Function(LoadTransactionsEvent value) loadTransactions,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(ExportTransactionsEvent value) exportTransactions,
-    required TResult Function(ClearWalletTransientEvent value) clearTransient,
-  }) {
-    return loadWithdrawals(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadWalletsEvent value)? loadWallets,
-    TResult? Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult? Function(LoadWalletEvent value)? loadWallet,
-    TResult? Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult? Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult? Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult? Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult? Function(ClearWalletTransientEvent value)? clearTransient,
-  }) {
-    return loadWithdrawals?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadWalletsEvent value)? loadWallets,
-    TResult Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult Function(LoadWalletEvent value)? loadWallet,
-    TResult Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult Function(ClearWalletTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (loadWithdrawals != null) {
-      return loadWithdrawals(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadTransactionsEvent&&(identical(other.walletId, walletId) || other.walletId == walletId)&&(identical(other.limit, limit) || other.limit == limit)&&(identical(other.offset, offset) || other.offset == offset));
 }
 
-abstract class LoadWithdrawalsEvent implements WalletEvent {
-  const factory LoadWithdrawalsEvent({required final String walletId}) =
-      _$LoadWithdrawalsEventImpl;
 
-  String get walletId;
+@override
+int get hashCode => Object.hash(runtimeType,walletId,limit,offset);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LoadWithdrawalsEventImplCopyWith<_$LoadWithdrawalsEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'WalletEvent.loadTransactions(walletId: $walletId, limit: $limit, offset: $offset)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$ExportTransactionsEventImplCopyWith<$Res> {
-  factory _$$ExportTransactionsEventImplCopyWith(
-          _$ExportTransactionsEventImpl value,
-          $Res Function(_$ExportTransactionsEventImpl) then) =
-      __$$ExportTransactionsEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String walletId, DateTime? startDate, DateTime? endDate});
+abstract mixin class $LoadTransactionsEventCopyWith<$Res> implements $WalletEventCopyWith<$Res> {
+  factory $LoadTransactionsEventCopyWith(LoadTransactionsEvent value, $Res Function(LoadTransactionsEvent) _then) = _$LoadTransactionsEventCopyWithImpl;
+@useResult
+$Res call({
+ String walletId, int limit, int offset
+});
+
+
+
+
+}
+/// @nodoc
+class _$LoadTransactionsEventCopyWithImpl<$Res>
+    implements $LoadTransactionsEventCopyWith<$Res> {
+  _$LoadTransactionsEventCopyWithImpl(this._self, this._then);
+
+  final LoadTransactionsEvent _self;
+  final $Res Function(LoadTransactionsEvent) _then;
+
+/// Create a copy of WalletEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? walletId = null,Object? limit = null,Object? offset = null,}) {
+  return _then(LoadTransactionsEvent(
+walletId: null == walletId ? _self.walletId : walletId // ignore: cast_nullable_to_non_nullable
+as String,limit: null == limit ? _self.limit : limit // ignore: cast_nullable_to_non_nullable
+as int,offset: null == offset ? _self.offset : offset // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
 }
 
-/// @nodoc
-class __$$ExportTransactionsEventImplCopyWithImpl<$Res>
-    extends _$WalletEventCopyWithImpl<$Res, _$ExportTransactionsEventImpl>
-    implements _$$ExportTransactionsEventImplCopyWith<$Res> {
-  __$$ExportTransactionsEventImplCopyWithImpl(
-      _$ExportTransactionsEventImpl _value,
-      $Res Function(_$ExportTransactionsEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? walletId = null,
-    Object? startDate = freezed,
-    Object? endDate = freezed,
-  }) {
-    return _then(_$ExportTransactionsEventImpl(
-      walletId: null == walletId
-          ? _value.walletId
-          : walletId // ignore: cast_nullable_to_non_nullable
-              as String,
-      startDate: freezed == startDate
-          ? _value.startDate
-          : startDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      endDate: freezed == endDate
-          ? _value.endDate
-          : endDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$ExportTransactionsEventImpl implements ExportTransactionsEvent {
-  const _$ExportTransactionsEventImpl(
-      {required this.walletId, this.startDate, this.endDate});
 
-  @override
-  final String walletId;
-  @override
-  final DateTime? startDate;
-  @override
-  final DateTime? endDate;
+class LoadWithdrawalsEvent implements WalletEvent {
+  const LoadWithdrawalsEvent({required this.walletId});
+  
 
-  @override
-  String toString() {
-    return 'WalletEvent.exportTransactions(walletId: $walletId, startDate: $startDate, endDate: $endDate)';
-  }
+ final  String walletId;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ExportTransactionsEventImpl &&
-            (identical(other.walletId, walletId) ||
-                other.walletId == walletId) &&
-            (identical(other.startDate, startDate) ||
-                other.startDate == startDate) &&
-            (identical(other.endDate, endDate) || other.endDate == endDate));
-  }
+/// Create a copy of WalletEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LoadWithdrawalsEventCopyWith<LoadWithdrawalsEvent> get copyWith => _$LoadWithdrawalsEventCopyWithImpl<LoadWithdrawalsEvent>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, walletId, startDate, endDate);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ExportTransactionsEventImplCopyWith<_$ExportTransactionsEventImpl>
-      get copyWith => __$$ExportTransactionsEventImplCopyWithImpl<
-          _$ExportTransactionsEventImpl>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String userId) loadWallets,
-    required TResult Function(String userId) loadMainWallet,
-    required TResult Function(String walletId) loadWallet,
-    required TResult Function(String userId) createMainWallet,
-    required TResult Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)
-        updateBankDetails,
-    required TResult Function(
-            String walletId, double amount, String? paymentMethod)
-        initiateTopUp,
-    required TResult Function(String transactionId, String paymentId)
-        confirmTopUp,
-    required TResult Function(String fromWalletId, String toCampaignId,
-            double amount, String? donationId)
-        processDonation,
-    required TResult Function(String walletId, double amount) requestWithdrawal,
-    required TResult Function(String walletId, int limit, int offset)
-        loadTransactions,
-    required TResult Function(String walletId) loadWithdrawals,
-    required TResult Function(
-            String walletId, DateTime? startDate, DateTime? endDate)
-        exportTransactions,
-    required TResult Function() clearTransient,
-  }) {
-    return exportTransactions(walletId, startDate, endDate);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId)? loadWallets,
-    TResult? Function(String userId)? loadMainWallet,
-    TResult? Function(String walletId)? loadWallet,
-    TResult? Function(String userId)? createMainWallet,
-    TResult? Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)?
-        updateBankDetails,
-    TResult? Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult? Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult? Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult? Function(String walletId, double amount)? requestWithdrawal,
-    TResult? Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult? Function(String walletId)? loadWithdrawals,
-    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult? Function()? clearTransient,
-  }) {
-    return exportTransactions?.call(walletId, startDate, endDate);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? loadWallets,
-    TResult Function(String userId)? loadMainWallet,
-    TResult Function(String walletId)? loadWallet,
-    TResult Function(String userId)? createMainWallet,
-    TResult Function(String walletId, String bankName, String bankAccountNumber,
-            String bankAccountHolder)?
-        updateBankDetails,
-    TResult Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult Function(String walletId, double amount)? requestWithdrawal,
-    TResult Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult Function(String walletId)? loadWithdrawals,
-    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (exportTransactions != null) {
-      return exportTransactions(walletId, startDate, endDate);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadWalletsEvent value) loadWallets,
-    required TResult Function(LoadMainWalletEvent value) loadMainWallet,
-    required TResult Function(LoadWalletEvent value) loadWallet,
-    required TResult Function(CreateMainWalletEvent value) createMainWallet,
-    required TResult Function(UpdateBankDetailsEvent value) updateBankDetails,
-    required TResult Function(InitiateTopUpEvent value) initiateTopUp,
-    required TResult Function(ConfirmTopUpEvent value) confirmTopUp,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(RequestWalletWithdrawalEvent value)
-        requestWithdrawal,
-    required TResult Function(LoadTransactionsEvent value) loadTransactions,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(ExportTransactionsEvent value) exportTransactions,
-    required TResult Function(ClearWalletTransientEvent value) clearTransient,
-  }) {
-    return exportTransactions(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadWalletsEvent value)? loadWallets,
-    TResult? Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult? Function(LoadWalletEvent value)? loadWallet,
-    TResult? Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult? Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult? Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult? Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult? Function(ClearWalletTransientEvent value)? clearTransient,
-  }) {
-    return exportTransactions?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadWalletsEvent value)? loadWallets,
-    TResult Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult Function(LoadWalletEvent value)? loadWallet,
-    TResult Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult Function(ClearWalletTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (exportTransactions != null) {
-      return exportTransactions(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadWithdrawalsEvent&&(identical(other.walletId, walletId) || other.walletId == walletId));
 }
 
-abstract class ExportTransactionsEvent implements WalletEvent {
-  const factory ExportTransactionsEvent(
-      {required final String walletId,
-      final DateTime? startDate,
-      final DateTime? endDate}) = _$ExportTransactionsEventImpl;
 
-  String get walletId;
-  DateTime? get startDate;
-  DateTime? get endDate;
+@override
+int get hashCode => Object.hash(runtimeType,walletId);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ExportTransactionsEventImplCopyWith<_$ExportTransactionsEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'WalletEvent.loadWithdrawals(walletId: $walletId)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$ClearWalletTransientEventImplCopyWith<$Res> {
-  factory _$$ClearWalletTransientEventImplCopyWith(
-          _$ClearWalletTransientEventImpl value,
-          $Res Function(_$ClearWalletTransientEventImpl) then) =
-      __$$ClearWalletTransientEventImplCopyWithImpl<$Res>;
+abstract mixin class $LoadWithdrawalsEventCopyWith<$Res> implements $WalletEventCopyWith<$Res> {
+  factory $LoadWithdrawalsEventCopyWith(LoadWithdrawalsEvent value, $Res Function(LoadWithdrawalsEvent) _then) = _$LoadWithdrawalsEventCopyWithImpl;
+@useResult
+$Res call({
+ String walletId
+});
+
+
+
+
+}
+/// @nodoc
+class _$LoadWithdrawalsEventCopyWithImpl<$Res>
+    implements $LoadWithdrawalsEventCopyWith<$Res> {
+  _$LoadWithdrawalsEventCopyWithImpl(this._self, this._then);
+
+  final LoadWithdrawalsEvent _self;
+  final $Res Function(LoadWithdrawalsEvent) _then;
+
+/// Create a copy of WalletEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? walletId = null,}) {
+  return _then(LoadWithdrawalsEvent(
+walletId: null == walletId ? _self.walletId : walletId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-class __$$ClearWalletTransientEventImplCopyWithImpl<$Res>
-    extends _$WalletEventCopyWithImpl<$Res, _$ClearWalletTransientEventImpl>
-    implements _$$ClearWalletTransientEventImplCopyWith<$Res> {
-  __$$ClearWalletTransientEventImplCopyWithImpl(
-      _$ClearWalletTransientEventImpl _value,
-      $Res Function(_$ClearWalletTransientEventImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of WalletEvent
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$ClearWalletTransientEventImpl implements ClearWalletTransientEvent {
-  const _$ClearWalletTransientEventImpl();
 
-  @override
-  String toString() {
-    return 'WalletEvent.clearTransient()';
-  }
+class ExportTransactionsEvent implements WalletEvent {
+  const ExportTransactionsEvent({required this.walletId, this.startDate, this.endDate});
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ClearWalletTransientEventImpl);
-  }
+ final  String walletId;
+ final  DateTime? startDate;
+ final  DateTime? endDate;
 
-  @override
-  int get hashCode => runtimeType.hashCode;
+/// Create a copy of WalletEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ExportTransactionsEventCopyWith<ExportTransactionsEvent> get copyWith => _$ExportTransactionsEventCopyWithImpl<ExportTransactionsEvent>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String userId) loadWallets,
-    required TResult Function(String userId) loadMainWallet,
-    required TResult Function(String walletId) loadWallet,
-    required TResult Function(String userId) createMainWallet,
-    required TResult Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)
-        updateBankDetails,
-    required TResult Function(
-            String walletId, double amount, String? paymentMethod)
-        initiateTopUp,
-    required TResult Function(String transactionId, String paymentId)
-        confirmTopUp,
-    required TResult Function(String fromWalletId, String toCampaignId,
-            double amount, String? donationId)
-        processDonation,
-    required TResult Function(String walletId, double amount) requestWithdrawal,
-    required TResult Function(String walletId, int limit, int offset)
-        loadTransactions,
-    required TResult Function(String walletId) loadWithdrawals,
-    required TResult Function(
-            String walletId, DateTime? startDate, DateTime? endDate)
-        exportTransactions,
-    required TResult Function() clearTransient,
-  }) {
-    return clearTransient();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId)? loadWallets,
-    TResult? Function(String userId)? loadMainWallet,
-    TResult? Function(String walletId)? loadWallet,
-    TResult? Function(String userId)? createMainWallet,
-    TResult? Function(String walletId, String bankName,
-            String bankAccountNumber, String bankAccountHolder)?
-        updateBankDetails,
-    TResult? Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult? Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult? Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult? Function(String walletId, double amount)? requestWithdrawal,
-    TResult? Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult? Function(String walletId)? loadWithdrawals,
-    TResult? Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult? Function()? clearTransient,
-  }) {
-    return clearTransient?.call();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? loadWallets,
-    TResult Function(String userId)? loadMainWallet,
-    TResult Function(String walletId)? loadWallet,
-    TResult Function(String userId)? createMainWallet,
-    TResult Function(String walletId, String bankName, String bankAccountNumber,
-            String bankAccountHolder)?
-        updateBankDetails,
-    TResult Function(String walletId, double amount, String? paymentMethod)?
-        initiateTopUp,
-    TResult Function(String transactionId, String paymentId)? confirmTopUp,
-    TResult Function(String fromWalletId, String toCampaignId, double amount,
-            String? donationId)?
-        processDonation,
-    TResult Function(String walletId, double amount)? requestWithdrawal,
-    TResult Function(String walletId, int limit, int offset)? loadTransactions,
-    TResult Function(String walletId)? loadWithdrawals,
-    TResult Function(String walletId, DateTime? startDate, DateTime? endDate)?
-        exportTransactions,
-    TResult Function()? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (clearTransient != null) {
-      return clearTransient();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadWalletsEvent value) loadWallets,
-    required TResult Function(LoadMainWalletEvent value) loadMainWallet,
-    required TResult Function(LoadWalletEvent value) loadWallet,
-    required TResult Function(CreateMainWalletEvent value) createMainWallet,
-    required TResult Function(UpdateBankDetailsEvent value) updateBankDetails,
-    required TResult Function(InitiateTopUpEvent value) initiateTopUp,
-    required TResult Function(ConfirmTopUpEvent value) confirmTopUp,
-    required TResult Function(ProcessDonationEvent value) processDonation,
-    required TResult Function(RequestWalletWithdrawalEvent value)
-        requestWithdrawal,
-    required TResult Function(LoadTransactionsEvent value) loadTransactions,
-    required TResult Function(LoadWithdrawalsEvent value) loadWithdrawals,
-    required TResult Function(ExportTransactionsEvent value) exportTransactions,
-    required TResult Function(ClearWalletTransientEvent value) clearTransient,
-  }) {
-    return clearTransient(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadWalletsEvent value)? loadWallets,
-    TResult? Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult? Function(LoadWalletEvent value)? loadWallet,
-    TResult? Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult? Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult? Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult? Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult? Function(ProcessDonationEvent value)? processDonation,
-    TResult? Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult? Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult? Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult? Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult? Function(ClearWalletTransientEvent value)? clearTransient,
-  }) {
-    return clearTransient?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadWalletsEvent value)? loadWallets,
-    TResult Function(LoadMainWalletEvent value)? loadMainWallet,
-    TResult Function(LoadWalletEvent value)? loadWallet,
-    TResult Function(CreateMainWalletEvent value)? createMainWallet,
-    TResult Function(UpdateBankDetailsEvent value)? updateBankDetails,
-    TResult Function(InitiateTopUpEvent value)? initiateTopUp,
-    TResult Function(ConfirmTopUpEvent value)? confirmTopUp,
-    TResult Function(ProcessDonationEvent value)? processDonation,
-    TResult Function(RequestWalletWithdrawalEvent value)? requestWithdrawal,
-    TResult Function(LoadTransactionsEvent value)? loadTransactions,
-    TResult Function(LoadWithdrawalsEvent value)? loadWithdrawals,
-    TResult Function(ExportTransactionsEvent value)? exportTransactions,
-    TResult Function(ClearWalletTransientEvent value)? clearTransient,
-    required TResult orElse(),
-  }) {
-    if (clearTransient != null) {
-      return clearTransient(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ExportTransactionsEvent&&(identical(other.walletId, walletId) || other.walletId == walletId)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.endDate, endDate) || other.endDate == endDate));
 }
 
-abstract class ClearWalletTransientEvent implements WalletEvent {
-  const factory ClearWalletTransientEvent() = _$ClearWalletTransientEventImpl;
+
+@override
+int get hashCode => Object.hash(runtimeType,walletId,startDate,endDate);
+
+@override
+String toString() {
+  return 'WalletEvent.exportTransactions(walletId: $walletId, startDate: $startDate, endDate: $endDate)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class $ExportTransactionsEventCopyWith<$Res> implements $WalletEventCopyWith<$Res> {
+  factory $ExportTransactionsEventCopyWith(ExportTransactionsEvent value, $Res Function(ExportTransactionsEvent) _then) = _$ExportTransactionsEventCopyWithImpl;
+@useResult
+$Res call({
+ String walletId, DateTime? startDate, DateTime? endDate
+});
+
+
+
+
+}
+/// @nodoc
+class _$ExportTransactionsEventCopyWithImpl<$Res>
+    implements $ExportTransactionsEventCopyWith<$Res> {
+  _$ExportTransactionsEventCopyWithImpl(this._self, this._then);
+
+  final ExportTransactionsEvent _self;
+  final $Res Function(ExportTransactionsEvent) _then;
+
+/// Create a copy of WalletEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? walletId = null,Object? startDate = freezed,Object? endDate = freezed,}) {
+  return _then(ExportTransactionsEvent(
+walletId: null == walletId ? _self.walletId : walletId // ignore: cast_nullable_to_non_nullable
+as String,startDate: freezed == startDate ? _self.startDate : startDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,endDate: freezed == endDate ? _self.endDate : endDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class ClearWalletTransientEvent implements WalletEvent {
+  const ClearWalletTransientEvent();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ClearWalletTransientEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'WalletEvent.clearTransient()';
+}
+
+
+}
+
+
+
+
+// dart format on
