@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:velora/features/auth/presentation/widgets/components/primary_button.dart';
+import 'package:velora/features/auth/presentation/widgets/atoms/auth_primary_button.dart';
 
 void main() {
   Widget buildTestWidget(Widget child) {
@@ -13,8 +13,8 @@ void main() {
     var tapped = false;
     await tester.pumpWidget(
       buildTestWidget(
-        PrimaryButton(
-          text: 'Submit',
+        AuthPrimaryButton(
+          label: 'Submit',
           isLoading: true,
           onPressed: () => tapped = true,
         ),
@@ -22,7 +22,7 @@ void main() {
     );
 
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
-    expect(find.text('Submit'), findsNothing);
+    expect(find.text('Submit'), findsOneWidget);
     
     await tester.tap(find.byType(ElevatedButton));
     expect(tapped, isFalse, reason: 'Button should be disabled while loading');
@@ -32,7 +32,7 @@ void main() {
     var tapped = false;
     await tester.pumpWidget(
       buildTestWidget(
-        PrimaryButton(text: 'Submit', onPressed: () => tapped = true),
+        AuthPrimaryButton(label: 'Submit', onPressed: () => tapped = true),
       ),
     );
 
@@ -45,7 +45,7 @@ void main() {
   testWidgets('disabled when onPressed is null', (tester) async {
     await tester.pumpWidget(
       buildTestWidget(
-        PrimaryButton(text: 'Submit', onPressed: null),
+        AuthPrimaryButton(label: 'Submit', onPressed: null),
       ),
     );
 
@@ -56,7 +56,7 @@ void main() {
   testWidgets('shows correct text', (tester) async {
     await tester.pumpWidget(
       buildTestWidget(
-        PrimaryButton(text: 'Login', onPressed: () {}),
+        AuthPrimaryButton(label: 'Login', onPressed: () {}),
       ),
     );
 

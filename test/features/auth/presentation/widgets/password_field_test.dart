@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:velora/features/auth/presentation/widgets/components/password_field.dart';
+import 'package:velora/features/auth/presentation/widgets/atoms/auth_password_field.dart';
 import 'package:velora/l10n/app_localizations.dart';
 
 void main() {
@@ -32,21 +32,29 @@ void main() {
     testWidgets('renders with default properties', (tester) async {
       await tester.pumpWidget(
         buildTestWidget(
-          PasswordField(controller: controller, validator: (_) => null),
+          AuthPasswordField(
+            controller: controller,
+            label: 'Password',
+            validator: (_) => null,
+          ),
         ),
       );
       await tester.pump(const Duration(milliseconds: 100));
 
       // Should find password field and visibility toggle
-      expect(find.byType(PasswordField), findsOneWidget);
+      expect(find.byType(AuthPasswordField), findsOneWidget);
       expect(find.byIcon(Icons.visibility_outlined), findsOneWidget);
-      expect(find.byIcon(Icons.lock_outline), findsOneWidget);
+      expect(find.byIcon(Icons.lock_outline_rounded), findsOneWidget);
     });
 
     testWidgets('toggles password visibility', (tester) async {
       await tester.pumpWidget(
         buildTestWidget(
-          PasswordField(controller: controller, validator: (_) => null),
+          AuthPasswordField(
+            controller: controller,
+            label: 'Password',
+            validator: (_) => null,
+          ),
         ),
       );
       await tester.pump(const Duration(milliseconds: 100));
@@ -74,10 +82,11 @@ void main() {
     testWidgets('shows strength indicator when enabled', (tester) async {
       await tester.pumpWidget(
         buildTestWidget(
-          PasswordField(
+          AuthPasswordField(
             controller: controller,
+            label: 'Password',
             validator: (_) => null,
-            showStrengthIndicator: true,
+            showStrength: true,
           ),
         ),
       );
@@ -94,10 +103,11 @@ void main() {
     testWidgets('shows weak strength for short password', (tester) async {
       await tester.pumpWidget(
         buildTestWidget(
-          PasswordField(
+          AuthPasswordField(
             controller: controller,
+            label: 'Password',
             validator: (_) => null,
-            showStrengthIndicator: true,
+            showStrength: true,
           ),
         ),
       );
@@ -114,10 +124,11 @@ void main() {
     testWidgets('shows medium strength for moderate password', (tester) async {
       await tester.pumpWidget(
         buildTestWidget(
-          PasswordField(
+          AuthPasswordField(
             controller: controller,
+            label: 'Password',
             validator: (_) => null,
-            showStrengthIndicator: true,
+            showStrength: true,
           ),
         ),
       );
@@ -134,7 +145,11 @@ void main() {
     testWidgets('hides strength indicator by default', (tester) async {
       await tester.pumpWidget(
         buildTestWidget(
-          PasswordField(controller: controller, validator: (_) => null),
+          AuthPasswordField(
+            controller: controller,
+            label: 'Password',
+            validator: (_) => null,
+          ),
         ),
       );
       await tester.pump(const Duration(milliseconds: 100));
@@ -152,7 +167,7 @@ void main() {
     testWidgets('accepts custom label', (tester) async {
       await tester.pumpWidget(
         buildTestWidget(
-          PasswordField(
+          AuthPasswordField(
             controller: controller,
             validator: (_) => null,
             label: 'Custom Password Label',
@@ -171,8 +186,9 @@ void main() {
 
       await tester.pumpWidget(
         buildTestWidget(
-          PasswordField(
+          AuthPasswordField(
             controller: controller,
+            label: 'Password',
             focusNode: focusNode,
             validator: (_) => null,
           ),
@@ -191,8 +207,9 @@ void main() {
       var callbackCalled = false;
       await tester.pumpWidget(
         buildTestWidget(
-          PasswordField(
+          AuthPasswordField(
             controller: controller,
+            label: 'Password',
             validator: (_) => null,
             onEditingComplete: () {
               callbackCalled = true;
@@ -213,7 +230,11 @@ void main() {
     testWidgets('updates controller text', (tester) async {
       await tester.pumpWidget(
         buildTestWidget(
-          PasswordField(controller: controller, validator: (_) => null),
+          AuthPasswordField(
+            controller: controller,
+            label: 'Password',
+            validator: (_) => null,
+          ),
         ),
       );
       await tester.pump(const Duration(milliseconds: 100));
@@ -229,29 +250,17 @@ void main() {
     testWidgets('shows correct icon for password field', (tester) async {
       await tester.pumpWidget(
         buildTestWidget(
-          PasswordField(controller: controller, validator: (_) => null),
-        ),
-      );
-      await tester.pump(const Duration(milliseconds: 100));
-
-      // Should have lock icon as prefix
-      expect(find.byIcon(Icons.lock_outline), findsOneWidget);
-    });
-
-    testWidgets('can use custom prefix icon', (tester) async {
-      await tester.pumpWidget(
-        buildTestWidget(
-          PasswordField(
+          AuthPasswordField(
             controller: controller,
+            label: 'Password',
             validator: (_) => null,
-            prefixIcon: const Icon(Icons.security),
           ),
         ),
       );
       await tester.pump(const Duration(milliseconds: 100));
 
-      // Should have custom security icon
-      expect(find.byIcon(Icons.security), findsOneWidget);
+      // Should have lock icon as prefix
+      expect(find.byIcon(Icons.lock_outline_rounded), findsOneWidget);
     });
   });
 }

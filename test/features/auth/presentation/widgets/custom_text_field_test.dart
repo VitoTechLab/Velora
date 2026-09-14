@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:velora/features/auth/presentation/widgets/components/custom_text_field.dart';
+import 'package:velora/features/auth/presentation/widgets/atoms/auth_text_field.dart';
 
 void main() {
   late TextEditingController controller;
@@ -16,29 +16,37 @@ void main() {
     focusNode.dispose();
   });
 
-  Widget buildTestWidget(Widget child) {
+  Widget buildTestWidget(Widget child, {GlobalKey<FormState>? formKey}) {
     return MaterialApp(
       home: Scaffold(
-        body: Column(
-          children: [
-            child,
-            TextButton(onPressed: () {}, child: const Text('Next')),
-          ],
+        body: Form(
+          key: formKey,
+          child: Column(
+            children: [
+              child,
+              TextButton(
+                onPressed: () => formKey?.currentState?.validate(),
+                child: const Text('Next'),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
   testWidgets('shows validation error after blur', (tester) async {
+    final formKey = GlobalKey<FormState>();
     await tester.pumpWidget(
       buildTestWidget(
-        CustomTextField(
+        AuthTextField(
           controller: controller,
           focusNode: focusNode,
           label: 'Email',
           validator: (value) =>
               value == null || value.isEmpty ? 'Required' : null,
         ),
+        formKey: formKey,
       ),
     );
 
@@ -51,15 +59,17 @@ void main() {
   });
 
   testWidgets('accepts valid input without error', (tester) async {
+    final formKey = GlobalKey<FormState>();
     await tester.pumpWidget(
       buildTestWidget(
-        CustomTextField(
+        AuthTextField(
           controller: controller,
           focusNode: focusNode,
           label: 'Email',
           validator: (value) =>
               value == null || value.isEmpty ? 'Required' : null,
         ),
+        formKey: formKey,
       ),
     );
 
@@ -73,7 +83,7 @@ void main() {
   testWidgets('disabled when enabled is false', (tester) async {
     await tester.pumpWidget(
       buildTestWidget(
-        CustomTextField(
+        AuthTextField(
           controller: controller,
           focusNode: focusNode,
           label: 'Email',
