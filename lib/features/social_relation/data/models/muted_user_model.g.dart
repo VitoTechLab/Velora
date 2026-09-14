@@ -6,8 +6,8 @@ part of 'muted_user_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$MutedUserModelImpl _$$MutedUserModelImplFromJson(Map<String, dynamic> json) =>
-    _$MutedUserModelImpl(
+_MutedUserModel _$MutedUserModelFromJson(Map<String, dynamic> json) =>
+    _MutedUserModel(
       muterId: json['muter_id'] as String,
       mutedId: json['muted_id'] as String,
       createdAt: const UtcDateTimeConverter().fromJson(json['created_at']),
@@ -16,8 +16,7 @@ _$MutedUserModelImpl _$$MutedUserModelImplFromJson(Map<String, dynamic> json) =>
       mutedFullName: json['muted_full_name'] as String?,
     );
 
-Map<String, dynamic> _$$MutedUserModelImplToJson(
-        _$MutedUserModelImpl instance) =>
+Map<String, dynamic> _$MutedUserModelToJson(_MutedUserModel instance) =>
     <String, dynamic>{
       'muter_id': instance.muterId,
       'muted_id': instance.mutedId,
