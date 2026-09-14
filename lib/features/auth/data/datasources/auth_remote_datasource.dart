@@ -23,6 +23,9 @@ abstract class AuthRemoteDataSource {
   /// Send password reset email.
   Future<void> resetPassword({required String email});
 
+  /// Resend account verification email.
+  Future<void> resendVerificationEmail({String? email});
+
   /// Update user's password.
   Future<void> updatePassword({
     required String currentPassword,

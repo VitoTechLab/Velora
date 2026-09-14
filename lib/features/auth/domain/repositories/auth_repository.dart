@@ -19,6 +19,8 @@ abstract class AuthRepository {
 
   Future<Either<Failure, void>> resetPassword({required String email});
 
+  Future<Either<Failure, void>> resendVerificationEmail({String? email});
+
   Future<Either<Failure, void>> updatePassword({
     required String currentPassword,
     required String newPassword,

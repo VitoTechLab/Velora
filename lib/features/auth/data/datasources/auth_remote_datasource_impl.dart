@@ -135,6 +135,22 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       redirectTo: 'velora://auth/reset-password',
     );
   }
+
+  @override
+  Future<void> resendVerificationEmail({String? email}) {
+    final targetEmail = email ?? _client.auth.currentUser?.email;
+    if (targetEmail == null || targetEmail.isEmpty) {
+      throw Exception('Email is required to resend verification');
+    }
+
+    logi('Supabase resendVerificationEmail email=$targetEmail', tag: _logTag);
+    return _client.auth.resend(
+      type: OtpType.signup,
+      email: targetEmail,
+      emailRedirectTo: 'velora://auth/verification-email',
+    );
+  }
+
   /// Update user's password
   @override
   Future<void> updatePassword({

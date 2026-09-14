@@ -81,6 +81,19 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(AuthFailure.fromException(error));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> resendVerificationEmail({String? email}) async {
+    try {
+      logi('[$_logTag] resendVerificationEmail email=$email');
+      await remoteDataSource.resendVerificationEmail(email: email);
+      return const Right(null);
+    } catch (error) {
+      loge('[$_logTag ERROR] resendVerificationEmail', error: error);
+      return Left(AuthFailure.fromException(error));
+    }
+  }
+
   /// Update user's password
   @override
   Future<Either<Failure, void>> updatePassword({
