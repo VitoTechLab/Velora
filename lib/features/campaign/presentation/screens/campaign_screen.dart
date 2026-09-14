@@ -64,8 +64,8 @@ class CampaignScreen extends HookWidget {
         searchQuery.value = query;
         if (query.trim().isNotEmpty) {
           context.read<CampaignBloc>().add(
-                CampaignEvent.searchCampaigns(query: query.trim(), limit: 20),
-              );
+            CampaignEvent.searchCampaigns(query: query.trim(), limit: 20),
+          );
         }
       });
     }
@@ -168,13 +168,15 @@ class CampaignScreen extends HookWidget {
         bloc.add(CampaignEvent.loadUserCampaigns(userId: currentUserId));
       }
 
-      await bloc.stream.firstWhere(
-        (state) => !state.isRefreshingCampaigns,
-      );
+      await bloc.stream.firstWhere((state) => !state.isRefreshingCampaigns);
     }
 
     // Navigate to campaign detail
-    void onCampaignTap(BuildContext ctx, CampaignModel campaign, List<CampaignEntity> entities) {
+    void onCampaignTap(
+      BuildContext ctx,
+      CampaignModel campaign,
+      List<CampaignEntity> entities,
+    ) {
       // Find the original entity to get full data
       final entity = entities.firstWhere(
         (e) => e.id == campaign.id,
@@ -230,8 +232,9 @@ class CampaignScreen extends HookWidget {
             );
           }
 
-          final featuredCampaigns =
-              campaignsToShow.where((c) => c.isFeatured).toList();
+          final featuredCampaigns = campaignsToShow
+              .where((c) => c.isFeatured)
+              .toList();
 
           // Group by category dynamically
           final campaignsByCategory = <String, List<CampaignModel>>{};
@@ -248,7 +251,8 @@ class CampaignScreen extends HookWidget {
           }
 
           // If no category sections but campaigns exist, show all as "All Campaigns"
-          final showAllCampaignsSection = campaignsByCategory.isEmpty && 
+          final showAllCampaignsSection =
+              campaignsByCategory.isEmpty &&
               (campaignsToShow.isNotEmpty || uncategorizedCampaigns.isNotEmpty);
 
           return RefreshIndicator(
@@ -265,22 +269,13 @@ class CampaignScreen extends HookWidget {
                       onPressed: () {
                         context.pushNamed(AppRouteName.createCampaignPost);
                       },
-                      icon: Container(
-                        padding: const EdgeInsets.all(6),
-                        decoration: BoxDecoration(
-                          color: colorScheme.primary.withValues(alpha: 0.08),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Icon(
-                          Icons.add_rounded,
-                          color: colorScheme.primary,
-                        ),
-                      ),
+                      tooltip: l10n?.chatSearchScopeCampaigns ?? 'Campaigns',
+                      icon: Icon(Icons.add_rounded, color: colorScheme.primary),
                     ),
                   ),
                   title: Text(
                     l10n?.chatSearchScopeCampaigns ?? 'Campaigns',
-                    style: theme.textTheme.headlineMedium?.copyWith(
+                    style: theme.textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: colorScheme.onSurface,
                     ),
@@ -292,7 +287,7 @@ class CampaignScreen extends HookWidget {
                     children: [
                       // Search Field with real functionality
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 8, 20, 16),
+                        padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
                         child: CampaignSearchField(
                           controller: searchController,
                           onChanged: onSearchChanged,
@@ -353,10 +348,7 @@ class CampaignScreen extends HookWidget {
                       // Featured Carousel (only when not searching)
                       if (!isSearching && featuredCampaigns.isNotEmpty) ...[
                         Padding(
-                          padding: const EdgeInsets.only(
-                            left: 20,
-                            bottom: 8,
-                          ),
+                          padding: const EdgeInsets.only(left: 20, bottom: 8),
                           child: Text(
                             l10n?.campaignFeaturedTitle ?? 'Featured Campaigns',
                             style: theme.textTheme.titleLarge?.copyWith(
@@ -367,9 +359,8 @@ class CampaignScreen extends HookWidget {
                         ),
                         ElegantFeaturedCarousel(
                           campaigns: featuredCampaigns,
-                          onCampaignTap: (campaign) => onCampaignTap(
-                            context, campaign, state.campaigns,
-                          ),
+                          onCampaignTap: (campaign) =>
+                              onCampaignTap(context, campaign, state.campaigns),
                         ),
                       ],
 
@@ -378,9 +369,8 @@ class CampaignScreen extends HookWidget {
                         (entry) => CampaignCategorySection(
                           categoryName: entry.key,
                           campaigns: entry.value,
-                          onCampaignTap: (campaign) => onCampaignTap(
-                            context, campaign, state.campaigns,
-                          ),
+                          onCampaignTap: (campaign) =>
+                              onCampaignTap(context, campaign, state.campaigns),
                           onSeeMore: () {
                             CampaignListScreen.show(
                               context,
@@ -393,13 +383,12 @@ class CampaignScreen extends HookWidget {
 
                       if (showAllCampaignsSection) ...[
                         CampaignCategorySection(
-                          categoryName: isSearching 
-                              ? 'Search Results' 
+                          categoryName: isSearching
+                              ? 'Search Results'
                               : 'All Campaigns',
                           campaigns: campaignsToShow,
-                          onCampaignTap: (campaign) => onCampaignTap(
-                            context, campaign, state.campaigns,
-                          ),
+                          onCampaignTap: (campaign) =>
+                              onCampaignTap(context, campaign, state.campaigns),
                           onSeeMore: () {
                             CampaignListScreen.show(
                               context,
@@ -410,14 +399,13 @@ class CampaignScreen extends HookWidget {
                         ),
                       ],
 
-                      if (uncategorizedCampaigns.isNotEmpty && 
+                      if (uncategorizedCampaigns.isNotEmpty &&
                           !showAllCampaignsSection) ...[
                         CampaignCategorySection(
                           categoryName: 'General',
                           campaigns: uncategorizedCampaigns,
-                          onCampaignTap: (campaign) => onCampaignTap(
-                            context, campaign, state.campaigns,
-                          ),
+                          onCampaignTap: (campaign) =>
+                              onCampaignTap(context, campaign, state.campaigns),
                           onSeeMore: () {
                             CampaignListScreen.show(
                               context,
@@ -443,8 +431,8 @@ class CampaignScreen extends HookWidget {
                   ),
 
                 // Empty state
-                if (campaignsToShow.isEmpty && 
-                    !state.isLoadingCampaigns && 
+                if (campaignsToShow.isEmpty &&
+                    !state.isLoadingCampaigns &&
                     !state.isSearching)
                   SliverFillRemaining(
                     child: CampaignEmptyState(
@@ -454,10 +442,8 @@ class CampaignScreen extends HookWidget {
                         searchController.clear();
                         searchQuery.value = '';
                         context.read<CampaignBloc>().add(
-                              const CampaignEvent.loadCampaigns(
-                                limit: 50,
-                              ),
-                            );
+                          const CampaignEvent.loadCampaigns(limit: 50),
+                        );
                       },
                     ),
                   ),
