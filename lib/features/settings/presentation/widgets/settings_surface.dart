@@ -34,7 +34,7 @@ class SettingsSurface extends StatelessWidget {
         padding: padding,
         decoration: BoxDecoration(
           color: colorScheme.surfaceContainerHighest,
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color: colorScheme.outlineVariant.withValues(alpha: 0.35),
           ),

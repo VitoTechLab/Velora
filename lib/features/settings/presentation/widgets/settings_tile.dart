@@ -85,7 +85,7 @@ class SettingsTile extends StatelessWidget {
                                 color: colorScheme.primary.withValues(
                                   alpha: 0.12,
                                 ),
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(12),
                               ),
                               child: Text(
                                 data.badgeLabel!,

@@ -49,8 +49,8 @@ class SettingsSectionCard extends StatelessWidget {
           const SizedBox(height: 12),
           Container(
             decoration: BoxDecoration(
-              color: colorScheme.surfaceContainerHighest,
-              borderRadius: BorderRadius.circular(20),
+              color: colorScheme.surface,
+              borderRadius: BorderRadius.circular(12),
             ),
             child: Column(
               children: [
