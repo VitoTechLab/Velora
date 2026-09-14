@@ -7,6 +7,7 @@ import 'package:velora/features/auth/domain/entities/auth_session_entity.dart';
 import 'package:velora/features/auth/domain/entities/auth_snapshot_entity.dart';
 import 'package:velora/features/auth/domain/entities/auth_status_entity.dart';
 import 'package:velora/features/auth/domain/usecases/reset_password_usecase.dart';
+import 'package:velora/features/auth/domain/usecases/resend_verification_email_usecase.dart';
 import 'package:velora/features/auth/domain/usecases/sign_in_usecase.dart';
 import 'package:velora/features/auth/domain/usecases/sign_in_with_google_usecase.dart';
 import 'package:velora/features/auth/domain/usecases/sign_out_usecase.dart';
@@ -24,6 +25,9 @@ class _MockSignInWithGoogleUseCase extends Mock implements SignInWithGoogleUseCa
 
 class _MockResetPasswordUseCase extends Mock implements ResetPasswordUseCase {}
 
+class _MockResendVerificationEmailUseCase extends Mock
+    implements ResendVerificationEmailUseCase {}
+
 class _MockSignOutUseCase extends Mock implements SignOutUseCase {}
 
 class _MockWatchAuthSnapshotUseCase extends Mock
@@ -34,6 +38,7 @@ void main() {
   late _MockSignInUseCase signIn;
   late _MockSignInWithGoogleUseCase signInWithGoogle;
   late _MockResetPasswordUseCase resetPassword;
+  late _MockResendVerificationEmailUseCase resendVerificationEmail;
   late _MockSignOutUseCase signOut;
   late _MockWatchAuthSnapshotUseCase watchSnapshot;
 
@@ -52,6 +57,7 @@ void main() {
       signInUseCase: signIn,
       signInWithGoogleUseCase: signInWithGoogle,
       resetPasswordUseCase: resetPassword,
+      resendVerificationEmailUseCase: resendVerificationEmail,
       signOutUseCase: signOut,
       watchAuthSnapshotUseCase: watchSnapshot,
     );
@@ -62,6 +68,7 @@ void main() {
     signIn = _MockSignInUseCase();
     signInWithGoogle = _MockSignInWithGoogleUseCase();
     resetPassword = _MockResetPasswordUseCase();
+    resendVerificationEmail = _MockResendVerificationEmailUseCase();
     signOut = _MockSignOutUseCase();
     watchSnapshot = _MockWatchAuthSnapshotUseCase();
   });
@@ -147,6 +154,30 @@ void main() {
         message: 'Password reset link sent to your email.',
       ),
     ],
+  );
+
+  blocTest<AuthBloc, AuthState>(
+    'emits success message when verification email is resent',
+    build: () {
+      when(
+        () => resendVerificationEmail(email: any(named: 'email')),
+      ).thenAnswer((_) async => const Right(null));
+      return buildBloc();
+    },
+    act: (bloc) =>
+        bloc.resendVerificationEmail(email: 'user@velora.app'),
+    expect: () => const [
+      AuthState(loadingType: AuthLoadingType.verificationEmail),
+      AuthState(
+        loadingType: AuthLoadingType.none,
+        message: 'Verification email resent',
+      ),
+    ],
+    verify: (_) {
+      verify(
+        () => resendVerificationEmail(email: 'user@velora.app'),
+      ).called(1);
+    },
   );
 
   blocTest<AuthBloc, AuthState>(

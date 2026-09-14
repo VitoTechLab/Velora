@@ -7,6 +7,7 @@ import 'package:velora/core/utils/app_logger.dart';
 import 'package:velora/features/auth/domain/entities/auth_snapshot_entity.dart';
 import 'package:velora/features/auth/domain/entities/auth_status_entity.dart';
 import 'package:velora/features/auth/domain/usecases/reset_password_usecase.dart';
+import 'package:velora/features/auth/domain/usecases/resend_verification_email_usecase.dart';
 import 'package:velora/features/auth/domain/usecases/sign_in_usecase.dart';
 import 'package:velora/features/auth/domain/usecases/sign_in_with_google_usecase.dart';
 import 'package:velora/features/auth/domain/usecases/sign_out_usecase.dart';
@@ -22,6 +23,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final SignInUseCase signInUseCase;
   final SignInWithGoogleUseCase signInWithGoogleUseCase;
   final ResetPasswordUseCase resetPasswordUseCase;
+  final ResendVerificationEmailUseCase resendVerificationEmailUseCase;
   final SignOutUseCase signOutUseCase;
   final WatchAuthSnapshotUseCase watchAuthSnapshotUseCase;
 
@@ -30,6 +32,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required this.signInUseCase,
     required this.signInWithGoogleUseCase,
     required this.resetPasswordUseCase,
+    required this.resendVerificationEmailUseCase,
     required this.signOutUseCase,
     required this.watchAuthSnapshotUseCase,
   }) : super(const AuthState()) {
@@ -38,6 +41,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<ResetPasswordEvent>(_onResetPassword);
     on<SignOutEvent>(_onSignOut);
     on<SignInWithGoogleEvent>(_onSignInWithGoogle);
+    on<ResendEmailVerificationEvent>(_onResendVerificationEmail);
     on<ClearMessagesEvent>(_onClearMessages);
     on<AuthSnapshotChangedEvent>(_onAuthSnapshotChanged);
 
@@ -45,6 +49,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   StreamSubscription<AuthSnapshotEntity>? _authSubscription;
+  String? _lastEmailForVerification;
 
   /// Subscribe to Supabase auth state changes
   void _listenToAuthStatus() {
@@ -61,20 +66,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthSnapshotChangedEvent event,
     Emitter<AuthState> emit,
   ) {
-    // Get current user ID from the auth status stream if available
-    String? currentUserId;
-    if (event.snapshot.status == AuthStatusEntity.authenticated) {
-      // Try to get userId from current session
-      // This will be set by sign in/sign up flows
-      currentUserId = event.snapshot.userId;
+    final currentUserId =
+        event.snapshot.status == AuthStatusEntity.authenticated
+            ? event.snapshot.userId
+            : null;
+    final didAuthIdentityChange =
+        state.status != event.snapshot.status || state.userId != currentUserId;
+
+    if (!didAuthIdentityChange && state.loadingType == AuthLoadingType.none) {
+      return;
     }
 
+    // Keep transient UI feedback intact; clearMessages owns that lifecycle.
     emit(
       state.copyWith(
         status: event.snapshot.status,
-        loadingType: AuthLoadingType.none,
-        message: null,
-        errorMessage: null,
+        loadingType:
+            didAuthIdentityChange ? AuthLoadingType.none : state.loadingType,
         userId: currentUserId,
       ),
     );
@@ -92,6 +100,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     ));
 
     try {
+      _lastEmailForVerification = event.email;
       final result = await signUpUseCase(
         email: event.email,
         password: event.password,
@@ -99,7 +108,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       result.fold(
         (failure) {
-          final status = _statusForFailure(failure, AuthStatusEntity.unauthenticated);
+          final status =
+              _statusForFailure(failure, AuthStatusEntity.unauthenticated);
           emit(
             state.copyWith(
               status: status,
@@ -150,6 +160,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     ));
 
     try {
+      _lastEmailForVerification = event.email;
       final result = await signInUseCase(
         email: event.email,
         password: event.password,
@@ -157,7 +168,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       result.fold(
         (failure) {
-          final status = _statusForFailure(failure, AuthStatusEntity.unauthenticated);
+          final status =
+              _statusForFailure(failure, AuthStatusEntity.unauthenticated);
           emit(
             state.copyWith(
               status: status,
@@ -301,7 +313,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       result.fold(
         (failure) {
-          final status = _statusForFailure(failure, AuthStatusEntity.unauthenticated);
+          final status =
+              _statusForFailure(failure, AuthStatusEntity.unauthenticated);
           emit(
             state.copyWith(
               status: status,
@@ -351,6 +364,55 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     add(const AuthEvent.clearMessages());
   }
 
+  Future<void> _onResendVerificationEmail(
+    ResendEmailVerificationEvent event,
+    Emitter<AuthState> emit,
+  ) async {
+    final requestedEmail = event.email?.trim();
+    final targetEmail = requestedEmail?.isNotEmpty == true
+        ? requestedEmail
+        : _lastEmailForVerification;
+
+    if (state.isVerificationEmailLoading) return;
+
+    emit(state.copyWith(
+      loadingType: AuthLoadingType.verificationEmail,
+      message: null,
+      errorMessage: null,
+    ));
+
+    try {
+      final result = await resendVerificationEmailUseCase(
+        email: targetEmail,
+      );
+
+      result.fold(
+        (failure) {
+          emit(state.copyWith(
+            loadingType: AuthLoadingType.none,
+            errorMessage: failure.message,
+            message: null,
+          ));
+        },
+        (_) {
+          emit(state.copyWith(
+            loadingType: AuthLoadingType.none,
+            message: 'Verification email resent',
+            errorMessage: null,
+          ));
+        },
+      );
+    } catch (error, stackTrace) {
+      _handleError(
+        error,
+        stackTrace,
+        emit,
+        'resend verification email',
+        statusOnError: state.status,
+      );
+    }
+  }
+
   /// Handle error and emit error state
   void _handleError(
     Object error,
@@ -384,7 +446,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   /// Map authentication failure types to corresponding status values
-  AuthStatusEntity _statusForFailure(Failure failure, AuthStatusEntity fallback) {
+  AuthStatusEntity _statusForFailure(
+      Failure failure, AuthStatusEntity fallback) {
     if (failure is AuthFailure) {
       switch (failure.type) {
         case AuthFailureType.emailNotVerified:

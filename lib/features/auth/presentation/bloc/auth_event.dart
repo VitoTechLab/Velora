@@ -5,7 +5,7 @@ part 'auth_event.freezed.dart';
 
 /// Events for authentication operations.
 @freezed
-class AuthEvent with _$AuthEvent {
+abstract class AuthEvent with _$AuthEvent {
   /// User registration with email and password
   const factory AuthEvent.signUp({
     required String email,
@@ -21,6 +21,9 @@ class AuthEvent with _$AuthEvent {
   /// Send password reset email
   const factory AuthEvent.resetPassword({required String email}) =
       ResetPasswordEvent;
+
+  const factory AuthEvent.resendEmailVerification({String? email}) =
+      ResendEmailVerificationEvent;
 
   /// Log out current user
   const factory AuthEvent.signOut() = SignOutEvent;

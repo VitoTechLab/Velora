@@ -9,6 +9,7 @@ enum AuthLoadingType {
   emailPassword,
   google,
   apple,
+  verificationEmail,
 }
 
 /// Represents current authentication state.
@@ -32,4 +33,8 @@ abstract class AuthState with _$AuthState {
 
   /// Check if Google auth is loading
   bool get isGoogleLoading => loadingType == AuthLoadingType.google;
+
+  /// Check if verification email action is loading
+  bool get isVerificationEmailLoading =>
+      loadingType == AuthLoadingType.verificationEmail;
 }
