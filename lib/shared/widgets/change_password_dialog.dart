@@ -157,13 +157,13 @@ class ChangePasswordDialog extends HookWidget {
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: biometricVerified.value
-                        ? colorScheme.primaryContainer.withOpacity(0.3)
+                        ? colorScheme.primaryContainer.withValues(alpha: 0.3)
                         : colorScheme.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                       color: biometricVerified.value
                           ? colorScheme.primary
-                          : colorScheme.outline.withOpacity(0.2),
+                          : colorScheme.outline.withValues(alpha: 0.2),
                     ),
                   ),
                   child: Row(
