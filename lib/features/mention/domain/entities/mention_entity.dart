@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'mention_entity.freezed.dart';
 
 @freezed
-class MentionEntity with _$MentionEntity {
+abstract class MentionEntity with _$MentionEntity {
   const factory MentionEntity({
     required String id,
     required String userId,
