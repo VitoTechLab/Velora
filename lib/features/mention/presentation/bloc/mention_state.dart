@@ -1,7 +1,7 @@
 part of 'mention_bloc.dart';
 
 @freezed
-class MentionState with _$MentionState {
+abstract class MentionState with _$MentionState {
   const factory MentionState.initial() = _Initial;
   const factory MentionState.loading() = _Loading;
   const factory MentionState.loaded({
