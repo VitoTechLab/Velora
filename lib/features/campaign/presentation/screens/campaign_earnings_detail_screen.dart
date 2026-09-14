@@ -19,10 +19,7 @@ import 'package:velora/features/campaign/presentation/bloc/campaign_state.dart';
 /// - List of recent donations
 /// - Withdrawal history
 class CampaignEarningsDetailScreen extends HookWidget {
-  const CampaignEarningsDetailScreen({
-    super.key,
-    required this.campaignId,
-  });
+  const CampaignEarningsDetailScreen({super.key, required this.campaignId});
 
   final String campaignId;
 
@@ -44,14 +41,14 @@ class CampaignEarningsDetailScreen extends HookWidget {
     // Load campaign data on init
     useEffect(() {
       context.read<CampaignBloc>().add(
-            CampaignEvent.getCampaignDetail(campaignId: campaignId),
-          );
+        CampaignEvent.getCampaignDetail(campaignId: campaignId),
+      );
       context.read<CampaignBloc>().add(
-            CampaignEvent.loadDonations(campaignId: campaignId),
-          );
+        CampaignEvent.loadDonations(campaignId: campaignId),
+      );
       context.read<CampaignBloc>().add(
-            CampaignEvent.loadWithdrawals(campaignId: campaignId),
-          );
+        CampaignEvent.loadWithdrawals(campaignId: campaignId),
+      );
       return null;
     }, [campaignId]);
 
@@ -62,9 +59,8 @@ class CampaignEarningsDetailScreen extends HookWidget {
         backgroundColor: colorScheme.surface,
         actions: [
           IconButton(
-            onPressed: () => context.push(
-              '/wallet/my-campaigns/$campaignId/bank-settings',
-            ),
+            onPressed: () =>
+                context.push('/wallet/my-campaigns/$campaignId/bank-settings'),
             icon: const Icon(Icons.settings_outlined),
             tooltip: 'Bank Settings',
           ),
@@ -73,10 +69,12 @@ class CampaignEarningsDetailScreen extends HookWidget {
       body: BlocBuilder<CampaignBloc, CampaignState>(
         builder: (context, state) {
           // Find campaign from user campaigns or selected campaign
-          final campaign = state.userCampaigns.cast<CampaignEntity?>().firstWhere(
-                    (c) => c?.id == campaignId,
-                    orElse: () => state.selectedCampaign,
-                  );
+          final campaign = state.userCampaigns
+              .cast<CampaignEntity?>()
+              .firstWhere(
+                (c) => c?.id == campaignId,
+                orElse: () => state.selectedCampaign,
+              );
 
           if (campaign == null) {
             return const Center(child: CircularProgressIndicator());
@@ -91,14 +89,14 @@ class CampaignEarningsDetailScreen extends HookWidget {
           return RefreshIndicator(
             onRefresh: () async {
               context.read<CampaignBloc>().add(
-                    CampaignEvent.getCampaignDetail(campaignId: campaignId),
-                  );
+                CampaignEvent.getCampaignDetail(campaignId: campaignId),
+              );
               context.read<CampaignBloc>().add(
-                    CampaignEvent.loadDonations(campaignId: campaignId),
-                  );
+                CampaignEvent.loadDonations(campaignId: campaignId),
+              );
               context.read<CampaignBloc>().add(
-                    CampaignEvent.loadWithdrawals(campaignId: campaignId),
-                  );
+                CampaignEvent.loadWithdrawals(campaignId: campaignId),
+              );
             },
             child: NestedScrollView(
               headerSliverBuilder: (context, innerBoxIsScrolled) => [
@@ -140,7 +138,8 @@ class CampaignEarningsDetailScreen extends HookWidget {
                             Expanded(
                               child: _InfoCard(
                                 title: 'Progress',
-                                value: '${campaign.progressPercent.toStringAsFixed(0)}%',
+                                value:
+                                    '${campaign.progressPercent.toStringAsFixed(0)}%',
                                 subtitle:
                                     'of ${_currencyFormat.format(campaign.targetAmount)}',
                                 icon: Icons.trending_up,
@@ -152,8 +151,9 @@ class CampaignEarningsDetailScreen extends HookWidget {
                             Expanded(
                               child: _InfoCard(
                                 title: 'Available',
-                                value: _currencyFormat
-                                    .format(campaign.currentBalance),
+                                value: _currencyFormat.format(
+                                  campaign.currentBalance,
+                                ),
                                 subtitle: 'Ready to withdraw',
                                 icon: Icons.account_balance_wallet,
                                 colorScheme: colorScheme,
@@ -237,10 +237,7 @@ class CampaignEarningsDetailScreen extends HookWidget {
 
     final filtered = donations.where((d) => d.createdAt.isAfter(cutoff));
 
-    final amount = filtered.fold<double>(
-      0,
-      (sum, d) => sum + d.amountTotal,
-    );
+    final amount = filtered.fold<double>(0, (sum, d) => sum + d.amountTotal);
 
     return (amount: amount, count: filtered.length);
   }
@@ -281,14 +278,7 @@ class _EarningsCard extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: colorScheme.primary,
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-            color: colorScheme.primary.withValues(alpha: 0.3),
-            blurRadius: 16,
-            offset: const Offset(0, 8),
-          ),
-        ],
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
         children: [
@@ -311,7 +301,7 @@ class _EarningsCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
               color: colorScheme.onPrimary.withValues(alpha: 0.15),
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(12),
             ),
             child: Text(
               '$count donations',
@@ -361,11 +351,7 @@ class _InfoCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Icon(
-                    icon,
-                    size: 16,
-                    color: colorScheme.onSurfaceVariant,
-                  ),
+                  Icon(icon, size: 16, color: colorScheme.onSurfaceVariant),
                   const SizedBox(width: 8),
                   Text(
                     title,
@@ -395,8 +381,9 @@ class _InfoCard extends StatelessWidget {
                         color: onTap != null
                             ? colorScheme.primary
                             : colorScheme.onSurfaceVariant,
-                        fontWeight:
-                            onTap != null ? FontWeight.w600 : FontWeight.normal,
+                        fontWeight: onTap != null
+                            ? FontWeight.w600
+                            : FontWeight.normal,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -461,7 +448,8 @@ class _DonationsList extends StatelessWidget {
       itemBuilder: (context, index) {
         final donation = donations[index];
         final isAnonymous = donation.isAnonymous;
-        final hasMessage = donation.message != null && donation.message!.isNotEmpty;
+        final hasMessage =
+            donation.message != null && donation.message!.isNotEmpty;
 
         return Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -484,18 +472,20 @@ class _DonationsList extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        isAnonymous ? 'Anonymous Donor' : 'User ${donation.userId}',
+                        isAnonymous
+                            ? 'Anonymous Donor'
+                            : 'User ${donation.userId}',
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       const Spacer(),
                       Text(
                         currencyFormat.format(donation.amountTotal),
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                       ),
                     ],
                   ),
@@ -503,23 +493,26 @@ class _DonationsList extends StatelessWidget {
                   Text(
                     dateFormat.format(donation.createdAt),
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
                   ),
                   if (hasMessage) ...[
                     const SizedBox(height: 8),
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+                        color: Theme.of(context)
+                            .colorScheme
+                            .surfaceContainerHighest
+                            .withValues(alpha: 0.3),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
                         '"${donation.message}"',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              fontStyle: FontStyle.italic,
-                              color: Theme.of(context).colorScheme.onSurfaceVariant,
-                            ),
+                          fontStyle: FontStyle.italic,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
                       ),
                     ),
                   ],
@@ -641,10 +634,7 @@ class _SliverTabBarDelegate extends SliverPersistentHeaderDelegate {
     bool overlapsContent,
   ) {
     final colorScheme = Theme.of(context).colorScheme;
-    return Container(
-      color: colorScheme.surface,
-      child: tabBar,
-    );
+    return Container(color: colorScheme.surface, child: tabBar);
   }
 
   @override

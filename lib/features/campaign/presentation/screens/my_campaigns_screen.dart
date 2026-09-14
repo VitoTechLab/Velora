@@ -38,8 +38,8 @@ class MyCampaignsScreen extends HookWidget {
     useEffect(() {
       if (userId != null) {
         context.read<CampaignBloc>().add(
-              CampaignEvent.loadUserCampaigns(userId: userId),
-            );
+          CampaignEvent.loadUserCampaigns(userId: userId),
+        );
       }
       return null;
     }, [userId]);
@@ -68,8 +68,8 @@ class MyCampaignsScreen extends HookWidget {
                     context,
                     state.errorUserCampaigns!,
                     () => context.read<CampaignBloc>().add(
-                          CampaignEvent.loadUserCampaigns(userId: userId),
-                        ),
+                      CampaignEvent.loadUserCampaigns(userId: userId),
+                    ),
                   );
                 }
 
@@ -123,10 +123,7 @@ class MyCampaignsScreen extends HookWidget {
             const SizedBox(height: 16),
             Text(error, textAlign: TextAlign.center),
             const SizedBox(height: 16),
-            FilledButton.tonal(
-              onPressed: onRetry,
-              child: const Text('Retry'),
-            ),
+            FilledButton.tonal(onPressed: onRetry, child: const Text('Retry')),
           ],
         ),
       ),
@@ -148,9 +145,9 @@ class MyCampaignsScreen extends HookWidget {
             const SizedBox(height: 24),
             Text(
               'No Campaigns Yet',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             Text(
@@ -187,8 +184,8 @@ class MyCampaignsScreen extends HookWidget {
         final userId = getIt<SupabaseClient>().auth.currentUser?.id;
         if (userId != null) {
           context.read<CampaignBloc>().add(
-                CampaignEvent.loadUserCampaigns(userId: userId),
-              );
+            CampaignEvent.loadUserCampaigns(userId: userId),
+          );
           // Wait for state update
           await Future.delayed(const Duration(milliseconds: 500));
         }
@@ -242,9 +239,7 @@ class MyCampaignsScreen extends HookWidget {
           ),
 
           // Bottom padding
-          const SliverToBoxAdapter(
-            child: SizedBox(height: 24),
-          ),
+          const SliverToBoxAdapter(child: SizedBox(height: 24)),
         ],
       ),
     );
@@ -270,22 +265,8 @@ class _TotalBalanceCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            colorScheme.primaryContainer,
-            colorScheme.primary.withValues(alpha: 0.7),
-          ],
-        ),
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: colorScheme.primary.withValues(alpha: 0.3),
-            blurRadius: 20,
-            offset: const Offset(0, 8),
-          ),
-        ],
+        color: colorScheme.primaryContainer,
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -420,10 +401,7 @@ class _CampaignCard extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 8),
-                        Text(
-                          '•',
-                          style: TextStyle(color: colorScheme.outline),
-                        ),
+                        Text('•', style: TextStyle(color: colorScheme.outline)),
                         const SizedBox(width: 8),
                         Text(
                           '${campaign.donorCount} donors',
@@ -458,10 +436,7 @@ class _CampaignCard extends StatelessWidget {
               ),
 
               // Arrow
-              Icon(
-                Icons.chevron_right,
-                color: colorScheme.onSurfaceVariant,
-              ),
+              Icon(Icons.chevron_right, color: colorScheme.onSurfaceVariant),
             ],
           ),
         ),
@@ -483,10 +458,7 @@ class _CampaignCard extends StatelessWidget {
 }
 
 class _StatusBadge extends StatelessWidget {
-  const _StatusBadge({
-    required this.status,
-    required this.colorScheme,
-  });
+  const _StatusBadge({required this.status, required this.colorScheme});
 
   final CampaignStatus status;
   final ColorScheme colorScheme;
